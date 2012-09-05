@@ -35,13 +35,13 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -53,6 +53,7 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
 
     static {
         filter.add(new SubtypePredicate("Knight"));
+        filter.add(new AnotherPredicate());
     }
 
     public KnightExemplar(UUID ownerId) {
@@ -64,9 +65,13 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
+        // Other Knight creatures you control get +1/+1 and are indestructible.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IndestructibleAbility(), Duration.WhileOnBattlefield, filter, true)));
+        FilterCreaturePermanent indestructibleFilter = filter.copy();
+        indestructibleFilter.setMessage("Other Knight creatures you control");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(indestructibleFilter)));
     }
 
     public KnightExemplar(final KnightExemplar card) {

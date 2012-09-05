@@ -30,12 +30,11 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -45,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class DarksteelForge extends CardImpl<DarksteelForge> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -54,7 +53,9 @@ public class DarksteelForge extends CardImpl<DarksteelForge> {
     public DarksteelForge(UUID ownerId) {
         super(ownerId, 110, "Darksteel Forge", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{9}");
         this.expansionSetCode = "DST";
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield, filter, false)));
+
+        // Artifacts you control are indestructible.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(filter)));
 
     }
 

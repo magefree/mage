@@ -31,27 +31,46 @@ import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class IndestructibleSourceEffect extends ReplacementEffectImpl<IndestructibleSourceEffect> {
+public class IndestructibleAllEffect extends ReplacementEffectImpl<IndestructibleAllEffect> {
 
-    public IndestructibleSourceEffect(Duration duration) {
-        super(duration, Outcome.Benefit);
-        this.staticText = "{this} is indestructible";
+    private FilterPermanent filter;
+
+    /**
+     * duration = WhileOnBattlefield
+     *
+     * @param filter
+     */
+    public IndestructibleAllEffect(FilterPermanent filter) {
+        this(filter, Duration.WhileOnBattlefield);
     }
 
-    public IndestructibleSourceEffect(IndestructibleSourceEffect effect) {
+    public IndestructibleAllEffect(FilterPermanent filter, Duration duration) {
+        super(duration, Outcome.Benefit);
+        this.filter = filter;
+
+        this.staticText = filter.getMessage() + " are indestructible";
+        if (duration.equals(Duration.EndOfTurn)) {
+            this.staticText += " this turn";
+        }
+    }
+
+    public IndestructibleAllEffect(IndestructibleAllEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public IndestructibleSourceEffect copy() {
-        return new IndestructibleSourceEffect(this);
+    public IndestructibleAllEffect copy() {
+        return new IndestructibleAllEffect(this);
     }
 
     @Override
@@ -66,7 +85,10 @@ public class IndestructibleSourceEffect extends ReplacementEffectImpl<Indestruct
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)
-                && event.getTargetId().equals(source.getSourceId());
+        if (event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            return permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        }
+        return false;
     }
 }

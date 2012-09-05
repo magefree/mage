@@ -33,12 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.IndestructibleAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 
@@ -59,10 +57,9 @@ public class Indestructibility extends CardImpl<Indestructibility> {
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
+        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // Enchanted permanent is indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new IndestructibleAbility(), AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAttachedEffect(AttachmentType.AURA)));
     }
 
     public Indestructibility(final Indestructibility card) {

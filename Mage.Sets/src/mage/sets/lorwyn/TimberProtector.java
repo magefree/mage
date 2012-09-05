@@ -27,35 +27,37 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-
-import java.util.UUID;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
- * @author anonymous
+ * @author Loki
  */
 public class TimberProtector extends CardImpl<TimberProtector> {
 
     private final static FilterCreaturePermanent filterTreefolk = new FilterCreaturePermanent("Treefolk creatures");
-    private final static FilterControlledPermanent filterBoth = new FilterControlledPermanent("Treefolk and Forests");
+    private final static FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
 
     static {
         filterTreefolk.add(new SubtypePredicate("Treefolk"));
-        filterBoth.add(Predicates.or(new SubtypePredicate("Treefolk"),new SubtypePredicate("Forest")));
-
+        filterBoth.add(Predicates.or(
+                new SubtypePredicate("Treefolk"),
+                new SubtypePredicate("Forest")));
+        filterBoth.add(new AnotherPredicate());
     }
 
     public TimberProtector(UUID ownerId) {
@@ -66,10 +68,11 @@ public class TimberProtector extends CardImpl<TimberProtector> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(6);
+
         // Other Treefolk creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterTreefolk, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterTreefolk, true)));
         // Other Treefolk and Forests you control are indestructible.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.WhileOnBattlefield, filterBoth, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(filterBoth)));
     }
 
     public TimberProtector(final TimberProtector card) {

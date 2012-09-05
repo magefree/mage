@@ -30,12 +30,14 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.IndestructibleAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -50,9 +52,13 @@ public class DarksteelPlate extends CardImpl<DarksteelPlate> {
         super(ownerId, 104, "Darksteel Plate", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+
+        // Darksteel Plate is indestructible.
         this.addAbility(new IndestructibleAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new IndestructibleAbility(), Constants.AttachmentType.EQUIPMENT)));
+        // Equipped creature is indestructible.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAttachedEffect(AttachmentType.EQUIPMENT)));
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }
 
     public DarksteelPlate (final DarksteelPlate card) {

@@ -27,31 +27,37 @@
  */
 package mage.abilities.effects.common;
 
+import mage.Constants.AttachmentType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class IndestructibleSourceEffect extends ReplacementEffectImpl<IndestructibleSourceEffect> {
+public class IndestructibleAttachedEffect extends ReplacementEffectImpl<IndestructibleAttachedEffect> {
 
-    public IndestructibleSourceEffect(Duration duration) {
-        super(duration, Outcome.Benefit);
-        this.staticText = "{this} is indestructible";
+    public IndestructibleAttachedEffect(AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        if (attachmentType.equals(AttachmentType.AURA)) {
+            this.staticText = "Enchanted permanent is indestructible";
+        } else {
+            this.staticText = "Equiped creature is indestructible";
+        }
     }
 
-    public IndestructibleSourceEffect(IndestructibleSourceEffect effect) {
+    public IndestructibleAttachedEffect(IndestructibleAttachedEffect effect) {
         super(effect);
     }
 
     @Override
-    public IndestructibleSourceEffect copy() {
-        return new IndestructibleSourceEffect(this);
+    public IndestructibleAttachedEffect copy() {
+        return new IndestructibleAttachedEffect(this);
     }
 
     @Override
@@ -66,7 +72,11 @@ public class IndestructibleSourceEffect extends ReplacementEffectImpl<Indestruct
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        return event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)
-                && event.getTargetId().equals(source.getSourceId());
+        if (event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)) {
+            Permanent attachment = game.getPermanent(source.getSourceId());
+            return attachment != null && attachment.getAttachedTo() != null
+                    && attachment.getAttachedTo().equals(event.getTargetId());
+        }
+        return false;
     }
 }

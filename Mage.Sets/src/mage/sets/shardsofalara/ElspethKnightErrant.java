@@ -31,28 +31,25 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.GetEmblemEffect;
+import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.game.command.Emblem;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,17 +59,18 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 
-    private static SoldierToken soldierToken = new SoldierToken();
-
     public ElspethKnightErrant(UUID ownerId) {
         super(ownerId, 9, "Elspeth, Knight-Errant", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{W}{W}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Elspeth");
         this.color.setWhite(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
 
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(soldierToken), 1));
+        // +1: Put a 1/1 white Soldier creature token onto the battlefield.
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken()), 1));
 
+        // +1: Target creature gets +3/+3 and gains flying until end of turn.
         Effects effects1 = new Effects();
         effects1.add(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         effects1.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
@@ -80,8 +78,8 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
         ability1.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability1);
 
-        this.addAbility(new LoyaltyAbility(new ElspethKnightErrantEffect(), -8));
-
+        // -8: You get an emblem with "Artifacts, creatures, enchantments, and lands you control are indestructible."
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new ElspethKnightErrantEmblem()), -8));
     }
 
     public ElspethKnightErrant(final ElspethKnightErrant card) {
@@ -95,38 +93,15 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
 
 }
 
-class ElspethKnightErrantEffect extends ContinuousEffectImpl<ElspethKnightErrantEffect> {
+class ElspethKnightErrantEmblem extends Emblem {
 
-    private static final FilterPermanent filter = new FilterPermanent("artifacts, creatures, enchantments and lands");
-
-    static {
+    public ElspethKnightErrantEmblem() {
+        FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts, creatures, enchantments, and lands you control");
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.ARTIFACT),
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 new CardTypePredicate(CardType.LAND)));
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new IndestructibleAllEffect(filter)));
     }
-
-    public ElspethKnightErrantEffect() {
-        super(Duration.EndOfGame, Layer.RulesEffects, SubLayer.NA, Outcome.AddAbility);
-        staticText = "For the rest of the game artifacts, creature, enchantments and lands you control are indestructible";
-    }
-
-    public ElspethKnightErrantEffect(final ElspethKnightErrantEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            perm.addAbility(new IndestructibleAbility(), game);
-        }
-        return true;
-    }
-
-    @Override
-    public ElspethKnightErrantEffect copy() {
-        return new ElspethKnightErrantEffect(this);
-    }
-
 }

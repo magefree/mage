@@ -28,15 +28,13 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 
@@ -54,10 +52,12 @@ public class BreakOfDay extends CardImpl<BreakOfDay> {
         this.color.setWhite(true);
 
         // Creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         // Fateful hour - If you have 5 or less life, those creatures also are indestructible this turn.
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new GainAbilityControlledEffect(new IndestructibleAbility(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()),
-                FatefulHourCondition.getInstance(), "If you have 5 or less life, those creatures also are indestructible this turn."));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+                new IndestructibleAllEffect(new FilterCreaturePermanent("creatures you control"), Duration.EndOfTurn),
+                FatefulHourCondition.getInstance(),
+                "If you have 5 or less life, those creatures also are indestructible this turn."));
     }
 
     public BreakOfDay(final BreakOfDay card) {
