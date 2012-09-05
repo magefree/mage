@@ -36,6 +36,7 @@ Intimidate|instance|
 Lifelink|instance|
 Phasing|instance|
 Reach|instance|
+Scavenge|cost|
 Shroud|instance|
 Soulbond|instance|
 Trample|instance|
