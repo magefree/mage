@@ -25,44 +25,69 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.abilities.effects.common.UnblockableTargetEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.keyword.ReboundAbility;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.RestrictionEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
  * @author North
  */
-public class DistortionStrike extends CardImpl<DistortionStrike> {
+public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTargetEffect> {
 
-    public DistortionStrike(UUID ownerId) {
-        super(ownerId, 60, "Distortion Strike", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{U}");
-        this.expansionSetCode = "ROE";
-
-        this.color.setBlue(true);
-
-        // Target creature gets +1/+0 until end of turn and is unblockable this turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1, 0, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
-        // Rebound
-        this.addAbility(new ReboundAbility());
+    public UnblockableTargetEffect() {
+        super(Duration.EndOfTurn);
     }
 
-    public DistortionStrike(final DistortionStrike card) {
-        super(card);
+    public UnblockableTargetEffect(UnblockableTargetEffect effect) {
+        super(effect);
     }
 
     @Override
-    public DistortionStrike copy() {
-        return new DistortionStrike(this);
+    public UnblockableTargetEffect copy() {
+        return new UnblockableTargetEffect(this);
+    }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getFirstTarget());
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Target target = mode.getTargets().get(0);
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(target.getMaxNumberOfTargets()).append(" ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append("s");
+        }
+
+        sb.append(" is unblockable");
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            sb.append(" this turn");
+        }
+
+        return sb.toString();
     }
 }

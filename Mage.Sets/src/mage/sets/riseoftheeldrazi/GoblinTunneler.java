@@ -30,15 +30,13 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,7 +64,8 @@ public class GoblinTunneler extends CardImpl<GoblinTunneler> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        // {tap}: Target creature with power 2 or less is unblockable this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }

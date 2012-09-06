@@ -29,7 +29,6 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -37,9 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,7 +58,7 @@ public class EtherealUsher extends CardImpl<EtherealUsher> {
 
         // {U}, {tap}: Target creature is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn),
+                new UnblockableTargetEffect(),
                 new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());

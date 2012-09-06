@@ -30,12 +30,11 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,8 +53,11 @@ public class NeurokInvisimancer extends CardImpl<NeurokInvisimancer> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // Neurok Invisimancer is unblockable.
         this.addAbility(UnblockableAbility.getInstance());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn));
+        // When Neurok Invisimancer enters the battlefield, target creature is unblockable this turn.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new UnblockableTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

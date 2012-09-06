@@ -29,13 +29,11 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +50,7 @@ public class ArtfulDodge extends CardImpl<ArtfulDodge> {
         this.color.setBlue(true);
 
         // Target creature is unblockable this turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Flashback {U}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{U}"), TimingRule.SORCERY));

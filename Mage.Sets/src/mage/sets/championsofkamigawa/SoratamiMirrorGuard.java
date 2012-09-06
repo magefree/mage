@@ -30,17 +30,16 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterControlledPermanent;
@@ -71,8 +70,11 @@ public class SoratamiMirrorGuard extends CardImpl<SoratamiMirrorGuard> {
         this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn), new GenericManaCost(2));
+        // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less is unblockable this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);

@@ -38,9 +38,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -68,8 +67,10 @@ public class MerfolkSovereign extends CardImpl<MerfolkSovereign> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Other Merfolk creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
+        // {tap}: Target Merfolk creature is unblockable this turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
     }
