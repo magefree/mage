@@ -28,20 +28,18 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
 
 /**
  *
@@ -55,18 +53,6 @@ public class BubblingBeebles extends CardImpl<BubblingBeebles> {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
 
-    private class DefendingPlayerControlsEnchantment implements Condition {
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            UUID defendingPlayer = game.getCombat().getDefendingPlayer(source.getSourceId());
-            if (defendingPlayer != null) {
-                return game.getBattlefield().countAll(filter, defendingPlayer, game) > 0;
-            }
-            return false;
-        }
-    }
-
     public BubblingBeebles(UUID ownerId) {
         super(ownerId, 29, "Bubbling Beebles", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
         this.expansionSetCode = "UDS";
@@ -76,10 +62,11 @@ public class BubblingBeebles extends CardImpl<BubblingBeebles> {
         this.toughness = new MageInt(3);
 
         // Bubbling Beebles is unblockable as long as defending player controls an enchantment.
-        Effect effect = new ConditionalContinousEffect(new UnblockableSourceEffect(Constants.Duration.WhileOnBattlefield),
-                new DefendingPlayerControlsEnchantment(),
+        Effect effect = new ConditionalContinousEffect(
+                new UnblockableSourceEffect(),
+                new DefendingPlayerControlsCondition(filter),
                 "{this} is unblockable as long as defending player controls an enchantment");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public BubblingBeebles(final BubblingBeebles card) {

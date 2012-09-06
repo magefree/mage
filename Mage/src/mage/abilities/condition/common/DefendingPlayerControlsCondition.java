@@ -25,53 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.scarsofmirrodin;
+package mage.abilities.condition.common;
 
 import java.util.UUID;
-
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.DefendingPlayerControlsCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.UnblockableSourceEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
 
 /**
  *
- * @author ayratn
+ * @author North
  */
-public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
+public class DefendingPlayerControlsCondition implements Condition {
 
-    public ScrapdiverSerpent (UUID ownerId) {
-        super(ownerId, 41, "Scrapdiver Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Serpent");
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+    private FilterPermanent filter;
 
-        // Scrapdiver Serpent is unblockable as long as defending player controls an artifact
-        Effect effect = new ConditionalContinousEffect(
-                new UnblockableSourceEffect(),
-                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()),
-                "{this} is unblockable as long as defending player controls an artifact");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-    }
-
-    public ScrapdiverSerpent (final ScrapdiverSerpent card) {
-        super(card);
+    public DefendingPlayerControlsCondition(FilterPermanent filter) {
+        this.filter = filter;
     }
 
     @Override
-    public ScrapdiverSerpent copy() {
-        return new ScrapdiverSerpent(this);
+    public boolean apply(Game game, Ability source) {
+        UUID defendingPlayer = game.getCombat().getDefendingPlayer(source.getSourceId());
+        return defendingPlayer != null && game.getBattlefield().countAll(filter, defendingPlayer, game) > 0;
     }
-
 }
