@@ -38,7 +38,7 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -80,7 +80,7 @@ public class Fettergeist extends CardImpl<Fettergeist> {
 
 class FettergeistUnlessPaysEffect extends OneShotEffect<FettergeistUnlessPaysEffect> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(new AnotherPredicate());
