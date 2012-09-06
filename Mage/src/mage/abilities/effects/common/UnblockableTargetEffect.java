@@ -61,7 +61,7 @@ public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTarget
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getFirstTarget());
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
     }
 
     @Override
@@ -80,10 +80,11 @@ public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTarget
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s");
+            sb.append("s are unblockable");
+        } else {
+            sb.append(" is unblockable");
         }
 
-        sb.append(" is unblockable");
         if (Duration.EndOfTurn.equals(this.duration)) {
             sb.append(" this turn");
         }

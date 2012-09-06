@@ -27,15 +27,12 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -50,7 +47,7 @@ public class Ghostform extends CardImpl<Ghostform> {
         this.color.setBlue(true);
 
         // Up to two target creatures are unblockable this turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new UnblockableTargetEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
     }
 
