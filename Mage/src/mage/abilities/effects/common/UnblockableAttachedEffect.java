@@ -25,54 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2013;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
 import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UnblockableAttachedEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class TricksOfTheTrade extends CardImpl<TricksOfTheTrade> {
+public class UnblockableAttachedEffect extends RestrictionEffect<UnblockableAttachedEffect> {
 
-    public TricksOfTheTrade(UUID ownerId) {
-        super(ownerId, 74, "Tricks of the Trade", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{U}");
-        this.expansionSetCode = "M13";
-        this.subtype.add("Aura");
-
-        this.color.setBlue(true);
-
-        // Enchant creature
-        TargetPermanent target = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
-        this.addAbility(new EnchantAbility(target.getTargetName()));
-
-        // Enchanted creature gets +2/+0 and is unblockable.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 0, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAttachedEffect(AttachmentType.AURA)));
+    public UnblockableAttachedEffect(AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield);
+        if (attachmentType.equals(AttachmentType.AURA)) {
+            this.staticText = "Enchanted creature is unblockable";
+        } else {
+            this.staticText = "Equiped creature is unblockable";
+        }
     }
 
-    public TricksOfTheTrade(final TricksOfTheTrade card) {
-        super(card);
+    public UnblockableAttachedEffect(UnblockableAttachedEffect effect) {
+        super(effect);
     }
 
     @Override
-    public TricksOfTheTrade copy() {
-        return new TricksOfTheTrade(this);
+    public UnblockableAttachedEffect copy() {
+        return new UnblockableAttachedEffect(this);
+    }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        return attachment != null && attachment.getAttachedTo() != null
+                && attachment.getAttachedTo().equals(permanent.getId());
     }
 }

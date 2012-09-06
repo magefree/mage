@@ -37,10 +37,10 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.UnblockableAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 
 
@@ -54,9 +54,12 @@ public class WhispersilkCloak extends CardImpl<WhispersilkCloak> {
         super(ownerId, 345, "Whispersilk Cloak", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "10E";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(UnblockableAbility.getInstance(), AttachmentType.EQUIPMENT)));
+
+        // Equipped creature is unblockable and has shroud.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAttachedEffect(AttachmentType.EQUIPMENT)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        // Equip {2}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     protected WhispersilkCloak(WhispersilkCloak me) {
