@@ -87,10 +87,11 @@ public class IndestructibleTargetEffect extends ReplacementEffectImpl<Indestruct
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s");
+            sb.append("s are indestructible");
+        } else {
+            sb.append(" is indestructible");
         }
 
-        sb.append(" is indestructible");
         if (Duration.EndOfTurn.equals(this.duration)) {
             sb.append(" this turn");
         }
