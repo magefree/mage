@@ -25,53 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shadowmoor;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.UnblockableAllEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.filter.FilterPermanent;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author North
  */
-public class DeepchannelMentor extends CardImpl<DeepchannelMentor> {
+public class UnblockableAllEffect extends RestrictionEffect<UnblockableAllEffect> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Blue creatures you control");
+    private FilterPermanent filter;
 
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    public UnblockableAllEffect(FilterPermanent filter, Duration duration) {
+        super(duration);
+        this.filter = filter;
+
+        this.staticText = filter.getMessage() + " are unblockable";
+        if (duration.equals(Duration.EndOfTurn)) {
+            this.staticText += " this turn";
+        }
     }
 
-    public DeepchannelMentor(UUID ownerId) {
-        super(ownerId, 35, "Deepchannel Mentor", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
-        this.expansionSetCode = "SHM";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
-
-        this.color.setBlue(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Blue creatures you control are unblockable.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UnblockableAllEffect(filter, Duration.WhileOnBattlefield)));
-    }
-
-    public DeepchannelMentor(final DeepchannelMentor card) {
-        super(card);
+    public UnblockableAllEffect(UnblockableAllEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public DeepchannelMentor copy() {
-        return new DeepchannelMentor(this);
+    public UnblockableAllEffect copy() {
+        return new UnblockableAllEffect(this);
+    }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
 }

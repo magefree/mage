@@ -28,8 +28,10 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -42,9 +44,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.UnblockableAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -58,8 +59,6 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -79,10 +78,8 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
         ability1.addTarget(new TargetControlledPermanent());
         this.addAbility(ability1);
 
-        //TODO: Venser's second ability doesn't lock in what it applies to. That's because the effect states a true thing about creatures,
-        // but doesn't actually change the characteristics of those creatures. As a result, all creatures are unblockable that turn, including creatures you don't control, creatures that weren't on the battlefield at the time the ability resolved, and creatures that have lost all abilities.
         // -1: Creatures are unblockable this turn.
-        this.addAbility(new LoyaltyAbility(new GainAbilityAllEffect(UnblockableAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()), -1));
+        this.addAbility(new LoyaltyAbility(new UnblockableAllEffect(new FilterCreaturePermanent("Creatures"), Duration.EndOfTurn), -1));
 
         // -8: You get an emblem with "Whenever you cast a spell, exile target permanent."
         LoyaltyAbility ability2 = new LoyaltyAbility(new GetEmblemEffect(new VenserTheSojournerEmblem()), -8);
