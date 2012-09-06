@@ -28,21 +28,21 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
+
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 
@@ -52,7 +52,6 @@ import mage.game.Game;
  */
 public class NeurokSpy extends CardImpl<NeurokSpy> {
 
-    private static final String text = "Neurok Spy is unblockable as long as defending player controls an artifact";
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
@@ -81,9 +80,10 @@ public class NeurokSpy extends CardImpl<NeurokSpy> {
         this.toughness = new MageInt(2);
 
         //Neurok Spy is unblockable as long as defending player controls an artifact.
-        ContinuousEffect gainAbility = new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinousEffect(gainAbility, new DefendingPlayerControlsArtifact(), text);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        Effect effect = new ConditionalContinousEffect(new UnblockableSourceEffect(),
+                new DefendingPlayerControlsArtifact(),
+                "Neurok Spy is unblockable as long as defending player controls an artifact");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public NeurokSpy(final NeurokSpy card) {

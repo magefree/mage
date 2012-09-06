@@ -53,7 +53,7 @@ public class InvisibleStalker extends CardImpl<InvisibleStalker> {
 
         this.addAbility(HexproofAbility.getInstance());
         // Invisible Stalker is unblockable.
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public InvisibleStalker(final InvisibleStalker card) {

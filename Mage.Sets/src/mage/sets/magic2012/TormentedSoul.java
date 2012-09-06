@@ -50,7 +50,7 @@ public class TormentedSoul extends CardImpl<TormentedSoul> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(CantBlockAbility.getInstance());
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public TormentedSoul(final TormentedSoul card) {

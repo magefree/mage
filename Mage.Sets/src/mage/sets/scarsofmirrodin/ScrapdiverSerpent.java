@@ -32,7 +32,9 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,8 +42,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -52,8 +53,6 @@ import mage.game.Game;
  * @author ayratn
  */
 public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
-
-    private static final String rule = "Scrapdiver Serpent is unblockable as long as defending player controls an artifact";
 
     private static final FilterPermanent filter = new FilterPermanent();
 
@@ -79,9 +78,12 @@ public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
         this.color.setBlue(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
-        ContinuousEffect gainAbility = new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinousEffect(gainAbility, new DefendingPlayerControlsArtifact(), rule);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+
+        // Scrapdiver Serpent is unblockable as long as defending player controls an artifact
+        Effect effect = new ConditionalContinousEffect(new UnblockableSourceEffect(Duration.WhileOnBattlefield),
+                new DefendingPlayerControlsArtifact(),
+                "{this} is unblockable as long as defending player controls an artifact");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public ScrapdiverSerpent (final ScrapdiverSerpent card) {

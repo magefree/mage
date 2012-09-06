@@ -107,7 +107,6 @@ public class TraceUtil {
         log.error(uuid);
         log.error(uuid+"Flying ability id: " + FlyingAbility.getInstance().getId());
         log.error(uuid+"Reach ability id: " + ReachAbility.getInstance().getId());
-        log.error(uuid+"Unblockable ability id: " + UnblockableAbility.getInstance().getId());
         log.error(uuid);
 
         log.error(uuid+"Restriction effects:");

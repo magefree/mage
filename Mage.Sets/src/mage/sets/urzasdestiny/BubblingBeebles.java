@@ -36,10 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
+import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,7 +49,6 @@ import mage.game.Game;
  */
 public class BubblingBeebles extends CardImpl<BubblingBeebles> {
 
-    private static final String rule = "{this} is unblockable as long as defending player controls an enchantment";
     private static final FilterPermanent filter = new FilterPermanent();
 
     static {
@@ -79,8 +76,9 @@ public class BubblingBeebles extends CardImpl<BubblingBeebles> {
         this.toughness = new MageInt(3);
 
         // Bubbling Beebles is unblockable as long as defending player controls an enchantment.
-        ContinuousEffect gainAbility = new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
-        Effect effect = new ConditionalContinousEffect(gainAbility, new DefendingPlayerControlsEnchantment(), rule);
+        Effect effect = new ConditionalContinousEffect(new UnblockableSourceEffect(Constants.Duration.WhileOnBattlefield),
+                new DefendingPlayerControlsEnchantment(),
+                "{this} is unblockable as long as defending player controls an enchantment");
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
     }
 

@@ -55,7 +55,7 @@ public class NeurokInvisimancer extends CardImpl<NeurokInvisimancer> {
         this.toughness = new MageInt(1);
 
         // Neurok Invisimancer is unblockable.
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
         // When Neurok Invisimancer enters the battlefield, target creature is unblockable this turn.
         Ability ability = new EntersBattlefieldTriggeredAbility(new UnblockableTargetEffect());
         ability.addTarget(new TargetCreaturePermanent());

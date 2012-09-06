@@ -52,7 +52,7 @@ public class BlightedAgent extends CardImpl<BlightedAgent> {
         this.toughness = new MageInt(1);
 
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public BlightedAgent(final BlightedAgent card) {

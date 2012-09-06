@@ -50,7 +50,7 @@ public class JhessianInfiltrator extends CardImpl<JhessianInfiltrator> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public JhessianInfiltrator (final JhessianInfiltrator card) {

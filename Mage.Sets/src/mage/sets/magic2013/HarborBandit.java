@@ -28,19 +28,18 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -70,10 +69,12 @@ public class HarborBandit extends CardImpl<HarborBandit> {
 
         // Harbor Bandit gets +1/+1 as long as you control an Island.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         
         // {1}{U}: Harbor Bandit is unblockable this turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(UnblockableAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new UnblockableSourceEffect(Duration.EndOfTurn),
+                new ManaCostsImpl("{1}{U}")));
     }
 
     public HarborBandit(final HarborBandit card) {

@@ -50,7 +50,7 @@ public class LatchSeeker extends CardImpl<LatchSeeker> {
         this.toughness = new MageInt(1);
 
         // Latch Seeker is unblockable.
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public LatchSeeker(final LatchSeeker card) {

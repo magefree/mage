@@ -25,44 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.ravnika;
+package mage.abilities.effects.common;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.TransmuteAbility;
-import mage.abilities.keyword.UnblockableAbility;
-import mage.cards.CardImpl;
+import mage.Constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author Loki
+ * @author North
  */
-public class DimirInfiltrator extends CardImpl<DimirInfiltrator> {
+public class UnblockableSourceEffect extends RestrictionEffect<UnblockableSourceEffect> {
 
-    public DimirInfiltrator(UUID ownerId) {
-        super(ownerId, 203, "Dimir Infiltrator", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
-        this.expansionSetCode = "RAV";
-        this.subtype.add("Spirit");
-
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(3);
-
-        // Dimir Infiltrator is unblockable.
-        this.addAbility(new UnblockableAbility());
-        // Transmute {1}{U}{B}
-        this.addAbility(new TransmuteAbility("{1}{U}{B}"));
+    public UnblockableSourceEffect() {
+        this(Duration.WhileOnBattlefield);
+    }
+    public UnblockableSourceEffect(Duration duration) {
+        super(duration);
+        this.staticText = "{this} is unblockable";
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            this.staticText += " this turn";
+        }
     }
 
-    public DimirInfiltrator(final DimirInfiltrator card) {
-        super(card);
+    public UnblockableSourceEffect(UnblockableSourceEffect effect) {
+        super(effect);
     }
 
     @Override
-    public DimirInfiltrator copy() {
-        return new DimirInfiltrator(this);
+    public UnblockableSourceEffect copy() {
+        return new UnblockableSourceEffect(this);
+    }
+
+    @Override
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
     }
 }

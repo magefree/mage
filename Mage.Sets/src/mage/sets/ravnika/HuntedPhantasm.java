@@ -56,7 +56,7 @@ public class HuntedPhantasm extends CardImpl<HuntedPhantasm> {
         this.toughness = new MageInt(6);
 
         // Hunted Phantasm is unblockable.
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
         // When Hunted Phantasm enters the battlefield, put five 1/1 red Goblin creature tokens onto the battlefield under target opponent's control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new CreateTokenTargetEffect(new GoblinToken(), 5), false);
         Target target = new TargetOpponent();

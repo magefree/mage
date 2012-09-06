@@ -32,7 +32,7 @@ public class MagicAbility {
         put(ShroudAbility.getInstance().getRule(), 60);
         put(new SwampwalkAbility().getRule(), 10);
         put(TrampleAbility.getInstance().getRule(), 30);
-        put(UnblockableAbility.getInstance().getRule(), 100);
+        put(new UnblockableAbility().getRule(), 100);
         put(VigilanceAbility.getInstance().getRule(), 20);
         put(WitherAbility.getInstance().getRule(), 30);
     }};

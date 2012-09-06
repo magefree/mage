@@ -48,7 +48,7 @@ public class PhantomWarrior extends CardImpl<PhantomWarrior> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
     }
 
     public PhantomWarrior(final PhantomWarrior card) {

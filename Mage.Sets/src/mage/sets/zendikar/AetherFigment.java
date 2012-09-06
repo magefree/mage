@@ -59,7 +59,7 @@ public class AetherFigment extends CardImpl<AetherFigment> {
         this.toughness = new MageInt(1);
 
         // AEther Figment is unblockable.
-        this.addAbility(UnblockableAbility.getInstance());
+        this.addAbility(new UnblockableAbility());
 
         // Kicker {3}
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{3}"));
