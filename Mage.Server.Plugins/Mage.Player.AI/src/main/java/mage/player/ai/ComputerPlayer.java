@@ -432,7 +432,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 }
             }
 
-            if (!target.isRequired())
+            //if (!target.isRequired())
                 return false;
         }
         if (target instanceof TargetCardInGraveyard) {
@@ -445,7 +445,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 target.addTarget(card.getId(), source, game);
                 return true;
             }
-            if (!target.isRequired())
+            //if (!target.isRequired())
                 return false;
         }
         if (target instanceof TargetCardInLibrary) {
@@ -478,6 +478,22 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 }
             }
             return false;
+        }
+        if (target instanceof TargetCardInOpponentsGraveyard) {
+            List<Card> cards = new ArrayList<Card>();
+            for (UUID uuid: game.getOpponents(playerId)) {
+                Player player = game.getPlayer(uuid);
+                if (player != null) {
+                    cards.addAll(player.getGraveyard().getCards(game));
+                }
+            }
+            Card card = pickTarget(cards, outcome, target, source, game);
+            if (card != null) {
+                target.addTarget(card.getId(), source, game);
+                return true;
+            }
+            //if (!target.isRequired())
+                return false;
         }
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
