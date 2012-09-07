@@ -7,7 +7,6 @@ import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.sources.CardImageSource;
 import org.mage.plugins.card.dl.sources.MagicCardsImageSource;
-import org.mage.plugins.card.dl.sources.MtgatheringRuImageSource;
 import org.mage.plugins.card.dl.sources.WizardCardsImageSource;
 import org.mage.plugins.card.properties.SettingsManager;
 import org.mage.plugins.card.utils.CardImageUtils;
@@ -146,15 +145,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         break;
                     case 1:
                         cardImageSource = WizardCardsImageSource.getInstance();
-                        break;
-                    case 2:
-                        cardImageSource = MtgatheringRuImageSource.getHqInstance();
-                        break;
-                    case 3:
-                        cardImageSource = MtgatheringRuImageSource.getMqInstance();
-                        break;
-                    case 4:
-                        cardImageSource = MtgatheringRuImageSource.getLqInstance();
                         break;
                 }
                 int count = DownloadPictures.this.cards.size();
