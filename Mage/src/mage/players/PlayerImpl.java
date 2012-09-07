@@ -197,6 +197,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             this.hand.clear();
             this.graveyard.clear();
         }
+        this.library.reset();
         this.abilities.clear();
         this.counters.clear();
         this.wins = false;

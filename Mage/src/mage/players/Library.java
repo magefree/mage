@@ -221,4 +221,7 @@ public class Library implements Serializable {
         return null;
     }
 
+    public void reset() {
+        this.emptyDraw = false;
+    }
 }
