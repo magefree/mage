@@ -43,7 +43,7 @@ import mage.game.permanent.token.Token;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCreatureSourceEffect> {
+public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCreatureSourceEffect> implements SourceEffect {
 
     protected Token token;
     protected String type;
@@ -64,6 +64,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
     @Override
     public BecomesCreatureSourceEffect copy() {
         return new BecomesCreatureSourceEffect(this);
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        this.getAffectedObjects().add(source.getSourceId());
     }
 
     @Override

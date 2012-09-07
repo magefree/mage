@@ -284,6 +284,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     break;
                 case BATTLEFIELD:
                     PermanentCard permanent = new PermanentCard(this, ownerId);
+                    game.resetForSourceId(permanent.getId());
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
                     game.applyEffects();
@@ -397,6 +398,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             }
             updateZoneChangeCounter();
             PermanentCard permanent = new PermanentCard(this, controllerId);
+            game.resetForSourceId(permanent.getId());
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             //game.applyEffects(); // magenoxx: this causes bugs
