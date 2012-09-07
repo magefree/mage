@@ -48,7 +48,7 @@ public class SpinelessThug extends CardImpl<SpinelessThug> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public SpinelessThug(final SpinelessThug card) {

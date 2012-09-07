@@ -52,7 +52,7 @@ public class NightshadeStinger extends CardImpl<NightshadeStinger> {
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         // Nightshade Stinger can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public NightshadeStinger(final NightshadeStinger card) {

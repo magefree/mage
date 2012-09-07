@@ -54,7 +54,7 @@ public class VampireInterloper extends CardImpl<VampireInterloper> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Vampire Interloper can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public VampireInterloper(final VampireInterloper card) {

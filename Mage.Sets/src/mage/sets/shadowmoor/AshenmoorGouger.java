@@ -51,7 +51,7 @@ public class AshenmoorGouger extends CardImpl<AshenmoorGouger> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public AshenmoorGouger(final AshenmoorGouger card) {

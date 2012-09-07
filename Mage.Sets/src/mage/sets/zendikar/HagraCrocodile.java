@@ -52,7 +52,7 @@ public class HagraCrocodile extends CardImpl<HagraCrocodile> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
 
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         this.addAbility(new LandfallAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 

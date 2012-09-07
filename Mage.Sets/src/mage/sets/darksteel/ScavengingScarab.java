@@ -48,7 +48,7 @@ public class ScavengingScarab extends CardImpl<ScavengingScarab> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public ScavengingScarab(final ScavengingScarab card) {

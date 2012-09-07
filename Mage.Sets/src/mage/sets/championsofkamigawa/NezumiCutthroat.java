@@ -51,7 +51,7 @@ public class NezumiCutthroat extends CardImpl<NezumiCutthroat> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.addAbility(FearAbility.getInstance());
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public NezumiCutthroat(final NezumiCutthroat card) {

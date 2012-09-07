@@ -52,7 +52,7 @@ public class InkfathomInfiltrator extends CardImpl<InkfathomInfiltrator> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         this.addAbility(new UnblockableAbility());
     }
 

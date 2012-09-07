@@ -50,7 +50,7 @@ public class DaggerclawImp extends CardImpl<DaggerclawImp> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public DaggerclawImp (final DaggerclawImp card) {

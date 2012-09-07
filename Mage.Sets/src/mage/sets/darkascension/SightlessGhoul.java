@@ -52,7 +52,7 @@ public class SightlessGhoul extends CardImpl<SightlessGhoul> {
         this.toughness = new MageInt(2);
 
         // Sightless Ghoul can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         // Undying
         this.addAbility(new UndyingAbility());
     }

@@ -54,7 +54,7 @@ public class UnhallowedCathar extends CardImpl<UnhallowedCathar> {
         this.toughness = new MageInt(1);
 
         // Unhallowed Cathar can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
     }
 
     public UnhallowedCathar(final UnhallowedCathar card) {

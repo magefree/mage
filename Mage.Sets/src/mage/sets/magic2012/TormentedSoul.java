@@ -49,7 +49,7 @@ public class TormentedSoul extends CardImpl<TormentedSoul> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         this.addAbility(new UnblockableAbility());
     }
 

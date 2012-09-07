@@ -56,7 +56,7 @@ public class CarrionFeeder extends CardImpl<CarrionFeeder> {
         this.toughness = new MageInt(1);
 
         // Carrion Feeder can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         // Sacrifice a creature: Put a +1/+1 counter on Carrion Feeder.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance()),

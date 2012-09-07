@@ -21,6 +21,7 @@ Plainswalk|new|
 Rebound|new|
 Swampwalk|new|
 Totem armor|new|
+Unblockable|new|
 Undying|new|
 Deathtouch|instance|
 Defender|instance|
@@ -40,6 +41,5 @@ Scavenge|cost|
 Shroud|instance|
 Soulbond|instance|
 Trample|instance|
-Unblockable|instance|
 Vigilance|instance|
 Wither|instance|

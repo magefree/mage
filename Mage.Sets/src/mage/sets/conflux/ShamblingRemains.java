@@ -54,7 +54,7 @@ public class ShamblingRemains extends CardImpl<ShamblingRemains> {
         this.toughness = new MageInt(3);
 
         // Shambling Remains can't block.
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
         // Unearth {B}{R}
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{B}{R}")));
     }

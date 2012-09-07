@@ -64,7 +64,7 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
-        this.addAbility(CantBlockAbility.getInstance());
+        this.addAbility(new CantBlockAbility());
 
         // As long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre.
         this.addAbility( new ConditionalActivatedAbility(
