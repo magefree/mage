@@ -31,8 +31,11 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.regex.Pattern;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
+
+    private static final Pattern basicLandPattern = Pattern.compile("^(Forest|Mountain|Swamp|Island|Plains)$");
 
     private JProgressBar bar;
     private JOptionPane dlg;
@@ -206,7 +209,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                 CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
                 boolean withCollectorId = false;
-                if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island") || card.getName().equals("Plains")) {
+                if (basicLandPattern.matcher(card.getName()).matches()) {
                     withCollectorId = true;
                 }
                 file = new File(CardImageUtils.getImagePath(url, withCollectorId, imagesPath));
@@ -233,7 +236,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                     String cardName = card.getName();
                     CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
-                    if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
+                    if (basicLandPattern.matcher(cardName).matches()) {
                         url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
                     }
                     if (card.isFlipCard()) {
@@ -271,8 +274,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          */
         for (CardInfo card : allCardsUrls) {
             boolean withCollectorId = false;
-            if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp") || card.getName().equals("Island")
-                    || card.getName().equals("Plains")) {
+            if (basicLandPattern.matcher(card.getName()).matches()) {
                 withCollectorId = true;
             }
             file = new File(CardImageUtils.getImagePath(card, withCollectorId, imagesPath));
@@ -451,8 +453,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 createDirForCard(card, imagesPath);
 
                 boolean withCollectorId = false;
-                if (card.getName().equals("Forest") || card.getName().equals("Mountain") || card.getName().equals("Swamp")
-                        || card.getName().equals("Island") || card.getName().equals("Plains")) {
+                if (basicLandPattern.matcher(card.getName()).matches()) {
                     withCollectorId = true;
                 }
                 File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
@@ -516,6 +517,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             IIOImage image2 = new IIOImage(image, null, null);
             writer.write(null, image2, iwp);
             writer.dispose();
+            output.close();
         }
     }
 
@@ -540,8 +542,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             while (cardsIterator.hasNext()) {
                 CardInfo cardInfo = cardsIterator.next();
                 boolean withCollectorId = false;
-                if (cardInfo.getName().equals("Forest") || cardInfo.getName().equals("Mountain") || cardInfo.getName().equals("Swamp") || cardInfo.getName().equals("Island")
-                        || cardInfo.getName().equals("Plains")) {
+                if (basicLandPattern.matcher(cardInfo.getName()).matches()) {
                     withCollectorId = true;
                 }
                 File file = new File(CardImageUtils.getImagePath(cardInfo, withCollectorId));
