@@ -116,12 +116,12 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                         }
                         for (int j = 0; j < view.size(); j++) {
                             CardView cv = view.get(j);
-                            if (cv.getId().equals(entry.getKey())) {
+                            if (cv.getId().equals(entry.getValue().getId())) {
                                 if (count > 0) {
                                     // replace by another card with the same name+setCode
-                                    String key1 = cv.getName()+cv.getExpansionSetCode();
+                                    String key1 = cv.getName()+cv.getExpansionSetCode()+cv.getCardNumber();
                                     for (CardView cardView : cards.values()) {
-                                        String key2 = cardView.getName()+cardView.getExpansionSetCode();
+                                        String key2 = cardView.getName()+cardView.getExpansionSetCode()+cardView.getCardNumber();
                                         if ((key1).equals(key2)) {
                                             view.set(j, cardView);
                                             break;
