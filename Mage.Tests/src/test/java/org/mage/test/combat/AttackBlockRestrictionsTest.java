@@ -251,4 +251,40 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         
         assertLife(playerA, 19);
     }
+
+    /**
+     * Reproduced bug in combat blocking related to singleton classes
+     */
+    @Test
+    public void testFlyingVsNonFlying2() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Savannah Lions");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Azure Drake");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Aven Squire");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Walking Corpse");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+
+        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Aven Squire");
+
+        attack(3, playerA, "Llanowar Elves");
+        attack(3, playerA, "Azure Drake");
+        attack(3, playerA, "Aven Squire");
+        attack(3, playerA, "Savannah Lions");
+
+        block(3, playerB, "Llanowar Elves", "Azure Drake"); // won't be able to block
+        block(3, playerB, "Walking Corpse", "Aven Squire"); // able to block because of Turn to Frog
+
+        setStopAt(3, Constants.PhaseStep.END_TURN);
+        execute();
+
+        assertLife(playerB, 15);
+        assertLife(playerA, 20);
+
+        assertPermanentCount(playerB, "Aven Squire", 0);
+        assertPermanentCount(playerB, "Walking Corpse", 1);
+        assertPermanentCount(playerB, "Llanowar Elves", 1);
+    }
 }
