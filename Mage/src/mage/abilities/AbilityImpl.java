@@ -467,7 +467,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
 
         // emblem are always actual
         if (zone.equals(Zone.COMMAND)) {
@@ -482,18 +482,27 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
 
-        if (!(this instanceof MageSingleton)) {
-            MageObject object = game.getObject(getSourceId());
-            if (object != null && !object.getAbilities().contains(this)) {
-                boolean found = false;
-                // unfortunately we need to handle double faced cards separately and only this way
-                if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
-                    PermanentCard permanent = (PermanentCard)object;
-                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
-                }
-                if (!found) {
-                    return false;
-                }
+        MageObject object;
+        UUID sourceId;
+        // for singleton abilities like Flying we can't rely on abilities' source
+        // so will use the one that came as a parameter if it is not null
+        if (this instanceof MageSingleton && source != null) {
+            object = source;
+            sourceId = source.getId();
+        } else {
+            object = game.getObject(getSourceId());
+            sourceId = getSourceId();
+        }
+
+        if (object != null && !object.getAbilities().contains(this)) {
+            boolean found = false;
+            // unfortunately we need to handle double faced cards separately and only this way
+            if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
+                PermanentCard permanent = (PermanentCard)object;
+                found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+            }
+            if (!found) {
+                return false;
             }
         }
 

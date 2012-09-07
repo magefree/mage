@@ -31,6 +31,7 @@ package mage.abilities;
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
@@ -362,6 +363,6 @@ public interface Ability extends Controllable, Serializable {
      * @param checkLKI
      * @return 
      */
-    public boolean isInUseableZone(Game game, boolean checkLKI);
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
 
 }

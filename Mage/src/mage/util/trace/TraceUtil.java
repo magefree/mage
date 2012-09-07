@@ -123,13 +123,20 @@ public class TraceUtil {
             log.error(uuid+"        applies to blocker=" + effect.applies(blocker, ability, game));
         }
 
+        traceForPermanent(game, attacker, uuid, restrictionEffects);
+        traceForPermanent(game, blocker, uuid, restrictionEffects);
+
+        log.error(uuid);
+    }
+
+    private static void traceForPermanent(Game game, Permanent permanent, String uuid, ContinuousEffectsList<RestrictionEffect> restrictionEffects) {
+        Ability ability;
         for (RestrictionEffect effect: restrictionEffects) {
             ability = restrictionEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, false)) {
-                log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(attacker, ability, game));
-                log.error(uuid+"        ability=" + ability + ", applies_to_blocker=" + effect.applies(blocker, ability, game));
+            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
+                log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
             } else {
-                boolean usable = ability.isInUseableZone(game, false);
+                boolean usable = ability.isInUseableZone(game, permanent, false);
                 log.error(uuid+"        instanceof: " + (ability instanceof StaticAbility) + ", ability=" + ability);
                 log.error(uuid+"        usable: " + usable + ", ability=" + ability);
                 if (!usable) {
@@ -145,10 +152,8 @@ public class TraceUtil {
                 }
             }
         }
-
-        log.error(uuid);
     }
-    
+
     public static void trace(String msg) {
         log.info(msg);
     }

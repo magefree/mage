@@ -53,7 +53,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTrigger
     }
 
     @Override
-    public boolean isInUseableZone(Game game, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
         // check it was previously on battlefield
         MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
         // check now it is in graveyard

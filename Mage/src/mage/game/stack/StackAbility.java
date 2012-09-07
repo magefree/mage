@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.EffectType;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.*;
 import mage.abilities.costs.AlternativeCost;
@@ -346,7 +347,7 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
-    public boolean isInUseableZone(Game game, boolean checkLKI) {
+    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

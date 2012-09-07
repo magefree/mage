@@ -54,7 +54,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
 
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
-            if (ability.isInUseableZone(game, true)) {
+            if (ability.isInUseableZone(game, null, true)) {
                 MageObject object = getMageObject(event, game, ability);
                 if (object != null) {
                     if (checkAbilityStillExists(ability, object)) {
