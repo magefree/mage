@@ -28,7 +28,6 @@
 
 package mage.sets.conflux;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,8 +35,9 @@ import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
+import java.util.UUID;
+
 /**
- *
  * @author Loki
  */
 public class AvenSquire extends CardImpl<AvenSquire> {
@@ -49,7 +49,7 @@ public class AvenSquire extends CardImpl<AvenSquire> {
         this.subtype.add("Bird");
         this.subtype.add("Soldier");
         this.power = new MageInt(1);
-    this.toughness = new MageInt(1);
+        this.toughness = new MageInt(1);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new ExaltedAbility());
     }
