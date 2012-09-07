@@ -4,18 +4,19 @@ import com.google.common.base.Function;
 import com.google.common.collect.ComputationException;
 import com.google.common.collect.MapMaker;
 import com.mortennobel.imagescaling.ResampleOp;
+import de.schlichtherle.truezip.file.TFile;
+import de.schlichtherle.truezip.file.TFileInputStream;
+import de.schlichtherle.truezip.file.TFileOutputStream;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.utils.CardImageUtils;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -65,21 +66,27 @@ public class ImageCache {
 
                         CardInfo info = new CardInfo(name, set, collectorId, type);
 
-                        if (collectorId == 0) info.setToken(true);
+                        if (collectorId == 0) {
+                            info.setToken(true);
+                        }
                         String path = CardImageUtils.getImagePath(info);
-                        if (path == null) return null;
-                        File file = new File(path);
+                        if (path == null) {
+                            return null;
+                        }
+                        TFile file = new TFile(path);
 
                         if (thumbnail && path.endsWith(".jpg")) {
-                            String thumbnailPath = path.replace(".jpg", ".thumb.jpg");
-                            File thumbnailFile = new File(thumbnailPath);
+                            String thumbnailPath = path.replace(".zip", ".thumb.zip");
+                            TFile thumbnailFile = new TFile(thumbnailPath);
                             if (thumbnailFile.exists()) {
                                 //log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
                                 return loadImage(thumbnailFile);
                             } else {
                                 BufferedImage image = loadImage(file);
                                 image = getWizardsCard(image);
-                                if (image == null) return null;
+                                if (image == null) {
+                                    return null;
+                                }
                                 //log.debug("creating thumbnail for " + key);
                                 return makeThumbnail(image, thumbnailPath);
                             }
@@ -91,10 +98,11 @@ public class ImageCache {
                                 "Requested image doesn't fit the requirement for key (<cardname>#<setname>#<collectorID>): " + key);
                     }
                 } catch (Exception ex) {
-                    if (ex instanceof ComputationException)
+                    if (ex instanceof ComputationException) {
                         throw (ComputationException) ex;
-                    else
+                    } else {
                         throw new ComputationException(ex);
+                    }
                 }
             }
         });
@@ -138,8 +146,9 @@ public class ImageCache {
             // legitimate, happens when a card has no image
             return null;
         } catch (ComputationException ex) {
-            if (ex.getCause() instanceof NullPointerException)
+            if (ex.getCause() instanceof NullPointerException) {
                 return null;
+            }
             log.error(ex,ex);
             return null;
         }
@@ -163,13 +172,15 @@ public class ImageCache {
      *            file to load image from
      * @return {@link BufferedImage}
      */
-    public static BufferedImage loadImage(File file) {
+    public static BufferedImage loadImage(TFile file) {
         BufferedImage image = null;
         if (!file.exists()) {
             return null;
         }
         try {
-            image = ImageIO.read(file);
+            TFileInputStream inputStream = new TFileInputStream(file);
+            image = ImageIO.read(inputStream);
+            inputStream.close();
         } catch (Exception e) {
             log.error(e, e);
         }
@@ -179,10 +190,12 @@ public class ImageCache {
 
     public static BufferedImage makeThumbnail(BufferedImage original, String path) {
         BufferedImage image = getResizedImage(original, Constants.THUMBNAIL_SIZE_FULL);
-        File imagePath = new File(path);
+        TFile imageFile = new TFile(path);
         try {
             //log.debug("thumbnail path:"+path);
-            ImageIO.write(image, "jpg", imagePath);
+            TFileOutputStream outputStream = new TFileOutputStream(imageFile);
+            ImageIO.write(image, "jpg", outputStream);
+            outputStream.close();
         } catch (Exception e) {
             log.error(e,e);
         }
@@ -203,8 +216,9 @@ public class ImageCache {
         int tgtWidth = Constants.CARD_SIZE_FULL.width;
         int tgtHeight = Constants.CARD_SIZE_FULL.height;
 
-        if (srcWidth == tgtWidth && srcHeight == tgtHeight)
+        if (srcWidth == tgtWidth && srcHeight == tgtHeight) {
             return original;
+        }
 
         ResampleOp resampleOp = new ResampleOp(tgtWidth, tgtHeight);
         BufferedImage image = resampleOp.filter(original, null);
@@ -216,8 +230,9 @@ public class ImageCache {
      * panel For future use.
      */
     private static BufferedImage getFullSizeImage(BufferedImage original, double scale) {
-        if (scale == 1)
+        if (scale == 1) {
             return original;
+        }
         ResampleOp resampleOp = new ResampleOp((int) (original.getWidth() * scale), (int) (original.getHeight() * scale));
         BufferedImage image = resampleOp.filter(original, null);
         return image;
@@ -239,12 +254,14 @@ public class ImageCache {
     public static BufferedImage getImage(CardView card, int width, int height) {
         String key = getKey(card);
         BufferedImage original = getImage(key);
-        if (original == null)
+        if (original == null) {
             return null;
+        }
 
         double scale = Math.min((double) width / original.getWidth(), (double) height / original.getHeight());
-        if (scale > 1)
+        if (scale > 1) {
             scale = 1;
+        }
 
         return getFullSizeImage(original, scale);
     }

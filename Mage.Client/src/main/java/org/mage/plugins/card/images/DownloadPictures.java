@@ -1,5 +1,10 @@
 package org.mage.plugins.card.images;
 
+import de.schlichtherle.truezip.file.TArchiveDetector;
+import de.schlichtherle.truezip.file.TConfig;
+import de.schlichtherle.truezip.file.TFile;
+import de.schlichtherle.truezip.file.TFileOutputStream;
+import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.Card;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -61,6 +66,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     public static void main(String[] args) {
         startDownload(null, null, null);
+        TConfig config = TConfig.get();
+        config.setArchiveDetector(new TArchiveDetector("zip"));
+        config.getOutputPreferences().set(FsOutputOption.STORE);
     }
 
     public static void startDownload(JFrame frame, Set<Card> allCards, String imagesPath) {
@@ -204,7 +212,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     }
 
     public static boolean checkForNewCards(Set<Card> allCards, String imagesPath) {
-        File file;
+        TFile file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                 CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
@@ -212,9 +220,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (basicLandPattern.matcher(card.getName()).matches()) {
                     withCollectorId = true;
                 }
-                file = new File(CardImageUtils.getImagePath(url, withCollectorId, imagesPath));
-                if (!file.exists())
+                file = new TFile(CardImageUtils.getImagePath(url, withCollectorId, imagesPath));
+                if (!file.exists()) {
                     return true;
+                }
             }
         }        
         return false;
@@ -267,7 +276,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             log.error(e);
         }
 
-        File file;
+        TFile file;
 
         /**
          * check to see which cards we already have
@@ -277,7 +286,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             if (basicLandPattern.matcher(card.getName()).matches()) {
                 withCollectorId = true;
             }
-            file = new File(CardImageUtils.getImagePath(card, withCollectorId, imagesPath));
+            file = new TFile(CardImageUtils.getImagePath(card, withCollectorId, imagesPath));
             if (!file.exists()) {
                 cardsToDownload.add(card);
             }
@@ -300,16 +309,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private static ArrayList<CardInfo> getTokenCardUrls() throws RuntimeException {
         ArrayList<CardInfo> list = new ArrayList<CardInfo>();
-        HashSet<String> filter = new HashSet<String>();
         InputStream in = DownloadPictures.class.getClassLoader().getResourceAsStream("card-pictures-tok.txt");
-        readImageURLsFromFile(in, list, filter);
-        return list;
-    }
 
-    private static void readImageURLsFromFile(InputStream in, ArrayList<CardInfo> list, Set<String> filter) throws RuntimeException {
         if (in == null) {
             log.error("resources input stream is null");
-            return;
+            return list;
         }
 
         BufferedReader reader = null;
@@ -361,6 +365,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
 
         }
+        return list;
     }
 
     @Override
@@ -414,7 +419,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                     if (url != null) {
-                        Runnable task = new DownloadTask(card, new URL(url), imagesPath);
+                        Runnable task = new DownloadTask(card, new URL(url));
                         executor.execute(task);
                     } else {
                         synchronized (sync) {
@@ -439,38 +444,34 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         private CardInfo card;
         private URL url;
-        private String imagesPath;
 
-        public DownloadTask(CardInfo card, URL url, String imagesPath) {
+        public DownloadTask(CardInfo card, URL url) {
             this.card = card;
             this.url = url;
-            this.imagesPath = imagesPath;
         }
 
         @Override
         public void run() {
             try {
-                createDirForCard(card, imagesPath);
-
                 boolean withCollectorId = false;
                 if (basicLandPattern.matcher(card.getName()).matches()) {
                     withCollectorId = true;
                 }
-                File fileOut = new File(CardImageUtils.getImagePath(card, withCollectorId));
+                File temporaryFile = new File(Constants.IO.imageBaseDir + File.separator + card.hashCode() + "." + card.getName() + ".jpg");
 
                 BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
-                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(fileOut));
+                BufferedOutputStream out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
 
                 byte[] buf = new byte[1024];
-                int len = 0;
+                int len;
                 while ((len = in.read(buf)) != -1) {
                     // user cancelled
                     if (cancel) {
                         in.close();
                         out.flush();
                         out.close();
-                        // delete what was written so far
-                        fileOut.delete();
+                        temporaryFile.delete();
+                        return;
                     }
                     out.write(buf, 0, len);
                 }
@@ -479,8 +480,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 out.flush();
                 out.close();
 
+                TFile outputFile = new TFile(CardImageUtils.getImagePath(card, withCollectorId));
                 if (card.isTwoFacedCard()) {
-                    BufferedImage image = ImageIO.read(fileOut);
+                    BufferedImage image = ImageIO.read(temporaryFile);
+                    temporaryFile.delete();
                     if (image.getHeight() == 470) {
                         BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
                         renderedImage.getGraphics();
@@ -491,20 +494,23 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             graphics2D.drawImage(image, 0, 0, 265, 370, 41, 62, 306, 432, null);
                         }
                         graphics2D.dispose();
-                        writeImageToFile(renderedImage, fileOut);
+                        writeImageToFile(renderedImage, outputFile);
                     }
+                } else {
+                    new TFile(temporaryFile).cp_rp(outputFile);
+                    temporaryFile.delete();
                 }
 
-                synchronized (sync) {
-                    update(cardIndex + 1);
-                }
             } catch (Exception e) {
                 log.error(e, e);
             }
 
+            synchronized (sync) {
+                update(cardIndex + 1);
+            }
         }
 
-        private void writeImageToFile(BufferedImage image, File file) throws IOException {
+        private void writeImageToFile(BufferedImage image, TFile file) throws IOException {
             Iterator iter = ImageIO.getImageWritersByFormatName("jpg");
 
             ImageWriter writer = (ImageWriter) iter.next();
@@ -512,21 +518,17 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             iwp.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
             iwp.setCompressionQuality(0.96f);
 
-            FileImageOutputStream output = new FileImageOutputStream(file);
+            File tempFile = new File(Constants.IO.imageBaseDir + File.separator + image.hashCode() + file.getName());
+            FileImageOutputStream output = new FileImageOutputStream(tempFile);
             writer.setOutput(output);
             IIOImage image2 = new IIOImage(image, null, null);
             writer.write(null, image2, iwp);
             writer.dispose();
             output.close();
-        }
-    }
 
-    private static File createDirForCard(CardInfo card, String imagesPath) throws Exception {
-        File setDir = new File(CardImageUtils.getImageDir(card, imagesPath));
-        if (!setDir.exists()) {
-            setDir.mkdirs();
+            new TFile(tempFile).cp_rp(file);
+            tempFile.delete();
         }
-        return setDir;
     }
 
     private void update(int card) {
@@ -545,7 +547,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (basicLandPattern.matcher(cardInfo.getName()).matches()) {
                     withCollectorId = true;
                 }
-                File file = new File(CardImageUtils.getImagePath(cardInfo, withCollectorId));
+                TFile file = new TFile(CardImageUtils.getImagePath(cardInfo, withCollectorId));
                 if (file.exists()) {
                     cardsIterator.remove();
                 }

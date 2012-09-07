@@ -112,6 +112,17 @@
             <artifactId>jsoup</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <dependency>
+            <groupId>de.schlichtherle.truezip</groupId>
+            <artifactId>truezip-file</artifactId>
+            <version>7.6.3</version>
+        </dependency>
+        <dependency>
+            <groupId>de.schlichtherle.truezip</groupId>
+            <artifactId>truezip-driver-zip</artifactId>
+            <version>7.6.3</version>
+            <!--<scope>runtime</scope>-->
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,11 +1,10 @@
 package org.mage.plugins.card.utils;
 
+import de.schlichtherle.truezip.file.TFile;
+import java.util.HashMap;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
-
-import java.io.File;
-import java.util.HashMap;
 
 public class CardImageUtils {
 
@@ -22,17 +21,17 @@ public class CardImageUtils {
         String filePath;
         String suffix = ".jpg";
 
-        File file = null;
+        TFile file;
         if (card.isToken()) {
             if (pathCache.containsKey(card)) {
                 return pathCache.get(card);
             }
             filePath = getTokenImagePath(card);
-            file = new File(filePath);
+            file = new TFile(filePath);
 
             if (!file.exists()) {
                 filePath = searchForCardImage(card);
-                file = new File(filePath);
+                file = new TFile(filePath);
             }
 
             if (file.exists()) {
@@ -40,11 +39,11 @@ public class CardImageUtils {
             }
         } else {
             filePath = getImagePath(card, false);
-            file = new File(filePath);
+            file = new TFile(filePath);
 
             if (!file.exists()) {
                 filePath = getImagePath(card, true);
-                file = new File(filePath);
+                file = new TFile(filePath);
             }
         }
 
@@ -53,7 +52,7 @@ public class CardImageUtils {
          */
         if (file == null || !file.exists()) {
             filePath = cleanString(card.getName()) + suffix;
-            file = new File(filePath);
+            file = new TFile(filePath);
         }
 
         if (file.exists()) {
@@ -66,17 +65,16 @@ public class CardImageUtils {
     private static String getTokenImagePath(CardInfo card) {
         String filename = getImagePath(card, false);
 
-        File file = new File(filename);
+        TFile file = new TFile(filename);
         if (!file.exists()) {
             CardInfo updated = new CardInfo(card);
             updated.setName(card.getName() + " 1");
             filename = getImagePath(updated, false);
-            file = new File(filename);
+            file = new TFile(filename);
             if (!file.exists()) {
                 updated = new CardInfo(card);
                 updated.setName(card.getName() + " 2");
                 filename = getImagePath(updated, false);
-                file = new File(filename);
             }
         }
 
@@ -84,14 +82,14 @@ public class CardImageUtils {
     }
 
     private static String searchForCardImage(CardInfo card) {
-        File file = null;
-        String path = "";
+        TFile file;
+        String path;
         CardInfo c = new CardInfo(card);
 
         for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
             c.setSet(set);
             path = getTokenImagePath(c);
-            file = new File(path);
+            file = new TFile(path);
             if (file.exists()) {
                 pathCache.put(card, path);
                 return path;
@@ -106,9 +104,9 @@ public class CardImageUtils {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if (c == ' ' || c == '-')
+            if (c == ' ' || c == '-') {
                 out.append('_');
-            else if (Character.isLetterOrDigit(c)) {
+            } else if (Character.isLetterOrDigit(c)) {
                 out.append(c);
             }
         }
@@ -134,9 +132,9 @@ public class CardImageUtils {
         String set = updateSet(card.getSet(), false).toUpperCase();
         String imagesDir = (imagesPath != null ? imagesPath :  Constants.IO.imageBaseDir);
         if (card.isToken()) {
-            return imagesDir + File.separator + "TOK" + File.separator + set;
+            return imagesDir + TFile.separator + "TOK" + ".zip" + TFile.separator + set;
         } else {
-            return imagesDir + File.separator + set;
+            return imagesDir + TFile.separator + set + ".zip" + TFile.separator + set;
         }
     }
 
@@ -148,9 +146,9 @@ public class CardImageUtils {
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
         String name = card.getName();
         if (withCollector) {
-            return getImageDir(card, imagesPath) + File.separator + name + "." + card.getCollectorId() + ".full.jpg";
+            return getImageDir(card, imagesPath) + TFile.separator + name + "." + card.getCollectorId() + ".full.jpg";
         } else {
-            return getImageDir(card, imagesPath) + File.separator + name + type + ".full.jpg";
+            return getImageDir(card, imagesPath) + TFile.separator + name + type + ".full.jpg";
         }
     }
 }
