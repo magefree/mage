@@ -28,16 +28,17 @@
 
 package mage.view;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.UUID;
 import mage.cards.Card;
+
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class SimpleCardsView extends HashMap<UUID, SimpleCardView> {
+public class SimpleCardsView extends LinkedHashMap<UUID, SimpleCardView> {
 
     public SimpleCardsView() {}
 
