@@ -482,16 +482,18 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
 
-        MageObject object = game.getObject(getSourceId());
-        if (object != null && !object.getAbilities().contains(this)) {
-            boolean found = false;
-            // unfortunately we need to handle double faced cards separately and only this way
-            if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
-                PermanentCard permanent = (PermanentCard)object;
-                found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
-            }
-            if (!found) {
-                return false;
+        if (!(this instanceof MageSingleton)) {
+            MageObject object = game.getObject(getSourceId());
+            if (object != null && !object.getAbilities().contains(this)) {
+                boolean found = false;
+                // unfortunately we need to handle double faced cards separately and only this way
+                if (object instanceof PermanentCard && ((PermanentCard)object).canTransform()) {
+                    PermanentCard permanent = (PermanentCard)object;
+                    found = permanent.getSecondCardFace().getAbilities().contains(this) || permanent.getCard().getAbilities().contains(this);
+                }
+                if (!found) {
+                    return false;
+                }
             }
         }
 
