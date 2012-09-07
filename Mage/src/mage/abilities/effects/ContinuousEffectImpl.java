@@ -128,6 +128,11 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
     }
 
     @Override
+    public void discard() {
+        this.discarded = true;
+    }
+
+    @Override
     public void init(Ability source, Game game) {
         //20100716 - 611.2c
         if (source instanceof ActivatedAbility || source instanceof TriggeredAbility) {

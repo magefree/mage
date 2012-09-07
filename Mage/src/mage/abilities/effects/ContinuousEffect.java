@@ -46,6 +46,7 @@ public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<
 
     public boolean isUsed();
     public boolean isDiscarded();
+    public void discard();
     public Duration getDuration();
     public Date getTimestamp();
     public void setTimestamp();

@@ -39,6 +39,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CopyEffect;
+import mage.abilities.effects.common.continious.SourceEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.TriggeredManaAbility;
@@ -1447,9 +1448,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         for (ContinuousEffect effect : getContinuousEffects().getLayeredEffects(this)) {
             if (effect.getAffectedObjects().contains(sourceId)) {
                 effect.getAffectedObjects().remove(sourceId);
-            }
-            if (effect.getAffectedObjects().contains(sourceId)) {
-                effect.getAffectedObjects().remove(sourceId);
+                if (effect instanceof SourceEffect) {
+                    effect.discard();
+                }
             }
         }
         getContinuousEffects().removeGainedEffectsForSource(sourceId);

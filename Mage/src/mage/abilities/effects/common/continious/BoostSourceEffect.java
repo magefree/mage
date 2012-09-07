@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
+public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> implements SourceEffect {
     private DynamicValue power;
     private DynamicValue toughness;
     private boolean lockedIn;
@@ -82,6 +82,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> {
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
+        getAffectedObjects().add(source.getSourceId());
         if (lockedIn) {
             power = new StaticValue(power.calculate(game, source));
             toughness = new StaticValue(toughness.calculate(game, source));
