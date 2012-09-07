@@ -28,7 +28,6 @@
 
 package mage.abilities;
 
-import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
@@ -41,7 +40,10 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.stack.StackAbility;
 import mage.target.Target;
+
+import java.util.UUID;
 
 /**
  *
@@ -177,10 +179,20 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     protected String getMessageText(Game game) {
         StringBuilder sb = new StringBuilder();
         MageObject object = game.getObject(this.sourceId);
-        if (object != null)
-            sb.append(object.getName());
-        else
+        if (object != null) {
+            if (object instanceof StackAbility) {
+                Card card = game.getCard(((StackAbility) object).getSourceId());
+                if (card != null) {
+                    sb.append(card.getName());
+                } else {
+                    sb.append(object.getName());
+                }
+            } else {
+                sb.append(object.getName());
+            }
+        } else {
             sb.append("unknown");
+        }
         if (getTargets().size() > 0) {
             sb.append(" targeting ");
             for (Target target: getTargets()) {
