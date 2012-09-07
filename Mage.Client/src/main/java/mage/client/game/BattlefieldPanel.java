@@ -59,7 +59,7 @@ import java.util.Map.Entry;
  */
 public class BattlefieldPanel extends javax.swing.JLayeredPane {
 
-    private Map<UUID, MagePermanent> permanents = new HashMap<UUID, MagePermanent>();
+    private Map<UUID, MagePermanent> permanents = new LinkedHashMap<UUID, MagePermanent>();
     private UUID gameId;
     private BigCard bigCard;
     private Map<String, JComponent> ui = new HashMap<String, JComponent>();
@@ -184,7 +184,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
         }
         final MagePermanent perm = Plugins.getInstance().getMagePermanent(permanent, bigCard, cardDimension, gameId, true);
         if (!Plugins.getInstance().isCardPluginLoaded()) {
-            perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
+            //perm.setBounds(findEmptySpace(new Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight)));
         } else {
             //perm.setAlpha(0);
         }

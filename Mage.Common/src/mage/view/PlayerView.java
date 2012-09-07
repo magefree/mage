@@ -28,16 +28,17 @@
 
 package mage.view;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+
+import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -56,7 +57,7 @@ public class PlayerView implements Serializable {
     private boolean hasLeft;
     private ManaPoolView manaPool;
     private SimpleCardsView graveyard = new SimpleCardsView();
-    private Map<UUID, PermanentView> battlefield = new HashMap<UUID, PermanentView>();
+    private Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
     private CardView topCard;
     private UserDataView userDataView;
 
