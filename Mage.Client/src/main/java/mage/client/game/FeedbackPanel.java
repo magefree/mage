@@ -49,6 +49,9 @@ import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -68,6 +71,8 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanel connectedChatPanel;
+
+    private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
     /** Creates new form FeedbackPanel */
     public FeedbackPanel() {
@@ -124,6 +129,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.btnRight.setText("OK");
                 this.helper.setState("", false, "OK", true);
                 ArrowBuilder.removeAllArrows();
+                endWithTimeout();
                 break;
         }
         this.btnSpecial.setVisible(special);
@@ -145,6 +151,19 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.helper.setLinks(btnLeft, btnRight, btnSpecial);
 
         this.helper.setVisible(true);
+    }
+
+    /**
+     * Close game window by pressing OK button after 5 seconds
+     */
+    private void endWithTimeout() {
+        Runnable task = new Runnable() {
+            public void run() {
+                logger.info("Ending game...");
+                FeedbackPanel.this.btnRight.doClick();
+            }
+        };
+        worker.schedule(task, 8, TimeUnit.SECONDS);
     }
 
     private void handleOptions(Map<String, Serializable> options) {
