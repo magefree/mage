@@ -75,6 +75,7 @@ class WitchbaneOrbEffect extends OneShotEffect<WitchbaneOrbEffect> {
 
     public WitchbaneOrbEffect() {
         super(Outcome.Protect);
+        staticText = "destroy all Curses attached to you";
     }
 
     public WitchbaneOrbEffect(final WitchbaneOrbEffect effect) {
