@@ -216,11 +216,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                 CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
-                boolean withCollectorId = false;
-                if (basicLandPattern.matcher(card.getName()).matches()) {
-                    withCollectorId = true;
-                }
-                file = new TFile(CardImageUtils.getImagePath(url, withCollectorId, imagesPath));
+                file = new TFile(CardImageUtils.getImagePath(url, imagesPath));
                 if (!file.exists()) {
                     return true;
                 }
@@ -282,11 +278,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          * check to see which cards we already have
          */
         for (CardInfo card : allCardsUrls) {
-            boolean withCollectorId = false;
-            if (basicLandPattern.matcher(card.getName()).matches()) {
-                withCollectorId = true;
-            }
-            file = new TFile(CardImageUtils.getImagePath(card, withCollectorId, imagesPath));
+            file = new TFile(CardImageUtils.getImagePath(card, imagesPath));
             if (!file.exists()) {
                 cardsToDownload.add(card);
             }
@@ -453,10 +445,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         @Override
         public void run() {
             try {
-                boolean withCollectorId = false;
-                if (basicLandPattern.matcher(card.getName()).matches()) {
-                    withCollectorId = true;
-                }
                 File temporaryFile = new File(Constants.IO.imageBaseDir + File.separator + card.hashCode() + "." + card.getName() + ".jpg");
 
                 BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
@@ -480,7 +468,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 out.flush();
                 out.close();
 
-                TFile outputFile = new TFile(CardImageUtils.getImagePath(card, withCollectorId));
+                TFile outputFile = new TFile(CardImageUtils.getImagePath(card, imagesPath));
                 if (card.isTwoFacedCard()) {
                     BufferedImage image = ImageIO.read(temporaryFile);
                     temporaryFile.delete();
@@ -543,11 +531,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             Iterator<CardInfo> cardsIterator = DownloadPictures.this.cards.iterator();
             while (cardsIterator.hasNext()) {
                 CardInfo cardInfo = cardsIterator.next();
-                boolean withCollectorId = false;
-                if (basicLandPattern.matcher(cardInfo.getName()).matches()) {
-                    withCollectorId = true;
-                }
-                TFile file = new TFile(CardImageUtils.getImagePath(cardInfo, withCollectorId));
+                TFile file = new TFile(CardImageUtils.getImagePath(cardInfo, imagesPath));
                 if (file.exists()) {
                     cardsIterator.remove();
                 }

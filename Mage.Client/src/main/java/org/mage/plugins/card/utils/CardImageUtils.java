@@ -2,12 +2,14 @@ package org.mage.plugins.card.utils;
 
 import de.schlichtherle.truezip.file.TFile;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
+    private static final Pattern basicLandPattern = Pattern.compile("^(Forest|Mountain|Swamp|Island|Plains)$");
     private static HashMap<CardInfo, String> pathCache = new HashMap<CardInfo, String>();
 
     /**
@@ -19,7 +21,6 @@ public class CardImageUtils {
      */
     public static String getImagePath(CardInfo card) {
         String filePath;
-        String suffix = ".jpg";
 
         TFile file;
         if (card.isToken()) {
@@ -38,20 +39,7 @@ public class CardImageUtils {
                 pathCache.put(card, filePath);
             }
         } else {
-            filePath = getImagePath(card, false);
-            file = new TFile(filePath);
-
-            if (!file.exists()) {
-                filePath = getImagePath(card, true);
-                file = new TFile(filePath);
-            }
-        }
-
-        /**
-         * try current directory
-         */
-        if (file == null || !file.exists()) {
-            filePath = cleanString(card.getName()) + suffix;
+            filePath = getImagePath(card, null);
             file = new TFile(filePath);
         }
 
@@ -63,18 +51,18 @@ public class CardImageUtils {
     }
 
     private static String getTokenImagePath(CardInfo card) {
-        String filename = getImagePath(card, false);
+        String filename = getImagePath(card, null);
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
             CardInfo updated = new CardInfo(card);
             updated.setName(card.getName() + " 1");
-            filename = getImagePath(updated, false);
+            filename = getImagePath(updated, null);
             file = new TFile(filename);
             if (!file.exists()) {
                 updated = new CardInfo(card);
                 updated.setName(card.getName() + " 2");
-                filename = getImagePath(updated, false);
+                filename = getImagePath(updated, null);
             }
         }
 
@@ -98,22 +86,6 @@ public class CardImageUtils {
         return "";
     }
 
-    public static String cleanString(String in) {
-        in = in.trim();
-        StringBuilder out = new StringBuilder();
-        char c;
-        for (int i = 0; i < in.length(); i++) {
-            c = in.charAt(i);
-            if (c == ' ' || c == '-') {
-                out.append('_');
-            } else if (Character.isLetterOrDigit(c)) {
-                out.append(c);
-            }
-        }
-
-        return out.toString().toLowerCase();
-    }
-
     public static String updateSet(String cardSet, boolean forUrl) {
         String set = cardSet.toLowerCase();
         if (set.equals("con")) {
@@ -125,7 +97,7 @@ public class CardImageUtils {
         return set;
     }
 
-    public static String getImageDir(CardInfo card, String imagesPath) {
+    private static String getImageDir(CardInfo card, String imagesPath) {
         if (card.getSet() == null) {
             return "";
         }
@@ -138,17 +110,40 @@ public class CardImageUtils {
         }
     }
 
-    public static String getImagePath(CardInfo card, boolean withCollector) {
-        return getImagePath(card, withCollector, null);
-    }
-
-    public static String getImagePath(CardInfo card, boolean withCollector, String imagesPath) {
+    public static String getImagePath(CardInfo card, String imagesPath) {
+        String imageDir = getImageDir(card, imagesPath);
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
         String name = card.getName();
-        if (withCollector) {
-            return getImageDir(card, imagesPath) + TFile.separator + name + "." + card.getCollectorId() + ".full.jpg";
+
+        String path, capitalizedPath;
+        if (basicLandPattern.matcher(name).matches()) {
+            path = imageDir + TFile.separator + name + "." + card.getCollectorId() + ".full.jpg";
+            capitalizedPath = imageDir + TFile.separator + capitalize(name) + "." + card.getCollectorId() + ".full.jpg";
+
         } else {
-            return getImageDir(card, imagesPath) + TFile.separator + name + type + ".full.jpg";
+            path = imageDir + TFile.separator + name + type + ".full.jpg";
+            capitalizedPath = imageDir + TFile.separator + capitalize(name) + type + ".full.jpg";
         }
+
+        return new TFile(capitalizedPath).exists() ? capitalizedPath : path;
+    }
+
+    private static String capitalize(String str) {
+        int delimLen = -1;
+        if (str.isEmpty() || delimLen == 0) {
+            return str;
+        }
+        char[] buffer = str.toCharArray();
+        boolean capitalizeNext = true;
+        for (int i = 0; i < buffer.length; i++) {
+            char ch = buffer[i];
+            if (Character.isWhitespace(ch)) {
+                capitalizeNext = true;
+            } else if (capitalizeNext) {
+                buffer[i] = Character.toTitleCase(ch);
+                capitalizeNext = false;
+            }
+        }
+        return new String(buffer);
     }
 }
