@@ -112,38 +112,26 @@ public class CardImageUtils {
 
     public static String getImagePath(CardInfo card, String imagesPath) {
         String imageDir = getImageDir(card, imagesPath);
+        String imageName;
+
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
         String name = card.getName();
 
-        String path, capitalizedPath;
         if (basicLandPattern.matcher(name).matches()) {
-            path = imageDir + TFile.separator + name + "." + card.getCollectorId() + ".full.jpg";
-            capitalizedPath = imageDir + TFile.separator + capitalize(name) + "." + card.getCollectorId() + ".full.jpg";
-
+            imageName = name + "." + card.getCollectorId() + ".full.jpg";
         } else {
-            path = imageDir + TFile.separator + name + type + ".full.jpg";
-            capitalizedPath = imageDir + TFile.separator + capitalize(name) + type + ".full.jpg";
+            imageName = name + type + ".full.jpg";
         }
 
-        return new TFile(capitalizedPath).exists() ? capitalizedPath : path;
-    }
-
-    private static String capitalize(String str) {
-        int delimLen = -1;
-        if (str.isEmpty() || delimLen == 0) {
-            return str;
-        }
-        char[] buffer = str.toCharArray();
-        boolean capitalizeNext = true;
-        for (int i = 0; i < buffer.length; i++) {
-            char ch = buffer[i];
-            if (Character.isWhitespace(ch)) {
-                capitalizeNext = true;
-            } else if (capitalizeNext) {
-                buffer[i] = Character.toTitleCase(ch);
-                capitalizeNext = false;
+        if (new TFile(imageDir).exists() && !new TFile(imageDir + TFile.separator + imageName).exists()) {
+            for (String fileName : new TFile(imageDir).list()) {
+                if (fileName.toLowerCase().equals(imageName.toLowerCase())) {
+                    imageName = fileName;
+                    break;
+                }
             }
         }
-        return new String(buffer);
+
+        return imageDir + TFile.separator + imageName;
     }
 }
