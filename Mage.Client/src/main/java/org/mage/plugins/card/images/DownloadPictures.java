@@ -66,9 +66,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     public static void main(String[] args) {
         startDownload(null, null, null);
-        TConfig config = TConfig.get();
-        config.setArchiveDetector(new TArchiveDetector("zip"));
-        config.getOutputPreferences().set(FsOutputOption.STORE);
     }
 
     public static void startDownload(JFrame frame, Set<Card> allCards, String imagesPath) {

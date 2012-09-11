@@ -34,6 +34,9 @@
 
 package mage.client;
 
+import de.schlichtherle.truezip.file.TArchiveDetector;
+import de.schlichtherle.truezip.file.TConfig;
+import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.client.cards.BigCard;
@@ -173,6 +176,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 exitApp();
             }
         });
+
+        TConfig config = TConfig.get();
+        config.setArchiveDetector(new TArchiveDetector("zip"));
+        config.getOutputPreferences().set(FsOutputOption.STORE);
 
         try {
             UIManager.put("desktop", new Color(0, 0, 0, 0));
