@@ -47,10 +47,16 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
         this.addTarget(target);
-        if (target.getMaxNumberOfTargets() > 1)
-            this.text = "Exile " + target.getMaxNumberOfTargets() + " " + target.getTargetName() + " from your graveyard";
-        else
-            this.text = "Exile " + target.getTargetName() + " from your graveyard";
+        if (target.getMaxNumberOfTargets() > 1) {
+            this.text = "Exile " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
+        }
+        else {
+            this.text = "Exile " + target.getTargetName();
+        }
+        if (!this.text.endsWith(" from your graveyard")) {
+            this.text = this.text + " from your graveyard";
+        }
+        
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {

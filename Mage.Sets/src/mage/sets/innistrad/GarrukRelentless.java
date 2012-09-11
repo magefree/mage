@@ -118,7 +118,7 @@ class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl<GarrukRelent
 
     @Override
     public String getRule() {
-        return "When Garruk Relentless has two or fewer loyalty counters on him, transform him";
+        return "When Garruk Relentless has two or fewer loyalty counters on him, transform him.";
     }
 }
 
