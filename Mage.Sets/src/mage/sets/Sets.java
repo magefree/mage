@@ -72,6 +72,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         cardMap = new HashMap<String, Card>();
         creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
+        this.addSet(Alliances.getInstance());
         this.addSet(Apocalypse.getInstance());
         this.addSet(AvacynRestored.getInstance());
         this.addSet(BetrayersOfKamigawa.getInstance());

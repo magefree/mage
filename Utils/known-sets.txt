@@ -11,6 +11,7 @@ Magic 2012|magic2012|
 Magic 2013|magic2013|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
+Alliances|alliances|
 Mirage|mirage|
 Visions|visions|
 Weatherlight|weatherlight|
