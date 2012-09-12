@@ -77,6 +77,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(AvacynRestored.getInstance());
         this.addSet(BetrayersOfKamigawa.getInstance());
         this.addSet(ChampionsOfKamigawa.getInstance());
+        this.addSet(Coldsnap.getInstance());
         this.addSet(Conflux.getInstance());
         this.addSet(DarkAscension.getInstance());
         this.addSet(Darksteel.getInstance());
@@ -91,6 +92,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(FutureSight.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
+        this.addSet(IceAge.getInstance());
         this.addSet(Innistrad.getInstance());
         this.addSet(Invasion.getInstance());
         this.addSet(Judgment.getInstance());

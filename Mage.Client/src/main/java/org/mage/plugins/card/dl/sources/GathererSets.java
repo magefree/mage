@@ -15,12 +15,13 @@ public class GathererSets implements Iterable<DownloadJob> {
     private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
     private static File outDir = DEFAULT_OUT_DIR;
 
-    private static final String[] symbols = {"10E", "HOP", "TMP", "STH", "EXO", "INV", "PLS", "APC", "MRD", "DST", "5DN", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE", "USG", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG", "ULG", "USD", "MMQ", "NMS", "PCY", "MIR", "VIS", "WTH", "ALL"};
+    private static final String[] symbols = {"10E", "HOP", "TMP", "STH", "EXO", "INV", "PLS", "APC", "MRD", "DST", "5DN", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE", "USG", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG", "ULG", "USD", "MMQ", "NMS", "PCY", "MIR", "VIS", "WTH", "ALL", "ICE", "CSP"};
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "DDF", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "MBS", "NPH", "ISD", "DKA", "AVR"};
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
 
     static {
         symbolsReplacements.put("CFX", "CON");
+        symbolsReplacements.put("ALL", "AL");
         symbolsReplacements.put("APC", "AP");
         symbolsReplacements.put("TMP", "TE");
         symbolsReplacements.put("INV", "IN");
