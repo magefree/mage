@@ -11,6 +11,12 @@ Magic 2012|magic2012|
 Magic 2013|magic2013|
 Planechase|planechase|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
+Arabian Nights|arabiannights|
+Antiquities|antiquities|
+Legends|legends|
+The Dark|thedark|
+Fallen Empires|fallenempires|
+Homelands|homelands|
 Ice Age|iceage|
 Alliances|alliances|
 Coldsnap|coldsnap|

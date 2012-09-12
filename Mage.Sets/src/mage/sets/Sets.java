@@ -73,7 +73,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
         creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Alliances.getInstance());
+        this.addSet(Antiquities.getInstance());
         this.addSet(Apocalypse.getInstance());
+        this.addSet(ArabianNights.getInstance());
         this.addSet(AvacynRestored.getInstance());
         this.addSet(BetrayersOfKamigawa.getInstance());
         this.addSet(ChampionsOfKamigawa.getInstance());
@@ -88,14 +90,17 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Exodus.getInstance());
         this.addSet(FifthDawn.getInstance());
         this.addSet(FifthEdition.getInstance());
+        this.addSet(FallenEmpires.getInstance());
         this.addSet(FourthEdition.getInstance());
         this.addSet(FutureSight.getInstance());
         this.addSet(Guildpact.getInstance());
         this.addSet(Guru.getInstance());
+        this.addSet(Homelands.getInstance());
         this.addSet(IceAge.getInstance());
         this.addSet(Innistrad.getInstance());
         this.addSet(Invasion.getInstance());
         this.addSet(Judgment.getInstance());
+        this.addSet(Legends.getInstance());
         this.addSet(Legions.getInstance());
         this.addSet(Lorwyn.getInstance());
         this.addSet(Magic2010.getInstance());
@@ -130,6 +135,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Stronghold.getInstance());
         this.addSet(Tenth.getInstance());
         this.addSet(Tempest.getInstance());
+        this.addSet(TheDark.getInstance());
         this.addSet(TimeSpiral.getInstance());
         this.addSet(TimeSpiralTimeshifted.getInstance());
         this.addSet(Torment.getInstance());
