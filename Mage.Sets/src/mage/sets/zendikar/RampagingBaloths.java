@@ -72,6 +72,7 @@ class RampagingBalothsToken extends Token {
         super("Beast", "4/4 green Beast creature token");
         cardType.add(CardType.CREATURE);
         subtype.add("Beast");
+        this.color.setGreen(true);
         power = new MageInt(4);
         toughness = new MageInt(4);
     }
