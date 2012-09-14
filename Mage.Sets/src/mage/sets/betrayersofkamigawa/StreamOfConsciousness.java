@@ -25,22 +25,20 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
@@ -48,48 +46,47 @@ import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MemorysJourney extends CardImpl<MemorysJourney> {
+public class StreamOfConsciousness extends CardImpl<StreamOfConsciousness> {
 
-    public MemorysJourney(UUID ownerId) {
-        super(ownerId, 66, "Memory's Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
-        this.expansionSetCode = "ISD";
-
+    public StreamOfConsciousness(UUID ownerId) {
+        super(ownerId, 53, "Stream of Consciousness", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "BOK";
+        this.subtype.add("Arcane");
         this.color.setBlue(true);
 
-        // Target player shuffles up to three target cards from his or her graveyard into his or her library.
-        this.getSpellAbility().addEffect(new MemorysJourneyEffect());
+        // Target player shuffles up to four target cards from his or her graveyard into his or her library.
+        this.getSpellAbility().addEffect(new StreamOfConsciousnessEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
-        this.getSpellAbility().addTarget(new MemorysJourneyTarget());
-        // Flashback {G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.INSTANT));
+        this.getSpellAbility().addTarget(new StreamOfConsciousnessTarget());
+
     }
 
-    public MemorysJourney(final MemorysJourney card) {
+    public StreamOfConsciousness(final StreamOfConsciousness card) {
         super(card);
     }
 
     @Override
-    public MemorysJourney copy() {
-        return new MemorysJourney(this);
+    public StreamOfConsciousness copy() {
+        return new StreamOfConsciousness(this);
     }
 }
 
-class MemorysJourneyEffect extends OneShotEffect<MemorysJourneyEffect> {
+class StreamOfConsciousnessEffect extends OneShotEffect<StreamOfConsciousnessEffect> {
 
-    public MemorysJourneyEffect() {
+    public StreamOfConsciousnessEffect() {
         super(Outcome.Neutral);
-        this.staticText = "Target player shuffles up to three target cards from his or her graveyard into his or her library";
+        this.staticText = "Target player shuffles up to four target cards from his or her graveyard into his or her library";
     }
 
-    public MemorysJourneyEffect(final MemorysJourneyEffect effect) {
+    public StreamOfConsciousnessEffect(final StreamOfConsciousnessEffect effect) {
         super(effect);
     }
 
     @Override
-    public MemorysJourneyEffect copy() {
-        return new MemorysJourneyEffect(this);
+    public StreamOfConsciousnessEffect copy() {
+        return new StreamOfConsciousnessEffect(this);
     }
 
     @Override
@@ -117,13 +114,13 @@ class MemorysJourneyEffect extends OneShotEffect<MemorysJourneyEffect> {
     }
 }
 
-class MemorysJourneyTarget extends TargetCard<MemorysJourneyTarget> {
+class StreamOfConsciousnessTarget extends TargetCard<StreamOfConsciousnessTarget> {
 
-    public MemorysJourneyTarget() {
-        super(0, 3, Zone.GRAVEYARD, new FilterCard());
+    public StreamOfConsciousnessTarget() {
+        super(0, 4, Zone.GRAVEYARD, new FilterCard("cards from target player's graveyard"));
     }
 
-    public MemorysJourneyTarget(final MemorysJourneyTarget target) {
+    public StreamOfConsciousnessTarget(final StreamOfConsciousnessTarget target) {
         super(target);
     }
 
@@ -140,7 +137,7 @@ class MemorysJourneyTarget extends TargetCard<MemorysJourneyTarget> {
     }
 
     @Override
-    public MemorysJourneyTarget copy() {
-        return new MemorysJourneyTarget(this);
+    public StreamOfConsciousnessTarget copy() {
+        return new StreamOfConsciousnessTarget(this);
     }
 }

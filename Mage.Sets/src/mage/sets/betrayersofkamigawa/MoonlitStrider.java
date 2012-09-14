@@ -28,38 +28,50 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ForkedBranchGarami extends CardImpl<ForkedBranchGarami> {
+public class MoonlitStrider extends CardImpl<MoonlitStrider> {
 
-    public ForkedBranchGarami(UUID ownerId) {
-        super(ownerId, 125, "Forked-Branch Garami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
+    public MoonlitStrider(UUID ownerId) {
+        super(ownerId, 16, "Moonlit Strider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "BOK";
         this.subtype.add("Spirit");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(4);
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        // Soulshift 4, soulshift 4 (When this creature dies, you may return up to two target Spirit cards with converted mana cost 4 or less from your graveyard to your hand.)
-        this.addAbility(new SoulshiftAbility(4));
-        this.addAbility(new SoulshiftAbility(4));
+        // Sacrifice Moonlit Strider: Target creature you control gains protection from the color of your choice until end of turn.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Constants.Duration.EndOfTurn), new SacrificeSourceCost());
+        ability.addChoice(new ChoiceColor());
+        ability.addTarget(new TargetControlledCreaturePermanent());
+        this.addAbility(ability);        
+        
+        // Soulshift 3 (When this creature dies, you may return target Spirit card with converted mana cost 3 or less from your graveyard to your hand.)
+        this.addAbility(new SoulshiftAbility(3));
     }
 
-    public ForkedBranchGarami(final ForkedBranchGarami card) {
+    public MoonlitStrider(final MoonlitStrider card) {
         super(card);
     }
 
     @Override
-    public ForkedBranchGarami copy() {
-        return new ForkedBranchGarami(this);
+    public MoonlitStrider copy() {
+        return new MoonlitStrider(this);
     }
 }
+

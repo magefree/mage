@@ -25,75 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.sets.betrayersofkamigawa;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import java.util.UUID;
+import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.filter.FilterPermanent;
+import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class IndestructibleAllEffect extends ReplacementEffectImpl<IndestructibleAllEffect> {
+public class OrbOfDreams extends CardImpl<OrbOfDreams> {
 
-    private FilterPermanent filter;
-
-    /**
-     * duration = WhileOnBattlefield
-     *
-     * @param filter
-     */
-    public IndestructibleAllEffect(FilterPermanent filter) {
-        this(filter, Duration.WhileOnBattlefield);
-    }
-
-    public IndestructibleAllEffect(FilterPermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
-        this.filter = filter;
+    public OrbOfDreams(UUID ownerId) {
+        super(ownerId, 156, "Orb of Dreams", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+        this.expansionSetCode = "BOK";
         
-        if (filter.getMessage().startsWith("Each")) {
-            this.staticText = filter.getMessage() + " is indestructible"; 
-        }  
-        else {
-            this.staticText = filter.getMessage() + " are indestructible";
+        // Permanents enter the battlefield tapped.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new OrbOfDreamsEffect()));
+    }
+
+    public OrbOfDreams(final OrbOfDreams card) {
+        super(card);
+    }
+
+    @Override
+    public OrbOfDreams copy() {
+        return new OrbOfDreams(this);
+    }
+    
+    private class OrbOfDreamsEffect extends ReplacementEffectImpl<OrbOfDreamsEffect> {
+
+        OrbOfDreamsEffect() {
+            super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Tap);
+            staticText = "Permanents enter the battlefield tapped";
         }
-        if (duration.equals(Duration.EndOfTurn)) {
-            this.staticText += " this turn";
+
+        OrbOfDreamsEffect(final OrbOfDreamsEffect effect) {
+            super(effect);
         }
-    }
 
-    public IndestructibleAllEffect(IndestructibleAllEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
+        @Override
+        public OrbOfDreamsEffect copy() {
+            return new OrbOfDreamsEffect(this);
+        }
 
-    @Override
-    public IndestructibleAllEffect copy() {
-        return new IndestructibleAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)) {
+        @Override
+        public boolean replaceEvent(GameEvent event, Ability source, Game game) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            return permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+            if (permanent != null) {
+                permanent.setTapped(true);
+            }
+            return true;
         }
-        return false;
-    }
+
+        @Override
+        public boolean applies(GameEvent event, Ability source, Game game) {
+            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public boolean apply(Game game, Ability source) {
+            return false;
+        }
+    } 
 }
+
