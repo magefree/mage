@@ -28,6 +28,8 @@
 
 package mage.abilities.costs.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -42,6 +44,8 @@ import mage.target.common.TargetCardInHand;
  * @author BetaSteward_at_googlemail.com
  */
 public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
+    
+    List<Card> cards = new ArrayList<Card>();
 
     public DiscardTargetCost(TargetCardInHand target) {
         this.addTarget(target);
@@ -50,6 +54,9 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
 
     public DiscardTargetCost(DiscardTargetCost cost) {
         super(cost);
+        for (Card card: cost.cards) {
+            this.cards.add(card.copy());
+        }
     }
 
     @Override
@@ -58,8 +65,10 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
             Player player = game.getPlayer(controllerId);
             for (UUID targetId: targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
-                if (card == null)
+                if (card == null) {
                     return false;
+                }
+                this.cards.add(card.copy());
                 paid |= player.discard(card, null, game);
             }
         }
@@ -76,4 +85,7 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
         return new DiscardTargetCost(this);
     }
 
+    public List<Card> getCards() {
+        return cards;
+    }
 }

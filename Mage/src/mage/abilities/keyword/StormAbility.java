@@ -45,13 +45,9 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
  *
  * @author Plopman
  */
+public class StormAbility extends TriggeredAbilityImpl<StormAbility> {
 
-
-public class StormAbility extends TriggeredAbilityImpl<StormAbility>{
-
-
-    public StormAbility()
-    {
+    public StormAbility() {
         super(Constants.Zone.STACK, new StormEffect());
     }
 
@@ -65,18 +61,12 @@ public class StormAbility extends TriggeredAbilityImpl<StormAbility>{
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(this.sourceId))
-        {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getSourceId().equals(this.sourceId)) {
             StackObject spell = game.getStack().getStackObject(this.sourceId);
-            if(spell instanceof Spell)
-            {
-                for(Effect effect : this.getEffects())
-                {
-                    if(effect instanceof StormEffect)
-                    {
-                        ((StormEffect)effect).setSpell((Spell)spell);
-                    }
-                }  
+            if (spell instanceof Spell) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setValue("StormSpell", spell);
+                }
                 return true;
             }
         }
@@ -87,28 +77,25 @@ public class StormAbility extends TriggeredAbilityImpl<StormAbility>{
     public String getRule() {
         return "Storm";
     }
-    
 }
+
 class StormEffect extends OneShotEffect<StormEffect> {
 
-    private Spell spell; 
-    
     public StormEffect() {
         super(Constants.Outcome.Copy);
     }
 
     public StormEffect(final StormEffect effect) {
         super(effect);
-        this.spell = effect.spell;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Spell spell = (Spell) this.getValue("StormSpell");
         if (spell != null) {
             CastSpellLastTurnWatcher watcher = (CastSpellLastTurnWatcher) game.getState().getWatchers().get("CastSpellLastTurnWatcher");
-            
-            for(int i = 0; i < watcher.getSpellOrder(spell) - 1; i++)
-            {
+
+            for (int i = 0; i < watcher.getSpellOrder(spell) - 1; i++) {
                 Spell copy = spell.copySpell();
                 copy.setControllerId(source.getControllerId());
                 copy.setCopiedSpell(true);
@@ -124,13 +111,4 @@ class StormEffect extends OneShotEffect<StormEffect> {
     public StormEffect copy() {
         return new StormEffect(this);
     }
-
-    public void setSpell(Spell spell) {
-        this.spell = spell;
-    }
-
-    
-
-
 }
-

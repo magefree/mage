@@ -37,7 +37,7 @@ public class Justice extends mage.sets.fifthedition.Justice {
 
     public Justice(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 366;
+        this.cardNumber = 256;
         this.expansionSetCode = "ICE";
     }
 

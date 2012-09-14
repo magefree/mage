@@ -19,6 +19,7 @@ Mountainwalk|new|
 Persist|new|
 Plainswalk|new|
 Rebound|new|
+Storm|new|
 Swampwalk|new|
 Totem armor|new|
 Unblockable|new|
