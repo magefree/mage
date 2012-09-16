@@ -67,13 +67,21 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
 
     @Override
     public String getRule() {
+        String effectsText = getEffects().getText(modes.getMode());
         switch (targetController) {
             case YOU:
-                return "At the beginning of your upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
+                if (this.optional) {
+                    if (effectsText.toLowerCase().startsWith("target")){
+                        effectsText = "you may have " + effectsText;
+                    } else if (!effectsText.toLowerCase().startsWith("you may")){
+                        effectsText = "you may " + effectsText;
+                    }
+                }
+                return "At the beginning of your upkeep, " + generateZoneString() + effectsText;
             case OPPONENT:
-                return "At the beginning of each opponent's upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each opponent's upkeep, " + generateZoneString() + effectsText;
             case ANY:
-                return "At the beginning of each player's upkeep, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return "At the beginning of each player's upkeep, " + generateZoneString() + effectsText;
         }
         return "";
     }
