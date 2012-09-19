@@ -14,11 +14,16 @@ import mage.game.permanent.Permanent;
  */
 public class DiesAttachedTriggeredAbility extends TriggeredAbilityImpl<DiesAttachedTriggeredAbility> {
     private String attachedDescription;
-
+    
     public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        this(effect, attachedDescription, false);
+    }
+    
+    public DiesAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
+        super(Constants.Zone.BATTLEFIELD, effect, optional);
         this.attachedDescription = attachedDescription;
     }
+
 
     public DiesAttachedTriggeredAbility(final DiesAttachedTriggeredAbility ability) {
         super(ability);
