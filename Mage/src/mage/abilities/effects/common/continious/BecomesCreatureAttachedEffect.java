@@ -81,9 +81,11 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                                     }
                                 }
                             }
-                            if ("".equals(type) || type == null) {
-                                permanent.getSubtype().clear();
-                            }
+                            // commented out the removal of the subtypes because for the e.g. "Enchant Plains" enchantments it's needed else the enchantments goes to graveyard.
+                            // Is it needed for anything or can it be completely removed?
+//                            if ("".equals(type) || type == null) {
+//                                permanent.getSubtype().clear();
+//                            }
                             if (token.getSubtype().size() > 0) {
                                 permanent.getSubtype().addAll(token.getSubtype());
                             }
