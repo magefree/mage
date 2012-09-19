@@ -93,12 +93,16 @@ class ArrogantBloodlordTriggeredAbility extends TriggeredAbilityImpl<ArrogantBlo
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.BLOCKER_DECLARED) {
             Permanent blocker = game.getPermanent(event.getSourceId());
+            Permanent blocked = game.getPermanent(event.getTargetId());
             Permanent arrogantBloodlord = game.getPermanent(sourceId);
-            if (blocker != null && blocker != arrogantBloodlord && blocker.getPower().getValue() < 2) {
+            if (blocker != null && blocker != arrogantBloodlord
+                    && blocker.getPower().getValue() < 2
+                    && blocked == arrogantBloodlord) {
                 return true;
             }
-            if (blocker != null && blocker == arrogantBloodlord && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
-                    return true;
+            if (blocker != null && blocker == arrogantBloodlord
+                    && game.getPermanent(event.getTargetId()).getPower().getValue() < 2) {
+                return true;
             }
             return false;
         }
@@ -141,5 +145,3 @@ class ArrogantBloodlordEffect extends OneShotEffect<ArrogantBloodlordEffect> {
         return new ArrogantBloodlordEffect(this);
     }
 }
-
-
