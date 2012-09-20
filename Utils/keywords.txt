@@ -11,6 +11,7 @@ Unearth|cost|
 Battle cry|new|
 Cascade|new|
 Exalted|new|
+Flanking|new|
 Forestwalk|new|
 Indestructible|new|
 Islandwalk|new|
