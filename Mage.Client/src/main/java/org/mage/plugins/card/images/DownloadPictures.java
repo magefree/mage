@@ -1,10 +1,7 @@
 package org.mage.plugins.card.images;
 
-import de.schlichtherle.truezip.file.TArchiveDetector;
-import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TFileOutputStream;
-import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.Card;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -468,7 +465,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 TFile outputFile = new TFile(CardImageUtils.getImagePath(card, imagesPath));
                 if (card.isTwoFacedCard()) {
                     BufferedImage image = ImageIO.read(temporaryFile);
-                    temporaryFile.delete();
                     if (image.getHeight() == 470) {
                         BufferedImage renderedImage = new BufferedImage(265, 370, BufferedImage.TYPE_INT_RGB);
                         renderedImage.getGraphics();
@@ -480,7 +476,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         }
                         graphics2D.dispose();
                         writeImageToFile(renderedImage, outputFile);
+                    } else {
+                        new TFile(temporaryFile).cp_rp(outputFile);
                     }
+                    temporaryFile.delete();
                 } else {
                     new TFile(temporaryFile).cp_rp(outputFile);
                     temporaryFile.delete();
