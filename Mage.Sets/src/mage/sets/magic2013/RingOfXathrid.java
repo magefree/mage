@@ -38,7 +38,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.EquippedMatchesFilterCondition;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.common.RegenerateEquippedEffect;
+import mage.abilities.effects.common.RegenerateAttachedEffect;
 import mage.abilities.effects.common.counter.AddPlusOneCountersAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
@@ -63,7 +63,7 @@ public class RingOfXathrid extends CardImpl<RingOfXathrid> {
         this.subtype.add("Equipment");
 
         // {2}: Regenerate equipped creature.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateEquippedEffect(), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateAttachedEffect(Constants.AttachmentType.EQUIPMENT), new GenericManaCost(2)));
         
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
         TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), Constants.TargetController.YOU, false);
