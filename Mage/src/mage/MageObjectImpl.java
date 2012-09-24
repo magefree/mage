@@ -144,6 +144,9 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     }
 
     @Override
+    public void adjustChoices(Ability ability, Game game) {}
+    
+    @Override
     public void adjustCosts(Ability ability, Game game) {}
 
     @Override

@@ -159,11 +159,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         if (!modes.choose(game, this))
             return false;
         //20100716 - 601.2b
+        Card card = game.getCard(sourceId);
+        if (card != null) {
+            card.adjustChoices(this, game);
+        }
         if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
             logger.debug("activate failed - choice");
             return false;
         }
-        Card card = game.getCard(sourceId);
+
         if (card != null) {
             card.adjustTargets(this, game);
         }
