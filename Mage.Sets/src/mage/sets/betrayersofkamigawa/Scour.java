@@ -28,20 +28,12 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileTargetAndSearchGraveyardHandLibraryEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetPermanent;
 
 /**
@@ -62,12 +54,9 @@ public class Scour extends CardImpl<Scour> {
         this.color.setWhite(true);
 
         // Exile target enchantment.
-        this.getSpellAbility().addEffect(new ScourExileTargetEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        
         // Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library.
-
-
+        this.getSpellAbility().addTarget(new TargetPermanent(filter)); 
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect());
     }
 
     public Scour(final Scour card) {
@@ -78,86 +67,4 @@ public class Scour extends CardImpl<Scour> {
     public Scour copy() {
         return new Scour(this);
     }
-    
-    
-    
-    private class ScourExileTargetEffect extends OneShotEffect<ScourExileTargetEffect> {
-
-        private String exileZone = null;
-        private UUID exileId = null;
-
-
-        public ScourExileTargetEffect() {
-            super(Constants.Outcome.Exile);
-            this.staticText = "Exile target enchantment. Search its controller's graveyard, hand, and library for all cards with the same name as that enchantment and exile them. Then that player shuffles his or her library";
-        }
-
-        public ScourExileTargetEffect(final ScourExileTargetEffect effect) {
-            super(effect);
-            this.exileZone = effect.exileZone;
-            this.exileId = effect.exileId;
-        }
-
-        @Override
-        public ScourExileTargetEffect copy() {
-            return new ScourExileTargetEffect(this);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            boolean result;
-            Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-
-            if (exileId == null) {
-                exileId = getId();
-            }
-
-            if (permanent != null) {
-                Player targetPlayer = game.getPlayer(permanent.getOwnerId());
-                Player you = game.getPlayer(source.getControllerId());
-
-                Card chosenCard = permanent;
-                result = permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
-
-                if (targetPlayer != null && you != null) {
-                    //cards in Library
-                    Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
-                    cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
-                    you.lookAtCards("Scour search of Library", cardsInLibrary, game);
-
-                    // cards in Graveyard
-                    Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
-                    cardsInGraveyard.addAll(targetPlayer.getGraveyard());
-
-                    // cards in Hand
-                    Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
-                    cardsInHand.addAll(targetPlayer.getHand());
-                    you.lookAtCards("Scour search of Hand", cardsInHand, game);
-
-                    // exile same named cards from zones
-                    for (Card checkCard : cardsInLibrary.getCards(game)) {
-                        if (checkCard.getName().equals(chosenCard.getName())) {
-                            checkCard.moveToExile(id, "Library", id, game);
-                        }
-                    }
-                    for (Card checkCard : cardsInGraveyard.getCards(game)) {
-                        if (checkCard.getName().equals(chosenCard.getName())) {
-                            checkCard.moveToExile(id, "Graveyard", id, game);
-                        }
-                    }
-                    for (Card checkCard : cardsInHand.getCards(game)) {
-                        if (checkCard.getName().equals(chosenCard.getName())) {
-                            checkCard.moveToExile(id, "Hand", id, game);
-                        }
-                    }
-
-                    targetPlayer.shuffleLibrary(game);            
-                }
-                return result;
-
-            } 
-            return false;
-        }
-    }
-
 }

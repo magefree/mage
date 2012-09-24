@@ -44,6 +44,7 @@ public class CrackTheEarth extends CardImpl<CrackTheEarth> {
     public CrackTheEarth(UUID ownerId) {
         super(ownerId, 98, "Crack the Earth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "BOK";
+        this.subtype.add("Arcane");
         this.color.setRed(true);
         // Each player sacrifices a permanent.
         this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledPermanent("permanent to sacrifice")));

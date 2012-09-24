@@ -51,7 +51,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Floodbringer extends CardImpl<Floodbringer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land (return to hand)");
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));

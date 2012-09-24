@@ -46,10 +46,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.Filter;
-import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterNonlandCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -211,6 +208,7 @@ public class NightDealings extends CardImpl<NightDealings> {
                         name = sourceCard.getName();
                     }
                     player.revealCards(name, cards, game);
+                    game.informPlayers(player.getName() + " reveals " + card.getName());
                 }
                 player.shuffleLibrary(game);
                 return true;

@@ -39,7 +39,6 @@ import mage.abilities.common.DiesAttachedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.ReturnToHandAttachedEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
