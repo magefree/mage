@@ -469,7 +469,11 @@ public class MageServerImpl implements MageServer {
         execute("sendPlayerUUID", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
-                user.sendPlayerUUID(gameId, data);
+                if (user != null) {
+                    user.sendPlayerUUID(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                 
             }
         });
     }
@@ -479,7 +483,11 @@ public class MageServerImpl implements MageServer {
         execute("sendPlayerString", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
-                user.sendPlayerString(gameId, data);
+                if (user != null) {
+                    user.sendPlayerString(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                  
             }
         });
     }
@@ -489,7 +497,11 @@ public class MageServerImpl implements MageServer {
         execute("sendPlayerBoolean", sessionId, new Action() {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
-                user.sendPlayerBoolean(gameId, data);
+                if (user != null) {
+                    user.sendPlayerBoolean(gameId, data);
+                } else {
+                    logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
+                }                
             }
         });
     }
