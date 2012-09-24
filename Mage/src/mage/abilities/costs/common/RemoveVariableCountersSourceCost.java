@@ -83,6 +83,7 @@ public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCou
             permanent.removeCounters(name, amountPaid, game);
             this.paid = true;
         }
+        game.informPlayers(player.getName() + " removes " + this.amountPaid + " " + name + " counter from " + permanent.getName());
         return paid;
     }
 

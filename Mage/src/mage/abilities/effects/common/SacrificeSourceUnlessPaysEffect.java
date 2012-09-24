@@ -53,12 +53,13 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
             String costText = cost.getText();
-            if (costText.toLowerCase().startsWith("discard")) {
+            if (costText.toLowerCase().startsWith("discard") || costText.toLowerCase().startsWith("remove")) {
                 sb.append(costText.substring(0, 1).toLowerCase());
                 sb.append(costText.substring(1));
-            }
-            else
+            } 
+            else {
                 sb.append("pay ").append(costText);
+            }
 
             return sb.toString();
 
