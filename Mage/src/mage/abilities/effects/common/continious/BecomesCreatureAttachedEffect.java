@@ -74,6 +74,13 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
+                            if (token.getSupertype().size() > 0) {
+                                for (String t : token.getSupertype()) {
+                                    if (!permanent.getSupertype().contains(t)) {
+                                        permanent.getSupertype().add(t);
+                                    }
+                                }
+                            }
                             if (token.getCardType().size() > 0) {
                                 for (Constants.CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
@@ -81,20 +88,20 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                                     }
                                 }
                             }
-                            // commented out the removal of the subtypes because for the e.g. "Enchant Plains" enchantments it's needed else the enchantments goes to graveyard.
-                            // Is it needed for anything or can it be completely removed?
-//                            if ("".equals(type) || type == null) {
-//                                permanent.getSubtype().clear();
-//                            }
                             if (token.getSubtype().size() > 0) {
-                                permanent.getSubtype().addAll(token.getSubtype());
+                                for (String t : token.getSubtype()) {
+                                    if (!permanent.getSubtype().contains(t)) {
+                                        permanent.getSubtype().add(t);
+                                    }
+                                }
                             }
                         }
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getColor().hasColor())
+                            if (token.getColor().hasColor()) {
                                 permanent.getColor().setColor(token.getColor());
+                            }
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:
