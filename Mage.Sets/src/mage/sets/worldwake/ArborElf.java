@@ -48,7 +48,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class ArborElf extends CardImpl<ArborElf> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
 
     static {
         filter.add(new SubtypePredicate("Forest"));
