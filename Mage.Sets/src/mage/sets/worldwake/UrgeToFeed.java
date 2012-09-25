@@ -85,7 +85,7 @@ class UrgeToFeedEffect extends OneShotEffect<UrgeToFeedEffect> {
     }
 
     public UrgeToFeedEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Constants.Outcome.BoostCreature);
         staticText = "You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires";
     }
 
