@@ -440,6 +440,21 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         public void run() {
             try {
                 File temporaryFile = new File(Constants.IO.imageBaseDir + File.separator + card.hashCode() + "." + card.getName() + ".jpg");
+                String imagePath = CardImageUtils.getImagePath(card, imagesPath);
+                TFile outputFile = new TFile(imagePath);
+                File existingFile = new File(imagePath.replaceFirst("\\w{3}.zip", ""));
+                if (existingFile.exists()) {
+                    new TFile(existingFile).cp_rp(outputFile);
+                    synchronized (sync) {
+                        update(cardIndex + 1);
+                    }
+                    existingFile.delete();
+                    File parent = existingFile.getParentFile();
+                    if (parent != null && parent.isDirectory() && parent.list().length == 0) {
+                        parent.delete();
+                    }
+                    return;
+                }
 
                 BufferedInputStream in = new BufferedInputStream(url.openConnection(p).getInputStream());
                 BufferedOutputStream out = new BufferedOutputStream(new TFileOutputStream(temporaryFile));
@@ -462,7 +477,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 out.flush();
                 out.close();
 
-                TFile outputFile = new TFile(CardImageUtils.getImagePath(card, imagesPath));
                 if (card.isTwoFacedCard()) {
                     BufferedImage image = ImageIO.read(temporaryFile);
                     if (image.getHeight() == 470) {
