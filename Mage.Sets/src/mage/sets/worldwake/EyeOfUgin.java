@@ -65,7 +65,6 @@ public class EyeOfUgin extends CardImpl<EyeOfUgin> {
         super(ownerId, 136, "Eye of Ugin", Rarity.MYTHIC, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "WWK";
         this.supertype.add("Legendary");
-        this.subtype.add("Land");
 
         // Colorless Eldrazi spells you cast cost {2} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 2)));
