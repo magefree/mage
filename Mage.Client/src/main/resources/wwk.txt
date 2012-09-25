@@ -21,7 +21,7 @@
 21|Talus Paladin
 22|Terra Eternal
 23|Veteran's Reflexes
-24|Æther Tradewinds
+24|AEther Tradewinds
 25|Calcite Snapper
 26|Dispel
 27|Enclave Elite
