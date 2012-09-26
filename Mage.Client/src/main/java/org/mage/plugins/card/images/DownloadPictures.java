@@ -2,6 +2,8 @@ package org.mage.plugins.card.images;
 
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TFileOutputStream;
+import de.schlichtherle.truezip.file.TVFS;
+import de.schlichtherle.truezip.fs.FsSyncException;
 import mage.cards.Card;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
@@ -423,6 +425,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 } catch (InterruptedException ie) {}
             }
         }
+        try {
+            TVFS.umount();
+        } catch (FsSyncException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Couldn't unmount zip files", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        finally {
+            System.gc();
+        }
         closeButton.setText("Close");
     }
 
@@ -552,7 +563,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 bar.setString(String.format("0 cards remaining! Please close!", count));
             } else {
                 bar.setString(String.format("%d cards remaining! Please choose another source!", count));
-                executor = Executors.newFixedThreadPool(10);
+                //executor = Executors.newFixedThreadPool(10);
                 startDownloadButton.setEnabled(true);
             }
         }
