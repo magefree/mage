@@ -87,7 +87,10 @@ public class SetCardColorSourceEffect extends ContinuousEffectImpl<SetCardColorS
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("{this} ").append(mode.getTargets().get(0).getTargetName());
+        sb.append("{this} ");
+        if (mode.getTargets().size() > 0) {
+            sb.append(mode.getTargets().get(0).getTargetName());
+        }
         sb.append(" becomes ").append(setColor.getDescription());
         sb.append(" ").append(duration.toString());
         return sb.toString();
