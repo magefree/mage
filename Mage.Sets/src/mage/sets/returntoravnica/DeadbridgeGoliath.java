@@ -43,7 +43,7 @@ import java.util.UUID;
 public class DeadbridgeGoliath extends CardImpl<DeadbridgeGoliath> {
 
     public DeadbridgeGoliath(UUID ownerId) {
-        super(ownerId, 1056, "Deadbridge Goliath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
+        super(ownerId, 120, "Deadbridge Goliath", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Insect");
 
