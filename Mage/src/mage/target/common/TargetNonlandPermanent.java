@@ -41,12 +41,20 @@ public class TargetNonlandPermanent extends TargetPermanent<TargetNonlandPermane
         this(1, 1, false);
     }
 
+    public TargetNonlandPermanent(FilterNonlandPermanent filter) {
+        this(1, 1, filter, false);
+    }
+
     public TargetNonlandPermanent(int numTargets) {
-        this(numTargets, numTargets, false);
+        this(numTargets, numTargets, new FilterNonlandPermanent(), false);
     }
 
     public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, boolean notTarget) {
-        super(minNumTargets, maxNumTargets, new FilterNonlandPermanent(), notTarget);
+        this(minNumTargets, maxNumTargets, new FilterNonlandPermanent(), notTarget);
+    }
+
+    public TargetNonlandPermanent(int minNumTargets, int maxNumTargets, FilterNonlandPermanent filter, boolean notTarget) {
+        super(minNumTargets, maxNumTargets, filter, notTarget);
         this.targetName = filter.getMessage();
     }
 
