@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class NezumiBoneReader extends CardImpl<NezumiBoneReader> {
 
     public NezumiBoneReader (UUID ownerId) {
-        super(ownerId, 127, "Nezumi Bone Reader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 127, "Nezumi Bone-Reader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Rat");
         this.subtype.add("Shaman");

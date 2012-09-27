@@ -106,7 +106,7 @@ class NemesisTrapAlternativeCost extends AlternativeCostImpl<NemesisTrapAlternat
     
     @Override
     public String getText() {
-        return "If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost.";
+        return "If a white creature is attacking, you may pay {B}{B} rather than pay Nemesis Trap's mana cost";
     }
 }
 

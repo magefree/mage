@@ -28,7 +28,6 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -47,7 +46,7 @@ public class CrackTheEarth extends CardImpl<CrackTheEarth> {
         this.subtype.add("Arcane");
         this.color.setRed(true);
         // Each player sacrifices a permanent.
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledPermanent("permanent to sacrifice")));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(1, new FilterControlledPermanent("permanent")));
 
     }
 

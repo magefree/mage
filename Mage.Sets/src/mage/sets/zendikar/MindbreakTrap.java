@@ -155,7 +155,7 @@ class MindbreakTrapAlternativeCost extends AlternativeCostImpl<MindbreakTrapAlte
 
     @Override
     public String getText() {
-        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost.";
+        return "If an opponent cast three or more spells this turn, you may pay {0} rather than pay Mindbreak Trap's mana cost";
     }
 }
 
@@ -167,6 +167,7 @@ class MindbreakEffect extends OneShotEffect<MindbreakEffect>{
 
     MindbreakEffect() {
         super(Outcome.Exile);
+        staticText = "Exile any number of target spells";
     }
 
     @Override
