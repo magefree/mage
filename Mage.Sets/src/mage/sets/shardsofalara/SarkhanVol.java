@@ -62,7 +62,7 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
         this.subtype.add("Sarkhan");
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         Effects effects1 = new Effects();
         effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));

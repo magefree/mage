@@ -60,7 +60,7 @@ public class GarrukWildspeaker extends CardImpl<GarrukWildspeaker> {
         this.expansionSetCode = "M10";
         this.subtype.add("Garruk");
         this.color.setGreen(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new UntapTargetEffect(), 1);

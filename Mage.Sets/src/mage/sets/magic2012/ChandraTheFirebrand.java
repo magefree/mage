@@ -58,7 +58,7 @@ public class ChandraTheFirebrand extends CardImpl<ChandraTheFirebrand> {
         this.expansionSetCode = "M12";
         this.subtype.add("Chandra");
         this.color.setRed(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
         ability1.addTarget(new TargetCreatureOrPlayer());

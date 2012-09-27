@@ -80,7 +80,7 @@ public class LilianaOfTheDarkRealms extends CardImpl<LilianaOfTheDarkRealms> {
 
         this.color.setBlack(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.
         this.addAbility(new LoyaltyAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter), true), 1));

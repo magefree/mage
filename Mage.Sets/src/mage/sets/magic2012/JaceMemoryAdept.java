@@ -57,7 +57,7 @@ public class JaceMemoryAdept extends CardImpl<JaceMemoryAdept> {
 
         this.color.setBlue(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DrawCardControllerEffect(1), 1);

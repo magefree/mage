@@ -59,7 +59,7 @@ public class LilianaVess extends CardImpl<LilianaVess> {
         this.expansionSetCode = "M10";
         this.subtype.add("Liliana");
         this.color.setBlack(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DiscardTargetEffect(1), 1);
         ability1.addTarget(new TargetPlayer());

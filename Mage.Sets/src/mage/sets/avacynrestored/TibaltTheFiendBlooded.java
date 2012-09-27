@@ -69,7 +69,7 @@ public class TibaltTheFiendBlooded extends CardImpl<TibaltTheFiendBlooded> {
 
         this.color.setRed(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(2)), false));
 
         // +1: Draw a card, then discard a card at random.
         this.addAbility(new LoyaltyAbility(new TibaltTheFiendBloodedFirstEffect(), 1));

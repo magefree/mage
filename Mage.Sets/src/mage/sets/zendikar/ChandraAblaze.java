@@ -66,7 +66,7 @@ public class ChandraAblaze extends CardImpl<ChandraAblaze> {
 
         this.color.setRed(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +1: Discard a card. If a red card is discarded this way, Chandra Ablaze deals 4 damage to target creature or player.
         LoyaltyAbility ability = new LoyaltyAbility(new ChandraAblazeEffect1(), 1);

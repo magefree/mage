@@ -61,7 +61,7 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
 
         this.color.setBlack(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +2: Sorin Markov deals 2 damage to target creature or player and you gain 2 life.
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(2), 2);

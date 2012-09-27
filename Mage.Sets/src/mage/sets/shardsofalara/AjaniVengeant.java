@@ -64,7 +64,7 @@ public class AjaniVengeant extends CardImpl<AjaniVengeant> {
         this.subtype.add("Ajani");
         this.color.setRed(true);
         this.color.setWhite(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new SkipNextUntapTargetEffect(), 1);

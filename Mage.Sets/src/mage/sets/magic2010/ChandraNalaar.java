@@ -60,7 +60,7 @@ public class ChandraNalaar extends CardImpl<ChandraNalaar> {
         this.expansionSetCode = "M10";
         this.subtype.add("Chandra");
         this.color.setRed(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);

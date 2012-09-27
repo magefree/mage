@@ -52,7 +52,7 @@ public class JaceBeleren extends CardImpl<JaceBeleren> {
         this.expansionSetCode = "M10";
         this.subtype.add("Jace");
         this.color.setBlue(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
 
         this.addAbility(new LoyaltyAbility(new DrawCardAllEffect(1), 2));

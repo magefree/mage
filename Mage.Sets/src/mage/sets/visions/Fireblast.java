@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
+import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -39,6 +40,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -56,8 +58,6 @@ public class Fireblast extends CardImpl<Fireblast> {
         filter.add(new SubtypePredicate("Mountain"));
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may sacrifice two Mountains rather than pay Fireblast's mana cost";
 
     public Fireblast(UUID ownerId) {
         super(ownerId, 79, "Fireblast", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{4}{R}{R}");
@@ -66,7 +66,7 @@ public class Fireblast extends CardImpl<Fireblast> {
         this.color.setRed(true);
 
         // You may sacrifice two Mountains rather than pay Fireblast's mana cost.
-        this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true), true)));
+        this.getSpellAbility().addAlternativeCost(new FireblastAlternativeCost());
         
         // Fireblast deals 4 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));
@@ -81,5 +81,39 @@ public class Fireblast extends CardImpl<Fireblast> {
     @Override
     public Fireblast copy() {
         return new Fireblast(this);
+    }
+}
+
+class FireblastAlternativeCost extends AlternativeCostImpl<FireblastAlternativeCost> {
+    
+    private static final FilterPermanent filter = new FilterPermanent("Mountain");
+    
+    static {
+        filter.add(new CardTypePredicate(CardType.LAND));
+        filter.add(new SubtypePredicate("Mountain"));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
+    public FireblastAlternativeCost() {
+        super("You may sacrifice two Mountains rather than pay Fireblast's mana cost");
+        this.add(new SacrificeTargetCost(new TargetControlledPermanent(2, 2, filter, true)));
+    }
+
+    public FireblastAlternativeCost(final FireblastAlternativeCost cost) {
+        super(cost);
+    }
+
+    @Override
+    public FireblastAlternativeCost copy() {
+        return new FireblastAlternativeCost(this);
+    }
+
+    @Override
+    public boolean isAvailable(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public String getText() {
+        return "You may sacrifice two Mountains rather than pay Fireblast's mana cost";
     }
 }

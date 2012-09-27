@@ -68,7 +68,7 @@ public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
         this.expansionSetCode = "M12";
         this.subtype.add("Garruk");
         this.color.setGreen(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BeastToken()), 1));
         this.addAbility(new LoyaltyAbility(new GarrukPrimalHunterEffect(), -3));
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));

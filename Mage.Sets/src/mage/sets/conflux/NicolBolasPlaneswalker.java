@@ -69,7 +69,7 @@ public class NicolBolasPlaneswalker extends CardImpl<NicolBolasPlaneswalker> {
         this.color.setBlue(true);
         this.color.setBlack(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(5)), false));
 
         // +3: Destroy target noncreature permanent.
         LoyaltyAbility ability = new LoyaltyAbility(new DestroyTargetEffect(), 3);

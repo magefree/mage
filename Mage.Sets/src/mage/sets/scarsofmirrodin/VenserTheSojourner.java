@@ -71,7 +71,7 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
         this.subtype.add("Venser");
         this.color.setWhite(true);
         this.color.setBlue(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);

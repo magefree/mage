@@ -59,7 +59,7 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Elspeth");
         this.color.setWhite(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
 
         this.addAbility(new LoyaltyAbility(new ElspethTirelFirstEffect(), 2));

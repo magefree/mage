@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class HandOfEmrakul extends CardImpl<HandOfEmrakul> {
 
-    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost.";
+    private static final String ALTERNATIVE_COST_DESCRIPTION = "You may sacrifice four Eldrazi Spawn rather than pay Hand of Emrakul's mana cost";
     private static final FilterControlledPermanent filter = new FilterControlledPermanent("Eldrazi Spawn");
 
     static {

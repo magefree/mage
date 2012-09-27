@@ -38,14 +38,23 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbility> {
-
+    
+    protected Boolean generateRule;
+    
     public EntersBattlefieldAbility(Effect effect) {
+        this(new EntersBattlefieldEffect(effect), true);
+    }
+
+    public EntersBattlefieldAbility(Effect effect, Boolean generateRule) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
+        this.generateRule = generateRule;
     }
 
     public EntersBattlefieldAbility(Effect effect, String rule) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, rule));
+        this.generateRule = true;
     }
+
 
     public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
         super(ability);
@@ -58,6 +67,6 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
 
     @Override
     public String getRule() {
-        return "{this} enters the battlefield " + super.getRule();
+        return (generateRule ? "{this} enters the battlefield " + super.getRule():"");
     }
 }

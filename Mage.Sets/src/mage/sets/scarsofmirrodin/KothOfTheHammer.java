@@ -80,7 +80,7 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
         this.color.setRed(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), "land", Duration.EndOfTurn));

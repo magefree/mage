@@ -65,7 +65,7 @@ public class TezzeretTheSeeker extends CardImpl<TezzeretTheSeeker> {
         this.subtype.add("Tezzeret");
 
         this.color.setBlue(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Untap up to two target artifacts.
         LoyaltyAbility ability = new LoyaltyAbility(new UntapTargetEffect(), 1);

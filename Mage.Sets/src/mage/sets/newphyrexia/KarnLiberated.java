@@ -67,7 +67,7 @@ public class KarnLiberated extends CardImpl<KarnLiberated> {
         super(ownerId, 1, "Karn Liberated", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{7}");
         this.expansionSetCode = "NPH";
         this.subtype.add("Karn");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
         // +4: Target player exiles a card from his or her hand.
         LoyaltyAbility ability1 = new LoyaltyAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Karn Liberated", new FilterCard()), 4);

@@ -68,7 +68,7 @@ public class AjaniGoldmane extends CardImpl<AjaniGoldmane> {
         this.expansionSetCode = "M10";
         this.subtype.add("Ajani");
         this.color.setWhite(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         this.addAbility(new LoyaltyAbility(new GainLifeEffect(2), 1));
 

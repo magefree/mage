@@ -66,7 +66,7 @@ public class AjaniCallerOfThePride extends CardImpl<AjaniCallerOfThePride> {
 
     @Override
     public void build() {
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
         // +1: Put a +1/+1 counter on up to one target creature.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1);
         ability.addTarget(new TargetCreaturePermanent());

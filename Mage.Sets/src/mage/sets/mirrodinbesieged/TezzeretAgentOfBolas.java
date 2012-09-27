@@ -70,7 +70,7 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
         this.subtype.add("Tezzeret");
         this.color.setBlue(true);
         this.color.setBlack(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         this.addAbility(new LoyaltyAbility(new TezzeretAgentOfBolasEffect1(), 1));
 

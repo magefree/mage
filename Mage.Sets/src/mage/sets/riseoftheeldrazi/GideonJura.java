@@ -69,7 +69,7 @@ public class GideonJura extends CardImpl<GideonJura> {
         this.expansionSetCode = "ROE";
         this.subtype.add("Gideon");
         this.color.setWhite(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(6)), false));
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new GideonJuraEffect(), 2);
         ability1.addTarget(new TargetOpponent());

@@ -80,7 +80,7 @@ public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
         this.color.setBlack(true);
         this.color.setWhite(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), null));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new VampireToken()), 1));

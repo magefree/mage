@@ -65,7 +65,7 @@ public class ElspethKnightErrant extends CardImpl<ElspethKnightErrant> {
         this.subtype.add("Elspeth");
         this.color.setWhite(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
         // +1: Put a 1/1 white Soldier creature token onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new SoldierToken()), 1));

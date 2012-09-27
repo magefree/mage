@@ -64,7 +64,7 @@ public class GarrukRelentless extends CardImpl<GarrukRelentless> {
         this.canTransform = true;
         this.secondSideCard = new GarrukTheVeilCursed(ownerId);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // When Garruk Relentless has two or fewer loyalty counters on him, transform him.
         this.addAbility(new TransformAbility());

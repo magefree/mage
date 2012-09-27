@@ -65,7 +65,7 @@ public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
         super(ownerId, 214, "Sarkhan the Mad", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{3}{B}{R}");
         this.expansionSetCode = "ROE";
         this.subtype.add("Sarkhan");
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(7)), false));
 
         this.color.setBlack(true);
         this.color.setRed(true);

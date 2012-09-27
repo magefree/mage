@@ -64,7 +64,7 @@ public class LilianaOfTheVeil extends CardImpl<LilianaOfTheVeil> {
 
         this.color.setBlack(true);
 
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
         // +1: Each player discards a card.
         this.addAbility(new LoyaltyAbility(new DiscardEachPlayerEffect(), 1));

@@ -65,7 +65,7 @@ public class ApocalypseHydra extends CardImpl<ApocalypseHydra> {
         this.toughness = new MageInt(0);
 
         // Apocalypse Hydra enters the battlefield with X +1/+1 counters on it. If X is 5 or more, it enters the battlefield with an additional X +1/+1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new ApocalypseHydraEffect(), ""));
+        this.addAbility(new EntersBattlefieldAbility(new ApocalypseHydraEffect(), true));
         // {1}{R}, Remove a +1/+1 counter from Apocalypse Hydra: Apocalypse Hydra deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
