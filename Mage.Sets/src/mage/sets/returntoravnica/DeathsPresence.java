@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class DeathsPresence extends CardImpl<DeathsPresence> {
 
     public DeathsPresence(UUID ownerId) {
-        super(ownerId, 119, "Death's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
+        super(ownerId, 121, "Death's Presence", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{5}{G}");
         this.expansionSetCode = "RTR";
         this.color.setGreen(true);
         
@@ -92,7 +92,7 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl<DeathsPresence
                 this.getTargets().clear();
                 this.addTarget(new TargetControlledCreaturePermanent());
                 this.getEffects().clear();
-                this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(permanent.getToughness().getValue())));
+                this.addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(permanent.getPower().getValue())));
                 return true;
             }
         }
