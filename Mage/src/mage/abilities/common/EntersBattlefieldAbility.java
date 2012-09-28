@@ -67,6 +67,11 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
 
     @Override
     public String getRule() {
-        return (generateRule ? "{this} enters the battlefield " + super.getRule():"");
+        if (generateRule != null) {
+            if (generateRule = false) {
+                return "";
+            }
+        }
+        return "{this} enters the battlefield " + super.getRule();
     }
 }
