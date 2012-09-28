@@ -192,8 +192,6 @@ Noble Steeds|Alliances|140|C|{2}{W}|Enchantment|||{1}{W}: Target creature gains 
 Noble Steeds|Alliances|140|C|{2}{W}|Enchantment|||{1}{W}: Target creature gains first strike until end of turn.|
 Reinforcements|Alliances|142|C|{W}|Instant|||Put up to three target creature cards from your graveyard on top of your library.|
 Reinforcements|Alliances|142|C|{W}|Instant|||Put up to three target creature cards from your graveyard on top of your library.|
-Feast or Famine|Alliances|143|C|{3}{B}|Instant|||Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.|
-Feast or Famine|Alliances|143|C|{3}{B}|Instant|||Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.|
 Reprisal|Alliances|144|C|{1}{W}|Instant|||Destroy target creature with power 4 or greater. It can't be regenerated.|
 Reprisal|Alliances|144|C|{1}{W}|Instant|||Destroy target creature with power 4 or greater. It can't be regenerated.|
 Royal Decree|Alliances|146|R|{2}{W}{W}|Enchantment|||Cumulative upkeep {W} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$Whenever a Swamp, Mountain, black permanent, or red permanent becomes tapped, Royal Decree deals 1 damage to that permanent's controller.|
@@ -215,6 +213,8 @@ Astrolabe|Alliances|159|C|{3}|Artifact|||{1}, {tap}, Sacrifice Astrolabe: Add tw
 Krovikan Plague|Alliances|16|U|{2}{B}|Enchantment - Aura|||Enchant non-Wall creature you control$When Krovikan Plague enters the battlefield, draw a card at the beginning of the next turn's upkeep.$Tap enchanted creature: Krovikan Plague deals 1 damage to target creature or player. Put a -0/-1 counter on enchanted creature. Activate this ability only if enchanted creature is untapped.|
 Floodwater Dam|Alliances|161|R|{3}|Artifact|||{X}{X}{1}, {tap}: Tap X target lands.|
 Gustha's Scepter|Alliances|162|R|{0}|Artifact|||{tap}: Exile a card from your hand face down. You may look at it for as long as it remains exiled.${tap}: Return a card you own exiled with Gustha's Scepter to your hand.$When you lose control of Gustha's Scepter, put all cards exiled with Gustha's Scepter into their owner's graveyard.|
+Foresight|Alliances|162|C|{1}{U}|Sorcery|||Search your library for three cards, exile them, then shuffle your library.$Draw a card at the beginning of the next turn's upkeep.|
+Foresight|Alliances|162|C|{1}{U}|Sorcery|||Search your library for three cards, exile them, then shuffle your library.$Draw a card at the beginning of the next turn's upkeep.|
 Helm of Obedience|Alliances|163|R|{4}|Artifact|||{X}, {tap}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.|
 Lodestone Bauble|Alliances|164|R|{0}|Artifact|||{1}, {tap}, Sacrifice Lodestone Bauble: Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.|
 Mishra's Groundbreaker|Alliances|165|U|{4}|Artifact|||{tap}, Sacrifice Mishra's Groundbreaker: Target land becomes a 3/3 artifact creature that's still a land. <i>(This effect lasts indefinitely.)</i>|
@@ -280,8 +280,6 @@ Contagion|Alliances|4|U|{3}{B}{B}|Instant|||You may pay 1 life and exile a black
 False Demise|Alliances|40|C|{2}{U}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, return that card to the battlefield under your control.|
 False Demise|Alliances|40|C|{2}{U}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, return that card to the battlefield under your control.|
 Force of Will|Alliances|42|U|{3}{U}{U}|Instant|||You may pay 1 life and exile a blue card from your hand rather than pay Force of Will's mana cost.$Counter target spell.|
-Foresight|Alliances|43|C|{1}{U}|Sorcery|||Search your library for three cards, exile them, then shuffle your library.$Draw a card at the beginning of the next turn's upkeep.|
-Foresight|Alliances|43|C|{1}{U}|Sorcery|||Search your library for three cards, exile them, then shuffle your library.$Draw a card at the beginning of the next turn's upkeep.|
 Lat-Nam's Legacy|Alliances|45|C|{1}{U}|Instant|||Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.|
 Lat-Nam's Legacy|Alliances|45|C|{1}{U}|Instant|||Shuffle a card from your hand into your library. If you do, draw two cards at the beginning of the next turn's upkeep.|
 Library of Lat-Nam|Alliances|47|R|{4}{U}|Sorcery|||An opponent chooses one - You draw three cards at the beginning of the next turn's upkeep; or you search your library for a card, put that card into your hand, then shuffle your library.|
@@ -321,6 +319,8 @@ Gorilla Berserkers|Alliances|75|C|{3}{G}{G}|Creature - Ape Berserker|2|3|Trample
 Gorilla Chieftain|Alliances|77|C|{2}{G}{G}|Creature - Ape|3|3|{1}{G}: Regenerate Gorilla Chieftain.|
 Gorilla Chieftain|Alliances|77|C|{2}{G}{G}|Creature - Ape|3|3|{1}{G}: Regenerate Gorilla Chieftain.|
 Hail Storm|Alliances|79|U|{1}{G}{G}|Instant|||Hail Storm deals 2 damage to each attacking creature and 1 damage to you and each creature you control.|
+Feast or Famine|Alliances|8|C|{3}{B}|Instant|||Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.|
+Feast or Famine|Alliances|8|C|{3}{B}|Instant|||Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.|
 Kaysa|Alliances|80|R|{3}{G}{G}|Legendary Creature - Elf Druid|2|3|Green creatures you control get +1/+1.|
 Nature's Chosen|Alliances|81|U|{G}|Enchantment - Aura|||Enchant creature you control${0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.$Tap enchanted creature: Untap target artifact, creature, or land. Activate this ability only if enchanted creature is white and is untapped and only once each turn.|
 Nature's Wrath|Alliances|82|R|{4}{G}{G}|Enchantment|||At the beginning of your upkeep, sacrifice Nature's Wrath unless you pay {G}.$Whenever a player puts an Island or blue permanent onto the battlefield, he or she sacrifices an Island or blue permanent.$Whenever a player puts a Swamp or black permanent onto the battlefield, he or she sacrifices a Swamp or black permanent.|
@@ -480,8 +480,8 @@ Fire|Apocalypse|128a|U|{1}{R}|Instant|||Fire deals 2 damage divided as you choos
 Ice|Apocalypse|128b|U|{1}{U}|Instant|||$Tap target permanent.$Draw a card.|
 Illusion|Apocalypse|129a|U|{U}|Instant|||Target spell or permanent becomes the color of your choice until end of turn.$|
 Reality|Apocalypse|129b|U|{2}{G}|Instant|||$Destroy target artifact.|
-Reality|Apocalypse|129a|U|{2}{G}|Instant|||$Destroy target artifact.|
-Illusion|Apocalypse|129b|U|{U}|Instant|||Target spell or permanent becomes the color of your choice until end of turn.$|
+Illusion|Apocalypse|129a|U|{U}|Instant|||Target spell or permanent becomes the color of your choice until end of turn.$|
+Reality|Apocalypse|129b|U|{2}{G}|Instant|||$Destroy target artifact.|
 Helionaut|Apocalypse|13|C|{2}{W}|Creature - Human Soldier|1|2|Flying${1}, {tap}: Add one mana of any color to your mana pool.|
 Life|Apocalypse|130a|U|{G}|Sorcery|||All lands you control become 1/1 creatures until end of turn. They're still lands.$|
 Death|Apocalypse|130b|U|{1}{B}|Sorcery|||$Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.|
@@ -1140,7 +1140,6 @@ Advance Scout|Battle Royale Box Set|2|C|{1}{W}|Creature - Human Soldier Scout|1|
 Disenchant|Battle Royale Box Set|20|C|{1}{W}|Instant|||Destroy target artifact or enchantment.|
 Symbiosis|Battle Royale Box Set|209|C|{1}{G}|Instant|||Two target creatures each get +2/+2 until end of turn.|
 Disruptive Student|Battle Royale Box Set|21|C|{2}{U}|Creature - Human Wizard|1|1|{tap}: Counter target spell unless its controller pays {1}.|
-Flood|Battle Royale Box Set|21|C|{U}|Enchantment|||{U}{U}: Tap target creature without flying.|
 Drifting Meadow|Battle Royale Box Set|22|C||Land|||Drifting Meadow enters the battlefield tapped.${tap}: Add {W} to your mana pool.$Cycling {2} <i>({2}, Discard this card: Draw a card.)</i>|
 Elvish Lyrist|Battle Royale Box Set|23|U|{G}|Creature - Elf|1|1|{G}, {tap}, Sacrifice Elvish Lyrist: Destroy target enchantment.|
 Exhume|Battle Royale Box Set|24|C|{1}{B}|Sorcery|||Each player puts a creature card from his or her graveyard onto the battlefield.|
@@ -1151,6 +1150,7 @@ Giant Growth|Battle Royale Box Set|29|C|{G}|Instant|||Target creature gets +3/+3
 Air Elemental|Battle Royale Box Set|3|U|{3}{U}{U}|Creature - Elemental|4|4|Flying|
 Gorilla Warrior|Battle Royale Box Set|30|C|{2}{G}|Creature - Ape Warrior|3|2||
 Healing Salve|Battle Royale Box Set|31|C|{W}|Instant|||Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.|
+Flood|Battle Royale Box Set|32|C|{U}|Enchantment|||{U}{U}: Tap target creature without flying.|
 Heat Ray|Battle Royale Box Set|32|C|{X}{R}|Instant|||Heat Ray deals X damage to target creature.|
 Hurricane|Battle Royale Box Set|33|U|{X}{G}|Sorcery|||Hurricane deals X damage to each creature with flying and each player.|
 Infantry Veteran|Battle Royale Box Set|34|C|{W}|Creature - Human Soldier|1|1|{tap}: Target attacking creature gets +1/+1 until end of turn.|
@@ -2842,7 +2842,7 @@ AEther Snap|Darksteel|37|R|{3}{B}{B}|Sorcery|||Remove all counters from all perm
 Burden of Greed|Darksteel|38|C|{3}{B}|Instant|||Target player loses 1 life for each tapped artifact he or she controls.|
 Chittering Rats|Darksteel|39|C|{1}{B}{B}|Creature - Rat|2|2|When Chittering Rats enters the battlefield, target opponent puts a card from his or her hand on top of his or her library.|
 Hallow|Darksteel|4|C|{W}|Instant|||Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.|
-Death Cloud|Darksteel|40|R|{X}{B}{B}{B}|Sorcery|||Each player loses X life, then discards X cards, then sacrifices X creatures, then sacrifices X lands.|
+Death Cloud|Darksteel|40|R|{X}{B}{B}{B}|Sorcery|||Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.|
 Echoing Decay|Darksteel|41|C|{1}{B}|Instant|||Target creature and all other creatures with the same name as that creature get -2/-2 until end of turn.|
 Emissary of Despair|Darksteel|42|U|{1}{B}{B}|Creature - Spirit|2|1|Flying$Whenever Emissary of Despair deals combat damage to a player, that player loses 1 life for each artifact he or she controls.|
 Essence Drain|Darksteel|43|C|{4}{B}|Sorcery|||Essence Drain deals 3 damage to target creature or player and you gain 3 life.|
@@ -2962,13 +2962,13 @@ Rakdos Guildmage|Dissension|145|U|{BR}{BR}|Creature - Zombie Shaman|2|2|<i>({BR}
 Riot Spikes|Dissension|146|C|{BR}|Enchantment - Aura|||<i>({BR} can be paid with either {B} or {R}.)</i>$Enchant creature$Enchanted creature gets +2/-1.|
 Shielding Plax|Dissension|147|C|{2}{GU}|Enchantment - Aura|||<i>({GU} can be paid with either {G} or {U}.)</i>$Enchant creature$When Shielding Plax enters the battlefield, draw a card.$Enchanted creature can't be the target of spells or abilities your opponents control.|
 Simic Guildmage|Dissension|148|U|{GU}{GU}|Creature - Elf Wizard|2|2|<i>({GU} can be paid with either {G} or {U}.)</i>${1}{G}: Move a +1/+1 counter from target creature onto another target creature with the same controller.${1}{U}: Attach target Aura enchanting a permanent to another permanent with the same controller.|
-Bound|Dissension|149a|R|{3}{B}{G}|Instant|||Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.$|
-Determined|Dissension|149b|R|{G}{U}|Instant|||$Other spells you control can't be countered by spells or abilities this turn.$Draw a card.|
+Determined|Dissension|149a|R|{G}{U}|Instant|||$Other spells you control can't be countered by spells or abilities this turn.$Draw a card.|
+Bound|Dissension|149b|R|{3}{B}{G}|Instant|||Sacrifice a creature. Return up to X cards from your graveyard to your hand, where X is the number of colors that creature was. Exile this card.$|
 Proclamation of Rebirth|Dissension|15|R|{2}{W}|Sorcery|||Return up to three target creature cards with converted mana cost 1 or less from your graveyard to the battlefield.$Forecast - {5}{W}, Reveal Proclamation of Rebirth from your hand: Return target creature card with converted mana cost 1 or less from your graveyard to the battlefield. <i>(Activate this ability only during your upkeep and only once each turn.)</i>|
 Crime|Dissension|150a|R|{3}{W}{B}|Sorcery|||Put target creature or enchantment card from an opponent's graveyard onto the battlefield under your control.$|
 Punishment|Dissension|150b|R|{X}{B}{G}|Sorcery|||$Destroy each artifact, creature, and enchantment with converted mana cost X.|
-Hide|Dissension|151a|R|{R}{W}|Instant|||Put target artifact or enchantment on the bottom of its owner's library.$|
-Seek|Dissension|151b|R|{W}{B}|Instant|||$Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.|
+Seek|Dissension|151a|R|{W}{B}|Instant|||$Search target opponent's library for a card and exile it. You gain life equal to its converted mana cost. Then that player shuffles his or her library.|
+Hide|Dissension|151b|R|{R}{W}|Instant|||Put target artifact or enchantment on the bottom of its owner's library.$|
 Hit|Dissension|152a|U|{1}{B}{R}|Instant|||Target player sacrifices an artifact or creature. Hit deals damage to that player equal to that permanent's converted mana cost.$|
 Run|Dissension|152b|U|{3}{R}{G}|Instant|||$Attacking creatures you control get +1/+0 until end of turn for each other attacking creature.|
 Odds|Dissension|153a|R|{U}{R}|Instant|||Flip a coin. If it comes up heads, counter target instant or sorcery spell. If it comes up tails, copy that spell and you may choose new targets for the copy.$|
@@ -3455,6 +3455,98 @@ Swamp|Duel Decks: Garruk vs. Liliana|63|L||Basic Land - Swamp|||B|
 Blastoderm|Duel Decks: Garruk vs. Liliana|7|C|{2}{G}{G}|Creature - Beast|5|5|Shroud <i>(This permanent can't be the target of spells or abilities.)</i>$Fading 3 <i>(This creature enters the battlefield with three fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)</i>|
 Ravenous Baloth|Duel Decks: Garruk vs. Liliana|8|R|{2}{G}{G}|Creature - Beast|4|4|Sacrifice a Beast: You gain 4 life.|
 Stampeding Wildebeests|Duel Decks: Garruk vs. Liliana|9|U|{2}{G}{G}|Creature - Antelope Beast|5|4|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$At the beginning of your upkeep, return a green creature you control to its owner's hand.|
+Niv-Mizzet, the Firemind|Duel Decks: Izzet vs. Golgari|1|M|{2}{U}{U}{R}{R}|Legendary Creature - Dragon Wizard|4|4|Flying$Whenever you draw a card, Niv-Mizzet, the Firemind deals 1 damage to target creature or player.${tap}: Draw a card.|
+Galvanoth|Duel Decks: Izzet vs. Golgari|10|R|{3}{R}{R}|Creature - Beast|3|3|At the beginning of your upkeep, you may look at the top card of your library. If it's an instant or sorcery card, you may cast it without paying its mana cost.|
+Izzet Chronarch|Duel Decks: Izzet vs. Golgari|11|C|{3}{U}{R}|Creature - Human Wizard|2|2|When Izzet Chronarch enters the battlefield, return target instant or sorcery card from your graveyard to your hand.|
+Djinn Illuminatus|Duel Decks: Izzet vs. Golgari|12|R|{5}{UR}{UR}|Creature - Djinn|3|5|<i>({UR} can be paid with either {U} or {R}.)</i>$Flying$Each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost. <i>(When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>|
+Brainstorm|Duel Decks: Izzet vs. Golgari|13|C|{U}|Instant|||Draw three cards, then put two cards from your hand on top of your library in any order.|
+Force Spike|Duel Decks: Izzet vs. Golgari|14|C|{U}|Instant|||Counter target spell unless its controller pays {1}.|
+Magma Spray|Duel Decks: Izzet vs. Golgari|15|C|{R}|Instant|||Magma Spray deals 2 damage to target creature. If that creature would die this turn, exile it instead.|
+Isochron Scepter|Duel Decks: Izzet vs. Golgari|16|U|{2}|Artifact|||Imprint - When Isochron Scepter enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.${2}, {tap}: You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.|
+Izzet Signet|Duel Decks: Izzet vs. Golgari|17|C|{2}|Artifact|||{1}, {tap}: Add {U}{R} to your mana pool.|
+Call to Heel|Duel Decks: Izzet vs. Golgari|18|C|{1}{U}|Instant|||Return target creature to its owner's hand. Its controller draws a card.|
+Train of Thought|Duel Decks: Izzet vs. Golgari|19|C|{1}{U}|Sorcery|||Replicate {1}{U} <i>(When you cast this spell, copy it for each time you paid its replicate cost.)</i>$Draw a card.|
+Kiln Fiend|Duel Decks: Izzet vs. Golgari|2|C|{1}{R}|Creature - Elemental Beast|1|2|Whenever you cast an instant or sorcery spell, Kiln Fiend gets +3/+0 until end of turn.|
+Pyromatics|Duel Decks: Izzet vs. Golgari|20|C|{1}{R}|Instant|||Replicate {1}{R} <i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>$Pyromatics deals 1 damage to target creature or player.|
+Izzet Charm|Duel Decks: Izzet vs. Golgari|21|U|{U}{R}|Instant|||Choose one - Counter target noncreature spell unless its controller pays {2}; or Izzet Charm deals 2 damage to target creature; or draw two cards, then discard two cards.|
+Reminisce|Duel Decks: Izzet vs. Golgari|22|U|{2}{U}|Sorcery|||Target player shuffles his or her graveyard into his or her library.|
+Thunderheads|Duel Decks: Izzet vs. Golgari|23|U|{2}{U}|Instant|||Replicate {2}{U} <i>(When you cast this spell, copy it for each time you paid its replicate cost.)</i>$Put a 3/3 blue Weird creature token with defender and flying onto the battlefield. Exile it at the beginning of the next end step.|
+Vacuumelt|Duel Decks: Izzet vs. Golgari|24|U|{2}{U}|Sorcery|||Replicate {2}{U} <i>(When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)</i>$Return target creature to its owner's hand.|
+Dissipate|Duel Decks: Izzet vs. Golgari|25|U|{1}{U}{U}|Instant|||Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.|
+Quicksilver Dagger|Duel Decks: Izzet vs. Golgari|26|C|{1}{U}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has "{tap}: This creature deals 1 damage to target player. You draw a card."|
+Prophetic Bolt|Duel Decks: Izzet vs. Golgari|27|R|{3}{U}{R}|Instant|||Prophetic Bolt deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.|
+Overwhelming Intellect|Duel Decks: Izzet vs. Golgari|28|U|{4}{U}{U}|Instant|||Counter target creature spell. Draw cards equal to that spell's converted mana cost.|
+Sphinx-Bone Wand|Duel Decks: Izzet vs. Golgari|29|R|{7}|Artifact|||Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player.|
+Goblin Electromancer|Duel Decks: Izzet vs. Golgari|3|C|{U}{R}|Creature - Goblin Wizard|2|2|Instant and sorcery spells you cast cost {1} less to cast.|
+Street Spasm|Duel Decks: Izzet vs. Golgari|30|U|{X}{R}|Instant|||Street Spasm deals X damage to target creature without flying you don't control.$Overload {X}{X}{R}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Invoke the Firemind|Duel Decks: Izzet vs. Golgari|31|R|{X}{U}{U}{R}|Sorcery|||Choose one - Draw X cards; or Invoke the Firemind deals X damage to target creature or player.|
+Fire|Duel Decks: Izzet vs. Golgari|32a|U|{1}{R}|Instant|||Fire deals 2 damage divided as you choose among one or two target creatures and/or players.$|
+Ice|Duel Decks: Izzet vs. Golgari|32b|U|{1}{U}|Instant|||$Tap target permanent.$Draw a card.|
+Forgotten Cave|Duel Decks: Izzet vs. Golgari|33|C||Land|||Forgotten Cave enters the battlefield tapped.${tap}: Add {R} to your mana pool.$Cycling {R} <i>({R}, Discard this card: Draw a card.)</i>|
+Izzet Boilerworks|Duel Decks: Izzet vs. Golgari|34|C||Land|||Izzet Boilerworks enters the battlefield tapped.$When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.${tap}: Add {U}{R} to your mana pool.|
+Lonely Sandbar|Duel Decks: Izzet vs. Golgari|35|C||Land|||Lonely Sandbar enters the battlefield tapped.${tap}: Add {U} to your mana pool.$Cycling {U} <i>({U}, Discard this card: Draw a card.)</i>|
+Nivix, Aerie of the Firemind|Duel Decks: Izzet vs. Golgari|36|U||Land|||{tap}: Add {1} to your mana pool.${2}{U}{R}, {tap}: Exile the top card of your library. Until your next turn, you may cast that card if it's an instant or sorcery.|
+Island|Duel Decks: Izzet vs. Golgari|37|L||Basic Land - Island|||U|
+Island|Duel Decks: Izzet vs. Golgari|38|L||Basic Land - Island|||U|
+Island|Duel Decks: Izzet vs. Golgari|39|L||Basic Land - Island|||U|
+Izzet Guildmage|Duel Decks: Izzet vs. Golgari|4|U|{UR}{UR}|Creature - Human Wizard|2|2|<i>({UR} can be paid with either {U} or {R}.)</i>${2}{U}: Copy target instant spell you control with converted mana cost 2 or less. You may choose new targets for the copy.${2}{R}: Copy target sorcery spell you control with converted mana cost 2 or less. You may choose new targets for the copy.|
+Island|Duel Decks: Izzet vs. Golgari|40|L||Basic Land - Island|||U|
+Mountain|Duel Decks: Izzet vs. Golgari|41|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Izzet vs. Golgari|42|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Izzet vs. Golgari|43|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Izzet vs. Golgari|44|L||Basic Land - Mountain|||R|
+Jarad, Golgari Lich Lord|Duel Decks: Izzet vs. Golgari|45|M|{B}{B}{G}{G}|Legendary Creature - Zombie Elf|2|2|Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.${1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.$Sacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.|
+Plagued Rusalka|Duel Decks: Izzet vs. Golgari|46|U|{B}|Creature - Spirit|1|1|{B}, Sacrifice a creature: Target creature gets -1/-1 until end of turn.|
+Elves of Deep Shadow|Duel Decks: Izzet vs. Golgari|47|C|{G}|Creature - Elf Druid|1|1|{tap}: Add {B} to your mana pool. Elves of Deep Shadow deals 1 damage to you.|
+Golgari Thug|Duel Decks: Izzet vs. Golgari|48|U|{1}{B}|Creature - Human Warrior|1|1|When Golgari Thug dies, put target creature card from your graveyard on top of your library.$Dredge 4 <i>(If you would draw a card, instead you may put exactly four cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Ravenous Rats|Duel Decks: Izzet vs. Golgari|49|C|{1}{B}|Creature - Rat|1|1|When Ravenous Rats enters the battlefield, target opponent discards a card.|
+Gelectrode|Duel Decks: Izzet vs. Golgari|5|U|{1}{U}{R}|Creature - Weird|0|1|{tap}: Gelectrode deals 1 damage to target creature or player.$Whenever you cast an instant or sorcery spell, you may untap Gelectrode.|
+Reassembling Skeleton|Duel Decks: Izzet vs. Golgari|50|U|{1}{B}|Creature - Skeleton Warrior|1|1|{1}{B}: Return Reassembling Skeleton from your graveyard to the battlefield tapped.|
+Boneyard Wurm|Duel Decks: Izzet vs. Golgari|51|U|{1}{G}|Creature - Wurm|*|*|Boneyard Wurm's power and toughness are each equal to the number of creature cards in your graveyard.|
+Korozda Guildmage|Duel Decks: Izzet vs. Golgari|52|U|{B}{G}|Creature - Elf Shaman|2|2|{1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.${2}{B}{G}, Sacrifice a nontoken creature: Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.|
+Putrid Leech|Duel Decks: Izzet vs. Golgari|53|C|{B}{G}|Creature - Zombie Leech|2|2|Pay 2 life: Putrid Leech gets +2/+2 until end of turn. Activate this ability only once each turn.|
+Stinkweed Imp|Duel Decks: Izzet vs. Golgari|54|C|{2}{B}|Creature - Imp|1|2|Flying$Whenever Stinkweed Imp deals combat damage to a creature, destroy that creature.$Dredge 5 <i>(If you would draw a card, instead you may put exactly five cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Eternal Witness|Duel Decks: Izzet vs. Golgari|55|U|{1}{G}{G}|Creature - Human Shaman|2|1|When Eternal Witness enters the battlefield, you may return target card from your graveyard to your hand.|
+Dreg Mangler|Duel Decks: Izzet vs. Golgari|56|U|{1}{B}{G}|Creature - Plant Zombie|3|3|Haste$Scavenge {3}{B}{G} <i>({3}{B}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Shambling Shell|Duel Decks: Izzet vs. Golgari|57|C|{1}{B}{G}|Creature - Plant Zombie|3|1|Sacrifice Shambling Shell: Put a +1/+1 counter on target creature.$Dredge 3 <i>(If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Brain Weevil|Duel Decks: Izzet vs. Golgari|58|C|{3}{B}|Creature - Insect|1|1|Intimidate <i>(This creature can't be blocked except by artifact creatures and/or creatures that share a color with it.)</i>$Sacrifice Brain Weevil: Target player discards two cards. Activate this ability only any time you could cast a sorcery.|
+Greater Mossdog|Duel Decks: Izzet vs. Golgari|59|C|{3}{G}|Creature - Plant Hound|3|3|Dredge 3 <i>(If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Wee Dragonauts|Duel Decks: Izzet vs. Golgari|6|C|{1}{U}{R}|Creature - Faerie Wizard|1|3|Flying$Whenever you cast an instant or sorcery spell, Wee Dragonauts gets +2/+0 until end of turn.|
+Golgari Grave-Troll|Duel Decks: Izzet vs. Golgari|60|R|{4}{G}|Creature - Skeleton Troll|0|0|Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.${1}, Remove a +1/+1 counter from Golgari Grave-Troll: Regenerate Golgari Grave-Troll.$Dredge 6 <i>(If you would draw a card, instead you may put exactly six cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Stingerfling Spider|Duel Decks: Izzet vs. Golgari|61|U|{4}{G}|Creature - Spider|2|5|Reach <i>(This creature can block creatures with flying.)</i>$When Stingerfling Spider enters the battlefield, you may destroy target creature with flying.|
+Sadistic Hypnotist|Duel Decks: Izzet vs. Golgari|62|U|{3}{B}{B}|Creature - Human Minion|2|2|Sacrifice a creature: Target player discards two cards. Activate this ability only any time you could cast a sorcery.|
+Golgari Rotwurm|Duel Decks: Izzet vs. Golgari|63|C|{3}{B}{G}|Creature - Zombie Wurm|5|4|{B}, Sacrifice a creature: Target player loses 1 life.|
+Gleancrawler|Duel Decks: Izzet vs. Golgari|64|R|{3}{BG}{BG}{BG}|Creature - Insect Horror|6|6|<i>({BG} can be paid with either {B} or {G}.)</i>$Trample$At the beginning of your end step, return to your hand all creature cards in your graveyard that were put there from the battlefield this turn.|
+Doomgape|Duel Decks: Izzet vs. Golgari|65|R|{4}{BG}{BG}{BG}|Creature - Elemental|10|10|Trample$At the beginning of your upkeep, sacrifice a creature. You gain life equal to that creature's toughness.|
+Golgari Signet|Duel Decks: Izzet vs. Golgari|66|C|{2}|Artifact|||{1}, {tap}: Add {B}{G} to your mana pool.|
+Ghoul's Feast|Duel Decks: Izzet vs. Golgari|67|U|{1}{B}|Instant|||Target creature gets +X/+0 until end of turn, where X is the number of creature cards in your graveyard.|
+Yoke of the Damned|Duel Decks: Izzet vs. Golgari|68|C|{1}{B}|Enchantment - Aura|||Enchant creature$When a creature dies, destroy enchanted creature.|
+Life from the Loam|Duel Decks: Izzet vs. Golgari|69|R|{1}{G}|Sorcery|||Return up to three target land cards from your graveyard to your hand.$Dredge 3 <i>(If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Steamcore Weird|Duel Decks: Izzet vs. Golgari|7|C|{3}{U}|Creature - Weird|1|3|When Steamcore Weird enters the battlefield, if {R} was spent to cast Steamcore Weird, it deals 2 damage to target creature or player.|
+Golgari Germination|Duel Decks: Izzet vs. Golgari|70|U|{1}{B}{G}|Enchantment|||Whenever a nontoken creature you control dies, put a 1/1 green Saproling creature token onto the battlefield.|
+Putrefy|Duel Decks: Izzet vs. Golgari|71|U|{1}{B}{G}|Instant|||Destroy target artifact or creature. It can't be regenerated.|
+Feast or Famine|Duel Decks: Izzet vs. Golgari|72|C|{3}{B}|Instant|||Choose one - Put a 2/2 black Zombie creature token onto the battlefield; or destroy target nonartifact, nonblack creature and it can't be regenerated.|
+Nightmare Void|Duel Decks: Izzet vs. Golgari|73|U|{3}{B}|Sorcery|||Target player reveals his or her hand. You choose a card from it. That player discards that card.$Dredge 2 <i>(If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Vigor Mortis|Duel Decks: Izzet vs. Golgari|74|U|{2}{B}{B}|Sorcery|||Return target creature card from your graveyard to the battlefield. If {G} was spent to cast Vigor Mortis, that creature enters the battlefield with an additional +1/+1 counter on it.|
+Grim Flowering|Duel Decks: Izzet vs. Golgari|75|U|{5}{G}|Sorcery|||Draw a card for each creature card in your graveyard.|
+Twilight's Call|Duel Decks: Izzet vs. Golgari|76|R|{4}{B}{B}|Sorcery|||You may cast Twilight's Call any time you could cast an instant if you pay {2} more to cast it.$Each player returns all creature cards from his or her graveyard to the battlefield.|
+Life|Duel Decks: Izzet vs. Golgari|77a|U|{G}|Sorcery|||All lands you control become 1/1 creatures until end of turn. They're still lands.$|
+Death|Duel Decks: Izzet vs. Golgari|77b|U|{1}{B}|Sorcery|||$Return target creature card from your graveyard to the battlefield. You lose life equal to its converted mana cost.|
+Barren Moor|Duel Decks: Izzet vs. Golgari|78|C||Land|||Barren Moor enters the battlefield tapped.${tap}: Add {B} to your mana pool.$Cycling {B} <i>({B}, Discard this card: Draw a card.)</i>|
+Dakmor Salvage|Duel Decks: Izzet vs. Golgari|79|U||Land|||Dakmor Salvage enters the battlefield tapped.${tap}: Add {B} to your mana pool.$Dredge 2 <i>(If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
+Shrewd Hatchling|Duel Decks: Izzet vs. Golgari|8|U|{3}{UR}|Creature - Elemental|6|6|Shrewd Hatchling enters the battlefield with four -1/-1 counters on it.${UR}: Target creature can't block Shrewd Hatchling this turn.$Whenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.$Whenever you cast a red spell, remove a -1/-1 counter from Shrewd Hatchling.|
+Golgari Rot Farm|Duel Decks: Izzet vs. Golgari|80|C||Land|||Golgari Rot Farm enters the battlefield tapped.$When Golgari Rot Farm enters the battlefield, return a land you control to its owner's hand.${tap}: Add {B}{G} to your mana pool.|
+Svogthos, the Restless Tomb|Duel Decks: Izzet vs. Golgari|81|U||Land|||{tap}: Add {1} to your mana pool.${3}{B}{G}: Until end of turn, Svogthos, the Restless Tomb becomes a black and green Plant Zombie creature with "This creature's power and toughness are each equal to the number of creature cards in your graveyard." It's still a land.|
+Tranquil Thicket|Duel Decks: Izzet vs. Golgari|82|C||Land|||Tranquil Thicket enters the battlefield tapped.${tap}: Add {G} to your mana pool.$Cycling {G} <i>({G}, Discard this card: Draw a card.)</i>|
+Swamp|Duel Decks: Izzet vs. Golgari|83|L||Basic Land - Swamp|||B|
+Swamp|Duel Decks: Izzet vs. Golgari|84|L||Basic Land - Swamp|||B|
+Swamp|Duel Decks: Izzet vs. Golgari|85|L||Basic Land - Swamp|||B|
+Swamp|Duel Decks: Izzet vs. Golgari|86|L||Basic Land - Swamp|||B|
+Forest|Duel Decks: Izzet vs. Golgari|87|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Izzet vs. Golgari|88|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Izzet vs. Golgari|89|L||Basic Land - Forest|||G|
+Ogre Savant|Duel Decks: Izzet vs. Golgari|9|C|{4}{R}|Creature - Ogre Wizard|3|2|When Ogre Savant enters the battlefield, if {U} was spent to cast Ogre Savant, return target creature to its owner's hand.|
+Forest|Duel Decks: Izzet vs. Golgari|90|L||Basic Land - Forest|||G|
 Jace Beleren|Duel Decks: Jace vs. Chandra|1|M|{1}{U}{U}|Planeswalker - Jace|||+2: Each player draws a card.$-1: Target player draws a card.$-10: Target player puts the top twenty cards of his or her library into his or her graveyard.|
 Elemental Shaman|Duel Decks: Jace vs. Chandra|1|C||Creature - Elemental Shaman|3|1||
 Fledgling Mawcor|Duel Decks: Jace vs. Chandra|10|U|{3}{U}|Creature - Beast|2|2|Flying${tap}: Fledgling Mawcor deals 1 damage to target creature or player.$Morph {U}{U} <i>(You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)</i>|
@@ -5654,6 +5746,21 @@ Mikaeus, the Lunarch|From the Vault: Legends|6|M|{X}{W}|Legendary Creature - Hum
 Omnath, Locus of Mana|From the Vault: Legends|7|M|{2}{G}|Legendary Creature - Elemental|1|1|Green mana doesn't empty from your mana pool as steps and phases end.$Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool.|
 Oona, Queen of the Fae|From the Vault: Legends|8|M|{3}{UB}{UB}{UB}|Legendary Creature - Faerie Wizard|5|5|Flying${X}{UB}: Choose a color. Target opponent exiles the top X cards of his or her library. For each card of the chosen color exiled this way, put a 1/1 blue and black Faerie Rogue creature token with flying onto the battlefield.|
 Progenitus|From the Vault: Legends|9|M|{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}|Legendary Creature - Hydra Avatar|10|10|Protection from everything$If Progenitus would be put into a graveyard from anywhere, reveal Progenitus and shuffle it into its owner's library instead.|
+Ancient Tomb|From the Vault: Realms|1|M||Land|||{tap}: Add {2} to your mana pool. Ancient Tomb deals 2 damage to you.|
+Maze of Ith|From the Vault: Realms|10|M||Land|||{tap}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.|
+Murmuring Bosk|From the Vault: Realms|11|M||Land - Forest|||<i>({tap}: Add {G} to your mana pool.)</i>$As Murmuring Bosk enters the battlefield, you may reveal a Treefolk card from your hand. If you don't, Murmuring Bosk enters the battlefield tapped.${tap}: Add {W} or {B} to your mana pool. Murmuring Bosk deals 1 damage to you.|
+Shivan Gorge|From the Vault: Realms|12|M||Legendary Land|||{tap}: Add {1} to your mana pool.${2}{R}, {tap}: Shivan Gorge deals 1 damage to each opponent.|
+Urborg, Tomb of Yawgmoth|From the Vault: Realms|13|M||Legendary Land|||Each land is a Swamp in addition to its other land types.|
+Vesuva|From the Vault: Realms|14|M||Land|||You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.|
+Windbrisk Heights|From the Vault: Realms|15|M||Land|||Hideaway <i>(This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)</i>${tap}: Add {W} to your mana pool.${W}, {tap}: You may play the exiled card without paying its mana cost if you attacked with three or more creatures this turn.|
+Boseiju, Who Shelters All|From the Vault: Realms|2|M||Legendary Land|||Boseiju, Who Shelters All enters the battlefield tapped.${tap}, Pay 2 life: Add {1} to your mana pool. If that mana is spent on an instant or sorcery spell, that spell can't be countered by spells or abilities.|
+Cephalid Coliseum|From the Vault: Realms|3|M||Land|||{tap}: Add {U} to your mana pool. Cephalid Coliseum deals 1 damage to you.$Threshold - {U}, {tap}, Sacrifice Cephalid Coliseum: Target player draws three cards, then discards three cards. Activate this ability only if seven or more cards are in your graveyard.|
+Desert|From the Vault: Realms|4|M||Land - Desert|||{tap}: Add {1} to your mana pool.${tap}: Desert deals 1 damage to target attacking creature. Activate this ability only during the end of combat step.|
+Dryad Arbor|From the Vault: Realms|5|M||Land Creature - Forest Dryad|1|1|<i>(Dryad Arbor isn't a spell, it's affected by summoning sickness, and it has "{tap}: Add {G} to your mana pool.")</i>|
+Forbidden Orchard|From the Vault: Realms|6|M||Land|||{tap}: Add one mana of any color to your mana pool.$Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.|
+Glacial Chasm|From the Vault: Realms|7|M||Land|||Cumulative upkeep-Pay 2 life. <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$When Glacial Chasm enters the battlefield, sacrifice a land.$Creatures you control can't attack.$Prevent all damage that would be dealt to you.|
+Grove of the Burnwillows|From the Vault: Realms|8|M||Land|||{tap}: Add {1} to your mana pool.${tap}: Add {R} or {G} to your mana pool. Each opponent gains 1 life.|
+High Market|From the Vault: Realms|9|M||Land|||{tap}: Add {1} to your mana pool.${tap}, Sacrifice a creature: You gain 1 life.|
 AEther Vial|From the Vault: Relics|1|M|{1}|Artifact|||At the beginning of your upkeep, you may put a charge counter on &AElig;ther Vial.${tap}: You may put a creature card with converted mana cost equal to the number of charge counters on &AElig;ther Vial from your hand onto the battlefield.|
 Mox Diamond|From the Vault: Relics|10|M|{0}|Artifact|||If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard.${tap}: Add one mana of any color to your mana pool.|
 Nevinyrral's Disk|From the Vault: Relics|11|M|{4}|Artifact|||Nevinyrral's Disk enters the battlefield tapped.${1}, {tap}: Destroy all artifacts, creatures, and enchantments.|
@@ -5905,7 +6012,7 @@ Mourning Thrull|Guildpact|146|C|{1}{WB}|Creature - Thrull|1|1|<i>({WB} can be pa
 Orzhov Guildmage|Guildpact|147|U|{WB}{WB}|Creature - Human Wizard|2|2|{2}{W}: Target player gains 1 life.${2}{B}: Each player loses 1 life.|
 Petrahydrox|Guildpact|148|C|{3}{UR}|Creature - Weird|3|3|<i>({UR} can be paid with either {U} or {R}.)</i>$When Petrahydrox becomes the target of a spell or ability, return Petrahydrox to its owner's hand.|
 Wild Cantor|Guildpact|149|C|{RG}|Creature - Human Druid|1|1|<i>({RG} can be paid with either {R} or {G}.)</i>$Sacrifice Wild Cantor: Add one mana of any color to your mana pool.|
-Shrieking Grotesque|Guildpact|15|C|{2}{W}|Creature - Gargoyle|2|1|Flying$When Shrieking Grotesque enters the battlefield, if {B} was spent to cast Shrieking Grotesque, target player discards a card.|
+Shrieking Grotesque|Guildpact|15|C|{2}{W}|Creature - Gargoyle|2|1|Flying$When Shrieking Grotesque enters the battlefield, if {B} was spent to cast it, target player discards a card.|
 Gruul Signet|Guildpact|150|C|{2}|Artifact|||{1}, {tap}: Add {R}{G} to your mana pool.|
 Gruul War Plow|Guildpact|151|R|{4}|Artifact|||Creatures you control have trample.${1}{R}{G}: Gruul War Plow becomes a 4/4 Juggernaut artifact creature until end of turn.|
 Izzet Signet|Guildpact|152|C|{2}|Artifact|||{1}, {tap}: Add {U}{R} to your mana pool.|
@@ -5969,7 +6076,7 @@ Ostiary Thrull|Guildpact|55|C|{3}{B}|Creature - Thrull|2|2|{W}, {tap}: Tap targe
 Plagued Rusalka|Guildpact|56|U|{B}|Creature - Spirit|1|1|{B}, Sacrifice a creature: Target creature gets -1/-1 until end of turn.|
 Poisonbelly Ogre|Guildpact|57|C|{4}{B}|Creature - Ogre Warrior|3|3|Whenever another creature enters the battlefield, its controller loses 1 life.|
 Restless Bones|Guildpact|58|C|{2}{B}|Creature - Skeleton|1|1|{3}{B}, {tap}: Target creature gains swampwalk until end of turn.${1}{B}: Regenerate Restless Bones.|
-Revenant Patriarch|Guildpact|59|U|{4}{B}|Creature - Spirit|4|3|When Revenant Patriarch enters the battlefield, if {W} was spent to cast Revenant Patriarch, target player skips his or her next combat phase.$Revenant Patriarch can't block.|
+Revenant Patriarch|Guildpact|59|U|{4}{B}|Creature - Spirit|4|3|When Revenant Patriarch enters the battlefield, if {W} was spent to cast it, target player skips his or her next combat phase.$Revenant Patriarch can't block.|
 Ghostway|Guildpact|6|R|{2}{W}|Instant|||Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step.|
 Sanguine Praetor|Guildpact|60|R|{6}{B}{B}|Creature - Avatar Praetor|7|5|{B}, Sacrifice a creature: Destroy each creature with the same converted mana cost as the sacrificed creature.|
 Seize the Soul|Guildpact|61|R|{2}{B}{B}|Instant|||Destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.$Haunt <i>(When this spell card is put into a graveyard after resolving, exile it haunting target creature.)</i>$When the creature Seize the Soul haunts dies, destroy target nonwhite, nonblack creature. Put a 1/1 white Spirit creature token with flying onto the battlefield.|
@@ -6341,7 +6448,6 @@ Order of the Sacred Torch|Ice Age|269|R|{1}{W}{W}|Creature - Human Knight|2|2|{t
 Krovikan Elementalist|Ice Age|27|U|{B}{B}|Creature - Human Wizard|1|1|{2}{R}: Target creature gets +1/+0 until end of turn.${U}{U}: Target creature you control gains flying until end of turn. Sacrifice it at the beginning of the next end step.|
 Order of the White Shield|Ice Age|270|U|{W}{W}|Creature - Human Knight|2|1|Protection from black${W}: Order of the White Shield gains first strike until end of turn.${W}{W}: Order of the White Shield gets +1/+0 until end of turn.|
 Prismatic Ward|Ice Age|271|C|{1}{W}|Enchantment - Aura|||Enchant creature$As Prismatic Ward enters the battlefield, choose a color.$Prevent all damage that would be dealt to enchanted creature by sources of the chosen color.|
-Rally|Ice Age|272|C|{W}{W}|Instant|||Blocking creatures get +1/+1 until end of turn.|
 Red Scarab|Ice Age|273|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature can't be blocked by red creatures.$Enchanted creature gets +2/+2 as long as an opponent controls a red permanent.|
 Sacred Boon|Ice Age|274|U|{1}{W}|Instant|||Prevent the next 3 damage that would be dealt to target creature this turn. At the beginning of the next end step, put a +0/+1 counter on that creature for each 1 damage prevented this way.|
 Seraph|Ice Age|275|R|{6}{W}|Creature - Angel|4|4|Flying$Whenever a creature dealt damage by Seraph this turn dies, put that card onto the battlefield under your control at the beginning of the next end step. Sacrifice the creature when you lose control of Seraph.|
@@ -6533,6 +6639,7 @@ Ray of Command|Ice Age|92|C|{3}{U}|Instant|||Untap target creature an opponent c
 Ray of Erasure|Ice Age|93|C|{U}|Instant|||Target player puts the top card of his or her library into his or her graveyard.$Draw a card at the beginning of the next turn's upkeep.|
 Reality Twist|Ice Age|94|R|{U}{U}{U}|Enchantment|||Cumulative upkeep {1}{U}{U} <i>(At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)</i>$If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.|
 Sea Spirit|Ice Age|95|U|{4}{U}|Creature - Elemental Spirit|2|3|{U}: Sea Spirit gets +1/+0 until end of turn.|
+Rally|Ice Age|95|C|{W}{W}|Instant|||Blocking creatures get +1/+1 until end of turn.|
 Shyft|Ice Age|96|R|{4}{U}|Creature - Shapeshifter|4|2|At the beginning of your upkeep, you may have Shyft become the color or colors of your choice. <i>(This effect lasts indefinitely.)</i>|
 Sibilant Spirit|Ice Age|97|R|{5}{U}|Creature - Spirit|5|6|Flying$Whenever Sibilant Spirit attacks, defending player may draw a card.|
 Silver Erne|Ice Age|98|U|{3}{U}|Creature - Bird|2|2|Flying, trample|
@@ -7132,7 +7239,7 @@ Blind Seer|Invasion|47|R|{2}{U}{U}|Legendary Creature - Human Wizard|3|3|{1}{U}:
 Breaking Wave|Invasion|48|R|{2}{U}{U}|Sorcery|||You may cast Breaking Wave any time you could cast an instant if you pay {2} more to cast it.$Simultaneously untap all tapped creatures and tap all untapped creatures.|
 Collective Restraint|Invasion|49|R|{3}{U}|Enchantment|||Domain - Creatures can't attack you unless their controller pays {X} for each creature he or she controls that's attacking you, where X is the number of basic land types among lands you control.|
 Benalish Emissary|Invasion|5|U|{2}{W}|Creature - Human Wizard|1|4|Kicker {1}{G} <i>(You may pay an additional {1}{G} as you cast this spell.)</i>$When Benalish Emissary enters the battlefield, if it was kicked, destroy target land.|
-Crystal Spray|Invasion|50|R|{2}{U}|Instant|||Change the text of target spell or permanent by replacing all instances of one color word or basic land type with another until end of turn.$$Draw a card.|
+Crystal Spray|Invasion|50|R|{2}{U}|Instant|||Change the text of target spell or permanent by replacing all instances of one color word with another or one basic land type with another until end of turn.$Draw a card.|
 Disrupt|Invasion|51|U|{U}|Instant|||Counter target instant or sorcery spell unless its controller pays {1}.$$Draw a card.|
 Distorting Wake|Invasion|52|R|{X}{U}{U}{U}|Sorcery|||Return X target nonland permanents to their owners' hands.|
 Dream Thrush|Invasion|53|C|{1}{U}|Creature - Bird|1|1|Flying${tap}: Target land becomes the basic land type of your choice until end of turn.|
@@ -7308,8 +7415,8 @@ Anger|Judgment|77|U|{3}{R}|Creature - Incarnation|2|2|Haste$As long as Anger is 
 Arcane Teachings|Judgment|78|C|{2}{R}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$Enchanted creature gets +2/+2 and has "{tap}: This creature deals 1 damage to target creature or player."|
 Barbarian Bully|Judgment|79|C|{2}{R}|Creature - Human Barbarian|2|2|Discard a card at random: Barbarian Bully gets +2/+2 until end of turn unless a player has Barbarian Bully deal 4 damage to him or her. Activate this ability only once each turn.|
 Chastise|Judgment|8|U|{3}{W}|Instant|||Destroy target attacking creature. You gain life equal to its power.|
-Book Burning|Judgment|80|C|{1}{R}|Sorcery|||Any player may have Book Burning deal 6 damage to him or her. If no one does, put the top six cards of target player's library into his or her graveyard.|
-Breaking Point|Judgment|81|R|{1}{R}{R}|Sorcery|||Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures and they can't be regenerated.|
+Book Burning|Judgment|80|C|{1}{R}|Sorcery|||Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.|
+Breaking Point|Judgment|81|R|{1}{R}{R}|Sorcery|||Any player may have Breaking Point deal 6 damage to him or her. If no one does, destroy all creatures. Creatures destroyed this way can't be regenerated.|
 Browbeat|Judgment|82|U|{2}{R}|Sorcery|||Any player may have Browbeat deal 5 damage to him or her. If no one does, target player draws three cards.|
 Burning Wish|Judgment|83|R|{1}{R}|Sorcery|||You may choose a sorcery card you own from outside the game, reveal that card, and put it into your hand. Exile Burning Wish.|
 Dwarven Bloodboiler|Judgment|84|R|{R}{R}{R}|Creature - Dwarf|2|2|Tap an untapped Dwarf you control: Target creature gets +2/+0 until end of turn.|
@@ -7598,7 +7705,7 @@ Gaseous Form|Legends|59|C|{2}{U}|Enchantment - Aura|||Enchant creature$Prevent a
 Cosmic Horror|Legends|6|R|{3}{B}{B}{B}|Creature - Horror|7|7|First strike$At the beginning of your upkeep, destroy Cosmic Horror unless you pay {3}{B}{B}{B}. If Cosmic Horror is destroyed this way, it deals 7 damage to you.|
 Glyph of Delusion|Legends|60|C|{U}|Instant|||Put X glyph counters on target creature that target Wall blocked this turn, where X is the power of that blocked creature. The creature gains "This creature doesn't untap during your untap step if it has a glyph counter on it" and "At the beginning of your upkeep, remove a glyph counter from this creature."|
 In the Eye of Chaos|Legends|61|R|{2}{U}|World Enchantment|||Whenever a player casts an instant spell, counter it unless that player pays {X}, where X is its converted mana cost.|
-Invoke Prejudice|Legends|62|R|{U}{U}{U}{U}|Enchantment|||Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, counter that spell unless its controller pays {X}, where X is its converted mana cost.|
+Invoke Prejudice|Legends|62|R|{U}{U}{U}{U}|Enchantment|||Whenever an opponent casts a creature spell that doesn't share a color with a creature you control, counter that spell unless that player pays {X}, where X is its converted mana cost.|
 Juxtapose|Legends|63|R|{3}{U}|Sorcery|||You and target player exchange control of the creature you each control with the highest converted mana cost. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest cost, their controller chooses one of them.|
 Land Equilibrium|Legends|64|R|{2}{U}{U}|Enchantment|||If an opponent who controls at least as many lands as you do would put a land onto the battlefield, that player instead puts that land onto the battlefield then sacrifices a land.|
 Mana Drain|Legends|65|U|{U}{U}|Instant|||Counter target spell. At the beginning of your next main phase, add {X} to your mana pool, where X is that spell's converted mana cost.|
@@ -9787,8 +9894,8 @@ Dominus of Fealty|Magic: The Gathering-Commander|194|R|{UR}{UR}{UR}{UR}{UR}|Crea
 Duergar Hedge-Mage|Magic: The Gathering-Commander|195|U|{2}{RW}|Creature - Dwarf Shaman|2|2|When Duergar Hedge-Mage enters the battlefield, if you control two or more Mountains, you may destroy target artifact.$When Duergar Hedge-Mage enters the battlefield, if you control two or more Plains, you may destroy target enchantment.|
 Edric, Spymaster of Trest|Magic: The Gathering-Commander|196|R|{1}{G}{U}|Legendary Creature - Elf Rogue|2|2|Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.|
 Electrolyze|Magic: The Gathering-Commander|197|U|{1}{U}{R}|Instant|||Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.$Draw a card.|
-Ice|Magic: The Gathering-Commander|198a|U|{1}{U}|Instant|||$Tap target permanent.$Draw a card.|
-Fire|Magic: The Gathering-Commander|198b|U|{1}{R}|Instant|||Fire deals 2 damage divided as you choose among one or two target creatures and/or players.$|
+Fire|Magic: The Gathering-Commander|198a|U|{1}{R}|Instant|||Fire deals 2 damage divided as you choose among one or two target creatures and/or players.$|
+Ice|Magic: The Gathering-Commander|198b|U|{1}{U}|Instant|||$Tap target permanent.$Draw a card.|
 Firespout|Magic: The Gathering-Commander|199|U|{2}{RG}|Sorcery|||Firespout deals 3 damage to each creature without flying if {R} was spent to cast Firespout and 3 damage to each creature with flying if {G} was spent to cast it. <i>(Do both if {R}{G} was spent.)</i>|
 Afterlife|Magic: The Gathering-Commander|2|U|{2}{W}|Instant|||Destroy target creature. It can't be regenerated. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.|
 Monk Realist|Magic: The Gathering-Commander|20|C|{1}{W}|Creature - Human Monk Cleric|1|1|When Monk Realist enters the battlefield, destroy target enchantment.|
@@ -11329,11 +11436,11 @@ Preferred Selection|Mirage|131|R|{2}{G}{G}|Enchantment|||At the beginning of you
 Quirion Elves|Mirage|132|C|{1}{G}|Creature - Elf Druid|1|1|As Quirion Elves enters the battlefield, choose a color.${tap}: Add {G} to your mana pool.${tap}: Add one mana of the chosen color to your mana pool.|
 Rampant Growth|Mirage|133|C|{1}{G}|Sorcery|||Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle your library.|
 Regeneration|Mirage|134|C|{1}{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>${G}: Regenerate enchanted creature. <i>(The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
-Roots of Life|Mirage|135|U|{1}{G}{G}|Enchantment|||As Roots of Life enters the battlefield, choose Islands or Swamps.$Whenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.|
+Roots of Life|Mirage|135|U|{1}{G}{G}|Enchantment|||As Roots of Life enters the battlefield, choose Island or Swamp.$Whenever a land of the chosen type an opponent controls becomes tapped, you gain 1 life.|
 Sabertooth Cobra|Mirage|136|C|{2}{G}|Creature - Snake|2|2|Whenever Sabertooth Cobra deals damage to a player, he or she gets a poison counter. That player gets another poison counter at the beginning of his or her next upkeep unless he or she pays {2} before that turn. <i>(A player with ten or more poison counters loses the game.)</i>|
 Sandstorm|Mirage|137|C|{G}|Instant|||Sandstorm deals 1 damage to each attacking creature.|
 Seedling Charm|Mirage|138|C|{G}|Instant|||Choose one - Return target Aura attached to a creature to its owner's hand; or regenerate target green creature; or target creature gains trample until end of turn.|
-Seeds of Innocence|Mirage|139|R|{1}{G}{G}|Sorcery|||Destroy all artifacts. They can't be regenerated. The controller of each artifact destroyed this way gains life equal to its converted mana cost.|
+Seeds of Innocence|Mirage|139|R|{1}{G}{G}|Sorcery|||Destroy all artifacts. They can't be regenerated. The controller of each of those artifacts gains life equal to its converted mana cost.|
 Dark Ritual|Mirage|14|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
 Serene Heart|Mirage|140|C|{1}{G}|Instant|||Destroy all Auras.|
 Stalking Tiger|Mirage|141|C|{3}{G}|Creature - Cat|3|3|Stalking Tiger can't be blocked by more than one creature.|
@@ -13269,7 +13376,7 @@ Pedantic Learning|Odyssey|90|R|{U}{U}|Enchantment|||Whenever a land card is put 
 Peek|Odyssey|91|C|{U}|Instant|||Look at target player's hand.$Draw a card.|
 Persuasion|Odyssey|92|R|{3}{U}{U}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$You control enchanted creature.|
 Phantom Whelp|Odyssey|93|C|{1}{U}|Creature - Illusion Hound|2|2|When Phantom Whelp attacks or blocks, return it to its owner's hand at end of combat. <i>(Return it only if it's on the battlefield.)</i>|
-Predict|Odyssey|94|U|{1}{U}|Instant|||Name a card, then put the top card of target player's library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.|
+Predict|Odyssey|94|U|{1}{U}|Instant|||Name a card, then target player puts the top card of his or her library into his or her graveyard. If that card is the named card, you draw two cards. Otherwise, you draw a card.|
 Psionic Gift|Odyssey|95|C|{1}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."|
 Pulsating Illusion|Odyssey|96|U|{4}{U}|Creature - Illusion|0|1|Flying$Discard a card: Pulsating Illusion gets +4/+4 until end of turn. Activate this ability only once each turn.|
 Puppeteer|Odyssey|97|U|{2}{U}|Creature - Human Wizard|1|2|{U}, {tap}: You may tap or untap target creature.|
@@ -13642,8 +13749,8 @@ Torchling|Planar Chaos|110|R|{3}{R}{R}|Creature - Shapeshifter|3|3|{R}: Untap To
 Volcano Hellion|Planar Chaos|111|R|{2}{R}{R}|Creature - Hellion|6|5|Volcano Hellion has echo {X}, where X is your life total. <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>$When Volcano Hellion enters the battlefield, it deals an amount of damage of your choice to you and target creature. The damage can't be prevented.|
 Boom|Planar Chaos|112a|R|{1}{R}|Sorcery|||Destroy target land you control and target land you don't control.$|
 Bust|Planar Chaos|112b|R|{5}{R}|Sorcery|||$Destroy all lands.|
-Gone|Planar Chaos|113a|C|{2}{R}|Instant|||$Return target creature you don't control to its owner's hand.|
-Dead|Planar Chaos|113b|C|{R}|Instant|||Dead deals 2 damage to target creature.$|
+Dead|Planar Chaos|113a|C|{R}|Instant|||Dead deals 2 damage to target creature.$|
+Gone|Planar Chaos|113b|C|{2}{R}|Instant|||$Return target creature you don't control to its owner's hand.|
 Rough|Planar Chaos|114a|U|{1}{R}|Sorcery|||Rough deals 2 damage to each creature without flying.$|
 Tumble|Planar Chaos|114b|U|{5}{R}|Sorcery|||$Tumble deals 6 damage to each creature with flying.|
 Blood Knight|Planar Chaos|115|U|{R}{R}|Creature - Human Knight|2|2|First strike, protection from white|
@@ -14075,7 +14182,7 @@ Aura Gnarlid|Planechase 2012 Edition|55|C|{2}{G}|Creature - Beast|2|2|Creatures 
 Awakening Zone|Planechase 2012 Edition|56|R|{2}{G}|Enchantment|||At the beginning of your upkeep, you may put a 0/1 colorless Eldrazi Spawn creature token onto the battlefield. It has "Sacrifice this creature: Add {1} to your mana pool."|
 Beast Within|Planechase 2012 Edition|57|U|{2}{G}|Instant|||Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.|
 Boar Umbra|Planechase 2012 Edition|58|U|{2}{G}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +3/+3.$Totem armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>|
-Bramble Elemental|Planechase 2012 Edition|59|C|{3}{G}{G}|Creature - Elemental|4|4|Whenever an Aura becomes attached to Bramble Elemental or enters the battlefield attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.|
+Bramble Elemental|Planechase 2012 Edition|59|C|{3}{G}{G}|Creature - Elemental|4|4|Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.|
 Felidar Umbra|Planechase 2012 Edition|6|U|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has lifelink.${1}{W}: Attach Felidar Umbra to target creature you control.$Totem armor <i>(If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)</i>|
 Brindle Shoat|Planechase 2012 Edition|60|U|{1}{G}|Creature - Boar|1|1|When Brindle Shoat dies, put a 3/3 green Boar creature token onto the battlefield.|
 Brutalizer Exarch|Planechase 2012 Edition|61|U|{5}{G}|Creature - Cleric|3|3|When Brutalizer Exarch enters the battlefield, choose one - Search your library for a creature card, reveal it, then shuffle your library and put that card on top of it; or put target noncreature permanent on the bottom of its owner's library.|
@@ -14958,7 +15065,7 @@ Raging Kavu|Promo set for Gatherer|262|R|{1}{R}{G}|Creature - Kavu|3|1|Flash$Has
 Avatar of Hope|Promo set for Gatherer|3|R|{6}{W}{W}|Creature - Avatar|4|9|If you have 3 or less life, Avatar of Hope costs {6} less to cast.$Flying$Avatar of Hope can block any number of creatures.|
 False Prophet|Promo set for Gatherer|6|R|{2}{W}{W}|Creature - Human Cleric|2|2|When False Prophet dies, exile all creatures.|
 Mana Crypt|Promo set for Gatherer|60|Special|{0}|Artifact|||At the beginning of your upkeep, flip a coin. If you lose the flip, Mana Crypt deals 3 damage to you.${tap}: Add {2} to your mana pool.|
-Revenant|Promo set for Gatherer|64|R|{4}{B}|Creature - Spirit|*|*|Flying$Revenant's power and toughness are each equal to the number of creature cards in your graveyard.|
+Revenant|Promo set for Gatherer|61|R|{4}{B}|Creature - Spirit|*|*|Flying$Revenant's power and toughness are each equal to the number of creature cards in your graveyard.|
 Rathi Assassin|Promo set for Gatherer|67|R|{2}{B}{B}|Creature - Zombie Mercenary Assassin|2|2|{1}{B}{B}, {tap}: Destroy target tapped nonblack creature.${3}, {tap}: Search your library for a Mercenary permanent card with converted mana cost 3 or less and put it onto the battlefield. Then shuffle your library.|
 Laquatus's Champion|Promo set for Gatherer|67|R|{4}{B}{B}|Creature - Nightmare Horror|6|3|When Laquatus's Champion enters the battlefield, target player loses 6 life.$When Laquatus's Champion leaves the battlefield, that player gains 6 life.${B}: Regenerate Laquatus's Champion.|
 Windseeker Centaur|Promo set for Gatherer|7|Special|{1}{R}{R}|Creature - Centaur|2|2|Vigilance|
@@ -15169,7 +15276,7 @@ Warp World|Ravnica: City of Guilds|150|R|{5}{R}{R}{R}|Sorcery|||Each player shuf
 War-Torch Goblin|Ravnica: City of Guilds|151|C|{R}|Creature - Goblin Warrior|1|1|{R}, Sacrifice War-Torch Goblin: War-Torch Goblin deals 2 damage to target blocking creature.|
 Wojek Embermage|Ravnica: City of Guilds|152|U|{3}{R}|Creature - Human Wizard|1|2|Radiance - {tap}: Wojek Embermage deals 1 damage to target creature and each other creature that shares a color with it.|
 Birds of Paradise|Ravnica: City of Guilds|153|R|{G}|Creature - Bird|0|1|Flying${tap}: Add one mana of any color to your mana pool.|
-Bramble Elemental|Ravnica: City of Guilds|154|C|{3}{G}{G}|Creature - Elemental|4|4|Whenever an Aura becomes attached to Bramble Elemental or enters the battlefield attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.|
+Bramble Elemental|Ravnica: City of Guilds|154|C|{3}{G}{G}|Creature - Elemental|4|4|Whenever an Aura becomes attached to Bramble Elemental, put two 1/1 green Saproling creature tokens onto the battlefield.|
 Carven Caryatid|Ravnica: City of Guilds|155|U|{1}{G}{G}|Creature - Spirit|2|5|Defender <i>(This creature can't attack.)</i>$When Carven Caryatid enters the battlefield, draw a card.|
 Chord of Calling|Ravnica: City of Guilds|156|R|{X}{G}{G}{G}|Instant|||Convoke <i>(Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)</i>$Search your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.|
 Civic Wayfinder|Ravnica: City of Guilds|157|C|{2}{G}|Creature - Elf Warrior Druid|2|2|When Civic Wayfinder enters the battlefield, you may search your library for a basic land card, reveal it, and put it into your hand. If you do, shuffle your library.|
@@ -15414,6 +15521,280 @@ Mortipede|Ravnica: City of Guilds|96|C|{3}{B}|Creature - Insect|4|1|{2}{G}: All 
 Necromantic Thirst|Ravnica: City of Guilds|97|C|{2}{B}{B}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature deals combat damage to a player, you may return target creature card from your graveyard to your hand.|
 Necroplasm|Ravnica: City of Guilds|98|R|{1}{B}{B}|Creature - Ooze|1|1|At the beginning of your upkeep, put a +1/+1 counter on Necroplasm.$At the beginning of your end step, destroy each creature with converted mana cost equal to the number of +1/+1 counters on Necroplasm.$Dredge 2 <i>(If you would draw a card, instead you may put exactly two cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
 Netherborn Phalanx|Ravnica: City of Guilds|99|U|{5}{B}|Creature - Horror|2|4|When Netherborn Phalanx enters the battlefield, each opponent loses 1 life for each creature he or she controls.$Transmute {1}{B}{B} <i>({1}{B}{B}, Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)</i>|
+Angel of Serenity|Return to Ravnica|1|M|{4}{W}{W}{W}|Creature - Angel|5|6|Flying$When Angel of Serenity enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.$When Angel of Serenity leaves the battlefield, return the exiled cards to their owners' hands.|
+Eyes in the Skies|Return to Ravnica|10|C|{3}{W}|Instant|||Put a 1/1 white Bird creature token with flying onto the battlefield, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Minotaur Aggressor|Return to Ravnica|100|U|{6}{R}|Creature - Minotaur Berserker|6|2|First strike, haste|
+Mizzium Mortars|Return to Ravnica|101|R|{1}{R}|Sorcery|||Mizzium Mortars deals 4 damage to target creature you don't control.$Overload {3}{R}{R}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Pursuit of Flight|Return to Ravnica|102|C|{1}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."|
+Pyroconvergence|Return to Ravnica|103|U|{4}{R}|Enchantment|||Whenever you cast a multicolored spell, Pyroconvergence deals 2 damage to target creature or player.|
+Racecourse Fury|Return to Ravnica|104|U|{R}|Enchantment - Aura|||Enchant land$Enchanted land has "{tap}: Target creature gains haste until end of turn."|
+Splatter Thug|Return to Ravnica|105|C|{2}{R}|Creature - Human Warrior|2|2|First strike$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Street Spasm|Return to Ravnica|106|U|{X}{R}|Instant|||Street Spasm deals X damage to target creature without flying you don't control.$Overload {X}{X}{R}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Survey the Wreckage|Return to Ravnica|107|C|{4}{R}|Sorcery|||Destroy target land. Put a 1/1 red Goblin creature token onto the battlefield.|
+Tenement Crasher|Return to Ravnica|108|C|{5}{R}|Creature - Beast|5|4|Haste|
+Traitorous Instinct|Return to Ravnica|109|C|{3}{R}|Sorcery|||Gain control of target creature until end of turn. Untap that creature. Until end of turn, it gets +2/+0 and gains haste.|
+Fencing Ace|Return to Ravnica|11|U|{1}{W}|Creature - Human Soldier|1|1|Double strike <i>(This creature deals both first-strike and regular combat damage.)</i>|
+Utvara Hellkite|Return to Ravnica|110|M|{6}{R}{R}|Creature - Dragon|6|6|Flying$Whenever a Dragon you control attacks, put a 6/6 red Dragon creature token with flying onto the battlefield.|
+Vandalblast|Return to Ravnica|111|U|{R}|Sorcery|||Destroy target artifact you don't control.$Overload {4}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Viashino Racketeer|Return to Ravnica|112|C|{2}{R}|Creature - Viashino Rogue|2|1|When Viashino Racketeer enters the battlefield, you may discard a card. If you do, draw a card.|
+Aerial Predation|Return to Ravnica|113|C|{2}{G}|Instant|||Destroy target creature with flying. You gain 2 life.|
+Archweaver|Return to Ravnica|114|U|{5}{G}{G}|Creature - Spider|5|5|Reach, trample|
+Axebane Guardian|Return to Ravnica|115|C|{2}{G}|Creature - Human Druid|0|3|Defender${tap}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.|
+Axebane Stag|Return to Ravnica|116|C|{6}{G}|Creature - Elk|6|7||
+Brushstrider|Return to Ravnica|117|U|{1}{G}|Creature - Beast|3|1|Vigilance|
+Centaur's Herald|Return to Ravnica|118|C|{G}|Creature - Elf Scout|0|1|{2}{G}, Sacrifice Centaur's Herald: Put a 3/3 green Centaur creature token onto the battlefield.|
+Chorus of Might|Return to Ravnica|119|C|{3}{G}|Instant|||Until end of turn, target creature gets +1/+1 for each creature you control and gains trample.|
+Keening Apparition|Return to Ravnica|12|C|{1}{W}|Creature - Spirit|2|2|Sacrifice Keening Apparition: Destroy target enchantment.|
+Deadbridge Goliath|Return to Ravnica|120|R|{2}{G}{G}|Creature - Insect|5|5|Scavenge {4}{G}{G} <i>({4}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Death's Presence|Return to Ravnica|121|R|{5}{G}|Enchantment|||Whenever a creature you control dies, put X +1/+1 counters on target creature you control, where X is the power of the creature that died.|
+Drudge Beetle|Return to Ravnica|122|C|{1}{G}|Creature - Insect|2|2|Scavenge {5}{G} <i>({5}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Druid's Deliverance|Return to Ravnica|123|C|{1}{G}|Instant|||Prevent all combat damage that would be dealt to you this turn. Populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Gatecreeper Vine|Return to Ravnica|124|C|{1}{G}|Creature - Plant|0|2|Defender$When Gatecreeper Vine enters the battlefield, you may search your library for a basic land card or a Gate card, reveal it, put it into your hand, then shuffle your library.|
+Giant Growth|Return to Ravnica|125|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
+Gobbling Ooze|Return to Ravnica|126|U|{4}{G}|Creature - Ooze|3|3|{G}, Sacrifice another creature: Put a +1/+1 counter on Gobbling Ooze.|
+Golgari Decoy|Return to Ravnica|127|U|{3}{G}|Creature - Elf Rogue|2|2|All creatures able to block Golgari Decoy do so.$Scavenge {3}{G}{G} <i>({3}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Horncaller's Chant|Return to Ravnica|128|C|{7}{G}|Sorcery|||Put a 4/4 green Rhino creature token with trample onto the battlefield, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Korozda Monitor|Return to Ravnica|129|C|{2}{G}{G}|Creature - Lizard|3|3|Trample$Scavenge {5}{G}{G} <i>({5}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Knightly Valor|Return to Ravnica|13|C|{4}{W}|Enchantment - Aura|||Enchant creature$When Knightly Valor enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.$Enchanted creature gets +2/+2 and has vigilance.|
+Mana Bloom|Return to Ravnica|130|R|{X}{G}|Enchantment|||Mana Bloom enters the battlefield with X charge counters on it.$Remove a charge counter from Mana Bloom: Add one mana of any color to your mana pool. Activate this ability only once each turn.$At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.|
+Oak Street Innkeeper|Return to Ravnica|131|U|{2}{G}|Creature - Elf|1|2|As long as it's not your turn, tapped creatures you control have hexproof.|
+Rubbleback Rhino|Return to Ravnica|132|C|{4}{G}|Creature - Rhino|3|4|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>|
+Savage Surge|Return to Ravnica|133|U|{1}{G}|Instant|||Target creature gets +2/+2 until end of turn. Untap that creature.|
+Seek the Horizon|Return to Ravnica|134|U|{3}{G}|Sorcery|||Search your library for up to three basic land cards, reveal them, and put them into your hand. Then shuffle your library.|
+Slime Molding|Return to Ravnica|135|U|{X}{G}|Sorcery|||Put an X/X green Ooze creature token onto the battlefield.|
+Stonefare Crocodile|Return to Ravnica|136|C|{2}{G}|Creature - Crocodile|3|2|{2}{B}: Stonefare Crocodile gains lifelink until end of turn. <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Towering Indrik|Return to Ravnica|137|C|{3}{G}|Creature - Beast|2|4|Reach <i>(This creature can block creatures with flying.)</i>|
+Urban Burgeoning|Return to Ravnica|138|C|{G}|Enchantment - Aura|||Enchant land$Enchanted land has "Untap this land during each other player's untap step."|
+Wild Beastmaster|Return to Ravnica|139|R|{2}{G}|Creature - Human Shaman|1|1|Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.|
+Martial Law|Return to Ravnica|14|R|{2}{W}{W}|Enchantment|||At the beginning of your upkeep, detain target creature an opponent controls. <i>(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)</i>|
+Worldspine Wurm|Return to Ravnica|140|M|{8}{G}{G}{G}|Creature - Wurm|15|15|Trample$When Worldspine Wurm dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield.$When Worldspine Wurm is put into a graveyard from anywhere, shuffle it into its owner's library.|
+Abrupt Decay|Return to Ravnica|141|R|{B}{G}|Instant|||Abrupt Decay can't be countered by spells or abilities.$Destroy target nonland permanent with converted mana cost 3 or less.|
+Archon of the Triumvirate|Return to Ravnica|142|R|{5}{W}{U}|Creature - Archon|4|5|Flying$Whenever Archon of the Triumvirate attacks, detain up to two target nonland permanents your opponents control. <i>(Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)</i>|
+Armada Wurm|Return to Ravnica|143|M|{2}{G}{G}{W}{W}|Creature - Wurm|5|5|Trample$When Armada Wurm enters the battlefield, put a 5/5 green Wurm creature token with trample onto the battlefield.|
+Auger Spree|Return to Ravnica|144|C|{1}{B}{R}|Instant|||Target creature gets +4/-4 until end of turn.|
+Azorius Charm|Return to Ravnica|145|U|{W}{U}|Instant|||Choose one - Creatures you control gain lifelink until end of turn; or draw a card; or put target attacking or blocking creature on top of its owner's library.|
+Call of the Conclave|Return to Ravnica|146|U|{G}{W}|Sorcery|||Put a 3/3 green Centaur creature token onto the battlefield.|
+Carnival Hellsteed|Return to Ravnica|147|R|{4}{B}{R}|Creature - Nightmare Horse|5|4|First strike, haste$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Centaur Healer|Return to Ravnica|148|C|{1}{G}{W}|Creature - Centaur Cleric|3|3|When Centaur Healer enters the battlefield, you gain 3 life.|
+Chemister's Trick|Return to Ravnica|149|C|{U}{R}|Instant|||Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.$Overload {3}{U}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Palisade Giant|Return to Ravnica|15|R|{4}{W}{W}|Creature - Giant Soldier|2|7|All damage that would be dealt to you or another permanent you control is dealt to Palisade Giant instead.|
+Collective Blessing|Return to Ravnica|150|R|{3}{G}{G}{W}|Enchantment|||Creatures you control get +3/+3.|
+Common Bond|Return to Ravnica|151|C|{1}{G}{W}|Instant|||Put a +1/+1 counter on target creature.$Put a +1/+1 counter on target creature.|
+Corpsejack Menace|Return to Ravnica|152|R|{2}{B}{G}|Creature - Fungus|4|4|If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead.|
+Counterflux|Return to Ravnica|153|R|{U}{U}{R}|Instant|||Counterflux can't be countered by spells or abilities.$Counter target spell you don't control.$Overload {1}{U}{U}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Coursers' Accord|Return to Ravnica|154|C|{4}{G}{W}|Sorcery|||Put a 3/3 green Centaur creature token onto the battlefield, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Detention Sphere|Return to Ravnica|155|R|{1}{W}{U}|Enchantment|||When Detention Sphere enters the battlefield, you may exile target nonland permanent not named Detention Sphere and all other permanents with the same name as that permanent.$When Detention Sphere leaves the battlefield, return the exiled cards to the battlefield under their owner's control.|
+Dramatic Rescue|Return to Ravnica|156|C|{W}{U}|Instant|||Return target creature to its owner's hand. You gain 2 life.|
+Dreadbore|Return to Ravnica|157|R|{B}{R}|Sorcery|||Destroy target creature or planeswalker.|
+Dreg Mangler|Return to Ravnica|158|U|{1}{B}{G}|Creature - Plant Zombie|3|3|Haste$Scavenge {3}{B}{G} <i>({3}{B}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Epic Experiment|Return to Ravnica|159|M|{X}{U}{R}|Sorcery|||Exile the top X cards of your library. For each instant and sorcery card with converted mana cost X or less among them, you may cast that card without paying its mana cost. Then put all cards exiled this way that weren't cast into your graveyard.|
+Phantom General|Return to Ravnica|16|U|{3}{W}|Creature - Spirit Soldier|2|3|Creature tokens you control get +1/+1.|
+Essence Backlash|Return to Ravnica|160|C|{2}{U}{R}|Instant|||Counter target creature spell. Essence Backlash deals damage equal to that spell's power to its controller.|
+Fall of the Gavel|Return to Ravnica|161|U|{3}{W}{U}|Instant|||Counter target spell. You gain 5 life.|
+Firemind's Foresight|Return to Ravnica|162|R|{5}{U}{R}|Instant|||Search your library for an instant card with converted mana cost 3, reveal it, and put it into your hand. Then repeat this process for instant cards with converted mana costs 2 and 1. Then shuffle your library.|
+Goblin Electromancer|Return to Ravnica|163|C|{U}{R}|Creature - Goblin Wizard|2|2|Instant and sorcery spells you cast cost {1} less to cast.|
+Golgari Charm|Return to Ravnica|164|U|{B}{G}|Instant|||Choose one - All creatures get -1/-1 until end of turn; or destroy target enchantment; or regenerate each creature you control.|
+Grisly Salvage|Return to Ravnica|165|C|{B}{G}|Instant|||Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard.|
+Havoc Festival|Return to Ravnica|166|R|{4}{B}{R}|Enchantment|||Players can't gain life.$At the beginning of each player's upkeep, that player loses half his or her life, rounded up.|
+Hellhole Flailer|Return to Ravnica|167|U|{1}{B}{R}|Creature - Ogre Warrior|3|2|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>${2}{B}{R}, Sacrifice Hellhole Flailer: Hellhole Flailer deals damage equal to its power to target player.|
+Heroes' Reunion|Return to Ravnica|168|U|{G}{W}|Instant|||Target player gains 7 life.|
+Hussar Patrol|Return to Ravnica|169|C|{2}{W}{U}|Creature - Human Knight|2|4|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$Vigilance|
+Precinct Captain|Return to Ravnica|17|R|{W}{W}|Creature - Human Soldier|2|2|First strike$Whenever Precinct Captain deals combat damage to a player, put a 1/1 white Soldier creature token onto the battlefield.|
+Hypersonic Dragon|Return to Ravnica|170|R|{3}{U}{R}|Creature - Dragon|4|4|Flying, haste$You may cast sorcery spells as though they had flash. <i>(You may cast them any time you could cast an instant.)</i>|
+Isperia, Supreme Judge|Return to Ravnica|171|M|{2}{W}{W}{U}{U}|Legendary Creature - Sphinx|6|4|Flying$Whenever a creature attacks you or a planeswalker you control, you may draw a card.|
+Izzet Charm|Return to Ravnica|172|U|{U}{R}|Instant|||Choose one - Counter target noncreature spell unless its controller pays {2}; or Izzet Charm deals 2 damage to target creature; or draw two cards, then discard two cards.|
+Izzet Staticaster|Return to Ravnica|173|U|{1}{U}{R}|Creature - Human Wizard|0|3|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$Haste${tap}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.|
+Jarad, Golgari Lich Lord|Return to Ravnica|174|M|{B}{B}{G}{G}|Legendary Creature - Zombie Elf|2|2|Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.${1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.$Sacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.|
+Jarad's Orders|Return to Ravnica|175|R|{2}{B}{G}|Sorcery|||Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library.|
+Korozda Guildmage|Return to Ravnica|176|U|{B}{G}|Creature - Elf Shaman|2|2|{1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.${2}{B}{G}, Sacrifice a nontoken creature: Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.|
+Lotleth Troll|Return to Ravnica|177|R|{B}{G}|Creature - Zombie Troll|2|1|Trample$Discard a creature card: Put a +1/+1 counter on Lotleth Troll.${B}: Regenerate Lotleth Troll.|
+Loxodon Smiter|Return to Ravnica|178|R|{1}{G}{W}|Creature - Elephant Soldier|4|4|Loxodon Smiter can't be countered.$If a spell or ability an opponent controls causes you to discard Loxodon Smiter, put it onto the battlefield instead of putting it into your graveyard.|
+Lyev Skyknight|Return to Ravnica|179|U|{1}{W}{U}|Creature - Human Knight|3|1|Flying$When Lyev Skyknight enters the battlefield, detain target nonland permanent an opponent controls. <i>(Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)</i>|
+Rest in Peace|Return to Ravnica|18|R|{1}{W}|Enchantment|||When Rest in Peace enters the battlefield, exile all cards from all graveyards.$If a card or token would be put into a graveyard from anywhere, exile it instead.|
+Mercurial Chemister|Return to Ravnica|180|R|{3}{U}{R}|Creature - Human Wizard|2|3|{U}, {tap}: Draw two cards.${R}, {tap}, Discard a card: Mercurial Chemister deals damage to target creature equal to the discarded card's converted mana cost.|
+New Prahv Guildmage|Return to Ravnica|181|U|{W}{U}|Creature - Human Wizard|2|2|{W}{U}: Target creature gains flying until end of turn.${3}{W}{U}: Detain target nonland permanent an opponent controls. <i>(Until your next turn, that permanent can't attack or block and its activated abilities can't be activated.)</i>|
+Nivix Guildmage|Return to Ravnica|182|U|{U}{R}|Creature - Human Wizard|2|2|{1}{U}{R}: Draw a card, then discard a card.${2}{U}{R}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.|
+Niv-Mizzet, Dracogenius|Return to Ravnica|183|M|{2}{U}{U}{R}{R}|Legendary Creature - Dragon Wizard|5|5|Flying$Whenever Niv-Mizzet, Dracogenius deals damage to a player, you may draw a card.${U}{R}: Niv-Mizzet, Dracogenius deals 1 damage to target creature or player.|
+Rakdos Charm|Return to Ravnica|184|U|{B}{R}|Instant|||Choose one - Exile all cards from target player's graveyard; or destroy target artifact; or each creature deals 1 damage to its controller.|
+Rakdos Ragemutt|Return to Ravnica|185|U|{3}{B}{R}|Creature - Elemental Hound|3|3|Lifelink, haste|
+Rakdos Ringleader|Return to Ravnica|186|U|{4}{B}{R}|Creature - Skeleton Warrior|3|1|First strike$Whenever Rakdos Ringleader deals combat damage to a player, that player discards a card at random.${B}: Regenerate Rakdos Ringleader.|
+Rakdos, Lord of Riots|Return to Ravnica|187|M|{B}{B}{R}{R}|Legendary Creature - Demon|6|6|You can't cast Rakdos, Lord of Riots unless an opponent lost life this turn.$Flying, trample$Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.|
+Rakdos's Return|Return to Ravnica|188|M|{X}{B}{R}|Sorcery|||Rakdos's Return deals X damage to target opponent. That player discards X cards.|
+Righteous Authority|Return to Ravnica|189|R|{3}{W}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each card in its controller's hand.$At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.|
+Rootborn Defenses|Return to Ravnica|19|C|{2}{W}|Instant|||Populate. Creatures you control are indestructible this turn. <i>(To populate, put a token onto the battlefield that's a copy of a creature token you control. Damage and effects that say "destroy" don't destroy indestructible creatures.)</i>|
+Risen Sanctuary|Return to Ravnica|190|U|{5}{G}{W}|Creature - Elemental|8|8|Vigilance|
+Rites of Reaping|Return to Ravnica|191|U|{4}{B}{G}|Sorcery|||Target creature gets +3/+3 until end of turn. Another target creature gets -3/-3 until end of turn.|
+Rix Maadi Guildmage|Return to Ravnica|192|U|{B}{R}|Creature - Human Shaman|2|2|{B}{R}: Target blocking creature gets -1/-1 until end of turn.${B}{R}: Target player who lost life this turn loses 1 life.|
+Search Warrant|Return to Ravnica|193|C|{W}{U}|Sorcery|||Target player reveals his or her hand. You gain life equal to the number of cards in that player's hand.|
+Selesnya Charm|Return to Ravnica|194|U|{G}{W}|Instant|||Choose one - Target creature gets +2/+2 and gains trample until end of turn; or exile target creature with power 5 or greater; or put a 2/2 white Knight creature token with vigilance onto the battlefield.|
+Skull Rend|Return to Ravnica|195|C|{3}{B}{R}|Sorcery|||Skull Rend deals 2 damage to each opponent. Those players each discard two cards at random.|
+Skymark Roc|Return to Ravnica|196|U|{2}{W}{U}|Creature - Bird|3|3|Flying$Whenever Skymark Roc attacks, you may return target creature defending player controls with toughness 2 or less to its owner's hand.|
+Slaughter Games|Return to Ravnica|197|R|{2}{B}{R}|Sorcery|||Slaughter Games can't be countered by spells or abilities.$Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.|
+Sluiceway Scorpion|Return to Ravnica|198|C|{2}{B}{G}|Creature - Scorpion|2|2|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>$Scavenge {1}{B}{G} <i>({1}{B}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Spawn of Rix Maadi|Return to Ravnica|199|C|{3}{B}{R}|Creature - Horror|5|3|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Armory Guard|Return to Ravnica|2|C|{3}{W}|Creature - Giant Soldier|2|5|Armory Guard has vigilance as long as you control a Gate.|
+Security Blockade|Return to Ravnica|20|U|{2}{W}|Enchantment - Aura|||Enchant land$When Security Blockade enters the battlefield, put a 2/2 white Knight creature token with vigilance onto the battlefield.$Enchanted land has "{tap}: Prevent the next 1 damage that would be dealt to you this turn."|
+Sphinx's Revelation|Return to Ravnica|200|M|{X}{W}{U}{U}|Instant|||You gain X life and draw X cards.|
+Supreme Verdict|Return to Ravnica|201|R|{1}{W}{W}{U}|Sorcery|||Supreme Verdict can't be countered.$Destroy all creatures.|
+Teleportal|Return to Ravnica|202|U|{U}{R}|Sorcery|||Target creature you control gets +1/+0 until end of turn and is unblockable this turn.$Overload {3}{U}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Thoughtflare|Return to Ravnica|203|U|{3}{U}{R}|Instant|||Draw four cards, then discard two cards.|
+Treasured Find|Return to Ravnica|204|U|{B}{G}|Sorcery|||Return target card from your graveyard to your hand. Exile Treasured Find.|
+Trestle Troll|Return to Ravnica|205|C|{1}{B}{G}|Creature - Troll|1|4|Defender$Reach <i>(This creature can block creatures with flying.)</i>${1}{B}{G}: Regenerate Trestle Troll.|
+Trostani, Selesnya's Voice|Return to Ravnica|206|M|{G}{G}{W}{W}|Legendary Creature - Dryad|2|5|Whenever another creature enters the battlefield under your control, you gain life equal to that creature's toughness.${1}{G}{W}, {tap}: Populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Vitu-Ghazi Guildmage|Return to Ravnica|207|U|{G}{W}|Creature - Dryad Shaman|2|2|{4}{G}{W}: Put a 3/3 green Centaur creature token onto the battlefield.${2}{G}{W}: Populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Vraska the Unseen|Return to Ravnica|208|M|{3}{B}{G}|Planeswalker - Vraska|||+1: Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature.$-3: Destroy target nonland permanent.$-7: Put three 1/1 black Assassin creature tokens onto the battlefield with "Whenever this creature deals combat damage to a player, that player loses the game."|
+Wayfaring Temple|Return to Ravnica|209|R|{1}{G}{W}|Creature - Elemental|*|*|Wayfaring Temple's power and toughness are each equal to the number of creatures you control.$Whenever Wayfaring Temple deals combat damage to a player, populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Selesnya Sentry|Return to Ravnica|21|C|{2}{W}|Creature - Elephant Soldier|3|2|{5}{G}: Regenerate Selesnya Sentry.|
+Azor's Elocutors|Return to Ravnica|210|R|{3}{WU}{WU}|Creature - Human Advisor|3|5|At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.$Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.|
+Blistercoil Weird|Return to Ravnica|211|U|{UR}|Creature - Weird|1|1|Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.|
+Cryptborn Horror|Return to Ravnica|212|R|{1}{BR}{BR}|Creature - Horror|0|0|Trample$Cryptborn Horror enters the battlefield with X +1/+1 counters on it, where X is the total life lost by your opponents this turn.|
+Deathrite Shaman|Return to Ravnica|213|R|{BG}|Creature - Elf Shaman|1|2|{tap}: Exile target land card from a graveyard. Add one mana of any color to your mana pool.${B}, {tap}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.${G}, {tap}: Exile target creature card from a graveyard. You gain 2 life.|
+Dryad Militant|Return to Ravnica|214|U|{GW}|Creature - Dryad Soldier|2|1|If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.|
+Frostburn Weird|Return to Ravnica|215|C|{UR}{UR}|Creature - Weird|1|4|{UR}: Frostburn Weird gets +1/-1 until end of turn.|
+Golgari Longlegs|Return to Ravnica|216|C|{3}{BG}{BG}|Creature - Insect|5|4||
+Growing Ranks|Return to Ravnica|217|R|{2}{GW}{GW}|Enchantment|||At the beginning of your upkeep, populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Judge's Familiar|Return to Ravnica|218|U|{WU}|Creature - Bird|1|1|Flying$Sacrifice Judge's Familiar: Counter target instant or sorcery spell unless its controller pays {1}.|
+Nivmagus Elemental|Return to Ravnica|219|R|{UR}|Creature - Elemental|1|2|Exile an instant or sorcery spell you control: Put two +1/+1 counters on Nivmagus Elemental. <i>(That spell won't resolve.)</i>|
+Seller of Songbirds|Return to Ravnica|22|C|{2}{W}|Creature - Human|1|2|When Seller of Songbirds enters the battlefield, put a 1/1 white Bird creature token with flying onto the battlefield.|
+Rakdos Cackler|Return to Ravnica|220|U|{BR}|Creature - Devil|1|1|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Rakdos Shred-Freak|Return to Ravnica|221|C|{BR}{BR}|Creature - Human Berserker|2|1|Haste|
+Slitherhead|Return to Ravnica|222|U|{BG}|Creature - Plant Zombie|1|1|Scavenge {0} <i>({0}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Sundering Growth|Return to Ravnica|223|C|{GW}{GW}|Instant|||Destroy target artifact or enchantment, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Vassal Soul|Return to Ravnica|224|C|{1}{WU}{WU}|Creature - Spirit|2|2|Flying|
+Azorius Keyrune|Return to Ravnica|225|U|{3}|Artifact|||{tap}: Add {W} or {U} to your mana pool.${W}{U}: Azorius Keyrune becomes a 2/2 white and blue Bird artifact creature with flying until end of turn.|
+Chromatic Lantern|Return to Ravnica|226|R|{3}|Artifact|||Lands you control have "{tap}: Add one mana of any color to your mana pool."${tap}: Add one mana of any color to your mana pool.|
+Civic Saber|Return to Ravnica|227|U|{1}|Artifact - Equipment|||Equipped creature gets +1/+0 for each of its colors.$Equip {1}|
+Codex Shredder|Return to Ravnica|228|U|{1}|Artifact|||{tap}: Target player puts the top card of his or her library into his or her graveyard.${5}, {tap}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.|
+Golgari Keyrune|Return to Ravnica|229|U|{3}|Artifact|||{tap}: Add {B} or {G} to your mana pool.${B}{G}: Golgari Keyrune becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.|
+Soul Tithe|Return to Ravnica|23|U|{1}{W}|Enchantment - Aura|||Enchant nonland permanent$At the beginning of the upkeep of enchanted permanent's controller, that player sacrifices it unless he or she pays {X}, where X is its converted mana cost.|
+Izzet Keyrune|Return to Ravnica|230|U|{3}|Artifact|||{tap}: Add {U} or {R} to your mana pool.${U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.$Whenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.|
+Pithing Needle|Return to Ravnica|231|R|{1}|Artifact|||As Pithing Needle enters the battlefield, name a card.$Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.|
+Rakdos Keyrune|Return to Ravnica|232|U|{3}|Artifact|||{tap}: Add {B} or {R} to your mana pool.${B}{R}: Rakdos Keyrune becomes a 3/1 black and red Devil artifact creature with first strike until end of turn.|
+Selesnya Keyrune|Return to Ravnica|233|U|{3}|Artifact|||{tap}: Add {G} or {W} to your mana pool.${G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.|
+Street Sweeper|Return to Ravnica|234|U|{6}|Artifact Creature - Construct|4|6|Whenever Street Sweeper attacks, destroy all Auras attached to target land.|
+Tablet of the Guilds|Return to Ravnica|235|U|{2}|Artifact|||As Tablet of the Guilds enters the battlefield, choose two colors.$Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.|
+Volatile Rig|Return to Ravnica|236|R|{4}|Artifact Creature - Construct|4|4|Trample$Volatile Rig attacks each turn if able.$Whenever Volatile Rig is dealt damage, flip a coin. If you lose the flip, sacrifice Volatile Rig.$When Volatile Rig dies, flip a coin. If you lose the flip, it deals 4 damage to each creature and each player.|
+Azorius Guildgate|Return to Ravnica|237|C||Land - Gate|||Azorius Guildgate enters the battlefield tapped.${tap}: Add {W} or {U} to your mana pool.|
+Blood Crypt|Return to Ravnica|238|R||Land - Swamp Mountain|||<i>({tap}: Add {B} or {R} to your mana pool.)</i>$As Blood Crypt enters the battlefield, you may pay 2 life. If you don't, Blood Crypt enters the battlefield tapped.|
+Golgari Guildgate|Return to Ravnica|239|C||Land - Gate|||Golgari Guildgate enters the battlefield tapped.${tap}: Add {B} or {G} to your mana pool.|
+Sphere of Safety|Return to Ravnica|24|U|{4}{W}|Enchantment|||Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.|
+Grove of the Guardian|Return to Ravnica|240|R||Land|||{tap}: Add {1} to your mana pool.${3}{G}{W}, {tap}, Tap two untapped creatures you control, Sacrifice Grove of the Guardian: Put an 8/8 green and white Elemental creature token with vigilance onto the battlefield.|
+Hallowed Fountain|Return to Ravnica|241|R||Land - Plains Island|||<i>({tap}: Add {W} or {U} to your mana pool.)</i>$As Hallowed Fountain enters the battlefield, you may pay 2 life. If you don't, Hallowed Fountain enters the battlefield tapped.|
+Izzet Guildgate|Return to Ravnica|242|C||Land - Gate|||Izzet Guildgate enters the battlefield tapped.${tap}: Add {U} or {R} to your mana pool.|
+Overgrown Tomb|Return to Ravnica|243|R||Land - Swamp Forest|||<i>({tap}: Add {B} or {G} to your mana pool.)</i>$As Overgrown Tomb enters the battlefield, you may pay 2 life. If you don't, Overgrown Tomb enters the battlefield tapped.|
+Rakdos Guildgate|Return to Ravnica|244|C||Land - Gate|||Rakdos Guildgate enters the battlefield tapped.${tap}: Add {B} or {R} to your mana pool.|
+Rogue's Passage|Return to Ravnica|245|U||Land|||{tap}: Add {1} to your mana pool.${4}, {tap}: Target creature is unblockable this turn.|
+Selesnya Guildgate|Return to Ravnica|246|C||Land - Gate|||Selesnya Guildgate enters the battlefield tapped.${tap}: Add {G} or {W} to your mana pool.|
+Steam Vents|Return to Ravnica|247|R||Land - Island Mountain|||<i>({tap}: Add {U} or {R} to your mana pool.)</i>$As Steam Vents enters the battlefield, you may pay 2 life. If you don't, Steam Vents enters the battlefield tapped.|
+Temple Garden|Return to Ravnica|248|R||Land - Forest Plains|||<i>({tap}: Add {G} or {W} to your mana pool.)</i>$As Temple Garden enters the battlefield, you may pay 2 life. If you don't, Temple Garden enters the battlefield tapped.|
+Transguild Promenade|Return to Ravnica|249|C||Land|||Transguild Promenade enters the battlefield tapped.$When Transguild Promenade enters the battlefield, sacrifice it unless you pay {1}.${tap}: Add one mana of any color to your mana pool.|
+Sunspire Griffin|Return to Ravnica|25|C|{1}{W}{W}|Creature - Griffin|2|3|Flying|
+Plains|Return to Ravnica|250|L||Basic Land - Plains|||W|
+Plains|Return to Ravnica|251|L||Basic Land - Plains|||W|
+Plains|Return to Ravnica|252|L||Basic Land - Plains|||W|
+Plains|Return to Ravnica|253|L||Basic Land - Plains|||W|
+Plains|Return to Ravnica|254|L||Basic Land - Plains|||W|
+Island|Return to Ravnica|255|L||Basic Land - Island|||U|
+Island|Return to Ravnica|256|L||Basic Land - Island|||U|
+Island|Return to Ravnica|257|L||Basic Land - Island|||U|
+Island|Return to Ravnica|258|L||Basic Land - Island|||U|
+Island|Return to Ravnica|259|L||Basic Land - Island|||U|
+Swift Justice|Return to Ravnica|26|C|{W}|Instant|||Until end of turn, target creature gets +1/+0 and gains first strike and lifelink.|
+Swamp|Return to Ravnica|260|L||Basic Land - Swamp|||B|
+Swamp|Return to Ravnica|261|L||Basic Land - Swamp|||B|
+Swamp|Return to Ravnica|262|L||Basic Land - Swamp|||B|
+Swamp|Return to Ravnica|263|L||Basic Land - Swamp|||B|
+Swamp|Return to Ravnica|264|L||Basic Land - Swamp|||B|
+Mountain|Return to Ravnica|265|L||Basic Land - Mountain|||R|
+Mountain|Return to Ravnica|266|L||Basic Land - Mountain|||R|
+Mountain|Return to Ravnica|267|L||Basic Land - Mountain|||R|
+Mountain|Return to Ravnica|268|L||Basic Land - Mountain|||R|
+Mountain|Return to Ravnica|269|L||Basic Land - Mountain|||R|
+Trained Caracal|Return to Ravnica|27|C|{W}|Creature - Cat|1|1|Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Forest|Return to Ravnica|270|L||Basic Land - Forest|||G|
+Forest|Return to Ravnica|271|L||Basic Land - Forest|||G|
+Forest|Return to Ravnica|272|L||Basic Land - Forest|||G|
+Forest|Return to Ravnica|273|L||Basic Land - Forest|||G|
+Forest|Return to Ravnica|274|L||Basic Land - Forest|||G|
+Trostani's Judgment|Return to Ravnica|28|C|{5}{W}|Instant|||Exile target creature, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Aquus Steed|Return to Ravnica|29|U|{3}{U}|Creature - Beast|1|3|{2}{U}, {tap}: Target creature gets -2/-0 until end of turn.|
+Arrest|Return to Ravnica|3|U|{2}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature can't attack or block, and its activated abilities can't be activated.|
+Blustersquall|Return to Ravnica|30|U|{U}|Instant|||Tap target creature you don't control.$Overload {3}{U} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Cancel|Return to Ravnica|31|C|{1}{U}{U}|Instant|||Counter target spell.|
+Chronic Flooding|Return to Ravnica|32|C|{1}{U}|Enchantment - Aura|||Enchant land$Whenever enchanted land becomes tapped, its controller puts the top three cards of his or her library into his or her graveyard.|
+Conjured Currency|Return to Ravnica|33|R|{5}{U}|Enchantment|||At the beginning of your upkeep, you may exchange control of Conjured Currency and target permanent you neither own nor control.|
+Crosstown Courier|Return to Ravnica|34|C|{1}{U}|Creature - Vedalken|2|1|Whenever Crosstown Courier deals combat damage to a player, that player puts that many cards from the top of his or her library into his or her graveyard.|
+Cyclonic Rift|Return to Ravnica|35|R|{1}{U}|Instant|||Return target nonland permanent you don't control to its owner's hand.$Overload {6}{U} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Dispel|Return to Ravnica|36|C|{U}|Instant|||Counter target instant spell.|
+Doorkeeper|Return to Ravnica|37|C|{1}{U}|Creature - Homunculus|0|4|Defender${2}{U}, {tap}: Target player puts the top X cards of his or her library into his or her graveyard, where X is the number of creatures with defender you control.|
+Downsize|Return to Ravnica|38|C|{U}|Instant|||Target creature you don't control gets -4/-0 until end of turn.$Overload {2}{U} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Faerie Impostor|Return to Ravnica|39|U|{U}|Creature - Faerie Rogue|2|1|Flying$When Faerie Impostor enters the battlefield, sacrifice it unless you return another creature you control to its owner's hand.|
+Avenging Arrow|Return to Ravnica|4|C|{2}{W}|Instant|||Destroy target creature that dealt damage this turn.|
+Hover Barrier|Return to Ravnica|40|U|{2}{U}|Creature - Illusion Wall|0|6|Defender, flying|
+Inaction Injunction|Return to Ravnica|41|C|{1}{U}|Sorcery|||Detain target creature an opponent controls. <i>(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)</i>$Draw a card.|
+Inspiration|Return to Ravnica|42|C|{3}{U}|Instant|||Target player draws two cards.|
+Isperia's Skywatch|Return to Ravnica|43|C|{5}{U}|Creature - Vedalken Knight|3|3|Flying$When Isperia's Skywatch enters the battlefield, detain target creature an opponent controls. <i>(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)</i>|
+Jace, Architect of Thought|Return to Ravnica|44|M|{2}{U}{U}|Planeswalker - Jace|||+1: Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.$-2: Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order.$-8: For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.|
+Mizzium Skin|Return to Ravnica|45|C|{U}|Instant|||Target creature you control gets +0/+1 and gains hexproof until end of turn.$Overload {1}{U} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Paralyzing Grasp|Return to Ravnica|46|C|{2}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature doesn't untap during its controller's untap step.|
+Psychic Spiral|Return to Ravnica|47|U|{4}{U}|Instant|||Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard.|
+Runewing|Return to Ravnica|48|C|{3}{U}|Creature - Bird|2|2|Flying$When Runewing dies, draw a card.|
+Search the City|Return to Ravnica|49|R|{4}{U}|Enchantment|||When Search the City enters the battlefield, exile the top five cards of your library.$Whenever you play a card with the same name as one of the exiled cards, you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with Search the City, sacrifice it. If you do, take an extra turn after this one.|
+Azorius Arrester|Return to Ravnica|5|C|{1}{W}|Creature - Human Soldier|2|1|When Azorius Arrester enters the battlefield, detain target creature an opponent controls. <i>(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)</i>|
+Skyline Predator|Return to Ravnica|50|U|{4}{U}{U}|Creature - Drake|3|4|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$Flying|
+Soulsworn Spirit|Return to Ravnica|51|U|{3}{U}|Creature - Spirit|2|1|Soulsworn Spirit is unblockable.$When Soulsworn Spirit enters the battlefield, detain target creature an opponent controls. <i>(Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)</i>|
+Sphinx of the Chimes|Return to Ravnica|52|R|{4}{U}{U}|Creature - Sphinx|5|6|Flying$Discard two nonland cards with the same name: Draw four cards.|
+Stealer of Secrets|Return to Ravnica|53|C|{2}{U}|Creature - Human Rogue|2|2|Whenever Stealer of Secrets deals combat damage to a player, draw a card.|
+Syncopate|Return to Ravnica|54|U|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.|
+Tower Drake|Return to Ravnica|55|C|{2}{U}|Creature - Drake|2|1|Flying${W}: Tower Drake gets +0/+1 until end of turn.|
+Voidwielder|Return to Ravnica|56|C|{4}{U}|Creature - Human Wizard|1|4|When Voidwielder enters the battlefield, you may return target creature to its owner's hand.|
+Assassin's Strike|Return to Ravnica|57|U|{4}{B}{B}|Sorcery|||Destroy target creature. Its controller discards a card.|
+Catacomb Slug|Return to Ravnica|58|C|{4}{B}|Creature - Slug|2|6||
+Cremate|Return to Ravnica|59|C|{B}|Instant|||Exile target card from a graveyard.$Draw a card.|
+Azorius Justiciar|Return to Ravnica|6|U|{2}{W}{W}|Creature - Human Wizard|2|2|When Azorius Justiciar enters the battlefield, detain up to two target creatures your opponents control. <i>(Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)</i>|
+Daggerdrome Imp|Return to Ravnica|60|C|{1}{B}|Creature - Imp|1|1|Flying$Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Dark Revenant|Return to Ravnica|61|U|{3}{B}|Creature - Spirit|2|2|Flying$When Dark Revenant dies, put it on top of its owner's library.|
+Dead Reveler|Return to Ravnica|62|C|{2}{B}|Creature - Zombie|2|3|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Desecration Demon|Return to Ravnica|63|R|{2}{B}{B}|Creature - Demon|6|6|Flying$At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it.|
+Destroy the Evidence|Return to Ravnica|64|C|{4}{B}|Sorcery|||Destroy target land. Its controller reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.|
+Deviant Glee|Return to Ravnica|65|C|{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."|
+Drainpipe Vermin|Return to Ravnica|66|C|{B}|Creature - Rat|1|1|When Drainpipe Vermin dies, you may pay {B}. If you do, target player discards a card.|
+Grave Betrayal|Return to Ravnica|67|R|{5}{B}{B}|Enchantment|||Whenever a creature you don't control dies, return it to the battlefield under your control with an additional +1/+1 counter on it at the beginning of the next end step. That creature is a black Zombie in addition to its other colors and types.|
+Grim Roustabout|Return to Ravnica|68|C|{1}{B}|Creature - Skeleton Warrior|1|1|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>${1}{B}: Regenerate Grim Roustabout.|
+Launch Party|Return to Ravnica|69|C|{3}{B}|Instant|||As an additional cost to cast Launch Party, sacrifice a creature.$Destroy target creature. Its controller loses 2 life.|
+Bazaar Krovod|Return to Ravnica|7|U|{4}{W}|Creature - Beast|2|5|Whenever Bazaar Krovod attacks, another target attacking creature gets +0/+2 until end of turn. Untap that creature.|
+Mind Rot|Return to Ravnica|70|C|{2}{B}|Sorcery|||Target player discards two cards.|
+Necropolis Regent|Return to Ravnica|71|M|{3}{B}{B}{B}|Creature - Vampire|6|5|Flying$Whenever a creature you control deals combat damage to a player, put that many +1/+1 counters on it.|
+Ogre Jailbreaker|Return to Ravnica|72|C|{3}{B}|Creature - Ogre Rogue|4|4|Defender$Ogre Jailbreaker can attack as though it didn't have defender as long as you control a Gate.|
+Pack Rat|Return to Ravnica|73|R|{1}{B}|Creature - Rat|*|*|Pack Rat's power and toughness are each equal to the number of Rats you control.${2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.|
+Perilous Shadow|Return to Ravnica|74|C|{2}{B}{B}|Creature - Insect Shade|0|4|{1}{B}: Perilous Shadow gets +2/+2 until end of turn.|
+Sewer Shambler|Return to Ravnica|75|C|{2}{B}|Creature - Zombie|2|1|Swampwalk <i>(This creature is unblockable as long as defending player controls a Swamp.)</i>$Scavenge {2}{B} <i>({2}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Shrieking Affliction|Return to Ravnica|76|U|{B}|Enchantment|||At the beginning of each opponent's upkeep, if that player has one or fewer cards in hand, he or she loses 3 life.|
+Slum Reaper|Return to Ravnica|77|U|{3}{B}|Creature - Horror|4|2|When Slum Reaper enters the battlefield, each player sacrifices a creature.|
+Stab Wound|Return to Ravnica|78|C|{2}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets -2/-2.$At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life.|
+Tavern Swindler|Return to Ravnica|79|U|{1}{B}|Creature - Human Rogue|2|2|{tap}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.|
+Concordia Pegasus|Return to Ravnica|8|C|{1}{W}|Creature - Pegasus|1|3|Flying|
+Terrus Wurm|Return to Ravnica|80|C|{6}{B}|Creature - Zombie Wurm|5|5|Scavenge {6}{B} <i>({6}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Thrill-Kill Assassin|Return to Ravnica|81|U|{1}{B}|Creature - Human Assassin|1|2|Deathtouch$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Ultimate Price|Return to Ravnica|82|U|{1}{B}|Instant|||Destroy target monocolored creature.|
+Underworld Connections|Return to Ravnica|83|R|{1}{B}{B}|Enchantment - Aura|||Enchant land$Enchanted land has "{tap}, Pay 1 life: Draw a card."|
+Zanikev Locust|Return to Ravnica|84|U|{5}{B}|Creature - Insect|3|3|Flying$Scavenge {2}{B}{B} <i>({2}{B}{B}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Annihilating Fire|Return to Ravnica|85|C|{1}{R}{R}|Instant|||Annihilating Fire deals 3 damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead.|
+Ash Zealot|Return to Ravnica|86|R|{R}{R}|Creature - Human Warrior|2|2|First strike, haste$Whenever a player casts a spell from a graveyard, Ash Zealot deals 3 damage to that player.|
+Batterhorn|Return to Ravnica|87|C|{4}{R}|Creature - Beast|4|3|When Batterhorn enters the battlefield, you may destroy target artifact.|
+Bellows Lizard|Return to Ravnica|88|C|{R}|Creature - Lizard|1|1|{1}{R}: Bellows Lizard gets +1/+0 until end of turn.|
+Bloodfray Giant|Return to Ravnica|89|U|{2}{R}{R}|Creature - Giant|4|3|Trample$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Ethereal Armor|Return to Ravnica|9|C|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+1 for each enchantment you control and has first strike.|
+Chaos Imps|Return to Ravnica|90|R|{4}{R}{R}|Creature - Imp|6|5|Flying$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>$Chaos Imps has trample as long as it has a +1/+1 counter on it.|
+Cobblebrute|Return to Ravnica|91|C|{3}{R}|Creature - Elemental|5|2||
+Dynacharge|Return to Ravnica|92|C|{R}|Instant|||Target creature you control gets +2/+0 until end of turn.$Overload {2}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Electrickery|Return to Ravnica|93|C|{R}|Instant|||Electrickery deals 1 damage to target creature you don't control.$Overload {1}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Explosive Impact|Return to Ravnica|94|C|{5}{R}|Instant|||Explosive Impact deals 5 damage to target creature or player.|
+Goblin Rally|Return to Ravnica|95|U|{3}{R}{R}|Sorcery|||Put four 1/1 red Goblin creature tokens onto the battlefield.|
+Gore-House Chainwalker|Return to Ravnica|96|C|{1}{R}|Creature - Human Warrior|2|1|Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Guild Feud|Return to Ravnica|97|R|{5}{R}|Enchantment|||At the beginning of your upkeep, target opponent reveals the top three cards of his or her library, may put a creature card from among them onto the battlefield, then puts the rest into his or her graveyard. You do the same with the top three cards of your library. If two creatures are put onto the battlefield this way, those creatures fight each other.|
+Guttersnipe|Return to Ravnica|98|U|{2}{R}|Creature - Goblin Shaman|2|2|Whenever you cast an instant or sorcery spell, Guttersnipe deals 2 damage to each opponent.|
+Lobber Crew|Return to Ravnica|99|C|{2}{R}|Creature - Goblin Warrior|0|4|Defender${tap}: Lobber Crew deals 1 damage to each opponent.$Whenever you cast a multicolored spell, untap Lobber Crew.|
 Animate Dead|Revised Edition|1|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
 Deathlace|Revised Edition|10|R|{B}|Instant|||Target spell or permanent becomes black. <i>(Mana symbols on that permanent remain unchanged.)</i>|
 Elvish Archers|Revised Edition|100|R|{1}{G}|Creature - Elf Archer|2|1|First strike|
@@ -16061,7 +16442,7 @@ Shinen of Stars' Light|Saviors of Kamigawa|28|C|{2}{W}|Creature - Spirit|2|1|Fir
 Spiritual Visit|Saviors of Kamigawa|29|C|{W}|Instant - Arcane|||Put a 1/1 colorless Spirit creature token onto the battlefield.$Splice onto Arcane {W} <i>(As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>|
 Celestial Kirin|Saviors of Kamigawa|3|R|{2}{W}{W}|Legendary Creature - Kirin Spirit|3|3|Flying$Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.|
 Torii Watchward|Saviors of Kamigawa|30|C|{4}{W}|Creature - Spirit|3|3|Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>$Soulshift 4 <i>(When this creature dies, you may return target Spirit card with converted mana cost 4 or less from your graveyard to your hand.)</i>|
-Cloudhoof Kirin|Saviors of Kamigawa|31|R|{3}{U}{U}|Legendary Creature - Kirin Spirit|4|4|Flying$Whenever you cast a Spirit or Arcane spell, you may put the top X cards of target player's library into his or her graveyard, where X is that spell's converted mana cost.|
+Cloudhoof Kirin|Saviors of Kamigawa|31|R|{3}{U}{U}|Legendary Creature - Kirin Spirit|4|4|Flying$Whenever you cast a Spirit or Arcane spell, you may have target player put the top X cards of his or her library into his or her graveyard, where X is that spell's converted mana cost.|
 Cut the Earthly Bond|Saviors of Kamigawa|32|C|{U}|Instant - Arcane|||Return target enchanted permanent to its owner's hand.|
 Descendant of Soramaro|Saviors of Kamigawa|33|C|{3}{U}|Creature - Human Wizard|2|3|{1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.|
 Dreamcatcher|Saviors of Kamigawa|34|C|{U}|Creature - Spirit|1|1|Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.|
@@ -17614,6 +17995,7 @@ Terror|Starter 2000|111|C|{1}{B}|Instant|||Destroy target nonartifact, nonblack 
 Bog Imp|Starter 2000|116|C|{1}{B}|Creature - Imp|1|1|Flying <i>(This creature can't be blocked except by creatures with flying or reach.)</i>|
 Coercion|Starter 2000|118|C|{2}{B}|Sorcery|||Target opponent reveals his or her hand. You choose a card from it. That player discards that card.|
 Ogre Warrior|Starter 2000|12|C|{3}{R}|Creature - Ogre Warrior|3|3||
+Giant Growth|Starter 2000|125|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
 Swamp|Starter 2000|135|L||Basic Land - Swamp|||B|
 Swamp|Starter 2000|135|L||Basic Land - Swamp|||B|
 Royal Falcon|Starter 2000|14|C|{1}{W}|Creature - Bird|1|1|Flying|
@@ -17622,7 +18004,6 @@ Python|Starter 2000|150|C|{1}{B}{B}|Creature - Snake|3|2||
 Time Ebb|Starter 2000|16|C|{2}{U}|Sorcery|||Put target creature on top of its owner's library.|
 Trained Orgg|Starter 2000|17|R|{6}{R}|Creature - Orgg|6|6||
 Scathe Zombies|Starter 2000|175|C|{2}{B}|Creature - Zombie|2|2||
-Giant Growth|Starter 2000|178|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
 Flame Spirit|Starter 2000|179|C|{4}{R}|Creature - Elemental Spirit|2|3|{R}: Flame Spirit gets +1/+0 until end of turn.|
 Vizzerdrix|Starter 2000|18|R|{6}{U}|Creature - Rabbit Beast|6|6||
 Llanowar Elves|Starter 2000|182|C|{G}|Creature - Elf Druid|1|1|{tap}: Add {G} to your mana pool.|
@@ -17649,6 +18030,7 @@ Durkwood Boars|Starter 2000|3|C|{4}{G}|Creature - Boar|4|4||
 Obsianus Golem|Starter 2000|303|U|{6}|Artifact Creature - Golem|4|6||
 Soul Net|Starter 2000|317|U|{1}|Artifact|||Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.|
 Eager Cadet|Starter 2000|4|C|{W}|Creature - Human Soldier|1|1||
+Inspiration|Starter 2000|42|C|{3}{U}|Instant|||Target player draws two cards.|
 Giant Octopus|Starter 2000|5|C|{3}{U}|Creature - Octopus|3|3||
 Venerable Monk|Starter 2000|5|C|{2}{W}|Creature - Human Monk Cleric|2|2|When Venerable Monk enters the battlefield, you gain 2 life.|
 Hand of Death|Starter 2000|6|C|{2}{B}|Sorcery|||Destroy target nonblack creature.|
@@ -17658,7 +18040,6 @@ Knight Errant|Starter 2000|7|C|{1}{W}|Creature - Human Knight|2|2||
 Armored Pegasus|Starter 2000|7|C|{1}{W}|Creature - Pegasus|1|2|Flying|
 Wind Drake|Starter 2000|75|C|{2}{U}|Creature - Drake|2|2|Flying|
 Lava Axe|Starter 2000|8|C|{4}{R}|Sorcery|||Lava Axe deals 5 damage to target player.|
-Inspiration|Starter 2000|85|C|{3}{U}|Instant|||Target player draws two cards.|
 Mons's Goblin Raiders|Starter 2000|9|C|{R}|Creature - Goblin|1|1||
 Bottomless Pit|Stronghold|1|U|{1}{B}{B}|Enchantment|||At the beginning of each player's upkeep, that player discards a card at random.|
 Grave Pact|Stronghold|10|R|{1}{B}{B}{B}|Enchantment|||Whenever a creature you control dies, each other player sacrifices a creature.|
@@ -17759,10 +18140,10 @@ Lowland Basilisk|Stronghold|59|C|{2}{G}|Creature - Basilisk|1|3|Whenever Lowland
 Dauthi Trapper|Stronghold|6|U|{2}{B}|Creature - Dauthi Minion|1|1|{tap}: Target creature gains shadow until end of turn. <i>(It can block or be blocked by only creatures with shadow.)</i>|
 Mulch|Stronghold|60|C|{1}{G}|Sorcery|||Reveal the top four cards of your library. Put all land cards revealed this way into your hand and the rest into your graveyard.|
 Overgrowth|Stronghold|61|C|{2}{G}|Enchantment - Aura|||Enchant land <i>(Target a land as you cast this. This card enters the battlefield attached to that land.)</i>$Whenever enchanted land is tapped for mana, its controller adds {G}{G} to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
+Revenant|Stronghold|61|R|{4}{B}|Creature - Spirit|*|*|Flying$Revenant's power and toughness are each equal to the number of creature cards in your graveyard.|
 Temper|Stronghold|61|U|{X}{1}{W}|Instant|||Prevent the next X damage that would be dealt to target creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.|
 Primal Rage|Stronghold|62|U|{1}{G}|Enchantment|||Creatures you control have trample. <i>(If a creature you control would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>|
 Provoke|Stronghold|63|C|{1}{G}|Instant|||Untap target creature you don't control. That creature blocks this turn if able.$$Draw a card.|
-Revenant|Stronghold|64|R|{4}{B}|Creature - Spirit|*|*|Flying$Revenant's power and toughness are each equal to the number of creature cards in your graveyard.|
 Skyshroud Archer|Stronghold|64|C|{G}|Creature - Elf Archer|1|1|{tap}: Target creature with flying gets -1/-1 until end of turn.|
 Skyshroud Troopers|Stronghold|65|C|{3}{G}|Creature - Elf Druid Warrior|3|3|{tap}: Add {G} to your mana pool.|
 Spike Breeder|Stronghold|66|R|{3}{G}|Creature - Spike|0|0|Spike Breeder enters the battlefield with three +1/+1 counters on it.${2}, Remove a +1/+1 counter from Spike Breeder: Put a +1/+1 counter on target creature.${2}, Remove a +1/+1 counter from Spike Breeder: Put a 1/1 green Spike creature token onto the battlefield.|
@@ -17807,7 +18188,7 @@ Abandon Hope|Tempest|1|U|{X}{1}{B}|Sorcery|||As an additional cost to cast Aband
 Corpse Dance|Tempest|10|R|{2}{B}|Instant|||Buyback {2} <i>(You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Return the top creature card of your graveyard to the battlefield. That creature gains haste until end of turn. Exile it at the beginning of the next end step.|
 Unstable Shapeshifter|Tempest|100|R|{3}{U}|Creature - Shapeshifter|0|1|Whenever another creature enters the battlefield, Unstable Shapeshifter becomes a copy of that creature and gains this ability.|
 Volrath's Curse|Tempest|101|C|{1}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature can't attack or block, and its activated abilities can't be activated. That creature's controller may sacrifice a permanent for that player to ignore this effect until end of turn.${1}{U}: Return Volrath's Curse to its owner's hand.|
-Whim of Volrath|Tempest|102|R|{U}|Instant|||Buyback {2} <i>(You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Change the text of target permanent by replacing all instances of one color word or basic land type with another until end of turn. <i>(For example, you may change "nonred creature" to "nongreen creature" or "plainswalk" to "swampwalk.")</i>|
+Whim of Volrath|Tempest|102|R|{U}|Instant|||Buyback {2} <i>(You may pay an additional {2} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another until end of turn. <i>(For example, you may change "nonred creature" to "nongreen creature" or "plainswalk" to "swampwalk.")</i>|
 Whispers of the Muse|Tempest|103|U|{U}|Instant|||Buyback {5} <i>(You may pay an additional {5} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Draw a card.|
 Wind Dancer|Tempest|104|U|{1}{U}|Creature - Faerie|1|1|Flying$${tap}: Target creature gains flying until end of turn.|
 Wind Drake|Tempest|105|C|{2}{U}|Creature - Drake|2|2|Flying|
@@ -17947,7 +18328,7 @@ Cloudchaser Eagle|Tempest|227|C|{3}{W}|Creature - Bird|2|2|Flying$When Cloudchas
 Disenchant|Tempest|228|C|{1}{W}|Instant|||Destroy target artifact or enchantment.|
 Elite Javelineer|Tempest|229|C|{2}{W}|Creature - Human Soldier|2|2|Whenever Elite Javelineer blocks, it deals 1 damage to target attacking creature.|
 Disturbed Burial|Tempest|23|C|{1}{B}|Sorcery|||Buyback {3} <i>(You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Return target creature card from your graveyard to your hand.|
-Intuition|Tempest|23|R|{2}{U}|Instant|||Search your library for any three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.|
+Intuition|Tempest|23|R|{2}{U}|Instant|||Search your library for three cards and reveal them. Target opponent chooses one. Put that card into your hand and the rest into your graveyard. Then shuffle your library.|
 Field of Souls|Tempest|230|R|{2}{W}{W}|Enchantment|||Whenever a nontoken creature is put into your graveyard from the battlefield, put a 1/1 white Spirit creature token with flying onto the battlefield.|
 Flickering Ward|Tempest|231|U|{W}|Enchantment - Aura|||Enchant creature$As Flickering Ward enters the battlefield, choose a color.$Enchanted creature has protection from the chosen color. This effect doesn't remove Flickering Ward.${W}: Return Flickering Ward to its owner's hand.|
 Gallantry|Tempest|232|U|{1}{W}|Instant|||Target blocking creature gets +4/+4 until end of turn.$$Draw a card.|
@@ -18003,7 +18384,7 @@ Excavator|Tempest|277|U|{2}|Artifact|||{tap}, Sacrifice a basic land: Target cre
 Flowstone Sculpture|Tempest|278|R|{6}|Artifact Creature - Shapeshifter|4|4|{2}, Discard a card: Put a +1/+1 counter on Flowstone Sculpture or Flowstone Sculpture gains flying, first strike, or trample. <i>(This effect lasts indefinitely.)</i>|
 Fool's Tome|Tempest|279|R|{4}|Artifact|||{2}, {tap}: Draw a card. Activate this ability only if you have no cards in hand.|
 Evincar's Justice|Tempest|28|C|{2}{B}{B}|Sorcery|||Buyback {3} <i>(You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>$Evincar's Justice deals 2 damage to each creature and each player.|
-Grindstone|Tempest|280|R|{1}|Artifact|||{3}, {tap}: Put the top two cards of target player's library into that player's graveyard. If both cards share a color, repeat this process.|
+Grindstone|Tempest|280|R|{1}|Artifact|||{3}, {tap}: Target player puts the top two cards of his or her library into his or her graveyard. If both cards share a color, repeat this process.|
 Helm of Possession|Tempest|281|R|{4}|Artifact|||You may choose not to untap Helm of Possession during your untap step.${2}, {tap}, Sacrifice a creature: Gain control of target creature for as long as you control Helm of Possession and Helm of Possession remains tapped.|
 Jet Medallion|Tempest|282|R|{2}|Artifact|||Black spells you cast cost {1} less to cast.|
 Jinxed Idol|Tempest|283|R|{2}|Artifact|||At the beginning of your upkeep, Jinxed Idol deals 2 damage to you.$Sacrifice a creature: Target opponent gains control of Jinxed Idol.|
@@ -20263,7 +20644,7 @@ Brood of Cockroaches|Visions|3|U|{1}{B}|Creature - Insect|1|1|When Brood of Cock
 Desertion|Visions|30|R|{3}{U}{U}|Instant|||Counter target spell. If an artifact or creature spell is countered this way, put that card onto the battlefield under your control instead of into its owner's graveyard.|
 Dream Tides|Visions|31|U|{2}{U}{U}|Enchantment|||Creatures don't untap during their controllers' untap steps.$At the beginning of each player's upkeep, that player may choose any number of tapped nongreen creatures he or she controls and pay {2} for each creature chosen this way. If the player does, untap those creatures.|
 Flooded Shoreline|Visions|32|R|{U}{U}|Enchantment|||{U}{U}, Return two Islands you control to their owner's hand: Return target creature to its owner's hand.|
-Foreshadow|Visions|33|U|{1}{U}|Instant|||Name a card, then put the top card of target opponent's library into his or her graveyard. If that card is the named card, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
+Foreshadow|Visions|33|U|{1}{U}|Instant|||Name a card, then target opponent puts the top card of his or her library into his or her graveyard. If that card is the named card, you draw a card.$Draw a card at the beginning of the next turn's upkeep.|
 Inspiration|Visions|35|C|{3}{U}|Instant|||Target player draws two cards.|
 Knight of the Mists|Visions|36|C|{2}{U}|Creature - Human Knight|2|2|Flanking <i>(Whenever a creature without flanking blocks this creature, the blocking creature gets -1/-1 until end of turn.)</i>$When Knight of the Mists enters the battlefield, you may pay {U}. If you don't, destroy target Knight and it can't be regenerated.|
 Man-o'-War|Visions|37|C|{2}{U}|Creature - Jellyfish|2|2|When Man-o'-War enters the battlefield, return target creature to its owner's hand.|
