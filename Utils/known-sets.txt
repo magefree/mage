@@ -63,6 +63,7 @@ Conflux|conflux|
 Alara Reborn|alarareborn|
 Zendikar|zendikar|
 Worldwake|worldwake|
+Return to Ravnica|returntoravnica|
 Rise of the Eldrazi|riseoftheeldrazi|
 Scars of Mirrodin|scarsofmirrodin|
 Mirrodin Besieged|mirrodinbesieged|

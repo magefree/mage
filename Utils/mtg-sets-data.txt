@@ -81,6 +81,7 @@ Portal Three Kingdoms|PTK|
 Premium Deck Series: Fire and Lightning|PD2|
 Premium Deck Series: Slivers|PDS|
 Ravnica: City of Guilds|RAV|
+Return to Ravnica|RTR|
 Rise of the Eldrazi|ROE|
 Scars of Mirrodin|SOM|
 Scourge|SCG|
