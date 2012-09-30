@@ -94,7 +94,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
 
         sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" puts the top ");
-        if (message.isEmpty() || !message.equals("1")) {
+      if (message.isEmpty()) {
             if (amount.toString().equals("1")) {
                 sb.append("card ");
             } else {

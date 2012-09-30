@@ -44,8 +44,9 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public String toString() {
-        if (amount != null)
+        if (amount != null) {
             return amount.toString();
+        }
         return "";
     }
 
