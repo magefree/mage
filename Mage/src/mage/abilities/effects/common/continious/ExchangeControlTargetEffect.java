@@ -114,7 +114,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
 
     @Override
     public boolean apply(Game game, Ability source) {
-//        if (this.lockedControllers != null) {
+        if (this.lockedControllers != null) {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
@@ -132,8 +132,8 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
                 }
             }
             return true;
-  //      }
-//        return false;
+        }
+        return false;
     }
 
     @Override

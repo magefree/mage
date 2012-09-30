@@ -28,6 +28,7 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TimingRule;
@@ -35,13 +36,21 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.OwnerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author North
  */
 public class SavingGrasp extends CardImpl<SavingGrasp> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you own");
+
+    static {
+        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
+    }
 
     public SavingGrasp(UUID ownerId) {
         super(ownerId, 46, "Saving Grasp", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
@@ -50,7 +59,7 @@ public class SavingGrasp extends CardImpl<SavingGrasp> {
         this.color.setBlue(true);
 
         // Return target creature you own to your hand.
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
         // Flashback {W}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
