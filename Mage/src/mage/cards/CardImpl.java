@@ -156,9 +156,6 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     public List<String> getRules() {
         try {
             List<String> rules = abilities.getRules(this.name);
-            if (cardType.contains(CardType.INSTANT) || cardType.contains(CardType.SORCERY)) {
-                rules.add(0, getSpellAbility().getRule(this.name));
-            }
             if (info != null) {
                 for (String data : info.values()) {
                     rules.add(data);

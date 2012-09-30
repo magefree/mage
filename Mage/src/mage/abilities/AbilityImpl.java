@@ -231,8 +231,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected boolean useAlternativeCost(Game game) {
         for (AlternativeCost cost: alternativeCosts) {
             if (cost.isAvailable(game, this)) {
-                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game))
+                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Neutral, "Use alternative cost " + cost.getName(), game)) {
                     return cost.pay(this, game, sourceId, controllerId, false);
+                }
             }
         }
         return false;
@@ -349,19 +350,6 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 sbRule.append(": ");
             }
         }
-        else if (this.alternativeCosts.size() > 0) {
-            for (AlternativeCost cost: alternativeCosts) {
-                sbRule.append(cost.getText()).append("\n");
-            }
-        }
-        else {
-            for (Cost cost: this.costs) {
-                if (!(cost instanceof ManaCost)) {
-                    sbRule.append("As an additional cost to cast {this}, ").append(cost.getText()).append("\n");
-                }
-            }
-        }
-
         sbRule.append(modes.getText());
 
         return sbRule.toString();

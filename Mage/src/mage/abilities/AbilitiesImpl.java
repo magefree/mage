@@ -72,13 +72,21 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         List<String> rules = new ArrayList<String>();
 
         for (T ability:this) {
-            if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility))
+            if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
                 rules.add(ability.getRule());
+            }
             if (ability instanceof SpellAbility) {
                 if (ability.getAlternativeCosts().size() > 0) {
                     StringBuilder sbRule = new StringBuilder();
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                        sbRule.append(cost.getName()).append(".\n");
+                        if (cost.getClass().getName().equals("mage.abilities.costs.AlternativeCostImpl")) 
+                        { // if the template class is used, the rule is in the getName() instead in the getText()
+                            sbRule.append(cost.getName()).append(".\n");
+                        }
+                        else
+                        {
+                            sbRule.append(cost.getText()).append(".\n");
+                        }
                     }
                     rules.add(sbRule.toString());
                 }
@@ -94,6 +102,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     }
                     rules.add(sbRule.toString());
                 }
+                rules.add(ability.getRule()); 
             }
         }
 
