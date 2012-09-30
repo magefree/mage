@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.*;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -38,24 +39,29 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.*;
-
 /**
  * @author magenoxx_at_googlemail.com
  */
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeControlTargetEffect> {
 
     private String rule;
+    private Boolean withSource;
     private Map<UUID, UUID> lockedControllers;
 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
+        this(duration, rule, false);
+    }
+
+    public ExchangeControlTargetEffect(Duration duration, String rule, Boolean withSource) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        this.withSource = withSource;
         this.rule = rule;
     }
 
     public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
+        this.withSource = effect.withSource;
     }
 
     @Override
@@ -72,6 +78,9 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
                 controllers.add(permanent.getControllerId());
             }
         }
+        if (withSource) {
+            controllers.add(source.getControllerId());
+        }
         // exchange works only for two different controllers
         if (controllers.size() != 2) {
             // discard effect
@@ -85,27 +94,46 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
         UUID firstController = it.next();
         UUID secondController = it.next();
 
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                this.lockedControllers.put(permanent.getId(), permanent.getControllerId().equals(firstController) ? secondController : firstController);
+        if (withSource) {
+            Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (targetPermanent != null && sourcePermanent != null) {
+                    this.lockedControllers.put(targetPermanent.getId(), sourcePermanent.getControllerId());
+                    this.lockedControllers.put(sourcePermanent.getId(), targetPermanent.getControllerId());
+            }
+        }
+        else {
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    this.lockedControllers.put(permanent.getId(), permanent.getControllerId().equals(firstController) ? secondController : firstController);
+                }
             }
         }
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
+//        if (this.lockedControllers != null) {
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    UUID controllerId = this.lockedControllers.get(permanent.getId());
+                    if (controllerId != null) {
+                        permanent.changeControllerId(controllerId, game);
+                    }
+                }
+            }
+            if (withSource) {
+                Permanent permanent = game.getPermanent(source.getSourceId());
                 UUID controllerId = this.lockedControllers.get(permanent.getId());
                 if (controllerId != null) {
                     permanent.changeControllerId(controllerId, game);
                 }
             }
-        }
-
-        return true;
+            return true;
+  //      }
+//        return false;
     }
 
     @Override
