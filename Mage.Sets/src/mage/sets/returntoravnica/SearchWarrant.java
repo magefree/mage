@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
 public class SearchWarrant extends CardImpl<SearchWarrant> {
 
     public SearchWarrant(UUID ownerId) {
-        super(ownerId, 161, "Search Warrant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}{U}");
+        super(ownerId, 193, "Search Warrant", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{W}{U}");
         this.expansionSetCode = "RTR";
 
         this.color.setBlue(true);

@@ -114,26 +114,36 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
 
     @Override
     public boolean apply(Game game, Ability source) {
+        int countChangeControl = 0;
         if (this.lockedControllers != null) {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
                 if (permanent != null) {
                     UUID controllerId = this.lockedControllers.get(permanent.getId());
                     if (controllerId != null) {
-                        permanent.changeControllerId(controllerId, game);
+                        if(permanent.changeControllerId(controllerId, game)) {
+                            ++countChangeControl; 
+                        }
                     }
                 }
             }
             if (withSource) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
-                UUID controllerId = this.lockedControllers.get(permanent.getId());
-                if (controllerId != null) {
-                    permanent.changeControllerId(controllerId, game);
+                if (permanent != null) {
+                    UUID controllerId = this.lockedControllers.get(permanent.getId());
+                    if (controllerId != null) {
+                        if (permanent.changeControllerId(controllerId, game)) {
+                            ++countChangeControl;
+                        }
+                    }
                 }
             }
+        }
+        if (countChangeControl == 2) {
             return true;
         }
         return false;
+
     }
 
     @Override
