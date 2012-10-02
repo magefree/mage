@@ -62,6 +62,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
+        this.lockedControllers = effect.lockedControllers;
     }
 
     @Override
@@ -115,6 +116,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
     @Override
     public boolean apply(Game game, Ability source) {
         int countChangeControl = 0;
+        Map<UUID, UUID> remainingLockedControllers = new HashMap<UUID, UUID>();
         if (this.lockedControllers != null) {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
@@ -122,6 +124,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
                     UUID controllerId = this.lockedControllers.get(permanent.getId());
                     if (controllerId != null) {
                         if(permanent.changeControllerId(controllerId, game)) {
+                            remainingLockedControllers.put(permanentId, controllerId);
                             ++countChangeControl; 
                         }
                     }
@@ -133,13 +136,17 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
                     UUID controllerId = this.lockedControllers.get(permanent.getId());
                     if (controllerId != null) {
                         if (permanent.changeControllerId(controllerId, game)) {
+                            remainingLockedControllers.put(source.getSourceId(), controllerId);
                             ++countChangeControl;
                         }
                     }
                 }
             }
         }
-        if (countChangeControl == 2) {
+        // if the permanent is not existent (card in hand or graveyard) the control changing effect has to end
+        // else a previous controlled card that will be enter the battlefield again will be immediately be affected
+        this.lockedControllers = remainingLockedControllers;
+        if (countChangeControl > 0) {
             return true;
         }
         return false;
