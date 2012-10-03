@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
 import org.mage.plugins.card.dl.DownloadJob;
 import static org.mage.plugins.card.dl.DownloadJob.fromURL;
 import static org.mage.plugins.card.dl.DownloadJob.toFile;
@@ -15,8 +14,31 @@ public class GathererSets implements Iterable<DownloadJob> {
     private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
     private static File outDir = DEFAULT_OUT_DIR;
 
-    private static final String[] symbols = {"10E", "HOP", "TMP", "STH", "EXO", "INV", "PLS", "APC", "MRD", "DST", "5DN", "CHK", "BOK", "SOK", "RAV", "GPT", "DIS", "TSP", "TSB", "PLC", "FUT", "LRW", "MOR", "SHM", "EVE", "USG", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "ODY", "TOR", "JUD", "ONS", "LGN", "SCG", "ULG", "USD", "MMQ", "NMS", "PCY", "MIR", "VIS", "WTH", "ALL", "ICE", "CSP", "ARN", "ATQ", "LEG", "DRK", "FEM", "HML"};
-    private static final String[] withMythics = {"M10", "M11", "M12", "M13", "DDF", "ALA", "CFX", "ARB", "ZEN", "WWK", "ROE", "SOM", "MBS", "NPH", "ISD", "DKA", "AVR"};
+    private static final String[] symbols =     {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", 
+                                                 "HOP", 
+                                                 "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
+                                                 "ICE", "ALL", "CSP",
+                                                 "MIR", "VIS", "WTH",
+                                                 "TMP", "STH", "EXO", 
+                                                 "USG", "ULG", "UDS",
+                                                 "MMQ", "NMS", "PCY",
+                                                 "INV", "PLS", "APC",
+                                                 "ODY", "TOR", "JUD",
+                                                 "ONS", "LGN", "SCG",
+                                                 "MRD", "DST", "5DN", 
+                                                 "CHK", "BOK", "SOK", 
+                                                 "RAV", "GPT", "DIS", 
+                                                 "TSP", "TSB", "PLC", "FUT", 
+                                                 "LRW", "MOR", 
+                                                 "SHM", "EVE"};
+    
+    private static final String[] withMythics = {"M10", "M11", "M12", "M13", 
+                                                 "DDF", 
+                                                 "ALA", "CFX", "ARB", 
+                                                 "ZEN", "WWK", "ROE", 
+                                                 "SOM", "MBS", "NPH", 
+                                                 "ISD", "DKA", "AVR", 
+                                                 "RTR"};
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
 
     static {
@@ -36,8 +58,7 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("WTH", "WL");
         symbolsReplacements.put("ULG", "GU");
         symbolsReplacements.put("USG", "UZ");
-        symbolsReplacements.put("UDS", "UD");
-        symbolsReplacements.put("JUD", "JU");
+        symbolsReplacements.put("UDS", "CG");
         symbolsReplacements.put("ODY", "OD");
         symbolsReplacements.put("MMQ", "MM");
         symbolsReplacements.put("NMS", "NE");
