@@ -68,7 +68,7 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
     @Override
     public String getRule() {
         if (generateRule != null) {
-            if (generateRule = false) {
+            if (!generateRule) {
                 return "";
             }
         }

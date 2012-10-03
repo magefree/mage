@@ -63,7 +63,7 @@ public class JaceTheMindSculptor extends CardImpl<JaceTheMindSculptor> {
         this.expansionSetCode = "WWK";
         this.subtype.add("Jace");
         this.color.setBlue(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), ""));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
 
         LoyaltyAbility ability1 = new LoyaltyAbility(new JaceTheMindSculptorEffect1(), 2);
