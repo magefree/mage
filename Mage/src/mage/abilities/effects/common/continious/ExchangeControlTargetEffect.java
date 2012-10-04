@@ -25,9 +25,9 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
+ 
 package mage.abilities.effects.common.continious;
-
+ 
 import java.util.*;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -38,38 +38,44 @@ import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
+ 
 /**
  * @author magenoxx_at_googlemail.com
  */
 public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeControlTargetEffect> {
-
+ 
     private String rule;
     private Boolean withSource;
     private Map<UUID, UUID> lockedControllers;
-
+ 
     public ExchangeControlTargetEffect(Duration duration, String rule) {
         this(duration, rule, false);
     }
-
+ 
     public ExchangeControlTargetEffect(Duration duration, String rule, Boolean withSource) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.withSource = withSource;
         this.rule = rule;
     }
-
+ 
     public ExchangeControlTargetEffect(final ExchangeControlTargetEffect effect) {
         super(effect);
         this.rule = effect.rule;
         this.withSource = effect.withSource;
         this.lockedControllers = effect.lockedControllers;
     }
-
+ 
     @Override
     public ExchangeControlTargetEffect copy() {
         return new ExchangeControlTargetEffect(this);
     }
-
+ 
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        // if there are no more creatures that are effected, the effect can be removed
+        return this.lockedControllers != null && this.lockedControllers.size() > 0;
+    }
+ 
     @Override
     public void init(Ability source, Game game) {
         Set<UUID> controllers = new HashSet<UUID>();
@@ -88,13 +94,13 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
             this.discarded = true;
             return;
         }
-
+ 
         this.lockedControllers = new HashMap<UUID, UUID>();
-
+ 
         Iterator<UUID> it = controllers.iterator();
         UUID firstController = it.next();
         UUID secondController = it.next();
-
+ 
         if (withSource) {
             Permanent targetPermanent = game.getPermanent(targetPointer.getFirst(game, source));
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
@@ -112,7 +118,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
             }
         }
     }
-
+ 
     @Override
     public boolean apply(Game game, Ability source) {
         int countChangeControl = 0;
@@ -125,7 +131,7 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
                     if (controllerId != null) {
                         if(permanent.changeControllerId(controllerId, game)) {
                             remainingLockedControllers.put(permanentId, controllerId);
-                            ++countChangeControl; 
+                            ++countChangeControl;
                         }
                     }
                 }
@@ -150,9 +156,9 @@ public class ExchangeControlTargetEffect extends ContinuousEffectImpl<ExchangeCo
             return true;
         }
         return false;
-
+ 
     }
-
+ 
     @Override
     public String getText(Mode mode) {
         return this.rule;
