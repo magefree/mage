@@ -25,6 +25,7 @@ Swampwalk|new|
 Totem armor|new|
 Unblockable|new|
 Undying|new|
+Unleash|new|
 Deathtouch|instance|
 Defender|instance|
 Double Strike|instance|
