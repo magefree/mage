@@ -31,10 +31,8 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -69,8 +67,9 @@ public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")), Constants.AttachmentType.AURA)));
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield));
+        ability2.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")),Constants.AttachmentType.AURA));
+        this.addAbility(ability2);
     }
 
     public PursuitOfFlight(final PursuitOfFlight card) {
