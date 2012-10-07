@@ -27,7 +27,7 @@
  */
 package mage.abilities;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import mage.game.Game;
@@ -37,7 +37,7 @@ import mage.players.Player;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Modes extends HashMap<UUID, Mode> {
+public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private UUID modeId;
 
@@ -63,8 +63,9 @@ public class Modes extends HashMap<UUID, Mode> {
     }
 
     public void setMode(Mode mode) {
-        if (this.containsKey(mode.getId()))
+        if (this.containsKey(mode.getId())) {
             this.modeId = mode.getId();
+        }
     }
 
     public void addMode(Mode mode) {
@@ -75,8 +76,9 @@ public class Modes extends HashMap<UUID, Mode> {
         if (this.size() > 1) {
             Player player = game.getPlayer(source.getControllerId());
             Mode choice = player.chooseMode(this, source, game);
-            if (choice == null)
+            if (choice == null) {
                 return false;
+            }
             setMode(choice);
             return true;
         }
@@ -86,8 +88,9 @@ public class Modes extends HashMap<UUID, Mode> {
 
     public String getText() {
         StringBuilder sb = new StringBuilder();
-        if (this.size() > 1)
+        if (this.size() > 1) {
             sb.append("Choose one - ");
+        }
         for (Mode mode: this.values()) {
             sb.append(mode.getEffects().getText(mode)).append("; or ");
         }
@@ -97,8 +100,9 @@ public class Modes extends HashMap<UUID, Mode> {
 
     public String getText(String sourceName) {
         StringBuilder sb = new StringBuilder();
-        if (this.size() > 1)
+        if (this.size() > 1) {
             sb.append("Choose one - ");
+        }
         for (Mode mode: this.values()) {
             sb.append(mode.getEffects().getText(mode)).append("; or ");
         }

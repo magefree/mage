@@ -717,7 +717,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseMode", game);
         if (modes.size() > 1) {
             MageObject obj = game.getObject(source.getSourceId());
-            Map<UUID, String> modeMap = new HashMap<UUID, String>();
+            Map<UUID, String> modeMap = new LinkedHashMap<UUID, String>();
             for (Mode mode: modes.values()) {
                 String modeText = mode.getEffects().getText(mode);
                 if (obj != null)
