@@ -47,6 +47,18 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author magenoxx_at_gmail.com
  */
+
+
+//
+//    702.95. Scavenge
+//
+//    702.95a Scavenge is an activated ability that functions only while the card
+//    with scavenge is in a graveyard. "Scavenge [cost]" means "[Cost], Exile this
+//    card from your graveyard: Put a number of +1/+1 counters equal to this card’s
+//    power on target creature. Activate this ability only any time you could cast
+//    a sorcery."
+//
+
 public class ScavengeAbility extends ActivatedAbilityImpl<ScavengeAbility> {
 
     public ScavengeAbility(ManaCosts costs) {

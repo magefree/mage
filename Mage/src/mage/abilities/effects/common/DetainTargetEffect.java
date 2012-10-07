@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -45,6 +46,16 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
+
+
+//
+//    701.26. Detain
+//
+//    701.26a Certain spells and abilities can detain a permanent. Until the next
+//    turn of the controller of that spell or ability, that permanent can’t attack
+//    or block and its activated abilities can’t be activated.
+//
+
 public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
 
     public DetainTargetEffect() {
@@ -67,6 +78,12 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        for (UUID target: this.getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(target);
+            if (permanent != null) {
+                game.informPlayers("Detained creature: " + permanent.getName());
+            }
+        }
         game.getContinuousEffects().addEffect(new DetainReplacementEffect(), source);
         game.getContinuousEffects().addEffect(new DetainRestrictionEffect(), source);
         return true;
@@ -90,7 +107,7 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
         } else {
                 sb.append("detain up to ").append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
         }
-        sb.append(". (Until your next turn, ");
+        sb.append(". <i>(Until your next turn, ");
 
 
         if (target instanceof TargetCreaturePermanent) {
@@ -101,7 +118,7 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
         }
         sb.append(" can't attack or block and ");
         sb.append(target.getMaxNumberOfTargets() == 1 ? "its": "their");
-        sb.append(" activated abilities can't be activated)");
+        sb.append(" activated abilities can't be activated)</i>");
         return sb.toString();
     }
 }
