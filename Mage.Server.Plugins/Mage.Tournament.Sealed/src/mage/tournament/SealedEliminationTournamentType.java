@@ -39,7 +39,7 @@ public class SealedEliminationTournamentType extends TournamentType<SealedElimin
     public SealedEliminationTournamentType() {
         this.name = "Sealed Elimination";
         this.maxPlayers = 16;
-        this.minPlayers = 4;
+        this.minPlayers = 2;
         this.numBoosters = 6;
         this.draft = false;
         this.limited = true;
