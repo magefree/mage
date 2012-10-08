@@ -93,8 +93,9 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
                 if (target.choose(Outcome.Exile, player.getId(), source.getSourceId(), game)) {
                     for (UUID cardId: target.getTargets()) {
                         Card card = game.getCard(cardId);
-                        if (card != null)
+                        if (card != null) {
                             card.moveToExile(exileId, exileName, source.getSourceId(), game);
+                        }
                     }
                     return true;
                 }
@@ -109,10 +110,12 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     }
 
     private void setText() {
-        if (amount == 1)
-            staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString();
-        else
-            staticText = "Target player exiles " + amount + " " + filter.getMessage() + " from his or her " + zone.toString();
+        if (amount == 1) {
+            staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString().toLowerCase();
+        }
+        else {
+            staticText = "Target player exiles " + amount + " " + filter.getMessage() + " from his or her " + zone.toString().toLowerCase();
+        }
     }
 
 }
