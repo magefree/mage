@@ -30,19 +30,20 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,15 +52,15 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
+public class StabWound extends CardImpl<StabWound> {
 
-    static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
+    static final String rule = "At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life";
 
-    public PursuitOfFlight(UUID ownerId) {
-        super(ownerId, 102, "Pursuit of Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public StabWound (UUID ownerId) {
+        super(ownerId, 78, "Stab Wound", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
         this.subtype.add("Aura");
+        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -68,18 +69,20 @@ public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")),Constants.AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule));
-        this.addAbility(ability2);
+        // Enchanted creature gets -2/-2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2,-2, Duration.WhileOnBattlefield)));
+
+        // At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life.
+        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(2), Constants.TargetController.YOU, false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
-    public PursuitOfFlight(final PursuitOfFlight card) {
+    public StabWound (final StabWound card) {
         super(card);
     }
 
     @Override
-    public PursuitOfFlight copy() {
-        return new PursuitOfFlight(this);
+    public StabWound copy() {
+        return new StabWound(this);
     }
 }

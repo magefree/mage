@@ -29,10 +29,12 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,7 +44,7 @@ import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,15 +53,15 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
+public class DeviantGlee extends CardImpl<DeviantGlee> {
 
-    static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
+    static final String rule = "and has \"{R}: This creature gains trample until end of turn";
 
-    public PursuitOfFlight(UUID ownerId) {
-        super(ownerId, 102, "Pursuit of Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public DeviantGlee (UUID ownerId) {
+        super(ownerId, 65, "Deviant Glee", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
         this.subtype.add("Aura");
+        this.color.setBlack(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -68,18 +70,19 @@ public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")),Constants.AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule));
+        // Enchanted creature gets +2/+1 and has "{R}: This creature gains trample until end of turn."
+        SimpleStaticAbility ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 1, Duration.WhileOnBattlefield));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(),Duration.EndOfTurn),new ManaCostsImpl("{R}"));
+        ability2.addEffect(new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule));
         this.addAbility(ability2);
     }
 
-    public PursuitOfFlight(final PursuitOfFlight card) {
+    public DeviantGlee (final DeviantGlee card) {
         super(card);
     }
 
     @Override
-    public PursuitOfFlight copy() {
-        return new PursuitOfFlight(this);
+    public DeviantGlee copy() {
+        return new DeviantGlee(this);
     }
 }

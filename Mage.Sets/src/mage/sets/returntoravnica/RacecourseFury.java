@@ -30,56 +30,58 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
+public class RacecourseFury extends CardImpl<RacecourseFury> {
 
-    static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
+    static final String rule = "Enchanted land has \"{T}: Target creature gains haste until end of turn.\"";
 
-    public PursuitOfFlight(UUID ownerId) {
-        super(ownerId, 102, "Pursuit of Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public RacecourseFury (UUID ownerId) {
+        super(ownerId, 104, "Racecourse Fury", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
         this.subtype.add("Aura");
+        this.color.setRed(true);
 
-        // Enchant creature
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
+        // Enchant land
+        TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")),Constants.AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule));
-        this.addAbility(ability2);
+        // Enchanted land has "{T}: Target creature gains haste until end of turn."
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn), new TapSourceCost());
+        gainedAbility.addTarget(new TargetCreaturePermanent());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule)));
     }
 
-    public PursuitOfFlight(final PursuitOfFlight card) {
+    public RacecourseFury (final RacecourseFury card) {
         super(card);
     }
 
     @Override
-    public PursuitOfFlight copy() {
-        return new PursuitOfFlight(this);
+    public RacecourseFury copy() {
+        return new RacecourseFury(this);
     }
 }

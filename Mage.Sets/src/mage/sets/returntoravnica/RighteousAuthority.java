@@ -29,20 +29,22 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,15 +53,17 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
+public class RighteousAuthority extends CardImpl<RighteousAuthority> {
 
-    static final String rule = "and has \"{U}: This creature gains flying until end of turn.\"";
+    static final String rule = "Enchanted creature gets +1/+1 for each card in its controller's hand";
+    static final String rule2 = "At the beginning of the draw step of enchanted creature's controller, that player draws an additional card";
 
-    public PursuitOfFlight(UUID ownerId) {
-        super(ownerId, 102, "Pursuit of Flight", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public RighteousAuthority (UUID ownerId) {
+        super(ownerId, 189, "Righteous Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
         this.expansionSetCode = "RTR";
-        this.color.setRed(true);
         this.subtype.add("Aura");
+        this.color.setWhite(true);
+        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -68,18 +72,22 @@ public class PursuitOfFlight extends CardImpl<PursuitOfFlight> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature gets +2/+2 and has "{U}: This creature gains flying until end of turn."
-        SimpleStaticAbility ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(2, 2, Constants.Duration.WhileOnBattlefield));
-        ability2.addEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}")),Constants.AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule));
-        this.addAbility(ability2);
+        // Enchanted creature gets +1/+1 for each card in its controller's hand.
+        CardsInControllerHandCount boost = new CardsInControllerHandCount();
+        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+
+        // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
+        Ability gainedAbility2 = new BeginningOfDrawTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility2, AttachmentType.AURA, Duration.WhileOnBattlefield, rule2)));
     }
 
-    public PursuitOfFlight(final PursuitOfFlight card) {
+    public RighteousAuthority (final RighteousAuthority card) {
         super(card);
     }
 
     @Override
-    public PursuitOfFlight copy() {
-        return new PursuitOfFlight(this);
+    public RighteousAuthority copy() {
+        return new RighteousAuthority(this);
     }
 }
