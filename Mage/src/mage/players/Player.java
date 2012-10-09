@@ -56,6 +56,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -91,6 +92,7 @@ public interface Player extends MageItem, Copyable<Player> {
     public boolean canPaySacrificeCost();
     public void setLifeTotalCanChange(boolean lifeTotalCanChange);
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable);
+    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects);
     public Cards getHand();
     public int getLandsPlayed();
     public int getLandsPerTurn();
