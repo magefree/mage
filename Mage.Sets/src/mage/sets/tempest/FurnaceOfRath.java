@@ -36,7 +36,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -83,13 +87,13 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-                event.setAmount(event.getAmount() * 2);
-                return true;
-            case DAMAGE_CREATURE:
-                event.setAmount(event.getAmount() * 2);
-                return true;
+        if (!event.getAppliedEffects().contains(this.getId())) {
+            switch (event.getType()) {
+                case DAMAGE_PLAYER:
+                    return true;
+                case DAMAGE_CREATURE:
+                    return true;
+            }
         }
         return false;
     }
@@ -101,6 +105,21 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return apply(game, source);
+        DamageEvent damageEvent = (DamageEvent)event;
+        damageEvent.getAppliedEffects().add(getId());
+        if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
+            Player targetPlayer = game.getPlayer(event.getTargetId());
+            if (targetPlayer != null) {
+                targetPlayer.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+                return true;
+            }
+        } else {
+            Permanent targetPermanent = game.getPermanent(event.getTargetId());
+            if (targetPermanent != null) {
+                targetPermanent.damage(damageEvent.getAmount()*2, damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
+                return true;
+            }
+        }
+        return false;
     }
 }

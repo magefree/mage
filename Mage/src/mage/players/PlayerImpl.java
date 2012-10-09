@@ -878,11 +878,21 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
         return 0;
     }
-
     @Override
     public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable) {
+        return doDamage(damage, sourceId, game, combatDamage, preventable, null);
+    }
+
+    @Override
+    public int damage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
+        return doDamage(damage, sourceId, game, combatDamage, preventable, appliedEffects);
+    }
+
+
+    private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
         if (damage > 0 && canDamage(game.getObject(sourceId), game)) {
             GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
+            event.setAppliedEffects(appliedEffects);
             if (!game.replaceEvent(event)) {
                 int actualDamage = event.getAmount();
                 if (actualDamage > 0) {
