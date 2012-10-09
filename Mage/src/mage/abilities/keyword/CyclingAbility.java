@@ -61,7 +61,7 @@ public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
     @Override
     public String getRule() {
-        return "Cycling " + super.getRule();
+        return "Cycling " + getManaCostsToPay().getText()+ " <i>(" + super.getRule() + ")</i>";
     }
 
 }

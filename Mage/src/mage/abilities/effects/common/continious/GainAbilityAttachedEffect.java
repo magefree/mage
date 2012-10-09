@@ -48,6 +48,17 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
     protected AttachmentType attachmentType;
     protected boolean fixedTarget = false;
 
+    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration, String rule) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.attachmentType = attachmentType;
+        this.duration = duration;
+        if (duration == Duration.EndOfTurn) {
+            fixedTarget = true;
+        }
+        this.staticText = rule;
+    }
+
     public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType, Duration duration) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
