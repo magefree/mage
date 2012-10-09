@@ -29,7 +29,7 @@
 package mage.choices;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -41,7 +41,7 @@ public class ChoiceImpl<T extends ChoiceImpl<T>> implements Choice, Serializable
     protected boolean chosen;
     protected boolean required;
     protected String choice;
-    protected Set<String> choices = new HashSet<String>();
+    protected Set<String> choices = new LinkedHashSet<String>();
     protected String message;
 
     public ChoiceImpl() {
