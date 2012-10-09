@@ -559,9 +559,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
-        return damage(damageAmount, sourceId, game, preventable, combat, false);
+        return damage(damageAmount, sourceId, game, preventable, combat, false, null);
     }
 
+    public int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects) {
+        return damage(damageAmount, sourceId, game, preventable, combat, false, appliedEffects);
+    }
     /**
      * @param damageAmount
      * @param sourceId
@@ -571,13 +574,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
      * @param markDamage   If true, damage will be dealt later in applyDamage method
      * @return
      */
-    private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
+    private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         int damageDone = 0;
         if (damageAmount > 0 && canDamage(game.getObject(sourceId), game)) {
             if (cardType.contains(CardType.PLANESWALKER)) {
-                damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage);
+                damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             } else {
-                damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage);
+                damageDone = damageCreature(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             }
             if (damageDone > 0) {
                 Permanent source = game.getPermanent(sourceId);
@@ -599,7 +602,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public int markDamage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat) {
-        return damage(damageAmount, sourceId, game, preventable, combat, true);
+        return damage(damageAmount, sourceId, game, preventable, combat, true, null);
     }
 
     @Override
@@ -621,8 +624,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         deathtouched = false;
     }
 
-    protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
+    protected int damagePlaneswalker(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         GameEvent event = new DamagePlaneswalkerEvent(objectId, sourceId, controllerId, damage, preventable, combat);
+        event.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
             int actualDamage = event.getAmount();
             if (actualDamage > 0) {
@@ -638,8 +642,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         return 0;
     }
 
-    protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage) {
+    protected int damageCreature(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         GameEvent event = new DamageCreatureEvent(objectId, sourceId, controllerId, damage, preventable, combat);
+        event.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
             int actualDamage = checkProtectionAbilities(event, sourceId, game);
             if (actualDamage > 0) {

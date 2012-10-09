@@ -28,6 +28,7 @@
 
 package mage.game.permanent;
 
+import java.util.ArrayList;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -84,6 +85,8 @@ public interface Permanent extends Card, Controllable {
     public boolean hasSummoningSickness();
     public int getDamage();
     public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+
+    public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects);
 
     /**
      * used in combat only to deal damage at the same time

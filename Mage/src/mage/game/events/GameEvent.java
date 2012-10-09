@@ -28,9 +28,9 @@
 
 package mage.game.events;
 
-import mage.Constants.Zone;
-
+import java.util.ArrayList;
 import java.util.UUID;
+import mage.Constants.Zone;
 
 /**
  *
@@ -46,6 +46,7 @@ public class GameEvent {
     protected boolean flag;
     protected String data;
     protected Zone zone;
+    protected ArrayList<UUID> appliedEffects = new ArrayList<UUID>();;
 
     public enum EventType {
 
@@ -207,5 +208,29 @@ public class GameEvent {
 
     public void setZone(Zone zone) {
         this.zone = zone;
+    }
+    /**
+     * used to store which replacement effects were already applied to an event
+     * or or any modified events that may replace it
+     *
+     * 614.5. A replacement effect doesn't invoke itself repeatedly; it gets only one
+     * opportunity to affect an event or any modified events that may replace it.
+     * Example: A player controls two permanents, each with an ability that reads
+     * "If a creature you control would deal damage to a creature or player, it
+     * deals double that damage to that creature or player instead." A creature
+     * that normally deals 2 damage will deal 8 damage--not just 4, and not an
+     * infinite amount.
+     *
+     * @return
+     */
+    public ArrayList<UUID> getAppliedEffects() {
+        return appliedEffects;
+    }
+
+    public void setAppliedEffects(ArrayList<UUID> appliedEffects) {
+        if (appliedEffects == null) {
+            appliedEffects = new ArrayList<UUID>();
+        }
+        this.appliedEffects = appliedEffects;
     }
 }
