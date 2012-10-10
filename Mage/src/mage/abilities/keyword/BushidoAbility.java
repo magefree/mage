@@ -55,6 +55,6 @@ public class BushidoAbility extends BlocksOrBecomesBlockedTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Bushido " + value + " (When this blocks or becomes blocked, it gets +" + value + "/+" + value + " until end of turn.)";
+        return "Bushido " + value + " <i>(When this blocks or becomes blocked, it gets +" + value + "/+" + value + " until end of turn.)</i>";
     }
 }
