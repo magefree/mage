@@ -58,7 +58,7 @@ public class PlayerQueryEventSource implements EventSource<PlayerQueryEvent>, Se
         dispatcher.fireEvent(PlayerQueryEvent.selectEvent(playerId, message));
     }
 
-    public void chooseAbility(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
+    public void chooseAbility(UUID playerId, String message, List<? extends ActivatedAbility> choices) {
         dispatcher.fireEvent(PlayerQueryEvent.chooseAbilityEvent(playerId, message, choices));
     }
 

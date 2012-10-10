@@ -671,11 +671,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return false;
     }
 
-    protected Map<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
-        Map<UUID, ActivatedAbility> useable = new HashMap<UUID, ActivatedAbility>();
+    protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
         for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
-            if (ability.canActivate(playerId, game))
+            
+            if (ability.canActivate(playerId, game)) {
                 useable.put(ability.getId(), ability);
+            }
         }
         if (zone != Zone.HAND) {
             if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
@@ -702,8 +704,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return useable;
     }
 
-    protected Map<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
-        Map<UUID, ManaAbility> useable = new HashMap<UUID, ManaAbility>();
+    protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
+        LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<UUID, ManaAbility>();
         for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
             if (ability.canActivate(playerId, game))
                 useable.put(ability.getId(), ability);

@@ -29,8 +29,8 @@
 package mage.view;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -42,9 +42,9 @@ import mage.abilities.Ability;
 public class AbilityPickerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Map<UUID, String> choices = new HashMap<UUID, String>();
+    private Map<UUID, String> choices = new LinkedHashMap<UUID, String>();
 
-    public AbilityPickerView(Collection<? extends Ability> abilities) {
+    public AbilityPickerView(List<? extends Ability> abilities) {
         for (Ability ability: abilities) {
             choices.put(ability.getId(), ability.getRule(true));
         }

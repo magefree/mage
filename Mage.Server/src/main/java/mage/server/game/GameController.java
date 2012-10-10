@@ -385,7 +385,7 @@ public class GameController implements GameCallback {
 
     }
 
-    private synchronized void chooseAbility(UUID playerId, final Collection<? extends Ability> choices) throws MageException {
+    private synchronized void chooseAbility(UUID playerId, final List<? extends Ability> choices) throws MageException {
         perform(playerId, new Command() {
             public void execute(UUID playerId) {
                 gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));

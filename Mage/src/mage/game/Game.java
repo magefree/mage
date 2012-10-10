@@ -139,7 +139,7 @@ public interface Game extends MageItem, Serializable {
     public void firePriorityEvent(UUID playerId);
     public void firePlayManaEvent(UUID playerId, String message);
     public void firePlayXManaEvent(UUID playerId, String message);
-    public void fireGetChoiceEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices);
+    public void fireGetChoiceEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices);
     public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes);
     public void fireGetAmountEvent(UUID playerId, String message, int min, int max);
     public void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);

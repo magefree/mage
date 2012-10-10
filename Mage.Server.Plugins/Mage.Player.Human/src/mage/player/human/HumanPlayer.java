@@ -415,7 +415,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             } else if (response.getUUID() != null) {
                 MageObject object = game.getObject(response.getUUID());
                 if (object != null) {
-                    Map<UUID, ActivatedAbility> useableAbilities = null;
+                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = null;
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
                         useableAbilities = getUseableActivatedAbilities(object, zone, game);
@@ -492,7 +492,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("playManaAbilities", game);
         MageObject object = game.getObject(response.getUUID());
         if (object == null) return;
-        Map<UUID, ManaAbility> useableAbilities = null;
+        LinkedHashMap<UUID, ManaAbility> useableAbilities = null;
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
             useableAbilities = getUseableManaAbilities(object, zone, game);
@@ -686,8 +686,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
     protected void specialAction(Game game) {
         updateGameStatePriority("specialAction", game);
-        Map<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
-        game.fireGetChoiceEvent(playerId, name, specialActions.values());
+        LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
+        game.fireGetChoiceEvent(playerId, name, new ArrayList<SpecialAction>(specialActions.values()));
         waitForResponse();
         if (response.getUUID() != null) {
             if (specialActions.containsKey(response.getUUID()))
@@ -695,7 +695,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         }
     }
 
-    protected void activateAbility(Map<UUID, ? extends ActivatedAbility> abilities, Game game) {
+    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, Game game) {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1) {
             ActivatedAbility ability = abilities.values().iterator().next();
@@ -704,7 +704,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 return;
             }
         }
-        game.fireGetChoiceEvent(playerId, name, abilities.values());
+        game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(abilities.values()));
         waitForResponse();
         if (response.getUUID() != null) {
             if (abilities.containsKey(response.getUUID()))

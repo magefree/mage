@@ -28,8 +28,7 @@
 
 package mage.abilities;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 /**
@@ -44,8 +43,8 @@ public class SpecialActions extends AbilitiesImpl<SpecialAction> {
         super(actions);
     }
 
-    public Map<UUID, SpecialAction> getControlledBy(UUID controllerId) {
-        HashMap<UUID, SpecialAction> controlledBy = new HashMap<UUID, SpecialAction>();
+    public LinkedHashMap<UUID, SpecialAction> getControlledBy(UUID controllerId) {
+        LinkedHashMap<UUID, SpecialAction> controlledBy = new LinkedHashMap<UUID, SpecialAction>();
         for (SpecialAction action: this) {
             if (action.getControllerId().equals(controllerId))
                 controlledBy.put(action.id, action);

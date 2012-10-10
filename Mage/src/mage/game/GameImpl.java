@@ -1164,7 +1164,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public void fireGetChoiceEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
+    public void fireGetChoiceEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices) {
         if (simulation) return;
         playerQueryEventSource.chooseAbility(playerId, message, choices);
     }

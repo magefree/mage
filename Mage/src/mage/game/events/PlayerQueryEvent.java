@@ -49,7 +49,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     }
 
     private String message;
-    private Collection<? extends Ability> abilities;
+    private List<? extends Ability> abilities;
     private List<Permanent> perms;
     private Set<String> choices;
     private Set<UUID> targets;
@@ -66,12 +66,12 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
     private List<? extends Card> pile2;    
 
 
-    private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
+    private PlayerQueryEvent(UUID playerId, String message, List<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required, Map<String, Serializable> options) {
         this(playerId, message, abilities, choices, targets, cards, queryType, min, max, required);
         this.options = options;
     }
 
-    private PlayerQueryEvent(UUID playerId, String message, Collection<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required) {
+    private PlayerQueryEvent(UUID playerId, String message, List<? extends Ability> abilities, Set<String> choices, Set<UUID> targets, Cards cards, QueryType queryType, int min, int max, boolean required) {
         super(playerId);
         this.queryType = queryType;
         this.message = message;
@@ -139,7 +139,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
     }
 
-    public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, Collection<? extends ActivatedAbility> choices) {
+    public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices) {
         return new PlayerQueryEvent(playerId, message, choices, null, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
     }
 
@@ -215,7 +215,7 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return queryType;
     }
 
-    public Collection<? extends Ability> getAbilities() {
+    public List<? extends Ability> getAbilities() {
         return abilities;
     }
 
