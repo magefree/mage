@@ -102,7 +102,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                     }
                     rules.add(sbRule.toString());
                 }
-                rules.add(ability.getRule()); 
+                String rule = ability.getRule();
+                if (rule.length() > 1) {
+                    rule = rule.substring(0, 1).toUpperCase() + rule.substring(1);
+                }
+                rules.add(rule); 
             }
         }
 
