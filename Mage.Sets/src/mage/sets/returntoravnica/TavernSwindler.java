@@ -26,45 +26,77 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.returntoravnica;
- 
+
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.UnleashAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
- 
+import mage.game.Game;
+import mage.players.Player;
+
 /**
  *
  * @author LevelX2
  */
-public class ThrillKillAssassin extends CardImpl<ThrillKillAssassin> {
- 
-    public ThrillKillAssassin(UUID ownerId) {
-        super(ownerId, 81, "Thrill-Kill Assassin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+public class TavernSwindler extends CardImpl<TavernSwindler> {
+
+    public TavernSwindler(UUID ownerId) {
+        super(ownerId, 79, "Tavern Swindler", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
-        this.subtype.add("Assassin");
- 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
- 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+        this.subtype.add("Rogue");
 
-        // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-        this.addAbility(new UnleashAbility());
-        
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {T}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TavernSwindlerEffect(),new TapSourceCost());
+        ability.addCost(new PayLifeCost(3));
+        this.addAbility(ability);
     }
- 
-    public ThrillKillAssassin(final ThrillKillAssassin card) {
+
+    public TavernSwindler(final TavernSwindler card) {
         super(card);
     }
- 
+
     @Override
-    public ThrillKillAssassin copy() {
-        return new ThrillKillAssassin(this);
+    public TavernSwindler copy() {
+        return new TavernSwindler(this);
+    }
+}
+
+class TavernSwindlerEffect extends OneShotEffect<TavernSwindlerEffect> {
+
+    public TavernSwindlerEffect() {
+        super(Constants.Outcome.Damage);
+        staticText = "Flip a coin. If you win the flip, you gain 6 life";
+    }
+
+    public TavernSwindlerEffect(TavernSwindlerEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (controller.flipCoin(game)) {
+                game.informPlayers(controller.getName() + " got " + controller.gainLife(6, game)+ " live");
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public TavernSwindlerEffect copy() {
+        return new TavernSwindlerEffect(this);
     }
 }

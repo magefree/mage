@@ -26,45 +26,41 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.returntoravnica;
- 
+
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.UnleashAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
- 
+import mage.filter.common.FilterControlledCreaturePermanent;
+
 /**
  *
  * @author LevelX2
  */
-public class ThrillKillAssassin extends CardImpl<ThrillKillAssassin> {
- 
-    public ThrillKillAssassin(UUID ownerId) {
-        super(ownerId, 81, "Thrill-Kill Assassin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "RTR";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
- 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
- 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+public class SlumReaper extends CardImpl<SlumReaper> {
 
-        // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-        this.addAbility(new UnleashAbility());
-        
+    public SlumReaper(UUID ownerId) {
+        super(ownerId, 77, "Slum Reaper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        this.expansionSetCode = "RTR";
+        this.subtype.add("Horror");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(2);
+
+        // When Slum Reaper enters the battlefield, each player sacrifices a creature.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(1, new FilterControlledCreaturePermanent("creature"))));
     }
- 
-    public ThrillKillAssassin(final ThrillKillAssassin card) {
+
+    public SlumReaper(final SlumReaper card) {
         super(card);
     }
- 
+
     @Override
-    public ThrillKillAssassin copy() {
-        return new ThrillKillAssassin(this);
+    public SlumReaper copy() {
+        return new SlumReaper(this);
     }
 }

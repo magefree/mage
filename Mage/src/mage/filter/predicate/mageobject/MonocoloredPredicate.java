@@ -25,46 +25,25 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
- 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.UnleashAbility;
-import mage.cards.CardImpl;
- 
+package mage.filter.predicate.mageobject;
+
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+
 /**
  *
  * @author LevelX2
  */
-public class ThrillKillAssassin extends CardImpl<ThrillKillAssassin> {
- 
-    public ThrillKillAssassin(UUID ownerId) {
-        super(ownerId, 81, "Thrill-Kill Assassin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "RTR";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
- 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
- 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+public class MonocoloredPredicate implements Predicate<MageObject> {
 
-        // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-        this.addAbility(new UnleashAbility());
-        
-    }
- 
-    public ThrillKillAssassin(final ThrillKillAssassin card) {
-        super(card);
-    }
- 
     @Override
-    public ThrillKillAssassin copy() {
-        return new ThrillKillAssassin(this);
+    public boolean apply(MageObject input, Game game) {
+        return 1 == input.getColor().getColorCount();
+    }
+
+    @Override
+    public String toString() {
+        return "Monocolored";
     }
 }

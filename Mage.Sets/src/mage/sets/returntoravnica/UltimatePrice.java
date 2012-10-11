@@ -26,45 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.returntoravnica;
- 
+
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.UnleashAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
- 
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.MonocoloredPredicate;
+import mage.target.common.TargetCreaturePermanent;
+
 /**
  *
  * @author LevelX2
  */
-public class ThrillKillAssassin extends CardImpl<ThrillKillAssassin> {
- 
-    public ThrillKillAssassin(UUID ownerId) {
-        super(ownerId, 81, "Thrill-Kill Assassin", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
-        this.expansionSetCode = "RTR";
-        this.subtype.add("Human");
-        this.subtype.add("Assassin");
- 
-        this.color.setBlack(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(2);
- 
-        // Deathtouch
-        this.addAbility(DeathtouchAbility.getInstance());
+public class UltimatePrice extends CardImpl<UltimatePrice> {
 
-        // Unleash (You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)
-        this.addAbility(new UnleashAbility());
-        
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("monocolored creature");
+
+    static {
+        filter.add(new MonocoloredPredicate());
     }
- 
-    public ThrillKillAssassin(final ThrillKillAssassin card) {
+
+    public UltimatePrice(UUID ownerId) {
+        super(ownerId, 82, "Ultimate Price", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
+        this.expansionSetCode = "RTR";
+
+        this.color.setBlack(true);
+
+        // Destroy target monocolored creature.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+
+    }
+
+    public UltimatePrice(final UltimatePrice card) {
         super(card);
     }
- 
+
     @Override
-    public ThrillKillAssassin copy() {
-        return new ThrillKillAssassin(this);
+    public UltimatePrice copy() {
+        return new UltimatePrice(this);
     }
 }
