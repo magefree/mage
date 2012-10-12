@@ -103,8 +103,12 @@ public interface Permanent extends Card, Controllable {
 
     public void removeAllDamage(Game game);
     public Counters getCounters();
+
     public void addCounters(String name, int amount, Game game);
+    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
     public void addCounters(Counter counter, Game game);
+    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+
     public void removeCounters(String name, int amount, Game game);
     public void removeCounters(Counter counter, Game game);
     public void reset(Game game);
