@@ -97,14 +97,8 @@ class ShriekingAfflictionTriggeredAbility extends TriggeredAbilityImpl<Shrieking
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player player = game.getPlayer(event.getPlayerId());
             if (player != null && player.getHand().size() < 2) {
-
                 this.getEffects().clear();
                 ShriekingAfflictionTargetEffect effect = new ShriekingAfflictionTargetEffect();
-                Permanent sourcePermanent = game.getPermanent(sourceId);
-                if (sourcePermanent != null) {
-                    game.informPlayers(sourcePermanent.getName() + ": " + player.getName() + " loses 3 life");
-                }
-
                 effect.setTargetPointer(new FixedTarget(player.getId()));
                 this.addEffect(effect);
                 return true;
@@ -138,6 +132,10 @@ class ShriekingAfflictionTargetEffect extends OneShotEffect<ShriekingAfflictionT
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null && player.getHand().size() < 2) {
+            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+            if (sourcePermanent != null) {
+                game.informPlayers(sourcePermanent.getName() + ": " + player.getName() + " loses 3 life");
+            }
             player.loseLife(3, game);
             return true;
         }

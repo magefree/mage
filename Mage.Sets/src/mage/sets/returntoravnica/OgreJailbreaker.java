@@ -39,7 +39,6 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 
@@ -48,11 +47,6 @@ import mage.game.Game;
  * @author LevelX2
  */
 public class OgreJailbreaker extends CardImpl<OgreJailbreaker> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Rats you control");
-
-    static {
-        filter.add(new SubtypePredicate("Rat"));
-    }
 
     public OgreJailbreaker(UUID ownerId) {
         super(ownerId, 72, "Ogre Jailbreaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

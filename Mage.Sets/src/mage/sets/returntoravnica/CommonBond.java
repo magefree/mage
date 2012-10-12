@@ -32,13 +32,10 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.TapTargetEffect;
-import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -48,64 +45,60 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author LevelX2
  */
-public class Blustersquall extends CardImpl<Blustersquall> {
+public class CommonBond extends CardImpl<CommonBond> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you don't control");
-
-    static {
-        filter.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
-    }
-
-    public Blustersquall(UUID ownerId) {
-        super(ownerId, 30, "Blustersquall", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}");
+    public CommonBond(UUID ownerId) {
+        super(ownerId, 151, "Common Bond", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}{W}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.color.setWhite(true);
 
-        // Tap target creature you don't control.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new TapTargetEffect());
-
-        // Overload {3}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
-        this.addAbility(new OverloadAbility(this, new BlustersqallTapAllEffect(filter), new ManaCostsImpl("{3}{U}")));
-
+        // Put a +1/+1 counter on target creature. Put a +1/+1 counter on target creature.
+        this.getSpellAbility().addEffect(new CommonBondEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("first creature")));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)")));
     }
 
-    public Blustersquall(final Blustersquall card) {
+    public CommonBond(final CommonBond card) {
         super(card);
     }
 
     @Override
-    public Blustersquall copy() {
-        return new Blustersquall(this);
+    public CommonBond copy() {
+        return new CommonBond(this);
     }
 }
 
-class BlustersqallTapAllEffect extends OneShotEffect<BlustersqallTapAllEffect> {
+class CommonBondEffect extends OneShotEffect<CommonBondEffect> {
 
-    protected FilterCreaturePermanent filter;
-
-    public BlustersqallTapAllEffect(FilterCreaturePermanent filter) {
-        super(Constants.Outcome.Tap);
-        this.filter = filter;
-        staticText = "Tap each creature you don't control";
+    public CommonBondEffect() {
+        super(Constants.Outcome.BoostCreature);
+        staticText = "Put a +1/+1 counter on target creature. Put a +1/+1 counter on target creature.";
     }
 
-    public BlustersqallTapAllEffect(final BlustersqallTapAllEffect effect) {
+    public CommonBondEffect(final CommonBondEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            creature.tap(game);
+        int affectedTargets = 0;
+        Permanent permanent = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+        if (permanent != null) {
+            permanent.addCounters(CounterType.P1P1.createInstance(1), game);
+            affectedTargets ++;
         }
-        return true;
+        permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (permanent != null) {
+            permanent.addCounters(CounterType.P1P1.createInstance(1), game);
+            affectedTargets ++;
+        }
+        return affectedTargets > 0;
     }
 
     @Override
-    public BlustersqallTapAllEffect copy() {
-        return new BlustersqallTapAllEffect(this);
+    public CommonBondEffect copy() {
+        return new CommonBondEffect(this);
     }
 }
