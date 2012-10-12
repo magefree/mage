@@ -108,7 +108,7 @@ class SoulTitheSacrificeSourceUnlessPaysEffect extends OneShotEffect<SoulTitheSa
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             int cmc = permanent.getManaCost().convertedManaCost();
-            if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} or sacrifice " + permanent.getName() + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay {" + cmc + "} for " + permanent.getName() + "?", game)) {
                 Cost cost = new GenericManaCost(cmc);
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
                 {
