@@ -35,6 +35,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCost;
 
 /**
  *
@@ -68,6 +69,10 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
         this.abilities.clear();
         for (Ability ability: token.getAbilities()) {
             this.addAbility(ability, game);
+        }
+        this.manaCost.clear();
+        for (ManaCost cost: token.getManaCost()) {
+            this.getManaCost().add(cost.copy());
         }
         this.cardType = token.getCardType();
         this.color = token.getColor();

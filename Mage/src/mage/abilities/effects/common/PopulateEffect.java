@@ -31,7 +31,6 @@ import mage.Constants.Outcome;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -43,6 +42,8 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.util.CardUtil;
+
+
 
 /**
  *
@@ -92,7 +93,8 @@ public class PopulateEffect extends OneShotEffect<PopulateEffect> {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent tokenToCopy = game.getPermanent(target.getFirstTarget());
                 if (tokenToCopy != null && tokenToCopy instanceof PermanentToken) {
-                    Token newToken = ((PermanentToken) tokenToCopy).getToken().copy();
+                    Token newToken = new Token("","");
+                    CardUtil.copyTo(newToken).from(tokenToCopy);
                     if (newToken != null ) {
                         game.informPlayers("Token selected for populate: " + newToken.getName());
                         return newToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
