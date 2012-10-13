@@ -59,7 +59,7 @@ public class MarrowGnawer extends CardImpl<MarrowGnawer> {
 
     private static final FilterCreaturePermanent filterFear = new FilterCreaturePermanent("Rat creatures");
     private static final FilterControlledCreaturePermanent filterSacrifice = new FilterControlledCreaturePermanent("a Rat");
-    private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("Rats you control");
+    private static final FilterControlledCreaturePermanent filter3 = new FilterControlledCreaturePermanent("the number of Rats you control");
 
     {
         SubtypePredicate ratPredicate = new SubtypePredicate("Rat");

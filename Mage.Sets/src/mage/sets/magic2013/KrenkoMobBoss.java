@@ -47,7 +47,7 @@ import mage.game.permanent.token.GoblinToken;
  */
 public class KrenkoMobBoss extends CardImpl<KrenkoMobBoss> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("the number of Goblins you control");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

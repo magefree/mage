@@ -44,7 +44,7 @@ import mage.game.permanent.token.Token;
  */
 public class FlurryOfWings extends CardImpl<FlurryOfWings> {
 
-    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("the number of attacking creatures");
 
     public FlurryOfWings(UUID ownerId) {
         super(ownerId, 127, "Flurry of Wings", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}{U}");
