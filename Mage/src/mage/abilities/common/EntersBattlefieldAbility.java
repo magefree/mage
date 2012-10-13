@@ -58,6 +58,7 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
 
     public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
         super(ability);
+        this.generateRule = ability.generateRule;
     }
 
     @Override

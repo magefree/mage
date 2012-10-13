@@ -81,14 +81,21 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
     private void setText() {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
-            sb.append("a");
+            sb.append("a ").append(token.getDescription());
         } else {
-            sb.append(amount.toString());
+            sb.append(amount.toString()).append(" ").append(token.getDescription());
+            if (token.getDescription().endsWith("token")) {
+                sb.append("s ");
+            }
         }
-        sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        sb.append(" onto the battlefield");
         String message = amount.getMessage();
         if (message.length() > 0) {
-            sb.append(" for each ");
+            if (message.startsWith("the ") || message.contains("number ")) {
+                sb.append(", where X is ");
+            } else {
+                sb.append(" for each ");
+            }
         }
         sb.append(message);
         staticText = sb.toString();
