@@ -69,20 +69,23 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel label1 = new JLabel("Choose format:");
         label1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label1.setForeground(Color.white);
         jPanel1.add(label1);
 
         formats = new JComboBox(ConstructedFormats.getTypes());
         formats.setSelectedItem(ConstructedFormats.getDefault());
-        formats.setPreferredSize(new Dimension(100, 25));
-        formats.setMaximumSize(new Dimension(100, 25));
+        formats.setPreferredSize(new Dimension(250, 25));
+        formats.setMaximumSize(new Dimension(250, 25));
         formats.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel1.add(formats);
 
         JLabel label2 = new JLabel("Choose size:");
         label2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label2.setForeground(Color.white);
         jPanel1.add(label2);
 
         small3x3 = new JRadioButton("3x3");
+        small3x3.setForeground(Color.white);
         boolean selected3x3 = MageFrame.getPreferences().get(LAYOYT_CONFIG_KEY, MageBook.LAYOUT_3x3).equals(MageBook.LAYOUT_3x3);
         small3x3.setSelected(selected3x3);
         small3x3.addActionListener(new ActionListener() {
@@ -96,6 +99,7 @@ public final class CollectionViewerPanel extends JPanel {
         jPanel1.add(small3x3);
 
         big4x4 = new JRadioButton("4x4");
+        big4x4.setForeground(Color.white);
         big4x4.setSelected(!selected3x3);
         big4x4.addActionListener(new ActionListener() {
             @Override
@@ -109,6 +113,7 @@ public final class CollectionViewerPanel extends JPanel {
 
         JLabel label3 = new JLabel("Switch tabs:");
         label3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        label3.setForeground(Color.white);
         jPanel1.add(label3);
 
         JPanel buttonPanel = new JPanel();

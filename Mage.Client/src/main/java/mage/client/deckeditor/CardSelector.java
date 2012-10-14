@@ -157,9 +157,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnBooster.setVisible(true);
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
-        cbExpansionSet.setModel(new DefaultComboBoxModel(Sets.getInstance().getSortedByReleaseDate()));
-        cbExpansionSet.insertItemAt("-- All sets", 0);
-        cbExpansionSet.insertItemAt("-- Standard", 1);
+        cbExpansionSet.setModel(new DefaultComboBoxModel(ConstructedFormats.getTypes()));
         cbExpansionSet.setSelectedIndex(0);
 
         filterCards();
@@ -216,14 +214,15 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         String name = jTextFieldSearch.getText().trim();
         filter.add(new CardTextPredicate(name));
 
-        if (this.cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-            filter.add(new ExpansionSetPredicate(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode()));
-        } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
-            ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
-            for (String setCode : ConstructedFormats.getSetsByFormat("Standard")) {
-                expansionPredicates.add(new ExpansionSetPredicate(setCode));
+        if (this.cbExpansionSet.isVisible()) {
+            String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
+            if (!expansionSelection.equals("- All Sets")) {
+                ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
+                for (String setCode : ConstructedFormats.getSetsByFormat(expansionSelection)) {
+                    expansionPredicates.add(new ExpansionSetPredicate(setCode));
+                }
+                filter.add(Predicates.or(expansionPredicates));
             }
-            filter.add(Predicates.or(expansionPredicates));
         }
     }
 
@@ -411,7 +410,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbColor.add(rdoColorless);
 
-        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        cbExpansionSet.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbExpansionSet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbExpansionSetActionPerformed(evt);
@@ -539,7 +538,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         });
         tbTypes.add(chkPiles);
 
-        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Item 1", "Item 2", "Item 3", "Item 4"}));
+        cbSortBy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbSortBy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSortByActionPerformed(evt);
@@ -605,8 +604,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
 
+        cardCountLabel.setForeground(java.awt.SystemColor.textHighlightText);
         cardCountLabel.setText("Card count:");
 
+        cardCount.setForeground(java.awt.SystemColor.text);
         cardCount.setText("0");
 
         jButtonRemoveFromMain.setText("-");
@@ -649,7 +650,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addComponent(cardCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cardCount, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -690,7 +691,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

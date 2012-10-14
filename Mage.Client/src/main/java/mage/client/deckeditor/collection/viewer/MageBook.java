@@ -291,6 +291,7 @@ public class MageBook extends JComponent {
             this.setsToDisplay = CardsStorage.getSetCodes();
         }
         addSetTabs();
+        tabs.get(0).execute();
     }
 
     public void next() {
