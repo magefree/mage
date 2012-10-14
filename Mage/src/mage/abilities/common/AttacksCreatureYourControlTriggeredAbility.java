@@ -31,6 +31,7 @@ package mage.abilities.common;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -41,23 +42,31 @@ import mage.game.permanent.Permanent;
  */
 public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbilityImpl<AttacksCreatureYourControlTriggeredAbility> {
 
+    protected FilterControlledCreaturePermanent filter;
+
     public AttacksCreatureYourControlTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, new FilterControlledCreaturePermanent());
+    }
+    
+    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.filter = filter;
     }
 
     public AttacksCreatureYourControlTriggeredAbility(AttacksCreatureYourControlTriggeredAbility ability) {
         super(ability);
+        this.filter = ability.filter;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent source = game.getPermanent(event.getSourceId());
-            if (source != null && source.getControllerId().equals(controllerId)) {
+            Permanent sourcePermanent = game.getPermanent(event.getSourceId());
+            if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
                 return true;
             }
         }
@@ -71,7 +80,7 @@ public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbility
 
     @Override
     public String getRule() {
-        return "Whenever a creature you control attacks, " + super.getRule();
+        return "Whenever a " + filter.getMessage() + " attacks, " + super.getRule();
     }
 
 }

@@ -11,6 +11,7 @@ import mage.game.permanent.Permanent;
  * @author LevelX2
  */
 public class SacrificeCostCreaturesToughness implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         for (Cost cost: sourceAbility.getCosts()) {
@@ -33,7 +34,7 @@ public class SacrificeCostCreaturesToughness implements DynamicValue {
 
     @Override
     public String toString() {
-        return "X";
+        return "";
     }
 
 
