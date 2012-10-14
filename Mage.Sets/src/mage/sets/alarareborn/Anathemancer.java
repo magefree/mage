@@ -101,6 +101,11 @@ class AnathemancerCount implements DynamicValue {
     }
 
     @Override
+    public String toString() {
+        return "1";
+    }
+
+    @Override
     public String getMessage() {
         return "nonbasic lands that player controls";
     }
