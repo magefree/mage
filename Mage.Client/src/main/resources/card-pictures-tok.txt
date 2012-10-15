@@ -1,3 +1,29 @@
+|Generate|TOK:RTR|Bird|
+|Generate|TOK:RTR|Knight|
+|Generate|TOK:RTR|Soldier|
+|Generate|TOK:RTR|Assassin|
+|Generate|TOK:RTR|Dragon|
+|Generate|TOK:RTR|Goblin|
+|Generate|TOK:RTR|Ooze|
+|Generate|TOK:RTR|Rhino|
+|Generate|TOK:RTR|Saproling|
+|Generate|TOK:RTR|Wurm|
+|Generate|TOK:RTR|Elemental|
+|Generate|TOK:RTR|Centaur 2|
+
+|Generate|EMBLEM:M13|Liliana of the Dark Realms|
+
+|Generate|TOK:M13|Cat|
+|Generate|TOK:M13|Goat|
+|Generate|TOK:M13|Soldier|
+|Generate|TOK:M13|Drake|
+|Generate|TOK:M13|Zombie|
+|Generate|TOK:M13|Goblin|
+|Generate|TOK:M13|Hellion|
+|Generate|TOK:M13|Beast|
+|Generate|TOK:M13|Saproling|
+|Generate|TOK:M13|Wurm|
+
 |Generate|EMBLEM:AVR|Tamiyo, the Moon Sage|
 
 |Generate|TOK:AVR|Angel|
