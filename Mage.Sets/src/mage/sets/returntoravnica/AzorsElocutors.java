@@ -34,14 +34,17 @@ import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 
 /**
@@ -61,7 +64,7 @@ public class AzorsElocutors extends CardImpl<AzorsElocutors> {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(new Counter("filibuster",1)), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AzorsElocutorsEffect(), TargetController.YOU, false));
 
         // Whenever a source deals damage to you, remove a filibuster counter from Azor's Elocutors.
         this.addAbility(new AzorsElocutorsTriggeredAbility());
@@ -105,4 +108,37 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl<AzorsElocutors
         return "Whenever a source deals damage to you, " + super.getRule();
     }
 
+}
+
+class AzorsElocutorsEffect extends OneShotEffect<AzorsElocutorsEffect> {
+
+    public AzorsElocutorsEffect() {
+        super(Constants.Outcome.Benefit);
+    }
+
+    public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
+        super(effect);
+        staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            permanent.addCounters(new Counter("filibuster",1), game);
+            if (permanent.getCounters().getCount("filibuster") > 4) {
+                Player player = game.getPlayer(permanent.getControllerId());
+                if (player != null) {
+                    player.won(game);
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public AzorsElocutorsEffect copy() {
+        return new AzorsElocutorsEffect(this);
+    }
 }

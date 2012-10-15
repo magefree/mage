@@ -27,6 +27,8 @@
  */
 package mage.sets.urzaslegacy;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -93,12 +95,14 @@ class TreefolkMysticEffect extends OneShotEffect<TreefolkMysticEffect> {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if(permanent != null)
         {
-            for(UUID uuid : permanent.getAttachments())
+            LinkedList<UUID> attachments = new LinkedList();
+            attachments.addAll(permanent.getAttachments());
+            for(UUID uuid : attachments)
             {
                 Permanent aura = game.getPermanent(uuid);
                 if(aura != null && aura.getSubtype().contains("Aura"))
                 {
-                    permanent.destroy(source.getId(), game, false);
+                    aura.destroy(source.getId(), game, false);
                 }
             }
         }
