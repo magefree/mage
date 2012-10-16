@@ -99,7 +99,7 @@ class SerraAvengerCost extends CostImpl<SerraAvengerCost> {
             if (controller.getTurns() > 3) {
                 return true;
             } else {
-                game.informPlayer(controller, "You can't cass Serra Avenger (your turns passed: " + controller.getTurns() + ")");
+                game.informPlayer(controller, "You can't cast Serra Avenger (your turns passed: " + controller.getTurns() + ")");
                 return false;
             }
         }
