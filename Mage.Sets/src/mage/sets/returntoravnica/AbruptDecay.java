@@ -31,7 +31,7 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.CantCounterAbility;
+import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
@@ -58,7 +58,7 @@ public class AbruptDecay extends CardImpl<AbruptDecay> {
         this.color.setBlack(true);
 
         // Abrupt Decay can't be countered by spells or abilities.
-        this.addAbility(new CantCounterAbility());
+        this.getSpellAbility().addEffect(new CantCounterSourceEffect());
 
         // Destroy target nonland permanent with converted mana cost 3 or less.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());

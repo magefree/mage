@@ -33,9 +33,9 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.common.CantCounterAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class Counterflux extends CardImpl<mage.sets.returntoravnica.Counterflux>
         this.color.setRed(true);
 
         // Counterflux can't be countered by spells or abilities.
-        this.addAbility(new CantCounterAbility());
+        this.getSpellAbility().addEffect(new CantCounterSourceEffect());
 
         // Counter target spell you don't control.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
