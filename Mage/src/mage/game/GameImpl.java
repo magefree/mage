@@ -580,6 +580,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         state.getWatchers().add(new CastSpellLastTurnWatcher());
         state.getWatchers().add(new MiracleWatcher());
         state.getWatchers().add(new SoulbondWatcher());
+        state.getWatchers().add(new PlayerLostLifeWatcher());
 
         //20100716 - 103.5
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
