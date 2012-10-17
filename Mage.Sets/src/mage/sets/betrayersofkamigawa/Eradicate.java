@@ -58,7 +58,7 @@ public class Eradicate extends CardImpl<Eradicate> {
         // Exile target nonblack creature. Search its controller's graveyard, hand, and library for all cards 
         // with the same name as that creature and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect());
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that creature"));
     }
 
     public Eradicate(final Eradicate card) {

@@ -52,7 +52,7 @@ public class Splinter extends CardImpl<Splinter> {
         // Exile target artifact. Search its controller's graveyard, hand, and library for all cards
         // with the same name as that artifact and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect());
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that artifact"));
     }
 
     public Splinter(final Splinter card) {

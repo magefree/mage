@@ -58,7 +58,7 @@ public class SowingSalt extends CardImpl<SowingSalt> {
         // Exile target nonbasic land. Search its controller's graveyard, hand, and library for all cards with 
         // the same name as that land and exile them. Then that player shuffles his or her library.
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect());
+        this.getSpellAbility().addEffect(new ExileTargetAndSearchGraveyardHandLibraryEffect(false, "its controller's","all cards with the same name as that land"));
     }
 
     public SowingSalt(final SowingSalt card) {
