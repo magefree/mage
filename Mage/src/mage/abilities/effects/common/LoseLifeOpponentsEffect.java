@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,52 +25,71 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.abilities.dynamicvalue.common;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
-import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**
  *
  * @author LevelX2
  */
+public class LoseLifeOpponentsEffect extends OneShotEffect<LoseLifeOpponentsEffect> {
 
-public class OpponentsLostLifeCount implements DynamicValue {
+    private DynamicValue amount;
 
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        return this.calculate(game, sourceAbility.getControllerId());
+    public LoseLifeOpponentsEffect(int amount) {
+        this(new StaticValue(amount));
     }
 
-    public int calculate(Game game, UUID controllerId) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
-        if (watcher != null) {
-            int amountLifeLost = 0;
-            for(UUID opponent: game.getOpponents(controllerId)){
-                amountLifeLost += watcher.getLiveLost(opponent);
+    public LoseLifeOpponentsEffect(DynamicValue amount) {
+        super(Constants.Outcome.Damage);
+        this.amount = amount;
+        staticText = "each opponent loses " + amount + " life";
+    }
+
+    public LoseLifeOpponentsEffect(final LoseLifeOpponentsEffect effect) {
+        super(effect);
+        this.amount = effect.amount;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID opponentId: game.getOpponents(source.getControllerId())) {
+            Player player = game.getPlayer(opponentId);
+            if (player != null) {
+                player.loseLife(amount.calculate(game, source), game);
             }
-            return amountLifeLost;
         }
-        return 0;
+        return true;
     }
 
     @Override
-    public DynamicValue clone() {
-        return new OpponentsLostLifeCount();
+    public LoseLifeOpponentsEffect copy() {
+        return new LoseLifeOpponentsEffect(this);
     }
 
     @Override
-    public String toString() {
-        return "X";
-    }
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        String message = amount.getMessage();
 
-    @Override
-    public String getMessage() {
-        return "the total life lost by your opponents this turn";
+        sb.append("each opponent loses ");
+        if (message.isEmpty() || !message.equals("1")) {
+            sb.append(amount).append(" ");
+        }
+        sb.append("life");
+        if (message.length() > 0) {
+            sb.append(message.equals("1") || message.startsWith("the ") ? " equal to the number of " : " for each ");
+            sb.append(message);
+        }
+        return sb.toString();
     }
 }
