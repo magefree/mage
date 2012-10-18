@@ -29,6 +29,7 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -44,7 +45,9 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.turn.Step;
 import mage.players.Player;
 
 /**
@@ -88,12 +91,15 @@ public class VolatileRig extends CardImpl<VolatileRig> {
 
 class VolatileRigTriggeredAbility extends TriggeredAbilityImpl<VolatileRigTriggeredAbility> {
 
+    private Boolean triggerdThisCombatStep = false;
+
     public VolatileRigTriggeredAbility() {
         super(Zone.BATTLEFIELD, new VolatileRigEffect());
     }
 
     public VolatileRigTriggeredAbility(final VolatileRigTriggeredAbility effect) {
         super(effect);
+        this.triggerdThisCombatStep = effect.triggerdThisCombatStep;
     }
 
     @Override
@@ -103,9 +109,24 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl<VolatileRigTrigge
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        /*
+         * If Volatile Rig is dealt damage by multiple sources at the same time 
+         * (for example, multiple blocking creatures), its first triggered ability
+         * will trigger only once.
+         */
+        if (triggerdThisCombatStep && event.getType() == EventType.COMBAT_DAMAGE_STEP_POST) {
+            triggerdThisCombatStep = false;
+        }
+
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-                        this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                        return true;
+            if (game.getPhase().getStep().getType() == Constants.PhaseStep.COMBAT_DAMAGE) {
+                if (triggerdThisCombatStep) {
+                    return false;
+                } else {
+                    triggerdThisCombatStep = true;
+                }
+            }
+            return true;
         }
         return false;
     }
