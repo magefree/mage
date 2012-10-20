@@ -39,8 +39,10 @@ import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.client.cards.BigCard;
-import mage.client.cards.CardsStorage;
 import mage.client.chat.ChatPanel;
 import mage.client.components.*;
 import mage.client.components.ext.dlg.DialogManager;
@@ -74,6 +76,7 @@ import mage.server.Main;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
 import javax.imageio.ImageIO;
@@ -81,19 +84,27 @@ import javax.swing.*;
 import javax.swing.JToolBar.Separator;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
-import mage.cards.repository.CardScanner;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -469,22 +480,36 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menu.show(component, 0, component.getHeight());
     }
 
+    private List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<Card>();
+        List<CardInfo> allCards = CardRepository.instance.getAllCards();
+        for (CardInfo cardInfo : allCards) {
+            cards.add(cardInfo.getCard());
+        }
+
+        return cards;
+    }
+
     private void checkForNewImages() {
-        HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
-        List<Card> notImplemented = CardsStorage.getNotImplementedCards();
-        cards.addAll(notImplemented);
-        if (Plugins.getInstance().newImage(cards)) {
+        List<Card> cards = getAllCards();
+
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+
+        if (DownloadPictures.checkForNewCards(cards, path)) {
             if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                Plugins.getInstance().downloadImage(cards);
+                DownloadPictures.startDownload(null, cards, path);
             }
         }
     }
 
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        HashSet<Card> cards = new HashSet<Card>(CardsStorage.getAllCards());
-        List<Card> notImplemented = CardsStorage.getNotImplementedCards();
-        cards.addAll(notImplemented);
-        Plugins.getInstance().downloadImage(cards);
+        List<Card> cards = getAllCards();
+
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+
+        DownloadPictures.startDownload(null, cards, path);
     }
 
     public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {

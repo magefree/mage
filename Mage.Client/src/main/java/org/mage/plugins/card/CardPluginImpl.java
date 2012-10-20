@@ -1,6 +1,5 @@
 package org.mage.plugins.card;
 
-import mage.cards.Card;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
 import mage.interfaces.plugin.CardPlugin;
@@ -21,7 +20,6 @@ import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
-import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.images.ImageCache;
 import org.mage.plugins.card.info.CardInfoPaneImpl;
 
@@ -419,22 +417,6 @@ public class CardPluginImpl implements CardPlugin {
         private int getHeight() {
             return cardHeight + (size() - 1) * stackSpacingY + cardSpacingY;
         }
-    }
-
-    @Override
-    public boolean newImages(Set<Card> allCards, String imagesPath) {
-        return DownloadPictures.checkForNewCards(allCards, imagesPath);
-    }
-
-    /**
-     * Download images.
-     *
-     * @param allCards Set of cards to download images for.
-     * @param imagesPath Path to check in and store images to. Can be null, in such case default path should be used.
-     */
-    @Override
-    public void downloadImages(Set<Card> allCards, String imagesPath) {
-        DownloadPictures.startDownload(null, allCards, imagesPath);
     }
 
     /**
