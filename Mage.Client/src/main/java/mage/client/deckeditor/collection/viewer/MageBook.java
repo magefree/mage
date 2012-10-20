@@ -32,8 +32,11 @@ import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
 import mage.client.MageFrame;
+import mage.cards.CardImpl;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
-import mage.client.cards.CardsStorage;
 import mage.client.components.HoverButton;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.AudioManager;
@@ -49,11 +52,16 @@ import org.mage.card.arcane.ManaSymbols;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -209,13 +217,14 @@ public class MageBook extends JComponent {
         jLayeredPane.removeAll();
         addLeftRightPageButtons();
 
-        java.util.List<Card> cards = getCards(currentPage, currentSet);
+        List<CardInfo> cards = getCards(currentPage, currentSet);
         int size = cards.size();
 
         Rectangle rectangle = new Rectangle();
         rectangle.translate(OFFSET_X, OFFSET_Y);
         for (int i = 0; i < Math.min(conf.CARDS_PER_PAGE / 2, size); i++) {
-            addCard(new CardView(cards.get(i)), bigCard, null, rectangle);
+            Card card = CardImpl.createCard(cards.get(i).getClassName());
+            addCard(new CardView(card), bigCard, null, rectangle);
             rectangle = CardPosition.translatePosition(i, rectangle, conf);
         }
 
@@ -225,7 +234,8 @@ public class MageBook extends JComponent {
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
         for (int i = conf.CARDS_PER_PAGE / 2; i < Math.min(conf.CARDS_PER_PAGE, size); i++) {
-            addCard(new CardView(cards.get(i)), bigCard, null, rectangle);
+            Card card = CardImpl.createCard(cards.get(i).getClassName());
+            addCard(new CardView(card), bigCard, null, rectangle);
             rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
         }
 
@@ -252,10 +262,10 @@ public class MageBook extends JComponent {
         jLayeredPane.add(label);
     }
 
-    private java.util.List<Card> getCards(int page, String set) {
-        int start = page * conf.CARDS_PER_PAGE;
-        int end = (page + 1) * conf.CARDS_PER_PAGE;
-        java.util.List<Card> cards = CardsStorage.getAllCards(start, end, currentSet, false);
+    private List<CardInfo> getCards(int page, String set) {
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(set).start((long) page * conf.CARDS_PER_PAGE).count((long) conf.CARDS_PER_PAGE + 1);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.size() > conf.CARDS_PER_PAGE) {
             pageRight.setVisible(true);
         }
@@ -288,7 +298,7 @@ public class MageBook extends JComponent {
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(format);
         if (this.setsToDisplay.isEmpty()) {
             // display all
-            this.setsToDisplay = CardsStorage.getSetCodes();
+            this.setsToDisplay = CardRepository.instance.getSetCodes();
         }
         addSetTabs();
         tabs.get(0).execute();

@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
-import mage.client.cards.CardsStorage;
+import mage.cards.repository.CardRepository;
 import mage.sets.Sets;
 
 /**
@@ -344,10 +344,9 @@ public class ConstructedFormats {
     }
 
     private static void buildLists() {
-        
-        for (String setCode : CardsStorage.getSetCodes()) {
+        for (String setCode : CardRepository.instance.getSetCodes()) {
             ExpansionSet set = Sets.findSet(setCode);
-        
+
             if (set.getReleaseDate().after(standardDate)) {
                 standard.add(set.getCode());
             }
@@ -359,7 +358,7 @@ public class ConstructedFormats {
             }
         }
     }
-    
+
     private static final List<String> standard = new ArrayList<String>();
     private static final Date standardDate = new GregorianCalendar(2011, 9, 29).getTime();
 
