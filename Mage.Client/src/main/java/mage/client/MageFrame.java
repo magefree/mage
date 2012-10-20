@@ -93,6 +93,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.cards.repository.CardScanner;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -974,6 +975,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         });
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
+                CardScanner.scan();
                 for (String arg : args) {
                     if (arg.startsWith(liteModeArg)) {
                         liteMode = true;
