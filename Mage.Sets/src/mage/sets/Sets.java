@@ -56,7 +56,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
     private static Set<String> nonLandNames;
     private static Set<String> creatureTypes;
     private static List<Card> cards;
-    private static Map<String, Card> cardMap;
     protected static Random rnd = new Random();
 
     private static boolean loaded;
@@ -69,7 +68,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
         names = new TreeSet<String>();
         nonLandNames = new TreeSet<String>();
         cards = new ArrayList<Card>();
-        cardMap = new HashMap<String, Card>();
         creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Alliances.getInstance());
@@ -262,18 +260,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     protected static boolean isColoredMana(String symbol) {
         return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
-    }
-
-    public static Deck generateDeck() {
-        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
-        int numColors = rnd.nextInt(2) + 1;
-        int cardPoolSize = 60;
-        if (numColors > 2) {
-            cardPoolSize += 20;
-        }
-        Deck deck = new Deck();
-
-        return deck;
     }
 
     public static Card findCard(String name) {
