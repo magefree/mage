@@ -28,7 +28,9 @@
 
 package mage.client.util;
 
-import mage.sets.Sets;
+import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.view.CardView;
 import mage.view.CardsView;
 import mage.view.SimpleCardView;
@@ -44,9 +46,9 @@ public class CardsViewUtil {
         CardsView cards = new CardsView();
 
         for (SimpleCardView simple: view.values()) {
-            mage.cards.Card card = Sets.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
+            CardInfo cardInfo = CardRepository.instance.findCard(simple.getExpansionSetCode(), simple.getCardNumber());
+            Card card = cardInfo != null ? cardInfo.getCard() : null;
             if (card != null) {
-
                 cards.put(simple.getId(), new CardView(card, simple.getId()));
             }
         }

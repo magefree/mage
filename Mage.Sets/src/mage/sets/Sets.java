@@ -305,23 +305,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return null;
     }
 
-    public static Card findCard(String expansionsetCode, int cardNum) {
-        if (cardMap.containsKey(expansionsetCode + Integer.toString(cardNum))) {
-            return cardMap.get(expansionsetCode + Integer.toString(cardNum));
-        }
-        if (fINSTANCE.containsKey(expansionsetCode)) {
-            ExpansionSet set = fINSTANCE.get(expansionsetCode);
-            Card card = set.findCard(cardNum);
-            if (card != null) {
-                cardMap.put(expansionsetCode + Integer.toString(cardNum), card);
-                return card;
-            }
-        }
-        logger.warn("Could not find card: set=" + expansionsetCode + "cardNum=" + Integer.toString(cardNum));
-        return null;
-
-    }
-
     public static Card createCard(Class clazz) {
         try {
             Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
