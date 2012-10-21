@@ -33,7 +33,6 @@ import mage.Constants.SetType;
 import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLDecoder;
@@ -77,8 +76,6 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
-        //this.cards = getCardClassesForPackage(packageName);
-        //this.rarities = getCardsByRarity();
     }
 
     public List<Card> getCards() {
@@ -119,16 +116,8 @@ public abstract class ExpansionSet implements Serializable {
         return setType;
     }
 
-    private Card createCard(Class clazz) {
-        try {
-            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-            Card card = (Card) con.newInstance(new Object[]{null});
-            card.build();
-            return card;
-        } catch (Exception ex) {
-            logger.fatal("Error creating card:" + clazz.getName(), ex);
-            return null;
-        }
+    public String getPackageName() {
+        return packageName;
     }
 
     @Override
@@ -237,7 +226,7 @@ public abstract class ExpansionSet implements Serializable {
         List<Card> newCards = new ArrayList<Card>();
         for (Class clazz : classes) {
             if (clazz.getPackage().getName().equals(packageName)) {
-                Card card = createCard(clazz);
+                Card card = CardImpl.createCard(clazz);
                 if (card.isNightCard()) {
                     // skip second face of double-faced cards
                     continue;
