@@ -113,7 +113,7 @@ public enum CardRepository {
         }
     }
 
-    public CardInfo getCard(String setCode, int cardNumber) {
+    public CardInfo findCard(String setCode, int cardNumber) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             queryBuilder.where().eq("setCode", setCode).and().eq("cardNumber", cardNumber);
