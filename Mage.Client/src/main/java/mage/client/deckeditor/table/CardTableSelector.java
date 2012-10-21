@@ -33,9 +33,11 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
-import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.constants.Constants.SortBy;
@@ -53,13 +55,13 @@ import mage.view.CardsView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -68,7 +70,6 @@ import java.util.List;
 public class CardTableSelector extends javax.swing.JPanel implements ComponentListener {
 
     private final List<Card> cards = new ArrayList<Card>();
-    private FilterCard filter = new FilterCard();
     private BigCard bigCard;
     protected CardEventSource cardEventSource = new CardEventSource();
     private DeckEditorMode mode = DeckEditorMode.Constructed;
@@ -95,8 +96,8 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
 
     }
 
-    private void buildFilter() {
-        filter = new FilterCard();
+    private FilterCard buildFilter() {
+        FilterCard filter = new FilterCard();
         ArrayList<Predicate<MageObject>> predicates = new ArrayList<Predicate<MageObject>>();
 
         if (this.rdoGreen.isSelected()) {
@@ -150,11 +151,13 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
             filter.add(new ExpansionSetPredicate(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode()));
         } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
             ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
-            for(String setCode : ConstructedFormats.getSetsByFormat("Standard")) {
+            for (String setCode : ConstructedFormats.getSetsByFormat("Standard")) {
                 expansionPredicates.add(new ExpansionSetPredicate(setCode));
             }
             filter.add(Predicates.or(expansionPredicates));
         }
+
+        return filter;
     }
 
     public void loadCards(List<Card> sideboard, BigCard bigCard, boolean construct) {
@@ -189,21 +192,71 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
         filterCards();
     }
 
+    private CardCriteria buildCriteria() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.black(this.rdoBlack.isSelected());
+        criteria.blue(this.rdoBlue.isSelected());
+        criteria.green(this.rdoGreen.isSelected());
+        criteria.red(this.rdoRed.isSelected());
+        criteria.white(this.rdoWhite.isSelected());
+        criteria.colorless(this.rdoColorless.isSelected());
+
+        if (this.rdoLand.isSelected()) {
+            criteria.types(CardType.LAND);
+        }
+        if (this.rdoArtifacts.isSelected()) {
+            criteria.types(CardType.ARTIFACT);
+        }
+        if (this.rdoCreatures.isSelected()) {
+            criteria.types(CardType.CREATURE);
+        }
+        if (this.rdoEnchantments.isSelected()) {
+            criteria.types(CardType.ENCHANTMENT);
+        }
+        if (this.rdoInstants.isSelected()) {
+            criteria.types(CardType.INSTANT);
+        }
+        if (this.rdoSorceries.isSelected()) {
+            criteria.types(CardType.SORCERY);
+        }
+        if (this.rdoPlaneswalkers.isSelected()) {
+            criteria.types(CardType.PLANESWALKER);
+        }
+
+        String text = jTextFieldSearch.getText().trim();
+        if (!text.isEmpty()) {
+            // criteria.rules(text);
+        }
+
+        if (this.cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+            criteria.setCodes(((ExpansionSet) this.cbExpansionSet.getSelectedItem()).getCode());
+        } else if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
+            List<String> setCodes = ConstructedFormats.getSetsByFormat("Standard");
+            criteria.setCodes(setCodes.toArray(new String[0]));
+        }
+
+        return criteria;
+    }
+
     private void filterCards() {
-        buildFilter();
+        FilterCard filter = buildFilter();
         try {
             List<Card> filteredCards = new ArrayList<Card>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             if (!cards.isEmpty()) {
                 for (Card card: cards) {
-                    if (filter.match(card, null))
+                    if (filter.match(card, null)) {
                         filteredCards.add(card);
+                    }
                 }
             }
             else {
-                for (Card card: CardsStorage.getAllCards()) {
-                    if (filter.match(card, null))
+                List<CardInfo> foundCards = CardRepository.instance.findCards(buildCriteria());
+                for (CardInfo cardInfo : foundCards) {
+                    Card card = cardInfo.getCard();
+                    if (filter.match(card, null)) {
                         filteredCards.add(card);
+                    }
                 }
             }
             this.mainModel.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
@@ -225,22 +278,6 @@ public class CardTableSelector extends javax.swing.JPanel implements ComponentLi
                 break;
             }
         }
-    }
-
-    public Card getCard(UUID cardId) {
-        if (!cards.isEmpty()) {
-            for (Card card: cards) {
-                if (card.getId().equals(cardId))
-                    return card;
-            }
-        }
-        else {
-            for (Card card: CardsStorage.getAllCards()) {
-                if (card.getId().equals(cardId))
-                    return card;
-            }
-        }
-        return null;
     }
 
     private void initComponents() {

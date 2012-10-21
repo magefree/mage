@@ -269,12 +269,12 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void doubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.doubleClick(card.getId(), "double-click");
+        cardEventSource.doubleClick(card, "double-click");
     }
 
     public void shiftDoubleClick(int index) {
         CardView card = view.get(index);
-        cardEventSource.shiftDoubleClick(card.getId(), "shift-double-click");
+        cardEventSource.shiftDoubleClick(card, "shift-double-click");
     }
 
     public void removeFromMainEvent(int index) {

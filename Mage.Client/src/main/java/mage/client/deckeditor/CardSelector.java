@@ -39,9 +39,11 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardGrid;
-import mage.client.cards.CardsStorage;
 import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
@@ -54,15 +56,14 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
-import mage.sets.Sets;
 import mage.view.CardsView;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.event.*;
 import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -71,7 +72,6 @@ import java.util.List;
 public class CardSelector extends javax.swing.JPanel implements ComponentListener {
 
     private final List<Card> cards = new ArrayList<Card>();
-    private FilterCard filter = new FilterCard();
     private BigCard bigCard;
     private boolean limited = false;
 
@@ -163,8 +163,8 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filterCards();
     }
 
-    private void buildFilter() {
-        filter = new FilterCard();
+    private FilterCard buildFilter() {
+        FilterCard filter = new FilterCard();
         ArrayList<Predicate<MageObject>> predicates = new ArrayList<Predicate<MageObject>>();
 
         if (this.rdoGreen.isSelected()) {
@@ -224,10 +224,59 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 filter.add(Predicates.or(expansionPredicates));
             }
         }
+
+        return filter;
+    }
+
+    private CardCriteria buildCriteria() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.black(this.rdoBlack.isSelected());
+        criteria.blue(this.rdoBlue.isSelected());
+        criteria.green(this.rdoGreen.isSelected());
+        criteria.red(this.rdoRed.isSelected());
+        criteria.white(this.rdoWhite.isSelected());
+        criteria.colorless(this.rdoColorless.isSelected());
+
+        if (this.rdoLand.isSelected()) {
+            criteria.types(CardType.LAND);
+        }
+        if (this.rdoArtifacts.isSelected()) {
+            criteria.types(CardType.ARTIFACT);
+        }
+        if (this.rdoCreatures.isSelected()) {
+            criteria.types(CardType.CREATURE);
+        }
+        if (this.rdoEnchantments.isSelected()) {
+            criteria.types(CardType.ENCHANTMENT);
+        }
+        if (this.rdoInstants.isSelected()) {
+            criteria.types(CardType.INSTANT);
+        }
+        if (this.rdoSorceries.isSelected()) {
+            criteria.types(CardType.SORCERY);
+        }
+        if (this.rdoPlaneswalkers.isSelected()) {
+            criteria.types(CardType.PLANESWALKER);
+        }
+
+        String text = jTextFieldSearch.getText().trim();
+        if (!text.isEmpty()) {
+            // criteria.rules(text);
+        }
+
+        if (this.cbExpansionSet.isVisible()) {
+            String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
+            if (!expansionSelection.equals("- All Sets")) {
+                List<String> setCodes = ConstructedFormats.getSetsByFormat(expansionSelection);
+                criteria.setCodes(setCodes.toArray(new String[0]));
+            }
+        }
+
+        return criteria;
     }
 
     private void filterCards() {
-        buildFilter();
+        FilterCard filter = buildFilter();
         try {
             List<Card> filteredCards = new ArrayList<Card>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
@@ -239,7 +288,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 }
             }
             else {
-                for (Card card: CardsStorage.getAllCards()) {
+                List<CardInfo> foundCards = CardRepository.instance.findCards(buildCriteria());
+                for (CardInfo cardInfo : foundCards) {
+                    Card card = cardInfo.getCard();
                     if (filter.match(card, null)) {
                         filteredCards.add(card);
                     }
@@ -273,22 +324,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 break;
             }
         }
-    }
-
-    public Card getCard(UUID cardId) {
-        if (!cards.isEmpty()) {
-            for (Card card: cards) {
-                if (card.getId().equals(cardId))
-                    return card;
-            }
-        }
-        else {
-            for (Card card: CardsStorage.getAllCards()) {
-                if (card.getId().equals(cardId))
-                    return card;
-            }
-        }
-        return null;
     }
 
     /** This method is called from within the constructor to
