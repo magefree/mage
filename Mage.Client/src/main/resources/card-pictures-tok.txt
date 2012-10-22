@@ -11,7 +11,7 @@
 |Generate|TOK:RTR|Elemental|
 |Generate|TOK:RTR|Centaur 2|
 
-|Generate|EMBLEM:M13|Liliana of the Dark Realms|
+|Generate|EMBLEM-:M13|Liliana of the Dark Realms|
 
 |Generate|TOK:M13|Cat|
 |Generate|TOK:M13|Goat|

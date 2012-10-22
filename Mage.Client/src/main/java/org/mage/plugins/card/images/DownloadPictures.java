@@ -325,6 +325,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             String set = params[2].substring(7);
                             CardInfo card = new CardInfo("Emblem " + params[3], set, 0, 0, true);
                             list.add(card);
+                        } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
+                            String set = params[2].substring(8);
+                            CardInfo card = new CardInfo(params[3] + " Emblem", set, 0, 0, true);
+                            list.add(card);
                         }
                     } else {
                         log.error("wrong format for image urls: " + line);
