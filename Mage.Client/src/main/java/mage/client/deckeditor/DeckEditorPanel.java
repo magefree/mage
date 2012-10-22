@@ -28,6 +28,7 @@
 package mage.client.deckeditor;
 
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.importer.DeckImporterUtil;
@@ -190,7 +191,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
                             Card card = cardInfo != null ? cardInfo.getCard() : null;
                             if (card != null) {
-                                deck.getSideboard().add(Sets.createCard(card.getClass()));
+                                deck.getSideboard().add(CardImpl.createCard(card.getClass()));
                             }
                             if (cardInfoPane instanceof  CardInfoPane)  {
                                 ((CardInfoPane)cardInfoPane).setCard(new CardView(card));

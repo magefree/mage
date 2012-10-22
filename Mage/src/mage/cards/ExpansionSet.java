@@ -125,51 +125,6 @@ public abstract class ExpansionSet implements Serializable {
         return name;
     }
 
-    public Card findCard(String name) {
-        for (Card card : getCards()) {
-            if (name.equalsIgnoreCase(card.getName())) {
-                Card newCard = card.copy();
-                newCard.assignNewId();
-                return newCard;
-            }
-        }
-        return null;
-    }
-
-    public Card findCard(int cardNum) {
-        for (Card card : getCards()) {
-            if (cardNum == card.getCardNumber()) {
-                Card newCard = card.copy();
-                newCard.assignNewId();
-                return newCard;
-            }
-        }
-        return null;
-    }
-
-    public Card findCard(String name, boolean random) {
-        List<Card> foundCards = new ArrayList<Card>();
-        for (Card card : getCards()) {
-            if (name.equalsIgnoreCase(card.getName())) {
-                foundCards.add(card);
-            }
-        }
-        if (foundCards.size() > 0) {
-            Card newCard = foundCards.get(rnd.nextInt(foundCards.size())).copy();
-            newCard.assignNewId();
-            return newCard;
-        }
-        return null;
-    }
-
-    public String findCardName(int cardNum) {
-        for (Card card : getCards()) {
-            if (card.getCardNumber() == cardNum)
-                return card.getClass().getCanonicalName();
-        }
-        return null;
-    }
-
     private List<Card> getCardClassesForPackage(String packageName) {
         ClassLoader classLoader = this.getClass().getClassLoader();
         assert classLoader != null;

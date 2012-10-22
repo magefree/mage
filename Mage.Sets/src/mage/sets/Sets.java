@@ -35,13 +35,11 @@ import mage.cache.CacheService;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
-import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.lang.reflect.Constructor;
 import java.util.*;
 
 /**
@@ -261,48 +259,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
     protected static boolean isColoredMana(String symbol) {
         return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
     }
-
-    public static Card findCard(String name) {
-        for (ExpansionSet set: fINSTANCE.values()) {
-            Card card = set.findCard(name);
-            if (card != null)
-                return card;
-        }
-        return null;
-    }
-
-    public static Card findCard(String name, boolean random) {
-        if (!random) {
-            return findCard(name);
-        } else {
-            List<Card> cardsFound = new ArrayList<Card>();
-            for (ExpansionSet set: fINSTANCE.values()) {
-                Card card = set.findCard(name, true);
-                if (card != null) {
-                    cardsFound.add(card);
-                }
-            }
-            if (cardsFound.size() > 0) {
-                Card card = cardsFound.get(rnd.nextInt(cardsFound.size()));
-                String cardClassName = card.getClass().getName();
-                return CardImpl.createCard(cardClassName);
-            }
-        }
-        return null;
-    }
-
-    public static Card createCard(Class clazz) {
-        try {
-            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-            Card card = (Card) con.newInstance(new Object[] {null});
-            card.build();
-            return card;
-        } catch (Exception ex) {
-            logger.fatal("Error creating card:" + clazz.getName(), ex);
-            return null;
-        }
-    }
-
 
     public static ExpansionSet findSet(String code) {
         if (fINSTANCE.containsKey(code))
