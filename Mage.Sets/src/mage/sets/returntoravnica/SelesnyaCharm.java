@@ -62,9 +62,9 @@ public class SelesnyaCharm extends CardImpl<SelesnyaCharm> {
         super(ownerId, 194, "Selesnya Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{W}");
         this.expansionSetCode = "RTR";
 
+        this.color.setGreen(true);
         this.color.setWhite(true);
-        this.color.setBlue(true);
-
+       
         // Choose one — Target creature gets +2/+2 and gains trample until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new BoostTargetEffect(2,2, Constants.Duration.EndOfTurn));

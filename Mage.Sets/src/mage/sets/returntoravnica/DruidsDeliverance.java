@@ -28,7 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -50,7 +49,7 @@ public class DruidsDeliverance extends CardImpl<DruidsDeliverance> {
         super(ownerId, 123, "Druid's Deliverance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "RTR";
 
-        this.color.setBlue(true);
+        this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt to you this turn. Populate.
         // (Put a token onto the battlefield that's a copy of a creature token you control.)

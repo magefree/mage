@@ -53,7 +53,7 @@ public class MizziumMortars extends CardImpl<MizziumMortars> {
     }
 
     public MizziumMortars(UUID ownerId) {
-        super(ownerId, 101, "Mizzium Mortars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{R}");
+        super(ownerId, 101, "Mizzium Mortars", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "RTR";
 
         this.color.setRed(true);

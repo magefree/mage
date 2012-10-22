@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MercurialChemister extends CardImpl<MercurialChemister> {
 
     public MercurialChemister(UUID ownerId) {
-        super(ownerId, 180, "Mercurial Chemister", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
+        super(ownerId, 180, "Mercurial Chemister", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Human");
         this.subtype.add("Wizard");

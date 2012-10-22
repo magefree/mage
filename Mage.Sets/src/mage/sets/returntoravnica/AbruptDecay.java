@@ -52,7 +52,7 @@ public class AbruptDecay extends CardImpl<AbruptDecay> {
     }
 
     public AbruptDecay (UUID ownerId) {
-        super(ownerId, 141, "Abrupt Decay", Rarity.MYTHIC, new CardType[]{CardType.INSTANT}, "{B}{G}");
+        super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
         this.expansionSetCode = "RTR";
         this.color.setGreen(true);
         this.color.setBlack(true);

@@ -57,7 +57,7 @@ public class BlistercoilWeird extends CardImpl<BlistercoilWeird> {
     public BlistercoilWeird(UUID ownerId) {
         super(ownerId, 211, "Blistercoil Weird", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U/R}");
         this.expansionSetCode = "RTR";
-
+        this.subtype.add("Weird");
         this.color.setBlue(true);
         this.color.setRed(true);
 

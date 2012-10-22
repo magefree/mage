@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class ViashinoRacketeer extends CardImpl<ViashinoRacketeer> {
 
     public ViashinoRacketeer(UUID ownerId) {
-        super(ownerId, 112, "Viashino Racketeer", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{R}");
+        super(ownerId, 112, "Viashino Racketeer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Viashino");
         this.subtype.add("Rogue");
