@@ -28,43 +28,50 @@
 
 package mage.cards.decks.importer;
 
-import mage.cards.Card;
+import java.util.List;
+import java.util.Random;
 import mage.cards.decks.DeckCardLists;
-import mage.sets.Sets;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DecDeckImporter extends DeckImporterImpl {
+public class DecDeckImporter extends DeckImporter {
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
-        if (line.length() == 0 || line.startsWith("//")) return;
+        if (line.length() == 0 || line.startsWith("//")) {
+            return;
+        }
+
         boolean sideboard = false;
         if (line.startsWith("SB:")) {
             line = line.substring(3).trim();
             sideboard = true;
         }
+
         int delim = line.indexOf(' ');
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).trim();
         try {
             int num = Integer.parseInt(lineNum);
-            Card card = Sets.findCard(lineName);
-            if (card == null)
+            List<CardInfo> cards = CardRepository.instance.findCards(lineName);
+            if (cards.isEmpty()) {
                 sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
-            else {
-                String cardName = card.getClass().getCanonicalName();
+            } else {
+                Random random = new Random();
                 for (int i = 0; i < num; i++) {
-                    if (!sideboard)
-                        deckList.getCards().add(cardName);
-                    else
-                        deckList.getSideboard().add(cardName);
+                    String className = cards.get(random.nextInt(cards.size())).getClassName();
+                    if (!sideboard) {
+                        deckList.getCards().add(className);
+                    } else {
+                        deckList.getSideboard().add(className);
+                    }
                 }
             }
-        }
-        catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
         }
     }

@@ -29,15 +29,15 @@ package mage.cards.decks.importer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
-import mage.sets.Sets;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
  *
  * @author North
  */
-public class DckDeckImporter extends DeckImporterImpl {
+public class DckDeckImporter extends DeckImporter {
 
     private static final Pattern pattern = Pattern.compile("(SB:)?\\s*(\\d*)\\s*\\[([a-zA-Z0-9]{3}):(\\d*)\\].*");
 
@@ -57,17 +57,18 @@ public class DckDeckImporter extends DeckImporterImpl {
             int count = Integer.parseInt(m.group(2));
             String setCode = m.group(3);
             int cardNum = Integer.parseInt(m.group(4));
-            ExpansionSet set = Sets.findSet(setCode);
-            String card = null;
-            if (set != null) {
-                card = set.findCardName(cardNum);
+
+            String className = null;
+            CardInfo cardInfo = CardRepository.instance.findCard(setCode, cardNum);
+            if (cardInfo != null) {
+                className = cardInfo.getClassName();
             }
-            if (card != null) {
+            if (className != null) {
                 for (int i = 0; i < count; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(card);
+                        deckList.getCards().add(className);
                     } else {
-                        deckList.getSideboard().add(card);
+                        deckList.getSideboard().add(className);
                     }
                 }
             } else {
