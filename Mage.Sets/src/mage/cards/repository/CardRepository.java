@@ -33,6 +33,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,12 +48,16 @@ import java.util.concurrent.Callable;
 public enum CardRepository {
 
     instance;
-    private static final String JDBC_URL = "jdbc:sqlite:mage.db";
+    private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private TreeSet<String> classNames;
 
     private CardRepository() {
+        File file = new File("db");
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
 
