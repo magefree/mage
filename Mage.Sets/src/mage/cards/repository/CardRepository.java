@@ -36,6 +36,7 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 
@@ -47,6 +48,7 @@ public enum CardRepository {
 
     instance;
     private static final String JDBC_URL = "jdbc:sqlite:mage.db";
+    private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private TreeSet<String> classNames;
 
@@ -124,6 +126,30 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return null;
+    }
+
+    /**
+     *
+     * @param name
+     * @return random card with the provided name or null if none is found
+     */
+    public CardInfo findCard(String name) {
+        List<CardInfo> cards = findCards(name);
+        if (!cards.isEmpty()) {
+            return cards.get(random.nextInt(cards.size()));
+        }
+        return null;
+    }
+
+    public List<CardInfo> findCards(String name) {
+        try {
+            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+            queryBuilder.where().eq("name", name);
+
+            return cardDao.query(queryBuilder.prepare());
+        } catch (SQLException ex) {
+        }
+        return new ArrayList<CardInfo>();
     }
 
     public List<CardInfo> findCards(CardCriteria criteria) {
