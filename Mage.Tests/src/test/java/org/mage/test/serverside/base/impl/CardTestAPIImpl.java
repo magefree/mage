@@ -4,11 +4,12 @@ import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.sets.Sets;
 import org.junit.Assert;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
@@ -118,7 +119,8 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
 
         if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
             for (int i = 0; i < count; i++) {
-                Card card = Sets.findCard(cardName, true);
+                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+                Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
@@ -136,7 +138,8 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
             }
             List<Card> cards = getCardList(gameZone, player);
             for (int i = 0; i < count; i++) {
-                Card card = Sets.findCard(cardName, true);
+                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+                Card card = cardInfo != null ? cardInfo.getCard() : null;
                 cards.add(card);
             }
         }

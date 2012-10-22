@@ -7,6 +7,8 @@ import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.game.ExileZone;
@@ -16,7 +18,6 @@ import mage.game.command.CommandObject;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.players.Player;
-import mage.sets.Sets;
 import org.junit.Assert;
 import org.mage.test.player.TestPlayer;
 import org.mage.test.serverside.base.CardTestAPI;
@@ -150,7 +151,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
 
         if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
             for (int i = 0; i < count; i++) {
-                Card card = Sets.findCard(cardName, true);
+                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+                Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
                     throw new IllegalArgumentException("[TEST] Couldn't find a card: " + cardName);
                 }
@@ -164,7 +166,8 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
             }
             List<Card> cards = getCardList(gameZone, player);
             for (int i = 0; i < count; i++) {
-                Card card = Sets.findCard(cardName, true);
+                CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+                Card card = cardInfo != null ? cardInfo.getCard() : null;
                 if (card == null) {
                     throw new AssertionError("Couldn't find a card: " + cardName);
                 }

@@ -2,9 +2,10 @@ package org.mage.test.load;
 
 import mage.Constants;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
 import mage.remote.Connection;
@@ -247,9 +248,10 @@ public class LoadTest {
         DeckCardLists deckList = new DeckCardLists();
         Deck deck = generateRandomDeck();
         for (Card card : deck.getCards()) {
-            ExpansionSet set = Sets.findSet(card.getExpansionSetCode());
-            String cardName = set.findCardName(card.getCardNumber());
-            deckList.getCards().add(cardName);
+            CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
+            if (cardInfo != null) {
+                deckList.getCards().add(cardInfo.getClassName());
+            }
         }
         return deckList;
     }
