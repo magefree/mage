@@ -66,8 +66,8 @@ public class NewPrahvGuildmage extends CardImpl<NewPrahvGuildmage> {
         
         this.color.setBlue(true);
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
         // {W}{U}: Target creature gains flying until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}{U}"));
