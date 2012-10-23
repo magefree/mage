@@ -457,6 +457,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 File temporaryFile = new File(Constants.IO.imageBaseDir + File.separator + card.hashCode() + "." + card.getName() + ".jpg");
                 String imagePath = CardImageUtils.getImagePath(card, imagesPath);
                 TFile outputFile = new TFile(imagePath);
+                if (!outputFile.exists()) {
+                    outputFile.getParentFile().mkdirs();
+                }
                 File existingFile = new File(imagePath.replaceFirst("\\w{3}.zip", ""));
                 if (existingFile.exists()) {
                     new TFile(existingFile).cp_rp(outputFile);

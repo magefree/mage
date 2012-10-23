@@ -69,6 +69,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
+    public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
@@ -173,7 +174,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         imageFolderPath = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         checkForNewImages = new javax.swing.JCheckBox();
-        checkForNewImages1 = new javax.swing.JCheckBox();
+        saveToZipFiles = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -451,10 +452,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        checkForNewImages1.setText("store in zip files");
-        checkForNewImages1.addActionListener(new java.awt.event.ActionListener() {
+        saveToZipFiles.setText("store in zip files");
+        saveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkForNewImages1ActionPerformed(evt);
+                saveToZipFilesActionPerformed(evt);
             }
         });
 
@@ -477,7 +478,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addComponent(checkForNewImages))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(checkForNewImages1)))
+                        .addComponent(saveToZipFiles)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -492,7 +493,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkForNewImages)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(checkForNewImages1)
+                .addComponent(saveToZipFiles)
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -981,6 +982,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // images
         saveImagesPath(prefs);
+        saveSaveToZipOption(prefs);
 
         try {
             prefs.flush();
@@ -1048,9 +1050,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
 
-    private void checkForNewImages1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkForNewImages1ActionPerformed
+    private void saveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToZipFilesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_checkForNewImages1ActionPerformed
+    }//GEN-LAST:event_saveToZipFilesActionPerformed
 
     private void checkForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkForNewImagesActionPerformed
         // TODO add your handling code here:
@@ -1101,6 +1103,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
                     // Images
                     loadImagesPath(prefs);
+                    loadSaveToZip(prefs);
 
                     // open specified tab before displaying
                     openTab(openedTab);
@@ -1193,7 +1196,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
         updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
     }
 
-     private static void saveImagesPath(Preferences prefs) {
+    private static void loadSaveToZip(Preferences prefs) {
+        String prop = prefs.get(KEY_CARD_IMAGES_SAVE_TO_ZIP, "false");
+        dialog.checkForNewImages.setSelected(prop.equals("true"));
+        updateCache(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
+    }
+
+    private static void saveImagesPath(Preferences prefs) {
         if (dialog.useDefaultImageFolder.isSelected()) {
             prefs.put(KEY_CARD_IMAGES_USE_DEFAULT, "true");
             updateCache(KEY_CARD_IMAGES_USE_DEFAULT, "true");
@@ -1206,6 +1215,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         prefs.put(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
         updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
+    }
+
+    private static void saveSaveToZipOption(Preferences prefs) {
+        prefs.put(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
+        updateCache(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
+    }
+
+    public static boolean isSaveImagesToZip() {
+        return PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_SAVE_TO_ZIP, "false").equals("true");
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName, String yesValue) {
@@ -1367,7 +1385,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JCheckBox checkForNewImages;
-    private javax.swing.JCheckBox checkForNewImages1;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField imageFolderPath;
@@ -1417,6 +1434,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
+    private javax.swing.JCheckBox saveToZipFiles;
     private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPasswordField txtPasswordField;
     private javax.swing.JTextField txtProxyPort;

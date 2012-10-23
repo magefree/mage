@@ -7,16 +7,18 @@ import com.mortennobel.imagescaling.ResampleOp;
 import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TFileInputStream;
 import de.schlichtherle.truezip.file.TFileOutputStream;
+import mage.client.dialog.PreferencesDialog;
+import mage.view.CardView;
+import org.apache.log4j.Logger;
+import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.utils.CardImageUtils;
+
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.imageio.ImageIO;
-import mage.view.CardView;
-import org.apache.log4j.Logger;
-import org.mage.plugins.card.constants.Constants;
-import org.mage.plugins.card.utils.CardImageUtils;
 
 /**
  * This class stores ALL card images in a cache with soft values. this means
@@ -76,7 +78,7 @@ public class ImageCache {
                         TFile file = new TFile(path);
 
                         if (thumbnail && path.endsWith(".jpg")) {
-                            String thumbnailPath = path.replace(".zip", ".thumb.zip");
+                            String thumbnailPath = buildThumbnailPath(path);
                             TFile thumbnailFile = new TFile(thumbnailPath);
                             if (thumbnailFile.exists()) {
                                 //log.debug("loading thumbnail for " + key + ", path="+thumbnailPath);
@@ -106,6 +108,16 @@ public class ImageCache {
                 }
             }
         });
+    }
+    
+    private static String buildThumbnailPath(String path) {
+        String thumbnailPath;
+        if (PreferencesDialog.isSaveImagesToZip()) {
+            thumbnailPath = path.replace(".zip", ".thumb.zip");
+        } else {
+            thumbnailPath = path.replace(".jpg", ".thumb.jpg");
+        }
+        return thumbnailPath;
     }
 
     public static BufferedImage getWizardsCard(BufferedImage image) {
