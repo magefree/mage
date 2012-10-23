@@ -1,11 +1,13 @@
 package org.mage.plugins.card.utils;
 
 import de.schlichtherle.truezip.file.TFile;
-import java.util.HashMap;
-import java.util.regex.Pattern;
+import mage.client.dialog.PreferencesDialog;
 import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
+
+import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class CardImageUtils {
 
@@ -104,9 +106,25 @@ public class CardImageUtils {
         String set = updateSet(card.getSet(), false).toUpperCase();
         String imagesDir = (imagesPath != null ? imagesPath :  Constants.IO.imageBaseDir);
         if (card.isToken()) {
+            return buildTokenPath(imagesDir, set);
+        } else {
+            return buildPath(imagesDir, set);
+        }
+    }
+    
+    private static String buildTokenPath(String imagesDir, String set) {
+        if (PreferencesDialog.isSaveImagesToZip()) {
             return imagesDir + TFile.separator + "TOK" + ".zip" + TFile.separator + set;
         } else {
+            return imagesDir + TFile.separator + "TOK" + TFile.separator + set;
+        }
+    }
+
+    private static String buildPath(String imagesDir, String set) {
+        if (PreferencesDialog.isSaveImagesToZip()) {
             return imagesDir + TFile.separator + set + ".zip" + TFile.separator + set;
+        } else {
+            return imagesDir + TFile.separator + set;
         }
     }
 
