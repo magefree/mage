@@ -173,6 +173,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         imageFolderPath = new javax.swing.JTextField();
         browseButton = new javax.swing.JButton();
         checkForNewImages = new javax.swing.JCheckBox();
+        checkForNewImages1 = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -444,6 +445,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
         });
 
         checkForNewImages.setText("check for new images on startup");
+        checkForNewImages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkForNewImagesActionPerformed(evt);
+            }
+        });
+
+        checkForNewImages1.setText("store in zip files");
+        checkForNewImages1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkForNewImages1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -461,7 +474,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                         .addComponent(browseButton))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(checkForNewImages)))
+                        .addComponent(checkForNewImages))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(checkForNewImages1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -475,7 +491,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(browseButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(checkForNewImages)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(checkForNewImages1)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -718,7 +736,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel13.setText("New avatars:");
 
         jPanel16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -1029,6 +1047,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
+
+    private void checkForNewImages1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkForNewImages1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkForNewImages1ActionPerformed
+
+    private void checkForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkForNewImagesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_checkForNewImagesActionPerformed
 
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
@@ -1341,6 +1367,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
     private javax.swing.JCheckBox checkForNewImages;
+    private javax.swing.JCheckBox checkForNewImages1;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField imageFolderPath;
