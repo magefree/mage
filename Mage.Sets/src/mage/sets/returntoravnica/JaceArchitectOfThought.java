@@ -42,6 +42,7 @@ import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -61,8 +62,8 @@ import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInExile;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreaturePermanent;
 import mage.target.common.TargetOpponent;
+import mage.target.targetpointer.FixedTarget;
 
 
 /**
@@ -148,8 +149,7 @@ class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceA
 class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceArchitectOfThoughtTriggeredAbility> {
 
     public JaceArchitectOfThoughtTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-1,0, Duration.EndOfTurn));
-        addTarget(new TargetCreaturePermanent());
+        super(Constants.Zone.BATTLEFIELD, new JaceArchitectOfThoughtEffectUnboostEffect(-1,0, Duration.EndOfTurn));
     }
 
     public JaceArchitectOfThoughtTriggeredAbility(final JaceArchitectOfThoughtTriggeredAbility ability) {
@@ -168,8 +168,10 @@ class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceAr
             Player defender = game.getPlayer(event.getTargetId());
             Player you = game.getPlayer(controllerId);
             if (attacker.getControllerId() != you.getId()
-                    && defender == you) {
-                getTargets().get(0).addTarget(attacker.getId(), this, game, true);
+                  && defender == you) {
+                for (Effect effect : getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                }
                 return true;
             }
         }
@@ -179,6 +181,38 @@ class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceAr
     @Override
     public String getRule() {
         return "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn.";
+    }
+}
+
+/*
+ * effect only applies if creature continues to attack (if it's left the combat, it#s no longer attacking
+ */
+class JaceArchitectOfThoughtEffectUnboostEffect extends BoostTargetEffect {
+
+    public JaceArchitectOfThoughtEffectUnboostEffect(int power, int toughness, Duration duration) {
+        super(power, toughness, duration);
+    }
+
+
+    public JaceArchitectOfThoughtEffectUnboostEffect (final  JaceArchitectOfThoughtEffectUnboostEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public  JaceArchitectOfThoughtEffectUnboostEffect copy() {
+        return new JaceArchitectOfThoughtEffectUnboostEffect(this);
+    }
+
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        for (UUID permanentId : targetPointer.getTargets(game, source)) {
+            Permanent target = (Permanent) game.getPermanent(permanentId);
+            if (target != null && target.isAttacking()) {
+                return super.apply(game, source);
+            }
+        }
+        return false;
     }
 }
 
@@ -349,3 +383,4 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThought
         return true;
     }
 }
+
