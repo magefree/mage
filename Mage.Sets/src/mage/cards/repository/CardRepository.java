@@ -31,6 +31,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import java.io.File;
@@ -123,7 +124,7 @@ public enum CardRepository {
     public CardInfo findCard(String setCode, int cardNumber) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.where().eq("setCode", setCode).and().eq("cardNumber", cardNumber);
+            queryBuilder.where().eq("setCode", new SelectArg(setCode)).and().eq("cardNumber", cardNumber);
             List<CardInfo> result = cardDao.query(queryBuilder.prepare());
             if (!result.isEmpty()) {
                 return result.get(0);
@@ -149,7 +150,7 @@ public enum CardRepository {
     public List<CardInfo> findCards(String name) {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.where().eq("name", name);
+            queryBuilder.where().eq("name", new SelectArg(name));
 
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {

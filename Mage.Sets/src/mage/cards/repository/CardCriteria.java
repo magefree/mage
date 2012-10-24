@@ -28,6 +28,7 @@
 package mage.cards.repository;
 
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -158,11 +159,11 @@ public class CardCriteria {
         Where where = qb.where();
         int clausesCount = 0;
         if (name != null) {
-            where.like("name", '%' + name + '%');
+            where.like("name", new SelectArg('%' + name + '%'));
             clausesCount++;
         }
         if (rules != null) {
-            where.like("rules", '%' + rules + '%');
+            where.like("rules", new SelectArg('%' + rules + '%'));
             clausesCount++;
         }
 
@@ -175,7 +176,7 @@ public class CardCriteria {
         }
 
         for (CardType type : types) {
-            where.like("types", '%' + type.name() + '%');
+            where.like("types", new SelectArg('%' + type.name() + '%'));
         }
         if (!types.isEmpty()) {
             where.or(types.size());
@@ -183,21 +184,21 @@ public class CardCriteria {
         }
 
         for (CardType type : notTypes) {
-            where.not().like("types", '%' + type.name() + '%');
+            where.not().like("types", new SelectArg('%' + type.name() + '%'));
             clausesCount++;
         }
 
         for (String superType : supertypes) {
-            where.like("supertypes", '%' + superType + '%');
+            where.like("supertypes", new SelectArg('%' + superType + '%'));
             clausesCount++;
         }
         for (String subType : notSupertypes) {
-            where.not().like("supertypes", '%' + subType + '%');
+            where.not().like("supertypes", new SelectArg('%' + subType + '%'));
             clausesCount++;
         }
 
         for (String subType : subtypes) {
-            where.like("subtypes", '%' + subType + '%');
+            where.like("subtypes", new SelectArg('%' + subType + '%'));
             clausesCount++;
         }
 
