@@ -9,6 +9,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.game.ExileZone;
@@ -32,6 +33,10 @@ import java.util.UUID;
  * @author ayratn
  */
 public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implements CardTestAPI {
+
+    static {
+        CardScanner.scan();
+    }
 
     /**
      * Default game initialization params for red player (that plays with Mountains)
