@@ -28,9 +28,14 @@
 
 package mage.view;
 
-import java.util.ArrayList;
-
+import mage.abilities.effects.Effect;
 import mage.game.stack.StackAbility;
+import mage.target.targetpointer.FixedTarget;
+import mage.target.targetpointer.TargetPointer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -57,7 +62,25 @@ public class StackAbilityView extends CardView {
         this.superTypes = ability.getSupertype();
         this.color = ability.getColor();
         this.manaCost = ability.getManaCost().getSymbols();
-        setTargets(ability.getTargets());
+        updateTargets(ability);
+    }
+
+    private void updateTargets(StackAbility ability) {
+        if (ability.getTargets().size() > 0) {
+            setTargets(ability.getTargets());
+        } else {
+            List<UUID> targetList = new ArrayList<UUID>();
+            for (Effect effect : ability.getEffects()) {
+                TargetPointer targetPointer = effect.getTargetPointer();
+                if (targetPointer instanceof FixedTarget) {
+                    targetList.add(((FixedTarget) targetPointer).getTarget());
+                }
+            }
+            if (targetList.size() > 0) {
+                overrideTargets(targetList);
+            }
+
+        }
     }
 
     public CardView getSourceCard() {

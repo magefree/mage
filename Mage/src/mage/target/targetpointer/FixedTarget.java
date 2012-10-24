@@ -61,4 +61,8 @@ public class FixedTarget implements TargetPointer {
     public TargetPointer copy() {
         return new FixedTarget(this);
     }
+    
+    public UUID getTarget() {
+        return target;
+    }
 }
