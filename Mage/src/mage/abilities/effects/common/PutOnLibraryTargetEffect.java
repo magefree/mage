@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
@@ -50,6 +49,12 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
     public PutOnLibraryTargetEffect(boolean onTop) {
         super(Outcome.ReturnToHand);
         this.onTop = onTop;
+    }
+
+    public PutOnLibraryTargetEffect(boolean onTop, String rule) {
+        super(Outcome.ReturnToHand);
+        this.onTop = onTop;
+        this.staticText = rule;
     }
 
     public PutOnLibraryTargetEffect(final PutOnLibraryTargetEffect effect) {
@@ -90,12 +95,16 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Put ");
-        if (mode.getTargets().get(0).getMaxNumberOfTargets() == 0) {
-            sb.append("any number of ");
+        if (this.staticText != null) {
+            sb.append(staticText);
+        } else {
+            sb.append("Put ");
+            if (mode.getTargets().get(0).getMaxNumberOfTargets() == 0) {
+                sb.append("any number of ");
+            }
+            sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
+            sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
         }
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" on ");
-        sb.append(onTop ? "top" : "the bottom").append(" of it's owner's library");
         return sb.toString();
 
     }
