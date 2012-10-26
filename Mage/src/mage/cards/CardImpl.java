@@ -385,6 +385,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case LIBRARY:
                         removed = game.getPlayer(ownerId).removeFromLibrary(this, game);
                         break;
+                    case EXILED:
+                        game.getExile().removeCard(this, game);
+                        removed = true;
+                        break;
                     default:
                         //logger.warning("putOntoBattlefield, not fully implemented: from="+fromZone);
                 }
