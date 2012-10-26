@@ -28,14 +28,14 @@
 
 package mage.game.permanent;
 
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.Token;
 
-import java.util.UUID;
-import mage.abilities.costs.mana.ManaCost;
 
 /**
  *
@@ -45,10 +45,11 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
     protected Token token;
 
-    public PermanentToken(Token token, UUID controllerId, String expansionSetCode) {
+    public PermanentToken(Token token, UUID controllerId, String expansionSetCode, Game game) {
         super(controllerId, controllerId, token.getName());
-        this.token = token;
         this.expansionSetCode = expansionSetCode;
+        this.token = token;
+        this.copyFromToken(this.token, game); // needed to have e.g. subtypes for entersTheBattlefield replacement effects
     }
 
     public PermanentToken(final PermanentToken permanent) {
