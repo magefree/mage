@@ -44,6 +44,8 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 
 /**
  * @author nantuko
@@ -66,7 +68,7 @@ public class ScreechingBat extends CardImpl<ScreechingBat> {
 
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Screeching Bat.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility());
+        this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(true), "", true));
     }
 
     public ScreechingBat(final ScreechingBat card) {
@@ -82,7 +84,7 @@ public class ScreechingBat extends CardImpl<ScreechingBat> {
 class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<ScreechingBatBeginningOfUpkeepTriggeredAbility> {
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect(), true);
+        super(Constants.Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect());
     }
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility(final ScreechingBatBeginningOfUpkeepTriggeredAbility ability) {

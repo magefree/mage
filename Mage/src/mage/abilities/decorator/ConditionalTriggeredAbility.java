@@ -17,11 +17,16 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
     protected Condition condition;
     protected String text;
 
-    public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text) {
+    public ConditionalTriggeredAbility(TriggeredAbility ability,  Condition condition, String text) {
+        this(ability, condition, text, false);
+    }
+
+    public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text, Boolean optional) {
         super(ability.getZone(), null);
         this.ability = ability;
         this.modes = ability.getModes();
         this.condition = condition;
+        this.optional = optional;
         this.text = text;
     }
 
@@ -51,6 +56,9 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
 
     @Override
     public String getRule() {
+        if (text != null && text.isEmpty()) {
+            return ability.getRule();
+        }
         return text;
     }
 }

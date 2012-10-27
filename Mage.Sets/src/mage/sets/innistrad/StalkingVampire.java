@@ -33,6 +33,8 @@ import mage.MageInt;
 import mage.cards.CardImpl;
 
 import java.util.UUID;
+import mage.abilities.condition.common.TransformedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 
 /**
  * @author nantuko
@@ -52,7 +54,7 @@ public class StalkingVampire extends CardImpl<StalkingVampire> {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, you may pay {2}{B}{B}. If you do, transform Stalking Vampire.
-        this.addAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility());
+        this.addAbility(new ConditionalTriggeredAbility(new ScreechingBatBeginningOfUpkeepTriggeredAbility(), new TransformedCondition(), "", true));
     }
 
     public StalkingVampire(final StalkingVampire card) {
