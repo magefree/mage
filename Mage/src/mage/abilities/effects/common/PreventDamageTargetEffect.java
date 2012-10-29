@@ -84,7 +84,7 @@ public class PreventDamageTargetEffect extends PreventionEffectImpl<PreventDamag
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(source.getFirstTarget())) {
+        if (!this.used && super.applies(event, source, game) && event.getTargetId().equals(targetPointer.getFirst(game, source))) {
             return true;
         }
         return false;
