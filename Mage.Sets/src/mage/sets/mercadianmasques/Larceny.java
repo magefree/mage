@@ -54,6 +54,7 @@ public class Larceny extends CardImpl<Larceny> {
         this.color.setBlack(true);
 
         // Whenever a creature you control deals combat damage to a player, that player discards a card.
+        this.addAbility(new LarcenyTriggeredAbility());
     }
 
     public Larceny(final Larceny card) {
