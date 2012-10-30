@@ -249,8 +249,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case EXILED:
                         game.getExile().removeCard(this, game);
                         break;
-                    case STACK:
                     case OUTSIDE:
+                        game.getPlayer(ownerId).getSideboard().remove(this);
+                        break;
+                    case STACK:
                     case PICK:
                         break;
                     default:
@@ -320,6 +322,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         break;
                     case EXILED:
                         game.getExile().removeCard(this, game);
+                        break;
+                    case OUTSIDE:
+                        game.getPlayer(ownerId).getSideboard().remove(this);
                         break;
                     default:
                         //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());
