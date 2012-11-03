@@ -12,10 +12,13 @@ import mage.Constants.CardType;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.CardScanner;
 import mage.view.CardView;
 
 import org.mage.plugins.card.CardPluginImpl;
-import org.mage.plugins.rating.cards.CardsStorage;
 import org.mage.plugins.rating.results.Rating;
 import org.mage.plugins.rating.results.ResultHandler;
 import org.mage.plugins.rating.ui.BigCard;
@@ -35,6 +38,21 @@ public class RateThread extends Thread {
     private Random random = new Random();
 
     private static List<Rating> results = new ArrayList<Rating>();
+    private static final List<CardInfo> cards = new ArrayList<CardInfo>();
+
+    static {
+        CardScanner.scan();
+        CardCriteria criteria = new CardCriteria();
+        criteria.notTypes(CardType.LAND);
+        List<CardInfo> allCards = CardRepository.instance.findCards(criteria);
+        List<String> names = new ArrayList<String>();
+        for (CardInfo card : allCards) {
+            if (!names.contains(card.getName())) {
+                names.add(card.getName());
+                cards.add(card);
+            }
+        }
+    }
 
     public RateThread() {
         setDaemon(true);
@@ -70,14 +88,12 @@ public class RateThread extends Thread {
     }
 
     protected Card getRandomUniqueNonLandCard(Card previousCard) {
-        int count = CardsStorage.getUniqueCards().size();
-        int index = random.nextInt(count);
-        Card card1 = CardsStorage.getUniqueCards().get(index);
-        while (card1.getCardType().contains(CardType.LAND) || card1.getName().equals(previousCard)) {
-            index = random.nextInt(count);
-            card1 = CardsStorage.getUniqueCards().get(index);
+        int count = cards.size();
+        Card card = cards.get(random.nextInt(count)).getCard();
+        while (previousCard != null && card.getName().equals(previousCard.getName())) {
+            card = cards.get(random.nextInt(count)).getCard();
         }
-        return card1;
+        return card;
     }
 
     public void start(JFrame frame, BigCard bigCard) {
