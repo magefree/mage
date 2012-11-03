@@ -114,6 +114,99 @@ public class CardUtil {
     }
 
     /**
+     * Adjusts spell or ability cost to be paid by colored and generic mana.
+     *
+     * @param spellAbility
+     * @param mana costs to reduce
+     */
+    public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
+        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+        ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+
+        Mana reduceMana = new Mana();
+        for (ManaCost manaCost : manaCostsToReduce) {
+            reduceMana.add(manaCost.getMana());
+        }
+        // subtract colored mana
+        for (ManaCost newManaCost : previousCost) {
+            Mana mana = newManaCost.getMana();
+            if (mana.getColorless() > 0) {
+                continue;
+            }
+            if (mana.getBlack() > 0 && reduceMana.getBlack() > 0) {
+                if (reduceMana.getBlack() > mana.getBlack()) {
+                    reduceMana.setBlack(reduceMana.getBlack()-mana.getBlack());
+                    mana.setBlack(0);
+                } else {
+                    mana.setBlack(mana.getBlack()-reduceMana.getBlack());
+                    reduceMana.setBlack(0);
+                }
+            }
+            if (mana.getRed() > 0 && reduceMana.getRed() > 0) {
+                if (reduceMana.getRed() > mana.getRed()) {
+                    reduceMana.setRed(reduceMana.getRed()-mana.getRed());
+                    mana.setRed(0);
+                } else {
+                    mana.setRed(mana.getRed()-reduceMana.getRed());
+                    reduceMana.setRed(0);
+                }
+            }
+            if (mana.getBlue() > 0 && reduceMana.getBlue() > 0) {
+                if (reduceMana.getBlue() > mana.getBlue()) {
+                    reduceMana.setBlue(reduceMana.getBlue()-mana.getBlue());
+                    mana.setBlue(0);
+                } else {
+                    mana.setBlue(mana.getBlue()-reduceMana.getBlue());
+                    reduceMana.setBlue(0);
+                }
+            }
+            if (mana.getGreen() > 0 && reduceMana.getGreen() > 0) {
+                if (reduceMana.getGreen() > mana.getGreen()) {
+                    reduceMana.setGreen(reduceMana.getGreen()-mana.getGreen());
+                    mana.setGreen(0);
+                } else {
+                    mana.setGreen(mana.getGreen()-reduceMana.getGreen());
+                    reduceMana.setGreen(0);
+                }
+            }
+            if (mana.getWhite() > 0 && reduceMana.getWhite() > 0) {
+                if (reduceMana.getWhite() > mana.getWhite()) {
+                    reduceMana.setWhite(reduceMana.getWhite()-mana.getWhite());
+                    mana.setWhite(0);
+                } else {
+                    mana.setWhite(mana.getWhite()-reduceMana.getWhite());
+                    reduceMana.setWhite(0);
+                }
+            }
+            if (mana.count() > 0) {
+                adjustedCost.add(newManaCost);
+            }
+        }
+        // subtract colorless mana, use all mana that is left
+        int reduceAmount = reduceMana.count();
+        for (ManaCost newManaCost : previousCost) {
+            Mana mana = newManaCost.getMana();
+            if (mana.getColorless() == 0) {
+                continue;
+            }
+            if (mana.getColorless() > 0 && reduceAmount > 0) {
+                if (reduceAmount > mana.getColorless()) {
+                    reduceAmount -= mana.getColorless();
+                    mana.setColorless(0);
+                } else {
+                    mana.setColorless(mana.getColorless() - reduceAmount);
+                    reduceAmount = 0;
+                }
+            }
+            if (mana.count() > 0) {
+                adjustedCost.add(0, new GenericManaCost(mana.count()));
+            }
+        }
+
+        spellAbility.getManaCostsToPay().clear();
+        spellAbility.getManaCostsToPay().addAll(adjustedCost);
+    }
+    /**
      * Returns function that copies params\abilities from one card to another.
      *
      * @param target
