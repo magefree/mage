@@ -23,6 +23,12 @@ public class AlternativeCostImpl<T extends AlternativeCostImpl<T>> extends Costs
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
+        for (int x=0; x < ((Costs) this).size(); x++) {
+            Cost cost = (Cost) ((Costs) this).get(x);
+            if (!cost.canPay(source.getSourceId(), source.getControllerId(), game)) {
+                return false;
+            }
+        }
         return true;
     }
 
