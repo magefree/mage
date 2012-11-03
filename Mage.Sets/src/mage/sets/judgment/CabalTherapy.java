@@ -39,11 +39,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -93,7 +93,7 @@ class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Discard, cardChoice, game)) {

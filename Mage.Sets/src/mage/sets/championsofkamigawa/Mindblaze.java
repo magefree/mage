@@ -39,13 +39,13 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.target.TargetPlayer;
 
 
@@ -95,7 +95,7 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
         Player playerControls = game.getPlayer(source.getControllerId());
         if (player != null && playerControls != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
             Choice numberChoice = new ChoiceImpl();
             numberChoice.setMessage("Choose a number greater than 0");

@@ -38,12 +38,12 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
-import mage.sets.Sets;
 
 /**
  *
@@ -88,7 +88,7 @@ class NameCard extends OneShotEffect<NameCard> {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
             while (!controller.choose(Constants.Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");

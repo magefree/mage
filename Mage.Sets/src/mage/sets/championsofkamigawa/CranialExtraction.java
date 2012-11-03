@@ -37,11 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.target.TargetPlayer;
 
 /**
@@ -90,7 +90,7 @@ class CranialExtractionEffect extends OneShotEffect<CranialExtractionEffect> {
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {

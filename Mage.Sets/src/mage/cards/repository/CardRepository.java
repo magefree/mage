@@ -39,8 +39,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
+import mage.Constants.CardType;
 
 /**
  *
@@ -52,7 +54,7 @@ public enum CardRepository {
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
-    private TreeSet<String> classNames;
+    private Set<String> classNames;
 
     private CardRepository() {
         File file = new File("db");
@@ -118,6 +120,53 @@ public enum CardRepository {
         } catch (SQLException ex) {
         } finally {
             return setCodes;
+        }
+    }
+
+    public Set<String> getNames() {
+        Set<String> names = new TreeSet<String>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                names.add(card.getName());
+            }
+        } catch (SQLException ex) {
+        } finally {
+            return names;
+        }
+    }
+
+    public Set<String> getNonLandNames() {
+        Set<String> names = new TreeSet<String>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                names.add(card.getName());
+            }
+        } catch (SQLException ex) {
+        } finally {
+            return names;
+        }
+    }
+
+    public Set<String> getCreatureTypes() {
+        TreeSet<String> subtypes = new TreeSet<String>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("subtypes");
+            qb.where().like("types", new SelectArg('%' + CardType.CREATURE.name() + '%'));
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                subtypes.addAll(card.getSubTypes());
+            }
+        } catch (SQLException ex) {
+        } finally {
+            return subtypes;
         }
     }
 

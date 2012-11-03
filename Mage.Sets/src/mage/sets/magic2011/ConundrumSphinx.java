@@ -42,11 +42,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 
 /**
  *
@@ -91,7 +91,7 @@ class ConundrumSphinxEffect extends OneShotEffect<ConundrumSphinxEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Choice cardChoice = new ChoiceImpl();
-        cardChoice.setChoices(Sets.getCardNames());
+        cardChoice.setChoices(CardRepository.instance.getNames());
         for (Player player: game.getPlayers().values()) {
             if(player.getLibrary().size() > 0){
                 cardChoice.clearChoice();

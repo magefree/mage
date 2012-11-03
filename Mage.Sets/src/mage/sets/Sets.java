@@ -31,7 +31,6 @@ package mage.sets;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
-import mage.cache.CacheService;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
@@ -50,9 +49,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     private final static Logger logger = Logger.getLogger(Sets.class);
     private static final Sets fINSTANCE =  new Sets();
-    private static Set<String> names;
-    private static Set<String> nonLandNames;
-    private static Set<String> creatureTypes;
     private static List<Card> cards;
     protected static Random rnd = new Random();
 
@@ -63,10 +59,7 @@ public class Sets extends HashMap<String, ExpansionSet> {
     }
 
     private Sets() {
-        names = new TreeSet<String>();
-        nonLandNames = new TreeSet<String>();
         cards = new ArrayList<Card>();
-        creatureTypes = new TreeSet<String>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Alliances.getInstance());
         this.addSet(Antiquities.getInstance());
@@ -156,29 +149,11 @@ public class Sets extends HashMap<String, ExpansionSet> {
                     for (ExpansionSet set : getInstance().values()) {
                         cards.addAll(set.getCards());
                     }
-                    names = CacheService.loadCardNames(cards);
-                    creatureTypes = CacheService.loadCreatureTypes(cards);
-                    nonLandNames = CacheService.loadNonLandNames(cards);
                     loaded = true;
                 }
             }
         }
     }
-
-	public static Set<String> getCardNames() {
-        loadCards();
-		return names;
-	}
-
-	public static Set<String> getNonLandCardNames() {
-        loadCards();
-		return nonLandNames;
-	}
-
-	public static Set<String> getCreatureTypes() {
-        loadCards();
-		return creatureTypes;
-	}
 
 	public static Card getRandomCard() {
         loadCards();
