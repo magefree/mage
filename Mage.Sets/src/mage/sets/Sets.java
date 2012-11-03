@@ -30,11 +30,13 @@ package mage.sets;
 
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
-import mage.Mana;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
@@ -49,17 +51,13 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     private final static Logger logger = Logger.getLogger(Sets.class);
     private static final Sets fINSTANCE =  new Sets();
-    private static List<Card> cards;
     protected static Random rnd = new Random();
-
-    private static boolean loaded;
 
     public static Sets getInstance() {
         return fINSTANCE;
     }
 
     private Sets() {
-        cards = new ArrayList<Card>();
         this.addSet(AlaraReborn.getInstance());
         this.addSet(Alliances.getInstance());
         this.addSet(Antiquities.getInstance());
@@ -137,28 +135,9 @@ public class Sets extends HashMap<String, ExpansionSet> {
         this.addSet(Zendikar.getInstance());
     }
 
-	private void addSet(ExpansionSet set) {
-		this.put(set.getCode(), set);
-        //cards.addAll(set.getCards());
-	}
-
-    private static void loadCards() {
-        if (!loaded) {
-            synchronized (Sets.class) {
-                if (!loaded) {
-                    for (ExpansionSet set : getInstance().values()) {
-                        cards.addAll(set.getCards());
-                    }
-                    loaded = true;
-                }
-            }
-        }
+    private void addSet(ExpansionSet set) {
+        this.put(set.getCode(), set);
     }
-
-	public static Card getRandomCard() {
-        loadCards();
-		return cards.get(rnd.nextInt(cards.size()));
-	}
 
     /**
      * Generates card pool of cardsCount cards that have manacost of allowed colors.
@@ -168,17 +147,38 @@ public class Sets extends HashMap<String, ExpansionSet> {
      * @return
      */
     public static List<Card> generateRandomCardPool(int cardsCount, List<ColoredManaSymbol> allowedColors) {
-        List<Card> cardPool = new ArrayList<Card>();
+        CardCriteria criteria = new CardCriteria();
+        criteria.notTypes(CardType.LAND);
+        for (ColoredManaSymbol color : allowedColors) {
+            switch (color) {
+                case W:
+                    criteria.white(true);
+                    break;
+                case U:
+                    criteria.blue(true);
+                    break;
+                case B:
+                    criteria.black(true);
+                    break;
+                case R:
+                    criteria.red(true);
+                    break;
+                case G:
+                    criteria.green(true);
+                    break;
+            }
+        }
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         int count = 0;
         int tries = 0;
+        List<Card> cardPool = new ArrayList<Card>();
         while (count < cardsCount) {
-            Card card = getRandomCard();
-            if (!card.getCardType().contains(CardType.LAND)) {
-                if (cardFitsChosenColors(card, allowedColors)) {
-                    cardPool.add(card);
-                    count++;
-                }
+            CardInfo cardInfo = cards.get(rnd.nextInt(cards.size()));
+            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            if (card != null) {
+                cardPool.add(card);
+                count++;
             }
             tries++;
             if (tries > 4096) { // to avoid infinite loop
@@ -187,52 +187,6 @@ public class Sets extends HashMap<String, ExpansionSet> {
         }
 
         return cardPool;
-    }
-
-    /**
-     * Check that card can be played using chosen (allowed) colors.
-     *
-     * @param card
-     * @param allowedColors
-     * @return
-     */
-    private static boolean cardFitsChosenColors(Card card, List<ColoredManaSymbol> allowedColors) {
-        if (card.getCardType().contains(CardType.LAND))  {
-            if (!card.getSupertype().contains("Basic")) {
-                int score = 0;
-                for (Mana mana : card.getMana()) {
-                    for (ColoredManaSymbol color : allowedColors) {
-                        score += mana.getColor(color);
-                    }
-                }
-                if (score > 1) {
-                    return true;
-                }
-            }
-        }
-        else {
-            for (String symbol : card.getManaCost().getSymbols()) {
-                boolean found = false;
-                symbol = symbol.replace("{", "").replace("}", "");
-                if (isColoredMana(symbol)) {
-                    for (ColoredManaSymbol allowed : allowedColors) {
-                        if (allowed.toString().equals(symbol)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    protected static boolean isColoredMana(String symbol) {
-        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
     }
 
     public static ExpansionSet findSet(String code) {
