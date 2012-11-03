@@ -56,12 +56,12 @@ public class AzoriusCharm extends CardImpl<AzoriusCharm> {
         // Choose one — Creatures you control gain lifelink until end of turn;
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
 
-        //           or draw a card;
+        // or draw a card;
         Mode mode = new Mode();
         mode.getEffects().add(new DrawCardControllerEffect(1));
         this.getSpellAbility().addMode(mode);
 
-        //           or put target attacking or blocking creature on top of its owner's library.
+        // or put target attacking or blocking creature on top of its owner's library.
         mode = new Mode();
         mode.getTargets().add(new TargetAttackingOrBlockingCreature());
         mode.getEffects().add(new PutOnLibraryTargetEffect(true));

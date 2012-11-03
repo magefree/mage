@@ -95,7 +95,7 @@ public class PutOnLibraryTargetEffect extends OneShotEffect<PutOnLibraryTargetEf
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        if (this.staticText != null) {
+        if (this.staticText != null && !this.staticText.isEmpty()) {
             sb.append(staticText);
         } else {
             sb.append("Put ");

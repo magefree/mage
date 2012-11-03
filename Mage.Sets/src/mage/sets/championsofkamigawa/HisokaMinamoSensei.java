@@ -85,7 +85,7 @@ public class HisokaMinamoSensei extends CardImpl<HisokaMinamoSensei> {
 
 class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDiscardTargetCost> {
 
-        protected int convertedManaCosts = 0;
+    protected int convertedManaCosts = 0;
 
     public HisokaMinamoSenseiDiscardTargetCost(TargetCardInHand target) {
         this.addTarget(target);
@@ -102,10 +102,11 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDis
             Player player = game.getPlayer(controllerId);
             for (UUID targetId: targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
-                if (card == null)
+                if (card == null) {
                     return false;
+                }
                 convertedManaCosts = card.getManaCost().convertedManaCost();
-                                paid |= player.discard(card, null, game);
+                paid |= player.discard(card, null, game);
 
             }
         }
@@ -122,9 +123,9 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDis
         return new HisokaMinamoSenseiDiscardTargetCost(this);
     }
 
-        public int getConvertedCosts() {
-            return convertedManaCosts;
-        }
+    public int getConvertedCosts() {
+        return convertedManaCosts;
+    }
 
 }
 
