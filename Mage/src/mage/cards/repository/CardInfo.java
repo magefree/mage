@@ -83,6 +83,8 @@ public class CardInfo {
     protected boolean red;
     @DatabaseField
     protected boolean white;
+    @DatabaseField
+    protected boolean doubleFaced;
 
     public CardInfo() {
     }
@@ -96,6 +98,7 @@ public class CardInfo {
         this.toughness = card.getToughness().toString();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
         this.rarity = card.getRarity();
+        this.doubleFaced = card.canTransform();
 
         this.blue = card.getColor().isBlue();
         this.black = card.getColor().isBlack();

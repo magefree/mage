@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import mage.Constants.CardType;
+import mage.Constants.Rarity;
 
 /**
  *
@@ -50,6 +51,8 @@ public class CardCriteria {
     private List<String> supertypes;
     private List<String> notSupertypes;
     private List<String> subtypes;
+    private List<Rarity> rarities;
+    private Boolean doubleFaced;
     private boolean black;
     private boolean blue;
     private boolean green;
@@ -61,6 +64,7 @@ public class CardCriteria {
 
     public CardCriteria() {
         this.setCodes = new ArrayList<String>();
+        this.rarities = new ArrayList<Rarity>();
         this.types = new ArrayList<CardType>();
         this.notTypes = new ArrayList<CardType>();
         this.supertypes = new ArrayList<String>();
@@ -105,6 +109,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria doubleFaced(boolean doubleFaced) {
+        this.doubleFaced = doubleFaced;
+        return this;
+    }
+
     public CardCriteria name(String name) {
         this.name = name;
         return this;
@@ -122,6 +131,11 @@ public class CardCriteria {
 
     public CardCriteria count(Long count) {
         this.count = count;
+        return this;
+    }
+
+    public CardCriteria rarities(Rarity... rarities) {
+        this.rarities.addAll(Arrays.asList(rarities));
         return this;
     }
 
@@ -164,6 +178,19 @@ public class CardCriteria {
         }
         if (rules != null) {
             where.like("rules", new SelectArg('%' + rules + '%'));
+            clausesCount++;
+        }
+
+        if (doubleFaced != null) {
+            where.eq("doubleFaced", doubleFaced);
+            clausesCount++;
+        }
+
+        for (Rarity rarity : rarities) {
+            where.eq("rarity", rarity);
+        }
+        if (!rarities.isEmpty()) {
+            where.or(rarities.size());
             clausesCount++;
         }
 
