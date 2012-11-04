@@ -39,6 +39,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -783,34 +784,36 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-        if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
+        if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
             filterCards();
         } else {
-            if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
-                filterCards();
-            } else {
-                // auto switch for ListView for "All sets" (too many cards to load)
-                jToggleListView.doClick();
-                jToggleListView.setSelected(true);
-            }
+            // auto switch for ListView for "All sets" (too many cards to load)
+            jToggleListView.doClick();
+            jToggleListView.setSelected(true);
         }
-
     }//GEN-LAST:event_cbExpansionSetActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         cards.clear();
+        this.limited = false;
         filterCards();
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnBoosterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBoosterActionPerformed
-        if (cbExpansionSet.getSelectedItem() instanceof ExpansionSet) {
-            List<Card> booster = ((ExpansionSet)this.cbExpansionSet.getSelectedItem()).createBooster();
-            for (Card card: booster) {
-                cards.add(card);
+        List<String> sets = ConstructedFormats.getSetsByFormat(this.cbExpansionSet.getSelectedItem().toString());
+        if (sets.size() == 1) {
+            if (!this.limited) {
+                this.limited = true;
+                cards.clear();
             }
-            filterCards();
+            ExpansionSet expansionSet = Sets.getInstance().get(sets.get(0));
+            if (expansionSet != null) {
+                List<Card> booster = expansionSet.createBooster();
+                cards.addAll(booster);
+                filterCards();
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "It's not possible to generate booster for not Expansion Set \nChoose Expansion Set first.");
+            JOptionPane.showMessageDialog(null, "An expansion set must be selected to be able to generate a booster.");
         }
     }//GEN-LAST:event_btnBoosterActionPerformed
 
