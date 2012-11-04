@@ -35,8 +35,7 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ManaEffect;
@@ -52,7 +51,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -80,7 +78,7 @@ public class UtopiaSprawl extends CardImpl<UtopiaSprawl> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // As Utopia Sprawl enters the battlefield, choose a color.
-        this.addAbility(new EntersBattlefieldAbility(new ChooseColorEffect()));
+        this.addAbility(new AsEntersBattlefieldAbility(new ChooseColorEffect()));
         // Whenever enchanted Forest is tapped for mana, its controller adds one mana of the chosen color to his or her mana pool.
         this.addAbility(new UtopiaSprawlTriggeredAbility());
     }
