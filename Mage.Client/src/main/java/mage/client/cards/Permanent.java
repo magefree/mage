@@ -56,7 +56,7 @@ import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.client.util.Config;
 import mage.client.util.ImageHelper;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.CounterView;
 import mage.view.PermanentView;
 

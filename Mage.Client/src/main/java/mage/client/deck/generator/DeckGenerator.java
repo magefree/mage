@@ -13,7 +13,7 @@ import mage.client.cards.CardsStorage;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.sets.ConstructedFormats;
 import mage.interfaces.rate.RateCallback;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.utils.DeckBuilder;
 
 import javax.swing.*;

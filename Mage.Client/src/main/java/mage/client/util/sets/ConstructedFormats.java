@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardRepository;
-import mage.sets.Sets;
+import mage.cards.Sets;
 
 /**
  * Utility class for constructed formats.

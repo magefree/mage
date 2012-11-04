@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.CardsView;
 
 import javax.swing.*;

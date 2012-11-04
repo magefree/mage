@@ -44,7 +44,7 @@ import mage.game.draft.DraftOptions.TimingOption;
 import mage.game.tournament.LimitedOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.remote.Session;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.TableView;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;

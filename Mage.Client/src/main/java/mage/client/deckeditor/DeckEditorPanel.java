@@ -45,7 +45,7 @@ import mage.client.util.Listener;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.CardView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;

@@ -36,7 +36,7 @@ import java.util.Map;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 

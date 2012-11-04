@@ -10,7 +10,7 @@ import mage.game.GameOptions;
 import mage.game.TwoPlayerDuel;
 import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mage.test.serverside.base.MageTestBase;

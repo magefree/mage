@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.cards.repository;
+package mage.util;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,45 +39,14 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.cards.ExpansionSet;
-import mage.sets.Sets;
 
 /**
  *
  * @author North
  */
-public class CardScanner {
+public class ClassScanner {
 
-    private static boolean scanned = false;
-
-    public static void scan() {
-        if (scanned) {
-            return;
-        }
-        scanned = true;
-
-        List<CardInfo> cardsToAdd = new ArrayList<CardInfo>();
-        List<String> packages = new ArrayList<String>();
-        for (ExpansionSet set : Sets.getInstance().values()) {
-            packages.add(set.getPackageName());
-        }
-
-        for (Class c : getCards(packages)) {
-            if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
-                Card card = CardImpl.createCard(c);
-                if (card != null && !card.isNightCard()) {
-                    cardsToAdd.add(new CardInfo(card));
-                }
-            }
-        }
-        if (!cardsToAdd.isEmpty()) {
-            CardRepository.instance.addCards(cardsToAdd);
-        }
-    }
-
-    private static List<Class> getCards(List<String> packages) {
+    public static List<Class> findClasses(List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<Class>();
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
@@ -102,19 +71,19 @@ public class CardScanner {
             }
 
             for (String filePath : dirs.keySet()) {
-                cards.addAll(findCards(new File(filePath), dirs.get(filePath)));
+                cards.addAll(findClasses(new File(filePath), dirs.get(filePath), type));
             }
 
             for (String filePath : jars) {
                 File file = new File(URLDecoder.decode(filePath, "UTF-8"));
-                cards.addAll(findCardsInJar(file, packages));
+                cards.addAll(findClassesInJar(file, packages, type));
             }
         } catch (IOException ex) {
         }
         return cards;
     }
 
-    private static List<Class> findCards(File directory, String packageName) {
+    private static List<Class> findClasses(File directory, String packageName, Class<?> type) {
         List<Class> cards = new ArrayList<Class>();
         if (!directory.exists()) {
             return cards;
@@ -124,7 +93,7 @@ public class CardScanner {
             if (file.getName().endsWith(".class")) {
                 try {
                     Class<?> clazz = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
-                    if (CardImpl.class.isAssignableFrom(clazz)) {
+                    if (type.isAssignableFrom(clazz)) {
                         cards.add(clazz);
                     }
                 } catch (ClassNotFoundException ex) {
@@ -134,7 +103,7 @@ public class CardScanner {
         return cards;
     }
 
-    private static List<Class> findCardsInJar(File file, List<String> packages) {
+    private static List<Class> findClassesInJar(File file, List<String> packages, Class<?> type) {
         List<Class> cards = new ArrayList<Class>();
         if (!file.exists()) {
             return cards;
@@ -149,12 +118,13 @@ public class CardScanner {
                 }
                 if (jarEntry.getName().endsWith(".class")) {
                     String className = jarEntry.getName().replace('/', '.').replace(".class", "");
-                    String packageName = className.substring(0, className.lastIndexOf('.'));
+                    int packageNameEnd = className.lastIndexOf('.');
+                    String packageName = packageNameEnd != -1 ? className.substring(0, packageNameEnd) : "";
                     if (packages.contains(packageName)) {
                         Class<?> clazz;
                         try {
                             clazz = Class.forName(className);
-                            if (CardImpl.class.isAssignableFrom(clazz)) {
+                            if (type.isAssignableFrom(clazz)) {
                                 cards.add(clazz);
                             }
                         } catch (ClassNotFoundException ex) {

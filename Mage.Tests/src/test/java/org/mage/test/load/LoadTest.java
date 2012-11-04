@@ -11,7 +11,7 @@ import mage.player.ai.ComputerPlayer;
 import mage.remote.Connection;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.GameTypeView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
