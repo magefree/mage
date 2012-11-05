@@ -57,7 +57,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
             if (ability.isInUseableZone(game, null, true)) {
                 MageObject object = getMageObject(event, game, ability);
                 if (object != null) {
-                    if (checkAbilityStillExists(ability, object)) {
+                    if (checkAbilityStillExists(ability, event, object)) {
                         if (object instanceof Permanent) {
                             ability.setControllerId(((Permanent) object).getControllerId());
                         }
@@ -71,14 +71,14 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
         }
     }
 
-    private boolean checkAbilityStillExists(TriggeredAbility ability, MageObject object) {
+    private boolean checkAbilityStillExists(TriggeredAbility ability, GameEvent event, MageObject object) {
         boolean exists = true;
         if (!object.getAbilities().contains(ability)) {
             exists = false;
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
-                if (permanent.canTransform()) {
-                    exists = permanent.getCard().getAbilities().contains(ability);
+                if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
+                    exists = permanent.getCard().getAbilities().contains(ability);  
                 }
             }
         }
