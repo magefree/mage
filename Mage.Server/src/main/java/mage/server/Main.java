@@ -28,6 +28,7 @@
 
 package mage.server;
 
+import mage.cards.repository.CardScanner;
 import mage.game.match.MatchType;
 import mage.game.tournament.TournamentType;
 import mage.interfaces.MageServer;
@@ -83,6 +84,7 @@ public class Main {
 
         logger.info("Starting MAGE server version " + version);
         logger.info("Logging level: " + logger.getEffectiveLevel());
+        CardScanner.scan();
         deleteSavedGames();
         ConfigSettings config = ConfigSettings.getInstance();
         for (GamePlugin plugin: config.getGameTypes()) {

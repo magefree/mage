@@ -28,55 +28,52 @@
 
 package mage.cards.decks.importer;
 
-import java.io.File;
-import java.util.Scanner;
+import java.util.List;
+import java.util.Random;
 import mage.cards.decks.DeckCardLists;
-import org.apache.log4j.Logger;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public abstract class DeckImporterImpl implements DeckImporter {
-
-    private final static Logger logger = Logger.getLogger(DeckImporterImpl.class);
-    protected StringBuilder sbMessage = new StringBuilder();
-    protected int lineCount;
+public class DecDeckImporter extends DeckImporter {
 
     @Override
-    public DeckCardLists importDeck(String file) {
-        File f = new File(file);
-        DeckCardLists deckList = new DeckCardLists();
-        lineCount = 0;
-        sbMessage.setLength(0);
-        try {
-            Scanner scanner = new Scanner(f);
-            try {
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine().trim();
-                    lineCount++;
-                    readLine(line, deckList);
-                }
-                if (sbMessage.length() > 0) {
-                    logger.fatal(sbMessage);
-                }
-            }
-            catch (Exception ex) {
-                logger.fatal(null, ex);
-            }
-            finally {
-                scanner.close();
-            }
-        } catch (Exception ex) {
-            logger.fatal(null, ex);
+    protected void readLine(String line, DeckCardLists deckList) {
+        if (line.length() == 0 || line.startsWith("//")) {
+            return;
         }
-        return deckList;
+
+        boolean sideboard = false;
+        if (line.startsWith("SB:")) {
+            line = line.substring(3).trim();
+            sideboard = true;
+        }
+
+        int delim = line.indexOf(' ');
+        String lineNum = line.substring(0, delim).trim();
+        String lineName = line.substring(delim).trim();
+        try {
+            int num = Integer.parseInt(lineNum);
+            List<CardInfo> cards = CardRepository.instance.findCards(lineName);
+            if (cards.isEmpty()) {
+                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
+            } else {
+                Random random = new Random();
+                for (int i = 0; i < num; i++) {
+                    String className = cards.get(random.nextInt(cards.size())).getClassName();
+                    if (!sideboard) {
+                        deckList.getCards().add(className);
+                    } else {
+                        deckList.getSideboard().add(className);
+                    }
+                }
+            }
+        } catch (NumberFormatException nfe) {
+            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
+        }
     }
 
-    @Override
-    public String getErrors(){
-        return sbMessage.toString();
-    }
-
-    protected abstract void readLine(String line, DeckCardLists deckList);
 }

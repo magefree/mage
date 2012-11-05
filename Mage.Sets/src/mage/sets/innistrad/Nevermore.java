@@ -40,13 +40,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
-import mage.sets.Sets;
 
 /**
  *
@@ -93,7 +93,7 @@ class NevermoreEffect1 extends OneShotEffect<NevermoreEffect1> {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");

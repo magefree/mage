@@ -28,9 +28,12 @@
 package mage.client.deckeditor;
 
 import mage.cards.Card;
+import mage.cards.CardImpl;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.importer.DeckImporterUtil;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.ICardGrid;
@@ -42,13 +45,16 @@ import mage.client.util.Listener;
 import mage.components.CardInfoPane;
 import mage.game.GameException;
 import mage.remote.Session;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.CardView;
+import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -163,9 +169,11 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     @Override
                     public void event(Event event) {
                         if (event.getEventName().equals("double-click")) {
-                            Card card = cardSelector.getCard((UUID) event.getSource());
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+                            Card card = cardInfo != null ? cardInfo.getCard() : null;
                             if (card != null) {
-                                deck.getCards().add(Sets.createCard(card.getClass()));
+                                deck.getCards().add(card);
                                 if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
                                     deck.getSideboard().remove(card);
                                     cardSelector.removeCard(card.getId());
@@ -179,8 +187,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             }
 
                         } else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
-                            Card card = cardSelector.getCard((UUID) event.getSource());
-                            deck.getSideboard().add(Sets.createCard(card.getClass()));
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+                            Card card = cardInfo != null ? cardInfo.getCard() : null;
+                            if (card != null) {
+                                deck.getSideboard().add(CardImpl.createCard(card.getClass()));
+                            }
                             if (cardInfoPane instanceof  CardInfoPane)  {
                                 ((CardInfoPane)cardInfoPane).setCard(new CardView(card));
                             }
@@ -201,8 +213,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 @Override
                 public void event(Event event) {
                     if (event.getEventName().equals("double-click")) {
+                        SimpleCardView cardView = (SimpleCardView) event.getSource();
                         for (Card card: deck.getCards()) {
-                            if (card.getId().equals(event.getSource())) {
+                            if (card.getId().equals(cardView.getId())) {
                                 deck.getCards().remove(card);
                                 if (mode == DeckEditorMode.Limited || mode == DeckEditorMode.Sideboard) {
                                     deck.getSideboard().add(card);
@@ -215,8 +228,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         refreshDeck();
                     }
                     else if (event.getEventName().equals("shift-double-click") && mode == DeckEditorMode.Constructed) {
+                        SimpleCardView cardView = (SimpleCardView) event.getSource();
                         for (Card card: deck.getCards()) {
-                            if (card.getId().equals(event.getSource())) {
+                            if (card.getId().equals(cardView.getId())) {
                                 deck.getCards().remove(card);
                                 deck.getSideboard().add(card);
                                 break;
@@ -233,8 +247,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 @Override
                 public void event(Event event) {
                     if (event.getEventName().equals("double-click")) {
+                        SimpleCardView cardView = (SimpleCardView) event.getSource();
                         for (Card card: deck.getSideboard()) {
-                            if (card.getId().equals(event.getSource())) {
+                            if (card.getId().equals(cardView.getId())) {
                                 deck.getSideboard().remove(card);
                                 deck.getCards().add(card);
                                 break;

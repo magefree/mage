@@ -35,6 +35,8 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.events.Listener;
@@ -46,7 +48,6 @@ import mage.server.*;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
-import mage.sets.Sets;
 import mage.view.AbilityPickerView;
 import mage.view.CardsView;
 import mage.view.ChatMessage.MessageColor;
@@ -273,7 +274,8 @@ public class GameController implements GameCallback {
     }
 
     public boolean cheat(UUID userId, UUID playerId, String cardName) {
-        Card card = Sets.findCard(cardName, true);
+        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+        Card card = cardInfo != null ? cardInfo.getCard() : null;
         if (card != null) {
             Set<Card> cards = new HashSet<Card>();
             cards.add(card);

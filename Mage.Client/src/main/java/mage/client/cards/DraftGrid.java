@@ -132,7 +132,7 @@ public class DraftGrid extends javax.swing.JPanel implements MouseListener {
     public void mousePressed(MouseEvent e) {
         Object obj = e.getSource();
         if (obj instanceof MageCard) {
-            this.cardEventSource.doubleClick(((MageCard)obj).getOriginal().getId(), "pick-a-card");
+            this.cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "pick-a-card");
         }
     }
 

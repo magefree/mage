@@ -40,12 +40,12 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -91,7 +91,7 @@ class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
             while (!you.choose(Constants.Outcome.Damage, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");

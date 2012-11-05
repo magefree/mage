@@ -28,45 +28,53 @@
 
 package mage.cards.decks.importer;
 
-import mage.cards.Card;
+import java.io.File;
+import java.util.Scanner;
 import mage.cards.decks.DeckCardLists;
-import mage.sets.Sets;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class DecDeckImporter extends DeckImporterImpl {
+public abstract class DeckImporter {
 
-    @Override
-    protected void readLine(String line, DeckCardLists deckList) {
-        if (line.length() == 0 || line.startsWith("//")) return;
-        boolean sideboard = false;
-        if (line.startsWith("SB:")) {
-            line = line.substring(3).trim();
-            sideboard = true;
-        }
-        int delim = line.indexOf(' ');
-        String lineNum = line.substring(0, delim).trim();
-        String lineName = line.substring(delim).trim();
+    private final static Logger logger = Logger.getLogger(DeckImporter.class);
+    protected StringBuilder sbMessage = new StringBuilder();
+    protected int lineCount;
+
+    public DeckCardLists importDeck(String file) {
+        File f = new File(file);
+        DeckCardLists deckList = new DeckCardLists();
+        lineCount = 0;
+        sbMessage.setLength(0);
         try {
-            int num = Integer.parseInt(lineNum);
-            Card card = Sets.findCard(lineName);
-            if (card == null)
-                sbMessage.append("Could not find card: '").append(lineName).append("' at line ").append(lineCount).append("\n");
-            else {
-                String cardName = card.getClass().getCanonicalName();
-                for (int i = 0; i < num; i++) {
-                    if (!sideboard)
-                        deckList.getCards().add(cardName);
-                    else
-                        deckList.getSideboard().add(cardName);
+            Scanner scanner = new Scanner(f);
+            try {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine().trim();
+                    lineCount++;
+                    readLine(line, deckList);
+                }
+                if (sbMessage.length() > 0) {
+                    logger.fatal(sbMessage);
                 }
             }
+            catch (Exception ex) {
+                logger.fatal(null, ex);
+            }
+            finally {
+                scanner.close();
+            }
+        } catch (Exception ex) {
+            logger.fatal(null, ex);
         }
-        catch (NumberFormatException nfe) {
-            sbMessage.append("Invalid number: ").append(lineNum).append(" at line ").append(lineCount).append("\n");
-        }
+        return deckList;
     }
 
+    public String getErrors(){
+        return sbMessage.toString();
+    }
+
+    protected abstract void readLine(String line, DeckCardLists deckList);
 }

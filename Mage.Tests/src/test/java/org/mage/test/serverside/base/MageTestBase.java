@@ -3,6 +3,8 @@ package org.mage.test.serverside.base;
 import mage.Constants;
 import mage.Constants.PhaseStep;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -15,7 +17,6 @@ import mage.server.util.ConfigSettings;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
-import mage.sets.Sets;
 import mage.util.Copier;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
@@ -253,7 +254,8 @@ public abstract class MageTestBase {
                     }
                 } else {
                     for (int i = 0; i < amount; i++) {
-                        Card card = Sets.findCard(cardName, true);
+                        CardInfo cardInfo = CardRepository.instance.findCard(cardName);
+                        Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
                             if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
                                 PermanentCard p = new PermanentCard(card, null);

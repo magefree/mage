@@ -51,6 +51,8 @@ import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.filter.FilterPermanent;
 import mage.filter.common.*;
@@ -72,7 +74,6 @@ import mage.players.Player;
 import mage.players.PlayerImpl;
 import mage.players.net.UserData;
 import mage.players.net.UserGroup;
-import mage.sets.Sets;
 import mage.target.*;
 import mage.target.common.*;
 import mage.util.Copier;
@@ -1096,6 +1097,19 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         match.submitDeck(playerId, deck);
     }
 
+    private static void addBasicLands(Deck deck, String landName, int number) {
+        Random random = new Random();
+        List<CardInfo> cards = CardRepository.instance.findCards(landName);
+        if (cards.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < number; i++) {
+            Card land = cards.get(random.nextInt(cards.size())).getCard();
+            deck.getCards().add(land);
+        }
+    }
+
     public static Deck buildDeck(List<Card> cardPool, final List<Constants.ColoredManaSymbol> colors) {
         Deck deck = new Deck();
         List<Card> sortedCards = new ArrayList<Card>(cardPool);
@@ -1124,45 +1138,28 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         double total = mana.getBlack() + mana.getBlue() + mana.getGreen() + mana.getRed() + mana.getWhite();
         if (mana.getGreen() > 0) {
-            int numGreen = (int) Math.round(mana.getGreen() / total * 17);
-            for (int i = 0; i < numGreen; i++) {
-                Card land = Sets.findCard("Forest", true);
-                deck.getCards().add(land);
-            }
+            int number = (int) Math.round(mana.getGreen() / total * 17);
+            addBasicLands(deck, "Forest", number);
         }
         if (mana.getBlack() > 0) {
-            int numBlack = (int) Math.round(mana.getBlack() / total * 17);
-            for (int i = 0; i < numBlack; i++) {
-                Card land = Sets.findCard("Swamp", true);
-                deck.getCards().add(land);
-            }
+            int number = (int) Math.round(mana.getBlack() / total * 17);
+            addBasicLands(deck, "Swamp", number);
         }
         if (mana.getBlue() > 0) {
-            int numBlue = (int) Math.round(mana.getBlue() / total * 17);
-            for (int i = 0; i < numBlue; i++) {
-                Card land = Sets.findCard("Island", true);
-                deck.getCards().add(land);
-            }
+            int number = (int) Math.round(mana.getBlue() / total * 17);
+            addBasicLands(deck, "Island", number);
         }
         if (mana.getWhite() > 0) {
-            int numWhite = (int) Math.round(mana.getWhite() / total * 17);
-            for (int i = 0; i < numWhite; i++) {
-                Card land = Sets.findCard("Plains", true);
-                deck.getCards().add(land);
-            }
+            int number = (int) Math.round(mana.getWhite() / total * 17);
+            addBasicLands(deck, "Plains", number);
         }
         if (mana.getRed() > 0) {
-            int numRed = (int) Math.round(mana.getRed() / total * 17);
-            for (int i = 0; i < numRed; i++) {
-                Card land = Sets.findCard("Mountain", true);
-                deck.getCards().add(land);
-            }
+            int number = (int) Math.round(mana.getRed() / total * 17);
+            addBasicLands(deck, "Mountain", number);
         }
-        while (deck.getCards().size() < 40) {
-            //TODO: improve this
-            Card land = Sets.findCard("Forest", true);
-            deck.getCards().add(land);
-        }
+
+        //TODO: improve this
+        addBasicLands(deck, "Forest", 40 - deck.getCards().size());
 
         return deck;
     }

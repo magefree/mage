@@ -1,6 +1,6 @@
 package org.mage.card.arcane;
 
-import mage.client.cards.CardsStorage;
+import mage.cards.repository.CardRepository;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import org.apache.log4j.Logger;
@@ -47,7 +47,8 @@ public class ManaSymbols {
             } catch (Exception e) {
             }
         }
-        for (String set : CardsStorage.getSetCodes()) {
+        List<String> setCodes = CardRepository.instance.getSetCodes();
+        for (String set : setCodes) {
             String _set = set.equals("CON") ? "CFX" : set;
             File file = new File(Constants.RESOURCE_PATH_SET + _set + "-C.jpg");
             try {
@@ -104,7 +105,7 @@ public class ManaSymbols {
         }
 
         File file;
-        for (String set : CardsStorage.getSetCodes()) {
+        for (String set : CardRepository.instance.getSetCodes()) {
             file = new File(Constants.RESOURCE_PATH_SET_SMALL);
             if (!file.exists()) {
                 break;

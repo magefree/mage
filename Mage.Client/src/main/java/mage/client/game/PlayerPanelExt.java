@@ -37,6 +37,7 @@ package mage.client.game;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.importer.DckDeckImporter;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
@@ -50,7 +51,6 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
 import mage.remote.Session;
-import mage.sets.Sets;
 import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
@@ -202,7 +202,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         // Avatar
         Image image = ImageHelper.getImageFromResources("/avatars/unknown.jpg");
 
-        topCardPanel = Plugins.getInstance().getMageCard(new CardView(Sets.findCard("Forest")), bigCard, topCardDimension, gameId, true);
+        topCardPanel = Plugins.getInstance().getMageCard(new CardView(CardRepository.instance.findCard("Forest").getCard()), bigCard, topCardDimension, gameId, true);
         topCardPanel.setVisible(false);
         panelBackground.add(topCardPanel);
 

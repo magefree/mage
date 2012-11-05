@@ -120,22 +120,6 @@ public class Plugins implements MagePlugins {
     }
 
     @Override
-    public boolean newImage(Set<mage.cards.Card> allCards) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        return this.cardPlugin.newImages(allCards, path);
-    }
-
-    @Override
-    public void downloadImage(Set<mage.cards.Card> allCards) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        if (this.cardPlugin != null) {
-            this.cardPlugin.downloadImages(allCards, path);
-        }
-    }
-
-    @Override
     public void downloadSymbols() {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);

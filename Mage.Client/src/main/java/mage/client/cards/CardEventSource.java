@@ -32,9 +32,9 @@ import mage.client.util.Event;
 import mage.client.util.EventDispatcher;
 import mage.client.util.EventSource;
 import mage.client.util.Listener;
+import mage.view.SimpleCardView;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 /**
  *
@@ -49,12 +49,12 @@ public class CardEventSource implements EventSource<Event>, Serializable {
         dispatcher.addListener(listener);
     }
 
-    public void doubleClick(UUID cardId, String message) {
-        dispatcher.fireEvent(new Event(cardId, message));
+    public void doubleClick(SimpleCardView card, String message) {
+        dispatcher.fireEvent(new Event(card, message));
     }
 
-    public void shiftDoubleClick(UUID cardId, String message) {
-        dispatcher.fireEvent(new Event(cardId, message));
+    public void shiftDoubleClick(SimpleCardView card, String message) {
+        dispatcher.fireEvent(new Event(card, message));
     }
 
     public void removeFromMainEvent(String message) {

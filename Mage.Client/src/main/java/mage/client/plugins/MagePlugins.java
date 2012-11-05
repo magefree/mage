@@ -1,6 +1,5 @@
 package mage.client.plugins;
 
-import mage.cards.Card;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -13,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 public interface MagePlugins {
@@ -27,8 +25,6 @@ public interface MagePlugins {
     boolean isCardPluginLoaded();
     boolean isCounterPluginLoaded();
     int sortPermanents(Map<String, JComponent> ui, Collection<MagePermanent> permanents);
-    boolean newImage(Set<Card> allCards);
-    void downloadImage(Set<Card> allCards);
     void downloadSymbols();
     int getGamesPlayed();
     void addGamesPlayed();

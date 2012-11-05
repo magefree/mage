@@ -30,16 +30,13 @@ package mage.cards;
 
 import mage.Constants.Rarity;
 import mage.Constants.SetType;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import org.apache.log4j.Logger;
 
 import java.io.*;
-import java.lang.reflect.Constructor;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.net.URLDecoder;
 import java.util.*;
-import java.util.jar.JarEntry;
-import java.util.jar.JarInputStream;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -77,26 +74,6 @@ public abstract class ExpansionSet implements Serializable {
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
-        //this.cards = getCardClassesForPackage(packageName);
-        //this.rarities = getCardsByRarity();
-    }
-
-    public List<Card> getCards() {
-        if (cards == null) {
-            loadLazily();
-        }
-        return cards;
-    }
-
-    private void loadLazily() {
-        synchronized (this) {
-            if (cards == null) {
-                this.cards = getCardClassesForPackage(packageName);
-            }
-            if (rarities == null) {
-                this.rarities = getCardsByRarity();
-            }
-        }
     }
 
     public String getName() {
@@ -119,16 +96,8 @@ public abstract class ExpansionSet implements Serializable {
         return setType;
     }
 
-    private Card createCard(Class clazz) {
-        try {
-            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
-            Card card = (Card) con.newInstance(new Object[]{null});
-            card.build();
-            return card;
-        } catch (Exception ex) {
-            logger.fatal("Error creating card:" + clazz.getName(), ex);
-            return null;
-        }
+    public String getPackageName() {
+        return packageName;
     }
 
     @Override
@@ -136,335 +105,68 @@ public abstract class ExpansionSet implements Serializable {
         return name;
     }
 
-    public Card findCard(String name) {
-        for (Card card : getCards()) {
-            if (name.equalsIgnoreCase(card.getName())) {
-                Card newCard = card.copy();
-                newCard.assignNewId();
-                return newCard;
-            }
-        }
-        return null;
-    }
-
-    public Card findCard(int cardNum) {
-        for (Card card : getCards()) {
-            if (cardNum == card.getCardNumber()) {
-                Card newCard = card.copy();
-                newCard.assignNewId();
-                return newCard;
-            }
-        }
-        return null;
-    }
-
-    public Card findCard(String name, boolean random) {
-        List<Card> foundCards = new ArrayList<Card>();
-        for (Card card : getCards()) {
-            if (name.equalsIgnoreCase(card.getName())) {
-                foundCards.add(card);
-            }
-        }
-        if (foundCards.size() > 0) {
-            Card newCard = foundCards.get(rnd.nextInt(foundCards.size())).copy();
-            newCard.assignNewId();
-            return newCard;
-        }
-        return null;
-    }
-
-    public String findCardName(int cardNum) {
-        for (Card card : getCards()) {
-            if (card.getCardNumber() == cardNum)
-                return card.getClass().getCanonicalName();
-        }
-        return null;
-    }
-
-    private List<Card> getCardClassesForPackage(String packageName) {
-        ClassLoader classLoader = this.getClass().getClassLoader();
-        assert classLoader != null;
-        String path = packageName.replace(".", "/");
-        Enumeration<URL> resources = null;
-        try {
-            resources = classLoader.getResources(path);
-        } catch (IOException e) {
-            logger.fatal("Error loading resource - " + path, e);
-        }
-        List<File> dirs = new ArrayList<File>();
-        boolean isLoadingFromJar = false;
-        String jarPath = null;
-        while (resources.hasMoreElements()) {
-            URL resource = resources.nextElement();
-            if (resource.toString().startsWith("jar:")) {
-                isLoadingFromJar = true;
-                jarPath = resource.getFile();
-                break;
-            }
-            try {
-                dirs.add(new File(URLDecoder.decode(resource.getFile(), "UTF-8")));
-            } catch (UnsupportedEncodingException e) {
-                logger.fatal("Error decoding director - " + resource.getFile(), e);
-            }
-        }
-        List<Class> classes = new ArrayList<Class>();
-        if (isLoadingFromJar) {
-            if (jarPath.contains("!")) {
-                jarPath = jarPath.substring(0, jarPath.lastIndexOf('!'));
-            }
-            String filePathElement = "file:";
-            if (jarPath.startsWith(filePathElement)) {
-                try {
-                    jarPath = URLDecoder.decode(jarPath.substring(jarPath.indexOf(filePathElement) + filePathElement.length()), "UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    logger.fatal("Error decoding file - " + jarPath, e);
-                }
-            }
-            try {
-                classes.addAll(findClassesInJar(new File(jarPath), path));
-            } catch (ClassNotFoundException e) {
-                logger.fatal("Error loading classes - " + jarPath, e);
-            }
-        } else { // faster but doesn't work for jars
-            for (File directory : dirs) {
-                try {
-                    classes.addAll(findClasses(directory, packageName));
-                } catch (ClassNotFoundException e) {
-                    logger.fatal("Error loading classes - " + jarPath, e);
-                }
-            }
-        }
-        List<Card> newCards = new ArrayList<Card>();
-        for (Class clazz : classes) {
-            if (clazz.getPackage().getName().equals(packageName)) {
-                Card card = createCard(clazz);
-                if (card.isNightCard()) {
-                    // skip second face of double-faced cards
-                    continue;
-                }
-                newCards.add(card);
-            }
-        }
-        return newCards;
-    }
-
-    private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
-        List<Class> classes = new ArrayList<Class>();
-        if (!directory.exists()) {
-            return classes;
-        }
-        File[] files = directory.listFiles();
-        if (files == null) {
-            return classes;
-        }
-        for (File file : files) {
-            if (file.isDirectory()) {
-                assert !file.getName().contains(".");
-                classes.addAll(findClasses(file, packageName + "." + file.getName()));
-            } else if (file.getName().endsWith(".class")) {
-                Class c = Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6));
-                if (CardImpl.class.isAssignableFrom(c)) {
-                    classes.add(c);
-                }
-            }
-        }
-        return classes;
-    }
-
-    private static List<Class> findClassesInJar(File file, String packageName) throws ClassNotFoundException {
-        List<Class> classes = new ArrayList<Class>();
-
-        if (!file.exists()) {
-            return classes;
-        }
-
-        try {
-            URL url = file.toURL();
-            URL[] urls = new URL[]{url};
-            ClassLoader cl = new URLClassLoader(urls);
-
-            JarInputStream jarFile = new JarInputStream(new FileInputStream(file));
-            JarEntry jarEntry;
-
-            while (true) {
-                jarEntry = jarFile.getNextJarEntry();
-                if (jarEntry == null) {
-                    break;
-                }
-                if ((jarEntry.getName().startsWith(packageName)) && (jarEntry.getName().endsWith(".class"))) {
-                    String clazz = jarEntry.getName().replaceAll("/", "\\.").replace(".class", "");
-                    Class c = cl.loadClass(clazz);
-                    if (CardImpl.class.isAssignableFrom(c)) {
-                        classes.add(c);
-                    }
-                }
-            }
-        } catch (Exception e) {
-            logger.fatal("Error loading classes - " + file, e);
-        }
-
-        return classes;
-    }
-
-    private Map<Rarity, List<Card>> getCardsByRarity() {
-        Map<Rarity, List<Card>> cardsByRarity = new HashMap<Rarity, List<Card>>();
-
-        for (Card card : getCards()) {
-            if (!cardsByRarity.containsKey(card.getRarity()))
-                cardsByRarity.put(card.getRarity(), new ArrayList<Card>());
-            cardsByRarity.get(card.getRarity()).add(card);
-        }
-
-        return cardsByRarity;
-    }
-
     public List<Card> createBooster() {
         List<Card> booster = new ArrayList<Card>();
-
-        if (!hasBoosters)
+        if (!hasBoosters) {
             return booster;
+        }
 
-        if (parentSet != null) {
-            for (int i = 0; i < numBoosterLands; i++) {
-                addToBooster(booster, parentSet, Rarity.LAND);
-            }
-        } else {
-            for (int i = 0; i < numBoosterLands; i++) {
-                addToBooster(booster, this, Rarity.LAND);
-            }
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(parentSet != null ? parentSet.code : this.code).rarities(Rarity.LAND).doubleFaced(false);
+        List<CardInfo> basicLand = CardRepository.instance.findCards(criteria);
+
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.COMMON).doubleFaced(false);
+        List<CardInfo> common = CardRepository.instance.findCards(criteria);
+
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.UNCOMMON).doubleFaced(false);
+        List<CardInfo> uncommon = CardRepository.instance.findCards(criteria);
+
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.RARE).doubleFaced(false);
+        List<CardInfo> rare = CardRepository.instance.findCards(criteria);
+
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.MYTHIC).doubleFaced(false);
+        List<CardInfo> mythic = CardRepository.instance.findCards(criteria);
+
+        criteria = new CardCriteria();
+        criteria.setCodes(this.code).doubleFaced(true);
+        List<CardInfo> doubleFaced = CardRepository.instance.findCards(criteria);
+
+        for (int i = 0; i < numBoosterLands; i++) {
+            addToBooster(booster, basicLand);
         }
         for (int i = 0; i < numBoosterCommon; i++) {
-            addToBooster(booster, this, Rarity.COMMON);
+            addToBooster(booster, common);
         }
         for (int i = 0; i < numBoosterUncommon; i++) {
-            addToBooster(booster, this, Rarity.UNCOMMON);
+            addToBooster(booster, uncommon);
         }
         for (int i = 0; i < numBoosterRare; i++) {
             if (ratioBoosterMythic > 0 && rnd.nextInt(ratioBoosterMythic) == 1) {
-                addToBooster(booster, this, Rarity.MYTHIC);
+                addToBooster(booster, mythic);
             } else {
-                addToBooster(booster, this, Rarity.RARE);
+                addToBooster(booster, rare);
             }
         }
         for (int i = 0; i < numBoosterDoubleFaced; i++) {
-            addToBoosterDoubleFaced(booster, this);
+            addToBooster(booster, doubleFaced);
         }
 
         return booster;
     }
 
-    protected void addToBooster(List<Card> booster, ExpansionSet set, Rarity rarity) {
-        Card card = set.getRandom(rarity);
-        if (card != null) {
-            card = checkNotDoubleFaced(card, set, rarity);
-            card = checkNotDuplicate(card, booster, set, rarity);
-            Card newCard = card.copy();
-            newCard.assignNewId();
-            booster.add(newCard);
-        }
-    }
-
-    protected void addToBoosterDoubleFaced(List<Card> booster, ExpansionSet set) {
-        Card card = set.getRandomDoubleFaced();
-        if (card != null) {
-            Card newCard = card.copy();
-            newCard.assignNewId();
-            booster.add(newCard);
-        }
-    }
-
-    /**
-     * Checks that card doesn't already exist in the booster. If so, tries to generate new one several times.
-     *
-     * @param cardToCheck
-     * @param booster
-     * @param set
-     * @param rarity
-     * @return
-     */
-    private Card checkNotDuplicate(Card cardToCheck, List<Card> booster, ExpansionSet set, Rarity rarity) {
-        Card card = cardToCheck;
-        boolean duplicate = true;
-        int retryCount = 5;
-        while (duplicate && retryCount > 0) {
-            if (!rarity.equals(Rarity.LAND)) {
-                // check for duplicates
-                if (hasCardByName(booster, card.getName())) {
-                    card = set.getRandom(rarity);
-                } else {
-                    duplicate = false; // no such card yet
-                }
-            } else {
-                duplicate = false;
-            }
-            retryCount--;
-        }
-        return card;
-    }
-
-    /**
-     * Checks that card is not double faced. If so, tries to generate new one several times.
-     *
-     * @param cardToCheck
-     * @param set
-     * @param rarity
-     * @return
-     */
-    private Card checkNotDoubleFaced(Card cardToCheck, ExpansionSet set, Rarity rarity) {
-        int retryCount = 100;
-        Card card = cardToCheck;
-        while (card.canTransform()) {
-            card = set.getRandom(rarity);
-            retryCount--;
-            if (retryCount <= 0) {
-                logger.warn("Couldn't find non double faced card");
-                break;
-            }
-        }
-        return card;
-    }
-
-    protected boolean hasCardByName(List<Card> booster, String name) {
-        for (Card card : booster) {
-            if (card.getName().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected Card getRandom(Rarity rarity) {
-        if (!getRarities().containsKey(rarity))
-            return null;
-        int size = getRarities().get(rarity).size();
-        if (size > 0) {
-            return getRarities().get(rarity).get(rnd.nextInt(size)).copy();
-        }
-        return null;
-    }
-
-    protected Card getRandomDoubleFaced() {
-        int size = getCards().size();
-        if (size > 0) {
-            Card card = cards.get(rnd.nextInt(size));
-            int retryCount = 1000;
-            while (!card.canTransform()) {
-                card = cards.get(rnd.nextInt(size));
-                retryCount--;
-                if (retryCount <= 0) {
-                    logger.warn("Couldn't find double-faced card.");
-                    break;
+    private void addToBooster(List<Card> booster, List<CardInfo> cards) {
+        if (!cards.isEmpty()) {
+            CardInfo cardInfo = cards.remove(rnd.nextInt(cards.size()));
+            if (cardInfo != null) {
+                Card card = cardInfo.getCard();
+                if (card != null) {
+                    booster.add(card);
                 }
             }
-            return card;
         }
-        return null;
-    }
-
-    public Map<Rarity, List<Card>> getRarities() {
-        if (rarities == null) {
-            loadLazily();
-        }
-        return rarities;
     }
 }

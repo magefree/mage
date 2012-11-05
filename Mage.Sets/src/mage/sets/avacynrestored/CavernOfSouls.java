@@ -43,6 +43,7 @@ import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
@@ -50,7 +51,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.watchers.WatcherImpl;
 
 import java.util.ArrayList;
@@ -109,7 +109,7 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
-            typeChoice.setChoices(Sets.getCreatureTypes());
+            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Constants.Outcome.Benefit, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }

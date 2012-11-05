@@ -121,13 +121,21 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     public static Card createCard(String name) {
         try {
-            Class<?> theClass = Class.forName(name);
-            Constructor<?> con = theClass.getConstructor(new Class[]{UUID.class});
+            return createCard(Class.forName(name));
+        } catch (ClassNotFoundException ex) {
+            logger.fatal("Error loading card: " + name, ex);
+            return null;
+        }
+    }
+
+    public static Card createCard(Class<?> clazz) {
+        try {
+            Constructor<?> con = clazz.getConstructor(new Class[]{UUID.class});
             Card card = (Card) con.newInstance(new Object[]{null});
             card.build();
             return card;
         } catch (Exception e) {
-            logger.fatal("Error loading card: " + name, e);
+            logger.fatal("Error loading card: " + clazz.getCanonicalName(), e);
             return null;
         }
     }

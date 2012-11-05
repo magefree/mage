@@ -46,7 +46,7 @@ import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
-import mage.sets.Sets;
+import mage.cards.Sets;
 import mage.view.AbilityView;
 import mage.view.CardView;
 import mage.view.PermanentView;

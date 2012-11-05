@@ -2,12 +2,15 @@ package mage.server.util;
 
 import mage.Constants;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 
 import java.io.File;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -48,46 +51,59 @@ public class SystemUtil {
             try {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine().trim();
-                    if (line.trim().length() == 0 || line.startsWith("#")) continue;
+                    if (line.trim().length() == 0 || line.startsWith("#")) {
+                        continue;
+                    }
+
                     Matcher m = pattern.matcher(line);
-                    if (m.matches()) {
-
-                        String zone = m.group(1);
-                        String nickname = m.group(2);
-
-                        Player player = findPlayer(game, nickname);
-                        if (player != null) {
-                            Constants.Zone gameZone;
-                            if ("hand".equalsIgnoreCase(zone)) {
-                                gameZone = Constants.Zone.HAND;
-                            } else if ("battlefield".equalsIgnoreCase(zone)) {
-                                gameZone = Constants.Zone.BATTLEFIELD;
-                            } else if ("graveyard".equalsIgnoreCase(zone)) {
-                                gameZone = Constants.Zone.GRAVEYARD;
-                            } else if ("library".equalsIgnoreCase(zone)) {
-                                gameZone = Constants.Zone.LIBRARY;
-                            } else {
-                                continue; // go parse next line
-                            }
-
-                            String cardName = m.group(3);
-                            Integer amount = Integer.parseInt(m.group(4));
-                            for (int i = 0; i < amount; i++) {
-                                Card card = Sets.findCard(cardName, true);
-                                if (card != null) {
-                                    Set<Card> cards = new HashSet<Card>();
-                                    cards.add(card);
-                                    game.loadCards(cards, player.getId());
-                                    swapWithAnyCard(game, player, card, gameZone);
-                                } else {
-                                    logger.fatal("Couldn't find a card: " + cardName);
-                                }
-                            }
-                        } else {
-                            logger.warn("Was skipped: " + line);
-                        }
-                    } else {
+                    if (!m.matches()) {
                         logger.warn("Init string wasn't parsed: " + line);
+                        continue;
+                    }
+
+                    String zone = m.group(1);
+                    String nickname = m.group(2);
+
+                    Player player = findPlayer(game, nickname);
+                    if (player == null) {
+                        logger.warn("Was skipped: " + line);
+                        continue;
+                    }
+
+                    Constants.Zone gameZone;
+                    if ("hand".equalsIgnoreCase(zone)) {
+                        gameZone = Constants.Zone.HAND;
+                    } else if ("battlefield".equalsIgnoreCase(zone)) {
+                        gameZone = Constants.Zone.BATTLEFIELD;
+                    } else if ("graveyard".equalsIgnoreCase(zone)) {
+                        gameZone = Constants.Zone.GRAVEYARD;
+                    } else if ("library".equalsIgnoreCase(zone)) {
+                        gameZone = Constants.Zone.LIBRARY;
+                    } else {
+                        continue; // go parse next line
+                    }
+
+                    String cardName = m.group(3);
+                    Integer amount = Integer.parseInt(m.group(4));
+
+                    List<CardInfo> cards = CardRepository.instance.findCards(cardName);
+                    if (cards.isEmpty()) {
+                        logger.warn("Couldn't find a card: " + cardName);
+                        continue;
+                    }
+
+                    Random random = new Random();
+                    Set<Card> cardsToLoad = new HashSet<Card>();
+                    for (int i = 0; i < amount; i++) {
+                        CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
+                        Card card = cardInfo != null ? cardInfo.getCard() : null;
+                        if (card != null) {
+                            cardsToLoad.add(card);
+                        }
+                    }
+                    game.loadCards(cardsToLoad, player.getId());
+                    for (Card card : cardsToLoad) {
+                        swapWithAnyCard(game, player, card, gameZone);
                     }
                 }
             }
@@ -126,8 +142,9 @@ public class SystemUtil {
      */
     private static Player findPlayer(Game game, String name) {
         for (Player player: game.getPlayers().values()) {
-            if (player.getName().equals(name))
+            if (player.getName().equals(name)) {
                 return player;
+            }
         }
         return null;
     }

@@ -38,13 +38,13 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Sets;
 
 import java.util.UUID;
 
@@ -96,7 +96,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceImpl(true);
-            typeChoice.setChoices(Sets.getCreatureTypes());
+            typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }

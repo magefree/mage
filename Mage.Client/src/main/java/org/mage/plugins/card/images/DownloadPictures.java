@@ -21,7 +21,9 @@ import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -32,7 +34,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Pattern;
@@ -67,7 +69,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         startDownload(null, null, null);
     }
 
-    public static void startDownload(JFrame frame, Set<Card> allCards, String imagesPath) {
+    public static void startDownload(JFrame frame, List<Card> allCards, String imagesPath) {
         ArrayList<CardInfo> cards = getNeededCards(allCards, imagesPath);
 
         /*
@@ -207,7 +209,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     }
 
-    public static boolean checkForNewCards(Set<Card> allCards, String imagesPath) {
+    public static boolean checkForNewCards(List<Card> allCards, String imagesPath) {
         TFile file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
@@ -221,7 +223,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return false;
     }
 
-    private static ArrayList<CardInfo> getNeededCards(Set<Card> allCards, String imagesPath) {
+    private static ArrayList<CardInfo> getNeededCards(List<Card> allCards, String imagesPath) {
 
         ArrayList<CardInfo> cardsToDownload = new ArrayList<CardInfo>();
 

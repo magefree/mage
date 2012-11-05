@@ -32,12 +32,12 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,7 +45,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.sets.Sets;
 
 /**
  *
@@ -96,7 +95,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
             if (player != null && permanent != null) {
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose creature type");
-                typeChoice.setChoices(Sets.getCreatureTypes());
+                typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
                 while (!player.choose(Constants.Outcome.Detriment, typeChoice, game)) {
                     game.debugMessage("player canceled choosing type. retrying.");
                 }

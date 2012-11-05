@@ -1,7 +1,6 @@
 package org.mage.plugins.rating;
 
 import org.apache.log4j.Logger;
-import org.mage.plugins.rating.cards.CardsStorage;
 import org.mage.plugins.rating.results.ResultHandler;
 import org.mage.plugins.rating.ui.BigCard;
 
@@ -78,7 +77,6 @@ public class RateFrame extends JFrame {
     }
 
     public void startRating() {
-        CardsStorage.getAllCards();
         label.setText("The results are stored automatically for every 10 compare.");
         RateThread.getInstance().start(this, this.bigCard);
     }

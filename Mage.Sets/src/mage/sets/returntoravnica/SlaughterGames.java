@@ -38,11 +38,11 @@ import mage.abilities.effects.common.CantCounterSourceEffect;
 import mage.abilities.effects.common.search.SearchTargetGraveyardHandLibraryForCardNameAndExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.game.Game;
 import mage.players.Player;
-import mage.sets.Sets;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -93,7 +93,7 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
         Player controller = game.getPlayer(source.getControllerId());
         if (player != null && controller != null) {
             Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(Sets.getNonLandCardNames());
+            cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
             cardChoice.setMessage("Name a nonland card");
 

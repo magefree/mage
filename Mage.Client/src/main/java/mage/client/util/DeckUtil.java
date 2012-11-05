@@ -29,9 +29,9 @@
 package mage.client.util;
 
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
-import mage.sets.Sets;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.view.DeckView;
 import mage.view.SimpleCardView;
 import org.apache.log4j.Logger;
@@ -51,25 +51,21 @@ public class DeckUtil {
     public static Deck construct(DeckView view) {
         Deck deck = new Deck();
         for (SimpleCardView cardView : view.getCards().values()) {
-            ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
-            if (set != null) {
-                Card card = set.findCard(cardView.getCardNumber());
-                if (card != null) {
-                    deck.getCards().add(card);
-                } else {
-                    log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
-                }
+            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            if (card != null) {
+                deck.getCards().add(card);
+            } else {
+                log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
             }
         }
         for (SimpleCardView cardView : view.getSideboard().values()) {
-            ExpansionSet set = Sets.findSet(cardView.getExpansionSetCode());
-            if (set != null) {
-                Card card = set.findCard(cardView.getCardNumber());
-                if (card != null) {
-                    deck.getSideboard().add(card);
-                } else {
-                    log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
-                }
+            CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
+            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            if (card != null) {
+                deck.getSideboard().add(card);
+            } else {
+                log.fatal("(Deck constructing) Couldn't find card: set=" + cardView.getExpansionSetCode() + ", cid=" + Integer.valueOf(cardView.getCardNumber()));
             }
         }
         return deck;

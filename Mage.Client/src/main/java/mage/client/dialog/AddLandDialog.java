@@ -34,10 +34,14 @@
 
 package mage.client.dialog;
 
+import java.util.List;
+import java.util.Random;
 import javax.swing.JLayeredPane;
+import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
-import mage.sets.Sets;
 
 /**
  *
@@ -57,6 +61,19 @@ public class AddLandDialog extends MageDialog {
         this.deck = deck;
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);
+    }
+
+    private void addLands(String landName, int number) {
+        Random random = new Random();
+        List<CardInfo> cards = CardRepository.instance.findCards(landName);
+        if (cards.isEmpty()) {
+            return;
+        }
+
+        for (int i = 0; i < number; i++) {
+            Card land = cards.get(random.nextInt(cards.size())).getCard();
+            deck.getCards().add(land);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -194,25 +211,16 @@ public class AddLandDialog extends MageDialog {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         int nForest = ((Number)spnForest.getValue()).intValue();
-        for (int i = 0; i < nForest; i++) {
-            deck.getCards().add(Sets.findCard("Forest", true));
-        }
         int nIsland = ((Number)spnIsland.getValue()).intValue();
-        for (int i = 0; i < nIsland; i++) {
-            deck.getCards().add(Sets.findCard("Island", true));
-        }
         int nMountain = ((Number)spnMountain.getValue()).intValue();
-        for (int i = 0; i < nMountain; i++) {
-            deck.getCards().add(Sets.findCard("Mountain", true));
-        }
         int nPlains = ((Number)spnPlains.getValue()).intValue();
-        for (int i = 0; i < nPlains; i++) {
-            deck.getCards().add(Sets.findCard("Plains", true));
-        }
         int nSwamp = ((Number)spnSwamp.getValue()).intValue();
-        for (int i = 0; i < nSwamp; i++) {
-            deck.getCards().add(Sets.findCard("Swamp", true));
-        }
+
+        addLands("Forest", nForest);
+        addLands("Island", nIsland);
+        addLands("Mountain", nMountain);
+        addLands("Plains", nPlains);
+        addLands("Swamp", nSwamp);
         this.hideDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
