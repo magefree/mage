@@ -56,7 +56,9 @@ import mage.game.events.GameEvent;
                 DelayedTriggeredAbility ability = it.next();
                 if (ability.checkTrigger(event, game)) {
                     ability.trigger(game, ability.controllerId);
-                    it.remove();
+                    if (ability.getTriggerOnlyOnce()) {
+                        it.remove();
+                    }
                 }
             }
         }
@@ -65,8 +67,9 @@ import mage.game.events.GameEvent;
     public void removeEndOfTurnAbilities() {
         for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
             DelayedTriggeredAbility ability = it.next();
-            if (ability.getDuration() == Duration.EndOfTurn)
+            if (ability.getDuration() == Duration.EndOfTurn) {
                 it.remove();
+            }
         }
     }
 

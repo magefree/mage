@@ -39,19 +39,26 @@ import mage.abilities.effects.Effect;
 public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<T>> extends TriggeredAbilityImpl<T> {
 
     private Duration duration;
+    private Boolean triggerOnlyOnce;
 
     public DelayedTriggeredAbility(Effect effect) {
         this(effect, Duration.EndOfGame);
     }
 
     public DelayedTriggeredAbility(Effect effect, Duration duration) {
+        this(effect, duration, true);
+    }
+
+    public DelayedTriggeredAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
         super(Zone.ALL, effect);
         this.duration = duration;
+        this.triggerOnlyOnce = triggerOnlyOnce;
     }
 
     public DelayedTriggeredAbility(final DelayedTriggeredAbility ability) {
         super(ability);
         this.duration = ability.duration;
+        this.triggerOnlyOnce = ability.triggerOnlyOnce;
     }
 
     @Override
@@ -59,5 +66,9 @@ public abstract class DelayedTriggeredAbility<T extends DelayedTriggeredAbility<
 
     public Duration getDuration() {
         return duration;
+    }
+
+    public Boolean getTriggerOnlyOnce() {
+        return triggerOnlyOnce;
     }
 }
