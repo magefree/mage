@@ -133,7 +133,7 @@ public class CardImageUtils {
         String imageName;
 
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
-        String name = card.getName();
+        String name = card.getName().replace(":", "");
 
         if (basicLandPattern.matcher(name).matches()) {
             imageName = name + "." + card.getCollectorId() + ".full.jpg";

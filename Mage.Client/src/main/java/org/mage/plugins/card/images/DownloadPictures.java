@@ -456,7 +456,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         @Override
         public void run() {
             try {
-                File temporaryFile = new File(Constants.IO.imageBaseDir + File.separator + card.hashCode() + "." + card.getName() + ".jpg");
+                StringBuilder filePath = new StringBuilder();
+                filePath.append(Constants.IO.imageBaseDir).append(File.separator);
+                filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "")).append(".jpg");
+                File temporaryFile = new File(filePath.toString());
                 String imagePath = CardImageUtils.getImagePath(card, imagesPath);
                 TFile outputFile = new TFile(imagePath);
                 if (!outputFile.exists()) {
