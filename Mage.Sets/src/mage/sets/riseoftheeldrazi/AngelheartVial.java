@@ -104,7 +104,7 @@ class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl<AngelheartVial
 
     @Override
     public String getRule() {
-        return "Whenever you are dealt damage, you may put that many charge counters on {this}";
+        return "Whenever you are dealt damage, you may put that many charge counters on {this}.";
     }
 }
 

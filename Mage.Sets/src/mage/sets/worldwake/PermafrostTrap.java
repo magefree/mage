@@ -141,7 +141,7 @@ class PermafrostTrapAlternativeCost extends AlternativeCostImpl<PermafrostTrapAl
 
     @Override
     public String getText() {
-        return "If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost.";
+        return "If an opponent had a green creature enter the battlefield under his or her control this turn, you may pay {U} rather than pay Permafrost Trap's mana cost";
     }
 }
 

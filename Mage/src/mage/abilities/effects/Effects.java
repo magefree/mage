@@ -59,7 +59,10 @@ public class Effects extends ArrayList<Effect> {
         for (Effect effect: this) {
             String rule = effect.getText(mode);
             if (rule != null) {
-                sbText.append(effect.getText(mode)).append(". ");
+                sbText.append(rule);
+                if (!rule.endsWith(". ")) {
+                    sbText.append(". ");
+                }
             }
         }
         return sbText.toString();
