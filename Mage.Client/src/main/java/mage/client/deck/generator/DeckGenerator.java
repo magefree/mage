@@ -9,7 +9,6 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
-import mage.client.cards.CardsStorage;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.sets.ConstructedFormats;
 import mage.interfaces.rate.RateCallback;
@@ -163,7 +162,7 @@ public class DeckGenerator {
         deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, landCardPool, new RateCallback() {
             @Override
             public int rateCard(Card card) {
-                return CardsStorage.rateCard(card);
+                return 6;
             }
 
             @Override
@@ -173,8 +172,7 @@ public class DeckGenerator {
                 do {
                     land = DeckGenerator.getBestBasicLand(color);
                     tries--;
-                    if (tries < 0) break;
-                } while (!setsToUseFinal.contains(land.getExpansionSetCode()));
+                } while (!setsToUseFinal.contains(land.getExpansionSetCode()) && tries >= 0);
                 return land;
             }
         });
