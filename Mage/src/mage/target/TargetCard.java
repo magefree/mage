@@ -87,7 +87,34 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
      */
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
+        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                switch (zone) {
+                    case HAND:
+                        if (player.getHand().count(filter, sourceId, sourceControllerId, game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case GRAVEYARD:
+                        if (player.getGraveyard().count(filter, sourceId, sourceControllerId, game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case LIBRARY:
+                        if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                    case EXILED:
+                        if (game.getExile().getPermanentExile().count(filter, sourceId, sourceControllerId, game) >= this.minNumberOfTargets) {
+                            return true;
+                        }
+                        break;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -99,34 +126,7 @@ public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (UUID playerId: game.getPlayer(sourceControllerId).getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                switch (zone) {
-                    case HAND:
-                        if (player.getHand().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                        break;
-                    case GRAVEYARD:
-                        if (player.getGraveyard().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                        break;
-                    case LIBRARY:
-                        if (player.getLibrary().count(filter, game) >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                        break;
-                    case EXILED:
-                        if (game.getExile().getPermanentExile().count(filter, player.getId(), game) >= this.minNumberOfTargets) {
-                            return true;
-                        }
-                        break;
-                }
-            }
-        }
-        return false;
+        return canChoose(null, sourceControllerId, game);
     }
 
     @Override

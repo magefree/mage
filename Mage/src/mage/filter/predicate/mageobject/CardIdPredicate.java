@@ -25,67 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
- 
-package mage.abilities.costs.common;
- 
-import java.util.ArrayList;
-import java.util.List;
+package mage.filter.predicate.mageobject;
+
 import java.util.UUID;
-import mage.Constants;
-import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
-import mage.cards.Card;
+import mage.MageObject;
+import mage.filter.predicate.Predicate;
 import mage.game.Game;
-import mage.players.Player;
-import mage.target.common.TargetCardInHand;
- 
+
 /**
  *
  * @author LevelX2
  */
-public class ExileFromHandCost extends CostImpl<ExileFromHandCost> {
- 
-    List<Card> cards = new ArrayList<Card>();
- 
-    public ExileFromHandCost(TargetCardInHand target) {
-        this.addTarget(target);
-        this.text = "Exile " + target.getTargetName();
+public class CardIdPredicate implements Predicate<MageObject> {
+
+    private final UUID cardId;
+
+    public CardIdPredicate(UUID cardId) {
+        this.cardId = cardId;
     }
- 
-    public ExileFromHandCost(ExileFromHandCost cost) {
-        super(cost);
-        for (Card card: cost.cards) {
-            this.cards.add(card.copy());
-        }
-    }
- 
+
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Constants.Outcome.Exile, controllerId, sourceId, game)) {
-            Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = player.getHand().get(targetId, game);
-                if (card == null) {
-                    return false;
-                }
-                this.cards.add(card.copy());
-                paid |= card.moveToExile(ability.getSourceId(), "from Hand", ability.getSourceId(), game);
-            }
-        }
-        return paid;
+    public boolean apply(MageObject input, Game game) {
+        return input.getId().equals(cardId);
     }
- 
+
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        return targets.canChoose(sourceId, controllerId, game);
-    }
- 
-    @Override
-    public ExileFromHandCost copy() {
-        return new ExileFromHandCost(this);
-    }
- 
-     public List<Card> getCards() {
-        return cards;
+    public String toString() {
+        return "CardId(" + cardId.toString() + ")";
     }
 }

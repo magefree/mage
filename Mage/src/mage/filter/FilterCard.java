@@ -35,6 +35,7 @@ import java.util.UUID;
 import mage.cards.Card;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
+import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,6 +69,14 @@ public class FilterCard extends FilterObject<Card> {
         }
 
         return Predicates.and(extraPredicates).apply(new ObjectPlayer(card, playerId), game);
+    }
+
+    public boolean match(Card card, UUID sourceId, UUID playerId, Game game) {
+        if (!this.match(card, game)) {
+            return false;
+        }
+
+        return Predicates.and(extraPredicates).apply(new ObjectSourcePlayer(card, sourceId, playerId), game);
     }
 
     public void add(ObjectPlayerPredicate predicate) {

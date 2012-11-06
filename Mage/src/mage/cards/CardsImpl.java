@@ -28,12 +28,19 @@
 
 package mage.cards;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -118,12 +125,26 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
         return result;
     }
 
-       @Override
+    @Override
     public int count(FilterCard filter, UUID playerId, Game game) {
         int result = 0;
         for (UUID card: this) {
             if (filter.match(game.getCard(card), playerId, game))
                 result++;
+        }
+        return result;
+    }
+
+    @Override
+    public int count(FilterCard filter, UUID sourceId, UUID playerId, Game game) {
+        if (sourceId == null) {
+            return count(filter, playerId, game);
+        }
+        int result = 0;
+        for (UUID card: this) {
+            if (filter.match(game.getCard(card), sourceId, playerId, game)) {
+                result++;
+            }
         }
         return result;
     }

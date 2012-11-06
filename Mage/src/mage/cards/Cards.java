@@ -49,6 +49,7 @@ public interface Cards extends Set<UUID>, Serializable {
     public Card getRandom(Game game);
     public int count(FilterCard filter, Game game);
     public int count(FilterCard filter, UUID playerId, Game game);
+    public int count(FilterCard filter, UUID sourceId, UUID playerId, Game game);
 
     public Cards copy();
 }
