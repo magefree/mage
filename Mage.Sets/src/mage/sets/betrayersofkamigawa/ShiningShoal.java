@@ -27,7 +27,6 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -35,18 +34,16 @@ import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.PreventionEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,12 +59,6 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class ShiningShoal extends CardImpl<ShiningShoal> {
 
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost";
-    private static final FilterCard filter = new FilterCard("white card from your hand");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.WHITE));
-        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
-    }
 
     public ShiningShoal(UUID ownerId) {
         super(ownerId, 21, "Shining Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{W}{W}");
@@ -76,10 +67,13 @@ public class ShiningShoal extends CardImpl<ShiningShoal> {
         this.color.setWhite(true);
 
         // You may exile a white card with converted mana cost X from your hand rather than pay Shining Shoal's mana cost
+        FilterOwnedCard filter = new FilterOwnedCard("white card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // The next X damage that a source of your choice would deal to you and/or creatures you control this turn is dealt to target creature or player instead.
-        this.getSpellAbility().addEffect(new ShiningShoalPreventDamageTargetEffect(Constants.Duration.EndOfTurn, new ShiningShoalVariableValue()));
+        this.getSpellAbility().addEffect(new ShiningShoalPreventDamageTargetEffect(Constants.Duration.EndOfTurn, new ExileFromHandCostCardConvertedMana()));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
@@ -94,43 +88,6 @@ public class ShiningShoal extends CardImpl<ShiningShoal> {
     }
 }
 
-class ShiningShoalVariableValue implements DynamicValue {
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        List<AlternativeCost> aCosts =  sourceAbility.getAlternativeCosts();
-        for (AlternativeCost aCost: aCosts) {
-            if (aCost.isPaid()) {
-                Costs aCostsList = (Costs) aCost;
-                for (int x=0; x < aCostsList.size(); x++) {
-                    Cost cost = (Cost) aCostsList.get(x);
-                    if (cost instanceof ExileFromHandCost) {
-                        int xMana = 0;
-                        for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                            xMana += card.getManaCost().convertedManaCost();
-                        }
-                        return xMana;
-                    }
-                }
-            }
-        }
-        return sourceAbility.getManaCostsToPay().getX();
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return new ShiningShoalVariableValue();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
-    }
-}
 
 class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<ShiningShoalPreventDamageTargetEffect> {
 

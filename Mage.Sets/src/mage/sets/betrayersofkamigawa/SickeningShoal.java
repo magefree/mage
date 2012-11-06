@@ -27,27 +27,22 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.List;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.game.Game;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,12 +53,6 @@ import mage.target.common.TargetCreaturePermanent;
 public class SickeningShoal extends CardImpl<SickeningShoal> {
 
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost";
-    private static final FilterCard filter = new FilterCard("black card from your hand");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLACK));
-        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
-    }
 
     public SickeningShoal(UUID ownerId) {
         super(ownerId, 82, "Sickening Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
@@ -72,11 +61,14 @@ public class SickeningShoal extends CardImpl<SickeningShoal> {
         this.color.setBlack(true);
 
         // You may exile a black card with converted mana cost X from your hand rather than pay Sickening Shoal's mana cost.
+        FilterOwnedCard filter = new FilterOwnedCard("black card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // Target creature gets -X/-X until end of turn.
-        DynamicValue x = new SignInversionDynamicValue(new SickeningShoalVariableValue());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Constants.Duration.EndOfTurn, true));
+        DynamicValue x = new SignInversionDynamicValue(new ExileFromHandCostCardConvertedMana());
+        this.getSpellAbility().addEffect(new BoostTargetEffect(x, x, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -87,41 +79,5 @@ public class SickeningShoal extends CardImpl<SickeningShoal> {
     @Override
     public SickeningShoal copy() {
         return new SickeningShoal(this);
-    }
-}
-// ConvertedManaExileFromHandOrVariableManaValue
-class SickeningShoalVariableValue implements DynamicValue {
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        for (AlternativeCost aCost: (List<AlternativeCost>) sourceAbility.getAlternativeCosts()) {
-            if (aCost.isPaid()) {
-                for (int x=0; x < ((Costs) aCost).size(); x++) {
-                    Cost cost = (Cost) ((Costs) aCost).get(x);
-                    if (cost instanceof ExileFromHandCost) {
-                        int xValue = 0;
-                        for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                            xValue += card.getManaCost().convertedManaCost();
-                        }
-                        return xValue;
-                    }
-                }
-            }
-        }
-        return sourceAbility.getManaCostsToPay().getX();
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return new SickeningShoalVariableValue();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }

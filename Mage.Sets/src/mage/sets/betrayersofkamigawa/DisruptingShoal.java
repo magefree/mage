@@ -27,28 +27,23 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import java.util.List;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ExileFromHandCostCardConvertedMana;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterOwnedCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.other.OwnerIdPredicate;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.target.TargetSpell;
@@ -61,12 +56,6 @@ import mage.target.common.TargetCardInHand;
 public class DisruptingShoal extends CardImpl<DisruptingShoal> {
 
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost";
-    private static final FilterCard filter = new FilterCard("blue card from your hand");
-
-    static {
-        filter.add(new ColorPredicate(ObjectColor.BLUE));
-        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
-    }
 
     public DisruptingShoal(UUID ownerId) {
         super(ownerId, 33, "Disrupting Shoal", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{U}{U}");
@@ -75,6 +64,9 @@ public class DisruptingShoal extends CardImpl<DisruptingShoal> {
         this.color.setBlue(true);
 
         // You may exile a blue card with converted mana cost X from your hand rather than pay Disrupting Shoal's mana cost.
+        FilterOwnedCard filter = new FilterOwnedCard("blue card from your hand");
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+        filter.add(Predicates.not(new CardIdPredicate(this.getId()))); // the exile cost can never be paid with the card itself
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, new ExileFromHandCost(new TargetCardInHand(filter))));
 
         // 2/1/2005: Disrupting Shoal can target any spell, but does nothing unless that spell's converted mana cost is X.
@@ -90,42 +82,6 @@ public class DisruptingShoal extends CardImpl<DisruptingShoal> {
     @Override
     public DisruptingShoal copy() {
         return new DisruptingShoal(this);
-    }
-}
-// ConvertedManaExileFromHandOrVariableManaValue
-class DisruptingShoalVariableValue implements DynamicValue {
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        for (AlternativeCost aCost: (List<AlternativeCost>) sourceAbility.getAlternativeCosts()) {
-            if (aCost.isPaid()) {
-                for (int x=0; x < ((Costs) aCost).size(); x++) {
-                    Cost cost = (Cost) ((Costs) aCost).get(x);
-                    if (cost instanceof ExileFromHandCost) {
-                        int xValue = 0;
-                        for (Card card : ((ExileFromHandCost) cost).getCards()) {
-                            xValue += card.getManaCost().convertedManaCost();
-                        }
-                        return xValue;
-                    }
-                }
-            }
-        }
-        return sourceAbility.getManaCostsToPay().getX();
-    }
-
-    @Override
-    public DynamicValue clone() {
-        return new DisruptingShoalVariableValue();
-    }
-
-    @Override
-    public String toString() {
-        return "X";
-    }
-
-    @Override
-    public String getMessage() {
-        return "";
     }
 }
 
@@ -146,7 +102,7 @@ class DisruptingShoalCounterTargetEffect extends OneShotEffect<DisruptingShoalCo
 
     @Override
     public boolean apply(Game game, Ability source) {
-        DynamicValue amount = new DisruptingShoalVariableValue();
+        DynamicValue amount = new ExileFromHandCostCardConvertedMana();
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null && spell.getManaCost().convertedManaCost() == amount.calculate(game, source)) {
             return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
