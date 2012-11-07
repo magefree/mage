@@ -32,6 +32,7 @@ public class MagicCardsImageSource implements CardImageSource {
             put("WWK", "worldwake");
             put("ZEN", "zendikar");
             put("HOP", "planechase");
+            put("PC2", "planechase-2012-edition");
             put("M10", "magic-2010");
             put("GVL", "duel-decks-garruk-vs-liliana");
             put("ARB", "alara-reborn");

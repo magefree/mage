@@ -15,7 +15,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     private static File outDir = DEFAULT_OUT_DIR;
 
     private static final String[] symbols =     {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", 
-                                                 "HOP", 
+                                                 "HOP","PC2",
                                                  "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
                                                  "ICE", "ALL", "CSP",
                                                  "MIR", "VIS", "WTH",

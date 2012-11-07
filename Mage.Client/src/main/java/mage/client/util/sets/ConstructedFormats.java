@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
-import mage.cards.repository.CardRepository;
 import mage.cards.Sets;
+import mage.cards.repository.CardRepository;
 
 /**
- * Utility class for constructed formats.
+ * Utility class for constructed formats (expansions and other editions).
  *
  * @author nantuko
  */
@@ -19,8 +19,10 @@ public class ConstructedFormats {
     private static final String[] constructedFormats = {"- All Sets", "- Standard", "- Extended", "- Modern",
                                                         "* Return to Ravnica Block", "Return to Ravnica", "Magic 2013",
                                                         "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", "Magic 2012",
+                                                        "Planechase 2012",
                                                         "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
                                                         "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar", "Magic 2010",
+                                                        "Planechase",
                                                         "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
                                                         "* Shadowmoor Block", "Shadowmoor", "Eventide",
                                                         "* Lorwyn Block", "Lorwyn", "Morningtide",
@@ -324,6 +326,13 @@ public class ConstructedFormats {
         if (format.equals("Magic 2013")) {
             return Arrays.asList("M13");
         }
+        if (format.equals("Planechase")) {
+            return Arrays.asList("HOP");
+        }
+        if (format.equals("Planechase 2012")) {
+            return Arrays.asList("PC2");
+        }
+
         if (format.equals("Guru")) {
             return Arrays.asList("GUR");
         }

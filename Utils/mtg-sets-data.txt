@@ -43,6 +43,7 @@ From the Vault: Relics|FVR|
 Guildpact|GPT|
 Homelands|HML|
 Planechase|HOP|
+Planechase 2012 Edition|PC2|
 Ice Age|ICE|
 Innistrad|ISD|
 Invasion|INV|
