@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -44,12 +46,16 @@ import mage.players.Player;
  */
 public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect> {
 
-    private int amount;
+    private DynamicValue amount;
 
     public DamageEverythingEffect(int amount) {
+        this(new StaticValue(amount));
+    }
+    
+    public DamageEverythingEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
-        staticText = "{source} deals " + Integer.toString(amount) + " damage to each creature and each player";
+        staticText = "{source} deals " + amount.toString() + " damage to each creature and each player";   
     }
 
     public DamageEverythingEffect(final DamageEverythingEffect effect) {
@@ -66,14 +72,14 @@ public class DamageEverythingEffect extends OneShotEffect<DamageEverythingEffect
     public boolean apply(Game game, Ability source) {
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent permanent: permanents) {
-            permanent.damage(amount, source.getId(), game, true, false);
+            permanent.damage(amount.calculate(game, source), source.getId(), game, true, false);
         }
         for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);
-            if (player != null)
-                player.damage(amount, source.getId(), game, false, true);
+            if (player != null) {
+                player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+            }
         }
         return true;
     }
-
 }
