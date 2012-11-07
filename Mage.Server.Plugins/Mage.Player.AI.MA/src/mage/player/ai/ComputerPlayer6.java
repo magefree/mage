@@ -1094,14 +1094,18 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
                     if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                             && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
-                        if (attackerValue < blockerValue
+                        if (attackerValue > blockerValue
                                 || blocker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
-                                || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())) {
+                                || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
+                                || blocker.getAbilities().contains(new ExaltedAbility())
+                                || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
+                                || blocker.getAbilities().contains(new IndestructibleAbility())) {
                             safeToAttack = false;
                         }
                     }
                 }
-                if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
+                if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
+                        || attacker.getAbilities().contains(new IndestructibleAbility())) {
                     safeToAttack = true;
                 }
                 if (safeToAttack) {

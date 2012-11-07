@@ -222,8 +222,8 @@ public class CombatUtil {
         simulateStep(sim, new FirstCombatDamageStep());
         simulateStep(sim, new CombatDamageStep());
         simulateStep(sim, new EndOfCombatStep());
-
-        sim.checkStateAndTriggered();
+        // The following commented out call produces random freezes.
+        //sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
             sim.getStack().resolve(sim);
             sim.applyEffects();
@@ -255,8 +255,8 @@ public class CombatUtil {
         simulateStep(sim, new FirstCombatDamageStep());
         simulateStep(sim, new CombatDamageStep());
         simulateStep(sim, new EndOfCombatStep());
-
-        sim.checkStateAndTriggered();
+        // The following commented out call produces random freezes.
+        //sim.checkStateAndTriggered();
         while (!sim.getStack().isEmpty()) {
             triggered = true;
             sim.getStack().resolve(sim);
@@ -270,7 +270,8 @@ public class CombatUtil {
         game.getPhase().setStep(step);
         if (!step.skipStep(game, game.getActivePlayerId())) {
             step.beginStep(game, game.getActivePlayerId());
-            game.checkStateAndTriggered();
+            // The following commented out call produces random freezes.
+            //game.checkStateAndTriggered();
             while (!game.getStack().isEmpty()) {
                 game.getStack().resolve(game);
                 game.applyEffects();
