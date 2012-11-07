@@ -103,6 +103,6 @@ class ChandrasPhoenixTriggeredAbility extends TriggeredAbilityImpl<ChandrasPhoen
 
     @Override
     public String getRule() {
-        return "Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return {this} from your graveyard to your hand";
+        return "Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return {this} from your graveyard to your hand.";
     }
 }

@@ -32,8 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
-import mage.abilities.effects.common.SacrificeEffect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 
@@ -53,7 +52,7 @@ public class LesserGargadon extends CardImpl<LesserGargadon> {
         this.toughness = new MageInt(4);
 
         // Whenever Lesser Gargadon attacks or blocks, sacrifice a land.
-        this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeEffect(new FilterLandPermanent(), 1, ""), false));
+        this.addAbility(new AttacksOrBlocksTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, ""), false));
     }
 
     public LesserGargadon(final LesserGargadon card) {

@@ -35,11 +35,6 @@ import mage.cards.Card;
 
 
 /**
- *
- *
- */
-
-/**
  * 702.94. Overload
  *
  * 702.94a. Overload is a keyword that represents two static abilities: one that

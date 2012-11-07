@@ -79,7 +79,7 @@ class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 
     public ConsumeSpiritEffect() {
         super(Constants.Outcome.Damage);
-        staticText = "Consume Spirit deals X damage to target creature or player and you gain X life.Spend only black mana on X";
+        staticText = "Consume Spirit deals X damage to target creature or player and you gain X life. Spend only black mana on X";
     }
 
     public ConsumeSpiritEffect(final ConsumeSpiritEffect effect) {

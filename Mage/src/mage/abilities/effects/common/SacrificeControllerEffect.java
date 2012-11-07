@@ -41,22 +41,22 @@ import mage.target.targetpointer.FixedTarget;
 public class SacrificeControllerEffect extends SacrificeEffect {
 
 
-    public SacrificeControllerEffect ( FilterPermanent filter, DynamicValue count, String preText ) {
+    public SacrificeControllerEffect(FilterPermanent filter, DynamicValue count, String preText ) {
         super(filter, count, preText);
     }
 
-        public SacrificeControllerEffect ( FilterPermanent filter, int count, String preText ) {
-                this(filter, new StaticValue(count), preText);
-        }
+    public SacrificeControllerEffect(FilterPermanent filter, int count, String preText ) {
+        this(filter, new StaticValue(count), preText);
+    }
 
-    public SacrificeControllerEffect (final SacrificeControllerEffect effect ) {
+    public SacrificeControllerEffect(final SacrificeControllerEffect effect ) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-                this.targetPointer = new FixedTarget(source.getControllerId());
-                return super.apply(game, source);
+        this.targetPointer = new FixedTarget(source.getControllerId());
+        return super.apply(game, source);
     }
 
     @Override
