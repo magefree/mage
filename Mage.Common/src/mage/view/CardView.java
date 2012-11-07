@@ -46,6 +46,7 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Mode;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -129,6 +130,13 @@ public class CardView extends SimpleCardView {
             Spell<?> spell = (Spell<?>) card;
             if (spell.getSpellAbility().getTargets().size() > 0) {
                 setTargets(spell.getSpellAbility().getTargets());
+            }
+            // show for modal spell, which mode was choosen
+            if (spell.getSpellAbility().isModal()) {
+                Mode activeMode = spell.getSpellAbility().getModes().getMode();
+                if (activeMode != null) {
+                    this.rules.add("<span color='green'><i>Chosen mode: " + activeMode.getEffects().getText(activeMode)+"</i></span>");
+                }
             }
         }
     }
