@@ -44,6 +44,7 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -188,7 +189,13 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     sb.append(object.getName());
                 }
             } else {
-                sb.append(object.getName());
+                if (object instanceof Spell) {
+                    Spell<?> spell = (Spell<?>) object;
+                    String castText = spell.getSpellAbility().toString();
+                    sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
+                } else {
+                    sb.append(object.getName());
+                }
             }
         } else {
             sb.append("unknown");

@@ -505,16 +505,17 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 Zone fromZone = game.getState().getZone(card.getId());
                 card.cast(game, fromZone, ability, playerId);
 
-                Ability spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
+                SpellAbility spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
                 if (spellAbility.activate(game, noMana)) {
                     for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-                        if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game))
+                        if (kicker.getCosts().canPay(ability.getSourceId(), playerId, game) && kicker.canChooseTarget(game)) {
                             kicker.activate(game, false);
+                        }
                     }
                     GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), spellAbility.getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
-                    game.fireInformEvent(name + " casts " + card.getName());
+                    game.fireInformEvent(name + spellAbility.getActivatedMessage(game));
                     game.removeBookmark(bookmark);
                     return true;
                 }
