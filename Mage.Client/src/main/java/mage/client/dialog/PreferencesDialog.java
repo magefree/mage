@@ -63,13 +63,15 @@ import static mage.client.util.PhaseManager.*;
  */
 public class PreferencesDialog extends javax.swing.JDialog {
 
-    public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
+    public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
+
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
+
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
@@ -945,6 +947,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         Preferences prefs = MageFrame.getPreferences();
+
+        // main
+        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
+
+        // Phases
         save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
         save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
         save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
@@ -960,9 +969,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
         save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
         save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
-        save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
+
+        // images
+        save(prefs, dialog.useDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        saveImagesPath(prefs);
+        save(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
 
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
@@ -975,14 +987,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.put(KEY_PROXY_PSWD, new String(input));
         }
 
+        // Avatar
         if (availableAvatars.contains(selectedId)) {
             prefs.put(KEY_AVATAR, String.valueOf(selectedId));
             updateCache(KEY_AVATAR, String.valueOf(selectedId));
         }
 
-        // images
-        saveImagesPath(prefs);
-        saveSaveToZipOption(prefs);
+
 
         try {
             prefs.flush();
@@ -1102,8 +1113,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     loadSelectedAvatar(prefs);
 
                     // Images
-                    loadImagesPath(prefs);
-                    loadSaveToZip(prefs);
+                    loadImages(prefs);
 
                     // open specified tab before displaying
                     openTab(openedTab);
@@ -1138,6 +1148,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+    }
+
+    private static void loadImages(Preferences prefs) {
+        String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        if (prop.equals("true")) {
+            dialog.useDefaultImageFolder.setSelected(true);
+            dialog.useDefaultPath();
+        } else {
+            dialog.useDefaultImageFolder.setSelected(false);
+            dialog.useConfigurablePath();
+            String path = prefs.get(KEY_CARD_IMAGES_PATH, "");
+            dialog.imageFolderPath.setText(path);
+            updateCache(KEY_CARD_IMAGES_PATH, path);
+        }
+        load(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true");
+        load(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
     }
 
     private static void loadProxySettings(Preferences prefs) {
@@ -1180,46 +1206,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }
 
-    private static void loadImagesPath(Preferences prefs) {
-        String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        if (prop.equals("true")) {
-            dialog.useDefaultImageFolder.setSelected(true);
-            dialog.useDefaultPath();
-        } else {
-            dialog.useDefaultImageFolder.setSelected(false);
-            dialog.useConfigurablePath();
-            String path = prefs.get(KEY_CARD_IMAGES_PATH, "");
-            dialog.imageFolderPath.setText(path);
-            updateCache(KEY_CARD_IMAGES_PATH, path);
-        }
-        dialog.checkForNewImages.setSelected(Boolean.parseBoolean(prefs.get(KEY_CARD_IMAGES_CHECK, "true")));
-        updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
-    }
 
-    private static void loadSaveToZip(Preferences prefs) {
-        String prop = prefs.get(KEY_CARD_IMAGES_SAVE_TO_ZIP, "false");
-        dialog.checkForNewImages.setSelected(prop.equals("true"));
-        updateCache(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
-    }
 
     private static void saveImagesPath(Preferences prefs) {
-        if (dialog.useDefaultImageFolder.isSelected()) {
-            prefs.put(KEY_CARD_IMAGES_USE_DEFAULT, "true");
-            updateCache(KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        } else {
-            prefs.put(KEY_CARD_IMAGES_USE_DEFAULT, "false");
-            updateCache(KEY_CARD_IMAGES_USE_DEFAULT, "false");
+        if (!dialog.useDefaultImageFolder.isSelected()) {
             String path = dialog.imageFolderPath.getText();
             prefs.put(KEY_CARD_IMAGES_PATH, path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
-        prefs.put(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
-        updateCache(KEY_CARD_IMAGES_CHECK, Boolean.toString(dialog.checkForNewImages.isSelected()));
-    }
-
-    private static void saveSaveToZipOption(Preferences prefs) {
-        prefs.put(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
-        updateCache(KEY_CARD_IMAGES_SAVE_TO_ZIP, Boolean.toString(dialog.saveToZipFiles.isSelected()));
     }
 
     public static boolean isSaveImagesToZip() {

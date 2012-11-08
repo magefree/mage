@@ -330,7 +330,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 disableButtons();
                 if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_CHECK, "true").equals("true"))
                     checkForNewImages();
-                logger.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " ms"));
+                logger.info("Client start up time: " + ((System.currentTimeMillis() - startTime) / 1000 + " seconds"));
                 if (autoConnect())
                     enableButtons();
                 else {
