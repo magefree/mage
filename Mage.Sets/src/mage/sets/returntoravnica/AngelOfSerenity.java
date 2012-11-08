@@ -101,10 +101,11 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility<AngelOf
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
+            getTargets().clear();
             FilterCreaturePermanent filter = new FilterCreaturePermanent("up to three other target creatures");
             filter.add(new AnotherPredicate());
             TargetCreaturePermanent target1 = new TargetCreaturePermanent(0,3, filter, false);
-            game.getPlayer(getControllerId()).choose(Outcome.Exile, target1, sourceId, game);
+            game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target1, this, game);
             if (target1.getTargets().size() > 0) {
                 getTargets().add(target1);
 
@@ -113,7 +114,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility<AngelOf
             if (leftTargets > 0) {
                 FilterCard filter2 = new FilterCreatureCard("up to " + leftTargets + " target creature card" + (leftTargets > 1?"s":"") +" from graveyards");
                 TargetCardInGraveyard target2 = new TargetCardInGraveyard(0,leftTargets, filter2);
-                game.getPlayer(getControllerId()).choose(Outcome.Exile, target2, sourceId, game);
+                game.getPlayer(getControllerId()).chooseTarget(Outcome.Exile, target2, this, game);
                 if (target2.getTargets().size() > 0) {
                     getTargets().add(target2);
                 }
