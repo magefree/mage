@@ -49,6 +49,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.UUID;
+import mage.view.SimpleCardView;
 
 /**
  *
@@ -115,7 +116,8 @@ public class DraftPanel extends javax.swing.JPanel {
                 @Override
                 public void event(Event event) {
                     if (event.getEventName().equals("pick-a-card")) {
-                        DraftPickView view = session.sendCardPick(draftId, (UUID)event.getSource());
+                        SimpleCardView source = (SimpleCardView) event.getSource();
+                        DraftPickView view = session.sendCardPick(draftId, source.getId());
                         if (view != null) {
                             //draftBooster.loadBooster(view.getBooster(), bigCard);
                             draftBooster.loadBooster(emptyView, bigCard);
