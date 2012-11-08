@@ -1099,7 +1099,10 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                                 || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
                                 || blocker.getAbilities().contains(new ExaltedAbility())
                                 || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                                || blocker.getAbilities().contains(new IndestructibleAbility())) {
+                                || blocker.getAbilities().contains(new IndestructibleAbility())
+                                || !attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
+                                || !attacker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
+                                || !attacker.getAbilities().contains(new ExaltedAbility())) {
                             safeToAttack = false;
                         }
                     }

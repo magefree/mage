@@ -1111,7 +1111,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void declareAttacker(UUID attackerId, UUID defenderId, Game game) {
         Permanent attacker = game.getPermanent(attackerId);
-        if (attacker != null && attacker.canAttack(game)) {
+        if (attacker != null && attacker.canAttack(game) && attacker.getControllerId().equals(playerId)) {
             if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARE_ATTACKER, defenderId, attackerId, playerId))) {
                 game.getCombat().declareAttacker(attackerId, defenderId, game);
             }
@@ -1122,7 +1122,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void declareBlocker(UUID blockerId, UUID attackerId, Game game) {
         Permanent blocker = game.getPermanent(blockerId);
         CombatGroup group = game.getCombat().findGroup(attackerId);
-        if (blocker != null && group != null && group.canBlock(blocker, game)) {
+        if (blocker != null && group != null && group.canBlock(blocker, game) && blocker.getControllerId().equals(playerId)) {
             group.addBlocker(blockerId, playerId, game);
             game.getCombat().addBlockingGroup(blockerId, attackerId, playerId, game);
         }
