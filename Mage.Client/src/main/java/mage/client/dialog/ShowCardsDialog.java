@@ -78,6 +78,7 @@ public class ShowCardsDialog extends MageDialog implements MouseListener {
     public void loadCards(String name, CardsView showCards, BigCard bigCard, CardDimensions dimension, UUID gameId, boolean modal, Map<String, Serializable> options) {
         this.reloaded = true;
         this.title = name;
+        this.setTitelBarToolTip(name);
         cardArea.loadCards(showCards, bigCard, dimension, gameId, this);
         if (options != null) {
             if (options.containsKey("chosen")) {

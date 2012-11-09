@@ -157,6 +157,29 @@ public class MageDialog extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }
 
+    public void setTitelBarToolTip(final String text) {
+        desktopIcon.setToolTipText(text); //tooltip on icon
+        Component[] children = desktopIcon.getComponents();
+//        if (children != null) {
+//            for(int i = 0; i < children.length; i++) {
+//                if (children[i] instanceof JButton){
+//                    ((JButton)children[i]).setToolTipText(text);//tooltip on icon button
+//                    break;
+//                }
+//            }
+//        }
+        children = getComponents();
+        if (children != null) {
+            for(int i = 0; i < children.length; i++) {
+                if (children[i].getClass().getName().equalsIgnoreCase(
+                        "javax.swing.plaf.synth.SynthInternalFrameTitlePane")){
+                    ((JComponent)children[i]).setToolTipText(text);//tooltip on title bar
+                    break;
+                }
+            }
+        }
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

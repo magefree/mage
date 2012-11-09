@@ -539,7 +539,7 @@ public class GamePanel extends javax.swing.JPanel {
                 ShowCardsDialog newReveal = new ShowCardsDialog();
                 lookedAt.put(looked.getName(), newReveal);
             }
-            lookedAt.get(looked.getName()).loadCards("LookedAt by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
+            lookedAt.get(looked.getName()).loadCards("Looked at by " + looked.getName(), looked.getCards(), bigCard, Config.dimensions, gameId, false);
         }
     }
 
