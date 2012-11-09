@@ -146,10 +146,10 @@ public class TableController {
         table.joinTable(player, seat);
         User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
-        user.joinedTable(table.getRoomId(), table.getId(), true);
         logger.info("player joined " + player.getId());
-        //only add human players to sessionPlayerMap
+        //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
+            user.joinedTable(table.getRoomId(), table.getId(), true);
             userPlayerMap.put(userId, player.getId());
         }
 
@@ -174,10 +174,10 @@ public class TableController {
         table.joinTable(player, seat);
         User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
-        user.joinedTable(table.getRoomId(), table.getId(), false);
         logger.info("player joined " + player.getId());
-        //only add human players to sessionPlayerMap
+        //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
+            user.joinedTable(table.getRoomId(), table.getId(), false);
             userPlayerMap.put(userId, player.getId());
         }
 
