@@ -74,7 +74,7 @@ public class HigureTheStillWind extends CardImpl<HigureTheStillWind> {
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{2}{U}{U}")));
 
         // Whenever Higure, the Still Wind deals combat damage to a player, you may search your library for a Ninja card, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), true, false));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), true));
 
         // {2}: Target Ninja creature is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
