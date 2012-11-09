@@ -35,7 +35,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -88,12 +87,11 @@ public class SkullRend extends CardImpl<SkullRend> {
                             // damage
                             opponent.damage(2, source.getId(), game, false, true);
                             // discard 2 cards at random
-                            Cards cards = opponent.getHand();
-                            for (int i = 0; i < 2 && !cards.isEmpty(); i++) {
-                                Card card = cards.getRandom(game);
+                            int amount = Math.min(2, opponent.getHand().size());
+                            for (int i = 0; i < amount; i++) {
+                                Card card = opponent.getHand().getRandom(game);
                                 if (card != null) {
-                                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
-                                    cards.remove(card);
+                                    opponent.discard(card, source, game);
                                 }
                             }
                         }
