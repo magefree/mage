@@ -60,6 +60,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
@@ -169,16 +170,27 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                     @Override
                     public void event(Event event) {
                         if (event.getEventName().equals("double-click")) {
-                            SimpleCardView cardView = (SimpleCardView) event.getSource();
+                            SimpleCardView cardView = (SimpleCardView) event.getSource();                      
                             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-                            Card card = cardInfo != null ? cardInfo.getCard() : null;
+                            Card card = null;
+                            if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
+                                Iterator sideboard = deck.getSideboard().iterator();
+                                while (sideboard.hasNext()) {
+                                    card = (Card) sideboard.next();
+                                    if (card.getId().equals(cardView.getId())) {
+                                        break;
+                                    }
+                                }
+                            } else {
+                                card = cardInfo != null ? cardInfo.getCard() : null;
+                            }
                             if (card != null) {
                                 deck.getCards().add(card);
                                 if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
                                     deck.getSideboard().remove(card);
                                     cardSelector.removeCard(card.getId());
+                                    cardSelector.setCardCount(deck.getSideboard().size());
                                     cardSelector.refresh();
-
                                 }
                                 if (cardInfoPane instanceof  CardInfoPane)  {
                                     ((CardInfoPane)cardInfoPane).setCard(new CardView(card));

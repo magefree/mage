@@ -305,6 +305,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         }
     }
 
+    public void setCardCount(int value) {
+        this.cardCount.setText(String.valueOf(value));
+    }
+
     public ICardGrid getCardsList() {
         return this.currentView;
     }
