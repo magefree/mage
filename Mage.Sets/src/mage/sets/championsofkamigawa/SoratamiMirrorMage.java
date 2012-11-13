@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoratamiMirrorMage extends CardImpl<SoratamiMirrorMage> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
 
     public SoratamiMirrorMage(UUID ownerId) {
         super(ownerId, 88, "Soratami Mirror-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

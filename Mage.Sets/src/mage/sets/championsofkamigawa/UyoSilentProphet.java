@@ -72,7 +72,7 @@ public class UyoSilentProphet extends CardImpl<UyoSilentProphet> {
         this.toughness = new MageInt(4);
         this.addAbility(FlyingAbility.getInstance());
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CopyTargetSpellEffect(), new GenericManaCost(2));
-        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, new FilterLandPermanent(), false)));
+        ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, new FilterLandPermanent("lands"), false)));
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
     }
