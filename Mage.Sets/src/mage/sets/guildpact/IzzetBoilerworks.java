@@ -28,9 +28,9 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,22 +49,23 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class IzzetBoilerworks extends CardImpl<IzzetBoilerworks> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(Constants.CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public IzzetBoilerworks(UUID ownerId) {
         super(ownerId, 159, "Izzet Boilerworks", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "GPT";
+
+        // Izzet Boilerworks enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // When Izzet Boilerworks enters the battlefield, return a land you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         Target target = new TargetControlledPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
+        // {T}: Add {U}{R} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 
     public IzzetBoilerworks(final IzzetBoilerworks card) {

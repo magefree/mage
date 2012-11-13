@@ -29,30 +29,27 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author Loki
  */
 public class BountifulHarvest extends CardImpl<BountifulHarvest> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public BountifulHarvest(UUID ownerId) {
         super(ownerId, 166, "Bountiful Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");
         this.expansionSetCode = "M12";
         this.color.setGreen(true);
+
+        // You gain 1 life for each land you control.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 

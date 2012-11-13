@@ -42,9 +42,8 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -115,6 +114,8 @@ class ElsewhereFlaskEffect extends OneShotEffect<ElsewhereFlaskEffect> {
 
 class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlaskContinuousEffect> {
 
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+
     public ElsewhereFlaskContinuousEffect() {
         super(Constants.Duration.EndOfTurn, Constants.Outcome.Neutral);
     }
@@ -130,9 +131,6 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlask
 
     @Override
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask");
         if (choice != null) {
             for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {

@@ -36,6 +36,7 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -47,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Harrow extends CardImpl<Harrow> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     static{
         filter.add(new CardTypePredicate(CardType.LAND));
@@ -58,7 +59,10 @@ public class Harrow extends CardImpl<Harrow> {
         this.expansionSetCode = "ZEN";
         this.color.setGreen(true);        
 
+        // As an additional cost to cast Harrow, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+
+        // Search your library for up to two basic land cards and put them onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(0, 2, new FilterBasicLandCard());
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
     }

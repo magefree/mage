@@ -34,9 +34,9 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
 
@@ -46,11 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class CropRotation extends CardImpl<CropRotation> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land.");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public CropRotation(UUID ownerId) {
         super(ownerId, 98, "Crop Rotation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
@@ -60,6 +56,7 @@ public class CropRotation extends CardImpl<CropRotation> {
 
         // As an additional cost to cast Crop Rotation, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+
         // Search your library for a land card and put that card onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterLandCard()), false, Outcome.PutLandInPlay));
     }

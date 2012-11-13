@@ -34,7 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterLandPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -43,16 +43,14 @@ import mage.target.TargetPermanent;
  */
 public class RainOfSalt extends CardImpl<RainOfSalt> {
 
-    private final static FilterPermanent filter = new FilterPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterPermanent filter = new FilterLandPermanent();
 
     public RainOfSalt(UUID ownerId) {
         super(ownerId, 206, "Rain of Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");
         this.expansionSetCode = "USG";
         this.color.setRed(true);
+
+        // Destroy two target lands.
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(2, filter));
     }

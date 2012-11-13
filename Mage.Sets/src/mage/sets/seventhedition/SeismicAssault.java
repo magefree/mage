@@ -37,7 +37,7 @@ import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -47,11 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SeismicAssault extends CardImpl<SeismicAssault> {
 
-    private static final FilterCard filter = new FilterCard("land card");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterCard filter = new FilterLandCard();
 
     public SeismicAssault(UUID ownerId) {
         super(ownerId, 216, "Seismic Assault", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}{R}{R}");

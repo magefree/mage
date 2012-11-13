@@ -32,21 +32,18 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -61,7 +58,7 @@ public class ReflectingPool extends CardImpl<ReflectingPool> {
         super(ownerId, 328, "Reflecting Pool", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "TMP";
 
-        // {tap}: Add to your mana pool one mana of any type that a land you control could produce.
+        // {T}: Add to your mana pool one mana of any type that a land you control could produce.
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
     }
 
@@ -77,6 +74,8 @@ public class ReflectingPool extends CardImpl<ReflectingPool> {
 
 class ReflectingPoolEffect extends ManaEffect<ReflectingPoolEffect> {
 
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+
     public ReflectingPoolEffect() {
         super();
         staticText = "Add to your mana pool one mana of any type that a land you control could produce";
@@ -88,9 +87,6 @@ class ReflectingPoolEffect extends ManaEffect<ReflectingPoolEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new ControllerPredicate(TargetController.YOU));
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         for (Permanent land : lands) {
             Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Constants.Zone.BATTLEFIELD);

@@ -28,10 +28,9 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,8 +38,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledPermanent;
 
@@ -50,18 +49,16 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GoblinTrenches extends CardImpl<GoblinTrenches> {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-        static {
-            filter.add(new CardTypePredicate(CardType.LAND));
-        }
+    final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
         public GoblinTrenches(UUID ownerId) {
         super(ownerId, 104, "Goblin Trenches", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}{W}");
         this.expansionSetCode = "APC";
         this.color.setRed(true);
         this.color.setWhite(true);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinTrenchesToken(), 2), new GenericManaCost(2));
+
+        // {2}, Sacrifice a land: Put two 1/1 red and white Goblin Soldier creature tokens onto the battlefield.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinTrenchesToken(), 2), new GenericManaCost(2));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
     }

@@ -29,10 +29,9 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -44,8 +43,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,11 +53,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class GoblinRazerunners extends CardImpl<GoblinRazerunners> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public GoblinRazerunners (UUID ownerId) {
         super(ownerId, 64, "Goblin Razerunners", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -68,9 +64,13 @@ public class GoblinRazerunners extends CardImpl<GoblinRazerunners> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}"));
+
+        // {1}{R}, Sacrifice a land: Put a +1/+1 counter on Goblin Razerunners.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);
+
+        // At the beginning of your end step, you may have Goblin Razerunners deal damage equal to the number of +1/+1 counters on it to target player.
         ability = new BeginningOfYourEndStepTriggeredAbility(new DamageTargetEffect(new CountersCount(CounterType.P1P1)), true);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -29,10 +29,9 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,11 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoratamiMirrorMage extends CardImpl<SoratamiMirrorMage> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("lands");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public SoratamiMirrorMage(UUID ownerId) {
         super(ownerId, 88, "Soratami Mirror-Mage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
@@ -65,8 +60,12 @@ public class SoratamiMirrorMage extends CardImpl<SoratamiMirrorMage> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
+
+        // {3}, Return three lands you control to their owner's hand: Return target creature to its owner's hand.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(3, 3, filter, false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -41,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -51,11 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiSavant extends CardImpl<SoratamiSavant> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public SoratamiSavant(UUID ownerId) {
         super(ownerId, 90, "Soratami Savant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
@@ -65,7 +60,11 @@ public class SoratamiSavant extends CardImpl<SoratamiSavant> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // {3}, Return a land you control to its owner's hand: Counter target spell unless its controller pays {3}.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new GenericManaCost(3));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetSpell());

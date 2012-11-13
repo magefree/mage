@@ -39,8 +39,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,13 +50,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AgentOfShauku extends CardImpl<AgentOfShauku> {
 
-    final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+    final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
-	static {
-		filter.add(new CardTypePredicate(CardType.LAND));
-	}
-
-	public AgentOfShauku(UUID ownerId) {
+    public AgentOfShauku(UUID ownerId) {
         super(ownerId, 55, "Agent of Shauku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "PCY";
         this.subtype.add("Human");

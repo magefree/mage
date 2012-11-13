@@ -37,8 +37,8 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,12 +51,6 @@ import mage.target.common.TargetLandPermanent;
  * @author LevelX
  */
 public class FeastOfWorms extends CardImpl<FeastOfWorms> {
-
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent();
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
 
     public FeastOfWorms (UUID ownerId) {
         super(ownerId, 216, "Feast of Worms", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}{G}");
@@ -101,10 +95,8 @@ class FeastOfWormsEffect extends OneShotEffect<FeastOfWormsEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         Player targetPlayer = game.getPlayer(permanent.getControllerId());
-        if (targetPlayer != null && permanent != null
-                && (permanent.getSupertype().get(0).toString().equals("Legendary"))) {
-                FilterControlledPermanent filter = new FilterControlledPermanent("land to sacrifice");
-                filter.add(new CardTypePredicate(CardType.LAND));
+        if (targetPlayer != null && permanent != null && (permanent.getSupertype().get(0).toString().equals("Legendary"))) {
+                FilterPermanent filter = new FilterLandPermanent("land to sacrifice");
                 filter.add(new ControllerIdPredicate(targetPlayer.getId()));
                 TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
 

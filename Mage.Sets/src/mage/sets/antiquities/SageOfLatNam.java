@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SageOfLatNam extends CardImpl<SageOfLatNam> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an Artifact");
     
     static
     {
@@ -65,7 +65,7 @@ public class SageOfLatNam extends CardImpl<SageOfLatNam> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        // {tap}, Sacrifice an artifact: Draw a card.
+        // {T}, Sacrifice an artifact: Draw a card.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

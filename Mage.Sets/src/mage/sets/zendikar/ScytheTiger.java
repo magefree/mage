@@ -36,8 +36,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -45,6 +45,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author Rafbill
  */
 public class ScytheTiger extends CardImpl<ScytheTiger> {
+
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public ScytheTiger(UUID ownerId) {
         super(ownerId, 183, "Scythe Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");
@@ -55,11 +57,10 @@ public class ScytheTiger extends CardImpl<ScytheTiger> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
 
+        // Shroud (This creature can't be the target of spells or abilities.)
         this.addAbility(ShroudAbility.getInstance());
-        // When Scythe Tiger enters the battlefield, sacrifice it unless you
-        // sacrifice a land.
-        FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-        filter.add(new CardTypePredicate(CardType.LAND));
+
+        // When Scythe Tiger enters the battlefield, sacrifice it unless you sacrifice a land.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new SacrificeTargetCost(new TargetControlledPermanent(filter)))));
     }
 

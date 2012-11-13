@@ -34,8 +34,8 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.ReturnToHandTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetSpell;
 import mage.target.common.TargetControlledPermanent;
 
@@ -45,17 +45,16 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Deprive extends CardImpl<Deprive> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public Deprive(UUID ownerId) {
         super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "ROE";
         this.color.setBlue(true);
+        // As an additional cost to cast Deprive, return a land you control to its owner's hand.
         this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
+
+        // Counter target spell.
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
     }

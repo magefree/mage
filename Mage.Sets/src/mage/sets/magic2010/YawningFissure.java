@@ -32,13 +32,11 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -73,6 +71,8 @@ public class YawningFissure extends CardImpl<YawningFissure> {
 
 class YawningFissureEffect extends OneShotEffect<YawningFissureEffect> {
 
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+
     public YawningFissureEffect() {
         super(Outcome.Sacrifice);
         this.staticText = "Each opponent sacrifices a land";
@@ -89,10 +89,6 @@ class YawningFissureEffect extends OneShotEffect<YawningFissureEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-        filter.add(new CardTypePredicate(CardType.LAND));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         for (UUID opponentId : opponents) {
             Player player = game.getPlayer(opponentId);

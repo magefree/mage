@@ -28,10 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -51,11 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Floodbringer extends CardImpl<Floodbringer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land (return to hand)");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land you control (return to hand)");
 
     public Floodbringer(UUID ownerId) {
         super(ownerId, 34, "Floodbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -66,8 +61,9 @@ public class Floodbringer extends CardImpl<Floodbringer> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
+
         // {2}, Return a land you control to its owner's hand: Tap target land.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);

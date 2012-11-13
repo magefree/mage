@@ -28,15 +28,14 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,10 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class AkkiBlizzardHerder extends CardImpl<AkkiBlizzardHerder> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public AkkiBlizzardHerder(UUID ownerId) {
         super(ownerId, 91, "Akki Blizzard-Herder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -57,6 +53,7 @@ public class AkkiBlizzardHerder extends CardImpl<AkkiBlizzardHerder> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
         // When Akki Blizzard-Herder dies, each player sacrifices a land.
         this.addAbility(new DiesTriggeredAbility(new SacrificeAllEffect(filter)));
     }

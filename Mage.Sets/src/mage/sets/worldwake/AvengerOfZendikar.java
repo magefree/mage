@@ -29,7 +29,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -40,8 +39,9 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.PlantToken;
 
@@ -50,14 +50,12 @@ import mage.game.permanent.token.PlantToken;
  * @author Loki, nantuko, North
  */
 public class AvengerOfZendikar extends CardImpl<AvengerOfZendikar> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Plant creature you control");
-    private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("land you control");
+    
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent("Plant creature you control");
+    private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
 
     static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new SubtypePredicate("Plant"));
-
-        filterLand.add(new CardTypePredicate(CardType.LAND));
     }
 
     public AvengerOfZendikar (UUID ownerId) {
@@ -69,7 +67,10 @@ public class AvengerOfZendikar extends CardImpl<AvengerOfZendikar> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // When Avenger of Zendikar enters the battlefield, put a 0/1 green Plant creature token onto the battlefield for each land you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new PlantToken(), new PermanentsOnBattlefieldCount(filterLand)), false));
+
+        // Landfall - Whenever a land enters the battlefield under your control, you may put a +1/+1 counter on each Plant creature you control.
         this.addAbility(new LandfallAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter), true));
     }
 

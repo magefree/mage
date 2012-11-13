@@ -33,8 +33,8 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -44,19 +44,17 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MagmaRift extends CardImpl<MagmaRift> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public MagmaRift(UUID ownerId) {
         super(ownerId, 136, "Magma Rift", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{2}{R}");
         this.expansionSetCode = "ZEN";
-
         this.color.setRed(true);
 
+        // As an additional cost to cast Magma Rift, sacrifice a land.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+
+        // Magma Rift deals 5 damage to target creature.
         this.getSpellAbility().addEffect(new DamageTargetEffect(5));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

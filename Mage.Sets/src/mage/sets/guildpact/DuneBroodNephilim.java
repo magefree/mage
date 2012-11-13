@@ -35,8 +35,8 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -44,11 +44,7 @@ import mage.game.permanent.token.Token;
  */
 public class DuneBroodNephilim extends CardImpl<DuneBroodNephilim> {
 
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("land you control");
-
-    static {
-        filterLands.add(new CardTypePredicate(CardType.LAND));
-    }
+    final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent();
 
     public DuneBroodNephilim(UUID ownerId) {
         super(ownerId, 110, "Dune-Brood Nephilim", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{R}{G}{W}");
@@ -60,6 +56,8 @@ public class DuneBroodNephilim extends CardImpl<DuneBroodNephilim> {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Whenever Dune-Brood Nephilim deals combat damage to a player, put a 1/1 colorless Sand creature token onto the battlefield for each land you control.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new CreateTokenEffect(new DuneBroodNephilimToken(), new PermanentsOnBattlefieldCount(filterLands)), false));
     }
 

@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -42,8 +41,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -52,11 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public SoratamiRainshaper(UUID ownerId) {
         super(ownerId, 89, "Soratami Rainshaper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -66,7 +61,11 @@ public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // {3}, Return a land you control to its owner's hand: Target creature you control gains shroud until end of turn. (It can't be the target of spells or abilities.)
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(ShroudAbility.getInstance(), Constants.Duration.EndOfTurn), new GenericManaCost(3));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetControlledCreaturePermanent());
@@ -81,5 +80,4 @@ public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
     public SoratamiRainshaper copy() {
         return new SoratamiRainshaper(this);
     }
-
 }

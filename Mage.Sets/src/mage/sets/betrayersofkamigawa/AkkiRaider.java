@@ -29,7 +29,6 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 import mage.Constants;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -39,8 +38,6 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -52,11 +49,6 @@ import mage.game.permanent.Permanent;
  */
 public class AkkiRaider extends CardImpl<AkkiRaider> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
     public AkkiRaider(UUID ownerId) {
         super(ownerId, 92, "Akki Raider", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "BOK";
@@ -65,6 +57,7 @@ public class AkkiRaider extends CardImpl<AkkiRaider> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
         // Whenever a land is put into a graveyard from the battlefield, Akki Raider gets +1/+0 until end of turn.
         this.addAbility(new AkkiRaiderTriggeredAbility(new BoostSourceEffect(1,0,Duration.EndOfTurn)));
     }

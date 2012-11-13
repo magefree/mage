@@ -39,8 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -50,11 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GruulGuildmage extends CardImpl<GruulGuildmage> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public GruulGuildmage(UUID ownerId) {
         super(ownerId, 144, "Gruul Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");
@@ -65,10 +61,13 @@ public class GruulGuildmage extends CardImpl<GruulGuildmage> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // {3}{R}, Sacrifice a land: Gruul Guildmage deals 2 damage to target player.
         Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{3}{R}"));
         firstAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         firstAbility.addTarget(new TargetPlayer(1));
         this.addAbility(firstAbility);
+        // {3}{G}: Target creature gets +2/+2 until end of turn.
         Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{3}{G}"));
         secondAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(secondAbility);

@@ -41,7 +41,6 @@ import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,16 +61,16 @@ public class VaporSnare extends CardImpl<VaporSnare> {
         this.color.setBlue(true);
 
         // Enchant creature
-        // You control enchanted creature.
-        // At the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
-        
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
+        // You control enchanted creature.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
-        
+
+        // At the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporSnareEffect(), Constants.TargetController.YOU, false));
     }
 
@@ -87,13 +86,8 @@ public class VaporSnare extends CardImpl<VaporSnare> {
 
 class VaporSnareEffect extends OneShotEffect<VaporSnareEffect> {
     
-    private static final FilterControlledPermanent filter;
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();
     private static final String effectText = "sacrifice {this} unless you return a land you control to its owner's hand";
-
-    static {
-        filter = new FilterControlledPermanent("land");
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     VaporSnareEffect( ) {
         super(Constants.Outcome.Sacrifice);

@@ -28,10 +28,9 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -40,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -50,11 +49,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class SimicGrowthChamber extends CardImpl<SimicGrowthChamber> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public SimicGrowthChamber(UUID ownerId) {
         super(ownerId, 180, "Simic Growth Chamber", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
@@ -69,7 +65,7 @@ public class SimicGrowthChamber extends CardImpl<SimicGrowthChamber> {
         ability.addTarget(target);
         this.addAbility(ability);
         // {tap}: Add {G}{U} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 1, 1, 0, 0, 0, 0), new TapSourceCost()));
     }
 
     public SimicGrowthChamber(final SimicGrowthChamber card) {

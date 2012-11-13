@@ -33,9 +33,9 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,11 +43,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Wildfire extends CardImpl<Wildfire> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
     public Wildfire(UUID ownerId) {
         super(ownerId, 228, "Wildfire", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

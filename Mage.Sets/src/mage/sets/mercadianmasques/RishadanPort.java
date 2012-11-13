@@ -38,8 +38,6 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -48,14 +46,8 @@ import mage.target.common.TargetLandPermanent;
  */
 public class RishadanPort extends CardImpl<RishadanPort> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Tap Target Land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
     public RishadanPort(UUID ownerId) {
-        super(ownerId, 324, "Rishadan Port", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        super(ownerId, 324, "Rishadan Port", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "MMQ";
 
         // {tap}: Add {1} to your mana pool.

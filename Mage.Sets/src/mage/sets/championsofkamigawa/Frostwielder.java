@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -43,8 +42,6 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -57,12 +54,6 @@ import mage.watchers.common.DamagedByWatcher;
  * @author LevelX
  */
 public class Frostwielder extends CardImpl<Frostwielder> {
-
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     public Frostwielder(UUID ownerId) {
         super(ownerId, 167, "Frostwielder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
@@ -128,11 +119,11 @@ class FrostwielderEffect extends ReplacementEffectImpl<FrostwielderEffect> {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-                        DamagedByWatcher watcher = 
-                                (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                        if (watcher != null)
-                                return watcher.damagedCreatures.contains(event.getTargetId());
-                        }
+            DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
+            if (watcher != null) {
+                return watcher.damagedCreatures.contains(event.getTargetId());
+            }
+        }
         return false;
     }
 

@@ -28,19 +28,16 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import javax.smartcardio.CardTerminal;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.players.Player;
@@ -75,9 +72,8 @@ public class Karma extends CardImpl<Karma> {
 
 class KarmaDamageTargetEffect extends OneShotEffect<KarmaDamageTargetEffect>{
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Swamps");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Swamps");
     static{
-        filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(new SubtypePredicate("Swamp"));
     }
     

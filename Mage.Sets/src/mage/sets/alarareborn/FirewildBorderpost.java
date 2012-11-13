@@ -40,8 +40,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
@@ -50,14 +50,13 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class FirewildBorderpost extends CardImpl<FirewildBorderpost> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("basic land");
 
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("basic land");
     private static final String COST_DESCRIPTION = "pay {1} and return a basic land you control to its owner's hand";
     private static final String ALTERNATIVE_COST_DESCRIPTION = "You may pay {1} and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost";
 
     static {
         filter.add(new SupertypePredicate("Basic"));
-        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public FirewildBorderpost (UUID ownerId) {
@@ -65,9 +64,15 @@ public class FirewildBorderpost extends CardImpl<FirewildBorderpost> {
         this.expansionSetCode = "ARB";
         this.color.setRed(true);
         this.color.setGreen(true);
+
+        // You may pay {1} and return a basic land you control to its owner's hand rather than pay Firewild Borderpost's mana cost.
         Cost cost = new CompositeCost(new GenericManaCost(1), new ReturnToHandTargetCost(new TargetControlledPermanent(filter)), COST_DESCRIPTION);
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl(ALTERNATIVE_COST_DESCRIPTION, cost));
+
+        // Veinfire Firewild enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // Tap: Add {R} or {G} to your mana pool.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
     }

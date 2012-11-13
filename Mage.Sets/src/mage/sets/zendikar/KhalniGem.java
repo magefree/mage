@@ -41,8 +41,8 @@ import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -54,12 +54,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KhalniGem extends CardImpl<KhalniGem> {
 
-    private static final FilterControlledPermanent filter;
-
-    static {
-        filter = new FilterControlledPermanent("land you control");
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public KhalniGem (UUID ownerId) {
         super(ownerId, 205, "Khalni Gem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

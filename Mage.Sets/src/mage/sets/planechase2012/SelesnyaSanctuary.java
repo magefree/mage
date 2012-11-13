@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author  * @author LevelX2
+ * @author LevelX2
  */
 public class SelesnyaSanctuary extends mage.sets.ravnika.SelesnyaSanctuary {
 

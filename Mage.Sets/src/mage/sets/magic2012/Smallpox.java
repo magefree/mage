@@ -28,16 +28,15 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -72,18 +71,11 @@ public class Smallpox extends CardImpl<Smallpox> {
 
 class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
 
-    private static final FilterPermanent filterCreature = new FilterPermanent("a creature you control");
-    private static final FilterPermanent filterLand = new FilterPermanent("a land you control");
-
-    static {
-        filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterCreature.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filterLand.add(new CardTypePredicate(CardType.LAND));
-        filterLand.add(new ControllerPredicate(Constants.TargetController.YOU));
-    }
+    private static final FilterPermanent filterCreature = new FilterControlledCreaturePermanent();
+    private static final FilterPermanent filterLand = new FilterControlledLandPermanent();
 
     SmallpoxEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Each player loses 1 life, discards a card, sacrifices a creature, then sacrifices a land";
     }
 
@@ -134,7 +126,7 @@ class SmallpoxEffect extends OneShotEffect<SmallpoxEffect> {
         Target target = new TargetControlledPermanent(1, 1, filter, false);
         if (target.canChoose(player.getId(), game)) {
             while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {

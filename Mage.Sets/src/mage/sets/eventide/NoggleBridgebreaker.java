@@ -28,7 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -36,8 +35,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -45,11 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class NoggleBridgebreaker extends CardImpl<NoggleBridgebreaker> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public NoggleBridgebreaker(UUID ownerId) {
         super(ownerId, 107, "Noggle Bridgebreaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}{U/R}");
@@ -60,6 +55,8 @@ public class NoggleBridgebreaker extends CardImpl<NoggleBridgebreaker> {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+
+        // When Noggle Bridgebreaker enters the battlefield, return a land you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);

@@ -29,15 +29,15 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -45,19 +45,17 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land your control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public StrengthOfCedars (UUID ownerId) {
         super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new PermanentsOnBattlefieldCount(filter),
-                new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfTurn, true));
+
+        // Target creature gets +X/+X until end of turn, where X is the number of lands you control.
+        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
+        this.getSpellAbility().addEffect(new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

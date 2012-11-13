@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -42,9 +41,9 @@ import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.target.common.TargetControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,11 +53,10 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoratamiMirrorGuard extends CardImpl<SoratamiMirrorGuard> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
     private final static FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
         filterCreature.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
     }
 
@@ -73,6 +71,7 @@ public class SoratamiMirrorGuard extends CardImpl<SoratamiMirrorGuard> {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+        
         // {2}, Return a land you control to its owner's hand: Target creature with power 2 or less is unblockable this turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));

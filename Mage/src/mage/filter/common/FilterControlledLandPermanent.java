@@ -25,46 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
 
-import java.util.UUID;
+package mage.filter.common;
+
 import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ShardVolley extends CardImpl<ShardVolley> {
+public class FilterControlledLandPermanent extends FilterControlledPermanent {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    public ShardVolley(UUID ownerId) {
-        super(ownerId, 103, "Shard Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
-        this.expansionSetCode = "MOR";
-        this.color.setRed(true);
-
-        // As an additional cost to cast Shard Volley, sacrifice a land.
-        this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-
-        // Shard Volley deals 3 damage to target creature or player.
-        this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+    public FilterControlledLandPermanent() {
+        this("land you control");
     }
 
-    public ShardVolley(final ShardVolley card) {
-        super(card);
+    public FilterControlledLandPermanent(String name) {
+        super(name);
+        this.add(new CardTypePredicate(CardType.LAND));
+    }
+
+    public FilterControlledLandPermanent(final FilterControlledLandPermanent filter) {
+        super(filter);
     }
 
     @Override
-    public ShardVolley copy() {
-        return new ShardVolley(this);
+    public FilterControlledLandPermanent copy() {
+        return new FilterControlledLandPermanent(this);
     }
+
 }

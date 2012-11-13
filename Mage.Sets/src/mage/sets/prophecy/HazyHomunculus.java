@@ -39,6 +39,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -49,11 +50,10 @@ import mage.filter.predicate.permanent.TappedPredicate;
  */
 public class HazyHomunculus extends CardImpl<HazyHomunculus> {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public HazyHomunculus(UUID ownerId) {

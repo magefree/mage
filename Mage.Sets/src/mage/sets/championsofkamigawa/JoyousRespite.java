@@ -34,8 +34,8 @@ import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -43,17 +43,15 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class JoyousRespite extends CardImpl<JoyousRespite> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent();
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public JoyousRespite (UUID ownerId) {
         super(ownerId, 216, "Joyous Respite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setGreen(true);
+
+        // You gain 1 life for each land you control.
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
     }
 

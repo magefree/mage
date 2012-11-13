@@ -40,9 +40,9 @@ import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter.ComparisonType;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -54,16 +54,15 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class BogGlider extends CardImpl<BogGlider> {
 
-    final static FilterControlledPermanent landFilter = new FilterControlledPermanent("a land");
+    final static FilterControlledPermanent landFilter = new FilterControlledLandPermanent("a land");
     private static final FilterCreatureCard filter = new FilterCreatureCard("Mercenary permanent card with converted mana cost 2 or less");
 
-	static {
-		landFilter.add(new CardTypePredicate(CardType.LAND));
+    static {
         filter.add(new SubtypePredicate("Mercenary"));
-		filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 3));
+        filter.add(new ConvertedManaCostPredicate(ComparisonType.LessThan, 3));
     }
 
-	public BogGlider(UUID ownerId) {
+    public BogGlider(UUID ownerId) {
         super(ownerId, 58, "Bog Glider", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "PCY";
         this.subtype.add("Human");
@@ -72,11 +71,13 @@ public class BogGlider extends CardImpl<BogGlider> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-		// {T}, Sacrifice a land: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
+
+        // {T}, Sacrifice a land: Search your library for a Mercenary permanent card with converted mana cost 2 or less and put it onto the battlefield. Then shuffle your library.
+	Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter)), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(landFilter)));
-		this.addAbility(ability);
+	this.addAbility(ability);
     }
 
     public BogGlider(final BogGlider card) {

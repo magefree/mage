@@ -43,8 +43,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.BeastToken;
@@ -56,21 +56,24 @@ import mage.players.Player;
  * @author Loki
  */
 public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land your control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-
+    
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public GarrukPrimalHunter (UUID ownerId) {
         super(ownerId, 174, "Garruk, Primal Hunter", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{G}{G}{G}");
         this.expansionSetCode = "M12";
         this.subtype.add("Garruk");
         this.color.setGreen(true);
+
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        
+        // +1: Put a 3/3 green Beast creature token onto the battlefield.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new BeastToken()), 1));
+        
+        // -3: Draw cards equal to the greatest power among creatures you control.
         this.addAbility(new LoyaltyAbility(new GarrukPrimalHunterEffect(), -3));
+
+        // -6: Put a 6/6 green Wurm creature token onto the battlefield for each land you control.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new WurmToken(), new PermanentsOnBattlefieldCount(filter)), -6));
     }
 

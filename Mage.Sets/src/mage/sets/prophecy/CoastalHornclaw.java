@@ -37,8 +37,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -48,13 +48,7 @@ import mage.target.common.TargetControlledPermanent;
 public class CoastalHornclaw extends CardImpl<CoastalHornclaw> {
 
     
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-    
-    static
-    {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
-    
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
     
     public CoastalHornclaw(UUID ownerId) {
         super(ownerId, 31, "Coastal Hornclaw", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

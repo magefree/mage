@@ -41,6 +41,7 @@ import mage.abilities.effects.common.UnblockableAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -49,11 +50,10 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Tanglewalker extends CardImpl<Tanglewalker> {
 
-    private static final FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
-        filter.add(new CardTypePredicate(CardType.LAND));
     }
 
     public Tanglewalker(UUID ownerId) {

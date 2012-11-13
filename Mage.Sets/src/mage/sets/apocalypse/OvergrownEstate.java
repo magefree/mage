@@ -28,16 +28,15 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -45,12 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class OvergrownEstate extends CardImpl<OvergrownEstate> {
 
-
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public OvergrownEstate(UUID ownerId) {
         super(ownerId, 113, "Overgrown Estate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{W}");
@@ -58,7 +52,9 @@ public class OvergrownEstate extends CardImpl<OvergrownEstate> {
         this.color.setGreen(true);
         this.color.setBlack(true);
         this.color.setWhite(true);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+
+        // Sacrifice a land: You gain 3 life.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(3), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public OvergrownEstate(final OvergrownEstate card) {

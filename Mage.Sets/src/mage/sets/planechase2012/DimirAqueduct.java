@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  *
- * @author  * @author LevelX2
+ * @author LevelX2
  */
 public class DimirAqueduct extends mage.sets.ravnika.DimirAqueduct {
 

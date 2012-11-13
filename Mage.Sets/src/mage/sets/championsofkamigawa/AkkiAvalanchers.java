@@ -29,18 +29,17 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -48,11 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class AkkiAvalanchers extends CardImpl<AkkiAvalanchers> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public AkkiAvalanchers(UUID ownerId) {
         super(ownerId, 151, "Akki Avalanchers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");
@@ -62,8 +57,9 @@ public class AkkiAvalanchers extends CardImpl<AkkiAvalanchers> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
-        this.addAbility(ability);
+
+        // Sacrifice a land: Akki Avalanchers gets +2/+0 until end of turn. Activate this ability only once each turn.
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public AkkiAvalanchers(final AkkiAvalanchers card) {

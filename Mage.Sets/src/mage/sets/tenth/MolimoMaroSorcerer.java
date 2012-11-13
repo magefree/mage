@@ -28,7 +28,6 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,8 +37,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -47,11 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class MolimoMaroSorcerer extends CardImpl<MolimoMaroSorcerer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("lands you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public MolimoMaroSorcerer(UUID ownerId) {
         super(ownerId, 280, "Molimo, Maro-Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");
@@ -61,7 +56,10 @@ public class MolimoMaroSorcerer extends CardImpl<MolimoMaroSorcerer> {
         this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
+
+        // Trample
         this.addAbility(TrampleAbility.getInstance());
+        // Molimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
     }
 

@@ -27,9 +27,12 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +41,7 @@ import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CopyTokenEffect;
@@ -45,20 +49,20 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInHand;
 
-import java.util.UUID;
 
 /**
  * @author Loki
  */
 public class BudokaGardener extends CardImpl<BudokaGardener> {
+
     public BudokaGardener(UUID ownerId) {
         super(ownerId, 202, "Budoka Gardener", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
@@ -68,10 +72,12 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.flipCard = true;
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
+
+        // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(new FilterLandCard()));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "")));
     }
 
     public BudokaGardener(final BudokaGardener card) {
@@ -86,8 +92,9 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
 }
 
 class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
+
     BudokaGardenerEffect() {
-        super(Constants.Outcome.PutLandInPlay);
+        super(Outcome.PutLandInPlay);
         staticText = "You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip {this}";
     }
 
@@ -99,7 +106,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
     public boolean apply(Game game, Ability source) {
         Card c = game.getCard(targetPointer.getFirst(game, source));
         if (c != null) {
-            c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
+            c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
         }
         if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getControllerId(), game) >= 10) {
             Permanent p = game.getPermanent(source.getSourceId());
@@ -118,6 +125,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
  }
 
 class DokaiWeaverofLife extends Token {
+
     DokaiWeaverofLife() {
         super("Dokai, Weaver of Life", "");
         supertype.add("Legendary");
@@ -127,18 +135,17 @@ class DokaiWeaverofLife extends Token {
         subtype.add("Monk");
         power = new MageInt(3);
         toughness = new MageInt(3);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
+
+        // {4}{G}{G}, {T}: Put an X/X green Elemental creature token onto the battlefield, where X is the number of lands you control.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DokaiWeaverofLifeToken()), new ManaCostsImpl("{4}{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
 }
 
 class DokaiWeaverofLifeToken extends Token {
-    final static FilterControlledPermanent filterLands = new FilterControlledPermanent("lands");
-
-    static {
-        filterLands.add(new CardTypePredicate(CardType.LAND));
-    }
+    
+    final static FilterControlledPermanent filterLands = new FilterControlledLandPermanent("lands you control");
 
     DokaiWeaverofLifeToken() {
         super("Elemental", "a X/X green Elemental creature token onto the battlefield, where X is the number of lands you control");
@@ -147,7 +154,8 @@ class DokaiWeaverofLifeToken extends Token {
         subtype.add("Elemental");
         power = new MageInt(0);
         toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new PermanentsOnBattlefieldCount(filterLands), new PermanentsOnBattlefieldCount(filterLands), Constants.Duration.WhileOnBattlefield)));
+        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filterLands);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
     }
 }
 

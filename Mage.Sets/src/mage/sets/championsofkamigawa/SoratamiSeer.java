@@ -29,10 +29,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,8 +42,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -53,11 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiSeer extends CardImpl<SoratamiSeer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("lands");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public SoratamiSeer(UUID ownerId) {
         super(ownerId, 91, "Soratami Seer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");
@@ -67,8 +63,12 @@ public class SoratamiSeer extends CardImpl<SoratamiSeer> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SoratamiSeerEffect(), new GenericManaCost(4));
+
+        // {4}, Return two lands you control to their owner's hand: Discard all the cards in your hand, then draw that many cards.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SoratamiSeerEffect(), new GenericManaCost(4));
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(2, 2, filter, false)));
         this.addAbility(ability);
     }

@@ -44,10 +44,10 @@ import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetControlledPermanent;
@@ -58,10 +58,9 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest or Plains");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("Forest or Plains");
 
     static {
-        filter.add(new CardTypePredicate(CardType.LAND));
         filter.add(Predicates.or(new SubtypePredicate("Forest"), new SubtypePredicate("Plains")));
     }
 
@@ -76,9 +75,11 @@ public class KnightOfTheReliquary extends CardImpl<KnightOfTheReliquary> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Knight of the Reliquary gets +1/+1 for each land card in your graveyard.
         CardsInControllerGraveyardCount value = new CardsInControllerGraveyardCount(new FilterLandCard());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(value, value, Duration.WhileOnBattlefield)));
 
+        // {T}, Sacrifice a Forest or Plains: Search your library for a land card, put it onto the battlefield, then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterLandCard());
         Costs costs = new CostsImpl();
         costs.add(new TapSourceCost());

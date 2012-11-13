@@ -39,8 +39,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -54,12 +54,6 @@ import mage.watchers.common.DamagedByWatcher;
  * @author LevelX
  */
 public class KumanosPupils extends CardImpl<KumanosPupils> {
-
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a land");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     public KumanosPupils(UUID ownerId) {
         super(ownerId, 177, "Kumano's Pupils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");

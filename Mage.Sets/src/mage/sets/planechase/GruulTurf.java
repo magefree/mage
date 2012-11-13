@@ -39,8 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,11 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GruulTurf extends CardImpl<GruulTurf> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("land");
-
-    static {
-        filter.add(new CardTypePredicate(Constants.CardType.LAND));
-    }
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public GruulTurf(UUID ownerId) {
         super(ownerId, 134, "Gruul Turf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

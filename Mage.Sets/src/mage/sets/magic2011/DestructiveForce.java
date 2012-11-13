@@ -34,9 +34,10 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.SacrificeAllEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -44,18 +45,19 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class DestructiveForce extends CardImpl<DestructiveForce> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
+    private static final FilterControlledPermanent filterLand = new FilterControlledLandPermanent();
+    private static final FilterPermanent filterCreature = new FilterCreaturePermanent();
 
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
 
     public DestructiveForce(UUID ownerId) {
         super(ownerId, 133, "Destructive Force", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{5}{R}{R}");
         this.expansionSetCode = "M11";
         this.color.setRed(true);
-        this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filter));
-        this.getSpellAbility().addEffect(new DamageAllEffect(5, new FilterCreaturePermanent()));
+
+        // Each player sacrifices five lands.
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(5, filterLand));
+        // Destructive Force deals 5 damage to each creature.
+        this.getSpellAbility().addEffect(new DamageAllEffect(5, filterCreature));
     }
 
     public DestructiveForce(final DestructiveForce card) {
