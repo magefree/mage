@@ -37,7 +37,7 @@ public class PhyrexianVault extends mage.sets.tenth.PhyrexianVault {
 
     public PhyrexianVault(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 306;
+        this.cardNumber = 307;
         this.expansionSetCode = "6ED";
     }
 

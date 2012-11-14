@@ -37,7 +37,7 @@ public class TeferisPuzzleBox extends mage.sets.ninthedition.TeferisPuzzleBox {
 
     public TeferisPuzzleBox(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 314;
+        this.cardNumber = 315;
         this.expansionSetCode = "6ED";
     }
 

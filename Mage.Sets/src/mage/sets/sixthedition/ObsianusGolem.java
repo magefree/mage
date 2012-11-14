@@ -40,7 +40,7 @@ import mage.cards.CardImpl;
 public class ObsianusGolem extends CardImpl<ObsianusGolem> {
 
     public ObsianusGolem(UUID ownerId) {
-        super(ownerId, 302, "Obsianus Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
+        super(ownerId, 303, "Obsianus Golem", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{6}");
         this.expansionSetCode = "6ED";
         this.subtype.add("Golem");
 
