@@ -29,7 +29,7 @@
 package mage.server.game;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import mage.cards.decks.*;
@@ -44,7 +44,7 @@ public class DeckValidatorFactory {
     private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
     private final static Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
-    private Map<String, Class> deckTypes = new HashMap<String, Class>();
+    private Map<String, Class> deckTypes = new LinkedHashMap<String, Class>();
 
     public static DeckValidatorFactory getInstance() {
         return INSTANCE;
