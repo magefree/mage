@@ -69,6 +69,7 @@ public class RingOfGix extends CardImpl<RingOfGix> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
+        this.addAbility(ability);
     }
 
     public RingOfGix(final RingOfGix card) {
