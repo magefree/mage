@@ -41,7 +41,9 @@ public class CardImageUtils {
                 pathCache.put(card, filePath);
             }
         } else {
-            filePath = getImagePath(card, null);
+            String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+            String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+            filePath = getImagePath(card, path);
             file = new TFile(filePath);
         }
 
@@ -53,18 +55,20 @@ public class CardImageUtils {
     }
 
     private static String getTokenImagePath(CardInfo card) {
-        String filename = getImagePath(card, null);
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+        String filename = getImagePath(card, path);
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
             CardInfo updated = new CardInfo(card);
             updated.setName(card.getName() + " 1");
-            filename = getImagePath(updated, null);
+            filename = getImagePath(updated, path);
             file = new TFile(filename);
             if (!file.exists()) {
                 updated = new CardInfo(card);
                 updated.setName(card.getName() + " 2");
-                filename = getImagePath(updated, null);
+                filename = getImagePath(updated, path);
             }
         }
 
