@@ -64,7 +64,7 @@ public class BigCard extends JComponent {
     protected volatile BufferedImage foil;
     protected UUID cardId;
     protected JXPanel panel;
-    protected boolean initState;
+    protected int oldWidth;
     protected boolean foilState;
     protected Thread foilThread;
     protected float hue = 0.005f;
@@ -81,13 +81,14 @@ public class BigCard extends JComponent {
         }
         setDoubleBuffered(true);
         setOpaque(true);
-        scrollPane.setOpaque(true);
+        this.scrollPane.setOpaque(true);
+        this.scrollPane.setVisible(false);
     }
 
     protected void initBounds() {
-        initState = true;
-        scrollPane.setBounds(20, 230, 210, 120);
-        scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
+        oldWidth = this.getWidth();
+        scrollPane.setBounds(this.getWidth()*1000/17777,this.getWidth()*1000/1100,
+                             this.getWidth()*1000/1142,this.getWidth()*1000/2539);
     }
 
     public void setCard(UUID cardId, Image image, List<String> strings, boolean foil) {
@@ -152,7 +153,7 @@ public class BigCard extends JComponent {
     }
 
     public void showTextComponent() {
-        if (!initState) {
+        if (oldWidth != this.getWidth()) {
             initBounds();
         }
         this.scrollPane.setVisible(true);
@@ -180,64 +181,64 @@ public class BigCard extends JComponent {
         repaint();
     }
 
-    private Thread getFoilThread() {
-        return new Thread(new Runnable() {
-            @Override
-            public void run() {
-                if (bigImage == null) {
-                    return;
-                }
-                final HueFilter filter = FilterFactory.getHueFilter();
-                int sign = 1;
-                while (true) {
-                    boolean prevState = foilState;
-                    while (!foilState) {
-                        ThreadUtils.sleep(10);
-                    }
-                    if (prevState == foilState) {
-                        ThreadUtils.sleep(DEFAULT_DELAY_PERIOD);
-                    }
-                    hue += dh * sign;
-                    /*if (hue >= 1.0D) {
-                        hue = 0.000F;
-                    }*/
-                    if (hue < LEFT_BOUNDARY) {
-                        sign *= -1;
-                        hue = LEFT_BOUNDARY;
-                    } else if (hue > RIGHT_BOUNDARY) {
-                        sign *= -1;
-                        hue = RIGHT_BOUNDARY;
-                    }
-                    filter.setHue(hue);
-                    BufferedImage f = null;
-                    synchronized (BigCard.this) {
-                        if (source == null) {
-                            source = BufferedImageBuilder.bufferImage(bigImage);
-                        }
-                        if (source == null) {
-                            return;
-                        }
-                        f = filter.filter(source, null);
-                    }
-                    synchronized (BigCard.class) {
-                        foil = f;
-                    }
-                    SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            BigCard.this.repaint();
-                        }
-                    });
-
-                }
-            }
-        });
-    }
+//    private Thread getFoilThread() {
+//        return new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (bigImage == null) {
+//                    return;
+//                }
+//                final HueFilter filter = FilterFactory.getHueFilter();
+//                int sign = 1;
+//                while (true) {
+//                    boolean prevState = foilState;
+//                    while (!foilState) {
+//                        ThreadUtils.sleep(10);
+//                    }
+//                    if (prevState == foilState) {
+//                        ThreadUtils.sleep(DEFAULT_DELAY_PERIOD);
+//                    }
+//                    hue += dh * sign;
+//                    /*if (hue >= 1.0D) {
+//                        hue = 0.000F;
+//                    }*/
+//                    if (hue < LEFT_BOUNDARY) {
+//                        sign *= -1;
+//                        hue = LEFT_BOUNDARY;
+//                    } else if (hue > RIGHT_BOUNDARY) {
+//                        sign *= -1;
+//                        hue = RIGHT_BOUNDARY;
+//                    }
+//                    filter.setHue(hue);
+//                    BufferedImage f = null;
+//                    synchronized (BigCard.this) {
+//                        if (source == null) {
+//                            source = BufferedImageBuilder.bufferImage(bigImage);
+//                        }
+//                        if (source == null) {
+//                            return;
+//                        }
+//                        f = filter.filter(source, null);
+//                    }
+//                    synchronized (BigCard.class) {
+//                        foil = f;
+//                    }
+//                    SwingUtilities.invokeLater(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            BigCard.this.repaint();
+//                        }
+//                    });
+//
+//                }
+//            }
+//        });
+//    }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {
         bigImage = null;
         synchronized (this) {
-            if (this.panel != null) remove(this.panel);
+            if (this.panel != null) { remove(this.panel); }
             this.panel = jxPanel;
             add(jxPanel);
         }
@@ -260,10 +261,9 @@ public class BigCard extends JComponent {
 
         setFocusable(false);
         setMinimumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
-        setMaximumSize(new Dimension(FRAME_MAX_WIDTH, FRAME_MAX_HEIGHT));
+        setOpaque(false);
         setPreferredSize(getMinimumSize());
         setLayout(null);
-        //setBackground(new Color(255,255,255,200));
 
         scrollPane.setBorder(null);
         scrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -275,6 +275,8 @@ public class BigCard extends JComponent {
         scrollPane.setViewportView(text);
 
         add(scrollPane);
+        scrollPane.setBounds(20, 230, 210, 120);
+        scrollPane.setBounds(new Rectangle(CONTENT_MAX_XOFFSET, TEXT_MAX_YOFFSET, TEXT_MAX_WIDTH, TEXT_MAX_HEIGHT));
     }// </editor-fold>//GEN-END:initComponents
 
     public void setDefaultImage() {
