@@ -41,6 +41,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
@@ -49,7 +50,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class ResplendentMentor extends CardImpl<ResplendentMentor> {
 
-    private static final FilterPermanent filter = new FilterPermanent("White creatures");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("White creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

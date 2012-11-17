@@ -32,17 +32,17 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.costs.common.RemoveCounterTargetCost;
+import mage.abilities.costs.common.RemoveCounterCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterPermanentOrPlayerWithCounter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetPermanentOrPlayerWithCounter;
+import mage.filter.predicate.permanent.CounterAnyPredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -50,10 +50,11 @@ import mage.target.common.TargetPermanentOrPlayerWithCounter;
  */
 public class ChiseiHeartOfOceans extends CardImpl<ChiseiHeartOfOceans> {
 
-    private final static  FilterPermanentOrPlayerWithCounter filter = new FilterPermanentOrPlayerWithCounter("remove a counter from a permanent you control");
+    private final static  FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
     
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new CounterAnyPredicate());
     }       
     
     public ChiseiHeartOfOceans(UUID ownerId) {
@@ -70,10 +71,9 @@ public class ChiseiHeartOfOceans extends CardImpl<ChiseiHeartOfOceans> {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of your upkeep, sacrifice Chisei, Heart of Oceans unless you remove a counter from a permanent you control.
-        TargetPermanentOrPlayerWithCounter target = new TargetPermanentOrPlayerWithCounter(1);
-        target.setFilter(filter);
+        TargetPermanent target = new TargetPermanent(1,1,filter,true);
         target.setTargetName("a permanent you control");
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterTargetCost(target)),TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new RemoveCounterCost(target)),TargetController.YOU, false));
 
     }
 

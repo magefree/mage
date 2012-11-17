@@ -28,17 +28,15 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,6 +45,12 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class VigilanteJustice extends CardImpl<VigilanteJustice> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human");
+
+    static {
+            filter.add(new SubtypePredicate("Human"));
+    }
+
     public VigilanteJustice(UUID ownerId) {
         super(ownerId, 165, "Vigilante Justice", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}");
         this.expansionSetCode = "AVR";
@@ -54,7 +58,9 @@ public class VigilanteJustice extends CardImpl<VigilanteJustice> {
         this.color.setRed(true);
 
         // Whenever a Human enters the battlefield under your control, Vigilante Justice deals 1 damage to target creature or player.
-        this.addAbility(new VigilanteJusticeTriggeredAbility());
+        Ability ability = new CreatureEntersBattlefieldTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), filter, false, false);
+        ability.addTarget(new TargetCreatureOrPlayer());
+        this.addAbility(ability);
     }
 
     public VigilanteJustice(final VigilanteJustice card) {
@@ -66,36 +72,3 @@ public class VigilanteJustice extends CardImpl<VigilanteJustice> {
         return new VigilanteJustice(this);
     }
 }
-
-class VigilanteJusticeTriggeredAbility extends ZoneChangeTriggeredAbility<VigilanteJusticeTriggeredAbility> {
-
-    public VigilanteJusticeTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), "Whenever a Human enters the battlefield under your control, ", false);
-        this.addTarget(new TargetCreatureOrPlayer());
-    }
-
-    public VigilanteJusticeTriggeredAbility(VigilanteJusticeTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getSubtype().contains("Human") && permanent.getControllerId().equals(this.getControllerId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public VigilanteJusticeTriggeredAbility copy() {
-        return new VigilanteJusticeTriggeredAbility(this);
-    }
-
-}
-

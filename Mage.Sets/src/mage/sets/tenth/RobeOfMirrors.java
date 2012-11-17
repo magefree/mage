@@ -28,7 +28,6 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -53,11 +52,15 @@ public class RobeOfMirrors extends CardImpl<RobeOfMirrors> {
         this.expansionSetCode = "10E";
         this.subtype.add("Aura");
         this.color.setBlue(true);
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        
+        // Enchanted creature has shroud.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), Constants.AttachmentType.AURA)));
     }
 
