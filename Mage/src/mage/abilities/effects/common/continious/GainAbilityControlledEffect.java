@@ -124,14 +124,21 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (excludeSource)
+        if (excludeSource) {
             sb.append("Other ");
+        }
+        String gainedAbility = ability.getRule();
         sb.append(filter.getMessage()).append(" you control ");
-        if (duration.equals(Duration.WhileOnBattlefield))
+        if (duration.equals(Duration.WhileOnBattlefield)) {
             sb.append("have ");
-        else
+            if (gainedAbility.startsWith("Whenever ") || gainedAbility.startsWith("{T}")) {
+                gainedAbility = "\"" + gainedAbility + "\"";
+            }
+        }
+        else {
             sb.append("gain ");
-        sb.append(ability.getRule()).append(" ").append(duration.toString());
+        }
+        sb.append(gainedAbility).append(" ").append(duration.toString());
         staticText = sb.toString();
     }
 
