@@ -31,6 +31,7 @@ import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -47,6 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl<CreatureEntersBattlefieldTriggeredAbility> {
 
     private boolean opponentController;
+    protected FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     /**
      * optional = false<br>
@@ -75,13 +77,41 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
      * @param opponentController
      */
     public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean opponentController) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, optional, opponentController);
         this.opponentController = opponentController;
     }
+    
+    /**
+     * @param zone
+     * @param effect
+     * @param optional
+     * @param opponentController
+     */
+    public CreatureEntersBattlefieldTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean opponentController) {
+        this(zone, effect, null, optional, opponentController);
+
+    }
+
+    /**
+     * @param zone
+     * @param effect
+     * @param filter filter the triggering creatures
+     * @param optional
+     * @param opponentController
+     */
+    public CreatureEntersBattlefieldTriggeredAbility(Zone zone, Effect effect, FilterCreaturePermanent filter, boolean optional, boolean opponentController) {
+        super(zone, effect, optional);
+        this.opponentController = opponentController;
+        if (filter != null) {
+            this.filter = filter;
+        }
+    }
+
 
     public CreatureEntersBattlefieldTriggeredAbility(CreatureEntersBattlefieldTriggeredAbility ability) {
         super(ability);
         this.opponentController = ability.opponentController;
+        this.filter = ability.filter;
     }
 
     @Override
@@ -89,7 +119,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
         if (event.getType() == EventType.ZONE_CHANGE) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && permanent.getCardType().contains(CardType.CREATURE)
+                    && filter.match(permanent, sourceId, controllerId, game)
                     && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
                 if (!this.getTargets().isEmpty()) {
                     Target target = this.getTargets().get(0);
@@ -108,7 +138,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public String getRule() {
-        return "Whenever a creature enters the battlefield under "
+        return "Whenever a " + filter.getMessage() +" enters the battlefield under "
                 + (opponentController ? "an opponent's control, " : "your control, ")
                 + super.getRule();
     }
