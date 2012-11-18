@@ -29,10 +29,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CopyTargetSpellEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -58,7 +57,10 @@ public class PyromancerAscension extends CardImpl<PyromancerAscension> {
         super(ownerId, 143, "Pyromancer Ascension", Rarity.RARE, new CardType[] { CardType.ENCHANTMENT }, "{1}{R}");
         this.expansionSetCode = "ZEN";
         this.color.setRed(true);
+
+        // Whenever you cast an instant or sorcery spell that has the same name as a card in your graveyard, you may put a quest counter on Pyromancer Ascension.
         this.addAbility(new PyromancerAscensionQuestTriggeredAbility());
+        // Whenever you cast an instant or sorcery spell while Pyromancer Ascension has two or more quest counters on it, you may copy that spell. You may choose new targets for the copy.
         this.addAbility(new PyromancerAscensionCopyTriggeredAbility());
     }
 
@@ -76,7 +78,7 @@ public class PyromancerAscension extends CardImpl<PyromancerAscension> {
 class PyromancerAscensionQuestTriggeredAbility extends TriggeredAbilityImpl<PyromancerAscensionQuestTriggeredAbility> {
 
     PyromancerAscensionQuestTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(), true), true);
     }
 
     PyromancerAscensionQuestTriggeredAbility(final PyromancerAscensionQuestTriggeredAbility ability) {
@@ -132,7 +134,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<Pyrom
     }
 
     PyromancerAscensionCopyTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
+        super(Zone.BATTLEFIELD, new CopyTargetSpellEffect(), true);
         this.addTarget(new TargetSpell(filter));
     }
 
@@ -152,6 +154,7 @@ class PyromancerAscensionCopyTriggeredAbility extends TriggeredAbilityImpl<Pyrom
             if (isControlledInstantOrSorcery(spell)) {
                 Permanent permanent = game.getBattlefield().getPermanent(this.getSourceId());
                 if (permanent != null && permanent.getCounters().getCount(CounterType.QUEST) >= 2) {
+                    this.getTargets().get(0).clearChosen();
                     this.getTargets().get(0).add(spell.getId(), game);
                     return true;
                 }
