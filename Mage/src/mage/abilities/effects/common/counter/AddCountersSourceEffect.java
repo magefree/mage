@@ -31,9 +31,11 @@ package mage.abilities.effects.common.counter;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -41,17 +43,25 @@ import mage.game.permanent.Permanent;
 public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
 
     private Counter counter;
+    protected boolean informPlayers;
 
     public AddCountersSourceEffect(Counter counter) {
+        this(counter, false);
+    }
+
+    public AddCountersSourceEffect(Counter counter, boolean informPlayers) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
+        this.informPlayers = informPlayers;
         setText();
     }
 
     public AddCountersSourceEffect(final AddCountersSourceEffect effect) {
         super(effect);
-        if (effect.counter != null)
+        if (effect.counter != null) {
             this.counter = effect.counter.copy();
+        }
+        this.informPlayers = effect.informPlayers;
     }
 
     @Override
@@ -60,6 +70,12 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         if (permanent != null) {
             if (counter != null) {
                 permanent.addCounters(counter.copy(), game);
+                if (informPlayers) {
+                    Player player = game.getPlayer(source.getControllerId());
+                    if (player != null) {
+                        game.informPlayers(player.getName()+ " puts " + counter.getCount() + " " + counter.getName() + " counter on " + permanent.getName());
+                    }
+                }
             }
         }
         return true;
@@ -70,8 +86,9 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
             StringBuilder sb = new StringBuilder();
             sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
             staticText = sb.toString();
-        } else
+        } else {
             staticText = "put a " + counter.getName() + " counter on {this}";
+        }
     }
 
     @Override

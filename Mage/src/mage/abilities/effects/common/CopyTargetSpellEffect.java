@@ -35,6 +35,7 @@ import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -59,6 +60,12 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
             copy.setCopiedSpell(true);
             game.getStack().push(copy);
             copy.chooseNewTargets(game, source.getControllerId());
+            Player player = game.getPlayer(source.getControllerId());
+            String activateMessage = copy.getSpellAbility().getActivatedMessage(game);
+            if (activateMessage.startsWith(" casts ")) {
+                activateMessage = activateMessage.substring(6);
+            }
+            game.informPlayers(player.getName() + " copies " + activateMessage);;
             return true;
         }
         return false;
