@@ -78,6 +78,7 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
     public TargetPermanentOrPlayer(final TargetPermanentOrPlayer target) {
         super(target);
         this.filter = target.filter.copy();
+        this.filterPermanent = target.filterPermanent.copy();
     }
 
     @Override
