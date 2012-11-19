@@ -75,6 +75,15 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
         this.excludeSource = excludeSource;
         setText();
     }
+    
+    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
+        this.power = power;
+        this.toughness = toughness;
+        this.filter = filter;
+        this.excludeSource = excludeSource;
+        this.staticText = rule;
+    }
 
     public BoostAllEffect(final BoostAllEffect effect) {
         super(effect);
@@ -82,6 +91,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
         this.toughness = effect.toughness;
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
+        this.staticText = effect.staticText;
     }
 
     @Override
