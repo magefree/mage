@@ -36,6 +36,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  *
@@ -48,19 +49,36 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
      */
     private MageObject target;
     private UUID sourceId;
+    private int zoneChangeCounter;
 
     public CopyEffect(Permanent target, UUID sourceId) {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(Duration.Custom, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
         this.sourceId = sourceId;
+        this.zoneChangeCounter = 0;
     }
 
     public CopyEffect(final CopyEffect effect) {
         super(effect);
         this.target = effect.target.copy();
         this.sourceId = effect.sourceId;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        Permanent permanent = game.getPermanent(this.sourceId);
+        if(permanent != null) {
+            Card card = game.getCard(this.sourceId);
+            if(card != null)
+            {
+                this.zoneChangeCounter = card.getZoneChangeCounter();
+            }
+        }
+    }
+
+    
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.sourceId);
@@ -114,5 +132,18 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
 
     public UUID getSourceId() {
         return sourceId;
+    }
+    
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        Permanent permanent = game.getPermanent(this.sourceId);
+        if(permanent != null) {
+            Card card = game.getCard(this.sourceId);
+            if(card != null)
+            {
+                return this.zoneChangeCounter != card.getZoneChangeCounter();
+            }
+        }
+        return true;
     }
 }

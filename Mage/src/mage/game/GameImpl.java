@@ -852,7 +852,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (effect instanceof CopyEffect) {
                 CopyEffect copyEffect = (CopyEffect) effect;
                 // there is another copy effect that our targetPermanent copies stats from
-                if (copyEffect.getSourceId().equals(copyFromPermanent.getId())) {
+                if (!copyEffect.isInactive(null, this) && copyEffect.getSourceId().equals(copyFromPermanent.getId())) {
                     MageObject object = ((CopyEffect) effect).getTarget();
                     if (object instanceof Permanent) {
                         // so we will use original card instead of target
@@ -866,7 +866,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
 
-        state.addEffect(newEffect, newAbility);
+        state.addEffect(newEffect, copyToPermanent.getId(), newAbility);
     }
 
     @Override

@@ -371,6 +371,10 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect effect: layer) {
             effect.apply(Layer.CopyEffects_1, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
         }
+        
+        //Reload layerEffect
+        layerEffects = getLayeredEffects(game);
+        
         layer = filterLayeredEffects(layerEffects, Layer.ControlChangingEffects_2);
         for (ContinuousEffect effect: layer) {
             effect.apply(Layer.ControlChangingEffects_2, SubLayer.NA, layeredEffects.getAbility(effect.getId()), game);
@@ -395,6 +399,9 @@ public class ContinuousEffects implements Serializable {
             }
         }
 
+        //Reload layerEffect
+        layerEffects = getLayeredEffects(game);
+        
         layer = filterLayeredEffects(layerEffects, Layer.PTChangingEffects_7);
         for (ContinuousEffect effect: layer) {
             effect.apply(Layer.PTChangingEffects_7, SubLayer.SetPT_7b, layeredEffects.getAbility(effect.getId()), game);
