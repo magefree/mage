@@ -34,8 +34,6 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
@@ -60,11 +58,7 @@ public class CentaurOmenreader extends CardImpl<CentaurOmenreader> {
         this.toughness = new MageInt(3);
 
         // As long as Centaur Omenreader is tapped, creature spells you cast cost {2} less to cast.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(
-                new SpellsCostReductionEffect(new FilterCreatureCard("creature spells"), 2),
-                TappedCondition.getInstance(),
-                "As long as {this} is tapped, creature spells you cast cost {2} less to cast");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CentaurOmenreaderSpellsCostReductionEffect()));
     }
 
     public CentaurOmenreader(final CentaurOmenreader card) {
@@ -77,18 +71,27 @@ public class CentaurOmenreader extends CardImpl<CentaurOmenreader> {
     }
 }
 
-class TappedCondition implements Condition {
+class CentaurOmenreaderSpellsCostReductionEffect extends SpellsCostReductionEffect {
 
-    private static TappedCondition fInstance = new TappedCondition();
+    public CentaurOmenreaderSpellsCostReductionEffect() {
+        super(new FilterCreatureCard("creature spells"), 2);
+    }
 
-    public static Condition getInstance() {
-        return fInstance;
+    protected CentaurOmenreaderSpellsCostReductionEffect(SpellsCostReductionEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent != null && sourcePermanent.isTapped()) {
+            return super.applies(abilityToModify, source, game);
+        }
+        return false;
+    }
 
-        return permanent != null && permanent.isTapped();
+    @Override
+    public CentaurOmenreaderSpellsCostReductionEffect copy() {
+        return new CentaurOmenreaderSpellsCostReductionEffect(this);
     }
 }
