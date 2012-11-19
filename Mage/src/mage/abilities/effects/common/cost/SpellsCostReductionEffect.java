@@ -30,8 +30,10 @@ package mage.abilities.effects.common.cost;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;
@@ -64,14 +66,13 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        CardUtil.adjustCost(spellAbility, this.amount);
+        CardUtil.adjustCost(abilityToModify, this.amount);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility
+        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
                 && abilityToModify.getControllerId().equals(source.getControllerId())) {
             Card sourceCard = game.getCard(abilityToModify.getSourceId());
             return sourceCard != null && this.filter.match(sourceCard, game);

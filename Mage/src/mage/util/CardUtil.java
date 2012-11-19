@@ -30,6 +30,8 @@ package mage.util;
 
 import mage.Constants;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
@@ -85,7 +87,6 @@ public class CardUtil {
 
         return false;
     }
-
     /**
      * Adjusts spell or ability cost to be paid.
      *
@@ -93,7 +94,17 @@ public class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
+        Ability ability = (Ability) spellAbility;
+        CardUtil.adjustCost(ability, reduceCount);
+    }
+    /**
+     * Adjusts ability cost to be paid.
+     *
+     * @param ability
+     * @param reduceCount
+     */
+    public static void adjustCost(Ability ability, int reduceCount) {
+        ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
         boolean reduced = false;
         for (ManaCost manaCost : previousCost) {
@@ -109,8 +120,8 @@ public class CardUtil {
                 adjustedCost.add(manaCost);
             }
         }
-        spellAbility.getManaCostsToPay().clear();
-        spellAbility.getManaCostsToPay().addAll(adjustedCost);
+        ability.getManaCostsToPay().clear();
+        ability.getManaCostsToPay().addAll(adjustedCost);
     }
 
     /**

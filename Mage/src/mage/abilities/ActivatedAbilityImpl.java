@@ -193,6 +193,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     Spell<?> spell = (Spell<?>) object;
                     String castText = spell.getSpellAbility().toString();
                     sb.append((castText.startsWith("Cast ") ? castText.substring(5):castText));
+                    if (spell.getFromZone() == Zone.GRAVEYARD) {
+                        sb.append(" from graveyard");
+                    }
                 } else {
                     sb.append(object.getName());
                 }
