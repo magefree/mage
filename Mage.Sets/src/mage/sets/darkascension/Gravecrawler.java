@@ -108,7 +108,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> 
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Constants.Zone.GRAVEYARD) {
+            if (card != null && game.getState().getZone(source.getSourceId()) == Constants.Zone.GRAVEYARD && game.canPlaySorcery(source.getControllerId())) {
                 if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0)
                     return true;
             }
