@@ -4,6 +4,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -15,9 +16,9 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetArtifactPermanent;
 
 
@@ -37,10 +38,15 @@ import mage.target.common.TargetArtifactPermanent;
  */
 
 public class ModularAbility extends DiesTriggeredAbility {
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact creature");
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
     private int amount;
 
     public ModularAbility(Card card, int amount) {
         super(new ModularDistributeCounterEffect(), true);
+        this.addTarget(new TargetArtifactPermanent(filter));
         this.amount = amount;
         card.addAbility(new ModularStaticAbility(amount));
     }
@@ -48,6 +54,15 @@ public class ModularAbility extends DiesTriggeredAbility {
     public ModularAbility(ModularAbility ability) {
         super(ability);
         this.amount = ability.amount;
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
+        if (before != null && ((Permanent) before).getCounters().getCount(CounterType.P1P1) > 0) {
+            return super.checkTrigger(event, game);
+        }
+        return false;
     }
 
     @Override
@@ -112,9 +127,7 @@ class ModularDistributeCounterEffect extends OneShotEffect<ModularDistributeCoun
             if (numberOfCounters > 0) {
                 Player player = game.getPlayer(source.getControllerId());
                 if (player != null) {
-                    Target target = new TargetArtifactPermanent(filter);
-                    player.chooseTarget(outcome, target, source, game);
-                    Permanent targetArtifact = game.getPermanent(target.getFirstTarget());
+                    Permanent targetArtifact = game.getPermanent(targetPointer.getFirst(game, source));
                     if (targetArtifact != null) {
                         targetArtifact.addCounters(CounterType.P1P1.createInstance(numberOfCounters), game);
                         return true;
