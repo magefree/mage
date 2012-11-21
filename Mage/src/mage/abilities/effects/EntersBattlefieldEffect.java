@@ -31,6 +31,7 @@ package mage.abilities.effects;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -44,6 +45,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
     protected Effects baseEffects = new Effects();
     protected String text;
+    protected Condition condition;
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
@@ -57,10 +59,18 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
         this.text = text;
     }
 
+    public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text) {
+        super(Duration.OneUse, baseEffect.getOutcome());
+        this.baseEffects.add(baseEffect);
+        this.text = text;
+        this.condition = condition;
+    }
+
     public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
         super(effect);
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
+        this.condition = effect.condition;
     }
 
     public void addEffect(Effect effect) {
@@ -71,7 +81,9 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             if (event.getTargetId().equals(source.getSourceId())) {
-                return true;
+                if (condition == null || condition.apply(game, source)) {
+                    return true;
+                }
             }
         }
         return false;

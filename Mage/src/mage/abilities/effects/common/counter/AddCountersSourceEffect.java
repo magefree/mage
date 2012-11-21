@@ -30,8 +30,9 @@ package mage.abilities.effects.common.counter;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,15 +45,27 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
     private Counter counter;
     protected boolean informPlayers;
+    protected DynamicValue amount;
 
     public AddCountersSourceEffect(Counter counter) {
         this(counter, false);
     }
 
     public AddCountersSourceEffect(Counter counter, boolean informPlayers) {
+        this(counter, new StaticValue(0), informPlayers);
+    }
+
+    /**
+     * 
+     * @param counter
+     * @param amount this amount will be added to the counter instances
+     * @param informPlayers 
+     */
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
         this.informPlayers = informPlayers;
+        this.amount = amount;
         setText();
     }
 
@@ -62,6 +75,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
             this.counter = effect.counter.copy();
         }
         this.informPlayers = effect.informPlayers;
+        this.amount = effect.amount;
     }
 
     @Override
@@ -69,11 +83,13 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             if (counter != null) {
+                Counter newCounter = counter.copy();
+                newCounter.add(amount.calculate(game, source));
                 permanent.addCounters(counter.copy(), game);
                 if (informPlayers) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {
-                        game.informPlayers(player.getName()+ " puts " + counter.getCount() + " " + counter.getName() + " counter on " + permanent.getName());
+                        game.informPlayers(player.getName()+ " puts " + newCounter.getCount() + " " + newCounter.getName() + " counter on " + permanent.getName());
                     }
                 }
             }

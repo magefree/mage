@@ -18,6 +18,15 @@ public class KickerManaCost extends ManaCostsImpl {
         return new KickerManaCost(this);
     }
 
+
+    public String getText(boolean onlyMana) {
+        if (onlyMana) {
+            return super.getText();
+        } else {
+            return this.getText();
+        }
+    }
+
     @Override
     public String getText() {
         return "Kicker - " + super.getText();

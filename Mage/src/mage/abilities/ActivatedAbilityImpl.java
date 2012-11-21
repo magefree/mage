@@ -44,6 +44,9 @@ import mage.game.stack.StackAbility;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.keyword.MultikickerAbility;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 
 /**
@@ -172,8 +175,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
 
     @Override
     public String getActivatedMessage(Game game) {
-        if (game.isSimulation())
+        if (game.isSimulation()) {
             return "";
+        }
         return " activates ability from " + getMessageText(game);
     }
 
@@ -196,6 +200,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     if (spell.getFromZone() == Zone.GRAVEYARD) {
                         sb.append(" from graveyard");
                     }
+                    sb.append(getKickerText(game, spell));
                 } else {
                     sb.append(object.getName());
                 }
@@ -212,4 +217,37 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         return sb.toString();
     }
 
+    String getKickerText(Game game, Spell spell) {
+        StringBuilder sb = new StringBuilder();
+        int numberPaid = 0;
+        for (Object cost : spell.getSpellAbility().getOptionalCosts()) {
+            if (cost instanceof KickerManaCost) {
+                if (((KickerManaCost) cost).isPaid()) {
+                    if (numberPaid == 0) {
+                        sb.append(" with ").append(((KickerManaCost)cost).getText(true));
+                    } else {
+                        sb.append(" and ").append(((KickerManaCost)cost).getText(true));
+                    }
+                    ++numberPaid;
+                }
+            }
+        }
+        if (numberPaid > 0) {
+            sb.append(" kicker");
+        }
+        // Multikicker
+        int multikickerCount = 0;
+        Card card = game.getCard(this.getSourceId());
+        if (card != null) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof MultikickerAbility) {
+                    multikickerCount = ((MultikickerAbility)ability).getActivateCount();
+                    }
+                }
+            }
+        if (multikickerCount > 0) {
+            sb.append(" with ").append(multikickerCount).append(multikickerCount > 1? " times":" time").append(" multikicker");
+        }
+        return sb.toString();
+    }
 }

@@ -28,6 +28,8 @@
 
 package mage.abilities.keyword;
 
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 
@@ -41,6 +43,11 @@ public class MultikickerAbility extends KickerAbility {
 
     public MultikickerAbility(Effect effect, boolean replaces) {
         super(effect, replaces);
+    }
+
+    public MultikickerAbility(ManaCosts manaCosts) {
+        super(new EmptyEffect(""), false);
+        this.addManaCost(manaCosts);
     }
 
     public MultikickerAbility(final MultikickerAbility ability) {
@@ -77,19 +84,21 @@ public class MultikickerAbility extends KickerAbility {
     }
 
     @Override
-    public String getRule() {
+    public String getKickerText(boolean withRemainder) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Multikicker");
+        sb.append("Multikicker ");
         if (manaCosts.size() > 0) {
             sb.append(manaCosts.getText());
-            if (costs.size() > 0)
+            if (costs.size() > 0) {
                 sb.append(",");
+            }
         }
-        if (costs.size() > 0)
+        if (costs.size() > 0) {
             sb.append(costs.getText());
-        sb.append(":").append(modes.getText());
-        if (replaces)
-            sb.append(" instead");
+        }
+        if (withRemainder) {
+            sb.append("  (You may pay an additional ").append(manaCosts.getText()).append(" any number of times as you cast this spell.)");
+        }
         return sb.toString();
     }
 

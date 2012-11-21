@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -37,7 +38,6 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -87,6 +87,9 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 
     @Override
     public String getText(Mode mode) {
+        if (mode.getTargets().size() < 1) {
+            return "";
+        }
         if (mode.getTargets().get(0).getNumberOfTargets() == 0 && mode.getTargets().get(0).getMaxNumberOfTargets() > 0) {
             return "Return up to " + mode.getTargets().get(0).getMaxNumberOfTargets() +" target " + mode.getTargets().get(0).getTargetName() + " to their owners' hand";
         } else {

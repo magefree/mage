@@ -30,6 +30,7 @@ package mage.abilities.common;
 
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 
@@ -38,27 +39,43 @@ import mage.abilities.effects.EntersBattlefieldEffect;
  * @author BetaSteward_at_googlemail.com
  */
 public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbility> {
-    
-    protected Boolean generateRule;
+
+    protected String abilityRule;
+    protected Boolean showRule;
     
     public EntersBattlefieldAbility(Effect effect) {
         this(new EntersBattlefieldEffect(effect), true);
     }
-
-    public EntersBattlefieldAbility(Effect effect, Boolean generateRule) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
-        this.generateRule = generateRule;
+/**
+ *
+ * @param effect effect that happens when the permanent enters the battlefield
+ * @param showRule show a rule for this ability
+ */
+    public EntersBattlefieldAbility(Effect effect, Boolean showRule) {
+        this(effect, null, showRule, null, null);
     }
 
-    public EntersBattlefieldAbility(Effect effect, String rule) {
-        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, rule));
-        this.generateRule = true;
+    public EntersBattlefieldAbility(Effect effect, String effectText) {
+        this(effect, null, true, null, effectText);
     }
-
+/**
+ *
+ * @param effect effect that happens when the permanent enters the battlefield
+ * @param condition only if this condition is true, the effect will happen
+ * @param showRule show a rule for this ability
+ * @param abilityRule rule for this ability (no text from effects will be added)
+ * @param effectText this text will be used for the EnterBattlefieldEffect
+ */
+    public EntersBattlefieldAbility(Effect effect, Condition condition, Boolean showRule, String abilityRule, String effectText) {
+        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, condition, effectText));
+        this.showRule = true;
+        this.abilityRule = abilityRule;
+    }
 
     public EntersBattlefieldAbility(EntersBattlefieldAbility ability) {
         super(ability);
-        this.generateRule = ability.generateRule;
+        this.showRule = ability.showRule;
+        this.abilityRule = ability.abilityRule;
     }
 
     @Override
@@ -68,10 +85,11 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
 
     @Override
     public String getRule() {
-        if (generateRule != null) {
-            if (!generateRule) {
+        if (showRule != null && !showRule) {
                 return "";
-            }
+        }
+        if (abilityRule != null && !abilityRule.isEmpty()) {
+            return abilityRule;
         }
         return "{this} enters the battlefield " + super.getRule();
     }

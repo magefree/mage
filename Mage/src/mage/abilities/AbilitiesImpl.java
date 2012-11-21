@@ -41,6 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.costs.mana.KickerManaCost;
 
 /**
  *
@@ -76,6 +77,10 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 rules.add(ability.getRule());
             }
             if (ability instanceof SpellAbility) {
+                String kickerRule = getKickerRule(ability);
+                if (!kickerRule.isEmpty()) {
+                    rules.add(kickerRule);
+                }
                 if (ability.getAlternativeCosts().size() > 0) {
                     StringBuilder sbRule = new StringBuilder();
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
@@ -111,6 +116,25 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         }
 
         return rules;
+    }
+
+    private String getKickerRule(Ability ability) {
+        StringBuilder sb = new StringBuilder();
+        int numberKicker = 0;
+        for (Object cost : ability.getOptionalCosts()) {
+            if (cost instanceof KickerManaCost) {
+                if (numberKicker == 0) {
+                    sb.append(((KickerManaCost)cost).getText(true));
+                } else {
+                    sb.append(" and/or ").append(((KickerManaCost)cost).getText(true));
+                }
+                ++numberKicker;
+            }
+        }
+        if (numberKicker > 0) {
+            return "Kicker " + sb.toString() + " <i>(You may pay an additional " + sb.toString() + " as you cast this spell.)</i>";
+        }
+        return sb.toString();
     }
 
     @Override
