@@ -28,18 +28,17 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.condition.common.KickedCostCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -57,14 +56,28 @@ public class Cetavolver extends CardImpl<Cetavolver> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false);
-        firstAbility.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
-        firstAbility.addCost(new ManaCostsImpl("{1}{R}"));
-        this.addAbility(firstAbility);
-        Ability secondAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        secondAbility.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
-        secondAbility.addCost(new ColoredManaCost(Constants.ColoredManaSymbol.G));
-        this.addAbility(secondAbility);
+
+        // Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)
+        KickerManaCost kicker1 = new KickerManaCost("{1}{R}");
+        this.getSpellAbility().addOptionalCost(kicker1);
+        KickerManaCost kicker2 = new KickerManaCost("{G}");
+        this.getSpellAbility().addOptionalCost(kicker2);
+
+        // If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.
+        EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
+                new KickedCostCondition(kicker1), true, "If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.",
+                "{this} enters the battlefield with two +1/+1 counters on it and with first strike");
+        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addAbility(ability1);
+
+        // If Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.
+        EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition(kicker2), true,
+                "If Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.",
+                "{this} enters the battlefield with a +1/+1 counter on it and with trample");
+        ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addAbility(ability2);
     }
 
     public Cetavolver(final Cetavolver card) {

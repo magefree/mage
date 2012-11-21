@@ -27,12 +27,9 @@
  */
 package mage.sets.worldwake;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -43,6 +40,9 @@ import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.Constants.Outcome;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.MultikickerAbility;
 
 /**
  * @author noxx
@@ -55,12 +55,9 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
 
         this.color.setGreen(true);
 
-        // Multikicker {1}
-        //MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(""), false);
-        //ability.addManaCost(new GenericManaCost(1));
-        //this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new EmptyEffect("Multikicker {1}")));
+        // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}")));
 
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
@@ -88,7 +85,7 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
 class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect<StrengthOfTheTajuruAddCountersTargetEffect> {
 
     public StrengthOfTheTajuruAddCountersTargetEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.";
     }
 

@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class MarshCasualties extends CardImpl<MarshCasualties> {
 
-    private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. If {this} was kicked, those creatures get -2/-2 until end of turn instead.";
+    private static final String ruleText = "Creatures target player controls get -1/-1 until end of turn. If {this} was kicked, those creatures get -2/-2 until end of turn instead";
 
     public MarshCasualties(UUID ownerId) {
         super(ownerId, 101, "Marsh Casualties", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}{B}");

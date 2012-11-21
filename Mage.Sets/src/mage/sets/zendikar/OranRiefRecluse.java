@@ -29,16 +29,14 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -66,14 +64,16 @@ public class OranRiefRecluse extends CardImpl<OranRiefRecluse> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
 
+        // Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{2}{G}"));
+
+        // Reach (This creature can block creatures with flying.)
         this.addAbility(ReachAbility.getInstance());
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        // When Oran-Rief Recluse enters the battlefield, if it was kicked, destroy target creature with flying.
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent(filter));
-
-        KickerAbility kickerAbility = new KickerAbility(new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield), false);
-        kickerAbility.addManaCost(new ManaCostsImpl("{2}{G}"));
-        this.addAbility(kickerAbility);
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target creature with flying."));
     }
 
     public OranRiefRecluse(final OranRiefRecluse card) {

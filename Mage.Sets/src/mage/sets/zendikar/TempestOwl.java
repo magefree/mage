@@ -31,10 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
@@ -54,13 +56,16 @@ public class TempestOwl extends CardImpl<TempestOwl> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // Kicker {4}{U}
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}{U}"));
+
         // When Tempest Owl enters the battlefield, if it was kicked, tap up to three target permanents.
-        KickerAbility kickerAbility = new KickerAbility(new TapTargetEffect(), false);
-        kickerAbility.addTarget(new TargetPermanent(0, 3, new FilterPermanent(), false));
-        kickerAbility.addManaCost(new ManaCostsImpl("{4}{U}"));
-        this.addAbility(kickerAbility);
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(0, 3, new FilterPermanent(), false));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, tap up to three target permanents."));
     }
 
     public TempestOwl(final TempestOwl card) {

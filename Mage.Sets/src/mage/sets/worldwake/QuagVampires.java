@@ -31,7 +31,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.keyword.SwampwalkAbility;
@@ -54,10 +56,16 @@ public class QuagVampires extends CardImpl<QuagVampires> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Multikicker (You may pay an additional {1}{B} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}{B}")));
+
+        // Swampwalk
         this.addAbility(new SwampwalkAbility());
-        MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{B}"));
-        this.addAbility(ability);
+
+        // Quag Vampires enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
+                "with a +1/+1 counter on it for each time it was kicked"));
     }
 
     public QuagVampires(final QuagVampires card) {

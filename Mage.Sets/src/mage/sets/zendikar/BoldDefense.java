@@ -27,12 +27,13 @@
  */
 package mage.sets.zendikar;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -43,7 +44,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 
-import java.util.UUID;
 
 /**
  * @author nantuko, Loki
@@ -58,11 +58,11 @@ public class BoldDefense extends CardImpl<BoldDefense> {
         this.color.setWhite(true);
 
         DynamicValue dn = new BoldDefensePTCount();
-        this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Duration.EndOfTurn));
 
-        this.getSpellAbility().addOptionalCost(new ManaCostsImpl("{3}{W}"));
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{3}{W}"));
 
-        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false);
+        ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false);
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText));
     }
 
@@ -90,13 +90,19 @@ class BoldDefensePTCount implements DynamicValue {
         }
     }
 
+
     @Override
     public DynamicValue clone() {
         return new BoldDefensePTCount();
     }
 
     @Override
+    public String toString() {
+        return "1";
+    }
+
+    @Override
     public String getMessage() {
-        return "";
+        return "1";
     }
 }

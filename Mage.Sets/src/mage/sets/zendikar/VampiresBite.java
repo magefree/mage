@@ -31,10 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,13 +53,14 @@ public class VampiresBite extends CardImpl<VampiresBite> {
 
         this.color.setBlack(true);
 
-        TargetCreaturePermanent target = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(target);
+        // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{2}{B}"));
+
+        // Target creature gets +3/+0 until end of turn. If Vampire's Bite was kicked, that creature gains lifelink until end of turn.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
-        KickerAbility ability = new KickerAbility(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), false);
-        ability.addTarget(target);
-        ability.addManaCost(new ManaCostsImpl("{2}{B}"));
-        this.addAbility(ability);
+        ContinuousEffect effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), "If {this} was kicked, that creature gains lifelink until end of turn"));
     }
 
     public VampiresBite(final VampiresBite card) {

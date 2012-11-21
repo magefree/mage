@@ -53,20 +53,20 @@ import java.util.UUID;
  */
 public class EverflowingChalice extends CardImpl<EverflowingChalice> {
 
-    protected static final String rule = "Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked";
+    protected static final String rule = "Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.";
 
     public EverflowingChalice(UUID ownerId) {
         super(ownerId, 123, "Everflowing Chalice", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "WWK";
 
-        // Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
-        Ability ability1 = new EntersBattlefieldAbility(new EverflowingChaliceAddCountersEffect());
-        this.addAbility(ability1);
-
         // Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
         MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(rule), false);
         ability.addManaCost(new GenericManaCost(2));
         this.addAbility(ability);
+
+        // Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
+        Ability ability1 = new EntersBattlefieldAbility(new EverflowingChaliceAddCountersEffect(), null, true, rule, null);
+        this.addAbility(ability1);
 
         this.addAbility(new DynamicManaAbility(Mana.ColorlessMana, new CountersCount(CounterType.CHARGE)));
     }
@@ -86,7 +86,6 @@ class EverflowingChaliceAddCountersEffect extends OneShotEffect<EverflowingChali
 
     public EverflowingChaliceAddCountersEffect() {
         super(Constants.Outcome.Benefit);
-        staticText = EverflowingChalice.rule;
     }
 
     public EverflowingChaliceAddCountersEffect(final EverflowingChaliceAddCountersEffect effect) {

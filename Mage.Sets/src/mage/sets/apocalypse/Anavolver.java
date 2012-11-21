@@ -29,21 +29,21 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.KickedCostCondition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -59,14 +59,28 @@ public class Anavolver extends CardImpl<Anavolver> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability firstAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), false);
-        firstAbility.addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.WhileOnBattlefield));
-        firstAbility.addCost(new ManaCostsImpl("{1}{U}"));
-        this.addAbility(firstAbility);
-        Ability secondAbility = new KickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
-        secondAbility.addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Constants.Duration.WhileOnBattlefield));
-        secondAbility.addCost(new ColoredManaCost(Constants.ColoredManaSymbol.B));
-        this.addAbility(secondAbility);
+        
+        // Kicker {1}{U} and/or {B} (You may pay an additional {1}{U} and/or {B} as you cast this spell.)
+        KickerManaCost kicker1 = new KickerManaCost("{1}{U}");
+        this.getSpellAbility().addOptionalCost(kicker1);
+        KickerManaCost kicker2 = new KickerManaCost("{B}");
+        this.getSpellAbility().addOptionalCost(kicker2);
+
+        // If Anavolver was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.
+        EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
+                new KickedCostCondition(kicker1), true, "If {this} was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.",
+                "{this} enters the battlefield with two +1/+1 counters on it and with flying");
+        ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
+        this.addAbility(ability1);
+
+        // If Anavolver was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."
+        EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition(kicker2), true,
+                "If {this} was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"",
+                "{this} enters the battlefield with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"");
+        ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));
+        this.addAbility(ability2);
     }
 
     public Anavolver(final Anavolver card) {
@@ -77,5 +91,4 @@ public class Anavolver extends CardImpl<Anavolver> {
     public Anavolver copy() {
         return new Anavolver(this);
     }
-
 }

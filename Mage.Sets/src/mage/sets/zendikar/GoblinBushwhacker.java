@@ -32,11 +32,13 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -55,10 +57,13 @@ public class GoblinBushwhacker extends CardImpl<GoblinBushwhacker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        KickerAbility ability = new KickerAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), false);
+        // Kicker {R} (You may pay an additional {R} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{R}"));
+
+        // When Goblin Bushwhacker enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn), false);
         ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-        ability.addCost(new ManaCostsImpl("{R}"));
-        this.addAbility(ability);
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn."));
     }
 
     public GoblinBushwhacker(final GoblinBushwhacker card) {

@@ -31,7 +31,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -52,10 +54,14 @@ public class LightkeeperOfEmeria extends CardImpl<LightkeeperOfEmeria> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(4);
 
+        // Multikicker (You may pay an additional {W} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{W}")));
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        MultikickerAbility ability = new MultikickerAbility(new GainLifeEffect(2), false);
-        ability.addManaCost(new ManaCostsImpl("{W}"));
-        this.addAbility(ability);
+
+        // When Lightkeeper of Emeria enters the battlefield, you gain 2 life for each time it was kicked.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(new MultikickerCount())));
     }
 
     public LightkeeperOfEmeria(final LightkeeperOfEmeria card) {

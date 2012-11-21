@@ -33,14 +33,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -48,8 +48,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -78,12 +76,13 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
         this.toughness = new MageInt(1);
 
         // Multikicker {1}{G}
-        MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(""), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{G}"));
-        this.addAbility(ability);
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}{G}")));
         
         // Joraga Warcaller enters the battlefield with a +1/+1 counter on it for each time it was kicked.
-        this.addAbility(new EntersBattlefieldAbility(new JoragaWarcallerEffect()));
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
+                "with a +1/+1 counter on it for each time it was kicked"));
+
         
         // Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Constants.Duration.WhileOnBattlefield, filter, true, rule)));
@@ -98,38 +97,4 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
     public JoragaWarcaller copy() {
         return new JoragaWarcaller(this);
     }
-}
-
-class JoragaWarcallerEffect extends OneShotEffect<JoragaWarcallerEffect> {
-
-    public JoragaWarcallerEffect() {
-        super(Constants.Outcome.Benefit);
-        staticText = "with a +1/+1 counter on it for each time it was kicked";
-    }
-
-    public JoragaWarcallerEffect(final JoragaWarcallerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            for (Ability ability : permanent.getAbilities()) {
-                if (ability instanceof MultikickerAbility) {
-                    int count = ((MultikickerAbility)ability).getActivateCount();
-                    if (count > 0) {
-                        permanent.addCounters(CounterType.P1P1.createInstance(count), game);
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public JoragaWarcallerEffect copy() {
-        return new JoragaWarcallerEffect(this);
-    }
-
 }

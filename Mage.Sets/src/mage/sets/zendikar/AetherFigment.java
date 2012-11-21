@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class AetherFigment extends CardImpl<AetherFigment> {
 
-    private final static String staticText = "If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it";
+    private final static String staticText = "with two +1/+1 counters on it, if it was kicked";
 
     public AetherFigment(UUID ownerId) {
         super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

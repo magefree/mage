@@ -29,12 +29,13 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
@@ -55,9 +56,12 @@ public class BloodhuskRitualist extends CardImpl<BloodhuskRitualist> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        MultikickerAbility ability = new MultikickerAbility(new DiscardTargetEffect(1), false);
+        // Multikicker (You may pay an additional {B} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{B}")));
+
+        // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new MultikickerCount()));
         ability.addTarget(new TargetOpponent());
-        ability.addManaCost(new ColoredManaCost(Constants.ColoredManaSymbol.B));
         this.addAbility(ability);
     }
 

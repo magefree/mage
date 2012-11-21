@@ -33,7 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
@@ -53,9 +56,11 @@ public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        MultikickerAbility ability = new MultikickerAbility(new CreateTokenEffect(new WolfToken()), false);
-        ability.addManaCost(new ColoredManaCost(ColoredManaSymbol.G));
-        this.addAbility(ability);
+        // Multikicker (You may pay an additional {G} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{G}")));
+
+        // When Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), new MultikickerCount())));
     }
 
     public WolfbriarElemental(final WolfbriarElemental card) {

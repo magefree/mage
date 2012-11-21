@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -31,7 +31,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -53,10 +56,17 @@ public class SkitterOfLizards extends CardImpl<SkitterOfLizards> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Multikicker (You may pay an additional {1}{R} any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}{R}")));
+
+        // Haste
         this.addAbility(HasteAbility.getInstance());
-        MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{R}"));
-        this.addAbility(ability);
+
+        // Skitter of Lizards enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
+                "with a +1/+1 counter on it for each time it was kicked"));
+
     }
 
     public SkitterOfLizards(final SkitterOfLizards card) {

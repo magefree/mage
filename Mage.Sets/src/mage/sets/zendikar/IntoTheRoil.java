@@ -31,10 +31,11 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetNonlandPermanent;
 
@@ -48,11 +49,17 @@ public class IntoTheRoil extends CardImpl<IntoTheRoil> {
         super(ownerId, 48, "Into the Roil", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "ZEN";
         this.color.setBlue(true);
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
+
+        // Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{1}{U}"));
+
+        // Return target nonland permanent to its owner's hand. If Into the Roil was kicked, draw a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        KickerAbility ability = new KickerAbility(new DrawCardControllerEffect(1), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{U}"));
-        this.addAbility(ability);
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new DrawCardControllerEffect(1),
+                KickedCondition.getInstance(),
+                "If {this} was kicked, draw a card"));
+        this.getSpellAbility().addTarget(new TargetNonlandPermanent());
     }
 
     public IntoTheRoil(final IntoTheRoil card) {

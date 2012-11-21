@@ -28,20 +28,16 @@
 
 package mage.sets.zendikar;
 
-
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.ColoredManaSymbol;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -59,13 +55,17 @@ public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
         this.subtype.add("Shaman");
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(HasteAbility.getInstance());
-        Ability ability1 = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
-        ability1.addTarget(new TargetNonBasicLandPermanent());
-        KickerAbility ability2 = new KickerAbility(new GainAbilitySourceEffect(ability1, Duration.WhileOnBattlefield), false);
-        ability2.addManaCost(new ColoredManaCost(ColoredManaSymbol.R));
-        this.addAbility(ability2);
 
+        // Kicker {R} (You may pay an additional {R} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{R}"));
+
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+
+        // When Goblin Ruinblaster enters the battlefield, if it was kicked, destroy target nonbasic land.
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetNonBasicLandPermanent());
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target nonbasic land."));
     }
 
     public GoblinRuinblaster(final GoblinRuinblaster card) {

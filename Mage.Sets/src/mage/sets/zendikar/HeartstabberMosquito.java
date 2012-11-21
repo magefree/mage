@@ -31,10 +31,12 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,11 +55,16 @@ public class HeartstabberMosquito extends CardImpl<HeartstabberMosquito> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)
+        this.getSpellAbility().addOptionalCost(new KickerManaCost("{2}{B}"));
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        KickerAbility ability = new KickerAbility(new DestroyTargetEffect(), false);
-        ability.addManaCost(new ManaCostsImpl("{2}{B}"));
+
+        // When Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target creature."));
     }
 
     public HeartstabberMosquito(final HeartstabberMosquito card) {

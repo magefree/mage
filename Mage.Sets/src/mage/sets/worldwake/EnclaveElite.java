@@ -31,7 +31,9 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.IslandwalkAbility;
 import mage.abilities.keyword.MultikickerAbility;
@@ -54,10 +56,16 @@ public class EnclaveElite extends CardImpl<EnclaveElite> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Multikicker (You may pay an additional any number of times as you cast this spell.)
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}{U}")));
+
+        // Islandwalk
         this.addAbility(new IslandwalkAbility());
-        MultikickerAbility ability = new MultikickerAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{U}"));
-        this.addAbility(ability);
+
+        // Enclave Elite enters the battlefield with a +1/+1 counter on it for each time it was kicked.
+        this.addAbility(new EntersBattlefieldAbility(
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
+                "with a +1/+1 counter on it for each time it was kicked"));
     }
 
     public EnclaveElite(final EnclaveElite card) {

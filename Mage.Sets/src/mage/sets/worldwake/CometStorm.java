@@ -29,13 +29,13 @@ package mage.sets.worldwake;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +55,7 @@ public class CometStorm extends CardImpl<CometStorm> {
         this.color.setRed(true);
 
         // Multikicker {1}
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new EmptyEffect("Multikicker {1}")));
+        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}")));
 
         // Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
@@ -74,7 +74,7 @@ public class CometStorm extends CardImpl<CometStorm> {
 class CometStormEffect extends OneShotEffect<CometStormEffect> {
 
     public CometStormEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them";
     }
 
@@ -89,7 +89,7 @@ class CometStormEffect extends OneShotEffect<CometStormEffect> {
         Player you = game.getPlayer(source.getControllerId());
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer(amount);
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Damage, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     List<UUID> targets = target.getTargets();
                     for (UUID uuid : targets) {

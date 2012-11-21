@@ -29,7 +29,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -65,11 +64,14 @@ public class KorSanctifiers extends CardImpl<KorSanctifiers> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+
+        // Kicker {W} (You may pay an additional {W} as you cast this spell.)
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}"));
 
+        // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
         ability.addTarget(new TargetPermanent(filter));
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment"));
+        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target artifact or enchantment."));
     }
 
     public KorSanctifiers (final KorSanctifiers card) {
