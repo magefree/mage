@@ -29,6 +29,9 @@
  */
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -42,9 +45,6 @@ import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.target.TargetImpl;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -73,18 +73,19 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
     }
 
     public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, boolean notTarget) {
-           this(minNumTargets, maxNumTargets);
+        this(minNumTargets, maxNumTargets);
         this.notTarget = notTarget;
     }
 
-        public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, FilterSpellOrPermanent filter,boolean notTarget) {
-           this(minNumTargets, maxNumTargets);
+    public TargetSpellOrPermanent(int minNumTargets, int maxNumTargets, FilterSpellOrPermanent filter,boolean notTarget) {
+        this(minNumTargets, maxNumTargets);
         this.notTarget = notTarget;
-                this.filter = filter;
+        this.filter = filter;
     }
     public TargetSpellOrPermanent(final TargetSpellOrPermanent target) {
         super(target);
         this.filter = target.filter.copy();
+        this.filterPermanent = target.filterPermanent.copy();
     }
 
     @Override
