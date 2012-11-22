@@ -27,21 +27,25 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -54,13 +58,13 @@ public class VanguardsShield extends CardImpl<VanguardsShield> {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +0/+3 and can block an additional creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(
-                new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new VanguardsShieldEffect()),
-                Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
+
+        // Equipped creature can block an additional creature. (static abilit of equipment, no ability that will be gained to equiped creature!)
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new VanguardsShieldEffect()));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     public VanguardsShield(final VanguardsShield card) {
@@ -76,8 +80,8 @@ public class VanguardsShield extends CardImpl<VanguardsShield> {
 class VanguardsShieldEffect extends ContinuousEffectImpl<VanguardsShieldEffect> {
 
     public VanguardsShieldEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-        staticText = "Equipped creature can block an additional creature";
+        super(Duration.WhileOnBattlefield, Outcome.AddAbility);
+        staticText = "Equiped creature can block an additional creature";
     }
 
     public VanguardsShieldEffect(final VanguardsShieldEffect effect) {
@@ -90,7 +94,7 @@ class VanguardsShieldEffect extends ContinuousEffectImpl<VanguardsShieldEffect> 
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null && perm.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(perm.getAttachedTo());
@@ -115,8 +119,8 @@ class VanguardsShieldEffect extends ContinuousEffectImpl<VanguardsShieldEffect> 
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.RulesEffects;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 
 }
