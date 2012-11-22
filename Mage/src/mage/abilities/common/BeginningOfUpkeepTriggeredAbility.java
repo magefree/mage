@@ -5,6 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUpkeepTriggeredAbility> {
@@ -60,6 +61,19 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                         }
                     }
                     return true;
+                case CONTROLLER_ATTACHED_TO:
+                    Permanent attachment = game.getPermanent(sourceId);
+                    if (attachment != null && attachment.getAttachedTo() != null) {
+                        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                        if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                            if (getTargets().size() == 0) {
+                                for (Effect effect : this.getEffects()) {
+                                    effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                                }
+                            }
+                            return true;
+                        }
+                    }
             }
         }
         return false;
@@ -82,6 +96,8 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
                 return "At the beginning of each opponent's upkeep, " + generateZoneString() + effectsText;
             case ANY:
                 return "At the beginning of each player's upkeep, " + generateZoneString() + effectsText;
+            case CONTROLLER_ATTACHED_TO:
+                return "At the beginning of the upkeep of enchanted creature's controller, " + generateZoneString() + effectsText;
         }
         return "";
     }

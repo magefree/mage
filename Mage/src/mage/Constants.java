@@ -380,7 +380,7 @@ public final class Constants {
     }
 
     public enum TargetController {
-        ANY, YOU, NOT_YOU, OPPONENT
+        ANY, YOU, NOT_YOU, OPPONENT, CONTROLLER_ATTACHED_TO
     }
 
     public enum RangeOfInfluence {
