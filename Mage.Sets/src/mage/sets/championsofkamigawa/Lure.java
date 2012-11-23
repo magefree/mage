@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -38,8 +37,7 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.MustBlockSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.effects.common.MustBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -56,12 +54,16 @@ public class Lure extends CardImpl<Lure> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Aura");
         this.color.setGreen(true);
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), AttachmentType.AURA)));
+
+        // All creatures able to block enchanted creature do so.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockAttachedEffect(AttachmentType.AURA)));
     }
 
     public Lure (final Lure card) {

@@ -34,14 +34,16 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
-import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -64,9 +66,10 @@ public class SlowMotion extends CardImpl<SlowMotion> {
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+
         // At the beginning of the upkeep of enchanted creature's controller, that player sacrifices that creature unless he or she pays {2}.
-        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(2)), Constants.TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, Constants.AttachmentType.AURA)));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeEquipedUnlessPaysEffect(new GenericManaCost(2)), Constants.TargetController.CONTROLLER_ATTACHED_TO, false ));
+
         // When Slow Motion is put into a graveyard from the battlefield, return Slow Motion to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
@@ -80,3 +83,43 @@ public class SlowMotion extends CardImpl<SlowMotion> {
         return new SlowMotion(this);
     }
 }
+
+class SacrificeEquipedUnlessPaysEffect extends OneShotEffect<SacrificeEquipedUnlessPaysEffect> {
+    protected Cost cost;
+
+    public SacrificeEquipedUnlessPaysEffect(Cost cost) {
+        super(Constants.Outcome.Sacrifice);
+        this.cost = cost;
+        staticText = "that player sacrifices that creature unless he or she pays {2}";
+     }
+
+    public SacrificeEquipedUnlessPaysEffect(final SacrificeEquipedUnlessPaysEffect effect) {
+        super(effect);
+        this.cost = effect.cost;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            Player player = game.getPlayer(equipped.getControllerId());
+            if (player != null && equipped != null) {
+                if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + cost.getText() + "? (Or " + equipped.getName() + " will be sacrificed.)", game)) {
+                    cost.clearPaid();
+                    if (cost.pay(source, game, source.getSourceId(), equipped.getControllerId(), false)) {
+                        return true;
+                    }
+                }
+                equipped.sacrifice(source.getSourceId(), game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public SacrificeEquipedUnlessPaysEffect copy() {
+        return new SacrificeEquipedUnlessPaysEffect(this);
+    }
+ }

@@ -27,6 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -50,8 +51,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import java.util.UUID;
-
 /**
  *
  * @author North
@@ -63,15 +62,16 @@ public class HeavyArbalest extends CardImpl<HeavyArbalest> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
-        // Equip {4}
-        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
+        // Equipped creature doesn't untap during its controller's untap step.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeavyArbalestEffect()));
 
-        SimpleStaticAbility ability1 = new SimpleStaticAbility(Zone.BATTLEFIELD, new HeavyArbalestEffect());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.EQUIPMENT)));
-
+        // Equipped creature has "{T}: This creature deals 2 damage to target creature or player."
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability2.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability2, AttachmentType.EQUIPMENT)));
+
+        // Equip {4)
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
     public HeavyArbalest(final HeavyArbalest card) {
@@ -113,17 +113,15 @@ class HeavyArbalestEffect extends ReplacementEffectImpl<HeavyArbalestEffect> {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (game.getTurn().getStepType() == PhaseStep.UNTAP
-                && event.getType() == EventType.UNTAP
-                && event.getTargetId().equals(source.getSourceId())) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            for (Ability ability : p.getAbilities()) {
-                if (ability.getRule().startsWith(staticText)) {
+                && event.getType() == EventType.UNTAP ) {
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+                if (equipped.getId().equals(event.getTargetId())) {
                     return true;
                 }
             }
-            used = true;
         }
         return false;
     }
-
 }

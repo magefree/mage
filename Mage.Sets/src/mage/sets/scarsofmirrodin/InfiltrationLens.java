@@ -33,13 +33,17 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.common.BecomesBlockedTriggeredAbility;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -52,8 +56,11 @@ public class InfiltrationLens extends CardImpl<InfiltrationLens> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
+        // Whenever equipped creature becomes blocked by a creature, you may draw two cards.
+        this.addAbility(new EquippedBecomesBlockedTriggeredAbility(new DrawCardControllerEffect(2), true));
+
+        // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new BecomesBlockedTriggeredAbility(new DrawCardControllerEffect(2), true), AttachmentType.EQUIPMENT)));
     }
 
     public InfiltrationLens(final InfiltrationLens card) {
@@ -63,5 +70,40 @@ public class InfiltrationLens extends CardImpl<InfiltrationLens> {
     @Override
     public InfiltrationLens copy() {
         return new InfiltrationLens(this);
+    }
+}
+
+class EquippedBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<EquippedBecomesBlockedTriggeredAbility> {
+
+    public EquippedBecomesBlockedTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
+    }
+
+    public EquippedBecomesBlockedTriggeredAbility(final EquippedBecomesBlockedTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.CREATURE_BLOCKED) {
+            Permanent equipment = game.getPermanent(sourceId);
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+                if (equipped.getId().equals(event.getTargetId())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever equipped creature becomes blocked by a creature, " + super.getRule();
+    }
+
+    @Override
+    public EquippedBecomesBlockedTriggeredAbility copy() {
+        return new EquippedBecomesBlockedTriggeredAbility(this);
     }
 }

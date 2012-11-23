@@ -63,8 +63,8 @@ public class BlazingTorch extends CardImpl<BlazingTorch> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Equipment");
 
-        // Equipped creature can't be blocked by Vampires or Zombies.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new BlazingTorchEvasionAbility(), AttachmentType.EQUIPMENT)));
+        // Equipped creature can't be blocked by Vampires or Zombies. (!this is a static ability of the equipment)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlazingTorchEvasionEffect()));
         // Equipped creature has "{tap}, Sacrifice Blazing Torch: Blazing Torch deals 2 damage to target creature or player.")
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlazingTorchDamageEffect(), new TapSourceCost());
         ability.addCost(new BlazingTorchCost());
@@ -84,32 +84,11 @@ public class BlazingTorch extends CardImpl<BlazingTorch> {
     }
 }
 
-class BlazingTorchEvasionAbility extends EvasionAbility<BlazingTorchEvasionAbility> {
-
-    public BlazingTorchEvasionAbility() {
-        this.addEffect(new BlazingTorchEvasionEffect());
-    }
-
-    public BlazingTorchEvasionAbility(final BlazingTorchEvasionAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked by Vampires or Zombies.";
-    }
-
-    @Override
-    public BlazingTorchEvasionAbility copy() {
-        return new BlazingTorchEvasionAbility(this);
-    }
-}
-
-
 class BlazingTorchEvasionEffect extends RestrictionEffect<BlazingTorchEvasionEffect> {
 
     public BlazingTorchEvasionEffect() {
         super(Duration.WhileOnBattlefield);
+        staticText = "Equipped creature can't be blocked by Vampires or Zombies";
     }
 
     public BlazingTorchEvasionEffect(final BlazingTorchEvasionEffect effect) {
@@ -118,8 +97,12 @@ class BlazingTorchEvasionEffect extends RestrictionEffect<BlazingTorchEvasionEff
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            if (permanent.getId().equals(equipped.getId())) {
+                return true;
+            }
         }
         return false;
     }

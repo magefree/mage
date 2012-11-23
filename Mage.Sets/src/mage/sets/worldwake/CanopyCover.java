@@ -27,11 +27,14 @@
  */
 package mage.sets.worldwake;
 
-import mage.Constants;
+import java.util.UUID;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -46,7 +49,7 @@ import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
+
 
 /**
  * @author noxx
@@ -63,15 +66,15 @@ public class CanopyCover extends CardImpl<CanopyCover> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        // Enchanted creature can't be blocked except by creatures with flying or reach.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(OrchardSpiritAbility.getInstance(), Constants.AttachmentType.AURA)));
+        // Enchanted creature can't be blocked except by creatures with flying or reach. (!this is a static ability of the enchantment)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrchardSpiritEffect()));
 
         // Enchanted creature can't be the target of spells or abilities your opponents control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA)));
     }
 
     public CanopyCover(final CanopyCover card) {
@@ -84,36 +87,11 @@ public class CanopyCover extends CardImpl<CanopyCover> {
     }
 }
 
-class OrchardSpiritAbility extends EvasionAbility<OrchardSpiritAbility> {
-
-    private static OrchardSpiritAbility instance;
-
-    public static OrchardSpiritAbility getInstance() {
-        if (instance == null) {
-            instance = new OrchardSpiritAbility();
-        }
-        return instance;
-    }
-
-    private OrchardSpiritAbility() {
-        this.addEffect(new OrchardSpiritEffect());
-    }
-
-    @Override
-    public String getRule() {
-        return "\"{this} can't be blocked except by creatures with flying or reach\"";
-    }
-
-    @Override
-    public OrchardSpiritAbility copy() {
-        return getInstance();
-    }
-}
-
 class OrchardSpiritEffect extends RestrictionEffect<OrchardSpiritEffect> {
 
     public OrchardSpiritEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
+        staticText = "Enchanted creature can't be blocked except by creatures with flying or reach";
     }
 
     public OrchardSpiritEffect(final OrchardSpiritEffect effect) {
@@ -122,8 +100,12 @@ class OrchardSpiritEffect extends RestrictionEffect<OrchardSpiritEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(OrchardSpiritAbility.getInstance().getId())) {
-            return true;
+        Permanent equipment = game.getPermanent(source.getSourceId());
+        if (equipment != null && equipment.getAttachedTo() != null) {
+            Permanent equipped = game.getPermanent(equipment.getAttachedTo());
+            if (permanent.getId().equals(equipped.getId())) {
+                return true;
+            }
         }
         return false;
     }
