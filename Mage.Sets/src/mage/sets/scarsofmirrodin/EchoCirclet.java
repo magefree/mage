@@ -27,8 +27,10 @@
  */
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Layer;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -51,9 +52,11 @@ public class EchoCirclet extends CardImpl<EchoCirclet> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
-        // Equipped creature can block an additional creature.
+        // Equipped creature can block an additional creature. (static abilit of equipment, no ability that will be gained to equiped creature!)
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EchoCircletEffect()));
+
+        // Equip {1}
+        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     public EchoCirclet(final EchoCirclet card) {
@@ -83,7 +86,7 @@ class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null && perm.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(perm.getAttachedTo());
@@ -108,8 +111,8 @@ class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.RulesEffects;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 
 }
