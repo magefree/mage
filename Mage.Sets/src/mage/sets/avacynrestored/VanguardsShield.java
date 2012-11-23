@@ -81,7 +81,7 @@ class VanguardsShieldEffect extends ContinuousEffectImpl<VanguardsShieldEffect> 
 
     public VanguardsShieldEffect() {
         super(Duration.WhileOnBattlefield, Outcome.AddAbility);
-        staticText = "Equiped creature can block an additional creature";
+        staticText = "Equipped creature can block an additional creature";
     }
 
     public VanguardsShieldEffect(final VanguardsShieldEffect effect) {
