@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.common;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
@@ -66,16 +67,14 @@ public class TapVariableTargetCost extends CostImpl<TapVariableTargetCost> imple
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         amountPaid = 0;
-        while (true) {
-            target.clearChosen();
-            if (target.canChoose(sourceId, controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
+        target.clearChosen();
+        if (target.canChoose(sourceId, controllerId, game) && target.choose(Outcome.Tap, controllerId, sourceId, game)) {
+            for (Iterator it = target.getTargets().iterator(); it.hasNext();) {
+                UUID uuid = (UUID) it.next();
+                Permanent permanent = game.getPermanent(uuid);
                 if (permanent != null && permanent.tap(game)) {
                     amountPaid++;
                 }
-            }
-            else {
-                break;
             }
         }
         paid = true;

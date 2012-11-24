@@ -33,7 +33,7 @@ import mage.Constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CyclingAbility;
-import mage.abilities.mana.BlackManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -49,7 +49,7 @@ public class SecludedSteppe extends CardImpl<SecludedSteppe> {
         // Secluded Steppe enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // {tap}: Add {W} to your mana pool.
-        this.addAbility(new BlackManaAbility());
+        this.addAbility(new WhiteManaAbility());
         // Cycling {W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W}")));
     }

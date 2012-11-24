@@ -97,7 +97,7 @@ class MyrBattlesphereAbility extends TriggeredAbilityImpl<MyrBattlesphereAbility
     public MyrBattlesphereAbility() {
         super(Zone.BATTLEFIELD, new BoostSourceEffect(new GetXValue(), new StaticValue(0), Duration.EndOfTurn), true);
         this.addEffect(new MyrBattlesphereEffect());
-        this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(1, Integer.MAX_VALUE, filter, false)));
+        this.addCost(new TapVariableTargetCost(new TargetControlledCreaturePermanent(0, Integer.MAX_VALUE, filter, false)));
     }
 
     public MyrBattlesphereAbility(final MyrBattlesphereAbility ability) {
@@ -140,6 +140,7 @@ class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 
     public MyrBattlesphereEffect() {
         super(Outcome.Damage);
+        staticText = "{source} deals X damage to defending player";
     }
 
     public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
