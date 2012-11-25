@@ -176,13 +176,4 @@
         <manifest.file>src/main/resources/META-INF/MANIFEST.MF</manifest.file>
     </properties>
 
-    <repositories>
-        <repository>
-            <url>http://download.java.net/maven/2/</url>
-            <id>beans-binding</id>
-            <layout>default</layout>
-            <name>Repository for library Library[beans-binding]</name>
-        </repository>
-    </repositories>
-
 </project>
