@@ -91,7 +91,7 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
         sb.append(" onto the battlefield");
         String message = amount.getMessage();
         if (message.length() > 0) {
-            if (message.startsWith("the ") || message.contains("number ")) {
+            if (amount.toString().equals("X")) {
                 sb.append(", where X is ");
             } else {
                 sb.append(" for each ");

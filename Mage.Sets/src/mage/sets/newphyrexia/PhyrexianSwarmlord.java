@@ -62,7 +62,7 @@ public class PhyrexianSwarmlord extends CardImpl<PhyrexianSwarmlord> {
 
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
-                new CreateTokenEffect(new InsectInfectToken(), OpponentsPoisonCountersCount.getInstance())));
+                new CreateTokenEffect(new InsectInfectToken(), new OpponentsPoisonCountersCount())));
     }
 
     public PhyrexianSwarmlord(final PhyrexianSwarmlord card) {
@@ -76,15 +76,6 @@ public class PhyrexianSwarmlord extends CardImpl<PhyrexianSwarmlord> {
 }
 
 class OpponentsPoisonCountersCount implements DynamicValue {
-
-    private static OpponentsPoisonCountersCount instance;
-
-    public static OpponentsPoisonCountersCount getInstance() {
-        if (instance == null) {
-            instance = new OpponentsPoisonCountersCount();
-        }
-        return instance;
-    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
@@ -101,7 +92,7 @@ class OpponentsPoisonCountersCount implements DynamicValue {
 
     @Override
     public DynamicValue clone() {
-        return getInstance();
+        return new OpponentsPoisonCountersCount();
     }
 
     @Override

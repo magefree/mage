@@ -53,8 +53,10 @@ public class EndlessRanksOfTheDead extends CardImpl<EndlessRanksOfTheDead> {
 
         this.color.setBlack(true);
 
-        // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield, where X is half the number of Zombies you control, rounded down.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CreateTokenEffect(new ZombieToken(), HalfZombiesCount.getInstance())));
+        // At the beginning of your upkeep, put X 2/2 black Zombie creature tokens onto the battlefield,
+        // where X is half the number of Zombies you control, rounded down.
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep",
+                new CreateTokenEffect(new ZombieToken(), new HalfZombiesCount())));
 
     }
 
@@ -70,18 +72,10 @@ public class EndlessRanksOfTheDead extends CardImpl<EndlessRanksOfTheDead> {
 
 class HalfZombiesCount implements DynamicValue {
 
-    private static HalfZombiesCount instance;
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new SubtypePredicate("Zombie"));
-    }
-
-    public static HalfZombiesCount getInstance() {
-        if (instance == null) {
-            instance = new HalfZombiesCount();
-        }
-        return instance;
     }
 
     @Override
@@ -92,12 +86,12 @@ class HalfZombiesCount implements DynamicValue {
 
     @Override
     public DynamicValue clone() {
-        return getInstance();
+        return new HalfZombiesCount();
     }
 
     @Override
     public String toString() {
-        return "1";
+        return "X";
     }
 
     @Override

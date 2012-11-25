@@ -116,8 +116,9 @@ class FreshMeatDynamicValue implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         FreshMeatWatcher watcher = (FreshMeatWatcher) game.getState().getWatchers().get("YourCreaturesDied", sourceAbility.getControllerId());
-        if (watcher != null)
+        if (watcher != null) {
             return watcher.getCreaturesCount();
+        }
         return 0;
     }
 
@@ -133,6 +134,6 @@ class FreshMeatDynamicValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "for each creature put into your graveyard from the battlefield this turn";
+        return "creature put into your graveyard from the battlefield this turn";
     }
 }

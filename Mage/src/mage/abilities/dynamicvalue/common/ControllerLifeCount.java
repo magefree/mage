@@ -27,6 +27,6 @@ public class ControllerLifeCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "X";
     }
 }
