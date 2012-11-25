@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Mode;
+import mage.game.permanent.PermanentCard;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -86,7 +87,10 @@ public class CardView extends SimpleCardView {
     }
 
     public CardView(Card card) {
-        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)));
+        super(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), 
+                (card instanceof PermanentCard ?
+                     Character.isDigit(((PermanentCard) card).getCard().getClass().getName().charAt(((PermanentCard) card).getCard().getClass().getName().length()-1)) 
+                    :Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1))));
 
         // no information available for face down cards
         if (this.faceDown) {
