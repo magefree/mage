@@ -40,12 +40,14 @@ public class SimpleCardView implements Serializable {
     protected String expansionSetCode;
     protected int cardNumber;
     protected boolean faceDown;
+    protected boolean useCardNumber; // for building the image name (different images for the same card)
 
-    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown) {
+    public SimpleCardView(UUID id, String expansionSetCode, int cardNumber, boolean faceDown, boolean useCardNumber) {
         this.id = id;
         this.expansionSetCode = expansionSetCode;
         this.cardNumber = cardNumber;
         this.faceDown = faceDown;
+        this.useCardNumber = useCardNumber;
     }
 
     public UUID getId() {
@@ -62,5 +64,9 @@ public class SimpleCardView implements Serializable {
 
     public boolean isFaceDown() {
         return faceDown;
+    }
+
+    public boolean useCardNumber() {
+        return useCardNumber;
     }
 }

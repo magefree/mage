@@ -1,17 +1,14 @@
 package org.mage.plugins.card.utils;
 
 import de.schlichtherle.truezip.file.TFile;
+import java.util.HashMap;
+import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.CardInfo;
 import org.mage.plugins.card.properties.SettingsManager;
 
-import java.util.HashMap;
-import java.util.regex.Pattern;
-
 public class CardImageUtils {
 
-    private static final Pattern basicLandPattern = Pattern.compile("^(Forest|Mountain|Swamp|Island|Plains)$");
     private static HashMap<CardInfo, String> pathCache = new HashMap<CardInfo, String>();
 
     /**
@@ -139,7 +136,7 @@ public class CardImageUtils {
         String type = card.getType() != 0 ? " " + Integer.toString(card.getType()) : "";
         String name = card.getName().replace(":", "");
 
-        if (basicLandPattern.matcher(name).matches()) {
+        if (card.useCollectorId()) {
             imageName = name + "." + card.getCollectorId() + ".full.jpg";
         } else {
             imageName = name + type + ".full.jpg";

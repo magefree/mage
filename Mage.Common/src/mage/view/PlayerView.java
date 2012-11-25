@@ -72,7 +72,7 @@ public class PlayerView implements Serializable {
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
-            graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+            graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)), card.isFaceDown()));
         }
         for (Permanent permanent: state.getBattlefield().getAllPermanents()) {
             if (showInBattlefield(permanent, state)) {

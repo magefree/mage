@@ -37,11 +37,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.regex.Pattern;
 
 public class DownloadPictures extends DefaultBoundedRangeModel implements Runnable {
-
-    private static final Pattern basicLandPattern = Pattern.compile("^(Forest|Mountain|Swamp|Island|Plains)$");
 
     private JProgressBar bar;
     private JOptionPane dlg;
@@ -213,7 +210,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         TFile file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
+                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(),Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)),0 , false, card.canTransform(), card.isNightCard());
                 file = new TFile(CardImageUtils.getImagePath(url, imagesPath));
                 if (!file.exists()) {
                     return true;
@@ -238,8 +235,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             for (Card card : allCards) {
                 if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), card.isNightCard());
-                    if (basicLandPattern.matcher(cardName).matches()) {
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)), 0, false, card.canTransform(), card.isNightCard());
+                    if (url.useCollectorId()) {
                         url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
                     }
                     if (card.isFlipCard()) {
@@ -251,7 +248,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         // it has the same expansion set code and card number as original one
                         // second side = true;
                         Card secondSide = card.getSecondCardFace();
-                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), 0, false, card.canTransform(), true);
+                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(secondSide.getClass().getName().charAt(secondSide.getClass().getName().length()-1)), 0, false, card.canTransform(), true);
                         allCardsUrls.add(url);
                     }
                 } else {
@@ -321,15 +318,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (params.length >= 4) {
                         if (params[1].toLowerCase().equals("generate") && params[2].startsWith("TOK:")) {
                             String set = params[2].substring(4);
-                            CardInfo card = new CardInfo(params[3], set, 0, 0, true);
+                            CardInfo card = new CardInfo(params[3], set, 0, false, 0, true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM:")) {
                             String set = params[2].substring(7);
-                            CardInfo card = new CardInfo("Emblem " + params[3], set, 0, 0, true);
+                            CardInfo card = new CardInfo("Emblem " + params[3], set, 0, false,0, true);
                             list.add(card);
                         } else if (params[1].toLowerCase().equals("generate") && params[2].startsWith("EMBLEM-:")) {
                             String set = params[2].substring(8);
-                            CardInfo card = new CardInfo(params[3] + " Emblem", set, 0, 0, true);
+                            CardInfo card = new CardInfo(params[3] + " Emblem", set, 0, false, 0, true);
                             list.add(card);
                         }
                     } else {

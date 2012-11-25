@@ -46,7 +46,7 @@ public class LookedAtView implements Serializable {
     public LookedAtView(String name, Cards cards, Game game) {
         this.name = name;
         for (Card card: cards.getCards(game)) {
-            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown()));
+            this.cards.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)), card.isFaceDown()));
         }
     }
 

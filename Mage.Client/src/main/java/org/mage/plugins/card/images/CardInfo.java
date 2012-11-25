@@ -15,19 +15,21 @@ public class CardInfo {
     private boolean twoFacedCard;
     private boolean secondSide;
     private boolean flipCard;
+    private boolean useCollectorId; // for building the image name (different images for the same card)
 
-    public CardInfo(String name, String set, Integer collectorId, Integer type) {
-        this(name, set, collectorId, type, false);
+    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type) {
+        this(name, set, collectorId, useCollectorId, type, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, Integer type, boolean token) {
-        this(name, set, collectorId, type, token, false, false);
+    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type, boolean token) {
+        this(name, set, collectorId, useCollectorId, type, token, false, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
+        this.useCollectorId = useCollectorId;
         this.type = type;
         this.token = token;
         this.twoFacedCard = twoFacedCard;
@@ -150,4 +152,9 @@ public class CardInfo {
     public void setType(Integer type) {
         this.type = type;
     }
+
+    public boolean useCollectorId() {
+        return useCollectorId;
+    }
+
 }
