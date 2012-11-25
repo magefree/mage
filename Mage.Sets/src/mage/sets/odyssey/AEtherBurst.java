@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class AEtherBurst extends CardImpl<AEtherBurst> {
 
-    private static FilterCard filter = new FilterCard("cards named AEther Burst");
+    private static final FilterCard filter = new FilterCard("cards named AEther Burst");
 
     static {
         filter.add(new NamePredicate("AEther Burst"));
@@ -96,7 +96,7 @@ public class AEtherBurst extends CardImpl<AEtherBurst> {
 
 class DynamicTargetCreaturePermanent<T extends DynamicTargetCreaturePermanent<T>> extends TargetCreaturePermanent<DynamicTargetCreaturePermanent<T>> {
 
-    private static FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures");
+    private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creatures");
 
     public DynamicTargetCreaturePermanent() {
         super(new TargetCreaturePermanent(filterCreature));
