@@ -210,7 +210,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         TFile file;
         for (Card card : allCards) {
             if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(),Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)),0 , false, card.canTransform(), card.isNightCard());
+                CardInfo url = new CardInfo(card.getName(), card.getExpansionSetCode(), card.getCardNumber(),card.getUsesVariousArt(),0 , false, card.canTransform(), card.isNightCard());
                 file = new TFile(CardImageUtils.getImagePath(url, imagesPath));
                 if (!file.exists()) {
                     return true;
@@ -235,8 +235,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             for (Card card : allCards) {
                 if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
                     String cardName = card.getName();
-                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1)), 0, false, card.canTransform(), card.isNightCard());
-                    if (url.useCollectorId()) {
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(),card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
+                    if (url.getUsesVariousArt()) {
                         url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
                     }
                     if (card.isFlipCard()) {
@@ -248,7 +248,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         // it has the same expansion set code and card number as original one
                         // second side = true;
                         Card secondSide = card.getSecondCardFace();
-                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), Character.isDigit(secondSide.getClass().getName().charAt(secondSide.getClass().getName().length()-1)), 0, false, card.canTransform(), true);
+                        url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), true);
                         allCardsUrls.add(url);
                     }
                 } else {

@@ -54,10 +54,10 @@ public class ImageCache {
             public BufferedImage apply(String key) {
                 try {
                     boolean thumbnail = false;
-                    boolean useCollectorId = false;
-                    if (key.endsWith("#useCardNumber")) {
-                        useCollectorId = true;
-                        key = key.replace("#useCardNumber", "");
+                    boolean usesVariousArt = false;
+                    if (key.endsWith("#usesVariousArt")) {
+                        usesVariousArt = true;
+                        key = key.replace("#usesVariousArt", "");
                     }
                     if (key.endsWith("#thumb")) {
                         thumbnail = true;
@@ -71,7 +71,7 @@ public class ImageCache {
                         Integer type = Integer.parseInt(m.group(3));
                         Integer collectorId = Integer.parseInt(m.group(4));
 
-                        CardInfo info = new CardInfo(name, set, collectorId, useCollectorId, type);
+                        CardInfo info = new CardInfo(name, set, collectorId, usesVariousArt, type);
 
                         if (collectorId == 0) {
                             info.setToken(true);
@@ -139,8 +139,8 @@ public class ImageCache {
 
     public static BufferedImage getThumbnail(CardView card) {
         String key = getKey(card) + "#thumb";
-        if (card.useCardNumber()) {
-            key += "#useCardNumber";
+        if (card.getUsesVariousArt()) {
+            key += "#usesVariousArt";
         }
         //log.debug("#key: " + key);
         return getImage(key);
@@ -148,8 +148,8 @@ public class ImageCache {
 
     public static BufferedImage getImageOriginal(CardView card) {
         String key = getKey(card);
-        if (card.useCardNumber()) {
-            key += "#useCardNumber";
+        if (card.getUsesVariousArt()) {
+            key += "#usesVariousArt";
         }
         //log.debug("#key: " + key);
         return getImage(key);

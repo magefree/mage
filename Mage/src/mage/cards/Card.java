@@ -28,6 +28,8 @@
 
 package mage.cards;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -36,9 +38,6 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.game.Game;
 import mage.watchers.Watcher;
-
-import java.util.List;
-import java.util.UUID;
 
 public interface Card extends MageObject {
 
@@ -100,6 +99,13 @@ public interface Card extends MageObject {
     public List<Mana> getMana();
 
     public void build();
+
+    public void setUsesVariousArt(boolean usesVariousArt);
+    /**
+     *
+     * @return true if there exists various art images for this card
+     */
+    public boolean getUsesVariousArt();
 
     @Override
     public Card copy();

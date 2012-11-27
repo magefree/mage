@@ -47,7 +47,7 @@ public class ExileView extends SimpleCardsView {
         this.name = exileZone.getName();
         this.id = exileZone.getId();
         for (Card card: exileZone.getCards(game)) {
-            this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), Character.isDigit(card.getClass().getName().charAt(card.getClass().getName().length()-1))));
+            this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt()));
         }
     }
 

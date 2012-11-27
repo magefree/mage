@@ -427,6 +427,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public boolean getUsesVariousArt() {
+        return card.getUsesVariousArt();
+    }
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        card.setUsesVariousArt(usesVariousArt);
+    }
+
+    @Override
     public List<Mana> getMana() {
         return card.getMana();
     }

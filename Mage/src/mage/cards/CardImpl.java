@@ -28,6 +28,8 @@
 
 package mage.cards;
 
+import java.lang.reflect.Constructor;
+import java.util.*;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -44,8 +46,6 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
-import java.lang.reflect.Constructor;
-import java.util.*;
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
@@ -65,6 +65,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected boolean flipCard;
     protected int zoneChangeCounter = 1;
     protected Map<String, String> info;
+    protected boolean usesVariousArt = false;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -72,10 +73,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         this.cardNumber = cardNumber;
         this.cardType.addAll(Arrays.asList(cardTypes));
         this.manaCost.load(costs);
-        if (cardType.contains(CardType.LAND))
+        if (cardType.contains(CardType.LAND)) {
             addAbility(new PlayLandAbility(name));
-        else
+        }
+        else {
             addAbility(new SpellAbility(manaCost, name));
+        }
+        this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
     }
 
     protected CardImpl(UUID ownerId, String name) {
@@ -110,6 +114,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             info = new HashMap<String, String>();
             info.putAll(card.info);
         }
+        usesVariousArt = card.usesVariousArt;
     }
 
     @Override
@@ -196,8 +201,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     public SpellAbility getSpellAbility() {
         if (spellAbility == null) {
             for (Ability ability : abilities.getActivatedAbilities(Zone.HAND)) {
-                if (ability instanceof SpellAbility)
+                if (ability instanceof SpellAbility) {
                     spellAbility = (SpellAbility) ability;
+                }
             }
         }
         return spellAbility;
@@ -284,10 +290,12 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.getExile().getPermanentExile().add(this);
                     break;
                 case LIBRARY:
-                    if (flag)
+                    if (flag) {
                         game.getPlayer(ownerId).getLibrary().putOnTop(this, game);
-                    else
+                    }
+                    else {
                         game.getPlayer(ownerId).getLibrary().putOnBottom(this, game);
+                    }
                     break;
                 case BATTLEFIELD:
                     PermanentCard permanent = new PermanentCard(this, ownerId);
@@ -297,8 +305,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.applyEffects();
                     permanent.entersBattlefield(sourceId, game);
                     game.applyEffects();
-                    if (flag)
+                    if (flag) {
                         permanent.setTapped(true);
+                    }
                     event.setTarget(permanent);
                     break;
                 default:
@@ -483,4 +492,14 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public void build() {}
+
+    @Override
+    public void setUsesVariousArt(boolean usesVariousArt) {
+        this.usesVariousArt = usesVariousArt;
+    }
+
+    @Override
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
+    }
 }

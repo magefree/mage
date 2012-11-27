@@ -114,6 +114,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         this.expansionSetCode = card.getExpansionSetCode();
         this.rarity = card.getRarity();
         this.cardNumber = card.getCardNumber();
+        this.usesVariousArt = card.getUsesVariousArt();
 
         canTransform = card.canTransform();
         if (canTransform) {

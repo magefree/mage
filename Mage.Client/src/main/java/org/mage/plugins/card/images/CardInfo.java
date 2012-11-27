@@ -15,21 +15,21 @@ public class CardInfo {
     private boolean twoFacedCard;
     private boolean secondSide;
     private boolean flipCard;
-    private boolean useCollectorId; // for building the image name (different images for the same card)
+    private boolean usesVariousArt;
 
-    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type) {
-        this(name, set, collectorId, useCollectorId, type, false);
+    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
+        this(name, set, collectorId, usesVariousArt, type, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type, boolean token) {
-        this(name, set, collectorId, useCollectorId, type, token, false, false);
+    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token) {
+        this(name, set, collectorId, usesVariousArt, type, token, false, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean useCollectorId, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
-        this.useCollectorId = useCollectorId;
+        this.usesVariousArt = usesVariousArt;
         this.type = type;
         this.token = token;
         this.twoFacedCard = twoFacedCard;
@@ -44,6 +44,7 @@ public class CardInfo {
         this.twoFacedCard = card.twoFacedCard;
         this.secondSide = card.secondSide;
         this.type = card.type;
+        this.usesVariousArt = card.usesVariousArt;
     }
 
     @Override
@@ -153,8 +154,8 @@ public class CardInfo {
         this.type = type;
     }
 
-    public boolean useCollectorId() {
-        return useCollectorId;
+    public boolean getUsesVariousArt() {
+        return usesVariousArt;
     }
 
 }
