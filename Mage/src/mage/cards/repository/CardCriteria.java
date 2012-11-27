@@ -256,11 +256,17 @@ public class CardCriteria {
                 where.and(5);
                 colorClauses++;
             }
-            where.or(colorClauses);
-            clausesCount++;
+            if (colorClauses > 0) {
+                where.or(colorClauses);
+                clausesCount++;
+            }
         }
 
-        where.and(clausesCount);
+        if (clausesCount > 0) {
+            where.and(clausesCount);
+        } else {
+            where.eq("cardNumber", new SelectArg(0));
+        }
 
         if (start != null) {
             qb.offset(start);
