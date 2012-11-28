@@ -1,1 +1,0 @@
-git log 9ac166abc92f70aebdbe34825880ff8f909465ed..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt 

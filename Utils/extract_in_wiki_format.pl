@@ -76,7 +76,7 @@ foreach my $set (keys(%cards)) {
 				} else {
 					$first = 0;
 				}
-                print REPORT $cardsBySet{$knownSets{$set}}{$card}[0];
+                print REPORT "[$cardsBySet{$knownSets{$set}}{$card}[0]](http://magiccards.info/query?q=$cardsBySet{$knownSets{$set}}{$card}[0])";
             } else {
                 #$card =~ s/([A-Z]{1}[a-z]+)/ $1/g;
                 #$card =~ s/A Ether/ AEther/g;
