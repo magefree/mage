@@ -84,6 +84,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import mage.abilities.mana.DelayedTriggeredManaAbility;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -884,7 +885,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void addTriggeredAbility(TriggeredAbility ability) {
-        if (ability instanceof TriggeredManaAbility) {
+        if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
             ability.resolve(this);
         }
