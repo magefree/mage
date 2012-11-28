@@ -133,10 +133,10 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append(duration.toString());
-        sb.append(" target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes a ").append(token.getDescription());
+        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes a ").append(token.getDescription());
+        sb.append(" ").append(duration.toString());
         if (type != null && type.length() > 0)
-            sb.append(" that's still a ").append(type);
+            sb.append(". It's still a ").append(type);
         return sb.toString();
     }
 

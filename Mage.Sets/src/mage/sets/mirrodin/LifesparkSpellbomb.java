@@ -77,7 +77,7 @@ public class LifesparkSpellbomb extends CardImpl<LifesparkSpellbomb> {
 class LifesparkSpellbombToken extends Token {
 
     public LifesparkSpellbombToken() {
-        super("", "3/3");
+        super("", "3/3 creature");
         this.cardType.add(CardType.CREATURE);
 
         this.power = new MageInt(3);

@@ -81,7 +81,7 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
 class AwakenerDruidToken extends Token {
 
     public AwakenerDruidToken() {
-        super("", "4/5 green Treefolk creature");
+        super("", "4/5 green Treefolk creature as long as {this} is on the battlefield");
         cardType.add(CardType.CREATURE);
         subtype.add("Treefolk");
         color.setGreen(true);
