@@ -75,6 +75,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected Zone zone;
     protected String name;
     protected boolean usesStack = true;
+    protected boolean ruleAtTheTop = false;
 
     @Override
     public abstract T copy();
@@ -108,6 +109,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             this.alternativeCosts.add((AlternativeCost)cost.copy());
         }
         this.modes = ability.modes.copy();
+        this.ruleAtTheTop = ability.ruleAtTheTop;
     }
 
     @Override
@@ -507,4 +509,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     public String toString() {
         return getRule();
     }
+    
+    @Override
+    public boolean getRuleAtTheTop() {
+        return ruleAtTheTop;
+    }
+
+    @Override
+    public void setRuleAtTheTop(boolean ruleAtTheTop) {
+        this.ruleAtTheTop = ruleAtTheTop;
+    }    
 }
+

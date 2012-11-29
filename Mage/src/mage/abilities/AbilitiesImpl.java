@@ -74,7 +74,11 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
         for (T ability:this) {
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
-                rules.add(ability.getRule());
+                if (ability.getRuleAtTheTop()) {
+                    rules.add(0, ability.getRule());
+                } else {
+                    rules.add(ability.getRule());
+                }
             }
             if (ability instanceof SpellAbility) {
                 String kickerRule = getKickerRule(ability);

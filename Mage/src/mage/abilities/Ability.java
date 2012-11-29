@@ -365,4 +365,18 @@ public interface Ability extends Controllable, Serializable {
      */
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
 
+    /**
+     * Returns true if this ability has to be shown on top of the card.
+     *
+     * @return
+     */
+    public boolean getRuleAtTheTop();
+
+    /**
+     * Sets the value for the ruleAtTheTop attribute
+     *
+     * @param ruleAtTheTop
+     */
+    public void setRuleAtTheTop(boolean ruleAtTheTop);
+
 }

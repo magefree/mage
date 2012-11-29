@@ -362,4 +362,14 @@ public class StackAbility implements StackObject, Ability {
     public boolean isCopy() {
         return false;
     }
+
+    @Override
+    public boolean getRuleAtTheTop() {
+        return this.ability.getRuleAtTheTop();
+    }
+
+    @Override
+    public void setRuleAtTheTop(boolean ruleAtTheTop) {
+        this.ability.setRuleAtTheTop(ruleAtTheTop);
+    }
 }
