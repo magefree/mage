@@ -13,9 +13,14 @@ import mage.game.Game;
  */
 public class KickedCondition implements Condition {
 
-    private static KickedCondition fInstance = new KickedCondition();
+    private static KickedCondition fInstance = null;
+
+    private KickedCondition() {}
 
     public static Condition getInstance() {
+        if (fInstance == null) {
+            fInstance = new KickedCondition();
+        }
         return fInstance;
     }
 
