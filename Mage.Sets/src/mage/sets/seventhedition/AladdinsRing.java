@@ -27,7 +27,6 @@
  */
 package mage.sets.seventhedition;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
