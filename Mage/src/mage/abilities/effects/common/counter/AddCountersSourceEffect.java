@@ -85,7 +85,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
             if (counter != null) {
                 Counter newCounter = counter.copy();
                 newCounter.add(amount.calculate(game, source));
-                permanent.addCounters(counter.copy(), game);
+                permanent.addCounters(newCounter, game);
                 if (informPlayers) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {

@@ -79,7 +79,7 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
         
         // Joraga Warcaller enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1), new MultikickerCount(), true),
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new MultikickerCount(), true),
                 "with a +1/+1 counter on it for each time it was kicked"));
 
         
