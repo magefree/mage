@@ -27,11 +27,13 @@
  */
 package mage.abilities.common.delayed;
 
+import mage.Constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -39,18 +41,46 @@ import mage.game.events.GameEvent.EventType;
  */
 public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility<AtEndOfTurnDelayedTriggeredAbility> {
 
+    private TargetController targetController;
+
     public AtEndOfTurnDelayedTriggeredAbility(Effect effect) {
+        this(effect, TargetController.ANY);
+    }
+
+    public AtEndOfTurnDelayedTriggeredAbility(Effect effect, TargetController targetController) {
         super(effect);
+        this.targetController = targetController;
     }
 
     public AtEndOfTurnDelayedTriggeredAbility(AtEndOfTurnDelayedTriggeredAbility ability) {
         super(ability);
+        this.targetController = ability.targetController;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.END_TURN_STEP_PRE) {
-            return true;
+            switch (targetController) {
+                case ANY:
+                    return true;
+                case YOU:
+                    boolean yours = event.getPlayerId().equals(this.controllerId);
+                    return yours;
+                case OPPONENT:
+                    if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+                        return true;
+                    }
+                    break;
+
+                case CONTROLLER_ATTACHED_TO:
+                    Permanent attachment = game.getPermanent(sourceId);
+                    if (attachment != null && attachment.getAttachedTo() != null) {
+                        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                        if (attachedTo != null && attachedTo.getControllerId().equals(event.getPlayerId())) {
+                            return true;
+                        }
+                    }
+            }
         }
         return false;
     }
@@ -62,6 +92,22 @@ public class AtEndOfTurnDelayedTriggeredAbility extends DelayedTriggeredAbility<
 
     @Override
     public String getRule() {
-        return "At the beginning of the next end step, " + modes.getText();
+        StringBuilder sb = new StringBuilder();
+        switch (targetController) {
+            case YOU:
+                sb.append("At the beginning of your next end step, ");
+                break;
+            case OPPONENT:
+                sb.append("At the beginning of an opponent's next end step, ");
+                break;
+            case ANY:
+                sb.append("At the beginning of the next end step, ");
+                break;
+            case CONTROLLER_ATTACHED_TO:
+                sb.append("At the beginning of the next end step of enchanted creature's controller, ");
+                break;
+        }
+        sb.append(getEffects().getText(modes.getMode()));
+        return sb.toString();
     }
 }

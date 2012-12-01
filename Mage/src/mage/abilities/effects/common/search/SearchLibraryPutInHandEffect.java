@@ -49,6 +49,7 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
 
     private boolean revealCards = false;
     private boolean forceShuffle;
+    private String rulePrefix;
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target) {
         this(target, false, true);
@@ -59,15 +60,22 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
     }
 
     public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle) {
+        this(target, revealCards, forceShuffle, "Search your library for ");
+    }
+
+    public SearchLibraryPutInHandEffect(TargetCardInLibrary target, boolean revealCards, boolean forceShuffle, String rulePrefix) {
         super(target, Outcome.DrawCard);
         this.revealCards = revealCards;
         this.forceShuffle = forceShuffle;
+        this.rulePrefix = rulePrefix;
         setText();
     }
 
     public SearchLibraryPutInHandEffect(final SearchLibraryPutInHandEffect effect) {
         super(effect);
         this.revealCards = effect.revealCards;
+        this.forceShuffle = effect.forceShuffle;
+        this.rulePrefix = effect.rulePrefix;
     }
 
     @Override
@@ -78,8 +86,9 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null)
+        if (player == null) {
             return false;
+        }
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Cards cards = new CardsImpl();
@@ -104,14 +113,15 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
             player.shuffleLibrary(game);
             return true;
         }
-        if (forceShuffle)
+        if (forceShuffle) {
             player.shuffleLibrary(game);
+        }
         return false;
     }
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Search your library for ");
+        sb.append(rulePrefix);
         if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
             sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" ");
             sb.append(target.getTargetName()).append(revealCards ? ", reveal them, " : "").append(" and put them into your hand");
@@ -119,11 +129,12 @@ public class SearchLibraryPutInHandEffect extends SearchEffect<SearchLibraryPutI
         else {
             sb.append("a ").append(target.getTargetName()).append(revealCards ? ", reveal it, " : "").append(" and put that card into your hand");
         }
-        if (forceShuffle)
+        if (forceShuffle) {
             sb.append(". Then shuffle your library");
-        else
+        }
+        else {
             sb.append(". If you do, shuffle your library");
-
+        }
         staticText = sb.toString();
     }
 

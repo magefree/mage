@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -35,8 +36,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  *
@@ -53,9 +52,9 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
         this.exileId = exileId;
     }
 
-    public ExileTargetEffect(String exileZone) {
+    public ExileTargetEffect(String effectText) {
         this();
-        this.exileZone = exileZone;
+        this.staticText = effectText;
     }
 
     public ExileTargetEffect() {
@@ -76,11 +75,6 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-
-//        if (exileId == null) {
-//            exileId = getId();
-//        }
-
         if (permanent != null) {
             return permanent.moveToExile(exileId, exileZone, source.getSourceId(), game);
         } else {
@@ -94,6 +88,9 @@ public class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (mode.getTargets().isEmpty()) {
             return "Exile it";
         } else {
