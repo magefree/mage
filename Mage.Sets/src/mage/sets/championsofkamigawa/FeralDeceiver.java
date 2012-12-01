@@ -28,7 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -36,9 +35,9 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
@@ -54,7 +53,7 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX
+ * @author LevelX2
  */
 public class FeralDeceiver extends CardImpl<FeralDeceiver> {
 
@@ -88,35 +87,35 @@ public class FeralDeceiver extends CardImpl<FeralDeceiver> {
 
 class FeralDeceiverAbility extends ActivateOncePerTurnActivatedAbility {
 
-        public FeralDeceiverAbility(Zone zone, Effect effect, Cost cost) {
+    public FeralDeceiverAbility(Zone zone, Effect effect, Cost cost) {
         super(zone, effect, cost);
     }
 
-        public FeralDeceiverAbility(FeralDeceiverAbility ability) {
+    public FeralDeceiverAbility(FeralDeceiverAbility ability) {
         super(ability);
     }
 
-        @Override
-        public FeralDeceiverAbility copy() {
-                return new FeralDeceiverAbility(this);
-        }
+    @Override
+    public FeralDeceiverAbility copy() {
+        return new FeralDeceiverAbility(this);
+    }
 
-        @Override
+    @Override
     public boolean checkIfClause(Game game) {
-                Player player = game.getPlayer(this.getControllerId());
-                if (player != null) {
-                    Cards cards = new CardsImpl();
-                    Card card = player.getLibrary().getFromTop(game);
-                    cards.add(card);
-                    player.revealCards("Feral Deceiver", cards, game);
-                    if (card != null && card.getCardType().contains(CardType.LAND)) {
-                            return true;
-                    }
-                }
-        return false;
+        Player player = game.getPlayer(this.getControllerId());
+        if (player != null) {
+            Cards cards = new CardsImpl();
+            Card card = player.getLibrary().getFromTop(game);
+            cards.add(card);
+            player.revealCards("Feral Deceiver", cards, game);
+            if (card != null && card.getCardType().contains(CardType.LAND)) {
+                return true;
+            }
         }
+        return false;
+    }
 
-        @Override
+    @Override
     public String getRule() {
         return "{2}: Reveal the top card of your library. If it's a land card, {this} gets +2/+2 and gains trample until end of turn. Activate this ability only once each turn."; 
     }
