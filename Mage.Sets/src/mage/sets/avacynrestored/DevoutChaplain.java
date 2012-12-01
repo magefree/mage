@@ -27,9 +27,10 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,13 +41,12 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
 
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -79,7 +79,7 @@ public class DevoutChaplain extends CardImpl<DevoutChaplain> {
         this.toughness = new MageInt(2);
 
         // {tap}, Tap two untapped Humans you control: Exile target artifact or enchantment.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect("Devout Chaplain"), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(2, 2, humanFilter, false)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

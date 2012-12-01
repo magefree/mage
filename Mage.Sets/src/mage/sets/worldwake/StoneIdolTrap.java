@@ -30,14 +30,19 @@ package mage.sets.worldwake;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -45,6 +50,7 @@ import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
+import mage.util.CardUtil;
 
 /**
  *
@@ -52,11 +58,6 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class StoneIdolTrap extends CardImpl<StoneIdolTrap> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
-
-    static {
-        filter.add(new AttackingPredicate());
-    }
 
     public StoneIdolTrap(UUID ownerId) {
         super(ownerId, 93, "Stone Idol Trap", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{5}{R}");
@@ -66,7 +67,9 @@ public class StoneIdolTrap extends CardImpl<StoneIdolTrap> {
         this.color.setRed(true);
 
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.STACK, new StoneIdolTrapCostReductionEffect()));
+        Ability ability = new SimpleStaticAbility(Constants.Zone.STACK, new StoneIdolTrapCostReductionEffect());
+        ability.setRuleAtTheTop(true);
+        this.addAbility(ability);
 
         // Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step.
         this.getSpellAbility().addEffect(new StoneIdolTrapEffect());
@@ -77,41 +80,40 @@ public class StoneIdolTrap extends CardImpl<StoneIdolTrap> {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        super.adjustCosts(ability, game);
-        int cost = ability.getManaCostsToPay().convertedManaCost() - 1;
-        int reductionAmount = game.getBattlefield().getAllActivePermanents(filter, game).size();
-        int newCost = cost - reductionAmount;
-        if (newCost < 0) {
-            newCost = 0;
-        }
-        String adjustedCost = "{R}";
-        adjustedCost = "{" + String.valueOf(newCost) + "}" + adjustedCost;
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().load(adjustedCost);
-    }
-
-    @Override
     public StoneIdolTrap copy() {
         return new StoneIdolTrap(this);
     }
 }
 
-class StoneIdolTrapCostReductionEffect extends OneShotEffect<StoneIdolTrapCostReductionEffect> {
+class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneIdolTrapCostReductionEffect> {
 
-    private static final String effectText = "{this} costs {1} less to cast for each attacking creature";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    StoneIdolTrapCostReductionEffect() {
-        super(Constants.Outcome.Benefit);
-        this.staticText = effectText;
+    static {
+        filter.add(new AttackingPredicate());
+    }
+    public StoneIdolTrapCostReductionEffect() {
+        super(Duration.WhileOnStack, Outcome.Benefit);
+        staticText = "{this} costs {1} less to cast for each attacking creature";
     }
 
-    StoneIdolTrapCostReductionEffect(StoneIdolTrapCostReductionEffect effect) {
+    protected StoneIdolTrapCostReductionEffect(StoneIdolTrapCostReductionEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        int reductionAmount = game.getBattlefield().getAllActivePermanents(filter, game).size();
+        CardUtil.adjustCost(abilityToModify, reductionAmount);
+        return true;
+    }
+
+    @Override
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
+                && abilityToModify.getSourceId().equals(source.getSourceId())) {
+            return game.getCard(abilityToModify.getSourceId()) != null;
+        }
         return false;
     }
 
@@ -141,10 +143,10 @@ class StoneIdolTrapEffect extends OneShotEffect<StoneIdolTrapEffect> {
     public boolean apply(Game game, Ability source) {
         StoneTrapIdolToken token = new StoneTrapIdolToken();
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-        ExileTargetEffect exileEffect = new ExileTargetEffect("Exile this token at the end of turn step");
+        ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
         exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect);
-        delayedAbility.setSourceId(token.getId());
+        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect, Constants.TargetController.YOU);
+        delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);
         

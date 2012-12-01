@@ -33,18 +33,17 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.SacrificeTargetEffect;
+import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -64,9 +63,7 @@ public class PainwrackerOni extends CardImpl<PainwrackerOni> {
         // Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)
         this.addAbility(FearAbility.getInstance());
         // At the beginning of your upkeep, sacrifice a creature if you don't control an Ogre.
-        Ability ability = new PainwrackerOniTriggeredAbility1(new SacrificeTargetEffect());
-        ability.addTarget(new TargetControlledCreaturePermanent());
-        this.addAbility(ability);
+        this.addAbility(new PainwrackerOniTriggeredAbility1(new SacrificeControllerEffect(new FilterControlledCreaturePermanent(), 1, "")));
     }
 
     public PainwrackerOni (final PainwrackerOni card) {
