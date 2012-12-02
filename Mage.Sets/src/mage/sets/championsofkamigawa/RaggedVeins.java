@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
 public class RaggedVeins extends CardImpl<RaggedVeins> {
 
@@ -87,7 +87,7 @@ public class RaggedVeins extends CardImpl<RaggedVeins> {
 class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl<RaggedVeinsTriggeredAbility> {
 
     public RaggedVeinsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SpitefulShadowsEffect());
+        super(Zone.BATTLEFIELD, new RaggedVeinsEffect());
     }
 
     public RaggedVeinsTriggeredAbility(final RaggedVeinsTriggeredAbility ability) {
@@ -119,20 +119,20 @@ class RaggedVeinsTriggeredAbility extends TriggeredAbilityImpl<RaggedVeinsTrigge
     }
 }
 
-class SpitefulShadowsEffect extends OneShotEffect<SpitefulShadowsEffect> {
+class  RaggedVeinsEffect extends OneShotEffect<RaggedVeinsEffect> {
 
-    public SpitefulShadowsEffect() {
+    public RaggedVeinsEffect() {
         super(Outcome.Damage);
         this.staticText = "its controller loses that much life";
     }
 
-    public SpitefulShadowsEffect(final SpitefulShadowsEffect effect) {
+    public RaggedVeinsEffect(final RaggedVeinsEffect effect) {
         super(effect);
     }
 
     @Override
-    public SpitefulShadowsEffect copy() {
-        return new SpitefulShadowsEffect(this);
+    public RaggedVeinsEffect copy() {
+        return new RaggedVeinsEffect(this);
     }
 
     @Override
