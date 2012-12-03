@@ -58,7 +58,7 @@ public class AutochthonWurm extends CardImpl<AutochthonWurm> {
         this.toughness = new MageInt(14);
 
         // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
-        this.addAbility(ConvokeAbility.getInstance());
+        this.addAbility(new ConvokeAbility());
 
         // Trample
         this.addAbility(TrampleAbility.getInstance());

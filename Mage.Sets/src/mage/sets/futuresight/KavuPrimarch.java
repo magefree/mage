@@ -54,7 +54,7 @@ public class KavuPrimarch extends CardImpl<KavuPrimarch> {
         this.toughness = new MageInt(3);
 
         // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
-        this.addAbility(ConvokeAbility.getInstance());
+        this.addAbility(new ConvokeAbility());
 
         // Kicker {4} (You may pay an additional {4} as you cast this spell.)
         this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}"));

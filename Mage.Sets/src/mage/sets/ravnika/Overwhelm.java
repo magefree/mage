@@ -46,7 +46,7 @@ public class Overwhelm extends CardImpl<Overwhelm> {
       this.expansionSetCode = "RAV";
 
       // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
-      this.addAbility(ConvokeAbility.getInstance());
+      this.addAbility(new ConvokeAbility());
 
       // Creatures you control get +3/+3 until end of turn.
       this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));

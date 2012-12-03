@@ -88,22 +88,14 @@ import mage.util.CardUtil;
 
 public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
 
-    private static ConvokeAbility fINSTANCE =  new ConvokeAbility();
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     static {
       filter.add(Predicates.not(new TappedPredicate()));
     }
 
-    private ConvokeAbility() {
+    public ConvokeAbility() {
         super(Zone.STACK, null);
         this.setRuleAtTheTop(true);
-    }
-
-    public static ConvokeAbility getInstance() {
-        if (fINSTANCE == null) {
-            fINSTANCE = new ConvokeAbility();
-        }
-        return fINSTANCE;
     }
 
     public ConvokeAbility(final ConvokeAbility ability) {
@@ -111,8 +103,8 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
     }
 
     @Override
-    public SimpleStaticAbility copy() {
-      return fINSTANCE;
+    public ConvokeAbility copy() {
+      return new ConvokeAbility(this);
     }
 
     @Override
