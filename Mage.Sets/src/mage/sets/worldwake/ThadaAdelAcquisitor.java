@@ -150,7 +150,11 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl<ThadaAdelPlayFromE
             if (card != null && game.getState().getZone(this.cardId) == Constants.Zone.EXILED) {
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null && you.chooseUse(Constants.Outcome.Benefit, "Play the card?", game)) {
-                    you.cast(card.getSpellAbility(), game, false);
+                    if (card.getCardType().contains(CardType.LAND)) {
+                        you.playLand(card, game);
+                    } else {
+                        you.cast(card.getSpellAbility(), game, false);
+                    }
                 }
                 return false;
             }
