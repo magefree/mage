@@ -48,9 +48,13 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
     @Override
     public boolean apply(MageObject input, Game game) {
         Spell spell = game.getStack().getSpell(input.getId());
-        Targets target = spell.getSpellAbility().getTargets();
-        if (target.size() == targets) {
-            return true;
+        if (spell != null) {
+            Targets target = spell.getSpellAbility().getTargets();
+            if (target != null) {
+                if (target.size() == targets) {
+                    return true;
+                }
+            }
         }
         return false;
     }
