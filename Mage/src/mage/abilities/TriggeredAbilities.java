@@ -1,3 +1,4 @@
+
 /*
 * Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
 *
@@ -28,27 +29,35 @@
 
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageObject;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
- */
+*
+* @author BetaSteward_at_googlemail.com
+*/
 public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
+
+    private Map<String, List<UUID>> sources = new HashMap<String, List<UUID>>();
 
     public TriggeredAbilities() {}
 
     public TriggeredAbilities(final TriggeredAbilities abilities) {
         for (Map.Entry<String, TriggeredAbility> entry: abilities.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
+        }
+        for (Map.Entry<String, List<UUID>> entry : abilities.sources.entrySet()) {
+            sources.put(entry.getKey(), entry.getValue());
         }
     }
 
@@ -78,7 +87,7 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
             if (object instanceof PermanentCard) {
                 PermanentCard permanent = (PermanentCard)object;
                 if (permanent.canTransform() && event.getType() == GameEvent.EventType.TRANSFORMED) {
-                    exists = permanent.getCard().getAbilities().contains(ability);  
+                    exists = permanent.getCard().getAbilities().contains(ability);
                 }
             }
         }
@@ -96,16 +105,51 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
         return object;
     }
 
+    /**
+     * Adds a by sourceId gained triggered ability
+     *
+     * @param ability - the gained ability
+     * @param sourceId - the source that assigned the ability
+     * @param attachedTo - the object that gained the ability
+     */
+    public void add(TriggeredAbility ability, UUID sourceId, MageObject attachedTo) {
+        this.add(ability, attachedTo);
+        List<UUID> uuidList = new LinkedList<UUID>();
+        uuidList.add(sourceId);
+        // if the object that gained the ability moves zone, also then the triggered ability must be removed
+        uuidList.add(attachedTo.getId());
+        sources.put(getKey(ability, attachedTo), uuidList);
+    }
+
     public void add(TriggeredAbility ability, MageObject attachedTo) {
         this.put(getKey(ability, attachedTo), ability);
     }
-    
+
     private String getKey(TriggeredAbility ability, MageObject target) {
         String key = ability.getId() + "_";
         if (target != null) {
             key += target.getId();
         }
         return key;
+    }
+
+    /**
+     * Removes gained abilities by sourceId
+     *
+     * @param sourceId
+     */
+    public List<String> removeGainedAbilitiesForSource(UUID sourceId) {
+        List<String> keysToRemove = new ArrayList<String>();
+
+        for (Map.Entry<String, List<UUID>> entry : sources.entrySet()) {
+            if (entry.getValue().contains(sourceId)) {
+                keysToRemove.add(entry.getKey());
+            }
+        }
+        for (String key: keysToRemove) {
+            sources.remove(key);
+        }
+        return keysToRemove;
     }
 
     public TriggeredAbilities copy() {

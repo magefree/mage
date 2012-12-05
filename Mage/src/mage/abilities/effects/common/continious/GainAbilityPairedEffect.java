@@ -68,7 +68,7 @@ public class GainAbilityPairedEffect extends ContinuousEffectImpl<GainAbilityPai
             Permanent paired = game.getPermanent(permanent.getPairedCard());
             if (paired != null) {
                 permanent.addAbility(ability, game);
-                paired.addAbility(ability, game);
+                paired.addAbility(ability, source.getSourceId(), game);
                 return true;
             }
         }

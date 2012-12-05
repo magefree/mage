@@ -112,7 +112,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
             }
         }
         if (creature != null) {
-            creature.addAbility(ability, game);
+            creature.addAbility(ability, source.getSourceId(), game);
         }
         return true;
     }

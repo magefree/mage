@@ -60,15 +60,15 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- *
- * @author BetaSteward_at_googlemail.com
- *
- * since at any time the game state may be copied and restored you cannot
- * rely on any object maintaining it's instance
- * it then becomes necessary to only refer to objects by their ids since
- * these will always remain constant throughout its lifetime
- * 
- */
+*
+* @author BetaSteward_at_googlemail.com
+*
+* since at any time the game state may be copied and restored you cannot
+* rely on any object maintaining it's instance
+* it then becomes necessary to only refer to objects by their ids since
+* these will always remain constant throughout its lifetime
+*
+*/
 public class GameState implements Serializable, Copyable<GameState> {
 
     private Players players;
@@ -478,7 +478,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         else if (ability instanceof TriggeredAbility) {
             // TODO: add sources for triggers - the same way as in addEffect: sources
-            this.triggers.add((TriggeredAbility)ability, attachedTo);
+            this.triggers.add((TriggeredAbility)ability, sourceId, attachedTo);
         }
     }
 
@@ -552,6 +552,18 @@ public class GameState implements Serializable, Copyable<GameState> {
     private void resetOtherAbilities() {
         for (Abilities<ActivatedAbility> abilities: otherAbilities.values()) {
             abilities.clear();
+        }
+    }
+
+    /**
+     * Removes Triggered abilities that were gained from sourceId
+     *
+     * @param sourceId
+     */
+    public void resetForSourceId(UUID sourceId) {
+        List<String> keysToRemove = triggers.removeGainedAbilitiesForSource(sourceId);
+        for (String key : keysToRemove) {
+            triggers.remove(key);
         }
     }
 

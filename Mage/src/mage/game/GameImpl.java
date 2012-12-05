@@ -326,7 +326,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             return null;
         return gameCards.get(cardId);
     }
-    
+
     @Override
     public Ability getAbility(UUID abilityId, UUID sourceId) {
         MageObject object = getObject(sourceId);
@@ -1456,6 +1456,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
         getContinuousEffects().removeGainedEffectsForSource(sourceId);
+        // remove gained triggered abilities
+        getState().resetForSourceId(sourceId);
     }
 
     @Override
@@ -1533,7 +1535,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId);
                 getBattlefield().addPermanent(permanent);
-                permanent.entersBattlefield(permanent.getId(), this);                    
+                permanent.entersBattlefield(permanent.getId(), this);
                 ((PermanentImpl)permanent).removeSummoningSickness();
                 if (card.isTapped())
                     permanent.setTapped(true);

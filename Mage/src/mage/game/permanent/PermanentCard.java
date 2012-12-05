@@ -173,9 +173,6 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         if (controller != null && controller.removeFromBattlefield(this, game)) {
             ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
             if (!game.replaceEvent(event)) {
-                if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
-                    game.resetForSourceId(getId());
-                }
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
@@ -201,6 +198,9 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                     }
                     game.setZone(objectId, event.getToZone());
                     game.fireEvent(event);
+                    if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
+                        game.resetForSourceId(getId());
+                    }
                     return game.getState().getZone(objectId) == toZone;
                 }
             }
@@ -224,6 +224,9 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                 }
                 game.setZone(objectId, event.getToZone());
                 game.fireEvent(event);
+                if (event.getFromZone().equals(Zone.BATTLEFIELD)) {
+                    game.resetForSourceId(getId());
+                }
                 return true;
             }
         }

@@ -96,4 +96,25 @@ public class LoseAbilityTest extends CardTestPlayerBase {
         // should NOT have flying
         Assert.assertFalse(airElemental.getAbilities().contains(FlyingAbility.getInstance()));
     }
+    /**
+     * Tests that gaining two times a triggered ability and losing one will result in only one triggering
+     */
+    @Test
+    public void testMultiGainTriggeredVsLoseAbility() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sublime Archangel",2);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 5);
+
+        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Sublime Archangel");
+        attack(3, playerA, "Silvercoat Lion");
+
+        setStopAt(3, Constants.PhaseStep.END_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 16);
+    }
 }

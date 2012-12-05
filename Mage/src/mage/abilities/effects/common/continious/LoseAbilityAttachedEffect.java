@@ -33,12 +33,15 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityAttachedEffect> {
+
+    private final static Logger logger = Logger.getLogger(LoseAbilityAttachedEffect.class);
 
     protected Ability ability;
     protected AttachmentType attachmentType;
@@ -68,7 +71,10 @@ public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityA
             Permanent creature = game.getPermanent(equipment.getAttachedTo());
             if (creature != null) {
                 while (creature.getAbilities().contains(ability)) {
-                    creature.getAbilities().remove(ability);
+                    if (!creature.getAbilities().remove(ability)) {
+                        // Something went wrong - ability has an other id?
+                          logger.warn("ability" + ability.getRule() + "couldn't be removed.");
+                    }
                 }
             }
         }
