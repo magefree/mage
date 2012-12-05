@@ -60,7 +60,9 @@ public class ScribNibblers extends CardImpl<ScribNibblers> {
         this.toughness = new MageInt(1);
 
         // {tap}: Exile the top card of target player's library. If it's a land card, you gain 1 life.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost()));
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost());
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
 
         // Landfall - Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.
         this.addAbility(new LandfallAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), true));
@@ -95,17 +97,13 @@ class ScribNibblersEffect extends OneShotEffect<ScribNibblersEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        TargetPlayer target = new TargetPlayer();
-        target.setRequired(true);
-        if (you.choose(Constants.Outcome.Neutral, target, source.getId(), game)) {
-            Player targetPlayer = game.getPlayer(target.getFirstTarget());
-            if (targetPlayer != null && targetPlayer.getLibrary().size() > 0) {
-                Card card = targetPlayer.getLibrary().getFromTop(game);
-                card.moveToExile(id, "Scrib Nibblers Exile", source.getId(), game);
-                if (card != null && card.getCardType().contains(CardType.LAND)) {
-                    you.gainLife(1, game);
-                    return true;
-                }
+        Player targetPlayer = game.getPlayer(source.getFirstTarget());
+        if (targetPlayer != null && targetPlayer.getLibrary().size() > 0) {
+            Card card = targetPlayer.getLibrary().getFromTop(game);
+            card.moveToExile(id, "Scrib Nibblers Exile", source.getId(), game);
+            if (card != null && card.getCardType().contains(CardType.LAND)) {
+                you.gainLife(1, game);
+                return true;
             }
         }
         return false;

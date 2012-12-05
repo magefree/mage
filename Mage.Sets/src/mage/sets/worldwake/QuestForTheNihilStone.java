@@ -28,6 +28,7 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -120,11 +121,14 @@ class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl<QuestF
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent quest = game.getPermanent(super.getSourceId());
+        if (quest == null) {
+            Permanent questLKI = (Permanent) game.getLastKnownInformation(super.getSourceId(), Constants.Zone.BATTLEFIELD);
+            quest = questLKI;
+        }
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Player opponent = game.getPlayer(event.getPlayerId());
             if (opponent != null
                     && opponent.getHand().size() == 0
-                    && quest != null
                     && quest.getCounters().getCount(CounterType.QUEST) >= 2) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(opponent.getId()));
@@ -135,8 +139,8 @@ class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl<QuestF
         return false;
     }
 
-        @Override
-        public String getRule() {
+    @Override
+    public String getRule() {
         return "At the beginning of each opponent's upkeep, if that player has no cards in hand and {this} has two or more quest counters on it, you may have that player lose 5 life.";
-        }
     }
+}
