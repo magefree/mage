@@ -54,7 +54,7 @@ import mage.target.common.TargetOpponent;
 public class Intuition extends CardImpl<Intuition> {
 
     public Intuition(UUID ownerId) {
-        super(ownerId, 23, "Intuition", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        super(ownerId, 70, "Intuition", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "TMP";
 
         this.color.setBlue(true);
