@@ -26,36 +26,72 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.costs.mana;
-
-import mage.abilities.costs.OptionalAdditionalCostImpl;
+package mage.abilities.costs;
 
 /**
-* This cost defines the Kicker cost
-* 
-* @author LevelX2
-*/
-public class KickerManaCost extends OptionalAdditionalCostImpl {
+ * @author LevelX2
+ */
+public interface OptionalAdditionalCost extends Cost {
 
-    public KickerManaCost(String manaString) {
-        super("Kicker","(You may pay an additional {cost} as you cast this spell.)",new ManaCostsImpl(manaString));
-    }
+    public String getName();
 
-    public KickerManaCost(final KickerManaCost cost) {
-        super(cost);
-    }
+    /**
+     * Returns the complete text for the addional coast or if onlyCost is true
+     * only the pure text fore the included native cost
+     *
+     * @param onlyCost
+     * @return
+     */
+    public String getText(boolean onlyCost);
 
-    @Override
-    public KickerManaCost copy() {
-        return new KickerManaCost(this);
-    }
+    /**
+     * Returns a reminder text, if the cost has one
+     *
+     * @return
+     */
+    public String getReminderText();
 
-    @Override
-    public String getCastSuffixMessage(int position) {
-        if (position == 0) {
-            return " with " + getText(false);
-        } else {
-            return " and " + getText(true);
-        }
-    }
+    /**
+     * Returns a text suffix for the game log, that can be added to
+     * the cast message.
+     *
+     * @param position - if there are multiple costs, it's the postion the cost is set (starting with 0)
+     * @return
+     */
+    public String getCastSuffixMessage(int position);
+
+
+    /**
+     * If the player intends to pay the cost, the cost will be activated
+     *
+     * @param activated
+     */
+    public void activate();
+
+    /**
+     * Reset the activate and count information
+     *
+     */
+    public void reset();
+
+    /**
+     * Can the cost be multiple times activated
+     *
+     * @return
+     */
+    public boolean isRepeatable();
+
+    /**
+     * Returns if the cost was activated
+     *
+     * @return
+     */
+    public boolean isActivated();
+
+    /**
+     * Returns the number of times the cost was activated
+     * @return
+     */
+    public int getActivateCount();
+        
 }

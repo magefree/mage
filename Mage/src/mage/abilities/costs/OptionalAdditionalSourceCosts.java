@@ -25,37 +25,19 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.costs;
 
-package mage.abilities.costs.mana;
-
-import mage.abilities.costs.OptionalAdditionalCostImpl;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
-* This cost defines the Kicker cost
-* 
-* @author LevelX2
-*/
-public class KickerManaCost extends OptionalAdditionalCostImpl {
-
-    public KickerManaCost(String manaString) {
-        super("Kicker","(You may pay an additional {cost} as you cast this spell.)",new ManaCostsImpl(manaString));
-    }
-
-    public KickerManaCost(final KickerManaCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public KickerManaCost copy() {
-        return new KickerManaCost(this);
-    }
-
-    @Override
-    public String getCastSuffixMessage(int position) {
-        if (position == 0) {
-            return " with " + getText(false);
-        } else {
-            return " and " + getText(true);
-        }
-    }
+ * Interface for abilities that add addional costs to the source.
+ *
+ * Example of such additional source costs: {@link mage.abilities.keyword.KickerAbility}
+ *
+ * @author LevelX2
+ */
+public interface OptionalAdditionalSourceCosts {
+    void addOptionalAdditionalCosts(Ability ability, Game game);
+    String getCastMessageSuffix();
 }

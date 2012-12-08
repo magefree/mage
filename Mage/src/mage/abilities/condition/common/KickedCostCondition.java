@@ -2,7 +2,9 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
 
@@ -21,18 +23,22 @@ public class KickedCostCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card p = game.getCard(source.getSourceId());
-
-        boolean kicked = false;
-        if (p != null) {
-            for (Object cost : p.getSpellAbility().getOptionalCosts()) {
-                if (cost.equals(kickerManaCost)) {
-                    if (((KickerManaCost) cost).isPaid()) {
-                        kicked = true;
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            KickerAbility kickerAbility = null;
+            for (Ability ability: card.getAbilities()) {
+                if (ability instanceof KickerAbility) {
+                    kickerAbility = (KickerAbility) ability;
+                }
+            }
+            if (kickerAbility != null) {
+                for (OptionalAdditionalCost cost: kickerAbility.getKickerCosts()) {
+                    if (cost.equals(kickerManaCost)) {
+                        return cost.isActivated();
                     }
                 }
             }
         }
-        return kicked;
+        return false;
     }
 }

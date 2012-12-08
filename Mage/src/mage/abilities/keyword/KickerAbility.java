@@ -28,89 +28,123 @@
 
 package mage.abilities.keyword;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import mage.Constants;
 import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.Effect;
-import mage.cards.Card;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.OptionalAdditionalCost;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.game.Game;
 import mage.players.Player;
 
-/**
- *
- * @author BetaSteward_at_googlemail.com
- */
-public class KickerAbility extends StaticAbility<KickerAbility> {
+public class KickerAbility extends StaticAbility<KickerAbility> implements OptionalAdditionalSourceCosts {
 
-    protected boolean kicked = false;
-    protected boolean replaces = false;
+    protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
 
-    public KickerAbility(Effect effect, boolean replaces) {
-        super(Zone.STACK, effect);
-        this.replaces = replaces;
+    public KickerAbility(OptionalAdditionalCost kickerCost) {
+       super(Zone.STACK, null);
+       kickerCosts.add(kickerCost);
+       setRuleAtTheTop(true);
     }
 
     public KickerAbility(final KickerAbility ability) {
-        super(ability);
-        this.kicked = ability.kicked;
-        this.replaces = ability.replaces;
+       super(ability);
+       this.kickerCosts = ability.kickerCosts;
     }
 
     @Override
     public KickerAbility copy() {
-        return new KickerAbility(this);
+       return new KickerAbility(this);
     }
 
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        Player player = game.getPlayer(this.getControllerId());
-
-        String message = getKickerText(false) + "?";
-        Card card = game.getCard(sourceId);
-        // replace by card name or just plain "this"
-        String text = card == null ? "this" : card.getName();
-        message = message.replace("{this}", text).replace("{source}", text);
-        if (player.chooseUse(getEffects().get(0).getOutcome(), message, game)) {
-            int bookmark = game.bookmarkState();
-            if (super.activate(game, noMana)) {
-                game.removeBookmark(bookmark);
-                kicked = true;
-            }
-            else {
-                game.restoreState(bookmark);
-                kicked = false;
-            }
-            return kicked;
+    public void resetKicker() {
+        for (OptionalAdditionalCost cost: kickerCosts) {
+            cost.reset();
         }
-        return false;
     }
 
-    public boolean isKicked() {
-        return kicked;
+    public List<OptionalAdditionalCost> getKickerCosts () {
+        return kickerCosts;
     }
 
-    public boolean isReplaces() {
-        return replaces;
+    public void addKickerManaCost(OptionalAdditionalCost kickerCost) {
+        kickerCosts.add(kickerCost);
     }
+    
+    @Override
+    public void addOptionalAdditionalCosts(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            Player player = game.getPlayer(controllerId);
+            if (player != null) {
+                this.resetKicker();
+                for (OptionalAdditionalCost kickerCost: kickerCosts) {
+                    boolean again = true;
+                    while (again) {
+                        String times = "";
+                        if (kickerCost.isRepeatable()) {
+                            int activated = kickerCost.getActivateCount();
+                            times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
+                        }
+                        if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", game)) {
+                            kickerCost.activate();
+                            for (Iterator it = ((Costs) kickerCost).iterator(); it.hasNext();) {
+                                Cost cost = (Cost) it.next();
+                                if (cost instanceof ManaCostsImpl) {
+                                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                                } else {
+                                    ability.getCosts().add(cost.copy());
+                                }
+                            }
+                            
+                            again = kickerCost.isRepeatable();
+                        } else {
+                            again = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     @Override
     public String getRule() {
-        return getKickerText(true);
+       StringBuilder sb = new StringBuilder();
+       int numberKicker = 0;
+       String remarkText = "";
+       for (OptionalAdditionalCost kickerCost: kickerCosts) {
+           if (numberKicker == 0) {
+               sb.append(kickerCost.getText(false));
+               remarkText = kickerCost.getReminderText();
+           } else {
+               sb.append(" and/or ").append(kickerCost.getText(true));
+           }
+           ++numberKicker;
+       }
+       if (numberKicker == 1) {
+            sb.append(" ").append(remarkText);
+       }
+
+       return sb.toString();
     }
 
-    public String getKickerText(boolean withRemainder) {
+    @Override
+    public String getCastMessageSuffix() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Kicker - ");
-        if (manaCosts.size() > 0) {
-            sb.append(manaCosts.getText());
-            if (costs.size() > 0)
-                sb.append(",");
+        int position = 0;
+        for (OptionalAdditionalCost cost : kickerCosts) {
+            if (cost.isActivated()) {
+                sb.append(cost.getCastSuffixMessage(position));
+                ++position;
+            }
         }
-        if (costs.size() > 0)
-            sb.append(costs.getText());
-        sb.append(":").append(modes.getText());
-        if (replaces)
-            sb.append(" instead");
         return sb.toString();
     }
-
 }

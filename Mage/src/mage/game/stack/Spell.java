@@ -43,7 +43,6 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.events.ZoneChangeEvent;
@@ -88,12 +87,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts();
-                boolean replaced = resolveKicker(game);
-                if (!replaced)
-                    result = ability.resolve(game);
-                else
-                    result = true;
-
+                result = ability.resolve(game);
                 if (!copiedSpell) {
                     for (Effect effect : ability.getEffects()) {
                         if (effect instanceof PostResolveEffect) {
@@ -126,8 +120,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             return false;
         } else {
             updateOptionalCosts();
-
-            resolveKicker(game);
             result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
             return result;
         }
@@ -157,18 +149,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         }
     }
 
-    protected boolean resolveKicker(Game game) {
-        boolean replaced = false;
-        for (KickerAbility kicker: card.getAbilities().getKickerAbilities()) {
-            if (kicker.isKicked()) {
-                if (kicker.isReplaces()) {
-                    replaced = true;
-                }
-                kicker.resolve(game);
-            }
-        }
-        return replaced;
-    }
 
     /**
      * Choose new targets for the spell

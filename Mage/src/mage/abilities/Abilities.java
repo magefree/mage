@@ -32,7 +32,6 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
-import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
@@ -141,16 +140,6 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.players.PlayerImpl#canDamage(mage.MageObject)
      */
     public Abilities<ProtectionAbility> getProtectionAbilities();
-
-    /**
-     * Retrieves all {@link KickerAbility kicker abilities}.
-     * 
-     * @return All found {@link KickerAbility kicker abilities}.
-     * 
-     * @see mage.players.PlayerImpl#cast(mage.abilities.SpellAbility, mage.game.Game, boolean)
-     * @see mage.game.stack.Spell#resolveKicker(mage.game.Game)
-     */
-    public Abilities<KickerAbility> getKickerAbilities();
 
     /**
      * TODO Method is unused, keep it around?

@@ -447,9 +447,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     @Deprecated
     public void addAbility(Ability ability, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
-            if (ability instanceof KickerAbility) {
-                return;
-            }
             for (Mode mode: ability.getModes().values()) {
                 for (Effect effect: mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {
@@ -465,9 +462,6 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
         if (ability instanceof StaticAbility) {
-            if (ability instanceof KickerAbility) {
-                return;
-            }
             for (Mode mode: ability.getModes().values()) {
                 for (Effect effect: mode.getEffects()) {
                     if (effect instanceof ContinuousEffect) {

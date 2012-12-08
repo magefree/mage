@@ -28,17 +28,28 @@
 
 package mage.abilities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.MageObject;
-import mage.abilities.costs.*;
-import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.costs.AdjustingSourceCosts;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.*;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.Effects;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -49,9 +60,6 @@ import mage.target.Target;
 import mage.target.Targets;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -144,8 +152,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         if (checkIfClause(game)) {
             for (Effect effect: getEffects()) {
                 if (effect instanceof OneShotEffect) {
-                    if (!(effect instanceof PostResolveEffect))
+                    if (!(effect instanceof PostResolveEffect)) {
                         result &= effect.apply(game, this);
+                    }
                 }
                 else {
                     game.addEffect((ContinuousEffect) effect, this);
@@ -158,8 +167,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public boolean activate(Game game, boolean noMana) {
         // 20110204 - 700.2
-        if (!modes.choose(game, this))
+        if (!modes.choose(game, this)) {
             return false;
+        }
         //20100716 - 601.2b
         Card card = game.getCard(sourceId);
         if (card != null) {
@@ -170,22 +180,29 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             return false;
         }
 
+        // 20121001 - 601.2b
+        // If the spell has alternative or additional costs that will be paid as it's being cast such
+        // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
+        // or her intentions to pay any or all of those costs (see rule 601.2e).
+        if (card != null) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof OptionalAdditionalSourceCosts) {
+                    ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
+                }
+            }
+        }
+
+        //20121001 - 601.2c
         if (card != null) {
             card.adjustTargets(this, game);
         }
-        //20100716 - 601.2b
         if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
             logger.debug("activate failed - target");
             return false;
         }
 
         for (Cost cost : optionalCosts) {
-            if (cost instanceof KickerManaCost) {
-                cost.clearPaid();
-                if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay " + cost.getText() + "?", game)) {
-                    manaCostsToPay.add((ManaCost) cost);
-                }
-            } else if (cost instanceof ManaCost) {
+              if (cost instanceof ManaCost) {
                 cost.clearPaid();
                 if (game.getPlayer(this.controllerId).chooseUse(Outcome.Benefit, "Pay optional cost " + cost.getText() + "?", game)) {
                     manaCostsToPay.add((ManaCost) cost);
@@ -454,8 +471,9 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public boolean canChooseTarget(Game game) {
         for (Mode mode: modes.values()) {
-            if (mode.getTargets().canChoose(sourceId, controllerId, game))
+            if (mode.getTargets().canChoose(sourceId, controllerId, game)) {
                 return true;
+            }
         }
         return false;
     }
@@ -477,15 +495,15 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
 
         MageObject object;
-        UUID sourceId;
+        UUID parameterSourceId;
         // for singleton abilities like Flying we can't rely on abilities' source
         // so will use the one that came as a parameter if it is not null
         if (this instanceof MageSingleton && source != null) {
             object = source;
-            sourceId = source.getId();
+            parameterSourceId = source.getId();
         } else {
             object = game.getObject(getSourceId());
-            sourceId = getSourceId();
+            parameterSourceId = getSourceId();
         }
 
         if (object != null && !object.getAbilities().contains(this)) {
@@ -501,7 +519,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
 
         // check against current state
-        Zone test = game.getState().getZone(sourceId);
+        Zone test = game.getState().getZone(parameterSourceId);
         return test != null && zone.match(test);
     }
 

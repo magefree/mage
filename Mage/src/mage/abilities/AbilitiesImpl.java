@@ -28,20 +28,18 @@
 
 package mage.abilities;
 
-import mage.Constants.Zone;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.Cost;
-import mage.abilities.keyword.KickerAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.mana.ManaAbility;
-import mage.game.Game;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.costs.mana.KickerManaCost;
+import mage.Constants.Zone;
+import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.Cost;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.game.Game;
+
 
 /**
  *
@@ -81,10 +79,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 }
             }
             if (ability instanceof SpellAbility) {
-                String kickerRule = getKickerRule(ability);
-                if (!kickerRule.isEmpty()) {
-                    rules.add(kickerRule);
-                }
                 if (ability.getAlternativeCosts().size() > 0) {
                     StringBuilder sbRule = new StringBuilder();
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
@@ -122,25 +116,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         return rules;
     }
 
-    private String getKickerRule(Ability ability) {
-        StringBuilder sb = new StringBuilder();
-        int numberKicker = 0;
-        for (Object cost : ability.getOptionalCosts()) {
-            if (cost instanceof KickerManaCost) {
-                if (numberKicker == 0) {
-                    sb.append(((KickerManaCost)cost).getText(true));
-                } else {
-                    sb.append(" and/or ").append(((KickerManaCost)cost).getText(true));
-                }
-                ++numberKicker;
-            }
-        }
-        if (numberKicker > 0) {
-            return "Kicker " + sb.toString() + " <i>(You may pay an additional " + sb.toString() + " as you cast this spell.)</i>";
-        }
-        return sb.toString();
-    }
-
     @Override
     public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone) {
         Abilities<ActivatedAbility> zonedAbilities = new AbilitiesImpl<ActivatedAbility>();
@@ -168,8 +143,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         Abilities<ManaAbility> abilities = new AbilitiesImpl<ManaAbility>();
         for (T ability: this) {
             if (ability instanceof ManaAbility && ability.getZone().match(zone)) {
-                if ((((ManaAbility)ability).canActivate(ability.getControllerId(), game)))
+                if ((((ManaAbility)ability).canActivate(ability.getControllerId(), game))) {
                     abilities.add((ManaAbility)ability);
+                }
             }
         }
         return abilities;
@@ -226,17 +202,6 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     }
 
     @Override
-    public Abilities<KickerAbility> getKickerAbilities() {
-        Abilities<KickerAbility> abilities = new AbilitiesImpl<KickerAbility>();
-        for (T ability: this) {
-            if (ability instanceof KickerAbility) {
-                abilities.add((KickerAbility)ability);
-            }
-        }
-        return abilities;
-    }
-
-    @Override
     public void setControllerId(UUID controllerId) {
         for (Ability ability: this) {
             ability.setControllerId(controllerId);
@@ -276,11 +241,13 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
 
     @Override
     public boolean containsAll(Abilities<T> abilities) {
-        if (this.size() < abilities.size())
+        if (this.size() < abilities.size()) {
             return false;
+        }
         for (T ability: abilities) {
-            if (!contains(ability))
+            if (!contains(ability)) {
                 return false;
+            }
         }
         return true;
     }
@@ -288,8 +255,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public boolean containsKey(UUID abilityId) {
         for (T ability: this) {
-            if (ability.getId().equals(abilityId))
+            if (ability.getId().equals(abilityId)) {
                 return true;
+            }
         }
         return false;
     }
@@ -297,8 +265,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public T get(UUID abilityId) {
         for (T ability: this) {
-            if (ability.getId().equals(abilityId))
+            if (ability.getId().equals(abilityId)) {
                 return ability;
+            }
         }
         return null;
     }

@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.abilities.common.EmptyEffect;
+import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -42,11 +42,14 @@ public class MultikickerAbility extends KickerAbility {
     int activateCount;
 
     public MultikickerAbility(Effect effect, boolean replaces) {
-        super(effect, replaces);
+        super(new KickerManaCost("{1}"));
+     //        super(effect, replaces);
+
     }
 
     public MultikickerAbility(ManaCosts manaCosts) {
-        super(new EmptyEffect(""), false);
+        super((KickerManaCost) manaCosts);
+        //super(new EmptyEffect(""), false);
         this.addManaCost(manaCosts);
     }
 
@@ -70,8 +73,9 @@ public class MultikickerAbility extends KickerAbility {
                 break;
             activateCount++;
         }
-        kicked = activateCount > 0;
-        return kicked;
+//        kicked = activateCount > 0;
+//        return kicked;
+        return false;
     }
 
     @Override
@@ -83,24 +87,24 @@ public class MultikickerAbility extends KickerAbility {
         return result;
     }
 
-    @Override
-    public String getKickerText(boolean withRemainder) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Multikicker ");
-        if (manaCosts.size() > 0) {
-            sb.append(manaCosts.getText());
-            if (costs.size() > 0) {
-                sb.append(",");
-            }
-        }
-        if (costs.size() > 0) {
-            sb.append(costs.getText());
-        }
-        if (withRemainder) {
-            sb.append("  (You may pay an additional ").append(manaCosts.getText()).append(" any number of times as you cast this spell.)");
-        }
-        return sb.toString();
-    }
+//    @Override
+//    public String getKickerText(boolean withRemainder) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Multikicker ");
+//        if (manaCosts.size() > 0) {
+//            sb.append(manaCosts.getText());
+//            if (costs.size() > 0) {
+//                sb.append(",");
+//            }
+//        }
+//        if (costs.size() > 0) {
+//            sb.append(costs.getText());
+//        }
+//        if (withRemainder) {
+//            sb.append("  (You may pay an additional ").append(manaCosts.getText()).append(" any number of times as you cast this spell.)");
+//        }
+//        return sb.toString();
+//    }
 
     public int getActivateCount() {
         return activateCount;

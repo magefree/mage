@@ -25,37 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.costs.mana;
 
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 
 /**
-* This cost defines the Kicker cost
-* 
-* @author LevelX2
-*/
-public class KickerManaCost extends OptionalAdditionalCostImpl {
+ *
+ * @author LevelX2
+ */
 
-    public KickerManaCost(String manaString) {
-        super("Kicker","(You may pay an additional {cost} as you cast this spell.)",new ManaCostsImpl(manaString));
+
+public class MultikickerManaCost extends OptionalAdditionalCostImpl{
+
+    public MultikickerManaCost(String manaString) {
+       super("Multikicker","(You may pay an additional {cost} any number of times as you cast this spell.)",new ManaCostsImpl(manaString));
+       repeatable = true;
     }
 
-    public KickerManaCost(final KickerManaCost cost) {
-        super(cost);
+    public MultikickerManaCost(final MultikickerManaCost cost) {
+       super(cost);
     }
 
     @Override
-    public KickerManaCost copy() {
-        return new KickerManaCost(this);
+    public MultikickerManaCost copy() {
+       return new MultikickerManaCost(this);
     }
 
     @Override
     public String getCastSuffixMessage(int position) {
-        if (position == 0) {
-            return " with " + getText(false);
-        } else {
-            return " and " + getText(true);
-        }
+        return (position > 0 ? " and ":"") + " with " + getActivateCount() + (getActivateCount() > 1? " times":" time") + " multikicker";
     }
 }

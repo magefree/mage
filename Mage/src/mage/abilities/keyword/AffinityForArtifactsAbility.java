@@ -50,6 +50,7 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
 
     public AffinityForArtifactsAbility() {
         super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
+        setRuleAtTheTop(true);
     }
 
     public AffinityForArtifactsAbility(final AffinityForArtifactsAbility ability) {

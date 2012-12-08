@@ -28,26 +28,24 @@
 
 package mage.abilities;
 
+import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 
-import java.util.UUID;
-import mage.abilities.costs.mana.KickerManaCost;
-import mage.abilities.keyword.MultikickerAbility;
-import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 
 /**
  *
@@ -82,8 +80,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         if (effect != null) {
             this.addEffect(effect);
         }
-        if (cost != null)
+        if (cost != null) {
             this.addManaCost(cost);
+        }
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, ManaCosts cost) {
@@ -93,8 +92,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                 this.addEffect(effect);
             }
         }
-        if (cost != null)
+        if (cost != null) {
             this.addManaCost(cost);
+        }
     }
 
     public ActivatedAbilityImpl(Zone zone, Effect effect, Cost cost) {
@@ -130,8 +130,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                 this.addEffect(effect);
             }
         }
-        if (cost != null)
+        if (cost != null) {
             this.addCost(cost);
+        }
     }
 
     public ActivatedAbilityImpl(Zone zone, Effects effects, Costs<Cost> costs) {
@@ -151,8 +152,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
-        if (!controlsAbility(playerId, game))
+        if (!controlsAbility(playerId, game)) {
             return false;
+        }
         //20091005 - 602.5d/602.5e
         if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
             if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
@@ -163,12 +165,14 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     }
 
     protected boolean controlsAbility(UUID playerId, Game game) {
-        if (this.controllerId != null && this.controllerId.equals(playerId))
+        if (this.controllerId != null && this.controllerId.equals(playerId)) {
             return true;
+        }
         else {
             Card card = (Card)game.getObject(this.sourceId);
-            if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD)
+            if (card != null && game.getState().getZone(this.sourceId) != Zone.BATTLEFIELD) {
                 return card.getOwnerId().equals(playerId);
+            }
         }
         return false;
     }
@@ -200,7 +204,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     if (spell.getFromZone() == Zone.GRAVEYARD) {
                         sb.append(" from graveyard");
                     }
-                    sb.append(getKickerText(game, spell));
+                    sb.append(getOptionalTextSuffix(game, spell));
                 } else {
                     sb.append(object.getName());
                 }
@@ -217,36 +221,12 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         return sb.toString();
     }
 
-    String getKickerText(Game game, Spell spell) {
+    String getOptionalTextSuffix(Game game, Spell spell) {
         StringBuilder sb = new StringBuilder();
-        int numberPaid = 0;
-        for (Object cost : spell.getSpellAbility().getOptionalCosts()) {
-            if (cost instanceof KickerManaCost) {
-                if (((KickerManaCost) cost).isPaid()) {
-                    if (numberPaid == 0) {
-                        sb.append(" with ").append(((KickerManaCost)cost).getText(true));
-                    } else {
-                        sb.append(" and ").append(((KickerManaCost)cost).getText(true));
-                    }
-                    ++numberPaid;
-                }
+        for (Ability ability : (Abilities<Ability>) spell.getAbilities()) {
+            if (ability instanceof OptionalAdditionalSourceCosts) {
+                sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
             }
-        }
-        if (numberPaid > 0) {
-            sb.append(" kicker");
-        }
-        // Multikicker
-        int multikickerCount = 0;
-        Card card = game.getCard(this.getSourceId());
-        if (card != null) {
-            for (Ability ability : card.getAbilities()) {
-                if (ability instanceof MultikickerAbility) {
-                    multikickerCount = ((MultikickerAbility)ability).getActivateCount();
-                    }
-                }
-            }
-        if (multikickerCount > 0) {
-            sb.append(" with ").append(multikickerCount).append(multikickerCount > 1? " times":" time").append(" multikicker");
         }
         return sb.toString();
     }
