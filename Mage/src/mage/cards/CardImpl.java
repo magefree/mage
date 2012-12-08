@@ -246,8 +246,13 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        return this.moveToZone(toZone, sourceId, game, flag, null);
+    }
+
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone);
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, toZone, appliedEffects);
         if (!game.replaceEvent(event)) {
             if (event.getFromZone() != null) {
                 switch (event.getFromZone()) {
@@ -355,11 +360,15 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         }
         return false;
     }
-
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        return moveToExile(exileId, name, sourceId, game, null);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
-        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED);
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
         if (!game.replaceEvent(event)) {
             if (fromZone != null) {
                 switch (fromZone) {

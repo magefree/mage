@@ -28,6 +28,7 @@
 
 package mage.game.events;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import mage.Constants.Zone;
 import mage.game.permanent.Permanent;
@@ -49,10 +50,29 @@ public class ZoneChangeEvent extends GameEvent {
         this.target = target;
     }
 
+    public ZoneChangeEvent(Permanent target, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects) {
+        super(EventType.ZONE_CHANGE, target.getId(), sourceId, playerId);
+        this.fromZone = fromZone;
+        this.toZone = toZone;
+        this.target = target;
+        if (appliedEffects != null) {
+            this.appliedEffects = appliedEffects;
+        };
+    }
+
     public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {
         super(EventType.ZONE_CHANGE, targetId, sourceId, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
+    }
+
+    public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects) {
+        super(EventType.ZONE_CHANGE, targetId, sourceId, playerId);
+        this.fromZone = fromZone;
+        this.toZone = toZone;
+        if (appliedEffects != null) {
+            this.appliedEffects = appliedEffects;
+        }
     }
 
     public ZoneChangeEvent(Permanent target, UUID playerId, Zone fromZone, Zone toZone) {

@@ -28,6 +28,7 @@
 
 package mage.game.permanent;
 
+import java.util.ArrayList;
 import mage.Constants.Zone;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
@@ -165,13 +166,17 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
     public Card getCard() {
         return card;
     }
-
     @Override
     public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        return moveToZone(toZone, sourceId, game, flag, null);
+    }
+
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone);
+            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, controllerId, fromZone, toZone, appliedEffects);
             if (!game.replaceEvent(event)) {
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
@@ -208,13 +213,17 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         return false;
     }
 
-
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        return moveToExile(exileId, name, sourceId, game, null);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
         Zone fromZone = game.getState().getZone(objectId);
         Player controller = game.getPlayer(controllerId);
         if (controller != null && controller.removeFromBattlefield(this, game)) {
-            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED);
+            ZoneChangeEvent event = new ZoneChangeEvent(this, sourceId, ownerId, fromZone, Zone.EXILED, appliedEffects);
             if (!game.replaceEvent(event)) {
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (exileId == null) {

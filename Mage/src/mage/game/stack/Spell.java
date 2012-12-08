@@ -28,6 +28,7 @@
 
 package mage.game.stack;
 
+import java.util.ArrayList;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -366,14 +367,25 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public void adjustTargets(Ability ability, Game game) {}
 
+
     @Override
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag) {
+        return moveToZone(zone, sourceId, game, flag, null);
+    }
+
+    @Override
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
         throw new UnsupportedOperationException("Unsupported operation");
     }
 
     @Override
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
-        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED);
+        return moveToExile(exileId, name, sourceId, game, null);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game,  ArrayList<UUID> appliedEffects) {
+        ZoneChangeEvent event = new ZoneChangeEvent(this.getId(), sourceId, this.getOwnerId(), Zone.STACK, Zone.EXILED, appliedEffects);
         if (!game.replaceEvent(event)) {
             game.getStack().remove(this);
             game.rememberLKI(this.getId(), event.getFromZone(), this);

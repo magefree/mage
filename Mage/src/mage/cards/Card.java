@@ -28,6 +28,7 @@
 
 package mage.cards;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Rarity;
@@ -85,6 +86,8 @@ public interface Card extends MageObject {
      */
     public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 
+    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects);
+
     /**
      * Moves the card to an exile zone
      * @param exileId set to null for generic exile zone
@@ -94,6 +97,10 @@ public interface Card extends MageObject {
      * @return true if card was moved to zone
      */
     public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
+    
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
+
+
     public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
     public List<Mana> getMana();

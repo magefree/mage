@@ -46,7 +46,7 @@ public class GameEvent {
     protected boolean flag;
     protected String data;
     protected Zone zone;
-    protected ArrayList<UUID> appliedEffects = new ArrayList<UUID>();;
+    protected ArrayList<UUID> appliedEffects = new ArrayList<UUID>();
 
     public enum EventType {
 
