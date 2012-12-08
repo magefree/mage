@@ -39,6 +39,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,11 +54,16 @@ public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
         super(ownerId, 193, "Vines of Vastwood", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "ZEN";
         this.color.setGreen(true);
+
+        // Kicker {G} (You may pay an additional {G} as you cast this spell.)
+        this.addAbility(new KickerAbility(new KickerManaCost("{G}")));
+
+        // Target creature can't be the target of spells or abilities your opponents control this turn.
         TargetCreaturePermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HexproofAbility.getInstance(), Duration.EndOfTurn));
 
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{G}"));
+        // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
                 KickedCondition.getInstance(), staticText));
     }

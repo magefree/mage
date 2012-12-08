@@ -36,6 +36,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -65,7 +66,7 @@ public class MoldShambler extends CardImpl<MoldShambler> {
         this.toughness = new MageInt(3);
 
         // Kicker {1}{G} (You may pay an additional {1}{G} as you cast this spell.)
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{1}{G}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{1}{G}")));
 
         // When Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);

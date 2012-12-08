@@ -36,6 +36,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -56,7 +57,8 @@ public class RiteOfReplication extends CardImpl<RiteOfReplication> {
         this.color.setBlue(true);
 
         // Kicker {5}
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{5}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{5}")));
+
         // Put a token that's a copy of target creature onto the battlefield. If Rite of Replication was kicked, put five of those tokens onto the battlefield instead.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new RiteOfReplicationEffect(5),

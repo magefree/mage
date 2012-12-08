@@ -39,6 +39,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -59,9 +60,10 @@ public class Cetavolver extends CardImpl<Cetavolver> {
 
         // Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)
         KickerManaCost kicker1 = new KickerManaCost("{1}{R}");
-        this.getSpellAbility().addOptionalCost(kicker1);
         KickerManaCost kicker2 = new KickerManaCost("{G}");
-        this.getSpellAbility().addOptionalCost(kicker2);
+        KickerAbility kickerAbility = new KickerAbility(kicker1);
+        kickerAbility.addKickerManaCost(kicker2);
+        this.addAbility(kickerAbility);
 
         // If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(

@@ -34,10 +34,12 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.MultikickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.DiscardTargetEffect;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetOpponent;
 
@@ -57,10 +59,13 @@ public class BloodhuskRitualist extends CardImpl<BloodhuskRitualist> {
         this.toughness = new MageInt(2);
 
         // Multikicker (You may pay an additional {B} any number of times as you cast this spell.)
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{B}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{B}")));
 
         // When Bloodhusk Ritualist enters the battlefield, target opponent discards a card for each time it was kicked.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new MultikickerCount()));
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(new MultikickerCount())),
+                KickedCondition.getInstance(),
+                "");
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

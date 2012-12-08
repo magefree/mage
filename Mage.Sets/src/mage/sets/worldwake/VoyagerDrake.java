@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -35,20 +34,16 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.MultikickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -66,15 +61,29 @@ public class VoyagerDrake extends CardImpl<VoyagerDrake> {
         this.toughness = new MageInt(3);
 
         // Multikicker {U}
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{U}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{U}")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // When Voyager Drake enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times Voyager Drake was kicked.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new VoyagerDrakeEffect(), false));
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), false),
+                KickedCondition.getInstance(),
+                "When {this} enters the battlefield, up to X target creatures gain flying until end of turn, where X is the number of times {this} was kicked.");
+        this.addAbility(ability);
     }
 
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof ConditionalTriggeredAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new MultikickerCount().calculate(game, ability);
+            if (numbTargets > 0) {
+                ability.addTarget(new TargetCreaturePermanent(0,numbTargets));
+            }
+        }
+    }
     public VoyagerDrake(final VoyagerDrake card) {
         super(card);
     }
@@ -82,55 +91,5 @@ public class VoyagerDrake extends CardImpl<VoyagerDrake> {
     @Override
     public VoyagerDrake copy() {
         return new VoyagerDrake(this);
-    }
-}
-
-class VoyagerDrakeEffect extends OneShotEffect<VoyagerDrakeEffect> {
-
-    public VoyagerDrakeEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
-        this.staticText = "up to X target creatures gain flying until end of turn, where X is the number of times {this} was kicked";
-    }
-
-    public VoyagerDrakeEffect(final VoyagerDrakeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public VoyagerDrakeEffect copy() {
-        return new VoyagerDrakeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        Player you = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            for (Ability ability : permanent.getAbilities()) {
-                if (ability instanceof MultikickerAbility) {
-                    int count = Math.min(game.getBattlefield().countAll(filter, game), ((MultikickerAbility) ability).getActivateCount());
-                    TargetCreaturePermanent target = new TargetCreaturePermanent(0, count, filter, false);
-                    if (you != null) {
-                        if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.AddAbility, source.getControllerId(), source.getId(), game)) {
-                            if (!target.getTargets().isEmpty()) {
-                                List<UUID> targets = target.getTargets();
-                                for (UUID targetId : targets) {
-                                    Permanent creature = game.getPermanent(targetId);
-                                    if (creature != null) {
-                                        ContinuousEffect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn);
-                                        effect.setTargetPointer(new FixedTarget(creature.getId()));
-                                        game.addEffect(effect, source);
-                                    }
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

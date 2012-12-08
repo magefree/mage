@@ -46,6 +46,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -73,7 +74,8 @@ public class Gigantiform extends CardImpl<Gigantiform> {
         this.color.setGreen(true);
 
         // Kicker {4}
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{4}")));
+
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);

@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetNonBasicLandPermanent;
 
@@ -57,7 +58,8 @@ public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
         this.toughness = new MageInt(1);
 
         // Kicker {R} (You may pay an additional {R} as you cast this spell.)
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{R}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{R}")));
+
 
         // Haste
         this.addAbility(HasteAbility.getInstance());

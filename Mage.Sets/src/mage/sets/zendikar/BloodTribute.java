@@ -32,7 +32,12 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.OptionalAdditionalCost;
+import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.common.TapTargetCost;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -64,14 +69,20 @@ public class BloodTribute extends CardImpl<BloodTribute> {
 
         this.color.setBlack(true);
 
+        // Kicker - Tap an untapped Vampire you control.
+        OptionalAdditionalCost cost = new OptionalAdditionalCostImpl("Kicker-","",new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
+        this.addAbility(new KickerAbility(cost));
+
         // Target opponent loses half his or her life, rounded up.
         this.getSpellAbility().addTarget(new TargetOpponent());
         this.getSpellAbility().addEffect(new BloodTributeLoseLifeEffect());
-        // Kicker - Tap an untapped Vampire you control.
+         
         // If Blood Tribute was kicked, you gain life equal to the life lost this way.
-        KickerAbility ability = new KickerAbility(new BloodTributeGainLifeEffect(), false);
-        ability.addCost(new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, true)));
-        this.addAbility(ability);
+        Effect effect = new ConditionalOneShotEffect(
+                new BloodTributeGainLifeEffect(),
+                KickedCondition.getInstance(),
+                "If Blood Tribute was kicked, you gain life equal to the life lost this way");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public BloodTribute(final BloodTribute card) {

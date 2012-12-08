@@ -42,6 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
+import mage.abilities.keyword.KickerAbility;
 
 /**
  *
@@ -66,7 +67,8 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{B}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{B}")));
+
 
         EntersBattlefieldTriggeredAbility ability =
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));

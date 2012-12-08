@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +57,8 @@ public class HeartstabberMosquito extends CardImpl<HeartstabberMosquito> {
         this.toughness = new MageInt(2);
 
         // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{2}{B}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{2}{B}")));
+
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

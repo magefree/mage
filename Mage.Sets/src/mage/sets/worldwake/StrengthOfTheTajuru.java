@@ -27,11 +27,17 @@
  */
 package mage.sets.worldwake;
 
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.MultikickerManaCost;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -39,10 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
-import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.MultikickerAbility;
 
 /**
  * @author noxx
@@ -57,7 +59,7 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
 
 
         // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}")));
 
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());
@@ -65,10 +67,11 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        int numTargets = ability.getTargets().get(0).getTargets().size();
-        if (numTargets > 1) {
-            ability.getManaCostsToPay().add(new GenericManaCost(numTargets - 1));
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new MultikickerCount().calculate(game, ability) + 1;
+            ability.addTarget(new TargetCreaturePermanent(0, numbTargets));
         }
     }
 
@@ -86,7 +89,7 @@ class StrengthOfTheTajuruAddCountersTargetEffect extends OneShotEffect<StrengthO
 
     public StrengthOfTheTajuruAddCountersTargetEffect() {
         super(Outcome.BoostCreature);
-        staticText = "Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.";
+        staticText = "Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them";
     }
 
     public StrengthOfTheTajuruAddCountersTargetEffect(final StrengthOfTheTajuruAddCountersTargetEffect effect) {

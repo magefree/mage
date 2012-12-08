@@ -27,15 +27,16 @@
  */
 package mage.sets.worldwake;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.MultikickerManaCost;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,14 +56,24 @@ public class CometStorm extends CardImpl<CometStorm> {
         this.color.setRed(true);
 
         // Multikicker {1}
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{1}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}")));
 
         // Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(1));
     }
 
     public CometStorm(final CometStorm card) {
         super(card);
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new MultikickerCount().calculate(game, ability) + 1;
+            ability.addTarget(new TargetCreatureOrPlayer(numbTargets));
+        }
     }
 
     @Override
@@ -84,24 +95,17 @@ class CometStormEffect extends OneShotEffect<CometStormEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = source.getManaCostsToPay().getX() + 1;
         int damage = source.getManaCostsToPay().getX();
         Player you = game.getPlayer(source.getControllerId());
-        TargetCreatureOrPlayer target = new TargetCreatureOrPlayer(amount);
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getId(), game)) {
-                if (!target.getTargets().isEmpty()) {
-                    List<UUID> targets = target.getTargets();
-                    for (UUID uuid : targets) {
-                        Permanent permanent = game.getPermanent(uuid);
-                        Player player = game.getPlayer(uuid);
-                        if (permanent != null) {
-                            permanent.damage(damage, source.getId(), game, true, false);
-                        }
-                        if (player != null) {
-                            player.damage(damage, source.getId(), game, true, false);
-                        }
-                    }
+            for (UUID uuid : this.getTargetPointer().getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(uuid);
+                Player player = game.getPlayer(uuid);
+                if (permanent != null) {
+                    permanent.damage(damage, source.getId(), game, true, false);
+                }
+                if (player != null) {
+                    player.damage(damage, source.getId(), game, true, false);
                 }
             }
             return true;

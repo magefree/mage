@@ -32,11 +32,11 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -55,7 +55,7 @@ public class LightkeeperOfEmeria extends CardImpl<LightkeeperOfEmeria> {
         this.toughness = new MageInt(4);
 
         // Multikicker (You may pay an additional {W} any number of times as you cast this spell.)
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{W}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{W}")));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

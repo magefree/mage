@@ -35,6 +35,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -48,7 +49,9 @@ public class BurstLightning extends CardImpl<BurstLightning> {
         super(ownerId, 119, "Burst Lightning", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");
         this.expansionSetCode = "ZEN";
         this.color.setRed(true);
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{4}"));
+
+        this.addAbility(new KickerAbility(new KickerManaCost("{4}")));
+
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),
                 new DamageTargetEffect(2), KickedCondition.getInstance(), "{this} deals 2 damage to target creature or player. If {this} was kicked, it deals 4 damage to that creature or player instead"));

@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -54,7 +55,7 @@ public class OrimsChant extends CardImpl<OrimsChant> {
         this.color.setWhite(true);
 
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{W}")));
 
         // Target player can't cast spells this turn.
         this.getSpellAbility().addTarget(new TargetPlayer());

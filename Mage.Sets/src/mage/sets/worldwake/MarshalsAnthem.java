@@ -27,31 +27,28 @@
  */
 package mage.sets.worldwake;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
-import mage.abilities.common.EmptyEffect;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.costs.mana.MultikickerManaCost;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.dynamicvalue.common.MultikickerCount;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.keyword.MultikickerAbility;
-import mage.cards.Card;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -61,11 +58,12 @@ import java.util.UUID;
 public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
+    private static final FilterCard filterCard = new FilterCard("creature card in your graveyard");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filterCard.add(new CardTypePredicate(CardType.CREATURE));
     }
-    protected static final String rule = "return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked";
 
     public MarshalsAnthem(UUID ownerId) {
         super(ownerId, 15, "Marshal's Anthem", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}{W}");
@@ -74,15 +72,30 @@ public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
         this.color.setWhite(true);
 
         // Multikicker {1}{W}
-        MultikickerAbility ability = new MultikickerAbility(new EmptyEffect(rule), false);
-        ability.addManaCost(new ManaCostsImpl("{1}{W}"));
-        this.addAbility(ability);
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}{W}")));
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, false)));
 
         // When Marshal's Anthem enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times Marshal's Anthem was kicked.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new MarshalsAnthemEffect()));
+
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), false),
+                KickedCondition.getInstance(),
+                "When {this} enters the battlefield, return up to X target creature cards from your graveyard to the battlefield, where X is the number of times {this} was kicked.");
+        this.addAbility(ability);
+
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof ConditionalTriggeredAbility) {
+            ability.getTargets().clear();
+            int numbTargets = new MultikickerCount().calculate(game, ability);
+            if (numbTargets > 0) {
+                ability.addTarget(new TargetCardInYourGraveyard(0, numbTargets, filterCard));
+            }
+        }
     }
 
     public MarshalsAnthem(final MarshalsAnthem card) {
@@ -92,53 +105,5 @@ public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
     @Override
     public MarshalsAnthem copy() {
         return new MarshalsAnthem(this);
-    }
-}
-
-class MarshalsAnthemEffect extends OneShotEffect<MarshalsAnthemEffect> {
-
-    public MarshalsAnthemEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
-        this.staticText = "return up to X target creature cards from your graveyard to the battlefield, where X is the number of times {this} was kicked";
-    }
-
-    public MarshalsAnthemEffect(final MarshalsAnthemEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MarshalsAnthemEffect copy() {
-        return new MarshalsAnthemEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterCard filter = new FilterCard("creature card in your graveyard");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        Player you = game.getPlayer(source.getControllerId());
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            for (Ability ability : permanent.getAbilities()) {
-                if (ability instanceof MultikickerAbility) {
-                    int count = Math.min(you.getGraveyard().size(), ((MultikickerAbility) ability).getActivateCount());
-                    TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, count, filter);
-                    if (you != null) {
-                        if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
-                            if (!target.getTargets().isEmpty()) {
-                                List<UUID> targets = target.getTargets();
-                                for (UUID targetId : targets) {
-                                    Card card = game.getCard(targetId);
-                                    if (card != null) {
-                                        card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), you.getId());
-                                    }
-                                }
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
     }
 }

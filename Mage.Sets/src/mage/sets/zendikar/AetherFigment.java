@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
 import java.util.UUID;
+import mage.abilities.keyword.KickerAbility;
 
 /**
  * @author nantuko, BetaSteward_at_googlemail.com
@@ -62,7 +63,7 @@ public class AetherFigment extends CardImpl<AetherFigment> {
         this.addAbility(new UnblockableAbility());
 
         // Kicker {3}
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{3}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{3}")));
 
         // If AEther Figment was kicked, it enters the battlefield with two +1/+1 counters on it
         Ability ability = new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), KickedCondition.getInstance(), ""), staticText);

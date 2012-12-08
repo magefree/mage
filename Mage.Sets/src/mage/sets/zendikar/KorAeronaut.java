@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +57,9 @@ public class KorAeronaut extends CardImpl<KorAeronaut> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{1}{W}"));
+        
+        this.addAbility(new KickerAbility(new KickerManaCost("{1}{W}")));
+
 
         this.addAbility(FlyingAbility.getInstance());
 

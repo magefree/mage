@@ -30,15 +30,13 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.ColoredManaSymbol;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.WolfToken;
 
@@ -57,7 +55,7 @@ public class WolfbriarElemental extends CardImpl<WolfbriarElemental> {
         this.toughness = new MageInt(4);
 
         // Multikicker (You may pay an additional {G} any number of times as you cast this spell.)
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{G}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{G}")));
 
         // When Wolfbriar Elemental enters the battlefield, put a 2/2 green Wolf creature token onto the battlefield for each time it was kicked.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WolfToken(), new MultikickerCount())));

@@ -29,15 +29,16 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -55,7 +56,14 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
         this.color.setBlack(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{W}{W}"));
+
+        // Kicker (You may pay an additional as you cast this spell.)
+        this.addAbility(new KickerAbility(new KickerManaCost("{W}{W}")));
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // When Desolation Angel enters the battlefield, destroy all lands you control. If it was kicked, destroy all lands instead.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DesolationAngelEntersBattlefieldEffect()));
     }
 
@@ -71,7 +79,7 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
 
 class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAngelEntersBattlefieldEffect> {
     DesolationAngelEntersBattlefieldEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "destroy all lands you control. If it was kicked, destroy all lands instead";
     }
 

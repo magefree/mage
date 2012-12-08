@@ -41,6 +41,7 @@ import mage.target.TargetPlayer;
 
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.KickerAbility;
 
 /**
  *
@@ -57,7 +58,8 @@ public class MarshCasualties extends CardImpl<MarshCasualties> {
         this.color.setBlack(true);
 
         // Kicker {3}
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{3}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{3}")));
+
         // Creatures target player controls get -1/-1 until end of turn. If Marsh Casualties was kicked, those creatures get -2/-2 until end of turn instead.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new MarshCasualtiesEffect(-2, -2),

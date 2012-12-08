@@ -40,6 +40,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -57,10 +58,11 @@ public class BoldDefense extends CardImpl<BoldDefense> {
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
 
+        this.addAbility(new KickerAbility(new KickerManaCost("{3}{W}")));
+
         DynamicValue dn = new BoldDefensePTCount();
         this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Duration.EndOfTurn));
 
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{3}{W}"));
 
         ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false);
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText));

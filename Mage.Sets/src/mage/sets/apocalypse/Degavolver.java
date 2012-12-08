@@ -44,6 +44,7 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -63,9 +64,10 @@ public class Degavolver extends CardImpl<Degavolver> {
 
          // Kicker {1}{B} and/or {R} (You may pay an additional {1}{B} and/or {R} as you cast this spell.)
         KickerManaCost kicker1 = new KickerManaCost("{1}{B}");
-        this.getSpellAbility().addOptionalCost(kicker1);
         KickerManaCost kicker2 = new KickerManaCost("{R}");
-        this.getSpellAbility().addOptionalCost(kicker2);
+        KickerAbility kickerAbility = new KickerAbility(kicker1);
+        kickerAbility.addKickerManaCost(kicker2);
+        this.addAbility(kickerAbility);
 
         // If Degavolver was kicked with its {1}{B} kicker, it enters the battlefield with two +1/+1 counters on it and with "Pay 3 life: Regenerate Degavolver."
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(

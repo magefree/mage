@@ -37,6 +37,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +55,7 @@ public class VampiresBite extends CardImpl<VampiresBite> {
         this.color.setBlack(true);
 
         // Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{2}{B}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{2}{B}")));
 
         // Target creature gets +3/+0 until end of turn. If Vampire's Bite was kicked, that creature gains lifelink until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());

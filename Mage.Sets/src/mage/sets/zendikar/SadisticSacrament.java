@@ -37,6 +37,7 @@ import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -60,7 +61,8 @@ public class SadisticSacrament extends CardImpl<SadisticSacrament> {
         this.color.setBlack(true);
 
         // Kicker {7}
-        this.getSpellAbility().addOptionalCost(new KickerManaCost("{7}"));
+        this.addAbility(new KickerAbility(new KickerManaCost("{7}")));
+
         // Search target player's library for up to three cards, exile them, then that player shuffles his or her library.
         // If Sadistic Sacrament was kicked, instead search that player's library for up to fifteen cards, exile them, then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
