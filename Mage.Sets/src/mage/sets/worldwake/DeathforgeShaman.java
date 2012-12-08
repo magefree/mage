@@ -34,11 +34,11 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.MultikickerAbility;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -61,7 +61,7 @@ public class DeathforgeShaman extends CardImpl<DeathforgeShaman> {
         this.toughness = new MageInt(3);
 
         // Multikicker {R}
-        this.addAbility(new MultikickerAbility(new ManaCostsImpl("{R}")));
+        this.addAbility(new KickerAbility(new MultikickerManaCost("{R}")));
         
         // When Deathforge Shaman enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DeathforgeShamanEffect());
