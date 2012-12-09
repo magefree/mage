@@ -46,7 +46,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -149,9 +148,6 @@ class RumblingAftershocksDealDamageEffect extends OneShotEffect<RumblingAftersho
         Player player = game.getPlayer(source.getControllerId());
         Integer damageAmount = (Integer) this.getValue("damageAmount");
         if (player != null && damageAmount.intValue() > 0) {
-//            Target target = new TargetCreatureOrPlayer(true);
-//            player.chooseTarget(Outcome.Damage, target, source, game);
-
             Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
             if (targetPlayer != null) {
                targetPlayer.damage(damageAmount.intValue(), source.getSourceId(), game, false, true);
