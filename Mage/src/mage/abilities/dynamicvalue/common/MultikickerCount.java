@@ -29,8 +29,6 @@ package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
 import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.mana.KickerManaCost;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
@@ -50,21 +48,13 @@ public class MultikickerCount implements DynamicValue {
         int count = 0;
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            KickerAbility kickerAbility = null;
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    kickerAbility = (KickerAbility) ability;
+                    count += ((KickerAbility) ability).getKickedCounter();
                 }
             }
-            if (kickerAbility != null) {
-                for (OptionalAdditionalCost cost: kickerAbility.getKickerCosts()) {
-                    count = cost.getActivateCount();
-                    break;
-                }
-            }
-            return count;
         }
-        return 0;
+        return count;
     }
 
     @Override

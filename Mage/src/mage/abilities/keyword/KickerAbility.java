@@ -70,6 +70,23 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
         }
     }
 
+    public int getKickedCounter() {
+        int counter = 0;
+        for (OptionalAdditionalCost cost: kickerCosts) {
+            counter += cost.getActivateCount();
+        }
+        return counter;
+    }
+
+    public boolean isKicked() {
+        for (OptionalAdditionalCost cost: kickerCosts) {
+            if(cost.isActivated()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<OptionalAdditionalCost> getKickerCosts () {
         return kickerCosts;
     }
