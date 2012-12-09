@@ -46,9 +46,15 @@ import mage.target.common.TargetCardInHand;
 public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
     
     List<Card> cards = new ArrayList<Card>();
+    protected boolean randomDiscard;
 
     public DiscardTargetCost(TargetCardInHand target) {
+        this(target, false);
+    }
+    
+    public DiscardTargetCost(TargetCardInHand target, boolean randomDiscard) {
         this.addTarget(target);
+        this.randomDiscard = randomDiscard;
         this.text = "Discard " + target.getTargetName();
     }
 
@@ -57,19 +63,32 @@ public class DiscardTargetCost extends CostImpl<DiscardTargetCost> {
         for (Card card: cost.cards) {
             this.cards.add(card.copy());
         }
+        this.randomDiscard = cost.randomDiscard;
     }
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
-            Player player = game.getPlayer(controllerId);
-            for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = player.getHand().get(targetId, game);
-                if (card == null) {
-                    return false;
+        Player player = game.getPlayer(controllerId);
+        if (randomDiscard) {
+            int amount = this.getTargets().get(0).getMaxNumberOfTargets();
+            int maxAmount = Math.min(amount, player.getHand().size());
+            for (int i = 0; i < maxAmount; i++) {
+                Card card = player.getHand().getRandom(game);
+                if (card != null) {
+                    paid |= player.discard(card, null, game);
                 }
-                this.cards.add(card.copy());
-                paid |= player.discard(card, null, game);
+            }
+        } else {
+            if (targets.choose(Outcome.Discard, controllerId, sourceId, game)) {
+            
+                for (UUID targetId: targets.get(0).getTargets()) {
+                    Card card = player.getHand().get(targetId, game);
+                    if (card == null) {
+                        return false;
+                    }
+                    this.cards.add(card.copy());
+                    paid |= player.discard(card, null, game);
+                }
             }
         }
         return paid;

@@ -40,7 +40,6 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
-import mage.abilities.costs.mana.BuybackManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
@@ -56,29 +55,44 @@ import mage.players.Player;
 
 public class BuybackAbility extends StaticAbility<BuybackAbility> implements OptionalAdditionalSourceCosts {
 
+    private static final String keywordTextMana = "Buyback ";
+    private static final String keywordTextCost = "Buyback-";
+    private static final String reminderTextCost = "<i>(You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
+    private static final String reminderTextMana = "<i>(You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
     protected List<OptionalAdditionalCost> buybackCosts = new LinkedList<OptionalAdditionalCost>();
 
     public BuybackAbility(String manaString) {
        super(Zone.STACK, new BuybackEffect());
-       this.buybackCosts.add(new BuybackManaCost(manaString));
+       OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextMana, reminderTextMana, new ManaCostsImpl(manaString));
+       buybackCosts.add(buybackCost);
        setRuleAtTheTop(true);
     }
     
     public BuybackAbility(Cost cost) {
        super(Zone.STACK, new BuybackEffect());
-       OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl("Buyback", "(You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)", cost);
-       this.buybackCosts.add(buybackCost);
+       OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextCost, reminderTextCost, cost);
+       buybackCosts.add(buybackCost);
        setRuleAtTheTop(true);
     }
 
     public BuybackAbility(final BuybackAbility ability) {
        super(ability);
-       this.buybackCosts = ability.buybackCosts;
+       buybackCosts = ability.buybackCosts;
     }
 
     @Override
     public BuybackAbility copy() {
        return new BuybackAbility(this);
+    }
+
+    @Override
+    public void addCost(Cost cost) {
+        if (buybackCosts.size() > 0) {
+            ((Costs) buybackCosts.get(0)).add(cost);
+        } else {
+            OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextCost, reminderTextCost, cost);
+            buybackCosts.add(buybackCost);
+        }
     }
 
     public boolean isActivated() {
@@ -143,35 +157,47 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
     @Override
     public String getRule() {
        StringBuilder sb = new StringBuilder();
+       String reminderText = "";
        int numberBuyback = 0;
-       String remarkText = "";
        for (OptionalAdditionalCost buybackCost: buybackCosts) {
            if (numberBuyback == 0) {
                sb.append(buybackCost.getText(false));
-               remarkText = buybackCost.getReminderText();
+               reminderText = buybackCost.getReminderText();
            } else {
-               sb.append(" and/or ").append(buybackCost.getText(true));
+               sb.append(", ").append(buybackCost.getText(true));
            }
            ++numberBuyback;
        }
-       if (numberBuyback == 1) {
-            sb.append(" ").append(remarkText);
-       }
+       sb.append(" ").append(reminderText);
 
        return sb.toString();
     }
 
     @Override
     public String getCastMessageSuffix() {
-        StringBuilder sb = new StringBuilder();
-        int position = 0;
-        for (OptionalAdditionalCost cost : buybackCosts) {
-            if (cost.isActivated()) {
-                sb.append(cost.getCastSuffixMessage(position));
-                ++position;
-            }
+        String message = "";
+        if (isActivated()) {
+            message = " with " + keywordTextMana;
         }
-        return sb.toString();
+        return message;
+    }
+
+    public String getReminderText() {
+        String costsReminderText = reminderTextCost;
+        StringBuilder costsText = new StringBuilder();
+        int costCounter = 0;
+        for (OptionalAdditionalCost cost : buybackCosts) {
+            if (costCounter > 0) {
+                costsText.append(" and ");
+            } else {
+                if (((Costs)cost).get(0) instanceof ManaCostsImpl) {
+                    costsReminderText = reminderTextMana;
+                }
+            }
+            costsText.append(cost.getText(true));
+            ++costCounter;
+        }
+        return costsReminderText.replace("{cost}", costsText);
     }
 }
 

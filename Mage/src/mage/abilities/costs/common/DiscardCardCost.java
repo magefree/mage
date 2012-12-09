@@ -27,6 +27,7 @@
  */
 package mage.abilities.costs.common;
 
+import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -36,7 +37,11 @@ import mage.target.common.TargetCardInHand;
 public class DiscardCardCost extends DiscardTargetCost {
 
     public DiscardCardCost() {
-        super(new TargetCardInHand());
+        this(false);
+    }
+
+    public DiscardCardCost(boolean randomDiscard) {
+        super(new TargetCardInHand(new FilterCard("a Card at random")), randomDiscard);
     }
 
     public DiscardCardCost(DiscardCardCost cost) {

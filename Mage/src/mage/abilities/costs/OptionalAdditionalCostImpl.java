@@ -28,6 +28,8 @@
 
 package mage.abilities.costs;
 
+import mage.abilities.costs.mana.ManaCostsImpl;
+
 /**
  *
  * @author LevelX2
@@ -103,7 +105,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
      */
     @Override
     public String getCastSuffixMessage(int position) {
-        return "";
+        return " with " + name;
     }
 
 
