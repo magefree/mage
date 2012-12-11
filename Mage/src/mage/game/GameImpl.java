@@ -789,7 +789,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void emptyManaPools() {
         if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOLS, null, null, null))) {
             for (Player player: getPlayers().values()) {
-                player.getManaPool().emptyPool();
+                if (!replaceEvent(new GameEvent(GameEvent.EventType.EMPTY_MANA_POOL, player.getId(), null, player.getId()))) {
+                    player.getManaPool().emptyPool();
+                }
             }
         }
     }

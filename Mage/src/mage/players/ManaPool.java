@@ -38,6 +38,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -127,6 +128,24 @@ public class ManaPool implements Serializable {
 
     public int getColorless() {
         return get(ManaType.COLORLESS);
+    }
+
+    public int emptyManaType(List<ManaType> manaTypeArray) {
+        int total = count();
+        Iterator<ManaPoolItem> it = manaItems.iterator();
+        while (it.hasNext()) {
+            ManaPoolItem item = it.next();
+            for (ManaType manaType: manaTypeArray) {
+                if (item.get(manaType) > 0) {
+                    total += item.get(manaType);
+                    item.remove(manaType);
+                }
+            }
+            if (item.count() == 0) {
+                it.remove();
+            }
+        }
+        return total;
     }
 
     public int emptyPool() {
