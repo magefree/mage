@@ -53,7 +53,7 @@ public class FlameJab extends CardImpl<FlameJab> {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{W}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{R}"), Constants.TimingRule.SORCERY));
     }
 
     public FlameJab(final FlameJab card) {
