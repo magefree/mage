@@ -21,6 +21,7 @@ Persist|new|
 Plainswalk|new|
 Rebound|new|
 Storm|new|
+Sunburst|new|
 Swampwalk|new|
 Totem armor|new|
 Unblockable|new|
