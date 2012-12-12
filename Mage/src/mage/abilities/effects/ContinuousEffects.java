@@ -28,6 +28,8 @@
 
 package mage.abilities.effects;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -39,15 +41,13 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
-import java.io.Serializable;
-import java.util.*;
-
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffects implements Serializable {
+
+    private Date lastSetTimestamp;
 
     //transient Continuous effects
     private ContinuousEffectsList<ContinuousEffect> layeredEffects = new ContinuousEffectsList<ContinuousEffect>();
@@ -90,6 +90,7 @@ public class ContinuousEffects implements Serializable {
             sources.put(entry.getKey(), entry.getValue());
         }
         collectAllEffects();
+        lastSetTimestamp = effect.lastSetTimestamp;
     }
 
     private void collectAllEffects() {
@@ -116,18 +117,24 @@ public class ContinuousEffects implements Serializable {
 
     public Ability getAbility(UUID effectId) {
         Ability ability = layeredEffects.getAbility(effectId);
-        if (ability == null)
+        if (ability == null) {
             ability = replacementEffects.getAbility(effectId);
-        if (ability == null)
+        }
+        if (ability == null) {
             ability = preventionEffects.getAbility(effectId);
-        if (ability == null)
+        }
+        if (ability == null) {
             ability = requirementEffects.getAbility(effectId);
-        if (ability == null)
+        }
+        if (ability == null) {
             ability = restrictionEffects.getAbility(effectId);
-        if (ability == null)
+        }
+        if (ability == null) {
             ability = asThoughEffects.getAbility(effectId);
-        if (ability == null)
+        }
+        if (ability == null) {
             ability = costModificationEffects.getAbility(effectId);
+        }
         return ability;
     }
 
@@ -159,8 +166,9 @@ public class ContinuousEffects implements Serializable {
                 case WhileOnStack:
                 case WhileInGraveyard:
                     Ability ability = layeredEffects.getAbility(effect.getId());
-                    if (ability.isInUseableZone(game, null, false))
+                    if (ability.isInUseableZone(game, null, false)) {
                         layerEffects.add(effect);
+                    }
                     break;
                 default:
                     layerEffects.add(effect);
@@ -183,18 +191,27 @@ public class ContinuousEffects implements Serializable {
         for (ContinuousEffect continuousEffect : layerEffects) {
             // check if it's new, then set timestamp
             if (!previous.contains(continuousEffect)) {
-                continuousEffect.setTimestamp();
+                setUniqueTimesstamp(continuousEffect);
             }
         }
         previous.clear();
         previous.addAll(layerEffects);
     }
 
+    public void setUniqueTimesstamp(ContinuousEffect effect) {
+        do {
+            effect.setTimestamp();
+        }
+        while (effect.getTimestamp().equals(lastSetTimestamp)); // prevent to set the same timestamp so logical order is saved
+        lastSetTimestamp = effect.getTimestamp();
+    }
+
     private List<ContinuousEffect> filterLayeredEffects(List<ContinuousEffect> effects, Layer layer) {
         List<ContinuousEffect> layerEffects = new ArrayList<ContinuousEffect>();
         for (ContinuousEffect effect: effects) {
-            if (effect.hasLayer(layer))
+            if (effect.hasLayer(layer)) {
                 layerEffects.add(effect);
+            }
         }
         return layerEffects;
     }
@@ -204,8 +221,9 @@ public class ContinuousEffects implements Serializable {
         for (RequirementEffect effect: requirementEffects) {
             Ability ability = requirementEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
-                if (effect.applies(permanent, ability, game))
+                if (effect.applies(permanent, ability, game)) {
                     effects.add(effect);
+                }
             }
         }
         return effects;
@@ -216,8 +234,9 @@ public class ContinuousEffects implements Serializable {
         for (RestrictionEffect effect: restrictionEffects) {
             Ability ability = restrictionEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
-                if (effect.applies(permanent, ability, game))
+                if (effect.applies(permanent, ability, game)) {
                     effects.add(effect);
+                }
             }
         }
         return effects;
@@ -231,10 +250,12 @@ public class ContinuousEffects implements Serializable {
      */
     private List<ReplacementEffect> getApplicableReplacementEffects(GameEvent event, Game game) {
         List<ReplacementEffect> replaceEffects = new ArrayList<ReplacementEffect>();
-        if (planeswalkerRedirectionEffect.applies(event, null, game))
+        if (planeswalkerRedirectionEffect.applies(event, null, game)) {
             replaceEffects.add(planeswalkerRedirectionEffect);
-        if(auraReplacementEffect.applies(event, null, game))
+        }
+        if(auraReplacementEffect.applies(event, null, game)){
             replaceEffects.add(auraReplacementEffect);
+        }
         //get all applicable transient Replacement effects
         for (ReplacementEffect effect: replacementEffects) {
             Ability ability = replacementEffects.getAbility(effect.getId());
@@ -339,11 +360,13 @@ public class ContinuousEffects implements Serializable {
             List<ReplacementEffect> rEffects = getApplicableReplacementEffects(event, game);
             for (Iterator<ReplacementEffect> i = rEffects.iterator(); i.hasNext();) {
                 ReplacementEffect entry = i.next();
-                if (consumed.contains(entry.getId()))
+                if (consumed.contains(entry.getId())) {
                     i.remove();
+                }
             }
-            if (rEffects.isEmpty())
+            if (rEffects.isEmpty()) {
                 break;
+            }
             int index;
             if (rEffects.size() == 1) {
                 index = 0;
@@ -355,8 +378,9 @@ public class ContinuousEffects implements Serializable {
             }
             ReplacementEffect rEffect = rEffects.get(index);
             caught = rEffect.replaceEvent(event, this.getAbility(rEffect.getId()), game);
-            if (caught)
+            if (caught) {
                 break;
+            }
             consumed.add(rEffect.getId());
             game.applyEffects();
         } while (true);
