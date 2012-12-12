@@ -62,7 +62,7 @@ public class GnatMiser extends CardImpl<GnatMiser> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Your maximum hand size is increased by two.
+        // Each opponent's maximum hand size is reduced by one.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(1, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
