@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSpellEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -53,7 +54,7 @@ public class PraetorsCounsel extends CardImpl<PraetorsCounsel> {
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new PraetorsCounselEffect());
         this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
-        this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, false));
+        this.getSpellAbility().addEffect(new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
     }
 
     public PraetorsCounsel(final PraetorsCounsel card) {

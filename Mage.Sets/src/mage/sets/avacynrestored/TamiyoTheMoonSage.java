@@ -27,7 +27,12 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +45,7 @@ import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -54,7 +60,6 @@ import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
-import java.util.UUID;
 
 /**
  *
@@ -190,7 +195,7 @@ class TamiyoTheMoonSageEffect extends OneShotEffect<TamiyoTheMoonSageEffect> {
 class TamiyoTheMoonSageEmblem extends Emblem {
 
     public TamiyoTheMoonSageEmblem() {
-        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, false));
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.EndOfGame, HandSizeModification.SET));
         this.getAbilities().add(ability);
         this.getAbilities().add(new TamiyoTheMoonSageTriggeredAbility());
     }

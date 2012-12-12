@@ -30,13 +30,17 @@ package mage.sets.visions;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -52,11 +56,11 @@ public class AnvilOfBogardan extends CardImpl<AnvilOfBogardan> {
         this.expansionSetCode = "VIS";
 
         // Players have no maximum hand size.
-        Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Constants.Duration.WhileOnBattlefield, false, true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET, TargetController.ANY);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each player's draw step, that player draws an additional card, then discards a card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(Constants.Zone.BATTLEFIELD, new AnvilOfBogardanEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(Zone.BATTLEFIELD, new AnvilOfBogardanEffect(), TargetController.ANY, false));
     }
     
     public AnvilOfBogardan(final AnvilOfBogardan card) {

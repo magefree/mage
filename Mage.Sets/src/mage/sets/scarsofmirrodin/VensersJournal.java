@@ -28,16 +28,18 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.cards.CardImpl;
 
 /**
@@ -51,11 +53,11 @@ public class VensersJournal extends CardImpl<VensersJournal> {
         this.expansionSetCode = "SOM";
 
         // You have no maximum hand size.
-        Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Constants.Duration.WhileOnBattlefield, false);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        Effect effect = new MaximumHandSizeControllerEffect(Integer.MAX_VALUE, Duration.WhileOnBattlefield, HandSizeModification.SET);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of your upkeep, you gain 1 life for each card in your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new CardsInControllerHandCount()), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(new CardsInControllerHandCount()), TargetController.YOU, false));
     }
 
     public VensersJournal(final VensersJournal card) {

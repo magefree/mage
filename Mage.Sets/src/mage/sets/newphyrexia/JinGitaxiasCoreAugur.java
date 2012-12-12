@@ -28,20 +28,19 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -59,9 +58,15 @@ public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(4);
 
+        // Flash
         this.addAbility(FlashAbility.getInstance());
+
+        // At the beginning of your end step, draw seven cards.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardControllerEffect(7), false));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new JinGitaxiasCoreAugurEffect()));
+
+        // Each opponent's maximum hand size is reduced by seven.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+                new MaximumHandSizeControllerEffect(7, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 
     public JinGitaxiasCoreAugur(final JinGitaxiasCoreAugur card) {
@@ -71,32 +76,5 @@ public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
     @Override
     public JinGitaxiasCoreAugur copy() {
         return new JinGitaxiasCoreAugur(this);
-    }
-}
-
-class JinGitaxiasCoreAugurEffect extends ContinuousEffectImpl<JinGitaxiasCoreAugurEffect> {
-    JinGitaxiasCoreAugurEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Detriment);
-        staticText = "Each opponent's maximum hand size is reduced by seven";
-    }
-
-    JinGitaxiasCoreAugurEffect(final JinGitaxiasCoreAugurEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            Player player = game.getPlayer(opponentId);
-            if (player != null) {
-                player.setMaxHandSize(player.getMaxHandSize() - 7);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public JinGitaxiasCoreAugurEffect copy() {
-        return new JinGitaxiasCoreAugurEffect(this);
     }
 }

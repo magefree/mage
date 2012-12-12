@@ -27,99 +27,147 @@
  */
 package mage.abilities.effects.common.continious;
 
+import java.util.UUID;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
- * @author nantuko
+ * @author nantuko, LevelX2
  */
 public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl<MaximumHandSizeControllerEffect> {
 
+    public static enum HandSizeModification { SET, INCREASE, REDUCE };
+
     protected int handSize;
-    protected boolean reduce;
-    protected boolean allPlayers;
+    protected HandSizeModification handSizeModification;
+    protected TargetController targetController;
 
     /**
      * @param handSize Maximum hand size to set or to reduce by
      * @param duration Effect duration
-     * @param reduce If true, the hand size will be reduced related to current
-     * value, otherwise it will be set.
+     * @param handSizeModification SET, INCREASE, REDUCE
+     * 
      */
-    public MaximumHandSizeControllerEffect(int handSize, Duration duration, boolean reduce) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        this.handSize = handSize;
-        this.reduce = reduce;
-        setText();
+    public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification) {
+        this(handSize, duration, handSizeModification, TargetController.YOU);
     }
 
-    public MaximumHandSizeControllerEffect(int handSize, Duration duration, boolean reduce, boolean allPlayers) {
-        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
+    public MaximumHandSizeControllerEffect(int handSize, Duration duration, HandSizeModification handSizeModification, TargetController targetController) {
+        super(duration, Layer.PlayerEffects, SubLayer.NA, defineOutcome(handSizeModification,  targetController));
         this.handSize = handSize;
-        this.reduce = reduce;
-        this.allPlayers = allPlayers;
+        this.handSizeModification = handSizeModification;
+        this.targetController = targetController;
         setText();
     }
 
     public MaximumHandSizeControllerEffect(final MaximumHandSizeControllerEffect effect) {
         super(effect);
         this.handSize = effect.handSize;
-        this.reduce = effect.reduce;
-        this.allPlayers = effect.allPlayers;
+        this.handSizeModification = effect.handSizeModification;
+        this.targetController = effect.targetController;
     }
 
     @Override
     public MaximumHandSizeControllerEffect copy() {
         return new MaximumHandSizeControllerEffect(this);
     }
+    
+    protected static Outcome defineOutcome(HandSizeModification handSizeModification, TargetController targetController) {
+        Outcome newOutcome = Outcome.Benefit;
+        if ((targetController.equals(TargetController.YOU) || targetController.equals(TargetController.ANY))
+                && handSizeModification.equals(HandSizeModification.REDUCE)) {
+            newOutcome = Outcome.Detriment;
+        }
+        return newOutcome;
+    }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (allPlayers) {
-            for (Player playerid : game.getPlayers().values()) {
-                if (playerid != null) {
-                    if (reduce) {
-                        player.setMaxHandSize(player.getMaxHandSize() - handSize);
-                    } else {
-                        player.setMaxHandSize(handSize);
-                    }
+        Player controller = game.getPlayer(source.getControllerId());
+        switch(targetController) {
+            case ANY:
+                for (UUID playerId: controller.getInRange()) {
+                    setHandSize(game, playerId);
                 }
-            }
-            return true;
-        }
-        if (!allPlayers && player != null) {
-            if (reduce) {
-                player.setMaxHandSize(player.getMaxHandSize() - handSize);
-            } else {
-                player.setMaxHandSize(handSize);
-            }
-            return true;
+                break;
+            case OPPONENT:
+                for (UUID playerId: game.getOpponents(source.getControllerId())) {
+                    setHandSize(game, playerId);
+                }
+                break;
+            case YOU:
+                setHandSize(game, source.getControllerId());
+                break;
+            default:
+                throw new UnsupportedOperationException("Not supported yet.");
         }
         return true;
     }
 
-    private void setText() {
-        if (allPlayers && handSize == Integer.MAX_VALUE) {
-            staticText = "All players have no maximum hand size";
-        }
-        if (!allPlayers && handSize == Integer.MAX_VALUE) {
-            staticText = "You have no maximum hand size";
-        }
-        if (!allPlayers && staticText == null) {
-            StringBuilder sb = new StringBuilder("Your maximum hand size is ");
-            if (reduce) {
-                sb.append("reduced by ");
-                sb.append(Integer.toString(handSize));
-            } else {
-                sb.append(Integer.toString(handSize));
+    private void setHandSize(Game game, UUID playerId) {
+        Player player = game.getPlayer(playerId);
+        if (player != null) {
+            switch(handSizeModification) {
+                case SET:
+                    player.setMaxHandSize(handSize);
+                    break;
+                case INCREASE:
+                    player.setMaxHandSize(player.getMaxHandSize() + handSize);
+                    break;
+                case REDUCE:
+                    player.setMaxHandSize(player.getMaxHandSize() - handSize);
+                    break;
             }
-            staticText = sb.toString();
         }
     }
+
+    private void setText() {
+        StringBuilder sb = new StringBuilder();
+        switch(targetController) {
+            case ANY:
+                if (handSize == Integer.MAX_VALUE) {
+                    sb.append("All players have no ");
+                } else {
+                    sb.append("All players ");
+                }
+                break;
+            case OPPONENT:
+                if (handSize == Integer.MAX_VALUE) {
+                    sb.append("Each opponent has no ");
+                } else {
+                    sb.append("Each opponent's ");
+                }
+                break;
+            case YOU:
+                if (handSize == Integer.MAX_VALUE) {
+                    sb.append("You have no ");
+                } else {
+                    sb.append("Your ");
+                }
+                break;
+        }
+        sb.append("maximum hand size");
+        if (handSizeModification.equals(HandSizeModification.INCREASE)){
+            sb.append(" is increased by ");
+        } else if (handSizeModification.equals(HandSizeModification.REDUCE)){
+            sb.append(" is reduced by ");
+        } else if (handSize != Integer.MAX_VALUE) {
+            sb.append(" is ");
+        }
+        if (handSize != Integer.MAX_VALUE) {
+            sb.append(handSize);
+        }
+        if (duration == Duration.EndOfGame) {
+            sb.append(" for the rest of the game");
+        }
+        staticText = sb.toString();
+    }
+
 }
