@@ -27,22 +27,20 @@
  */
 package mage.sets.magic2010;
 
-import java.util.LinkedList;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continious.LoseAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -84,7 +82,7 @@ class MagebaneArmorAbility extends StaticAbility<MagebaneArmorAbility> {
 
     public MagebaneArmorAbility() {
         super(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 4));
-        this.addEffect(new MagebaneArmorEffect());
+        this.addEffect(new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT));
     }
 
     public MagebaneArmorAbility(MagebaneArmorAbility ability) {
@@ -99,41 +97,6 @@ class MagebaneArmorAbility extends StaticAbility<MagebaneArmorAbility> {
     @Override
     public String getRule() {
         return "Equipped creature gets +2/+4 and loses flying.";
-    }
-}
-
-class MagebaneArmorEffect extends ContinuousEffectImpl {
-
-    public MagebaneArmorEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
-    }
-
-    public MagebaneArmorEffect(final MagebaneArmorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public MagebaneArmorEffect copy() {
-        return new MagebaneArmorEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = false;
-        Permanent equipment = game.getPermanent(source.getSourceId());
-        if (equipment != null && equipment.getAttachedTo() != null) {
-            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-            if (permanent != null) {
-                LinkedList<Ability> abilities = new LinkedList(permanent.getAbilities());
-                for (Ability ability : abilities) {
-                    if (ability == FlyingAbility.getInstance()) {
-                        permanent.getAbilities().remove(ability);
-                        result = true;
-                    }
-                }
-            }
-        }
-        return result;
     }
 }
 
