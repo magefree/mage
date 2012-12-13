@@ -41,7 +41,7 @@ public class AddExtraTurnControllerEffect extends OneShotEffect<AddExtraTurnCont
 
     public AddExtraTurnControllerEffect() {
         super(Constants.Outcome.ExtraTurn);
-        staticText = "Target player takes an extra turn after this one";
+        staticText = "Take an extra turn after this one";
     }
 
     public AddExtraTurnControllerEffect(final AddExtraTurnControllerEffect effect) {
