@@ -56,7 +56,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
 
     @Override
     public String getRule() {
-        if (text != null && text.isEmpty()) {
+        if (text == null || text.isEmpty()) {
             return ability.getRule();
         }
         return text;

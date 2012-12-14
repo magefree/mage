@@ -40,7 +40,7 @@ import mage.players.Player;
 
 /**
  *
- * @author LevelX
+ * @author LevelX2
  */
 public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerUntapStepEffect> {
 
@@ -82,7 +82,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
         } else {
             sb.append("target");
         }
-        sb.append("player skips his or her next untap step");
+        sb.append(" player skips his or her next untap step");
         return sb.toString();
     }
 }
