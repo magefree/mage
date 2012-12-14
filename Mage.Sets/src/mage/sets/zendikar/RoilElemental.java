@@ -25,48 +25,63 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.eventide;
+package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.common.LandfallAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author jeffwadsworth
  */
-public class CacheRaiders extends CardImpl<CacheRaiders> {
+public class RoilElemental extends CardImpl<RoilElemental> {
 
-    public CacheRaiders(UUID ownerId) {
-        super(ownerId, 18, "Cache Raiders", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
-        this.expansionSetCode = "EVE";
-        this.subtype.add("Merfolk");
-        this.subtype.add("Rogue");
+    public RoilElemental(UUID ownerId) {
+        super(ownerId, 62, "Roil Elemental", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{U}{U}");
+        this.expansionSetCode = "ZEN";
+        this.subtype.add("Elemental");
+
         this.color.setBlue(true);
-        this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);
-        Target target = new TargetControlledPermanent();
-        target.setRequired(true);
-        ability.addTarget(target);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
+
+        String rule = "you may gain control of target creature for as long as you control Roil Elemental";
+
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new CardIdPredicate(this.getId()));
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Constants.Duration.Custom), new ControlsPermanentCondition(filter), rule);
+        Ability ability = new LandfallAbility(Constants.Zone.BATTLEFIELD, effect, true);
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public CacheRaiders(final CacheRaiders card) {
+    public RoilElemental(final RoilElemental card) {
         super(card);
     }
 
     @Override
-    public CacheRaiders copy() {
-        return new CacheRaiders(this);
+    public RoilElemental copy() {
+        return new RoilElemental(this);
     }
 }
