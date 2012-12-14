@@ -32,6 +32,8 @@ import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
@@ -45,13 +47,17 @@ import mage.players.Player;
  */
 public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
-    public CyclingAbility(ManaCosts costs) {
-        super(Zone.HAND, new CycleEffect(), costs);
+    private Cost cost;
+    
+    public CyclingAbility(Cost cost) {
+        super(Zone.HAND, new CycleEffect(), cost);
         this.addCost(new DiscardSourceCost());
+        this.cost = cost;
     }
 
     public CyclingAbility(final CyclingAbility ability) {
         super(ability);
+        this.cost = ability.cost;
     }
 
     @Override
@@ -61,7 +67,14 @@ public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
     @Override
     public String getRule() {
-        return "Cycling " + getManaCostsToPay().getText()+ " <i>(" + super.getRule() + ")</i>";
+        String rule = "";
+        if(cost instanceof ManaCosts){
+            rule = "Cycling " + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+        }
+        else{
+            rule = "Cycling-" + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+        }
+        return rule;
     }
 
 }
