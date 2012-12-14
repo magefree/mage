@@ -34,7 +34,7 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -58,7 +58,7 @@ public class TheTabernacleAtPendrellVale extends CardImpl<TheTabernacleAtPendrel
         this.supertype.add("Legendary");
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
-        Ability ability = new BeginningOfUntapTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), Constants.TargetController.YOU, false);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
 
