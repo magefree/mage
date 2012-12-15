@@ -32,11 +32,10 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -56,7 +55,7 @@ public class ApexHawks extends CardImpl<ApexHawks> {
         this.toughness = new MageInt(2);
 
         // Multikicker (You may pay an additional {1}{W} any number of times as you cast this spell.)
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}{W}")));
+        this.addAbility(new MultikickerAbility("{1}{W}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

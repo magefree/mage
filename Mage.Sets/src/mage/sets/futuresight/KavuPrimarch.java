@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.KickerAbility;
@@ -55,7 +54,7 @@ public class KavuPrimarch extends CardImpl<KavuPrimarch> {
         this.toughness = new MageInt(3);
 
         // Kicker {4} (You may pay an additional {4} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{4}")));
+        this.addAbility(new KickerAbility("{4}"));
 
         // Convoke (Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)
         this.addAbility(new ConvokeAbility());

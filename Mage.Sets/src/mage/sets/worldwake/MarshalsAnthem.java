@@ -36,12 +36,11 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -72,7 +71,7 @@ public class MarshalsAnthem extends CardImpl<MarshalsAnthem> {
         this.color.setWhite(true);
 
         // Multikicker {1}{W}
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}{W}")));
+        this.addAbility(new MultikickerAbility("{1}{W}"));
 
         // Creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, false)));

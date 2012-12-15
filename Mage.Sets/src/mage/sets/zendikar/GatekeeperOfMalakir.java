@@ -33,7 +33,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
@@ -67,7 +66,7 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new KickerAbility(new KickerManaCost("{B}")));
+        this.addAbility(new KickerAbility("{B}"));
 
 
         EntersBattlefieldTriggeredAbility ability =

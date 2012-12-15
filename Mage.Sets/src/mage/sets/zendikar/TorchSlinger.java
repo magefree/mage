@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -57,7 +56,7 @@ public class TorchSlinger extends CardImpl<TorchSlinger> {
         this.toughness = new MageInt(2);
 
         // Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{1}{R}")));
+        this.addAbility(new KickerAbility("{1}{R}"));
 
 
         // When Torch Slinger enters the battlefield, if it was kicked, it deals 2 damage to target creature.

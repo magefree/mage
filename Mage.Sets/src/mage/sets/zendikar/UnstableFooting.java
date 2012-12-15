@@ -35,7 +35,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -58,7 +57,7 @@ public class UnstableFooting extends CardImpl<UnstableFooting> {
         this.color.setRed(true);
 
         // Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{3}{R}")));
+        this.addAbility(new KickerAbility("{3}{R}"));
 
         // Damage can't be prevented this turn. If Unstable Footing was kicked, it deals 5 damage to target player.
         this.getSpellAbility().addEffect(new UnstableFootingEffect());

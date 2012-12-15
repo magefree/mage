@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -51,7 +50,7 @@ public class ConquerorsPledge extends CardImpl<ConquerorsPledge> {
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
 
-        this.addAbility(new KickerAbility(new KickerManaCost("{6}")));
+        this.addAbility(new KickerAbility("{6}"));
 
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new CreateTokenEffect(new KorSoldierToken(), 12),
                 new CreateTokenEffect(new KorSoldierToken(), 6), KickedCondition.getInstance(),

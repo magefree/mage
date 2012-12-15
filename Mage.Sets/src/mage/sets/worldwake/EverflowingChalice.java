@@ -33,11 +33,10 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -57,7 +56,7 @@ public class EverflowingChalice extends CardImpl<EverflowingChalice> {
         this.expansionSetCode = "WWK";
 
         // Multikicker {2} (You may pay an additional {2} any number of times as you cast this spell.)
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{2}")));
+        this.addAbility(new MultikickerAbility("{2}"));
 
         // Everflowing Chalice enters the battlefield with a charge counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(

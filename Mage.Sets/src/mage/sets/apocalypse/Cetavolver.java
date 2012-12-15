@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.KickedCostCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -59,23 +58,21 @@ public class Cetavolver extends CardImpl<Cetavolver> {
         this.toughness = new MageInt(1);
 
         // Kicker {1}{R} and/or {G} (You may pay an additional {1}{R} and/or {G} as you cast this spell.)
-        KickerManaCost kicker1 = new KickerManaCost("{1}{R}");
-        KickerManaCost kicker2 = new KickerManaCost("{G}");
-        KickerAbility kickerAbility = new KickerAbility(kicker1);
-        kickerAbility.addKickerManaCost(kicker2);
+        KickerAbility kickerAbility = new KickerAbility("{1}{R}");
+        kickerAbility.addKickerCost("{G}");
         this.addAbility(kickerAbility);
 
         // If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
-                new KickedCostCondition(kicker1), true, "If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.",
+                new KickedCostCondition("{1}{R}"), true, "If Cetavolver was kicked with its {1}{R} kicker, it enters the battlefield with two +1/+1 counters on it and with first strike.",
                 "{this} enters the battlefield with two +1/+1 counters on it and with first strike");
         ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability1);
 
         // If Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.
         EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition(kicker2), true,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{G}"), true,
                 "If Cetavolver was kicked with its {G} kicker, it enters the battlefield with a +1/+1 counter on it and with trample.",
                 "{this} enters the battlefield with a +1/+1 counter on it and with trample");
         ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield));

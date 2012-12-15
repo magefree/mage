@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -66,7 +65,7 @@ public class OranRiefRecluse extends CardImpl<OranRiefRecluse> {
         this.toughness = new MageInt(3);
 
         // Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{2}{G}")));
+        this.addAbility(new KickerAbility("{2}{G}"));
 
         // Reach (This creature can block creatures with flying.)
         this.addAbility(ReachAbility.getInstance());

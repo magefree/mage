@@ -40,7 +40,6 @@ import mage.abilities.StaticAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -74,7 +73,7 @@ public class Gigantiform extends CardImpl<Gigantiform> {
         this.color.setGreen(true);
 
         // Kicker {4}
-        this.addAbility(new KickerAbility(new KickerManaCost("{4}")));
+        this.addAbility(new KickerAbility("{4}"));
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();

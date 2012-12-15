@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -52,7 +51,7 @@ public class IntoTheRoil extends CardImpl<IntoTheRoil> {
         this.color.setBlue(true);
 
         // Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{1}{U}")));
+        this.addAbility(new KickerAbility("{1}{U}"));
 
         // Return target nonland permanent to its owner's hand. If Into the Roil was kicked, draw a card.
         this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());

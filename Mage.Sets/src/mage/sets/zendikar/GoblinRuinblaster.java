@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -58,7 +57,7 @@ public class GoblinRuinblaster extends CardImpl<GoblinRuinblaster> {
         this.toughness = new MageInt(1);
 
         // Kicker {R} (You may pay an additional {R} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{R}")));
+        this.addAbility(new KickerAbility("{R}"));
 
 
         // Haste

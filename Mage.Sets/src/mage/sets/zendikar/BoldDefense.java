@@ -33,7 +33,6 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.ContinuousEffect;
@@ -58,7 +57,7 @@ public class BoldDefense extends CardImpl<BoldDefense> {
         this.expansionSetCode = "ZEN";
         this.color.setWhite(true);
 
-        this.addAbility(new KickerAbility(new KickerManaCost("{3}{W}")));
+        this.addAbility(new KickerAbility("{3}{W}"));
 
         DynamicValue dn = new BoldDefensePTCount();
         this.getSpellAbility().addEffect(new BoostControlledEffect(dn, dn, Duration.EndOfTurn));

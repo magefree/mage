@@ -35,12 +35,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
@@ -61,7 +60,7 @@ public class VoyagerDrake extends CardImpl<VoyagerDrake> {
         this.toughness = new MageInt(3);
 
         // Multikicker {U}
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{U}")));
+        this.addAbility(new MultikickerAbility("{U}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());

@@ -29,12 +29,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -56,7 +54,7 @@ public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
         this.color.setGreen(true);
 
         // Kicker {G} (You may pay an additional {G} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{G}")));
+        this.addAbility(new KickerAbility("{G}"));
 
         // Target creature can't be the target of spells or abilities your opponents control this turn.
         TargetCreaturePermanent target = new TargetCreaturePermanent();

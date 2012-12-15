@@ -114,8 +114,8 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
-            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
+            game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
+            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>");
         }
         return false;
     }

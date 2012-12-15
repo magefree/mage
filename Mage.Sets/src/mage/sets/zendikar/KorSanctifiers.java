@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -67,7 +66,7 @@ public class KorSanctifiers extends CardImpl<KorSanctifiers> {
         this.toughness = new MageInt(3);
 
         // Kicker {W} (You may pay an additional {W} as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{W}")));
+        this.addAbility(new KickerAbility("{W}"));
 
 
         // When Kor Sanctifiers enters the battlefield, if it was kicked, destroy target artifact or enchantment.

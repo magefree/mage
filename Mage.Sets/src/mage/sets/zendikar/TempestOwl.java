@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -61,7 +60,7 @@ public class TempestOwl extends CardImpl<TempestOwl> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Kicker {4}{U}
-        this.addAbility(new KickerAbility(new KickerManaCost("{4}{U}")));
+        this.addAbility(new KickerAbility("{4}{U}"));
 
         // When Tempest Owl enters the battlefield, if it was kicked, tap up to three target permanents.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), false);

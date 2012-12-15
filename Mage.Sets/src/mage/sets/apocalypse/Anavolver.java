@@ -38,7 +38,6 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.KickedCostCondition;
 import mage.abilities.costs.common.PayLifeCost;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
@@ -62,23 +61,21 @@ public class Anavolver extends CardImpl<Anavolver> {
         this.toughness = new MageInt(3);
         
         // Kicker {1}{U} and/or {B} (You may pay an additional {1}{U} and/or {B} as you cast this spell.)
-        KickerManaCost kicker1 = new KickerManaCost("{1}{U}");
-        KickerManaCost kicker2 = new KickerManaCost("{B}");
-        KickerAbility kickerAbility = new KickerAbility(kicker1);
-        kickerAbility.addKickerManaCost(kicker2);
+        KickerAbility kickerAbility = new KickerAbility("{1}{U}");
+        kickerAbility.addKickerCost("{B}");
         this.addAbility(kickerAbility);
 
         // If Anavolver was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.
         EntersBattlefieldAbility ability1 = new EntersBattlefieldAbility(
                 new AddCountersSourceEffect(CounterType.P1P1.createInstance(2),false),
-                new KickedCostCondition(kicker1), true, "If {this} was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.",
+                new KickedCostCondition("{1}{U}"), true, "If {this} was kicked with its {1}{U} kicker, it enters the battlefield with two +1/+1 counters on it and with flying.",
                 "{this} enters the battlefield with two +1/+1 counters on it and with flying");
         ((EntersBattlefieldEffect)ability1.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield));
         this.addAbility(ability1);
 
         // If Anavolver was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with "Pay 3 life: Regenerate Anavolver."
         EntersBattlefieldAbility ability2 = new EntersBattlefieldAbility(
-                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition(kicker2), true,
+                new AddCountersSourceEffect(CounterType.P1P1.createInstance(1),false), new KickedCostCondition("{B}"), true,
                 "If {this} was kicked with its {B} kicker, it enters the battlefield with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"",
                 "{this} enters the battlefield with a +1/+1 counter on it and with \"Pay 3 life: Regenerate Anavolver.\"");
         ((EntersBattlefieldEffect)ability2.getEffects().get(0)).addEffect(new GainAbilitySourceEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new PayLifeCost(3)), Duration.WhileOnBattlefield));

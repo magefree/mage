@@ -32,10 +32,9 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 
@@ -55,7 +54,7 @@ public class GnarlidPack extends CardImpl<GnarlidPack> {
         this.toughness = new MageInt(2);
 
         // Multikicker (You may pay an additional any number of times as you cast this spell.)
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}{G}")));
+        this.addAbility(new MultikickerAbility("{1}{G}"));
 
         // Gnarlid Pack enters the battlefield with a +1/+1 counter on it for each time it was kicked.
         this.addAbility(new EntersBattlefieldAbility(

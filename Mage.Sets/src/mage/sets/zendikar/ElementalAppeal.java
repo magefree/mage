@@ -36,7 +36,6 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
@@ -59,7 +58,7 @@ public class ElementalAppeal extends CardImpl<ElementalAppeal> {
         this.color.setRed(true);
 
         // Kicker {5}
-        this.addAbility(new KickerAbility(new KickerManaCost("{5}")));
+        this.addAbility(new KickerAbility("{5}"));
 
         // Put a 7/1 red Elemental creature token with trample and haste onto the battlefield. Exile it at the beginning of the next end step.
         this.getSpellAbility().addEffect(new ElementalAppealEffect());

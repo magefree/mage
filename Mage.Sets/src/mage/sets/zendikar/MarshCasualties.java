@@ -30,7 +30,6 @@ package mage.sets.zendikar;
 import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
@@ -58,7 +57,7 @@ public class MarshCasualties extends CardImpl<MarshCasualties> {
         this.color.setBlack(true);
 
         // Kicker {3}
-        this.addAbility(new KickerAbility(new KickerManaCost("{3}")));
+        this.addAbility(new KickerAbility("{3}"));
 
         // Creatures target player controls get -1/-1 until end of turn. If Marsh Casualties was kicked, those creatures get -2/-2 until end of turn instead.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(

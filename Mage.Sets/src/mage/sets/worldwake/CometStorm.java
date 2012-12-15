@@ -33,10 +33,9 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +55,7 @@ public class CometStorm extends CardImpl<CometStorm> {
         this.color.setRed(true);
 
         // Multikicker {1}
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}")));
+        this.addAbility(new MultikickerAbility("{1}"));
 
         // Choose target creature or player, then choose another target creature or player for each time Comet Storm was kicked. Comet Storm deals X damage to each of them.
         this.getSpellAbility().addEffect(new CometStormEffect());

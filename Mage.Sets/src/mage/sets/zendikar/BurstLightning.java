@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.KickerAbility;
@@ -50,7 +49,7 @@ public class BurstLightning extends CardImpl<BurstLightning> {
         this.expansionSetCode = "ZEN";
         this.color.setRed(true);
 
-        this.addAbility(new KickerAbility(new KickerManaCost("{4}")));
+        this.addAbility(new KickerAbility("{4}"));
 
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new DamageTargetEffect(4),

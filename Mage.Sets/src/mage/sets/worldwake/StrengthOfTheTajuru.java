@@ -33,11 +33,9 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.mana.MultikickerManaCost;
 import mage.abilities.dynamicvalue.common.MultikickerCount;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.KickerAbility;
+import mage.abilities.keyword.MultikickerAbility;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -59,7 +57,7 @@ public class StrengthOfTheTajuru extends CardImpl<StrengthOfTheTajuru> {
 
 
         // Multikicker (You may pay an additional {1} any number of times as you cast this spell.)
-        this.addAbility(new KickerAbility(new MultikickerManaCost("{1}")));
+        this.addAbility(new MultikickerAbility("{1}"));
 
         // Choose target creature, then choose another target creature for each time Strength of the Tajuru was kicked. Put X +1/+1 counters on each of them.
         this.getSpellAbility().addEffect(new StrengthOfTheTajuruAddCountersTargetEffect());

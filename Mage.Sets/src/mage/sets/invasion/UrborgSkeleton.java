@@ -36,7 +36,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -62,7 +61,7 @@ public class UrborgSkeleton extends CardImpl<UrborgSkeleton> {
        this.toughness = new MageInt(1);
 
        // Kicker {3} (You may pay an additional {3} as you cast this spell.)
-       this.addAbility(new KickerAbility(new KickerManaCost("{3}")));
+       this.addAbility(new KickerAbility("{3}"));
 
        // {B}: Regenerate Urborg Skeleton.
        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{B}")));

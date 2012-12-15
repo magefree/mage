@@ -35,12 +35,13 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.KickerManaCost;
+import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +59,7 @@ public class DesolationAngel extends CardImpl<DesolationAngel> {
         this.toughness = new MageInt(4);
 
         // Kicker (You may pay an additional as you cast this spell.)
-        this.addAbility(new KickerAbility(new KickerManaCost("{W}{W}")));
+        this.addAbility(new KickerAbility("{W}{W}"));
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
@@ -90,26 +91,13 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
     @Override
     public boolean apply(Game game, Ability source) {
         Card p = game.getCard(source.getSourceId());
-
-        boolean kicked = false;
-        if (p != null) {
-            for (Object cost : p.getSpellAbility().getOptionalCosts()) {
-                if (cost instanceof KickerManaCost) {
-                    if (((KickerManaCost) cost).isPaid()) {
-                        kicked = true;
-                    }
-                }
+        boolean kicked = KickedCondition.getInstance().apply(game, source);
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(),game)) {
+            if ((!kicked && permanent.getControllerId() == source.getControllerId())
+               || kicked) {
+                permanent.destroy(source.getSourceId(), game, false);
             }
         }
-
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-            if (permanent.getCardType().contains(CardType.LAND)) {
-                if ((!kicked && permanent.getControllerId() == source.getControllerId()) || kicked) {
-                    permanent.destroy(source.getSourceId(), game, false);
-                }
-            }
-        }
-
         return true;
     }
 
