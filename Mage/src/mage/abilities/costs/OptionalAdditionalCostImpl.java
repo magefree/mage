@@ -28,8 +28,6 @@
 
 package mage.abilities.costs;
 
-import mage.abilities.costs.mana.ManaCostsImpl;
-
 /**
  *
  * @author LevelX2
@@ -41,14 +39,21 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
 
     protected String name;
     protected String reminderText;
+    protected String delimiter;
+
     protected boolean activated;
     protected int activatedCounter;
     protected boolean repeatable;
 
     public OptionalAdditionalCostImpl(String name, String reminderText, Cost cost) {
+        this(name, " ", reminderText, cost);
+    }
+
+    public OptionalAdditionalCostImpl(String name, String delimiter, String reminderText, Cost cost) {
         this.activated = false;
         this.name = name;
-        this.reminderText = reminderText;
+        this.delimiter = delimiter;
+        this.reminderText = new StringBuilder("<i>").append(reminderText).append("</i>").toString();
         this.activatedCounter = 0;
         this.add((Cost) cost);
     }
@@ -59,6 +64,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
         this.reminderText = cost.reminderText;
         this.activated = cost.activated;
         this.activatedCounter = cost.activatedCounter;
+        this.delimiter = cost.delimiter;
     }
 
     @Override
@@ -67,7 +73,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
     }
 
     /**
-     * Returns the complete text for the addional coast or if onlyCost is true
+     * Returns the complete text for the addional cost or if onlyCost is true
      * only the pure text fore the included native cost
      *
      * @param onlyCost
@@ -78,7 +84,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
         if (onlyCost) {
             return getText();
         } else {
-            return name + " " + getText();
+            return new StringBuffer(name).append(delimiter).append(getText()).toString();
         }
     }
 
@@ -105,7 +111,12 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
      */
     @Override
     public String getCastSuffixMessage(int position) {
-        return " with " + name;
+        StringBuilder sb = new StringBuilder(position > 0 ? " and ":"").append(" with ");
+        if (isRepeatable()) {
+            sb.append(getActivateCount()).append(getActivateCount() > 1? " times ":" time ");
+        }
+        sb.append(name);
+        return  sb.toString();
     }
 
 
@@ -129,6 +140,14 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
         activated = false;
         activatedCounter = 0;
     }
+
+    /**
+     * Set if the cost be multiple times activated
+     *
+     */
+    public void setRepeatable(boolean repeatable) {
+        this.repeatable = repeatable;
+    }  
 
     /**
      * Can the cost be multiple times activated

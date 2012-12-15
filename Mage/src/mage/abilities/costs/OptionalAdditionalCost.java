@@ -75,6 +75,12 @@ public interface OptionalAdditionalCost extends Cost {
     public void reset();
 
     /**
+     * Set if the cost be multiple times activated
+     *
+     */
+    public void setRepeatable(boolean repeatable);
+
+    /**
      * Can the cost be multiple times activated
      *
      * @return

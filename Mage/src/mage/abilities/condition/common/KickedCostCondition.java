@@ -3,7 +3,6 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.OptionalAdditionalCost;
-import mage.abilities.costs.mana.KickerManaCost;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.game.Game;
@@ -15,10 +14,10 @@ import mage.game.Game;
  */
 public class KickedCostCondition implements Condition {
 
-    protected KickerManaCost kickerManaCost;
+    protected String kickerCostText;
 
-    public  KickedCostCondition(KickerManaCost kickerManaCost) {
-        this.kickerManaCost = kickerManaCost;
+    public  KickedCostCondition(String kickerCostText) {
+        this.kickerCostText = kickerCostText;
     }
 
     @Override
@@ -33,7 +32,7 @@ public class KickedCostCondition implements Condition {
             }
             if (kickerAbility != null) {
                 for (OptionalAdditionalCost cost: kickerAbility.getKickerCosts()) {
-                    if (cost.equals(kickerManaCost)) {
+                    if (cost.getText(true).equals(kickerCostText)) {
                         return cost.isActivated();
                     }
                 }

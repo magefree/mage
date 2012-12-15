@@ -39,29 +39,95 @@ import mage.abilities.StaticAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalCost;
+import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.game.Game;
 import mage.players.Player;
 
+/**
+ *
+ * 20121001 702.31. Kicker
+ *   702.31a Kicker is a static ability that functions while the spell with kicker
+ *           is on the stack. "Kicker [cost]" means "You may pay an additional [cost]
+ *           as you cast this spell." Paying a spell's kicker cost(s) follows the
+ *           rules for paying additional costs in rules 601.2b and 601.2e-g.
+ *   702.31b The phrase "Kicker [cost 1] and/or [cost 2]" means the same thing as
+ *           "Kicker [cost 1], kicker [cost 2]."
+ *   702.31c Multikicker is a variant of the kicker ability. "Multikicker [cost]"
+ *           means "You may pay an additional [cost] any number of times as you cast
+ *           this spell." A multikicker cost is a kicker cost.
+ *   702.31d If a spell's controller declares the intention to pay any of that spell's
+ *           kicker costs, that spell has been "kicked." If a spell has two kicker
+ *           costs or has multikicker, it may be kicked multiple times. See rule 601.2b.
+ *   702.31e Objects with kicker or multikicker have additional abilities that specify
+ *           what happens if they are kicked. These abilities are linked to the kicker
+ *           or multikicker abilities printed on that object: they can refer only to
+ *           those specific kicker or multikicker abilities. See rule 607,
+ *           "Linked Abilities."
+ *   702.31f Objects with more than one kicker cost have abilities that each correspond
+ *           to a specific kicker cost. They contain the phrases "if it was kicked with
+ *           its [A] kicker" and "if it was kicked with its [B] kicker," where A and B
+ *           are the first and second kicker costs listed on the card, respectively. Each
+ *           of those abilities is linked to the appropriate kicker ability.
+ *   702.31g If part of a spell's ability has its effect only if that spell was kicked,
+ *           and that part of the ability includes any targets, the spell's controller
+ *           chooses those targets only if that spell was kicked. Otherwise, the spell is
+ *           cast as if it did not have those targets. See rule 601.2c.
+ *
+ * @author LevelX2
+ *
+ */
 public class KickerAbility extends StaticAbility<KickerAbility> implements OptionalAdditionalSourceCosts {
 
+    protected static final String KickerKeyword = "Kicker";
+    protected static final String KickerReminderMana = "(You may pay an additional {cost} as you cast this spell.)";
+    protected static final String KickerReminderCost = "(You may {cost} in addition to any other costs as you cast this spell.)";
+
+    protected String keywordText;
+    protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
 
-    public KickerAbility(OptionalAdditionalCost kickerCost) {
+    public KickerAbility(String manaString) {
+       this(KickerKeyword, KickerReminderMana);
+       this.addKickerCost(manaString);
+    }
+
+    public KickerAbility(Cost cost) {
+       this(KickerKeyword, KickerReminderCost);
+       this.addKickerCost(cost);
+    }
+
+    public KickerAbility(String keywordText, String reminderText) {
        super(Zone.STACK, null);
-       kickerCosts.add(kickerCost);
+       name = keywordText;
+       this.keywordText = keywordText;
+       this.reminderText = reminderText;
        setRuleAtTheTop(true);
     }
 
     public KickerAbility(final KickerAbility ability) {
        super(ability);
        this.kickerCosts = ability.kickerCosts;
+       this.keywordText = ability.keywordText;
+       this.reminderText = ability.reminderText;
     }
 
     @Override
     public KickerAbility copy() {
        return new KickerAbility(this);
+    }
+
+    public final OptionalAdditionalCost addKickerCost(String manaString) {
+       OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(keywordText, reminderText, new ManaCostsImpl(manaString));
+       kickerCosts.add(kickerCost);
+       return kickerCost;
+    }
+
+    public final OptionalAdditionalCost addKickerCost(Cost cost) {
+       OptionalAdditionalCost kickerCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderText, cost);
+       kickerCosts.add(kickerCost);
+       return kickerCost;
     }
 
     public void resetKicker() {
@@ -91,10 +157,6 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
         return kickerCosts;
     }
 
-    public void addKickerManaCost(OptionalAdditionalCost kickerCost) {
-        kickerCosts.add(kickerCost);
-    }
-    
     @Override
     public void addOptionalAdditionalCosts(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
@@ -109,7 +171,8 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                             int activated = kickerCost.getActivateCount();
                             times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
                         }
-                        if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + times + kickerCost.getText(false) + " ?", game)) {
+                        if (kickerCost.canPay(sourceId, controllerId, game) &&
+                                player.chooseUse(Constants.Outcome.Benefit, new StringBuilder("Pay ").append(times).append(kickerCost.getText(false)).append(" ?").toString(), game)) {
                             kickerCost.activate();
                             for (Iterator it = ((Costs) kickerCost).iterator(); it.hasNext();) {
                                 Cost cost = (Cost) it.next();

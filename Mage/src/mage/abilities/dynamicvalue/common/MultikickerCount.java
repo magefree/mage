@@ -28,7 +28,6 @@
 package mage.abilities.dynamicvalue.common;
 
 import mage.abilities.Ability;
-import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;

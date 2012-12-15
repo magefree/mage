@@ -26,45 +26,43 @@
 * or implied, of BetaSteward_at_googlemail.com.
 */
 
-package mage.abilities.condition.common;
+package mage.abilities.keyword;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
-import mage.game.Game;
-
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.OptionalAdditionalCost;
 
 /**
- * Describes condition when spell was kicked.
+ *
+ * 20121001 702.31c Multikicker is a variant of the kicker ability. "Multikicker [cost]" means
+ *                  "You may pay an additional [cost] any number of times as you cast this spell."
+ *                  A multikicker cost is a kicker cost.
  *
  * @author LevelX2
  */
-public class KickedCondition implements Condition {
 
-    private static KickedCondition fInstance = null;
+public class MultikickerAbility extends KickerAbility {
 
-    private KickedCondition() {}
+    protected static final String MultikickerKeyword = "Multikicker";
+    protected static final String MultikickerReminder = "(You may pay an additional {cost} any number of times as you cast this spell.)";
 
-    public static Condition getInstance() {
-        if (fInstance == null) {
-            fInstance = new KickedCondition();
-        }
-        return fInstance;
+    public MultikickerAbility(String manaString) {
+       super(MultikickerKeyword, MultikickerReminder);
+       OptionalAdditionalCost multikickerCost = this.addKickerCost(manaString);
+       multikickerCost.setRepeatable(true);
+    }
+
+    public MultikickerAbility(Cost cost) {
+       super(MultikickerKeyword, MultikickerReminder);
+       OptionalAdditionalCost multikickerCost =this.addKickerCost(cost);
+       multikickerCost.setRepeatable(true);
+    }
+
+    public MultikickerAbility(final MultikickerAbility ability) {
+       super(ability);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            for (Ability ability: card.getAbilities()) {
-                if (ability instanceof KickerAbility) {
-                    if(((KickerAbility) ability).isKicked()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+    public MultikickerAbility copy() {
+       return new MultikickerAbility(this);
     }
 }
