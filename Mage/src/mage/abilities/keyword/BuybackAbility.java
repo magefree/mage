@@ -28,8 +28,6 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import mage.Constants;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -49,35 +47,40 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 /**
+ * 702.25. Buyback
+ *
+ *   702.25a Buyback appears on some instants and sorceries. It represents two static 
+ *   abilities that function while the spell is on the stack. "Buyback [cost]" means 
+ *   "You may pay an additional [cost] as you cast this spell" and "If the buyback 
+ *   cost was paid, put this spell into its owner's hand instead of into that player's
+ *   graveyard as it resolves." Paying a spell's buyback cost follows the rules for 
+ *   paying additional costs in rules 601.2b and 601.2e-g.
  *
  * @author LevelX2
  */
 
 public class BuybackAbility extends StaticAbility<BuybackAbility> implements OptionalAdditionalSourceCosts {
 
-    private static final String keywordTextMana = "Buyback ";
-    private static final String keywordTextCost = "Buyback-";
+    private static final String keywordText = "Buyback";
     private static final String reminderTextCost = "<i>(You may {cost} in addition to any other costs as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
     private static final String reminderTextMana = "<i>(You may pay an additional {cost} as you cast this spell. If you do, put this card into your hand as it resolves.)</i>";
-    protected List<OptionalAdditionalCost> buybackCosts = new LinkedList<OptionalAdditionalCost>();
+    protected OptionalAdditionalCost buybackCost;
 
     public BuybackAbility(String manaString) {
        super(Zone.STACK, new BuybackEffect());
-       OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextMana, reminderTextMana, new ManaCostsImpl(manaString));
-       buybackCosts.add(buybackCost);
+       this.buybackCost = new OptionalAdditionalCostImpl(keywordText, reminderTextMana, new ManaCostsImpl(manaString));
        setRuleAtTheTop(true);
     }
     
     public BuybackAbility(Cost cost) {
        super(Zone.STACK, new BuybackEffect());
-       OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextCost, reminderTextCost, cost);
-       buybackCosts.add(buybackCost);
+       this.buybackCost = new OptionalAdditionalCostImpl(keywordText, "-", reminderTextCost, cost);
        setRuleAtTheTop(true);
     }
 
     public BuybackAbility(final BuybackAbility ability) {
        super(ability);
-       buybackCosts = ability.buybackCosts;
+       buybackCost = ability.buybackCost;
     }
 
     @Override
@@ -87,35 +90,22 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
 
     @Override
     public void addCost(Cost cost) {
-        if (buybackCosts.size() > 0) {
-            ((Costs) buybackCosts.get(0)).add(cost);
-        } else {
-            OptionalAdditionalCostImpl buybackCost = new OptionalAdditionalCostImpl(keywordTextCost, reminderTextCost, cost);
-            buybackCosts.add(buybackCost);
+        if (buybackCost != null) {
+            ((Costs) buybackCost).add(cost);
         }
     }
 
     public boolean isActivated() {
-        for (OptionalAdditionalCost cost: buybackCosts) {
-            if(cost.isActivated()) {
-                return true;
-            }
+        if (buybackCost != null) {
+            return buybackCost.isActivated();
         }
         return false;
     }
 
     public void resetBuyback() {
-        for (OptionalAdditionalCost cost: buybackCosts) {
-            cost.reset();
+        if (buybackCost != null) {
+            buybackCost.reset();
         }
-    }
-
-    public List<OptionalAdditionalCost> getBuybackCosts () {
-        return buybackCosts;
-    }
-
-    public void addKickerManaCost(OptionalAdditionalCost kickerCost) {
-        buybackCosts.add(kickerCost);
     }
 
     @Override
@@ -124,28 +114,16 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 this.resetBuyback();
-                for (OptionalAdditionalCost buybackCost: buybackCosts) {
-                    boolean again = true;
-                    while (again) {
-                        String times = "";
-                        if (buybackCost.isRepeatable()) {
-                            int activated = buybackCost.getActivateCount();
-                            times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
-                        }
-                        if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + times + buybackCost.getText(false) + " ?", game)) {
-                            buybackCost.activate();
-                            for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
-                                Cost cost = (Cost) it.next();
-                                if (cost instanceof ManaCostsImpl) {
-                                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                                } else {
-                                    ability.getCosts().add(cost.copy());
-                                }
+                if (buybackCost != null) {
+                    if (player.chooseUse(Constants.Outcome.Benefit,new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), game)) {
+                        buybackCost.activate();
+                        for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
+                            Cost cost = (Cost) it.next();
+                            if (cost instanceof ManaCostsImpl) {
+                                ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                            } else {
+                                ability.getCosts().add(cost.copy());
                             }
-
-                            again = buybackCost.isRepeatable();
-                        } else {
-                            again = false;
                         }
                     }
                 }
@@ -156,48 +134,29 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
 
     @Override
     public String getRule() {
-       StringBuilder sb = new StringBuilder();
-       String reminderText = "";
-       int numberBuyback = 0;
-       for (OptionalAdditionalCost buybackCost: buybackCosts) {
-           if (numberBuyback == 0) {
-               sb.append(buybackCost.getText(false));
-               reminderText = buybackCost.getReminderText();
-           } else {
-               sb.append(", ").append(buybackCost.getText(true));
-           }
-           ++numberBuyback;
-       }
-       sb.append(" ").append(reminderText);
-
-       return sb.toString();
+        StringBuilder sb = new StringBuilder();
+        if (buybackCost != null) {
+            sb.append(buybackCost.getText(false));
+            sb.append(" ").append(buybackCost.getReminderText());
+        }
+        return sb.toString();
     }
 
     @Override
     public String getCastMessageSuffix() {
-        String message = "";
-        if (isActivated()) {
-            message = " with " + keywordTextMana;
+        if (buybackCost != null) {
+            return buybackCost.getCastSuffixMessage(0);
+        } else {
+            return "";
         }
-        return message;
     }
 
     public String getReminderText() {
-        String costsReminderText = reminderTextCost;
-        StringBuilder costsText = new StringBuilder();
-        int costCounter = 0;
-        for (OptionalAdditionalCost cost : buybackCosts) {
-            if (costCounter > 0) {
-                costsText.append(" and ");
-            } else {
-                if (((Costs)cost).get(0) instanceof ManaCostsImpl) {
-                    costsReminderText = reminderTextMana;
-                }
-            }
-            costsText.append(cost.getText(true));
-            ++costCounter;
+        if (buybackCost != null) {
+            return buybackCost.getReminderText();
+        } else {
+            return "";
         }
-        return costsReminderText.replace("{cost}", costsText);
     }
 }
 
