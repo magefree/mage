@@ -5,6 +5,7 @@ Dredge|number|
 Soulshift|number|
 Basic landcycling|cost|
 Cycling|cost|
+Cumulative upkeep|cost|
 Level up|cost|
 Miracle|cost|
 Unearth|cost|

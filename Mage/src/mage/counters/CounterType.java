@@ -69,7 +69,8 @@ public enum CounterType {
     PRESSURE(new PressureCounter().name),
     PETRIFICATION(new PetrificationCounter().name),
     MINING(new MiningCounter().name),
-    THEFT(new TheftCounter().name);
+    THEFT(new TheftCounter().name),
+    AGE(new AgeCounter().name);
 
     private String name;
 
@@ -171,6 +172,8 @@ public enum CounterType {
                 return new MiningCounter(amount);
             case THEFT:
                 return new TheftCounter(amount);
+            case AGE:
+                return new AgeCounter(amount);
                 
         }
         return null;
