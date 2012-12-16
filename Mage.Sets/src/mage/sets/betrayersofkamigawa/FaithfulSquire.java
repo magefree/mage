@@ -73,8 +73,8 @@ public class FaithfulSquire extends CardImpl<FaithfulSquire> {
         this.subtype.add("Human");
         this.subtype.add("Soldier");
         this.color.setWhite(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
         this.flipCard = true;
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.
