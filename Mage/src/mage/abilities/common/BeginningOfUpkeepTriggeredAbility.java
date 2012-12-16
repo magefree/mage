@@ -81,23 +81,23 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
 
     @Override
     public String getRule() {
-        String effectsText = getEffects().getText(modes.getMode());
+        StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
         switch (targetController) {
             case YOU:
                 if (this.optional) {
-                    if (effectsText.toLowerCase().startsWith("target")){
-                        effectsText = "you may have " + effectsText;
-                    } else if (!effectsText.toLowerCase().startsWith("you may")){
-                        effectsText = "you may " + effectsText;
+                    if (sb.substring(0, 6).toLowerCase().equals("target")){
+                        sb.insert(0, "you may have ");
+                    } else if (!sb.substring(0, 4).toLowerCase().equals("you ")){
+                        sb.insert(0, "you may ");
                     }
                 }
-                return "At the beginning of your upkeep, " + generateZoneString() + effectsText;
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of your upkeep, ").toString();
             case OPPONENT:
-                return "At the beginning of each opponent's upkeep, " + generateZoneString() + effectsText;
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each opponent's upkeep, ").toString();
             case ANY:
-                return "At the beginning of each player's upkeep, " + generateZoneString() + effectsText;
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of each player's upkeep, ").toString();
             case CONTROLLER_ATTACHED_TO:
-                return "At the beginning of the upkeep of enchanted creature's controller, " + generateZoneString() + effectsText;
+                return sb.insert(0, generateZoneString()).insert(0, "At the beginning of the upkeep of enchanted creature's controller, ").toString();
         }
         return "";
     }

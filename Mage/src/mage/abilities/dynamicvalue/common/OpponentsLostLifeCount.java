@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;
-import mage.players.Player;
 import mage.watchers.common.PlayerLostLifeWatcher;
 
 /**
