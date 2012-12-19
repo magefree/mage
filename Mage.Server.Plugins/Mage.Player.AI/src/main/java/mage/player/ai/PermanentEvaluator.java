@@ -33,9 +33,6 @@ import java.util.Map;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
-import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.TrampleAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

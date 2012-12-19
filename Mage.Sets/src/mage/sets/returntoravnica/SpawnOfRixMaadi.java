@@ -30,16 +30,9 @@ package mage.sets.returntoravnica;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
  
 /**
  *

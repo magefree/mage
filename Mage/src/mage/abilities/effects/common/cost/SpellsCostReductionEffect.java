@@ -30,7 +30,6 @@ package mage.abilities.effects.common.cost;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;

@@ -30,7 +30,6 @@ package mage.abilities.mana;
 
 import mage.Constants;
 import mage.Constants.Zone;
-import mage.abilities.DelayedTriggeredAbilities;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;

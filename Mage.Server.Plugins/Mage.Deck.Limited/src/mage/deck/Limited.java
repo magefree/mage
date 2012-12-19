@@ -28,12 +28,6 @@
 
 package mage.deck;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorImpl;
 

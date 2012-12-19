@@ -27,7 +27,6 @@
  */
 package mage.abilities.common;
 
-import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;

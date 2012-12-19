@@ -5,7 +5,6 @@
 package org.mage.test.cards.conditional;
 
 import mage.Constants;
-import mage.Constants;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

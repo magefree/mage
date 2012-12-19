@@ -39,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

@@ -1,7 +1,5 @@
 package org.mage.test.serverside.cards.effects;
 
-import org.mage.test.cards.*;
-import junit.framework.Assert;
 import mage.Constants;
 import mage.filter.Filter;
 import org.junit.Test;

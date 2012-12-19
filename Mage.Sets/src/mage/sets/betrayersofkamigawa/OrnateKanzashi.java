@@ -42,7 +42,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
-import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Library;
 import mage.players.Player;

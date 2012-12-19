@@ -29,18 +29,12 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterAttackingCreature;
-import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *

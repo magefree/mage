@@ -34,7 +34,6 @@ import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.target.TargetPlayer;
 
 /**

@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.keyword.SunburstAbility;
 import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 

@@ -31,25 +31,15 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.Mana;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author LevelX2

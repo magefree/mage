@@ -31,7 +31,6 @@ package mage.player.ai;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.game.Game;
 import mage.util.Logging;
 
 /**

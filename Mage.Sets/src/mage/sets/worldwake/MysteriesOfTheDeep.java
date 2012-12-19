@@ -34,7 +34,6 @@ import mage.abilities.condition.common.LandfallCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPlayer;
 import mage.watchers.common.LandfallWatcher;
 
 /**

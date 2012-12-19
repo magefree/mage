@@ -34,7 +34,6 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;

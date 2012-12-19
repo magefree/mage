@@ -38,7 +38,6 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

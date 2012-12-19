@@ -43,8 +43,6 @@ import mage.abilities.keyword.*;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
-import mage.counters.CounterType;
-import mage.filter.common.FilterCreatureForCombat;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -59,7 +57,6 @@ import mage.player.ai.ma.optimizers.impl.EquipOptimizer;
 import mage.player.ai.ma.optimizers.impl.LevelUpOptimizer;
 import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
-import mage.player.ai.util.SurviveInfo;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
@@ -67,7 +64,6 @@ import mage.target.TargetCard;
 import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
-import mage.player.ai.utils.RateCard;
 
 /**
  *

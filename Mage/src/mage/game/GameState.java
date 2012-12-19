@@ -34,7 +34,6 @@ import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
-import mage.abilities.keyword.KickerAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
 import mage.game.combat.Combat;

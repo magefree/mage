@@ -36,10 +36,6 @@ package mage.client.cards;
 
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.ImageHelper;
-import mage.client.util.gui.BufferedImageBuilder;
-import mage.filters.FilterFactory;
-import mage.filters.impl.HueFilter;
-import mage.utils.ThreadUtils;
 import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;

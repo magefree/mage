@@ -41,7 +41,6 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;

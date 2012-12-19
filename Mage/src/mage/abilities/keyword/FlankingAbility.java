@@ -4,7 +4,6 @@ package mage.abilities.keyword;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.BecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.game.Game;

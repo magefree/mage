@@ -42,7 +42,6 @@ import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;

@@ -28,7 +28,6 @@
 package mage.sets.returntoravnica;
  
 import java.util.LinkedList;
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;

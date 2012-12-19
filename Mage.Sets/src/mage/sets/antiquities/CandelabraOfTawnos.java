@@ -33,19 +33,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetLandPermanent;
-import mage.util.CardUtil;
 
 /**
  *

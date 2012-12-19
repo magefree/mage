@@ -3,7 +3,6 @@ package org.mage.test.serverside.cards.abilities;
 import mage.Constants;
 import mage.Constants.PhaseStep;
 import org.junit.Test;
-import org.mage.test.serverside.base.CardTestAPI;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
 /**

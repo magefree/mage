@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
 
 /**
  *

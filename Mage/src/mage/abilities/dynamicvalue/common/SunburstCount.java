@@ -31,8 +31,6 @@ package mage.abilities.dynamicvalue.common;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackObject;

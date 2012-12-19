@@ -27,7 +27,6 @@
  */
 package mage.sets.onslaught;
 
-import java.lang.annotation.Target;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants;

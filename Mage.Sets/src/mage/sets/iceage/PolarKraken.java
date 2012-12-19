@@ -34,7 +34,6 @@ import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledLandPermanent;

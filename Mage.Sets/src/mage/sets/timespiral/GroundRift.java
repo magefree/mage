@@ -35,11 +35,9 @@ import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
-import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**

@@ -30,7 +30,6 @@ package mage.sets.returntoravnica;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;
 

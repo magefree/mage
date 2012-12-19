@@ -41,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterEnchantment;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;

@@ -27,7 +27,6 @@
  */
 package mage.sets.mirrodin;
 
-import java.awt.Color;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants;
@@ -36,20 +35,16 @@ import mage.Constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;

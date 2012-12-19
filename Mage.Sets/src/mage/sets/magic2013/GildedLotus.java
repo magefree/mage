@@ -35,8 +35,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.AnyColorManaAbility;
-import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;

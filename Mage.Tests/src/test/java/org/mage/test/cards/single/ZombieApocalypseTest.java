@@ -1,6 +1,5 @@
 package org.mage.test.cards.single;
 
-import junit.framework.Assert;
 import mage.Constants;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;

@@ -40,7 +40,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
-import mage.game.turn.TurnMod;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 

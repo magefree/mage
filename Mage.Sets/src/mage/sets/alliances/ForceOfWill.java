@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.common.PayLifeCost;

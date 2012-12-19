@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
  

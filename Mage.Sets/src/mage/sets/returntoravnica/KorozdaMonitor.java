@@ -28,13 +28,10 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
