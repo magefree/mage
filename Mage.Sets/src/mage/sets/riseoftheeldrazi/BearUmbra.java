@@ -42,7 +42,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.TotemArmorAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -58,7 +58,7 @@ public class BearUmbra extends CardImpl<BearUmbra> {
         this.color.setGreen(true);
 
         // Enchant creature
-        TargetPermanent auraTarget = new TargetControlledCreaturePermanent();
+        TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
