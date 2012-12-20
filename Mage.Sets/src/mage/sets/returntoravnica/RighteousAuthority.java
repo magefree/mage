@@ -39,13 +39,19 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,9 +60,6 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class RighteousAuthority extends CardImpl<RighteousAuthority> {
-
-    static final String rule = "Enchanted creature gets +1/+1 for each card in its controller's hand";
-    static final String rule2 = "At the beginning of the draw step of enchanted creature's controller, that player draws an additional card";
 
     public RighteousAuthority (UUID ownerId) {
         super(ownerId, 189, "Righteous Authority", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{W}{U}");
@@ -73,13 +76,11 @@ public class RighteousAuthority extends CardImpl<RighteousAuthority> {
         this.addAbility(ability);
 
         // Enchanted creature gets +1/+1 for each card in its controller's hand.
-        CardsInControllerHandCount boost = new CardsInControllerHandCount();
-        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        CardsInEnchantedControllerHandCount boost = new CardsInEnchantedControllerHandCount();
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(boost, boost, Duration.WhileOnBattlefield)));
 
         // At the beginning of the draw step of enchanted creature's controller, that player draws an additional card.
-        Ability gainedAbility2 = new BeginningOfDrawTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility2, AttachmentType.AURA, Duration.WhileOnBattlefield, rule2)));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.CONTROLLER_ATTACHED_TO, false));
     }
 
     public RighteousAuthority (final RighteousAuthority card) {
@@ -89,5 +90,40 @@ public class RighteousAuthority extends CardImpl<RighteousAuthority> {
     @Override
     public RighteousAuthority copy() {
         return new RighteousAuthority(this);
+    }
+}
+
+
+class CardsInEnchantedControllerHandCount implements DynamicValue {
+    @Override
+    public int calculate(Game game, Ability sourceAbility) {
+        if (sourceAbility != null) {
+            Permanent attachment = game.getPermanent(sourceAbility.getSourceId());
+            if (attachment != null && attachment.getAttachedTo() != null) {
+                Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+                if (attachedTo != null) {
+                    Player controller = game.getPlayer(attachedTo.getControllerId());
+                    if (controller != null) {
+                        return controller.getHand().size();
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public DynamicValue clone() {
+        return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
+    }
+
+    @Override
+    public String getMessage() {
+        return "card in its controller's hand";
+    }
+
+    @Override
+    public String toString() {
+        return "1";
     }
 }
