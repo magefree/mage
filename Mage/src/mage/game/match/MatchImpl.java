@@ -45,8 +45,6 @@ import java.util.*;
  */
 public abstract class MatchImpl implements Match {
 
-//    private final static Logger logger = Logging.getLogger(MatchImpl.class.getName());
-
     protected UUID id = UUID.randomUUID();
     protected String name;
     protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
@@ -67,8 +65,9 @@ public abstract class MatchImpl implements Match {
     @Override
     public MatchPlayer getPlayer(UUID playerId) {
         for (MatchPlayer player: players) {
-            if (player.getPlayer().getId().equals(playerId))
+            if (player.getPlayer().getId().equals(playerId)) {
                 return player;
+            }
         }
         return null;
     }
@@ -111,7 +110,9 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public Game getGame() {
-        if (games.size() == 0) return null;
+        if (games.isEmpty()) {
+            return null;
+        }
         return games.get(games.size() -1);
     }
 
@@ -150,10 +151,12 @@ public abstract class MatchImpl implements Match {
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
             if (p != null) {
-                if (p.hasWon())
+                if (p.hasWon()) {
                     player.addWin();
-                if (p.hasLost())
+                }
+                if (p.hasLost()) {
                     player.addLose();
+                }
             }
         }
     }
@@ -164,9 +167,8 @@ public abstract class MatchImpl implements Match {
         Game game = getGame();
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
-            if (p != null) {
-                if (p.hasLost())
-                    loserId = p.getId();
+            if (p != null && p.hasLost()) {
+                loserId = p.getId();
             }
         }
         return loserId;
@@ -195,8 +197,9 @@ public abstract class MatchImpl implements Match {
     @Override
     public boolean isDoneSideboarding() {
         for (MatchPlayer player: this.players) {
-            if (!player.isDoneSideboarding())
+            if (!player.isDoneSideboarding()) {
                 return false;
+            }
         }
         return true;
     }
