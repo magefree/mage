@@ -53,6 +53,7 @@ syntax: regexp
 \.iws
 \.log
 nbactions.xml
+nbactions-*.xml
 nb-configuration.xml
 glob:Mage.Client/cheat.dck
 glob:Mage.Client/test.dck
