@@ -74,6 +74,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
+    public static final String KEY_GAMEPANEL_LAST_SIZE = "gamepanelLastSize";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
+    public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
+
     public static final String KEY_PROXY_ADDRESS = "proxyAddress";
     public static final String KEY_PROXY_PORT = "proxyPort";
     public static final String KEY_PROXY_USERNAME = "proxyUsername";

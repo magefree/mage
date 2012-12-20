@@ -33,7 +33,17 @@
  */
 
 package mage.client.game;
-
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import mage.Constants;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
@@ -56,17 +66,6 @@ import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -118,9 +117,9 @@ public class GamePanel extends javax.swing.JPanel {
             j.setSize(1024,768);
             this.add(j);
             j.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
-
-            Map<String, JComponent> ui = getUIComponents(j);
-            Plugins.getInstance().updateGamePanel(ui);
+            
+            Map<String, JComponent> myUi = getUIComponents(j);
+            Plugins.getInstance().updateGamePanel(myUi);
 
             // Enlarge jlayeredpane on resize
             addComponentListener(new ComponentAdapter(){
@@ -139,9 +138,9 @@ public class GamePanel extends javax.swing.JPanel {
                                 jSplitPane0.setDividerLocation(1.0);
                             }
                         }
+                        initialized = true;
                     }
-
-                    initialized = true;
+                    
                 }
             });
 
@@ -149,7 +148,6 @@ public class GamePanel extends javax.swing.JPanel {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
-
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -168,6 +166,7 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void cleanUp() {
+        saveDividerLocations();
         this.gameChatPanel.disconnect();
         this.players.clear();
         logger.debug("players clear.");
@@ -185,6 +184,40 @@ public class GamePanel extends javax.swing.JPanel {
             popupContainer.setVisible(false);
         } catch (InterruptedException ex) {
             logger.fatal("popupContainer error:", ex);
+        }
+    }
+
+    private void saveDividerLocations() {
+        // save panel sizes and divider locations.
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_LAST_SIZE, sb.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
+    }
+
+    public void restoreDividerLocations() {
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        if (rec != null) {
+            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_LAST_SIZE, null);
+            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            // use divider positions only if screen size is the same as it was the time the settings were saved
+            if (size != null && size.equals(sb.toString())) {
+
+                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, null);
+                if (location != null && jSplitPane0 != null) {
+                    jSplitPane0.setDividerLocation(Integer.parseInt(location));
+                }
+                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, null);
+                if (location != null && jSplitPane1 != null) {
+                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
+                }
+                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, null);
+                if (location != null && jSplitPane2 != null) {
+                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
+                }
+            }
         }
     }
 
@@ -245,8 +278,9 @@ public class GamePanel extends javax.swing.JPanel {
         this.btnStopWatching.setVisible(false);
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
-        if (!session.joinGame(gameId))
+        if (!session.joinGame(gameId)) {
             hideGame();
+        }
     }
 
     public synchronized void watchGame(UUID gameId) {
@@ -263,8 +297,9 @@ public class GamePanel extends javax.swing.JPanel {
         this.pnlReplay.setVisible(false);
         this.gameChatPanel.clear();
         this.gameChatPanel.connect(session.getGameChatId(gameId));
-        if (!session.watchGame(gameId))
+        if (!session.watchGame(gameId)) {
             hideGame();
+        }
     }
 
     public synchronized void replayGame(UUID gameId) {
@@ -280,8 +315,9 @@ public class GamePanel extends javax.swing.JPanel {
         this.btnStopWatching.setVisible(false);
         this.pnlReplay.setVisible(true);
         this.gameChatPanel.clear();
-        if (!session.startReplay(gameId))
+        if (!session.startReplay(gameId)) {
             hideGame();
+        }
     }
 
     public void hideGame() {
@@ -290,8 +326,9 @@ public class GamePanel extends javax.swing.JPanel {
         while (c != null && !(c instanceof GamePane)) {
             c = c.getParent();
         }
-        if (c != null)
+        if (c != null) {
             ((GamePane)c).hideFrame();
+        }
     }
 
     public synchronized void init(GameView game) {
@@ -315,8 +352,9 @@ public class GamePanel extends javax.swing.JPanel {
         int playerSeat = 0;
         if (playerId != null) {
             for (PlayerView player: game.getPlayers()) {
-                if (playerId.equals(player.getPlayerId()))
+                if (playerId.equals(player.getPlayerId())) {
                     break;
+                }
                 playerSeat++;
             }
         }
@@ -327,22 +365,27 @@ public class GamePanel extends javax.swing.JPanel {
         c.fill = GridBagConstraints.BOTH;
         c.weightx = 0.5;
         c.weighty = 0.5;
-        if (oddNumber)
+        if (oddNumber) {
             c.gridwidth = 2;
+        }
         c.gridx = col;
         c.gridy = row;
         this.pnlBattlefield.add(sessionPlayer, c);
         sessionPlayer.setVisible(true);
-        if (oddNumber)
+        if (oddNumber) {
             col++;
+        }
         int playerNum = playerSeat + 1;
-        if (playerNum >= numSeats)
+        if (playerNum >= numSeats) {
             playerNum = 0;
+        }
         while (true) {
-            if (row == 1)
+            if (row == 1) {
                 col++;
-            else
+            }
+            else {
                 col--;
+            }
             if (col >= numColumns) {
                 row = 0;
                 col = numColumns - 1;
@@ -359,10 +402,12 @@ public class GamePanel extends javax.swing.JPanel {
             this.pnlBattlefield.add(playerPanel, c);
             playerPanel.setVisible(true);
             playerNum++;
-            if (playerNum >= numSeats)
+            if (playerNum >= numSeats) {
                 playerNum = 0;
-            if (playerNum == playerSeat)
+            }
+            if (playerNum == playerSeat) {
                 break;
+            }
         }
         for (PlayAreaPanel p: players.values()) {
             p.sizePlayer(smallMode);
@@ -411,10 +456,12 @@ public class GamePanel extends javax.swing.JPanel {
             //AudioManager.playEndTurn();
         }
 
-        if (game.getStep() != null)
+        if (game.getStep() != null) {
             this.txtStep.setText(game.getStep().toString());
-        else
+        }
+        else {
             this.txtStep.setText("");
+        }
         this.txtActivePlayer.setText(game.getActivePlayerName());
         this.txtPriority.setText(game.getPriorityPlayerName());
         this.txtTurn.setText(Integer.toString(game.getTurn()));
@@ -625,10 +672,12 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void getAmount(int min, int max, String message) {
         pickNumber.showDialog(min, max, message);
-        if (pickNumber.isCancel())
+        if (pickNumber.isCancel()) {
             session.sendPlayerBoolean(gameId, false);
-        else
+        }
+        else {
             session.sendPlayerInteger(gameId, pickNumber.getAmount());
+        }
     }
 
     public void getChoice(String message, String[] choices) {
@@ -703,6 +752,8 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane0.setDividerSize(7);
         jSplitPane0.setResizeWeight(1.0);
         jSplitPane0.setOneTouchExpandable(true);
+
+        restoreDividerLocations();
 
         pnlGameInfo.setOpaque(false);
 
@@ -814,8 +865,8 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        final BasicSplitPaneUI ui = (BasicSplitPaneUI) jSplitPane0.getUI();
-        final BasicSplitPaneDivider divider = ui.getDivider();
+        final BasicSplitPaneUI myUi = (BasicSplitPaneUI) jSplitPane0.getUI();
+        final BasicSplitPaneDivider divider = myUi.getDivider();
         final JButton upArrowButton = (JButton) divider.getComponent(0);
         upArrowButton.addActionListener(new ActionListener() {
             @Override
@@ -852,6 +903,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnStopWatching.setText("Stop Watching");
         btnStopWatching.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStopWatchingActionPerformed(evt);
             }
@@ -862,6 +914,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png"))); // NOI18N
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnStopReplayActionPerformed(evt);
             }
@@ -869,6 +922,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png"))); // NOI18N
         btnNextPlay.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNextPlayActionPerformed(evt);
             }
@@ -876,6 +930,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png"))); // NOI18N
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPlayActionPerformed(evt);
             }
@@ -883,6 +938,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png"))); // NOI18N
         btnSkipForward.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSkipForwardActionPerformed(evt);
             }
@@ -890,6 +946,7 @@ public class GamePanel extends javax.swing.JPanel {
 
         btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png"))); // NOI18N
         btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPreviousPlayActionPerformed(evt);
             }
@@ -1053,11 +1110,31 @@ public class GamePanel extends javax.swing.JPanel {
         jSplitPane1.setLeftComponent(jPanel3);
         jSplitPane1.setRightComponent(jSplitPane2);
 
-        jPanel2.setLayout(new GridLayout(0, 1));
-        jPanel2.add(bigCard);
-        jPanel2.add(pnlGameInfo);
+        // Set individual area sizes of big card pane
+        GridBagLayout gbl = new GridBagLayout();
+        jPanel2.setLayout( gbl );
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridwidth = 1; gbc.gridheight = 4; // size 4/5
+        gbc.weightx = 1.0; gbc.weighty = 1.0;
+        gbl.setConstraints( bigCard, gbc );
+        jPanel2.add( bigCard );
+
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.fill = GridBagConstraints.NONE;
+        gbc2.gridx = 0; gbc2.gridy = GridBagConstraints.RELATIVE;
+        gbc2.gridwidth = 1; gbc2.gridheight = 1; //size 1/5
+        gbc2.weightx = 0.0; gbc2.weighty = 0.0;
+        gbl.setConstraints( pnlGameInfo, gbc2 );
+        jPanel2.add( pnlGameInfo );
+
         jPanel2.setOpaque(false);
+
+        // game pane and chat/log pane
         jSplitPane0.setLeftComponent(jSplitPane1);
+        // big card and buttons
         jSplitPane0.setRightComponent(jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1087,7 +1164,7 @@ public class GamePanel extends javax.swing.JPanel {
     private void btnSwitchHandActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String[] choices = handCards.keySet().toArray(new String[0]);
 
-        String chosenHandKey = (String) JOptionPane.showInputDialog(
+        String newChosenHandKey = (String) JOptionPane.showInputDialog(
                     this,
                     "Choose hand to display:", "Switch between hands",
                     JOptionPane.PLAIN_MESSAGE,
@@ -1095,8 +1172,8 @@ public class GamePanel extends javax.swing.JPanel {
                     choices,
                     this.chosenHandKey);
 
-        if (chosenHandKey != null && chosenHandKey.length() > 0) {
-            this.chosenHandKey = chosenHandKey;
+        if (newChosenHandKey != null && newChosenHandKey.length() > 0) {
+            this.chosenHandKey = newChosenHandKey;
             SimpleCardsView cards = handCards.get(chosenHandKey);
             handContainer.loadCards(cards, bigCard, gameId);
         }
