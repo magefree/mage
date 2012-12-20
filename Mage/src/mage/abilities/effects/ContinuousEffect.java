@@ -44,19 +44,21 @@ import java.util.UUID;
  */
 public interface ContinuousEffect<T extends ContinuousEffect<T>> extends Effect<T> {
 
-    public boolean isUsed();
-    public boolean isDiscarded();
-    public void discard();
-    public Duration getDuration();
-    public Date getTimestamp();
-    public void setTimestamp();
-    public void newId();
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
-    public boolean hasLayer(Layer layer);
-    public boolean isInactive(Ability source, Game game);
-    public void init(Ability source, Game game);
-    public Layer getLayer();
-    public SubLayer getSublayer();
-    public void overrideRuleText(String text);
-    public List<UUID> getAffectedObjects();
+    boolean isUsed();
+    boolean isDiscarded();
+    void discard();
+    Duration getDuration();
+    Date getTimestamp();
+    void setTimestamp();
+    boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game);
+    boolean hasLayer(Layer layer);
+    boolean isInactive(Ability source, Game game);
+    void init(Ability source, Game game);
+    Layer getLayer();
+    SubLayer getSublayer();
+    void overrideRuleText(String text);
+    List<UUID> getAffectedObjects();
+
+    @Override
+    void newId();
 }

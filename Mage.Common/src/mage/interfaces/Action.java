@@ -13,5 +13,5 @@ public interface Action {
     /**
      * Executes action.
      */
-    public void execute() throws MageException;
+    void execute() throws MageException;
 }

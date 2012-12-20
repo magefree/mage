@@ -52,7 +52,7 @@ public interface CostModificationEffect<T extends CostModificationEffect<T>> ext
      * @param abilityToModify The {@link mage.abilities.SpellAbility} or {@link Ability} which should be modified.
      * @return
      */
-    public boolean apply ( Game game, Ability source, Ability abilityToModify );
+    boolean apply ( Game game, Ability source, Ability abilityToModify );
 
     /**
      * Called by the {@link ContinuousEffects#costModification(mage.abilities.Ability, mage.game.Game) ContinuousEffects.costModification}
@@ -63,5 +63,5 @@ public interface CostModificationEffect<T extends CostModificationEffect<T>> ext
      * @param game The game for which this effect shoul dbe applied.
      * @return
      */
-    public boolean applies(Ability abilityToModify, Ability source, Game game);
+    boolean applies(Ability abilityToModify, Ability source, Game game);
 }

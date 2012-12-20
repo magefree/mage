@@ -36,15 +36,15 @@ import java.util.Set;
  */
 public interface Choice {
 
-    public boolean isChosen();
-    public boolean isRequired();
-    public void clearChoice();
-    public String getMessage();
-    public void setMessage(String message);
-    public void setChoice(String choice);
-    public Set<String> getChoices();
-    public void setChoices(Set<String> choices);
-    public String getChoice();
+    boolean isChosen();
+    boolean isRequired();
+    void clearChoice();
+    String getMessage();
+    void setMessage(String message);
+    void setChoice(String choice);
+    Set<String> getChoices();
+    void setChoices(Set<String> choices);
+    String getChoice();
 
-    public Choice copy();
+    Choice copy();
 }

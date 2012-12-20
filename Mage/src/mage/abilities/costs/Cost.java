@@ -37,15 +37,15 @@ import mage.target.Targets;
 
 public interface Cost extends Serializable {
 
-    public UUID getId();
-    public String getText();
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game);
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana);
-    public boolean isPaid();
-    public void clearPaid();
-    public void setPaid();
-    public Targets getTargets();
+    UUID getId();
+    String getText();
+    boolean canPay(UUID sourceId, UUID controllerId, Game game);
+    boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana);
+    boolean isPaid();
+    void clearPaid();
+    void setPaid();
+    Targets getTargets();
 
-    public Cost copy();
+    Cost copy();
 
 }

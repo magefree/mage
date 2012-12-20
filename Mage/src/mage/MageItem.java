@@ -37,6 +37,5 @@ import java.util.UUID;
  */
 public interface MageItem extends Serializable {
 
-    public UUID getId();
-
+    UUID getId();
 }

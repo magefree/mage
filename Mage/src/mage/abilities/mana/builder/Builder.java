@@ -33,5 +33,6 @@ import java.io.Serializable;
  * @author noxx
  */
 public interface Builder<T> extends Serializable {
-    public T build(Object... options);
+
+    T build(Object... options);
 }

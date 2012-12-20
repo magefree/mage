@@ -59,7 +59,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.cards.CardImpl#getRules()
      * @see mage.abilities.keyword.LevelAbility#getRule()
      */
-    public List<String> getRules(String source);
+    List<String> getRules(String source);
 
     /**
      * Retrieves all activated abilities for the given {@link Zone}.
@@ -69,7 +69,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * 
      * @see mage.cards.CardImpl#getSpellAbility()
      */
-    public Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
+    Abilities<ActivatedAbility> getActivatedAbilities(Zone zone);
 
     /**
      * Retrieves all {@link ManaAbility mana abilities} in the given {@link Zone}.
@@ -81,7 +81,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.players.PlayerImpl#getManaAvailable(mage.game.Game)
      * @see mage.players.PlayerImpl#getAvailableManaProducers(mage.game.Game)
      */
-    public Abilities<ManaAbility> getManaAbilities(Zone zone);
+    Abilities<ManaAbility> getManaAbilities(Zone zone);
 
     /**
      * Retrieves all {@link ManaAbility mana abilities} in the given {@link Zone} that can be used.
@@ -93,7 +93,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.players.PlayerImpl#getManaAvailable(mage.game.Game)
      * @see mage.players.PlayerImpl#getAvailableManaProducers(mage.game.Game)
      */
-    public Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game);
+    Abilities<ManaAbility> getAvailableManaAbilities(Zone zone, Game game);
 
     /**
      * Retrieves all {@link StaticAbility static abilities} in the given {@link Zone}.
@@ -108,14 +108,14 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.abilities.effects.ContinuousEffects#asThough(java.util.UUID, mage.Constants.AsThoughEffectType, mage.game.Game)
      * @see mage.abilities.effects.ContinuousEffects#costModification(mage.abilities.Ability, mage.game.Game)
      */
-    public Abilities<StaticAbility> getStaticAbilities(Zone zone);
+    Abilities<StaticAbility> getStaticAbilities(Zone zone);
 
     /**
      * Retrieves all {@link EvasionAbility evasion abilities}.
      * 
      * @return The {@link EvasionAbility evasion abilities}.
      */
-    public Abilities<EvasionAbility> getEvasionAbilities();
+    Abilities<EvasionAbility> getEvasionAbilities();
 
     /**
      * Retrieves all {@link TriggeredAbility triggered abilities} for the given
@@ -128,7 +128,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.game.permanent.PermanentImpl#checkTriggers(mage.game.events.GameEvent, mage.game.Game)
      * @see mage.game.permanent.PermanentCard#checkPermanentOnlyTriggers(mage.game.events.ZoneChangeEvent, mage.game.Game)
      */
-    public Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone);
+    Abilities<TriggeredAbility> getTriggeredAbilities(Zone zone);
 
     /**
      * Retrieves all {@link ProtectionAbility protection abilities}.
@@ -139,7 +139,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.players.PlayerImpl#hasProtectionFrom(mage.MageObject)
      * @see mage.players.PlayerImpl#canDamage(mage.MageObject)
      */
-    public Abilities<ProtectionAbility> getProtectionAbilities();
+    Abilities<ProtectionAbility> getProtectionAbilities();
 
     /**
      * TODO Method is unused, keep it around?
@@ -150,7 +150,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * 
      * @return A numeral value representing the 'strength' or effectiveness of the abilities?
      */
-    public int getOutcomeTotal();
+    int getOutcomeTotal();
 
     /**
      * Sets the controller of this set of abilities.
@@ -162,7 +162,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.game.permanent.PermanentImpl#changeControllerId(java.util.UUID, mage.game.Game)
      * @see mage.game.permanent.PermanentCard#copyFromCard(mage.cards.Card)
      */
-    public void setControllerId(UUID controllerId);
+    void setControllerId(UUID controllerId);
 
     /**
      * Sets the source of this set of abilities.
@@ -171,17 +171,17 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * 
      * @see mage.cards.CardImpl#assignNewId()
      */
-    public void setSourceId(UUID sourceId);
+    void setSourceId(UUID sourceId);
 
     /**
      * Assigns a new {@link java.util.UUID}
      */
-    public void newId();
+    void newId();
 
     /**
      * Assigns a new {@link java.util.UUID}
      */
-    public void newOriginalId();
+    void newOriginalId();
 
     /**
      * Searches this set of abilities to see if the ability represented by the abilityId
@@ -190,7 +190,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param abilityId
      * @return 
      */
-    public boolean containsKey(UUID abilityId);
+    boolean containsKey(UUID abilityId);
 
     /**
      * TODO Method is unused, keep it around?
@@ -200,7 +200,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param abilityId
      * @return 
      */
-    public T get(UUID abilityId);
+    T get(UUID abilityId);
 
     /**
      * TODO The usage of this method seems redundant to that of {@link #containsKey(java.util.UUID)}
@@ -212,7 +212,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param ability
      * @return 
      */
-    public boolean contains(T ability);
+    boolean contains(T ability);
 
     /**
      * Searches this set of abilities for the existence of each of the passed in
@@ -221,7 +221,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param abilities
      * @return True if the passed in set of abilities is also in this set of abilities.
      */
-    public boolean containsAll(Abilities<T> abilities);
+    boolean containsAll(Abilities<T> abilities);
 
     /**
      * Copies this set of abilities.  This copy should be new instances of all
@@ -229,7 +229,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * 
      * @return 
      */
-    public Abilities<T> copy();
+    Abilities<T> copy();
 
-    public String getValue();
+    String getValue();
 }

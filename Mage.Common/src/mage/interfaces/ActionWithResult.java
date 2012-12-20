@@ -16,11 +16,11 @@ public interface ActionWithResult<T> {
      * Executes and returns result.
      * @return
      */
-    public T execute() throws MageException;
+    T execute() throws MageException;
 
     /**
      * Defines negative result specific for type <T>.
      * @return
      */
-    public T negativeResult();
+    T negativeResult();
 }

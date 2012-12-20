@@ -38,8 +38,8 @@ import mage.game.Game;
  */
 public interface FilterInPlay<E> extends Filter<E> {
 
-    public boolean match(E o, UUID sourceId, UUID playerId, Game game);
+    boolean match(E o, UUID sourceId, UUID playerId, Game game);
     @Override
-    public FilterInPlay<E> copy();
+    FilterInPlay<E> copy();
 
 }

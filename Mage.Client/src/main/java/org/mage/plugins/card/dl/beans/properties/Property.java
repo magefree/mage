@@ -14,19 +14,20 @@ package org.mage.plugins.card.dl.beans.properties;
  * @author Clemens Koza
  */
 public interface Property<T> {
-    public void setValue(T value);
 
-    public T getValue();
+    void setValue(T value);
+
+    T getValue();
 
     /**
      * A property's hash code is its value's hashCode, or {@code null} if the value is null.
      */
     @Override
-    public int hashCode();
+    int hashCode();
 
     /**
      * Two properties are equal if their values are equal.
      */
     @Override
-    public boolean equals(Object obj);
+    boolean equals(Object obj);
 }

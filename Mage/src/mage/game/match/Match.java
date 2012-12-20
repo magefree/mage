@@ -43,29 +43,29 @@ import mage.players.Player;
  */
 public interface Match {
 
-    public static final int SIDEBOARD_TIME = 180;
+    int SIDEBOARD_TIME = 180;
 
-    public UUID getId();
-    public String getName();
-    public boolean isMatchOver();
-    public List<MatchPlayer> getPlayers();
-    public MatchPlayer getPlayer(UUID playerId);
-    public void addPlayer(Player player, Deck deck);
-    public void submitDeck(UUID playerId, Deck deck);
-    public void updateDeck(UUID playerId, Deck deck);
-    public void startMatch() throws GameException;
-    public void startGame() throws GameException;
-    public void sideboard();
-    public void endGame();
-    public Game getGame();
-    public List<Game> getGames();
-    public int getWinsNeeded();
-    public int getNumGames();
-    public boolean isDoneSideboarding();
-    public UUID getChooser();
-    public MatchOptions getOptions();
+    UUID getId();
+    String getName();
+    boolean isMatchOver();
+    List<MatchPlayer> getPlayers();
+    MatchPlayer getPlayer(UUID playerId);
+    void addPlayer(Player player, Deck deck);
+    void submitDeck(UUID playerId, Deck deck);
+    void updateDeck(UUID playerId, Deck deck);
+    void startMatch() throws GameException;
+    void startGame() throws GameException;
+    void sideboard();
+    void endGame();
+    Game getGame();
+    List<Game> getGames();
+    int getWinsNeeded();
+    int getNumGames();
+    boolean isDoneSideboarding();
+    UUID getChooser();
+    MatchOptions getOptions();
 
-    public void addTableEventListener(Listener<TableEvent> listener);
-    public void fireSideboardEvent(UUID playerId, Deck deck);
+    void addTableEventListener(Listener<TableEvent> listener);
+    void fireSideboardEvent(UUID playerId, Deck deck);
 
 }

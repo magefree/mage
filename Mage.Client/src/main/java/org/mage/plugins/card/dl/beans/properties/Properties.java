@@ -23,22 +23,23 @@ import org.mage.plugins.card.dl.beans.properties.bound.BoundProperties;
  * @author Clemens Koza
  */
 public interface Properties {
-    public <T> Property<T> property(String name, Property<T> property);
 
-    public <E> List<E> list(String name, List<E> list);
+    <T> Property<T> property(String name, Property<T> property);
 
-    public <E> Set<E> set(String name, Set<E> set);
+    <E> List<E> list(String name, List<E> list);
 
-    public <K, V> Map<K, V> map(String name, Map<K, V> map);
+    <E> Set<E> set(String name, Set<E> set);
+
+    <K, V> Map<K, V> map(String name, Map<K, V> map);
 
 
-    public <T> Property<T> property(String name, T value);
+    <T> Property<T> property(String name, T value);
 
-    public <T> Property<T> property(String name);
+    <T> Property<T> property(String name);
 
-    public <E> List<E> list(String name);
+    <E> List<E> list(String name);
 
-    public <E> Set<E> set(String name);
+    <E> Set<E> set(String name);
 
-    public <K, V> Map<K, V> map(String name);
+    <K, V> Map<K, V> map(String name);
 }

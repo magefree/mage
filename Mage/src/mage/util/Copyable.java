@@ -34,5 +34,5 @@ package mage.util;
  */
 public interface Copyable<T> {
 
-    public abstract T copy();
+    T copy();
 }

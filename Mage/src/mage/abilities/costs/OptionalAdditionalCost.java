@@ -33,7 +33,7 @@ package mage.abilities.costs;
  */
 public interface OptionalAdditionalCost extends Cost {
 
-    public String getName();
+    String getName();
 
     /**
      * Returns the complete text for the addional coast or if onlyCost is true
@@ -42,14 +42,14 @@ public interface OptionalAdditionalCost extends Cost {
      * @param onlyCost
      * @return
      */
-    public String getText(boolean onlyCost);
+    String getText(boolean onlyCost);
 
     /**
      * Returns a reminder text, if the cost has one
      *
      * @return
      */
-    public String getReminderText();
+    String getReminderText();
 
     /**
      * Returns a text suffix for the game log, that can be added to
@@ -58,7 +58,7 @@ public interface OptionalAdditionalCost extends Cost {
      * @param position - if there are multiple costs, it's the postion the cost is set (starting with 0)
      * @return
      */
-    public String getCastSuffixMessage(int position);
+    String getCastSuffixMessage(int position);
 
 
     /**
@@ -66,38 +66,38 @@ public interface OptionalAdditionalCost extends Cost {
      *
      * @param activated
      */
-    public void activate();
+    void activate();
 
     /**
      * Reset the activate and count information
      *
      */
-    public void reset();
+    void reset();
 
     /**
      * Set if the cost be multiple times activated
      *
      */
-    public void setRepeatable(boolean repeatable);
+    void setRepeatable(boolean repeatable);
 
     /**
      * Can the cost be multiple times activated
      *
      * @return
      */
-    public boolean isRepeatable();
+    boolean isRepeatable();
 
     /**
      * Returns if the cost was activated
      *
      * @return
      */
-    public boolean isActivated();
+    boolean isActivated();
 
     /**
      * Returns the number of times the cost was activated
      * @return
      */
-    public int getActivateCount();
+    int getActivateCount();
         
 }

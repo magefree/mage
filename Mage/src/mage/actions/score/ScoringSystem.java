@@ -7,6 +7,7 @@ import mage.game.Game;
  * @author ayratn
  */
 public interface ScoringSystem {
-    public int getLoseGameScore(final Game game);
-    public int getCardScore(final Card card);
+
+    int getLoseGameScore(final Game game);
+    int getCardScore(final Card card);
 }

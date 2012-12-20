@@ -38,18 +38,18 @@ import mage.game.Game;
 
 public interface Cards extends Set<UUID>, Serializable {
 
-    public void add(Card card);
-    public Card get(UUID cardId, Game game);
-    public void remove(Card card);
-    public void setOwner(UUID ownerId, Game game);
-    public void addAll(List<Card> createCards);
-    public Set<Card> getCards(Game game);
-    public Set<Card> getCards(FilterCard filter, Game game);
-    public Collection<Card> getUniqueCards(Game game);
-    public Card getRandom(Game game);
-    public int count(FilterCard filter, Game game);
-    public int count(FilterCard filter, UUID playerId, Game game);
-    public int count(FilterCard filter, UUID sourceId, UUID playerId, Game game);
+    void add(Card card);
+    Card get(UUID cardId, Game game);
+    void remove(Card card);
+    void setOwner(UUID ownerId, Game game);
+    void addAll(List<Card> createCards);
+    Set<Card> getCards(Game game);
+    Set<Card> getCards(FilterCard filter, Game game);
+    Collection<Card> getUniqueCards(Game game);
+    Card getRandom(Game game);
+    int count(FilterCard filter, Game game);
+    int count(FilterCard filter, UUID playerId, Game game);
+    int count(FilterCard filter, UUID sourceId, UUID playerId, Game game);
 
-    public Cards copy();
+    Cards copy();
 }

@@ -38,20 +38,21 @@ import mage.players.ManaPool;
 
 public interface ManaCost extends Cost {
 
-    public int convertedManaCost();
-    public Mana getMana();
-    public Mana getPayment();
-    public void assignPayment(Game game, Ability ability, ManaPool pool);
-    public void setPayment(Mana mana);
-    @Override
-    public String getText();
-    public ManaCost getUnpaid();
-    public ManaOptions getOptions();
-    public boolean testPay(Mana testMana);
-    public Filter getSourceFilter();
-    public void setSourceFilter(Filter filter);
+    int convertedManaCost();
+    Mana getMana();
+    Mana getPayment();
+    void assignPayment(Game game, Ability ability, ManaPool pool);
+    void setPayment(Mana mana);
+    ManaCost getUnpaid();
+    ManaOptions getOptions();
+    boolean testPay(Mana testMana);
+    Filter getSourceFilter();
+    void setSourceFilter(Filter filter);
 
     @Override
-    public ManaCost copy();
+    String getText();
+
+    @Override
+    ManaCost copy();
 
 }

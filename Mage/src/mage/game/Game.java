@@ -68,106 +68,106 @@ import java.util.*;
 
 public interface Game extends MageItem, Serializable {
 
-    public MatchType getGameType();
-    public int getNumPlayers();
-    public int getLife();
-    public RangeOfInfluence getRangeOfInfluence();
-    public MultiplayerAttackOption getAttackOption();
+    MatchType getGameType();
+    int getNumPlayers();
+    int getLife();
+    RangeOfInfluence getRangeOfInfluence();
+    MultiplayerAttackOption getAttackOption();
 
     //game data methods
-    public void loadCards(Set<Card> cards, UUID ownerId);
-    public Collection<Card> getCards();
-    public Object getCustomData();
-    public void setCustomData(Object data);
-    public GameOptions getOptions();
-    public MageObject getObject(UUID objectId);
-    public MageObject getEmblem(UUID objectId);
-    public UUID getControllerId(UUID objectId);
-    public Permanent getPermanent(UUID permanentId);
-    public Card getCard(UUID cardId);
-    public Ability getAbility(UUID abilityId, UUID sourceId);
-    public void setZone(UUID objectId, Zone zone);
-    public void addPlayer(Player player, Deck deck) throws GameException;
-    public Player getPlayer(UUID playerId);
-    public Players getPlayers();
-    public PlayerList getPlayerList();
-    public Set<UUID> getOpponents(UUID playerId);
-    public Turn getTurn();
-    public Phase getPhase();
-    public Step getStep();
-    public int getTurnNum();
-    public boolean isMainPhase();
-    public boolean canPlaySorcery(UUID playerId);
-    public UUID getActivePlayerId();
-    public UUID getPriorityPlayerId();
-    public void leave(UUID playerId);
-    public boolean isGameOver();
-    public Battlefield getBattlefield();
-    public SpellStack getStack();
-    public Exile getExile();
-    public Combat getCombat();
-    public GameState getState();
-    public String getWinner();
-    public ContinuousEffects getContinuousEffects();
-    public GameStates getGameStates();
-    public void loadGameStates(GameStates states);
-    public Game copy();
-    public boolean isSimulation();
-    public void setSimulation(boolean simulation);
-    public MageObject getLastKnownInformation(UUID objectId, Zone zone);
-    public MageObject getShortLivingLKI(UUID objectId, Zone zone);
-    public void rememberLKI(UUID objectId, Zone zone, MageObject object);
-    public void resetLKI();
-    public void resetShortLivingLKI();
-    public void setLosingPlayer(Player player);
-    public Player getLosingPlayer();
-    public void setStateCheckRequired();
-    public boolean getStateCheckRequired();
-    public void resetForSourceId(UUID sourceId);
+    void loadCards(Set<Card> cards, UUID ownerId);
+    Collection<Card> getCards();
+    Object getCustomData();
+    void setCustomData(Object data);
+    GameOptions getOptions();
+    MageObject getObject(UUID objectId);
+    MageObject getEmblem(UUID objectId);
+    UUID getControllerId(UUID objectId);
+    Permanent getPermanent(UUID permanentId);
+    Card getCard(UUID cardId);
+    Ability getAbility(UUID abilityId, UUID sourceId);
+    void setZone(UUID objectId, Zone zone);
+    void addPlayer(Player player, Deck deck) throws GameException;
+    Player getPlayer(UUID playerId);
+    Players getPlayers();
+    PlayerList getPlayerList();
+    Set<UUID> getOpponents(UUID playerId);
+    Turn getTurn();
+    Phase getPhase();
+    Step getStep();
+    int getTurnNum();
+    boolean isMainPhase();
+    boolean canPlaySorcery(UUID playerId);
+    UUID getActivePlayerId();
+    UUID getPriorityPlayerId();
+    void leave(UUID playerId);
+    boolean isGameOver();
+    Battlefield getBattlefield();
+    SpellStack getStack();
+    Exile getExile();
+    Combat getCombat();
+    GameState getState();
+    String getWinner();
+    ContinuousEffects getContinuousEffects();
+    GameStates getGameStates();
+    void loadGameStates(GameStates states);
+    Game copy();
+    boolean isSimulation();
+    void setSimulation(boolean simulation);
+    MageObject getLastKnownInformation(UUID objectId, Zone zone);
+    MageObject getShortLivingLKI(UUID objectId, Zone zone);
+    void rememberLKI(UUID objectId, Zone zone, MageObject object);
+    void resetLKI();
+    void resetShortLivingLKI();
+    void setLosingPlayer(Player player);
+    Player getLosingPlayer();
+    void setStateCheckRequired();
+    boolean getStateCheckRequired();
+    void resetForSourceId(UUID sourceId);
 
     //client event methods
-    public void addTableEventListener(Listener<TableEvent> listener);
-    public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
-    public void fireAskPlayerEvent(UUID playerId, String message);
-    public void fireChooseEvent(UUID playerId, Choice choice);
-    public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
-    public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
-    public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
-    public void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
-    public void fireSelectEvent(UUID playerId, String message);
-    public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);
-    public void firePriorityEvent(UUID playerId);
-    public void firePlayManaEvent(UUID playerId, String message);
-    public void firePlayXManaEvent(UUID playerId, String message);
-    public void fireGetChoiceEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices);
-    public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes);
-    public void fireGetAmountEvent(UUID playerId, String message, int min, int max);
-    public void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
-    public void fireInformEvent(String message);
-    public void fireUpdatePlayersEvent();
-    public void informPlayers(String message);
-    public void informPlayer(Player player, String message);
-    public void debugMessage(String message);
-    public void fireErrorEvent(String message, Exception ex);
+    void addTableEventListener(Listener<TableEvent> listener);
+    void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
+    void fireAskPlayerEvent(UUID playerId, String message);
+    void fireChooseEvent(UUID playerId, Choice choice);
+    void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options);
+    void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities);
+    void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required);
+    void fireSelectEvent(UUID playerId, String message);
+    void fireLookAtCardsEvent(UUID playerId, String message, Cards cards);
+    void firePriorityEvent(UUID playerId);
+    void firePlayManaEvent(UUID playerId, String message);
+    void firePlayXManaEvent(UUID playerId, String message);
+    void fireGetChoiceEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices);
+    void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes);
+    void fireGetAmountEvent(UUID playerId, String message, int min, int max);
+    void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2);
+    void fireInformEvent(String message);
+    void fireUpdatePlayersEvent();
+    void informPlayers(String message);
+    void informPlayer(Player player, String message);
+    void debugMessage(String message);
+    void fireErrorEvent(String message, Exception ex);
 
     //game event methods
-    public void fireEvent(GameEvent event);
-    public boolean replaceEvent(GameEvent event);
+    void fireEvent(GameEvent event);
+    boolean replaceEvent(GameEvent event);
 
     //game play methods
-    public void start(UUID choosingPlayerId);
-    public void start(UUID choosingPlayerId, GameOptions options);
-    public void resume();
-    public void pause();
-    public boolean isPaused();
-    public void end();
-    public void mulligan(UUID playerId);
-    public void quit(UUID playerId);
-    public void concede(UUID playerId);
-    public void emptyManaPools();
-    public void addEffect(ContinuousEffect continuousEffect, Ability source);
-    public void addEmblem(Emblem emblem, Ability source);
-    public void addPermanent(Permanent permanent);
+    void start(UUID choosingPlayerId);
+    void start(UUID choosingPlayerId, GameOptions options);
+    void resume();
+    void pause();
+    boolean isPaused();
+    void end();
+    void mulligan(UUID playerId);
+    void quit(UUID playerId);
+    void concede(UUID playerId);
+    void emptyManaPools();
+    void addEffect(ContinuousEffect continuousEffect, Ability source);
+    void addEmblem(Emblem emblem, Ability source);
+    void addPermanent(Permanent permanent);
 
     /**
      * This version supports copying of copies of any depth.
@@ -177,33 +177,33 @@ public interface Game extends MageItem, Serializable {
      * @param source
      * @param applier
      */
-    public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
     
-    public Card copyCard(Card cardToCopy, Ability source, UUID newController);
+    Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
-    public void addTriggeredAbility(TriggeredAbility ability);
-    public void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
-    public void applyEffects();
-    public boolean checkStateAndTriggered();
-    public void playPriority(UUID activePlayerId, boolean resuming);
-    public boolean endTurn(UUID playerId);
+    void addTriggeredAbility(TriggeredAbility ability);
+    void addDelayedTriggeredAbility(DelayedTriggeredAbility delayedAbility);
+    void applyEffects();
+    boolean checkStateAndTriggered();
+    void playPriority(UUID activePlayerId, boolean resuming);
+    boolean endTurn(UUID playerId);
 
-    public int doAction(MageAction action);
+    int doAction(MageAction action);
 
     //game transaction methods
-    public void saveState();
-    public int bookmarkState();
-    public void restoreState(int bookmark);
-    public void removeBookmark(int bookmark);
+    void saveState();
+    int bookmarkState();
+    void restoreState(int bookmark);
+    void removeBookmark(int bookmark);
 
     // game options
-    public void setGameOptions(GameOptions options);
+    void setGameOptions(GameOptions options);
 
     // game times
-    public Date getStartTime();
-    public Date getEndTime();
+    Date getStartTime();
+    Date getEndTime();
 
     // game cheats (for tests only)
-    public void cheat(UUID ownerId, Map<Zone, String> commands);
-    public void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
+    void cheat(UUID ownerId, Map<Zone, String> commands);
+    void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
 }

@@ -37,11 +37,10 @@ import java.util.UUID;
 
 public interface StackObject extends MageObject, Controllable {
 
-//    public Card getCard();
-    public boolean resolve(Game game);
-    public UUID getSourceId();
-    public void counter(UUID sourceId, Game game);
-    public Ability getStackAbility();
+    boolean resolve(Game game);
+    UUID getSourceId();
+    void counter(UUID sourceId, Game game);
+    Ability getStackAbility();
     @Override
-    public StackObject copy();
+    StackObject copy();
 }

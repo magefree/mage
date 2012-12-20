@@ -39,7 +39,7 @@ import mage.game.Game;
  */
 public interface Filter<E> extends Serializable {
 
-    public enum ComparisonType {
+    enum ComparisonType {
 
         GreaterThan(">"),
         Equal("=="),
@@ -57,16 +57,16 @@ public interface Filter<E> extends Serializable {
         }
     }
 
-    public enum ComparisonScope {
+    enum ComparisonScope {
         Any, All
     }
 
-    public boolean match(E o, Game game);
-    public void add(Predicate predicate);
+    boolean match(E o, Game game);
+    void add(Predicate predicate);
 
-    public String getMessage();
-    public void setMessage(String message);
+    String getMessage();
+    void setMessage(String message);
 
-    public Filter<E> copy();
+    Filter<E> copy();
 
 }

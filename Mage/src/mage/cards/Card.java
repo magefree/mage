@@ -42,34 +42,34 @@ import mage.watchers.Watcher;
 
 public interface Card extends MageObject {
 
-    public UUID getOwnerId();
-    public int getCardNumber();
-    public void setCardNumber(int cid);
-    public Rarity getRarity();
-    public void setRarity(Rarity rarity);
-    public void setControllerId(UUID controllerId);
-    public void setOwnerId(UUID ownerId);
-    public void addAbility(Ability ability);
-    public void addWatcher(Watcher watcher);
-    public SpellAbility getSpellAbility();
-    public List<String> getRules();
-    public List<Watcher> getWatchers();
-    public String getExpansionSetCode();
-    public void setExpansionSetCode(String expansionSetCode);
-    public void setFaceDown(boolean value);
-    public boolean isFaceDown();
-    public boolean isFlipCard();
+    UUID getOwnerId();
+    int getCardNumber();
+    void setCardNumber(int cid);
+    Rarity getRarity();
+    void setRarity(Rarity rarity);
+    void setControllerId(UUID controllerId);
+    void setOwnerId(UUID ownerId);
+    void addAbility(Ability ability);
+    void addWatcher(Watcher watcher);
+    SpellAbility getSpellAbility();
+    List<String> getRules();
+    List<Watcher> getWatchers();
+    String getExpansionSetCode();
+    void setExpansionSetCode(String expansionSetCode);
+    void setFaceDown(boolean value);
+    boolean isFaceDown();
+    boolean isFlipCard();
 
-    public boolean canTransform();
-    public Card getSecondCardFace();
-    public void setSecondCardFace(Card card);
-    public boolean isNightCard();
+    boolean canTransform();
+    Card getSecondCardFace();
+    void setSecondCardFace(Card card);
+    boolean isNightCard();
 
-    public void assignNewId();
+    void assignNewId();
 
-    public int getZoneChangeCounter();
+    int getZoneChangeCounter();
 
-    public void addInfo(String key, String value);
+    void addInfo(String key, String value);
 
     /**
      * Moves the card to the specified zone
@@ -84,9 +84,9 @@ public interface Card extends MageObject {
      * </ul>
      * @return true if card was moved to zone
      */
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
+    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag);
 
-    public boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects);
+    boolean moveToZone(Zone zone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects);
 
     /**
      * Moves the card to an exile zone
@@ -96,24 +96,24 @@ public interface Card extends MageObject {
      * @param game
      * @return true if card was moved to zone
      */
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
+    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game);
     
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
+    boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects);
 
 
-    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
-    public List<Mana> getMana();
+    boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
+    List<Mana> getMana();
 
-    public void build();
+    void build();
 
-    public void setUsesVariousArt(boolean usesVariousArt);
+    void setUsesVariousArt(boolean usesVariousArt);
     /**
      *
      * @return true if there exists various art images for this card
      */
-    public boolean getUsesVariousArt();
+    boolean getUsesVariousArt();
 
     @Override
-    public Card copy();
+    Card copy();
 }

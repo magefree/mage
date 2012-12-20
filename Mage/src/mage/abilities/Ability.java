@@ -62,7 +62,7 @@ public interface Ability extends Controllable, Serializable {
      * @return A {@link java.util.UUID} which the game will use to store and retrieve
      * the exact instance of this ability.
      */
-    public UUID getId();
+    UUID getId();
 
     /**
      * Assigns a new {@link java.util.UUID}
@@ -71,7 +71,7 @@ public interface Ability extends Controllable, Serializable {
      * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
-    public void newId();
+    void newId();
 
     /**
      * Assigns a new {@link java.util.UUID}
@@ -80,14 +80,14 @@ public interface Ability extends Controllable, Serializable {
      * @see mage.game.GameImpl#addTriggeredAbility(mage.abilities.TriggeredAbility)
      * @see mage.game.GameImpl#addDelayedTriggeredAbility(mage.abilities.DelayedTriggeredAbility)
      */
-    public void newOriginalId();
+    void newOriginalId();
 
     /**
      * Gets the {@link AbilityType} of this ability.
      * 
      * @return The {@link AbilityType type} of this ability.
      */
-    public AbilityType getAbilityType();
+    AbilityType getAbilityType();
 
     /**
      * Gets the id of the player in control of this ability.
@@ -95,35 +95,35 @@ public interface Ability extends Controllable, Serializable {
      * @return The {@link java.util.UUID} of the controlling player.
      */
     @Override
-    public UUID getControllerId();
+    UUID getControllerId();
 
     /**
      * Sets the id of the controller of this ability.
      * 
      * @param controllerId The {@link java.util.UUID} of the controller.
      */
-    public void setControllerId(UUID controllerId);
+    void setControllerId(UUID controllerId);
 
     /**
      * Gets the id of the object which put this ability in motion.
      * 
      * @return The {@link java.util.UUID} of the object this ability is associated with.
      */
-    public UUID getSourceId();
+    UUID getSourceId();
 
     /**
      * Sets the id of the object which this ability orignates from.
      * 
      * @param sourceID {@link java.util.UUID} the source id to set.
      */
-    public void setSourceId(UUID sourceID);
+    void setSourceId(UUID sourceID);
 
     /**
      * Gets all {@link Costs} associated with this ability.
      * 
      * @return All {@link Costs} associated with this ability.
      */
-    public Costs<Cost> getCosts();
+    Costs<Cost> getCosts();
 
     /**
      * Adds a {@link Cost} to this ability that must be paid before this ability
@@ -131,7 +131,7 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param cost The {@link Cost} to add.
      */
-    public void addCost(Cost cost);
+    void addCost(Cost cost);
 
     /**
      * Gets all {@link ManaCosts} associated with this ability.  These returned
@@ -140,7 +140,7 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @return All {@link ManaCosts} that must be paid.
      */
-    public ManaCosts<ManaCost> getManaCosts();
+    ManaCosts<ManaCost> getManaCosts();
 
     /**
      * Gets all the {@link ManaCosts} that must be paid before activating this
@@ -149,7 +149,7 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @return All {@link ManaCosts} that must be paid.
      */
-    public ManaCosts<ManaCost> getManaCostsToPay();
+    ManaCosts<ManaCost> getManaCostsToPay();
 
     /**
      * Adds a {@link ManaCost} to this ability that must be paid before this
@@ -157,14 +157,14 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param cost The {@link ManaCost} to add.
      */
-    public void addManaCost(ManaCost cost);
+    void addManaCost(ManaCost cost);
 
     /**
      * Gets all {@link AlternativeCost} associated with this ability.
      * 
      * @return All {@link AlternativeCost}'s that can be paid instead of the {@link ManaCosts}
      */
-    public List<AlternativeCost> getAlternativeCosts();
+    List<AlternativeCost> getAlternativeCosts();
 
     /**
      * Adds an {@link AlternativeCost} this ability that may be paid instead of
@@ -172,7 +172,7 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param cost The {@link AlternativeCost} to add.
      */
-    public void addAlternativeCost(AlternativeCost cost);
+    void addAlternativeCost(AlternativeCost cost);
 
     /**
      * TODO Method is unused, keep it around?
@@ -182,14 +182,14 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @return All {@link Costs} that can be paid above and beyond other costs.
      */
-    public Costs<Cost> getOptionalCosts();
+    Costs<Cost> getOptionalCosts();
 
     /**
      * Adds a {@link Cost} that is optional to this ability.
      * 
      * @param cost The {@link Cost} to add to the optional costs.
      */
-    public void addOptionalCost(Cost cost);
+    void addOptionalCost(Cost cost);
 
     /**
      * Retrieves the effects that are put into the place by the resolution of this
@@ -198,7 +198,7 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link Effects} that will be put into place by the resolution
      * of this ability.
      */
-    public Effects getEffects();
+    Effects getEffects();
 
     /**
      * Retrieves the effects of the specified {@link EffectType type} that are
@@ -208,14 +208,14 @@ public interface Ability extends Controllable, Serializable {
      * @param effectType The {@link EffectType type} to search for.
      * @return All {@link Effects} of the given {@link EffectType}.
      */
-    public Effects getEffects(Game game, EffectType effectType);
+    Effects getEffects(Game game, EffectType effectType);
 
     /**
      * Adds an effect to this ability.
      * 
      * @param effect The {@link Effect} to add.
      */
-    public void addEffect(Effect effect);
+    void addEffect(Effect effect);
 
     /**
      * Retrieves all targets that must be satisfied before this ability is
@@ -224,7 +224,7 @@ public interface Ability extends Controllable, Serializable {
      * @return All {@link Targets} that must be satisfied before this ability is put onto
      * the stack.
      */
-    public Targets getTargets();
+    Targets getTargets();
 
     /**
      * Retrieves the {@link Target} located at the 0th index in the {@link Targets}.
@@ -234,7 +234,7 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @see mage.target.Target
      */
-    public UUID getFirstTarget();
+    UUID getFirstTarget();
 
     /**
      * Adds a target to this ability that must be satisfied before this ability
@@ -242,35 +242,35 @@ public interface Ability extends Controllable, Serializable {
      * 
      * @param target The {@link Target} to add.
      */
-    public void addTarget(Target target);
+    void addTarget(Target target);
 
     /**
      * Choices
      * 
      * @return 
      */
-    public Choices getChoices();
+    Choices getChoices();
 
     /**
      * TODO: Javadoc me
      * 
      * @param choice 
      */
-    public void addChoice(Choice choice);
+    void addChoice(Choice choice);
 
     /**
      * Retrieves the {@link Zone} that this ability is active within.
      * 
      * @return 
      */
-    public Zone getZone();
+    Zone getZone();
 
     /**
      * Retrieves whether or not this abilities activation will use the stack.
      * 
      * @return 
      */
-    public boolean isUsesStack();
+    boolean isUsesStack();
 
     /**
      * Retrieves a human readable string representing what the ability states it
@@ -279,7 +279,7 @@ public interface Ability extends Controllable, Serializable {
      * @return A human readable string representing what the ability states it
      * accomplishes
      */
-    public String getRule();
+    String getRule();
 
     /**
      * Retrieves a human readable string including any costs associated with this
@@ -289,7 +289,7 @@ public interface Ability extends Controllable, Serializable {
      * @param all True if costs are desired in the output, false otherwise.
      * @return
      */
-    public String getRule(boolean all);
+    String getRule(boolean all);
 
     /**
      * Retrieves the rule associated with the given source.
@@ -297,7 +297,7 @@ public interface Ability extends Controllable, Serializable {
      * @param source
      * @return 
      */
-    public String getRule(String source);
+    String getRule(String source);
 
     /**
      * Activates this ability prompting the controller to pay any mandatory
@@ -311,7 +311,7 @@ public interface Ability extends Controllable, Serializable {
      * @see mage.players.PlayerImpl#playAbility(mage.abilities.ActivatedAbility, mage.game.Game)
      * @see mage.players.PlayerImpl#triggerAbility(mage.abilities.TriggeredAbility, mage.game.Game)
      */
-    public boolean activate(Game game, boolean noMana);
+    boolean activate(Game game, boolean noMana);
 
     /**
      * Resolves this ability and puts any effects it produces into play.  This
@@ -324,14 +324,14 @@ public interface Ability extends Controllable, Serializable {
      * @see mage.players.PlayerImpl#playManaAbility(mage.abilities.mana.ManaAbility, mage.game.Game)
      * @see mage.players.PlayerImpl#specialAction(mage.abilities.SpecialAction, mage.game.Game)
      */
-    public boolean resolve(Game game);
+    boolean resolve(Game game);
 
     /**
      * Used to reset the state of this ability.
      * 
      * @param game 
      */
-    public void reset(Game game);
+    void reset(Game game);
 
     /**
      * Overridden by triggered abilities with intervening if clauses - rule 20110715 - 603.4
@@ -339,22 +339,22 @@ public interface Ability extends Controllable, Serializable {
      * @param game
      * @return Whether or not the intervening if clause is satisfied
      */
-    public boolean checkIfClause(Game game);
+    boolean checkIfClause(Game game);
 
     /**
      * Creates a fresh copy of this ability.
      * 
      * @return A new copy of this ability.
      */
-    public Ability copy();
+    Ability copy();
 
-    public boolean isModal();
+    boolean isModal();
 
-    public void addMode(Mode mode);
+    void addMode(Mode mode);
 
-    public Modes getModes();
+    Modes getModes();
 
-    public boolean canChooseTarget(Game game);
+    boolean canChooseTarget(Game game);
 
     /**
      * Returns true if this abilities source is in the zone for the ability
@@ -363,20 +363,20 @@ public interface Ability extends Controllable, Serializable {
      * @param checkLKI
      * @return 
      */
-    public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
+    boolean isInUseableZone(Game game, MageObject source, boolean checkLKI);
 
     /**
      * Returns true if this ability has to be shown on top of the card.
      *
      * @return
      */
-    public boolean getRuleAtTheTop();
+    boolean getRuleAtTheTop();
 
     /**
      * Sets the value for the ruleAtTheTop attribute
      *
      * @param ruleAtTheTop
      */
-    public void setRuleAtTheTop(boolean ruleAtTheTop);
+    void setRuleAtTheTop(boolean ruleAtTheTop);
 
 }

@@ -42,9 +42,9 @@ import java.util.UUID;
 
 public interface Permanent extends Card, Controllable {
 
-    public boolean isTapped();
-    public boolean untap(Game game);
-    public boolean tap(Game game);
+    boolean isTapped();
+    boolean untap(Game game);
+    boolean tap(Game game);
     /**
      * use tap(game)
      * <p>setTapped doesn't trigger TAPPED event and should be used
@@ -54,39 +54,39 @@ public interface Permanent extends Card, Controllable {
      * @deprecated
      */
     @Deprecated
-    public void setTapped(boolean tapped);
-    public boolean canTap();
+    void setTapped(boolean tapped);
+    boolean canTap();
 
-    public boolean isFlipped();
-    public boolean unflip(Game game);
-    public boolean flip(Game game);
+    boolean isFlipped();
+    boolean unflip(Game game);
+    boolean flip(Game game);
 
-    public boolean transform(Game game);
-    public boolean isTransformed();
-    public void setTransformed(boolean value);
+    boolean transform(Game game);
+    boolean isTransformed();
+    void setTransformed(boolean value);
 
-    public boolean isPhasedIn();
-    public boolean phaseIn(Game game);
-    public boolean phaseOut(Game game);
+    boolean isPhasedIn();
+    boolean phaseIn(Game game);
+    boolean phaseOut(Game game);
 
-    public boolean isFaceUp();
-    public boolean turnFaceUp(Game game);
-    public boolean turnFaceDown(Game game);
+    boolean isFaceUp();
+    boolean turnFaceUp(Game game);
+    boolean turnFaceDown(Game game);
 
-    public List<UUID> getAttachments();
-    public UUID getAttachedTo();
-    public void attachTo(UUID permanentId, Game game);
-    public boolean addAttachment(UUID permanentId, Game game);
-    public boolean removeAttachment(UUID permanentId, Game game);
+    List<UUID> getAttachments();
+    UUID getAttachedTo();
+    void attachTo(UUID permanentId, Game game);
+    boolean addAttachment(UUID permanentId, Game game);
+    boolean removeAttachment(UUID permanentId, Game game);
 
-    public boolean changeControllerId(UUID controllerId, Game game);
-    public boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
-    public boolean hasProtectionFrom(MageObject source, Game game);
-    public boolean hasSummoningSickness();
-    public int getDamage();
-    public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+    boolean changeControllerId(UUID controllerId, Game game);
+    boolean canBeTargetedBy(MageObject source, UUID controllerId, Game game);
+    boolean hasProtectionFrom(MageObject source, Game game);
+    boolean hasSummoningSickness();
+    int getDamage();
+    int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
 
-    public int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects);
+    int damage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat, ArrayList<UUID> appliedEffects);
 
     /**
      * used in combat only to deal damage at the same time
@@ -98,65 +98,65 @@ public interface Permanent extends Card, Controllable {
      * @param combat
      * @return
      */
-    public int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
-    public int applyDamage(Game game);
+    int markDamage(int damage, UUID sourceId, Game game, boolean preventable, boolean combat);
+    int applyDamage(Game game);
 
-    public void removeAllDamage(Game game);
-    public Counters getCounters();
+    void removeAllDamage(Game game);
+    Counters getCounters();
 
-    public void addCounters(String name, int amount, Game game);
-    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
-    public void addCounters(Counter counter, Game game);
-    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+    void addCounters(String name, int amount, Game game);
+    void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
+    void addCounters(Counter counter, Game game);
+    void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
 
-    public void removeCounters(String name, int amount, Game game);
-    public void removeCounters(Counter counter, Game game);
-    public void reset(Game game);
-    public boolean destroy(UUID sourceId, Game game, boolean noRegen);
-    public boolean sacrifice(UUID sourceId, Game game);
-    public boolean regenerate(UUID sourceId, Game game);
-    public void entersBattlefield(UUID sourceId, Game game);
-    public String getValue();
+    void removeCounters(String name, int amount, Game game);
+    void removeCounters(Counter counter, Game game);
+    void reset(Game game);
+    boolean destroy(UUID sourceId, Game game, boolean noRegen);
+    boolean sacrifice(UUID sourceId, Game game);
+    boolean regenerate(UUID sourceId, Game game);
+    void entersBattlefield(UUID sourceId, Game game);
+    String getValue();
 
     @Deprecated
     @Override
-    public void addAbility(Ability ability);
+    void addAbility(Ability ability);
     @Deprecated
-    public void addAbility(Ability ability, Game game);
-    public void addAbility(Ability ability, UUID sourceId, Game game);
+    void addAbility(Ability ability, Game game);
+    void addAbility(Ability ability, UUID sourceId, Game game);
     
-    public void removeAllAbilities(UUID sourceId, Game game);
+    void removeAllAbilities(UUID sourceId, Game game);
 
-    public void setLoyaltyUsed(boolean used);
-    public boolean isLoyaltyUsed();
+    void setLoyaltyUsed(boolean used);
+    boolean isLoyaltyUsed();
 
-    public void beginningOfTurn(Game game);
-    public void endOfTurn(Game game);
-    public void checkControlChanged(Game game);
-    public int getTurnsOnBattlefield();
+    void beginningOfTurn(Game game);
+    void endOfTurn(Game game);
+    void checkControlChanged(Game game);
+    int getTurnsOnBattlefield();
 
-    public void addPower(int power);
-    public void addToughness(int toughness);
+    void addPower(int power);
+    void addToughness(int toughness);
 
-    public boolean isAttacking();
-    public int getBlocking();
-    public void setAttacking(boolean attacking);
-    public void setBlocking(int blocking);
-    public int getMaxBlocks();
-    public void setMaxBlocks(int maxBlocks);
-    public int getMinBlockedBy();
-    public void setMinBlockedBy(int minBlockedBy);
-    public boolean canAttack(Game game);
-    public boolean canBlock(UUID attackerId, Game game);
-    public boolean canBlockAny(Game game);
-    public boolean removeFromCombat(Game game);
-    public boolean isDeathtouched();
+    boolean isAttacking();
+    int getBlocking();
+    void setAttacking(boolean attacking);
+    void setBlocking(int blocking);
+    int getMaxBlocks();
+    void setMaxBlocks(int maxBlocks);
+    int getMinBlockedBy();
+    void setMinBlockedBy(int minBlockedBy);
+    boolean canAttack(Game game);
+    boolean canBlock(UUID attackerId, Game game);
+    boolean canBlockAny(Game game);
+    boolean removeFromCombat(Game game);
+    boolean isDeathtouched();
 
     /**
      * Returns the list of sources that dealt damage this turn to this permanent
      * @return
      */
-    public List<UUID> getDealtDamageByThisTurn();
+    List<UUID> getDealtDamageByThisTurn();
 
     /**
      * Imprint some other card to this one.
@@ -165,7 +165,7 @@ public interface Permanent extends Card, Controllable {
      * @param game
      * @return true if card was imprinted
      */
-    public boolean imprint(UUID imprintedCard, Game game);
+    boolean imprint(UUID imprintedCard, Game game);
 
     /**
      * Removes all imprinted cards from permanent.
@@ -173,7 +173,7 @@ public interface Permanent extends Card, Controllable {
      * @param game
      * @return
      */
-    public boolean clearImprinted(Game game);
+    boolean clearImprinted(Game game);
 
     /**
      * Get card that was imprinted on this one.
@@ -181,7 +181,7 @@ public interface Permanent extends Card, Controllable {
      * Can be null if no card was imprinted.
      * @return Imprinted card UUID.
      */
-    public List<UUID> getImprinted();
+    List<UUID> getImprinted();
 
     /**
      * Allows to connect any card to permanent.
@@ -190,40 +190,40 @@ public interface Permanent extends Card, Controllable {
      * @param key
      * @param connectedCard
      */
-    public void addConnectedCard(String key, UUID connectedCard);
+    void addConnectedCard(String key, UUID connectedCard);
 
     /**
      * Returns connected cards.
      * Very similar to Imprint except that it is for internal use only.
      * @return
      */
-    public List<UUID> getConnectedCards(String key);
+    List<UUID> getConnectedCards(String key);
 
     /**
      * Clear all connected cards.
      */
-    public void clearConnectedCards(String key);
+    void clearConnectedCards(String key);
 
     /**
      * Sets paired card.
      *
      * @param pairedCard
      */
-    public void setPairedCard(UUID pairedCard);
+    void setPairedCard(UUID pairedCard);
 
     /**
      * Gets paired card. Can return null.
      *
      * @return
      */
-    public UUID getPairedCard();
+    UUID getPairedCard();
 
     /**
      * Makes permanent paired with no other permanent.
      */
-    public void clearPairedCard();
+    void clearPairedCard();
 
     @Override
-    public Permanent copy();
+    Permanent copy();
 
 }

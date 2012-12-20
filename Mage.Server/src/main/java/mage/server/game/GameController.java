@@ -638,6 +638,6 @@ public class GameController implements GameCallback {
     }
 
     interface Command {
-        public void execute(UUID player);
+        void execute(UUID player);
     }
 }

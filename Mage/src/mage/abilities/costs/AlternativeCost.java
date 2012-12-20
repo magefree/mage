@@ -35,7 +35,8 @@ import mage.game.Game;
  * @author BetaSteward_at_googlemail.com
  */
 public interface AlternativeCost extends Cost {
-    public boolean isAvailable(Game game, Ability source);
 
-    public String getName();
+    boolean isAvailable(Game game, Ability source);
+
+    String getName();
 }

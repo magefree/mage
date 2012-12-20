@@ -9,6 +9,7 @@ import mage.view.CardView;
  * @author nantuko
  */
 public interface CardInfoPane {
-    public void setCard (final CardView card);
-    public boolean isCurrentCard (CardView card);
+
+    void setCard (final CardView card);
+    boolean isCurrentCard (CardView card);
 }

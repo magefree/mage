@@ -44,22 +44,22 @@ import mage.players.Player;
  */
 public interface Tournament {
 
-    public UUID getId();
-    public void addPlayer(Player player, String playerType);
-    public TournamentPlayer getPlayer(UUID playerId);
-    public Collection<TournamentPlayer> getPlayers();
-    public Collection<Round> getRounds();
-    public List<ExpansionSet> getSets();
-    public void submitDeck(UUID playerId, Deck deck);
-    public void updateDeck(UUID playerId, Deck deck);
-    public void autoSubmit(UUID playerId, Deck deck);
-    public boolean allJoined();
-    public boolean isDoneConstructing();
-    public void leave(UUID playerId);
-    public void nextStep();
+    UUID getId();
+    void addPlayer(Player player, String playerType);
+    TournamentPlayer getPlayer(UUID playerId);
+    Collection<TournamentPlayer> getPlayers();
+    Collection<Round> getRounds();
+    List<ExpansionSet> getSets();
+    void submitDeck(UUID playerId, Deck deck);
+    void updateDeck(UUID playerId, Deck deck);
+    void autoSubmit(UUID playerId, Deck deck);
+    boolean allJoined();
+    boolean isDoneConstructing();
+    void leave(UUID playerId);
+    void nextStep();
 
-    public void addTableEventListener(Listener<TableEvent> listener);
-    public void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
-    public void fireConstructEvent(UUID playerId);
+    void addTableEventListener(Listener<TableEvent> listener);
+    void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
+    void fireConstructEvent(UUID playerId);
 
 }

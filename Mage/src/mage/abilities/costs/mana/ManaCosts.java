@@ -38,17 +38,17 @@ import mage.abilities.costs.VariableCost;
  */
 public interface ManaCosts<T extends ManaCost> extends List<T>, ManaCost {
 
-    public ManaCosts<T> getUnpaidVariableCosts();
-    public List<VariableCost> getVariableCosts();
-    public int getX();
-    public void setX(int x);
-    public void load(String mana);
-    public List<String> getSymbols();
+    ManaCosts<T> getUnpaidVariableCosts();
+    List<VariableCost> getVariableCosts();
+    int getX();
+    void setX(int x);
+    void load(String mana);
+    List<String> getSymbols();
 
 
     @Override
-    public Mana getMana();
+    Mana getMana();
 
     @Override
-    public ManaCosts<T> copy();
+    ManaCosts<T> copy();
 }
