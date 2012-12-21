@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class InduceDespair extends CardImpl<InduceDespair> {
     
-    FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand.");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card from your hand.");
 
     public InduceDespair(UUID ownerId) {
         super(ownerId, 114, "Induce Despair", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");

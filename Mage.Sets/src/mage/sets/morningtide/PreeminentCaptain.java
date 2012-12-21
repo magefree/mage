@@ -53,8 +53,6 @@ import mage.target.common.TargetDefender;
  */
 public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
 
-    final PreeminentCaptainEffect effect = new PreeminentCaptainEffect();
-
     public PreeminentCaptain(UUID ownerId) {
         super(ownerId, 20, "Preeminent Captain", Rarity.RARE,
                 new CardType[] { CardType.CREATURE }, "{2}{W}");
@@ -69,7 +67,7 @@ public class PreeminentCaptain extends CardImpl<PreeminentCaptain> {
         this.addAbility(FirstStrikeAbility.getInstance());
         // Whenever Preeminent Captain attacks, you may put a Soldier creature
         // card from your hand onto the battlefield tapped and attacking.
-        this.addAbility(new AttacksTriggeredAbility(effect, true));
+        this.addAbility(new AttacksTriggeredAbility(new PreeminentCaptainEffect(), true));
     }
 
     public PreeminentCaptain(final PreeminentCaptain card) {
@@ -115,8 +113,7 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
                         TargetDefender def = new TargetDefender(game
                                 .getCombat().getDefenders(), player.getId());
                         if (def.choose(getOutcome(), player.getId(), source.getSourceId(), game)) {
-                            // TODO -> If only one option, don't ask, as for
-                            // normal attacking.
+                            // TODO -> If only one option, don't ask, as for normal attacking.
                             if (def.getTargets().size() > 0) {
                                 game.getCombat().declareAttacker(
                                         permanent.getId(),

@@ -75,8 +75,6 @@ public class NissasChosen extends CardImpl<NissasChosen> {
 
 class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
-    boolean onTop = false;
-
     public NissasChosenEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If {this} would be put into a graveyard from the battlefield, put it on the bottom of its owner's library instead";
@@ -84,7 +82,6 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
     public NissasChosenEffect(final NissasChosenEffect effect) {
         super(effect);
-        this.onTop = effect.onTop;
     }
 
     @Override
@@ -101,7 +98,7 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());
         if ( card != null && event.getTargetId().equals(source.getSourceId()) ) {
-            return card.moveToZone(Zone.LIBRARY, source.getId(), game, onTop);
+            return card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
         }
         return false;
     }

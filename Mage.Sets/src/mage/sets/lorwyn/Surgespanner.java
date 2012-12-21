@@ -37,7 +37,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -45,8 +44,6 @@ import mage.target.TargetPermanent;
  * @author jeffwadsworth
  */
 public class Surgespanner extends CardImpl<Surgespanner> {
-
-    FilterPermanent filter = new FilterPermanent();
 
     public Surgespanner(UUID ownerId) {
         super(ownerId, 92, "Surgespanner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");

@@ -84,48 +84,47 @@ public class WaxmaneBaku extends CardImpl<WaxmaneBaku> {
     public WaxmaneBaku copy() {
         return new WaxmaneBaku(this);
     }
+}
 
-    private class WaxmaneBakuTapEffect extends OneShotEffect<WaxmaneBakuTapEffect> {
+class WaxmaneBakuTapEffect extends OneShotEffect<WaxmaneBakuTapEffect> {
 
-        FilterPermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent filter = new FilterCreaturePermanent();
 
-        public WaxmaneBakuTapEffect() {
-            super(Constants.Outcome.Tap);
-            staticText = "Tap X target creatures";
-        }
+    public WaxmaneBakuTapEffect() {
+        super(Constants.Outcome.Tap);
+        staticText = "Tap X target creatures";
+    }
 
-        public WaxmaneBakuTapEffect(final WaxmaneBakuTapEffect effect) {
-            super(effect);
-        }
+    public WaxmaneBakuTapEffect(final WaxmaneBakuTapEffect effect) {
+        super(effect);
+    }
 
-        @Override
-        public boolean apply(Game game, Ability source) {
-            int numberToTap = 0;
-            for (Cost cost : source.getCosts()) {
-                if (cost instanceof RemoveVariableCountersSourceCost) {
-                    numberToTap = ((RemoveVariableCountersSourceCost)cost).getAmount();
-                }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int numberToTap = 0;
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof RemoveVariableCountersSourceCost) {
+                numberToTap = ((RemoveVariableCountersSourceCost) cost).getAmount();
             }
-            TargetPermanent target = new TargetPermanent(numberToTap, filter);
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Tap, source.getControllerId(), source.getId(), game)) {
-                if (!target.getTargets().isEmpty()) {
-                    List<UUID> targets = target.getTargets();
-                    for (UUID targetId : targets) {
-                        Permanent permanent = game.getPermanent(targetId);
-                        if (permanent != null) {
-                            permanent.tap(game);
-                        }
+        }
+        TargetPermanent target = new TargetPermanent(numberToTap, filter);
+        if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+            if (!target.getTargets().isEmpty()) {
+                List<UUID> targets = target.getTargets();
+                for (UUID targetId : targets) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.tap(game);
                     }
                 }
-                return true;
             }
-            return false;
+            return true;
         }
+        return false;
+    }
 
-        @Override
-        public WaxmaneBakuTapEffect copy() {
-            return new WaxmaneBakuTapEffect(this);
-        }
-
+    @Override
+    public WaxmaneBakuTapEffect copy() {
+        return new WaxmaneBakuTapEffect(this);
     }
 }

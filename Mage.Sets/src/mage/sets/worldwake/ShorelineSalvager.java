@@ -47,14 +47,13 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class ShorelineSalvager extends CardImpl<ShorelineSalvager> {
 
+    private static final String rule = "Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.";
     private static final FilterPermanent filter = new FilterPermanent("Island");
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Island"));
     }
-    
-    String rule = "Whenever Shoreline Salvager deals combat damage to a player, if you control an Island, you may draw a card.";
 
     public ShorelineSalvager(UUID ownerId) {
         super(ownerId, 67, "Shoreline Salvager", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");

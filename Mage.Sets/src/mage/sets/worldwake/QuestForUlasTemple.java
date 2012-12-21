@@ -152,7 +152,8 @@ class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl<QuestForUl
 
 class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2> {
 
-    final static private FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card from your hand");
+    private static final String query = "Do you want to put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield?";
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Kraken, Leviathan, Octopus, or Serpent creature card from your hand");
 
     static {
         filter.add(Predicates.or(
@@ -161,7 +162,6 @@ class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2>
                 new SubtypePredicate("Octopus"),
                 new SubtypePredicate("Serpent")));
     }
-    String query = "Do you want to put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield?";
 
     QuestForUlasTempleEffect2() {
         super(Constants.Outcome.PutCreatureInPlay);

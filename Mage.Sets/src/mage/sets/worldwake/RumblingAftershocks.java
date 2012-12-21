@@ -54,13 +54,11 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class RumblingAftershocks extends CardImpl<RumblingAftershocks> {
 
-    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-
-    String rule = "As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.";
 
     public RumblingAftershocks(UUID ownerId) {
         super(ownerId, 89, "Rumbling Aftershocks", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}");

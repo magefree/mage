@@ -51,8 +51,6 @@ import mage.game.permanent.Permanent;
  */
 public class ShoalSerpent extends CardImpl<ShoalSerpent> {
     
-    static String rule = "Landfall - Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn";
-
     public ShoalSerpent(UUID ownerId) {
         super(ownerId, 65, "Shoal Serpent", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
         this.expansionSetCode = "ZEN";
@@ -105,8 +103,9 @@ class ShoalSerpentEffect extends ContinuousEffectImpl<ShoalSerpentEffect> {
                     if (sublayer == SubLayer.NA) {
                         for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
                             Ability entry = i.next();
-                            if (entry.getId().equals(DefenderAbility.getInstance().getId()))
+                            if (entry.getId().equals(DefenderAbility.getInstance().getId())) {
                                 i.remove();
+                            }
                         }
                     }
                     break;

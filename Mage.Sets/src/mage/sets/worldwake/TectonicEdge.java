@@ -81,7 +81,7 @@ public class TectonicEdge extends CardImpl<TectonicEdge> {
 
 class TectonicEdgeCost extends CostImpl<TectonicEdgeCost> {
 
-    FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
 
     public TectonicEdgeCost() {
         this.text = "Activate this ability only if an opponent controls four or more lands";

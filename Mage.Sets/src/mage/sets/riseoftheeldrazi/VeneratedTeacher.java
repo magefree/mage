@@ -75,7 +75,7 @@ public class VeneratedTeacher extends CardImpl<VeneratedTeacher> {
 
 class VeneratedTeacherEffect extends OneShotEffect<VeneratedTeacherEffect> {
 
-    FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     public VeneratedTeacherEffect() {
         super(Outcome.BoostCreature);

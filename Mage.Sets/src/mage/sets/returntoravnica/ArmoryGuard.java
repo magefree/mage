@@ -47,9 +47,9 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ArmoryGuard extends CardImpl<ArmoryGuard> {
     
-    String rule = "Armory Guard has vigilance as long as you control a Gate";
+    private static final String rule = "Armory Guard has vigilance as long as you control a Gate";
     
-    final static private FilterPermanent filter = new FilterPermanent("Gate");
+    private static final FilterPermanent filter = new FilterPermanent("Gate");
     
     static {
         filter.add(new SubtypePredicate("Gate"));

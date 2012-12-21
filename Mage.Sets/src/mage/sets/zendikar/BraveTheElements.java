@@ -77,7 +77,7 @@ class BraveTheElementsEffect extends GainAbilityControlledEffect {
         filter1.add(new ColorPredicate(ObjectColor.WHITE));
     }
 
-    FilterCard filter2;
+    private FilterCard filter2;
 
     public BraveTheElementsEffect() {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);

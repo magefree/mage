@@ -53,13 +53,12 @@ import mage.game.permanent.Permanent;
  */
 public class QuestForTheGoblinLord extends CardImpl<QuestForTheGoblinLord> {
 
-    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final String rule = "As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.";
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
-    
-    String rule = "As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.";
 
     public QuestForTheGoblinLord(UUID ownerId) {
         super(ownerId, 86, "Quest for the Goblin Lord", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{R}");

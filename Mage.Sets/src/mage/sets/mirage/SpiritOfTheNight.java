@@ -51,13 +51,12 @@ import java.util.UUID;
  */
 public class SpiritOfTheNight extends CardImpl<SpiritOfTheNight> {
     
+    private static final String rule = "Spirit of the Night has first strike as long as it's attacking";
     private static final FilterCard filter = new FilterCard("Black");
     
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
     }
-    
-    String rule = "Spirit of the Night has first strike as long as it's attacking";
 
     public SpiritOfTheNight(UUID ownerId) {
         super(ownerId, 44, "Spirit of the Night", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{B}{B}{B}");

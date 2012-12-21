@@ -130,7 +130,7 @@ class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
         filter1.add(new ControllerPredicate(TargetController.YOU));
         filter1.add(new SubtypePredicate("Ally"));
     }
-    FilterCard filter2;
+    private FilterCard filter2;
 
     public GainProtectionFromChosenColorEffect() {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);

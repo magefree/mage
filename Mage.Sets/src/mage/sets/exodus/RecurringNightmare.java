@@ -48,8 +48,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RecurringNightmare extends CardImpl<RecurringNightmare> {
     
-    FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
-    FilterControlledPermanent filter2 = new FilterControlledPermanent("creature to sacrifice");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your graveyard");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("creature to sacrifice");
 
     public RecurringNightmare(UUID ownerId) {
         super(ownerId, 72, "Recurring Nightmare", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
