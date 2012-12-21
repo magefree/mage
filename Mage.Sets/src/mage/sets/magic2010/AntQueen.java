@@ -52,7 +52,7 @@ public class AntQueen extends CardImpl<AntQueen> {
         this.expansionSetCode = "M10";
         this.subtype.add("Insect");
         this.color.setGreen(true);
-//        this.art = "122179_typ_reg_sty_010.jpg";
+
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 

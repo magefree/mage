@@ -183,7 +183,6 @@ class RavagerOfTheFellsEffect extends OneShotEffect<RavagerOfTheFellsEffect> {
 
     public RavagerOfTheFellsEffect() {
         super(Constants.Outcome.Damage);
-        //staticText = "{this} deals 2 damage to target opponent and 2 damage to up to one target creature that player controls";
     }
 
     public RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {

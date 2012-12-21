@@ -96,16 +96,10 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent permanent = game.getPermanent(source.getSourceId());
 
-        if (creature == null || permanent == null)
+        if (creature == null || permanent == null) {
             return false;
+        }
 
-        /*
-        CardUtil.copyTo(permanent).from(card, game);
-
-        Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
-        upkeepAbility.addTarget(new TargetCreaturePermanent());
-        permanent.addAbility(upkeepAbility, game);
-        */
         game.copyPermanent(creature, permanent, source, new ApplyToPermanent() {
             @Override
             public Boolean apply(Game game, Permanent permanent) {
@@ -115,7 +109,6 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
                 return true;
             }
         });
-
 
 
         return true;

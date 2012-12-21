@@ -59,21 +59,6 @@ public class StoicRebuttal extends CardImpl<StoicRebuttal> {
     @Override
     public void adjustCosts(Ability ability, Game game) {
         if (MetalcraftCondition.getInstance().apply(game, ability)) {
-            /*ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
-            ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
-            boolean reduced = false;
-            for (ManaCost manaCost : previousCost) {
-                Mana mana = manaCost.getOptions().get(0);
-                if (!reduced && mana != null && mana.getColorless() > 0) {
-                    mana.setColorless(0);
-                    adjustedCost.add(manaCost);
-                    reduced = true;
-                } else {
-                    adjustedCost.add(manaCost);
-                }
-            }
-            ability.getManaCostsToPay().clear();
-            ability.getManaCostsToPay().addAll(adjustedCost);*/
             ability.getManaCostsToPay().clear();
             ability.getManaCostsToPay().load("{U}{U}");
         }

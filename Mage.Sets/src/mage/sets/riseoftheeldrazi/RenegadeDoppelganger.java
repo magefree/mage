@@ -129,7 +129,6 @@ class RenegadeDoppelgangerEffect extends ContinuousEffectImpl<RenegadeDoppelgang
             return false;
         }
 
-        //CardUtil.copyTo(permanent).from(card, game);
         game.copyPermanent(creature, permanent, source, new EmptyApplyToPermanent());
 
         return true;

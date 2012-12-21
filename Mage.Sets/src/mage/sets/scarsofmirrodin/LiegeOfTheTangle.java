@@ -85,12 +85,6 @@ class LiegeOfTheTangleTriggeredAbility extends TriggeredAbilityImpl<LiegeOfTheTa
     LiegeOfTheTangleTriggeredAbility() {
         super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.AWAKENING.createInstance()));
         this.addEffect(new LiegeOfTheTangleEffect());
-//        Ability ability  = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
-//                            new ConditionalContinousEffect(
-//                                new BecomesCreatureSourceEOTEffect(new AwakeningLandToken(), "land"),
-//                                new HaveCounter(CounterType.AWAKENING),
-//                                "This land is an 8/8 green Elemental creature for as long as it has an awakening counter on it. It's still a land"));
-//        this.addEffect(new GainAbilityTargetEffect(ability, Constants.Duration.EndOfGame));
         Target target = new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), true);
         this.addTarget(target);
     }

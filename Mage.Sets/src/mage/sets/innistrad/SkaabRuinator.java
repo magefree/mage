@@ -122,7 +122,6 @@ class SkaabRuinatorAbility extends ActivatedAbilityImpl<SkaabRuinatorAbility> {
 class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
 
     public SkaabRuinatorEffect() {
-        // should it be?
         super(Constants.Outcome.PutCreatureInPlay);
         staticText = "";
     }
@@ -142,7 +141,6 @@ class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
         if (target != null) {
             Player controller = game.getPlayer(target.getOwnerId());
             if (controller != null) {
-                //return controller.cast(target.getSpellAbility(), game, true);
                 return target.cast(game, Zone.GRAVEYARD, target.getSpellAbility(), controller.getId());
             }
         }

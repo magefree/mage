@@ -37,7 +37,6 @@ import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
-//import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;

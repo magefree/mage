@@ -205,7 +205,6 @@ class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSouls
 
     public CavernOfSoulsCantCounterEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-        //staticText = "that spell can't be countered";
         staticText = null;
     }
 

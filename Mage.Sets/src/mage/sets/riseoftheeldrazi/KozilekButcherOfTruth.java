@@ -123,9 +123,7 @@ class KozilekButcherOfTruthEffect extends OneShotEffect<KozilekButcherOfTruthEff
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        /*Card permanent = (Card)game.getObject(source.getSourceId());*/
-        if (player != null /* && permanent != null */) {
-            /*permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);*/
+        if (player != null) {
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
             player.shuffleLibrary(game);
