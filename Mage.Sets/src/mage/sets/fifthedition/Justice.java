@@ -31,7 +31,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -95,21 +94,16 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl<JusticeTriggeredAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        //if anyone can perform these checks more efficiently, have at it.
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || 
-                event.getType() == GameEvent.EventType.DAMAGED_PLAYER  || 
-                event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
-            if (game.getObject(event.getSourceId()) instanceof Spell || 
-                    game.getObject(event.getSourceId()) instanceof Permanent) {
-                MageObject damageObject = game.getObject(event.getSourceId());
-                if (damageObject.getColor().contains(ObjectColor.RED)) {
-                    if (damageObject.getCardType().contains(CardType.CREATURE) ||
-                            damageObject.getCardType().contains(CardType.SORCERY) ||
-                            damageObject.getCardType().contains(CardType.INSTANT)) {
-                                this.getEffects().get(0).setValue("damageAmount", event.getAmount());
-                                this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(damageObject.getId())));
-                                return true;
-                    }
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
+            MageObject sourceObject = game.getObject(event.getSourceId());
+            if (sourceObject.getColor().isRed()) {
+                if (sourceObject instanceof Permanent && sourceObject.getCardType().contains(CardType.CREATURE)
+                        || sourceObject instanceof Spell) {
+                    this.getEffects().get(0).setValue("damageAmount", event.getAmount());
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getControllerId(sourceObject.getId())));
+                    return true;
                 }
             }
         }
@@ -126,7 +120,6 @@ class JusticeEffect extends OneShotEffect<JusticeEffect> {
 
     public JusticeEffect() {
         super(Constants.Outcome.Damage);
-        //this.staticText = "it deals that much damage to its controller";
     }
 
     public JusticeEffect(final JusticeEffect effect) {
