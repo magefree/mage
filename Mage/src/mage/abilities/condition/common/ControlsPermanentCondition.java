@@ -114,4 +114,9 @@ public class ControlsPermanentCondition implements Condition {
 
         return conditionApplies;
     }
+
+    @Override
+    public String toString() {
+        return filter.getMessage();
+    }
 }

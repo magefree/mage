@@ -89,7 +89,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
                 if (informPlayers) {
                     Player player = game.getPlayer(source.getControllerId());
                     if (player != null) {
-                        game.informPlayers(player.getName()+ " puts " + newCounter.getCount() + " " + newCounter.getName() + " counter on " + permanent.getName());
+                        game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
                     }
                 }
             }
@@ -98,12 +98,12 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
     }
 
     private void setText() {
+        StringBuilder sb = new StringBuilder();
         if (counter.getCount() > 1) {
-            StringBuilder sb = new StringBuilder();
             sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
             staticText = sb.toString();
         } else {
-            staticText = "put a " + counter.getName() + " counter on {this}";
+            staticText = sb.append("put a ").append(counter.getName().toLowerCase()).append(" counter on {this}").toString();
         }
     }
 

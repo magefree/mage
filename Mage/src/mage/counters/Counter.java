@@ -63,15 +63,18 @@ public class Counter<T extends Counter<T>> implements Serializable {
     }
 
     public void remove() {
-        if (count > 0)
+        if (count > 0) {
             count--;
+        }
     }
 
     public void remove(int amount) {
-        if (count > amount)
+        if (count > amount) {
             count -= amount;
-        else
+        }
+        else {
             count = 0;
+        }
     }
 
     public String getName() {
