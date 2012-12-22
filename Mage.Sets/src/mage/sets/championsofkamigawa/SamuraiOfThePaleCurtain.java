@@ -57,9 +57,10 @@ public class SamuraiOfThePaleCurtain extends CardImpl<SamuraiOfThePaleCurtain> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-    this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
         this.addAbility(new BushidoAbility(1));
         // If a permanent would be put into a graveyard, exile it instead.
@@ -82,7 +83,7 @@ public class SamuraiOfThePaleCurtain extends CardImpl<SamuraiOfThePaleCurtain> {
 class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl<SamuraiOfThePaleCurtainEffect> {
 
     public SamuraiOfThePaleCurtainEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a permanent would be put into a graveyard, exile it instead";
     }
 
@@ -102,16 +103,16 @@ class SamuraiOfThePaleCurtainEffect extends ReplacementEffectImpl<SamuraiOfThePa
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-                Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-                if (permanent != null) {
-                    return permanent.moveToExile(null, "", source.getId(), game);
-                }
+        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
+        if (permanent != null) {
+            return permanent.moveToExile(null, "", source.getId(), game);
+        }
         return false;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-                if (event.getType() == EventType.ZONE_CHANGE ) {
+        if (event.getType() == EventType.ZONE_CHANGE ) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getToZone() == Zone.GRAVEYARD) {
                 return true;

@@ -36,7 +36,9 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continious.ControlEnchantedEffect;
@@ -54,6 +56,10 @@ import mage.target.common.TargetCreaturePermanent;
  * @author LevelX2
  */
 public class MarkOfTheOni extends CardImpl<MarkOfTheOni> {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("if you control no Demons");
+    static {
+        filter.add(new SubtypePredicate("Demon"));
+    }
 
     public MarkOfTheOni(UUID ownerId) {
         super(ownerId, 73, "Mark of the Oni", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{B}");
@@ -72,8 +78,11 @@ public class MarkOfTheOni extends CardImpl<MarkOfTheOni> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // At the beginning of the end step, if you control no Demons, sacrifice Mark of the Oni.
-        this.addAbility(new MarkOfTheOniTriggeredAbility());
-
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD,
+                new SacrificeSourceEffect(),
+                Constants.TargetController.ANY,
+                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 1),
+                false));
     }
 
     public MarkOfTheOni(final MarkOfTheOni card) {
@@ -84,37 +93,4 @@ public class MarkOfTheOni extends CardImpl<MarkOfTheOni> {
     public MarkOfTheOni copy() {
         return new MarkOfTheOni(this);
     }
-
-    private class MarkOfTheOniTriggeredAbility extends TriggeredAbilityImpl<MarkOfTheOniTriggeredAbility> {
-        MarkOfTheOniTriggeredAbility() {
-            super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
-        }
-
-        MarkOfTheOniTriggeredAbility(final MarkOfTheOniTriggeredAbility ability) {
-            super(ability);
-        }
-
-        @Override
-        public MarkOfTheOniTriggeredAbility copy() {
-            return new MarkOfTheOniTriggeredAbility(this);
-        }
-
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.END_TURN_STEP_PRE) {
-                FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new SubtypePredicate("Demon"));
-                if (!game.getBattlefield().contains(filter, controllerId, 1, game)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public String getRule() {
-            return "At the beginning of the end step, if you control no Demons, sacrifice {this}.";
-        }
-    }
 }
-
