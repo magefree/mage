@@ -1,9 +1,9 @@
 package mage.abilities.condition;
 
+import java.io.Serializable;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-import java.io.Serializable;
 
 /**
  * Interface describing condition occurrence.
@@ -11,6 +11,24 @@ import java.io.Serializable;
  * @author nantuko, noxx
  */
 public interface Condition extends Serializable {
+
+    public enum ComparisonType {
+
+        GreaterThan(">"),
+        Equal("=="),
+        LessThan("<");
+
+        private String text;
+
+        ComparisonType(String text) {
+            this.text = text;
+        }
+
+        @Override
+        public String toString() {
+            return text;
+        }
+    }
 
     /**
      * Checks the game to see if this condition applies for the given ability.
