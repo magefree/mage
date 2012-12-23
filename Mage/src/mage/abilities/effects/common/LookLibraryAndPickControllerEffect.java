@@ -73,7 +73,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
 
     public LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
         super(effect);
-        this.numberToPick = effect.numberToPick.clone();
+        this.numberToPick = effect.numberToPick.copy();
         this.filter = effect.filter.copy();
         this.revealPickedCards = effect.revealPickedCards;
         this.targetPickedCards = effect.targetPickedCards;

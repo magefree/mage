@@ -56,7 +56,7 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
 
     public GainLifeEffect(final GainLifeEffect effect) {
         super(effect);
-        this.life = effect.life.clone();
+        this.life = effect.life.copy();
     }
 
     @Override

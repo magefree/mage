@@ -51,7 +51,7 @@ public class DynamicManaEffect extends BasicManaEffect {
     public DynamicManaEffect(final DynamicManaEffect effect) {
         super(effect);
         this.computedMana = effect.computedMana.copy();
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
     }
 
     @Override

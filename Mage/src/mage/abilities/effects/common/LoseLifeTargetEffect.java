@@ -56,7 +56,7 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
 
     public LoseLifeTargetEffect(final LoseLifeTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
     }
 
     @Override

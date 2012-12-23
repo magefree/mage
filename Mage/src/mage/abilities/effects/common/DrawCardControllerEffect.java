@@ -50,13 +50,13 @@ public class DrawCardControllerEffect extends OneShotEffect<DrawCardControllerEf
 
     public DrawCardControllerEffect(DynamicValue amount) {
         super(Outcome.DrawCard);
-        this.amount = amount.clone();
+        this.amount = amount.copy();
         setText();
     }
 
     public DrawCardControllerEffect(final DrawCardControllerEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
     }
 
     @Override

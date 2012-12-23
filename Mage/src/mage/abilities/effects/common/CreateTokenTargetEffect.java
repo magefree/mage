@@ -27,7 +27,7 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
         super(Constants.Outcome.PutCreatureInPlay);
         this.token = token;
-        this.amount = amount.clone();
+        this.amount = amount.copy();
     }
 
     public CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {

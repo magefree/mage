@@ -73,7 +73,7 @@ public class SunburstCount  implements DynamicValue{
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new SunburstCount();
     }
 

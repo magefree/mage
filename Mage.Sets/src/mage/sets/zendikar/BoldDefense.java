@@ -93,7 +93,7 @@ class BoldDefensePTCount implements DynamicValue {
 
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new BoldDefensePTCount();
     }
 

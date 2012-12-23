@@ -91,7 +91,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
 
     public LookLibraryControllerEffect(final LookLibraryControllerEffect effect) {
         super(effect);
-        this.numberOfCards = effect.numberOfCards.clone();
+        this.numberOfCards = effect.numberOfCards.copy();
         this.mayShuffleAfter = effect.mayShuffleAfter;
         this.targetZoneLookedCards = effect.targetZoneLookedCards;
         this.putOnTop = effect.putOnTop;

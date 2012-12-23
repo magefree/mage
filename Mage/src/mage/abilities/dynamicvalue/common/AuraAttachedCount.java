@@ -72,7 +72,7 @@ public class AuraAttachedCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new AuraAttachedCount(this);
     }
 

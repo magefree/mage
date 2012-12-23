@@ -56,13 +56,13 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
     public CreateTokenEffect(Token token, DynamicValue amount) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
-        this.amount = amount.clone();
+        this.amount = amount.copy();
         setText();
     }
 
     public CreateTokenEffect(final CreateTokenEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
         this.token = effect.token.copy();
     }
 

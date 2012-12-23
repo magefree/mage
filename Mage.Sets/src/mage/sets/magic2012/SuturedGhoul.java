@@ -160,7 +160,7 @@ class SuturedGhoulPowerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return getInstance();
     }
 
@@ -202,7 +202,7 @@ class SuturedGhoulToughnessCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return getInstance();
     }
 

@@ -89,7 +89,7 @@ class CivicSaberColorCount implements DynamicValue {
     }
  
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new CivicSaberColorCount(this);
     }
  

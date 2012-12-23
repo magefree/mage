@@ -8,11 +8,11 @@ public class SignInversionDynamicValue implements DynamicValue {
     private DynamicValue value;
 
     public SignInversionDynamicValue(DynamicValue value) {
-        this.value = value.clone();
+        this.value = value.copy();
     }
 
     SignInversionDynamicValue(final SignInversionDynamicValue dynamicValue) {
-        this.value = dynamicValue.value.clone();
+        this.value = dynamicValue.value.copy();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class SignInversionDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new SignInversionDynamicValue(this);
     }
 

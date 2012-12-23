@@ -120,7 +120,7 @@ class ZuberasDiedDynamicValue implements DynamicValue {
     }
 
     @Override
-    public ZuberasDiedDynamicValue clone() {
+    public ZuberasDiedDynamicValue copy() {
         return new ZuberasDiedDynamicValue();
     }
 

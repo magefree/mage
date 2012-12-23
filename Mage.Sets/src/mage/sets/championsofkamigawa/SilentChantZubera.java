@@ -79,7 +79,7 @@ class SilentChantZuberaDynamicValue implements DynamicValue {
     }
 
     @Override
-    public SilentChantZuberaDynamicValue clone() {
+    public SilentChantZuberaDynamicValue copy() {
         return new SilentChantZuberaDynamicValue();
     }
 

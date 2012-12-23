@@ -55,7 +55,7 @@ public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffe
 
     public DiscardControllerEffect(final DiscardControllerEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
     }
 
     @Override

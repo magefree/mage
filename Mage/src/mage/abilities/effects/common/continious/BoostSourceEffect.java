@@ -69,8 +69,8 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> i
 
     public BoostSourceEffect(final BoostSourceEffect effect) {
         super(effect);
-        this.power = effect.power.clone();
-        this.toughness = effect.toughness.clone();
+        this.power = effect.power.copy();
+        this.toughness = effect.toughness.copy();
         this.lockedIn = effect.lockedIn;
     }
 

@@ -73,8 +73,8 @@ public class BoostEquippedEffect extends ContinuousEffectImpl<BoostEquippedEffec
 
     public BoostEquippedEffect(final BoostEquippedEffect effect) {
         super(effect);
-        this.power = effect.power.clone();
-        this.toughness = effect.toughness.clone();
+        this.power = effect.power.copy();
+        this.toughness = effect.toughness.copy();
         this.fixedTarget = effect.fixedTarget;
     }
 

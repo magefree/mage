@@ -176,7 +176,7 @@ class GutterGrimeCounters implements DynamicValue {
     }
 
     @Override
-    public GutterGrimeCounters clone() {
+    public GutterGrimeCounters copy() {
         return this;
     }
 

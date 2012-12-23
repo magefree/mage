@@ -28,7 +28,7 @@ public class DiscardCostCardConvertedMana implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new DiscardCostCardConvertedMana();
     }
 

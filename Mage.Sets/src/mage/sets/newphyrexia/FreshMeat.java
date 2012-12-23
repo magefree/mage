@@ -123,7 +123,7 @@ class FreshMeatDynamicValue implements DynamicValue {
     }
 
     @Override
-    public FreshMeatDynamicValue clone() {
+    public FreshMeatDynamicValue copy() {
         return new FreshMeatDynamicValue();
     }
 

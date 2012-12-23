@@ -137,7 +137,7 @@ class CardsInTargetPlayerHandCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new mage.abilities.dynamicvalue.common.CardsInControllerHandCount();
     }
 

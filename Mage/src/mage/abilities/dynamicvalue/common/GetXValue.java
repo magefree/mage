@@ -47,7 +47,7 @@ public class GetXValue implements DynamicValue {
     }
 
     @Override
-    public GetXValue clone() {
+    public GetXValue copy() {
         return new GetXValue();
     }
 

@@ -22,7 +22,7 @@ public class StaticValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new StaticValue(this);
     }
 

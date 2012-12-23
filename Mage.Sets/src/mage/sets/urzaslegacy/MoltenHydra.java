@@ -158,7 +158,7 @@ class MotltenHydraDynamicValue implements DynamicValue {
     }
 
     @Override
-    public MotltenHydraDynamicValue clone() {
+    public MotltenHydraDynamicValue copy() {
         return new MotltenHydraDynamicValue(this);
     }
 

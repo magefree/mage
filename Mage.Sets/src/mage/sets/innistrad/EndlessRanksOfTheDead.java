@@ -85,7 +85,7 @@ class HalfZombiesCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new HalfZombiesCount();
     }
 

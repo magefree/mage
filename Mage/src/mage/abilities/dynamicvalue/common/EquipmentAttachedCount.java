@@ -72,7 +72,7 @@ public class EquipmentAttachedCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new EquipmentAttachedCount(this);
     }
 

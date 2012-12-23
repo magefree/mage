@@ -33,7 +33,7 @@ public class ManaTypeInManaPoolCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new ManaTypeInManaPoolCount(this);
     }
 

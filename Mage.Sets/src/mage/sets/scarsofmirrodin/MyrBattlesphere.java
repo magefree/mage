@@ -145,7 +145,7 @@ class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 
     public MyrBattlesphereEffect(final MyrBattlesphereEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
     }
 
     @Override

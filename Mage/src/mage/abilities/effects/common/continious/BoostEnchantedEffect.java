@@ -69,8 +69,8 @@ public class BoostEnchantedEffect extends ContinuousEffectImpl<BoostEnchantedEff
 
     public BoostEnchantedEffect(final BoostEnchantedEffect effect) {
         super(effect);
-        this.power = effect.power.clone();
-        this.toughness = effect.toughness.clone();
+        this.power = effect.power.copy();
+        this.toughness = effect.toughness.copy();
     }
 
     @Override

@@ -38,7 +38,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new PermanentsOnBattlefieldCount(this);
     }
 

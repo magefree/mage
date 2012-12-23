@@ -87,7 +87,7 @@ class IchorExplosionDynamicValue implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return this;
     }
 

@@ -66,7 +66,7 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
 
     public DiscardTargetEffect(final DiscardTargetEffect effect) {
         super(effect);
-        this.amount = effect.amount.clone();
+        this.amount = effect.amount.copy();
         this.randomDiscard = effect.randomDiscard;
     }
 

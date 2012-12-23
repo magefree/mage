@@ -46,7 +46,7 @@ public class CardsInAllGraveyardsCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue clone() {
+    public DynamicValue copy() {
         return new CardsInAllGraveyardsCount(this);
     }
 
