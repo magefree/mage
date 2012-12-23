@@ -29,7 +29,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -40,13 +39,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
