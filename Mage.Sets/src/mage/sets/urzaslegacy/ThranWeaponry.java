@@ -28,21 +28,20 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 
 /**
  *
@@ -57,10 +56,10 @@ public class ThranWeaponry extends CardImpl<ThranWeaponry> {
         // Echo {4}
         this.addAbility(new EchoAbility("{4}"));
         // You may choose not to untap Thran Weaponry during your untap step.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ThranWeaponryRestrictionEffect()));
+        this.addAbility(new SkipUntapOptionalAbility());
 
         // {2}, {tap}: All creatures get +2/+2 for as long as Thran Weaponry remains tapped.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThranWeaponryEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
@@ -78,10 +77,8 @@ public class ThranWeaponry extends CardImpl<ThranWeaponry> {
 
 class ThranWeaponryEffect extends BoostAllEffect{
 
-   
-
     public ThranWeaponryEffect() {
-        super(2, 2, Constants.Duration.WhileOnBattlefield);
+        super(2, 2, Duration.WhileOnBattlefield);
         staticText = "All creatures get +2/+2 for as long as Thran Weaponry remains tapped";
     }
 
@@ -93,8 +90,6 @@ class ThranWeaponryEffect extends BoostAllEffect{
     public ThranWeaponryEffect copy() {
         return new ThranWeaponryEffect(this);
     }
-
-  
 
     @Override
     public boolean apply(Game game, Ability source) {
@@ -109,35 +104,4 @@ class ThranWeaponryEffect extends BoostAllEffect{
         }
         return false;
     }
-
-}
-
-
-class ThranWeaponryRestrictionEffect extends RestrictionEffect<ThranWeaponryRestrictionEffect> {
-
-    public ThranWeaponryRestrictionEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "You may choose not to untap {this} during your untap step";
-    }
-
-    public ThranWeaponryRestrictionEffect(final ThranWeaponryRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && permanent.isTapped();
-    }
-
-    @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
-        Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Constants.Outcome.Benefit, "Untap " + permanent.getName() + "?", game);
-    }
-
-    @Override
-    public ThranWeaponryRestrictionEffect copy() {
-        return new ThranWeaponryRestrictionEffect(this);
-    }
-
 }

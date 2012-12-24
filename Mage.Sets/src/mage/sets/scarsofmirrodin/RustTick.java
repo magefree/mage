@@ -27,14 +27,17 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RestrictionEffect;
@@ -42,10 +45,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetArtifactPermanent;
 
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -61,15 +62,15 @@ public class RustTick extends CardImpl<RustTick> {
         this.toughness = new MageInt(3);
 
         // You may choose not to untap Rust Tick during your untap step.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RustTickSelfRestrictionEffect()));
+        this.addAbility(new SkipUntapOptionalAbility());
 
         // {1}, {tap}: Tap target artifact. It doesn't untap during its controller's untap step for as long as Rust Tick remains tapped.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RustTickTapTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RustTickTapTargetEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RustTickRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RustTickRestrictionEffect()));
     }
 
     public RustTick(final RustTick card) {
@@ -96,7 +97,9 @@ class RustTickTapTargetEffect extends TapTargetEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent rustTick = game.getPermanent(source.getSourceId());
-        if (rustTick != null) rustTick.clearConnectedCards("RustTick");
+        if (rustTick != null) {
+            rustTick.clearConnectedCards("RustTick");
+        }
         for (UUID target : targetPointer.getTargets(game, source)) {
             Permanent permanent = game.getPermanent(target);
             if (permanent != null) {
@@ -124,7 +127,7 @@ class RustTickTapTargetEffect extends TapTargetEffect {
 class RustTickRestrictionEffect extends RestrictionEffect<RustTickRestrictionEffect> {
 
     public RustTickRestrictionEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
     }
 
     public RustTickRestrictionEffect(final RustTickRestrictionEffect effect) {
@@ -153,35 +156,6 @@ class RustTickRestrictionEffect extends RestrictionEffect<RustTickRestrictionEff
     @Override
     public RustTickRestrictionEffect copy() {
         return new RustTickRestrictionEffect(this);
-    }
-
-}
-
-class RustTickSelfRestrictionEffect extends RestrictionEffect<RustTickSelfRestrictionEffect> {
-
-    public RustTickSelfRestrictionEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "You may choose not to untap Rust Tick during your untap step";
-    }
-
-    public RustTickSelfRestrictionEffect(final RustTickSelfRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && permanent.isTapped();
-    }
-
-    @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
-        Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Constants.Outcome.Benefit, "Untap Rust Tick?", game);
-    }
-
-    @Override
-    public RustTickSelfRestrictionEffect copy() {
-        return new RustTickSelfRestrictionEffect(this);
     }
 
 }

@@ -27,27 +27,30 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -65,7 +68,7 @@ public class HisokasGuard extends CardImpl<HisokasGuard> {
         this.toughness = new MageInt(1);
 
         // You may choose not to untap Hisoka's Guard during your untap step.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new HisokasGuardRestrictionEffect()));
+        this.addAbility(new SkipUntapOptionalAbility());
 
         // {1}{U}, {T}: Target creature you control other than Hisoka's Guard has shroud for as long as Hisoka's Guard remains tapped. (It can't be the target of spells or abilities.)
         FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
@@ -128,41 +131,12 @@ class HisokasGuardGainAbilityTargetEffect extends ContinuousEffectImpl<HisokasGu
                 return true;
             } else {
                 // if guard isn't tapped, the effect is no more valid
-                if (!hisokasGuard.isTapped())
+                if (!hisokasGuard.isTapped()) {
                     hisokasGuard.clearConnectedCards("HisokasGuard");
+                }
             }
         }
         return false;
-    }
-
-}
-
-
-class HisokasGuardRestrictionEffect extends RestrictionEffect<HisokasGuardRestrictionEffect> {
-
-    public HisokasGuardRestrictionEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
-        staticText = "You may choose not to untap {this} during your untap step";
-    }
-
-    public HisokasGuardRestrictionEffect(final HisokasGuardRestrictionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId()) && permanent.isTapped();
-    }
-
-    @Override
-    public boolean canBeUntapped(Permanent permanent, Game game) {
-        Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Constants.Outcome.Benefit, "Untap " + permanent.getName() + "?", game);
-    }
-
-    @Override
-    public HisokasGuardRestrictionEffect copy() {
-        return new HisokasGuardRestrictionEffect(this);
     }
 
 }
