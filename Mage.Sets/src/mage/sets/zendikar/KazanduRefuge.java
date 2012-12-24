@@ -47,10 +47,15 @@ public class KazanduRefuge extends CardImpl<KazanduRefuge> {
         super(ownerId, 217, "Kazandu Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ZEN";
 
+        // Kazandu Refuge enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        // When Kazandu Refuge enters the battlefield, you gain 1 life.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
+        
+        // {T}: Add {R} or {G} to your mana pool.
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
+        
     }
 
     public KazanduRefuge(final KazanduRefuge card) {

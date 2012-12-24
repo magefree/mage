@@ -29,10 +29,12 @@ package mage.sets.zendikar;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.MageInt;
@@ -44,6 +46,7 @@ import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -83,16 +86,16 @@ public class WorldQueller extends CardImpl<WorldQueller> {
 
 class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
 
-    private static final HashSet<String> choice = new HashSet<String>();
+    private static final HashSet<String> choice = new LinkedHashSet<String>();
 
     static {
         choice.add(CardType.ARTIFACT.toString());
         choice.add(CardType.CREATURE.toString());
-        choice.add(CardType.LAND.toString());
         choice.add(CardType.ENCHANTMENT.toString());
         choice.add(CardType.INSTANT.toString());
-        choice.add(CardType.SORCERY.toString());
+        choice.add(CardType.LAND.toString());
         choice.add(CardType.PLANESWALKER.toString());
+        choice.add(CardType.SORCERY.toString());
         choice.add(CardType.TRIBAL.toString());
     }
 
@@ -114,10 +117,11 @@ class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
     public boolean apply(Game game, Ability source) {
         List<Card> chosen = new ArrayList<Card>();
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
+        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        if (you != null && sourceCreature != null) {
             Choice choiceImpl = new ChoiceImpl();
             choiceImpl.setChoices(choice);
-            while (!you.choose(outcome.Neutral, choiceImpl, game));
+            while (!you.choose(Outcome.Neutral, choiceImpl, game)) {};
             CardType type = null;
             String choosenType = choiceImpl.getChoice();
 
@@ -139,10 +143,8 @@ class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
                 type = CardType.TRIBAL;
             }
 
-            FilterPermanent filter = new FilterPermanent();
+            FilterPermanent filter = new FilterControlledPermanent(new StringBuilder("permanent you control of type ").append(type.toString()).toString());
             filter.add(new CardTypePredicate(type));
-
-            System.out.println("The type chosen is " + type.toString());
 
             TargetPermanent target = new TargetControlledPermanent(1, 1, filter, false);
             target.setRequired(true);
