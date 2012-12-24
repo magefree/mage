@@ -27,6 +27,8 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -78,7 +80,7 @@ public class WhiplashTrap extends CardImpl<WhiplashTrap> {
 
 class WhiplashTrapWatcher extends WatcherImpl<WhiplashTrapWatcher> {
 
-    int creatureCount;
+    private Map<UUID, Integer> amountOfCreaturesPlayedThisTurn = new HashMap<UUID, Integer>();
 
     public WhiplashTrapWatcher() {
         super("WhiplashTrapWatcher", Constants.WatcherScope.GAME);
@@ -86,6 +88,9 @@ class WhiplashTrapWatcher extends WatcherImpl<WhiplashTrapWatcher> {
 
     public WhiplashTrapWatcher(final WhiplashTrapWatcher watcher) {
         super(watcher);
+        for (Map.Entry<UUID, Integer> entry : watcher.amountOfCreaturesPlayedThisTurn.entrySet()) {
+            amountOfCreaturesPlayedThisTurn.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -95,25 +100,35 @@ class WhiplashTrapWatcher extends WatcherImpl<WhiplashTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { // no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.CREATURE) && !perm.getControllerId().equals(controllerId)) {
-                creatureCount += 1;
-                if (creatureCount >= 2) {
-                    condition = true;
+            if (perm.getCardType().contains(CardType.CREATURE)) {
+                Integer amount = amountOfCreaturesPlayedThisTurn.get(perm.getControllerId());
+                if (amount == null) {
+                    amount = Integer.valueOf(1);
+                } else {
+                    ++amount;
                 }
+                amountOfCreaturesPlayedThisTurn.put(perm.getControllerId(), amount);
             }
         }
+    }
+    
+    public int maxCreaturesAnOpponentPlayedThisTurn(UUID playerId, Game game) {
+        int maxCreatures = 0;
+        for (UUID opponentId : game.getOpponents(playerId)) {
+            Integer amount = amountOfCreaturesPlayedThisTurn.get(opponentId);
+            if (amount != null && amount.intValue() > maxCreatures) {
+                maxCreatures = amount.intValue();
+            }
+        }
+        return maxCreatures;
     }
 
     @Override
     public void reset() {
         super.reset();
-        condition = false;
-        creatureCount = 0;
+        amountOfCreaturesPlayedThisTurn.clear();
     }
 }
 
@@ -136,7 +151,7 @@ class WhiplashAlternativeCost extends AlternativeCostImpl<WhiplashAlternativeCos
     @Override
     public boolean isAvailable(Game game, Ability source) {
         WhiplashTrapWatcher watcher = (WhiplashTrapWatcher) game.getState().getWatchers().get("WhiplashTrapWatcher");
-        if (watcher != null && watcher.conditionMet()) {
+        if (watcher != null && watcher.maxCreaturesAnOpponentPlayedThisTurn(source.getControllerId(), game) >= 2) {
             return true;
         }
         return false;
