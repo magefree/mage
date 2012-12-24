@@ -805,24 +805,41 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
             CombatUtil.sortByPower(attackers, false);
 
-            CombatInfo combatInfo = CombatUtil.blockWithGoodTrade(game, attackers, possibleBlockers);
             Player player = game.getPlayer(this.playerId);
+            Player attackingPlayer = game.getPlayer(attackers.get(0).getControllerId());
 
-            boolean blocked = false;
-            for (Map.Entry<Permanent, List<Permanent>> entry : combatInfo.getCombat().entrySet()) {
-                UUID attackerId = entry.getKey().getId();
-                List<Permanent> blockers = entry.getValue();
-                if (blockers != null) {
-                    for (Permanent blocker : blockers) {
-                        player.declareBlocker(blocker.getId(), attackerId, game);
-                        blocked = true;
+            for (Permanent attacker : attackers) {
+                for (Permanent blocker : possibleBlockers) {
+                    if (attacker.getPower().getValue() < blocker.getToughness().getValue()
+                            || attacker.getToughness().getValue() < blocker.getPower().getValue()
+                            || attacker.getPower().getValue() >= attackingPlayer.getLife()) {
+                        if (blocker.getBlocking() == 0) {
+                            player.declareBlocker(blocker.getId(), attacker.getId(), game);
+                        }
                     }
                 }
             }
+            /*
+             CombatInfo combatInfo = CombatUtil.blockWithGoodTrade(game, attackers, possibleBlockers);
+             Player player = game.getPlayer(this.playerId);
 
-            if (blocked) {
-                game.getPlayers().resetPassed();
-            }
+             boolean blocked = false;
+             for (Map.Entry<Permanent, List<Permanent>> entry : combatInfo.getCombat().entrySet()) {
+             UUID attackerId = entry.getKey().getId();
+             List<Permanent> blockers = entry.getValue();
+             if (blockers != null) {
+             for (Permanent blocker : blockers) {
+             player.declareBlocker(blocker.getId(), attackerId, game);
+             blocked = true;
+             }
+             }
+             }
+
+             if (blocked) {
+             game.getPlayers().resetPassed();
+             }
+             }
+             */
         }
     }
 
@@ -1074,7 +1091,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
             // The AI will now attack more sanely.  Simple, but good enough for now.
             // The sim minmax does not work at the moment.  
-            
+
             boolean safeToAttack;
             CombatEvaluator eval = new CombatEvaluator();
 
@@ -1113,147 +1130,148 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             }
         }
     }
-/*
-    private boolean shouldAttack(Game game, UUID attackingPlayerId, UUID defenderId, Permanent attacker, List<Permanent> blockers, int aggressionRate) {
-        boolean canBeKilledByOne = false;
-        boolean canKillAll = true;
-        boolean canKillAllDangerous = true;
+    /*
+     private boolean shouldAttack(Game game, UUID attackingPlayerId, UUID defenderId, Permanent attacker, List<Permanent> blockers, int aggressionRate) {
+     boolean canBeKilledByOne = false;
+     boolean canKillAll = true;
+     boolean canKillAllDangerous = true;
 
-        boolean isWorthLessThanAllKillers = true;
-        boolean canBeBlocked = false;
-        int numberOfPossibleBlockers = 0;
+     boolean isWorthLessThanAllKillers = true;
+     boolean canBeBlocked = false;
+     int numberOfPossibleBlockers = 0;
 
-        //int life = game.getPlayer(defenderId).getLife();
-        //int poison = game.getPlayer(defenderId).getCounters().getCount(CounterType.POISON);
+     //int life = game.getPlayer(defenderId).getLife();
+     //int poison = game.getPlayer(defenderId).getCounters().getCount(CounterType.POISON);
 
-         if (!isEffectiveAttacker(game, attackingPlayerId, defenderId, attacker, life, poison)) {
-         System.out.println("Ahh, this is why it is not attacking");
-         return false;
-         }
+     if (!isEffectiveAttacker(game, attackingPlayerId, defenderId, attacker, life, poison)) {
+     System.out.println("Ahh, this is why it is not attacking");
+     return false;
+     }
          
-        for (Permanent defender : blockers) {
-            System.out.println("The blocker is " + defender.getName());
-            if (defender.canBlock(attacker.getId(), game)) {
-                System.out.println("The blocker can block the attacker" + defender.getName() + attacker.getName());
-                numberOfPossibleBlockers += 1;
-                System.out.println("The number of possible blockers is " + numberOfPossibleBlockers);
-                SurviveInfo info = CombatUtil.willItSurvive(game, attackingPlayerId, defenderId, attacker, defender);
-                System.out.println("Did the attacker die? " + info.isAttackerDied());
-                if (info.isAttackerDied()) {
-                    boolean canBeReallyKilled = true;
-                    for (Ability ability : attacker.getAbilities()) {
-                        if (ability instanceof UndyingAbility) {
-                            if (attacker.getCounters().getCount(CounterType.P1P1) == 0) {
-                                canBeReallyKilled = false;
-                            }
-                        }
-                    }
+     for (Permanent defender : blockers) {
+     System.out.println("The blocker is " + defender.getName());
+     if (defender.canBlock(attacker.getId(), game)) {
+     System.out.println("The blocker can block the attacker" + defender.getName() + attacker.getName());
+     numberOfPossibleBlockers += 1;
+     System.out.println("The number of possible blockers is " + numberOfPossibleBlockers);
+     SurviveInfo info = CombatUtil.willItSurvive(game, attackingPlayerId, defenderId, attacker, defender);
+     System.out.println("Did the attacker die? " + info.isAttackerDied());
+     if (info.isAttackerDied()) {
+     boolean canBeReallyKilled = true;
+     for (Ability ability : attacker.getAbilities()) {
+     if (ability instanceof UndyingAbility) {
+     if (attacker.getCounters().getCount(CounterType.P1P1) == 0) {
+     canBeReallyKilled = false;
+     }
+     }
+     }
 
-                    if (canBeReallyKilled) {
-                        canBeKilledByOne = true;
-                        if (GameStateEvaluator2.evaluateCreature(defender, game) <= GameStateEvaluator2.evaluateCreature(attacker, game)) {
-                            isWorthLessThanAllKillers = false;
-                        }
-                    }
-                }
-                // see if this attacking creature can destroy this defender, if
-                // not record that it can't kill everything
-                if (info.isBlockerDied()) {
-                    canKillAll = false;
-                    if (defender.getAbilities().contains(WitherAbility.getInstance()) || defender.getAbilities().contains(InfectAbility.getInstance())) {
-                        canKillAllDangerous = false;
-                    }
-                }
-            }
-        }
+     if (canBeReallyKilled) {
+     canBeKilledByOne = true;
+     if (GameStateEvaluator2.evaluateCreature(defender, game) <= GameStateEvaluator2.evaluateCreature(attacker, game)) {
+     isWorthLessThanAllKillers = false;
+     }
+     }
+     }
+     // see if this attacking creature can destroy this defender, if
+     // not record that it can't kill everything
+     if (info.isBlockerDied()) {
+     canKillAll = false;
+     if (defender.getAbilities().contains(WitherAbility.getInstance()) || defender.getAbilities().contains(InfectAbility.getInstance())) {
+     canKillAllDangerous = false;
+     }
+     }
+     }
+     }
 
-        if (canKillAll && !CombatUtil.canBlock(game, attacker) && isWorthLessThanAllKillers) {
-            System.out.println(attacker.getName()
-                    + " = attacking because they can't block, expecting to kill or damage player");
-            return true;
-        }
+     if (canKillAll && !CombatUtil.canBlock(game, attacker) && isWorthLessThanAllKillers) {
+     System.out.println(attacker.getName()
+     + " = attacking because they can't block, expecting to kill or damage player");
+     return true;
+     }
 
-        if (numberOfPossibleBlockers >= 1) {
-            canBeBlocked = true;
-        }
+     if (numberOfPossibleBlockers >= 1) {
+     canBeBlocked = true;
+     }
         
-        // This is how I know this does quite work.  Something is wrong with the sim part.
-        System.out.println("canKillAll, canKillAllDangerous, canbeKilledByOne, canBeBlocked " + canKillAll + canKillAllDangerous + canBeKilledByOne + canBeBlocked);
+     // This is how I know this does quite work.  Something is wrong with the sim part.
+     System.out.println("canKillAll, canKillAllDangerous, canbeKilledByOne, canBeBlocked " + canKillAll + canKillAllDangerous + canBeKilledByOne + canBeBlocked);
 
-        switch (aggressionRate) {
-            case 4:
-                if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
-                    System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
-                    return true;
-                }
-            case 3:
-                if ((canKillAll && isWorthLessThanAllKillers) || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
-                    System.out.println(attacker.getName()
-                            + " = attacking expecting to kill creature or cause damage, or is unblockable");
-                    return true;
-                }
-            case 2:
-                if ((canKillAll && !canBeKilledByOne) || !canBeBlocked) {
-                    System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
-                    return true;
-                }
-            case 1:
-                if (!canBeBlocked) {
-                    System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
-                    return true;
-                }
-            default:
-                break;
-        }
+     switch (aggressionRate) {
+     case 4:
+     if (canKillAll || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
+     System.out.println(attacker.getName() + " = attacking expecting to at least trade with something");
+     return true;
+     }
+     case 3:
+     if ((canKillAll && isWorthLessThanAllKillers) || (canKillAllDangerous && !canBeKilledByOne) || !canBeBlocked) {
+     System.out.println(attacker.getName()
+     + " = attacking expecting to kill creature or cause damage, or is unblockable");
+     return true;
+     }
+     case 2:
+     if ((canKillAll && !canBeKilledByOne) || !canBeBlocked) {
+     System.out.println(attacker.getName() + " = attacking expecting to survive or attract group block");
+     return true;
+     }
+     case 1:
+     if (!canBeBlocked) {
+     System.out.println(attacker.getName() + " = attacking expecting not to be blocked");
+     return true;
+     }
+     default:
+     break;
+     }
 
-        return false;
-    }
+     return false;
+     }
 
-    private boolean isEffectiveAttacker(Game game, UUID attackingPlayerId, UUID defenderId, Permanent attacker, int life, int poison) {
-        try {
-            SurviveInfo info = CombatUtil.getCombatInfo(game, attackingPlayerId, defenderId, attacker);
-            if (info.isAttackerDied()) {
-                return false;
-            }
+     private boolean isEffectiveAttacker(Game game, UUID attackingPlayerId, UUID defenderId, Permanent attacker, int life, int poison) {
+     try {
+     SurviveInfo info = CombatUtil.getCombatInfo(game, attackingPlayerId, defenderId, attacker);
+     if (info.isAttackerDied()) {
+     return false;
+     }
 
-            if (info.getDefender().getLife() < life) {
-                return true;
-            }
+     if (info.getDefender().getLife() < life) {
+     return true;
+     }
 
-            if (info.getDefender().getCounters().getCount(CounterType.POISON) > poison && poison < 10) {
-                return true;
-            }
+     if (info.getDefender().getCounters().getCount(CounterType.POISON) > poison && poison < 10) {
+     return true;
+     }
 
-            if (info.isTriggered()) {
-                return true;
-            }
-        } catch (Exception e) {
-            // swallow exception and return false
-            logger.error(e);
-            return false;
-        }
+     if (info.isTriggered()) {
+     return true;
+     }
+     } catch (Exception e) {
+     // swallow exception and return false
+     logger.error(e);
+     return false;
+     }
 
-        return false;
-    }
+     return false;
+     }
 
-    private int getAggressionRate(double oppScore, double ourScore, int outNumber, double score, boolean doAttack, double turnsUntilDeathByUnblockable, boolean doUnblockableAttack, int aggressionRate) {
-        if (score > 0 && doAttack) {
-            aggressionRate = 5;
-        } else if (((ourScore < 2) && score >= 0) || (score > 3)
-                || (score > 0 && outNumber > 0)) {
-            aggressionRate = 3;
-        } else if (score >= 0 || (score + outNumber >= -1)) {
-            aggressionRate = 2;
-        } else if (score < 0 && oppScore > 1) {
-            aggressionRate = 2;
-        } else if (doUnblockableAttack || score * -1 < turnsUntilDeathByUnblockable) {
-            aggressionRate = 2;
-        } else if (score < 0) {
-            aggressionRate = 1;
-        }
-        return aggressionRate;
-    }
-*/
+     private int getAggressionRate(double oppScore, double ourScore, int outNumber, double score, boolean doAttack, double turnsUntilDeathByUnblockable, boolean doUnblockableAttack, int aggressionRate) {
+     if (score > 0 && doAttack) {
+     aggressionRate = 5;
+     } else if (((ourScore < 2) && score >= 0) || (score > 3)
+     || (score > 0 && outNumber > 0)) {
+     aggressionRate = 3;
+     } else if (score >= 0 || (score + outNumber >= -1)) {
+     aggressionRate = 2;
+     } else if (score < 0 && oppScore > 1) {
+     aggressionRate = 2;
+     } else if (doUnblockableAttack || score * -1 < turnsUntilDeathByUnblockable) {
+     aggressionRate = 2;
+     } else if (score < 0) {
+     aggressionRate = 1;
+     }
+     return aggressionRate;
+     }
+     */
+
     private void declareAttackers(Game game, UUID activePlayerId, SimulationNode2 node) {
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, activePlayerId));
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, activePlayerId, activePlayerId))) {
