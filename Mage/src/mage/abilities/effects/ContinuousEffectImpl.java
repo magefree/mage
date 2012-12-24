@@ -28,7 +28,17 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import mage.Constants.Duration;
+import mage.Constants.EffectType;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.MageSingleton;
@@ -39,7 +49,6 @@ import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 
-import java.util.*;
 
 /**
  *
@@ -163,10 +172,12 @@ public abstract class ContinuousEffectImpl<T extends ContinuousEffectImpl<T>> ex
         return false;
     }
 
+    @Override
     public Layer getLayer() {
         return layer;
     }
 
+    @Override
     public SubLayer getSublayer() {
         return sublayer;
     }
