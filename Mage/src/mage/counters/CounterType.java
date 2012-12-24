@@ -70,7 +70,8 @@ public enum CounterType {
     PETRIFICATION(new PetrificationCounter().name),
     MINING(new MiningCounter().name),
     THEFT(new TheftCounter().name),
-    AGE(new AgeCounter().name);
+    AGE(new AgeCounter().name),
+    BLAZE(new BlazeCounter().name);
 
     private String name;
 
@@ -174,6 +175,8 @@ public enum CounterType {
                 return new TheftCounter(amount);
             case AGE:
                 return new AgeCounter(amount);
+            case BLAZE:
+                return new BlazeCounter(amount);
                 
         }
         return null;
