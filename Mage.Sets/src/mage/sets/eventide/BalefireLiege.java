@@ -50,10 +50,10 @@ import mage.target.TargetPlayer;
  */
 public class BalefireLiege extends CardImpl<BalefireLiege> {
 
-    private final static FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");
-    private final static FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("white creatures");
-    private final static FilterSpell filterRedSpell = new FilterSpell("a red spell");
-    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
+    private static final FilterCreaturePermanent filterRedCreature = new FilterCreaturePermanent("red creatures");
+    private static final FilterCreaturePermanent filterWhiteCreature = new FilterCreaturePermanent("white creatures");
+    private static final FilterSpell filterRedSpell = new FilterSpell("a red spell");
+    private static final FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
         filterRedCreature.add(new ColorPredicate(ObjectColor.RED));

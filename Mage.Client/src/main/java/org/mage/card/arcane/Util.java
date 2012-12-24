@@ -18,10 +18,10 @@ import javax.swing.SwingUtilities;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class Util {
-    static public final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
-    static public final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
+    public static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
+    public static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
 
-    static public Robot robot;
+    public static Robot robot;
     static {
         try {
             new Robot();
@@ -30,10 +30,11 @@ public class Util {
         }
     }
 
-    static public ThreadPoolExecutor threadPool;
+    public static final ThreadPoolExecutor threadPool;
     static private int threadCount;
     static {
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
+            @Override
             public Thread newThread (Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "Util" + threadCount);
@@ -54,7 +55,9 @@ public class Util {
         throws IOException {
         for (NetworkInterface iface : Collections.list(ifaces)) {
             for (InetAddress address : Collections.list(iface.getInetAddresses())) {
-                if (!address.isSiteLocalAddress()) continue;
+                if (!address.isSiteLocalAddress()) {
+                    continue;
+                }
                 // Java 1.5 doesn't support getting the subnet mask, so try the two most common.
                 byte[] ip = address.getAddress();
                 ip[3] = -1; // 255.255.255.0
@@ -65,14 +68,14 @@ public class Util {
         }
     }
 
-    static public void sleep (int millis) {
+    public static void sleep (int millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
         }
     }
 
-    static public boolean classExists (String className) {
+    public static boolean classExists (String className) {
         try {
             Class.forName(className);
             return true;
@@ -81,7 +84,7 @@ public class Util {
         }
     }
 
-    static public void wait (Object lock) {
+    public static void wait (Object lock) {
         synchronized (lock) {
             try {
                 lock.wait();

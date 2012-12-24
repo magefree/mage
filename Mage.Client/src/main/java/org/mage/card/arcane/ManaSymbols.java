@@ -19,13 +19,13 @@ import java.util.regex.Pattern;
 public class ManaSymbols {
 
     private static final Logger log = Logger.getLogger(ManaSymbols.class);
-    static private final Map<String, BufferedImage> manaImages = new HashMap<String, BufferedImage>();
-    static private final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
-    static private final Map<String, Image> setImages = new HashMap<String, Image>();
-    static private final Map<String, Dimension> setImagesExist = new HashMap<String, Dimension>();
-    static private Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
+    private static final Map<String, BufferedImage> manaImages = new HashMap<String, BufferedImage>();
+    private static final Map<String, Image> manaImagesOriginal = new HashMap<String, Image>();
+    private static final Map<String, Image> setImages = new HashMap<String, Image>();
+    private static final Map<String, Dimension> setImagesExist = new HashMap<String, Dimension>();
+    private static Pattern replaceSymbolsPattern = Pattern.compile("\\{([^}/]*)/?([^}]*)\\}");
 
-    static public void loadImages() {
+    public static void loadImages() {
         String[] symbols = new String[]{"0", "1", "10", "11", "12", "15", "16", "2", "3", "4", "5", "6", "7", "8", "9", "B", "BG",
             "BR", "G", "GU", "GW", "R", "RG", "RW", "S", "T", "U", "UB", "UR", "W", "WB", "WU",
             "WP", "UP", "BP", "RP", "GP", "X" /*, "Y", "Z", "slash"*/};
@@ -38,7 +38,6 @@ public class ManaSymbols {
                 manaImages.put(symbol, resized);
             } catch (Exception e) {
                 log.error("Error for symbol:" + symbol);
-                //e.printStackTrace();
             }
             file = new File(Constants.RESOURCE_PATH_MANA_MEDIUM + "/" + symbol + ".jpg");
             try {
@@ -121,11 +120,11 @@ public class ManaSymbols {
         }
     }
 
-    static public Image getManaSymbolImage(String symbol) {
+    public static Image getManaSymbolImage(String symbol) {
         return manaImagesOriginal.get(symbol);
     }
 
-    static public void draw(Graphics g, String manaCost, int x, int y) {
+    public static void draw(Graphics g, String manaCost, int x, int y) {
         if (manaCost.length() == 0) {
             return;
         }
@@ -144,7 +143,7 @@ public class ManaSymbols {
         }
     }
 
-    static public String getStringManaCost(List<String> manaCost) {
+    public static String getStringManaCost(List<String> manaCost) {
         StringBuilder sb = new StringBuilder();
         for (String s : manaCost) {
             sb.append(s);
@@ -152,7 +151,7 @@ public class ManaSymbols {
         return sb.toString().replace("{", "").replace("}", " ").trim();
     }
 
-    static public int getWidth(String manaCost) {
+    public static int getWidth(String manaCost) {
         int width = 0;
         manaCost = manaCost.replace("\\", "");
         StringTokenizer tok = new StringTokenizer(manaCost, " ");
@@ -169,7 +168,7 @@ public class ManaSymbols {
         PAY
     }
 
-    static public synchronized String replaceSymbolsWithHTML(String value, Type type) {
+    public static synchronized String replaceSymbolsWithHTML(String value, Type type) {
         value = value.replace("{source}", "|source|");
         value = value.replace("{this}", "|this|");
         String replaced = value;
@@ -189,7 +188,7 @@ public class ManaSymbols {
         return replaced;
     }
 
-    static public String replaceSetCodeWithHTML(String set, String rarity) {
+    public static String replaceSetCodeWithHTML(String set, String rarity) {
         String _set = set;
         if (_set.equals("CON")) {
             _set = "CFX";
@@ -203,11 +202,11 @@ public class ManaSymbols {
         }
     }
 
-    static public Image getSetSymbolImage(String set) {
+    public static Image getSetSymbolImage(String set) {
         return setImages.get(set);
     }
 
-    static public BufferedImage getManaSymbolImageSmall(String symbol) {
+    public static BufferedImage getManaSymbolImageSmall(String symbol) {
         return manaImages.get(symbol);
     }
 }

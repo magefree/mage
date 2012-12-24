@@ -11,12 +11,10 @@ import javax.swing.JPanel;
 public class ScaledImagePanel extends JPanel {
     private static final long serialVersionUID = -1523279873208605664L;
     public volatile Image srcImage;
-    //public volatile Image srcImageBlurred;
 
     private ScalingType scalingType = ScalingType.bilinear;
     private boolean scaleLarger;
     private MultipassType multiPassType = MultipassType.bilinear;
-    private boolean blur;
 
     public ScaledImagePanel () {
         super(false);
@@ -40,10 +38,6 @@ public class ScaledImagePanel extends JPanel {
         this.scalingType = scalingType;
     }
 
-    public void setScalingBlur (boolean blur) {
-        this.blur = blur;
-    }
-
     public void setScaleLarger (boolean scaleLarger) {
         this.scaleLarger = scaleLarger;
     }
@@ -64,8 +58,9 @@ public class ScaledImagePanel extends JPanel {
             if (targetWidth > panelWidth) {
                 targetHeight = Math.round(panelWidth * (srcHeight / (float)srcWidth));
                 targetWidth = panelWidth;
-            } else
+            } else {
                 targetHeight = panelHeight;
+            }
         }
         ScalingInfo info = new ScalingInfo();
         info.targetWidth = targetWidth;
@@ -77,8 +72,11 @@ public class ScaledImagePanel extends JPanel {
         return info;
     }
 
+    @Override
     public void paint (Graphics g) {
-        if (srcImage == null) return;
+        if (srcImage == null) {
+            return;
+        }
 
         Graphics2D g2 = (Graphics2D)g.create();
         ScalingInfo info = getScalingInfo();
@@ -112,8 +110,12 @@ public class ScaledImagePanel extends JPanel {
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, hint);
 
         int tempDestWidth = info.srcWidth / 2, tempDestHeight = info.srcHeight / 2;
-        if (tempDestWidth < info.targetWidth) tempDestWidth = info.targetWidth;
-        if (tempDestHeight < info.targetHeight) tempDestHeight = info.targetHeight;
+        if (tempDestWidth < info.targetWidth) {
+            tempDestWidth = info.targetWidth;
+        }
+        if (tempDestHeight < info.targetHeight) {
+            tempDestHeight = info.targetHeight;
+        }
 
         Image srcImage = getSourceImage(info);
 
@@ -144,15 +146,21 @@ public class ScaledImagePanel extends JPanel {
         while (true) {
             if (tempDestWidth > info.targetWidth) {
                 tempDestWidth = tempDestWidth / 2;
-                if (tempDestWidth < info.targetWidth) tempDestWidth = info.targetWidth;
+                if (tempDestWidth < info.targetWidth) {
+                    tempDestWidth = info.targetWidth;
+                }
             }
 
             if (tempDestHeight > info.targetHeight) {
                 tempDestHeight = tempDestHeight / 2;
-                if (tempDestHeight < info.targetHeight) tempDestHeight = info.targetHeight;
+                if (tempDestHeight < info.targetHeight) {
+                    tempDestHeight = info.targetHeight;
+                }
             }
 
-            if (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight) break;
+            if (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight) {
+                break;
+            }
 
             g2temp.drawImage(tempImage, 0, 0, tempDestWidth, tempDestHeight, 0, 0, tempSrcWidth, tempSrcHeight, null);
 
@@ -168,9 +176,6 @@ public class ScaledImagePanel extends JPanel {
 
     private Image getSourceImage (ScalingInfo info) {
         return srcImage;
-        //if (!blur || srcImageBlurred == null) return srcImage;
-        //if (info.srcWidth / 2 < info.targetWidth || info.srcHeight / 2 < info.targetHeight) return srcImage;
-        //return srcImageBlurred;
     }
 
     public Image getSrcImage() {

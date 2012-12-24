@@ -17,7 +17,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collections;
-import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -44,31 +45,31 @@ import javax.swing.text.html.ImageView;
  * UI utility functions.
  */
 public class UI {
-    static private Hashtable<URL, Image> imageCache = new Hashtable<URL, Image>();
+    private static ConcurrentMap<URL, Image> imageCache = new ConcurrentHashMap<URL, Image>();
 
-    static public JToggleButton getToggleButton () {
+    public static JToggleButton getToggleButton () {
         JToggleButton button = new JToggleButton();
         button.setMargin(new Insets(2, 4, 2, 4));
         return button;
     }
 
-    static public JButton getButton () {
+    public static JButton getButton () {
         JButton button = new JButton();
         button.setMargin(new Insets(2, 4, 2, 4));
         return button;
     }
 
-    static public void setTitle (JPanel panel, String title) {
+    public static void setTitle (JPanel panel, String title) {
         Border border = panel.getBorder();
         if (border instanceof TitledBorder) {
-            ((TitledBorder)panel.getBorder()).setTitle(title);
+            ((TitledBorder) panel.getBorder()).setTitle(title);
             panel.repaint();
-        } else
+        } else {
             panel.setBorder(BorderFactory.createTitledBorder(title));
+        }
     }
 
-    @SuppressWarnings("deprecation")
-    static public URL getFileURL (String path) {
+    public static URL getFileURL (String path) {
         File file = new File(path);
         if (file.exists()) {
             try {
@@ -79,12 +80,16 @@ public class UI {
         return UI.class.getResource(path);
     }
 
-    static public ImageIcon getImageIcon (String path) {
+    public static ImageIcon getImageIcon (String path) {
         try {
             InputStream stream;
             stream = UI.class.getResourceAsStream(path);
-            if (stream == null && new File(path).exists()) stream = new FileInputStream(path);
-            if (stream == null) throw new RuntimeException("Image not found: " + path);
+            if (stream == null && new File(path).exists()) {
+                stream = new FileInputStream(path);
+            }
+            if (stream == null) {
+                throw new RuntimeException("Image not found: " + path);
+            }
             byte[] data = new byte[stream.available()];
             stream.read(data);
             return new ImageIcon(data);
@@ -93,27 +98,33 @@ public class UI {
         }
     }
 
-    static public void setHTMLEditorKit (JEditorPane editorPane) {
+    public static void setHTMLEditorKit (JEditorPane editorPane) {
         editorPane.getDocument().putProperty("imageCache", imageCache); // Read internally by ImageView, but never written.
-        // Extend all this shit to cache images.
+
         editorPane.setEditorKit(new HTMLEditorKit() {
             private static final long serialVersionUID = -54602188235105448L;
 
+            @Override
             public ViewFactory getViewFactory () {
                 return new HTMLFactory() {
-                    public View create (Element elem) {
+                    @Override
+                    public View create(Element elem) {
                         Object o = elem.getAttributes().getAttribute(StyleConstants.NameAttribute);
                         if (o instanceof HTML.Tag) {
-                            HTML.Tag kind = (HTML.Tag)o;
-                            if (kind == HTML.Tag.IMG) return new ImageView(elem) {
-                                public URL getImageURL () {
-                                    URL url = super.getImageURL();
-                                    // Put an image into the cache to be read by other ImageView methods.
-                                    if (url != null && imageCache.get(url) == null)
-                                        imageCache.put(url, Toolkit.getDefaultToolkit().createImage(url));
-                                    return url;
-                                }
-                            };
+                            HTML.Tag kind = (HTML.Tag) o;
+                            if (kind == HTML.Tag.IMG) {
+                                return new ImageView(elem) {
+                                    @Override
+                                    public URL getImageURL() {
+                                        URL url = super.getImageURL();
+                                        // Put an image into the cache to be read by other ImageView methods.
+                                        if (url != null && imageCache.get(url) == null) {
+                                            imageCache.put(url, Toolkit.getDefaultToolkit().createImage(url));
+                                        }
+                                        return url;
+                                    }
+                                };
+                            }
                         }
                         return super.create(elem);
                     }
@@ -122,10 +133,11 @@ public class UI {
         });
     }
 
-    static public void setVerticalScrollingView (JScrollPane scrollPane, final Component view) {
+    public static void setVerticalScrollingView (JScrollPane scrollPane, final Component view) {
         final JViewport viewport = new JViewport();
         viewport.setLayout(new ViewportLayout() {
             private static final long serialVersionUID = 7701568740313788935L;
+            @Override
             public void layoutContainer (Container parent) {
                 viewport.setViewPosition(new Point(0, 0));
                 Dimension viewportSize = viewport.getSize();
@@ -139,19 +151,21 @@ public class UI {
         scrollPane.setViewport(viewport);
     }
 
-    static public String getDisplayManaCost (String manaCost) {
+    public static String getDisplayManaCost (String manaCost) {
         manaCost = manaCost.replace("/", "");
         // A pipe in the cost means "process left of the pipe as the card color, but display right of the pipe as the cost".
         int pipePosition = manaCost.indexOf("{|}");
-        if (pipePosition != -1) manaCost = manaCost.substring(pipePosition + 3);
+        if (pipePosition != -1) {
+            manaCost = manaCost.substring(pipePosition + 3);
+        }
         return manaCost;
     }
 
-    static public void invokeLater (Runnable runnable) {
+    public static void invokeLater (Runnable runnable) {
         EventQueue.invokeLater(runnable);
     }
 
-    static public void invokeAndWait (Runnable runnable) {
+    public static void invokeAndWait (Runnable runnable) {
         if (EventQueue.isDispatchThread()) {
             runnable.run();
             return;
@@ -164,7 +178,7 @@ public class UI {
         }
     }
 
-    static public void setSystemLookAndFeel () {
+    public static void setSystemLookAndFeel () {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
@@ -173,10 +187,12 @@ public class UI {
         }
     }
 
-    static public void setDefaultFont (Font font) {
+    public static void setDefaultFont (Font font) {
         for (Object key : Collections.list(UIManager.getDefaults().keys())) {
             Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource) UIManager.put(key, font);
+            if (value instanceof javax.swing.plaf.FontUIResource) {
+                UIManager.put(key, font);
+            }
         }
     }
 }

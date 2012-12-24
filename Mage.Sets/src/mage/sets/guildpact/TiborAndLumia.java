@@ -52,9 +52,9 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class TiborAndLumia extends CardImpl<TiborAndLumia> {
 
-    private final static FilterSpell filterBlue = new FilterSpell("a blue spell");
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
-    private final static FilterSpell filterRed = new FilterSpell("a red spell");
+    private static final FilterSpell filterBlue = new FilterSpell("a blue spell");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    private static final FilterSpell filterRed = new FilterSpell("a red spell");
 
     static {
         filterBlue.add(new ColorPredicate(ObjectColor.BLUE));

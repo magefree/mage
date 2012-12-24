@@ -66,10 +66,6 @@ public class BigCard extends JComponent {
     protected float hue = 0.005f;
     protected float dh = 0.005f;
 
-    static private final int DEFAULT_DELAY_PERIOD = 30;
-    static private final float LEFT_BOUNDARY = 0f;
-    static private final float RIGHT_BOUNDARY = 0.5f;
-
     public BigCard() {
         initComponents();
         if (!Plugins.getInstance().isCardPluginLoaded()) {
@@ -81,7 +77,7 @@ public class BigCard extends JComponent {
         this.scrollPane.setVisible(false);
     }
 
-    protected void initBounds() {
+    private void initBounds() {
         oldWidth = this.getWidth();
         scrollPane.setBounds(this.getWidth()*1000/17777,this.getWidth()*1000/1100,
                              this.getWidth()*1000/1142,this.getWidth()*1000/2539);
@@ -89,7 +85,9 @@ public class BigCard extends JComponent {
 
     public void setCard(UUID cardId, Image image, List<String> strings, boolean foil) {
         if (this.cardId == null || !this.cardId.equals(cardId)) {
-            if (this.panel != null) remove(this.panel);
+            if (this.panel != null) {
+                remove(this.panel);
+            }
             this.cardId = cardId;
             bigImage = image;
             synchronized (this) {
@@ -124,20 +122,6 @@ public class BigCard extends JComponent {
 
     @Override
     public void paintComponent(Graphics graphics) {
-
-        /*if (foilState) {
-            if (source != null) {
-                synchronized (BigCard.class) {
-                    if (source != null) {
-                        graphics.drawImage(foil, 0, 0, this);
-                    }
-                }
-            }
-        } else {
-            if (bigImage != null) {
-                graphics.drawImage(bigImage, 0, 0, this);
-            }
-        }*/
         if (bigImage != null) {
             graphics.drawImage(bigImage, 0, 0, this);
         }
@@ -156,80 +140,8 @@ public class BigCard extends JComponent {
     }
 
     public void setFoil(boolean foil) {
-        /*if (foilThread == null) {
-            synchronized (this) {
-                if (foilThread == null) {
-                    foilThread = getFoilThread();
-                    foilThread.setDaemon(true);
-                    foilThread.start();
-                }
-            }
-        }
-        if (foil != foilState) {
-            synchronized (this) {
-                if (foil != foilState) {
-                    hue = 0.005f;
-                    foilState = foil;
-                }
-            }
-        }
-        */
         repaint();
     }
-
-//    private Thread getFoilThread() {
-//        return new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (bigImage == null) {
-//                    return;
-//                }
-//                final HueFilter filter = FilterFactory.getHueFilter();
-//                int sign = 1;
-//                while (true) {
-//                    boolean prevState = foilState;
-//                    while (!foilState) {
-//                        ThreadUtils.sleep(10);
-//                    }
-//                    if (prevState == foilState) {
-//                        ThreadUtils.sleep(DEFAULT_DELAY_PERIOD);
-//                    }
-//                    hue += dh * sign;
-//                    /*if (hue >= 1.0D) {
-//                        hue = 0.000F;
-//                    }*/
-//                    if (hue < LEFT_BOUNDARY) {
-//                        sign *= -1;
-//                        hue = LEFT_BOUNDARY;
-//                    } else if (hue > RIGHT_BOUNDARY) {
-//                        sign *= -1;
-//                        hue = RIGHT_BOUNDARY;
-//                    }
-//                    filter.setHue(hue);
-//                    BufferedImage f = null;
-//                    synchronized (BigCard.this) {
-//                        if (source == null) {
-//                            source = BufferedImageBuilder.bufferImage(bigImage);
-//                        }
-//                        if (source == null) {
-//                            return;
-//                        }
-//                        f = filter.filter(source, null);
-//                    }
-//                    synchronized (BigCard.class) {
-//                        foil = f;
-//                    }
-//                    SwingUtilities.invokeLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            BigCard.this.repaint();
-//                        }
-//                    });
-//
-//                }
-//            }
-//        });
-//    }
 
     public void addJXPanel(UUID cardId, JXPanel jxPanel) {
         bigImage = null;

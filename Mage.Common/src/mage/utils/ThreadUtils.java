@@ -12,11 +12,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadUtils {
 
-    static public ThreadPoolExecutor threadPool;
-    static public ThreadPoolExecutor threadPool2;
-    static private int threadCount;
+    public static final ThreadPoolExecutor threadPool;
+    public static final ThreadPoolExecutor threadPool2;
+    private static int threadCount;
     static {
         threadPool = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
+            @Override
             public Thread newThread (Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "Util" + threadCount);
@@ -26,6 +27,7 @@ public class ThreadUtils {
         });
         threadPool.prestartAllCoreThreads();
         threadPool2 = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue(), new ThreadFactory() {
+            @Override
             public Thread newThread (Runnable runnable) {
                 threadCount++;
                 Thread thread = new Thread(runnable, "TP2" + threadCount);
@@ -36,14 +38,14 @@ public class ThreadUtils {
         threadPool2.prestartAllCoreThreads();
     }
 
-    static public void sleep (int millis) {
+    public static void sleep (int millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
         }
     }
 
-    static public void wait (Object lock) {
+    public static void wait (Object lock) {
         synchronized (lock) {
             try {
                 lock.wait();

@@ -73,7 +73,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class TablesPanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(TablesPanel.class);
+    private static final Logger logger = Logger.getLogger(TablesPanel.class);
 
     private TableTableModel tableModel;
     private MatchesTableModel matchesModel;
@@ -674,7 +674,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     private UUID roomId;
     private TablesPanel panel;
 
-    private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
     private int count = 0;
 
@@ -723,7 +723,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
     private UUID roomId;
     private ChatPanel chat;
 
-    private final static Logger logger = Logger.getLogger(UpdatePlayersTask.class);
+    private static final Logger logger = Logger.getLogger(UpdatePlayersTask.class);
 
     UpdatePlayersTask(Session session, UUID roomId, ChatPanel chat) {
         this.session = session;
@@ -829,7 +829,7 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     private UUID roomId;
     private TablesPanel panel;
 
-    private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
     UpdateMatchesTask(Session session, UUID roomId, TablesPanel panel) {
         this.session = session;

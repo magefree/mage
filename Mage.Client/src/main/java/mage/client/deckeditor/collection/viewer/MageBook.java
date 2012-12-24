@@ -71,6 +71,8 @@ import java.util.UUID;
  */
 public class MageBook extends JComponent {
 
+    private static final long serialVersionUID = 1L;
+
     public static final String LAYOUT_3x3 = "small";
 
     public static final String LAYOUT_4x4 = "big";
@@ -181,7 +183,7 @@ public class MageBook extends JComponent {
                 public void execute() {
                     if (!currentSet.equals(_set) || currentPage != 0) {
                         AudioManager.playAnotherTab();
-                        synchronized (this) {
+                        synchronized (MageBook.this) {
                             selectedTab = _index;
                         }
                         currentPage = 0;
@@ -413,17 +415,17 @@ public class MageBook extends JComponent {
     private java.util.List<HoverButton> tabs = new ArrayList<HoverButton>();
     private int selectedTab;
 
-    static private final String CENTER_PANEL_IMAGE_PATH = "/book_bg.jpg";
-    static private final String RIGHT_PANEL_IMAGE_PATH = "/book_right.jpg";
-    static private final String LEFT_PANEL_IMAGE_PATH = "/book_left.jpg";
-    static private final String LEFT_PAGE_BUTTON_IMAGE_PATH = "/book_pager_left.png";
-    static private final String RIGHT_PAGE_BUTTON_IMAGE_PATH = "/book_pager_right.png";
-    static private final String LEFT_TAB_IMAGE_PATH = "/tab_left.png";
-    static private final String RIGHT_TAB_IMAGE_PATH = "/tab_right.png";
-    static private final int OFFSET_X = 25;
-    static private final int OFFSET_Y = 20;
-    static private final int LEFT_RIGHT_PAGES_WIDTH = 40;
-    static private final Color NOT_IMPLEMENTED = new Color(220, 220, 220, 150);
+    private static final String CENTER_PANEL_IMAGE_PATH = "/book_bg.jpg";
+    private static final String RIGHT_PANEL_IMAGE_PATH = "/book_right.jpg";
+    private static final String LEFT_PANEL_IMAGE_PATH = "/book_left.jpg";
+    private static final String LEFT_PAGE_BUTTON_IMAGE_PATH = "/book_pager_left.png";
+    private static final String RIGHT_PAGE_BUTTON_IMAGE_PATH = "/book_pager_right.png";
+    private static final String LEFT_TAB_IMAGE_PATH = "/tab_left.png";
+    private static final String RIGHT_TAB_IMAGE_PATH = "/tab_right.png";
+    private static final int OFFSET_X = 25;
+    private static final int OFFSET_Y = 20;
+    private static final int LEFT_RIGHT_PAGES_WIDTH = 40;
+    private static final Color NOT_IMPLEMENTED = new Color(220, 220, 220, 150);
 
     private Configuration conf;
 }

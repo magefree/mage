@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public class Immerwolf extends CardImpl<Immerwolf> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Wolf and Werewolf creatures");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate("Wolf"), new SubtypePredicate("Werewolf")));
@@ -90,8 +90,8 @@ public class Immerwolf extends CardImpl<Immerwolf> {
 
 class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
 
-    private final static FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
-    private final static FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
+    private static final FilterCreaturePermanent filterWerewolf = new FilterCreaturePermanent("Werewolf creature");
+    private static final FilterCreaturePermanent filterNonhuman = new FilterCreaturePermanent("Non-human creature");
 
     static {
         filterWerewolf.add(new SubtypePredicate("Werewolf"));

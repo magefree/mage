@@ -43,15 +43,14 @@ import java.util.List;
 @Author(name = "nantuko")
 public class CardPluginImpl implements CardPlugin {
 
-    private final static Logger log = Logger.getLogger(CardPluginImpl.class);
+    private static final Logger log = Logger.getLogger(CardPluginImpl.class);
 
-    static private final int GUTTER_Y = 15;
-    static private final int GUTTER_X = 5;
+    private static final int GUTTER_Y = 15;
+    private static final int GUTTER_X = 5;
     static final float EXTRA_CARD_SPACING_X = 0.04f;
-    static private final float CARD_SPACING_Y = 0.03f;
-    static private final float STACK_SPACING_X = 0.07f;
-    static private final float STACK_SPACING_Y = 0.13f;
-    //static private final int MW_GUIDE_HEIGHT = 30;
+    private static final float CARD_SPACING_Y = 0.03f;
+    private static final float STACK_SPACING_X = 0.07f;
+    private static final float STACK_SPACING_Y = 0.13f;
 
     private int landStackMax = 5;
     private int cardWidthMin = 50, cardWidthMax = Constants.CARD_SIZE_FULL.width;
@@ -69,8 +68,6 @@ public class CardPluginImpl implements CardPlugin {
 
     @PluginLoaded
     public void newPlugin(CardPlugin plugin) {
-        //ManaSymbols.loadImages();
-        //log.info(plugin.toString() + " has been loaded.");
     }
 
     @Override
@@ -104,21 +101,16 @@ public class CardPluginImpl implements CardPlugin {
         //requires to find out is position have been changed that includes:
         //adding/removing permanents, type change
 
-        if (ui == null)
+        if (ui == null) {
             throw new RuntimeException("Error: no components");
-        //JComponent component = ui.get("jScrollPane");
-        JComponent component2 = ui.get("battlefieldPanel");
-        //if (component == null)
-            //throw new RuntimeException("Error: jScrollPane is missing");
-        if (component2 == null)
-            throw new RuntimeException("Error: battlefieldPanel is missing");
-        //if (!(component instanceof JScrollPane))
-            //throw new RuntimeException("Error: jScrollPane has wrong type.");
-        //if (!(component instanceof JScrollPane))
-            //throw new RuntimeException("Error: battlefieldPanel is missing");
+        }
+        JComponent component = ui.get("battlefieldPanel");
 
-        //JScrollPane jScrollPane = (JScrollPane) component;
-        JLayeredPane battlefieldPanel = (JLayeredPane) component2;
+        if (component == null) {
+            throw new RuntimeException("Error: battlefieldPanel is missing");
+        }
+
+        JLayeredPane battlefieldPanel = (JLayeredPane) component;
         JComponent jPanel = ui.get("jPanel");
 
         Row allLands = new Row();
@@ -126,8 +118,9 @@ public class CardPluginImpl implements CardPlugin {
         outerLoop:
         //
         for (MagePermanent permanent : permanents) {
-            if (!CardUtil.isLand(permanent) || CardUtil.isCreature(permanent))
+            if (!CardUtil.isLand(permanent) || CardUtil.isCreature(permanent)) {
                 continue;
+            }
 
             int insertIndex = -1;
 
@@ -150,8 +143,9 @@ public class CardPluginImpl implements CardPlugin {
                     stack.add(0, permanent);
                     continue outerLoop;
                 }
-                if (insertIndex != -1)
+                if (insertIndex != -1) {
                     break;
+                }
             }
 
             Stack stack = new Stack();
@@ -178,11 +172,11 @@ public class CardPluginImpl implements CardPlugin {
         while (true) {
             rows.clear();
             cardHeight = Math.round(cardWidth * CardPanel.ASPECT_RATIO);
-            extraCardSpacingX = (int) Math.round(cardWidth * EXTRA_CARD_SPACING_X);
+            extraCardSpacingX = Math.round(cardWidth * EXTRA_CARD_SPACING_X);
             cardSpacingX = cardHeight - cardWidth + extraCardSpacingX;
-            cardSpacingY = (int) Math.round(cardHeight * CARD_SPACING_Y);
-            stackSpacingX = stackVertical ? 0 : (int) Math.round(cardWidth * STACK_SPACING_X);
-            stackSpacingY = (int) Math.round(cardHeight * STACK_SPACING_Y);
+            cardSpacingY = Math.round(cardHeight * CARD_SPACING_Y);
+            stackSpacingX = stackVertical ? 0 : Math.round(cardWidth * STACK_SPACING_X);
+            stackSpacingY = Math.round(cardHeight * STACK_SPACING_Y);
             Row creatures = (Row) allCreatures.clone();
             Row lands = (Row) allLands.clone();
             Row others = (Row) allOthers.clone();
@@ -192,26 +186,30 @@ public class CardPluginImpl implements CardPlugin {
             wrap(lands, rows, afterCreaturesIndex);
             // Store the current rows and others.
             List<Row> storedRows = new ArrayList<Row>(rows.size());
-            for (Row row : rows)
+            for (Row row : rows) {
                 storedRows.add((Row) row.clone());
+            }
             Row storedOthers = (Row) others.clone();
             // Fill in all rows with others.
-            for (Row row : rows)
+            for (Row row : rows) {
                 fillRow(others, rows, row);
+            }
 
             // Stop if everything fits, otherwise revert back to the stored values.
-            if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty())
+            if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty()) {
                 break;
+            }
             rows = storedRows;
             others = storedOthers;
             // Try to put others on their own row(s) and fill in the rest.
             wrap(others, rows, afterCreaturesIndex);
-            for (Row row : rows)
+            for (Row row : rows) {
                 fillRow(others, rows, row);
+            }
             // If that still doesn't fit, scale down.
-            if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty())
+            if (creatures.isEmpty() && lands.isEmpty() && others.isEmpty()) {
                 break;
-            //cardWidth = (int)(cardWidth / 1.2);
+            }
             //FIXME: -1 is too slow. why not binary search?
             cardWidth -= 3;
         }
@@ -232,7 +230,6 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         // Position all card panels.
-        x = 0;
         y = GUTTER_Y;
         for (Row row : rows) {
             int rowBottom = 0;
@@ -242,17 +239,18 @@ public class CardPluginImpl implements CardPlugin {
                 // Align others to the right.
                 if (othersOnTheRight && RowType.other.isType(stack.get(0))) {
                     x = playAreaWidth - GUTTER_X + extraCardSpacingX;
-                    for (int i = stackIndex, n = row.size(); i < n; i++)
+                    for (int i = stackIndex, n = row.size(); i < n; i++) {
                         x -= row.get(i).getWidth();
+                    }
                 }
                 for (int panelIndex = 0, panelCount = stack.size(); panelIndex < panelCount; panelIndex++) {
                     MagePermanent panel = stack.get(panelIndex);
                     int stackPosition = panelCount - panelIndex - 1;
-                    if (jPanel != null)
+                    if (jPanel != null) {
                         jPanel.setComponentZOrder(panel, panelIndex);
+                    }
                     int panelX = x + (stackPosition * stackSpacingX);
                     int panelY = y + (stackPosition * stackSpacingY);
-                    //panel.setLocation(panelX, panelY);
                     try {
                         // may cause:
                         // java.lang.IllegalArgumentException: illegal component position 26 should be less then 26
@@ -286,10 +284,12 @@ public class CardPluginImpl implements CardPlugin {
             int rowWidth = currentRow.getWidth();
             if (!currentRow.isEmpty() && rowWidth + stack.getWidth() > playAreaWidth) {
                 // Stop processing if the row is too wide or tall.
-                if (!allowHeightOverflow && rowWidth > playAreaWidth)
+                if (!allowHeightOverflow && rowWidth > playAreaWidth) {
                     break;
-                if (!allowHeightOverflow && getRowsHeight(rows) + sourceRow.getHeight() > playAreaHeight)
+                }
+                if (!allowHeightOverflow && getRowsHeight(rows) + sourceRow.getHeight() > playAreaHeight) {
                     break;
+                }
                 rows.add(insertIndex == -1 ? rows.size() : insertIndex, currentRow);
                 currentRow = new Row();
             }
@@ -305,9 +305,11 @@ public class CardPluginImpl implements CardPlugin {
             }
         }
         // Remove the wrapped stacks from the source row.
-        for (Row row : rows)
-            for (Stack stack : row)
+        for (Row row : rows) {
+            for (Stack stack : row) {
                 sourceRow.remove(stack);
+            }
+        }
         return insertIndex;
     }
 
@@ -316,11 +318,12 @@ public class CardPluginImpl implements CardPlugin {
         while (!sourceRow.isEmpty()) {
             Stack stack = sourceRow.get(0);
             rowWidth += stack.getWidth();
-            if (rowWidth > playAreaWidth)
+            if (rowWidth > playAreaWidth) {
                 break;
-            if (stack.getHeight() > row.getHeight()) {
-                if (getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight)
-                    break;
+            }
+            if (stack.getHeight() > row.getHeight()
+                    && getRowsHeight(rows) - row.getHeight() + stack.getHeight() > playAreaHeight) {
+                break;
             }
             row.add(sourceRow.remove(0));
         }
@@ -328,12 +331,13 @@ public class CardPluginImpl implements CardPlugin {
 
     private int getRowsHeight(List<Row> rows) {
         int height = 0;
-        for (Row row : rows)
+        for (Row row : rows) {
             height += row.getHeight();
+        }
         return height - cardSpacingY + GUTTER_Y * 2;
     }
 
-    static private enum RowType {
+    private static enum RowType {
         land, creature, other;
 
         public boolean isType(MagePermanent card) {
@@ -351,6 +355,8 @@ public class CardPluginImpl implements CardPlugin {
     }
 
     private class Row extends ArrayList<Stack> {
+        private static final long serialVersionUID = 1L;
+
         public Row() {
             super(16);
         }
@@ -379,35 +385,33 @@ public class CardPluginImpl implements CardPlugin {
         }
 
         private int getWidth() {
-            if (isEmpty())
+            if (isEmpty()) {
                 return 0;
+            }
             int width = 0;
-            for (Stack stack : this)
+            for (Stack stack : this) {
                 width += stack.getWidth();
+            }
             return width + GUTTER_X * 2 - extraCardSpacingX;
         }
 
         private int getHeight() {
-            if (isEmpty())
+            if (isEmpty()) {
                 return 0;
+            }
             int height = 0;
-            for (Stack stack : this)
+            for (Stack stack : this) {
                 height = Math.max(height, stack.getHeight());
+            }
             return height;
         }
     }
 
     private class Stack extends ArrayList<MagePermanent> {
+        private static final long serialVersionUID = 1L;
+
         public Stack() {
             super(8);
-        }
-
-        @Override
-        public boolean add(MagePermanent panel) {
-            boolean appended = super.add(panel);
-            //for (CardPanel attachedPanel : panel.attachedPanels)
-            //add(attachedPanel);
-            return appended;
         }
 
         private int getWidth() {

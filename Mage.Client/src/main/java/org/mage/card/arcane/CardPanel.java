@@ -37,12 +37,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     private static final Logger log = Logger.getLogger(CardPanel.class);
 
-    static public final double TAPPED_ANGLE = Math.PI / 2;
-    static public final double FLIPPED_ANGLE = Math.PI;
-    static public final float ASPECT_RATIO = 3.5f / 2.5f;
-    static public final int POPUP_X_GAP = 1; // prevent popup window from blinking
+    public static final double TAPPED_ANGLE = Math.PI / 2;
+    public static final double FLIPPED_ANGLE = Math.PI;
+    public static final float ASPECT_RATIO = 3.5f / 2.5f;
+    public static final int POPUP_X_GAP = 1; // prevent popup window from blinking
 
-    static public CardPanel dragAnimationPanel;
+    public static CardPanel dragAnimationPanel;
 
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
 
@@ -62,7 +62,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     public double tappedAngle = 0;
     public double flippedAngle = 0;
-    public ScaledImagePanel imagePanel;
+    public final ScaledImagePanel imagePanel;
     public ImagePanel overlayPanel;
     public JPanel buttonPanel;
 
@@ -178,7 +178,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         add(imagePanel);
         imagePanel.setScaleLarger(true);
         imagePanel.setScalingType(ScalingType.nearestNeighbor);
-        imagePanel.setScalingBlur(true);
         imagePanel.setScalingMultiPassType(MultipassType.none);
 
         String cardType = getType(newGameCard);
@@ -190,7 +189,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-                    if (!loadImage || gameCard.isFaceDown()) return;
+                    if (!loadImage || gameCard.isFaceDown()) {
+                        return;
+                    }
                     BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
@@ -255,51 +256,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         return zone;
     }
 
+    @Override
     public void setFoil(boolean foil) {
         this.isFoil = foil;
-        if (foil) {
-            /*BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
-                        HueFilter filter = FilterFactory.getHueFilter();
-                        filter.setHue(0.1f);
-                        BufferedImage dest = filter.filter(source, null);
-                        imagePanel.setImage(dest);
-                        imagePanel.repaint();*/
-
-            /*
-                        Thread thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (imagePanel.getSrcImage() == null) {
-                                    return;
-                                }
-                                BufferedImage source = BufferedImageBuilder.bufferImage(imagePanel.getSrcImage());
-                                HueFilter filter = FilterFactory.getHueFilter();
-                                float hue = 0.005f;
-                                while (true) {
-                                    try {
-                                        Thread.sleep(DEFAULT_DELAY_PERIOD);
-                                    } catch (InterruptedException e) {
-                                    }
-                                    hue += 0.015F;
-                                    if (hue >= 1.0D) {
-                                        hue = 0.005F;
-                                    }
-                                    filter.setHue(hue);
-                                    final BufferedImage dest = filter.filter(source, null);
-                                    SwingUtilities.invokeLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            imagePanel.setImage(dest);
-                                            imagePanel.repaint();
-                                        }
-                                    });
-                                }
-                            }
-                        });
-                        thread.setDaemon(false);
-                        thread.start();
-                        */
-        }
     }
 
     public void setScalingType(ScalingType scalingType) {
@@ -341,8 +300,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void paint(Graphics g) {
-        if (!displayEnabled) return;
-        if (!isValid()) super.validate();
+        if (!displayEnabled) {
+            return;
+        }
+        if (!isValid()) {
+            super.validate();
+        }
         Graphics2D g2d = (Graphics2D) g;
         if (transformAngle < 1) {
             float edgeOffset = (cardWidth + cardXOffset) / 2f;
@@ -466,10 +429,11 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         ptText.setLocation(cardXOffset + ptX - TEXT_GLOW_SIZE / 2 - offsetX, cardYOffset + ptY - TEXT_GLOW_SIZE / 2);
         dayNightButton.setLocation(0, cardHeight - 30);
 
-        if (isAnimationPanel || cardWidth < 200)
+        if (isAnimationPanel || cardWidth < 200) {
             imagePanel.setScalingType(ScalingType.nearestNeighbor);
-        else
+        } else {
             imagePanel.setScalingType(ScalingType.bilinear);
+        }
     }
 
     @Override
@@ -493,15 +457,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         height = -yOffset + rotCenterY + rotCenterToBottomCorner;
         setBounds(x + xOffset, y + yOffset, width, height);
     }
-
-    /*@Override
-    public void repaint() {
-        Rectangle b = getBounds();
-        JRootPane rootPane = SwingUtilities.getRootPane(this);
-        if (rootPane == null) return;
-        Point p = SwingUtilities.convertPoint(getParent(), b.x, b.y, rootPane);
-        rootPane.repaint(p.x, p.y, b.width, b.height);
-    }*/
 
     public int getCardX() {
         return getX() + cardXOffset;
@@ -563,7 +518,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 try {
                     tappedAngle = isTapped() ? CardPanel.TAPPED_ANGLE : 0;
                     flippedAngle = isFlipped() ? CardPanel.FLIPPED_ANGLE : 0;
-                    if (gameCard.isFaceDown()) return;
+                    if (gameCard.isFaceDown()) {
+                        return;
+                    }
                     BufferedImage srcImage = ImageCache.getThumbnail(gameCard);
                     if (srcImage != null) {
                         hasImage = true;
@@ -666,41 +623,28 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public boolean contains(int x, int y) {
-        if (containsThis(x, y, true)) return true;
-
-        /*
-                   * if (attachedCount > 0) { for (MWCardImpl card :
-                   * mwAttachedCards.keySet()) { if (card.contains(x, y)) return true; } }
-                   */
+        if (containsThis(x, y, true)) {
+            return true;
+        }
 
         return false;
     }
 
     public boolean containsThis(int x, int y, boolean root) {
-        //log.info("x="+x+", y="+y);
         Point component = getLocation();
-
-        //int dy = component.y;
-        //if (root) dy = 0;
 
         int cx = getCardX() - component.x;
         int cy = getCardY() - component.y;
         int cw = getCardWidth();
         int ch = getCardHeight();
         if (isTapped()) {
-            cy = ch - cw + cx /*+ attachedDy*attachedCount*/;
+            cy = ch - cw + cx;
             ch = cw;
             cw = getCardHeight();
         }
-        //int dx = drawIcons ? 19 : 0;
-        //int dx = 0;
 
         if (x >= cx && x <= cx + cw && y >= cy && y <= cy + ch) {
-            //log.info("!cx="+cx+", cy="+cy+", dx="+cw +", ch="+ch);
-            //log.info(getOriginal().getId());
             return true;
-        } else {
-            //log.info("cx="+cx+", cy="+cy+", dx="+cw +", ch="+ch);
         }
         return false;
     }
@@ -712,8 +656,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public Image getImage() {
-        if (this.hasImage)
+        if (this.hasImage) {
             return ImageCache.getImageOriginal(gameCard);
+        }
         return null;
     }
 
@@ -723,7 +668,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (gameCard.isFaceDown()) return;
+        if (gameCard.isFaceDown()) {
+            return;
+        }
         if (!popupShowing) {
             synchronized (this) {
                 if (!popupShowing) {
@@ -740,15 +687,21 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if (gameCard.isFaceDown()) return;
+        if (gameCard.isFaceDown()) {
+            return;
+        }
         data.component = this;
         callback.mouseMoved(e, data);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (gameCard.isFaceDown()) return;
-        if (getMousePosition(true) != null) return;
+        if (gameCard.isFaceDown()) {
+            return;
+        }
+        if (getMousePosition(true) != null) {
+            return;
+        }
         if (popupShowing) {
             synchronized (this) {
                 if (popupShowing) {
@@ -764,7 +717,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (gameCard.isFaceDown()) return;
+        if (gameCard.isFaceDown()) {
+            return;
+        }
         data.component = this;
         data.card = this.gameCard;
         data.gameId = this.gameId;
@@ -840,12 +795,10 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             }
             if (card.getExpansionSetCode() != null && card.getExpansionSetCode().length() > 0) {
                 sb.append("\n").append(card.getCardNumber()).append(" - ");
-                //sb.append(Sets.getInstance().get(card.getExpansionSetCode()).getName()).append(" - ");
                 sb.append(card.getExpansionSetCode()).append(" - ");
                 sb.append(card.getRarity().toString());
             }
         }
-//        sb.append("\n").append(card.getId());
         return sb.toString();
     }
 
@@ -899,7 +852,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-        if (gameCard.isFaceDown()) return;
+        if (gameCard.isFaceDown()) {
+            return;
+        }
         data.component = this;
         callback.mouseWheelMoved(e, data);
     }

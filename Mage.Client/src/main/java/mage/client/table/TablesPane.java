@@ -25,16 +25,8 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * TablesPane.java
- *
- * Created on Dec 17, 2009, 9:21:42 AM
- */
-
 package mage.client.table;
 
-import java.util.Map;
 import java.util.UUID;
 
 import javax.swing.JComponent;
@@ -54,8 +46,7 @@ public class TablesPane extends MagePane {
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
             tablesPanel = new mage.client.table.TablesPanel();
-            Map<String, JComponent> ui = tablesPanel.getUIComponents(); 
-            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            JComponent container = Plugins.getInstance().updateTablePanel(tablesPanel.getUIComponents());
             if (container != null) {
                 initComponents(container);
                 container.add(tablesPanel);

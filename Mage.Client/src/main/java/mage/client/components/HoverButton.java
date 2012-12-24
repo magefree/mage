@@ -36,16 +36,17 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command onHover = null;
     private Color textColor = Color.white;
 
-    final static Font textFont = new Font("Arial", Font.PLAIN, 12);
-    final static Font textFontMini = new Font("Arial", Font.PLAIN, 11);
-    final static Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
-    final static Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
+    static final Font textFont = new Font("Arial", Font.PLAIN, 12);
+    static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
+    static final Font textSetFontBoldMini = new Font("Arial", Font.BOLD, 12);
+    static final Font textSetFontBold = new Font("Arial", Font.BOLD, 14);
     private boolean useMiniFont = false;
 
     public HoverButton(String text, Image image, Rectangle size) {
         this(text, image, image, null, image, size);
-        if (image == null)
+        if (image == null) {
             throw new IllegalArgumentException("Image can't be null");
+        }
     }
 
     public HoverButton(String text, Image image, Image hover, Image disabled, Rectangle size) {
@@ -74,9 +75,14 @@ public class HoverButton extends JPanel implements MouseListener {
             if (isHovered) {
                 g.drawImage(hoverImage, 0, 0, imageSize.width, imageSize.height, this);
                 if (text != null) {
-                    if (textColor != null) g2d.setColor(textColor);
-                    if (useMiniFont) g2d.setFont(textFontMini);
-                    else g2d.setFont(textFont);
+                    if (textColor != null) {
+                        g2d.setColor(textColor);
+                    }
+                    if (useMiniFont) {
+                        g2d.setFont(textFontMini);
+                    } else {
+                        g2d.setFont(textFont);
+                    }
                     textOffsetX = calculateOffset(g2d);
                     g2d.drawString(text, textOffsetX, textOffsetY);
                 }
@@ -124,7 +130,7 @@ public class HoverButton extends JPanel implements MouseListener {
                 frc = g2d.getFontRenderContext();
                 textWidth = (int) textFontMini.getStringBounds(text, frc).getWidth();
             }
-            textOffsetX = (int) ((imageSize.width - textWidth) / 2);
+            textOffsetX = (imageSize.width - textWidth) / 2;
         }
         return textOffsetX;
     }

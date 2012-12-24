@@ -52,7 +52,7 @@ import org.apache.log4j.Logger;
  */
 public class ConsolePanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(ConsolePanel.class);
+    private static final Logger logger = Logger.getLogger(ConsolePanel.class);
 
     private TableUserModel tableUserModel;
     private TableTableModel tableTableModel;
@@ -400,7 +400,7 @@ class UpdateUsersTask extends SwingWorker<Void, List<UserView>> {
     private Session session;
     private ConsolePanel panel;
 
-    private final static Logger logger = Logger.getLogger(UpdateUsersTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateUsersTask.class);
 
     UpdateUsersTask(Session session, ConsolePanel panel) {
         this.session = session;
@@ -439,7 +439,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     private UUID roomId;
     private ConsolePanel panel;
 
-    private final static Logger logger = Logger.getLogger(UpdateTablesTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateTablesTask.class);
 
     UpdateTablesTask(Session session, UUID roomId, ConsolePanel panel) {
         this.session = session;
