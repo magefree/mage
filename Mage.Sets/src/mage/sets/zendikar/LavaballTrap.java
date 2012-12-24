@@ -27,6 +27,8 @@
  */
 package mage.sets.zendikar;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -81,7 +83,7 @@ public class LavaballTrap extends CardImpl<LavaballTrap> {
 
 class LavaballTrapWatcher extends WatcherImpl<LavaballTrapWatcher> {
 
-    int landPlayed;
+    private Map<UUID, Integer> amountOfLandsPlayedThisTurn = new HashMap<UUID, Integer>();
 
     public LavaballTrapWatcher() {
         super("LavaballTrapWatcher", Constants.WatcherScope.GAME);
@@ -89,6 +91,9 @@ class LavaballTrapWatcher extends WatcherImpl<LavaballTrapWatcher> {
 
     public LavaballTrapWatcher(final LavaballTrapWatcher watcher) {
         super(watcher);
+        for (Map.Entry<UUID, Integer> entry : watcher.amountOfLandsPlayedThisTurn.entrySet()) {
+            amountOfLandsPlayedThisTurn.put(entry.getKey(), entry.getValue());
+        }
     }
 
     @Override
@@ -98,25 +103,35 @@ class LavaballTrapWatcher extends WatcherImpl<LavaballTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) { // no need to check - condition has already occured
-            return;
-        }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
-            if (perm.getCardType().contains(CardType.LAND) && !perm.getControllerId().equals(controllerId)) {
-                landPlayed += 1;
-                if (landPlayed >= 2) {
-                    condition = true;
+            if (perm.getCardType().contains(CardType.LAND)) {
+                Integer amount = amountOfLandsPlayedThisTurn.get(perm.getControllerId());
+                if (amount == null) {
+                    amount = Integer.valueOf(1);
+                } else {
+                    ++amount;
                 }
+                amountOfLandsPlayedThisTurn.put(perm.getControllerId(), amount);
             }
         }
+    }
+
+    public int maxLandsAnOpponentPlayedThisTurn(UUID playerId, Game game) {
+        int maxLands = 0;
+        for (UUID opponentId : game.getOpponents(playerId)) {
+            Integer amount = amountOfLandsPlayedThisTurn.get(opponentId);
+            if (amount != null && amount.intValue() > maxLands) {
+                maxLands = amount.intValue();
+            }
+        }
+        return maxLands;
     }
 
     @Override
     public void reset() {
         super.reset();
-        landPlayed = 0;
-        condition = false;
+        amountOfLandsPlayedThisTurn.clear();
     }
 }
 
@@ -139,7 +154,7 @@ class LavaballTrapAlternativeCost extends AlternativeCostImpl<LavaballTrapAltern
     @Override
     public boolean isAvailable(Game game, Ability source) {
         LavaballTrapWatcher watcher = (LavaballTrapWatcher) game.getState().getWatchers().get("LavaballTrapWatcher");
-        if (watcher != null && watcher.conditionMet()) {
+        if (watcher != null && watcher.maxLandsAnOpponentPlayedThisTurn(source.getControllerId(), game) > 1) {
             return true;
         }
         return false;
