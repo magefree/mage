@@ -134,7 +134,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
             if (message.equals("1")) {
                 sb.append(" equal to the number of ");
             } else {
-                if (message.startsWith("the")) {
+                if (message.startsWith("the") || message.startsWith("twice")) {
                     sb.append(" equal to ");
                 } else {
                     sb.append(" for each ");
