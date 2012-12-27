@@ -138,17 +138,20 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
     @Override
     public boolean isChosen() {
-        if (maxNumberOfTargets == 0 && minNumberOfTargets == 0)
+        if (maxNumberOfTargets == 0 && minNumberOfTargets == 0) {
             return true;
-        if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets)
+        }
+        if (maxNumberOfTargets != 0 && targets.size() == maxNumberOfTargets) {
             return true;
+        }
         return chosen;
     }
 
     @Override
     public boolean doneChosing() {
-        if (maxNumberOfTargets == 0)
+        if (maxNumberOfTargets == 0) {
             return false;
+        }
         return targets.size() == maxNumberOfTargets;
     }
 
@@ -192,8 +195,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                         targets.put(id, 0);
                         rememberZoneChangeCounter(id, game);
                         chosen = targets.size() >= minNumberOfTargets;
-                        if (!skipEvent)
+                        if (!skipEvent) {
                             game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                        }
                     }
                 }
                 else {
@@ -230,8 +234,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                 targets.put(id, amount);
                 rememberZoneChangeCounter(id, game);
                 chosen = targets.size() >= minNumberOfTargets;
-                if (!skipEvent)
+                if (!skipEvent) {
                     game.fireEvent(GameEvent.getEvent(EventType.TARGETED, id, source.getId(), source.getControllerId()));
+                }
             }
         }
         else {
@@ -276,10 +281,12 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                     continue; // it's not legal so continue to have a look at other targeted cards
                 }
             }
-            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId())))
+            if (game.replaceEvent(GameEvent.getEvent(EventType.TARGET, targetId, source.getId(), source.getControllerId()))) {
                 continue;
-            if (canTarget(targetId, source, game))
+            }
+            if (canTarget(targetId, source, game)) {
                 return true;
+            }
         }
         return false;
     }
@@ -302,8 +309,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                     target.addTarget(nextTargetId, source, game, true);
                 }
             }
-            if (target.isChosen())
+            if (target.isChosen()) {
                 options.add(target);
+            }
         }        
         return options;
     }
@@ -315,22 +323,17 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
     @Override
     public int getTargetAmount(UUID targetId) {
-        if (targets.containsKey(targetId))
+        if (targets.containsKey(targetId)) {
             return targets.get(targetId);
+        }
         return 0;
     }
 
-//    @Override
-//    public UUID getLastTarget() {
-//        if (targets.size() > 0)
-//            return targets.keySet().iterator().next();
-//        return null;
-//    }
-
     @Override
     public UUID getFirstTarget() {
-        if (targets.size() > 0)
+        if (targets.size() > 0) {
             return targets.keySet().iterator().next();
+        }
         return null;
     }
 
