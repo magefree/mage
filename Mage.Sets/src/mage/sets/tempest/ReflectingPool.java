@@ -35,10 +35,10 @@ import mage.Constants.Rarity;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
@@ -59,7 +59,7 @@ public class ReflectingPool extends CardImpl<ReflectingPool> {
         this.expansionSetCode = "TMP";
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
     }
 
     public ReflectingPool(final ReflectingPool card) {
@@ -88,60 +88,60 @@ class ReflectingPoolEffect extends ManaEffect<ReflectingPoolEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
+        Mana types = new Mana();
         for (Permanent land : lands) {
             Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Constants.Zone.BATTLEFIELD);
-            Mana types = new Mana();
             for (ManaAbility ability : mana) {
                 types.add(ability.getNetMana(game));
             }
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Pick a mana color");
-            if (types.getBlack() > 0) {
-                choice.getChoices().add("Black");
+        }
+        Choice choice = new ChoiceImpl(true);
+        choice.setMessage("Pick a mana color");
+        if (types.getBlack() > 0) {
+            choice.getChoices().add("Black");
+        }
+        if (types.getRed() > 0) {
+            choice.getChoices().add("Red");
+        }
+        if (types.getBlue() > 0) {
+            choice.getChoices().add("Blue");
+        }
+        if (types.getGreen() > 0) {
+            choice.getChoices().add("Green");
+        }
+        if (types.getWhite() > 0) {
+            choice.getChoices().add("White");
+        }
+        if (types.getColorless() > 0) {
+            choice.getChoices().add("Colorless");
+        }
+        if (types.getAny() > 0) {
+            choice.getChoices().add("Black");
+            choice.getChoices().add("Red");
+            choice.getChoices().add("Blue");
+            choice.getChoices().add("Green");
+            choice.getChoices().add("White");
+            choice.getChoices().add("Colorless");
+        }
+        if (choice.getChoices().size() > 0) {
+            Player player = game.getPlayer(source.getControllerId());
+            if (choice.getChoices().size() == 1) {
+                choice.setChoice(choice.getChoices().iterator().next());
+            } else {
+                player.choose(outcome, choice, game);
             }
-            if (types.getRed() > 0) {
-                choice.getChoices().add("Red");
-            }
-            if (types.getBlue() > 0) {
-                choice.getChoices().add("Blue");
-            }
-            if (types.getGreen() > 0) {
-                choice.getChoices().add("Green");
-            }
-            if (types.getWhite() > 0) {
-                choice.getChoices().add("White");
-            }
-            if (types.getColorless() > 0) {
-                choice.getChoices().add("Colorless");
-            }
-            if (types.getAny() > 0) {
-                choice.getChoices().add("Black");
-                choice.getChoices().add("Red");
-                choice.getChoices().add("Blue");
-                choice.getChoices().add("Green");
-                choice.getChoices().add("White");
-                choice.getChoices().add("Colorless");
-            }
-            if (choice.getChoices().size() > 0) {
-                Player player = game.getPlayer(source.getControllerId());
-                if (choice.getChoices().size() == 1) {
-                    choice.setChoice(choice.getChoices().iterator().next());
-                } else {
-                    player.choose(outcome, choice, game);
-                }
-                if (choice.getChoice().equals("Black")) {
-                    player.getManaPool().addMana(Mana.BlackMana, game, source);
-                } else if (choice.getChoice().equals("Blue")) {
-                    player.getManaPool().addMana(Mana.BlueMana, game, source);
-                } else if (choice.getChoice().equals("Red")) {
-                    player.getManaPool().addMana(Mana.RedMana, game, source);
-                } else if (choice.getChoice().equals("Green")) {
-                    player.getManaPool().addMana(Mana.GreenMana, game, source);
-                } else if (choice.getChoice().equals("White")) {
-                    player.getManaPool().addMana(Mana.WhiteMana, game, source);
-                } else if (choice.getChoice().equals("Colorless")) {
-                    player.getManaPool().addMana(Mana.ColorlessMana, game, source);
-                }
+            if (choice.getChoice().equals("Black")) {
+                player.getManaPool().addMana(Mana.BlackMana, game, source);
+            } else if (choice.getChoice().equals("Blue")) {
+                player.getManaPool().addMana(Mana.BlueMana, game, source);
+            } else if (choice.getChoice().equals("Red")) {
+                player.getManaPool().addMana(Mana.RedMana, game, source);
+            } else if (choice.getChoice().equals("Green")) {
+                player.getManaPool().addMana(Mana.GreenMana, game, source);
+            } else if (choice.getChoice().equals("White")) {
+                player.getManaPool().addMana(Mana.WhiteMana, game, source);
+            } else if (choice.getChoice().equals("Colorless")) {
+                player.getManaPool().addMana(Mana.ColorlessMana, game, source);
             }
         }
         return true;

@@ -33,15 +33,13 @@ import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
 /**
@@ -57,7 +55,7 @@ public class LurkingPredators extends CardImpl<LurkingPredators> {
         this.color.setGreen(true);
 
         // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
-        this.addAbility(new LurkingPredatorsTriggeredAbility());
+        this.addAbility(new OpponentCastsSpellTriggeredAbility(new LurkingPredatorsEffect(), false));
     }
 
     public LurkingPredators(final LurkingPredators card) {
@@ -67,35 +65,6 @@ public class LurkingPredators extends CardImpl<LurkingPredators> {
     @Override
     public LurkingPredators copy() {
         return new LurkingPredators(this);
-    }
-}
-
-class LurkingPredatorsTriggeredAbility extends TriggeredAbilityImpl<LurkingPredatorsTriggeredAbility> {
-
-    public LurkingPredatorsTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LurkingPredatorsEffect());
-    }
-
-    public LurkingPredatorsTriggeredAbility(final LurkingPredatorsTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public LurkingPredatorsTriggeredAbility copy() {
-        return new LurkingPredatorsTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library";
     }
 }
 
