@@ -14,9 +14,7 @@ You can visit the official MAGE forum [here](http://www.slightlymagic.net/forum/
  * Sealed
 
 ## Installation
-Download one of the following MAGE build:
-* [Latest Release](http://download.magefree.com): Can be played on official server
-* [Nightly Build](http://mtgathering.ru/mage/): contains the latest changes
+Download the latest release from [here](http://download.magefree.com). You need this to be able to play on the official server.
 
 After you extract the contents of the arhive, you will find batch files to start the client/server in the corresponding directories. See the included readme files for more instructions.
 
