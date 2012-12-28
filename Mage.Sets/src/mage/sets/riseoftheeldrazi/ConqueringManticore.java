@@ -37,6 +37,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,6 +56,8 @@ public class ConqueringManticore extends CardImpl<ConqueringManticore> {
         this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
+        this.addAbility(FlyingAbility.getInstance());
 
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn), false);
         ability.addEffect(new UntapTargetEffect());
