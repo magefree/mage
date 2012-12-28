@@ -1,5 +1,5 @@
 @ECHO OFF
-cd ./client
+cd ./mage-client
 call startClient
-cd ../server
+cd ../mage-server
 call startServer
