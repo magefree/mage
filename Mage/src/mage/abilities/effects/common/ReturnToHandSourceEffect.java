@@ -43,13 +43,13 @@ public class ReturnToHandSourceEffect extends OneShotEffect<ReturnToHandSourceEf
     boolean fromBattlefieldOnly = false;
 
     public ReturnToHandSourceEffect() {
-        super(Outcome.ReturnToHand);
-        staticText = "Return {this} to it's owner's hand";
+        this(false);
     }
 
     public ReturnToHandSourceEffect(boolean fromBattlefieldOnly) {
         super(Outcome.ReturnToHand);
         this.fromBattlefieldOnly = fromBattlefieldOnly;
+        staticText = "Return {this} to it's owner's hand";
     }
 
     public ReturnToHandSourceEffect(final ReturnToHandSourceEffect effect) {
