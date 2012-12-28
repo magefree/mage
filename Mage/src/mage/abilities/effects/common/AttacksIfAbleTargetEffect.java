@@ -56,8 +56,7 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTa
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null && creature.getId().equals(permanent.getId())) {
+        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
             return true;
         }
         return false;
@@ -75,10 +74,12 @@ public class AttacksIfAbleTargetEffect extends RequirementEffect<AttacksIfAbleTa
 
     @Override
     public String getText(Mode mode) {
-        if (this.duration == Duration.EndOfTurn)
-            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks this turn if able";
-        else
-            return "Target " + mode.getTargets().get(0).getTargetName() + " attacks each turn if able";
+        if (this.duration == Duration.EndOfTurn) {
+            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks this turn if able").toString();
+        }
+        else {
+            return new StringBuilder("Target ").append(mode.getTargets().get(0).getTargetName()).append(" attacks each turn if able").toString();
+        }
     }
 
 }

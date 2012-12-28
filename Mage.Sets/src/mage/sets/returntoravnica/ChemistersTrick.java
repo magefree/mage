@@ -106,7 +106,7 @@ class ChemistersTrickEffect extends OneShotEffect<ChemistersTrickEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             AttacksIfAbleTargetEffect effect = new AttacksIfAbleTargetEffect(Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);
