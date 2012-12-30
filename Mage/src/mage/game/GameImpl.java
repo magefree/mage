@@ -1004,22 +1004,25 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                         somethingHappened = true;
+                    }
                 }
                 else {
                     Target target = perm.getSpellAbility().getTargets().get(0);
                     if (target instanceof TargetPermanent) {
                         Permanent attachedTo = getPermanent(perm.getAttachedTo());
-                        if (attachedTo == null) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                        if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                                 somethingHappened = true;
+                            }
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
                             if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
-                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                                     somethingHappened = true;
+                                }
                             }
                         }
                     }
@@ -1039,30 +1042,32 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     }
                 }
             }
-            if (filterLegendary.match(perm, this))
+            if (filterLegendary.match(perm, this)) {
                 legendary.add(perm);
+            }
             if (filterEquipment.match(perm, this)) {
                 //20091005 - 704.5p, 702.14d
                 if (perm.getAttachedTo() != null) {
                     Permanent creature = getPermanent(perm.getAttachedTo());
-                    if (creature == null) {
+                    if (creature == null || !creature.getAttachments().contains(perm.getId())) {
                         perm.attachTo(null, this);
-                    }
-                    else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm, this)) {
-                        if (creature.removeAttachment(perm.getId(), this))
+                    } else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm, this)) {
+                        if (creature.removeAttachment(perm.getId(), this)) {
                             somethingHappened = true;
+                        }
                     }
                 }
             }
             if (filterFortification.match(perm, this)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent land = getPermanent(perm.getAttachedTo());
-                    if (land == null) {
+                    if (land == null || !land.getAttachments().contains(perm.getId())) {
                         perm.attachTo(null, this);
                     }
                     else if (!land.getCardType().contains(CardType.LAND) || land.hasProtectionFrom(perm, this)) {
-                        if (land.removeAttachment(perm.getId(), this))
+                        if (land.removeAttachment(perm.getId(), this)) {
                             somethingHappened = true;
+                        }
                     }
                 }
             }
