@@ -107,6 +107,6 @@ class RunechantersPikeValue implements DynamicValue {
 
     @Override
     public String toString() {
-        return "+X";
+        return "X";
     }
 }
