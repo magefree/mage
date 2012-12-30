@@ -66,4 +66,28 @@ public class CloudshiftTest extends CardTestPlayerBase {
         Assert.assertFalse(clone.getAbilities().contains(LifelinkAbility.getInstance()));
         Assert.assertFalse(clone.getAbilities().contains(FirstStrikeAbility.getInstance()));
     }
+    @Test
+    public void testEquipmentDetached() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Bonesplitter");
+
+        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
+
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Silvercoat Lion");
+
+        setStopAt(1, Constants.PhaseStep.END_TURN);
+        execute();
+
+        Permanent bonesplitter = getPermanent("Bonesplitter", playerA.getId());
+        Permanent silvercoatLion = getPermanent("Silvercoat Lion", playerA.getId());
+
+        assertLife(playerA, 20);
+        Assert.assertTrue(silvercoatLion.getAttachments().isEmpty());
+        Assert.assertTrue("Bonesplitter must not be connected to Silvercoat Lion",bonesplitter.getAttachedTo() == null);
+        Assert.assertEquals("Silvercoat Lion's power without equipment has to be 2",2, silvercoatLion.getPower().getValue());
+        Assert.assertEquals("Silvercoat Lion's toughness has to be 2",2, silvercoatLion.getToughness().getValue());
+    }
+
 }
