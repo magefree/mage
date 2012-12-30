@@ -28,6 +28,8 @@
 
 package mage.players;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -70,8 +72,6 @@ import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
-import java.util.*;
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
@@ -244,15 +244,17 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         inRange.clear();
         if (range == RangeOfInfluence.ALL) {
             for (Player player: game.getPlayers().values()) {
-                if (!player.hasLeft())
+                if (!player.hasLeft()) {
                     inRange.add(player.getId());
+                }
             }
         }
         else {
             if ((range.getRange() * 2) + 1 >= game.getPlayers().size()) {
                 for (Player player: game.getPlayers().values()) {
-                    if (!player.hasLeft())
+                    if (!player.hasLeft()) {
                         inRange.add(player.getId());
+                    }
                 }
             }
             else {
@@ -260,15 +262,17 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 PlayerList players = game.getState().getPlayerList(playerId);
                 for (int i = 0; i < range.getRange(); i++) {
                     Player player = players.getNext(game);
-                    while (player.hasLeft())
+                    while (player.hasLeft()) {
                         player = players.getNext(game);
+                    }
                     inRange.add(player.getId());
                 }
                 players = game.getState().getPlayerList(playerId);
                 for (int i = 0; i < range.getRange(); i++) {
                     Player player = players.getPrevious(game);
-                    while (player.hasLeft())
+                    while (player.hasLeft()) {
                         player = players.getPrevious(game);
+                    }
                     inRange.add(player.getId());
                 }
             }
@@ -333,14 +337,17 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean canBeTargetedBy(MageObject source, Game game) {
-        if (this.hasLost() || this.hasLeft())
+        if (this.hasLost() || this.hasLeft()) {
             return false;
+        }
         if (source != null) {
-            if (abilities.containsKey(ShroudAbility.getInstance().getId()))
+            if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
                 return false;
+            }
 
-            if (hasProtectionFrom(source, game))
+            if (hasProtectionFrom(source, game)) {
                 return false;
+            }
         }
 
         return true;
@@ -349,8 +356,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean hasProtectionFrom(MageObject source, Game game) {
         for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-            if (!ability.canTarget(source, game))
+            if (!ability.canTarget(source, game)) {
                 return true;
+            }
         }
         return false;
     }
@@ -388,7 +396,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean removeFromLibrary(Card card, Game game) {
-        if (card == null) return false;
+        if (card == null) {
+            return false;
+        }
         library.remove(card.getId(), game);
         return true;
     }
@@ -405,8 +415,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
         int numDiscarded = 0;
         while (numDiscarded < amount) {
-            if (hand.size() == 0)
+            if (hand.size() == 0) {
                 break;
+            }
             TargetDiscard target = new TargetDiscard(playerId);
             choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = hand.get(target.getFirstTarget(), game);
@@ -473,8 +484,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         game.getBattlefield().removePermanent(permanent.getId());
         if (permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
-            if (attachedTo != null)
+            if (attachedTo != null) {
                 attachedTo.removeAttachment(permanent.getId(), game);
+            }
         }
         return true;
     }
@@ -598,8 +610,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean activateAbility(ActivatedAbility ability, Game game) {
         boolean result;
-        if (!ability.canActivate(this.playerId, game))
+        if (!ability.canActivate(this.playerId, game)) {
             return false;
+        }
 
         if (ability instanceof PassAbility) {
             pass();
@@ -626,8 +639,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
 
         //if player has taken an action then reset all player passed flags
-        if (result)
+        if (result) {
             game.getPlayers().resetPassed();
+        }
         return result;
     }
 
@@ -703,8 +717,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<UUID, ManaAbility>();
         for (ManaAbility ability: object.getAbilities().getManaAbilities(zone)) {
-            if (ability.canActivate(playerId, game))
+            if (ability.canActivate(playerId, game)) {
                 useable.put(ability.getId(), ability);
+            }
         }
         return useable;
     }
@@ -763,7 +778,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game)) {
                 untap &= effect.canBeUntapped(permanent, game);
             }
-            if (untap) permanent.untap(game);
+            if (untap) {
+                permanent.untap(game);
+            }
         }
     }
 
@@ -845,7 +862,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public int loseLife(int amount, Game game) {
-        if (!canLoseLife) return 0;
+        if (!canLoseLife) {
+            return 0;
+        }
         GameEvent event = new GameEvent(GameEvent.EventType.LOSE_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life -= event.getAmount();
@@ -867,7 +886,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public int gainLife(int amount, Game game) {
-        if (!canGainLife) return 0;
+        if (!canGainLife) {
+            return 0;
+        }
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life += event.getAmount();
@@ -931,8 +952,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     protected boolean canDamage(MageObject source, Game game) {
         for (ProtectionAbility ability: abilities.getProtectionAbilities()) {
-            if (!ability.canTarget(source, game))
+            if (!ability.canTarget(source, game)) {
                 return false;
+            }
         }
         return true;
     }
@@ -1026,10 +1048,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void resetPassed() {
-        if (!this.loses && !this.left)
+        if (!this.loses && !this.left) {
             this.passed = false;
-        else
+        }
+        else {
             this.passed = true;
+        }
     }
 
     @Override
@@ -1061,8 +1085,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (canLose(game)) {
             this.loses = true;
             //20100423 - 603.9
-            if (!this.wins)
+            if (!this.wins) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
+            }
             game.leave(playerId);
         }
     }
@@ -1097,10 +1122,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean hasWon() {
-        if (!this.loses)
+        if (!this.loses) {
             return this.wins;
-        else
+        }
+        else {
             return false;
+        }
     }
 
     @Override
@@ -1166,8 +1193,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         List<Permanent> attackers = game.getBattlefield().getAllActivePermanents(filter, playerId, game);
         for (Iterator<Permanent> i = attackers.iterator(); i.hasNext();) {
             Permanent entry = i.next();
-            if (!entry.canAttack(game))
+            if (!entry.canAttack(game)) {
                 i.remove();
+            }
         }
         return attackers;
     }
@@ -1208,8 +1236,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     break;
                 }
             }
-            if (canAdd)
+            if (canAdd) {
                 result.add(permanent);
+            }
         }
         return result;
     }
@@ -1257,8 +1286,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             }
 
             for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game))
+                if (cost.isAvailable(game, ability) && cost.canPay(ability.getSourceId(), playerId, game)) {
                     return true;
+                }
             }
         }
         return false;
@@ -1274,20 +1304,23 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (hidden) {
             for (Card card: hand.getUniqueCards(game)) {
                 for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    if (canPlay(ability, available, game))
+                    if (canPlay(ability, available, game)) {
                         playable.add(ability);
+                    }
                 }
             }
         }
         for (Card card: graveyard.getUniqueCards(game)) {
             for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.GRAVEYARD)) {
-                if (canPlay(ability, available, game))
+                if (canPlay(ability, available, game)) {
                     playable.add(ability);
+                }
             }
             if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
                 for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                    if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                         playable.add(ability);
+                    }
                 }
             }
         }
@@ -1295,8 +1328,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             for (Card card: exile.getCards(game)) {
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                             playable.add(ability);
+                        }
                     }
                 }
             }
@@ -1305,8 +1339,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             for (Card card: cards.getCards(game)) {
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility)
+                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
                             playable.add(ability);
+                        }
                     }
                 }
             }
@@ -1315,9 +1350,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         Map<String, Ability> playableActivated = new HashMap<String, Ability>();
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             for (ActivatedAbility ability: permanent.getAbilities().getActivatedAbilities(Zone.BATTLEFIELD)) {
-                if (!playableActivated.containsKey(ability.toString()))
-                    if (canPlay(ability, available, game))
+                if (!playableActivated.containsKey(ability.toString())) {
+                    if (canPlay(ability, available, game)) {
                         playableActivated.put(ability.toString(), ability);
+                    }
+                }
             }
         }
         playable.addAll(playableActivated.values());
@@ -1328,14 +1365,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
         List<Ability> options = new ArrayList<Ability>();
 
-        if (ability.isModal())
+        if (ability.isModal()) {
             addModeOptions(options, ability, game);
-        else if (ability.getTargets().getUnchosen().size() > 0)
+        } else if (ability.getTargets().getUnchosen().size() > 0) {
             addTargetOptions(options, ability, 0, game);
-        else if (ability.getChoices().getUnchosen().size() > 0)
+        } else if (ability.getChoices().getUnchosen().size() > 0) {
             addChoiceOptions(options, ability, 0, game);
-        else if (ability.getCosts().getTargets().getUnchosen().size() > 0)
+        } else if (ability.getCosts().getTargets().getUnchosen().size() > 0) {
             addCostTargetOptions(options, ability, 0, game);
+        }
 
         return options;
     }
@@ -1344,14 +1382,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         for (Mode mode: option.getModes().values()) {
             Ability newOption = option.copy();
             newOption.getModes().setMode(mode);
-            if (option.getTargets().getUnchosen().size() > 0)
+            if (option.getTargets().getUnchosen().size() > 0) {
                 addTargetOptions(options, option, 0, game);
-            else if (option.getChoices().getUnchosen().size() > 0)
+            } else if (option.getChoices().getUnchosen().size() > 0) {
                 addChoiceOptions(options, option, 0, game);
-            else if (option.getCosts().getTargets().getUnchosen().size() > 0)
+            } else if (option.getCosts().getTargets().getUnchosen().size() > 0) {
                 addCostTargetOptions(options, option, 0, game);
-            else
+            } else {
                 options.add(newOption);
+            }
         }
     }
 
@@ -1375,12 +1414,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 addTargetOptions(options, newOption, targetNum + 1, game);
             }
             else {
-                if (option.getChoices().size() > 0)
+                if (option.getChoices().size() > 0) {
                     addChoiceOptions(options, newOption, 0, game);
-                else if (option.getCosts().getTargets().size() > 0)
+                } else if (option.getCosts().getTargets().size() > 0) {
                     addCostTargetOptions(options, newOption, 0, game);
-                else
+                } else {
                     options.add(newOption);
+                }
             }
         }
     }
@@ -1393,10 +1433,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 addChoiceOptions(options, newOption, choiceNum + 1, game);
             }
             else {
-                if (option.getCosts().getTargets().size() > 0)
+                if (option.getCosts().getTargets().size() > 0) {
                     addCostTargetOptions(options, newOption, 0, game);
-                else
+                } else {
                     options.add(newOption);
+                }
             }
         }
     }
