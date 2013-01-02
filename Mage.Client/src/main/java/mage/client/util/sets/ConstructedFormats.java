@@ -17,7 +17,7 @@ import mage.cards.repository.CardRepository;
 public class ConstructedFormats {
 
     private static final String[] constructedFormats = {"- All Sets", "- Standard", "- Extended", "- Modern",
-                                                        "* Return to Ravnica Block", "Return to Ravnica", "Magic 2013",
+                                                        "* Return to Ravnica Block", "Gatecrash","Return to Ravnica", "Magic 2013",
                                                         "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", "Magic 2012",
                                                         "Planechase 2012",
                                                         "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
@@ -285,11 +285,14 @@ public class ConstructedFormats {
             return Arrays.asList("AVR");
         }        
         if (format.equals("* Return to Ravnica Block")) {
-            return Arrays.asList("RTR");
+            return Arrays.asList("RTR", "GTC");
         }
         if (format.equals("Return to Ravnica")) {
             return Arrays.asList("RTR");
         }                                                               
+        if (format.equals("Gatecrash")) {
+            return Arrays.asList("GTC");
+        }
 
         if (format.equals("Fourth Edition")) {
             return Arrays.asList("4ED");
