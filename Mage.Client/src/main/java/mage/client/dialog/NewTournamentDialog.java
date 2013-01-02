@@ -362,7 +362,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         while (packs.size() < numPacks) {
             JComboBox pack = new JComboBox();
-            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().getSortedByReleaseDate()));
+            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().getWithBoosterSortedByReleaseDate()));
             pnlPacks.add(pack);
             packs.add(pack);
             pack.addActionListener(new java.awt.event.ActionListener() {

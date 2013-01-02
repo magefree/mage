@@ -28,6 +28,9 @@
 
 package mage.cards;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.*;
 import mage.Constants.CardType;
 import mage.Constants.ColoredManaSymbol;
 import mage.cards.decks.DeckCardLists;
@@ -37,9 +40,6 @@ import mage.cards.repository.CardRepository;
 import mage.util.ClassScanner;
 import org.apache.log4j.Logger;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.*;
 
 /**
  *
@@ -182,4 +182,17 @@ public class Sets extends HashMap<String, ExpansionSet> {
         });
         return sets;
     }
+
+    public ExpansionSet[] getWithBoosterSortedByReleaseDate() {
+        ExpansionSet[] allSets = getSortedByReleaseDate();
+        ArrayList<ExpansionSet> boosterSets = new ArrayList<ExpansionSet>();
+        for (ExpansionSet set: allSets) {
+            if (set.hasBoosters) {
+                boosterSets.add(set);
+            }
+        }
+        return boosterSets.toArray(new ExpansionSet[0]);
+    }
+
+
 }

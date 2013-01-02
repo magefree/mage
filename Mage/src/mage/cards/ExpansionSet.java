@@ -169,4 +169,8 @@ public abstract class ExpansionSet implements Serializable {
             }
         }
     }
+    
+    public boolean hasBoosters() {
+        return hasBoosters;
+    }
 }
