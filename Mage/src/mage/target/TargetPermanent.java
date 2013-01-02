@@ -28,6 +28,9 @@
 
 package mage.target;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -35,9 +38,6 @@ import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -81,7 +81,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         if (permanent != null) {
-            if (source != null)
+            if (source != null) {
                 //1. TODO: check for replacement effects
                 //2. We need to check both source.getId() and source.getSourceId()
                 // first for protection from spells or abilities (e.g. protection from colored spells, r1753)
@@ -89,8 +89,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
                 return permanent.canBeTargetedBy(game.getObject(source.getId()), controllerId, game)
                         && permanent.canBeTargetedBy(game.getObject(source.getSourceId()), controllerId, game)
                         && filter.match(permanent, source.getSourceId(), controllerId, game);
-            else
+            } else {
                 return filter.match(permanent, null, controllerId, game);
+            }
         }
         return false;
     }
@@ -121,8 +122,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets == 0)
+        if (remainingTargets <= 0) {
             return true;
+        }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
@@ -158,8 +160,9 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, game)) {
             if (!targets.containsKey(permanent.getId())) {
                 count++;
-                if (count >= remainingTargets)
+                if (count >= remainingTargets) {
                     return true;
+                }
             }
         }
         return false;
