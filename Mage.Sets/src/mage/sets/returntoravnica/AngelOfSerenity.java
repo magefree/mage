@@ -149,14 +149,14 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-
+        boolean result = true;
         if (source.getTargets().size() > 0) {
             for (Target target : source.getTargets()) {
                 if (target instanceof TargetCreaturePermanent) {
                     for (UUID permanentId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(permanentId);
                         if (permanent != null) {
-                            permanent.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
+                            result |= permanent.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
                         }
                     }
 
@@ -164,13 +164,13 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
-                            card.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
+                            result |= card.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
                         }
                     }
                 }
             }
         }
-        return false;
+        return result;
     }
 }
 
