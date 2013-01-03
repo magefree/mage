@@ -39,6 +39,7 @@ public class ReturnToRavnicaBlock extends Constructed {
     public ReturnToRavnicaBlock() {
         super("Constructed - Return to Ravnica Block");
         setCodes.add("RTR");
+        setCodes.add("GTC");
     }
 
 }
