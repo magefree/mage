@@ -43,16 +43,30 @@ import mage.players.Player;
 public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> {
 
     private DynamicValue amount;
+    String text;
 
     public LoseLifePlayersEffect(int amount) {
         super(Constants.Outcome.Damage);
         this.amount = new StaticValue(amount);
         staticText = "each player loses " + amount + " life";
     }
+    
+    public LoseLifePlayersEffect(DynamicValue amount) {
+        super(Constants.Outcome.Damage);
+        this.amount = amount;
+        staticText = "each player loses " + amount + " life";
+    }
+    
+    public LoseLifePlayersEffect(DynamicValue amount, String text) {
+        super(Constants.Outcome.Damage);
+        this.amount = amount;
+        staticText = text;
+    }
 
     public LoseLifePlayersEffect(final LoseLifePlayersEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.text = effect.text;
     }
 
     @Override
