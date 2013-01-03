@@ -37,11 +37,11 @@ import mage.target.common.TargetCardInHand;
 public class DiscardCardCost extends DiscardTargetCost {
 
     public DiscardCardCost() {
-        super(new TargetCardInHand(new FilterCard()), false);
+        this(false);
     }
 
     public DiscardCardCost(boolean randomDiscard) {
-        super(new TargetCardInHand(new FilterCard("a Card at random")), randomDiscard);
+        super(new TargetCardInHand(new FilterCard(randomDiscard ?"a card at random":"a card")), randomDiscard);
     }
 
     public DiscardCardCost(DiscardCardCost cost) {

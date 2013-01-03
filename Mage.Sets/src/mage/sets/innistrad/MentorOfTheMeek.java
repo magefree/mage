@@ -29,10 +29,9 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -77,7 +76,7 @@ public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
 class MentorOfTheMeekAbility extends TriggeredAbilityImpl<MentorOfTheMeekAbility> {
 
     public MentorOfTheMeekAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{1}")), true);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{1}")), true);
      }
 
     public MentorOfTheMeekAbility(final MentorOfTheMeekAbility ability) {
@@ -93,9 +92,11 @@ class MentorOfTheMeekAbility extends TriggeredAbilityImpl<MentorOfTheMeekAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
+            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() <= 2) {
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) 
+                        && permanent.getControllerId().equals(this.getControllerId())
+                        && permanent.getPower().getValue() <= 2) {
                     return true;
                 }
             }
@@ -105,7 +106,7 @@ class MentorOfTheMeekAbility extends TriggeredAbilityImpl<MentorOfTheMeekAbility
 
     @Override
     public String getRule() {
-        return "Whenever another creature with power 2 or less enters the battlefield under your control, you may pay {1}. If you do, draw a card.";
+        return new StringBuilder("Whenever another creature with power 2 or less enters the battlefield under your control, ").append(super.getRule()).toString();
     }
 
 }

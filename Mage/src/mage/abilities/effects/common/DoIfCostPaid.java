@@ -42,7 +42,12 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
 
     @Override
     public String getText(Mode mode) {
-        return "you may pay " + cost.getText() + ". If you do, " + executingEffect.getText(mode);
+        StringBuilder sb = new StringBuilder("you may ");
+        String costText = cost.getText();
+        if (costText.length() <7 || !costText.substring(0, 7).toLowerCase().equals("discard")) {
+            sb.append("pay ");
+        }
+        return sb.append(costText).append(". If you do, ").append(executingEffect.getText(mode)).toString();
     }
 
     @Override

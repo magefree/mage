@@ -22,7 +22,7 @@ public class ReturnToHandSpellEffect extends PostResolveEffect<ReturnToHandSpell
         }
 
         private ReturnToHandSpellEffect() {
-            staticText = "Return {this} into its owner's hand";
+            staticText = "Return {this} to its owner's hand";
         }
 
         public static ReturnToHandSpellEffect getInstance() {
