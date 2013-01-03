@@ -82,9 +82,9 @@ public class TargetCreaturePermanentAmount extends TargetAmount<TargetCreaturePe
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        MageObject targetSource = game.getObject(source.getSourceId());
         if (permanent != null) {
             if (source != null) {
+                MageObject targetSource = game.getObject(source.getSourceId());
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
             } else {
                 return filter.match(permanent, game);

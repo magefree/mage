@@ -104,24 +104,27 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
             return filter.match(permanent, game);
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null)
+        if (spell != null) {
             return filter.match(spell, game);
+        }
         return false;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
-        MageObject targetSource = game.getObject(source.getSourceId());
         if (permanent != null) {
-            if (source != null)
+            if (source != null) {
+                MageObject targetSource = game.getObject(source.getSourceId());
                 return permanent.canBeTargetedBy(targetSource, source.getControllerId(), game) && filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
-            else
+            } else {
                 return filter.match(permanent, game);
+            }
         }
         Spell spell = game.getStack().getSpell(id);
-        if (spell != null)
+        if (spell != null) {
             return filter.match(spell, game);
+        }
         return false;
     }
 
@@ -142,15 +145,17 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null && filter.match(spell, sourceId, sourceControllerId, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), sourceControllerId, game)) {
             if (permanent.canBeTargetedBy(targetSource, sourceControllerId, game) && filter.match(permanent, sourceId, sourceControllerId, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;
@@ -171,15 +176,17 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
             Spell spell = game.getStack().getSpell(stackObject.getId());
             if (spell != null && filter.match(spell, null, sourceControllerId, game) && filter.match(spell, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filterPermanent, sourceControllerId, game)) {
             if (filter.match(permanent, null, sourceControllerId, game) && filter.match(permanent, game)) {
                 count++;
-                if (count >= this.minNumberOfTargets)
+                if (count >= this.minNumberOfTargets) {
                     return true;
+                }
             }
         }
         return false;

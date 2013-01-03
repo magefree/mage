@@ -83,8 +83,6 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
-
-
 public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
@@ -123,47 +121,51 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                 int adjCost = 0;
                 for (UUID creatureId: target.getTargets()) {
                     Permanent perm = game.getPermanent(creatureId);
-                    if (perm!= null) {
-                        Card card = game.getCard(perm.getId());
-                        ManaCosts manaCostsCreature = card.getSpellAbility().getManaCosts();
-                        if (card != null && manaCostsCreature != null && manaCostsCreature.convertedManaCost() > 0) {
-                            if (perm.tap(game)) {
-                                Choice chooseManaType = buildChoice(manaCostsCreature, ability.getManaCostsToPay());
-                                if (chooseManaType.getChoices().size() > 0) {
-                                    if (chooseManaType.getChoices().size() > 1) {
-                                        chooseManaType.getChoices().add("Colorless");
-                                        chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
-                                        while (!chooseManaType.isChosen()) {
-                                            player.choose(Outcome.Benefit, chooseManaType, game);
-                                        }
-                                    } else {
-                                        chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
-                                    }
+                    if (perm == null) {
+                        continue;
+                    }
 
-                                    ManaCosts manaCostsToReduce = new ManaCostsImpl();
-                                    if (chooseManaType.getChoice().equals("Black")) {
-                                        manaCostsToReduce.load("{B}");
-                                    }
-                                    if (chooseManaType.getChoice().equals("Blue")) {
-                                        manaCostsToReduce.load("{U}");
-                                    }
-                                    if (chooseManaType.getChoice().equals("Green")) {
-                                        manaCostsToReduce.load("{G}");
-                                    }
-                                    if (chooseManaType.getChoice().equals("White")) {
-                                        manaCostsToReduce.load("{W}");
-                                    }
-                                    if (chooseManaType.getChoice().equals("Red")) {
-                                        manaCostsToReduce.load("{R}");
-                                    }
-                                    if (chooseManaType.getChoice().equals("Colorless")) {
-                                        ++adjCost;
-                                    }
-                                    CardUtil.adjustCost((SpellAbility)ability, manaCostsToReduce);
-                                } else {
-                                    ++adjCost;
+                    Card card = game.getCard(perm.getId());
+                    if (card == null) {
+                        continue;
+                    }
+
+                    ManaCosts manaCostsCreature = card.getSpellAbility().getManaCosts();
+                    if (manaCostsCreature != null && manaCostsCreature.convertedManaCost() > 0 && perm.tap(game)) {
+                        Choice chooseManaType = buildChoice(manaCostsCreature, ability.getManaCostsToPay());
+                        if (chooseManaType.getChoices().size() > 0) {
+                            if (chooseManaType.getChoices().size() > 1) {
+                                chooseManaType.getChoices().add("Colorless");
+                                chooseManaType.setMessage("Choose mana color to reduce from " + perm.getName());
+                                while (!chooseManaType.isChosen()) {
+                                    player.choose(Outcome.Benefit, chooseManaType, game);
                                 }
+                            } else {
+                                chooseManaType.setChoice(chooseManaType.getChoices().iterator().next());
                             }
+
+                            ManaCosts manaCostsToReduce = new ManaCostsImpl();
+                            if (chooseManaType.getChoice().equals("Black")) {
+                                manaCostsToReduce.load("{B}");
+                            }
+                            if (chooseManaType.getChoice().equals("Blue")) {
+                                manaCostsToReduce.load("{U}");
+                            }
+                            if (chooseManaType.getChoice().equals("Green")) {
+                                manaCostsToReduce.load("{G}");
+                            }
+                            if (chooseManaType.getChoice().equals("White")) {
+                                manaCostsToReduce.load("{W}");
+                            }
+                            if (chooseManaType.getChoice().equals("Red")) {
+                                manaCostsToReduce.load("{R}");
+                            }
+                            if (chooseManaType.getChoice().equals("Colorless")) {
+                                ++adjCost;
+                            }
+                            CardUtil.adjustCost((SpellAbility)ability, manaCostsToReduce);
+                        } else {
+                            ++adjCost;
                         }
                     }
                 }
@@ -200,4 +202,3 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
       return "Convoke <i>(Each creature you tap while casting this spell reduces its cost by {1} or by one mana of that creature's color.)</i>";
     }
 }
-

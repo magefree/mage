@@ -62,8 +62,11 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl<RegenerateAt
     public boolean apply(Game game, Ability source) {
         //20110204 - 701.11
         Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            return false;
+        }
         Permanent equipped = game.getPermanent(permanent.getAttachedTo());
-        if (permanent != null && equipped.regenerate(this.getId(), game)) {
+        if (equipped != null && equipped.regenerate(this.getId(), game)) {
             this.used = true;
             return true;
         }

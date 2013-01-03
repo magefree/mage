@@ -55,8 +55,9 @@ public class CardUtil {
      */
     public static boolean shareTypes(Card card1, Card card2) {
 
-        if (card1 == null || card2 == null)
+        if (card1 == null || card2 == null) {
             throw new IllegalArgumentException("Params can't be null");
+        }
 
         for (Constants.CardType type : card1.getCardType()) {
             if (card2.getCardType().contains(type)) {
@@ -75,8 +76,9 @@ public class CardUtil {
      */
     public static boolean shareSubtypes(Card card1, Card card2) {
 
-        if (card1 == null || card2 == null)
+        if (card1 == null || card2 == null) {
             throw new IllegalArgumentException("Params can't be null");
+        }
 
         for (String subtype : card1.getSubtype()) {
             if (card2.getSubtype().contains(subtype)) {
@@ -108,8 +110,8 @@ public class CardUtil {
         boolean reduced = false;
         for (ManaCost manaCost : previousCost) {
             Mana mana = manaCost.getOptions().get(0);
-            int colorless = mana.getColorless();
-            if (!reduced && mana != null && colorless > 0) {
+            int colorless = mana != null ? mana.getColorless() : 0;
+            if (!reduced && colorless > 0) {
                 if ((colorless - reduceCount) > 0) {
                     int newColorless = colorless - reduceCount;
                     adjustedCost.add(new GenericManaCost(newColorless));
