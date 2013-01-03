@@ -30,16 +30,12 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DiscardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandSpellEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -55,7 +51,7 @@ public class HanabiBlast extends CardImpl<HanabiBlast> {
         this.getSpellAbility().addEffect(new DamageTargetEffect(2));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(ReturnToHandSpellEffect.getInstance());
-        this.getSpellAbility().addEffect(new HanabiBlastDiscardEffect());
+        this.getSpellAbility().addEffect(new DiscardControllerEffect(1, true));
     }
 
     public HanabiBlast (final HanabiBlast card) {
@@ -68,34 +64,3 @@ public class HanabiBlast extends CardImpl<HanabiBlast> {
     }
 
 }
-
-class HanabiBlastDiscardEffect extends OneShotEffect<HanabiBlastDiscardEffect> {
-
-    private static final String effectText = "discard a card at random";
-
-    HanabiBlastDiscardEffect () {
-        super(Constants.Outcome.Discard);
-        staticText = effectText;
-    }
-
-    HanabiBlastDiscardEffect(HanabiBlastDiscardEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.discard(player.getHand().getRandom(game), source, game);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public HanabiBlastDiscardEffect copy() {
-        return new HanabiBlastDiscardEffect(this);
-    }
-
-}
-
