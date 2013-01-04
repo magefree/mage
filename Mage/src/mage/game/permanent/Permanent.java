@@ -102,15 +102,7 @@ public interface Permanent extends Card, Controllable {
     int applyDamage(Game game);
 
     void removeAllDamage(Game game);
-    Counters getCounters();
 
-    void addCounters(String name, int amount, Game game);
-    void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
-    void addCounters(Counter counter, Game game);
-    void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
-
-    void removeCounters(String name, int amount, Game game);
-    void removeCounters(Counter counter, Game game);
     void reset(Game game);
     boolean destroy(UUID sourceId, Game game, boolean noRegen);
     boolean sacrifice(UUID sourceId, Game game);

@@ -39,7 +39,10 @@ import mage.abilities.Ability;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.mana.ManaAbility;
+import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
@@ -66,6 +69,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected int zoneChangeCounter = 1;
     protected Map<String, String> info;
     protected boolean usesVariousArt = false;
+    protected Counters counters;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -80,17 +84,20 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             addAbility(new SpellAbility(manaCost, name));
         }
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
+        this.counters = new Counters();
     }
 
     protected CardImpl(UUID ownerId, String name) {
         this.ownerId = ownerId;
         this.name = name;
+        this.counters = new Counters();
     }
 
     protected CardImpl(UUID id, UUID ownerId, String name) {
         super(id);
         this.ownerId = ownerId;
         this.name = name;
+        this.counters = new Counters();
     }
 
     public CardImpl(final CardImpl card) {
@@ -115,6 +122,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             info.putAll(card.info);
         }
         usesVariousArt = card.usesVariousArt;
+        this.counters = card.counters.copy();
     }
 
     @Override
@@ -510,5 +518,55 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     @Override
     public boolean getUsesVariousArt() {
         return usesVariousArt;
+    }
+
+    @Override
+    public Counters getCounters() {
+        return counters;
+    }
+
+    @Override
+    public void addCounters(String name, int amount, Game game) {
+        addCounters(name, amount, game, null);
+    }
+
+    @Override
+    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, name, amount);
+        event.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(event)) {
+            counters.addCounter(name, amount);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, name, amount));
+        }
+    }
+
+    @Override
+    public void addCounters(Counter counter, Game game) {
+        addCounters(counter, game, null);
+    }
+
+    @Override
+    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, ownerId, counter.getName(), counter.getCount());
+        event.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(event)) {
+            counters.addCounter(counter);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, ownerId, counter.getName(), counter.getCount()));
+        }
+    }
+
+    @Override
+    public void removeCounters(String name, int amount, Game game) {
+        counters.removeCounter(name, amount);
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
+        event.setData(name);
+        for (int i = 0; i < amount; i++) {
+            game.fireEvent(event);
+        }
+    }
+
+    @Override
+    public void removeCounters(Counter counter, Game game) {
+        removeCounters(counter.getName(), counter.getCount(), game);
     }
 }

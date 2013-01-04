@@ -37,6 +37,8 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.counters.Counter;
+import mage.counters.Counters;
 import mage.game.Game;
 import mage.watchers.Watcher;
 
@@ -113,6 +115,15 @@ public interface Card extends MageObject {
      * @return true if there exists various art images for this card
      */
     boolean getUsesVariousArt();
+    Counters getCounters();
+
+    void addCounters(String name, int amount, Game game);
+    void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects);
+    void addCounters(Counter counter, Game game);
+    void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects);
+
+    void removeCounters(String name, int amount, Game game);
+    void removeCounters(Counter counter, Game game);
 
     @Override
     Card copy();

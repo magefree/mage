@@ -90,7 +90,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected int minBlockedBy = 1;
     protected boolean loyaltyUsed;
     protected boolean deathtouched;
-    protected Counters counters;
     protected List<UUID> attachments = new ArrayList<UUID>();
     protected Map<String, List<UUID>> connectedCards = new HashMap<String, List<UUID>>();
     protected List<UUID> dealtDamageByThisTurn;
@@ -104,14 +103,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         super(ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
-        this.counters = new Counters();
     }
 
     public PermanentImpl(UUID id, UUID ownerId, UUID controllerId, String name) {
         super(id, ownerId, name);
         this.originalControllerId = controllerId;
         this.controllerId = controllerId;
-        this.counters = new Counters();
     }
 
     public PermanentImpl(final PermanentImpl<T> permanent) {
@@ -130,7 +127,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.maxBlocks = permanent.maxBlocks;
         this.loyaltyUsed = permanent.loyaltyUsed;
         this.deathtouched = permanent.deathtouched;
-        this.counters = permanent.counters.copy();
         this.attachments.addAll(permanent.attachments);
         for (Map.Entry<String, List<UUID>> entry: permanent.connectedCards.entrySet()) {
             this.connectedCards.put(entry.getKey(), entry.getValue());
@@ -182,7 +178,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         sb.append(controllerId).append(name).append(tapped).append(damage);
         sb.append(subtype).append(supertype).append(power.getValue()).append(toughness.getValue());
         sb.append(abilities.getValue());
-        for (Counter counter : counters.values()) {
+        for (Counter counter : getCounters().values()) {
             sb.append(counter.getName()).append(counter.getCount());
         }
         return sb.toString();
@@ -224,28 +220,13 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     }
 
     @Override
-    public Counters getCounters() {
-        return counters;
-    }
-
-    @Override
-    public void addCounters(String name, int amount, Game game) {
-        addCounters(name, amount, game, null);
-    }
-
-    @Override
     public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {
         GameEvent event = GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, objectId, controllerId, name, amount);
         event.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
             counters.addCounter(name, amount);
-            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId, name, amount));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, name, amount));
         }
-    }
-
-    @Override
-    public void addCounters(Counter counter, Game game) {
-        addCounters(counter, game, null);
     }
 
     @Override
@@ -254,25 +235,19 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         event.setAppliedEffects(appliedEffects);
         if (!game.replaceEvent(event)) {
             counters.addCounter(counter);
-            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), counter.getCount()));
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER_ADDED, objectId, controllerId, counter.getName(), counter.getCount()));
         }
     }
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
         counters.removeCounter(name, amount);
-        GameEvent event = GameEvent.getEvent(EventType.COUNTER_REMOVED, objectId, controllerId);
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
         event.setData(name);
         for (int i = 0; i < amount; i++) {
             game.fireEvent(event);
         }
     }
-
-    @Override
-    public void removeCounters(Counter counter, Game game) {
-        removeCounters(counter.getName(), counter.getCount(), game);
-    }
-
     @Override
     public int getTurnsOnBattlefield() {
         return turnsOnBattlefield;
