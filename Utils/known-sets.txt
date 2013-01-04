@@ -1,3 +1,7 @@
+Limited Edition Alpha|limitedalpha|
+Limited Edition Beta|limitedbeta|
+Unlimited Edition|unlimitededition|
+Revised Edition|revisededition|
 Fourth Edition|fourthedition|
 Fifth Edition|fifthedition|
 Classic Sixth Edition|sixthedition|
