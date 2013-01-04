@@ -31,7 +31,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 /**
- * Interface for abilities that add addional costs to the source.
+ * Interface for abilities that add additional costs to the source.
  *
  * Example of such additional source costs: {@link mage.abilities.keyword.KickerAbility}
  *
