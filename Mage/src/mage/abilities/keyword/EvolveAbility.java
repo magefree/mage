@@ -76,6 +76,11 @@ public class EvolveAbility extends TriggeredAbilityImpl<EvolveAbility> {
         return false;
     }
 
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return true;
+    }
+
     public static boolean isPowerOrThoughnessGreater(Permanent sourceCreature, Permanent newCreature) {
         if (newCreature.getPower().getValue() > sourceCreature.getPower().getValue()) {
             return true;
@@ -116,9 +121,6 @@ class EvolveEffect extends OneShotEffect<EvolveEffect> {
     public boolean apply(Game game, Ability source) {
         UUID triggeringCreatureId = (UUID) getValue("triggeringCreature");
         Permanent triggeringCreature = game.getPermanent(triggeringCreatureId);
-        if (triggeringCreature == null) {
-            triggeringCreature = (Permanent) game.getLastKnownInformation(triggeringCreatureId, Zone.BATTLEFIELD);
-        }
         if (triggeringCreature != null) {
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null && EvolveAbility.isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
