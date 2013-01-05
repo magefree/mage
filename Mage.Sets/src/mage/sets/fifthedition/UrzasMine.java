@@ -44,7 +44,10 @@ public class UrzasMine extends CardImpl<UrzasMine> {
     public UrzasMine(UUID ownerId) {
         super(ownerId, 447, "Urza's Mine", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "5ED";
-        Ability urzaManaAbility = new DynamicManaAbility(Mana.ColorlessMana, new UrzaTerrainValue(2));
+
+        // {T}: Add {1} to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add {2} to your mana pool instead.
+        Ability urzaManaAbility = new DynamicManaAbility(Mana.ColorlessMana, new UrzaTerrainValue(2),
+                "Add {1} to your mana pool. If you control an Urza's Power-Plant and an Urza's Tower, add {2} to your mana pool instead");
         this.addAbility(urzaManaAbility);
     }
 

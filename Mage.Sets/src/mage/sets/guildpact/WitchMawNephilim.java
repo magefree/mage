@@ -28,9 +28,8 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -64,6 +63,8 @@ public class WitchMawNephilim extends CardImpl<WitchMawNephilim> {
 
         // Whenever you cast a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.
         this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), true));
+
+        // Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
         this.addAbility(new WitchMawNephilimTriggeredAbility());
     }
 
@@ -79,7 +80,7 @@ public class WitchMawNephilim extends CardImpl<WitchMawNephilim> {
 
 class WitchMawNephilimTriggeredAbility extends AttacksTriggeredAbility {
     WitchMawNephilimTriggeredAbility() {
-        super(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn), false);
+        super(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), false);
     }
 
     WitchMawNephilimTriggeredAbility(final WitchMawNephilimTriggeredAbility ability) {
@@ -90,8 +91,9 @@ class WitchMawNephilimTriggeredAbility extends AttacksTriggeredAbility {
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
             Permanent source = game.getPermanent(event.getSourceId());
-            if (source.getPower().getValue() >= 10)
+            if (source.getPower().getValue() >= 10) {
                 return true;
+            }
         }
         return false;
     }

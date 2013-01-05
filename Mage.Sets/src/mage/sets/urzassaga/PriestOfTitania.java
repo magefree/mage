@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class PriestOfTitania extends CardImpl<PriestOfTitania> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf on the battlefield");
 
     static {
         filter.add(new SubtypePredicate("Elf"));
@@ -60,7 +60,8 @@ public class PriestOfTitania extends CardImpl<PriestOfTitania> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-                this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
+        // {T}: Add {G} to your mana pool for each Elf on the battlefield.
+        this.addAbility(new DynamicManaAbility(Mana.GreenMana, new PermanentsOnBattlefieldCount(filter)));
     }
 
     public PriestOfTitania(final PriestOfTitania card) {

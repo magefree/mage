@@ -70,8 +70,8 @@ public class CraterhoofBehemoth extends CardImpl<CraterhoofBehemoth> {
 
         // When Craterhoof Behemoth enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
-        PermanentsOnBattlefieldCount x = new PermanentsOnBattlefieldCount(filter);
-        ability.addEffect(new BoostControlledEffect(x, x, Duration.EndOfTurn, filter, false, true));
+        PermanentsOnBattlefieldCount controlledCreatures = new PermanentsOnBattlefieldCount(filter);
+        ability.addEffect(new BoostControlledEffect(controlledCreatures, controlledCreatures, Duration.EndOfTurn, filter, false, true));
         this.addAbility(ability);
     }
 

@@ -42,6 +42,7 @@ import mage.game.Game;
 public class DynamicManaAbility extends ManaAbility<DynamicManaAbility> {
 
     private DynamicManaEffect manaEffect;
+    private String rule;
 
     /**
      * TapSourceCost added by default
@@ -50,14 +51,29 @@ public class DynamicManaAbility extends ManaAbility<DynamicManaAbility> {
         this(mana, amount, new TapSourceCost());
     }
 
+    /**
+     *
+     * @param mana - kind of mana
+     * @param amount - value for the numbe rof numer
+     * @param text - rule text for the DynamicManaEffect
+     */
+    public DynamicManaAbility(Mana mana, DynamicValue amount, String text) {
+        this(mana, amount, new TapSourceCost(), text);
+    }
+
     public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost) {
-        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount), cost);
+        this(mana, amount, cost, null);
+    }
+
+    public DynamicManaAbility(Mana mana, DynamicValue amount, Cost cost, String text) {
+        super(Zone.BATTLEFIELD, new DynamicManaEffect(mana, amount, text), cost);
         manaEffect = (DynamicManaEffect) this.getEffects().get(0);
     }
 
     public DynamicManaAbility(final DynamicManaAbility ability) {
         super(ability);
         manaEffect = ability.manaEffect;
+        rule = ability.rule;
     }
 
     @Override

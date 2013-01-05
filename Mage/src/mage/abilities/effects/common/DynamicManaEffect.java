@@ -41,6 +41,7 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     private Mana computedMana;
     private DynamicValue amount;
+    private String text = null;
 
     public DynamicManaEffect(Mana mana, DynamicValue amount) {
         super(mana);
@@ -48,10 +49,18 @@ public class DynamicManaEffect extends BasicManaEffect {
         computedMana = new Mana();
     }
 
+    public DynamicManaEffect(Mana mana, DynamicValue amount, String text) {
+        super(mana);
+        this.amount = amount;
+        computedMana = new Mana();
+        this.text = text;
+    }
+
     public DynamicManaEffect(final DynamicManaEffect effect) {
         super(effect);
         this.computedMana = effect.computedMana.copy();
         this.amount = effect.amount.copy();
+        this.text = effect.text;
     }
 
     @Override
@@ -68,6 +77,9 @@ public class DynamicManaEffect extends BasicManaEffect {
 
     @Override
     public String getText(Mode mode) {
+        if (text != null && !text.isEmpty()) {
+            return text;
+        }
         return super.getText(mode) + " for each " + amount.getMessage();
     }
 

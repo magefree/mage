@@ -116,19 +116,23 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
             sb.append("Target ").append(target.getTargetName()).append(" gets ");
         }
         String p = power.toString();
-        if(!p.startsWith("-"))
+        if(!p.startsWith("-")) {
             sb.append("+");
+        }
         sb.append(p).append("/");
         String t = toughness.toString();
         if(!t.startsWith("-")){
-            if(p.startsWith("-"))
+            if(p.startsWith("-")) {
                 sb.append("-");
-            else
+            }
+            else {
                 sb.append("+");
+            }
         }
         sb.append(t);
-        if (duration != Duration.WhileOnBattlefield)
+        if (duration != Duration.WhileOnBattlefield) {
             sb.append(" ").append(duration.toString());
+        }
         String message = power.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
