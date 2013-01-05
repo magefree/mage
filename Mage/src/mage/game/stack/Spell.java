@@ -53,6 +53,8 @@ import mage.watchers.Watcher;
 
 import java.util.List;
 import java.util.UUID;
+import mage.counters.Counter;
+import mage.counters.Counters;
 
 /**
  *
@@ -482,4 +484,27 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public void build() {}
+
+    @Override
+    public Counters getCounters() {
+        return null;
+    }
+
+    @Override
+    public void addCounters(String name, int amount, Game game) {}
+
+    @Override
+    public void addCounters(String name, int amount, Game game, ArrayList<UUID> appliedEffects) {}
+
+    @Override
+    public void addCounters(Counter counter, Game game) {}
+
+    @Override
+    public void addCounters(Counter counter, Game game, ArrayList<UUID> appliedEffects) {}
+
+    @Override
+    public void removeCounters(String name, int amount, Game game) {}
+
+    @Override
+    public void removeCounters(Counter counter, Game game) {}
 }
