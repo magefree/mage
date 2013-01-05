@@ -14,7 +14,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
     private static File outDir = DEFAULT_OUT_DIR;
 
-    private static final String[] symbols =     {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", 
+    private static final String[] symbols =     {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",
                                                  "HOP","PC2",
                                                  "ARN", "ATQ", "LEG", "DRK", "FEM", "HML",
                                                  "ICE", "ALL", "CSP",
@@ -71,6 +71,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("6ED", "6E");
         symbolsReplacements.put("5ED", "5E");
         symbolsReplacements.put("4ED", "4E");
+        symbolsReplacements.put("3ED", "RV");
+        symbolsReplacements.put("2ED", "UN");
+        symbolsReplacements.put("LEB", "BE");
+        symbolsReplacements.put("LEA", "AL");
     }
 
     public GathererSets(String path) {
