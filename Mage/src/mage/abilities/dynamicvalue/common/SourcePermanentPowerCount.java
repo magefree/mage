@@ -16,9 +16,9 @@ public class SourcePermanentPowerCount implements DynamicValue {
         if (sourcePermanent == null) {
             sourcePermanent = (Permanent) game.getLastKnownInformation(sourceAbility.getSourceId(), Constants.Zone.BATTLEFIELD);
         }
-        if (sourcePermanent != null)
+        if (sourcePermanent != null) {
             return sourcePermanent.getPower().getValue();
-
+        }
         return 0;
     }
 
@@ -32,9 +32,8 @@ public class SourcePermanentPowerCount implements DynamicValue {
         return "X";
     }
 
-
     @Override
     public String getMessage() {
-        return "point of power that {source} had";
+        return "{source}'s power";
     }
 }

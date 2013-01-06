@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
 
     public StrengthOfCedars (UUID ownerId) {
         super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");
@@ -54,7 +54,7 @@ public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
         this.color.setGreen(true);
 
         // Target creature gets +X/+X until end of turn, where X is the number of lands you control.
-        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
+        DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter, null);
         this.getSpellAbility().addEffect(new BoostTargetEffect(controlledLands, controlledLands, Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }

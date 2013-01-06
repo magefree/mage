@@ -59,11 +59,11 @@ public class TargetPermanentPowerCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return "1";
+        return "X";
     }
 
     @Override
     public String getMessage() {
-        return "point of power it has";
+        return "its power";
     }
 }

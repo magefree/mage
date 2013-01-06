@@ -133,12 +133,13 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
     }
 
     private void setText() {
+        String message = null;
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
-            sb.append("Other ");
+            sb.append("each other ");
         }
         sb.append(filter.getMessage());
-        sb.append(" you control get ");
+        sb.append(" you control gets ");
 
         String p = power.toString();
         if(!p.startsWith("-")) {
@@ -156,6 +157,14 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
         sb.append(t);
 
         sb.append((duration==Duration.EndOfTurn?" until end of turn":""));
+        if (t.equals("X")) {
+            message = toughness.getMessage();
+        } else if (p.equals("X")) {
+            message = power.getMessage();
+        }
+        if (message != null && !message.isEmpty()) {
+            sb.append(", where X is ").append(message);
+        }
         staticText = sb.toString();
     }
 

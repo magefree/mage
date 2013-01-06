@@ -33,16 +33,21 @@ public class DomainValue implements DynamicValue {
         int haveForests = 0;
         for (Permanent p : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
             if (p.getCardType().contains(Constants.CardType.LAND)) {
-                if (havePlains == 0 && p.getSubtype().contains("Plains"))
+                if (havePlains == 0 && p.getSubtype().contains("Plains")) {
                     havePlains = 1;
-                if (haveIslands == 0 && p.getSubtype().contains("Island"))
+                }
+                if (haveIslands == 0 && p.getSubtype().contains("Island")) {
                     haveIslands = 1;
-                if (haveMountains == 0 && p.getSubtype().contains("Mountain"))
+                }
+                if (haveMountains == 0 && p.getSubtype().contains("Mountain")) {
                     haveMountains = 1;
-                if (haveSwamps == 0 && p.getSubtype().contains("Swamp"))
+                }
+                if (haveSwamps == 0 && p.getSubtype().contains("Swamp")) {
                     haveSwamps = 1;
-                if (haveForests == 0 && p.getSubtype().contains("Forest"))
+                }
+                if (haveForests == 0 && p.getSubtype().contains("Forest")) {
                     haveForests = 1;
+                }
             }
         }
         return amount * (haveForests + haveIslands + haveMountains + havePlains + haveSwamps);
@@ -64,6 +69,6 @@ public class DomainValue implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "each basic land type among lands you control";
+        return "basic land type among lands you control";
     }
 }

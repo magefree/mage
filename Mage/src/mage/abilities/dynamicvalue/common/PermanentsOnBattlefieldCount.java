@@ -34,7 +34,11 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        return amount * game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        int value = game.getBattlefield().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+        if (amount != null) {
+            value *= amount;
+        }
+        return value;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class PermanentsOnBattlefieldCount implements DynamicValue {
         if (amount != null) {
             return amount.toString();
         }
-        return "";
+        return "X";
     }
 
     @Override

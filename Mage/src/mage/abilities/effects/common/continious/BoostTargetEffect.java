@@ -133,11 +133,24 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
         if (duration != Duration.WhileOnBattlefield) {
             sb.append(" ").append(duration.toString());
         }
-        String message = power.getMessage();
-        if (message.length() > 0) {
-            sb.append(" for each ");
+        String message = null;
+        String fixedPart = null;
+        if (t.equals("X")) {
+            message = toughness.getMessage();
+            fixedPart = ", where X is ";
+        } else if (p.equals("X")) {
+            message = power.getMessage();
+            fixedPart = ", where X is ";
+        } else if (!power.getMessage().isEmpty()) {
+            message = power.getMessage();
+            fixedPart = " for each ";
+        } else if (!toughness.getMessage().isEmpty()) {
+            message = toughness.getMessage();
+            fixedPart = " for each ";
         }
-        sb.append(message);
+        if (message != null && fixedPart != null) {
+            sb.append(fixedPart).append(message);
+        }
         return sb.toString();
     }
 }

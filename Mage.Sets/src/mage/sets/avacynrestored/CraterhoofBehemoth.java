@@ -44,6 +44,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -70,7 +71,7 @@ public class CraterhoofBehemoth extends CardImpl<CraterhoofBehemoth> {
 
         // When Craterhoof Behemoth enters the battlefield, creatures you control gain trample and get +X/+X until end of turn, where X is the number of creatures you control.
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, filter));
-        PermanentsOnBattlefieldCount controlledCreatures = new PermanentsOnBattlefieldCount(filter);
+        PermanentsOnBattlefieldCount controlledCreatures = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent("the number of creatures you control"), null);
         ability.addEffect(new BoostControlledEffect(controlledCreatures, controlledCreatures, Duration.EndOfTurn, filter, false, true));
         this.addAbility(ability);
     }
