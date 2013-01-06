@@ -28,17 +28,25 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author North
  */
-public class Vizzerdrix extends mage.sets.ninthedition.Vizzerdrix {
+public class Vizzerdrix extends CardImpl<Vizzerdrix> {
 
     public Vizzerdrix(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 110;
+        super(ownerId, 110, "Vizzerdrix", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "7ED";
+        this.subtype.add("Rabbit");
+        this.subtype.add("Beast");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
     }
 
     public Vizzerdrix(final Vizzerdrix card) {

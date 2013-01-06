@@ -28,17 +28,24 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author North
  */
-public class GiantOctopus extends mage.sets.ninthedition.GiantOctopus {
+public class GiantOctopus extends CardImpl<GiantOctopus> {
 
     public GiantOctopus(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 77;
+        super(ownerId, 77, "Giant Octopus", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{3}{U}");
         this.expansionSetCode = "7ED";
+        this.subtype.add("Octopus");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
     }
 
     public GiantOctopus(final GiantOctopus card) {

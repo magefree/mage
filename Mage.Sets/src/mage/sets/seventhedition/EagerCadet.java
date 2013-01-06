@@ -28,17 +28,26 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.cards.CardImpl;
 
 /**
  *
  * @author North
  */
-public class EagerCadet extends mage.sets.ninthedition.EagerCadet {
-
-    public EagerCadet(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 14;
+public class EagerCadet extends CardImpl<EagerCadet> {
+    
+  public EagerCadet(UUID ownerId) {
+        super(ownerId, 14, "Eager Cadet", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "7ED";
+        this.subtype.add("Human");
+        this.subtype.add("Soldier");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
     }
 
     public EagerCadet(final EagerCadet card) {

@@ -28,17 +28,34 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author Plopman
  */
-public class Vengeance extends mage.sets.ninthedition.Vengeance {
+public class Vengeance extends CardImpl<Vengeance> {
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("tapped creature");
+
+    static {
+        filter.add(new TappedPredicate());
+    }
 
     public Vengeance(UUID ownerId) {
-        super(ownerId);
-        this.cardNumber = 54;
+        super(ownerId, 54, "Vengeance", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{W}");
         this.expansionSetCode = "7ED";
+
+        this.color.setWhite(true);
+
+        // Destroy target tapped creature.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
     }
 
     public Vengeance(final Vengeance card) {
