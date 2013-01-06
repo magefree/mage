@@ -41,8 +41,10 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.other.OwnerPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCardInGraveyard;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -54,7 +56,6 @@ public class VolrathsStronghold extends CardImpl<VolrathsStronghold> {
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public VolrathsStronghold(UUID ownerId) {
@@ -68,7 +69,7 @@ public class VolrathsStronghold extends CardImpl<VolrathsStronghold> {
         // {1}{B}, {tap}: Put target creature card from your graveyard on top of your library.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(true), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInGraveyard(filter));
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(ability);
     }
 
