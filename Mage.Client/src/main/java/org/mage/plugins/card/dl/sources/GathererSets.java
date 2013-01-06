@@ -71,10 +71,10 @@ public class GathererSets implements Iterable<DownloadJob> {
         symbolsReplacements.put("6ED", "6E");
         symbolsReplacements.put("5ED", "5E");
         symbolsReplacements.put("4ED", "4E");
-        symbolsReplacements.put("3ED", "RV");
-        symbolsReplacements.put("2ED", "UN");
-        symbolsReplacements.put("LEB", "BE");
-        symbolsReplacements.put("LEA", "AL");
+        symbolsReplacements.put("3ED", "3E");
+        symbolsReplacements.put("2ED", "2U");
+        symbolsReplacements.put("LEB", "2E");
+        symbolsReplacements.put("LEA", "1E");
     }
 
     public GathererSets(String path) {
