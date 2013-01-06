@@ -39,6 +39,7 @@ public class ConstructedFormats {
                                                         "* Mirage Block", "Weatherlight", "Visions", "Mirage", "Fifth Edition",
                                                         "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
                                                         "Homelands","Fallen Empires","The Dark","Legends","Antiquities", "Arabian Nights",
+                                                        "Unlimited Edition", "Revised Edition", "Limited Edition Beta", "Limited Edition Alpha",
                                                         "Guru",
                                                         "Duel Decks: Elspeth vs. Tezzeret"
                                                         };
@@ -293,7 +294,18 @@ public class ConstructedFormats {
         if (format.equals("Gatecrash")) {
             return Arrays.asList("GTC");
         }
-
+        if (format.equals("Limited Edition Alpha")) {
+            return Arrays.asList("LEA");
+        }
+        if (format.equals("Limited Edition Beta")) {
+            return Arrays.asList("LEB");
+        }
+        if (format.equals("Revised Edition")) {
+            return Arrays.asList("2ED");
+        }
+        if (format.equals("Unlimited Edition")) {
+            return Arrays.asList("3ED");
+        }
         if (format.equals("Fourth Edition")) {
             return Arrays.asList("4ED");
         }
