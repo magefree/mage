@@ -99,6 +99,7 @@ public enum EntityManager implements Storage {
                         }
                         args.add(arg);
                     }
+                    log.setArguments(args);
                     logs.add(log);
                 }
                 rs.close();
