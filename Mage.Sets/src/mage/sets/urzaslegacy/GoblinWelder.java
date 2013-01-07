@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactCard;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -65,7 +66,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
 
         // {tap}: Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GoblinWelderEffect(), new TapSourceCost());
-        ability.addTarget(new TargetArtifactPermanent());
+        ability.addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact a player controls")));
         ability.addTarget(new GoblinWelderTarget());
         this.addAbility(ability);
     }
@@ -119,9 +120,8 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
 
         @Override
         public String getText(Mode mode) {
-            return  "Sacrifices " + mode.getTargets().get(0).getTargetName() + " and returns " + mode.getTargets().get(1).getTargetName() + " to the battlefield";
+            return  "Choose " + mode.getTargets().get(0).getTargetName() + " and " + mode.getTargets().get(1).getTargetName() + ". If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield";
         }
-
     }
     
     class GoblinWelderTarget extends TargetCard<TargetCardInYourGraveyard> {

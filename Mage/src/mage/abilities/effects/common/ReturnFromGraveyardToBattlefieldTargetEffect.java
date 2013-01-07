@@ -74,8 +74,9 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
                 if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
                     if (tapped) {
                         Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null)
+                        if (permanent != null) {
                             permanent.setTapped(true);
+                        }
                     }
                     return true;
                 }
@@ -87,11 +88,11 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Put target ").append(mode.getTargets().get(0).getTargetName()).append(" onto the battlefield");
-        if (tapped)
+        sb.append("Return target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
+        if (tapped) {
             sb.append(" tapped");
+        }
         sb.append(" under your control");
         return sb.toString();
     }
-
 }

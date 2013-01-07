@@ -50,8 +50,9 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 
     public TriggeredAbilityImpl(Zone zone, Effect effect, boolean optional) {
         super(AbilityType.TRIGGERED, zone);
-        if (effect != null)
+        if (effect != null) {
             addEffect(effect);
+        }
         this.optional = optional;
     }
 
@@ -92,8 +93,9 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
             }
         }
         //20091005 - 603.4
-        if (checkInterveningIfClause(game))
+        if (checkInterveningIfClause(game)) {
             return super.resolve(game);
+        }
         return false;
     }
 
@@ -101,11 +103,19 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
     public String getRule() {
         String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
-        if (optional && !superRule.toLowerCase().startsWith("you may")) {
-            sb.append("you may ");
-            if (!this.getTargets().isEmpty()) {
-                sb.append("have ");
+        String ruleLow = superRule.toLowerCase();
+        if (optional && !ruleLow.startsWith("you ")) {
+            if (this.getTargets().isEmpty() 
+                    || ruleLow.startsWith("exile") 
+                    || ruleLow.startsWith("destroy") 
+                    || ruleLow.startsWith("return") 
+                    || ruleLow.startsWith("tap")
+                    || ruleLow.startsWith("untap")) {
+                sb.append("you may ");
+            } else {
+                sb.append("you may have ");
             }
+
         }
         sb.append(superRule.substring(0, 1).toLowerCase());
         sb.append(superRule.substring(1));

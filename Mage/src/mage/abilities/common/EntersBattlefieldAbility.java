@@ -68,7 +68,7 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
  */
     public EntersBattlefieldAbility(Effect effect, Condition condition, Boolean showRule, String abilityRule, String effectText) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, condition, effectText));
-        this.showRule = true;
+        this.showRule = showRule;
         this.abilityRule = abilityRule;
     }
 

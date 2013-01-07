@@ -51,7 +51,7 @@ import java.util.UUID;
  */
 public class RestorationAngel extends CardImpl<RestorationAngel> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Angel");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("non-Angel creature you control, then ");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Angel")));

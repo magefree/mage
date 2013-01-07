@@ -60,7 +60,7 @@ public class CruelUltimatum extends CardImpl<CruelUltimatum> {
 
         // Target opponent sacrifices a creature, discards three cards, then loses 5 life. You return a creature card from your graveyard to your hand, draw three cards, then gain 5 life.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent sacrifices a creature"));
+        this.getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target opponent"));
         this.getSpellAbility().addEffect(new DiscardTargetEffect(3));
         this.getSpellAbility().addEffect(new LoseLifeTargetEffect(5));
 
@@ -83,7 +83,7 @@ class CruelUltimatumEffect extends OneShotEffect<CruelUltimatumEffect> {
 
     public CruelUltimatumEffect() {
         super(Outcome.ReturnToHand);
-        this.staticText = "return a creature card from your graveyard to your hand";
+        this.staticText = "Return a creature card from your graveyard to your hand";
     }
 
     public CruelUltimatumEffect(final CruelUltimatumEffect effect) {
