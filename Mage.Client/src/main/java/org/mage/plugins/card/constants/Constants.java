@@ -12,6 +12,12 @@ public class Constants {
 
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
     public static final Rectangle THUMBNAIL_SIZE_FULL = new Rectangle(102, 146);
+    
+    public static final int TOOLTIP_WIDTH_MIN = 320;
+    public static final int TOOLTIP_HEIGHT_MIN = 201;
+
+    public static final int TOOLTIP_HEIGHT_MAX = 401;
+    public static final int TOOLTIP_BORDER_WIDTH = 80;
 
     public interface IO { 
         public static final String imageBaseDir = "plugins" + File.separator + "images";

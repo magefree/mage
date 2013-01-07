@@ -193,7 +193,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                     cardSelector.refresh();
                                 }
                                 if (cardInfoPane instanceof  CardInfoPane)  {
-                                    ((CardInfoPane)cardInfoPane).setCard(new CardView(card));
+                                    ((CardInfoPane)cardInfoPane).setCard(new CardView(card), null);
                                 }
                                 hidePopup();
                             }
@@ -206,7 +206,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                                 deck.getSideboard().add(CardImpl.createCard(card.getClass()));
                             }
                             if (cardInfoPane instanceof  CardInfoPane)  {
-                                ((CardInfoPane)cardInfoPane).setCard(new CardView(card));
+                                ((CardInfoPane)cardInfoPane).setCard(new CardView(card), null);
                             }
                             hidePopup();
                         } else if (event.getEventName().equals("remove-main")) {

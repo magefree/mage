@@ -44,7 +44,10 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.CardScanner;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
-import mage.client.components.*;
+import mage.client.components.MageComponents;
+import mage.client.components.MageJDesktop;
+import mage.client.components.MageRoundPane;
+import mage.client.components.MageUI;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
@@ -76,6 +79,7 @@ import mage.server.Main;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
+import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.images.DownloadPictures;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
 
@@ -84,23 +88,14 @@ import javax.swing.*;
 import javax.swing.JToolBar.Separator;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.SplashScreen;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -342,7 +337,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (cardInfoPane == null) {
             return;
         }
-        cardInfoPane.setSize(320, 201);
+        cardInfoPane.setSize(Constants.TOOLTIP_WIDTH_MIN, Constants.TOOLTIP_HEIGHT_MIN);
         cardInfoPane.setLocation(40, 40);
         cardInfoPane.setBackground(new Color(0, 0, 0, 0));
 
@@ -351,7 +346,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
         popupContainer.add(cardInfoPane);
         popupContainer.setVisible(false);
-        popupContainer.setBounds(0, 0, 320 + 80, 201 + 80);
+        popupContainer.setBounds(0, 0,
+                Constants.TOOLTIP_WIDTH_MIN + Constants.TOOLTIP_BORDER_WIDTH,
+                Constants.TOOLTIP_HEIGHT_MIN + Constants.TOOLTIP_BORDER_WIDTH);
 
         desktopPane.add(popupContainer, JLayeredPane.POPUP_LAYER);
 

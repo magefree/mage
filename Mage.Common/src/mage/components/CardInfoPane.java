@@ -2,6 +2,8 @@ package mage.components;
 
 import mage.view.CardView;
 
+import java.awt.*;
+
 /**
  * Card info pane for displaying card rules.
  * Supports drawing mana symbols.
@@ -10,6 +12,6 @@ import mage.view.CardView;
  */
 public interface CardInfoPane {
 
-    void setCard (final CardView card);
+    void setCard(CardView card, Component container);
     boolean isCurrentCard (CardView card);
 }

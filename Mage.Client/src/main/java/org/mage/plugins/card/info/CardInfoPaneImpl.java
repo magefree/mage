@@ -24,6 +24,7 @@ import java.util.List;
 public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
     private CardView currentCard;
+    private int type;
 
     public CardInfoPaneImpl() {
         UI.setHTMLEditorKit(this);
@@ -31,7 +32,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         setBackground(Color.white);
     }
 
-    public void setCard(final CardView card) {
+    public void setCard(final CardView card, final Component container) {
         if (card == null) return;
         if (isCurrentCard(card)) return;
         currentCard = card;
@@ -171,11 +172,12 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
                     SwingUtilities.invokeLater(new Runnable() {
                         public void run() {
-                            if (!card.equals(currentCard)) return;
+                            if (!card.equals(currentCard)) {
+                                return;
+                            }
+                            resizeTooltipIfNeeded(buffer, container);
                             setText(buffer.toString());
-                            //System.out.println(buffer.toString());
                             setCaretPosition(0);
-                            //ThreadUtils.sleep(300);
                         }
                     });
 
@@ -184,6 +186,33 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                 }
             }
         });
+    }
+
+    private void resizeTooltipIfNeeded(StringBuilder buffer, Component container) {
+        if (container == null) {
+            return;
+        }
+        int i = buffer.indexOf("</p>");
+        int count = 0;
+        while (i != -1) {
+            count++;
+            i = buffer.indexOf("</p>", i+1);
+        }
+        if (count > 5 && this.type == 0) {
+            type = 1;
+            container.setSize(
+                org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
+                org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
+            );
+            this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX);
+        } else if (type == 1) {
+            type = 0;
+            container.setSize(
+                    org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
+                    org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
+            );
+            this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MIN);
+        }
     }
 
     private String getTypes(CardView card) {

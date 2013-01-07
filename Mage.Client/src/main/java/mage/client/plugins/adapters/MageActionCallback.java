@@ -195,7 +195,7 @@ public class MageActionCallback implements ActionCallback {
                     final Component popupContainer = MageFrame.getUI().getComponent(MageComponents.POPUP_CONTAINER);
                     Component popup2 = MageFrame.getUI().getComponent(MageComponents.CARD_INFO_PANE);
 
-                    ((CardInfoPane) popup2).setCard(data.card);
+                    ((CardInfoPane) popup2).setCard(data.card, popupContainer);
 
                     Point location = new Point((int) data.locationOnScreen.getX() + data.popupOffsetX - 40, (int) data.locationOnScreen.getY() + data.popupOffsetY - 40);
                     location = GuiDisplayUtil.keepComponentInsideParent(location, parentPoint, popup2, parentComponent);
