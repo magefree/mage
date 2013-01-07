@@ -77,8 +77,7 @@ public class GamePanel extends javax.swing.JPanel {
 
     private final static Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
-    private static final int X_PHASE_WIDTH = 55;
-
+	private static final int X_PHASE_WIDTH = 55;
     private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
     private Map<UUID, ExileZoneDialog> exiles = new HashMap<UUID, ExileZoneDialog>();
     private Map<String, ShowCardsDialog> revealed = new HashMap<String, ShowCardsDialog>();
@@ -95,6 +94,7 @@ public class GamePanel extends javax.swing.JPanel {
     private boolean initialized = false;
 
     private HelperPanel helper;
+    private int storedHeight;
     
     private Map<String, HoverButton> hoverButtons;
 
@@ -130,6 +130,12 @@ public class GamePanel extends javax.swing.JPanel {
                     int height = ((JComponent)e.getSource()).getHeight();
                     j.setSize(width, height);
                     jSplitPane0.setSize(width, height);
+                    
+                    if (height < storedHeight) {
+                        pnlBattlefield.setSize(0, 200);
+                    }
+                    storedHeight = height;
+
                     sizeToScreen();
 
                     if (!initialized) {
@@ -225,8 +231,8 @@ public class GamePanel extends javax.swing.JPanel {
     private void sizeToScreen() {
         Rectangle rect = this.getBounds();
 
-        if (rect.height < 650) { 
-            if (smallMode == false) {
+        if (rect.height < 720) {
+            if (!smallMode) {
                 smallMode = true;
                 Dimension bbDimension = new Dimension(128, 184);
                 bigCard.setMaximumSize(bbDimension);
@@ -241,7 +247,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         }
         else {
-            if (smallMode == true) {
+            if (smallMode) {
                 smallMode = false;
                 Dimension bbDimension = new Dimension(256, 367);
                 bigCard.setMaximumSize(bbDimension);
@@ -256,8 +262,8 @@ public class GamePanel extends javax.swing.JPanel {
             }
         }
 
-        int height = pnlBattlefield.getHeight();
-        phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, height));
+        //int height = pnlBattlefield.getHeight();
+        //phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, X_PHASE_HEIGHT));
 
         DialogManager.getManager(gameId).setScreenWidth(rect.width);
         DialogManager.getManager(gameId).setScreenHeight(rect.height);
