@@ -276,6 +276,10 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
+        hideAll();
+    }
+
+    public void hideAll() {
         hidePopup();
         startHideTimeout();
         this.state = false;

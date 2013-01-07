@@ -33,17 +33,6 @@
  */
 
 package mage.client.game;
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.border.LineBorder;
-import javax.swing.plaf.basic.BasicSplitPaneDivider;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 import mage.Constants;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
@@ -65,6 +54,18 @@ import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.utils.impl.ImageManagerImpl;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.Serializable;
+import java.util.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 
 
 
@@ -432,6 +433,9 @@ public class GamePanel extends javax.swing.JPanel {
                 chosenHandKey = YOUR_HAND;
             }
             handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
+
+            ActionCallback callback = Plugins.getInstance().getActionCallback();
+            ((MageActionCallback)callback).hideAll();
 
             // set visible only if we have any other hand visible than ours
             boolean previous = btnSwitchHands.isVisible();
