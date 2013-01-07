@@ -138,7 +138,10 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
         else {
             sb.append("gain ");
         }
-        sb.append(gainedAbility).append(" ").append(duration.toString());
+        sb.append(gainedAbility);
+        if (!duration.toString().isEmpty()) {
+                sb.append(" ").append(duration.toString());
+        }
         staticText = sb.toString();
     }
 
