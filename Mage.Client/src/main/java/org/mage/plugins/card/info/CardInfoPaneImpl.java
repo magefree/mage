@@ -205,7 +205,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                 org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH
             );
             this.setSize(org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN, org.mage.plugins.card.constants.Constants.TOOLTIP_HEIGHT_MAX);
-        } else if (type == 1) {
+        } else if (count < 6 && type == 1) {
             type = 0;
             container.setSize(
                     org.mage.plugins.card.constants.Constants.TOOLTIP_WIDTH_MIN + org.mage.plugins.card.constants.Constants.TOOLTIP_BORDER_WIDTH,
