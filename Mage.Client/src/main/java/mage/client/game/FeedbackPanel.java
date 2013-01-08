@@ -128,7 +128,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
                 this.btnRight.setVisible(true);
                 this.btnRight.setText("OK");
                 this.helper.setState("", false, "OK", true);
-                ArrowBuilder.removeAllArrows();
+                ArrowBuilder.getBuilder().removeAllArrows(gameId);
                 endWithTimeout();
                 break;
         }

@@ -2,20 +2,40 @@ package mage.client.util.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 /**
  * Class for dealing with arrows in the game.
  * 
- * @author nantuko
+ * @author nantuko, noxx
  */
 public class ArrowBuilder {
 
-    private static JPanel arrowsPanel;
+    private static ArrowBuilder instance;
 
-    private final static Map<Type, java.util.List<Arrow>> map = new HashMap<Type, java.util.List<Arrow>>();
+    static {
+        instance = new ArrowBuilder();
+    }
+
+    public static ArrowBuilder getBuilder() {
+        return instance;
+    }
+
+    /**
+     * The top panel where arrow panels are added to.
+     */
+    private JPanel arrowsManagerPanel;
+
+    /**
+     * Stores arrow panels per game
+     */
+    private final Map<UUID, JPanel> arrowPanels = new HashMap<UUID, JPanel>();
+
+    private final Map<UUID, Map<Type, List<Arrow>>> map = new HashMap<UUID, Map<Type, java.util.List<Arrow>>>();
+    
+    private int currentWidth;
+    private int currentHeight;
 
     public enum Type {
         PAIRED, SOURCE, TARGET, COMBAT;
@@ -25,20 +45,33 @@ public class ArrowBuilder {
      * Get the panel where all arrows are being drawn.
      * @return
      */
-    public static JPanel getArrowsPanel() {
-        if (arrowsPanel == null) {
+    public JPanel getArrowsManagerPanel() {
+        if (arrowsManagerPanel == null) {
             synchronized (ArrowBuilder.class) {
-                if (arrowsPanel == null) {
-                    arrowsPanel = new JPanel();
-                    arrowsPanel.setVisible(true);
-                    arrowsPanel.setOpaque(false);
-                    //arrowsPanel.setLayout(new BorderLayout());
-                    arrowsPanel.setLayout(null);
-                    //arrowsPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+                if (arrowsManagerPanel == null) {
+                    arrowsManagerPanel = new JPanel();
+                    arrowsManagerPanel.setVisible(true);
+                    arrowsManagerPanel.setOpaque(false);
+                    arrowsManagerPanel.setLayout(null);
                 }
             }
         }
-        return arrowsPanel;
+        return arrowsManagerPanel;
+    }
+    
+    private JPanel getArrowsPanel(UUID gameId) {
+        if (!arrowPanels.containsKey(gameId)) {
+            JPanel arrowPanel = new JPanel();
+            arrowPanel.setVisible(true);
+            arrowPanel.setOpaque(false);
+            arrowPanel.setLayout(null);
+            arrowPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
+            arrowPanel.setSize(currentWidth, currentHeight);
+            arrowPanels.put(gameId, arrowPanel);
+            getArrowsManagerPanel().add(arrowPanel);
+            return arrowPanel;
+        }
+        return arrowPanels.get(gameId);
     }
 
     /**
@@ -48,9 +81,9 @@ public class ArrowBuilder {
      * 
      * @return
      */
-    public static JPanel getArrowsPanelRef() {
-        return arrowsPanel;
-    }
+    /*public JPanel getPanelRef() {
+        return arrowsManagerPanel;
+    }*/
 
     /**
      * Adds new arrow.
@@ -61,21 +94,29 @@ public class ArrowBuilder {
      * @param endY
      * @param color
      */
-    public static void addArrow(int startX, int startY, int endX, int endY, Color color, Type type) {
-        JPanel p = getArrowsPanel();
+    public void addArrow(UUID gameId, int startX, int startY, int endX, int endY, Color color, Type type) {
+        JPanel p = getArrowsPanel(gameId);
+
         Arrow arrow = new Arrow();
         arrow.setColor(color);
         arrow.setArrowLocation(startX, startY, endX, endY);
         arrow.setBounds(0, 0, Math.max(startX, endX) + 40, Math.max(startY, endY) + 30); // 30 is offset for arrow heads (being cut otherwise)
+
         synchronized (map) {
             p.add(arrow);
-            java.util.List<Arrow> arrows = map.get(type);
+            Map<Type, java.util.List<Arrow>> innerMap = map.get(gameId);
+            if (innerMap == null) {
+                innerMap = new HashMap<Type, List<Arrow>>();
+                map.put(gameId, innerMap);
+            }
+            java.util.List<Arrow> arrows = innerMap.get(type);
             if (arrows == null) {
                 arrows = new ArrayList<Arrow>();
-                map.put(type, arrows);
+                innerMap.put(type, arrows);
             }
             arrows.add(arrow);
         }
+
         p.revalidate();
         p.repaint();
     }
@@ -83,33 +124,61 @@ public class ArrowBuilder {
     /**
      * Removes all arrows from the screen.
      */
-    public static void removeAllArrows() {
-        JPanel p = getArrowsPanel();
-        synchronized (map) {
-            if (p.getComponentCount() > 0) {
-                p.removeAll();
-                p.revalidate();
-                p.repaint();
+    public void removeAllArrows(UUID gameId) {
+        if (map.containsKey(gameId)) {
+            Map<Type, List<Arrow>> innerMap = map.get(gameId);
+            JPanel p = getArrowsPanel(gameId);
+            synchronized (map) {
+                if (p != null && p.getComponentCount() > 0) {
+                    p.removeAll();
+                    p.revalidate();
+                    p.repaint();
+                }
+                innerMap.clear();
+                map.remove(gameId);
             }
-            map.clear();
         }
     }
 
-    public static void removeArrowsByType(Type type) {
-        java.util.List<Arrow> arrows = map.get(type);
-        if (arrows != null) {
-            JPanel p = getArrowsPanel();
-            if (arrows.size() > 0) {
+    public void removeArrowsByType(UUID gameId, Type type) {
+        if (map.containsKey(gameId)) {
+            Map<Type, List<Arrow>> innerMap = map.get(gameId);
+            java.util.List<Arrow> arrows = innerMap.get(type);
+            if (arrows != null && arrows.size() > 0) {
+                JPanel p = getArrowsPanel(gameId);
                 synchronized (map) {
                     for (Arrow arrow : arrows) {
                         p.remove(arrow);
                     }
-                    map.put(type, new ArrayList<Arrow>());
+                    innerMap.put(type, new ArrayList<Arrow>());
                 }
                 p.revalidate();
                 p.repaint();
             }
         }
     }
+    
+    public void setSize(int width, int height) {
+        this.currentWidth = width;
+        this.currentHeight = height;
+        if (arrowsManagerPanel != null) {
+            arrowsManagerPanel.setSize(width, height);
+        }
+        for (JPanel arrowPanel : arrowPanels.values()) {
+            arrowPanel.setSize(width, height);
+            arrowPanel.repaint();
+        }
+    }
 
+    public void hideAllPanels() {
+        for (JPanel arrowPanel : arrowPanels.values()) {
+            arrowPanel.setVisible(false);
+        }
+    }
+
+    public void showPanel(UUID gameId) {
+        if (arrowPanels.containsKey(gameId)) {
+            arrowPanels.get(gameId).setVisible(true);
+        }
+    }
 }

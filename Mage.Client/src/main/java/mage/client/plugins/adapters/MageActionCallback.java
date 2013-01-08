@@ -103,7 +103,7 @@ public class MageActionCallback implements ActionCallback {
                 if (permanent != null) {
                     Point target = permanent.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
+                    ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
                 }
             }
         }
@@ -119,7 +119,7 @@ public class MageActionCallback implements ActionCallback {
                 if (permanent != null) {
                     Point source = permanent.getLocationOnScreen();
                     source.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.addArrow((int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
+                    ArrowBuilder.getBuilder().addArrow(data.gameId, (int) source.getX() + 40, (int) source.getY() + 10, (int) me.getX() + 35, (int) me.getY() + 20, Color.blue, ArrowBuilder.Type.SOURCE);
                 }
             }
         }
@@ -136,14 +136,14 @@ public class MageActionCallback implements ActionCallback {
                 if (p != null) {
                     Point target = p.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
-                    ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
+                    ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
                 } else {
                     for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
                         MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                         if (permanent != null) {
                             Point target = permanent.getLocationOnScreen();
                             target.translate(-parentPoint.x, -parentPoint.y);
-                            ArrowBuilder.addArrow((int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
+                            ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
                         }
                     }
                 }
@@ -276,17 +276,16 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
-        hideAll();
+        hideAll(data.gameId);
     }
 
-    public void hideAll() {
+    public void hideAll(UUID gameId) {
         hidePopup();
         startHideTimeout();
         this.state = false;
-        //ArrowBuilder.removeAllArrows();
-        ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.TARGET);
-        ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.PAIRED);
-        ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.SOURCE);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
     }
 
     public void enlargeCard() {

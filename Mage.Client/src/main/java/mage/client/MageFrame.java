@@ -245,7 +245,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         setAppIcon();
         MageTray.getInstance().install();
 
-        desktopPane.add(ArrowBuilder.getArrowsPanel(), JLayeredPane.DRAG_LAYER);
+        desktopPane.add(ArrowBuilder.getBuilder().getArrowsManagerPanel(), JLayeredPane.DRAG_LAYER);
 
         desktopPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -256,10 +256,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
                 if (!liteMode && !grayMode) {
                     backgroundPane.setSize(width, height);
                 }
-                JPanel arrowsPanel = ArrowBuilder.getArrowsPanelRef();
-                if (arrowsPanel != null) {
-                    arrowsPanel.setSize(width, height);
-                }
+
+                ArrowBuilder.getBuilder().setSize(width, height);
+
                 if (title != null) {
                     title.setBounds((int) (width - titleRectangle.getWidth()) / 2, (int) (height - titleRectangle.getHeight()) / 2, titleRectangle.width, titleRectangle.height);
                 }
@@ -534,6 +533,10 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             logger.error("Error setting " + frame.getTitle() + " active");
         }
         activeFrame.activated();
+        ArrowBuilder.getBuilder().hideAllPanels();
+        if (frame instanceof GamePane) {
+            ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
+        }
     }
 
     public static void deactivate(MagePane frame) {

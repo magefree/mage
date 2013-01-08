@@ -37,12 +37,12 @@ public class CombatManager {
     private Point parentPoint;
 
     public void showCombat(List<CombatGroupView> combatView, UUID gameId) {
-        ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.COMBAT);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.COMBAT);
         displayArrows(combatView, gameId);
     }
 
     public void hideCombat(UUID gameId) {
-        ArrowBuilder.removeArrowsByType(ArrowBuilder.Type.COMBAT);
+        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.COMBAT);
         combatAttackers.remove(gameId);
         combatBlockers.remove(gameId);
     }
@@ -92,7 +92,7 @@ public class CombatManager {
                 target.translate(-parentPoint.x, -parentPoint.y);
                 Point attackerPoint = attackerCard.getLocationOnScreen();
                 attackerPoint.translate(-parentPoint.x, -parentPoint.y);
-                ArrowBuilder.addArrow((int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() - 20, Color.red, ArrowBuilder.Type.COMBAT);
+                ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() - 20, Color.red, ArrowBuilder.Type.COMBAT);
             } else {
                 for (PlayAreaPanel pa : MageFrame.getGame(gameId).getPlayers().values()) {
                     MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(defenderId);
@@ -101,7 +101,7 @@ public class CombatManager {
                         target.translate(-parentPoint.x, -parentPoint.y);
                         Point attackerPoint = attackerCard.getLocationOnScreen();
                         attackerPoint.translate(-parentPoint.x, -parentPoint.y);
-                        ArrowBuilder.addArrow((int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.COMBAT);
+                        ArrowBuilder.getBuilder().addArrow(gameId, (int) attackerPoint.getX() + 45, (int) attackerPoint.getY() + 25, (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.COMBAT);
                     }
                 }
             }
@@ -122,7 +122,7 @@ public class CombatManager {
                     double xRateA = (attackerCard.getSize().width / SettingsManager.getInstance().getCardSize().width);
                     double yRateB = (blockerCard.getSize().height / SettingsManager.getInstance().getCardSize().height);
                     double xRateB = (blockerCard.getSize().width / SettingsManager.getInstance().getCardSize().width);
-                    ArrowBuilder.addArrow((int) blockerPoint.getX() + (int)(55*xRateB), (int) blockerPoint.getY() + (int)(25*xRateB),
+                    ArrowBuilder.getBuilder().addArrow(gameId, (int) blockerPoint.getX() + (int)(55*xRateB), (int) blockerPoint.getY() + (int)(25*xRateB),
                             (int) attackerPoint.getX() + (int)(70*xRateA), (int) attackerPoint.getY() + (int)(25*yRateA), Color.blue, ArrowBuilder.Type.COMBAT);
                     globalBlockersCount++;
                 }

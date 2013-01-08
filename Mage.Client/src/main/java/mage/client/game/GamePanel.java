@@ -50,6 +50,7 @@ import mage.client.plugins.impl.Plugins;
 import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
+import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -265,6 +266,8 @@ public class GamePanel extends javax.swing.JPanel {
         //int height = pnlBattlefield.getHeight();
         //phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, X_PHASE_HEIGHT));
 
+        ArrowBuilder.getBuilder().setSize(rect.width, rect.height);
+
         DialogManager.getManager(gameId).setScreenWidth(rect.width);
         DialogManager.getManager(gameId).setScreenHeight(rect.height);
         DialogManager.getManager(gameId).setBounds(0, 0, rect.width, rect.height);
@@ -441,7 +444,7 @@ public class GamePanel extends javax.swing.JPanel {
             handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
 
             ActionCallback callback = Plugins.getInstance().getActionCallback();
-            ((MageActionCallback)callback).hideAll();
+            ((MageActionCallback)callback).hideAll(gameId);
 
             // set visible only if we have any other hand visible than ours
             boolean previous = btnSwitchHands.isVisible();
@@ -623,15 +626,12 @@ public class GamePanel extends javax.swing.JPanel {
 
     public void endMessage(String message) {
         this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null);
+        ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
     public int modalQuestion(String message, String title) {
         return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
     }
-
-    /*public JPanel getHand() {
-        return hand;
-    }*/
 
     public void select(String message, GameView gameView) {
         updateGame(gameView);
@@ -1074,23 +1074,23 @@ public class GamePanel extends javax.swing.JPanel {
         gl_jPanel3.setHorizontalGroup(
             gl_jPanel3.createParallelGroup(Alignment.LEADING)
                 .addGroup(gl_jPanel3.createSequentialGroup()
-                    //.addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    //.addGap(0)
-                    .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                            .addGroup(gl_jPanel3.createSequentialGroup()
-                                .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
-                                    .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                )
-                                .addComponent(stack, 400, 400, 400)
+                        //.addComponent(pnlGameInfo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        //.addGap(0)
+                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                .addGroup(gl_jPanel3.createSequentialGroup()
+                                        .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
+                                                .addComponent(helper, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(handContainer, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        )
+                                        .addComponent(stack, 400, 400, 400)
 
-                            )
-                            .addGap(0)
-                                    //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(gl_jPanel3.createSequentialGroup()
-                                    .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            )))
+                                )
+                                .addGap(0)
+                                        //.addComponent(jPhases, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(gl_jPanel3.createSequentialGroup()
+                                        .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                )))
         );
         gl_jPanel3.setVerticalGroup(
                 gl_jPanel3.createParallelGroup(Alignment.TRAILING)
@@ -1099,7 +1099,7 @@ public class GamePanel extends javax.swing.JPanel {
                                         .addComponent(pnlBattlefield, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                                         .addComponent(phasesContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 )
-                                //.addPreferredGap(ComponentPlacement.RELATED)
+                                        //.addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(gl_jPanel3.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_jPanel3.createSequentialGroup()
                                                 .addGap(85)
@@ -1320,9 +1320,9 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
         try {
             get();
         } catch (InterruptedException ex) {
-            logger.fatal("Update Matches Task error", ex);
+            logger.fatal("Replay Match Task error", ex);
         } catch (ExecutionException ex) {
-            logger.fatal("Update Matches Task error", ex);
+            logger.fatal("Replay Match Task error", ex);
         } catch (CancellationException ex) {}
     }
 }

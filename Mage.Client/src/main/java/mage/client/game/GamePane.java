@@ -60,6 +60,7 @@ public class GamePane extends MagePane {
 
     public void showGame(UUID gameId, UUID playerId) {
         this.setTitle("Game " + gameId);
+        this.gameId = gameId;
         gamePanel.showGame(gameId, playerId);
     }
 
@@ -69,11 +70,13 @@ public class GamePane extends MagePane {
 
     public void watchGame(UUID gameId) {
         this.setTitle("Watching " + gameId);
+        this.gameId = gameId;
         gamePanel.watchGame(gameId);
     }
 
     public void replayGame(UUID gameId) {
         this.setTitle("Replaying " + gameId);
+        this.gameId = gameId;
         gamePanel.replayGame(gameId);
     }
 
@@ -101,8 +104,12 @@ public class GamePane extends MagePane {
         pack();
     }
 
+    public UUID getGameId() {
+        return gameId;
+    }
 
     private mage.client.game.GamePanel gamePanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private UUID gameId;
 
 }
