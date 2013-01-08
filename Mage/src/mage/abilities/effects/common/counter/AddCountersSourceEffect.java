@@ -99,12 +99,18 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
+        // put a +1/+1 counter on it for each attacking creature you control.
+        sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append("put ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on {this}");
-            staticText = sb.toString();
+            sb.append(Integer.toString(counter.getCount())).append(" ");
         } else {
-            staticText = sb.append("put a ").append(counter.getName().toLowerCase()).append(" counter on {this}").toString();
+            sb.append("a ");
         }
+        sb.append(counter.getName().toLowerCase()).append(" counter on {this}");
+        if (amount.getMessage().length() > 0) {
+            sb.append(" for each ").append(amount.getMessage());
+        }
+        staticText = sb.toString();
     }
 
     @Override
