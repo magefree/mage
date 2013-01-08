@@ -60,7 +60,7 @@ public class NissasChosen extends CardImpl<NissasChosen> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new NissasChosenEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NissasChosenEffect()));
     }
 
     public NissasChosen(final NissasChosen card) {
@@ -97,7 +97,7 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Card card = game.getCard(event.getTargetId());
-        if ( card != null && event.getTargetId().equals(source.getSourceId()) ) {
+        if ( card != null ) {
             return card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
         }
         return false;
@@ -105,12 +105,12 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == EventType.ZONE_CHANGE )
+        if ( event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId()) )
         {
-                    ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-                    if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
-                        return true;
-                    }
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
+                return true;
+            }
         }
         return false;
     }
