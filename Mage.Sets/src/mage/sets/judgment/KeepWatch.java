@@ -30,12 +30,9 @@ package mage.sets.judgment;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.AttackingCreatureCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.combat.CombatGroup;
 
 /**
  *
@@ -61,32 +58,4 @@ public class KeepWatch extends CardImpl<KeepWatch> {
     public KeepWatch copy() {
         return new KeepWatch(this);
     }
-}
-
-class AttackingCreatureCount implements DynamicValue {
-    
-    @Override
-    public int calculate(Game game, Ability sourceAbility) {
-        int count = 0;
-        for (CombatGroup combatGroup : game.getCombat().getGroups()) {
-            count += combatGroup.getAttackers().size();
-        }
-        return count;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return this;
-    }
-
-    @Override
-    public String getMessage() {
-        return "attacking creature";
-    }
-    
-    @Override
-    public String toString() {
-        return "one";
-    }
-
 }

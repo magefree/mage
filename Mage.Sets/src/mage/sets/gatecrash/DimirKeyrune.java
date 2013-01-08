@@ -71,7 +71,7 @@ public class DimirKeyrune extends CardImpl<DimirKeyrune> {
 
     private class DimirKeyruneToken extends Token {
         DimirKeyruneToken() {
-            super("", "a 2/2 blue and black Horror until end of turn and is unblockable this turn");
+            super("Horror", "a 2/2 blue and black Horror until end of turn and is unblockable this turn");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setBlue(true);
