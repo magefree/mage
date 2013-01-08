@@ -34,7 +34,7 @@ public class GathererSets implements Iterable<DownloadJob> {
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", 
                                                  "DDF", 
-                                                 "ALA", "CFX", "ARB", 
+                                                 "ALA", "CON", "ARB",
                                                  "ZEN", "WWK", "ROE", 
                                                  "SOM", "MBS", "NPH", 
                                                  "ISD", "DKA", "AVR", 
@@ -42,7 +42,6 @@ public class GathererSets implements Iterable<DownloadJob> {
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
 
     static {
-        symbolsReplacements.put("CFX", "CON");
         symbolsReplacements.put("ARN", "AN");
         symbolsReplacements.put("ATQ", "AQ");
         symbolsReplacements.put("LEG", "LE");

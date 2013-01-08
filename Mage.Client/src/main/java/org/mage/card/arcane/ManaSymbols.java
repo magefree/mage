@@ -48,8 +48,7 @@ public class ManaSymbols {
         }
         List<String> setCodes = CardRepository.instance.getSetCodes();
         for (String set : setCodes) {
-            String _set = set.equals("CON") ? "CFX" : set;
-            File file = new File(Constants.RESOURCE_PATH_SET + _set + "-C.jpg");
+            File file = new File(Constants.RESOURCE_PATH_SET + set + "-C.jpg");
             try {
                 Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                 int width = image.getWidth(null);
@@ -77,7 +76,7 @@ public class ManaSymbols {
                     if (file.exists()) {
                         continue;
                     }
-                    file = new File(Constants.RESOURCE_PATH_SET + _set + "-" + code + ".jpg");
+                    file = new File(Constants.RESOURCE_PATH_SET + set + "-" + code + ".jpg");
                     Image image = UI.getImageIcon(file.getAbsolutePath()).getImage();
                     try {
                         int width = image.getWidth(null);
@@ -89,7 +88,7 @@ public class ManaSymbols {
                             }
                             Rectangle r = new Rectangle(15 + dx, (int) (height * (15.0f + dx) / width));
                             BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
-                            File newFile = new File(Constants.RESOURCE_PATH_SET_SMALL + File.separator + _set + "-" + code + ".png");
+                            File newFile = new File(Constants.RESOURCE_PATH_SET_SMALL + File.separator + set + "-" + code + ".png");
                             ImageIO.write(resized, "png", newFile);
                         }
                     } catch (Exception e) {
@@ -190,9 +189,6 @@ public class ManaSymbols {
 
     public static String replaceSetCodeWithHTML(String set, String rarity) {
         String _set = set;
-        if (_set.equals("CON")) {
-            _set = "CFX";
-        }
         if (setImagesExist.containsKey(_set)) {
             Integer width = setImagesExist.get(_set).width;
             Integer height = setImagesExist.get(_set).height;
