@@ -276,16 +276,22 @@ public class MageActionCallback implements ActionCallback {
 
     @Override
     public void mouseExited(MouseEvent e, final TransferData data) {
-        hideAll(data.gameId);
+        if (data != null) {
+            hideAll(data.gameId);
+        } else {
+            hideAll(null);
+        }
     }
 
     public void hideAll(UUID gameId) {
         hidePopup();
         startHideTimeout();
         this.state = false;
-        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
-        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
-        ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
+        if (gameId != null) {
+            ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
+            ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
+            ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
+        }
     }
 
     public void enlargeCard() {
