@@ -51,7 +51,10 @@ import mage.Constants.CardType;
 public enum CardRepository {
 
     instance;
+
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
+    private static final long DB_VERSION = 1;
+
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
     private Set<String> classNames;
@@ -63,6 +66,17 @@ public enum CardRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
+            TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
+            Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
+            List<DatabaseVersion> dbVersions = dbVersionDao.queryForAll();
+            if (dbVersions.isEmpty() || dbVersions.get(0).getVersion() != DB_VERSION) {
+                TableUtils.dropTable(connectionSource, CardInfo.class, true);
+                if (dbVersions.isEmpty()) {
+                    DatabaseVersion dbVersion = new DatabaseVersion();
+                    dbVersion.setVersion(DB_VERSION);
+                    dbVersionDao.create(dbVersion);
+                }
+            }
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
             cardDao = DaoManager.createDao(connectionSource, CardInfo.class);
