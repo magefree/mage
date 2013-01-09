@@ -59,8 +59,9 @@ public class Choices extends ArrayList<Choice> {
     public List<Choice> getUnchosen() {
         List<Choice> unchosen = new ArrayList<Choice>();
         for (Choice choice: this) {
-            if (!choice.isChosen())
+            if (!choice.isChosen()) {
                 unchosen.add(choice);
+            }
         }
         return unchosen;
     }
@@ -73,8 +74,9 @@ public class Choices extends ArrayList<Choice> {
 
     public boolean isChosen() {
         for (Choice choice: this) {
-            if (!choice.isChosen())
+            if (!choice.isChosen()) {
                 return false;
+            }
         }
         return true;
     }
@@ -84,8 +86,9 @@ public class Choices extends ArrayList<Choice> {
             Player player = game.getPlayer(source.getControllerId());
             while (!isChosen()) {
                 Choice choice = this.getUnchosen().get(0);
-                if (!player.choose(outcome, choice, game))
+                if (!player.choose(outcome, choice, game)) {
                     return false;
+                }
             }
         }
         return true;
