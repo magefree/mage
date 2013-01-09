@@ -55,7 +55,7 @@ public class BattleRattleShaman extends CardImpl<BattleRattleShaman> {
         this.toughness = new MageInt(2);
 
         // At the beginning of combat on your turn, you may have target creature get +2/+0 until end of turn.
-        Ability ability = new BeginningOfCombatTriggeredAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), Constants.TargetController.YOU, true);
+        Ability ability = new BeginningOfCombatTriggeredAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), Constants.TargetController.YOU, true, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 

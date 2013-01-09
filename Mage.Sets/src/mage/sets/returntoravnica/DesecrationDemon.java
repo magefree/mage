@@ -32,10 +32,9 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -44,7 +43,6 @@ import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
@@ -68,8 +66,7 @@ public class DesecrationDemon extends CardImpl<DesecrationDemon> {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it.
-        this.addAbility(new DesecrationDemonTriggeredAbility());
-
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DesecrationDemonEffect(), Constants.TargetController.ANY, false));
     }
 
     public DesecrationDemon(final DesecrationDemon card) {
@@ -82,39 +79,10 @@ public class DesecrationDemon extends CardImpl<DesecrationDemon> {
     }
 }
 
-class DesecrationDemonTriggeredAbility extends TriggeredAbilityImpl<DesecrationDemonTriggeredAbility> {
-
-    public DesecrationDemonTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DesecrationDemonEffect());
-    }
-
-    public DesecrationDemonTriggeredAbility(final DesecrationDemonTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public DesecrationDemonTriggeredAbility copy() {
-        return new DesecrationDemonTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it";
-    }
-}
-
-
 class DesecrationDemonEffect extends OneShotEffect<DesecrationDemonEffect> {
     DesecrationDemonEffect() {
         super(Constants.Outcome.BoostCreature);
+        staticText = "any opponent may sacrifice a creature. If a player does, tap {this} and put a +1/+1 counter on it";
     }
 
     DesecrationDemonEffect(final DesecrationDemonEffect effect) {
@@ -134,13 +102,13 @@ class DesecrationDemonEffect extends OneShotEffect<DesecrationDemonEffect> {
                     filter.add(new ControllerPredicate(Constants.TargetController.YOU));
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                     if (target.canChoose(opponent.getId(), game)) {
-                        if (opponent.chooseUse(Outcome.Detriment, "Sacrifice a creature to tap Desecration Demon and put a +1/+1 counter on it?", game))
+                        if (opponent.chooseUse(Outcome.Detriment, new StringBuilder("Sacrifice a creature to tap ").append(descrationDemon.getName()).append("and put a +1/+1 counter on it?").toString(), game))
                         {
                             opponent.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                             Permanent permanent = game.getPermanent(target.getFirstTarget());
                             if (permanent != null) {
                                 permanent.sacrifice(source.getId(), game);
-                                game.informPlayers(opponent.getName() + " sacrifices " + permanent.getName() + " to tap Desecration Demon and put a +1/+1 counter on it");
+                                game.informPlayers(new StringBuilder(opponent.getName()).append(" sacrifices ").append(permanent.getName()).append(" to tap ").append(descrationDemon.getName()).append(". A +1/+1 counter was put on it").toString());
                                 if (descrationDemon != null) {
                                     descrationDemon.tap(game);
                                     descrationDemon.addCounters(CounterType.P1P1.createInstance(), game);
