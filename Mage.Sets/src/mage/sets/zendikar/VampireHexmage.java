@@ -27,6 +27,7 @@
  */
 package mage.sets.zendikar;
 
+import java.util.Iterator;
 import java.util.UUID;
 
 import mage.Constants.CardType;
@@ -40,6 +41,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -100,10 +102,8 @@ class VampireHexmageEffect extends OneShotEffect<VampireHexmageEffect> {
         Permanent permanent = game.getPermanent(target.getFirstTarget());
 
         if (permanent != null) {
-            String[] counterNames = permanent.getCounters().keySet().toArray(new String[0]);
-
-            for (String counterName : counterNames) {
-                permanent.getCounters().remove(counterName);
+            for(Counter counter : permanent.getCounters().values()){
+                permanent.removeCounters(counter, game);
             }
 
             return true;
