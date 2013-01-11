@@ -28,21 +28,21 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continious.SetPowerToughnessAllEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -62,8 +62,9 @@ public class MirrorEntity extends CardImpl<MirrorEntity> {
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
         // {X}: Creatures you control become X/X and gain all creature types until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(ChangelingAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")),new VariableManaCost());
-        ability.addEffect(new SetPowerToughneAllEffect());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ChangelingAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control")),new VariableManaCost());
+        DynamicValue variableMana = new ManacostVariableValue();
+        ability.addEffect(new SetPowerToughnessAllEffect(variableMana, variableMana, Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you control"), true));
         this.addAbility(ability);
     }
 
@@ -75,50 +76,4 @@ public class MirrorEntity extends CardImpl<MirrorEntity> {
     public MirrorEntity copy() {
         return new MirrorEntity(this);
     }
-}
-class SetPowerToughneAllEffect extends ContinuousEffectImpl<SetPowerToughneAllEffect> {
-
-
-
-    public SetPowerToughneAllEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.SetPT_7b, Constants.Outcome.BoostCreature);
-    }
-
-
-
-    public SetPowerToughneAllEffect(final SetPowerToughneAllEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SetPowerToughneAllEffect copy() {
-        return new SetPowerToughneAllEffect(this);
-    }
-
-        @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            objects.add(perm.getId());
-        }
-    }
-        
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int value = source.getManaCostsToPay().getX();
-        for (Permanent permanent: game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            if(objects.contains(permanent.getId())){
-                permanent.getPower().setValue(value);
-                permanent.getToughness().setValue(value);   
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        return "Creatures you control become X/X until end of turn";
-    }
-
-
 }
