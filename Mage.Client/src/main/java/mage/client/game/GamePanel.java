@@ -443,8 +443,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
             handContainer.loadCards(handCards.get(chosenHandKey), bigCard, gameId);
 
-            ActionCallback callback = Plugins.getInstance().getActionCallback();
-            ((MageActionCallback)callback).hideAll(gameId);
+            hideAll();
 
             // set visible only if we have any other hand visible than ours
             boolean previous = btnSwitchHands.isVisible();
@@ -670,11 +669,18 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void pickAbility(AbilityPickerView choices) {
+        hideAll();
         DialogManager.getManager(gameId).fadeOut();
         this.abilityPicker.show(choices, MageFrame.getDesktop().getMousePosition());
     }
 
+    private void hideAll() {
+        ActionCallback callback = Plugins.getInstance().getActionCallback();
+        ((MageActionCallback)callback).hideAll(gameId);
+    }
+
     private ShowCardsDialog showCards(String title, CardsView cards, boolean required, Map<String, Serializable> options) {
+        hideAll();
         ShowCardsDialog showCards = new ShowCardsDialog();
         showCards.loadCards(title, cards, bigCard, Config.dimensionsEnlarged, gameId, required, options);
         return showCards;
@@ -691,12 +697,14 @@ public class GamePanel extends javax.swing.JPanel {
     }
 
     public void getChoice(String message, String[] choices) {
+        hideAll();
         PickChoiceDialog pickChoice = new PickChoiceDialog();
         pickChoice.showDialog(message, choices);
         session.sendPlayerString(gameId, pickChoice.getChoice());
     }
 
     public void pickPile(String message, CardsView pile1, CardsView pile2) {
+        hideAll();
         PickPileDialog pickPileDialog = new PickPileDialog();
         pickPileDialog.loadCards(message, pile1, pile2, bigCard, Config.dimensions, gameId);
         session.sendPlayerBoolean(gameId, pickPileDialog.isPickedPile1());
