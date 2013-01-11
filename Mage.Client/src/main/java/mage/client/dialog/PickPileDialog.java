@@ -28,20 +28,19 @@
 
 package mage.client.dialog;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.UUID;
-
-import javax.swing.JButton;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-
 import mage.cards.CardDimensions;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardArea;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
 import mage.view.CardsView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.UUID;
 
 /**
 *
@@ -101,24 +100,14 @@ public class PickPileDialog extends MageDialog {
         }
         pack();
 
+        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+        this.setLocation(centered.x, centered.y);
+        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+
         this.revalidate();
         this.repaint();
         this.setModal(true);
         this.setVisible(true);
-
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                int width = PickPileDialog.this.getWidth();
-//                int height = PickPileDialog.this.getWidth();
-//                if (width > 0 && height > 0) {
-//                    Point centered = SettingsManager.getInstance().getComponentPosition(width, height);
-//                    PickPileDialog.this.setLocation(centered.x, centered.y);
-//                    GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, PickPileDialog.this);
-//                }
-//                PickPileDialog.this.setVisible(true);
-//            }
-//        });
     }
 
     private void btnPile1ActionPerformed(java.awt.event.ActionEvent evt) {

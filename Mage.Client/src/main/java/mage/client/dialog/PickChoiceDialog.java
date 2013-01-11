@@ -34,8 +34,12 @@
 
 package mage.client.dialog;
 
-import javax.swing.JLayeredPane;
 import mage.client.MageFrame;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  *
@@ -53,6 +57,11 @@ public class PickChoiceDialog extends MageDialog {
         this.lblMessage.setText(message);
         this.lstChoices.setListData(choices);
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
+
+        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+        this.setLocation(centered.x, centered.y);
+        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+
         this.setVisible(true);
     }
 
