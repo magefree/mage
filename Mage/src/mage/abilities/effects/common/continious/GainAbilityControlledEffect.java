@@ -129,7 +129,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
         }
         String gainedAbility = ability.getRule();
         sb.append(filter.getMessage()).append(" you control ");
-        if (duration.equals(Duration.WhileOnBattlefield)) {
+        if (duration.equals(Duration.WhileOnBattlefield) || duration.equals(Duration.EndOfGame)) {
             sb.append("have ");
             if (gainedAbility.startsWith("Whenever ") || gainedAbility.startsWith("{T}")) {
                 gainedAbility = "\"" + gainedAbility + "\"";
@@ -139,7 +139,7 @@ public class GainAbilityControlledEffect extends ContinuousEffectImpl<GainAbilit
             sb.append("gain ");
         }
         sb.append(gainedAbility);
-        if (!duration.toString().isEmpty()) {
+        if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
                 sb.append(" ").append(duration.toString());
         }
         staticText = sb.toString();
