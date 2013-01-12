@@ -28,10 +28,13 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -65,9 +68,15 @@ public class ChameleonColossus extends CardImpl<ChameleonColossus> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Changeling (This card is every creature type at all times.)
         this.addAbility(ChangelingAbility.getInstance());
+
+        // Protection from black
         this.addAbility(new ProtectionAbility(filter));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ChameleonColossusEffect(), new ManaCostsImpl("{2}{G}{G}")));
+
+        // {2}{G}{G}: Chameleon Colossus gets +X/+X until end of turn, where X is its power.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChameleonColossusEffect(), new ManaCostsImpl("{2}{G}{G}")));
     }
 
     public ChameleonColossus(final ChameleonColossus card) {
@@ -82,7 +91,7 @@ public class ChameleonColossus extends CardImpl<ChameleonColossus> {
 
 class ChameleonColossusEffect extends ContinuousEffectImpl<ChameleonColossusEffect> {
     public ChameleonColossusEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "{this} gets +X/+X until end of turn, where X is its power";
     }
 
