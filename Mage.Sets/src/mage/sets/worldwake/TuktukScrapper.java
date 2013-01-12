@@ -104,7 +104,7 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl<TuktukScrapper
                     return true;
                 }
                 if (permanent != null
-                        && permanent.getSubtype().contains("Ally")
+                        && permanent.hasSubtype("Ally")
                         && permanent.getControllerId().equals(this.getControllerId())) {
                     return true;
                 }

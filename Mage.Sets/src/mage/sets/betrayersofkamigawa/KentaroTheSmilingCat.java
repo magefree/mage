@@ -100,7 +100,7 @@ public class KentaroTheSmilingCat extends CardImpl<KentaroTheSmilingCat> {
                 SpellAbility spell = (SpellAbility) abilityToModify;
                 if (spell.getControllerId().equals(source.getControllerId())) {
                     Card sourceCard = game.getCard(spell.getSourceId());
-                    if (sourceCard != null && sourceCard.getSubtype().contains("Samurai")) {
+                    if (sourceCard != null && sourceCard.hasSubtype("Samurai")) {
                         String manaCostsString = "{" + sourceCard.getManaCost().convertedManaCost() + "}"; 
                         Player player = game.getPlayer(spell.getControllerId());
                         if (player != null && player.chooseUse(Constants.Outcome.Benefit, "Pay converted mana cost rather than pay the mana cost for Samurai creature?", game)) {

@@ -158,7 +158,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
             Object value = game.getState().getValue(manaProducer + "_type");
             if (value != null && value instanceof String) {
                 MageObject object = game.getObject(source.getSourceId());
-                if (object.getSubtype().contains(value)) {
+                if (object.hasSubtype((String) value)) {
                     return true;
                 }
             }

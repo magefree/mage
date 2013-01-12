@@ -99,7 +99,7 @@ class AgadeemOccultistEffect extends OneShotEffect<AgadeemOccultistEffect> {
         Player you = game.getPlayer(source.getControllerId());
         int allycount = 0;
         for (Permanent permanent : game.getBattlefield().getAllActivePermanents(source.getControllerId())) {
-            if (permanent.getSubtype().contains("Ally")) {
+            if (permanent.hasSubtype("Ally")) {
                 allycount++;
             }
         }

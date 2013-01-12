@@ -98,8 +98,9 @@ class SeanceEffect extends OneShotEffect<SeanceEffect> {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from(card);
 
-            if (!token.getSubtype().contains("Spirit"))
+            if (!token.hasSubtype("Spirit")) {
                 token.getSubtype().add("Spirit");
+            }
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
 
             ExileTargetEffect exileEffect = new ExileTargetEffect();

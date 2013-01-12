@@ -96,7 +96,7 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl<Rooftop
             SpellAbility spell = (SpellAbility) abilityToModify;
             if (spell.getControllerId().equals(source.getControllerId())) {
                 Card sourceCard = game.getCard(spell.getSourceId());
-                if (sourceCard != null && sourceCard.getSubtype().contains("Zombie")) {
+                if (sourceCard != null && sourceCard.hasSubtype("Zombie")) {
                     Player player = game.getPlayer(spell.getControllerId());
                     if (player != null && player.chooseUse(Outcome.Benefit, "Pay {0} rather than pay the mana cost for Zombie creature", game)) {
                         spell.getManaCostsToPay().clear();

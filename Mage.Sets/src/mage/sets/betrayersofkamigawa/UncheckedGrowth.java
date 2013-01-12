@@ -89,7 +89,7 @@ public class UncheckedGrowth extends CardImpl<UncheckedGrowth> {
             int affectedTargets = 0;
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null && permanent.getSubtype().contains("Spirit")) {
+                if (permanent != null && permanent.hasSubtype("Spirit")) {
                     permanent.addAbility(TrampleAbility.getInstance(), game);
                     affectedTargets++;
                 }

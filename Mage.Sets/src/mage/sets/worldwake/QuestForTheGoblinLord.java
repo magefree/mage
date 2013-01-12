@@ -102,7 +102,7 @@ class QuestForTheGoblinLordTriggeredAbility extends TriggeredAbilityImpl<QuestFo
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getSubtype().contains("Goblin") && permanent.getControllerId().equals(super.getControllerId())) {
+            if (permanent != null && permanent.hasSubtype("Goblin") && permanent.getControllerId().equals(super.getControllerId())) {
                 return true;
             }
         }

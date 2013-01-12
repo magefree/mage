@@ -109,7 +109,7 @@ class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl<HeraldOf
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
         if (abilityToModify instanceof SpellAbility) {
             Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
-            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.getSubtype().contains("Angel") || sourceCard.getSubtype().contains("Human"))) {
+            if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.hasSubtype("Angel") || sourceCard.hasSubtype("Human"))) {
                 return true;
             }
         }
