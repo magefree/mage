@@ -71,7 +71,7 @@ public class BorosKeyrune extends CardImpl<BorosKeyrune> {
 
     private class BorosKeyruneToken extends Token {
         BorosKeyruneToken() {
-            super("Soldier", "a 1/1 red and white Soldier artifact creature with double strike");
+            super("Soldier", "1/1 red and white Soldier artifact creature with double strike");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setRed(true);

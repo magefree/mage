@@ -58,13 +58,7 @@ import java.util.UUID;
  */
 public class DearlyDeparted extends CardImpl<DearlyDeparted> {
 
-    private static final FilterCreaturePermanent filterHuman = new FilterCreaturePermanent("Human creatures");
-
     private static final String ruleText = "As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it";
-
-    static {
-        filterHuman.add(new SubtypePredicate("Human"));
-    }
 
     public DearlyDeparted(UUID ownerId) {
         super(ownerId, 9, "Dearly Departed", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");

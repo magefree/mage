@@ -71,7 +71,7 @@ public class GruulKeyrune extends CardImpl<GruulKeyrune> {
 
     private class GruulKeyruneToken extends Token {
         GruulKeyruneToken() {
-            super("Beast", "a 3/2 red and green Beast artifact creature with trample");
+            super("Beast", "3/2 red and green Beast artifact creature with trample");
             cardType.add(CardType.ARTIFACT);
             cardType.add(CardType.CREATURE);
             color.setRed(true);
