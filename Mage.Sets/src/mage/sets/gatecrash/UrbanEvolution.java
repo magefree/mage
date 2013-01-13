@@ -43,7 +43,7 @@ import mage.cards.CardImpl;
 public class UrbanEvolution extends CardImpl<UrbanEvolution> {
 
     public UrbanEvolution(UUID ownerId) {
-        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}{G}");
+        super(ownerId, 204, "Urban Evolution", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{U}{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Wizard");
 

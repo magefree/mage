@@ -54,7 +54,9 @@ public class PrimeSpeakerZegana extends CardImpl<PrimeSpeakerZegana> {
     public PrimeSpeakerZegana(UUID ownerId) {
         super(ownerId, 188, "Prime Speaker Zegana", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{2}{G}{G}{U}{U}");
         this.expansionSetCode = "GTC";
+        this.subtype.add("Merfolk");
         this.subtype.add("Wizard");
+        this.supertype.add("Legendary");
 
         this.color.setGreen(true);
         this.color.setBlue(true);
