@@ -68,7 +68,7 @@ public class AngelicSkirmisher extends CardImpl<AngelicSkirmisher> {
     }
 
     public AngelicSkirmisher(UUID ownerId) {
-        super(ownerId, 3, "Angelic Skirmisher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
+        super(ownerId, 3, "Angelic Skirmisher", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
 

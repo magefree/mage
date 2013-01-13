@@ -55,7 +55,7 @@ public class TreasuryThrull extends CardImpl<TreasuryThrull> {
     }
 
     public TreasuryThrull(UUID ownerId) {
-        super(ownerId, 201, "Treasury Thrull", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}{B}");
+        super(ownerId, 201, "Treasury Thrull", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{B}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Thrull");
 

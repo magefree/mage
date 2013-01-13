@@ -38,10 +38,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.BloodrushAbility;
-import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -55,7 +53,7 @@ public class Rubblehulk extends CardImpl<Rubblehulk> {
     private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public Rubblehulk(UUID ownerId) {
-        super(ownerId, 191, "Rubblehulk", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
+        super(ownerId, 191, "Rubblehulk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Elemental");
 
