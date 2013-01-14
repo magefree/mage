@@ -51,6 +51,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private UUID playerId;
     private UUID gameId;
 
+    private static final int PANEL_HEIGHT = 242;
+    private static final int PANEL_HEIGHT_SMALL = 190;
+
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
         initComponents();
@@ -155,14 +158,14 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     public void sizePlayer(boolean smallMode) {
         this.playerPanel.sizePlayerPanel(smallMode);
         if (smallMode) {
-            this.playerPanel.setPreferredSize(new Dimension(92, 160));
+            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL));
             //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, 160));
+            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT_SMALL));
         }
         else {
-            this.playerPanel.setPreferredSize(new Dimension(92, 212));
+            this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT));
             //this.jScrollPane1.setPreferredSize(new Dimension(160, 212));
-            this.battlefieldPanel.setPreferredSize(new Dimension(160, 212));
+            this.battlefieldPanel.setPreferredSize(new Dimension(160, PANEL_HEIGHT));
         }
     }
 

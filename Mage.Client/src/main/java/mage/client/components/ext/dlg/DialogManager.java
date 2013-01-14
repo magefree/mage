@@ -40,7 +40,7 @@ public class DialogManager extends JComponent implements MouseListener,
     }
 
     public enum MTGDialogs {
-        none, AboutDialog, MessageDialog, StackDialog, AssignDamageDialog, ManaChoiceDialog, ChoiceDialog, GraveDialog, DialogContainer, CombatDialog,
+        none, AboutDialog, MessageDialog, StackDialog, AssignDamageDialog, ManaChoiceDialog, ChoiceDialog, EmblemsDialog, GraveDialog, DialogContainer, CombatDialog,
         ChooseDeckDialog, ChooseCommonDialog, RevealDialog
     }
 
@@ -122,7 +122,7 @@ public class DialogManager extends JComponent implements MouseListener,
         setVisible(true);
     }
 
-    public void showChoiceDialog(CardsView cards, BigCard bigCard, UUID gameId) {
+    public void showGraveyardDialog(CardsView cards, BigCard bigCard, UUID gameId) {
 
         int w = 720;
         int h = 550;
@@ -139,7 +139,37 @@ public class DialogManager extends JComponent implements MouseListener,
         params.gameId = gameId;
         //params.feedbackPanel = feedbackPanel;
         params.setCards(cards);
-        dialogContainer = new DialogContainer(MTGDialogs.ChoiceDialog, params);
+        dialogContainer = new DialogContainer(MTGDialogs.GraveDialog, params);
+        dialogContainer.setVisible(true);
+        add(dialogContainer);
+
+        this.currentDialog = MTGDialogs.DialogContainer;
+
+        setDlgBounds(new Rectangle(x, y, w, h));
+
+        dialogContainer.showDialog(true);
+
+        setVisible(true);
+    }
+
+    public void showEmblemsDialog(CardsView cards, BigCard bigCard, UUID gameId) {
+
+        int w = 720;
+        int h = 550;
+
+        int height = getHeight();
+        int width = getWidth();
+
+        int x = ((width - w) / 2);
+        int y = ((height - h) / 2);
+
+        DlgParams params = new DlgParams();
+        params.rect = new Rectangle(x, y, w, h);
+        params.bigCard = bigCard;
+        params.gameId = gameId;
+        //params.feedbackPanel = feedbackPanel;
+        params.setCards(cards);
+        dialogContainer = new DialogContainer(MTGDialogs.EmblemsDialog, params);
         dialogContainer.setVisible(true);
         add(dialogContainer);
 

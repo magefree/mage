@@ -81,9 +81,29 @@ public class DialogContainer extends JPanel {
             //backgroundColor = new Color(139, 46, 173, 0);
 
             alpha = 0;
-            ChoiceDialog dlg = new ChoiceDialog(params);
+            ChoiceDialog dlg = new ChoiceDialog(params, "Choose");
             add(dlg);
             //GameManager.getManager().setCurrentChoiceDlg(dlg);
+            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
+        } else if (dialogType == DialogManager.MTGDialogs.GraveDialog) {
+
+            backgroundColor = new Color(0, 0, 0, 110);
+
+            alpha = 0;
+            ChoiceDialog dlg = new ChoiceDialog(params, "Graveyard");
+            add(dlg);
+            dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
+            dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
+
+        } else if (dialogType == DialogManager.MTGDialogs.EmblemsDialog) {
+
+            backgroundColor = new Color(0, 0, 50, 110);
+
+            alpha = 0;
+            ChoiceDialog dlg = new ChoiceDialog(params, "Command Zone (Emblems)");
+            add(dlg);
             dlg.setLocation(X_OFFSET + 10, Y_OFFSET + 10);
             dlg.updateSize(params.rect.width - 80, params.rect.height - 80);
 

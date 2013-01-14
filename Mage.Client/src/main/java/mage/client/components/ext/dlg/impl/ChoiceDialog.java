@@ -49,16 +49,17 @@ public class ChoiceDialog extends IDialogPanel {
     private boolean isCancelStopsPlaying = true;
 
     private DlgParams params;
-
-    //HashMap<CardBean, MWCardImpl> map = new HashMap<CardBean, MWCardImpl>();
+    
+    private String title;
 
     /**
      * This is the default constructor
      */
-    public ChoiceDialog(DlgParams params) {
+    public ChoiceDialog(DlgParams params, String title) {
         super(params);
         this.params = params;
         this.gameId = params.gameId;
+        this.title = title;
 
         cards = params.getCards();
         isOptional = params.isOptional();
@@ -88,8 +89,8 @@ public class ChoiceDialog extends IDialogPanel {
      * @return void
      */
     private void initialize() {
-        jTitle = new ShadowLabel("Graveyard", 14);
-        jTitle.setBounds(new Rectangle(5, 3, 500, 16));
+        jTitle = new ShadowLabel(title, 14);
+        jTitle.setBounds(new Rectangle(5, 4, 500, 16));
         jTitle.setFont(new Font("Dialog", Font.BOLD, 14));
 
         this.setLayout(null);

@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.ObjectColor;
+import mage.abilities.Mode;
 import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
@@ -46,7 +47,6 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.Mode;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -318,7 +318,11 @@ public class CardView extends SimpleCardView {
     public String getExpansionSetCode() {
         return expansionSetCode;
     }
-
+    
+    public void setExpansionSetCode(String expansionSetCode) {
+        this.expansionSetCode = expansionSetCode;
+    }
+    
     @Override
     public UUID getId() {
         return id;

@@ -32,13 +32,13 @@ import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.GameState;
+import mage.game.command.CommandObject;
+import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -60,6 +60,7 @@ public class PlayerView implements Serializable {
     private Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
     private CardView topCard;
     private UserDataView userDataView;
+    private List<EmblemView> emblemList = new ArrayList<EmblemView>();
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();
@@ -86,6 +87,18 @@ public class PlayerView implements Serializable {
             this.userDataView = new UserDataView(player.getUserData());
         } else {
             this.userDataView = new UserDataView(0);
+        }
+        
+        for (CommandObject commandObject : game.getState().getCommand()) {
+            if (commandObject instanceof Emblem) {
+                Emblem emblem = (Emblem) commandObject;
+                if (emblem.getControllerId().equals(this.playerId)) {
+                    Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
+                    if (sourceCard != null) {
+                        emblemList.add(new EmblemView(emblem, sourceCard));
+                    }
+                }
+            }
         }
     }
 
@@ -153,5 +166,9 @@ public class PlayerView implements Serializable {
 
     public UserDataView getUserData() {
         return this.userDataView;
+    }
+
+    public List<EmblemView> getEmblemList() {
+        return emblemList;
     }
 }
