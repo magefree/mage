@@ -68,6 +68,7 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.flipCard = true;
+        this.flipCardName = "Nighteyes The Desecrator";
 
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));

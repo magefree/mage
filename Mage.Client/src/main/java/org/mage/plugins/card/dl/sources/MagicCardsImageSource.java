@@ -61,7 +61,7 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard, boolean flippedView) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
@@ -73,7 +73,11 @@ public class MagicCardsImageSource implements CardImageSource {
             url.append(secondSide ? "b" : "a");
         }
         if (isFlipCard) {
-            url.append("a");
+            if (flippedView) { // download rotated by 180 degree image
+                url.append("b");
+            } else {
+                url.append("a");
+            }
         }
         url.append(".jpg");
 

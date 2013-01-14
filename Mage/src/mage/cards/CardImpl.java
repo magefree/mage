@@ -28,8 +28,6 @@
 
 package mage.cards;
 
-import java.lang.reflect.Constructor;
-import java.util.*;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -49,6 +47,9 @@ import mage.game.stack.Spell;
 import mage.watchers.Watcher;
 import org.apache.log4j.Logger;
 
+import java.lang.reflect.Constructor;
+import java.util.*;
+
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
@@ -66,6 +67,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected boolean nightCard;
     protected SpellAbility spellAbility;
     protected boolean flipCard;
+    protected String flipCardName;
     protected int zoneChangeCounter = 1;
     protected Map<String, String> info;
     protected boolean usesVariousArt = false;
@@ -488,6 +490,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     @Override
     public boolean isFlipCard() {
         return flipCard;
+    }
+
+    @Override
+    public String getFlipCardName() {
+        return flipCardName;
     }
 
     @Override

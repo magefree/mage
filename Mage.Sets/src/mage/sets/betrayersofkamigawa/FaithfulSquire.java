@@ -30,7 +30,6 @@
 
 package mage.sets.betrayersofkamigawa;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -38,10 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.*;
 import mage.abilities.condition.common.FlippedCondition;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -58,6 +54,8 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.events.GameEvent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
+
+import java.util.UUID;
 
 
 /**
@@ -76,9 +74,12 @@ public class FaithfulSquire extends CardImpl<FaithfulSquire> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.flipCard = true;
+        this.flipCardName = "Kaiso, Memory of Loyalty";
 
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Faithful Squire.
         this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.KI.createInstance(2)), false));
 
         // At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it
         this.addAbility(new ConditionalTriggeredAbility(

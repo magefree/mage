@@ -27,12 +27,7 @@
  */
 package mage.sets.championsofkamigawa;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -57,6 +52,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInHand;
 
+import java.util.UUID;
+
 
 /**
  * @author Loki
@@ -72,6 +69,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         this.flipCard = true;
+        this.flipCardName = "Dokai, Weaver of Life";
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());

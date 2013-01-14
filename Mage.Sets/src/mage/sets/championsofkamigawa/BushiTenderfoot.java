@@ -67,12 +67,11 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.flipCard = true;
+        this.flipCardName = "Kenzo the Hardhearted";
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), "")));
-
-
     }
 
     public BushiTenderfoot(final BushiTenderfoot card) {

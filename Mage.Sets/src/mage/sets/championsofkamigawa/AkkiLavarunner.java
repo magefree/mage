@@ -38,6 +38,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.flipCard = true;
+        this.flipCardName = "Tok-Tok, Volcano Born";
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new AkkiLavarunnerAbility());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), "")));

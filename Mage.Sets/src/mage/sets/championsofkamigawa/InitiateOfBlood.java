@@ -70,6 +70,7 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.flipCard = true;
+        this.flipCardName = "Goka the Unjust";
 
         // {T}: Initiate of Blood deals 1 damage to target creature that was dealt damage this turn. 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
