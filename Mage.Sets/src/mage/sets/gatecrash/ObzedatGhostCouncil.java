@@ -42,6 +42,7 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
@@ -93,7 +94,7 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
 class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility<BeginningOfYourUpkeepdelayTriggeredAbility> {
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
-        this(new ReturnToBattlefieldUnderYourControlSourceEffect(), Constants.TargetController.YOU);
+        this(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), Constants.TargetController.YOU);
         this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
     }
 
