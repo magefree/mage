@@ -112,16 +112,18 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
-        for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
-            PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
-            if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {
-                Point me = new Point(data.locationOnScreen);
-                me.translate(-parentPoint.x, -parentPoint.y);
-                for (UUID attachmentId : playAreaPanel.getPlayer().getAttachments()) {
-                    if (attachmentId.equals(data.card.getId())) {
-                        Point player = pa.getLocationOnScreen();
-                        player.translate(-parentPoint.x, -parentPoint.y);
-                        ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
+        if (data.gameId != null) {
+            for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
+                if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {
+                    Point me = new Point(data.locationOnScreen);
+                    me.translate(-parentPoint.x, -parentPoint.y);
+                    for (UUID attachmentId : playAreaPanel.getPlayer().getAttachments()) {
+                        if (attachmentId.equals(data.card.getId())) {
+                            Point player = pa.getLocationOnScreen();
+                            player.translate(-parentPoint.x, -parentPoint.y);
+                            ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
+                        }
                     }
                 }
             }
