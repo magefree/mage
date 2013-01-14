@@ -497,7 +497,7 @@ public class GamePanel extends javax.swing.JPanel {
             if (!exiles.containsKey(exile.getId())) {
                 ExileZoneDialog newExile = new ExileZoneDialog();
                 exiles.put(exile.getId(), newExile);
-                MageFrame.getDesktop().add(newExile, JLayeredPane.POPUP_LAYER);
+                MageFrame.getDesktop().add(newExile, JLayeredPane.MODAL_LAYER);
                 newExile.show();
             }
             exiles.get(exile.getId()).loadCards(exile, bigCard, gameId);
