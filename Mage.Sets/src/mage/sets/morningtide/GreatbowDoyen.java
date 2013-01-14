@@ -52,7 +52,7 @@ import mage.players.Player;
  */
 public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Archer creatures you controll");
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Archer creatures you control");
 
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.YOU));
