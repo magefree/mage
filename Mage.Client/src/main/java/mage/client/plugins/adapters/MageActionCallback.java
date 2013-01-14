@@ -10,6 +10,7 @@ import mage.client.cards.BigCard;
 import mage.client.components.MageComponents;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.game.PlayAreaPanel;
+import mage.client.game.PlayerPanelExt;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.DefaultActionCallback;
 import mage.client.util.ImageHelper;
@@ -89,6 +90,7 @@ public class MageActionCallback implements ActionCallback {
         drawArrowsForTargets(data, parentPoint);
         drawArrowsForSource(data, parentPoint);
         drawArrowsForPairedCards(data, parentPoint);
+        drawArrowsForEnchantPlayers(data, parentPoint);
 
         showPopup(data, parentComponent, parentPoint);
     }
@@ -104,6 +106,23 @@ public class MageActionCallback implements ActionCallback {
                     Point target = permanent.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.green, ArrowBuilder.Type.PAIRED);
+                }
+            }
+        }
+    }
+
+    private void drawArrowsForEnchantPlayers(TransferData data, Point parentPoint) {
+        for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
+            PlayerPanelExt playAreaPanel = pa.getPlayerPanel();
+            if (playAreaPanel != null && playAreaPanel.getPlayer() != null && playAreaPanel.getPlayer().hasAttachments()) {
+                Point me = new Point(data.locationOnScreen);
+                me.translate(-parentPoint.x, -parentPoint.y);
+                for (UUID attachmentId : playAreaPanel.getPlayer().getAttachments()) {
+                    if (attachmentId.equals(data.card.getId())) {
+                        Point player = pa.getLocationOnScreen();
+                        player.translate(-parentPoint.x, -parentPoint.y);
+                        ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) player.getX() + 40, (int) player.getY() - 40, Color.magenta, ArrowBuilder.Type.ENCHANT_PLAYERS);
+                    }
                 }
             }
         }
@@ -291,6 +310,7 @@ public class MageActionCallback implements ActionCallback {
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.TARGET);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.PAIRED);
             ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.SOURCE);
+            ArrowBuilder.getBuilder().removeArrowsByType(gameId, ArrowBuilder.Type.ENCHANT_PLAYERS);
         }
     }
 

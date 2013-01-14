@@ -218,6 +218,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 session.sendPlayerUUID(gameId, playerId);
             }
         });
+        avatar.setOnHover(new Command() {
+            @Override
+            public void execute() {
+
+            }
+        });
         r = new Rectangle(18, 18);
         lifeLabel.setToolTipText("Life");
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");
@@ -561,6 +567,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed
         DckDeckImporter deckImporter = new DckDeckImporter();
         session.cheat(gameId, playerId, deckImporter.importDeck("cheat.dck"));
+    }
+
+    public PlayerView getPlayer() {
+        return player;
     }
 
     private HoverButton avatar;

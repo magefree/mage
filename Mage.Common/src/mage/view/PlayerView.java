@@ -61,6 +61,7 @@ public class PlayerView implements Serializable {
     private CardView topCard;
     private UserDataView userDataView;
     private List<EmblemView> emblemList = new ArrayList<EmblemView>();
+    private List<UUID> attachments = new ArrayList<UUID>();
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();
@@ -99,6 +100,10 @@ public class PlayerView implements Serializable {
                     }
                 }
             }
+        }
+
+        if (player.getAttachments() != null) {
+            attachments.addAll(player.getAttachments());
         }
     }
 
@@ -170,5 +175,13 @@ public class PlayerView implements Serializable {
 
     public List<EmblemView> getEmblemList() {
         return emblemList;
+    }
+
+    public List<UUID> getAttachments() {
+        return attachments;
+    }
+
+    public boolean hasAttachments() {
+        return attachments != null && attachments.size() > 0;
     }
 }

@@ -119,6 +119,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         return battlefieldPanel;
     }
 
+    public PlayerPanelExt getPlayerPanel() {
+        return playerPanel;
+    }
+
     private void initComponents() {
         setBorder(BorderFactory.createLineBorder(new Color(0,0,0,0)));
         playerPanel = new PlayerPanelExt();

@@ -31,10 +31,9 @@ package mage.client.util;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.view.CardView;
-import mage.view.CardsView;
-import mage.view.SimpleCardView;
-import mage.view.SimpleCardsView;
+import mage.view.*;
+
+import java.util.List;
 
 /**
  *
@@ -56,4 +55,16 @@ public class CardsViewUtil {
         return cards;
     }
 
+    public static CardsView convertEmblems(List<EmblemView> view) {
+        CardsView cards = new CardsView();
+
+        for (EmblemView emblem : view) {
+            CardView cardView = new CardView(emblem.getName());
+            cardView.overrideRules(emblem.getRules());
+            cardView.setExpansionSetCode(emblem.getExpansionSetCode());
+            cards.put(emblem.getId(), cardView);
+        }
+
+        return cards;
+    }
 }
