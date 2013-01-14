@@ -42,15 +42,15 @@ public class ShadowLabel extends JLabel {
         if (!invertColors) {
 	        g2D.setFont(f);
 	        g2D.setColor(new Color(0, 0, 0));
-	        g2D.drawString(this.text, 1, 11);
+	        g2D.drawString(this.text, 1, 14);
 	        g2D.setColor(new Color(255, 255, 255, 230));
-	        g2D.drawString(this.text, 0, 10);
+	        g2D.drawString(this.text, 0, 13);
         } else {
         	g2D.setFont(f);
 	        g2D.setColor(new Color(255, 255, 255, 230));
-	        g2D.drawString(this.text, 1, 11);
+	        g2D.drawString(this.text, 1, 14);
 	        g2D.setColor(new Color(0, 0, 0));
-	        g2D.drawString(this.text, 0, 10);
+	        g2D.drawString(this.text, 0, 13);
         }
         g2D.dispose();
 
