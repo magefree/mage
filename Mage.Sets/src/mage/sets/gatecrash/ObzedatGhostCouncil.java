@@ -72,7 +72,7 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
         //When Obzedat, Ghost Council enters the battlefield, target opponent loses 2 life and you gain 2 life.
         Ability ability = new EntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(2));
         ability.addEffect(new GainLifeEffect(2));
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
         //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
         Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ExileSourceEffect(), true);
@@ -93,7 +93,7 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
 class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility<BeginningOfYourUpkeepdelayTriggeredAbility> {
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
-        this(new ReturnToBattlefieldUnderYourControlSourceEffect(), Constants.TargetController.ANY);
+        this(new ReturnToBattlefieldUnderYourControlSourceEffect(), Constants.TargetController.YOU);
         this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
     }
 
@@ -120,6 +120,6 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
 
     @Override
     public String getRule() {
-        return "If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.";
+        return "If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste";
     }
 }

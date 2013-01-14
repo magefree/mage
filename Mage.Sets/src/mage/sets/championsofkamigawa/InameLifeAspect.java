@@ -60,6 +60,8 @@ public class InameLifeAspect extends CardImpl<InameLifeAspect> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // When Iname, Life Aspect dies, you may exile it. If you do, return any number of target Spirit cards from your graveyard to your hand.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect(), true);
         ability.addEffect(new ReturnToHandTargetEffect());
         ability.addTarget(new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, filter));
