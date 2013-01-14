@@ -42,6 +42,7 @@ import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -98,7 +99,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl<FiveAlarmFireTr
     public boolean checkTrigger(GameEvent event, Game game) {
             if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER || event.getType() == GameEvent.EventType.DAMAGED_PLAYER) {
                 Permanent permanent = game.getPermanent(event.getSourceId());
-                if(permanent != null &&  filter.match(permanent, sourceId, controllerId, game) && ((DamagedCreatureEvent) event).isCombatDamage()){
+                if(permanent != null &&  filter.match(permanent, sourceId, controllerId, game) && ((DamagedEvent) event).isCombatDamage()){
                     return true;
                 }
             }
