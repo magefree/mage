@@ -28,48 +28,52 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.BattalionAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.effects.common.WinGameEffect;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 
 /**
  *
- * @author LevelX2
+ * @author Plopman
  */
-public class FiremaneAvenger extends CardImpl<FiremaneAvenger> {
+public class Biovisionary extends CardImpl<Biovisionary> {
 
-    public FiremaneAvenger(UUID ownerId) {
-        super(ownerId, 163, "Firemane Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("if you control four or more creatures named Biovisionary");
+    static{
+        filter.add(new NamePredicate("Biovisionary"));
+    }
+           
+    public Biovisionary(UUID ownerId) {
+        super(ownerId, 146, "Biovisionary", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{G}{U}");
         this.expansionSetCode = "GTC";
-        this.subtype.add("Angel");
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
+        
+
+        this.color.setGreen(true);
+        this.color.setBlue(true);
+        
+        this.power = new MageInt(2);
         this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-
-        // Battalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
-        Ability ability = new BattalionAbility(new DamageTargetEffect(3));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
-        ability.addEffect(new GainLifeEffect(3));
-        this.addAbility(ability);
+        //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Constants.Zone.BATTLEFIELD, new WinGameEffect(), Constants.TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
     }
 
-    public FiremaneAvenger(final FiremaneAvenger card) {
+    public Biovisionary(final Biovisionary card) {
         super(card);
     }
 
     @Override
-    public FiremaneAvenger copy() {
-        return new FiremaneAvenger(this);
+    public Biovisionary copy() {
+        return new Biovisionary(this);
     }
 }
+

@@ -28,9 +28,6 @@
 
 package mage.cards;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageObject;
@@ -41,6 +38,10 @@ import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
 import mage.watchers.Watcher;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public interface Card extends MageObject {
 
@@ -61,6 +62,7 @@ public interface Card extends MageObject {
     void setFaceDown(boolean value);
     boolean isFaceDown();
     boolean isFlipCard();
+    String getFlipCardName();
 
     boolean canTransform();
     Card getSecondCardFace();

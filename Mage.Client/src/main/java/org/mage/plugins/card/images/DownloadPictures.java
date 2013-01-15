@@ -228,14 +228,16 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          * read all card names and urls
          */
         ArrayList<CardInfo> allCardsUrls = new ArrayList<CardInfo>();
+        HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
         try {
             offlineMode = true;
 
             for (Card card : allCards) {
-                if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
+                if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()
+                        && !ignoreUrls.contains(card.getExpansionSetCode())) {
                     String cardName = card.getName();
-                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(),card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
+                    CardInfo url = new CardInfo(cardName, card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
                     }
@@ -249,6 +251,15 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         // second side = true;
                         Card secondSide = card.getSecondCardFace();
                         url = new CardInfo(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), true);
+                        allCardsUrls.add(url);
+                    }
+                    if (card.isFlipCard()) {
+                        if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
+                            throw new IllegalStateException("Flipped card can't have empty name.");
+                        }
+                        url = new CardInfo(card.getFlipCardName(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
+                        url.setFlipCard(true);
+                        url.setFlippedSide(true);
                         allCardsUrls.add(url);
                     }
                 } else {
@@ -406,7 +417,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
                     } else {
                         url = cardImageSource.generateURL(card.getCollectorId(), card.getDownloadName(), card.getSet(),
-                                card.isTwoFacedCard(), card.isSecondSide(), card.isFlipCard());
+                                card.isTwoFacedCard(), card.isSecondSide(), card.isFlipCard(), card.isFlippedSide());
                     }
 
                     if (url != null) {
@@ -417,6 +428,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                             update(cardIndex + 1);
                         }
                     }
+
                 } catch (Exception ex) {
                     log.error(ex, ex);
                 }
@@ -554,7 +566,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         int count = DownloadPictures.this.cards.size();
 
         if (cardIndex < count) {
-        float mb = ((count - card) * cardImageSource.getAverageSize()) / 1024;
+            float mb = ((count - card) * cardImageSource.getAverageSize()) / 1024;
             bar.setString(String.format("%d of %d cards finished! Please wait! [%.1f Mb]",
                     card, count, mb));
         } else {

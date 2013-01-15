@@ -34,7 +34,10 @@
 
 package mage.client.dialog;
 
+import java.awt.Point;
 import javax.swing.SpinnerNumberModel;
+import mage.client.util.SettingsManager;
+import mage.client.util.gui.GuiDisplayUtil;
 
 /**
  *
@@ -56,6 +59,11 @@ public class PickNumberDialog extends MageDialog {
         this.btnOk.setVisible(true);
         this.btnCancel.setVisible(false);
         this.pack();
+
+        Point centered = SettingsManager.getInstance().getComponentPosition(getWidth(), getHeight());
+        this.setLocation(centered.x, centered.y);
+        GuiDisplayUtil.keepComponentInsideScreen(centered.x, centered.y, this);
+        
         this.setVisible(true);
     }
 

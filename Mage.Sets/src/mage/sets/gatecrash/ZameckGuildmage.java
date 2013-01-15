@@ -72,10 +72,12 @@ public class ZameckGuildmage extends CardImpl<ZameckGuildmage> {
 
 
         // {G}{U}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), ruleText),new ManaCostsImpl("{G}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), ruleText), new ManaCostsImpl("{G}{U}")));
 
         // {G}{U}, Remove a +1/+1 counter from a creature you control: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1),new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new ManaCostsImpl("{G}{U}"));
+        ability.addCost(new RemoveCounterCost(new TargetControlledCreaturePermanent(), CounterType.P1P1));
+        this.addAbility(ability);
     }
 
     public ZameckGuildmage(final ZameckGuildmage card) {

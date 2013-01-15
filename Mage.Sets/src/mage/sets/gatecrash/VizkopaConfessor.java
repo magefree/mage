@@ -107,6 +107,7 @@ class VizkopaConfessorEffect extends OneShotEffect<VizkopaConfessorEffect> {
             int payLife = controller.getAmount(0, controller.getLife(),"Pay how many life?", game);
             if (payLife > 0) {
                 controller.loseLife(payLife, game);
+                game.informPlayers(new StringBuilder("Vizkopa Confessor: ").append(controller.getName()).append(" pays ").append(payLife).append(" life").toString());
 
                 Cards cardsInHand = new CardsImpl(Constants.Zone.PICK);
                 cardsInHand.addAll(targetPlayer.getHand());

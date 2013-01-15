@@ -218,12 +218,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 session.sendPlayerUUID(gameId, playerId);
             }
         });
-        avatar.setOnHover(new Command() {
-            @Override
-            public void execute() {
-
-            }
-        });
         r = new Rectangle(18, 18);
         lifeLabel.setToolTipText("Life");
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");

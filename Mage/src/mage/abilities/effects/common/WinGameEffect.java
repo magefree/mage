@@ -25,51 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
 
-import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
+package mage.abilities.effects.common;
+
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.keyword.BattalionAbility;
-import mage.abilities.keyword.FlyingAbility;
-import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.abilities.effects.OneShotEffect;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author LevelX2
+ * @author plopman
  */
-public class FiremaneAvenger extends CardImpl<FiremaneAvenger> {
 
-    public FiremaneAvenger(UUID ownerId) {
-        super(ownerId, 163, "Firemane Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{W}");
-        this.expansionSetCode = "GTC";
-        this.subtype.add("Angel");
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
+public class WinGameEffect extends OneShotEffect<WinGameEffect> {
 
-        // Battalion - Whenever Firemane Avenger and at least two other creatures attack, Firemane Avenger deals 3 damage to target creature or player and you gain 3 life.
-        Ability ability = new BattalionAbility(new DamageTargetEffect(3));
-        ability.addTarget(new TargetCreatureOrPlayer(true));
-        ability.addEffect(new GainLifeEffect(3));
-        this.addAbility(ability);
+    public WinGameEffect() {
+        super(Outcome.Win);
+        this.staticText = "you win the game";
     }
 
-    public FiremaneAvenger(final FiremaneAvenger card) {
-        super(card);
+    public WinGameEffect(final WinGameEffect effect) {
+        super(effect);
     }
 
     @Override
-    public FiremaneAvenger copy() {
-        return new FiremaneAvenger(this);
+    public WinGameEffect copy() {
+        return new WinGameEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            player.won(game);
+            return true;
+        }
+        return false;
     }
 }

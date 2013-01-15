@@ -85,6 +85,8 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
             } else {
                 return "tap up to " + target.getMaxNumberOfTargets() + " target " + target.getTargetName() + "s";
             }
+        } else if (target.getMaxNumberOfTargets() == 0){
+            return "tap X target " + mode.getTargets().get(0).getTargetName();
         } else {
             return "tap target " + mode.getTargets().get(0).getTargetName();
         }

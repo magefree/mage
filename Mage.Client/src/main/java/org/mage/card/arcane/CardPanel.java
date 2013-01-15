@@ -315,7 +315,8 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         if (tappedAngle + flippedAngle > 0) {
             g2d = (Graphics2D) g2d.create();
             float edgeOffset = cardWidth / 2f;
-            g2d.rotate(tappedAngle + flippedAngle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
+            double angle = tappedAngle + (Math.abs(flippedAngle - FLIPPED_ANGLE) < 0.001 ? 0 : flippedAngle);
+            g2d.rotate(angle, cardXOffset + edgeOffset, cardYOffset + cardHeight - edgeOffset);
         }
         super.paint(g2d);
     }
