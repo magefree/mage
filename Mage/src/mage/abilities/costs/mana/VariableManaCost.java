@@ -116,4 +116,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
         return new VariableManaCost(this);
     }
 
+    public int getMultiplier() {
+       return multiplier;
+    }
 }

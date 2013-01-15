@@ -45,6 +45,7 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
@@ -184,6 +185,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
+        // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (card != null) {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof OptionalAdditionalSourceCosts) {
@@ -191,8 +193,44 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
             }
         }
+        // 20121001 - 601.2b
+        // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
+        // its mana cost; see rule 107.3), the player announces the value of that variable.
+        if (game.getPlayer(this.controllerId).isHuman()) {
+            // AI can't handle this yet. Uses old way of playXMana
+            VariableManaCost manaX = null;
+            for (ManaCost cost: manaCostsToPay) {
+                if (cost instanceof VariableManaCost && !cost.isPaid()) {
+                    manaX = (VariableManaCost) cost;
+                    break; // only one VariableManCost per spell (or is it possible to have more?)
+                }
+            }
+            if (manaX != null) {
+                int amount = game.getPlayer(this.controllerId).getAmount(0, Integer.MAX_VALUE, "Announce the value for " + manaX.getText(), game);
+                game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(amount).append(" for ").append(manaX.getText()).toString());
+                amount *= manaX.getMultiplier();
+                manaCostsToPay.add(new ManaCostsImpl(new StringBuilder("{").append(amount).append("}").toString()));
+                manaCostsToPay.setX(amount);
+                manaX.setPaid();
+            }
+        }
 
         //20121001 - 601.2c
+        // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
+        // each target the spell requires. A spell may require some targets only if an alternative or
+        // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
+        // otherwise, the spell is cast as though it did not require those targets. If the spell has a
+        // variable number of targets, the player announces how many targets he or she will choose before
+        // he or she announces those targets. The same target can't be chosen multiple times for any one
+        // instance of the word "target" on the spell. However, if the spell uses the word "target" in
+        // multiple places, the same object, player, or zone can be chosen once for each instance of the
+        // word "target" (as long as it fits the targeting criteria). If any effects say that an object
+        // or player must be chosen as a target, the player chooses targets so that he or she obeys the
+        // maximum possible number of such effects without violating any rules or effects that say that
+        // an object or player can't be chosen as a target. The chosen players, objects, and/or zones
+        // each become a target of that spell. (Any abilities that trigger when those players, objects,
+        // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
+        // the stack until the spell has finished being cast.)
         if (card != null) {
             card.adjustTargets(this, game);
         }
@@ -201,6 +239,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             return false;
         }
 
+        // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
         for (Cost cost : optionalCosts) {
               if (cost instanceof ManaCost) {
                 cost.clearPaid();
