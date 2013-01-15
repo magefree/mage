@@ -65,7 +65,6 @@ public class ArrowBuilder {
             arrowPanel.setVisible(true);
             arrowPanel.setOpaque(false);
             arrowPanel.setLayout(null);
-            arrowPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
             arrowPanel.setSize(currentWidth, currentHeight);
             arrowPanels.put(gameId, arrowPanel);
             getArrowsManagerPanel().add(arrowPanel);
