@@ -10,6 +10,7 @@
 		<playerType name="Computer - draftbot" jar="mage-player-ai-draft-bot.jar" className="mage.player.ai.ComputerDraftPlayer"/>
     </playerTypes>
     <gameTypes>
+        <gameType name="Commander Two Player Duel" jar="mage-game-commanderduel.jar" className="mage.game.CommanderDuelMatch" typeName="mage.game.CommanderDuelType"/>
         <gameType name="Two Player Duel" jar="mage-game-twoplayerduel.jar" className="mage.game.TwoPlayerMatch" typeName="mage.game.TwoPlayerDuelType"/>
         <gameType name="Free For All" jar="mage-game-freeforall.jar" className="mage.game.FreeForAllMatch" typeName="mage.game.FreeForAllType"/>
     </gameTypes>

@@ -19,6 +19,7 @@
             <includes>
                 <include>org.mage:mage-deck-constructed</include>
                 <include>org.mage:mage-deck-limited</include>
+                <include>org.mage:mage-game-commanderduel</include>
                 <include>org.mage:mage-game-freeforall</include>
                 <include>org.mage:mage-game-twoplayerduel</include>
                 <include>org.mage:mage-player-aiminimax</include>
@@ -35,6 +36,7 @@
                 <exclude>org.mage:mage-server</exclude>
                 <exclude>org.mage:mage-deck-constructed</exclude>
                 <exclude>org.mage:mage-deck-limited</exclude>
+                <exclude>org.mage:mage-game-commanderduel</exclude>
                 <exclude>org.mage:mage-game-freeforall</exclude>
                 <exclude>org.mage:mage-game-twoplayerduel</exclude>
                 <exclude>org.mage:mage-player-aiminimax</exclude>

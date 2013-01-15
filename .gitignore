@@ -13,6 +13,7 @@ Mage.Plugins/Mage.Rating.Plugin/target
 Mage.Server.Console/target/
 Mage.Server.Plugins/Mage.Deck.Constructed/target
 Mage.Server.Plugins/Mage.Deck.Limited/target
+Mage.Server.Plugins/Mage.Game.CommanderDuel/target
 Mage.Server.Plugins/Mage.Game.FreeForAll/target
 Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/target
 Mage.Server.Plugins/Mage.Player.AI/target

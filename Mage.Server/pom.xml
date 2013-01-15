@@ -65,6 +65,12 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-commanderduel</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-freeforall</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
