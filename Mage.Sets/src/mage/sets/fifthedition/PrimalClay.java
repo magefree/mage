@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -87,8 +88,9 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
     public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         PrimalClayChoice choice = (PrimalClayChoice) source.getChoices().get(0);
-        if (permanent == null)
+        if (permanent == null) {
             return false;
+        }
 
         switch (layer) {
             case TypeChangingEffects_4:
@@ -96,15 +98,17 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
                 permanent.getCardType().add(CardType.CREATURE);
                 break;
             case PTChangingEffects_7:
-                if (choice.getChoice().equals("a 3/3 artifact creature")) {
-                    permanent.getPower().setValue(3);
-                    permanent.getToughness().setValue(3);
-                } else if (choice.getChoice().equals("a 2/2 artifact creature with flying")) {
-                    permanent.getPower().setValue(2);
-                    permanent.getToughness().setValue(2);
-                } else if (choice.getChoice().equals("a 1/6 Wall artifact creature with defender")) {
-                    permanent.getPower().setValue(1);
-                    permanent.getToughness().setValue(6);
+                if (sublayer.equals(SubLayer.SetPT_7b)) {
+                    if (choice.getChoice().equals("a 3/3 artifact creature")) {
+                        permanent.getPower().setValue(3);
+                        permanent.getToughness().setValue(3);
+                    } else if (choice.getChoice().equals("a 2/2 artifact creature with flying")) {
+                        permanent.getPower().setValue(2);
+                        permanent.getToughness().setValue(2);
+                    } else if (choice.getChoice().equals("a 1/6 Wall artifact creature with defender")) {
+                        permanent.getPower().setValue(1);
+                        permanent.getToughness().setValue(6);
+                    }
                 }
                 break;
             case AbilityAddingRemovingEffects_6:
