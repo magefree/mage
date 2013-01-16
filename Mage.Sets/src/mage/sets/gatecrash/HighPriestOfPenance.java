@@ -96,14 +96,13 @@ class HighPriestOfPenanceTriggeredAbility extends TriggeredAbilityImpl<HighPries
             if (event.getTargetId().equals(this.sourceId)) {
                 return true;
             }
-
         }
         return false;
     }
 
     @Override
     public String getRule() {
-        return "Whenever {this} of Penance is dealt damage, " + super.getRule();
+        return "Whenever {this} is dealt damage, " + super.getRule();
     }
 
 }
