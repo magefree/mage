@@ -93,10 +93,6 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
         }
 
         switch (layer) {
-            case TypeChangingEffects_4:
-                permanent.getCardType().add(CardType.ARTIFACT);
-                permanent.getCardType().add(CardType.CREATURE);
-                break;
             case PTChangingEffects_7:
                 if (sublayer.equals(SubLayer.SetPT_7b)) {
                     if (choice.getChoice().equals("a 3/3 artifact creature")) {
