@@ -27,8 +27,9 @@
  */
 package mage.sets.magic2010;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +40,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
-import java.util.UUID;
+
 
 /**
  * @author nantuko
@@ -78,7 +79,7 @@ public class ConsumeSpirit extends CardImpl<ConsumeSpirit> {
 class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 
     public ConsumeSpiritEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Consume Spirit deals X damage to target creature or player and you gain X life. Spend only black mana on X";
     }
 
@@ -88,20 +89,27 @@ class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = source.getManaCostsToPay().getX();
-        if (damage > 0) {
+        int amount = source.getManaCostsToPay().getX();
+        if (amount > 0) {
             Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
             if (permanent != null) {
-                permanent.damage(damage, source.getSourceId(), game, true, false);
+                permanent.damage(amount, source.getSourceId(), game, true, false);
             } else {
                 Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
                 if (player != null) {
-                    player.damage(damage, source.getSourceId(), game, false, true);
+                    player.damage(amount, source.getSourceId(), game, false, true);
+                } else {
+                    return false;
                 }
             }
-            return true;
+            Player controller = game.getPlayer(source.getSourceId());
+            if (controller != null) {
+                controller.gainLife(amount, game);
+            } else {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     @Override
