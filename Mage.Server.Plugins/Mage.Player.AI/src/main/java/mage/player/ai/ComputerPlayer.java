@@ -935,10 +935,77 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         log.debug("choose 3");
         //TODO: improve this
-        choice.setChoice(choice.getChoices().iterator().next());
+        if (choice.getMessage().equals("Choose creature type")) {
+            chooseCreatureType(outcome, choice, game);
+        }
+        if (!choice.isChosen()) {
+            Iterator iterator = choice.getChoices().iterator();
+            while (iterator.hasNext()) {
+                String next = (String) iterator.next();
+                if (!next.isEmpty()) {
+                    choice.setChoice(next);
+                    break;
+                }
+            }
+        }
         return true;
     }
 
+    protected boolean chooseCreatureType(Outcome outcome, Choice choice, Game game) {
+        if (outcome.equals(Outcome.Detriment)) {
+            // choose a creature type of opponent on battlefield or graveyard
+            for (Permanent permanent :game.getBattlefield().getActivePermanents(this.getId(), game)) {
+                if(game.getOpponents(this.getId()).contains(permanent.getControllerId())
+                        && permanent.getCardType().contains(CardType.CREATURE)
+                        && permanent.getSubtype().size() > 0) {
+                    if (choice.getChoices().contains(permanent.getSubtype().get(0))) {
+                        choice.setChoice(permanent.getSubtype().get(0));
+                        break;
+                    }
+                }
+            }
+            // or in opponent graveyard
+            if (!choice.isChosen()) {
+                for (UUID opponentId :game.getOpponents(this.getId())) {
+                    Player opponent = game.getPlayer(opponentId);
+                    for (Card card : opponent.getGraveyard().getCards(game)) {
+                        if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
+                            if (choice.getChoices().contains(card.getSubtype().get(0))) {
+                                choice.setChoice(card.getSubtype().get(0));
+                                break;
+                            }
+                        }
+                    }
+                    if (choice.isChosen()) {
+                        break;
+                    }
+                }
+            }
+        } else {
+            // choose a creature type of hand or library
+            for (UUID cardId :this.getHand()) {
+                Card card = game.getCard(cardId);
+                if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
+                    if (choice.getChoices().contains(card.getSubtype().get(0))) {
+                        choice.setChoice(card.getSubtype().get(0));
+                        break;
+                    }
+                }
+            }
+            if (!choice.isChosen()) {
+                for (UUID cardId : this.getLibrary().getCardList()) {
+                    Card card = game.getCard(cardId);
+                    if (card != null && card.getCardType().contains(CardType.CREATURE) && card.getSubtype().size() > 0) {
+                        if (choice.getChoices().contains(card.getSubtype().get(0))) {
+                            choice.setChoice(card.getSubtype().get(0));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return choice.isChosen();
+    }
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         log.debug("chooseTarget");

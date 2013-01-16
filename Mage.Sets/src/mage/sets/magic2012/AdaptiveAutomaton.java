@@ -96,6 +96,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             Choice typeChoice = new ChoiceImpl(true);
+            typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
             while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
