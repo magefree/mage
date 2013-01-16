@@ -72,6 +72,11 @@ public class MageInt implements Serializable, Copyable<MageInt> {
         return baseValue;
     }
 
+    public void initValue(int value) {
+        this.baseValue = value;
+        this.cardValue = Integer.toString(value);
+    }
+
     public void setValue(int value) {
         this.baseValue = value;
     }
