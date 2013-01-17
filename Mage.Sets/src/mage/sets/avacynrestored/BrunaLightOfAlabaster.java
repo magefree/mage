@@ -48,8 +48,9 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
-
 import java.util.UUID;
+import mage.filter.predicate.other.CardCanTargetPermanentId;
+import mage.filter.predicate.other.PermanentCanTargetPermanentId;
 
 /**
  * @author noxx
@@ -122,6 +123,7 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
         }
 
         while (player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from the battlefield?", game)) {
+            filterAura.add(new PermanentCanTargetPermanentId(permanent.getId()));
             Target targetAura = new TargetPermanent(filterAura);
             if (player.choose(Constants.Outcome.Benefit, targetAura, source.getSourceId(), game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
@@ -137,11 +139,12 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
         int count = player.getHand().count(filterAuraCard, game);
         while (count > 0 && player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from your hand?", game)) {
+            filterAuraCard.add(new CardCanTargetPermanentId(permanent.getId()));
             TargetCard targetAura = new TargetCard(Constants.Zone.PICK, filterAuraCard);
             if (player.choose(Constants.Outcome.Benefit, player.getHand(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:"+aura.getId(), permanent);
+                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
                     aura.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), player.getId());
                     permanent.addAttachment(aura.getId(), game);
                 }
@@ -151,11 +154,12 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
         count = player.getGraveyard().count(filterAuraCard, game);
         while (count > 0 && player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from your graveyard?", game)) {
+            filterAuraCard.add(new CardCanTargetPermanentId(permanent.getId()));
             TargetCard targetAura = new TargetCard(Constants.Zone.PICK, filterAuraCard);
             if (player.choose(Constants.Outcome.Benefit, player.getGraveyard(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
                 if (aura != null) {
-                    game.getState().setValue("attachTo:"+aura.getId(), permanent);
+                    game.getState().setValue("attachTo:" + aura.getId(), permanent);
                     aura.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), player.getId());
                     permanent.addAttachment(aura.getId(), game);
                 }
