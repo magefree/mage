@@ -27,25 +27,29 @@
  */
 package mage.sets.timespiral;
 
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.costs.CostImpl;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.UUID;
 
 /**
  * @author noxx
  */
 public class SerraAvenger extends CardImpl<SerraAvenger> {
-
-    private static final String rule = "You can't cast Serra Avenger during your first, second, or third turns of the game";
 
     public SerraAvenger(UUID ownerId) {
         super(ownerId, 40, "Serra Avenger", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}");
@@ -56,15 +60,15 @@ public class SerraAvenger extends CardImpl<SerraAvenger> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
+        // You can't cast Serra Avenger during your first, second, or third turns of the game.
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new CantCastSerraAvengerEffect()));
+
         // Flying
         this.addAbility(FlyingAbility.getInstance());
 
         // Vigilance
         this.addAbility(VigilanceAbility.getInstance());
 
-        // You can't cast Serra Avenger during your first, second, or third turns of the game.
-        this.getSpellAbility().addCost(new SerraAvengerCost());
-        this.addInfo("cost", rule);
     }
 
     public SerraAvenger(final SerraAvenger card) {
@@ -77,42 +81,44 @@ public class SerraAvenger extends CardImpl<SerraAvenger> {
     }
 }
 
-class SerraAvengerCost extends CostImpl<SerraAvengerCost> {
+class CantCastSerraAvengerEffect extends ReplacementEffectImpl<CantCastSerraAvengerEffect> {
 
-    public SerraAvengerCost() {
-        text = "You can't cast Serra Avenger during your first, second, or third turns of the game";
+    public CantCastSerraAvengerEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "You can't cast Serra Avenger during your first, second, or third turns of the game";
     }
 
-    public SerraAvengerCost(final SerraAvengerCost cost) {
-        super(cost);
-    }
-
-    @Override
-    public SerraAvengerCost copy() {
-        return new SerraAvengerCost(this);
+    public CantCastSerraAvengerEffect(final CantCastSerraAvengerEffect effect) {
+        super(effect);
     }
 
     @Override
-    public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
-        if (game.getActivePlayerId().equals(controllerId)) {
-            Player controller = game.getPlayer(controllerId);
-            if (controller.getTurns() > 3) {
-                return true;
-            } else {
-                game.informPlayer(controller, "You can't cast Serra Avenger (your turns passed: " + controller.getTurns() + ")");
-                return false;
-            }
-        }
-
-        // Always return true for not controller's turn:
-        // 9/25/2006: You can cast Serra Avenger during another player's first, second, or third turns of the game
-        //   if some other effect (such as Vedalken Orrery) enables that.
+    public boolean apply(Game game, Ability source) {
         return true;
     }
 
     @Override
-    public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        this.paid = true;
-        return paid;
+    public CantCastSerraAvengerEffect copy() {
+        return new CantCastSerraAvengerEffect(this);
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            game.informPlayer(controller, "You can't cast Serra Avenger during your first, second, or third turns of the game");
+        }
+       return true;
+    }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == EventType.CAST_SPELL && event.getSourceId().equals(source.getSourceId())) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && controller.getTurns() <= 3 && game.getActivePlayerId().equals(source.getControllerId())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
