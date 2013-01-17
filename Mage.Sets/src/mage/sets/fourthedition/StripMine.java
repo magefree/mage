@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -53,7 +54,8 @@ public class StripMine extends CardImpl<StripMine> {
         this.addAbility(new ColorlessManaAbility());
 
         // {tap}, Sacrifice Strip Mine: Destroy target land.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
