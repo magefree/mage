@@ -37,7 +37,7 @@ import mage.game.match.MatchType;
 public class CommanderDuelType extends MatchType<CommanderDuelType> {
 
     public CommanderDuelType() {
-        this.name = "Commander Duel";
+        this.name = "Commander Two Player Duel";
         this.maxPlayers = 2;
         this.minPlayers = 2;
         this.numTeams = 0;
