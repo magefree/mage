@@ -40,12 +40,20 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredAbilityImpl<BlocksOrBecomesBlockedByCreatureTriggeredAbility> {
 
+    protected String rule;
+
     public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional) {
+        this(effect, optional, null);
+    }
+
+    public BlocksOrBecomesBlockedByCreatureTriggeredAbility(Effect effect, boolean optional, String rule) {
         super(Zone.BATTLEFIELD, effect, optional);
+        this.rule = rule;
     }
 
     public BlocksOrBecomesBlockedByCreatureTriggeredAbility(final BlocksOrBecomesBlockedByCreatureTriggeredAbility ability) {
         super(ability);
+        this.rule = ability.rule;
     }
 
     @Override
@@ -69,6 +77,9 @@ public class BlocksOrBecomesBlockedByCreatureTriggeredAbility extends TriggeredA
 
     @Override
     public String getRule() {
+        if (rule != null) {
+            return rule;
+        }
         return "Whenever {this} blocks or becomes blocked by a creature, " + super.getRule();
     }
 
