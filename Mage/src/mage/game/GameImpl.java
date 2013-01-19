@@ -28,7 +28,15 @@
 
 package mage.game;
 
-import mage.Constants.*;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
+import mage.Constants.CardType;
+import mage.Constants.MultiplayerAttackOption;
+import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
+import mage.Constants.RangeOfInfluence;
+import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -42,6 +50,7 @@ import mage.abilities.effects.common.CopyEffect;
 import mage.abilities.effects.common.continious.SourceEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.TransformAbility;
+import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.actions.impl.MageAction;
 import mage.cards.Card;
@@ -81,10 +90,6 @@ import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import mage.abilities.mana.DelayedTriggeredManaAbility;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
@@ -249,15 +254,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Player getPlayer(UUID playerId) {
-        if (playerId == null)
+        if (playerId == null) {
             return null;
+        }
         return state.getPlayer(playerId);
     }
 
     @Override
     public MageObject getObject(UUID objectId) {
-        if (objectId == null)
+        if (objectId == null) {
             return null;
+        }
         MageObject object;
         if (state.getBattlefield().containsPermanent(objectId)) {
             object = state.getBattlefield().getPermanent(objectId);
@@ -288,8 +295,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public MageObject getEmblem(UUID objectId) {
-        if (objectId == null)
+        if (objectId == null) {
             return null;
+        }
         for (CommandObject commandObject : state.getCommand()) {
             if (commandObject.getId().equals(objectId)) {
                 return commandObject;
@@ -322,8 +330,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Card getCard(UUID cardId) {
-        if (cardId == null)
+        if (cardId == null) {
             return null;
+        }
         return gameCards.get(cardId);
     }
 
@@ -358,21 +367,25 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void saveState() {
-        if (!simulation && gameStates != null)
+        if (!simulation && gameStates != null) {
             gameStates.save(state);
+        }
     }
 
     @Override
     public boolean isGameOver() {
-        if (state.isGameOver())
+        if (state.isGameOver()) {
             return true;
+        }
         int remainingPlayers = 0;
         int numLosers = 0;
         for (Player player: state.getPlayers().values()) {
-            if (!player.hasLeft())
+            if (!player.hasLeft()) {
                 remainingPlayers++;
-            if (player.hasLost())
+            }
+            if (player.hasLost()) {
                 numLosers++;
+            }
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
             state.endGame();
@@ -384,8 +397,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public String getWinner() {
-        if (winnerId == null)
+        if (winnerId == null) {
             return "Game is a draw";
+        }
         return "Player " + state.getPlayer(winnerId).getName() + " is the winner";
     }
 
@@ -398,8 +412,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public int bookmarkState() {
         if (!simulation) {
             saveState();
-            if (logger.isDebugEnabled())
+            if (logger.isDebugEnabled()) {
                 logger.debug("Bookmarking state: " + gameStates.getSize());
+            }
             savedStates.push(gameStates.getSize() - 1);
             return savedStates.size();
         }
@@ -413,8 +428,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 int stateNum = savedStates.get(bookmark - 1);
                 removeBookmark(bookmark);
                 GameState restore = gameStates.rollback(stateNum);
-                if (restore != null)
+                if (restore != null) {
                     state.restore(restore);
+                }
             }
         }
     }
@@ -423,8 +439,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void removeBookmark(int bookmark) {
         if (!simulation) {
             if (bookmark != 0) {
-                while (savedStates.size() > bookmark)
+                while (savedStates.size() > bookmark) {
                     savedStates.pop();
+                }
             }
         }
     }
@@ -454,7 +471,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 //            if (simulation)
 //                logger.info("Turn " + Integer.toString(state.getTurnNum()));
             fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
-            if (checkStopOnTurnOption()) return;
+            if (checkStopOnTurnOption()) {
+                return;
+            }
             state.getTurn().resumePlay(this, wasPaused);
             if (!isPaused() && !isGameOver()) {
                 endOfTurn();
@@ -486,8 +505,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 player = players.getNext(this);
             }
         }
-        if (isGameOver())
+        if (isGameOver()) {
             winnerId = findWinnersAndLosers();
+        }
     }
 
     private boolean playTurn(Player player) {
@@ -715,17 +735,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                                 }
                                 //resetLKI();
                                 applyEffects();
-                                if (isPaused() || isGameOver()) return;
+                                if (isPaused() || isGameOver()) {
+                                    return;
+                                }
                                 // resetPassed should be called if player performs any action
-                                if (player.priority(this))
+                                if (player.priority(this)) {
                                     applyEffects();
-                                if (isPaused()) return;
+                                }
+                                if (isPaused()) {
+                                    return;
+                                }
                             }
                             resuming = false;
                         }
                         resetShortLivingLKI();
                         resuming = false;
-                        if (isPaused() || isGameOver()) return;
+                        if (isPaused() || isGameOver()) {
+                            return;
+                        }
                         if (allPassed()) {
                             if (!state.getStack().isEmpty()) {
                                 //20091005 - 115.4
@@ -772,15 +799,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             top = state.getStack().peek();
             top.resolve(this);
         } finally {
-            if (top != null)
+            if (top != null) {
                 state.getStack().remove(top);
+            }
         }
     }
 
     protected boolean allPassed() {
         for (Player player: state.getPlayers().values()) {
-            if (!player.isPassed() && !player.hasLost() && !player.hasLeft())
+            if (!player.isPassed() && !player.hasLost() && !player.hasLeft()) {
                 return false;
+            }
         }
         return true;
     }
@@ -832,7 +861,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+    public Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
         Permanent permanent = copyFromPermanent.copy();
 
         //getState().addCard(permanent);
@@ -870,6 +899,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
 
         state.addEffect(newEffect, newAbility);
+        return permanent;
     }
 
     @Override
@@ -926,8 +956,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             Player player = getPlayer(playerId);
             while (true) {
                 List<TriggeredAbility> abilities = state.getTriggered(player.getId());
-                if (abilities.isEmpty())
+                if (abilities.isEmpty()) {
                     break;
+                }
                 if (abilities.size() == 1) {
                     state.removeTriggeredAbility(abilities.get(0));
                     played |= player.triggerAbility(abilities.get(0), this);
@@ -1029,14 +1060,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     else if (target instanceof TargetPlayer) {
                         Player attachedTo = getPlayer(perm.getAttachedTo());
                         if (attachedTo == null) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                                 somethingHappened = true;
+                            }
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
                             if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
-                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false))
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
                                     somethingHappened = true;
+                                }
                             }
                         }
                     }
@@ -1138,103 +1171,137 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public synchronized void firePriorityEvent(UUID playerId) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         String message = this.state.getTurn().getStepType().toString();
-        if (this.canPlaySorcery(playerId))
+        if (this.canPlaySorcery(playerId)) {
             message += " - play spells and abilities.";
-        else
+        }
+        else {
             message +=  " - play instants and activated abilities.";
+        }
 
         playerQueryEventSource.select(playerId, message);
     }
 
     @Override
     public synchronized void fireSelectEvent(UUID playerId, String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.select(playerId, message);
     }
 
     @Override
     public void firePlayManaEvent(UUID playerId, String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.playMana(playerId, message);
     }
 
     @Override
     public void firePlayXManaEvent(UUID playerId, String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.playXMana(playerId, message);
     }
 
     @Override
     public void fireAskPlayerEvent(UUID playerId, String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.ask(playerId, message);
     }
 
     @Override
     public void fireGetChoiceEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.chooseAbility(playerId, message, choices);
     }
 
     @Override
     public void fireGetModeEvent(UUID playerId, String message, Map<UUID, String> modes) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.chooseMode(playerId, message, modes);
     }
 
     @Override
     public void fireSelectTargetEvent(UUID playerId, String message, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.target(playerId, message, targets, required, options);
     }
 
     @Override
     public void fireSelectTargetEvent(UUID playerId, String message, Cards cards, boolean required, Map<String, Serializable> options) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.target(playerId, message, cards, required, options);
     }
 
     @Override
     public void fireSelectTargetEvent(UUID playerId, String message, List<TriggeredAbility> abilities) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.target(playerId, message, abilities);
     }
 
     @Override
     public void fireSelectTargetEvent(UUID playerId, String message, List<Permanent> perms, boolean required) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.target(playerId, message, perms, required);
     }
 
     @Override
     public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.target(playerId, message, cards);
     }
 
     @Override
     public void fireGetAmountEvent(UUID playerId, String message, int min, int max) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.amount(playerId, message, min, max);
     }
 
     @Override
     public void fireChooseEvent(UUID playerId, Choice choice) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.choose(playerId, choice.getMessage(), choice.getChoices());
     }
 
     @Override
     public void fireChoosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.choosePile(playerId, message, pile1, pile2);
     }
 
     @Override
     public void informPlayers(String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
 //        state.addMessage(message);
         fireInformEvent(message);
     }
@@ -1246,13 +1313,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void fireInformEvent(String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         tableEventSource.fireTableEvent(EventType.INFO, message, this);
     }
 
     @Override
     public void fireUpdatePlayersEvent() {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
     }
 
@@ -1331,8 +1402,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (perm.getOwnerId().equals(playerId)) {
                 if (perm.getAttachedTo() != null) {
                     Permanent attachedTo = getPermanent(perm.getAttachedTo());
-                    if (attachedTo != null)
+                    if (attachedTo != null) {
                         attachedTo.removeAttachment(perm.getId(), this);
+                    }
                 }
                 it.remove();
             }
@@ -1544,8 +1616,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 getBattlefield().addPermanent(permanent);
                 permanent.entersBattlefield(permanent.getId(), this);
                 ((PermanentImpl)permanent).removeSummoningSickness();
-                if (card.isTapped())
+                if (card.isTapped()) {
                     permanent.setTapped(true);
+                }
             }
             applyEffects();
         }
@@ -1622,7 +1695,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void informPlayer(Player player, String message) {
-        if (simulation) return;
+        if (simulation) {
+            return;
+        }
         playerQueryEventSource.informPlayer(player.getId(), message);
     }
 

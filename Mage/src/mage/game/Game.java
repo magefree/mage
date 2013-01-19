@@ -177,7 +177,7 @@ public interface Game extends MageItem, Serializable {
      * @param source
      * @param applier
      */
-    void copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+    Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
     
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
