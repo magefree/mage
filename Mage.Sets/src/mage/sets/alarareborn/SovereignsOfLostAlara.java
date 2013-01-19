@@ -41,14 +41,14 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.filter.predicate.other.CardCanTargetPermanentId;
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SovereignsOfLostAlara extends CardImpl<SovereignsOfLostAlara> {
 
     public SovereignsOfLostAlara(UUID ownerId) {
-        super(ownerId, 12, "Sovereigns of Lost Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");
+        super(ownerId, 12, "Sovereigns of Lost Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Spirit");
 
@@ -103,9 +103,7 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
         if (game.getActivePlayerId().equals(this.controllerId)) {
             if (event.getType() == EventType.DECLARED_ATTACKERS) {
                 if (game.getCombat().attacksAlone()) {
-                    TargetCreaturePermanent target = new TargetCreaturePermanent();
-                    this.addTarget(target);
-                    this.getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
+                    this.getEffects().get(0).setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
                     return true;
                 }
             }
@@ -133,19 +131,21 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect<SovereignsOfLostAlaraEff
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Permanent attackingCreature = game.getPermanent(source.getFirstTarget());
+        Permanent attackingCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (you != null && attackingCreature != null) {
-            FilterCard filter = new FilterCard("aura that could enchant that creature");
+            FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
             filter.add(new SubtypePredicate("Aura"));
-            filter.add(new CardCanTargetPermanentId(attackingCreature.getId()));
-            if (you.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from your library?", game)) {
+            filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
+            if (you.chooseUse(Constants.Outcome.Benefit, "Do you want to search your library?", game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 target.setNotTarget(true);
                 if (you.searchLibrary(target, game)) {
-                    Card aura = game.getCard(target.getFirstTarget());
-                    game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
-                    aura.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), you.getId());
-                    return attackingCreature.addAttachment(aura.getId(), game);
+                    if (target.getFirstTarget() != null) {
+                        Card aura = game.getCard(target.getFirstTarget());
+                        game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
+                        aura.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), you.getId());
+                        return attackingCreature.addAttachment(aura.getId(), game);
+                    }
                 }
             }
             you.shuffleLibrary(game);
