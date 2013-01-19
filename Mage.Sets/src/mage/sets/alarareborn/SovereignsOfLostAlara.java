@@ -57,7 +57,7 @@ import mage.target.targetpointer.FixedTarget;
 public class SovereignsOfLostAlara extends CardImpl<SovereignsOfLostAlara> {
 
     public SovereignsOfLostAlara(UUID ownerId) {
-        super(ownerId, 12, "Sovereigns of Lost Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{U}");
+        super(ownerId, 12, "Sovereigns of Lost Alara", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{U}");
         this.expansionSetCode = "ARB";
         this.subtype.add("Spirit");
 
