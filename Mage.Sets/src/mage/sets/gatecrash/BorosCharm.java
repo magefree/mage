@@ -28,17 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import javax.xml.datatype.Duration;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.IndestructibleAllEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
@@ -54,8 +51,8 @@ public class BorosCharm extends CardImpl<BorosCharm> {
         super(ownerId, 148, "Boros Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{R}{W}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
-        this.color.setGreen(true);
+        this.color.setRed(true);
+        this.color.setWhite(true);
 
         //Choose one - Boros Charm deals 4 damage to target player
         this.getSpellAbility().addEffect(new DamageTargetEffect(4));

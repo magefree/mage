@@ -7,7 +7,7 @@ import mage.counters.Counter;
  *
  * @author Loki
  */
-public class KiCounter extends Counter<LevelCounter> {
+public class KiCounter extends Counter<KiCounter> {
 
     public KiCounter() {
         super("Ki");
