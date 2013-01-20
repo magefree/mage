@@ -82,7 +82,7 @@ class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
 
     public ThoughtseizeEffect() {
         super(Constants.Outcome.Discard);
-        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card.";
+        staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
     }
 
     public ThoughtseizeEffect(final ThoughtseizeEffect effect) {

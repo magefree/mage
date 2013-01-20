@@ -83,7 +83,7 @@ class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl<Gis
     public GiselaBladeOfGoldnightDoubleDamageEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
         staticText = "If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead."
-            + "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.";
+            + "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up";
     }
 
     public GiselaBladeOfGoldnightDoubleDamageEffect(final GiselaBladeOfGoldnightDoubleDamageEffect effect) {
