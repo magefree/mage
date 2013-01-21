@@ -87,6 +87,7 @@ public class VendilionClique extends CardImpl<VendilionClique> {
 class VendilionCliqueEffect extends OneShotEffect<VendilionCliqueEffect> {
     VendilionCliqueEffect() {
         super(Constants.Outcome.Discard);
+        staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card";
     }
 
     VendilionCliqueEffect(final VendilionCliqueEffect effect) {
