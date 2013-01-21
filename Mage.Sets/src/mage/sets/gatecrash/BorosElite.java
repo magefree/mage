@@ -32,14 +32,9 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *

@@ -39,7 +39,7 @@ import mage.filter.FilterPermanent;
 public class EntersBattlefieldAllTriggeredAbility extends ZoneChangeAllTriggeredAbility<EntersBattlefieldAllTriggeredAbility> {
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        super(zone, Zone.BATTLEFIELD, effect, filter, "Whenever a " + filter.getMessage() + " enters the battlefield, ", optional);
+        super(zone, Zone.BATTLEFIELD, effect, filter, "Whenever " + filter.getMessage() + " enters the battlefield, ", optional);
     }
 
     public EntersBattlefieldAllTriggeredAbility(EntersBattlefieldAllTriggeredAbility ability) {

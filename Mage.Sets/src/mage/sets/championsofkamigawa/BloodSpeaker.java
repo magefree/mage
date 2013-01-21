@@ -52,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BloodSpeaker extends CardImpl<BloodSpeaker> {
 
-    private static final FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("Demon under your control");
+    private static final FilterControlledCreaturePermanent filter = new  FilterControlledCreaturePermanent("a Demon under your control");
     private static final FilterCard filterCard = new  FilterCard("Demon card");
     static {
         filter.add(new SubtypePredicate("Demon"));
