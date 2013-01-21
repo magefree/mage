@@ -30,6 +30,7 @@ package mage.remote;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.InvalidDeckException;
 import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
@@ -404,6 +405,8 @@ public class SessionImpl implements Session {
         try {
             if (isConnected())
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
+        } catch (InvalidDeckException iex) {
+            handleInvalidDeckException(iex);
         } catch (GameException ex) {
             handleGameException(ex);
         } catch (MageException ex) {
@@ -1057,6 +1060,12 @@ public class SessionImpl implements Session {
 
     private void handleMageException(MageException ex) {
         logger.fatal("Server error", ex);
+        client.showError(ex.getMessage());
+    }
+
+    private void handleInvalidDeckException(InvalidDeckException iex) {
+        logger.warn(iex.getMessage() + "\n" + iex.getInvalid());
+        client.showError(iex.getMessage() + "\n" + iex.getInvalid());
     }
 
     private void handleGameException(GameException ex) {

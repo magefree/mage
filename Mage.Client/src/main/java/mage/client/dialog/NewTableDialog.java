@@ -398,7 +398,8 @@ public class NewTableDialog extends MageDialog {
 
     private void handleError(Exception ex) {
         logger.fatal("Error loading deck", ex);
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+        //JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error loading deck.", "Error", JOptionPane.ERROR_MESSAGE);
+        MageFrame.getInstance().showErrorDialog("Error loading deck.", ex.getMessage());
     }
 
     public void showDialog(UUID roomId) {
