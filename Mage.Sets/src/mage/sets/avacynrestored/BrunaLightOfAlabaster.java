@@ -57,7 +57,7 @@ import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
 public class BrunaLightOfAlabaster extends CardImpl<BrunaLightOfAlabaster> {
 
     public BrunaLightOfAlabaster(UUID ownerId) {
-        super(ownerId, 208, "Bruna, Light of Alabaster", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{W}{U}");
+        super(ownerId, 208, "Bruna, Light of Alabaster", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
         this.expansionSetCode = "AVR";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
