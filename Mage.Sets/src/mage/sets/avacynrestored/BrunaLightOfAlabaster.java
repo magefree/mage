@@ -49,16 +49,15 @@ import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.TargetPermanent;
 import java.util.UUID;
-import mage.filter.predicate.other.CardCanTargetPermanentId;
-import mage.filter.predicate.other.PermanentCanTargetPermanentId;
-
+import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
+import mage.filter.predicate.other.AuraPermanentCanAttachToPermanentId;
 /**
  * @author noxx
  */
 public class BrunaLightOfAlabaster extends CardImpl<BrunaLightOfAlabaster> {
 
     public BrunaLightOfAlabaster(UUID ownerId) {
-        super(ownerId, 208, "Bruna, Light of Alabaster", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{3}{W}{W}{U}");
+        super(ownerId, 208, "Bruna, Light of Alabaster", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{W}{W}{U}");
         this.expansionSetCode = "AVR";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
@@ -87,16 +86,6 @@ public class BrunaLightOfAlabaster extends CardImpl<BrunaLightOfAlabaster> {
 
 class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEffect> {
 
-    private static final FilterPermanent filterAura = new FilterPermanent("Aura");
-    private static final FilterCard filterAuraCard = new FilterCard("Aura card");
-
-    static {
-        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAura.add(new SubtypePredicate("Aura"));
-        filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        filterAuraCard.add(new SubtypePredicate("Aura"));
-    }
-
     public BrunaLightOfAlabasterEffect() {
         super(Constants.Outcome.Benefit);
         this.staticText = "attach to it any number of Auras on the battlefield and you may put onto the battlefield attached to it any number of Aura cards that could enchant it from your graveyard and/or hand";
@@ -113,7 +102,19 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
     @Override
     public boolean apply(Game game, Ability source) {
+        UUID bruna = source.getSourceId();
         Player player = game.getPlayer(source.getControllerId());
+        
+        FilterPermanent filterAura = new FilterPermanent("Aura");
+        FilterCard filterAuraCard = new FilterCard("Aura card");
+
+        filterAura.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAura.add(new SubtypePredicate("Aura"));
+        filterAura.add(new AuraPermanentCanAttachToPermanentId(bruna));
+        filterAuraCard.add(new CardTypePredicate(CardType.ENCHANTMENT));
+        filterAuraCard.add(new SubtypePredicate("Aura"));
+        filterAuraCard.add(new AuraCardCanAttachToPermanentId(bruna));
+        
         if (player == null) {
             return false;
         }
@@ -123,7 +124,6 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
         }
 
         while (player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from the battlefield?", game)) {
-            filterAura.add(new PermanentCanTargetPermanentId(permanent.getId()));
             Target targetAura = new TargetPermanent(filterAura);
             if (player.choose(Constants.Outcome.Benefit, targetAura, source.getSourceId(), game)) {
                 Permanent aura = game.getPermanent(targetAura.getFirstTarget());
@@ -139,7 +139,6 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
         int count = player.getHand().count(filterAuraCard, game);
         while (count > 0 && player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from your hand?", game)) {
-            filterAuraCard.add(new CardCanTargetPermanentId(permanent.getId()));
             TargetCard targetAura = new TargetCard(Constants.Zone.PICK, filterAuraCard);
             if (player.choose(Constants.Outcome.Benefit, player.getHand(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
@@ -154,7 +153,6 @@ class BrunaLightOfAlabasterEffect extends OneShotEffect<BrunaLightOfAlabasterEff
 
         count = player.getGraveyard().count(filterAuraCard, game);
         while (count > 0 && player.chooseUse(Constants.Outcome.Benefit, "Attach an Aura from your graveyard?", game)) {
-            filterAuraCard.add(new CardCanTargetPermanentId(permanent.getId()));
             TargetCard targetAura = new TargetCard(Constants.Zone.PICK, filterAuraCard);
             if (player.choose(Constants.Outcome.Benefit, player.getGraveyard(), targetAura, game)) {
                 Card aura = game.getCard(targetAura.getFirstTarget());
