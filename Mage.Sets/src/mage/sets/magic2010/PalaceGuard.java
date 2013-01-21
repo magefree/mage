@@ -30,19 +30,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.CanBlockAdditionalCreatureEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -59,7 +52,8 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PalaceGuardEffect()));
+        // Palace Guard can block any number of creatures.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
     public PalaceGuard(final PalaceGuard card) {
@@ -70,47 +64,4 @@ public class PalaceGuard extends CardImpl<PalaceGuard> {
     public PalaceGuard copy() {
         return new PalaceGuard(this);
     }
-
-    class PalaceGuardEffect extends ContinuousEffectImpl<PalaceGuardEffect> {
-
-        public PalaceGuardEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Benefit);
-            staticText = "{this} can block any number of creatures";
-        }
-
-        public PalaceGuardEffect(final PalaceGuardEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public PalaceGuardEffect copy() {
-            return new PalaceGuardEffect(this);
-        }
-
-        @Override
-        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-            Permanent perm = game.getPermanent(source.getSourceId());
-            if (perm != null) {
-                switch (layer) {
-                    case RulesEffects:
-                        perm.setMaxBlocks(0);
-                        break;
-                }
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            return false;
-        }
-
-        @Override
-        public boolean hasLayer(Layer layer) {
-            return layer == Layer.RulesEffects;
-        }
-
-    }
 }
-

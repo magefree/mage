@@ -49,6 +49,11 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
         this(1);
     }
 
+    /**
+     * Changes the number of creatures source creature can block
+     *
+     * @param amount - 0 = any number, 1-x = n additional blocks
+     */
     public CanBlockAdditionalCreatureEffect(int amount) {
         this(Duration.WhileOnBattlefield, amount);
     }
@@ -56,7 +61,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
     public CanBlockAdditionalCreatureEffect(Duration duration, int amount) {
         super(duration, Outcome.Benefit);
         this.amount = amount;
-        staticText = "{this} can block " + (amount == 1 ? "an": amount) + " additional creature";
+        staticText = setText();
     }
 
     public CanBlockAdditionalCreatureEffect(final CanBlockAdditionalCreatureEffect effect) {
@@ -78,18 +83,34 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
                     // maxBlocks = 0 equals to "can block any number of creatures"
                     if (perm.getMaxBlocks() > 0) {
                         perm.setMaxBlocks(perm.getMaxBlocks() + 1);
+                    } else {
+                        perm.setMaxBlocks(0);
                     }
                     break;
             }
             return true;
         }
-
         return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         return false;
+    }
+
+    private String setText() {
+        StringBuilder sb = new StringBuilder("{this} can block ");
+        switch(amount) {
+            case 0:
+                sb.append("any number of creatures");
+                break;
+            case 1:
+                sb.append("an additional creature");
+                break;
+            default:
+                sb.append(amount).append(" additional creatures");
+        }
+        return sb.toString();
     }
 
     @Override

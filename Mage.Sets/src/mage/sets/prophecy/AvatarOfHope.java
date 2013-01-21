@@ -30,11 +30,7 @@ package mage.sets.prophecy;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
@@ -42,12 +38,11 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.effects.common.continious.CanBlockAdditionalCreatureEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.CardUtil;
 
@@ -71,7 +66,7 @@ public class AvatarOfHope extends CardImpl<AvatarOfHope> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Avatar of Hope can block any number of creatures.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AvatarOfHopeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockAdditionalCreatureEffect(0)));
     }
 
     public AvatarOfHope(final AvatarOfHope card) {
@@ -84,10 +79,7 @@ public class AvatarOfHope extends CardImpl<AvatarOfHope> {
     }
 }
 
-
 class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
-
-
 
     public AdjustingCostsAbility() {
         super(Constants.Zone.OUTSIDE, new AdjustingCostsEffect());
@@ -134,7 +126,9 @@ class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffe
  
         if (mana.getColorless() > 0 && player != null && player.getLife() < 4) {
             int newCount = mana.getColorless() - 6;
-            if (newCount < 0) newCount = 0;
+            if (newCount < 0) {
+                newCount = 0;
+            }
             mana.setColorless(newCount);
             spellAbility.getManaCostsToPay().load(mana.toString());
             return true;
@@ -154,46 +148,4 @@ class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffe
     public AdjustingCostsEffect copy() {
         return new AdjustingCostsEffect(this);
     }
-}
-
-class AvatarOfHopeEffect extends ContinuousEffectImpl<AvatarOfHopeEffect> {
-
-    public AvatarOfHopeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "{this} can block any number of creatures";
-    }
-
-    public AvatarOfHopeEffect(final AvatarOfHopeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AvatarOfHopeEffect copy() {
-        return new AvatarOfHopeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    perm.setMaxBlocks(0);
-                    break;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
-    }
-
 }
