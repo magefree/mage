@@ -45,7 +45,7 @@ import mage.target.TargetPlayer;
 public class UndercityPlague extends CardImpl<UndercityPlague> {
 
     public UndercityPlague(UUID ownerId) {
-        super(ownerId, 82, "Undercity Plague", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
+        super(ownerId, 83, "Undercity Plague", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{B}{B}");
         this.expansionSetCode = "GTC";
 
         this.color.setBlack(true);

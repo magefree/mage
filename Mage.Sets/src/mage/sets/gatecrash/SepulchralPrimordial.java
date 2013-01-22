@@ -55,7 +55,7 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
 public class SepulchralPrimordial extends CardImpl<SepulchralPrimordial> {
 
     public SepulchralPrimordial(UUID ownerId) {
-        super(ownerId, 79, "Sepulchral Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
+        super(ownerId, 75, "Sepulchral Primordial", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Avatar");
 
