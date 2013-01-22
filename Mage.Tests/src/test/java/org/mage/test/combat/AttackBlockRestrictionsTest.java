@@ -178,27 +178,36 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testChampionOfLambholt() {
+        //  Champion of Lambholt: Creature — Human Warrior 1/1, 1GG
+        //  - Creatures with power less than Champion of Lambholt's power can't block creatures you control.
+        //  - Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Champion of Lambholt");
 
+        // Elite Vanguard: Creature — Human Soldier 2/1, W
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        // Arbor Elf: Creature — Elf Druid 1/1, G - {T}: Untap target Forest.
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
 
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 5);
+        //  Baneslayer Angel: Creature — Angel 5/5, 3WW - Flying, first strike, lifelink, protection from Demons and from Dragons
         addCard(Constants.Zone.HAND, playerB, "Baneslayer Angel");
 
+        // Angelic Wall: Creature — Wall 0/4, 1W - Defender, flying
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        // Air Elemental: Creature — Elemental 4/4, 3UU - Flying
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G} to your mana pool.
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
         castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");
 
         // non flying vs. flying
         attack(2, playerB, "Elite Vanguard");
-        block(2, playerA, "Angelic Wall", "Elite Vanguard"); // can't block
+        block(2, playerA, "Angelic Wall", "Elite Vanguard"); // can't block - Elite Vanguard does 2 damage
         // non flying vs. non flying
         attack(2, playerB, "Arbor Elf");
-        block(2, playerA, "Llanowar Elves", "Arbor Elf"); // can block
+        block(2, playerA, "Llanowar Elves", "Arbor Elf"); // can't block - Arbor Elf does 1 damage
         // flying vs. flying
         attack(2, playerB, "Assault Griffin");
         block(2, playerA, "Air Elemental", "Assault Griffin"); // can block
@@ -208,7 +217,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
         assertPowerToughness(playerB, "Champion of Lambholt", 2, 2);
 
-        assertLife(playerA, 18);
+        assertLife(playerA, 17);
         assertLife(playerB, 20);
     }
 
