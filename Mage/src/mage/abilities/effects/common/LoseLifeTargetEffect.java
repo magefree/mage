@@ -90,7 +90,11 @@ public class LoseLifeTargetEffect extends OneShotEffect<LoseLifeTargetEffect> {
         }
         sb.append("life");
         if (message.length() > 0) {
-            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
+            if (amount.toString().equals("X")) {
+                sb.append(", where X is ");
+            } else {
+                sb.append(message.equals("1") ? " equal to the number of " : " for each ");
+            }
             sb.append(message);
         }
         return sb.toString();
