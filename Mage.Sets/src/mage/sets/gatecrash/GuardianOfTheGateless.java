@@ -47,7 +47,7 @@ import mage.cards.CardImpl;
 public class GuardianOfTheGateless extends CardImpl<GuardianOfTheGateless> {
 
     public GuardianOfTheGateless(UUID ownerId) {
-        super(ownerId, 14, "Guardian of the Gateless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 14, "Guardian of the Gateless", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Angel");
 
