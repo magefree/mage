@@ -124,8 +124,10 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect
         if (card != null) {
             ExileZone zone = game.getExile().getExileZone(exileId);
             if (zone != null && zone.contains(card.getId())) {
-                card.setControllerId(source.getControllerId());
-                return true;
+                if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {
+                    card.setControllerId(source.getControllerId());
+                    return true;
+                }
             }
         }
         return false;

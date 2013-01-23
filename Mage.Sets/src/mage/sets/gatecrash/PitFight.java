@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class PitFight extends CardImpl<PitFight> {
 
     public PitFight(UUID ownerId) {
-        super(ownerId, 225, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
+        super(ownerId, 223, "Pit Fight", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{R/G}");
         this.expansionSetCode = "GTC";
 
         this.color.setRed(true);
