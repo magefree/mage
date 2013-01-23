@@ -47,7 +47,7 @@ import mage.counters.CounterType;
 public class ExperimentOne extends CardImpl<ExperimentOne> {
 
     public ExperimentOne(UUID ownerId) {
-        super(ownerId, 115, "Experiment One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
+        super(ownerId, 119, "Experiment One", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Human");
         this.subtype.add("Ooze");

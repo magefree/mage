@@ -42,7 +42,7 @@ import mage.cards.CardImpl;
 public class BasilicaScreecher extends CardImpl<BasilicaScreecher> {
 
     public BasilicaScreecher(UUID ownerId) {
-        super(ownerId, 57, "Basilica Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
+        super(ownerId, 58, "Basilica Screecher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Bat");
 

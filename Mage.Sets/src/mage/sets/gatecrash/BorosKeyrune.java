@@ -49,7 +49,7 @@ import mage.game.permanent.token.Token;
 public class BorosKeyrune extends CardImpl<BorosKeyrune> {
 
     public BorosKeyrune(UUID ownerId) {
-        super(ownerId, 223, "Boros Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
+        super(ownerId, 227, "Boros Keyrune", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "GTC";
 
         // {T}: Add {R} or {W} to your mana pool.

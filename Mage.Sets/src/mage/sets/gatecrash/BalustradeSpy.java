@@ -51,7 +51,7 @@ import mage.target.TargetPlayer;
 public class BalustradeSpy extends CardImpl<BalustradeSpy> {
 
     public BalustradeSpy(UUID ownerId) {
-        super(ownerId, 58, "Balustrade Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, 57, "Balustrade Spy", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Vampire");
         this.subtype.add("Rogue");

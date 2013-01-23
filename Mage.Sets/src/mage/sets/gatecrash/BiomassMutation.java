@@ -45,7 +45,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 public class BiomassMutation extends CardImpl<BiomassMutation> {
 
     public BiomassMutation(UUID ownerId) {
-        super(ownerId, 215, "Biomass Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G/U}{G/U}");
+        super(ownerId, 213, "Biomass Mutation", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{X}{G/U}{G/U}");
         this.expansionSetCode = "GTC";
 
         this.color.setGreen(true);
