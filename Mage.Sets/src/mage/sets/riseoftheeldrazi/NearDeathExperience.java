@@ -32,11 +32,13 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.condition.Condition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.WinGameEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -51,7 +53,8 @@ public class NearDeathExperience extends CardImpl<NearDeathExperience> {
         this.color.setWhite(true);
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new NearDeathExperienceEffect(), Constants.TargetController.YOU, false));
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), Constants.TargetController.YOU, false);
+        this.addAbility(new ConditionalTriggeredAbility(ability, new OneLifeCondition(), "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
     }
 
     public NearDeathExperience(final NearDeathExperience card) {
@@ -64,30 +67,10 @@ public class NearDeathExperience extends CardImpl<NearDeathExperience> {
     }
 }
 
-class NearDeathExperienceEffect extends OneShotEffect<NearDeathExperienceEffect> {
-
-    public NearDeathExperienceEffect() {
-        super(Constants.Outcome.Win);
-        this.staticText = "you win the game";
-    }
-
-    public NearDeathExperienceEffect(final NearDeathExperienceEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public NearDeathExperienceEffect copy() {
-        return new NearDeathExperienceEffect(this);
-    }
+class OneLifeCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.getLife() == 1) {
-            you.won(game);
-            return true;
-        }
-        return false;
+        return game.getPlayer(source.getControllerId()).getLife() == 1;
     }
-
 }

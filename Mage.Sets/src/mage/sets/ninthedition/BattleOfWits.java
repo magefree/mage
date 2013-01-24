@@ -29,7 +29,6 @@ package mage.sets.ninthedition;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
@@ -37,7 +36,7 @@ import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.WinGameEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -55,7 +54,7 @@ public class BattleOfWits extends CardImpl<BattleOfWits> {
         this.color.setBlue(true);
 
         // At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new BattleOfWitsEffect(), TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new BattleOfWitsCondition(), "At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game."));
     }
 
@@ -75,33 +74,6 @@ class BattleOfWitsCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null && player.getLibrary().size() >= 200) {
-            return true;
-        }
-        return false;
-    }
-}
-
-class BattleOfWitsEffect extends OneShotEffect<BattleOfWitsEffect> {
-
-    public BattleOfWitsEffect() {
-        super(Outcome.Win);
-        this.staticText = "you win the game";
-    }
-
-    public BattleOfWitsEffect(final BattleOfWitsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public BattleOfWitsEffect copy() {
-        return new BattleOfWitsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.won(game);
             return true;
         }
         return false;

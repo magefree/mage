@@ -31,6 +31,7 @@ Unleash|new|
 Deathtouch|instance|
 Defender|instance|
 Double Strike|instance|
+Extort|new|
 Fear|instance|
 First strike|instance|
 Flash|instance|
