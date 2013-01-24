@@ -68,6 +68,7 @@ public class AvenMimeomancer extends CardImpl<AvenMimeomancer> {
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), Constants.TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
+        ability.addEffect(new AvenEffect2());
         this.addAbility(ability);
     }
 
@@ -102,9 +103,6 @@ class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
         if (target != null) {
             target.getPower().setValue(3);
             target.getToughness().setValue(1);
-            if (!target.getAbilities().contains(FlyingAbility.getInstance())) {
-                target.addAbility(FlyingAbility.getInstance(), source.getId(), game);
-            }
             return true;
         }
         return false;
@@ -124,5 +122,42 @@ class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
         StringBuilder sb = new StringBuilder();
         sb.append("If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it");
         return sb.toString();
+    }
+}
+
+class AvenEffect2 extends ContinuousEffectImpl<AvenEffect2> {
+
+    public AvenEffect2() {
+        super(Constants.Duration.Custom, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.BoostCreature);
+    }
+
+    public AvenEffect2(final AvenEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public AvenEffect2 copy() {
+        return new AvenEffect2(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            if (!target.getAbilities().contains(FlyingAbility.getInstance())) {
+                target.addAbility(FlyingAbility.getInstance(), source.getId(), game);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        Permanent creature = game.getPermanent(this.targetPointer.getFirst(game, source));
+        if (creature != null && creature.getCounters().getCount(CounterType.FEATHER) < 1) {
+            return true;
+        }
+        return false;
     }
 }
