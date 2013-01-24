@@ -38,7 +38,7 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GatewayShade extends CardImpl<GatewayShade> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Gate you control");
+    private final static FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
     static {
         filter.add(new SubtypePredicate("Gate"));
         filter.add(Predicates.not(new TappedPredicate()));
