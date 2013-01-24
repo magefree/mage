@@ -112,7 +112,11 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
         }
         sb.append(filter.getMessage());
         if (duration.equals(Duration.WhileOnBattlefield)) {
-            sb.append(" have ");
+            if (filter.getMessage().toLowerCase().startsWith("each")) {
+                sb.append(" has ");
+            } else {
+                sb.append(" have ");
+            }
         } else {
             sb.append(" gain ");
         }
