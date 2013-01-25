@@ -70,7 +70,12 @@ public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl<AddCardSubT
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ").append(addedSubType).append(" in addition to its other types ").append(duration.toString());
+        if (mode.getTargets().size() > 0) {
+            sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
+        } else {
+            sb.append("It ");
+        }
+        sb.append(" becomes ").append(addedSubType).append(" in addition to its other types ").append(duration.toString());
         return sb.toString();
     }
 }
