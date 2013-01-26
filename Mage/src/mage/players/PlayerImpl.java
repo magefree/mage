@@ -64,6 +64,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.net.UserData;
 import mage.target.Target;
 import mage.target.TargetAmount;
@@ -344,7 +345,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (abilities.containsKey(ShroudAbility.getInstance().getId())) {
                 return false;
             }
-
+            if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
+                UUID controllerId = null;
+                if (source instanceof Permanent) {
+                    controllerId = ((Permanent) source).getControllerId();
+                } else if (source instanceof StackObject) {
+                    controllerId = ((StackObject) source).getControllerId();
+                }
+                if (controllerId != null && game.getOpponents(this.playerId).contains(controllerId) &&
+                        !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, game)) {
+                    return false;
+                }
+            }
             if (hasProtectionFrom(source, game)) {
                 return false;
             }

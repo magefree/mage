@@ -1,13 +1,9 @@
 package mage.abilities.keyword;
 
+import java.io.ObjectStreamException;
 import mage.Constants;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.CantTargetSourceEffect;
-import mage.filter.FilterStackObject;
-import mage.filter.predicate.permanent.ControllerPredicate;
-
-import java.io.ObjectStreamException;
 
 /**
  * Hexproof
@@ -18,11 +14,8 @@ import java.io.ObjectStreamException;
 public class HexproofAbility extends SimpleStaticAbility implements MageSingleton {
 
     private static final HexproofAbility fINSTANCE;
-    private static final FilterStackObject filter;
 
     static {
-        filter = new FilterStackObject("spells or abilities your opponents control");
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
         fINSTANCE = new HexproofAbility();
     }
 
@@ -35,7 +28,7 @@ public class HexproofAbility extends SimpleStaticAbility implements MageSingleto
     }
 
     private HexproofAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CantTargetSourceEffect(filter, Constants.Duration.WhileOnBattlefield));
+        super(Constants.Zone.BATTLEFIELD, null);
     }
 
     @Override

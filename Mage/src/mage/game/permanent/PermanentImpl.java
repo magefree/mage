@@ -56,7 +56,6 @@ import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
-import mage.counters.Counters;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -738,7 +737,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                 return false;
             }
             if (abilities.containsKey(HexproofAbility.getInstance().getId())) {
-                if (game.getOpponents(controllerId).contains(sourceControllerId)) {
+                if (game.getOpponents(controllerId).contains(sourceControllerId) &&
+                        !game.getContinuousEffects().asThough(this.getId(), AsThoughEffectType.HEXPROOF, game)) {
                     return false;
                 }
             }
