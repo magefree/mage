@@ -83,6 +83,11 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
     }
 
     @Override
+    public void setText(String staticText) {
+        this.staticText = staticText;
+    }
+
+    @Override
     public Outcome getOutcome() {
         return outcome;
     }
