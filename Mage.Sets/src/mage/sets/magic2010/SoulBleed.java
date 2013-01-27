@@ -28,21 +28,18 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -63,7 +60,7 @@ public class SoulBleed extends CardImpl<SoulBleed> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.
-        this.addAbility(new SoulBleedTriggeredAbility());
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), Constants.TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
     public SoulBleed(final SoulBleed card) {
@@ -73,40 +70,5 @@ public class SoulBleed extends CardImpl<SoulBleed> {
     @Override
     public SoulBleed copy() {
         return new SoulBleed(this);
-    }
-}
-
-class SoulBleedTriggeredAbility extends TriggeredAbilityImpl<SoulBleedTriggeredAbility> {
-
-    public SoulBleedTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
-    }
-
-    public SoulBleedTriggeredAbility(final SoulBleedTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SoulBleedTriggeredAbility copy() {
-        return new SoulBleedTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent equipment = game.getPermanent(this.getSourceId());
-        if (equipment != null) {
-            Permanent permanent = game.getPermanent(equipment.getAttachedTo());
-            if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE
-                    && permanent != null && event.getPlayerId().equals(permanent.getControllerId())) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "At the beginning of the upkeep of enchanted creature's controller, that player loses 1 life.";
     }
 }

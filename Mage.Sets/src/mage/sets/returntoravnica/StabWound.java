@@ -41,6 +41,7 @@ import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
+import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -73,8 +74,7 @@ public class StabWound extends CardImpl<StabWound> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2,-2, Duration.WhileOnBattlefield)));
 
         // At the beginning of the upkeep of enchanted creature's controller, that player loses 2 life.
-        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(2), Constants.TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), Constants.TargetController.CONTROLLER_ATTACHED_TO, false, true));
     }
 
     public StabWound (final StabWound card) {

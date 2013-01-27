@@ -39,6 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -61,13 +62,15 @@ public class ArachnusWeb extends CardImpl<ArachnusWeb> {
 
         this.color.setGreen(true);
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArachnusWebEffect1()));
+        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
         // At the beginning of the end step, if enchanted creature's power is 4 or greater, destroy Arachnus Web.
         this.addAbility(new OnEventTriggeredAbility(EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new ArachnusWebEffect2()));
     }
@@ -79,46 +82,6 @@ public class ArachnusWeb extends CardImpl<ArachnusWeb> {
     @Override
     public ArachnusWeb copy() {
         return new ArachnusWeb(this);
-    }
-}
-
-class ArachnusWebEffect1 extends ReplacementEffectImpl<ArachnusWebEffect1> {
-
-    public ArachnusWebEffect1() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
-    }
-
-    public ArachnusWebEffect1(final ArachnusWebEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArachnusWebEffect1 copy() {
-        return new ArachnusWebEffect1(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }
 

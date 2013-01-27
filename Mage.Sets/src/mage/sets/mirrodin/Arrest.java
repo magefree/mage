@@ -29,22 +29,16 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -59,12 +53,16 @@ public class Arrest extends CardImpl<Arrest> {
         this.expansionSetCode = "MRD";
         this.subtype.add("Aura");
         this.color.setWhite(true);
+
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArrestEffect()));
+
+        //Enchanted creature can't attack or block, and its activated abilities can't be activated.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
     }
 
     public Arrest (final Arrest card) {
@@ -74,47 +72,6 @@ public class Arrest extends CardImpl<Arrest> {
     @Override
     public Arrest copy() {
         return new Arrest(this);
-    }
-
-}
-
-class ArrestEffect extends ReplacementEffectImpl<ArrestEffect> {
-
-    public ArrestEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
-        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
-    }
-
-    public ArrestEffect(final ArrestEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ArrestEffect copy() {
-        return new ArrestEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 }

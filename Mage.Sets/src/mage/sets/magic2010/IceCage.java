@@ -30,15 +30,14 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -61,12 +60,17 @@ public class IceCage extends CardImpl<IceCage> {
         this.color.setBlue(true);
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IceCageEffect()));
+
+        // Enchanted creature can't attack or block, and its activated abilities can't be activated.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBlockAttackActivateAttachedEffect()));
+
+        // When enchanted creature becomes the target of a spell or ability, destroy Ice Cage.
         this.addAbility(new IceCageAbility());
     }
 
@@ -78,47 +82,6 @@ public class IceCage extends CardImpl<IceCage> {
     public IceCage copy() {
         return new IceCage(this);
     }
-}
-
-class IceCageEffect extends ReplacementEffectImpl<IceCageEffect> {
-
-    public IceCageEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
-    }
-
-    public IceCageEffect(final IceCageEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IceCageEffect copy() {
-        return new IceCageEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.DECLARE_ATTACKER || event.getType() == EventType.DECLARE_BLOCKER || event.getType() == EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 }
 
 class IceCageAbility extends TriggeredAbilityImpl<IceCageAbility> {

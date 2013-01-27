@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -40,7 +39,6 @@ import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.game.stack.StackObject;
-import mage.players.Player;
 import mage.target.TargetSpell;
 
 /**
@@ -76,7 +74,7 @@ class MysticGenesisEffect extends OneShotEffect<MysticGenesisEffect> {
 
     public MysticGenesisEffect() {
         super(Outcome.Detriment);
-        staticText = " Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost";
+        staticText = "Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost";
     }
 
     public MysticGenesisEffect(final MysticGenesisEffect effect) {
