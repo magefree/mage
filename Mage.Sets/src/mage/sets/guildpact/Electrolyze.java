@@ -50,7 +50,7 @@ public class Electrolyze extends CardImpl<Electrolyze> {
 
         // Electrolyze deals 2 damage divided as you choose among one or two target creatures and/or players.
         this.getSpellAbility().addEffect(new DamageMultiEffect(2));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(3));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayerAmount(2));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }
