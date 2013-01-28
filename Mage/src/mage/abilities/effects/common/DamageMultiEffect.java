@@ -32,6 +32,8 @@ import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,15 +46,15 @@ import mage.target.Target;
  */
 public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
 
-    protected int amount;
+    protected DynamicValue amount;
 
     public DamageMultiEffect(int amount) {
-        super(Outcome.Damage);
-        this.amount = amount;
+        this(new StaticValue(amount));
     }
 
-    public int getAmount() {
-        return amount;
+    public DamageMultiEffect(DynamicValue amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
     }
 
     public DamageMultiEffect(final DamageMultiEffect effect) {
@@ -88,10 +90,8 @@ public class DamageMultiEffect extends OneShotEffect<DamageMultiEffect> {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("{source} deals ").append(Integer.toString(amount));
+        sb.append("{source} deals ").append(amount.toString());
         sb.append(" damage divided as you choose among any number of target ").append(mode.getTargets().get(0).getTargetName());
         return sb.toString();
     }
-
-
 }

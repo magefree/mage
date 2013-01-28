@@ -28,9 +28,14 @@
 
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureOrPlayer;
 import mage.filter.common.FilterCreaturePermanent;
@@ -38,10 +43,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetAmount;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -52,6 +53,10 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
     protected FilterCreatureOrPlayer filter;
 
     public TargetCreatureOrPlayerAmount(int amount) {
+        this(new StaticValue(amount));
+    }
+
+    public TargetCreatureOrPlayerAmount(DynamicValue amount) {
         super(amount);
         this.zone = Zone.ALL;
         this.filter = new FilterCreatureOrPlayer();
@@ -193,11 +198,11 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
         for (UUID targetId: getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getName()).append(" ");
+                sb.append(permanent.getName()).append("(").append(getTargetAmount(targetId)).append(") ");
             }
             else {
                 Player player = game.getPlayer(targetId);
-                sb.append(player.getName()).append(" ");
+                sb.append(player.getName()).append("(").append(getTargetAmount(targetId)).append(") ");
             }
         }
         return sb.toString();

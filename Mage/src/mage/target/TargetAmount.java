@@ -31,6 +31,8 @@ package mage.target;
 import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -40,12 +42,18 @@ import mage.players.Player;
  */
 public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl<T> {
 
-    int amount;
+    boolean amountWasSet = false;
+    DynamicValue amount;
     int remainingAmount;
 
     public TargetAmount(int amount) {
+        this(new StaticValue(amount));
+    }
+
+    public TargetAmount(DynamicValue amount) {
         this.amount = amount;
-        this.remainingAmount = amount;
+        //this.remainingAmount = amount;
+        amountWasSet = false;
         this.required = true;
     }
 
@@ -53,6 +61,7 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
         super(target);
         this.amount = target.amount;
         this.remainingAmount = target.remainingAmount;
+        this.amountWasSet = target.amountWasSet;
     }
 
     public int getAmountRemaining() {
@@ -66,17 +75,30 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 
     @Override
     public boolean doneChosing() {
+        if (amountWasSet == false) {
+            return false;
+        }
         return remainingAmount == 0;
     }
 
     @Override
     public void clearChosen() {
         super.clearChosen();
-        remainingAmount = amount;
+        amountWasSet = false;
+        // remainingAmount = amount;
     }
+
+    public void setAmount(Ability source, Game game) {
+        remainingAmount = amount.calculate(game, source);
+        amountWasSet = true;
+    }
+
 
     @Override
     public void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent) {
+        if (!amountWasSet) {
+            setAmount(source, game);
+        }
         if (amount <= remainingAmount) {
             super.addTarget(id, amount, source, game, skipEvent);
             remainingAmount -= amount;
@@ -85,6 +107,9 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
 
     @Override
     public boolean chooseTarget(Outcome outcome, UUID playerId, Ability source, Game game) {
+        if (!amountWasSet) {
+            setAmount(source, game);
+        }
         Player player = game.getPlayer(playerId);
         chosen = remainingAmount == 0;
         while (remainingAmount > 0) {
@@ -107,6 +132,9 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
     }
 
     protected void addTargets(TargetAmount<T> target, Set<UUID> targets, List<T> options, Ability source, Game game) {
+        if (!amountWasSet) {
+            setAmount(source, game);
+        }
         for (UUID targetId: targets) {
             for (int n = 1; n <= target.remainingAmount; n++) {
                 T t = target.copy();
@@ -115,8 +143,9 @@ public abstract class TargetAmount<T extends TargetAmount<T>> extends TargetImpl
                     if (targets.size() > 1) {
                         Set<UUID> newTargets = new HashSet<UUID>();
                         for (UUID newTarget: targets) {
-                            if (!newTarget.equals(targetId))
+                            if (!newTarget.equals(targetId)) {
                                 newTargets.add(newTarget);
+                            }
                         }
                         addTargets(t, newTargets, options, source, game);
                     }

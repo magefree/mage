@@ -27,6 +27,9 @@
  */
 package mage.target.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -34,12 +37,8 @@ import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.TargetAmount;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
 /**
  *
@@ -151,10 +150,7 @@ public class TargetCreaturePermanentAmount extends TargetAmount<TargetCreaturePe
         for (UUID targetId : getTargets()) {
             Permanent permanent = game.getPermanent(targetId);
             if (permanent != null) {
-                sb.append(permanent.getName()).append(" ");
-            } else {
-                Player player = game.getPlayer(targetId);
-                sb.append(player.getName()).append(" ");
+                sb.append(permanent.getName()).append("(").append(getTargetAmount(targetId)).append(") ");
             }
         }
         return sb.toString();
