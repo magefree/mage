@@ -74,6 +74,9 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
     }
 
     private void setText() {
+        if (!staticText.isEmpty()) {
+            return;
+        }
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
