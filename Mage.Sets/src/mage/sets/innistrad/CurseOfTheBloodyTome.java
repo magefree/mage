@@ -28,9 +28,8 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -64,7 +63,7 @@ public class CurseOfTheBloodyTome extends CardImpl<CurseOfTheBloodyTome> {
         // Enchant player
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());
         this.addAbility(ability);
         // At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.
@@ -99,7 +98,7 @@ class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl<CurseOfTheBloodyT
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.DRAW_STEP_PRE) {
+        if (event.getType() == EventType.UPKEEP_STEP_PRE) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
@@ -116,5 +115,4 @@ class CurseOfTheBloodyTomeAbility extends TriggeredAbilityImpl<CurseOfTheBloodyT
     public String getRule() {
         return "At the beginning of enchanted player's upkeep, that player puts the top two cards of his or her library into his or her graveyard.";
     }
-
 }
