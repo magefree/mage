@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
@@ -64,7 +65,7 @@ public class CracklingPerimeter extends CardImpl<CracklingPerimeter> {
         this.color.setRed(true);
 
         // Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CracklingPerimeterEffect(), new TapTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CracklingPerimeterEffect(), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public CracklingPerimeter(final CracklingPerimeter card) {
@@ -90,19 +91,16 @@ class CracklingPerimeterEffect extends OneShotEffect<CracklingPerimeterEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you != null) {
-            for (UUID playerId : you.getInRange()) {
-                if (playerId != source.getControllerId()) {
-                    Player opponent = game.getPlayer(playerId);
-                    if (opponent != null) {
-                        opponent.damage(1, source.getId(), game, false, true);
-                    }
-                }
+        boolean result = true;
+        for (UUID playerId : game.getOpponents(source.getControllerId())) {
+            Player opponent = game.getPlayer(playerId);
+            if (opponent != null) {
+                opponent.damage(1, source.getSourceId(), game, false, true);
+            } else {
+                result = false;
             }
-            return true;
         }
-        return false;
+        return result;
     }
 
     @Override
