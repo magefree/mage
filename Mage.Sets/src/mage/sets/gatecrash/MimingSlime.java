@@ -96,7 +96,7 @@ class MimingSlimeEffect extends OneShotEffect<MimingSlimeEffect> {
                     amount = power;
                 }
             }
-            MysticGenesisOozeToken oozeToken = new MysticGenesisOozeToken();
+            OozeToken oozeToken = new OozeToken();
             oozeToken.getPower().setValue(amount);
             oozeToken.getToughness().setValue(amount);
             oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
