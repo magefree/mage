@@ -117,10 +117,10 @@ class ConsumingAberrationEffect extends OneShotEffect<ConsumingAberrationEffect>
                     }
                 }
             }
-            player.revealCards("Undercity Informer", cards, game);
+            player.revealCards("Consuming Aberrtion", cards, game);
             for(Card card : cards.getCards(game)){
                 if(card != null){
-                    card.moveToZone(Zone.GRAVEYARD, id, game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
         }
