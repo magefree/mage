@@ -27,91 +27,87 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.RemoveVariableCountersTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.counters.CounterType;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.players.Player;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class MimingSlime extends CardImpl<MimingSlime> {
+public class OozeFlux extends CardImpl<OozeFlux> {
 
-    public MimingSlime(UUID ownerId) {
-        super(ownerId, 126, "Miming Slime", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+    public OozeFlux(UUID ownerId) {
+        super(ownerId, 128, "Ooze Flux", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}");
         this.expansionSetCode = "GTC";
 
         this.color.setGreen(true);
 
-        // Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control.
-        this.getSpellAbility().addEffect(new MimingSlimeEffect());
+        // {1}{G}, Remove one or more +1/+1 counters from among creatures you control: Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OozeFluxCreateTokenEffect(new OozeToken()),new ManaCostsImpl("{1}{G}"));
+        ability.addCost(new RemoveVariableCountersTargetCost(
+                new TargetControlledCreaturePermanent(1,Integer.MAX_VALUE,new FilterControlledCreaturePermanent(), true), CounterType.P1P1));
+        this.addAbility(ability);
     }
 
-    public MimingSlime(final MimingSlime card) {
+    public OozeFlux(final OozeFlux card) {
         super(card);
     }
 
     @Override
-    public MimingSlime copy() {
-        return new MimingSlime(this);
+    public OozeFlux copy() {
+        return new OozeFlux(this);
     }
 }
 
-class MimingSlimeEffect extends OneShotEffect<MimingSlimeEffect> {
+class OozeFluxCreateTokenEffect extends OneShotEffect<OozeFluxCreateTokenEffect> {
 
-    public MimingSlimeEffect() {
+    private Token token;
+
+    public OozeFluxCreateTokenEffect(Token token) {
         super(Outcome.PutCreatureInPlay);
-        staticText = "Put an X/X green Ooze creature token onto the battlefield, where X is the greatest power among creatures you control";
+        this.token = token;
+        staticText = "Put an X/X green Ooze creature token onto the battlefield, where X is the number of +1/+1 counters removed this way";
     }
 
-    public MimingSlimeEffect(final MimingSlimeEffect effect) {
+    public OozeFluxCreateTokenEffect(final OozeFluxCreateTokenEffect effect) {
         super(effect);
+        this.token = effect.token.copy();
     }
 
     @Override
-    public MimingSlimeEffect copy() {
-        return new MimingSlimeEffect(this);
+    public OozeFluxCreateTokenEffect copy() {
+        return new OozeFluxCreateTokenEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game);
-            int amount = 0;
-            for (Permanent creature : creatures) {
-                int power = creature.getPower().getValue();
-                if (amount < power) {
-                    amount = power;
-                }
+        int xValue = 0;
+        for (Cost cost : source.getCosts()) {
+            if (cost instanceof RemoveVariableCountersTargetCost) {
+                xValue = ((RemoveVariableCountersTargetCost) cost).getAmount();
+                break;
             }
-            OozeToken oozeToken = new OozeToken();
-            oozeToken.getPower().setValue(amount);
-            oozeToken.getToughness().setValue(amount);
-            oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
-            return true;
         }
-        return false;
-    }
-}
-
-class OozeToken extends Token {
-    public OozeToken() {
-        super("Ooze", "X/X green Ooze creature token");
-        cardType.add(CardType.CREATURE);
-        subtype.add("Ooze");
-        power = new MageInt(0);
-        toughness = new MageInt(0);
+        Token tokenCopy = token.copy();
+        tokenCopy.getAbilities().newId();
+        tokenCopy.getPower().setValue(xValue);
+        tokenCopy.getToughness().setValue(xValue);
+        tokenCopy.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
+        return true;
     }
 }
