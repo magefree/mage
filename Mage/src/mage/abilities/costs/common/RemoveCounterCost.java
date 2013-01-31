@@ -51,7 +51,6 @@ import mage.target.TargetPermanent;
 public class RemoveCounterCost extends CostImpl<RemoveCounterCost> {
 
     private TargetPermanent target;
-    private int amount;
     private String name;
     private CounterType counterTypeToRemove;
     
@@ -68,7 +67,6 @@ public class RemoveCounterCost extends CostImpl<RemoveCounterCost> {
     public RemoveCounterCost(final RemoveCounterCost cost) {
         super(cost);
         this.target = cost.target.copy();
-        this.amount = cost.amount;
         this.name = cost.name;
     }
 

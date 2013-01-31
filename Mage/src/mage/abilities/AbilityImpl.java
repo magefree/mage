@@ -196,6 +196,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
+        // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
         if (game.getPlayer(this.controllerId).isHuman()) {
             // AI can't handle this yet. Uses old way of playXMana
             VariableManaCost manaX = null;
@@ -276,7 +277,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
 
         //20100716 - 601.2g
-        if (!costs.pay(this, game, sourceId, controllerId, noMana)) {
+        UUID activatorId = controllerId;
+        if (this instanceof ActivatedAbilityImpl) {
+             activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
+        }
+        if (!costs.pay(this, game, sourceId, activatorId, noMana)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }

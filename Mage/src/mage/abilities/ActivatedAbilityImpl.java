@@ -54,6 +54,8 @@ import mage.target.Target;
 public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
     protected TimingRule timing = TimingRule.INSTANT;
+    protected boolean onlyOpponentCanActivate = false;
+    protected UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
         super(abilityType, zone);
@@ -62,6 +64,8 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
         super(ability);
         timing = ability.timing;
+        onlyOpponentCanActivate = ability.onlyOpponentCanActivate;
+        activatorId = ability.activatorId;
     }
 
     public ActivatedAbilityImpl(Zone zone) {
@@ -152,12 +156,14 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
-        if (!controlsAbility(playerId, game)) {
+        if ((!onlyOpponentCanActivate && !controlsAbility(playerId, game)) ||
+                (onlyOpponentCanActivate && !game.getOpponents(controllerId).contains(playerId))) {
             return false;
         }
         //20091005 - 602.5d/602.5e
         if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
             if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
+                this.activatorId = playerId;
                 return true;
             }
         }
@@ -229,5 +235,13 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
             }
         }
         return sb.toString();
+    }
+
+    public void setOnlyOpponentCanActivate(boolean onlyOpponentCanActivate) {
+        this.onlyOpponentCanActivate = onlyOpponentCanActivate;
+    }
+
+    public UUID getActivatorId() {
+        return this.activatorId;
     }
 }
