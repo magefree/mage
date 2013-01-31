@@ -198,20 +198,20 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         if (game.getPlayer(this.controllerId).isHuman()) {
             // AI can't handle this yet. Uses old way of playXMana
-            VariableManaCost manaX = null;
+            VariableManaCost variableManaCost = null;
             for (ManaCost cost: manaCostsToPay) {
                 if (cost instanceof VariableManaCost && !cost.isPaid()) {
-                    manaX = (VariableManaCost) cost;
+                    variableManaCost = (VariableManaCost) cost;
                     break; // only one VariableManCost per spell (or is it possible to have more?)
                 }
             }
-            if (manaX != null) {
-                int amount = game.getPlayer(this.controllerId).getAmount(0, Integer.MAX_VALUE, "Announce the value for " + manaX.getText(), game);
-                game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(amount).append(" for ").append(manaX.getText()).toString());
-                amount *= manaX.getMultiplier();
+            if (variableManaCost != null) {
+                int amount = game.getPlayer(this.controllerId).getAmount(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game);
+                game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(amount).append(" for ").append(variableManaCost.getText()).toString());
+                amount *= variableManaCost.getMultiplier();
                 manaCostsToPay.add(new ManaCostsImpl(new StringBuilder("{").append(amount).append("}").toString()));
                 manaCostsToPay.setX(amount);
-                manaX.setPaid();
+                variableManaCost.setPaid();
             }
         }
 

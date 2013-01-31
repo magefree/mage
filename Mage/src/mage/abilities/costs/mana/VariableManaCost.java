@@ -43,6 +43,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 
     protected int multiplier;
     protected FilterMana filter;
+    protected int minX = 0;
 
     public VariableManaCost() {
         this(1);
@@ -57,7 +58,10 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     public VariableManaCost(VariableManaCost manaCost) {
         super(manaCost);
         this.multiplier = manaCost.multiplier;
-        if (manaCost.filter != null) this.filter = manaCost.filter.copy();
+        if (manaCost.filter != null) {
+            this.filter = manaCost.filter.copy();
+        }
+        this.minX = manaCost.minX;
     }
 
     @Override
@@ -118,5 +122,13 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
 
     public int getMultiplier() {
        return multiplier;
+    }
+
+    public int getMinX() {
+       return minX;
+    }
+
+    public void setMinX(int minX) {
+        this.minX = minX;
     }
 }
