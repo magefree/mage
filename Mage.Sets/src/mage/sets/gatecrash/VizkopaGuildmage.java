@@ -29,6 +29,7 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -36,12 +37,11 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
@@ -49,9 +49,17 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
+ * Gatecrash FAQ (01.2013)
+ * Multiple instances of lifelink are redundant. Giving the same creature lifelink
+ * more than once won't cause you to gain additional life.
+ *
+ * Each time the second ability resolves, a delayed triggered ability is created.
+ * Whenever you gain life that turn, each of those abilities will trigger. For
+ * example, if you activate the second ability twice (and let those abilities resolve)
+ * and then you gain 2 life, each opponent will lose a total of 4 life. Each instance
+ * will cause two abilities to trigger, each causing that player to lose 2 life.
  *
  * @author LevelX2
  */
@@ -76,7 +84,8 @@ public class VizkopaGuildmage extends CardImpl<VizkopaGuildmage> {
         this.addAbility(ability);
 
         // 1{W}{B}: Whenever you gain life this turn, each opponent loses that much life.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new VizkopaGuildmageTriggeredAbility(), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateDelayedTriggeredAbilityEffect(new VizkopaGuildmageDelayedTriggeredAbility()), new ManaCostsImpl("{1}{W}{B}")));
+
     }
 
     public VizkopaGuildmage(final VizkopaGuildmage card) {
@@ -89,20 +98,14 @@ public class VizkopaGuildmage extends CardImpl<VizkopaGuildmage> {
     }
 }
 
-class VizkopaGuildmageTriggeredAbility extends TriggeredAbilityImpl<VizkopaGuildmageTriggeredAbility> {
+class VizkopaGuildmageDelayedTriggeredAbility extends DelayedTriggeredAbility<VizkopaGuildmageDelayedTriggeredAbility> {
 
-
-    public VizkopaGuildmageTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new OpponentsLoseLifeEffect());
+    public VizkopaGuildmageDelayedTriggeredAbility() {
+        super(new OpponentsLoseLifeEffect(), Constants.Duration.EndOfTurn, false);
     }
 
-    public VizkopaGuildmageTriggeredAbility(final VizkopaGuildmageTriggeredAbility ability) {
+    public VizkopaGuildmageDelayedTriggeredAbility(VizkopaGuildmageDelayedTriggeredAbility ability) {
         super(ability);
-    }
-
-    @Override
-    public VizkopaGuildmageTriggeredAbility copy() {
-        return new VizkopaGuildmageTriggeredAbility(this);
     }
 
     @Override
@@ -115,8 +118,13 @@ class VizkopaGuildmageTriggeredAbility extends TriggeredAbilityImpl<VizkopaGuild
     }
 
     @Override
+    public VizkopaGuildmageDelayedTriggeredAbility copy() {
+        return new VizkopaGuildmageDelayedTriggeredAbility(this);
+    }
+
+    @Override
     public String getRule() {
-        return "Whenever you gain life this turn, " + super.getRule();
+        return "Whenever you gain life this turn, " + modes.getText();
     }
 }
 

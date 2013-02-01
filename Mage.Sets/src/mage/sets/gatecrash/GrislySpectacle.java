@@ -53,7 +53,7 @@ public class GrislySpectacle extends CardImpl<GrislySpectacle> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
     static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public GrislySpectacle (UUID ownerId) {
