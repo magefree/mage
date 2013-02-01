@@ -278,7 +278,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
         //20100716 - 601.2g
         UUID activatorId = controllerId;
-        if (this instanceof ActivatedAbilityImpl) {
+        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
              activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
         }
         if (!costs.pay(this, game, sourceId, activatorId, noMana)) {
