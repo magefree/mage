@@ -1,5 +1,4 @@
 /*
-/*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -55,7 +54,7 @@ import mage.players.Player;
 public class ConsumingAberration extends CardImpl<ConsumingAberration> {
 
     public ConsumingAberration(UUID ownerId) {
-        super(ownerId, 152, "Consuming Aberrtion", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
+        super(ownerId, 152, "Consuming Aberration", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{B}");
         this.expansionSetCode = "GTC";
         
         this.subtype.add("horror");
