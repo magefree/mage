@@ -44,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -99,9 +100,16 @@ class CardsInEnchantedCreaturesControllerGraveyardCount implements DynamicValue 
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        Player player = game.getPlayer(sourceAbility.getControllerId());
-        if (player != null) {
-            return player.getGraveyard().count(filter, game);
+        Permanent attachment = game.getPermanent(sourceAbility.getSourceId());
+        if (attachment != null) {
+            Permanent creature = game.getPermanent(attachment.getAttachedTo());
+            if (creature != null) {
+                Player player = game.getPlayer(creature.getControllerId());
+                if (player != null) {
+                    return player.getGraveyard().count(filter, game);
+                }
+            }
+
         }
         return 0;
     }

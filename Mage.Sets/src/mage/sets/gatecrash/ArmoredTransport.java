@@ -33,9 +33,13 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
+import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.DamageEvent;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -52,7 +56,7 @@ public class ArmoredTransport extends CardImpl<ArmoredTransport> {
         this.toughness = new MageInt(1);
 
         // Prevent all combat damage that would be dealt to Armored Transport by creatures blocking it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ArmoredTransportPreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
 
     }
 
@@ -63,5 +67,52 @@ public class ArmoredTransport extends CardImpl<ArmoredTransport> {
     @Override
     public ArmoredTransport copy() {
         return new ArmoredTransport(this);
+    }
+}
+
+class ArmoredTransportPreventCombatDamageSourceEffect extends PreventionEffectImpl<ArmoredTransportPreventCombatDamageSourceEffect> {
+
+    public ArmoredTransportPreventCombatDamageSourceEffect(Duration duration) {
+            super(duration);
+            staticText = "Prevent all combat damage that would be dealt to {this} by creatures blocking it" + duration.toString();
+    }
+
+    public ArmoredTransportPreventCombatDamageSourceEffect(final ArmoredTransportPreventCombatDamageSourceEffect effect) {
+            super(effect);
+    }
+
+    @Override
+    public ArmoredTransportPreventCombatDamageSourceEffect copy() {
+            return new ArmoredTransportPreventCombatDamageSourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+            return true;
+    }
+
+    @Override
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+            if (!game.replaceEvent(preventEvent)) {
+                int damage = event.getAmount();
+                event.setAmount(0);
+                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+                return true;
+            }
+            return false;
+        }
+
+    @Override
+    public boolean applies(GameEvent event, Ability source, Game game) {
+            if (super.applies(event, source, game)) {
+                DamageEvent damageEvent = (DamageEvent) event;
+                if (event.getTargetId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
+                    if (game.getState().getCombat().getAttackers().contains(source.getSourceId())) {
+                        return true;
+                    }
+                }
+            }
+            return false;
     }
 }
