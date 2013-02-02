@@ -29,12 +29,15 @@ package mage.sets.gatecrash;
 
 import java.util.UUID;
 import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneAttachedEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -62,10 +65,8 @@ public class MadcapSkills extends CardImpl<MadcapSkills> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted creature gets +3/+0 and can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), Constants.AttachmentType.AURA)));
-        
-        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 0)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAttachedEffect(AttachmentType.AURA, 2)));
     }
 
     public MadcapSkills(final MadcapSkills card) {
