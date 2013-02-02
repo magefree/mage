@@ -28,6 +28,8 @@
 
 package mage.game.combat;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
 import mage.abilities.keyword.*;
@@ -37,8 +39,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
 
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -70,22 +70,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         this.attackerOrder.addAll(group.attackerOrder);
         this.players.putAll(group.players);
     }
-
-//    protected String getValue(Game game) {
-//        StringBuilder sb = new StringBuilder(1024);
-//        for (UUID attackerId: attackers) {
-//            getPermanentValue(attackerId, sb, game);
-//        }
-//        for (UUID blockerId: blockers) {
-//            getPermanentValue(blockerId, sb, game);
-//        }
-//        return sb.toString();
-//    }
-//
-//    private void getPermanentValue(UUID permId, StringBuilder sb, Game game) {
-//        Permanent perm = game.getPermanent(permId);
-//        sb.append(perm.getValue());
-//    }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
         for (UUID permId: attackers) {
@@ -214,8 +198,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             Permanent attacker = game.getPermanent(attackerId);
             if (canDamage(attacker, first)) {
                 //20091005 - 510.1c, 702.17c
-                if (!blocked || hasTrample(attacker))
+                if (!blocked || hasTrample(attacker)) {
                     defenderDamage(attacker, attacker.getPower().getValue(), game);
+                }
             }
         }
     }
@@ -237,8 +222,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                         int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
                         blocker.markDamage(damageAssigned, attacker.getId(), game, true, true);
                         damage -= damageAssigned;
-                        if (damage > 0)
+                        if (damage > 0) {
                             defenderDamage(attacker, damage, game);
+                        }
                     }
                 }
                 else {
@@ -268,20 +254,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 for (UUID blockerId: blockerOrder) {
                     Permanent blocker = game.getPermanent(blockerId);
                     int lethalDamage;
-                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId()))
+                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
                         lethalDamage = 1;
-                    else
+                    } else {
                         lethalDamage = blocker.getToughness().getValue() - blocker.getDamage();
+                    }
                     if (lethalDamage >= damage) {
-                        // Issue#73
-                        //blocker.damage(damage, attacker.getId(), game, true, true);
                         assigned.put(blockerId, damage);
                         damage = 0;
                         break;
                     }
                     int damageAssigned = player.getAmount(lethalDamage, damage, "Assign damage to " + blocker.getName(), game);
-                    // Issue#73
-                    //blocker.damage(damageAssigned, attacker.getId(), game, true, true);
                     assigned.put(blockerId, damageAssigned);
                     damage -= damageAssigned;
                 }
@@ -297,7 +280,6 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     }
                 }
             }
-            // Issue#73
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
                 Permanent blocker = game.getPermanent(entry.getKey());
                 blocker.markDamage(entry.getValue(), attacker.getId(), game, true, true);
@@ -355,10 +337,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             for (UUID attackerId: attackerOrder) {
                 Permanent attacker = game.getPermanent(attackerId);
                 int lethalDamage;
-                if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId()))
+                if (blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())) {
                     lethalDamage = 1;
-                else
+                } else {
                     lethalDamage = attacker.getToughness().getValue() - attacker.getDamage();
+                }
                 if (lethalDamage >= damage) {
                     assigned.put(attackerId, damage);
                     break;
@@ -390,8 +373,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public boolean canBlock(Permanent blocker, Game game) {
         for (UUID attackerId: attackers) {
-            if (!blocker.canBlock(attackerId, game))
+            if (!blocker.canBlock(attackerId, game)) {
                 return false;
+            }
         }
         return true;
     }
@@ -413,8 +397,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public void pickBlockerOrder(UUID playerId, Game game) {
-        if (blockers.isEmpty())
+        if (blockers.isEmpty()) {
             return;
+        }
         Player player = game.getPlayer(playerId);
         List<UUID> blockerList = new ArrayList<UUID>(blockers);
         blockerOrder.clear();
@@ -436,8 +421,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public void pickAttackerOrder(UUID playerId, Game game) {
-        if (attackers.isEmpty())
+        if (attackers.isEmpty()) {
             return;
+        }
         Player player = game.getPlayer(playerId);
         List<UUID> attackerList = new ArrayList<UUID>(attackers);
         attackerOrder.clear();
@@ -477,15 +463,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         if (blockers.contains(creatureId)) {
             blockers.remove(creatureId);
 
-            // ayratn: Issue 375
-            /*
-            if (blockers.isEmpty())
-                blocked = false;
-            */
-
             //20100423 - 509.2a
-            if (blockerOrder.contains(creatureId))
+            if (blockerOrder.contains(creatureId)) {
                 blockerOrder.remove(creatureId);
+            }
         }
     }
 
@@ -520,8 +501,12 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
             }
             for (UUID blockerId : toBeRemoved) {
                 remove(blockerId);
+                Permanent creature = game.getPermanent(blockerId);
+                if (creature != null) {
+                    creature.setBlocking(creature.getBlocking() - 1);
+                }
             }
-            if (blockers.size() == 0) {
+            if (blockers.isEmpty()) {
                 this.blocked = false;
             }
         }
@@ -547,5 +532,4 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     public CombatGroup copy() {
         return new CombatGroup(this);
     }
-
 }
