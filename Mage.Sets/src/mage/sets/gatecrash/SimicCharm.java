@@ -47,7 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class SimicCharm extends CardImpl<SimicCharm> {
 
     public SimicCharm (UUID ownerId) {
-        super(ownerId, 195, "Simic Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{U}");
+        super(ownerId, 195, "Simic Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}{U}");
         this.expansionSetCode = "GTC";
 
         this.color.setBlack(true);

@@ -45,6 +45,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -111,7 +112,11 @@ class NightveilSpecterExileEffect extends OneShotEffect<NightveilSpecterExileEff
           Card card = player.getLibrary().removeFromTop(game);
           Card sourceCard = game.getCard(source.getSourceId());
           if (card != null && sourceCard != null) {
-              UUID exileId = UUID.fromString(new StringBuilder(sourceCard.getId().toString()).append(sourceCard.getZoneChangeCounter()).toString());
+              UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
+              if (exileId == null) {
+                  exileId = UUID.randomUUID();
+                  game.getState().setValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString(), exileId);
+              }
               return card.moveToExile(exileId, "Nightveil Specter", source.getSourceId(), game);
           }
       }
@@ -151,7 +156,7 @@ class NightveilSpecterEffect extends AsThoughEffectImpl<NightveilSpecterEffect> 
       Card card = game.getCard(sourceId);
       if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
           Card sourceCard = game.getCard(source.getSourceId());
-          UUID exileId = UUID.fromString(new StringBuilder(sourceCard.getId().toString()).append(sourceCard.getZoneChangeCounter()).toString());
+          UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
           ExileZone zone = game.getExile().getExileZone(exileId);
           if (zone != null && zone.contains(card.getId())) {
                 if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {

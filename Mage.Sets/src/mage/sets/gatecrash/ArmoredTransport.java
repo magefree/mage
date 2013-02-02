@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -73,46 +74,47 @@ public class ArmoredTransport extends CardImpl<ArmoredTransport> {
 class ArmoredTransportPreventCombatDamageSourceEffect extends PreventionEffectImpl<ArmoredTransportPreventCombatDamageSourceEffect> {
 
     public ArmoredTransportPreventCombatDamageSourceEffect(Duration duration) {
-            super(duration);
-            staticText = "Prevent all combat damage that would be dealt to {this} by creatures blocking it" + duration.toString();
+        super(duration);
+        staticText = "Prevent all combat damage that would be dealt to {this} by creatures blocking it" + duration.toString();
     }
 
     public ArmoredTransportPreventCombatDamageSourceEffect(final ArmoredTransportPreventCombatDamageSourceEffect effect) {
-            super(effect);
+        super(effect);
     }
 
     @Override
     public ArmoredTransportPreventCombatDamageSourceEffect copy() {
-            return new ArmoredTransportPreventCombatDamageSourceEffect(this);
+        return new ArmoredTransportPreventCombatDamageSourceEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-            return true;
+        return true;
     }
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-            GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-            if (!game.replaceEvent(preventEvent)) {
-                int damage = event.getAmount();
-                event.setAmount(0);
-                game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-                return true;
-            }
-            return false;
+        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
+        if (!game.replaceEvent(preventEvent)) {
+            int damage = event.getAmount();
+            event.setAmount(0);
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
+            return true;
         }
+        return false;
+    }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-            if (super.applies(event, source, game)) {
-                DamageEvent damageEvent = (DamageEvent) event;
-                if (event.getTargetId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
-                    if (game.getState().getCombat().getAttackers().contains(source.getSourceId())) {
-                        return true;
-                    }
+        if (super.applies(event, source, game)) {
+            DamageEvent damageEvent = (DamageEvent) event;
+            if (event.getTargetId().equals(source.getSourceId()) && damageEvent.isCombatDamage()) {
+                Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+                if (sourcePermanent != null && sourcePermanent.isAttacking()) {
+                    return true;
                 }
             }
-            return false;
+        }
+        return false;
     }
 }

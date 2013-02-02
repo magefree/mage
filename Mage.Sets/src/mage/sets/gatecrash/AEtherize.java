@@ -59,4 +59,3 @@ public class AEtherize extends CardImpl<AEtherize> {
         return new AEtherize(this);
     }
 }
-
