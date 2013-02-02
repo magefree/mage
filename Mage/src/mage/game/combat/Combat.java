@@ -28,6 +28,8 @@
 
 package mage.game.combat;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CantAttackAloneAbility;
@@ -43,9 +45,6 @@ import mage.players.PlayerList;
 import mage.target.common.TargetDefender;
 import mage.util.Copyable;
 import mage.util.trace.TraceUtil;
-
-import java.io.Serializable;
-import java.util.*;
 
 
 /**
@@ -129,8 +128,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             //20101001 - 508.1d
             checkAttackRequirements(player, game);
             player.selectAttackers(game, attackerId);
-            if (game.isPaused() || game.isGameOver())
+            if (game.isPaused() || game.isGameOver()) {
                 return;
+            }
             checkAttackRestrictions(player, game);
             resumeSelectAttackers(game);
         }
@@ -179,15 +179,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         if (count == 1) {
             for (CombatGroup group: groups) {
                 List<UUID> tobeRemoved = new ArrayList<UUID>();
-                for (UUID attackerId: group.getAttackers()) {
-                    Permanent attacker = game.getPermanent(attackerId);
+                for (UUID attackingCreatureId: group.getAttackers()) {
+                    Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
                         game.informPlayers(attacker.getName() + " can't attack alone. Removing it from combat.");
-                        tobeRemoved.add(attackerId);
+                        tobeRemoved.add(attackingCreatureId);
                     }
                 }
-                for (UUID attackerId : tobeRemoved) {
-                    group.remove(attackerId);
+                for (UUID attackingCreatureId : tobeRemoved) {
+                    group.remove(attackingCreatureId);
                 }
             }
         }
@@ -332,8 +332,9 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void declareAttacker(UUID attackerId, UUID defenderId, Game game) {
-        if (!defenders.contains(defenderId))
+        if (!defenders.contains(defenderId)) {
             return;
+        }
         Permanent defender = game.getPermanent(defenderId);
         CombatGroup newGroup = new CombatGroup(defenderId, defender != null);
         newGroup.attackers.add(attackerId);
@@ -403,16 +404,18 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public boolean hasFirstOrDoubleStrike(Game game) {
         for (CombatGroup group : groups) {
-            if (group.hasFirstOrDoubleStrike(game))
+            if (group.hasFirstOrDoubleStrike(game)) {
                 return true;
+            }
         }
         return false;
     }
 
     public CombatGroup findGroup(UUID attackerId) {
         for (CombatGroup group : groups) {
-            if (group.getAttackers().contains(attackerId))
+            if (group.getAttackers().contains(attackerId)) {
                 return group;
+            }
         }
         return null;
     }
@@ -432,19 +435,22 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean noAttackers() {
-        if (groups.isEmpty() || getAttackers().isEmpty())
+        if (groups.isEmpty() || getAttackers().isEmpty()) {
             return true;
+        }
         return false;
     }
 
     public boolean isAttacked(UUID defenderId, Game game) {
         for (CombatGroup group : groups) {
-            if (group.getDefenderId().equals(defenderId))
+            if (group.getDefenderId().equals(defenderId)) {
                 return true;
+            }
             if (group.defenderIsPlaneswalker) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
-                if (permanent.getControllerId().equals(defenderId))
+                if (permanent.getControllerId().equals(defenderId)) {
                     return true;
+                }
             }
         }
         return false;
@@ -466,8 +472,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group : groups) {
             if (group.defenderIsPlaneswalker) {
                 Permanent permanent = game.getPermanent(group.getDefenderId());
-                if (permanent != null)
+                if (permanent != null) {
                     playerDefenders.add(permanent.getControllerId());
+                }
             } else {
                 playerDefenders.add(group.getDefenderId());
             }
@@ -510,13 +517,15 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (group.blockers.contains(blockerId)) {
                 group.blockers.remove(blockerId);
                 group.blockerOrder.remove(blockerId);
-                if (group.blockers.isEmpty())
+                if (group.blockers.isEmpty()) {
                     group.blocked = false;
+                }
             }
         }
         Permanent creature = game.getPermanent(blockerId);
-        if (creature != null)
+        if (creature != null) {
             creature.setBlocking(0);
+        }
     }
 
     public UUID getAttackerId() {

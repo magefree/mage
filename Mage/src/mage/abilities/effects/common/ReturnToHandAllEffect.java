@@ -58,7 +58,7 @@ public class ReturnToHandAllEffect extends OneShotEffect<ReturnToHandAllEffect> 
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             permanent.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
