@@ -46,6 +46,8 @@ public class Exodus extends ExpansionSet {
     private Exodus() {
         super("Exodus", "EXO", "", "mage.sets.exodus", new GregorianCalendar(1998, 5, 6).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Tempest";
+        this.parentSet = Tempest.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

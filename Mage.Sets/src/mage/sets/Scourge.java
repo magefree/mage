@@ -46,6 +46,8 @@ public class Scourge extends ExpansionSet {
     private Scourge() {
         super("Scourge", "SCG", "", "mage.sets.scourge", new GregorianCalendar(2003, 5, 17).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Onslaught";
+        this.parentSet = Onslaught.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

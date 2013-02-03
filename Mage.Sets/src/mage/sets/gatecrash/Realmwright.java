@@ -33,18 +33,16 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.*;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,7 +68,7 @@ public class Realmwright extends CardImpl<Realmwright> {
         this.addAbility(new AsEntersBattlefieldAbility(new RealmwrightEffect()));
 
         // Lands you control are the chosen type in addition to their other types.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RealmwrightEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RealmwrightEffect2()));
     }
 
     public Realmwright(final Realmwright card) {
@@ -143,8 +141,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Realmwright");
         if (you != null && choice != null) {
             for (Permanent land : lands) {
-                if (land != null) {
-                    System.out.println("The land is " + land.getName());
+                if (land != null && !land.getSubtype().contains(choice)) {
                     switch (layer) {
                         case TypeChangingEffects_4:
                             if (sublayer == Constants.SubLayer.NA) {

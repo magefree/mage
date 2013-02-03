@@ -48,6 +48,7 @@ public class AlaraReborn extends ExpansionSet {
         super("Alara Reborn", "ARB", "seticon_mtgarb", "mage.sets.alarareborn", new GregorianCalendar(2009, 3, 25).getTime(), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.parentSet = ShardsOfAlara.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

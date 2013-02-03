@@ -55,6 +55,7 @@ public abstract class ExpansionSet implements Serializable {
     protected List<Card> cards;
     protected SetType setType;
     protected Map<Rarity, List<Card>> rarities;
+    protected boolean hasBasicLands = true;
 
     protected String blockName;
     protected boolean hasBoosters = false;
@@ -92,6 +93,10 @@ public abstract class ExpansionSet implements Serializable {
         return releaseDate;
     }
 
+    public ExpansionSet getParentSet() {
+        return parentSet;
+    }
+
     public SetType getSetType() {
         return setType;
     }
@@ -112,7 +117,7 @@ public abstract class ExpansionSet implements Serializable {
         }
 
         CardCriteria criteria = new CardCriteria();
-        criteria.setCodes(parentSet != null ? parentSet.code : this.code).rarities(Rarity.LAND).doubleFaced(false);
+        criteria.setCodes(!hasBasicLands && parentSet != null ? parentSet.code : this.code).rarities(Rarity.LAND).doubleFaced(false);
         List<CardInfo> basicLand = CardRepository.instance.findCards(criteria);
 
         criteria = new CardCriteria();
@@ -173,4 +178,9 @@ public abstract class ExpansionSet implements Serializable {
     public boolean hasBoosters() {
         return hasBoosters;
     }
+    
+    public boolean hasBasicLands() {
+        return hasBasicLands;
+    }
+
 }

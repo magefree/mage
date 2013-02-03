@@ -46,6 +46,8 @@ public class Nemesis extends ExpansionSet {
     private Nemesis() {
         super("Nemesis", "NMS", "", "mage.sets.nemesis", new GregorianCalendar(2000, 1, 5).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Masques";
+        this.parentSet = MercadianMasques.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

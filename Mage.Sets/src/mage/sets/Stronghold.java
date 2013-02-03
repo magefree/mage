@@ -46,6 +46,8 @@ public class Stronghold extends ExpansionSet {
     private Stronghold() {
         super("Stronghold", "STH", "", "mage.sets.stronghold", new GregorianCalendar(1998, 1, 21).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Tempest";
+        this.parentSet = Tempest.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

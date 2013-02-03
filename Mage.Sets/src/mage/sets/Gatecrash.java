@@ -52,5 +52,7 @@ public class Gatecrash extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.parentSet = ReturnToRavnica.getInstance();
+        this.hasBasicLands = false;
     }
 }

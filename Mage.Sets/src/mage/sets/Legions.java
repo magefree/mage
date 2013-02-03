@@ -46,6 +46,8 @@ public class Legions extends ExpansionSet {
     private Legions() {
         super("Legions", "LGN", "", "mage.sets.legions", new GregorianCalendar(2003, 0, 25).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Onslaught";
+        this.parentSet = Onslaught.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

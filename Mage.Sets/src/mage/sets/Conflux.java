@@ -48,6 +48,7 @@ public class Conflux extends ExpansionSet {
         super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.parentSet = ShardsOfAlara.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

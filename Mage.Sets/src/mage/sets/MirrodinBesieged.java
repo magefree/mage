@@ -28,10 +28,11 @@
 
 package mage.sets;
 
+import java.util.GregorianCalendar;
 import mage.Constants.SetType;
 import mage.cards.ExpansionSet;
 
-import java.util.GregorianCalendar;
+
 
 /**
  *
@@ -47,7 +48,9 @@ public class MirrodinBesieged extends ExpansionSet {
 
     private MirrodinBesieged() {
         super("Mirrodin Besieged", "MBS", "seticon_mtgmbs", "mage.sets.mirrodinbesieged", new GregorianCalendar(2011, 1, 4).getTime(), SetType.EXPANSION);
-        this.blockName = "Mirrodin Besieged";
+        this.blockName = "Scars of Mirrodin";
+        this.parentSet = ScarsOfMirrodin.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

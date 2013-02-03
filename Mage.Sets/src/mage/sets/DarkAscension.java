@@ -52,5 +52,7 @@ public class DarkAscension  extends ExpansionSet {
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
         this.ratioBoosterMythic = 8;
+        this.parentSet = Innistrad.getInstance();
+        this.hasBasicLands = false;
     }
 }

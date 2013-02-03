@@ -22,8 +22,8 @@ public class DeckBuilder {
 
     private static final int DECK_COUNT[] = {3, 6, 6, 4, 3, 2};
     private static final int DECK_COST[] = {1, 2, 3, 4, 6, 10};
-    private static final int DECK_SPELLS = 24;
-    private static final int DECK_LANDS = 16;
+    private static final int DECK_SPELLS = 23;
+    private static final int DECK_LANDS = 17;
     private static final int DECK_SIZE = DECK_SPELLS + DECK_LANDS;
     private static final int MIN_CARD_SCORE = 25;
     private static final int MIN_SOURCE = 16;
@@ -35,7 +35,7 @@ public class DeckBuilder {
     private DeckBuilder() {
     }
 
-    public synchronized static Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<Card> landCardPool, RateCallback callback) {
+    public synchronized static Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, RateCallback callback) {
         deck = new Deck();
 
         final Collection<MageScoredCard> remainingCards = new ArrayList<MageScoredCard>();
@@ -55,7 +55,7 @@ public class DeckBuilder {
         }
         addCardsToDeck(remainingCards, 0, 4, DECK_SPELLS - deck.getCards().size());
         addCardsToDeck(remainingCards, 5, 10, DECK_SPELLS - deck.getCards().size());
-        addLandsToDeck(allowedColors, landCardPool, callback);
+        addLandsToDeck(allowedColors, setsToUse, landCardPool, callback);
 
         return deck;
     }
@@ -121,7 +121,7 @@ public class DeckBuilder {
      * @param landCardPool
      * @param callback
      */
-    private static void addLandsToDeck(List<ColoredManaSymbol> allowedColors, List<Card> landCardPool, RateCallback callback) {
+    private static void addLandsToDeck(List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, RateCallback callback) {
 
         // Calculate statistics per color.
         final Map<String, Integer> colorCount = new HashMap<String, Integer>();
@@ -190,7 +190,7 @@ public class DeckBuilder {
                     }
                 }
             }
-            final Card landCard = callback.getBestBasicLand(bestColor);
+            final Card landCard = callback.getBestBasicLand(bestColor, setsToUse);
             Integer count = colorSource.get(bestColor.toString());
             count++;
             colorSource.put(bestColor.toString(), count);

@@ -45,6 +45,7 @@ public class Homelands extends ExpansionSet {
 
     private Homelands() {
         super("Homelands", "HML", "", "mage.sets.homelands", new GregorianCalendar(1995, 9, 1).getTime(), Constants.SetType.EXPANSION);
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

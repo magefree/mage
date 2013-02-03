@@ -48,6 +48,8 @@ public class UrzasLegacy extends ExpansionSet {
     private UrzasLegacy() {
         super("Urza's Legacy", "ULG", "exp_symbol_mtgulg", "mage.sets.urzaslegacy", new GregorianCalendar(1999, 2, 6).getTime(), SetType.EXPANSION);
         this.blockName = "Urza";
+        this.parentSet = UrzasSaga.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

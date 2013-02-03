@@ -17,6 +17,7 @@ public class Darksteel extends ExpansionSet {
         super("Darksteel", "DST", "", "mage.sets.darksteel", new GregorianCalendar(2004, 1, 6).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Mirrodin";
         this.parentSet = Mirrodin.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

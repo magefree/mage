@@ -34,11 +34,16 @@
 
 package mage.client.dialog;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JLayeredPane;
+import mage.Constants;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
+import mage.cards.Sets;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
@@ -50,6 +55,7 @@ import mage.client.MageFrame;
 public class AddLandDialog extends MageDialog {
 
     private Deck deck;
+    private List<String> setCodesland;
 
     /** Creates new form AddLandDialog */
     public AddLandDialog() {
@@ -59,13 +65,46 @@ public class AddLandDialog extends MageDialog {
 
     public void showDialog(Deck deck) {
         this.deck = deck;
+
+        // find setCodes with basic lands from cards of the deck
+        List<String> setCodes = new LinkedList<String>();
+        for (Card card: this.deck.getCards()) {
+            if (!setCodes.contains(card.getExpansionSetCode())) {
+                setCodes.add(card.getExpansionSetCode());
+            }
+        }
+        for (Card card: this.deck.getSideboard()) {
+            if (!setCodes.contains(card.getExpansionSetCode())) {
+                setCodes.add(card.getExpansionSetCode());
+            }
+        }
+        List<String> landSets = new LinkedList<String>();
+        if (!setCodes.isEmpty()) {
+            // Add parent sets with the basic lands if the setlist don't include them
+            for (String setCode: setCodes) {
+                ExpansionSet expansionSet = Sets.findSet(setCode);
+                if (expansionSet.hasBasicLands()) {
+                    landSets.add(setCode);
+                } else if (expansionSet.getParentSet() != null && !landSets.contains(expansionSet.getParentSet().getCode())) {
+                    landSets.add(expansionSet.getParentSet().getCode());
+                } 
+            }
+        }
+        this.setCodesland = landSets;
+
+
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);
     }
 
     private void addLands(String landName, int number) {
         Random random = new Random();
-        List<CardInfo> cards = CardRepository.instance.findCards(landName);
+        CardCriteria criteria = new CardCriteria();
+        if (!setCodesland.isEmpty()) {
+            criteria.setCodes(setCodesland.toArray(new String[setCodesland.size()]));
+        }
+        criteria.rarities(Constants.Rarity.LAND).name(landName);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.isEmpty()) {
             return;
         }

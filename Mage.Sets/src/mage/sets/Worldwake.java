@@ -48,6 +48,7 @@ public class Worldwake extends ExpansionSet {
         super("Worldwake", "WWK", "seticon_WWK", "mage.sets.worldwake", new GregorianCalendar(2010, 0, 30).getTime(), SetType.EXPANSION);
         this.blockName = "Zendikar";
         this.parentSet = Zendikar.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;
         this.numBoosterCommon = 11;

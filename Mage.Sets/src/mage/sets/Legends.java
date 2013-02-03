@@ -45,6 +45,7 @@ public class Legends extends ExpansionSet {
 
     private Legends() {
         super("Legends", "LEG", "", "mage.sets.legends", new GregorianCalendar(1994, 5, 1).getTime(), Constants.SetType.EXPANSION);
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

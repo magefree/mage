@@ -46,5 +46,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
     private TimeSpiralTimeshifted() {
         super("Time Spiral \"Timeshifted\"", "TSB", "", "mage.sets.timeshifted", new GregorianCalendar(2006, 9, 9).getTime(), SetType.EXPANSION);
         this.blockName = "Time Spiral";
+        this.parentSet = TimeSpiral.getInstance();
+        this.hasBasicLands = false;
     }
 }

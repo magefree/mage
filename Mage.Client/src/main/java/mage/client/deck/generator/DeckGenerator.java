@@ -22,9 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import mage.Constants;
+import mage.cards.ExpansionSet;
 
 /**
  * Generates random card pool and builds a deck.
@@ -39,7 +42,7 @@ public class DeckGenerator {
 
     private static final int SPELL_CARD_POOL_SIZE = 180;
 
-    private static final int DECK_LANDS = 16;
+    private static final int DECK_LANDS = 17;
     private static final int MAX_NON_BASIC_SOURCE = DECK_LANDS / 2;
 
     private static final int MAX_TRIES = 4096;
@@ -159,21 +162,15 @@ public class DeckGenerator {
 
         final List<String> setsToUseFinal = setsToUse;
 
-        deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, landCardPool, new RateCallback() {
+        deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, setsToUseFinal, landCardPool, new RateCallback() {
             @Override
             public int rateCard(Card card) {
                 return 6;
             }
 
             @Override
-            public Card getBestBasicLand(ColoredManaSymbol color) {
-                int tries = 100;
-                Card land;
-                do {
-                    land = DeckGenerator.getBestBasicLand(color);
-                    tries--;
-                } while (!setsToUseFinal.contains(land.getExpansionSetCode()) && tries >= 0);
-                return land;
+            public Card getBestBasicLand(ColoredManaSymbol color, List<String> setsToUse) {
+                return DeckGenerator.getBestBasicLand(color, setsToUseFinal);
             }
         });
     }
@@ -336,29 +333,52 @@ public class DeckGenerator {
      * @param color
      * @return
      */
-    private static Card getBestBasicLand(ColoredManaSymbol color) {
-        if (color.equals(ColoredManaSymbol.G)) {
-            CardInfo cardInfo = CardRepository.instance.findCard("Forest");
-            return cardInfo != null ? cardInfo.getCard() : null;
-        }
-        if (color.equals(ColoredManaSymbol.R)) {
-            CardInfo cardInfo = CardRepository.instance.findCard("Mountain");
-            return cardInfo != null ? cardInfo.getCard() : null;
-        }
-        if (color.equals(ColoredManaSymbol.B)) {
-            CardInfo cardInfo = CardRepository.instance.findCard("Swamp");
-            return cardInfo != null ? cardInfo.getCard() : null;
-        }
-        if (color.equals(ColoredManaSymbol.U)) {
-            CardInfo cardInfo = CardRepository.instance.findCard("Island");
-            return cardInfo != null ? cardInfo.getCard() : null;
-        }
-        if (color.equals(ColoredManaSymbol.W)) {
-            CardInfo cardInfo = CardRepository.instance.findCard("Plains");
-            return cardInfo != null ? cardInfo.getCard() : null;
+    private static Card getBestBasicLand(ColoredManaSymbol color, List<String> setsToUse) {
+        String cardName = "";
+        switch(color) {
+            case G:
+                cardName = "Forest";
+                break;
+            case W:
+                cardName = "Plains";
+                break;
+            case R:
+                cardName = "Mountain";
+                break;
+            case B:
+                cardName = "Swamp";
+                break;
+            case U:
+                cardName = "Island";
+                break;
         }
 
-        return null;
+        List<String> landSets = new LinkedList<String>();
+        if (!setsToUse.isEmpty()) {
+            // Add parent sets with the basic lands if the setlist don't include them
+            for (String setCode: setsToUse) {
+                ExpansionSet expansionSet = Sets.findSet(setCode);
+                if (expansionSet.hasBasicLands()) {
+                    landSets.add(setCode);
+                } else if (expansionSet.getParentSet() != null && !landSets.contains(expansionSet.getParentSet().getCode())) {
+                    landSets.add(expansionSet.getParentSet().getCode());
+                }
+            }
+        }
+        CardCriteria criteria = new CardCriteria();
+        if (!landSets.isEmpty()) {
+            criteria.setCodes(landSets.toArray(new String[landSets.size()]));
+        }
+        criteria.rarities(Constants.Rarity.LAND).name(cardName);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+
+        if (cards.isEmpty() && !setsToUse.isEmpty()) {
+            cards = CardRepository.instance.findCards(cardName);
+        }
+
+        int randomInt = new Random().nextInt(cards.size());
+        return cards.get(randomInt).getCard();
+
     }
 
     protected static boolean isColoredMana(String symbol) {

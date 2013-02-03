@@ -46,6 +46,8 @@ public class FutureSight extends ExpansionSet {
     private FutureSight() {
         super("Future Sight", "FUT", "", "mage.sets.futuresight", new GregorianCalendar(2007, 4, 4).getTime(), SetType.EXPANSION);
         this.blockName = "Time Spiral";
+        this.parentSet = TimeSpiral.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

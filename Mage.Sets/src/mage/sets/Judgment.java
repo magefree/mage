@@ -46,6 +46,8 @@ public class Judgment extends ExpansionSet {
     private Judgment() {
         super("Judgment", "JUD", "exp_symbol_mtgjud", "mage.sets.judgment", new GregorianCalendar(2002, 5, 27).getTime(), SetType.EXPANSION);
         this.blockName = "Odyssey";
+        this.parentSet = Odyssey.getInstance();
+        this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -1,5 +1,6 @@
 package mage.interfaces.rate;
 
+import java.util.List;
 import mage.Constants;
 import mage.cards.Card;
 
@@ -10,5 +11,5 @@ import mage.cards.Card;
  */
 public interface RateCallback {
     int rateCard(Card card);
-    Card getBestBasicLand(Constants.ColoredManaSymbol color);
+    Card getBestBasicLand(Constants.ColoredManaSymbol color, List<String> setsToUse);
 }
