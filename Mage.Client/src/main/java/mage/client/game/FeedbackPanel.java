@@ -34,6 +34,15 @@
 
 package mage.client.game;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageTextArea;
@@ -43,15 +52,6 @@ import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -154,13 +154,20 @@ public class FeedbackPanel extends javax.swing.JPanel {
     }
 
     /**
-     * Close game window by pressing OK button after 5 seconds
+     * Close game window by pressing OK button after 8 seconds
      */
     private void endWithTimeout() {
         Runnable task = new Runnable() {
+            @Override
             public void run() {
                 logger.info("Ending game...");
-                FeedbackPanel.this.btnRight.doClick();
+                Component c = MageFrame.getGame(gameId);
+                while (c != null && !(c instanceof GamePane)) {
+                    c = c.getParent();
+                }
+                if (c != null && ((GamePane)c).isVisible()) { // check if GamePanel still visible 
+                    FeedbackPanel.this.btnRight.doClick();
+                }
             }
         };
         worker.schedule(task, 8, TimeUnit.SECONDS);
@@ -342,6 +349,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         btnRight.setText("Cancel");
         btnRight.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRightActionPerformed(evt);
             }
@@ -349,6 +357,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         btnLeft.setText("OK");
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLeftActionPerformed(evt);
             }
@@ -363,6 +372,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
         btnSpecial.setText("Special");
         btnSpecial.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSpecialActionPerformed(evt);
             }
