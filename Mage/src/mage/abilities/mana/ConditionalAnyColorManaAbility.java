@@ -47,8 +47,19 @@ public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyCo
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
-        super(Constants.Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(amount, manaBuilder), cost);
-        for (int i = 0; i < amount; i++) {
+        this(cost, amount, manaBuilder, false);
+    }
+
+    public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
+        super(Constants.Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(oneChoice ? 1 :amount, manaBuilder), cost);
+        int choices = amount;
+        if (oneChoice) {
+            for (int i = 1; i < amount; i++) {
+                this.addEffect(new AddConditionalManaOfAnyColorEffect(1 , manaBuilder));
+            }
+            choices = 1;
+        }
+        for (int i = 0; i < choices; i++) {
             this.addChoice(new ChoiceColor());
         }
         this.netMana.setAny(amount);
@@ -63,4 +74,3 @@ public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyCo
         return new ConditionalAnyColorManaAbility(this);
     }
 }
-

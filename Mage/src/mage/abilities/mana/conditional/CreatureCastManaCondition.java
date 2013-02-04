@@ -53,6 +53,6 @@ public class CreatureCastManaCondition extends ManaCondition implements Conditio
 
     @Override
     public boolean apply(Game game, Ability source, UUID originalId) {
-        return apply(game, source, null);
+        return apply(game, source);
     }
 }
