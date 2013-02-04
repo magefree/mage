@@ -32,8 +32,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ExileTargetForSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -43,6 +41,11 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.Constants;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -69,9 +72,7 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
 
-        // When Restoration Angel enters the battlefield, you may exile target non-Angel creature you control, then return that card to the battlefield under your control.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileTargetForSourceEffect("Restoration Angel"), true);
-        ability.addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new RestorationAngelEffect(), true);
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
     }
@@ -83,5 +84,46 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
     @Override
     public RestorationAngel copy() {
         return new RestorationAngel(this);
+    }
+}
+
+class RestorationAngelEffect extends OneShotEffect<RestorationAngelEffect> {
+
+    public RestorationAngelEffect() {
+        super(Constants.Outcome.Exile);
+        staticText = "you may exile target non-Angel creature you control, then return that card to the battlefield under your control";
+    }
+
+    public RestorationAngelEffect(final RestorationAngelEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public RestorationAngelEffect copy() {
+        return new RestorationAngelEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean exiled = false;
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            permanent.moveToExile(source.getSourceId(), "Restoration Angel", source.getSourceId(), game);
+            exiled = true;
+        } else {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                card.moveToExile(source.getSourceId(), "Restoration Angel", source.getSourceId(), game);
+                exiled = true;
+            }
+        }
+        if (exiled) {
+            Card card = game.getCard(targetPointer.getFirst(game, source));
+            if (card != null) {
+                Constants.Zone currentZone = game.getState().getZone(card.getId());
+                return card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId());
+            }
+        }
+        return exiled; 
     }
 }
