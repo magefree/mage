@@ -28,15 +28,17 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
