@@ -28,11 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -84,7 +86,7 @@ public class Realmwright extends CardImpl<Realmwright> {
 class RealmwrightEffect extends OneShotEffect<RealmwrightEffect> {
 
     public RealmwrightEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "Choose a basic land type";
     }
 
@@ -102,14 +104,15 @@ class RealmwrightEffect extends OneShotEffect<RealmwrightEffect> {
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
             ChoiceImpl choices = new ChoiceImpl(true);
+            choices.setMessage("Choose basic land type");
             choices.isRequired();
-            Set choicesSet = choices.getChoices();
-            choicesSet.add("Forest");
-            choicesSet.add("Plains");
-            choicesSet.add("Mountain");
-            choicesSet.add("Island");
-            choicesSet.add("Swamp");
-            if (you.choose(Constants.Outcome.Neutral, choices, game)) {
+            choices.getChoices().add("Forest");
+            choices.getChoices().add("Plains");
+            choices.getChoices().add("Mountain");
+            choices.getChoices().add("Island");
+            choices.getChoices().add("Swamp");
+            if (you.choose(Outcome.Neutral, choices, game)) {
+                game.informPlayers(new StringBuilder("Realmwright: ").append(" Chosen basic land type is ").append(choices.getChoice()).toString());
                 game.getState().setValue(source.getSourceId().toString() + "_Realmwright", choices.getChoice());
                 return true;
             }
@@ -121,7 +124,7 @@ class RealmwrightEffect extends OneShotEffect<RealmwrightEffect> {
 class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
 
     public RealmwrightEffect2() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Lands you control are the chosen type in addition to their other types";
     }
 
@@ -135,35 +138,76 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player you = game.getPlayer(source.getControllerId());
         List<Permanent> lands = game.getBattlefield().getAllActivePermanents(new FilterControlledLandPermanent(), source.getControllerId(), game);
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_Realmwright");
         if (you != null && choice != null) {
             for (Permanent land : lands) {
-                if (land != null && !land.getSubtype().contains(choice)) {
+                if (land != null) {
                     switch (layer) {
                         case TypeChangingEffects_4:
-                            if (sublayer == Constants.SubLayer.NA) {
+                            if (sublayer == SubLayer.NA && !land.getSubtype().contains(choice)) {
                                 land.getSubtype().add(choice);
                             }
                             break;
                         case AbilityAddingRemovingEffects_6:
-                            if (sublayer == Constants.SubLayer.NA) {
+                            if (sublayer == SubLayer.NA) {
+                                boolean addAbility = true;
                                 if (choice.equals("Forest")) {
-                                    land.addAbility(new GreenManaAbility(), source.getId(), game);
+                                    for (Ability existingAbility : land.getAbilities()) {
+                                        if (existingAbility instanceof GreenManaAbility) {
+                                            addAbility = false;
+                                            break;
+                                        }
+                                    }
+                                    if (addAbility) {
+                                        land.addAbility(new GreenManaAbility(), source.getId(), game);
+                                    }
                                 }
                                 if (choice.equals("Plains")) {
-                                    land.addAbility(new WhiteManaAbility(), source.getId(), game);
+                                    for (Ability existingAbility : land.getAbilities()) {
+                                        if (existingAbility instanceof WhiteManaAbility) {
+                                            addAbility = false;
+                                            break;
+                                        }
+                                    }
+                                    if (addAbility) {
+                                        land.addAbility(new WhiteManaAbility(), source.getId(), game);
+                                    }
                                 }
                                 if (choice.equals("Mountain")) {
-                                    land.addAbility(new RedManaAbility(), source.getId(), game);
+                                    for (Ability existingAbility : land.getAbilities()) {
+                                        if (existingAbility instanceof RedManaAbility) {
+                                            addAbility = false;
+                                            break;
+                                        }
+                                    }
+                                    if (addAbility) {
+                                        land.addAbility(new RedManaAbility(), source.getId(), game);
+                                    }
                                 }
                                 if (choice.equals("Island")) {
-                                    land.addAbility(new BlueManaAbility(), source.getId(), game);
+                                    for (Ability existingAbility : land.getAbilities()) {
+                                        if (existingAbility instanceof BlueManaAbility) {
+                                            addAbility = false;
+                                            break;
+                                        }
+                                    }
+                                    if (addAbility) {
+                                        land.addAbility(new BlueManaAbility(), source.getId(), game);
+                                    }
                                 }
                                 if (choice.equals("Swamp")) {
-                                    land.addAbility(new BlackManaAbility(), source.getId(), game);
+                                    for (Ability existingAbility : land.getAbilities()) {
+                                        if (existingAbility instanceof BlackManaAbility) {
+                                            addAbility = false;
+                                            break;
+                                        }
+                                    }
+                                    if (addAbility) {
+                                        land.addAbility(new BlackManaAbility(), source.getId(), game);
+                                    }
                                 }
                             }
                             break;
@@ -181,7 +225,7 @@ class RealmwrightEffect2 extends ContinuousEffectImpl<RealmwrightEffect2> {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 }
