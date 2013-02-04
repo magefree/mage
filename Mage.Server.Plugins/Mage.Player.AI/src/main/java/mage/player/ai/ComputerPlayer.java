@@ -935,13 +935,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     public boolean choose(Outcome outcome, Choice choice, Game game) {
         log.debug("choose 3");
         //TODO: improve this
-        if (choice.getMessage().equals("Choose creature type")) {
+        if (choice.getMessage() != null && choice.getMessage().equals("Choose creature type")) {
             chooseCreatureType(outcome, choice, game);
         }
         if (!choice.isChosen()) {
+            int choiceIdx = (int) (Math.random()*choice.getChoices().size()+1);
             Iterator iterator = choice.getChoices().iterator();
             while (iterator.hasNext()) {
                 String next = (String) iterator.next();
+                if (--choiceIdx > 0) {
+                    continue;
+                }
                 if (!next.isEmpty()) {
                     choice.setChoice(next);
                     break;
