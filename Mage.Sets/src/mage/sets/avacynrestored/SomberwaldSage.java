@@ -27,16 +27,17 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.ConditionalMana;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastConditionalMana;
 import mage.cards.CardImpl;
 
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -54,7 +55,7 @@ public class SomberwaldSage extends CardImpl<SomberwaldSage> {
         this.toughness = new MageInt(1);
 
         // {tap}: Add three mana of any one color to your mana pool. Spend this mana only to cast creature spells.
-        this.addAbility(new ConditionalAnyColorManaAbility(3, new SomberwaldSageManaBuilder()));
+        this.addAbility(new ConditionalAnyColorManaAbility(new TapSourceCost(), 3, new SomberwaldSageManaBuilder(), true));
     }
 
     public SomberwaldSage(final SomberwaldSage card) {
