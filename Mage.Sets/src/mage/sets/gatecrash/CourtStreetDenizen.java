@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -50,11 +51,12 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CourtStreetDenizen extends CardImpl<CourtStreetDenizen> {
 
-    private static final FilterPermanent filter = new FilterPermanent("another white creature");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another white creature");
     private static final FilterCreaturePermanent filterOpponentCreature = new FilterCreaturePermanent("creature an opponent controls");
     static {
         filter.add(new AnotherPredicate());
         filter.add(new ColorPredicate(ObjectColor.WHITE));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filterOpponentCreature.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
     public CourtStreetDenizen(UUID ownerId) {
