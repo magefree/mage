@@ -21,10 +21,10 @@ public class CardsInOpponentGraveCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player p = game.getPlayer(source.getControllerId());
-        if (p != null) {
-            for (UUID oppId : p.getInRange()) {
-                Player opponent = game.getPlayer(oppId);
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            for (UUID playerId : game.getOpponents(source.getControllerId())) {
+                Player opponent = game.getPlayer(playerId);
                 if (opponent != null && opponent.getGraveyard().size() >= value)
                     return true;
             }
