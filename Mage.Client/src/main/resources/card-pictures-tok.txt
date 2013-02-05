@@ -1,3 +1,12 @@
+|Generate|TOK:GTC|Angel|
+|Generate|TOK:GTC|Rat|
+|Generate|TOK:GTC|Frog-Lizard|
+|Generate|TOK:GTC|Cleric|
+|Generate|TOK:GTC|Horror|
+|Generate|TOK:GTC|Soldier|
+|Generate|TOK:GTC|Spirit|
+|Generate|EMBLEM:GTC|Domri Rade|
+
 |Generate|TOK:RTR|Bird|
 |Generate|TOK:RTR|Knight|
 |Generate|TOK:RTR|Soldier|
