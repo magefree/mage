@@ -194,5 +194,28 @@ public class Sets extends HashMap<String, ExpansionSet> {
         return boosterSets.toArray(new ExpansionSet[0]);
     }
 
+    /**
+     * Gives back the set codes from the sets that include basic lands.
+     * If the input set itself does not incluse basic lands, but it has a parent set,
+     * only this parent set code is added to the return sets.
+     *
+     * @param setCodes
+     * @return - setCodes that have basic lands
+     */
+    public static Set<String> getSetsWithBasicLandsAsCodes(Set<String> setCodes) {
+        Set<String> landSets = new LinkedHashSet<String>();
+        if (setCodes != null && !setCodes.isEmpty()) {
+            // Add parent sets with the basic lands if the setlist don't include them
+            for (String setCode: setCodes) {
+                ExpansionSet expansionSet = Sets.findSet(setCode);
+                if (expansionSet.hasBasicLands()) {
+                    landSets.add(setCode);
+                } else if (expansionSet.getParentSet() != null && !landSets.contains(expansionSet.getParentSet().getCode())) {
+                    landSets.add(expansionSet.getParentSet().getCode());
+                }
+            }
+        }
+        return landSets;
+    }
 
 }

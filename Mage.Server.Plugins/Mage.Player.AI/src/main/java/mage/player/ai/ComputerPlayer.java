@@ -84,6 +84,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.cards.Sets;
+import mage.cards.repository.CardCriteria;
 
 /**
  *
@@ -1170,7 +1172,15 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     private static void addBasicLands(Deck deck, String landName, int number) {
         Random random = new Random();
-        List<CardInfo> cards = CardRepository.instance.findCards(landName);
+        Set<String> landSets =  Sets.getSetsWithBasicLandsAsCodes(deck.getExpansionSetCodes());
+
+        CardCriteria criteria = new CardCriteria();
+        if (!landSets.isEmpty()) {
+            criteria.setCodes(landSets.toArray(new String[landSets.size()]));
+        }
+        criteria.rarities(Constants.Rarity.LAND).name(landName);
+        List<CardInfo> cards = CardRepository.instance.findCards(criteria);
+
         if (cards.isEmpty()) {
             return;
         }
@@ -1208,29 +1218,46 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             mana.add(card.getManaCost().getMana());
         }
         double total = mana.getBlack() + mana.getBlue() + mana.getGreen() + mana.getRed() + mana.getWhite();
+        int mostLand = 0;
+        String mostLandName = "Forest";
         if (mana.getGreen() > 0) {
             int number = (int) Math.round(mana.getGreen() / total * 17);
             addBasicLands(deck, "Forest", number);
+            mostLand = number;
         }
         if (mana.getBlack() > 0) {
             int number = (int) Math.round(mana.getBlack() / total * 17);
             addBasicLands(deck, "Swamp", number);
+            if (number > mostLand) {
+                mostLand = number;
+                mostLandName = "Swamp";
+            }
         }
         if (mana.getBlue() > 0) {
             int number = (int) Math.round(mana.getBlue() / total * 17);
             addBasicLands(deck, "Island", number);
+            if (number > mostLand) {
+                mostLand = number;
+                mostLandName = "Island";
+            }
         }
         if (mana.getWhite() > 0) {
             int number = (int) Math.round(mana.getWhite() / total * 17);
             addBasicLands(deck, "Plains", number);
+            if (number > mostLand) {
+                mostLand = number;
+                mostLandName = "Plains";
+            }
         }
         if (mana.getRed() > 0) {
             int number = (int) Math.round(mana.getRed() / total * 17);
             addBasicLands(deck, "Mountain", number);
+            if (number > mostLand) {
+                mostLandName = "Plains";
+            }
         }
 
-        //TODO: improve this
-        addBasicLands(deck, "Forest", 40 - deck.getCards().size());
+        addBasicLands(deck, mostLandName, 40 - deck.getCards().size());
 
         return deck;
     }

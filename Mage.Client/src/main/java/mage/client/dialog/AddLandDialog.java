@@ -37,6 +37,7 @@ package mage.client.dialog;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import javax.swing.JLayeredPane;
 import mage.Constants;
 import mage.cards.Card;
@@ -55,7 +56,7 @@ import mage.client.MageFrame;
 public class AddLandDialog extends MageDialog {
 
     private Deck deck;
-    private List<String> setCodesland;
+    private Set<String> setCodesland;
 
     /** Creates new form AddLandDialog */
     public AddLandDialog() {
@@ -65,33 +66,7 @@ public class AddLandDialog extends MageDialog {
 
     public void showDialog(Deck deck) {
         this.deck = deck;
-
-        // find setCodes with basic lands from cards of the deck
-        List<String> setCodes = new LinkedList<String>();
-        for (Card card: this.deck.getCards()) {
-            if (!setCodes.contains(card.getExpansionSetCode())) {
-                setCodes.add(card.getExpansionSetCode());
-            }
-        }
-        for (Card card: this.deck.getSideboard()) {
-            if (!setCodes.contains(card.getExpansionSetCode())) {
-                setCodes.add(card.getExpansionSetCode());
-            }
-        }
-        List<String> landSets = new LinkedList<String>();
-        if (!setCodes.isEmpty()) {
-            // Add parent sets with the basic lands if the setlist don't include them
-            for (String setCode: setCodes) {
-                ExpansionSet expansionSet = Sets.findSet(setCode);
-                if (expansionSet.hasBasicLands()) {
-                    landSets.add(setCode);
-                } else if (expansionSet.getParentSet() != null && !landSets.contains(expansionSet.getParentSet().getCode())) {
-                    landSets.add(expansionSet.getParentSet().getCode());
-                } 
-            }
-        }
-        this.setCodesland = landSets;
-
+        this.setCodesland = Sets.getSetsWithBasicLandsAsCodes(deck.getExpansionSetCodes());
 
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);

@@ -28,10 +28,12 @@
 
 package mage.cards.decks;
 
-import mage.cards.*;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
+import mage.cards.*;
 import mage.game.GameException;
 
 public class Deck implements Serializable {
@@ -49,20 +51,24 @@ public class Deck implements Serializable {
         deck.setName(deckCardLists.getName());
         for (String cardName: deckCardLists.getCards()) {
             Card card = CardImpl.createCard(cardName);
-            if (card != null)
+            if (card != null) {
                 deck.cards.add(CardImpl.createCard(cardName));
+            }
             else {
-                if (!ignoreErrors)
+                if (!ignoreErrors) {
                     throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+                }
             }
         }
         for (String cardName: deckCardLists.getSideboard()) {
             Card card = CardImpl.createCard(cardName);
-            if (card != null)
+            if (card != null) {
                 deck.sideboard.add(CardImpl.createCard(cardName));
+            }
             else {
-                if (!ignoreErrors)
+                if (!ignoreErrors) {
                     throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+                }
             }
         }
 
@@ -81,6 +87,21 @@ public class Deck implements Serializable {
         }
 
         return deckCardLists;
+    }
+
+    public Set<String> getExpansionSetCodes() {
+        Set<String> sets = new LinkedHashSet<String>();
+        for (Card card : getCards()) {
+            if (!sets.contains(card.getExpansionSetCode())) {
+                sets.add(card.getExpansionSetCode());
+            }
+        }
+        for (Card card : getSideboard()) {
+            if (!sets.contains(card.getExpansionSetCode())) {
+                sets.add(card.getExpansionSetCode());
+            }
+        }
+        return sets;
     }
 
     /**
