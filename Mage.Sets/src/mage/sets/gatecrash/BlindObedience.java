@@ -93,8 +93,8 @@ class BlindObedienceTapEffect extends ReplacementEffectImpl<BlindObedienceTapEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Card c = game.getCard(event.getTargetId());
-            if (c != null && (c.getCardType().contains(CardType.CREATURE) || c.getCardType().contains(CardType.ARTIFACT))) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && (permanent.getCardType().contains(CardType.CREATURE) || permanent.getCardType().contains(CardType.ARTIFACT))) {
                 return true;
             }
         }
