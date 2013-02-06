@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.util.functions.ApplyToPermanent;
 import mage.util.functions.EmptyApplyToPermanent;
 
 /**
@@ -46,13 +47,23 @@ import mage.util.functions.EmptyApplyToPermanent;
 public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
 
     private FilterPermanent filter;
+    private ApplyToPermanent applier;
 
      public CopyPermanentEffect() {
          this(new FilterCreaturePermanent());
      }
 
+     public CopyPermanentEffect(ApplyToPermanent applier) {
+        this(new FilterCreaturePermanent(), applier);
+    }
+
     public CopyPermanentEffect(FilterPermanent filter) {
+        this(filter, new EmptyApplyToPermanent());
+    }
+
+    public CopyPermanentEffect(FilterPermanent filter, ApplyToPermanent applier) {
         super(Outcome.Copy);
+        this.applier = applier;
         this.filter = filter;
         this.staticText = "You may have {this} enter the battlefield as a copy of any " + filter.getMessage() + " on the battlefield";
     }
@@ -60,6 +71,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     public CopyPermanentEffect(final CopyPermanentEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
+        this.applier = effect.applier;
     }
 
     @Override
@@ -72,7 +84,7 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
                 player.choose(Outcome.Copy, target, source.getSourceId(), game);
                 Permanent copyFromPermanent = game.getPermanent(target.getFirstTarget());
                 if (copyFromPermanent != null) {
-                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
+                    game.copyPermanent(copyFromPermanent, sourcePermanent, source, applier);
 
                     return true;
                 }
@@ -85,5 +97,4 @@ public class CopyPermanentEffect extends OneShotEffect<CopyPermanentEffect> {
     public CopyPermanentEffect copy() {
         return new CopyPermanentEffect(this);
     }
-
 }
