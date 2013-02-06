@@ -285,7 +285,25 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             if (!target.isRequired())
                 return false;
         }
-        return false;
+        if (target instanceof TargetCardInGraveyard) {
+            List<Card> cards = new ArrayList<Card>();
+            for (Player player: game.getPlayers().values()) {
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    if (target.canTarget(card.getId(), game)) {
+                        cards.add(card);
+                    }
+                }
+            }
+            for (Card card: cards) {
+                target.add(card.getId(), game);
+                if (target.isChosen()) {
+                    return true;
+                }
+            }
+            return target.isChosen();
+        }
+        throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
+//        return false;
     }
 
     @Override
