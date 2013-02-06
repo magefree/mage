@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
 public class DebtorsPulpit extends CardImpl<DebtorsPulpit> {
 
     public DebtorsPulpit(UUID ownerId) {
-        super(ownerId, 10, "Debtor's Pulpit", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
+        super(ownerId, 10, "Debtor's Pulpit", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{4}{W}");
         this.expansionSetCode = "GTC";
 
         this.subtype.add("Aura");

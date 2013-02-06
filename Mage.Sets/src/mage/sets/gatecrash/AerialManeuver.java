@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AerialManeuver extends CardImpl<AerialManeuver> {
 
     public AerialManeuver(UUID ownerId) {
-        super(ownerId, 1, "Aerial Maneuver", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{W}");
+        super(ownerId, 1, "Aerial Maneuver", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "GTC";
 
         this.color.setWhite(true);

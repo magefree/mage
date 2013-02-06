@@ -44,7 +44,7 @@ import mage.cards.CardImpl;
 public class DaringSkyjek extends CardImpl<DaringSkyjek> {
 
     public DaringSkyjek(UUID ownerId) {
-        super(ownerId, 9, "Daring Skyjek", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        super(ownerId, 9, "Daring Skyjek", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Human");
         this.subtype.add("Knight");

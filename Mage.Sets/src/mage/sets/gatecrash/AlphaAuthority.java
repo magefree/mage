@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class AlphaAuthority extends CardImpl<AlphaAuthority> {
 
     public AlphaAuthority(UUID ownerId) {
-        super(ownerId, 114, "Alpha Authority", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
+        super(ownerId, 114, "Alpha Authority", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{G}");
         this.expansionSetCode = "GTC";
 
         this.subtype.add("Aura");

@@ -49,7 +49,7 @@ public class AngelicEdict extends CardImpl<AngelicEdict> {
     }
 
     public AngelicEdict(UUID ownerId) {
-        super(ownerId, 2, "Angelic Edict", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}");
+        super(ownerId, 2, "Angelic Edict", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{W}");
         this.expansionSetCode = "GTC";
 
         this.color.setWhite(true);
