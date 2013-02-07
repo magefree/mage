@@ -20,15 +20,16 @@
     </tournamentTypes>
     <deckTypes>
         <deckType name="Constructed - Extended" jar="mage-deck-constructed.jar" className="mage.deck.Extended"/>
-        <deckType name="Constructed - Innistrad Block" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
-        <deckType name="Constructed - Kamigawa Block" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
-        <deckType name="Constructed - Return to Ravnica Block" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
-        <deckType name="Constructed - Scars of Mirrodin Block" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
-        <deckType name="Constructed - Shadowmoore Block" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmooreBlock"/>
-        <deckType name="Constructed - Shards of Alara Block" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Constructed - Standard" jar="mage-deck-constructed.jar" className="mage.deck.Standard"/>
         <deckType name="Constructed - Vintage" jar="mage-deck-constructed.jar" className="mage.deck.Vintage"/>
-        <deckType name="Constructed - Zendikar Block" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
+        <deckType name="Block Constructed - Innistrad" jar="mage-deck-constructed.jar" className="mage.deck.InnistradBlock"/>
+        <deckType name="Block Constructed - Kamigawa" jar="mage-deck-constructed.jar" className="mage.deck.KamigawaBlock"/>
+        <deckType name="Block Constructed - Return to Ravnica" jar="mage-deck-constructed.jar" className="mage.deck.ReturnToRavnicaBlock"/>
+        <deckType name="Block Constructed - Scars of Mirrodin" jar="mage-deck-constructed.jar" className="mage.deck.ScarsOfMirrodinBlock"/>
+        <deckType name="Block Constructed - Shadowmoore" jar="mage-deck-constructed.jar" className="mage.deck.ShadowmooreBlock"/>
+        <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed.jar" className="mage.deck.ShardsOfAlaraBlock"/>
+        <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed.jar" className="mage.deck.ZendikarBlock"/>
+        <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Limited" jar="mage-deck-limited.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>
