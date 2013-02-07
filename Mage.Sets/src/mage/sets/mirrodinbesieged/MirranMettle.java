@@ -53,7 +53,7 @@ public class MirranMettle extends CardImpl<MirranMettle> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
 
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn), MetalcraftCondition.getInstance(), effectText, true));
     }
 
     public MirranMettle(final MirranMettle card) {

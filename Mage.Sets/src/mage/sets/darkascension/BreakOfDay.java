@@ -57,7 +57,7 @@ public class BreakOfDay extends CardImpl<BreakOfDay> {
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new IndestructibleAllEffect(new FilterControlledCreaturePermanent("creatures you control"), Duration.EndOfTurn),
                 FatefulHourCondition.getInstance(),
-                "If you have 5 or less life, those creatures also are indestructible this turn."));
+                "If you have 5 or less life, those creatures also are indestructible this turn.", true));
     }
 
     public BreakOfDay(final BreakOfDay card) {

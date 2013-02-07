@@ -53,7 +53,7 @@ public class TombHex extends CardImpl<TombHex> {
         // Target creature gets -2/-2 until end of turn.
         // Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead.
         this.addWatcher(new LandfallWatcher());
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(-4, -4, Constants.Duration.EndOfTurn), new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), LandfallCondition.getInstance(), "Target creature gets -2/-2 until end of turn. Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead"));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(-4, -4, Constants.Duration.EndOfTurn), new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), LandfallCondition.getInstance(), "Target creature gets -2/-2 until end of turn. Landfall - If you had a land enter the battlefield under your control this turn, that creature gets -4/-4 until end of turn instead", true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
