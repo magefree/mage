@@ -33,7 +33,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -46,7 +45,6 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -150,6 +148,7 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
         permanent.getColor().setColor(card.getColor());
         permanent.getManaCost().clear();
         permanent.getManaCost().add(card.getManaCost());
+        permanent.getCardType().clear();
         for (CardType type : card.getCardType()) {
             if (!permanent.getCardType().contains(type)) {
                 permanent.getCardType().add(type);
@@ -160,12 +159,16 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
                 permanent.getSubtype().add(type);
             }
         }
+        permanent.getSupertype().clear();
+        permanent.getSupertype().add("Legendary");
         for (String type : card.getSupertype()) {
             if (!permanent.getSupertype().contains(type)) {
                 permanent.getSupertype().add(type);
             }
         }
         permanent.setExpansionSetCode(card.getExpansionSetCode());
+        permanent.getAbilities().clear();
+        permanent.getAbilities().add(HexproofAbility.getInstance());
         for (Ability ability : card.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {
                 permanent.addAbility(ability, source.getId(), game);
