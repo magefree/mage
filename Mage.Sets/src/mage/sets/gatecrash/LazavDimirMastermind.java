@@ -33,6 +33,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -45,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -98,15 +100,17 @@ class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            UUID cardId = event.getTargetId();
-            Card card = game.getCard(cardId);
-            if (zEvent.getToZone() == Zone.GRAVEYARD
-                    && game.getOpponents(controllerId).contains(card.getOwnerId())
-                    && card.getCardType().contains(CardType.CREATURE)) {
+        if (event.getType() == EventType.ZONE_CHANGE
+                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
+            MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+            if (object == null) {
+                return false;
+            }
+            if (game.getOpponents(controllerId).contains(event.getPlayerId())
+                    && object.getCardType().contains(CardType.CREATURE)
+                    && (!(object instanceof PermanentToken))) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(cardId));
+                    effect.setTargetPointer(new FixedTarget(object.getId()));
                 }
                 return true;
             }
@@ -148,17 +152,25 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
         permanent.getManaCost().clear();
         permanent.getManaCost().add(card.getManaCost());
         for (CardType type : card.getCardType()) {
-            permanent.getCardType().add(type);
+            if (!permanent.getCardType().contains(type)) {
+                permanent.getCardType().add(type);
+            }
         }
         for (String type : card.getSubtype()) {
-            permanent.getSubtype().add(type);
+            if (!permanent.getSubtype().contains(type)) {
+                permanent.getSubtype().add(type);
+            }
         }
         for (String type : card.getSupertype()) {
-            permanent.getSupertype().add(type);
+            if (!permanent.getSupertype().contains(type)) {
+                permanent.getSupertype().add(type);
+            }
         }
         permanent.setExpansionSetCode(card.getExpansionSetCode());
         for (Ability ability : card.getAbilities()) {
-            permanent.addAbility(ability, source.getId(), game);
+            if (!permanent.getAbilities().contains(ability)) {
+                permanent.addAbility(ability, source.getId(), game);
+            }
         }
         return true;
     }
