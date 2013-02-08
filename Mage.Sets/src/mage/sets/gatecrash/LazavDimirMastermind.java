@@ -102,15 +102,14 @@ class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityI
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
-            MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            if (object == null) {
+            Card card = game.getCard(event.getTargetId());
+            if (card == null) {
                 return false;
             }
             if (game.getOpponents(controllerId).contains(event.getPlayerId())
-                    && object.getCardType().contains(CardType.CREATURE)
-                    && (!(object instanceof PermanentToken))) {
+                    && card.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(object.getId()));
+                    effect.setTargetPointer(new FixedTarget(card.getId()));
                 }
                 return true;
             }
