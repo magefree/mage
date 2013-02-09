@@ -76,7 +76,7 @@ class DeathcultRogueRestrictionEffect extends RestrictionEffect<DeathcultRogueRe
 
     public DeathcultRogueRestrictionEffect() {
         super(Duration.WhileOnBattlefield);
-        staticText = "Deathcult Rogue can't be blocked except by Rogues.";
+        staticText = "Deathcult Rogue can't be blocked except by Rogues";
     }
 
     public DeathcultRogueRestrictionEffect(final DeathcultRogueRestrictionEffect effect) {

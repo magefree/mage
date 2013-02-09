@@ -27,6 +27,7 @@
  */
 package mage.sets.gatecrash;
 
+import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -168,9 +169,12 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
             }
         }
         permanent.setExpansionSetCode(card.getExpansionSetCode());
-        permanent.getAbilities().clear();
-        permanent.getAbilities().add(HexproofAbility.getInstance());
-        permanent.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility(), source.getSourceId(), game);
+        for (Iterator<Ability> it = permanent.getAbilities().iterator();it.hasNext();) {
+            Ability ability = it.next();
+            if (!(ability instanceof HexproofAbility) && !(ability instanceof CreatureCardPutOpponentGraveyardTriggeredAbility)) {
+                it.remove();
+            }
+        }
         for (Ability ability : card.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {
                 permanent.addAbility(ability, source.getId(), game);
