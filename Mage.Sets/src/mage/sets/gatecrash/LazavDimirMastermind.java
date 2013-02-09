@@ -154,6 +154,7 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
                 permanent.getCardType().add(type);
             }
         }
+        permanent.getSubtype().clear();
         for (String type : card.getSubtype()) {
             if (!permanent.getSubtype().contains(type)) {
                 permanent.getSubtype().add(type);
@@ -169,6 +170,7 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
         permanent.setExpansionSetCode(card.getExpansionSetCode());
         permanent.getAbilities().clear();
         permanent.getAbilities().add(HexproofAbility.getInstance());
+        permanent.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility(), source.getSourceId(), game);
         for (Ability ability : card.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {
                 permanent.addAbility(ability, source.getId(), game);
