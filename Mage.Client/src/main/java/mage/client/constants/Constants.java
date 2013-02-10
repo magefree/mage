@@ -96,6 +96,7 @@ public final class Constants {
         CASTING_COST ("Casting Cost"),
         RARITY ("Rarity"),
         COLOR ("Color"),
+        COLOR_DETAILED ("Color Detailed"),
         NAME ("Name"),
         UNSORTED ("Unsorted");
 

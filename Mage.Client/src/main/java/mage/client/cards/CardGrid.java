@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
+import mage.ObjectColor;
 
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;
@@ -132,6 +133,9 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                 case COLOR:
                     Collections.sort(sortedCards, new CardColorComparator());
                     break;
+                case COLOR_DETAILED:
+                    Collections.sort(sortedCards, new CardColorDetailedComparator());
+                    break;
                 case CASTING_COST:
                     Collections.sort(sortedCards, new CardCostComparator());
                     break;
@@ -156,6 +160,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
                             break;
                         case COLOR:
                             if (cardImg.getOriginal().getColor().compareTo(lastCard.getOriginal().getColor()) != 0) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case COLOR_DETAILED:
+                            if (cardImg.getOriginal().getColor().hashCode() !=  lastCard.getOriginal().getColor().hashCode()) {
                                 curColumn++;
                                 curRow = 0;
                             }
@@ -341,6 +351,21 @@ class CardColorComparator implements Comparator<MageCard> {
     @Override
     public int compare(MageCard o1, MageCard o2) {
         int val = o1.getOriginal().getColor().compareTo(o2.getOriginal().getColor());
+        if (val == 0) {
+            return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
+        }
+        else {
+            return val;
+        }
+    }
+
+}
+
+class CardColorDetailedComparator implements Comparator<MageCard> {
+
+    @Override
+    public int compare(MageCard o1, MageCard o2) {
+        int val = o1.getOriginal().getColor().hashCode() - o2.getOriginal().getColor().hashCode();
         if (val == 0) {
             return o1.getOriginal().getName().compareTo(o2.getOriginal().getName());
         }

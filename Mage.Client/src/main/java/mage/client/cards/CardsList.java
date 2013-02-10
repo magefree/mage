@@ -185,6 +185,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                 case COLOR:
                     Collections.sort(sortedCards, new CardViewColorComparator());
                     break;
+                case COLOR_DETAILED:
+                    Collections.sort(sortedCards, new CardViewColorDetailedComparator());
+                    break;
                 case CASTING_COST:
                     Collections.sort(sortedCards, new CardViewCostComparator());
                     break;
@@ -209,6 +212,12 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                             break;
                         case COLOR:
                             if (card.getColor().compareTo(lastCard.getColor()) != 0) {
+                                curColumn++;
+                                curRow = 0;
+                            }
+                            break;
+                        case COLOR_DETAILED:
+                            if (card.getColor().hashCode() != lastCard.getColor().hashCode()) {
                                 curColumn++;
                                 curRow = 0;
                             }
