@@ -59,7 +59,7 @@ public class GateHound extends CardImpl<GateHound> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
                 new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent()),
-                EnchantedCondition.getInstance(),
+                new EnchantedCondition(),
                 "Creatures you control have vigilance as long as {this} is enchanted")));
     }
 

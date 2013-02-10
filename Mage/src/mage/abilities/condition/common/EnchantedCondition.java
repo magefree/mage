@@ -40,23 +40,30 @@ import mage.game.permanent.Permanent;
  */
 public class EnchantedCondition implements Condition {
 
-    private static EnchantedCondition fInstance = new EnchantedCondition();
+    private int numberOfEnchantments;
 
-    public static Condition getInstance() {
-        return fInstance;
+    public EnchantedCondition() {
+        this(1);
+    }
+
+    public EnchantedCondition(int numberOfEnchantments) {
+        this.numberOfEnchantments = numberOfEnchantments;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
+        int numberOfFoundEnchantments = 0;
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
                 if (attached != null && attached.getCardType().contains(CardType.ENCHANTMENT)) {
-                    return true;
+                    if (++numberOfFoundEnchantments  >= numberOfEnchantments) {
+                        return true;
+                    }
                 }
             }
         }
-        return false;
+        return (numberOfFoundEnchantments >= numberOfEnchantments);
     }
 }

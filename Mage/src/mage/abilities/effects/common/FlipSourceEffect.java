@@ -25,7 +25,7 @@ public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent p = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.flip(game);
+            return p.flip(game);
         }
         return false;
     }

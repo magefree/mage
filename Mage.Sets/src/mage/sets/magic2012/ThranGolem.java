@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -62,13 +63,14 @@ public class ThranGolem extends CardImpl<ThranGolem> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
 
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), EnchantedCondition.getInstance(), rule1);
+        Condition enchanted = new EnchantedCondition();
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), enchanted, rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), EnchantedCondition.getInstance(), rule2);
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FlyingAbility.getInstance()), enchanted, rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
-        ConditionalContinousEffect effect3 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EnchantedCondition.getInstance(), rule3);
+        ConditionalContinousEffect effect3 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), enchanted, rule3);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect3));
-        ConditionalContinousEffect effect4 = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), EnchantedCondition.getInstance(), rule4);
+        ConditionalContinousEffect effect4 = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), enchanted, rule4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect4));
     }
 
