@@ -30,7 +30,10 @@
 
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -45,7 +48,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
 
-import java.util.UUID;
+
 
 /**
  * @author LevelX
@@ -59,7 +62,7 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
     }
 
     public BushiTenderfoot(UUID ownerId) {
-        super(ownerId, 2, "Bushi Tenderfoot", Constants.Rarity.UNCOMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{W}");
+        super(ownerId, 2, "Bushi Tenderfoot", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
@@ -71,7 +74,7 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), "")));
     }
 
     public BushiTenderfoot(final BushiTenderfoot card) {
@@ -89,7 +92,7 @@ class KenzoTheHardhearted extends Token {
     KenzoTheHardhearted() {
         super("Kenzo the Hardhearted", "");
         supertype.add("Legendary");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Human");
         subtype.add("Samurai");
