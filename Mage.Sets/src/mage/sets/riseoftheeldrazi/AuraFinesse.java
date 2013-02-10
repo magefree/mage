@@ -102,9 +102,13 @@ class AuraFinesseEffect extends OneShotEffect<AuraFinesseEffect> {
         Permanent aura = game.getPermanent(source.getFirstTarget());
         Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (aura != null && creature != null) {
-            aura.attachTo(creature.getId(), game);
-            creature.addAttachment(aura.getId(), game);
-            return true;
+            Permanent oldCreature = game.getPermanent(aura.getAttachedTo());
+            if (oldCreature == null || oldCreature.equals(creature)) {
+                return false;
+            }
+            if (oldCreature.removeAttachment(aura.getId(), game)) {
+                return creature.addAttachment(aura.getId(), game);
+            }
         }
         return false;
     }
