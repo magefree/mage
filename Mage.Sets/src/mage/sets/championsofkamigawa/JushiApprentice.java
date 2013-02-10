@@ -73,7 +73,7 @@ public class JushiApprentice extends CardImpl<JushiApprentice> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(), new CardsInHandCondition(CountType.MORE_THAN, 8),
-                    "If you have nine or more cards in hand, flip Jushi Apprentice"));
+                    "If you have nine or more cards in hand, flip {this}"));
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TomoyaTheRevealer()), FlippedCondition.getInstance(), "")));
     }

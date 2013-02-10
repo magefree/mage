@@ -91,7 +91,7 @@ class NezumiGraverobberFlipEffect extends OneShotEffect<NezumiGraverobberFlipEff
 
     NezumiGraverobberFlipEffect() {
         super(Constants.Outcome.BecomeCreature);
-        staticText = "If no cards are in that graveyard, flip Nezumi Graverobber";
+        staticText = "If no cards are in that graveyard, flip {this}";
     }
 
     NezumiGraverobberFlipEffect(final NezumiGraverobberFlipEffect effect) {

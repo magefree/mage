@@ -109,7 +109,7 @@ class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility<StudentOfE
 
     @Override
     public String getRule() {
-        return "When Student of Elements has flying, flip it.";
+        return "When {this} has flying, flip it.";
     }
 
 }
