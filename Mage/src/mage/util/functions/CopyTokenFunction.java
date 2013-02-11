@@ -28,8 +28,11 @@
 package mage.util.functions;
 
 import mage.Constants;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.game.permanent.PermanentCard;
+import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
 
 /**
@@ -40,44 +43,54 @@ public class CopyTokenFunction implements Function<Token, Card> {
     protected Token target;
 
     public CopyTokenFunction(Token target) {
-        if (target == null)
+        if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
+        }
         this.target = target;
     }
 
     @Override
     public Token apply(Card source) {
-        if (target == null)
+        if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
+        }
+        // A copy contains only the attributes of the basic card or basic Token that's the base of the permanent
+        // else gained abililies would be copied too.
+        MageObject sourceObj = source;
+        if (source instanceof PermanentToken) {
+            sourceObj = ((PermanentToken) source).getToken();
+        } else if (source instanceof PermanentCard) {
+            sourceObj = ((PermanentCard) source).getCard();
+        }
 
-        target.setName(source.getName());
-        target.getColor().setColor(source.getColor());
+        target.setName(sourceObj.getName());
+        target.getColor().setColor(sourceObj.getColor());
         target.getManaCost().clear();
-        target.getManaCost().add(source.getManaCost());
+        target.getManaCost().add(sourceObj.getManaCost());
         target.getCardType().clear();
-        for (Constants.CardType type : source.getCardType()) {
+        for (Constants.CardType type : sourceObj.getCardType()) {
             target.getCardType().add(type);
         }
         target.getSubtype().clear();
-        for (String type : source.getSubtype()) {
+        for (String type : sourceObj.getSubtype()) {
             target.getSubtype().add(type);
         }
         target.getSupertype().clear();
-        for (String type : source.getSupertype()) {
+        for (String type : sourceObj.getSupertype()) {
             target.getSupertype().add(type);
         }
         //target.setExpansionSetCode(source.getExpansionSetCode());
         target.getAbilities().clear();
 
-        for (Ability ability0 : source.getAbilities()) {
+        for (Ability ability0 : sourceObj.getAbilities()) {
             Ability ability = ability0.copy();
             ability.newId();
             ability.setSourceId(target.getId());
             target.addAbility(ability);
         }
         // Needed to do it this way because only the cardValue does not include the increased value from cards like "Intangible Virtue" will be copied.
-        target.getPower().initValue(Integer.parseInt(source.getPower().toString()));
-        target.getToughness().initValue(Integer.parseInt(source.getToughness().toString()));
+        target.getPower().initValue(Integer.parseInt(sourceObj.getPower().toString()));
+        target.getToughness().initValue(Integer.parseInt(sourceObj.getToughness().toString()));
 
         return target;
     }
