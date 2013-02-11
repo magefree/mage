@@ -94,8 +94,8 @@ class MysticGenesisEffect extends OneShotEffect<MysticGenesisEffect> {
                 int cmc = stackObject.getManaCost().convertedManaCost();
                 if ( cmc > 0 ) {
                     MysticGenesisOozeToken oozeToken = new MysticGenesisOozeToken();
-                    oozeToken.getPower().setValue(cmc);
-                    oozeToken.getToughness().setValue(cmc);
+                    oozeToken.getPower().initValue(cmc);
+                    oozeToken.getToughness().initValue(cmc);
                     oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
                 }
                 return true;

@@ -105,8 +105,8 @@ class OozeFluxCreateTokenEffect extends OneShotEffect<OozeFluxCreateTokenEffect>
         }
         Token tokenCopy = token.copy();
         tokenCopy.getAbilities().newId();
-        tokenCopy.getPower().setValue(xValue);
-        tokenCopy.getToughness().setValue(xValue);
+        tokenCopy.getPower().initValue(xValue);
+        tokenCopy.getToughness().initValue(xValue);
         tokenCopy.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         return true;
     }

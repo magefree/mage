@@ -97,8 +97,8 @@ class MimingSlimeEffect extends OneShotEffect<MimingSlimeEffect> {
                 }
             }
             OozeToken oozeToken = new OozeToken();
-            oozeToken.getPower().setValue(amount);
-            oozeToken.getToughness().setValue(amount);
+            oozeToken.getPower().initValue(amount);
+            oozeToken.getToughness().initValue(amount);
             oozeToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }
@@ -111,6 +111,7 @@ class OozeToken extends Token {
         super("Ooze", "X/X green Ooze creature token");
         cardType.add(CardType.CREATURE);
         subtype.add("Ooze");
+        color.setGreen(true);
         power = new MageInt(0);
         toughness = new MageInt(0);
     }
