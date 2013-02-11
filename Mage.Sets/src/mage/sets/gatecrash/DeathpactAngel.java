@@ -91,8 +91,9 @@ class DeathpactAngelToken extends Token {
     public DeathpactAngelToken() {
         super("Cleric", "1/1 white and black Cleric creature token onto the battlefield. It has \"{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield.\"");
         cardType.add(CardType.CREATURE);
-        
-        color = ObjectColor.BLACK;
+
+        color.setWhite(true);
+        color.setBlack(true);
         
         subtype.add("Cleric");
         
