@@ -74,7 +74,7 @@ class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getAllActivePermanents(source.getControllerId());
+        List<Permanent> permanents = game.getBattlefield().getActivePermanents(source.getControllerId(), game);
         for (Permanent p : permanents) {
             if (!p.getColor().isColorless()) {
                 p.sacrifice(source.getSourceId(), game);
