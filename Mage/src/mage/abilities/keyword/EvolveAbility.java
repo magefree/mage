@@ -42,7 +42,17 @@ import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
+ * FAQ 2013/01/11
  *
+ * 702.98. Evolve
+ * 
+ * 702.98a Evolve is a triggered ability. "Evolve" means "Whenever a creature enters
+ * the battlefield under your control, if that creature's power is greater than this
+ * creature's power and/or that creature's toughness is greater than this creature's
+ * toughness, put a +1/+1 counter on this creature."
+ *
+ * 702.98b If a creature has multiple instances of evolve, each triggers separately
+ * 
  * @author LevelX2
  */
 

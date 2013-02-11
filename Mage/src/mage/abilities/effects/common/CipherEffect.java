@@ -45,6 +45,28 @@ import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
+ * FAQ 2013/01/11
+ * 
+ * 702.97. Cipher
+ *
+ * 702.97a Cipher appears on some instants and sorceries. It represents two static
+ * abilities, one that functions while the spell is on the stack and one that functions
+ * while the card with cipher is in the exile zone. "Cipher" means "If this spell is
+ * represented by a card, you may exile this card encoded on a creature you control"
+ * and "As long as this card is encoded on that creature, that creature has 'Whenever
+ * this creature deals combat damage to a player, you may copy this card and you may
+ * cast the copy without paying its mana cost.'"
+ *
+ * 702.97b The term "encoded" describes the relationship between the card with cipher
+ * while in the exile zone and the creature chosen when the spell represented by that
+ * card resolves.
+ *
+ * 702.97c The card with cipher remains encoded on the chosen creature as long as the
+ * card with cipher remains exiled and the creature remains on the battlefield. The
+ * card remains encoded on that object even if it changes controller or stops being
+ * a creature, as long as it remains on the battlefield.
+ *
+ * TODO: Implement Cipher as two static abilities concerning the rules.
  *
  * @author LevelX2
  */

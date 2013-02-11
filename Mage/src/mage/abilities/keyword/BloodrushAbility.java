@@ -36,6 +36,11 @@ import mage.abilities.effects.Effect;
 import mage.target.common.TargetAttackingCreature;
 
 /**
+ * FAQ 2013/01/11
+ *
+ * Bloodrush is an ability word that appears in italics at the beginning of abilities
+ * of creature cards you can discard to give an attacking creature a bonus.
+ * (An ability word has no rules meaning.)
  *
  * @author Ludwig
  */
@@ -60,7 +65,7 @@ public class BloodrushAbility extends ActivatedAbilityImpl<BloodrushAbility> {
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder("Bloodrush - ");
+        StringBuilder sb = new StringBuilder("<i>Bloodrush</i> - ");
         sb.append(super.getRule());
         return sb.toString();
     }

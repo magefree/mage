@@ -41,6 +41,15 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
+ * FAQ 2013/01/11
+ *
+ * 702.99. Extort
+ *
+ * 702.99a Extort is a triggered ability. "Extort" means "Whenever you cast a spell,
+ * you may pay White or Black Mana. If you do, each opponent loses 1 life and you gain
+ * life equal to the total life lost this way."
+ *
+ * 702.99b If a permanent has multiple instances of extort, each triggers separately.
  *
  * @author LevelX2
  */
