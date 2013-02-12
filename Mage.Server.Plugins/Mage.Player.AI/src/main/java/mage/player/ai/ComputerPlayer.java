@@ -302,6 +302,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             }
             return target.isChosen();
         }
+
+        if (target instanceof TargetCardInYourGraveyard) {
+            List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
+            while(!target.isChosen() && !cards.isEmpty()) {
+                Card card = pickTarget(cards, outcome, target, null, game);
+                if (card != null) {
+                    target.add(card.getId(), game);
+                }
+            }
+            return target.isChosen();
+        }
+
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
 //        return false;
     }
@@ -480,12 +492,24 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (target instanceof TargetCardInYourGraveyard) {
             List<Card> cards = new ArrayList<Card>(game.getPlayer(playerId).getGraveyard().getCards(game));
-            Card card = pickTarget(cards, outcome, target, source, game);
-            if (card != null) {
-                target.addTarget(card.getId(), source, game);
-                return true;
+            while(!target.isChosen() && !cards.isEmpty()) {
+                Card card = pickTarget(cards, outcome, target, source, game);
+                if (card != null) {
+                    target.addTarget(card.getId(), source, game);
+                }
             }
-            return false;
+            return target.isChosen();
+        }
+        if (target instanceof TargetCardInHand) {
+            List<Card> cards = new ArrayList<Card>();
+            cards.addAll(this.hand.getCards(game));
+            while(!target.isChosen() && !cards.isEmpty()) {
+                Card pick = pickTarget(cards, outcome, target, source, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                }
+            }
+            return target.isChosen();
         }
         if (target instanceof TargetSpell) {
             if (game.getStack().size() > 0) {
