@@ -109,7 +109,7 @@ class HarabazDruidManaEffect extends ManaEffect<HarabazDruidManaEffect> {
     public boolean apply(Game game, Ability source) {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         Player player = game.getPlayer(source.getControllerId());
-        int count = game.getBattlefield().count(filter, source.getControllerId(), game);
+        int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         if (choice.getColor().isBlack()) {
             player.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
             return true;

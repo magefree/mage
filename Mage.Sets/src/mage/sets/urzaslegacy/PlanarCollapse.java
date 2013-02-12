@@ -75,7 +75,7 @@ public class PlanarCollapse extends CardImpl<PlanarCollapse> {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            return game.getBattlefield().countAll(new FilterCreaturePermanent(), game) >= 4;
+            return game.getBattlefield().count(new FilterCreaturePermanent(), source.getSourceId(), source.getControllerId(), game) >= 4;
         }
     }
 }

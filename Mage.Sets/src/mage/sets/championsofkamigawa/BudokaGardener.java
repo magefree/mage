@@ -106,7 +106,7 @@ class BudokaGardenerEffect extends OneShotEffect<BudokaGardenerEffect> {
         if (c != null) {
             c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
         }
-        if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getControllerId(), game) >= 10) {
+        if (game.getBattlefield().count(DokaiWeaverofLifeToken.filterLands, source.getSourceId(), source.getControllerId(), game) >= 10) {
             Permanent p = game.getPermanent(source.getSourceId());
             if (p != null) {
                 p.flip(game);

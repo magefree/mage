@@ -86,7 +86,7 @@ class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             player.gainLife(amount, game);

@@ -89,7 +89,7 @@ class CorruptEffect extends OneShotEffect<CorruptEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int amount = game.getBattlefield().count(filter, source.getControllerId(), game);
+        int amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         if (amount > 0) {
             int damageDealt = amount;
             Permanent permanent = game.getPermanent(source.getFirstTarget());

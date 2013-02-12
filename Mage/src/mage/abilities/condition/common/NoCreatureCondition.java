@@ -46,6 +46,6 @@ public class NoCreatureCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getBattlefield().countAll(filter, game) == 0;
+        return game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == 0;
     }
 }

@@ -95,7 +95,7 @@ class WorshipReplacementEffect extends ReplacementEffectImpl<WorshipReplacementE
                 if (controller != null
                         && (controller.getLife() - event.getAmount()) < 1
                         && event.getPlayerId().equals(controller.getId())
-                        && game.getBattlefield().count(new FilterControlledCreaturePermanent(), event.getPlayerId(), game) > 0
+                        && game.getBattlefield().count(new FilterControlledCreaturePermanent(), source.getSourceId(), event.getPlayerId(), game) > 0
                         ) {
                     event.setAmount(controller.getLife() - 1);
                 }

@@ -98,7 +98,7 @@ class HarborSerpentEffect extends RestrictionEffect<HarborSerpentEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (game.getBattlefield().countAll(filter, game) < 5) {
+        if (game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < 5) {
             return true;
         }
         return false;

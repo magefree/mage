@@ -61,8 +61,12 @@ public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle>
     public ValakutTheMoltenPinnacle(UUID ownerId) {
         super(ownerId, 228, "Valakut, the Molten Pinnacle", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "ZEN";
+
+        // Valakut, the Molten Pinnacle enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
+        // Whenever a Mountain enters the battlefield under your control, if you control at least five other Mountains, you may have Valakut, the Molten Pinnacle deal 3 damage to target creature or player.
         this.addAbility(new ValakutTheMoltenPinnacleTriggeredAbility());
+        // {T}: Add {R} to your mana pool.
         this.addAbility(new RedManaAbility());
 
     }
@@ -93,11 +97,9 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<Vala
 
         if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
+            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
                 if(permanent.hasSubtype("Mountain")){
-
-                    int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, permanent.getControllerId(), game);
-
+                    int count = game.getBattlefield().count(ValakutTheMoltenPinnacle.filter, getSourceId(), getControllerId(), game);
                     if(count > 5){
                         return true;
                     }

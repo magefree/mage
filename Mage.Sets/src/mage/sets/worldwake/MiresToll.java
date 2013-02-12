@@ -101,7 +101,7 @@ class MiresTollEffect extends OneShotEffect<MiresTollEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int swamps = game.getBattlefield().count(filter, source.getControllerId(), game);
+        int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (swamps > 0 && targetPlayer != null) {
             Cards revealedCards = new CardsImpl(Constants.Zone.PICK);

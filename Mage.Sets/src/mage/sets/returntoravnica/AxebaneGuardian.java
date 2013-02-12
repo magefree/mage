@@ -104,7 +104,7 @@ class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if(player != null){
-                int x = game.getBattlefield().count(filter, source.getControllerId(), game);
+                int x = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
 
             Mana mana = new Mana();
             for(int i = 0; i < x; i++){

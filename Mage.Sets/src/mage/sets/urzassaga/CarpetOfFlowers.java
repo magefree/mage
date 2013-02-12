@@ -164,7 +164,7 @@ class CarpetOfFlowersEffect extends ManaEffect<CarpetOfFlowersEffect> {
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
         Player player = game.getPlayer(source.getControllerId());
         if(player != null){
-            int countMax = game.getBattlefield().count(filter, source.getTargets().getFirstTarget(), game);
+            int countMax = game.getBattlefield().count(filter, source.getSourceId(), source.getTargets().getFirstTarget(), game);
             ChoiceImpl choiceCount = new ChoiceImpl(true);
             LinkedHashSet<String> set = new LinkedHashSet<String>();
             for(int i = 0; i <= countMax; i++)

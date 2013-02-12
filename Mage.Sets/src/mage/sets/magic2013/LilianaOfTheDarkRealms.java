@@ -129,7 +129,7 @@ class LilianaOfTheDarkRealmsEffect extends ContinuousEffectImpl<LilianaOfTheDark
         FilterLandPermanent filter = new FilterLandPermanent("Swamps");
         filter.add(new SubtypePredicate("Swamp"));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        this.amount = game.getBattlefield().count(filter, source.getControllerId(), game);
+        this.amount = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
 
         Player player = game.getPlayer(source.getControllerId());
 

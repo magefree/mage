@@ -27,9 +27,11 @@ public class AffinityEffect extends CostModificationEffectImpl<AffinityEffect> {
         SpellAbility spellAbility = (SpellAbility)abilityToModify;
         Mana mana = spellAbility.getManaCostsToPay().getMana();
         if (mana.getColorless() > 0) {
-            int count = game.getBattlefield().count(filter, source.getControllerId(), game);
+            int count = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
             int newCount = mana.getColorless() - count;
-            if (newCount < 0) newCount = 0;
+            if (newCount < 0) {
+                newCount = 0;
+            }
             mana.setColorless(newCount);
             spellAbility.getManaCostsToPay().load(mana.toString());
             return true;

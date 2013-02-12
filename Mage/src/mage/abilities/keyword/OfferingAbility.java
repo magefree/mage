@@ -147,7 +147,7 @@ class OfferingAsThoughEffect extends AsThoughEffectImpl<OfferingAsThoughEffect> 
                 game.getState().setValue("offering_Id_" + card.getId(), null);
             }
 
-            if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getControllerId(), game) > 0) {
+            if (game.getBattlefield().count(((OfferingAbility) source).getFilter(), source.getSourceId(), source.getControllerId(), game) > 0) {
 
                 FilterControlledCreaturePermanent filter = ((OfferingAbility) source).getFilter();
                 Card spellToCast = game.getCard(source.getSourceId());

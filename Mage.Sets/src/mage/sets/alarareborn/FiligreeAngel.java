@@ -92,7 +92,7 @@ class FiligreeAngelEffect extends OneShotEffect<FiligreeAngelEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            int life = game.getBattlefield().count(filter, source.getControllerId(), game) * 3;
+            int life = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) * 3;
             player.gainLife(life, game);
         }
         return true;
