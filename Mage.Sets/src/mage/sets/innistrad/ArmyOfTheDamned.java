@@ -27,16 +27,21 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TimingRule;
+import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.ZombieToken;
+import mage.players.Player;
 
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -50,10 +55,10 @@ public class ArmyOfTheDamned extends CardImpl<ArmyOfTheDamned> {
         this.color.setBlack(true);
 
         // Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped.
-        this.getSpellAbility().addEffect(new CreateTokenEffect(new ZombieToken(), 13));
+        this.getSpellAbility().addEffect(new ArmyOfTheDamnedEffect());
 
         // Flashback {7}{B}{B}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{B}{B}{B}"), TimingRule.SORCERY));
     }
 
     public ArmyOfTheDamned(final ArmyOfTheDamned card) {
@@ -63,5 +68,37 @@ public class ArmyOfTheDamned extends CardImpl<ArmyOfTheDamned> {
     @Override
     public ArmyOfTheDamned copy() {
         return new ArmyOfTheDamned(this);
+    }
+}
+
+class ArmyOfTheDamnedEffect extends OneShotEffect<ArmyOfTheDamnedEffect> {
+
+    public ArmyOfTheDamnedEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Put thirteen 2/2 black Zombie creature tokens onto the battlefield tapped";
+    }
+
+    public ArmyOfTheDamnedEffect(final ArmyOfTheDamnedEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ArmyOfTheDamnedEffect copy() {
+        return new ArmyOfTheDamnedEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            ZombieToken token = new ZombieToken();
+            for (int i = 0; i < 13; i++) {
+                token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
+                Permanent permanent = game.getPermanent(token.getLastAddedToken());
+                permanent.setTapped(true);
+            }
+            return true;
+        }
+        return false;
     }
 }
