@@ -63,12 +63,14 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
         addCard(Constants.Zone.HAND, playerA, "Public Execution");
+        // Turn to Frog - Instant, 1U - Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
         addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
 
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        // Craw Wurm - Creature — Wurm 6/4, 4GG
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Execution", "Llanowar Elves");
         castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Turn to Frog", "Craw Wurm");
 
         setStopAt(1, Constants.PhaseStep.END_TURN);
