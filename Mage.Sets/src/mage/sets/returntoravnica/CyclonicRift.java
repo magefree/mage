@@ -96,7 +96,7 @@ class CyclonicRiftEffect extends OneShotEffect<CyclonicRiftEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (!creature.getControllerId().equals(source.getControllerId())) {
                 creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
             }

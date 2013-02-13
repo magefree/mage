@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -85,7 +86,7 @@ class WretchedBanquetEffect extends OneShotEffect<WretchedBanquetEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent targetCreature = game.getPermanent(source.getFirstTarget());
-        List<Permanent> creatures = game.getBattlefield().getAllActivePermanents(CardType.CREATURE);
+        List<Permanent> creatures = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game);
 
         int minPower = targetCreature.getPower().getValue() + 1;
         for (Permanent creature : creatures) {

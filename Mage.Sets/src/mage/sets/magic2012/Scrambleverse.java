@@ -89,7 +89,7 @@ class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
         int count = players.size();
         if (count > 1) {
             FilterNonlandPermanent nonLand = new FilterNonlandPermanent();
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(nonLand, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(nonLand, source.getControllerId(), source.getSourceId(), game)) {
                 ContinuousEffect effect = new ScrambleverseControlEffect(players.get(random.nextInt(count)));
                 effect.setTargetPointer(new FixedTarget(permanent.getId()));
                 game.addEffect(effect, source);

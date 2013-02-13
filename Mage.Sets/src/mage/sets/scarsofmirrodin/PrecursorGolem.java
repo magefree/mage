@@ -175,7 +175,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpel
         if (spell != null) {
             SpellAbility sa = spell.getSpellAbility();
             UUID targetedGolem = (UUID) getValue("targetedGolem");
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterGolem, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterGolem, source.getControllerId(), source.getSourceId(), game)) {
                 if (permanent.getId().equals(targetedGolem)) {
                     continue; // copy only for other golems
                 }

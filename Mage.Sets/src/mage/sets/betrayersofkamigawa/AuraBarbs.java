@@ -83,7 +83,7 @@ public class AuraBarbs extends CardImpl<AuraBarbs> {
             FilterPermanent filterEnchantments = new FilterPermanent();
             filterEnchantments.add(new CardTypePredicate(CardType.ENCHANTMENT));
 
-            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(filterEnchantments, game)) {
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
                 Player controller = game.getPlayer(permanent.getControllerId());
                 if (controller != null) {
                     controller.damage(2, permanent.getId(), game, false, true);
@@ -92,7 +92,7 @@ public class AuraBarbs extends CardImpl<AuraBarbs> {
             }
 
             filterEnchantments.add(new SubtypePredicate("Aura"));
-            for (Permanent auraEnchantment : game.getBattlefield().getAllActivePermanents(filterEnchantments, game)) {
+            for (Permanent auraEnchantment : game.getBattlefield().getActivePermanents(filterEnchantments, source.getControllerId(), source.getSourceId(), game)) {
                 if (auraEnchantment.getAttachedTo() != null) {
                     Permanent attachedToCreature = game.getPermanent(auraEnchantment.getAttachedTo());
                     if (attachedToCreature != null && attachedToCreature.getCardType().contains(CardType.CREATURE)) {

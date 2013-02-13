@@ -106,7 +106,7 @@ class TeleportalEffect extends OneShotEffect<TeleportalEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             UnblockableTargetEffect effect = new UnblockableTargetEffect();
             effect.setTargetPointer(new FixedTarget(creature.getId()));
             game.addEffect(effect, source);

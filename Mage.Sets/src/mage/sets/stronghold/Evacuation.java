@@ -80,7 +80,7 @@ class EvacuationEffect extends OneShotEffect<EvacuationEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
             creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
         }
         return true;

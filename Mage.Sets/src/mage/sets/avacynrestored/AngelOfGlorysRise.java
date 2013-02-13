@@ -34,16 +34,16 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.players.Player;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -105,7 +105,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect<AngelOfGlorysRiseEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent zombie : game.getBattlefield().getAllActivePermanents(filterZombie, game)) {
+            for (Permanent zombie : game.getBattlefield().getActivePermanents(filterZombie, source.getControllerId(), source.getSourceId(), game)) {
                 zombie.moveToExile(source.getId(), zombie.getName(), source.getSourceId(), game);
             }
             for (Card human : player.getGraveyard().getCards(filterHuman, game)) {

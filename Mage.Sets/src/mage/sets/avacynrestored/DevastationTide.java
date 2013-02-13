@@ -27,9 +27,11 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -39,7 +41,6 @@ import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  *
@@ -73,7 +74,7 @@ public class DevastationTide extends CardImpl<DevastationTide> {
 class DevastationTideEffect extends OneShotEffect<DevastationTideEffect> {
 
     public DevastationTideEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return all nonland permanents to their owners' hands";
     }
 
@@ -83,8 +84,8 @@ class DevastationTideEffect extends OneShotEffect<DevastationTideEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterNonlandPermanent(), game)) {
-            creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterNonlandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
+            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

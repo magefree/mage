@@ -104,7 +104,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect<PatronOfTheOrochiEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent permanent: game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
                 permanent.untap(game);
             }
             return true;

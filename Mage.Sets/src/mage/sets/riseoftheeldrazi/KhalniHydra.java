@@ -77,13 +77,15 @@ public class KhalniHydra extends CardImpl<KhalniHydra> {
     @Override
     public void adjustCosts(Ability ability, Game game) {
         super.adjustCosts(ability, game);
-        int reductionAmount = game.getBattlefield().getAllActivePermanents(filter, game).size();
+        int reductionAmount = game.getBattlefield().count(filter,  ability.getSourceId(), ability.getControllerId(), game);
         Iterator<ManaCost> iter = ability.getManaCostsToPay().iterator();
 
         while ( reductionAmount > 0 && iter.hasNext() ) {
-            iter.next();
-            iter.remove();
-            reductionAmount--;
+            ManaCost manaCost = iter.next();
+            if (manaCost.getMana().getGreen() > 0) { // in case another effect adds additional mana cost
+                iter.remove();
+                reductionAmount--;
+            }
         }
     }
 

@@ -36,21 +36,20 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.effects.common.SacrificeSourceEffect;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.abilities.common.SkipUntapOptionalAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.CardIdPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -110,14 +109,14 @@ public class Seasinger extends CardImpl<Seasinger> {
 }
 
 class ControllerControlsIslandPredicate implements Predicate<Permanent> {
+    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
+    {
+        filter.add(new SubtypePredicate("Island"));
+    }
 
     @Override
     public boolean apply(Permanent input, Game game) {
-        FilterLandPermanent islandControlledByTargetCreatureController = new FilterLandPermanent("Island");
-        islandControlledByTargetCreatureController.add(new SubtypePredicate("Island"));
-        UUID controllerId = input.getControllerId();
-        islandControlledByTargetCreatureController.add(new ControllerIdPredicate(controllerId));
-        return !game.getBattlefield().getAllActivePermanents(islandControlledByTargetCreatureController, game).isEmpty();
+        return (game.getBattlefield().countAll(filter, input.getControllerId(), game) > 0);
     }
 
     @Override
@@ -143,12 +142,7 @@ class SeasingerTriggeredAbility extends StateTriggeredAbility<SeasingerTriggered
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        for (Permanent perm : game.getBattlefield().getAllActivePermanents(controllerId)) {
-            if (perm.getSubtype().contains("Island")) {
-                return false;
-            }
-        }
-        return true;
+        return (game.getBattlefield().countAll(ControllerControlsIslandPredicate.filter, controllerId, game) == 0);
     }
 
     @Override

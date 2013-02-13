@@ -27,6 +27,8 @@
  */
 package mage.sets.innistrad;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,8 +39,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -59,7 +59,7 @@ public class BlasphemousAct extends CardImpl<BlasphemousAct> {
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int creatureCount = game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game).size();
+        int creatureCount = game.getState().getBattlefield().count(new FilterCreaturePermanent(), ability.getSourceId(), ability.getControllerId(), game);
         int cost = 8 - creatureCount;
         String adjustedCost = "{R}";
         if (cost > 0) {

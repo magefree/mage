@@ -80,7 +80,7 @@ class RebuildEffect extends OneShotEffect<RebuildEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterArtifactPermanent(), game)) {
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
         }
         return true;

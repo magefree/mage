@@ -174,7 +174,7 @@ class UntapAllCreatureEffect extends OneShotEffect<UntapAllCreatureEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            for (Permanent land: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), game)) {
+            for (Permanent land: game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
                 land.untap(game);
             }
             return true;

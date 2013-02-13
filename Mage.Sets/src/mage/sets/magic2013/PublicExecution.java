@@ -33,13 +33,16 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -80,12 +83,6 @@ public class PublicExecution extends CardImpl<PublicExecution> {
 
 class PublicExecutionEffect extends OneShotEffect<PublicExecutionEffect> {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature an opponent controls");
-    
-    static {
-        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
-    }
-    
     public PublicExecutionEffect() {
         super(Constants.Outcome.Benefit);
         staticText = "Each other creature that player controls gets -2/-0 until end of turn";
@@ -101,11 +98,11 @@ class PublicExecutionEffect extends OneShotEffect<PublicExecutionEffect> {
         if (target != null) {
             UUID opponent = target.getControllerId();
             if (opponent != null) {
-                for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
-                    if (creature != null && creature.getControllerId() == opponent && creature != target) {
-                        creature.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(-2, 0, Constants.Duration.EndOfTurn)), game);
-                    }
-                }
+                FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature that player controls");
+                filter.add(new ControllerIdPredicate(opponent));
+                filter.add(Predicates.not(new PermanentIdPredicate(target.getId())));
+                ContinuousEffect effect = new BoostAllEffect(-2,0, Constants.Duration.EndOfTurn, filter, false);
+                game.addEffect(effect, source);
                 return true;
             }
         }

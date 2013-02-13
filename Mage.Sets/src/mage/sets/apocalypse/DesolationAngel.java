@@ -92,7 +92,7 @@ class DesolationAngelEntersBattlefieldEffect extends OneShotEffect<DesolationAng
     public boolean apply(Game game, Ability source) {
         Card p = game.getCard(source.getSourceId());
         boolean kicked = KickedCondition.getInstance().apply(game, source);
-        for (Permanent permanent : game.getBattlefield().getAllActivePermanents(new FilterLandPermanent(),game)) {
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(new FilterLandPermanent(), source.getControllerId(), source.getSourceId(), game)) {
             if ((!kicked && permanent.getControllerId() == source.getControllerId())
                || kicked) {
                 permanent.destroy(source.getSourceId(), game, false);
