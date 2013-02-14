@@ -542,6 +542,28 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             //if (!target.isRequired())
                 return false;
         }
+        if (target instanceof TargetDefender) {
+            // TODO: Improve, now planeswalker is always chosen if it exits
+            List<Permanent> targets ;
+            targets = game.getBattlefield().getActivePermanents(new FilterPlaneswalkerPermanent(), opponentId, game);
+            if (targets != null && !targets.isEmpty()) {
+                for (Permanent planeswalker: targets) {
+                    if (target.canTarget(planeswalker.getId(), source, game)) {
+                        target.addTarget(planeswalker.getId(), source, game);
+                    }
+                    if (target.isChosen()) {
+                        return true;
+                    }
+                }
+            }
+            if (!target.isChosen()) {
+                if (target.canTarget(opponentId, source, game)) {
+                    target.addTarget(opponentId, source, game);
+                }
+            }
+            return target.isChosen();
+        }
+
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
 
