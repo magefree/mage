@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
@@ -41,10 +40,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
-import mage.filter.predicate.other.OwnerPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.players.PlayerList;
 
 /**
  *
@@ -53,9 +50,6 @@ import mage.players.PlayerList;
 public class WightOfPrecinctSix extends CardImpl<WightOfPrecinctSix> {
 
     private static final FilterCard filter = new FilterCreatureCard("creature card in your opponents' graveyards");
-    static {
-        filter.add(new OwnerPredicate(TargetController.OPPONENT));
-    }
 
     public WightOfPrecinctSix(UUID ownerId) {
         super(ownerId, 84, "Wight of Precinct Six", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}");
@@ -67,8 +61,8 @@ public class WightOfPrecinctSix extends CardImpl<WightOfPrecinctSix> {
         this.toughness = new MageInt(1);
 
         // Wight of Precinct Six gets +1/+1 for each creature card in your opponents' graveyards.
-        DynamicValue boost = new CardsInAllGraveyardsCount(filter);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost,boost, Constants.Duration.WhileOnBattlefield)));
+        DynamicValue boost = new CardsInOpponentGraveyardsCount(filter);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Constants.Duration.WhileOnBattlefield)));
     }
 
     public WightOfPrecinctSix(final WightOfPrecinctSix card) {
@@ -81,47 +75,46 @@ public class WightOfPrecinctSix extends CardImpl<WightOfPrecinctSix> {
     }
 }
 
-class CardsInAllGraveyardsCount implements DynamicValue {
+class CardsInOpponentGraveyardsCount implements DynamicValue {
 
     private FilterCard filter;
 
-    public CardsInAllGraveyardsCount() {
-        this(new FilterCard());
+    public CardsInOpponentGraveyardsCount() {
+       this(new FilterCard());
     }
 
-    public CardsInAllGraveyardsCount(FilterCard filter) {
-        this.filter = filter;
+    public CardsInOpponentGraveyardsCount(FilterCard filter) {
+       this.filter = filter;
     }
 
-    private CardsInAllGraveyardsCount(CardsInAllGraveyardsCount dynamicValue) {
-        this.filter = dynamicValue.filter;
+    private CardsInOpponentGraveyardsCount(CardsInOpponentGraveyardsCount dynamicValue) {
+       this.filter = dynamicValue.filter;
     }
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
-        int amount = 0;
-        PlayerList playerList = game.getPlayerList();
-        for (UUID playerUUID : playerList) {
-            Player player = game.getPlayer(playerUUID);
-            if (player != null) {
-                amount += player.getGraveyard().count(filter, game);
-            }
-        }
-        return amount;
+       int amount = 0;
+       for (UUID playerUUID : game.getOpponents(sourceAbility.getControllerId())) {
+           Player player = game.getPlayer(playerUUID);
+           if (player != null) {
+               amount += player.getGraveyard().count(filter, sourceAbility.getSourceId(), sourceAbility.getControllerId(), game);
+           }
+       }
+       return amount;
     }
 
     @Override
     public DynamicValue copy() {
-        return new CardsInAllGraveyardsCount(this);
+       return new CardsInOpponentGraveyardsCount(this);
     }
 
     @Override
     public String toString() {
-        return "1";
+       return "1";
     }
 
     @Override
     public String getMessage() {
-        return filter.getMessage();
+       return filter.getMessage();
     }
 }
