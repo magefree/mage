@@ -35,6 +35,11 @@ public class MagicAbility {
         put(new UnblockableAbility().getRule(), 100);
         put(VigilanceAbility.getInstance().getRule(), 20);
         put(WitherAbility.getInstance().getRule(), 30);
+        // gatecrash
+        put(new EvolveAbility().getRule(), 50);
+        put(new ExtortAbility().getRule(), 30);
+        
+
     }};
 
     public static int getAbilityScore(Ability ability) {
