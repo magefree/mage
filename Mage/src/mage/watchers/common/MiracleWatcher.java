@@ -28,8 +28,13 @@
 
 package mage.watchers.common;
 
-import mage.Constants;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
+import mage.Constants.Outcome;
 import mage.Constants.WatcherScope;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -39,14 +44,10 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.stack.StackAbility;
 import mage.players.Player;
 import mage.watchers.WatcherImpl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.UUID;
+
 
 /**
  * Counts amount of cards drawn this turn by players.
@@ -97,17 +98,15 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof MiracleAbility) {
                     Player controller = game.getPlayer(ability.getControllerId());
-                    // FIXME: I don't like that I need to call it manually
-                    // it's the place for bugs
-                    game.getContinuousEffects().costModification(ability, game);
-                    ManaCosts<ManaCost> manaCostsToPay = ability.getManaCostsToPay();
                     if (controller != null) {
-                        game.getStack().add(new StackAbility(ability, controller.getId()));
-                        Cards cards = new CardsImpl(Constants.Zone.PICK);
+                        // FIXME: I don't like that I need to call it manually
+                        // it's the place for bugs
+                        game.getContinuousEffects().costModification(ability, game);
+                        ManaCosts<ManaCost> manaCostsToPay = ability.getManaCostsToPay();
+                        Cards cards = new CardsImpl(Zone.PICK);
                         cards.add(card);
                         controller.lookAtCards("Miracle", cards, game);
-                        if (controller.chooseUse(Constants.Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
-                            game.getStack().poll();
+                        if (controller.chooseUse(Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
                             controller.revealCards("Miracle", cards, game);
                             ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
                             // replace with the new cost
@@ -117,8 +116,6 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
                             }
                             controller.cast(card.getSpellAbility(), game, false);
                             break;
-                        } else {
-                            game.getStack().poll();
                         }
                     }
                 }

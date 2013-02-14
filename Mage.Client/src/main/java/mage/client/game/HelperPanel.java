@@ -28,10 +28,10 @@
 
 package mage.client.game;
 
-import mage.client.components.MageTextArea;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import mage.client.components.MageTextArea;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -91,6 +91,7 @@ public class HelperPanel extends JPanel {
         container.add(btnRight);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkLeft != null) {{
                     setState("",false,"",false);
@@ -101,6 +102,7 @@ public class HelperPanel extends JPanel {
         });
 
         btnRight.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkRight != null) {{
                     setState("",false,"",false);
@@ -111,6 +113,7 @@ public class HelperPanel extends JPanel {
         });
 
         btnSpecial.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if (linkSpecial != null) {{
                     setState("",false,"",false);
@@ -153,13 +156,14 @@ public class HelperPanel extends JPanel {
     public void setMessage(String message) {
         if (message.startsWith("Use alternative cost")) {
             textArea.setText("Use alternative cost?");
-        } else if (message.contains("Use")) {
+        } else if (message.length() > 30 && message.contains("Use")) {
             textArea.setText("Use ability?");
         } else {
             textArea.setText(message);
         }
     }
 
+    @Override
     public void requestFocus() {
         this.btnRight.requestFocus();
     }

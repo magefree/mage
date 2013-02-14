@@ -33,8 +33,16 @@ import mage.abilities.StaticAbility;
 import mage.abilities.costs.Cost;
 
 /**
- * Miracle ability:
- * You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.
+ * 702.92. Miracle
+ *
+ * 702.92a Miracle is a static ability linked to a triggered ability (see rule 603.10).
+ * "Miracle [cost]" means "You may reveal this card from your hand as you draw it if
+ * it's the first card you've drawn this turn. When you reveal this card this way,
+ * you may cast it by paying [cost] rather than its mana cost."
+ *
+ * 702.92b If a player chooses to reveal a card using its miracle ability, he or she
+ * plays with that card revealed until that card leaves his or her hand, that ability
+ * resolves, or that ability otherwise leaves the stack.
  *
  * @author noxx
  */
