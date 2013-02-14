@@ -727,7 +727,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public void entersBattlefield(UUID sourceId, Game game) {
         controlledFromStartOfControllerTurn = false;
-        game.replaceEvent(GameEvent.getEvent(EventType.ENTERS_THE_BATTLEFIELD, objectId, sourceId, ownerId));
+        game.replaceEvent(GameEvent.getEvent(EventType.ENTERS_THE_BATTLEFIELD, objectId, sourceId, controllerId));
     }
 
     @Override

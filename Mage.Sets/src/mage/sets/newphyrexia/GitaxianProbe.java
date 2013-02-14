@@ -29,9 +29,8 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -51,9 +50,13 @@ public class GitaxianProbe extends CardImpl<GitaxianProbe> {
         super(ownerId, 35, "Gitaxian Probe", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{UP}");
         this.expansionSetCode = "NPH";
         this.color.setBlue(true);
+
+        // Look at target player's hand.
         this.getSpellAbility().addEffect(new GitaxianProbeEffect());
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
+        // Draw a card.
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
+        
     }
 
     public GitaxianProbe (final GitaxianProbe card) {
@@ -69,7 +72,7 @@ public class GitaxianProbe extends CardImpl<GitaxianProbe> {
 
 class GitaxianProbeEffect extends OneShotEffect<GitaxianProbeEffect> {
     GitaxianProbeEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.DrawCard);
         staticText = "Look at target player's hand";
     }
 
