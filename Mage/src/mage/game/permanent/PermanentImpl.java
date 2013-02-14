@@ -215,7 +215,9 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void removeAllAbilities(UUID sourceId, Game game) {
         getAbilities().clear();
         // removes abilities that were gained from abilities of this permanent
-        game.resetForSourceId(this.getId());
+        game.getContinuousEffects().removeGainedEffectsForSource(this.getId());
+        // remove gained triggered abilities
+        game.getState().resetForSourceId(this.getId());
     }
 
     @Override
