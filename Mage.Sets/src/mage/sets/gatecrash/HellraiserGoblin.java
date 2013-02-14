@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -63,7 +64,7 @@ public class HellraiserGoblin extends CardImpl<HellraiserGoblin> {
         this.toughness = new MageInt(2);
 
         // Creatures you control have haste and attack each combat if able.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent()));
+        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent()));
         ability.addEffect(new AttacksIfAbleAllEffect(Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
