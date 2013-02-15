@@ -956,9 +956,14 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void addCounters(Counter counter, Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
-            counters.addCounter(counter);
-            game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+        int amount = counter.getCount();
+        for (int i = 0; i < amount; i++) {
+            Counter eventCounter = counter.copy();
+            eventCounter.remove(amount - 1);
+            if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.ADD_COUNTER, playerId, playerId, counter.getName(), counter.getCount()))) {
+                counters.addCounter(eventCounter);
+                game.fireEvent(GameEvent.getEvent(EventType.COUNTER_ADDED, playerId, playerId, counter.getName(), counter.getCount()));
+            }
         }
     }
 

@@ -52,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -297,7 +298,15 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                                 if (ability.getTargets().get(index).getNumberOfTargets() == 1) {
                                     ability.getTargets().get(index).clearChosen();
                                 }
-                                ability.getTargets().get(index).addTarget(id, ability, game);
+                                if (ability.getTargets().get(index) instanceof TargetCreaturePermanentAmount) {
+                                    // supports only to set the complete amount to one target
+                                    TargetCreaturePermanentAmount targetAmount = (TargetCreaturePermanentAmount) ability.getTargets().get(index);
+                                    targetAmount.setAmount(ability, game);
+                                    int amount = targetAmount.getAmountRemaining();
+                                    targetAmount.addTarget(id, amount,ability, game);
+                                } else {
+                                    ability.getTargets().get(index).addTarget(id, ability, game);
+                                }
                                 index++;
                                 break;
                             }
