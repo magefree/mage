@@ -53,7 +53,7 @@ public class SkinbrandGoblin extends CardImpl<SkinbrandGoblin> {
         this.toughness = new MageInt(1);
 
         // Bloodrush - {R}, Discard Skinbrand Goblin: Target attacking creature gets +2/+1 until end of turn.
-        this.addAbility(new BloodrushAbility("{1}{R}{R}", new BoostTargetEffect(2, 1, Constants.Duration.EndOfTurn)));
+        this.addAbility(new BloodrushAbility("{R}", new BoostTargetEffect(2, 1, Constants.Duration.EndOfTurn)));
     }
 
     public SkinbrandGoblin(final SkinbrandGoblin card) {
