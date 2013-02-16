@@ -35,13 +35,11 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -62,7 +60,7 @@ public class ElvishPioneer extends CardImpl<ElvishPioneer> {
         this.toughness = new MageInt(1);
 
         // When Elvish Pioneer enters the battlefield, you may put a basic land card from your hand onto the battlefield tapped.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutLandOnBattlefieldEffect(), true));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutLandOnBattlefieldEffect(), false));
     }
 
     public ElvishPioneer(final ElvishPioneer card) {
@@ -105,6 +103,10 @@ class PutLandOnBattlefieldEffect extends OneShotEffect<PutLandOnBattlefieldEffec
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
                 card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+                Permanent permanent = game.getPermanent(card.getId());
+                if (permanent != null) {
+                        permanent.setTapped(true);
+                }
                 return true;
             }
         }
