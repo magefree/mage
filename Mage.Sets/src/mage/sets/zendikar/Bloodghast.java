@@ -60,12 +60,15 @@ public class Bloodghast extends CardImpl<Bloodghast> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
+        // Bloodghast can't block.
         this.addAbility(new CantBlockAbility());
-        this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
+        // Bloodghast has haste as long as an opponent has 10 or less life.
         ContinuousEffect effect = new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect,
                 new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT),
-                "Bloodghast has haste as long as an opponent has 10 or less life.")));
+                "Bloodghast has haste as long as an opponent has 10 or less life")));
+        // Landfall — Whenever a land enters the battlefield under your control, you may return Bloodghast from your graveyard to the battlefield.
+        this.addAbility(new LandfallAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), true));
     }
 
     public Bloodghast(final Bloodghast card) {
