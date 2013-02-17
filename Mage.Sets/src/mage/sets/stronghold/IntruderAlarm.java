@@ -36,9 +36,8 @@ import mage.Constants.PhaseStep;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
@@ -46,7 +45,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -65,7 +63,7 @@ public class IntruderAlarm extends CardImpl<IntruderAlarm> {
         // Creatures don't untap during their controllers' untap steps.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new IntruderAlarmEffect()));
         // Whenever a creature enters the battlefield, untap all creatures.
-        this.addAbility(new IntruderAlarmTriggeredAbility(new UntapAllCreatureEffect()));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllCreatureEffect(), new FilterCreaturePermanent()));
     }
 
     public IntruderAlarm(final IntruderAlarm card) {
@@ -120,46 +118,10 @@ class IntruderAlarmEffect extends ReplacementEffectImpl<IntruderAlarmEffect> {
     public String getText(Mode mode) {
         return "Creatures don't untap during their controllers' untap steps";
     }
-    
-    
-
-}
-
-class IntruderAlarmTriggeredAbility extends ZoneChangeTriggeredAbility<IntruderAlarmTriggeredAbility> {
-
-    public IntruderAlarmTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect, "Whenever a creature enters the battlefield, ", false);
-    }
-
-
-
-    public IntruderAlarmTriggeredAbility(IntruderAlarmTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public IntruderAlarmTriggeredAbility copy() {
-        return new IntruderAlarmTriggeredAbility(this);
-    }
 
 }
 
 class UntapAllCreatureEffect extends OneShotEffect<UntapAllCreatureEffect> {
-
 
     public UntapAllCreatureEffect() {
         super(Outcome.Untap);

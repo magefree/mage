@@ -45,6 +45,7 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
+import mage.game.events.EntersTheBattlefieldEvent;
 
 /**
  *
@@ -91,10 +92,9 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD
-                    && ((ZoneChangeEvent) event).getFromZone() == Constants.Zone.GRAVEYARD
+            if (((EntersTheBattlefieldEvent) event).getFromZone() == Constants.Zone.GRAVEYARD
                     && permanent.getOwnerId().equals(controllerId)
                     && permanent.getCardType().contains(CardType.CREATURE)) {
                 Effect effect = this.getEffects().get(0);

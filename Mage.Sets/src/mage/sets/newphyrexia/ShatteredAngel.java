@@ -29,25 +29,29 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author Loki
  */
 public class ShatteredAngel extends CardImpl<ShatteredAngel> {
+
+    private static final FilterPermanent filter = new FilterLandPermanent("a land");
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
 
     public ShatteredAngel (UUID ownerId) {
         super(ownerId, 23, "Shattered Angel", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
@@ -56,8 +60,12 @@ public class ShatteredAngel extends CardImpl<ShatteredAngel> {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new ShatteredAngelTriggeredAbility());
+        // Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new GainLifeEffect(3), filter, true, "Whenever a land enters the battlefield under an opponent's control, you may gain 3 life."));
     }
 
     public ShatteredAngel (final ShatteredAngel card) {
@@ -69,35 +77,4 @@ public class ShatteredAngel extends CardImpl<ShatteredAngel> {
         return new ShatteredAngel(this);
     }
 
-}
-
-class ShatteredAngelTriggeredAbility extends TriggeredAbilityImpl<ShatteredAngelTriggeredAbility> {
-    ShatteredAngelTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3), true);
-    }
-
-    ShatteredAngelTriggeredAbility(final ShatteredAngelTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public ShatteredAngelTriggeredAbility copy() {
-        return new ShatteredAngelTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND) && game.getOpponents(this.controllerId).contains(permanent.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a land enters the battlefield under an opponent's control, you may gain 3 life.";
-    }
 }

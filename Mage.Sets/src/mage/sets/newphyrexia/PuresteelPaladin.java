@@ -29,14 +29,13 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -46,17 +45,14 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  * @author Loki
  */
 public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
-    private static final FilterPermanent filter = new FilterPermanent("Equipment");
+    private static final FilterPermanent filter = new FilterControlledPermanent("Equipment");
 
     static {
         filter.add(new SubtypePredicate("Equipment"));
@@ -70,8 +66,11 @@ public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new PuresteelPaladinTriggeredAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(
+
+        // Whenever an Equipment enters the battlefield under your control, you may draw a card.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
+        // Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new GainAbilityControlledEffect(new EquipAbility(Outcome.AddAbility, new GenericManaCost(0)), Duration.WhileOnBattlefield, filter),
                 MetalcraftCondition.getInstance(),
                 "Metalcraft - Equipment you control have equip {0} as long as you control three or more artifacts")));
@@ -84,40 +83,5 @@ public class PuresteelPaladin extends CardImpl<PuresteelPaladin> {
     @Override
     public PuresteelPaladin copy() {
         return new PuresteelPaladin(this);
-    }
-}
-
-class PuresteelPaladinTriggeredAbility extends TriggeredAbilityImpl<PuresteelPaladinTriggeredAbility> {
-    PuresteelPaladinTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
-    }
-
-    PuresteelPaladinTriggeredAbility(final PuresteelPaladinTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public PuresteelPaladinTriggeredAbility copy() {
-        return new PuresteelPaladinTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getSubtype().contains("Equipment")
-                        && permanent.getControllerId().equals(this.controllerId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an Equipment enters the battlefield under your control, you may draw a card.";
     }
 }

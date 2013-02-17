@@ -86,10 +86,9 @@ class ElectropotenceTriggeredAbility extends TriggeredAbilityImpl<Electropotence
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && permanent.getCardType().contains(CardType.CREATURE)
+            if (permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
                 Player player = game.getPlayer(this.getControllerId());
                 Card card = game.getCard(event.getTargetId());

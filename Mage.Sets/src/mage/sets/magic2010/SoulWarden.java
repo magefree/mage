@@ -28,26 +28,28 @@
 
 package mage.sets.magic2010;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
-import java.util.UUID;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class SoulWarden extends CardImpl<SoulWarden> {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public SoulWarden(UUID ownerId) {
         super(ownerId, 34, "Soul Warden", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{W}");
@@ -57,7 +59,8 @@ public class SoulWarden extends CardImpl<SoulWarden> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SoulWardenAbility());
+
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new GainLifeEffect(1), filter));
     }
 
     public SoulWarden(final SoulWarden card) {
@@ -67,39 +70,6 @@ public class SoulWarden extends CardImpl<SoulWarden> {
     @Override
     public SoulWarden copy() {
         return new SoulWarden(this);
-    }
-
-}
-
-class SoulWardenAbility extends TriggeredAbilityImpl<SoulWardenAbility> {
-
-    public SoulWardenAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1));
-    }
-
-    public SoulWardenAbility(final SoulWardenAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SoulWardenAbility copy() {
-        return new SoulWardenAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.CREATURE) && !permanent.getId().equals(this.getSourceId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield, " + super.getRule();
     }
 
 }

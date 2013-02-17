@@ -100,7 +100,7 @@ class WhiplashTrapWatcher extends WatcherImpl<WhiplashTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
             if (perm.getCardType().contains(CardType.CREATURE)) {
                 Integer amount = amountOfCreaturesPlayedThisTurn.get(perm.getControllerId());

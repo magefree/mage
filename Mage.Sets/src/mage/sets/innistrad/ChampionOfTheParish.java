@@ -28,26 +28,29 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author nantuko
  */
 public class ChampionOfTheParish extends CardImpl<ChampionOfTheParish> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
+    static {
+        filter.add(new SubtypePredicate("Human"));
+        filter.add(new AnotherPredicate());
+    }
 
     public ChampionOfTheParish(UUID ownerId) {
         super(ownerId, 6, "Champion of the Parish", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
@@ -60,7 +63,7 @@ public class ChampionOfTheParish extends CardImpl<ChampionOfTheParish> {
         this.toughness = new MageInt(1);
 
         // Whenever another Human enters the battlefield under your control, put a +1/+1 counter on Champion of the Parish.
-        this.addAbility(new HumanEntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter));
     }
 
     public ChampionOfTheParish(final ChampionOfTheParish card) {
@@ -70,41 +73,5 @@ public class ChampionOfTheParish extends CardImpl<ChampionOfTheParish> {
     @Override
     public ChampionOfTheParish copy() {
         return new ChampionOfTheParish(this);
-    }
-}
-
-class HumanEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
-
-    public HumanEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public HumanEntersBattlefieldTriggeredAbility(HumanEntersBattlefieldTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD
-                    && permanent.getControllerId().equals(this.controllerId)
-                    && (permanent.hasSubtype("Human") && !targetId.equals(this.getSourceId()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another Human enters the battlefield under your control, " + super.getRule();
-    }
-
-    @Override
-    public HumanEntersBattlefieldTriggeredAbility copy() {
-        return new HumanEntersBattlefieldTriggeredAbility(this);
     }
 }

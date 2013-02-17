@@ -57,7 +57,7 @@ public class ZoneChangeEvent extends GameEvent {
         this.target = target;
         if (appliedEffects != null) {
             this.appliedEffects = appliedEffects;
-        };
+        }
     }
 
     public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone) {

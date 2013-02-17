@@ -104,17 +104,14 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl<TalusPaladinTrig
     
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent ally = game.getPermanent(event.getTargetId());
             if (ally != null) {
                 if (ally.hasSubtype("Ally")
                         && ally.getControllerId().equals(this.getControllerId())) {
                     if (event.getTargetId().equals(this.getSourceId())
                             || event.getTargetId().equals(ally.getId())) {
-                        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-                        if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }

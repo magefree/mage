@@ -137,8 +137,7 @@ class GigantiformTriggeredAbility extends TriggeredAbilityImpl<GigantiformTrigge
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())
-                && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())
                 && KickedCondition.getInstance().apply(game, this)) {
             return true;
         }

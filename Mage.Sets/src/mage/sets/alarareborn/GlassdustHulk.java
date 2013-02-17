@@ -31,24 +31,32 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.TargetController;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author Loki
  */
 public class GlassdustHulk extends CardImpl<GlassdustHulk> {
+
+    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
+
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
+    }
 
     public GlassdustHulk(UUID ownerId) {
         super(ownerId, 7, "Glassdust Hulk", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}{W}{U}");
@@ -61,7 +69,11 @@ public class GlassdustHulk extends CardImpl<GlassdustHulk> {
         this.toughness = new MageInt(4);
 
         // Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.
-        this.addAbility(new GlassdustHulkTriggeredAbility());
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter,
+                "Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and is unblockable this turn.");
+        ability.addEffect(new UnblockableSourceEffect(Duration.EndOfTurn));
+        this.addAbility(ability);
+        
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{W/U}")));
     }
 
@@ -74,40 +86,3 @@ public class GlassdustHulk extends CardImpl<GlassdustHulk> {
         return new GlassdustHulk(this);
     }
 }
-
-class GlassdustHulkTriggeredAbility extends TriggeredAbilityImpl<GlassdustHulkTriggeredAbility> {
-    GlassdustHulkTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn));
-        this.addEffect(new UnblockableSourceEffect(Duration.EndOfTurn));
-    }
-
-    GlassdustHulkTriggeredAbility(final GlassdustHulkTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GlassdustHulkTriggeredAbility copy() {
-        return new GlassdustHulkTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)
-                        && permanent.getControllerId().equals(this.controllerId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another artifact enters the battlefield under your control, {this} gets +1/+1 until end of turn and is unblockable this turn.";
-    }
-}
-

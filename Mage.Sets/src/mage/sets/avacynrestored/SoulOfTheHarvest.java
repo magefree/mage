@@ -27,26 +27,32 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.TokenPredicate;
 
-import java.util.UUID;
 
 /**
  * @author noxx
  */
 public class SoulOfTheHarvest extends CardImpl<SoulOfTheHarvest> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another nontoken creature");
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(Predicates.not(new TokenPredicate()));
+    }
 
     public SoulOfTheHarvest(UUID ownerId) {
         super(ownerId, 195, "Soul of the Harvest", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}");
@@ -60,7 +66,7 @@ public class SoulOfTheHarvest extends CardImpl<SoulOfTheHarvest> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Whenever another nontoken creature enters the battlefield under your control, you may draw a card.
-        this.addAbility(new SoulOfTheHarvestAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
     }
 
     public SoulOfTheHarvest(final SoulOfTheHarvest card) {
@@ -71,40 +77,4 @@ public class SoulOfTheHarvest extends CardImpl<SoulOfTheHarvest> {
     public SoulOfTheHarvest copy() {
         return new SoulOfTheHarvest(this);
     }
-}
-
-class SoulOfTheHarvestAbility extends TriggeredAbilityImpl<SoulOfTheHarvestAbility> {
-
-    public SoulOfTheHarvestAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
-    }
-
-    public SoulOfTheHarvestAbility(final SoulOfTheHarvestAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SoulOfTheHarvestAbility copy() {
-        return new SoulOfTheHarvestAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getControllerId().equals(this.controllerId) && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.CREATURE)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another nontoken creature enters the battlefield under your control, you may draw a card";
-    }
-
 }

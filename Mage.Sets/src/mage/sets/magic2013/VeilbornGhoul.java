@@ -31,11 +31,16 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.CantBlockAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -46,6 +51,11 @@ import mage.game.permanent.Permanent;
  * @author jeffwadsworth
  */
 public class VeilbornGhoul extends CardImpl<VeilbornGhoul> {
+
+    private static final FilterPermanent filter = new FilterControlledLandPermanent("a Swamp");
+    static {
+        filter.add(new SubtypePredicate("Swamp"));
+    }
 
     public VeilbornGhoul(UUID ownerId) {
         super(ownerId, 114, "Veilborn Ghoul", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -60,7 +70,9 @@ public class VeilbornGhoul extends CardImpl<VeilbornGhoul> {
         this.addAbility(new CantBlockAbility());
         
         // Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.
-        this.addAbility(new VeilbornGhoulTriggeredAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.GRAVEYARD,  new ReturnSourceFromGraveyardToHandEffect(), filter, true));
+
     }
 
     public VeilbornGhoul(final VeilbornGhoul card) {
@@ -70,38 +82,5 @@ public class VeilbornGhoul extends CardImpl<VeilbornGhoul> {
     @Override
     public VeilbornGhoul copy() {
         return new VeilbornGhoul(this);
-    }
-}
-
-class VeilbornGhoulTriggeredAbility extends TriggeredAbilityImpl<VeilbornGhoulTriggeredAbility> {
-
-    VeilbornGhoulTriggeredAbility() {
-        super(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), true);
-    }
-
-    VeilbornGhoulTriggeredAbility(VeilbornGhoulTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
-                if(permanent.hasSubtype("Swamp")){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    @Override
-    public VeilbornGhoulTriggeredAbility copy() {
-        return new VeilbornGhoulTriggeredAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Swamp enters the battlefield under your control, you may return Veilborn Ghoul from your graveyard to your hand.";
     }
 }

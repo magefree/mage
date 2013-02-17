@@ -29,22 +29,23 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -53,10 +54,20 @@ import mage.game.permanent.token.Token;
  */
 public class GlintHawkIdol extends CardImpl<GlintHawkIdol> {
 
+    private static final FilterPermanent filter = new FilterArtifactPermanent("another artifact");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
+    }
+
     public GlintHawkIdol (UUID ownerId) {
         super(ownerId, 156, "Glint Hawk Idol", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
-        this.addAbility(new GlintHawkIdolTriggeredAbility());
+        
+        // Whenever another artifact enters the battlefield under your control, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), filter, true));
+
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.W)));
     }
 
@@ -69,41 +80,6 @@ public class GlintHawkIdol extends CardImpl<GlintHawkIdol> {
         return new GlintHawkIdol(this);
     }
 
-}
-
-class GlintHawkIdolTriggeredAbility extends TriggeredAbilityImpl<GlintHawkIdolTriggeredAbility> {
-    GlintHawkIdolTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GlintHawkIdolToken(), "", Duration.EndOfTurn), true);
-    }
-
-    GlintHawkIdolTriggeredAbility(final GlintHawkIdolTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GlintHawkIdolTriggeredAbility copy() {
-        return new GlintHawkIdolTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.ARTIFACT)
-                        && permanent.getControllerId().equals(this.controllerId)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another artifact enters the battlefield under your control, you may have {this} become a 2/2 Bird artifact creature with flying until end of turn.";
-    }
 }
 
 class GlintHawkIdolToken extends Token {

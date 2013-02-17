@@ -33,13 +33,21 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -51,6 +59,11 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class SuturePriest extends CardImpl<SuturePriest> {
 
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
+    static {
+        filter.add(new AnotherPredicate());
+    }
+
     public SuturePriest (UUID ownerId) {
         super(ownerId, 25, "Suture Priest", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
         this.expansionSetCode = "NPH";
@@ -58,8 +71,13 @@ public class SuturePriest extends CardImpl<SuturePriest> {
         this.color.setWhite(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SuturePriestFirstTriggeredAbility());
+
+        // Whenever another creature enters the battlefield under your control,you gain 1 life.
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
+
+        // Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
         this.addAbility(new SuturePriestSecondTriggeredAbility());
+
     }
 
     public SuturePriest (final SuturePriest card) {
@@ -69,38 +87,6 @@ public class SuturePriest extends CardImpl<SuturePriest> {
     @Override
     public SuturePriest copy() {
         return new SuturePriest(this);
-    }
-}
-
-class SuturePriestFirstTriggeredAbility extends TriggeredAbilityImpl<SuturePriestFirstTriggeredAbility> {
-    SuturePriestFirstTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), true);
-    }
-
-    SuturePriestFirstTriggeredAbility(final SuturePriestFirstTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SuturePriestFirstTriggeredAbility copy() {
-        return new SuturePriestFirstTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId()) && event.getPlayerId().equals(this.controllerId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            Card card = zEvent.getTarget();
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, " + modes.getText();
     }
 }
 
@@ -120,10 +106,10 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl<SuturePrie
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             Card card = zEvent.getTarget();
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD && card != null && card.getCardType().contains(CardType.CREATURE)) {
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                 }

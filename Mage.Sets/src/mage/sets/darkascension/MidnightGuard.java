@@ -30,22 +30,24 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author North
  */
 public class MidnightGuard extends CardImpl<MidnightGuard> {
+
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another creature");
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public MidnightGuard(UUID ownerId) {
         super(ownerId, 14, "Midnight Guard", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -58,7 +60,7 @@ public class MidnightGuard extends CardImpl<MidnightGuard> {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield, untap Midnight Guard.
-        this.addAbility(new MidnightGuardTriggeredAbility(new UntapSourceEffect()));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapSourceEffect(), filter));
     }
 
     public MidnightGuard(final MidnightGuard card) {
@@ -68,43 +70,5 @@ public class MidnightGuard extends CardImpl<MidnightGuard> {
     @Override
     public MidnightGuard copy() {
         return new MidnightGuard(this);
-    }
-}
-
-class MidnightGuardTriggeredAbility extends TriggeredAbilityImpl<MidnightGuardTriggeredAbility> {
-
-    public MidnightGuardTriggeredAbility(Effect effect) {
-        this(effect, false);
-    }
-
-    public MidnightGuardTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public MidnightGuardTriggeredAbility(MidnightGuardTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && zEvent.getTarget().getCardType().contains(CardType.CREATURE)
-                    && zEvent.getTargetId() != this.getSourceId()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield, " + super.getRule();
-    }
-
-    @Override
-    public MidnightGuardTriggeredAbility copy() {
-        return new MidnightGuardTriggeredAbility(this);
     }
 }

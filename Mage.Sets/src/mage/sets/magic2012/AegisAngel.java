@@ -127,12 +127,9 @@ class AegisAngelEffect extends ReplacementEffectImpl<AegisAngelEffect> {
                 return false;
             }
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                this.used = true;
-                return false;
-            }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
+            this.used = true;
+            return false;
         }
 
         return event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)

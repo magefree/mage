@@ -27,32 +27,38 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
 
 /**
  *
  * @author noxx
  */
 public class CaptainOfTheMists extends CardImpl<CaptainOfTheMists> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another Human");
+
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new SubtypePredicate("Human"));
+    }
 
     public CaptainOfTheMists(UUID ownerId) {
         super(ownerId, 45, "Captain of the Mists", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -65,10 +71,10 @@ public class CaptainOfTheMists extends CardImpl<CaptainOfTheMists> {
         this.toughness = new MageInt(3);
 
         // Whenever another Human enters the battlefield under your control, untap Captain of the Mists.
-        this.addAbility(new HumanEntersBattlefieldTriggeredAbility(new UntapSourceEffect(), false));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new UntapSourceEffect(), filter));
 
         // {1}{U}, {tap}: You may tap or untap target permanent.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MayTapOrUntapTargetEffect(), new ManaCostsImpl("{1}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
@@ -81,41 +87,5 @@ public class CaptainOfTheMists extends CardImpl<CaptainOfTheMists> {
     @Override
     public CaptainOfTheMists copy() {
         return new CaptainOfTheMists(this);
-    }
-}
-
-class HumanEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
-
-    public HumanEntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
-    }
-
-    public HumanEntersBattlefieldTriggeredAbility(HumanEntersBattlefieldTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            UUID targetId = event.getTargetId();
-            Permanent permanent = game.getPermanent(targetId);
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD
-                    && permanent.getControllerId().equals(this.controllerId)
-                    && (permanent.hasSubtype("Human") && !targetId.equals(this.getSourceId()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another Human enters the battlefield under your control, " + super.getRule();
-    }
-
-    @Override
-    public HumanEntersBattlefieldTriggeredAbility copy() {
-        return new HumanEntersBattlefieldTriggeredAbility(this);
     }
 }

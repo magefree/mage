@@ -84,10 +84,9 @@ class WarstormSurgeTriggeredAbility extends TriggeredAbilityImpl<WarstormSurgeTr
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && permanent.getCardType().contains(CardType.CREATURE)
+            if (permanent.getCardType().contains(CardType.CREATURE)
                     && permanent.getControllerId().equals(this.controllerId)) {
                 Effect effect = this.getEffects().get(0);
                 effect.setValue("damageSource", event.getTargetId());

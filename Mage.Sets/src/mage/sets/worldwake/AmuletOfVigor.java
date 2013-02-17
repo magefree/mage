@@ -28,17 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
@@ -66,7 +64,7 @@ public class AmuletOfVigor extends CardImpl<AmuletOfVigor> {
 
 class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl<AmuletOfVigorTriggeredAbility> {
     AmuletOfVigorTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new UntapTargetEffect());
+        super(Zone.BATTLEFIELD, new UntapTargetEffect());
     }
 
     AmuletOfVigorTriggeredAbility(final AmuletOfVigorTriggeredAbility ability) {
@@ -80,16 +78,13 @@ class AmuletOfVigorTriggeredAbility extends TriggeredAbilityImpl<AmuletOfVigorTr
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent p = game.getPermanent(event.getTargetId());
-                if (p != null && p.isTapped() && p.getControllerId().equals(this.controllerId)) {
-                    for (Effect effect : this.getEffects()) {
-                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
-                    }
-                    return true;
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            Permanent p = game.getPermanent(event.getTargetId());
+            if (p != null && p.isTapped() && p.getControllerId().equals(this.controllerId)) {
+                for (Effect effect : this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                 }
+                return true;
             }
         }
         return false;

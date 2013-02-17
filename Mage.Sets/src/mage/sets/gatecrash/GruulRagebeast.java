@@ -106,12 +106,10 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl<GruulRagebeast
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD
-                    && permanent.getControllerId().equals(this.controllerId)
+            if (permanent.getControllerId().equals(this.controllerId)
                     && permanent.getCardType().contains(CardType.CREATURE)
                     && (targetId.equals(this.getSourceId())
                     || !targetId.equals(this.getSourceId()))) {

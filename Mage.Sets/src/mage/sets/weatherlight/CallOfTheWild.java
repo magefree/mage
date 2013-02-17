@@ -102,7 +102,7 @@ class CallOfTheWildEffect extends OneShotEffect<CallOfTheWildEffect> {
 
             if (card != null) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
                 } else {
                     card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 }

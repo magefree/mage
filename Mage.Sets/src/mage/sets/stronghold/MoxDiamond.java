@@ -42,7 +42,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -117,9 +116,8 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl<MoxDiamondReplac
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
-            UUID sourceID = source.getSourceId();
-            if(sourceID.equals(event.getTargetId())){
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            if(source.getSourceId().equals(event.getTargetId())){
                 return true;
             }
         }

@@ -33,20 +33,27 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  * @author Loki
  */
 public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 2 or less");
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+    }
 
     public MentorOfTheMeek(UUID ownerId) {
         super(ownerId, 21, "Mentor of the Meek", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -58,7 +65,8 @@ public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
         this.toughness = new MageInt(2);
 
         //Whenever another creature with power 2 or less enters the battlefield under your control, you may pay 1. If you do, draw a card.
-        this.addAbility(new MentorOfTheMeekAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{1}")),filter, true));
 
     }
 
@@ -69,44 +77,6 @@ public class MentorOfTheMeek extends CardImpl<MentorOfTheMeek> {
     @Override
     public MentorOfTheMeek copy() {
         return new MentorOfTheMeek(this);
-    }
-
-}
-
-class MentorOfTheMeekAbility extends TriggeredAbilityImpl<MentorOfTheMeekAbility> {
-
-    public MentorOfTheMeekAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{1}")), true);
-     }
-
-    public MentorOfTheMeekAbility(final MentorOfTheMeekAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MentorOfTheMeekAbility copy() {
-        return new MentorOfTheMeekAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) 
-                        && permanent.getControllerId().equals(this.getControllerId())
-                        && permanent.getPower().getValue() <= 2) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return new StringBuilder("Whenever another creature with power 2 or less enters the battlefield under your control, ").append(super.getRule()).toString();
     }
 
 }

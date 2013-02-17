@@ -96,7 +96,7 @@ class BalothCageTrapWatcher extends WatcherImpl<BalothCageTrapWatcher> {
         if (condition == true) { // no need to check - condition has already occured
             return;
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
             if (perm.getCardType().contains(CardType.ARTIFACT) && !perm.getControllerId().equals(controllerId)) {
                 condition = true;

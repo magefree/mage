@@ -30,7 +30,6 @@ package mage.sets.darkascension;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -48,7 +47,6 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.game.permanent.token.WolfToken;
@@ -124,14 +122,12 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFe
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TRANSFORMED && event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && !permanent.isTransformed())
-                return true;
-        }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
+            if (permanent != null && !permanent.isTransformed()) {
                 return true;
             }
+        }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())) {
+            return true;
         }
         return false;
     }
@@ -166,8 +162,9 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbi
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TRANSFORMED && event.getTargetId().equals(sourceId)) {
             Permanent permanent = game.getPermanent(sourceId);
-            if (permanent != null && permanent.isTransformed())
+            if (permanent != null && permanent.isTransformed()) {
                 return true;
+            }
         }
         return false;
     }

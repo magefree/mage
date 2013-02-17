@@ -95,7 +95,7 @@ class ValakutTheMoltenPinnacleTriggeredAbility extends TriggeredAbilityImpl<Vala
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
 
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.BATTLEFIELD) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.getControllerId())) {
                 if(permanent.hasSubtype("Mountain")){

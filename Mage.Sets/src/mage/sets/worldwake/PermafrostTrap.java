@@ -99,7 +99,7 @@ class PermafrostTrapWatcher extends WatcherImpl<PermafrostTrapWatcher> {
         if (condition == true) { // no need to check - condition has already occured
             return;
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
             if (perm.getCardType().contains(CardType.CREATURE) && perm.getColor().contains(ObjectColor.GREEN) && !perm.getControllerId().equals(controllerId)) {
                 condition = true;

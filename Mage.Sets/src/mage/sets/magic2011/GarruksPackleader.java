@@ -33,20 +33,26 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.Filter;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.PowerPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class GarruksPackleader extends CardImpl<GarruksPackleader> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature with power 3 or greater");
+    static {
+        filter.add(new AnotherPredicate());
+        filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 2));
+    }
 
     public GarruksPackleader(UUID ownerId) {
         super(ownerId, 177, "Garruk's Packleader", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
@@ -56,7 +62,8 @@ public class GarruksPackleader extends CardImpl<GarruksPackleader> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new GarruksPackleaderAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(
+                Zone.BATTLEFIELD, new DrawCardControllerEffect(1), filter, true));
     }
 
     public GarruksPackleader(final GarruksPackleader card) {
@@ -66,42 +73,6 @@ public class GarruksPackleader extends CardImpl<GarruksPackleader> {
     @Override
     public GarruksPackleader copy() {
         return new GarruksPackleader(this);
-    }
-
-}
-
-class GarruksPackleaderAbility extends TriggeredAbilityImpl<GarruksPackleaderAbility> {
-
-    public GarruksPackleaderAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
-    }
-
-    public GarruksPackleaderAbility(final GarruksPackleaderAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GarruksPackleaderAbility copy() {
-        return new GarruksPackleaderAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId()) && permanent.getPower().getValue() > 2) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature with power 3 or greater enters the battlefield under your control, you may draw a card";
     }
 
 }

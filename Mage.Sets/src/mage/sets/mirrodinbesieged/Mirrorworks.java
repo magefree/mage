@@ -40,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.players.Player;
@@ -88,14 +87,11 @@ class MirrorworksAbility extends TriggeredAbilityImpl<MirrorworksAbility> {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.ARTIFACT)) {
-                    getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && !event.getTargetId().equals(this.getSourceId())) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && !(permanent instanceof PermanentToken) && permanent.getCardType().contains(CardType.ARTIFACT)) {
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                return true;
             }
         }
         return false;
@@ -149,4 +145,3 @@ class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
     }
 
 }
-

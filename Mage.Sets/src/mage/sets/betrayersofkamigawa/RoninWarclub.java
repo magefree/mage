@@ -28,10 +28,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,7 +42,6 @@ import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
@@ -58,7 +57,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
         this.expansionSetCode = "BOK";
         this.subtype.add("Equipment");
         // Equipped creature gets +2/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1)));
         
         // Whenever a creature enters the battlefield under your control, attach Ronin Warclub to that creature.
         Ability ability = new RoninWarclubTriggeredAbility();
@@ -66,7 +65,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
         this.addAbility(ability);
         
         // Equip {5} ({5}: Attach to target creature you control. Equip only as a sorcery.)
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(5)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(5)));
     }
 
     public RoninWarclub(final RoninWarclub card) {
@@ -81,7 +80,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
     private class RoninWarclubTriggeredAbility extends TriggeredAbilityImpl<RoninWarclubTriggeredAbility> {
 
         public RoninWarclubTriggeredAbility() {
-           super(Constants.Zone.BATTLEFIELD, new RoninWarclubAttachEffect(), false);
+           super(Zone.BATTLEFIELD, new RoninWarclubAttachEffect(), false);
         }
 
         public RoninWarclubTriggeredAbility(RoninWarclubTriggeredAbility ability) {
@@ -90,10 +89,9 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
 
         @Override
         public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+            if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
                 Permanent permanent = game.getPermanent(event.getTargetId());
-                if (((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD
-                        && permanent.getCardType().contains(CardType.CREATURE)
+                if (permanent.getCardType().contains(CardType.CREATURE)
                         && (permanent.getControllerId().equals(this.controllerId))) {
 
                     if (!this.getTargets().isEmpty()) {
@@ -122,7 +120,7 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
     private class RoninWarclubAttachEffect extends OneShotEffect<RoninWarclubAttachEffect> {
 
         public RoninWarclubAttachEffect() {
-            super(Constants.Outcome.BoostCreature);
+            super(Outcome.BoostCreature);
             this.staticText = "Whenever a creature enters the battlefield under your control, attach {this} to that creature";
         }
 
@@ -138,13 +136,20 @@ public class RoninWarclub extends CardImpl<RoninWarclub> {
         @Override
         public boolean apply(Game game, Ability source) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
-            if (permanent != null) {
+            Permanent attachment = game.getPermanent(source.getSourceId());
+            if (permanent != null && attachment != null) {
+                if (attachment.getAttachedTo() != null) {
+                    Permanent oldTarget = game.getPermanent(attachment.getAttachedTo());
+                    if (oldTarget != null) {
+                        oldTarget.removeAttachment(source.getSourceId(), game);
+                    }
+                }
                 boolean result;
                 result = permanent.addAttachment(source.getSourceId(), game);
                 return result;
             }
             return false;
         }
-        
     }
+
 }

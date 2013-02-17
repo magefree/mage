@@ -12,6 +12,8 @@ public class GoblinBushwhackerTest extends CardTestPlayerBase {
     @Test
     public void testKicker() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        // Goblin Bushwhacker - Creature — Goblin Warrior 1/1, R - Kicker {R} (You may pay an additional {R} as you cast this spell.)
+        // When Goblin Bushwhacker enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
         addCard(Constants.Zone.HAND, playerA, "Goblin Bushwhacker");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 

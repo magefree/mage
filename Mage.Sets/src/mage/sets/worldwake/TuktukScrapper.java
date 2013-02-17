@@ -96,18 +96,15 @@ class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl<TuktukScrapper
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getId() == this.getSourceId()) {
-                    return true;
-                }
-                if (permanent != null
-                        && permanent.hasSubtype("Ally")
-                        && permanent.getControllerId().equals(this.getControllerId())) {
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getId() == this.getSourceId()) {
+                return true;
+            }
+            if (permanent != null
+                    && permanent.hasSubtype("Ally")
+                    && permanent.getControllerId().equals(this.getControllerId())) {
+                return true;
             }
         }
         return false;

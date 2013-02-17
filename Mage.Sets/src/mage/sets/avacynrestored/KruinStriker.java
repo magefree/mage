@@ -28,26 +28,30 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author Loki
  */
 public class KruinStriker extends CardImpl<KruinStriker> {
+
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("another creature");
+    static {
+        filter.add(new AnotherPredicate());
+    }
 
     public KruinStriker(UUID ownerId) {
         super(ownerId, 143, "Kruin Striker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -60,7 +64,10 @@ public class KruinStriker extends CardImpl<KruinStriker> {
         this.toughness = new MageInt(1);
 
         // Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.
-        this.addAbility(new KruinStrikerAbility());
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter,
+                "Whenever another creature enters the battlefield under your control, Kruin Striker gets +1/+0 and gains trample until end of turn.");
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
+        this.addAbility(ability);
     }
 
     public KruinStriker(final KruinStriker card) {
@@ -71,41 +78,4 @@ public class KruinStriker extends CardImpl<KruinStriker> {
     public KruinStriker copy() {
         return new KruinStriker(this);
     }
-}
-
-class KruinStrikerAbility extends TriggeredAbilityImpl<KruinStrikerAbility> {
-
-    public KruinStrikerAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn));
-        this.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
-    }
-
-    public KruinStrikerAbility(final KruinStrikerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KruinStrikerAbility copy() {
-        return new KruinStrikerAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever another creature enters the battlefield under your control, {this} gets +1/+0 and gains trample until end of turn.";
-    }
-
 }

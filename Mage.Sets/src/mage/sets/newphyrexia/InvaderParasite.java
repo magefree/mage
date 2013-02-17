@@ -121,20 +121,17 @@ class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl<InvaderParasi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent p = game.getPermanent(event.getTargetId());
-                Permanent sourcePermanent = game.getPermanent(getSourceId());
-                if (p != null && sourcePermanent != null) {
-                    if (sourcePermanent.getImprinted().size() > 0) {
-                        Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
-                        if (p.getName().equals(imprintedCard.getName())) {
-                            for (Effect effect : this.getEffects()) {
-                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
-                            }
-                            return true;
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+            Permanent p = game.getPermanent(event.getTargetId());
+            Permanent sourcePermanent = game.getPermanent(getSourceId());
+            if (p != null && sourcePermanent != null) {
+                if (sourcePermanent.getImprinted().size() > 0) {
+                    Card imprintedCard = game.getCard(sourcePermanent.getImprinted().get(0));
+                    if (p.getName().equals(imprintedCard.getName())) {
+                        for (Effect effect : this.getEffects()) {
+                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
                         }
+                        return true;
                     }
                 }
             }

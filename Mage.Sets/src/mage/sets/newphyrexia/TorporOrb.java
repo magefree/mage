@@ -28,7 +28,6 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -40,7 +39,6 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -84,13 +82,10 @@ class TorporOrbEffect extends ReplacementEffectImpl<TorporOrbEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent p = game.getPermanent(event.getTargetId());
-                if (p != null && p.getCardType().contains(CardType.CREATURE)) {
-                    return true;
-                }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            Permanent p = game.getPermanent(event.getTargetId());
+            if (p != null && p.getCardType().contains(CardType.CREATURE)) {
+                return true;
             }
         }
         return false;

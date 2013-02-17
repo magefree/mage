@@ -32,10 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -48,6 +52,10 @@ import mage.game.permanent.Permanent;
  */
 public class SeraphSanctuary extends CardImpl<SeraphSanctuary> {
 
+    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("an Angel");
+    static {
+        filter.add(new SubtypePredicate("Angel"));
+    }
     public SeraphSanctuary(UUID ownerId) {
         super(ownerId, 228, "Seraph Sanctuary", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "AVR";
@@ -55,7 +63,7 @@ public class SeraphSanctuary extends CardImpl<SeraphSanctuary> {
         // When Seraph Sanctuary enters the battlefield, you gain 1 life.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
         // Whenever an Angel enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new SeraphSanctuaryTriggeredAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new GainLifeEffect(1), filter));
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
     }
@@ -67,39 +75,5 @@ public class SeraphSanctuary extends CardImpl<SeraphSanctuary> {
     @Override
     public SeraphSanctuary copy() {
         return new SeraphSanctuary(this);
-    }
-}
-
-class SeraphSanctuaryTriggeredAbility extends TriggeredAbilityImpl<SeraphSanctuaryTriggeredAbility> {
-
-    public SeraphSanctuaryTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(1));
-    }
-
-    public SeraphSanctuaryTriggeredAbility(SeraphSanctuaryTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && permanent.hasSubtype("Angel")
-                    && permanent.getControllerId().equals(this.controllerId)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an Angel enters the battlefield under your control, you gain 1 life.";
-    }
-
-    @Override
-    public SeraphSanctuaryTriggeredAbility copy() {
-        return new SeraphSanctuaryTriggeredAbility(this);
     }
 }

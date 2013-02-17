@@ -90,12 +90,10 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl<HamletbackG
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD
-                    && permanent.getCardType().contains(CardType.CREATURE)
+            if (permanent.getCardType().contains(CardType.CREATURE)
                     && !(targetId.equals(this.getSourceId()))) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

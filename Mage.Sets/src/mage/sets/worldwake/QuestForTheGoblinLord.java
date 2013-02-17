@@ -32,7 +32,8 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.Constants.Zone;
+import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -40,12 +41,11 @@ import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -55,9 +55,11 @@ public class QuestForTheGoblinLord extends CardImpl<QuestForTheGoblinLord> {
 
     private static final String rule = "As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.";
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterPermanent goblinFilter = new FilterControlledCreaturePermanent();
 
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
+        goblinFilter.add(new SubtypePredicate("Goblin"));
     }
 
     public QuestForTheGoblinLord(UUID ownerId) {
@@ -67,7 +69,7 @@ public class QuestForTheGoblinLord extends CardImpl<QuestForTheGoblinLord> {
         this.color.setRed(true);
 
         // Whenever a Goblin enters the battlefield under your control, you may put a quest counter on Quest for the Goblin Lord.
-        this.addAbility(new QuestForTheGoblinLordTriggeredAbility());
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
 
         // As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostAllEffect(2, 0, Constants.Duration.WhileOnBattlefield, filter, false), new HasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
@@ -80,37 +82,5 @@ public class QuestForTheGoblinLord extends CardImpl<QuestForTheGoblinLord> {
     @Override
     public QuestForTheGoblinLord copy() {
         return new QuestForTheGoblinLord(this);
-    }
-}
-
-class QuestForTheGoblinLordTriggeredAbility extends TriggeredAbilityImpl<QuestForTheGoblinLordTriggeredAbility> {
-
-    QuestForTheGoblinLordTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true);
-    }
-
-    QuestForTheGoblinLordTriggeredAbility(final QuestForTheGoblinLordTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public QuestForTheGoblinLordTriggeredAbility copy() {
-        return new QuestForTheGoblinLordTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.hasSubtype("Goblin") && permanent.getControllerId().equals(super.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a Goblin enters the battlefield under your control, you may put a quest counter on {this}.";
     }
 }

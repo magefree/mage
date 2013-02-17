@@ -103,7 +103,7 @@ class LavaballTrapWatcher extends WatcherImpl<LavaballTrapWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.BATTLEFIELD) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent perm = game.getPermanent(event.getTargetId());
             if (perm.getCardType().contains(CardType.LAND)) {
                 Integer amount = amountOfLandsPlayedThisTurn.get(perm.getControllerId());
