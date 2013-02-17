@@ -45,7 +45,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.ExileZone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -117,7 +116,7 @@ class NightveilSpecterExileEffect extends OneShotEffect<NightveilSpecterExileEff
                   exileId = UUID.randomUUID();
                   game.getState().setValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString(), exileId);
               }
-              return card.moveToExile(exileId, "Nightveil Specter", source.getSourceId(), game);
+              return card.moveToExile(exileId, sourceCard.getName(), source.getSourceId(), game);
           }
       }
       return false;
@@ -133,7 +132,7 @@ class NightveilSpecterEffect extends AsThoughEffectImpl<NightveilSpecterEffect> 
 
     public NightveilSpecterEffect() {
       super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
-      staticText = "You may play cards exiled with Nightveil Specter";
+      staticText = "You may play cards exiled with {this}";
     }
 
     public NightveilSpecterEffect(final NightveilSpecterEffect effect) {
