@@ -121,7 +121,9 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
             sb.append(" gain ");
         }
         sb.append(ability.getRule());
-        sb.append(" ").append(duration.toString());
+        if (duration.toString().length() > 0) {
+            sb.append(" ").append(duration.toString());
+        }
         staticText = sb.toString();
     }
 }
