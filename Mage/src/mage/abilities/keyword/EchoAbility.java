@@ -72,10 +72,9 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if(zEvent.getToZone() != null && zEvent.getToZone() == Constants.Zone.BATTLEFIELD &&
-                zEvent.getFromZone() == null && this.echoPaid) {
+            if(zEvent.getFromZone() == null && this.echoPaid) {
                 this.echoPaid = false;
             }
         }

@@ -119,7 +119,7 @@ public class AuraReplacementEffect extends ReplacementEffectImpl<AuraReplacement
             game.getBattlefield().addPermanent(permanent);
             game.setZone(card.getId(), Zone.BATTLEFIELD);
             game.applyEffects();
-            permanent.entersBattlefield(event.getSourceId(), game);
+            permanent.entersBattlefield(event.getSourceId(), game, fromZone, true);
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
 

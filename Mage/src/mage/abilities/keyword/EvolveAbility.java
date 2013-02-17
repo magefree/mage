@@ -69,10 +69,9 @@ public class EvolveAbility extends TriggeredAbilityImpl<EvolveAbility> {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent triggeringCreature = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && triggeringCreature != null
+            if (triggeringCreature != null
                     && triggeringCreature.getCardType().contains(CardType.CREATURE)
                     && triggeringCreature.getControllerId().equals(this.controllerId)) {
                 Permanent sourceCreature = game.getPermanent(sourceId);

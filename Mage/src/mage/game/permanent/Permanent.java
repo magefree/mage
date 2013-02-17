@@ -32,13 +32,12 @@ import java.util.ArrayList;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
-import mage.counters.Counter;
-import mage.counters.Counters;
 import mage.game.Controllable;
 import mage.game.Game;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants.Zone;
 
 public interface Permanent extends Card, Controllable {
 
@@ -107,7 +106,7 @@ public interface Permanent extends Card, Controllable {
     boolean destroy(UUID sourceId, Game game, boolean noRegen);
     boolean sacrifice(UUID sourceId, Game game);
     boolean regenerate(UUID sourceId, Game game);
-    void entersBattlefield(UUID sourceId, Game game);
+    void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent);
     String getValue();
 
     @Deprecated

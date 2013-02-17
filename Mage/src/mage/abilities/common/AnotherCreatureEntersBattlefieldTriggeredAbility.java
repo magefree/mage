@@ -5,7 +5,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 public class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl<AnotherCreatureEntersBattlefieldTriggeredAbility> {
 
@@ -23,11 +23,9 @@ public class AnotherCreatureEntersBattlefieldTriggeredAbility extends TriggeredA
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD
-                    && zEvent.getTarget().getCardType().contains(Constants.CardType.CREATURE)
-                    && zEvent.getTargetId() != this.getSourceId()) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId() != this.getSourceId()) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent.getCardType().contains(Constants.CardType.CREATURE)) {
                 return true;
             }
         }

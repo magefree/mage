@@ -3,7 +3,6 @@ package mage.watchers.common;
 import mage.Constants;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.WatcherImpl;
 
@@ -28,9 +27,10 @@ public class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
+        if (condition == true) { //no need to check - condition has already occured
             return;
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.BATTLEFIELD) {
+        }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(Constants.CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
                 condition = true;

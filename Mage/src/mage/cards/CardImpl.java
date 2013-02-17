@@ -318,7 +318,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
                     game.applyEffects();
-                    permanent.entersBattlefield(sourceId, game);
+                    permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
                     game.applyEffects();
                     if (flag) {
                         permanent.setTapped(true);
@@ -444,7 +444,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             //game.applyEffects(); // magenoxx: this causes bugs
-            permanent.entersBattlefield(sourceId, game);
+            permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
             return true;

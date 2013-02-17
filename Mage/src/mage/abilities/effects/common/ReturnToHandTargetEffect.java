@@ -60,22 +60,22 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
-        for (UUID id : targetPointer.getTargets(game, source)) {
-            switch (game.getState().getZone(id)) {
+        for (UUID targetId : targetPointer.getTargets(game, source)) {
+            switch (game.getState().getZone(targetId)) {
                 case BATTLEFIELD:
-                    Permanent permanent = game.getPermanent(id);
+                    Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
                         result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
                     }
                     break;
                 case GRAVEYARD:
-                    Card card = game.getCard(id);
+                    Card card = game.getCard(targetId);
                     if (card != null) {
                         result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
                     }
                     break;
                 case EXILED:
-                    card = game.getCard(id);
+                    card = game.getCard(targetId);
                     if (card != null) {
                         result |= card.moveToZone(Zone.HAND, source.getId(), game, true);
                     }

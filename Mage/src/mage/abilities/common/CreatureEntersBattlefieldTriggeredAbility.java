@@ -34,7 +34,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.TargetPlayer;
@@ -77,7 +76,7 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
      */
     public CreatureEntersBattlefieldTriggeredAbility(Effect effect, boolean optional, boolean opponentController) {
         this(Zone.BATTLEFIELD, effect, optional, opponentController);
-        this.opponentController = opponentController;
+
     }
     
     /**
@@ -88,7 +87,6 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
      */
     public CreatureEntersBattlefieldTriggeredAbility(Zone zone, Effect effect, boolean optional, boolean opponentController) {
         this(zone, effect, null, optional, opponentController);
-
     }
 
     /**
@@ -115,10 +113,9 @@ public class CreatureEntersBattlefieldTriggeredAbility extends TriggeredAbilityI
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD
-                    && filter.match(permanent, sourceId, controllerId, game)
+            if (filter.match(permanent, sourceId, controllerId, game)
                     && (permanent.getControllerId().equals(this.controllerId) ^ opponentController)) {
                 if (!this.getTargets().isEmpty()) {
                     Target target = this.getTargets().get(0);

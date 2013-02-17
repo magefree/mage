@@ -29,30 +29,45 @@
 package mage.abilities.common;
 
 import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class EntersBattlefieldTriggeredAbility extends ZoneChangeTriggeredAbility<EntersBattlefieldTriggeredAbility> {
+public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     public EntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, "When {this} enters the battlefield, ", optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
         super(ability);
     }
 
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
+                && event.getTargetId().equals(getSourceId())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When {this} enters the battlefield, " + super.getRule();
+    }
 
     @Override
     public EntersBattlefieldTriggeredAbility copy() {
         return new EntersBattlefieldTriggeredAbility(this);
     }
-
 }

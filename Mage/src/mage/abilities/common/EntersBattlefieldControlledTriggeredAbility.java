@@ -30,7 +30,6 @@ package mage.abilities.common;
 
 import java.util.UUID;
 import mage.Constants.Zone;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
@@ -41,48 +40,35 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
-
-    protected FilterPermanent filter;
-    protected String rule;
-    protected boolean controlled;
+public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefieldAllTriggeredAbility {
 
     /**
      * zone     = BATTLEFIELD
      * optional = false
-     * 
+     * rule     = null
+     *
      * @param effect
-     * @param filter 
+     * @param filter
      */
-    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter) {
+    public EntersBattlefieldControlledTriggeredAbility(Effect effect, FilterPermanent filter) {
         this(Zone.BATTLEFIELD, effect, filter, false);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Effect effect, FilterPermanent filter, String rule) {
+    public EntersBattlefieldControlledTriggeredAbility(Effect effect, FilterPermanent filter, String rule) {
         this(Zone.BATTLEFIELD, effect, filter, false, rule);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
+    public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
         this(zone, effect, filter, optional, null);
         this.filter = filter;
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        this(zone, effect, filter, optional, rule, false);
+    public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
+        super(zone, effect, filter, optional, rule, true);
     }
 
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlled) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = filter;
-        this.rule = rule;
-        this.controlled = controlled;
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(EntersBattlefieldAllTriggeredAbility ability) {
+    public EntersBattlefieldControlledTriggeredAbility(EntersBattlefieldControlledTriggeredAbility ability) {
         super(ability);
-        this.filter = ability.filter;
-        this.rule = ability.rule;
-        this.controlled = ability.controlled;
     }
 
     @Override
@@ -97,24 +83,10 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         return false;
     }
 
-    @Override
-    public String getRule() {
-        if (rule != null && !rule.isEmpty()) {
-            return rule;
-        }
-        StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
-        sb.append(" enters the battlefield");
-        if (controlled) {
-            sb.append("under your control,");
-        } else {
-            sb.append(",");
-        }
-        sb.append(super.getRule());
-        return sb.toString();
-    }
+
 
     @Override
-    public EntersBattlefieldAllTriggeredAbility copy() {
-        return new EntersBattlefieldAllTriggeredAbility(this);
+    public EntersBattlefieldControlledTriggeredAbility copy() {
+        return new EntersBattlefieldControlledTriggeredAbility(this);
     }
 }

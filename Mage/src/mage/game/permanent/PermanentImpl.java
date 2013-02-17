@@ -61,6 +61,7 @@ import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.DamagedPlaneswalkerEvent;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
@@ -733,10 +734,16 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         markedDamage.add(counter);
     }
 
+
     @Override
-    public void entersBattlefield(UUID sourceId, Game game) {
+    public void entersBattlefield(UUID sourceId, Game game, Zone fromZone, boolean fireEvent) {
         controlledFromStartOfControllerTurn = false;
-        game.replaceEvent(GameEvent.getEvent(EventType.ENTERS_THE_BATTLEFIELD, objectId, sourceId, controllerId));
+        EntersTheBattlefieldEvent event = new EntersTheBattlefieldEvent(this, sourceId, getControllerId(), fromZone);
+        if (!game.replaceEvent(event)) {
+            if (fireEvent) {
+                game.fireEvent(event);
+            }
+        }
     }
 
     @Override

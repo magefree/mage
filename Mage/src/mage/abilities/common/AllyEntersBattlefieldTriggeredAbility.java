@@ -34,7 +34,6 @@ import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 
 /**
@@ -53,12 +52,10 @@ public class AllyEntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl 
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
+        if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Zone.BATTLEFIELD
-                    && permanent.getControllerId().equals(this.controllerId)
+            if (permanent.getControllerId().equals(this.controllerId)
                     && (targetId.equals(this.getSourceId())
                     || (permanent.hasSubtype("Ally") && !targetId.equals(this.getSourceId())))) {
                 return true;

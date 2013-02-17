@@ -1614,7 +1614,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 card.setOwnerId(ownerId);
                 PermanentCard permanent = new PermanentCard(card.getCard(), ownerId);
                 getBattlefield().addPermanent(permanent);
-                permanent.entersBattlefield(permanent.getId(), this);
+                permanent.entersBattlefield(permanent.getId(), this, Zone.OUTSIDE, false);
                 ((PermanentImpl)permanent).removeSummoningSickness();
                 if (card.isTapped()) {
                     permanent.setTapped(true);

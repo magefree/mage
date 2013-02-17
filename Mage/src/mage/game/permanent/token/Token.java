@@ -117,7 +117,7 @@ public class Token extends MageObjectImpl<Token> {
                 game.getState().addCard(permanent);
                 game.addPermanent(permanent);
                 this.lastAddedTokenId = permanent.getId();
-                permanent.entersBattlefield(sourceId, game);
+                permanent.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
                 game.applyEffects();
                 game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
             }

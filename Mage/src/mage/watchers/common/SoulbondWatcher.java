@@ -69,51 +69,48 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.BATTLEFIELD) {
-                Permanent permanent = game.getPermanent(event.getTargetId());
-                if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE)) {
-                    if (permanent.getAbilities().contains(SoulbondAbility.getInstance())) {
-                        Player controller = game.getPlayer(permanent.getControllerId());
-                        if (controller != null) {
-                            Cards cards = new CardsImpl(Constants.Zone.PICK);
-                            cards.add(permanent);
-                            controller.lookAtCards("Soulbond", cards, game);
-                            if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond?", game)) {
-                                TargetControlledPermanent target = new TargetControlledPermanent(filter);
-                                target.setNotTarget(true);
-                                if (target.canChoose(permanent.getId(), controller.getId(), game)) {
-                                    if (controller.choose(Constants.Outcome.Benefit, target, permanent.getId(), game)) {
-                                        Permanent chosen = game.getPermanent(target.getFirstTarget());
-                                        if (chosen != null) {
-                                            chosen.setPairedCard(permanent.getId());
-                                            permanent.setPairedCard(chosen.getId());
-                                        }
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE)) {
+                if (permanent.getAbilities().contains(SoulbondAbility.getInstance())) {
+                    Player controller = game.getPlayer(permanent.getControllerId());
+                    if (controller != null) {
+                        Cards cards = new CardsImpl(Constants.Zone.PICK);
+                        cards.add(permanent);
+                        controller.lookAtCards("Soulbond", cards, game);
+                        if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond?", game)) {
+                            TargetControlledPermanent target = new TargetControlledPermanent(filter);
+                            target.setNotTarget(true);
+                            if (target.canChoose(permanent.getId(), controller.getId(), game)) {
+                                if (controller.choose(Constants.Outcome.Benefit, target, permanent.getId(), game)) {
+                                    Permanent chosen = game.getPermanent(target.getFirstTarget());
+                                    if (chosen != null) {
+                                        chosen.setPairedCard(permanent.getId());
+                                        permanent.setPairedCard(chosen.getId());
                                     }
                                 }
                             }
                         }
                     }
+                }
 
-                    // if still unpaired
-                    if (permanent.getPairedCard() == null) {
-                        // try to find creature with Soulbond and unpaired
-                        Player controller = null;
-                        for (Permanent chosen : game.getBattlefield().getActivePermanents(filter, permanent.getControllerId(), permanent.getId(), game)) {
-                            if (!chosen.getId().equals(permanent.getId()) && chosen.getAbilities().contains(SoulbondAbility.getInstance()) && chosen.getPairedCard() == null) {
-                                if (controller == null) {
-                                    controller = game.getPlayer(permanent.getControllerId());
-                                }
-                                if (controller != null) {
-                                    Cards cards = new CardsImpl(Constants.Zone.PICK);
-                                    cards.add(chosen);
-                                    controller.lookAtCards("Soulbond", cards, game);
-                                    if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
-                                        chosen.setPairedCard(permanent.getId());
-                                        permanent.setPairedCard(chosen.getId());
-                                        break;
-                                    }
+                // if still unpaired
+                if (permanent.getPairedCard() == null) {
+                    // try to find creature with Soulbond and unpaired
+                    Player controller = null;
+                    for (Permanent chosen : game.getBattlefield().getActivePermanents(filter, permanent.getControllerId(), permanent.getId(), game)) {
+                        if (!chosen.getId().equals(permanent.getId()) && chosen.getAbilities().contains(SoulbondAbility.getInstance()) && chosen.getPairedCard() == null) {
+                            if (controller == null) {
+                                controller = game.getPlayer(permanent.getControllerId());
+                            }
+                            if (controller != null) {
+                                Cards cards = new CardsImpl(Constants.Zone.PICK);
+                                cards.add(chosen);
+                                controller.lookAtCards("Soulbond", cards, game);
+                                if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
+                                    chosen.setPairedCard(permanent.getId());
+                                    permanent.setPairedCard(chosen.getId());
+                                    break;
                                 }
                             }
                         }
