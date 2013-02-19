@@ -61,7 +61,7 @@ public class HinterlandHarbor extends CardImpl<HinterlandHarbor> {
         this.expansionSetCode = "ISD";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
-        String abilityText = "tap it unless you control a Forest or an Island";
+        String abilityText = "tapped unless you control a Forest or an Island";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());
         this.addAbility(new BlueManaAbility());

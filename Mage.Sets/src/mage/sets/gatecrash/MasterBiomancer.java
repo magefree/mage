@@ -93,7 +93,9 @@ class MasterBiomancerEntersBattlefieldEffect extends ReplacementEffectImpl<Maste
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent creature = game.getPermanent(event.getTargetId());
-            if (creature != null && creature.getControllerId().equals(source.getControllerId()) && !event.getTargetId().equals(source.getSourceId())) {
+            if (creature != null && creature.getControllerId().equals(source.getControllerId()) 
+                    && creature.getCardType().contains(CardType.CREATURE)
+                    && !event.getTargetId().equals(source.getSourceId())) {
                 return true;
             }
         }

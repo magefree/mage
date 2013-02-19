@@ -131,6 +131,7 @@ class MoltenPrimordialEffect extends OneShotEffect<MoltenPrimordialEffect> {
                     game.addEffect(effect2, source);
 
                     targetCreature.untap(game);
+                    result = true;
                 }
             }
         }

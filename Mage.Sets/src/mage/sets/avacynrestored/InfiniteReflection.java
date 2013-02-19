@@ -94,7 +94,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflection
 
     public InfiniteReflectionTriggeredEffect() {
         super(Constants.Outcome.Sacrifice);
-        this.staticText = "When Infinite Reflection enters the battlefield attached to a creature, each other nontoken creature you control becomes a copy of that creature";
+        this.staticText = " attached to a creature, each other nontoken creature you control becomes a copy of that creature";
     }
 
     public InfiniteReflectionTriggeredEffect(final InfiniteReflectionTriggeredEffect effect) {
@@ -165,7 +165,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl<In
 
     @Override
     public String getText(Mode mode) {
-        return "Nontoken creatures you control enter the battlefield as a copy of enchanted creature.";
+        return "Nontoken creatures you control enter the battlefield as a copy of enchanted creature";
     }
 
     @Override
