@@ -113,7 +113,9 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflection
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
             if (toCopyFromPermanent != null) {
                 for (Permanent toCopyToPermanent: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-                    game.copyPermanent(toCopyFromPermanent, toCopyToPermanent, source, new EmptyApplyToPermanent());
+                    if (!toCopyToPermanent.equals(toCopyFromPermanent) && !(toCopyToPermanent instanceof PermanentToken)) {
+                        game.copyPermanent(toCopyFromPermanent, toCopyToPermanent, source, new EmptyApplyToPermanent());
+                    }
                 }
                 return true;
             }
