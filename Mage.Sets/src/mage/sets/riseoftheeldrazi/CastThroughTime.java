@@ -112,8 +112,8 @@ class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
                     }
                 }
                 if (!found) {
-                    card.addAbility(new AttachedReboundAbility());
                     Ability ability = new AttachedReboundAbility();
+                    card.addAbility(ability);
                     ability.setControllerId(source.getControllerId());
                     ability.setSourceId(card.getId());
                     game.getState().addAbility(ability, source.getSourceId(), card);
