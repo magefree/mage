@@ -27,6 +27,9 @@
  */
 package mage.player.ai;
 
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.*;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
@@ -61,9 +64,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 
-import java.io.File;
-import java.util.*;
-import java.util.concurrent.*;
 
 /**
  *
@@ -187,18 +187,18 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     protected void printOutState(Game game, UUID playerId) {
         if (lastTurnOutput < game.getTurnNum()) {
             lastTurnOutput = game.getTurnNum();
-            logger.info(new StringBuilder("Turn: ").append(game.getTurnNum()).append("  --------------------------------------------------------------").toString());
+            logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append("  --------------------------------------------------------------").toString());
         }
 
         Player player = game.getPlayer(playerId);
         logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("] ").append(game.getTurn().getStepType().name()).append(", life=").append(player.getLife()).toString());
-        StringBuilder sb = new StringBuilder("Hand: [");
+        StringBuilder sb = new StringBuilder("-> Hand: [");
         for (Card card : player.getHand().getCards(game)) {
             sb.append(card.getName()).append(";");
         }
         logger.info(sb.append("]").toString());
         sb.setLength(0);
-        sb.append("Permanents: [");
+        sb.append("-> Permanents: [");
         for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
             if (permanent.getOwnerId().equals(player.getId())) {
                 sb.append(permanent.getName());
@@ -460,7 +460,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             //logger.info("reached - " + val + ", playerId=" + playerId + ", node.pid="+currentPlayerId);
             return val;
         } else if (node.getChildren().size() > 0) {
-            logger.debug("simulating -- somthing added children:" + node.getChildren().size());
+            logger.debug("simulating -- something added children:" + node.getChildren().size());
             val = minimaxAB(node, depth - 1, alpha, beta);
             return val;
         } else {
@@ -924,9 +924,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 return;
             }
 
+            logger.debug("Declare Attackers: Number of potential attackers " + attackersList.size());
             for (Permanent attacker : attackersList) {
-                System.out.println("Number of potential attackers " + attackersList.size());
-                System.out.println("Potential attacker is " + attacker.getName());
+                logger.debug("                   Potential attacker: " + attacker.getName());
             }
 
             if (attackersList.isEmpty()) {
@@ -935,9 +935,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
             List<Permanent> possibleBlockers = defender.getAvailableBlockers(game);
 
+            logger.debug("Possible Blockers: Number of blockers " + possibleBlockers.size());
             for (Permanent blocker : possibleBlockers) {
-                System.out.println("Number of blockers " + possibleBlockers.size());
-                System.out.println("Blocker is " + blocker.getName());
+                logger.debug("                   Blocker:            " + blocker.getName());
             }
 
             List<Permanent> killers = CombatUtil.canKillOpponent(game, attackersList, possibleBlockers, defender);
