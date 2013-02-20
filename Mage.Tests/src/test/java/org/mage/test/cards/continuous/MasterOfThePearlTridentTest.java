@@ -1,6 +1,8 @@
 package org.mage.test.cards.continuous;
 
+import junit.framework.Assert;
 import mage.Constants;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.IslandwalkAbility;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;

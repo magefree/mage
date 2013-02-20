@@ -84,13 +84,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().contains(new IndestructibleAbility()));
+        Assert.assertTrue(master.getAbilities().containsRule(new IndestructibleAbility()));
 
         // But copied one should not
         Assert.assertEquals("Power different", 3, masterCopied.getPower().getValue());
         Assert.assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
         Assert.assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(masterCopied.getAbilities().contains(new IndestructibleAbility()));
+        Assert.assertFalse(masterCopied.getAbilities().containsRule(new IndestructibleAbility()));
     }
 
     /**
@@ -103,7 +103,7 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
         setChoice(playerA, "Illusionary Servant");
-        setChoice(playerA, "Illusionary Servant-M12");
+        setChoice(playerA, "Illusionary Servant-M10");
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");

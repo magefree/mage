@@ -20,7 +20,7 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {tap}:");
+        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
         castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
 
         setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
@@ -65,7 +65,7 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
         addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {tap}:");
+        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
         castSpell(4, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
 
         setStopAt(4, Constants.PhaseStep.BEGIN_COMBAT);
