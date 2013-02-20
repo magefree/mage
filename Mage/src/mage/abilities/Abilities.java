@@ -215,6 +215,14 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
     boolean contains(T ability);
 
     /**
+     * Searches an ability with the same rule text as the passed in ability.
+     * 
+     * @param ability
+     * @return
+     */
+    boolean containsRule(T ability);
+
+    /**
      * Searches this set of abilities for the existence of each of the passed in
      * set of abilities.
      * 

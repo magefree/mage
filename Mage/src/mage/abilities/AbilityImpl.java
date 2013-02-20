@@ -580,6 +580,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public void setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ruleAtTheTop = ruleAtTheTop;
-    }    
+    }
+
+    @Override
+    public UUID getOriginalId() {
+        return this.originalId;
+    }
 }
 

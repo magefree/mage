@@ -372,4 +372,9 @@ public class StackAbility implements StackObject, Ability {
     public void setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ability.setRuleAtTheTop(ruleAtTheTop);
     }
+
+    @Override
+    public UUID getOriginalId() {
+        return this.ability.getOriginalId();
+    }
 }

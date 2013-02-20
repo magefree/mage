@@ -232,7 +232,26 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     @Override
     public boolean contains(T ability) {
         for (T test: this) {
-            if (ability.getId().equals(test.getId()) || ability.getRule().equals(test.getRule())) {
+            // Checking also by getRule() without other restrictions is a problem when a triggered ability will be copied to a permanent that had the same ability
+            // already before the copy. Because then it keeps the triggered ability twice and it triggers twice.
+            // e.g. 2 Biovisonary and one enchanted with Infinite Reflection
+            if (ability.getId().equals(test.getId())) {
+                return true;
+            }
+            if (ability.getOriginalId().equals(test.getId())) {
+                return true;
+            }
+            if (ability instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsRule(T ability) {
+        for (T test: this) {
+            if (ability.getRule().equals(test.getRule())) {
                 return true;
             }
         }

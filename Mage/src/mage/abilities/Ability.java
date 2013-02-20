@@ -379,4 +379,11 @@ public interface Ability extends Controllable, Serializable {
      */
     void setRuleAtTheTop(boolean ruleAtTheTop);
 
+    /**
+     * Get the originalId of the ability
+     * 
+     * @return originalId
+     */
+    UUID getOriginalId();
+    
 }
