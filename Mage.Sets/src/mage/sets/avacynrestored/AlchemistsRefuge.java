@@ -59,7 +59,7 @@ public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddContinuousEffectToGame(new AlchemistsRefugeEffect()), new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {tap}")));
+        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddContinuousEffectToGame(new AlchemistsRefugeEffect()), new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
     public AlchemistsRefuge(final AlchemistsRefuge card) {

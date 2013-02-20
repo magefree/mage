@@ -70,7 +70,7 @@ public class FreewindEquenaut extends CardImpl<FreewindEquenaut> {
                 new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield),
                 new EnchantedCondition(),
-                "As long as {this} is enchanted, it has \"{tap}: {this} deals 2 damage to target attacking or blocking creature\"")));
+                "As long as {this} is enchanted, it has \"{T}: {this} deals 2 damage to target attacking or blocking creature\"")));
     }
 
     public FreewindEquenaut(final FreewindEquenaut card) {
