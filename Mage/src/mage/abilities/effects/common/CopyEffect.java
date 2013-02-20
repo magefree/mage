@@ -84,7 +84,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         for (String type: target.getSupertype()) {
             permanent.getSupertype().add(type);
         }
-        permanent.getAbilities().clear();
+        permanent.removeAllAbilities(source.getSourceId(), game);
         for (Ability ability: target.getAbilities()) {
              permanent.addAbility(ability, game);
         }
