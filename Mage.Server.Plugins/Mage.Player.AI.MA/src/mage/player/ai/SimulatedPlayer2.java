@@ -49,6 +49,7 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import org.apache.log4j.Level;
 
 /**
  *
@@ -100,12 +101,14 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             list.add(pass);
         }
 
-        for (Ability a : allActions) {
-            //System.out.println("ability=="+a);
-            if (a.getTargets().size() > 0) {
-                Player player = game.getPlayer(a.getFirstTarget());
-                if (player != null) {
-                    System.out.println("   target="+player.getName());
+        if (logger.isTraceEnabled()) {
+            for (Ability a : allActions) {
+                logger.trace("ability==" + a);
+                if (a.getTargets().size() > 0) {
+                    Player player = game.getPlayer(a.getFirstTarget());
+                    if (player != null) {
+                        logger.trace("   target="+player.getName());
+                    }
                 }
             }
         }
@@ -170,7 +173,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             Card card = game.getCard(ability.getSourceId());
             for (String s : suggested) {
                 if (s.equals(card.getName())) {
-                    System.out.println("matched: " + s);
+                    logger.debug("matched: " + s);
                     forced = true;
                     filtered.add(ability);
                 }
@@ -195,7 +198,7 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
                 Card card = game.getCard(ability.getSourceId());
                 for (String s : suggested) {
                     String[] groups = s.split(";");
-                    System.out.println("s="+s+";groups="+groups.length);
+                    logger.trace("s="+s+";groups="+groups.length);
                     if (groups.length == 2) {
                         if (groups[0].equals(card.getName()) && groups[1].startsWith("name=")) {
                             // extract target and compare to suggested

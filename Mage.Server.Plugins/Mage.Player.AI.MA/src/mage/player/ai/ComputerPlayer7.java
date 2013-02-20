@@ -67,8 +67,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
     @Override
     public boolean priority(Game game) {
         logState(game);
-        if (logger.isDebugEnabled())
-            logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         switch (game.getTurn().getStepType()) {
@@ -78,7 +77,6 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    System.out.println("Computer7:");
                     printOutState(game, playerId);
                     printOutState(game, game.getOpponents(playerId).iterator().next());
                     if (actions.size() == 0) {

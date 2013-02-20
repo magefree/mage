@@ -87,6 +87,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
 
+    private int lastTurnOutput = 0;
+
     static {
         optimizers.add(new LevelUpOptimizer());
         optimizers.add(new EquipOptimizer());
@@ -133,8 +135,14 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             case PRECOMBAT_MAIN:
             case POSTCOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game, playerId);
-                    printOutState(game, game.getOpponents(playerId).iterator().next());
+                    if (logger.isInfoEnabled()) {
+                        printOutState(game, playerId);
+                        Iterator it = game.getOpponents(playerId).iterator();
+                        while (it.hasNext()) {
+                            UUID opponentId = (UUID) it.next();
+                            printOutState(game, opponentId);
+                        }
+                    }
                     if (actions.size() == 0) {
                         calculateActions(game);
                     }
@@ -177,33 +185,33 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     protected void printOutState(Game game, UUID playerId) {
-        Player player = game.getPlayer(playerId);
-        System.out.println("Turn::" + game.getTurnNum());
-        System.out.println("[" + game.getPlayer(playerId).getName() + "] " + game.getTurn().getStepType().name() + ", life=" + player.getLife());
-        Player opponent = game.getPlayer(game.getOpponents(playerId).iterator().next());
-        System.out.println("[Opponent] life=" + opponent.getLife());
-
-        String s = "[";
-        for (Card card : player.getHand().getCards(game)) {
-            s += card.getName() + ";";
+        if (lastTurnOutput < game.getTurnNum()) {
+            lastTurnOutput = game.getTurnNum();
+            logger.info(new StringBuilder("Turn: ").append(game.getTurnNum()).append("  --------------------------------------------------------------").toString());
         }
-        s += "]";
-        System.out.println("Hand: " + s);
-        s = "[";
+
+        Player player = game.getPlayer(playerId);
+        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("] ").append(game.getTurn().getStepType().name()).append(", life=").append(player.getLife()).toString());
+        StringBuilder sb = new StringBuilder("Hand: [");
+        for (Card card : player.getHand().getCards(game)) {
+            sb.append(card.getName()).append(";");
+        }
+        logger.info(sb.append("]").toString());
+        sb.setLength(0);
+        sb.append("Permanents: [");
         for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
             if (permanent.getOwnerId().equals(player.getId())) {
-                s += permanent.getName();
+                sb.append(permanent.getName());
                 if (permanent.isTapped()) {
-                    s += "(tapped)";
+                    sb.append("(tapped)");
                 }
                 if (permanent.isAttacking()) {
-                    s += "(attacking)";
+                    sb.append("(attacking)");
                 }
-                s += ";";
+                sb.append(";");
             }
         }
-        s += "]";
-        System.out.println("Permanents: " + s);
+        logger.info(sb.append("]").toString());
     }
 
     protected void act(Game game) {
@@ -213,7 +221,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             boolean usedStack = false;
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
-                System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: " + ability.toString());
+                logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("] Action: ").append(ability.toString()).toString());
                 if (ability.getTargets().size() > 0) {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {
@@ -222,7 +230,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     }
                     Player player = game.getPlayer(ability.getFirstTarget());
                     if (player != null) {
-                        System.out.println("targets = " + player.getName());
+                        logger.info("targets = " + player.getName());
                     }
                 }
                 this.activateAbility((ActivatedAbility) ability, game);
@@ -234,9 +242,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     while (it.hasNext()) {
                         Card card = game.getCard(ability.getSourceId());
                         String action = it.next();
-                        System.out.println("action=" + action + ";card=" + card);
+                        logger.info("action=" + action + ";card=" + card);
                         if (action.equals(card.getName())) {
-                            System.out.println("removed from suggested=" + action);
+                            logger.info("removed from suggested=" + action);
                             it.remove();
                         }
                     }
@@ -416,7 +424,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         });
         pool.execute(task);
         try {
-            System.out.println("maxThink:" + maxThink);
+            logger.debug("maxThink: " + maxThink + " seconds");
             return task.get(maxThink, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             logger.info("simulating - timed out");
@@ -517,7 +525,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth - 1, alpha, beta);
-                logger.debug("val = " + val);
                 if (!currentPlayer.getId().equals(playerId)) {
                     if (val < beta) {
                         beta = val;
@@ -1253,7 +1260,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
         for (Player copyPlayer : sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            System.out.println("suggested=" + suggested);
+            logger.debug(origPlayer.getName() + " suggested: " + suggested);
             SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
             newPlayer.restore(origPlayer);
             sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
