@@ -100,7 +100,7 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
     public KarnLiberatedEffect(UUID exileId) {
         super(Outcome.ExtraTurn);
         this.exileId = exileId;
-        this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control.";
+        this.staticText = "Restart the game, leaving in exile all non-Aura permanent cards exiled with {this}. Then put those cards onto the battlefield under your control";
     }
 
     public KarnLiberatedEffect(final KarnLiberatedEffect effect) {

@@ -81,7 +81,7 @@ class RelicOfProgenitusEffect extends OneShotEffect<RelicOfProgenitusEffect> {
 
     public RelicOfProgenitusEffect() {
         super(Outcome.Exile);
-        this.staticText = "Target player exiles a card from his or her graveyard.";
+        this.staticText = "Target player exiles a card from his or her graveyard";
     }
 
     public RelicOfProgenitusEffect(final RelicOfProgenitusEffect effect) {
@@ -116,7 +116,7 @@ class RelicOfProgenitusEffect2 extends OneShotEffect<RelicOfProgenitusEffect2> {
 
     public RelicOfProgenitusEffect2() {
         super(Constants.Outcome.Detriment);
-        staticText = "Exile all cards from all graveyards.";
+        staticText = "Exile all cards from all graveyards";
     }
 
     public RelicOfProgenitusEffect2(final RelicOfProgenitusEffect2 effect) {
