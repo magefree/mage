@@ -276,7 +276,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 //System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: not better score");
                 //}
             } else {
-                System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: skip");
+                logger.info("[" + game.getPlayer(playerId).getName() + "] Action: skip");
             }
         }
     }
@@ -454,17 +454,17 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             return val;
         }
         if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
-            logger.debug("simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
+            logger.debug("Simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
             val = GameStateEvaluator2.evaluate(playerId, game);
             UUID currentPlayerId = node.getGame().getPlayerList().get();
             //logger.info("reached - " + val + ", playerId=" + playerId + ", node.pid="+currentPlayerId);
             return val;
         } else if (node.getChildren().size() > 0) {
-            logger.debug("simulating -- something added children:" + node.getChildren().size());
+            logger.debug("Simulating -- something added children:" + node.getChildren().size());
             val = minimaxAB(node, depth - 1, alpha, beta);
             return val;
         } else {
-            logger.debug("simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
+            logger.debug("Simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
@@ -554,7 +554,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                          * choices = node.getChoices();
                          */
                         if (depth == maxDepth) {
-                            logger.info("saved");
+                            logger.info(new StringBuilder("Saved (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).toString());
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());

@@ -430,8 +430,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getExile().removeCard(this, game);
                         removed = true;
                         break;
+                    case PICK:
+                        removed = true;
+                        break;
                     default:
-                        //logger.warning("putOntoBattlefield, not fully implemented: from="+fromZone);
+                        logger.warn("putOntoBattlefield, not fully implemented: fromZone="+fromZone);
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
                 if (!removed) {
