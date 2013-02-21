@@ -276,7 +276,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 //System.out.println("[" + game.getPlayer(playerId).getName() + "] Action: not better score");
                 //}
             } else {
-                logger.info("[" + game.getPlayer(playerId).getName() + "] Action: skip");
+                logger.info("[" + game.getPlayer(playerId).getName() + "] Action: skip    Root.score = " + root.getScore() + "  currentScore = " + currentScore);
             }
         }
     }
@@ -502,11 +502,12 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         SimulationNode2 bestNode = null;
         List<Ability> allActions = currentPlayer.simulatePriority(game);
         optimize(game, allActions);
-        logger.debug("simulating -- adding " + allActions.size() + " children:" + allActions);
+        logger.debug("Simulating -- adding " + allActions.size() + " children:" + allActions);
         for (Ability action : allActions) {
+            logger.debug(new StringBuilder("Simulating -- actions: " + allActions.size() + " -> " + action));
             if (Thread.interrupted()) {
                 Thread.currentThread().interrupt();
-                logger.debug("interrupted");
+                logger.debug("Simulating -- interrupted");
                 break;
             }
             Game sim = game.copy();
@@ -522,7 +523,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
                 int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
-                logger.debug("simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
+                logger.debug("Simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth - 1, alpha, beta);
                 if (!currentPlayer.getId().equals(playerId)) {
@@ -537,7 +538,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
                     // no need to check other actions
                     if (val == GameStateEvaluator2.LOSE_GAME_SCORE) {
-                        logger.debug("lose - break");
+                        logger.debug("Simulating -- lose - break");
                         break;
                     }
                 } else {
@@ -554,7 +555,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                          * choices = node.getChoices();
                          */
                         if (depth == maxDepth) {
-                            logger.info(new StringBuilder("Saved (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).toString());
+                            logger.info(new StringBuilder("Simulating -- Saved (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).toString());
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
@@ -563,7 +564,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
                     // no need to check other actions
                     if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
-                        logger.debug("win - break");
+                        logger.debug("Simulating -- win - break");
                         break;
                     }
                 }
@@ -572,7 +573,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     break;
                 }
                 if (SimulationNode2.nodeCount > maxNodes) {
-                    logger.debug("simulating -- reached end-state");
+                    logger.debug("Simulating -- reached end-state");
                     break;
                 }
             }
