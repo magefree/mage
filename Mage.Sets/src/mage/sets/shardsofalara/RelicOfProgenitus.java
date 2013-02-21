@@ -28,7 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -41,10 +40,12 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.FilterCard;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -97,7 +98,9 @@ class RelicOfProgenitusEffect extends OneShotEffect<RelicOfProgenitusEffect> {
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
         if (targetPlayer != null) {
-            TargetCardInYourGraveyard target = new TargetCardInYourGraveyard();
+            FilterCard filter = new FilterCard("card from your graveyard");
+            filter.add(new OwnerIdPredicate(targetPlayer.getId()));
+            TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
             target.setRequired(true);
             if (targetPlayer.chooseTarget(Outcome.Exile, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
@@ -115,7 +118,7 @@ class RelicOfProgenitusEffect extends OneShotEffect<RelicOfProgenitusEffect> {
 class RelicOfProgenitusEffect2 extends OneShotEffect<RelicOfProgenitusEffect2> {
 
     public RelicOfProgenitusEffect2() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Exile all cards from all graveyards";
     }
 

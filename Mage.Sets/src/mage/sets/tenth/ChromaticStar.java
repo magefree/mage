@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -52,7 +52,7 @@ public class ChromaticStar extends CardImpl<ChromaticStar> {
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(1)));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
     }
 
     public ChromaticStar(final ChromaticStar card) {
