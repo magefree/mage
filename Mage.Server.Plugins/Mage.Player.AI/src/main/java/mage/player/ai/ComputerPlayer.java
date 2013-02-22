@@ -242,7 +242,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 Collections.reverse(targets);
             }
             for (Permanent permanent : targets) {
-                if (((TargetControlledPermanent) target).canTarget(playerId, permanent.getId(), null, game) && !target.getTargets().contains(permanent.getId())) {
+                if (((TargetControlledPermanent) target).canTarget(playerId, permanent.getId(), sourceId, game, false) && !target.getTargets().contains(permanent.getId())) {
                     target.add(permanent.getId(), game);
                     return true;
                 }
@@ -457,6 +457,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (target instanceof TargetPermanent) {
             List<Permanent> targets;
+            boolean outcomeTargets = true;
             if (outcome.isGood()) {
                 targets = threats(playerId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
             }
@@ -466,15 +467,18 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             if (targets.isEmpty() && target.isRequired()) {
                 targets = threats(null, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 Collections.reverse(targets);
+                outcomeTargets = false;
                 //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
             }
             for (Permanent permanent: targets) {
                 if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
-                    return true;
+                    if (!outcomeTargets || target.getMaxNumberOfTargets() <= target.getTargets().size()) {
+                        return true;
+                    }
                 }
             }
-            return false;
+            return target.isChosen();
         }
         if (target instanceof TargetCreatureOrPlayer) {
             List<Permanent> targets;
