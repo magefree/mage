@@ -151,7 +151,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     actionCache.add(ability.getRule() + "_" + ability.getSourceId());
                 }
             } else {
-                System.out.println("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
+                logger.debug("[" + game.getPlayer(playerId).getName() + "][pre] Action: skip");
             }
         }
     }
@@ -176,7 +176,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     //System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: not better score");
                 //}
             } else {
-                System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: skip");
+                logger.debug("[" + game.getPlayer(playerId).getName() + "][post] Action: skip");
             }
         }
     }

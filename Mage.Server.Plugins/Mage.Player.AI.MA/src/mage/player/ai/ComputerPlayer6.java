@@ -185,7 +185,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     protected void printOutState(Game game, UUID playerId) {
-        if (lastTurnOutput < game.getTurnNum()) {
+        if (lastTurnOutput != game.getTurnNum()) {
             lastTurnOutput = game.getTurnNum();
             logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append("  --------------------------------------------------------------").toString());
         }

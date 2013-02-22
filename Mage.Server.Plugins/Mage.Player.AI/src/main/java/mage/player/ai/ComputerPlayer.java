@@ -462,10 +462,11 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             }
             else {
                 targets = threats(opponentId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
-            }
-            //targets = threats(null, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+            }            
             if (targets.isEmpty() && target.isRequired()) {
-                targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
+                targets = threats(null, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                Collections.reverse(targets);
+                //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
             }
             for (Permanent permanent: targets) {
                 if (((TargetPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
@@ -1766,8 +1767,8 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
         List<Permanent> threats = playerId == null ?
-                game.getBattlefield().getAllActivePermanents(filter, game) :
-                game.getBattlefield().getActivePermanents(filter, this.playerId, sourceId, game);
+                game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game) : // all permanents within the range of the player
+                game.getBattlefield().getAllActivePermanents(filter, playerId, game); // all controlled permanents of playerId
 
         Iterator<Permanent> it = threats.iterator();
         while (it.hasNext()) { // remove permanents already targeted
