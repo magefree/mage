@@ -28,13 +28,13 @@
 
 package mage.target;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -53,8 +53,9 @@ public class Targets extends ArrayList<Target> {
     public List<Target> getUnchosen() {
         List<Target> unchosen = new ArrayList<Target>();
         for (Target target: this) {
-            if (!target.isChosen())
+            if (!target.isChosen()) {
                 unchosen.add(target);
+            }
         }
         return unchosen;
     }
@@ -67,20 +68,23 @@ public class Targets extends ArrayList<Target> {
 
     public boolean isChosen() {
         for (Target target: this) {
-            if (!target.isChosen())
+            if (!target.isChosen()) {
                 return false;
+            }
         }
         return true;
     }
 
     public boolean choose(Outcome outcome, UUID playerId, UUID sourceId, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(playerId, game))
+            if (!canChoose(playerId, game)) {
                 return false;
+            }
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
-                if (!target.choose(outcome, playerId, sourceId, game))
+                if (!target.choose(outcome, playerId, sourceId, game)) {
                     return false;
+                }
             }
         }
         return true;
@@ -88,12 +92,14 @@ public class Targets extends ArrayList<Target> {
 
     public boolean chooseTargets(Outcome outcome, UUID playerId, Ability source, Game game) {
         if (this.size() > 0) {
-            if (!canChoose(source.getSourceId(), playerId, game))
+            if (!canChoose(source.getSourceId(), playerId, game)) {
                 return false;
+            }
             while (!isChosen()) {
                 Target target = this.getUnchosen().get(0);
-                if (!target.chooseTarget(outcome, playerId, source, game))
+                if (!target.chooseTarget(outcome, playerId, source, game)) {
                     return false;
+                }
             }
         }
         return true;
@@ -123,8 +129,9 @@ public class Targets extends ArrayList<Target> {
      */
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         for (Target target: this) {
-            if (!target.canChoose(sourceId, sourceControllerId, game))
+            if (!target.canChoose(sourceId, sourceControllerId, game)) {
                 return false;
+            }
         }
         return true;
     }
@@ -139,15 +146,17 @@ public class Targets extends ArrayList<Target> {
      */
     public boolean canChoose(UUID sourceControllerId, Game game) {
         for (Target target: this) {
-            if (!target.canChoose(sourceControllerId, game))
+            if (!target.canChoose(sourceControllerId, game)) {
                 return false;
+            }
         }
         return true;
     }
 
     public UUID getFirstTarget() {
-        if (this.size() > 0)
+        if (this.size() > 0) {
             return this.get(0).getFirstTarget();
+        }
         return null;
     }
 
