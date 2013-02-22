@@ -125,7 +125,7 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
             player.getHand().clear();
             player.getLibrary().clear();
             for (Card card: game.getCards()) {
-                if (card.getOwnerId().equals(player.getId())) {
+                if (card.getOwnerId().equals(player.getId()) && !card.isCopy()) {
                     player.getLibrary().putOnTop(card, game);
                 }
             }
