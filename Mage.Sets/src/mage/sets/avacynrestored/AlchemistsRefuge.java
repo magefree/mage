@@ -98,7 +98,8 @@ class AlchemistsRefugeEffect extends AsThoughEffectImpl<AlchemistsRefugeEffect> 
         Card card = game.getCard(sourceId);
         if (card != null) {
             if (!card.getCardType().contains(CardType.LAND) && card.getOwnerId().equals(source.getControllerId())) {
-                return true;
+                // TODO: Check if this also works for cards that gained e.g. flashback from another source.
+                return card.getSpellAbility().isInUseableZone(game, card, false);
             }
         }
         return false;
