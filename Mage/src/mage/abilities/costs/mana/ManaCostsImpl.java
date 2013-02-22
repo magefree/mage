@@ -321,7 +321,14 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
         StringBuilder sbText = new StringBuilder();
         for (ManaCost cost : this) {
-            sbText.append(cost.getText());
+            if (cost instanceof GenericManaCost) {
+                sbText.append(cost.getText());
+            }
+        }
+        for (ManaCost cost : this) {
+            if (!(cost instanceof GenericManaCost)) {
+                sbText.append(cost.getText());
+            }
         }
         return sbText.toString();
     }

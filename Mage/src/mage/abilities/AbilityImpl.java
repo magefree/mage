@@ -28,29 +28,17 @@
 
 package mage.abilities;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.AbilityType;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.MageObject;
-import mage.abilities.costs.AdjustingSourceCosts;
-import mage.abilities.costs.AlternativeCost;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.Effects;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.effects.*;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.choices.Choice;
@@ -60,6 +48,10 @@ import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.target.Targets;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 
 /**
