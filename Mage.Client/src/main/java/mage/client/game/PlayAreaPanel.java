@@ -50,9 +50,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     private UUID playerId;
     private UUID gameId;
+    private boolean smallMode = false;
 
-    private static final int PANEL_HEIGHT = 242;
-    private static final int PANEL_HEIGHT_SMALL = 190;
+    public static final int PANEL_HEIGHT = 242;
+    public static final int PANEL_HEIGHT_SMALL = 190;
 
     /** Creates new form PlayAreaPanel */
     public PlayAreaPanel() {
@@ -161,6 +162,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     public void sizePlayer(boolean smallMode) {
         this.playerPanel.sizePlayerPanel(smallMode);
+        this.smallMode = smallMode;
         if (smallMode) {
             this.playerPanel.setPreferredSize(new Dimension(92, PANEL_HEIGHT_SMALL));
             //this.jScrollPane1.setPreferredSize(new Dimension(160, 160));
@@ -177,6 +179,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         MageFrame.getSession().cheat(gameId, playerId, DeckImporterUtil.importDeck("cheat.dck"));
     }
 
+    public boolean isSmallMode() {
+        return smallMode;
+    }
 
     private mage.client.game.BattlefieldPanel battlefieldPanel;
     private javax.swing.JButton btnCheat;

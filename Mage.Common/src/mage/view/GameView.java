@@ -85,9 +85,9 @@ public class GameView implements Serializable {
                 Card card = game.getCard(stackObject.getSourceId());
                 if (card != null) {
                     if (object != null) {
-                        stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, card.getName(), new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, card.getName(), new CardView(card)));
                     } else {
-                        stack.put(stackObject.getId(), new StackAbilityView((StackAbility)stackObject, "", new CardView(card)));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, "", new CardView(card)));
                     }
                     if (card.canTransform()) {
                         updateLatestCardView(game, card, stackObject.getId());

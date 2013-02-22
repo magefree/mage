@@ -28,7 +28,9 @@
 
 package mage.view;
 
+import mage.MageObject;
 import mage.abilities.effects.Effect;
+import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
@@ -47,7 +49,7 @@ public class StackAbilityView extends CardView {
     private String sourceName;
     private CardView sourceCard;
 
-    public StackAbilityView(StackAbility ability, String sourceName, CardView sourceCard) {
+    public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
         this.id = ability.getId();
         this.name = "Ability";
         this.sourceName = sourceName;
@@ -62,10 +64,10 @@ public class StackAbilityView extends CardView {
         this.superTypes = ability.getSupertype();
         this.color = ability.getColor();
         this.manaCost = ability.getManaCost().getSymbols();
-        updateTargets(ability);
+        updateTargets(game, ability);
     }
 
-    private void updateTargets(StackAbility ability) {
+    private void updateTargets(Game game, StackAbility ability) {
         if (ability.getTargets().size() > 0) {
             setTargets(ability.getTargets());
         } else {
@@ -78,8 +80,17 @@ public class StackAbilityView extends CardView {
             }
             if (targetList.size() > 0) {
                 overrideTargets(targetList);
+                List<String> names = new ArrayList<String>();
+                for (UUID uuid : targetList) {
+                    MageObject mageObject = game.getObject(uuid);
+                    if (mageObject != null) {
+                        names.add(mageObject.getName());
+                    }
+                }
+                if (!names.isEmpty()) {
+                    getRules().add("<i>Targets: " + names.toString() + "</i>");
+                }
             }
-
         }
     }
 

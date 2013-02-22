@@ -139,6 +139,7 @@ public class CardView extends SimpleCardView {
                 }
             }
         }
+        
     }
 
     public CardView(MageObject card) {

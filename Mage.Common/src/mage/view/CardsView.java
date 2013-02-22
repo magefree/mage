@@ -29,15 +29,16 @@
 package mage.view;
 
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.TargetPointer;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -73,7 +74,33 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     break;
             }
             if (sourceCard != null) {
-                this.put(ability.getId(), new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard)));
+                AbilityView abilityView = new AbilityView(ability, sourceCard.getName(), new CardView(sourceCard));
+                if (ability.getTargets().size() > 0) {
+                    abilityView.setTargets(ability.getTargets());
+                } else {
+                    List<UUID> abilityTargets = new ArrayList<UUID>();
+                    for (Effect effect : ability.getEffects()) {
+                        TargetPointer targetPointer = effect.getTargetPointer();
+                        if (targetPointer != null) {
+                            List<UUID> targetList = targetPointer.getTargets(game, ability);
+                            abilityTargets.addAll(targetList);
+                        }
+                    }
+                    if (!abilityTargets.isEmpty()) {
+                        abilityView.overrideTargets(abilityTargets);
+                        List<String> names = new ArrayList<String>();
+                        for (UUID uuid : abilityTargets) {
+                            MageObject mageObject = game.getObject(uuid);
+                            if (mageObject != null) {
+                                names.add(mageObject.getName());
+                            }
+                        }
+                        if (!names.isEmpty()) {
+                            abilityView.getRules().add("<i>Targets: " + names.toString() + "</i>");
+                        }
+                    }
+                }
+                this.put(ability.getId(), abilityView);
             }
         }
     }

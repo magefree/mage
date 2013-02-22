@@ -20,6 +20,8 @@ import mage.components.CardInfoPane;
 import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
+import mage.view.PlayerView;
+import mage.view.SimpleCardsView;
 import org.jdesktop.swingx.JXPanel;
 
 import javax.swing.*;
@@ -153,8 +155,11 @@ public class MageActionCallback implements ActionCallback {
             me.translate(-parentPoint.x, -parentPoint.y);
             for (UUID uuid : targets) {
 
+                boolean found = false;
+                
                 PlayAreaPanel p = MageFrame.getGame(data.gameId).getPlayers().get(uuid);
                 if (p != null) {
+                    found = true;
                     Point target = p.getLocationOnScreen();
                     target.translate(-parentPoint.x, -parentPoint.y);
                     ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() - 40, Color.red, ArrowBuilder.Type.TARGET);
@@ -162,9 +167,30 @@ public class MageActionCallback implements ActionCallback {
                     for (PlayAreaPanel pa : MageFrame.getGame(data.gameId).getPlayers().values()) {
                         MagePermanent permanent = pa.getBattlefieldPanel().getPermanents().get(uuid);
                         if (permanent != null) {
+                            found = true;
                             Point target = permanent.getLocationOnScreen();
                             target.translate(-parentPoint.x, -parentPoint.y);
                             ArrowBuilder.getBuilder().addArrow(data.gameId, (int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 40, (int) target.getY() + 10, Color.red, ArrowBuilder.Type.TARGET);
+                        }
+                    }
+                }
+                
+                if (!found) {
+                    for (PlayAreaPanel panel : MageFrame.getGame(data.gameId).getPlayers().values()) {
+                        PlayerView view = panel.getPlayerPanel().getPlayer();
+                        if (view != null) {
+                            SimpleCardsView graveyard = view.getGraveyard();
+                            if (graveyard.containsKey(uuid)) {
+                                found = true;
+                                p = MageFrame.getGame(data.gameId).getPlayers().get(view.getPlayerId());
+                                if (p != null) {
+                                    Point target = p.getLocationOnScreen();
+                                    target.translate(-parentPoint.x, -parentPoint.y);
+                                    int y_offset = p.isSmallMode() ? (PlayAreaPanel.PANEL_HEIGHT - PlayAreaPanel.PANEL_HEIGHT_SMALL) : 0;
+                                    ArrowBuilder.getBuilder().addArrow(data.gameId,(int) me.getX() + 35, (int) me.getY(), (int) target.getX() + 15, (int) target.getY() + 145 - y_offset, Color.red, ArrowBuilder.Type.TARGET);
+                                }
+                                continue;
+                            }
                         }
                     }
                 }

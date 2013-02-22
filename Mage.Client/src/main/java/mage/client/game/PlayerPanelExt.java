@@ -531,7 +531,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     }
 
-    public void sizePlayerPanel(boolean smallMode) {
+    protected void sizePlayerPanel(boolean smallMode) {
         if (smallMode) {
             avatar.setVisible(false);
             btnPlayer.setVisible(true);
