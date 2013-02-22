@@ -281,8 +281,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         });
 
         zonesPanel = new JPanel();
-        zonesPanel.setPreferredSize(new Dimension(100, 25));
-        zonesPanel.setSize(100, 25);
+        zonesPanel.setPreferredSize(new Dimension(100, 20));
+        zonesPanel.setSize(100, 20);
         zonesPanel.setLayout(null);
 
         image = ImageHelper.getImageFromResources("/info/command_zone.png");
