@@ -31,11 +31,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -91,7 +93,6 @@ public class JaceArchitectOfThought extends CardImpl<JaceArchitectOfThought> {
         // -8: For each player, search that player's library for a nonland card and exile it, then that player shuffles his or her library. You may cast those cards without paying their mana costs.
         this.addAbility(new LoyaltyAbility(new JaceArchitectOfThoughtEffect3(), -8));
 
-
     }
 
     public JaceArchitectOfThought(final JaceArchitectOfThought card) {
@@ -109,7 +110,7 @@ class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceA
     protected Ability ability;
 
     public JaceArchitectOfThoughtGainAbilityEffect(Ability ability) {
-        super(Duration.Custom, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "Until your next turn, whenever a creature an opponent controls attacks, it gets -1/-0 until end of turn";
     }
@@ -136,7 +137,7 @@ class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceA
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;
@@ -149,7 +150,7 @@ class JaceArchitectOfThoughtGainAbilityEffect extends ContinuousEffectImpl<JaceA
 class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceArchitectOfThoughtTriggeredAbility> {
 
     public JaceArchitectOfThoughtTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new JaceArchitectOfThoughtEffectUnboostEffect(-1,0, Duration.EndOfTurn));
+        super(Zone.BATTLEFIELD, new JaceArchitectOfThoughtEffectUnboostEffect(-1,0, Duration.EndOfTurn));
     }
 
     public JaceArchitectOfThoughtTriggeredAbility(final JaceArchitectOfThoughtTriggeredAbility ability) {
@@ -164,13 +165,9 @@ class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceAr
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
-            Permanent attacker = game.getPermanent(event.getSourceId());
-            Player defender = game.getPlayer(event.getTargetId());
-            Player you = game.getPlayer(controllerId);
-            if (attacker.getControllerId() != you.getId()
-                  && defender == you) {
+            if (game.getOpponents(getControllerId()).contains(event.getPlayerId())) {
                 for (Effect effect : getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(attacker.getId()));
+                    effect.setTargetPointer(new FixedTarget(event.getSourceId()));
                 }
                 return true;
             }
@@ -185,7 +182,7 @@ class JaceArchitectOfThoughtTriggeredAbility extends TriggeredAbilityImpl<JaceAr
 }
 
 /*
- * effect only applies if creature continues to attack (if it's left the combat, it#s no longer attacking
+ * effect only applies if creature continues to attack (if it's left the combat, it's no longer attacking
  */
 class JaceArchitectOfThoughtEffectUnboostEffect extends BoostTargetEffect {
 
@@ -219,7 +216,7 @@ class JaceArchitectOfThoughtEffectUnboostEffect extends BoostTargetEffect {
 class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThoughtEffect2> {
 
     public JaceArchitectOfThoughtEffect2() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "Reveal the top three cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other on the bottom of your library in any order";
     }
 
@@ -266,7 +263,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
             TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
 
             Cards pile1 = new CardsImpl();
-            if (opponent.choose(Constants.Outcome.Neutral, cards, target, game)) {
+            if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
                     Card card = cards.get(targetId, game);
@@ -308,7 +305,7 @@ class JaceArchitectOfThoughtEffect2 extends OneShotEffect<JaceArchitectOfThought
             TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             targetCard.setRequired(true);
             while (cardsToLibrary.size() > 1) {
-                player.choose(Constants.Outcome.Neutral, cardsToLibrary, targetCard, game);
+                player.choose(Outcome.Neutral, cardsToLibrary, targetCard, game);
                 Card card = cardsToLibrary.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cardsToLibrary.remove(card);
@@ -358,7 +355,7 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThought
                 playerName = "your";
             }
             TargetCardInLibrary target = new TargetCardInLibrary(new FilterNonlandCard(new StringBuilder("nonland card from ").append(playerName).append(" library").toString()));
-            if (controller.choose(Constants.Outcome.Benefit, playerLibrary, target, game)) {
+            if (controller.choose(Outcome.Benefit, playerLibrary, target, game)) {
                 UUID targetId = target.getFirstTarget();
                 Card card = player.getLibrary().remove(targetId, game);
                 if (card != null) {
@@ -386,4 +383,3 @@ class JaceArchitectOfThoughtEffect3 extends OneShotEffect<JaceArchitectOfThought
         return true;
     }
 }
-
