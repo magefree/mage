@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,7 +41,6 @@ import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +61,7 @@ public class FiveAlarmFire extends CardImpl<FiveAlarmFire> {
         //Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.
         this.addAbility(new FiveAlarmFireTriggeredAbility());
         //Remove five blaze counters from Five-Alarm Fire: Five-Alarm Fire deals 5 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(5), new RemoveCountersSourceCost(CounterType.BLAZE.createInstance(5)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), new RemoveCountersSourceCost(CounterType.BLAZE.createInstance(5)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }
@@ -83,7 +82,7 @@ class FiveAlarmFireTriggeredAbility extends TriggeredAbilityImpl<FiveAlarmFireTr
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
     
     public FiveAlarmFireTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.BLAZE.createInstance()), false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.BLAZE.createInstance()), false);
     }
 
     public FiveAlarmFireTriggeredAbility(final FiveAlarmFireTriggeredAbility ability) {

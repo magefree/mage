@@ -104,6 +104,6 @@ class FathomMageTriggeredAbility extends TriggeredAbilityImpl<FathomMageTriggere
 
     @Override
     public String getRule() {
-        return "Whenever a +1/+1 counter is placed on Fathom Mage, " + super.getRule();
+        return "Whenever a +1/+1 counter is placed on {this}, " + super.getRule();
     }
 }

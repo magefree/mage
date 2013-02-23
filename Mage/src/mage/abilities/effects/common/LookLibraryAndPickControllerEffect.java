@@ -112,7 +112,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                         cards.remove(card);
                         card.moveToZone(targetPickedCards, source.getId(), game, false);
                         if (revealPickedCards) {
-                            Cards reveal = new CardsImpl(Zone.OUTSIDE);
+                            Cards reveal = new CardsImpl();
                             reveal.add(card);
                             player.revealCards(windowName, reveal, game);
                         }

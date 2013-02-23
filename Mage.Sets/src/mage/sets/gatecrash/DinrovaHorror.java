@@ -28,22 +28,19 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -99,7 +96,7 @@ class DinrovaHorrorEffect extends OneShotEffect<DinrovaHorrorEffect> {
         Permanent target = game.getPermanent(source.getFirstTarget());
         Player controller = game.getPlayer(target.getControllerId());
         if (target != null && controller != null) {
-            target.moveToZone(Constants.Zone.HAND, id, game, true);
+            target.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             controller.discard(1, source, game);
             return true;
         }

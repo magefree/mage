@@ -29,9 +29,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;
@@ -77,14 +77,13 @@ public class CryptGhast extends CardImpl<CryptGhast> {
 
 class CryptGhastTriggeredAbility extends TriggeredManaAbility<CryptGhastTriggeredAbility> {
     
-    private final static FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Island");
-    
+    private final static FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Swamp");
     static {
             filter.add(new SubtypePredicate("Swamp"));
     }
 
     public CryptGhastTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana));
+        super(Zone.BATTLEFIELD, new BasicManaEffect(Mana.BlackMana), true);
         this.usesStack = false;
     }
 
@@ -94,9 +93,11 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility<CryptGhastTriggere
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        Permanent land = game.getPermanent(event.getTargetId());
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && land != null && filter.match(land, game)) {
-            return true;
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
+            Permanent land = game.getPermanent(event.getTargetId());
+            if (land != null && filter.match(land, game)) {
+                return true;
+            }
         }
         return false;
     }
