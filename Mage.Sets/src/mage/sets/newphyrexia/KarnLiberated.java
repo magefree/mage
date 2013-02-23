@@ -44,6 +44,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
@@ -114,18 +116,24 @@ class KarnLiberatedEffect extends OneShotEffect<KarnLiberatedEffect> {
         for (ExileZone zone: game.getExile().getExileZones()) {
             if (zone.getId().equals(exileId)) {
                 for (Card card: zone.getCards(game)) {
-                    if (!card.getSubtype().contains("Aura"))
+                    if (!card.getSubtype().contains("Aura")) {
                         cards.add(card);
+                    }
                 }
             }
         }
         game.getState().clear();
+        for (Card card: game.getCards()) {
+            game.getState().addCard(card);
+        }
         for (Player player: game.getPlayers().values()) {
             player.getGraveyard().clear();
             player.getHand().clear();
             player.getLibrary().clear();
             for (Card card: game.getCards()) {
-                if (card.getOwnerId().equals(player.getId()) && !card.isCopy()) {
+                if (card.getOwnerId().equals(player.getId()) && !card.isCopy() // no copies 
+                        && !player.getSideboard().contains(card.getId())
+                        && !cards.contains(card)) { // not the exiled cards
                     player.getLibrary().putOnTop(card, game);
                 }
             }
@@ -195,10 +203,11 @@ class KarnLiberatedDelayedEffect extends OneShotEffect<KarnLiberatedDelayedEffec
     public boolean apply(Game game, Ability source) {
         ExileZone exile = game.getExile().getExileZone(exileId);
         if (exile != null) {
-            for (Card card: exile.getCards(game)) {
+            Cards cards = new CardsImpl(); // needed because putOntoTheBattlefield removes from exile
+            cards.addAll(exile);
+            for (Card card: cards.getCards(game)) {
                 card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
             }
-            exile.clear();
             return true;
         }
         return false;
