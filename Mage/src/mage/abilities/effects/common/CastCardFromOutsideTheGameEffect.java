@@ -43,26 +43,26 @@ import java.util.Set;
 /**
  * @author magenoxx_at_gmail.com
  */
-public class CastCardFromOursideTheGameEffect extends OneShotEffect<CastCardFromOursideTheGameEffect> {
+public class CastCardFromOutsideTheGameEffect extends OneShotEffect<CastCardFromOutsideTheGameEffect> {
 
     private static final String choiceText = "Cast a card from outside the game?";
 
     private FilterCard filterCard;
 
-    public CastCardFromOursideTheGameEffect(FilterCard filter, String ruleText) {
+    public CastCardFromOutsideTheGameEffect(FilterCard filter, String ruleText) {
         super(Constants.Outcome.Benefit);
         this.staticText = ruleText;
         this.filterCard = filter;
     }
 
-    public CastCardFromOursideTheGameEffect(final CastCardFromOursideTheGameEffect effect) {
+    public CastCardFromOutsideTheGameEffect(final CastCardFromOutsideTheGameEffect effect) {
         super(effect);
         filterCard = effect.filterCard;
     }
 
     @Override
-    public CastCardFromOursideTheGameEffect copy() {
-        return new CastCardFromOursideTheGameEffect(this);
+    public CastCardFromOutsideTheGameEffect copy() {
+        return new CastCardFromOutsideTheGameEffect(this);
     }
 
     @Override
