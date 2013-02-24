@@ -84,7 +84,7 @@ public class OrbOfDreams extends CardImpl<OrbOfDreams> {
             if (permanent != null) {
                 permanent.setTapped(true);
             }
-            return true;
+            return false;
         }
 
         @Override

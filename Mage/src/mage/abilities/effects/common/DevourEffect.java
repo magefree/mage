@@ -150,7 +150,6 @@ public class DevourEffect extends ReplacementEffectImpl<DevourEffect> {
                 }
 
             }
-            return true;
         }
         return false;
     }

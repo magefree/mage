@@ -91,7 +91,7 @@ class UrabraskTheHiddenEffect extends ReplacementEffectImpl<UrabraskTheHiddenEff
         if (target != null) {
             target.setTapped(true);
         }
-        return true;
+        return false;
     }
 
     @Override

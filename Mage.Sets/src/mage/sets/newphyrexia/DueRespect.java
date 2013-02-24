@@ -90,7 +90,7 @@ class DueRespectEffect extends ReplacementEffectImpl<DueRespectEffect> {
         if (permanent != null) {
             permanent.setTapped(true);
         }
-        return true;
+        return false;
     }
 
     @Override
