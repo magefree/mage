@@ -54,8 +54,7 @@ public class ZhurTaaSwine extends CardImpl<ZhurTaaSwine> {
         this.toughness = new MageInt(4);
 
         // Bloodrush - 1{R}{G}, Discard Zhur-Taa Swine: Target attacking creature gets +5/+4 until end of turn.
-        Ability ability = new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(5,4, Duration.EndOfTurn));
-        this.addAbility(ability);
+        this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(5,4, Duration.EndOfTurn)));
 
 
     }

@@ -61,7 +61,6 @@ public class GhorClanRampager extends CardImpl<GhorClanRampager> {
         // Bloodrush - {R}{G}, Discard Ghor-Clan Rampager: Target attacking creature gets +4/+4 and gains trample until end of turn.
         Ability ability = new BloodrushAbility("{R}{G}",new BoostTargetEffect(4,4, Constants.Duration.EndOfTurn));
         ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
-        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
 

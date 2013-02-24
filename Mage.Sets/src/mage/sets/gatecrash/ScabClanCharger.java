@@ -55,9 +55,7 @@ public class ScabClanCharger extends CardImpl<ScabClanCharger> {
         this.toughness = new MageInt(4);
 
         // Bloodrush - {1}{G}, Discard Scab-Clan Charger: Target attacking creature gets +2/+4 until end of turn.
-        Ability ability = new BloodrushAbility("{1}{G}", new BoostTargetEffect(2, 4, Duration.EndOfTurn));
-        ability.addTarget(new TargetAttackingCreature());
-        this.addAbility(ability);
+        this.addAbility(new BloodrushAbility("{1}{G}", new BoostTargetEffect(2, 4, Duration.EndOfTurn)));
     }
 
     public ScabClanCharger(final ScabClanCharger card) {

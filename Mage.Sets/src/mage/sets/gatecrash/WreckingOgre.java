@@ -61,7 +61,6 @@ public class WreckingOgre extends CardImpl<WreckingOgre> {
         // Bloodrush - {3}{R}{R}, Discard Wrecking Ogre: Target attacking creature gets +3/+3 and gains double strike until end of turn.
         Ability ability = new BloodrushAbility("{3}{R}{R}", new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         ability.addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
-        ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }
 
