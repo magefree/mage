@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.ExtortAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -57,7 +58,7 @@ public class BlindObedience extends CardImpl<BlindObedience> {
         this.addAbility(new ExtortAbility());
 
         // Artifacts and creatures your opponents control enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BlindObedienceTapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BlindObedienceTapEffect()));
 
     }
 
@@ -73,7 +74,7 @@ public class BlindObedience extends CardImpl<BlindObedience> {
 
 class BlindObedienceTapEffect extends ReplacementEffectImpl<BlindObedienceTapEffect> {
     BlindObedienceTapEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Tap);
+        super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Artifacts and creatures your opponents control enter the battlefield tapped";
     }
 
@@ -87,7 +88,7 @@ class BlindObedienceTapEffect extends ReplacementEffectImpl<BlindObedienceTapEff
         if (target != null) {
             target.setTapped(true);
         }
-        return true;
+        return false;
     }
 
     @Override
