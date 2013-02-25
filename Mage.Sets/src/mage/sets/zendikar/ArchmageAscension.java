@@ -27,13 +27,8 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
+import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,6 +44,8 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
 import mage.watchers.WatcherImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -122,6 +119,7 @@ class CardsDrawnControllerWatcher extends WatcherImpl<CardsDrawnControllerWatche
 
     public CardsDrawnControllerWatcher(final CardsDrawnControllerWatcher watcher) {
         super(watcher);
+        this.cardsDrawn = watcher.cardsDrawn;
     }
 
     @Override

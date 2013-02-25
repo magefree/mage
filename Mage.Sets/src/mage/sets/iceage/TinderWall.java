@@ -27,9 +27,6 @@
  */
 package mage.sets.iceage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -51,6 +48,10 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -105,7 +106,7 @@ class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
 
     public BlockedByWatcher(final BlockedByWatcher watcher) {
         super(watcher);
-        this.blockedByWatcher = watcher.blockedByWatcher;
+        this.blockedByWatcher.addAll(watcher.blockedByWatcher);
     }
 
     @Override

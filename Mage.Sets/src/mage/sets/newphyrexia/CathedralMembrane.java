@@ -27,15 +27,8 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TurnPhase;
-import mage.Constants.WatcherScope;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -46,6 +39,10 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -149,7 +146,7 @@ class CathedralMembraneWatcher extends WatcherImpl<CathedralMembraneWatcher> {
 
     public CathedralMembraneWatcher(final CathedralMembraneWatcher watcher) {
         super(watcher);
-        this.blockedCreatures = watcher.blockedCreatures;
+        this.blockedCreatures.addAll(watcher.blockedCreatures);
     }
 
     @Override

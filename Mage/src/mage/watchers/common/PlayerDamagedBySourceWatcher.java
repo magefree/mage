@@ -27,14 +27,15 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Watcher stores whitch sources did damage to a player
@@ -52,7 +53,7 @@ public class PlayerDamagedBySourceWatcher extends WatcherImpl<PlayerDamagedBySou
 
     public PlayerDamagedBySourceWatcher(final PlayerDamagedBySourceWatcher watcher) {
         super(watcher);
-        this.damageSources = watcher.damageSources;
+        this.damageSources.addAll(watcher.damageSources);
     }
 
     @Override

@@ -27,7 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.WatcherScope;
@@ -42,6 +41,8 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.WatcherImpl;
+
+import java.util.UUID;
 
 /**
  *
@@ -114,6 +115,7 @@ class CardsDrawnOpponentWatcher extends WatcherImpl<CardsDrawnOpponentWatcher> {
 
     public CardsDrawnOpponentWatcher(final CardsDrawnOpponentWatcher watcher) {
         super(watcher);
+        this.cardsDrawn = watcher.cardsDrawn;
     }
 
     @Override
