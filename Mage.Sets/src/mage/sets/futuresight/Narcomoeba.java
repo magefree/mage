@@ -27,8 +27,6 @@
  */
 package mage.sets.futuresight;
 
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,10 +35,8 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
+
+import java.util.UUID;
 
 /**
  *

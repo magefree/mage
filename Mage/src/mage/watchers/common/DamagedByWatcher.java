@@ -27,14 +27,15 @@
  */
 package mage.watchers.common;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -50,7 +51,7 @@ public class DamagedByWatcher extends WatcherImpl<DamagedByWatcher> {
 
     public DamagedByWatcher(final DamagedByWatcher watcher) {
         super(watcher);
-        this.damagedCreatures = watcher.damagedCreatures;
+        this.damagedCreatures.addAll(watcher.damagedCreatures);
     }
 
     @Override

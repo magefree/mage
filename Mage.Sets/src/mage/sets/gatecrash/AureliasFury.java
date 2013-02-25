@@ -27,9 +27,6 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -54,6 +51,10 @@ import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayerAmount;
 import mage.target.targetpointer.FixedTarget;
 import mage.watchers.WatcherImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * GATECRASH FAQ 11.01.2013
@@ -198,8 +199,8 @@ class AureliasFuryDamagedByWatcher extends WatcherImpl<AureliasFuryDamagedByWatc
 
     public AureliasFuryDamagedByWatcher(final AureliasFuryDamagedByWatcher watcher) {
         super(watcher);
-        this.damagedCreatures = watcher.damagedCreatures;
-        this.damagedPlayers = watcher.damagedPlayers;
+        this.damagedCreatures.addAll(watcher.damagedCreatures);
+        this.damagedPlayers.addAll(watcher.damagedPlayers);
     }
 
     @Override

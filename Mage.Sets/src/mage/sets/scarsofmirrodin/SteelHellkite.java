@@ -30,6 +30,7 @@ package mage.sets.scarsofmirrodin;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
@@ -40,15 +41,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.watchers.WatcherImpl;
 
-import java.util.*;
-import mage.Constants.WatcherScope;
-import mage.filter.common.FilterNonlandPermanent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nantuko
@@ -125,9 +127,7 @@ class SteelHellkiteWatcher extends WatcherImpl<SteelHellkiteWatcher> {
 
     public SteelHellkiteWatcher(final SteelHellkiteWatcher watcher) {
         super(watcher);
-        for (UUID playerId: watcher.damagedPlayers) {
-            damagedPlayers.add(playerId);
-        }
+        damagedPlayers.addAll(watcher.damagedPlayers);
     }
 
     @Override

@@ -110,7 +110,7 @@ class FaithsRewardWatcher extends WatcherImpl<FaithsRewardWatcher> {
 
     public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {
         super(watcher);
-        this.cards = (ArrayList<UUID>) watcher.cards.clone();
+        this.cards.addAll(watcher.cards);
     }
 
     @Override

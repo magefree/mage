@@ -49,7 +49,7 @@ public class AttackedThisTurnWatcher extends WatcherImpl<AttackedThisTurnWatcher
 
     public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {
         super(watcher);
-        this.attackedThisTurnCreatures = watcher.attackedThisTurnCreatures;
+        this.attackedThisTurnCreatures.addAll(watcher.attackedThisTurnCreatures);
     }
 
     @Override
