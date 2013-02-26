@@ -6,7 +6,7 @@
 
     <groupId>org.mage</groupId>
     <artifactId>mage-root</artifactId>
-    <version>0.10.1</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>Mage Root</name>
     <description>Mage Root POM</description>
@@ -74,7 +74,7 @@
     </repositories>
 
     <properties>
-        <mage-version>0.10.1</mage-version>
+        <mage-version>1.0.0</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.hint.license>mage</netbeans.hint.license>
     </properties>

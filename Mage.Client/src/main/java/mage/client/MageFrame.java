@@ -119,7 +119,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     private static Preferences prefs = Preferences.userNodeForPackage(MageFrame.class);
     private JLabel title;
     private Rectangle titleRectangle;
-    private static final MageVersion version = new MageVersion(0, 10, 1, "");
+    private static final MageVersion version = new MageVersion(1, 0, 0, "");
     private UUID clientId;
     private static MagePane activeFrame;
     private static boolean liteMode = false;
