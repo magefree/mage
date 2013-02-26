@@ -489,12 +489,16 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     private void checkForNewImages() {
+        long beforeCall = System.currentTimeMillis();
         List<Card> cards = getAllCards();
+        logger.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
 
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
 
+        beforeCall = System.currentTimeMillis();
         if (DownloadPictures.checkForNewCards(cards, path)) {
+            logger.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
             if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 DownloadPictures.startDownload(null, cards, path);
             }
