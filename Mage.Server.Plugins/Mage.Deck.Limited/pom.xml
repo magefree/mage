@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-server-plugins</artifactId>
-        <version>0.10.1</version>
+        <version>1.0.0</version>
     </parent>
 
     <artifactId>mage-deck-limited</artifactId>
