@@ -192,16 +192,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             return GameStateEvaluator2.evaluate(playerId, game);
         }
         if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
-            logger.debug("simulating -- reached end state");
+            logger.debug("Simulating -- reached end state");
             val = GameStateEvaluator2.evaluate(playerId, game);
         }
         else if (node.getChildren().size() > 0) {
-            logger.debug("simulating -- somthing added children:" + node.getChildren().size());
+            logger.debug("Simulating -- something added children:" + node.getChildren().size());
             val = minimaxAB(node, depth-1, alpha, beta);
         }
         else {
-            if (logger.isDebugEnabled())
-                logger.debug("simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getPlayerList().get()).getName());
+            logger.trace("Simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(game.getPlayerList().get()).getName());
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
@@ -215,7 +214,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 val = GameStateEvaluator2.evaluate(playerId, game);
             }
             else if (stepFinished) {
-                logger.debug("step finished");
+                logger.debug("Step finished");
                 int testScore = GameStateEvaluator2.evaluate(playerId, game);
                 if (game.getActivePlayerId().equals(playerId)) {
                     if (testScore < currentScore) {
@@ -248,7 +247,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 }
             }
             else if (node.getChildren().size() > 0) {
-                logger.debug("simulating -- trigger added children:" + node.getChildren().size());
+                logger.debug("Simulating -- trigger added children:" + node.getChildren().size());
                 val = minimaxAB(node, depth, alpha, beta);
             }
             else {
@@ -256,8 +255,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             }
         }
 
-        if (logger.isDebugEnabled())
-            logger.debug("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
         return val;
 
     }

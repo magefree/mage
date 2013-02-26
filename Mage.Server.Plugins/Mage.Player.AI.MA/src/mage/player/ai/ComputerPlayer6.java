@@ -450,21 +450,21 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         if (Thread.interrupted()) {
             Thread.currentThread().interrupt();
             val = GameStateEvaluator2.evaluate(playerId, game);
-            logger.info("interrupted - " + val);
+            logger.trace("interrupted - " + val);
             return val;
         }
         if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {
-            logger.debug("Simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
+            logger.trace("Simulating -- reached end state, node count=" + SimulationNode2.nodeCount + ", depth=" + depth);
             val = GameStateEvaluator2.evaluate(playerId, game);
             UUID currentPlayerId = node.getGame().getPlayerList().get();
             //logger.info("reached - " + val + ", playerId=" + playerId + ", node.pid="+currentPlayerId);
             return val;
         } else if (node.getChildren().size() > 0) {
-            logger.debug("Simulating -- something added children:" + node.getChildren().size());
+            logger.trace("Simulating -- something added children:" + node.getChildren().size());
             val = minimaxAB(node, depth - 1, alpha, beta);
             return val;
         } else {
-            logger.debug("Simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
+            logger.trace("Simulating -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + (node.getPlayerId().equals(playerId) ? "yes" : "no"));
             if (allPassed(game)) {
                 if (!game.getStack().isEmpty()) {
                     resolve(node, depth, game);
@@ -485,7 +485,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             }
         }
 
-        logger.debug("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
         return val;
 
     }
@@ -502,9 +502,10 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         SimulationNode2 bestNode = null;
         List<Ability> allActions = currentPlayer.simulatePriority(game);
         optimize(game, allActions);
-        logger.debug("Simulating -- adding " + allActions.size() + " children:" + allActions);
+        logger.debug("Simulating -- (depth=" + depth + ") adding " + allActions.size() + " children:" + allActions);
+        int counter = 0;
         for (Ability action : allActions) {
-            logger.debug(new StringBuilder("Simulating -- actions: " + allActions.size() + " -> " + action));
+            logger.debug(new StringBuilder("Simulating -- actions: [" + ++counter + "] " + " -> " + action));
             if (Thread.interrupted()) {
                 Thread.currentThread().interrupt();
                 logger.debug("Simulating -- interrupted");
@@ -522,10 +523,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     sim.getPlayerList().getNext();
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
-                int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
-                logger.debug("Simulating -- node #:" + SimulationNode2.getCount() + " actions:" + action);
+                // int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
+                
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth - 1, alpha, beta);
+                logger.debug("Simulating -- val = " + val + " depth= " + depth + " (" + action +")");
                 if (!currentPlayer.getId().equals(playerId)) {
                     if (val < beta) {
                         beta = val;
