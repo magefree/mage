@@ -25,41 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.zendikar;
+package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.mana.BlackManaAbility;
-import mage.abilities.mana.RedManaAbility;
-import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class AkoumRefuge extends CardImpl<AkoumRefuge> {
+public class BloodMoon extends mage.sets.ninthedition.BloodMoon {
 
-    public AkoumRefuge(UUID ownerId) {
-        super(ownerId, 210, "Akoum Refuge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
-        this.expansionSetCode = "ZEN";
-
-        this.addAbility(new EntersBattlefieldTappedAbility());
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new GainLifeEffect(1)));
-        this.addAbility(new BlackManaAbility());
-        this.addAbility(new RedManaAbility());
-
+    public BloodMoon(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 178;
+        this.expansionSetCode = "8ED";
     }
 
-    public AkoumRefuge(final AkoumRefuge card) {
+    public BloodMoon(final BloodMoon card) {
         super(card);
     }
 
     @Override
-    public AkoumRefuge copy() {
-        return new AkoumRefuge(this);
+    public BloodMoon copy() {
+        return new BloodMoon(this);
     }
 }
