@@ -1177,7 +1177,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         //20091005 - 701.14c
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.SEARCH_LIBRARY, targetPlayerId, playerId))) {
             TargetCardInLibrary newTarget = target.copy();
-            int count = library.count(target.getFilter(), game);
+            int count;
+            Integer cardLimit = (Integer) game.getState().getValue("LibrarySearchLimit");
+            if (cardLimit != null) {
+                newTarget.setCardLimit(cardLimit);
+                game.getState().setValue("LibrarySearchLimit", null);
+                count = Math.min(library.count(target.getFilter(), game),cardLimit.intValue());
+            } else {
+                count = library.count(target.getFilter(), game);
+            }
+
             if (count < target.getNumberOfTargets()) {
                 newTarget.setMinNumberOfTargets(count);
             }

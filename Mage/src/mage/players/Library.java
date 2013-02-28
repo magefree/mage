@@ -169,6 +169,21 @@ public class Library implements Serializable {
         return cards;
     }
 
+    public List<Card> getTopCards(Game game, int amount) {
+        List<Card> cards = new ArrayList<Card>();
+        Iterator<UUID> it = library.iterator();
+        int count = 0;
+        while(it.hasNext() && count < amount) {
+            UUID cardId = it.next();
+            Card card = game.getCard(cardId);
+            if (card != null) {
+                cards.add(card);
+                ++count;
+            }
+        }
+        return cards;
+    }
+
     public Collection<Card> getUniqueCards(Game game) {
         Map<String, Card> cards = new HashMap<String, Card>();
         for (UUID cardId: library) {

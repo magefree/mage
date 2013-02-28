@@ -28,6 +28,8 @@
 
 package mage.target.common;
 
+import java.util.ArrayList;
+import java.util.List;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -45,6 +47,8 @@ import java.util.UUID;
  * @author BetaSteward_at_googlemail.com
  */
 public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
+
+    private Integer cardLimit;
 
     public TargetCardInLibrary() {
         this(1, 1, new FilterCard());
@@ -64,6 +68,7 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
 
     public TargetCardInLibrary(final TargetCardInLibrary target) {
         super(target);
+        this.cardLimit = target.cardLimit;
     }
 
     @Override
@@ -73,27 +78,32 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
         if (targetPlayer == null) {
             targetPlayer = player;
         }
+
+        List<Card> cards;
+        if (cardLimit == null) {
+            cards = targetPlayer.getLibrary().getCards(game);
+        } else {
+            int maxCards = Math.min(cardLimit.intValue(), targetPlayer.getLibrary().size());
+            cards = targetPlayer.getLibrary().getTopCards(game, maxCards);
+        }
+
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= minNumberOfTargets;
-            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, targetPlayer.getLibrary().getCards(game)), this, game)) {
+            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, cards), this, game)) {
                 return chosen;
             }
             chosen = targets.size() >= minNumberOfTargets;
         }
-        // Issue 231
-        /*while (!doneChosing()) {
-            if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, player.getLibrary().getCards(game)), this, game)) {
-                break;
-            }
-        }*/
+
         return chosen = true;
     }
 
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getPlayer(source.getControllerId()).getLibrary().getCard(id, game);
-        if (card != null)
+        if (card != null) {
             return filter.match(card, game);
+        }
         return false;
     }
 
@@ -105,5 +115,10 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
     public void setMinNumberOfTargets(int minNumberOfTargets) {
         this.minNumberOfTargets = minNumberOfTargets;
     }
+
+    public void setCardLimit(Integer cardLimit) {
+        this.cardLimit = new Integer(cardLimit.intValue());
+    }
+
 
 }
