@@ -587,7 +587,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         //20091005 - 103.4
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
-            while (player.getHand().size() > 0 && player.chooseMulligan(this)) {
+            GameEvent event = new GameEvent(GameEvent.EventType.CAN_TAKE_MULLIGAN, null, null, playerId);
+            while (player.getHand().size() > 0)  {
+                if (replaceEvent(event)) {
+                    continue;
+                }
+                fireEvent(event);
+                if (!player.chooseMulligan(this)) {
+                    break;
+                }
+
                 mulligan(player.getId());
             }
             fireInformEvent(player.getName() + " keeps hand");

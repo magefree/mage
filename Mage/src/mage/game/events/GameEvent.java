@@ -102,6 +102,7 @@ public class GameEvent {
         SEARCH_LIBRARY, LIBRARY_SEARCHED,
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
+        CAN_TAKE_MULLIGAN,
 
         //permanent events
         ENTERS_THE_BATTLEFIELD,
