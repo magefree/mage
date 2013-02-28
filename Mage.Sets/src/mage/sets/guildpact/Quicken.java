@@ -27,24 +27,29 @@
  */
 package mage.sets.guildpact;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.watchers.WatcherImpl;
 
 /**
  *
  * @author LevelX2
  *
- * TODO: Change to handling with CAST_SPELL watcher. All existing effects must be consumed if a sorcery is cast.
  */
 public class Quicken extends CardImpl<Quicken> {
 
@@ -56,6 +61,7 @@ public class Quicken extends CardImpl<Quicken> {
 
         // The next sorcery card you cast this turn can be cast as though it had flash.
         this.getSpellAbility().addEffect(new QuickenAsThoughEffect());
+        this.addWatcher(new QuickenWatcher());
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
@@ -72,7 +78,7 @@ public class Quicken extends CardImpl<Quicken> {
 }
 
 class QuickenAsThoughEffect extends AsThoughEffectImpl<QuickenAsThoughEffect> {
-    private UUID cardId;
+    private QuickenWatcher quickenWatcher;
     private int zoneChangeCounter;
 
     public QuickenAsThoughEffect() {
@@ -82,8 +88,18 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl<QuickenAsThoughEffect> {
 
     public QuickenAsThoughEffect(final QuickenAsThoughEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
+        this.quickenWatcher = effect.quickenWatcher;
         this.zoneChangeCounter = effect.zoneChangeCounter;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+         quickenWatcher = (QuickenWatcher) game.getState().getWatchers().get("consumeQuickenWatcher", source.getControllerId());
+         Card card = game.getCard(source.getSourceId());
+         if (quickenWatcher != null && card != null) {
+             zoneChangeCounter = card.getZoneChangeCounter();
+             quickenWatcher.addQuickenSpell(source.getSourceId(), zoneChangeCounter);
+         }
     }
 
     @Override
@@ -99,19 +115,60 @@ class QuickenAsThoughEffect extends AsThoughEffectImpl<QuickenAsThoughEffect> {
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && (cardId == null || (cardId.equals(sourceId) && zoneChangeCounter == card.getZoneChangeCounter()))) {
-            if (card.getCardType().contains(CardType.SORCERY) && card.getOwnerId().equals(source.getControllerId())) {
-                if (card.getSpellAbility().isInUseableZone(game, card, false)) {
-                    if (cardId == null) {
-                        cardId = card.getId();
-                        zoneChangeCounter = card.getZoneChangeCounter();
-                    }
-                    return true;
-                }
+        if (quickenWatcher.isQuickenSpellActive(source.getSourceId(), zoneChangeCounter)) {
+            Card card = game.getCard(sourceId);
+            if (card != null && card.getCardType().contains(CardType.SORCERY) && card.getOwnerId().equals(source.getControllerId())) {
+                    return card.getSpellAbility().isInUseableZone(game, card, false);
             }
         }
         return false;
+    }
+
+}
+
+class QuickenWatcher extends WatcherImpl<QuickenWatcher> {
+
+    public List<String> activeQuickenSpells = new ArrayList<String>();
+
+    public QuickenWatcher() {
+        super("consumeQuickenWatcher", WatcherScope.PLAYER);
+    }
+
+    public QuickenWatcher(final QuickenWatcher watcher) {
+        super(watcher);
+    }
+
+    @Override
+    public QuickenWatcher copy() {
+        return new QuickenWatcher(this);
+    }
+
+    @Override
+    public void watch(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            if (!activeQuickenSpells.isEmpty() && event.getPlayerId().equals(getControllerId())) {
+                Spell spell = game.getStack().getSpell(event.getTargetId());
+                if (spell != null && spell.getCardType().contains(CardType.SORCERY)) {
+                    activeQuickenSpells.clear();
+                }
+            }
+        }
+    }
+
+    public void addQuickenSpell(UUID sourceId, int zoneChangeCounter) {
+        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+        activeQuickenSpells.add(spellKey);
+    }
+
+    public boolean isQuickenSpellActive(UUID sourceId, int zoneChangeCounter) {
+        String spellKey = new StringBuilder(sourceId.toString()).append("_").append(zoneChangeCounter).toString();
+        return activeQuickenSpells.contains(spellKey);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        activeQuickenSpells.clear();
     }
 
 }
