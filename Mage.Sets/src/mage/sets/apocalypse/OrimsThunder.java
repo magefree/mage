@@ -28,11 +28,15 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
@@ -70,8 +74,20 @@ public class OrimsThunder extends CardImpl<OrimsThunder> {
         // Destroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature.
         this.getSpellAbility().addEffect(new OrimsThunderEffect());
         this.getSpellAbility().addTarget(new TargetPermanent(filter));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
+                new OrimsThunderEffect2(),
+                KickedCondition.getInstance(),
+                "If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature"));
 
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            if (KickedCondition.getInstance().apply(game, ability)) {
+                ability.addTarget(new TargetCreaturePermanent());
+            }
+        }
     }
 
     public OrimsThunder(final OrimsThunder card) {
@@ -84,11 +100,43 @@ public class OrimsThunder extends CardImpl<OrimsThunder> {
     }
 }
 
+class OrimsThunderEffect2 extends OneShotEffect<OrimsThunderEffect2> {
+
+    OrimsThunderEffect2() {
+        super(Outcome.Damage);
+    }
+
+    OrimsThunderEffect2(final OrimsThunderEffect2 effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        int damage = 0;
+        MageObject firstTarget = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+        if (firstTarget != null) {
+            damage = firstTarget.getManaCost().convertedManaCost();
+        }
+        boolean kicked = KickedCondition.getInstance().apply(game, source);
+        if (kicked && secondTarget != null) {
+            secondTarget.damage(damage, source.getId(), game, true, false);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public OrimsThunderEffect2 copy() {
+        return new OrimsThunderEffect2(this);
+    }
+}
+
 class OrimsThunderEffect extends OneShotEffect<OrimsThunderEffect> {
 
     OrimsThunderEffect() {
         super(Outcome.DestroyPermanent);
-        staticText = "Destroy target artifact or enchantment. If Orim's Thunder was kicked, it deals damage equal to that permanent's converted mana cost to target creature";
+        staticText = "Destroy target artifact or enchantment";
     }
 
     OrimsThunderEffect(final OrimsThunderEffect effect) {
@@ -97,20 +145,11 @@ class OrimsThunderEffect extends OneShotEffect<OrimsThunderEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int damage = 0;
-        boolean successful = false;
-        Permanent first = game.getPermanent(source.getFirstTarget());
-        Permanent second = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (first != null) {
-            damage = first.getManaCost().convertedManaCost();
-            first.destroy(source.getSourceId(), game, false);
-            successful = true;
+        Permanent target = game.getPermanent(source.getFirstTarget());
+        if (target != null) {
+            return target.destroy(source.getId(), game, false);
         }
-        boolean kicked = KickedCondition.getInstance().apply(game, source);
-        if (kicked && second != null && successful) {
-            second.damage(damage, id, game, true, false);
-        }
-        return successful;
+        return false;
     }
 
     @Override
