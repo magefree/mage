@@ -28,9 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
@@ -44,7 +45,6 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.permanent.token.Token;
 
@@ -54,13 +54,11 @@ import mage.game.permanent.token.Token;
  */
 public class OgreSlumlord extends CardImpl<OgreSlumlord> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature you control ");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another nontoken creature");
     private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("Rats you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
         filter.add(Predicates.not(new TokenPredicate()));
         filter.add(new AnotherPredicate());
-        
         filter2.add(new SubtypePredicate("Rat"));
     }
     
@@ -77,10 +75,10 @@ public class OgreSlumlord extends CardImpl<OgreSlumlord> {
 
         this.color.setBlack(true);
 
-        // Whenever another nontoken creature you control dies, put a 1/1 black Rat creature token onto the battlefield.
+        // Whenever another nontoken creature dies, you may put a 1/1 black Rat creature token onto the battlefield.
         this.addAbility(new DiesCreatureTriggeredAbility(new CreateTokenEffect(new RatToken()), false, filter));
         // Rats you control have deathtouch.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filter2)));
          
     }
 
