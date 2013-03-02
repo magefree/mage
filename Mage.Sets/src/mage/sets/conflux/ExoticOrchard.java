@@ -36,7 +36,6 @@ import mage.Constants.Zone;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.ManaAbility;

@@ -33,9 +33,6 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DevourEffect;
-import mage.abilities.keyword.DevourAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.game.permanent.token.Token;
 

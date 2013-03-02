@@ -27,7 +27,6 @@
  */
 package mage.sets.magic2013;
 
-import java.util.LinkedHashMap;
 import java.util.UUID;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
@@ -37,14 +36,12 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
-import mage.players.PlayerImpl;
 
 /**
  *

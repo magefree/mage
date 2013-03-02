@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
-import mage.ObjectColor;
 
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;

@@ -29,15 +29,11 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
-import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.EvolveAbility;
 import mage.abilities.mana.DynamicManaAbility;
 import mage.cards.CardImpl;

@@ -28,13 +28,11 @@
 
 package mage.watchers.common;
 
-import java.io.ObjectStreamException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.Constants.WatcherScope;
-import mage.abilities.MageSingleton;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;

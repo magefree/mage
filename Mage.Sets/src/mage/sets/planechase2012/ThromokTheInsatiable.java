@@ -31,14 +31,8 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.DevouredCreaturesCondition;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DevourAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 
 /**

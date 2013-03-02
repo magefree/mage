@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;

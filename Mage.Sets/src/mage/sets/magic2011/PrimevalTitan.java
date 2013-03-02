@@ -42,7 +42,6 @@ import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.target.common.TargetCardInLibrary;
 
 /**

@@ -28,7 +28,6 @@
 
 package mage.target.common;
 
-import java.util.ArrayList;
 import java.util.List;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;

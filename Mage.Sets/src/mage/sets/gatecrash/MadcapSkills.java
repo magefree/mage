@@ -38,8 +38,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneAttachedEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;

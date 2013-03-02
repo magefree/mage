@@ -49,7 +49,6 @@ import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import org.apache.log4j.Level;
 
 /**
  *

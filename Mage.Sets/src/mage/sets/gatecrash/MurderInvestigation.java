@@ -44,7 +44,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

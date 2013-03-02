@@ -34,17 +34,13 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.watchers.common.CardsPutIntoGraveyardWatcher;
-import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
  *

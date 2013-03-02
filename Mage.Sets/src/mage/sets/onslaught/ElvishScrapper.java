@@ -40,7 +40,6 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
-import mage.filter.common.FilterEnchantmentPermanent;
 import mage.target.TargetPermanent;
 
 /**

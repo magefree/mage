@@ -34,7 +34,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import mage.Constants;
-import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorImpl;

@@ -43,7 +43,6 @@ import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;

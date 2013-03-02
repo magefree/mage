@@ -1,10 +1,6 @@
  package org.mage.test.cards.conditional;
 
 import mage.Constants;
-import mage.abilities.keyword.FirstStrikeAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.game.permanent.Permanent;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 

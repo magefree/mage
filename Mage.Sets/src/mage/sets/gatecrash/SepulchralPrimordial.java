@@ -42,7 +42,6 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.other.OwnerIdPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;

@@ -38,7 +38,6 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetAttackingCreature;
 
 /**
  *

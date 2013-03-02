@@ -34,14 +34,12 @@
 
 package mage.client.dialog;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLayeredPane;
 import mage.Constants;
 import mage.cards.Card;
-import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;

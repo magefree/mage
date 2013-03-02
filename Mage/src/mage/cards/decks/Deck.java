@@ -30,8 +30,6 @@ package mage.cards.decks;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 import mage.cards.*;
 import mage.game.GameException;

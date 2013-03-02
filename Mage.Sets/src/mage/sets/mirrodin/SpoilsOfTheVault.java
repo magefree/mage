@@ -40,11 +40,8 @@ import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.filter.FilterCard;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetCard;
 
 /**
  *

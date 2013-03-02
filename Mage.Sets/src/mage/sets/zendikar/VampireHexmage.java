@@ -27,7 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import java.util.Iterator;
 import java.util.UUID;
 
 import mage.Constants.CardType;

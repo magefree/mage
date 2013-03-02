@@ -39,7 +39,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.DamagedEvent;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetNonlandPermanent;
 
 /**
  *

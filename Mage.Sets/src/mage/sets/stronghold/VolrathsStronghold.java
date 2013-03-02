@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,9 +40,6 @@ import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.filter.predicate.other.OwnerPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**

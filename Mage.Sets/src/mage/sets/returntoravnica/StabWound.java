@@ -30,7 +30,6 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 import mage.Constants;
-import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -40,10 +39,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
