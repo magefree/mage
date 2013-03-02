@@ -63,6 +63,7 @@ public class CounterPluginImpl implements CounterPlugin {
         log.info(plugin.toString() + " has been loaded.");
     }
 
+    @Override
     public String toString() {
         return "[Game counter plugin, version 0.1]";
     }
@@ -78,7 +79,7 @@ public class CounterPluginImpl implements CounterPlugin {
             try {
                 ois = new ObjectInputStream(new FileInputStream(data));
                 Object o = ois.readObject();
-                CounterBean c = null;
+                CounterBean c;
                 if (o instanceof CounterBean) {
                     c = (CounterBean)o;
                     prev = c.getGamesPlayed();
@@ -129,7 +130,7 @@ public class CounterPluginImpl implements CounterPlugin {
                         c = (CounterBean)o;
                     }
                     ois.close();
-                    return c.getGamesPlayed();
+                    return c == null ? 0 : c.getGamesPlayed();
                 }
             } catch (EOFException e) {
                 return 0;

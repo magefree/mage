@@ -137,9 +137,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 if (game.getActivePlayerId().equals(playerId)) {
                     if (logger.isInfoEnabled()) {
                         printOutState(game, playerId);
-                        Iterator it = game.getOpponents(playerId).iterator();
-                        while (it.hasNext()) {
-                            UUID opponentId = (UUID) it.next();
+                        for (UUID opponentId : game.getOpponents(playerId)) {
                             printOutState(game, opponentId);
                         }
                     }
@@ -395,7 +393,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     for (UUID targetId : target.possibleTargets(ability.getSourceId(), ability.getControllerId(), game)) {
                         Game sim = game.copy();
                         StackAbility newAbility = (StackAbility) ability.copy();
-                        SearchEffect newEffect = getSearchEffect((StackAbility) newAbility);
+                        SearchEffect newEffect = getSearchEffect(newAbility);
                         newEffect.getTarget().addTarget(targetId, newAbility, sim);
                         sim.getStack().push(newAbility);
                         SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
@@ -1298,7 +1296,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         return false;
     }
 
-    protected void getSuggestedActions() {
+    protected final void getSuggestedActions() {
         try {
             File file = new File(FILE_WITH_INSTRUCTIONS);
             if (file.exists()) {
@@ -1323,7 +1321,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     @Override
     public void addAction(String action) {
         System.out.println("adding to suggested actions: " + action);
-        if (action != null && action.startsWith("cast:") || action.startsWith("play:")) {
+        if (action != null && (action.startsWith("cast:") || action.startsWith("play:"))) {
             suggested.add(action.substring(5, action.length()));
         }
     }

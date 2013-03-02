@@ -250,12 +250,13 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void showTables(UUID roomId) {
-
         this.roomId = roomId;
         session = MageFrame.getSession();
+        UUID chatRoomId = null;
         if (session != null) {
             btnQuickStart.setVisible(session.isTestMode());
             gameChooser.init(session);
+            chatRoomId = session.getRoomChatId(roomId);
         }
         if (newTableDialog == null) {
             newTableDialog = new NewTableDialog();
@@ -269,14 +270,12 @@ public class TablesPanel extends javax.swing.JPanel {
             joinTableDialog = new JoinTableDialog();
             MageFrame.getDesktop().add(joinTableDialog, JLayeredPane.MODAL_LAYER);
         }
-        UUID chatRoomId = session.getRoomChatId(roomId);
         if (chatRoomId != null) {
             this.chatPanel.connect(chatRoomId);
             startTasks();
             this.setVisible(true);
             this.repaint();
-        }
-        else {
+        } else {
             hideTables();
         }
 

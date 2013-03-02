@@ -125,9 +125,9 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 }
 
                 // cards in Library
-               Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
-               cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
-               cardsCount = (cardName.isEmpty() ? 0 :cardsInLibrary.count(filter, game));
+                Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
+                cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
+                cardsCount = (cardName.isEmpty() ? 0 : cardsInLibrary.count(filter, game));
                 if (cardsCount > 0) {
                     filter.setMessage("card named " + cardName + " in the library of " + targetPlayer.getName());
                     TargetCardInLibrary target = new TargetCardInLibrary(0, cardsCount, filter);
@@ -143,9 +143,9 @@ public abstract class SearchTargetGraveyardHandLibraryForCardNameAndExileEffect 
                 } else {
                     player.lookAtCards(targetPlayer.getName() + " library", cardsInLibrary, game);
                 }
-            }
 
-            targetPlayer.shuffleLibrary(game);
+                targetPlayer.shuffleLibrary(game);
+            }
 
             return true;
         }

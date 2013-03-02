@@ -1036,8 +1036,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             }
         });
         List<Permanent> result = new ArrayList<Permanent>();
-        for (Iterator it = list.iterator(); it.hasNext();) {
-            Entry<Permanent, Integer> entry = (Entry<Permanent, Integer>)it.next();
+        for (Entry<Permanent, Integer> entry : list) {
             result.add(entry.getKey());
         }
         return result;
@@ -1086,9 +1085,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (!choice.isChosen()) {
             int choiceIdx = (int) (Math.random()*choice.getChoices().size()+1);
-            Iterator iterator = choice.getChoices().iterator();
-            while (iterator.hasNext()) {
-                String next = (String) iterator.next();
+            for (String next : choice.getChoices()) {
                 if (--choiceIdx > 0) {
                     continue;
                 }
@@ -1159,7 +1156,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     @Override
     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game)  {
         log.debug("chooseTarget");
-        if (cards != null && cards.isEmpty()) {
+        if (cards == null || cards.isEmpty()) {
             if (!target.isRequired()) {
                 return false;
             }
@@ -1183,7 +1180,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     @Override
     public boolean choose(Outcome outcome, Cards cards, TargetCard target, Game game)  {
         log.debug("choose 2");
-        if (cards != null && cards.isEmpty()) {
+        if (cards == null || cards.isEmpty()) {
             if (!target.isRequired()) {
                 return false;
             }
@@ -1585,9 +1582,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     if (o1.score.equals(o2.score)) {
                         Integer i1 = RateCard.getColorManaCount(o1.card);
                         Integer i2 = RateCard.getColorManaCount(o2.card);
-                        return -i1.compareTo(i2);
+                        return i2.compareTo(i1);
                     }
-                    return -o1.score.compareTo(o2.score);
+                    return o2.score.compareTo(o1.score);
                 }
             });
             Set<String> chosenSymbols = new HashSet<String>();

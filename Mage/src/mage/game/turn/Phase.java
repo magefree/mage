@@ -65,8 +65,9 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
         this.preEvent = phase.preEvent;
         this.postEvent = phase.postEvent;
         this.activePlayerId = phase.activePlayerId;
-        if (phase.currentStep != null)
+        if (phase.currentStep != null) {
             this.currentStep = phase.currentStep.copy();
+        }
         this.count = phase.count;
         for (Step step: phase.steps) {
             this.steps.add(step.copy());
@@ -94,24 +95,29 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
     }
 
     public boolean play(Game game, UUID activePlayerId) {
-        if (game.isPaused() || game.isGameOver())
+        if (game.isPaused() || game.isGameOver()) {
             return false;
+        }
 
         this.activePlayerId = activePlayerId;
 
         if (beginPhase(game, activePlayerId)) {
 
             for (Step step: steps) {
-                if (game.isPaused() || game.isGameOver())
+                if (game.isPaused() || game.isGameOver()) {
                     return false;
+                }
                 currentStep = step;
-                if (!game.isSimulation() && checkStopOnStepOption(game)) 
+                if (!game.isSimulation() && checkStopOnStepOption(game)) {
                     return false;
-                if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType()))
+                }
+                if (!game.getState().getTurnMods().skipStep(activePlayerId, getStep().getType())) {
                     playStep(game);
+                }
             }
-            if (game.isPaused() || game.isGameOver())
+            if (game.isPaused() || game.isGameOver()) {
                 return false;
+            }
             count++;
             endPhase(game, activePlayerId);
             return true;
@@ -130,8 +136,9 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
     }
 
     public boolean resumePlay(Game game, PhaseStep stepType, boolean wasPaused) {
-        if (game.isPaused() || game.isGameOver())
+        if (game.isPaused() || game.isGameOver()) {
             return false;
+        }
 
         this.activePlayerId = game.getActivePlayerId();
         Iterator<Step> it = steps.iterator();
@@ -143,15 +150,18 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
         resumeStep(game, wasPaused);
         while (it.hasNext()) {
             step = it.next();
-            if (game.isPaused() || game.isGameOver())
+            if (game.isPaused() || game.isGameOver()) {
                 return false;
+            }
             currentStep = step;
-            if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType()))
+            if (!game.getState().getTurnMods().skipStep(activePlayerId, currentStep.getType())) {
                 playStep(game);
+            }
         }
 
-        if (game.isPaused() || game.isGameOver())
+        if (game.isPaused() || game.isGameOver()) {
             return false;
+        }
         count++;
         endPhase(game, activePlayerId);
         return true;
@@ -184,17 +194,21 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
     protected void playStep(Game game) {
         if (!currentStep.skipStep(game, activePlayerId)) {
             prePriority(game, activePlayerId);
-            if (!game.isPaused() && !game.isGameOver())
+            if (!game.isPaused() && !game.isGameOver()) {
                 currentStep.priority(game, activePlayerId, false);
-            if (!game.isPaused() && !game.isGameOver())
+            }
+            if (!game.isPaused() && !game.isGameOver()) {
                 postPriority(game, activePlayerId);
+            }
         }
     }
 
     protected void resumeStep(Game game, boolean wasPaused) {
         boolean resuming = true;
-        if (currentStep == null || currentStep.getStepPart() == null)
+        if (currentStep == null || currentStep.getStepPart() == null) {
             game.end();
+            return;
+        }
         switch (currentStep.getStepPart()) {
             case PRE:
                 if (wasPaused) {
@@ -205,19 +219,22 @@ public abstract class Phase<T extends Phase<T>> implements Serializable {
                     prePriority(game, activePlayerId);
                 }
             case PRIORITY:
-                if (!game.isPaused() && !game.isGameOver())
+                if (!game.isPaused() && !game.isGameOver()) {
                     currentStep.priority(game, activePlayerId, resuming);
+                }
             case POST:
-                if (!game.isPaused() && !game.isGameOver())
+                if (!game.isPaused() && !game.isGameOver()) {
                     postPriority(game, activePlayerId);
+                }
         }
     }
 
     private void playExtraSteps(Game game, PhaseStep afterStep) {
         while (true) {
             Step extraStep = game.getState().getTurnMods().extraStep(activePlayerId, afterStep);
-            if (extraStep == null)
+            if (extraStep == null) {
                 return;
+            }
             currentStep = extraStep;
             playStep(game);
         }
