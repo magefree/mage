@@ -14,7 +14,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,7 +46,7 @@ import javax.swing.text.html.ImageView;
  * UI utility functions.
  */
 public class UI {
-    private static ConcurrentMap<URL, Image> imageCache = new ConcurrentHashMap<URL, Image>();
+    private static ConcurrentMap<URI, Image> imageCache = new ConcurrentHashMap<URI, Image>();
 
     public static JToggleButton getToggleButton () {
         JToggleButton button = new JToggleButton();
@@ -67,17 +68,6 @@ public class UI {
         } else {
             panel.setBorder(BorderFactory.createTitledBorder(title));
         }
-    }
-
-    public static URL getFileURL (String path) {
-        File file = new File(path);
-        if (file.exists()) {
-            try {
-                return file.toURL();
-            } catch (MalformedURLException ignored) {
-            }
-        }
-        return UI.class.getResource(path);
     }
 
     public static ImageIcon getImageIcon (String path) {
@@ -117,9 +107,14 @@ public class UI {
                                     @Override
                                     public URL getImageURL() {
                                         URL url = super.getImageURL();
+                                        URI uri = null;
+                                        try {
+                                            uri = url.toURI();
+                                        } catch (URISyntaxException ex) {
+                                        }
                                         // Put an image into the cache to be read by other ImageView methods.
-                                        if (url != null && imageCache.get(url) == null) {
-                                            imageCache.put(url, Toolkit.getDefaultToolkit().createImage(url));
+                                        if (uri != null && imageCache.get(uri) == null) {
+                                            imageCache.put(uri, Toolkit.getDefaultToolkit().createImage(url));
                                         }
                                         return url;
                                     }
