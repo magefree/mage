@@ -82,8 +82,8 @@ public final class Constants {
     public static final String BASE_SOUND_PATH = "plugins" + File.separator + "sounds" + File.separator;
 
     public interface IO {
-        public static final String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
-        public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
+        String imageBaseDir = "plugins" + File.separator + "images" + File.separator;
+        String IMAGE_PROPERTIES_FILE = "image.url.properties";
     }
 
     public enum DeckEditorMode {

@@ -20,8 +20,8 @@ public class Constants {
     public static final int TOOLTIP_BORDER_WIDTH = 80;
 
     public interface IO { 
-        public static final String imageBaseDir = "plugins" + File.separator + "images";
-        public static final String IMAGE_PROPERTIES_FILE = "image.url.properties";
+        String imageBaseDir = "plugins" + File.separator + "images";
+        String IMAGE_PROPERTIES_FILE = "image.url.properties";
     }
 
     public static final String CARD_IMAGE_PATH_TEMPLATE = "." + File.separator + "plugins" + File.separator + "images/{set}/{name}.{collector}.full.jpg";

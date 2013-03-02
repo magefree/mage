@@ -33,8 +33,11 @@ public final class ListenableCollections {
     private ListenableCollections() {}
 
     public static <E> List<E> listenableList(List<E> list, ListListener<E> listener) {
-        if(list instanceof RandomAccess) return new ListenableList<E>(list, listener);
-        else return new ListenableSequentialList<E>(list, listener);
+        if (list instanceof RandomAccess) {
+            return new ListenableList<E>(list, listener);
+        } else {
+            return new ListenableSequentialList<E>(list, listener);
+        }
     }
 
     public static <E> Set<E> listenableSet(Set<E> set, SetListener<E> listener) {
@@ -45,21 +48,21 @@ public final class ListenableCollections {
         return new ListenableMap<K, V>(map, listener);
     }
 
-    public static interface ListListener<E> extends Serializable {
+    public interface ListListener<E> extends Serializable {
         /**
          * Notified after a value was added to the list.
          */
-        public void add(int index, E newValue);
+        void add(int index, E newValue);
 
         /**
          * Notified after a value in the list was changed.
          */
-        public void set(int index, E oldValue, E newValue);
+        void set(int index, E oldValue, E newValue);
 
         /**
          * Notified after a value was removed from the list.
          */
-        public void remove(int index, E oldValue);
+        void remove(int index, E oldValue);
     }
 
     private static class ListenableList<E> extends AbstractList<E> implements RandomAccess, Serializable {
@@ -122,44 +125,53 @@ public final class ListenableCollections {
                 private int                   lastIndex;
                 private E                     lastValue;
 
+                @Override
                 public boolean hasNext() {
                     return it.hasNext();
                 }
 
+                @Override
                 public boolean hasPrevious() {
                     return it.hasPrevious();
                 }
 
+                @Override
                 public E next() {
                     lastIndex = it.nextIndex();
                     lastValue = it.next();
                     return lastValue;
                 }
 
+                @Override
                 public int nextIndex() {
                     return it.nextIndex();
                 }
 
+                @Override
                 public E previous() {
                     lastIndex = it.previousIndex();
                     lastValue = it.previous();
                     return lastValue;
                 }
 
+                @Override
                 public int previousIndex() {
                     return it.previousIndex();
                 }
 
+                @Override
                 public void add(E o) {
                     it.add(o);
                     listener.add(previousIndex(), o);
                 }
 
+                @Override
                 public void set(E o) {
                     it.set(o);
                     listener.set(lastIndex, lastValue, o);
                 }
 
+                @Override
                 public void remove() {
                     it.remove();
                     listener.remove(lastIndex, lastValue);
@@ -204,7 +216,9 @@ public final class ListenableCollections {
         @Override
         public boolean add(E o) {
             boolean b = delegate.add(o);
-            if(b) listener.add(o);
+            if (b) {
+                listener.add(o);
+            }
             return b;
         };
 
@@ -212,7 +226,9 @@ public final class ListenableCollections {
         @Override
         public boolean remove(Object o) {
             boolean b = delegate.remove(o);
-            if(b) listener.remove((E) o);
+            if (b) {
+                listener.remove((E) o);
+            }
             return b;
         }
 
@@ -223,18 +239,23 @@ public final class ListenableCollections {
                 private boolean           hasLast;
                 private E                 last;
 
+                @Override
                 public boolean hasNext() {
                     return it.hasNext();
                 }
 
+                @Override
                 public E next() {
                     last = it.next();
                     hasLast = true;
                     return last;
                 }
 
+                @Override
                 public void remove() {
-                    if(!hasLast) throw new IllegalStateException();
+                     if(!hasLast) {
+                        throw new IllegalStateException();
+                    }
                     it.remove();
                     listener.remove(last);
                 }
@@ -298,7 +319,9 @@ public final class ListenableCollections {
                 V old = delegate.remove(key);
                 listener.remove((K) key, old);
                 return old;
-            } else return null;
+            } else {
+                return null;
+            }
         }
 
         @Override
@@ -337,18 +360,23 @@ public final class ListenableCollections {
                     private boolean                     hasLast;
                     private Entry<K, V>                 last;
 
+                    @Override
                     public boolean hasNext() {
                         return it.hasNext();
                     }
 
+                    @Override
                     public Entry<K, V> next() {
                         last = it.next();
                         hasLast = true;
                         return last;
                     }
 
+                    @Override
                     public void remove() {
-                        if(!hasLast) throw new IllegalStateException();
+                         if(!hasLast) {
+                            throw new IllegalStateException();
+                        }
                         hasLast = false;
                         it.remove();
                         listener.remove(last.getKey(), last.getValue());

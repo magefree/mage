@@ -52,8 +52,11 @@ public class DownloadJob extends AbstractLaternaBean {
      * Sets the job's state. If the state is {@link State#ABORTED}, it instead sets the error to "ABORTED"
      */
     public void setState(State state) {
-        if(state == State.ABORTED) setError("ABORTED");
-        else this.state.setValue(state);
+        if (state == State.ABORTED) {
+            setError("ABORTED");
+        } else {
+            this.state.setValue(state);
+        }
     }
 
     /**
@@ -77,7 +80,9 @@ public class DownloadJob extends AbstractLaternaBean {
      * given message and exception.
      */
     public void setError(String message, Exception error) {
-        if(message == null) message = error.toString();
+        if (message == null) {
+            message = error.toString();
+        }
         log.warn(message, error);
         this.state.setValue(State.ABORTED);
         this.error.setValue(error);
@@ -133,7 +138,9 @@ public class DownloadJob extends AbstractLaternaBean {
             private URLConnection c;
 
             public URLConnection getConnection() throws IOException {
-                if(c == null) c = proxy == null? new URL(url).openConnection():new URL(url).openConnection(proxy);
+                if (c == null) {
+                    c = proxy == null ? new URL(url).openConnection() : new URL(url).openConnection(proxy);
+                }
                 return c;
             }
 
@@ -154,7 +161,9 @@ public class DownloadJob extends AbstractLaternaBean {
             private URLConnection c;
 
             public URLConnection getConnection() throws IOException {
-                if(c == null) c = proxy == null? url.openConnection():url.openConnection(proxy);
+                if (c == null) {
+                    c = proxy == null ? url.openConnection() : url.openConnection(proxy);
+                }
                 return c;
             }
 
@@ -180,8 +189,9 @@ public class DownloadJob extends AbstractLaternaBean {
             public OutputStream open() throws IOException {
                 File parent = file.getAbsoluteFile().getParentFile();
                 //Trying to create the directory before checking it exists makes it threadsafe
-                if(!parent.mkdirs() && !parent.exists()) throw new IOException(parent
-                        + ": directory could not be created");
+                if (!parent.mkdirs() && !parent.exists()) {
+                    throw new IOException(parent + ": directory could not be created");
+                }
                 return new FileOutputStream(file);
             }
 
@@ -192,22 +202,24 @@ public class DownloadJob extends AbstractLaternaBean {
 
             @Override
             public void delete() throws IOException {
-                if(file.exists() && !file.delete()) throw new IOException(file + " couldn't be deleted");
+                if (file.exists() && !file.delete()) {
+                    throw new IOException(file + " couldn't be deleted");
+                }
             }
         };
     }
 
-    public static interface Source {
-        public InputStream open() throws IOException;
+    public interface Source {
+        InputStream open() throws IOException;
 
-        public int length() throws IOException;
+        int length() throws IOException;
     }
 
-    public static interface Destination {
-        public OutputStream open() throws IOException;
+    public interface Destination {
+        OutputStream open() throws IOException;
 
-        public boolean exists() throws IOException;
+        boolean exists() throws IOException;
 
-        public void delete() throws IOException;
+        void delete() throws IOException;
     }
 }

@@ -48,5 +48,5 @@ public interface Watcher<T extends Watcher<T>> extends Serializable {
     boolean conditionMet();
     void reset();
 
-    abstract T copy();
+    T copy();
 }
