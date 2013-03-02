@@ -39,7 +39,6 @@ import mage.players.Player;
 public class TournamentPlayer {
 
     protected int points;
-    protected String name;
     protected String playerType;
     protected Player player;
     protected Deck deck;

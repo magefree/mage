@@ -1,7 +1,5 @@
 package org.mage.card.arcane;
 
-import java.awt.AWTException;
-import java.awt.Robot;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -20,15 +18,6 @@ import javax.swing.SwingUtilities;
 public class Util {
     public static final boolean isMac = System.getProperty("os.name").toLowerCase().indexOf("mac") != -1;
     public static final boolean isWindows = System.getProperty("os.name").toLowerCase().indexOf("windows") == -1;
-
-    public static Robot robot;
-    static {
-        try {
-            new Robot();
-        } catch (AWTException ex) {
-            throw new RuntimeException("Error creating robot.", ex);
-        }
-    }
 
     public static final ThreadPoolExecutor threadPool;
     static private int threadCount;

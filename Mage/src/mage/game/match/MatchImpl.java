@@ -46,7 +46,6 @@ import java.util.*;
 public abstract class MatchImpl implements Match {
 
     protected UUID id = UUID.randomUUID();
-    protected String name;
     protected List<MatchPlayer> players = new ArrayList<MatchPlayer>();
     protected List<Game> games = new ArrayList<Game>();
     protected MatchOptions options;
