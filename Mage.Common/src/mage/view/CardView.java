@@ -47,6 +47,8 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.counters.Counter;
+import mage.counters.Counters;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -79,6 +81,7 @@ public class CardView extends SimpleCardView {
 
     protected UUID pairedCard;
     protected boolean paid;
+    protected List<CounterView> counters;
 
     public CardView(Card card, UUID cardId) {
         this(card);
@@ -121,7 +124,12 @@ public class CardView extends SimpleCardView {
         } else {
             this.rarity = card.getRarity();
         }
-
+        if (card.getCounters() != null && !card.getCounters().isEmpty()) {
+            counters = new ArrayList<CounterView>();
+            for (Counter counter: card.getCounters().values()) {
+                counters.add(new CounterView(counter));
+            }
+        }
         if (card.getSecondCardFace() != null) {
             this.secondCardFace = new CardView(card.getSecondCardFace());
         }
@@ -161,6 +169,16 @@ public class CardView extends SimpleCardView {
         this.color = card.getColor();
         this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
+//        if (card instanceof Card) {
+//            Counters cardCounters = ((Card) card).getCounters();
+//            if (cardCounters != null && !cardCounters.isEmpty()) {
+//                counters = new ArrayList<CounterView>();
+//                for (Counter counter: cardCounters.values()) {
+//                    counters.add(new CounterView(counter));
+//                }
+//            }
+//        }
+
         if (card instanceof PermanentToken) {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
@@ -410,5 +428,9 @@ public class CardView extends SimpleCardView {
 
     public void setPaid(boolean paid) {
         this.paid = paid;
+    }
+
+    public List<CounterView> getCounters() {
+        return counters;
     }
 }

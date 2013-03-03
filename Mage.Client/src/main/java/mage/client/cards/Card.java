@@ -57,10 +57,12 @@ import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static mage.constants.Constants.*;
+import mage.view.CounterView;
 
 /**
  *
@@ -243,7 +245,16 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
     }
 
     protected List<String> getRules() {
-        return card.getRules();
+        if (card.getCounters() != null) {
+            List<String> rules = new ArrayList<String>(card.getRules());
+            for (CounterView counter: card.getCounters()) {
+                rules.add(counter.getCount() + " x " + counter.getName());
+            }
+            return rules;
+        }
+        else {
+            return card.getRules();
+        }
     }
 
     protected String getType(CardView card) {

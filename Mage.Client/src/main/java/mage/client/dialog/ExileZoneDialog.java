@@ -57,8 +57,7 @@ public class ExileZoneDialog extends MageDialog {
     public void loadCards(ExileView exile, BigCard bigCard, UUID gameId) {
         this.title = exile.getName();
         this.setTitelBarToolTip(exile.getName());
-        boolean changed = false;
-        changed = cards.loadCards(exile, bigCard, gameId);
+        boolean changed = cards.loadCards(exile, bigCard, gameId, null);
         if (exile.size() > 0) {
             show();
             if (changed) {

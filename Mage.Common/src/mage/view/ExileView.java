@@ -37,7 +37,7 @@ import mage.game.Game;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class ExileView extends SimpleCardsView {
+public class ExileView extends CardsView {
     private static final long serialVersionUID = 1L;
 
     private String name;
@@ -47,7 +47,7 @@ public class ExileView extends SimpleCardsView {
         this.name = exileZone.getName();
         this.id = exileZone.getId();
         for (Card card: exileZone.getCards(game)) {
-            this.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.isFaceDown(), card.getUsesVariousArt()));
+            this.put(card.getId(), new CardView(card));    
         }
     }
 

@@ -32,15 +32,20 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         setBackground(Color.white);
     }
 
+    @Override
     public void setCard(final CardView card, final Component container) {
-        if (card == null) return;
-        if (isCurrentCard(card)) return;
+        if (card == null || isCurrentCard(card)) {
+            return;
+        }
         currentCard = card;
 
         ThreadUtils.threadPool.submit(new Runnable() {
+            @Override
             public void run() {
                 try {
-                    if (!card.equals(currentCard)) return;
+                    if (!card.equals(currentCard)) {
+                        return;
+                    }
 
                     String manaCost = "";
                     for (String m : card.getManaCost()) {
@@ -51,8 +56,9 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
                     int symbolCount = 0;
                     int offset = 0;
-                    while ((offset = castingCost.indexOf("<img", offset) + 1) != 0)
+                    while ((offset = castingCost.indexOf("<img", offset) + 1) != 0) {
                         symbolCount++;
+                    }
 
                     List<String> rules = card.getRules();
                     List<String> rulings = new ArrayList<String>(rules);
@@ -61,24 +67,33 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         if (card.getPairedCard() != null) {
                             rulings.add("<span color='green'><i>Paired with another creature</i></span>");
                         }
-                        List<CounterView> counters = ((PermanentView) card).getCounters();
+                    }
+                    if (!card.isAbility() && (card instanceof PermanentView || card instanceof CardView)) {
+                        List<CounterView> counters;
+                        if (card instanceof PermanentView) {
+                            counters = ((PermanentView) card).getCounters();
+                        } else {
+                            counters = ((CardView) card).getCounters();
+                        }
                         int count = counters != null ? counters.size() : 0;
                         if (count > 0) {
                             StringBuilder sb = new StringBuilder();
                             int index = 0;
-                            for (CounterView counter : ((PermanentView) card).getCounters()) {
+                            for (CounterView counter : counters) {
                                 if (counter.getCount() > 0) {
                                     if (index == 0) {
                                         sb.append("<b>Counters:</b> ");
                                     } else {
                                         sb.append(", ");
                                     }
-                                    sb.append(counter.getCount() + "x<i>" + counter.getName() + "</i>");
+                                    sb.append(counter.getCount()).append("x<i>").append(counter.getName()).append("</i>");
                                     index++;
                                 }
                             }
                             rulings.add(sb.toString());
                         }
+                    }
+                    if (card instanceof PermanentView) {
                         int damage = ((PermanentView)card).getDamage();
                         if (damage > 0) {
                             rulings.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
