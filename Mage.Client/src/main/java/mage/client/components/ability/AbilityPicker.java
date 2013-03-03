@@ -257,7 +257,7 @@ public class AbilityPicker extends JXPanel implements MouseWheelListener {
             }
 
             final String finalText = text;
-            System.out.println(finalText);
+            // System.out.println(finalText);
 
             ImageRenderer2.super.setText(finalText);
             setCaretPosition(0);

@@ -215,7 +215,6 @@ public class ManaSymbols {
         }
         replaced = replaced.replace("|source|", "{source}");
         replaced = replaced.replace("|this|", "{this}");
-        System.out.println(replaced);
         return replaced;
     }
 

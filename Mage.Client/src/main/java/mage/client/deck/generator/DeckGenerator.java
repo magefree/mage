@@ -158,7 +158,7 @@ public class DeckGenerator {
         List<Card> spellCardPool = generateSpellCardPool(cardPoolSize, allowedColors, setsToUse);
         List<Card> landCardPool = generateNonBasicLandCardPool(MAX_NON_BASIC_SOURCE, allowedColors, setsToUse);
 
-        System.out.println("deck generator card pool: spells=" + spellCardPool.size() + ", lands=" + landCardPool.size());
+        // System.out.println("deck generator card pool: spells=" + spellCardPool.size() + ", lands=" + landCardPool.size());
 
         final List<String> setsToUseFinal = setsToUse;
 

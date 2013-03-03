@@ -123,7 +123,7 @@ public class GuiDisplayUtil {
 
             c.setLocation(x, y);
         } else {
-            System.out.println("null");
+            System.out.println("GuiDisplayUtil::keepComponentInsideScreen -> no GraphicsConfiguration");
         }
     }
 

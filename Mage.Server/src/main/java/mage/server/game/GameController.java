@@ -629,6 +629,7 @@ public class GameController implements GameCallback {
                         logger.warn("    action player: " + player.getName() + ", id: " + player.getId());
                         Player priorityPlayer = game.getPlayer(game.getPriorityPlayerId());
                         logger.warn("    priority player: " + priorityPlayer.getName() + ", id: " + priorityPlayer.getId());
+                        logger.warn("    command: " + command.toString());
                     }
                 }
         } else {

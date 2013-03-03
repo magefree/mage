@@ -296,10 +296,10 @@ public class DialogManager extends JComponent implements MouseListener,
 
     public void mouseWheelMoved(MouseWheelEvent e) {
         int notches = e.getWheelRotation();
-        System.out.println("outx:"+notches);
-        if (currentDialog != null && currentDialog.equals(MTGDialogs.ChooseCommonDialog)) {
-            System.out.println("out:"+1);
-        }
+//        System.out.println("outx:"+notches);
+//        if (currentDialog != null && currentDialog.equals(MTGDialogs.ChooseCommonDialog)) {
+//            System.out.println("out:"+1);
+//        }
     }
 
     /**

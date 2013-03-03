@@ -411,7 +411,7 @@ public class ConnectDialog extends MageDialog {
             List<String> servers = new ArrayList<String>();
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                System.out.println("Found server: " + inputLine);
+                logger.info("Found server: " + inputLine);
                 servers.add(inputLine);
             }
 
