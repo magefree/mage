@@ -3,6 +3,7 @@ package mage.abilities.effects.common.counter;
 import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -28,6 +29,14 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
             p.removeCounters(counter.getName(), counter.getCount(), game);
             return true;
         }
+        Card c = game.getCard(source.getSourceId());
+        if (c != null && c.getCounters().getCount(counter.getName()) >= counter.getCount()) {
+            c.removeCounters(counter.getName(), counter.getCount(), game);
+            game.informPlayers(new StringBuilder("Removed ").append(counter.getCount()).append(" ").append(counter.getName())
+                    .append(" counter from ").append(c.getName())
+                    .append(" (").append(c.getCounters().getCount(counter.getName())).append(" left)").toString());
+            return true;
+        }    
         return false;
     }
 

@@ -75,6 +75,7 @@ import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentImpl;
+import mage.game.stack.Spell;
 import mage.game.stack.SpellStack;
 import mage.game.stack.StackObject;
 import mage.game.turn.Phase;
@@ -276,7 +277,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 state.setZone(objectId, Zone.STACK);
                 return item;
             }
-            if (item.getSourceId().equals(objectId)) {
+            if (item.getSourceId().equals(objectId) && item instanceof Spell) {
                 return item;
             }
         }
