@@ -77,6 +77,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     protected String name;
     protected boolean usesStack = true;
     protected boolean ruleAtTheTop = false;
+    protected boolean ruleVisible = true;
 
     @Override
     public abstract T copy();
@@ -111,6 +112,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         }
         this.modes = ability.modes.copy();
         this.ruleAtTheTop = ability.ruleAtTheTop;
+        this.ruleVisible = ability.ruleVisible;
     }
 
     @Override
@@ -417,7 +419,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     protected String formatRule(String rule, String source) {
         String replace = rule;
-        if (source != null && !source.isEmpty()) {
+        if (rule != null && source != null && !source.isEmpty()) {
             replace = rule.replace("{this}", source);
             replace = replace.replace("{source}", source);
         }
@@ -573,6 +575,17 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     public void setRuleAtTheTop(boolean ruleAtTheTop) {
         this.ruleAtTheTop = ruleAtTheTop;
     }
+
+    @Override
+    public boolean getRuleVisible() {
+        return ruleVisible;
+    }
+
+    @Override
+    public void setRuleVisible(boolean ruleVisible) {
+        this.ruleVisible = ruleVisible;
+    }
+
 
     @Override
     public UUID getOriginalId() {

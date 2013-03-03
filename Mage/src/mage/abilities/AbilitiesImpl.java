@@ -71,6 +71,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
         List<String> rules = new ArrayList<String>();
 
         for (T ability:this) {
+            if (!ability.getRuleVisible()) {
+                continue;
+            }
             if (!(ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
                 if (ability.getRuleAtTheTop()) {
                     rules.add(0, ability.getRule());
@@ -304,7 +307,9 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
     public String getValue() {
         List<String> abilities = new ArrayList<String>();
         for (T ability: this) {
-            abilities.add(ability.toString());
+            if (ability.toString() != null) {
+                abilities.add(ability.toString());
+            }
         }
         Collections.sort(abilities);
         StringBuilder sb = new StringBuilder();

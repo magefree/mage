@@ -375,9 +375,29 @@ public interface Ability extends Controllable, Serializable {
     /**
      * Sets the value for the ruleAtTheTop attribute
      *
+     * true = show the rule at the top position of the rules
+     *
      * @param ruleAtTheTop
      */
     void setRuleAtTheTop(boolean ruleAtTheTop);
+
+    /**
+     * Returns true if this ability's rule is visible on the card tooltip
+     *
+     * @return
+     */
+    boolean getRuleVisible();
+    
+    /**
+     * Sets the value for the ruleVisible attribute
+     *
+     * true = rule will be shown for the card / permanent
+     * false = rule won't be shown
+     *
+     * @param ruleAtTheTop
+     */
+    void setRuleVisible(boolean ruleVisible);
+
 
     /**
      * Get the originalId of the ability

@@ -374,6 +374,16 @@ public class StackAbility implements StackObject, Ability {
     }
 
     @Override
+    public boolean getRuleVisible() {
+        return this.ability.getRuleVisible();
+    }
+
+    @Override
+    public void setRuleVisible(boolean ruleVisible) {
+        this.ability.setRuleVisible(ruleVisible);
+    }
+
+    @Override
     public UUID getOriginalId() {
         return this.ability.getOriginalId();
     }
