@@ -25,14 +25,8 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * GamePanel.java
- *
- * Created on Dec 16, 2009, 9:29:58 AM
- */
-
 package mage.client.game;
+
 import mage.Constants;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
@@ -68,15 +62,13 @@ import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
-
-
 /**
  *
  * @author BetaSteward_at_googlemail.com, nantuko8
  */
-public class GamePanel extends javax.swing.JPanel {
+public final class GamePanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(GamePanel.class);
+    private static final Logger logger = Logger.getLogger(GamePanel.class);
     private static final String YOUR_HAND = "Your hand";
 	private static final int X_PHASE_WIDTH = 55;
     private Map<UUID, PlayAreaPanel> players = new HashMap<UUID, PlayAreaPanel>();
@@ -94,12 +86,10 @@ public class GamePanel extends javax.swing.JPanel {
     private boolean smallMode = false;
     private boolean initialized = false;
 
-    private HelperPanel helper;
     private int storedHeight;
     
     private Map<String, HoverButton> hoverButtons;
 
-    /** Creates new form GamePanel */
     public GamePanel() {
         initComponents();
 
@@ -111,51 +101,42 @@ public class GamePanel extends javax.swing.JPanel {
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 
-        //FIXME: remove from here
-        try {
-            // Override layout (I can't edit generated code)
-            this.setLayout(new BorderLayout());
-            final JLayeredPane j = new JLayeredPane();
-            j.setSize(1024,768);
-            this.add(j);
-            j.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
-            
-            Map<String, JComponent> myUi = getUIComponents(j);
-            Plugins.getInstance().updateGamePanel(myUi);
+        // Override layout (I can't edit generated code)
+        this.setLayout(new BorderLayout());
+        final JLayeredPane j = new JLayeredPane();
+        j.setSize(1024, 768);
+        this.add(j);
+        j.add(jSplitPane0, JLayeredPane.DEFAULT_LAYER);
 
-            // Enlarge jlayeredpane on resize
-            addComponentListener(new ComponentAdapter(){
-                @Override
-                public void componentResized(ComponentEvent e) {
-                    int width = ((JComponent)e.getSource()).getWidth();
-                    int height = ((JComponent)e.getSource()).getHeight();
-                    j.setSize(width, height);
-                    jSplitPane0.setSize(width, height);
-                    
-                    if (height < storedHeight) {
-                        pnlBattlefield.setSize(0, 200);
-                    }
-                    storedHeight = height;
+        Map<String, JComponent> myUi = getUIComponents(j);
+        Plugins.getInstance().updateGamePanel(myUi);
 
-                    sizeToScreen();
+        // Enlarge jlayeredpane on resize
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int width = ((JComponent) e.getSource()).getWidth();
+                int height = ((JComponent) e.getSource()).getHeight();
+                j.setSize(width, height);
+                jSplitPane0.setSize(width, height);
 
-                    if (!initialized) {
-                        String state = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, null);
-                        if (state != null) {
-                            if (state.equals("down")) {
-                                jSplitPane0.setDividerLocation(1.0);
-                            }
-                        }
-                        initialized = true;
-                    }
-                    
+                if (height < storedHeight) {
+                    pnlBattlefield.setSize(0, 200);
                 }
-            });
+                storedHeight = height;
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+                sizeToScreen();
+
+                if (!initialized) {
+                    String state = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BIG_CARD_TOGGLED, null);
+                    if (state != null && state.equals("down")) {
+                        jSplitPane0.setDividerLocation(1.0);
+                    }
+                    initialized = true;
+                }
+
+            }
+        });
     }
 
     private Map<String, JComponent> getUIComponents(JLayeredPane jLayeredPane) {
@@ -262,9 +243,6 @@ public class GamePanel extends javax.swing.JPanel {
                 }
             }
         }
-
-        //int height = pnlBattlefield.getHeight();
-        //phasesContainer.setPreferredSize(new Dimension(X_PHASE_WIDTH, X_PHASE_HEIGHT));
 
         ArrowBuilder.getBuilder().setSize(rect.width, rect.height);
 
@@ -464,9 +442,6 @@ public class GamePanel extends javax.swing.JPanel {
             this.txtPhase.setText("");
         }
         updatePhases(game.getStep());
-        if (game.getPhase() != null && game.getPhase().toString().equals("End") && game.getStep().toString().equals("End Turn")) {
-            //AudioManager.playEndTurn();
-        }
 
         if (game.getStep() != null) {
             this.txtStep.setText(game.getStep().toString());
@@ -505,10 +480,8 @@ public class GamePanel extends javax.swing.JPanel {
         showRevealed(game);
         showLookedAt(game);
         if (game.getCombat().size() > 0) {
-            //combat.showDialog(game.getCombat());
             CombatManager.getInstance().showCombat(game.getCombat(), gameId);
         } else {
-            //combat.hideDialog();
             CombatManager.getInstance().hideCombat(gameId);
         }
         this.revalidate();
@@ -517,28 +490,6 @@ public class GamePanel extends javax.swing.JPanel {
 
     private void displayStack(GameView game, BigCard bigCard, FeedbackPanel feedbackPanel, UUID gameId) {
         this.stack.loadCards(game.getStack(), bigCard, gameId, null);
-
-        /*if (game.getStack().size() > 0) {
-            if (game.getStack().size() != cachedStackSize) {
-                boolean allPaid = true;
-                for (CardView cardView : game.getStack().values()) {
-                    if (!cardView.isPaid()) {
-                        allPaid = false;
-                        break;
-                    }
-                }
-                if (allPaid) {
-                    DialogManager.getManager().fadeOut();
-                    cachedStackSize = game.getStack().size();
-                    DialogManager.getManager().showStackDialog(game.getStack(), bigCard, feedbackPanel, gameId);
-                }
-            } else {
-                // do nothing
-            }
-        } else {
-            cachedStackSize = game.getStack().size();
-            DialogManager.getManager().fadeOut();
-        }*/
     }
 
     /**
@@ -930,7 +881,7 @@ public class GamePanel extends javax.swing.JPanel {
         stack.setPreferredSize(new java.awt.Dimension(Config.dimensions.frameWidth, Config.dimensions.frameHeight + 25));
         stack.setBackgroundColor(new Color(0,0,0,0));
 
-        btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png"))); // NOI18N
+        btnStopReplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop.png")));
         btnStopReplay.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -938,7 +889,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png"))); // NOI18N
+        btnNextPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_right.png")));
         btnNextPlay.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -946,7 +897,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png"))); // NOI18N
+        btnPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_right.png")));
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -954,7 +905,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png"))); // NOI18N
+        btnSkipForward.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_double_stop_right.png")));
         btnSkipForward.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -962,7 +913,7 @@ public class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png"))); // NOI18N
+        btnPreviousPlay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/buttons/control_stop_left.png")));
         btnPreviousPlay.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1057,7 +1008,7 @@ public class GamePanel extends javax.swing.JPanel {
         }
 
         pnlReplay.setOpaque(false);
-        helper = new HelperPanel();
+        HelperPanel helper = new HelperPanel();
         helper.setPreferredSize(new Dimension(100, 90));
         feedbackPanel.setHelperPanel(helper);
 
@@ -1118,12 +1069,9 @@ public class GamePanel extends javax.swing.JPanel {
                                                 .addComponent(handContainer, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                         )
                                 )
-                                //.addComponent(jPhases, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                         )
-                        //.addComponent(pnlGameInfo, GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         jPanel3.setLayout(gl_jPanel3);
-        //helper.setBorder(BorderFactory.createLineBorder(Color.ORANGE));
 
         jSplitPane1.setLeftComponent(jPanel3);
         jSplitPane1.setRightComponent(jSplitPane2);
