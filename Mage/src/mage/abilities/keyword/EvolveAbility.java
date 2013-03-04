@@ -129,6 +129,9 @@ class EvolveEffect extends OneShotEffect<EvolveEffect> {
     public boolean apply(Game game, Ability source) {
         UUID triggeringCreatureId = (UUID) getValue("triggeringCreature");
         Permanent triggeringCreature = game.getPermanent(triggeringCreatureId);
+        if (triggeringCreature == null) {
+            triggeringCreature = (Permanent) game.getLastKnownInformation(triggeringCreatureId, Zone.BATTLEFIELD);
+        }
         if (triggeringCreature != null) {
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null && EvolveAbility.isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
