@@ -33,6 +33,7 @@ import mage.Constants;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
@@ -57,7 +58,6 @@ public class ExtortAbility extends TriggeredAbilityImpl<ExtortAbility> {
 
     public ExtortAbility() {
         super(Zone.BATTLEFIELD, new ExtortEffect(), false);
-        this.costs.add(new ManaCostsImpl("{W/B}"));
     }
 
     public ExtortAbility(final ExtortAbility ability) {
@@ -67,12 +67,7 @@ public class ExtortAbility extends TriggeredAbilityImpl<ExtortAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId().equals(this.getControllerId())) {
-            Player player = game.getPlayer(this.getControllerId());
-            Permanent sourcePerm = game.getPermanent(sourceId);
-            if (player != null && sourcePerm != null &&
-                player.chooseUse(Constants.Outcome.Damage, new StringBuilder("Extort opponents? (").append(sourcePerm.getName()).append(")").toString(), game)) {
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -100,18 +95,27 @@ class ExtortEffect extends OneShotEffect<ExtortEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int loseLife = 0;
-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-            loseLife += game.getPlayer(opponentId).loseLife(1, game);
-        }
-        if (loseLife > 0) {
-            game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
-        }
+        Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());
+        if (player != null && permanent != null) {
+            if (player.chooseUse(Constants.Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(")").toString(), game)) {
+                Cost cost = new ManaCostsImpl("{W/B}");
+                if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
+                    int loseLife = 0;
+                    for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+                        loseLife += game.getPlayer(opponentId).loseLife(1, game);
+                    }
+                    if (loseLife > 0) {
+                        game.getPlayer(source.getControllerId()).gainLife(loseLife, game);
+                    }
+                    if (permanent != null) {
+                        game.informPlayers(new StringBuilder(permanent.getName()).append(" extorted opponents ").append(loseLife).append(" life").toString());
+                    }
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
