@@ -56,7 +56,6 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.players.Player;
 import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -78,8 +77,8 @@ public class DomriRade extends CardImpl<DomriRade> {
 
         // -2: Target creature you control fights another target creature.
         LoyaltyAbility ability2 = new LoyaltyAbility(new FightTargetsEffect(), -2);
-        ability2.addTarget(new TargetControlledCreaturePermanent());
-        ability2.addTarget(new TargetCreaturePermanent());
+        ability2.addTarget(new TargetControlledCreaturePermanent(true));
+        ability2.addTarget(new TargetOtherCreaturePermanent(true));
         this.addAbility(ability2);
 
         // -7: You get an emblem with "Creatures you control have double strike, trample, hexproof and haste."

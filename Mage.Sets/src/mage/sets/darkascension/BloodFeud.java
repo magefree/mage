@@ -30,8 +30,11 @@ package mage.sets.darkascension;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,8 +51,8 @@ public class BloodFeud extends CardImpl<BloodFeud> {
 
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent(true));
     }
 
     public BloodFeud(final BloodFeud card) {
@@ -60,4 +63,29 @@ public class BloodFeud extends CardImpl<BloodFeud> {
     public BloodFeud copy() {
         return new BloodFeud(this);
     }
+}
+
+class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+
+    public TargetOtherCreaturePermanent(boolean required) {
+        super(true);
+    }
+
+    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (source.getTargets().get(0).getTargets().contains(id)) {
+            return false;
+        }
+        return super.canTarget(controllerId, id, source, game);
+    }
+
+    @Override
+    public TargetOtherCreaturePermanent copy() {
+        return new TargetOtherCreaturePermanent(this);
+    }
+
 }

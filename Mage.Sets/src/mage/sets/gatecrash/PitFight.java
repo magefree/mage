@@ -30,8 +30,10 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
+import mage.game.Game;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,8 +52,8 @@ public class PitFight extends CardImpl<PitFight> {
 
         // Target creature you control fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent(true));
     }
 
     public PitFight(final PitFight card) {
@@ -62,4 +64,30 @@ public class PitFight extends CardImpl<PitFight> {
     public PitFight copy() {
         return new PitFight(this);
     }
+}
+
+
+class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
+
+    public TargetOtherCreaturePermanent(boolean required) {
+        super(required);
+    }
+
+    public TargetOtherCreaturePermanent(final TargetOtherCreaturePermanent target) {
+        super(target);
+    }
+
+    @Override
+    public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
+        if (source.getTargets().get(0).getTargets().contains(id)) {
+            return false;
+        }
+        return super.canTarget(controllerId, id, source, game);
+    }
+
+    @Override
+    public TargetOtherCreaturePermanent copy() {
+        return new TargetOtherCreaturePermanent(this);
+    }
+
 }

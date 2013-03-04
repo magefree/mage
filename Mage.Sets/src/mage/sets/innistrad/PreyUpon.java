@@ -35,6 +35,7 @@ import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,8 +59,10 @@ public class PreyUpon extends CardImpl<PreyUpon> {
 
         // Target creature you control fights target creature you don't control.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
-        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
     }
 
     public PreyUpon(final PreyUpon card) {

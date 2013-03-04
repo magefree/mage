@@ -74,6 +74,7 @@ public class GruulRagebeast extends CardImpl<GruulRagebeast> {
 
         // Whenever Gruul Ragebeast or another creature enters the battlefield under your control, that creature fights target creature an opponent controls.
         Ability ability = new GruulRagebeastTriggeredAbility();
+
         ability.addTarget(new TargetCreaturePermanent(filter2));
         this.addAbility(ability);
     }

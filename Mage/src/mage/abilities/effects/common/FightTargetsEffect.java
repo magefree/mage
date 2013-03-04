@@ -32,6 +32,7 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,15 +52,22 @@ public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
-        Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        // 20110930 - 701.10
-        if (creature1 != null && creature2 != null) {
-            if (creature1.getCardType().contains(CardType.CREATURE) && creature2.getCardType().contains(CardType.CREATURE)) {
-                creature1.damage(creature2.getPower().getValue(), creature2.getId(), game, true, false);
-                creature2.damage(creature1.getPower().getValue(), creature1.getId(), game, true, false);
-                return true;
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            // only if both targets are legal the effect will be applied
+            if (source.getTargets().get(0).isLegal(source, game) && source.getTargets().get(1).isLegal(source, game)) {
+                Permanent creature1 = game.getPermanent(source.getTargets().get(0).getFirstTarget());
+                Permanent creature2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
+                // 20110930 - 701.10
+                if (creature1 != null && creature2 != null) {
+                    if (creature1.getCardType().contains(CardType.CREATURE) && creature2.getCardType().contains(CardType.CREATURE)) {
+                        creature1.damage(creature2.getPower().getValue(), creature2.getId(), game, true, false);
+                        creature2.damage(creature1.getPower().getValue(), creature1.getId(), game, true, false);
+                        return true;
+                    }
+                }
             }
+            game.informPlayers(card.getName() + " has been fizzled.");
         }
         return false;
     }
@@ -71,7 +79,8 @@ public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
 
     @Override
     public String getText(Mode mode) {
-        return "Target " + mode.getTargets().get(0).getTargetName() + " fights target " + mode.getTargets().get(1).getTargetName();
+        return "Target " + mode.getTargets().get(0).getTargetName() + " fights another target " + mode.getTargets().get(1).getTargetName();
     }
 
 }
+
