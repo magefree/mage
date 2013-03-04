@@ -65,7 +65,7 @@ public class BalustradeSpy extends CardImpl<BalustradeSpy> {
 
         // When Balustrade Spy enters the battlefield, target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
         Ability ability = new EntersBattlefieldTriggeredAbility(new BalustradeSpyEffect(), false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 
