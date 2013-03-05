@@ -499,12 +499,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                     toBeRemoved.add(blockerId);
                 }
             }
+
             for (UUID blockerId : toBeRemoved) {
-                remove(blockerId);
-                Permanent creature = game.getPermanent(blockerId);
-                if (creature != null) {
-                    creature.setBlocking(creature.getBlocking() - 1);
-                }
+                game.getCombat().removeBlocker(blockerId, game);
             }
             if (blockers.isEmpty()) {
                 this.blocked = false;

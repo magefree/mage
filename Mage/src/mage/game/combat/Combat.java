@@ -177,8 +177,8 @@ public class Combat implements Serializable, Copyable<Combat> {
             count += group.getAttackers().size();
         }
         if (count == 1) {
+            List<UUID> tobeRemoved = new ArrayList<UUID>();
             for (CombatGroup group: groups) {
-                List<UUID> tobeRemoved = new ArrayList<UUID>();
                 for (UUID attackingCreatureId: group.getAttackers()) {
                     Permanent attacker = game.getPermanent(attackingCreatureId);
                     if (attacker != null && attacker.getAbilities().containsKey(CantAttackAloneAbility.getInstance().getId())) {
@@ -186,10 +186,11 @@ public class Combat implements Serializable, Copyable<Combat> {
                         tobeRemoved.add(attackingCreatureId);
                     }
                 }
-                for (UUID attackingCreatureId : tobeRemoved) {
-                    group.remove(attackingCreatureId);
-                }
             }
+            for (UUID attackingCreatureId : tobeRemoved) {
+                this.removeAttacker(attackingCreatureId, game);
+            }
+
         }
     }
 

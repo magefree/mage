@@ -55,7 +55,7 @@ public class CantBlockAloneAbility extends StaticAbility<CantBlockAloneAbility> 
 
     @Override
     public String getRule() {
-        return "Can't block alone";
+        return "{this} can't block alone.";
     }
 
     @Override

@@ -55,7 +55,7 @@ public class CantAttackAloneAbility extends StaticAbility<CantAttackAloneAbility
 
     @Override
     public String getRule() {
-        return "Can't attack alone";
+        return "{this} can't attack alone.";
     }
 
     @Override
