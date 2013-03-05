@@ -31,11 +31,16 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.BlockedByIdPredicate;
+import mage.filter.predicate.permanent.BlockingAttackerIdPredicate;
 
 /**
  *
@@ -54,9 +59,11 @@ public class AlmsBeast extends CardImpl<AlmsBeast> {
         this.toughness = new MageInt(6);
 
         // Creatures blocking or blocked by Alms Beast have lifelink.
-        this.addAbility(new BlocksOrBecomesBlockedByCreatureTriggeredAbility(
-                new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfCombat),
-                false, "Creatures blocking or blocked by {this} have lifelink."));
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        filter.add(Predicates.or(new BlockedByIdPredicate(this.getId()),
+                                 new BlockingAttackerIdPredicate(this.getId())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(LifelinkAbility.getInstance(), Duration.EndOfCombat, filter,
+                "Creatures blocking or blocked by {this} have lifelink")));
     }
 
     public AlmsBeast(final AlmsBeast card) {
