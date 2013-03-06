@@ -28,11 +28,11 @@
 
 package mage.game.turn;
 
+import java.io.Serializable;
+import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 
-import java.io.Serializable;
-import java.util.UUID;
 
 /**
  * stores extra turns, phases or steps
@@ -53,15 +53,29 @@ public class TurnMod implements Serializable {
     private TurnPhase afterPhase;
     private PhaseStep afterStep;
 
+    /**
+     * Used to define if a player skips the next turn or gets an extra turn.
+     *
+     * @param playerId
+     * @param skip - true = skips next turn, false = player gets extra turn
+     */
     public TurnMod(UUID playerId, boolean skip) {
         this.id = UUID.randomUUID();
         this.playerId = playerId;
-        if (skip)
+        if (skip) {
             this.skipTurn = true;
-        else
+        }
+        else {
             this.extraTurn = true;
+        }
     }
 
+    /**
+     * Used to define that a player controlls the next turn of another player.
+     *
+     * @param playerId - id of the player whose next turn is controlled by newControllerId
+     * @param newControllerId - id of the player that controlls playerId's next turn
+     */
     public TurnMod(UUID playerId, UUID newControllerId) {
         this.id = UUID.randomUUID();
         this.playerId = playerId;
@@ -69,6 +83,7 @@ public class TurnMod implements Serializable {
     }
 
     /**
+     * Used to define if and when a player gets an extra phase.
      *
      * @param playerId
      * @param phase
@@ -77,17 +92,20 @@ public class TurnMod implements Serializable {
     public TurnMod(UUID playerId, TurnPhase phase, TurnPhase afterPhase, boolean skip) {
         this.id = UUID.randomUUID();
         this.playerId = playerId;
-        if (skip)
+        if (skip) {
             this.skipPhase = phase;
-        else
+        }
+        else {
             this.extraPhase = phase;
+        }
         this.afterPhase = afterPhase;
     }
 
     /**
+     * Used to define if and when a player gets an extra step.
      *
      * @param playerId
-     * @param step
+     * @param step - extra step the player gets
      * @param afterStep - set to null if extraStep is after the next step
      */
     public TurnMod(UUID playerId, Step step, PhaseStep afterStep) {
@@ -97,6 +115,12 @@ public class TurnMod implements Serializable {
         this.afterStep = afterStep;
     }
 
+    /**
+     * Used to define that a player skips the next time the specified step
+     *
+     * @param playerId
+     * @param step - step to skip the next time
+     */
     public TurnMod(UUID playerId, PhaseStep step) {
         this.id = UUID.randomUUID();
         this.playerId = playerId;
@@ -111,8 +135,9 @@ public class TurnMod implements Serializable {
         this.skipTurn = mod.skipTurn;
         this.extraPhase = mod.extraPhase;
         this.skipPhase = mod.skipPhase;
-        if (mod.extraStep != null)
+        if (mod.extraStep != null) {
             this.extraStep = mod.extraStep.copy();
+        }
         this.skipStep = mod.skipStep;
         this.afterPhase = mod.afterPhase;
         this.afterStep = mod.afterStep;

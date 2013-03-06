@@ -28,17 +28,17 @@
 
 package mage.game.turn;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.PhaseStep;
 import mage.Constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -59,8 +59,9 @@ public class Turn implements Serializable {
     }
 
     public Turn(final Turn turn) {
-        if (turn.currentPhase != null)
+        if (turn.currentPhase != null) {
             this.currentPhase = turn.currentPhase.copy();
+        }
         this.activePlayerId = turn.activePlayerId;
         for (Phase phase: turn.phases) {
             this.phases.add(phase.copy());
@@ -69,8 +70,9 @@ public class Turn implements Serializable {
     }
 
     public TurnPhase getPhaseType() {
-        if (currentPhase != null)
+        if (currentPhase != null) {
             return currentPhase.getType();
+        }
         return null;
     }
 
@@ -92,23 +94,27 @@ public class Turn implements Serializable {
     }
 
     public Step getStep() {
-        if (currentPhase != null)
+        if (currentPhase != null) {
             return currentPhase.getStep();
+        }
         return null;
     }
 
     public PhaseStep getStepType() {
-        if (currentPhase != null && currentPhase.getStep() != null)
+        if (currentPhase != null && currentPhase.getStep() != null) {
             return currentPhase.getStep().getType();
+        }
         return null;
     }
 
     public void play(Game game, UUID activePlayerId) {
-        if (game.isPaused() || game.isGameOver())
+        if (game.isPaused() || game.isGameOver()) {
             return;
+        }
 
-        if (game.getState().getTurnMods().skipTurn(activePlayerId))
+        if (game.getState().getTurnMods().skipTurn(activePlayerId)) {
             return;
+        }
 
         checkTurnIsControlledByOtherPlayer(game, activePlayerId);
 
@@ -116,8 +122,9 @@ public class Turn implements Serializable {
         resetCounts();
         game.getPlayer(activePlayerId).beginTurn(game);
         for (Phase phase: phases) {
-            if (game.isPaused() || game.isGameOver())
+            if (game.isPaused() || game.isGameOver()) {
                 return;
+            }
             currentPhase = phase;
             game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
             if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
@@ -128,7 +135,8 @@ public class Turn implements Serializable {
                     //game.saveState();
 
                     //20091005 - 500.8
-                    while (playExtraPhases(game, phase.getType()));
+                    while (playExtraPhases(game, phase.getType())) {
+                    }
                 }
             }
             // magenoxx: this causes bugs when we need to add several phases connected with each other (WorldAtWarTest)
@@ -159,8 +167,9 @@ public class Turn implements Serializable {
         }
         while (it.hasNext()) {
             phase = it.next();
-            if (game.isPaused() || game.isGameOver())
+            if (game.isPaused() || game.isGameOver()) {
                 return;
+            }
             currentPhase = phase;
             if (!game.getState().getTurnMods().skipPhase(activePlayerId, currentPhase.getType())) {
                 if (phase.play(game, activePlayerId)) {
@@ -193,11 +202,13 @@ public class Turn implements Serializable {
 
     private boolean playExtraPhases(Game game, TurnPhase afterPhase) {
         TurnMod extraPhaseTurnMod = game.getState().getTurnMods().extraPhase(activePlayerId, afterPhase);
-        if (extraPhaseTurnMod == null)
+        if (extraPhaseTurnMod == null) {
             return false;
+        }
         TurnPhase extraPhase = extraPhaseTurnMod.getExtraPhase();
-        if (extraPhase == null)
+        if (extraPhase == null) {
             return false;
+        }
         Phase phase;
         switch(extraPhase) {
             case BEGINNING:
