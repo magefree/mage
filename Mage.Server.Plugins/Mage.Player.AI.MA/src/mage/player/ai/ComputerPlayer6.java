@@ -287,7 +287,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 test = root;
                 root = root.children.get(0);
             }
-            logger.info("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
+            logger.debug("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
             if (!suggested.isEmpty()) {
                 return false;
             }
@@ -555,7 +555,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                          * choices = node.getChoices();
                          */
                         if (depth == maxDepth) {
-                            logger.info(new StringBuilder("Simulating -- Saved (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).toString());
+                            logger.info(new StringBuilder("Simulating -- Saved (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).append(" abilities: ").append(bestNode.getAbilities().toString()).toString());
                             node.children.clear();
                             node.children.add(bestNode);
                             node.setScore(bestNode.getScore());
