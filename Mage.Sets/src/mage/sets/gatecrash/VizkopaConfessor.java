@@ -29,10 +29,10 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -103,22 +103,23 @@ class VizkopaConfessorEffect extends OneShotEffect<VizkopaConfessorEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (controller != null && targetPlayer != null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (controller != null && targetPlayer != null && sourceCard != null) {
             int payLife = controller.getAmount(0, controller.getLife(),"Pay how many life?", game);
             if (payLife > 0) {
                 controller.loseLife(payLife, game);
-                game.informPlayers(new StringBuilder("Vizkopa Confessor: ").append(controller.getName()).append(" pays ").append(payLife).append(" life").toString());
+                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(controller.getName()).append(" pays ").append(payLife).append(" life").toString());
 
-                Cards cardsInHand = new CardsImpl(Constants.Zone.PICK);
+                Cards cardsInHand = new CardsImpl();
                 cardsInHand.addAll(targetPlayer.getHand());
 
                 int count = Math.min(cardsInHand.size(), payLife);
 
-                TargetCard target = new TargetCard(count, Constants.Zone.PICK, new FilterCard());
+                TargetCard target = new TargetCard(count, Zone.HAND, new FilterCard());
                 target.setRequired(true);
                 Cards revealedCards = new CardsImpl();
 
-                if (targetPlayer.choose(Outcome.Discard, cardsInHand, target, game)) {
+                if (targetPlayer.chooseTarget(Outcome.Discard, cardsInHand, target, source, game)) {
                     List<UUID> targets = target.getTargets();
                     for (UUID targetId : targets) {
                         Card card = game.getCard(targetId);
@@ -128,16 +129,16 @@ class VizkopaConfessorEffect extends OneShotEffect<VizkopaConfessorEffect> {
                     }
                 }
 
-                TargetCard targetInHand = new TargetCard(Constants.Zone.PICK, new FilterCard("card to exile"));
+                TargetCard targetInHand = new TargetCard(Zone.HAND, new FilterCard("card to exile"));
                 targetInHand.setRequired(true);
 
                 if (!revealedCards.isEmpty()) {
                     targetPlayer.revealCards("Vizkopa Confessor", revealedCards, game);
-                    controller.choose(Constants.Outcome.Exile, revealedCards, targetInHand, game);
+                    controller.chooseTarget(Outcome.Exile, revealedCards, targetInHand, source, game);
                     Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
                     if (card != null) {
                         card.moveToExile(null, null, source.getSourceId(), game);
-                        game.informPlayers(new StringBuilder("Vizkopa Confessor: Exiled card ").append(card.getName()).toString());
+                        game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Exiled card ").append(card.getName()).toString());
                     }
                 }
                 return true;

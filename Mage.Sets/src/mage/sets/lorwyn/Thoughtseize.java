@@ -28,9 +28,10 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
@@ -81,7 +82,7 @@ class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
     }
 
     public ThoughtseizeEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Target player reveals his or her hand. You choose a nonland card from it. That player discards that card";
     }
 
@@ -96,8 +97,8 @@ class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
             player.revealCards("Thoughtseize", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                TargetCard target = new TargetCard(Zone.HAND, filter);
+                if (you.chooseTarget(outcome, player.getHand(), target, source, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);

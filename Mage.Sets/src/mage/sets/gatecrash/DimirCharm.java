@@ -32,6 +32,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -128,21 +129,22 @@ class DimirCharmEffect extends OneShotEffect {
                 Card card = player.getLibrary().removeFromTop(game);
                 if(card != null){
                     cards.add(card);
+                    game.getState().setZone(card.getId(), Zone.PICK);
                 }
             }
             
             if(cards.size() > 0){
-                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("Card to put back on top of library"));
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("Card to put back on top of library"));
                 target.setRequired(true);
-                if(controller.choose(Outcome.Neutral, cards, target, game)){
+                if(controller.chooseTarget(Outcome.Benefit, cards, target, source, game)){
                     Card card = cards.get(target.getFirstTarget(), game);
                     if(card != null){
-                        card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                         cards.remove(card);
                     }
                     for(Card card2 : cards.getCards(game)){
                         if(card2 != null){
-                            card2.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, true);
+                            card2.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
                         }
                     }
                 }
