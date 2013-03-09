@@ -5,10 +5,12 @@
 package mage.abilities.common;
 
 import mage.Constants;
+import mage.Constants.CardType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -31,8 +33,12 @@ public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAb
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED && game.getPermanent(event.getTargetId()).getControllerId().equals(this.controllerId)) {
-            return true;
+        if (event.getType() == GameEvent.EventType.TAPPED) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getControllerId().equals(this.controllerId) 
+                    && permanent.getCardType().contains(CardType.CREATURE)) {
+                return true;
+            }
         }
         return false;
     }
@@ -40,6 +46,5 @@ public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAb
     @Override
     public String getRule() {
         return "When a creature you control becomes tapped, " + super.getRule();
-    }
-    
+    }    
 }
