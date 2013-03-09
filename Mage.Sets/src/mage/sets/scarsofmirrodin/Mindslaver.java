@@ -56,7 +56,7 @@ public class Mindslaver extends CardImpl<Mindslaver> {
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ControlTargetPlayerNextTurnEffect(), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

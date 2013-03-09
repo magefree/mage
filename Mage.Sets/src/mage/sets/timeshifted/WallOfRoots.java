@@ -28,16 +28,16 @@
 package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.counters.BoostCounter;
 import mage.game.Game;
@@ -62,7 +62,7 @@ public class WallOfRoots extends CardImpl<WallOfRoots> {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Put a -0/-1 counter on Wall of Roots: Add {G} to your mana pool. Activate this ability only once each turn.
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana), new WallOfRootsCost());
+        Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.GreenMana), new WallOfRootsCost());
         this.addAbility(ability);
     }
 

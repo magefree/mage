@@ -89,10 +89,11 @@ class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffec
         if (player == null) {
             return false;
         }
-        FilterCard filter = new FilterCard("creature card with converted mana cost X or less");
+        int xCost = source.getManaCostsToPay().getX();
+        FilterCard filter = new FilterCard(new StringBuilder("creature card with converted mana cost ").append(xCost).append(" or less").toString());
         filter.add(new CardTypePredicate(CardType.CREATURE));
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, xCost + 1));
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {

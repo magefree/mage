@@ -37,7 +37,6 @@ import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.HasCounterCondition;
@@ -47,6 +46,7 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.counters.CounterType;
@@ -71,7 +71,7 @@ public class ManaBloom extends CardImpl<ManaBloom> {
         this.addAbility(new EntersBattlefieldAbility(new ManaBloomEffect(),rule));
 
         // Remove a charge counter from Mana Bloom: Add one mana of any color to your mana pool. Activate this ability only once each turn.
-        Ability ability = new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        Ability ability = new ActivateOncePerTurnManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
 
