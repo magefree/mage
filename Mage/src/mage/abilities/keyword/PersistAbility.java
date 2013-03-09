@@ -37,6 +37,6 @@ public class PersistAbility extends DiesTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Persist";
+        return "Persist <i>(When this creature dies, if it had no -1/-1 counters on it, return it to the battlefield under its owner's control with a -1/-1 counter on it.)</i>";
     }
 }
