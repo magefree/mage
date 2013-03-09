@@ -28,6 +28,8 @@
 
 package mage.game;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
@@ -55,8 +57,6 @@ import mage.util.Copyable;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
 
-import java.io.Serializable;
-import java.util.*;
 
 /**
 *
@@ -139,7 +139,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.combat = state.combat.copy();
         this.turnMods = state.turnMods.copy();
         this.watchers = state.watchers.copy();
-        this.values.putAll(state.values);
+        for (Map.Entry<String, Object> entry: state.values.entrySet()) {
+            if (entry.getValue() instanceof Boolean) { // AI changed values of Boolean for cards like Wall of Roots TODO: copy other types than Boolean
+                this.values.put(entry.getKey(), Boolean.valueOf(((Boolean)entry.getValue()).toString()));
+            } else {
+                this.values.put(entry.getKey(), entry.getValue());
+            }
+
+        }
         this.zones.putAll(state.zones);
         for (Map.Entry<UUID, Abilities<ActivatedAbility>> entry: state.otherAbilities.entrySet()) {
             otherAbilities.put(entry.getKey(), entry.getValue().copy());
@@ -164,10 +171,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Player player: players.values()) {
             sb.append("player").append(player.getLife()).append("hand");
-            if (useHidden)
+            if (useHidden) {
                 sb.append(player.getHand());
-            else
+            }
+            else {
                 sb.append(player.getHand().size());
+            }
             sb.append("library").append(player.getLibrary().size()).append("graveyard").append(player.getGraveyard());
         }
 
@@ -200,10 +209,12 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         for (Player player: players.values()) {
             sb.append("player").append(player.isPassed()).append(player.getLife()).append("hand");
-            if (useHidden)
+            if (useHidden) {
                 sb.append(player.getHand());
-            else
+            }
+            else {
                 sb.append(player.getHand().size());
+            }
             sb.append("library").append(player.getLibrary().size());
             sb.append("graveyard");
             for (Card card: player.getGraveyard().getCards(game)) {
@@ -379,8 +390,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public PlayerList getPlayerList(UUID playerId) {
         PlayerList newPlayerList = new PlayerList();
         for (Player player: players.values()) {
-            if (!player.hasLeft() && !player.hasLost())
+            if (!player.hasLeft() && !player.hasLost()) {
                 newPlayerList.add(player.getId());
+            }
         }
         newPlayerList.setCurrent(playerId);
         return newPlayerList;
@@ -396,8 +408,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public Zone getZone(UUID id) {
-        if (id != null && zones.containsKey(id))
+        if (id != null && zones.containsKey(id)) {
             return zones.get(id);
+        }
         return null;
     }
 
@@ -506,8 +519,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public List<TriggeredAbility> getTriggered(UUID controllerId) {
         List<TriggeredAbility> triggereds = new ArrayList<TriggeredAbility>();
         for (TriggeredAbility ability: triggered) {
-            if (ability.getControllerId().equals(controllerId))
+            if (ability.getControllerId().equals(controllerId)) {
                 triggereds.add(ability);
+            }
         }
         return triggereds;
     }
