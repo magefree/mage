@@ -35,6 +35,7 @@ import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.cards.Card;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -47,8 +48,6 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.counters.Counter;
-import mage.counters.Counters;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -100,10 +99,11 @@ public class CardView extends SimpleCardView {
         this.name = card.getName();
         this.rules = card.getRules();
         if (card instanceof Permanent) {
+            Permanent permanent = (Permanent)card;
             this.power = Integer.toString(card.getPower().getValue());
             this.toughness = Integer.toString(card.getToughness().getValue());
-            this.loyalty = Integer.toString(((Permanent) card).getCounters().getCount(CounterType.LOYALTY));
-            this.pairedCard = ((Permanent)card).getPairedCard();
+            this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
+            this.pairedCard = permanent.getPairedCard();
         } else {
             this.power = card.getPower().toString();
             this.toughness = card.getToughness().toString();
@@ -169,21 +169,13 @@ public class CardView extends SimpleCardView {
         this.color = card.getColor();
         this.manaCost = card.getManaCost().getSymbols();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
-//        if (card instanceof Card) {
-//            Counters cardCounters = ((Card) card).getCounters();
-//            if (cardCounters != null && !cardCounters.isEmpty()) {
-//                counters = new ArrayList<CounterView>();
-//                for (Counter counter: cardCounters.values()) {
-//                    counters.add(new CounterView(counter));
-//                }
-//            }
-//        }
 
         if (card instanceof PermanentToken) {
+            PermanentToken permanentToken = (PermanentToken) card;
             this.rarity = Rarity.COMMON;
-            this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
-            this.rules = ((PermanentToken) card).getRules();
-            this.type = ((PermanentToken)card).getToken().getTokenType();
+            this.expansionSetCode = permanentToken.getExpansionSetCode();
+            this.rules = permanentToken.getRules();
+            this.type = permanentToken.getToken().getTokenType();
         }
         if (this.rarity == null && card instanceof StackAbility) {
             StackAbility stackAbility = (StackAbility)card;
@@ -245,33 +237,20 @@ public class CardView extends SimpleCardView {
         this.manaCost = token.getManaCost().getSymbols();
         this.rarity = Rarity.NA;
         this.type = token.getTokenType();
-        //this.expansionSetCode = "";
     }
 
-    protected void setTargets(Targets targets) {
+    protected final void setTargets(Targets targets) {
         for (Target target : targets) {
             if (target.isChosen()) {
                 for (UUID targetUUID : target.getTargets()) {
-                    if (this.targets == null) this.targets = new ArrayList<UUID>();
+                    if (this.targets == null) {
+                        this.targets = new ArrayList<UUID>();
+                    }
                     this.targets.add(targetUUID);
                 }
             }
         }
     }
-
-//    protected List<String> formatRules(List<String> rules) {
-//        List<String> newRules = new ArrayList<String>();
-//        for (String rule: rules) {
-//            newRules.add(formatRule(rule));
-//        }
-//        return newRules;
-//    }
-//
-//    protected String formatRule(String rule) {
-//        String replace = rule.replace("{this}", this.name);
-//        replace = replace.replace("{source}", this.name);
-//        return replace;
-//    }
 
     public String getName() {
         return name;

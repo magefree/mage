@@ -27,7 +27,6 @@
  */
 package mage.sets.lorwyn;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
