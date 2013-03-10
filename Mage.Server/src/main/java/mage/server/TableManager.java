@@ -63,6 +63,13 @@ public class TableManager {
     private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
     /**
+     * Defines how often checking process should be run on server.
+     *
+     * In minutes.
+     */
+    private static final int EXPIRE_CHECK_PERIOD = 10;
+
+    /**
      * This parameters defines when table can be counted as expired.
      * Uses EXPIRE_TIME_UNIT_VALUE as unit of measurement.
      *
@@ -86,7 +93,7 @@ public class TableManager {
             public void run() {
                 checkExpired();
             }
-        }, 10, 10, TimeUnit.MINUTES);
+        }, EXPIRE_CHECK_PERIOD, EXPIRE_CHECK_PERIOD, TimeUnit.MINUTES);
     }
 
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
@@ -268,7 +275,6 @@ public class TableManager {
         List<UUID> toRemove = new ArrayList<UUID>();
         for (Table table : tables.values()) {
             long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
-            logger.info("Expire = " + diff);
             if (diff >= EXPIRE_TIME) {
                 logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
                 toRemove.add(table.getId());
