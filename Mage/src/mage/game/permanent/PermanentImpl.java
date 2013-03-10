@@ -486,6 +486,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void checkControlChanged(Game game) {
         if (this.controllerChanged) {
             game.fireEvent(new GameEvent(EventType.LOST_CONTROL, objectId, objectId, beforeResetControllerId));
+            // reset the original controller to abilities and ContinuousEffects
+            if (controllerId.equals(originalControllerId)) {
+                this.abilities.setControllerId(controllerId);
+                game.getContinuousEffects().setController(this.objectId, controllerId);
+            }
             game.fireEvent(new GameEvent(EventType.GAINED_CONTROL, objectId, objectId, controllerId));
         }
     }

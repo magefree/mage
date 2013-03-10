@@ -110,4 +110,36 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Merfolk of the Pearl Trident", 0);
         assertPermanentCount(playerB, "Llanowar Elves", 0);
     }
+
+    /*
+     * Control of Master changes to player B in turn 2, after
+     */
+    @Test
+    public void testLooseAndGainControl() {
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master of the Pearl Trident");
+        addCard(Constants.Zone.HAND, playerA, "Merfolk of the Pearl Trident");
+
+        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Constants.Zone.HAND, playerB, "Zealous Conscripts");
+
+        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Zealous Conscripts");
+
+        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk of the Pearl Trident");
+        setStopAt(3, Constants.PhaseStep.POSTCOMBAT_MAIN);
+
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
+        assertPermanentCount(playerA, "Merfolk of the Pearl Trident", 1);
+        assertPowerToughness(playerA, "Merfolk of the Pearl Trident", 2, 2);
+
+        assertPermanentCount(playerB, "Zealous Conscripts", 1);
+
+    }
+
+
 }
