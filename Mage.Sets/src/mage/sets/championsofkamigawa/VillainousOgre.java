@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.decorator.ConditionalGainActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
@@ -66,7 +66,7 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
         this.addAbility(new CantBlockAbility());
 
         // As long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre.
-        this.addAbility( new ConditionalActivatedAbility(
+        this.addAbility( new ConditionalGainActivatedAbility(
                 Constants.Zone.BATTLEFIELD, 
                 new RegenerateSourceEffect(), 
                 new ColoredManaCost(Constants.ColoredManaSymbol.B), 

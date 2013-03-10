@@ -39,7 +39,7 @@ import mage.cards.CardImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.condition.common.TopLibraryCardTypeCondition;
-import mage.abilities.decorator.ConditionalActivatedAbility;
+import mage.abilities.decorator.ConditionalGainActivatedAbility;
 import static mage.abilities.condition.common.TopLibraryCardTypeCondition.CheckType.*;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
@@ -73,7 +73,7 @@ public class MulDayaChannelers extends CardImpl<MulDayaChannelers> {
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color to your mana pool."
-        ConditionalActivatedAbility ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost(), new TopLibraryCardTypeCondition(LAND), rule2);
+        ConditionalGainActivatedAbility ability = new ConditionalGainActivatedAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost(), new TopLibraryCardTypeCondition(LAND), rule2);
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }

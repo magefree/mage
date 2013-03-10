@@ -28,6 +28,7 @@
 
 package mage.sets.scarsofmirrodin;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
@@ -42,7 +43,6 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
 
 /**
  *
@@ -66,6 +66,8 @@ public class VedalkenCertarch extends CardImpl<VedalkenCertarch> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
+
+        // Metalcraft - {T}: Tap target artifact, creature, or land. Activate this ability only if you control three or more artifacts.
         Ability ability = new MetalcraftActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
