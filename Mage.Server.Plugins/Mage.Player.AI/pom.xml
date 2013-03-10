@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.mage</groupId>
         <artifactId>mage-server-plugins</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <artifactId>mage-player-ai</artifactId>
