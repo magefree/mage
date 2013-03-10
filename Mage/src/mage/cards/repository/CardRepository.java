@@ -132,9 +132,8 @@ public enum CardRepository {
                 setCodes.add(card.getSetCode());
             }
         } catch (SQLException ex) {
-        } finally {
-            return setCodes;
         }
+        return setCodes;
     }
 
     public Set<String> getNames() {
@@ -147,9 +146,8 @@ public enum CardRepository {
                 names.add(card.getName());
             }
         } catch (SQLException ex) {
-        } finally {
-            return names;
         }
+        return names;
     }
 
     public Set<String> getNonLandNames() {
@@ -163,9 +161,8 @@ public enum CardRepository {
                 names.add(card.getName());
             }
         } catch (SQLException ex) {
-        } finally {
-            return names;
         }
+        return names;
     }
 
     public Set<String> getCreatureTypes() {
@@ -179,9 +176,8 @@ public enum CardRepository {
                 subtypes.addAll(card.getSubTypes());
             }
         } catch (SQLException ex) {
-        } finally {
-            return subtypes;
         }
+        return subtypes;
     }
 
     public CardInfo findCard(String setCode, int cardNumber) {
