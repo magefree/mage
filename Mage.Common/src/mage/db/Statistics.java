@@ -10,7 +10,6 @@ import java.util.*;
 public class Statistics {
 
     public static void main(String[] args) throws Exception {
-        EntityManager.instance.testDB();
         List<Log> logs = EntityManager.instance.getAllLogs();
         System.out.println("logs found: " + logs.size());
 

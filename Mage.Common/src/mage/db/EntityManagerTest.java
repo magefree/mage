@@ -15,7 +15,6 @@ public class EntityManagerTest {
     private static DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.FULL);
 
     public static void main(String[] args) throws Exception {
-        EntityManager.instance.testDB();
         List<Log> logs = EntityManager.instance.getAllLogs();
         System.out.println("logs found: " + logs.size());
         for (Log log : logs) {

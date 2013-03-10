@@ -1,26 +1,46 @@
 package mage.db.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 import java.util.Date;
 
 /**
- * Feedback entity.
  *
- * @author noxx
+ * @author noxx, North
  */
+@DatabaseTable(tableName = "feedbacks")
 public class Feedback {
 
+    @DatabaseField
     private String username;
+    @DatabaseField
     private String title;
+    @DatabaseField
     private String type;
+    @DatabaseField
     private String message;
+    @DatabaseField
     private String email;
+    @DatabaseField
     private String host;
-
+    @DatabaseField(columnName = "created_dt")
     private Date createdDate;
 
+    @DatabaseField
     private String status;
 
     public Feedback() {
+    }
+
+    public Feedback(String username, String title, String type, String message, String email, String host, Date createdDate, String status) {
+        this.username = username;
+        this.title = title;
+        this.type = type;
+        this.message = message;
+        this.email = email;
+        this.host = host;
+        this.createdDate = createdDate;
+        this.status = status;
     }
 
     public String getUsername() {
