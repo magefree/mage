@@ -29,6 +29,7 @@ package mage.sets.lorwyn;
 
 import java.util.List;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -40,7 +41,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -109,6 +110,11 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
 
 class CrypticCommandEffect extends OneShotEffect<CrypticCommandEffect> {
 
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    static {
+      filter.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
+    }
+
     public CrypticCommandEffect() {
         super(Outcome.Tap);
         staticText = "tap all creatures your opponents control";
@@ -124,17 +130,9 @@ class CrypticCommandEffect extends OneShotEffect<CrypticCommandEffect> {
         if (player == null) {
             return false;
         }
-
-        for (UUID playerId : player.getInRange()) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new ControllerIdPredicate(playerId));
-
-            List<Permanent> creatures = game.getBattlefield().getActivePermanents(filter, player.getId(), source.getSourceId(), game);
-            for (Permanent creature : creatures) {
-                creature.tap(game);
-            }
+        for (Permanent creature : game.getBattlefield().getActivePermanents(filter, player.getId(), source.getSourceId(), game)) {
+            creature.tap(game);
         }
-
         return true;
     }
 
