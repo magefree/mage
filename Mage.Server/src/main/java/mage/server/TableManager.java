@@ -86,7 +86,7 @@ public class TableManager {
             public void run() {
                 checkExpired();
             }
-        }, 1, 1, TimeUnit.MINUTES);
+        }, 10, 10, TimeUnit.MINUTES);
     }
 
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
