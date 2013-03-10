@@ -148,4 +148,20 @@ public class SystemUtil {
         }
         return null;
     }
+
+    public static String sanitize(String input) {
+        //Pattern pattern = Pattern.compile("[^0-9a-zA-Z]");
+        //Matcher matcher = pattern.matcher(input);
+        //return matcher.replaceAll("");
+        return input.replaceAll("[^a-zA-Z0-9]", "");
+    }
+    
+    public static void main(String... args) {
+        System.out.println(sanitize("123"));
+        System.out.println(sanitize("AaAaD_123"));
+        System.out.println(sanitize("--sas-"));
+        System.out.println(sanitize("anPlsdf123_") + "|");
+        System.out.println(sanitize("anPlsdf123 ") + "|");
+        System.out.println(sanitize("anPlsdf123\r\n") + "|");
+    }
 }

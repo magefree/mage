@@ -33,7 +33,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -52,7 +51,7 @@ public class BloodFeud extends CardImpl<BloodFeud> {
         // Target creature fights another target creature.
         this.getSpellAbility().addEffect(new FightTargetsEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent(true));
+        this.getSpellAbility().addTarget(new TargetOtherCreaturePermanent());
     }
 
     public BloodFeud(final BloodFeud card) {
@@ -67,7 +66,7 @@ public class BloodFeud extends CardImpl<BloodFeud> {
 
 class TargetOtherCreaturePermanent extends TargetCreaturePermanent {
 
-    public TargetOtherCreaturePermanent(boolean required) {
+    public TargetOtherCreaturePermanent() {
         super(true);
     }
 
