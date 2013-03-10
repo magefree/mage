@@ -63,7 +63,7 @@ public class ZealousConscripts extends CardImpl<ZealousConscripts> {
         Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.EndOfTurn));
         ability.addTarget(new TargetPermanent());
         ability.addEffect(new UntapTargetEffect());
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, "It gains haste until end of turn"));
         this.addAbility(ability);
     }
 
