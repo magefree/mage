@@ -28,9 +28,6 @@
 
 package mage.server;
 
-import java.util.Collection;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -43,6 +40,13 @@ import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
 import mage.server.game.GamesRoomManager;
+import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -50,14 +54,39 @@ import mage.server.game.GamesRoomManager;
  */
 public class TableManager {
 
+    protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
+
     private final static TableManager INSTANCE = new TableManager();
-    //private final static Logger logger = Logger.getLogger(TableManager.class);
+    private final static Logger logger = Logger.getLogger(TableManager.class);
 
     private ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
     private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();
 
+    /**
+     * This parameters defines when table can be counted as expired.
+     * Uses EXPIRE_TIME_UNIT_VALUE as unit of measurement.
+     *
+     * The time pass is calculated as (table_created_at - now) / EXPIRE_TIME_UNIT_VALUE.
+     * Then this values is compared to EXPIRE_TIME.
+     */
+    private static final int EXPIRE_TIME = 3;
+
+    /**
+     * Defines unit of measurement for expiration time of tables created.
+     */
+    private static final int EXPIRE_TIME_UNIT_VALUE = 1000 * 60 * 60; // 1 hour
+
     public static TableManager getInstance() {
         return INSTANCE;
+    }
+
+    private TableManager() {
+        expireExecutor.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                checkExpired();
+            }
+        }, 1, 1, TimeUnit.MINUTES);
     }
 
     public Table createTable(UUID roomId, UUID userId, MatchOptions options) {
@@ -232,4 +261,25 @@ public class TableManager {
         }
     }
 
+    private void checkExpired() {
+        logger.info("Table expire checking...");
+
+        Date now = new Date();
+        List<UUID> toRemove = new ArrayList<UUID>();
+        for (Table table : tables.values()) {
+            long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
+            logger.info("Expire = " + diff);
+            if (diff >= EXPIRE_TIME) {
+                logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
+                toRemove.add(table.getId());
+            }
+        }
+        for (UUID tableId : toRemove) {
+            try {
+                removeTable(tableId);
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        }
+    }
 }
