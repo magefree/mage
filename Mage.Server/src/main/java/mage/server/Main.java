@@ -40,6 +40,7 @@ import mage.server.tournament.TournamentFactory;
 import mage.server.util.ConfigSettings;
 import mage.server.util.PluginClassLoader;
 import mage.server.util.ServerMessagesUtil;
+import mage.server.util.SystemUtil;
 import mage.server.util.config.GamePlugin;
 import mage.server.util.config.Plugin;
 import mage.utils.MageVersion;
@@ -106,6 +107,7 @@ public class Main {
             }
             else if (arg.startsWith(adminPasswordArg)) {
                 adminPassword = arg.replace(adminPasswordArg, "");
+                adminPassword = SystemUtil.sanitize(adminPassword);
             }
         }
         Connection connection = new Connection();
