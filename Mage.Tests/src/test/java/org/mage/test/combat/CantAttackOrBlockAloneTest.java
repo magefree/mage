@@ -27,7 +27,7 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
         assertLife(playerA, 20);
 
         Permanent moggFlunkies = getPermanent("Mogg Flunkies", playerB.getId());
-        Assert.assertTrue("Should be tapped because of attacking", moggFlunkies.isTapped());
+        Assert.assertFalse("Shouldn't be tapped because it can't attack alone", moggFlunkies.isTapped());
     }
 
     /**
