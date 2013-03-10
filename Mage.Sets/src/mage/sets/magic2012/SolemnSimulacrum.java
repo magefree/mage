@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SolemnSimulacrum extends CardImpl<SolemnSimulacrum> {
 
-    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public SolemnSimulacrum(UUID ownerId) {
         super(ownerId, 217, "Solemn Simulacrum", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

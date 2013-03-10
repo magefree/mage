@@ -56,7 +56,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DarkSupplicant extends CardImpl<DarkSupplicant> {
 
-    final static private FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("three Clerics you control");
 
     static {
         filter.add(new SubtypePredicate("Cleric"));

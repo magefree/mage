@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  */
 public class GameStateEvaluator2 {
 
-    private final static transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
+    private static final transient Logger logger = Logging.getLogger(GameStateEvaluator2.class.getName());
 
     static {
         logger.setLevel(Level.ALL);

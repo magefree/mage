@@ -49,8 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
 
-    private final static FilterSpell filterElf = new FilterSpell("Elf");
-    private final static FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
+    private static final FilterSpell filterElf = new FilterSpell("Elf");
+    private static final FilterCreaturePermanent filterFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
         filterElf.add(new SubtypePredicate("Elf"));

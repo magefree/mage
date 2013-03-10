@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class DerangedOutcast extends CardImpl<DerangedOutcast> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Human");
 
     static {
         filter.add(new SubtypePredicate("Human"));

@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class OvergrownEstate extends CardImpl<OvergrownEstate> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public OvergrownEstate(UUID ownerId) {
         super(ownerId, 113, "Overgrown Estate", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{B}{G}{W}");

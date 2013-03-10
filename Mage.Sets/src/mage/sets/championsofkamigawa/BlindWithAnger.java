@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BlindWithAnger extends CardImpl<BlindWithAnger> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonlegendary creature");
 
     static {
         filter.add(Predicates.not(new SupertypePredicate("Legendary")));

@@ -43,7 +43,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class IreOfKaminari extends CardImpl<IreOfKaminari> {
 
-    private final static FilterCard filter = new FilterCard("Arcane");
+    private static final FilterCard filter = new FilterCard("Arcane");
 
     static {
         filter.add(new SubtypePredicate("Arcane"));

@@ -76,7 +76,7 @@ public class BloodhallOoze extends CardImpl<BloodhallOoze> {
 
 class BloodhallOozeTriggeredAbility1 extends TriggeredAbilityImpl<BloodhallOozeTriggeredAbility1> {
 
-    private final static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

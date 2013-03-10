@@ -68,7 +68,7 @@ public class Hush extends CardImpl<Hush> {
 
 class HushEffect extends OneShotEffect<HushEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ClotSliver extends CardImpl<ClotSliver> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Slivers");
+    private static final FilterPermanent filter = new FilterPermanent("Slivers");
 
     static {
         filter.add(new SubtypePredicate("Sliver"));

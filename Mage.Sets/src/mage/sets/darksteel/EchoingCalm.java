@@ -45,7 +45,7 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class EchoingCalm extends CardImpl<EchoingCalm> {
-    private final static FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

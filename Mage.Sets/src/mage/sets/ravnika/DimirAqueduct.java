@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DimirAqueduct extends CardImpl<DimirAqueduct> {
     
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public DimirAqueduct(UUID ownerId) {
         super(ownerId, 276, "Dimir Aqueduct", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

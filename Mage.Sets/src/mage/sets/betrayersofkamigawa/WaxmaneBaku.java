@@ -57,7 +57,7 @@ import mage.target.TargetPermanent;
  */
 public class WaxmaneBaku extends CardImpl<WaxmaneBaku> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public WaxmaneBaku(UUID ownerId) {
         super(ownerId, 29, "Waxmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");

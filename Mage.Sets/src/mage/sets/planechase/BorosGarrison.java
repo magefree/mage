@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class BorosGarrison extends CardImpl<BorosGarrison> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public BorosGarrison(UUID ownerId) {
         super(ownerId, 131, "Boros Garrison", Rarity.COMMON, new CardType[]{CardType.LAND}, null);

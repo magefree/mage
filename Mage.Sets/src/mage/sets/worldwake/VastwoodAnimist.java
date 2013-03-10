@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class VastwoodAnimist extends CardImpl<VastwoodAnimist> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public VastwoodAnimist(UUID ownerId) {
         super(ownerId, 116, "Vastwood Animist", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

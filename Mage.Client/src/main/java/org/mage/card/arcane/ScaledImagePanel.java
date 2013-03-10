@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class ScaledImagePanel extends JPanel {
     private static final long serialVersionUID = -1523279873208605664L;
-    public volatile Image srcImage;
+    private volatile Image srcImage;
 
     private ScalingType scalingType = ScalingType.bilinear;
     private boolean scaleLarger;
@@ -101,7 +101,6 @@ public class ScaledImagePanel extends JPanel {
     }
 
     private void scaleWithGetScaledInstance (Graphics2D g2, ScalingInfo info, int hints) {
-        Image srcImage = getSourceImage(info);
         Image scaledImage = srcImage.getScaledInstance(info.targetWidth, info.targetHeight, hints);
         g2.drawImage(scaledImage, info.x, info.y, null);
     }
@@ -116,8 +115,6 @@ public class ScaledImagePanel extends JPanel {
         if (tempDestHeight < info.targetHeight) {
             tempDestHeight = info.targetHeight;
         }
-
-        Image srcImage = getSourceImage(info);
 
         // If not doing multipass or multipass only needs a single pass, just scale it once directly to the panel surface.
         if (multiPassType == MultipassType.none || (tempDestWidth == info.targetWidth && tempDestHeight == info.targetHeight)) {
@@ -174,15 +171,11 @@ public class ScaledImagePanel extends JPanel {
             tempSrcHeight, null);
     }
 
-    private Image getSourceImage (ScalingInfo info) {
-        return srcImage;
-    }
-
     public Image getSrcImage() {
         return srcImage;
     }
 
-    static private class ScalingInfo {
+    private static class ScalingInfo {
         public int targetWidth;
         public int targetHeight;
         public int srcWidth;
@@ -191,11 +184,11 @@ public class ScaledImagePanel extends JPanel {
         public int y;
     }
 
-    static public enum MultipassType {
+    public static enum MultipassType {
         none, nearestNeighbor, bilinear, bicubic
     }
 
-    static public enum ScalingType {
+    public static enum ScalingType {
         nearestNeighbor, replicate, bilinear, bicubic, areaAveraging
     }
 }

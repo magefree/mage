@@ -46,7 +46,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class MolimoMaroSorcerer extends CardImpl<MolimoMaroSorcerer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public MolimoMaroSorcerer(UUID ownerId) {
         super(ownerId, 280, "Molimo, Maro-Sorcerer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{G}{G}{G}");

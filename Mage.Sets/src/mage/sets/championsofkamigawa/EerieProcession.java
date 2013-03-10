@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class EerieProcession extends CardImpl<EerieProcession> {
 
-    private final static FilterCard filter = new FilterCard("Arcane card");
+    private static final FilterCard filter = new FilterCard("Arcane card");
 
     static {
         filter.add(new SubtypePredicate("Arcane"));

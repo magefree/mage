@@ -38,7 +38,7 @@ public abstract class MageTestPlayerBase {
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
 
-    private final static String pluginFolder = "plugins";
+    private static final String pluginFolder = "plugins";
 
     protected Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)(:\\{tapped\\})?");
 

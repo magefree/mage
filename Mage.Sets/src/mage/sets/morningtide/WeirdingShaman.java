@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class WeirdingShaman extends CardImpl<WeirdingShaman> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

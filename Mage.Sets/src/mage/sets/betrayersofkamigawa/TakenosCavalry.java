@@ -49,7 +49,7 @@ import mage.target.common.TargetAttackingOrBlockingCreature;
  */
 public class TakenosCavalry extends CardImpl<TakenosCavalry> {
 
-    private final static FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking Spirit");
+    private static final FilterAttackingOrBlockingCreature filter = new FilterAttackingOrBlockingCreature("attacking or blocking Spirit");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

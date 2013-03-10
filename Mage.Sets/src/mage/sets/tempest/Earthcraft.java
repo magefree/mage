@@ -51,8 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Earthcraft extends CardImpl<Earthcraft> {
 
-    private final static FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
-    private final static FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");
+    private static final FilterControlledCreaturePermanent filterCreature = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledPermanent filterLand = new FilterControlledPermanent("basic land");
 
     static {
         filterCreature.add(Predicates.not(new TappedPredicate()));

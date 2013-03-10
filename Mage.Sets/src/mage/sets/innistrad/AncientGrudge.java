@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class AncientGrudge extends CardImpl<AncientGrudge> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

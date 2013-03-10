@@ -78,7 +78,7 @@ public class AugurOfBolas extends CardImpl<AugurOfBolas> {
 
 class AugurOfBolasEffect extends OneShotEffect<AugurOfBolasEffect> {
     
-    final static private FilterCard filter = new FilterCard("Instant or Sorcery card");
+    private static final FilterCard filter = new FilterCard("Instant or Sorcery card");
     
     static {
         filter.add(Predicates.or(

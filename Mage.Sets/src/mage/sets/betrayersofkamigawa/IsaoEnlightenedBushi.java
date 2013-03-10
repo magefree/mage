@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class IsaoEnlightenedBushi extends CardImpl<IsaoEnlightenedBushi> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Samurai");
+    private static final FilterPermanent filter = new FilterPermanent("Samurai");
 
     static {
         filter.add(new SubtypePredicate("Samurai"));

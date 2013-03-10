@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class SummonTheSchool extends CardImpl<SummonTheSchool> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Merfolk you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

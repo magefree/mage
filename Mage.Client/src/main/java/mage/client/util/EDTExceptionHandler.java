@@ -38,7 +38,7 @@ import org.apache.log4j.Logger;
  */
 public class EDTExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-    private final static Logger logger = Logger.getLogger(EDTExceptionHandler.class);
+    private static final Logger logger = Logger.getLogger(EDTExceptionHandler.class);
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {

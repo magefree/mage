@@ -73,7 +73,7 @@ public class InameDeathAspect extends CardImpl<InameDeathAspect> {
 
 class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
 
-    private final static FilterCreatureCard filter = new FilterCreatureCard();
+    private static final FilterCreatureCard filter = new FilterCreatureCard();
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

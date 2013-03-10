@@ -41,7 +41,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
  * @author Loki
  */
 public class CullingSun extends CardImpl<CullingSun> {
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 3 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));

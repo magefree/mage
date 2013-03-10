@@ -65,7 +65,7 @@ public class TempestOfLight extends CardImpl<TempestOfLight> {
 
 class TempestOfLightEffect extends OneShotEffect<TempestOfLightEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

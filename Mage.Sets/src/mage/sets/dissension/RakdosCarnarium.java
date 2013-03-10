@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RakdosCarnarium extends CardImpl<RakdosCarnarium> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public RakdosCarnarium(UUID ownerId) {
         super(ownerId, 178, "Rakdos Carnarium", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

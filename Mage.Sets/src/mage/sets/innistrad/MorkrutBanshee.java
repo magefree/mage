@@ -46,7 +46,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
  */
 public class MorkrutBanshee extends CardImpl<MorkrutBanshee> {
 
-    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
+    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, target creature gets -4/-4 until end of turn.";
 
     public MorkrutBanshee(UUID ownerId) {
         super(ownerId, 110, "Morkrut Banshee", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

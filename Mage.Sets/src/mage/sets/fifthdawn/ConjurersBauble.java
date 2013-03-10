@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class ConjurersBauble extends CardImpl<ConjurersBauble> {
     
-    final static private FilterCard filter = new FilterCard("card from your graveyard");
+    private static final FilterCard filter = new FilterCard("card from your graveyard");
     
     static {
         filter.add(new OwnerPredicate(Constants.TargetController.YOU));

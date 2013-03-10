@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 public class KitsuneDiviner extends CardImpl<KitsuneDiviner> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Spirit");
+    private static final FilterPermanent filter = new FilterPermanent("Spirit");
 
         static {
             filter.add(new SubtypePredicate("Spirit"));

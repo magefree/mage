@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SeismicStrike extends CardImpl<SeismicStrike> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountains you control");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));

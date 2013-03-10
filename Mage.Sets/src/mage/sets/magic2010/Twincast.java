@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  */
 public class Twincast extends CardImpl<Twincast> {
 
-    private final static FilterSpell filter = new FilterSpell("instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
 
     static {
         filter.add(Predicates.or(

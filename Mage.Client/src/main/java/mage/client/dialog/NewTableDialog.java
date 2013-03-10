@@ -54,7 +54,7 @@ import java.util.UUID;
  */
 public class NewTableDialog extends MageDialog {
 
-    private final static Logger logger = Logger.getLogger(NewTableDialog.class);
+    private static final Logger logger = Logger.getLogger(NewTableDialog.class);
 
     private TableView table;
     private UUID playerId;

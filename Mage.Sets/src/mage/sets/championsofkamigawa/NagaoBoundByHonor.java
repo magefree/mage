@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class NagaoBoundByHonor extends CardImpl<NagaoBoundByHonor> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai creatures");
 
     static {
         filter.add(new SubtypePredicate("Samurai"));

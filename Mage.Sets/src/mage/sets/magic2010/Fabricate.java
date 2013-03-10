@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Fabricate extends CardImpl<Fabricate> {
 
-    private final static FilterCard filter = new FilterCard("artifact");
+    private static final FilterCard filter = new FilterCard("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

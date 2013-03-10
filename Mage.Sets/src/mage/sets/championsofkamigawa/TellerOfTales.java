@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
 
 public class TellerOfTales extends CardImpl<TellerOfTales> {
 
-     private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+     private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
    // Outcome.Benefit, "tap or untap target creature"
 

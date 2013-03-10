@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShellSkulkin extends CardImpl<ShellSkulkin> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));

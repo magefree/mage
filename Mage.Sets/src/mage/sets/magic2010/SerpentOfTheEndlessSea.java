@@ -52,7 +52,7 @@ import mage.game.events.GameEvent;
  */
 public class SerpentOfTheEndlessSea extends CardImpl<SerpentOfTheEndlessSea> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Islands you control");
 
     static {
         filter.add(new SubtypePredicate("Island"));

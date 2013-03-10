@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class LocustMiser extends CardImpl<LocustMiser> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -39,7 +39,7 @@ import mage.util.Logging;
  */
 public class SimulateBlockWorker implements Callable {
 
-    private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+    private static final Logger logger = Logging.getLogger(SimulationWorker.class.getName());
 
     private SimulationNode node;
     private ComputerPlayer3 player;

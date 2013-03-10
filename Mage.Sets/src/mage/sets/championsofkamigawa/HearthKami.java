@@ -52,7 +52,7 @@ import mage.target.TargetPermanent;
 public class HearthKami extends CardImpl<HearthKami> {
 
 
-    private final static FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with converted mana cost X");
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with converted mana cost X");
 
     public HearthKami(UUID ownerId) {
         super(ownerId, 171, "Hearth Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

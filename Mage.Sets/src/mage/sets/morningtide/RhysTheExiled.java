@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class RhysTheExiled extends CardImpl<RhysTheExiled> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

@@ -46,12 +46,12 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     public static final Rectangle CARD_SIZE_FULL = new Rectangle(101, 149);
 
-    static private final float ROUNDED_CORNER_SIZE = 0.1f;
-    static private final float BLACK_BORDER_SIZE = 0.03f;
-    static private final int TEXT_GLOW_SIZE = 6;
-    static private final float TEXT_GLOW_INTENSITY = 3f;
-    static private final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
-    static private final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
+    private static final float ROUNDED_CORNER_SIZE = 0.1f;
+    private static final float BLACK_BORDER_SIZE = 0.03f;
+    private static final int TEXT_GLOW_SIZE = 6;
+    private static final float TEXT_GLOW_INTENSITY = 3f;
+    private static final float ROT_CENTER_TO_TOP_CORNER = 1.0295630140987000315797369464196f;
+    private static final float ROT_CENTER_TO_BOTTOM_CORNER = 0.7071067811865475244008443621048f;
 
     public CardView gameCard;
 
@@ -236,7 +236,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public void setImage(final CardPanel panel) {
         synchronized (panel.imagePanel) {
             if (panel.imagePanel.hasImage()) {
-                setImage(panel.imagePanel.srcImage);
+                setImage(panel.imagePanel.getSrcImage());
             }
         }
     }
@@ -747,7 +747,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         return data;
     }
 
-    final protected String getType(CardView card) {
+    protected final String getType(CardView card) {
         StringBuilder sbType = new StringBuilder();
 
         for (String superType : card.getSuperTypes()) {
@@ -768,7 +768,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
         return sbType.toString();
     }
 
-    final protected String getText(String cardType, CardView card) {
+    protected final String getText(String cardType, CardView card) {
         StringBuilder sb = new StringBuilder();
         if (card instanceof StackAbilityView || card instanceof AbilityView) {
             for (String rule : card.getRules()) {

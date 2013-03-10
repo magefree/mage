@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 
-abstract public class Animation {
+public abstract class Animation {
     private static final long TARGET_MILLIS_PER_FRAME = 30;
 
     private static Timer timer = new Timer("Animation", true);
@@ -46,7 +46,7 @@ abstract public class Animation {
         timer.scheduleAtFixedRate(timerTask, delay, TARGET_MILLIS_PER_FRAME);
     }
 
-    abstract protected void update (float percentage);
+    protected abstract void update (float percentage);
 
     protected void cancel () {
         timerTask.cancel();
@@ -102,7 +102,7 @@ abstract public class Animation {
         }
     }
 
-    static public void tapCardToggle (final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
+    public static void tapCardToggle (final CardPanel panel, final MagePermanent parent, final boolean tapped, final boolean flipped) {
         new Animation(300) {
             @Override
             protected void start () {
@@ -177,7 +177,7 @@ abstract public class Animation {
         };
     }
 
-    static public void moveCardToPlay (final int startX, final int startY, final int startWidth, final int endX, final int endY,
+    public static void moveCardToPlay (final int startX, final int startY, final int startWidth, final int endX, final int endY,
         final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
         final int speed) {
         UI.invokeLater(new Runnable() {
@@ -247,7 +247,7 @@ abstract public class Animation {
         });
     }
 
-    static public void moveCard (final int startX, final int startY, final int startWidth, final int endX, final int endY,
+    public static void moveCard (final int startX, final int startY, final int startWidth, final int endX, final int endY,
         final int endWidth, final CardPanel animationPanel, final CardPanel placeholder, final JLayeredPane layeredPane,
         final int speed) {
         UI.invokeLater(new Runnable() {
@@ -294,11 +294,9 @@ abstract public class Animation {
         });
     }
 
-    static public void shrinkCard () {
+    public static void shrinkCard () {
         final CardPanel overPanel, animationPanel;
         synchronized (enlargeLock) {
-            //delayedCardPanel = null;
-            //delayedTime = 0;
             overPanel = Animation.enlargedCardPanel;
             animationPanel = Animation.enlargedAnimationPanel;
             if (animationPanel == null) {
@@ -348,15 +346,15 @@ abstract public class Animation {
         };
     }
 
-    static public boolean isShowingEnlargedCard () {
+    public static boolean isShowingEnlargedCard () {
         synchronized (enlargeLock) {
             return enlargedAnimationPanel != null;
         }
     }
 
-    static public void showCard(final MagePermanent card, int count) {
+    public static void showCard(final MagePermanent card, int count) {
         if (count == 0) {
-            count = 1;
+            return;
         }
         new Animation(600 / count) {
             @Override
@@ -377,9 +375,9 @@ abstract public class Animation {
         };
     }
 
-    static public void hideCard(final MagePermanent card, int count) {
+    public static void hideCard(final MagePermanent card, int count) {
         if (count == 0) {
-            count = 1;
+            return;
         }
         new Animation(600 / count) {
             @Override

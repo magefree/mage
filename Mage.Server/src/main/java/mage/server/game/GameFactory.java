@@ -45,8 +45,8 @@ import org.apache.log4j.Logger;
  */
 public class GameFactory {
 
-    private final static GameFactory INSTANCE = new GameFactory();
-    private final static Logger logger = Logger.getLogger(GameFactory.class);
+    private static final GameFactory INSTANCE = new GameFactory();
+    private static final Logger logger = Logger.getLogger(GameFactory.class);
 
     private Map<String, Class<Match>> games = new HashMap<String, Class<Match>>();
     private Map<String, MatchType> gameTypes = new HashMap<String, MatchType>();

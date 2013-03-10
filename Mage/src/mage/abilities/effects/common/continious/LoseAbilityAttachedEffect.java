@@ -41,7 +41,7 @@ import org.apache.log4j.Logger;
  */
 public class LoseAbilityAttachedEffect extends ContinuousEffectImpl<LoseAbilityAttachedEffect> {
 
-    private final static Logger logger = Logger.getLogger(LoseAbilityAttachedEffect.class);
+    private static final Logger logger = Logger.getLogger(LoseAbilityAttachedEffect.class);
 
     protected Ability ability;
     protected AttachmentType attachmentType;

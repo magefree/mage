@@ -47,7 +47,7 @@ import java.util.UUID;
  */
 public class SunriseSovereign extends CardImpl<SunriseSovereign> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Giant");
 
     static {
         filter.add(new SubtypePredicate("Giant"));

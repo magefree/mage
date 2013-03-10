@@ -33,8 +33,8 @@ public class Plugins implements MagePlugins {
 
     public static final String PLUGINS_DIRECTORY = "plugins/";
 
-    private final static MagePlugins fINSTANCE =  new Plugins();
-    private final static Logger logger = Logger.getLogger(Plugins.class);
+    private static final MagePlugins fINSTANCE =  new Plugins();
+    private static final Logger logger = Logger.getLogger(Plugins.class);
     private static PluginManager pm;
 
     private ThemePlugin themePlugin = null;

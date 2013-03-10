@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FemerefArchers extends CardImpl<FemerefArchers> {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

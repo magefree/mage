@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author Loki
  */
 public class Broodstar extends CardImpl<Broodstar> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifacts you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

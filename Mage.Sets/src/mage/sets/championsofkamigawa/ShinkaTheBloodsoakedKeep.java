@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class ShinkaTheBloodsoakedKeep extends CardImpl<ShinkaTheBloodsoakedKeep> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

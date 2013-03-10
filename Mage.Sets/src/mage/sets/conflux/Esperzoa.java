@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class Esperzoa extends CardImpl<Esperzoa> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

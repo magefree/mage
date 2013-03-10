@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class LeoninAbunas extends CardImpl<LeoninAbunas> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

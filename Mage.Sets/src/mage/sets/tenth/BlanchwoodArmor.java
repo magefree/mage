@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BlanchwoodArmor extends CardImpl<BlanchwoodArmor> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest you control");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

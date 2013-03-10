@@ -55,7 +55,7 @@ import mage.game.permanent.Permanent;
  */
 public class ChameleonColossus extends CardImpl<ChameleonColossus> {
 
-    private final static FilterCard filter = new FilterCard("black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

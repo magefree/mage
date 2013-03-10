@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class AkkiAvalanchers extends CardImpl<AkkiAvalanchers> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public AkkiAvalanchers(UUID ownerId) {
         super(ownerId, 151, "Akki Avalanchers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{R}");

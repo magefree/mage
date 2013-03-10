@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Reshape extends CardImpl<Reshape> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

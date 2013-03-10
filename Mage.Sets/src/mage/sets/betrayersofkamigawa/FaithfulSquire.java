@@ -63,7 +63,7 @@ import java.util.UUID;
  */
 public class FaithfulSquire extends CardImpl<FaithfulSquire> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public FaithfulSquire(UUID ownerId) {
         super(ownerId, 3, "Faithful Squire", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{W}{W}");

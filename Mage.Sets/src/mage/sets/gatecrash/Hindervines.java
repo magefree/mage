@@ -44,7 +44,7 @@ import mage.filter.predicate.permanent.CounterPredicate;
  */
 public class Hindervines extends CardImpl<Hindervines> {
     
-    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no +1/+1 counters on them");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures with no +1/+1 counters on them");
     
     static {
         filter.add(Predicates.not(new CounterPredicate(CounterType.P1P1)));

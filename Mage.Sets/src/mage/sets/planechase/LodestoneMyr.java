@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class LodestoneMyr extends CardImpl<LodestoneMyr> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped artifact you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped artifact you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

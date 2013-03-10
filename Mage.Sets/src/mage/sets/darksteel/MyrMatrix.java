@@ -50,7 +50,7 @@ import mage.game.permanent.token.MyrToken;
  */
 public class MyrMatrix extends CardImpl<MyrMatrix> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr");
 
        static {
            filter.add(new SubtypePredicate("Myr"));

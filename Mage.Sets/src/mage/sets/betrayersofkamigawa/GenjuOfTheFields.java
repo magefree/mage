@@ -58,7 +58,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GenjuOfTheFields extends CardImpl<GenjuOfTheFields> {
     
-    private final static FilterLandPermanent filter = new FilterLandPermanent("Plains");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Plains");
    
     static {
         filter.add(new SubtypePredicate("Plains"));

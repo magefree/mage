@@ -46,7 +46,7 @@ import mage.game.Game;
  */
 public class LethargyTrap extends CardImpl<LethargyTrap> {
     
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creatures");
 
     static {
         filter.add(new AttackingPredicate());

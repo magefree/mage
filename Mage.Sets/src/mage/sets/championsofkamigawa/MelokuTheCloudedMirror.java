@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public MelokuTheCloudedMirror(UUID ownerId) {
         super(ownerId, 74, "Meloku the Clouded Mirror", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}");

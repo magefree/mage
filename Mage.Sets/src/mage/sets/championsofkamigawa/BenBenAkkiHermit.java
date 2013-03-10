@@ -52,7 +52,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class BenBenAkkiHermit extends CardImpl<BenBenAkkiHermit> {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("untapped Mountain you control");
 
        static {
            filter.add(Predicates.not(new TappedPredicate()));

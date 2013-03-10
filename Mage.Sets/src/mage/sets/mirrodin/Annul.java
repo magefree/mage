@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  */
 public class Annul extends CardImpl<Annul> {
 
-    private final static FilterSpell filter = new FilterSpell("artifact or enchantment spell");
+    private static final FilterSpell filter = new FilterSpell("artifact or enchantment spell");
 
     static {
         filter.add(Predicates.or(

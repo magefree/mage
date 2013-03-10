@@ -50,8 +50,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class Spelltwine extends CardImpl<Spelltwine> {
 
-    private final static FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
-    private final static FilterCard filter2 = new FilterCard("instant or sorcery card from an opponent's graveyard");
+    private static final FilterCard filter = new FilterCard("instant or sorcery card from your graveyard");
+    private static final FilterCard filter2 = new FilterCard("instant or sorcery card from an opponent's graveyard");
 
     static {
         filter.add(Predicates.or(

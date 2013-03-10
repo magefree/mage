@@ -40,7 +40,7 @@ import java.util.concurrent.Callable;
  */
 public class GameWorker implements Callable {
 
-    private final static Logger logger = Logger.getLogger(GameWorker.class);
+    private static final Logger logger = Logger.getLogger(GameWorker.class);
 
     private GameCallback result;
     private Game game;

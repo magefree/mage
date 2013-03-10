@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  */
 public class Aftershock extends CardImpl<Aftershock> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
+    private static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
 
     static {
         filter.add(Predicates.or(

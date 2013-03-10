@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SimicGrowthChamber extends CardImpl<SimicGrowthChamber> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public SimicGrowthChamber(UUID ownerId) {
         super(ownerId, 180, "Simic Growth Chamber", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

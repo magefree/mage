@@ -53,7 +53,7 @@ import org.apache.log4j.Logger;
  */
 public class GameStateEvaluator {
 
-    private final static transient Logger logger = Logger.getLogger(GameStateEvaluator.class);
+    private static final transient Logger logger = Logger.getLogger(GameStateEvaluator.class);
 
     private static final int LIFE_FACTOR = Config.evaluatorLifeFactor;
     private static final int PERMANENT_FACTOR = Config.evaluatorPermanentFactor;

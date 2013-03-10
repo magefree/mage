@@ -43,7 +43,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SpittingEarth extends CardImpl<SpittingEarth> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Mountain you control");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));

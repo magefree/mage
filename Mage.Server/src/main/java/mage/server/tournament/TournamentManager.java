@@ -40,7 +40,7 @@ import mage.view.TournamentView;
  */
 public class TournamentManager {
 
-    private final static TournamentManager INSTANCE = new TournamentManager();
+    private static final TournamentManager INSTANCE = new TournamentManager();
 
     private ConcurrentHashMap<UUID, TournamentController> controllers = new ConcurrentHashMap<UUID, TournamentController>();
 

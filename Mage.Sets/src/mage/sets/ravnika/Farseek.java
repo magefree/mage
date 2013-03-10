@@ -45,7 +45,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Farseek extends CardImpl<Farseek> {
 
-    private final static FilterCard filter = new FilterCard("Plains, Island, Swamp, or Mountain card");
+    private static final FilterCard filter = new FilterCard("Plains, Island, Swamp, or Mountain card");
 
     static {
         filter.add(Predicates.or(

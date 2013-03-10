@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SkeletalVampire extends CardImpl<SkeletalVampire> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Bat");
 
     static {
         filter.add(new SubtypePredicate("Bat"));

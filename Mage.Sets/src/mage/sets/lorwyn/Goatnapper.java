@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class Goatnapper extends CardImpl<Goatnapper> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Goat");
+    private static final FilterPermanent filter = new FilterPermanent("Goat");
 
     static {
         filter.add(new SubtypePredicate("Goat"));

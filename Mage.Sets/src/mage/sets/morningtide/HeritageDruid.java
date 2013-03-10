@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class HeritageDruid extends CardImpl<HeritageDruid> {
 
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Elves you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

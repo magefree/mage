@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiMindsweeper extends CardImpl<SoratamiMindsweeper> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public SoratamiMindsweeper(UUID ownerId) {
         super(ownerId, 52, "Soratami Mindsweeper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");

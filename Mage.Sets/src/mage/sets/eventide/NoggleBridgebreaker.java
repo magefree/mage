@@ -44,7 +44,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class NoggleBridgebreaker extends CardImpl<NoggleBridgebreaker> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public NoggleBridgebreaker(UUID ownerId) {
         super(ownerId, 107, "Noggle Bridgebreaker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U/R}{U/R}");

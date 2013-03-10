@@ -45,7 +45,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class GoblinGrenade extends CardImpl<GoblinGrenade> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

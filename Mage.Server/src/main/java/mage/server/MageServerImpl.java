@@ -66,7 +66,7 @@ import java.util.concurrent.ExecutorService;
  */
 public class MageServerImpl implements MageServer {
 
-    private final static Logger logger = Logger.getLogger(MageServerImpl.class);
+    private static final Logger logger = Logger.getLogger(MageServerImpl.class);
     private static ExecutorService callExecutor = ThreadExecutor.getInstance().getCallExecutor();
 
     private String password;

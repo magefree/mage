@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CatapultMaster extends CardImpl<CatapultMaster> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Soldiers you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Soldiers you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

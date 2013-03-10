@@ -71,7 +71,7 @@ public class FungalSprouting extends CardImpl<FungalSprouting> {
 
 class FungalSproutingEffect extends OneShotEffect<FungalSproutingEffect> {
     
-    private final static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
     
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

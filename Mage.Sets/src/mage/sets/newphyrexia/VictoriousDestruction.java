@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  */
 public class VictoriousDestruction extends CardImpl<VictoriousDestruction> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact or land");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or land");
 
     static {
         filter.add(Predicates.or(

@@ -44,7 +44,7 @@ import mage.target.TargetPermanent;
  */
 public class TurnToDust extends CardImpl<TurnToDust> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Equipment");
+    private static final FilterPermanent filter = new FilterPermanent("Equipment");
 
     static {
         filter.add(new SubtypePredicate("Equipment"));

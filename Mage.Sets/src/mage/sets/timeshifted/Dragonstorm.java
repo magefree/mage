@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
 public class Dragonstorm extends CardImpl<Dragonstorm> {
 
         
-    final static private FilterPermanentCard filter = new FilterPermanentCard("Dragon permanent card");
+    private static final FilterPermanentCard filter = new FilterPermanentCard("Dragon permanent card");
 
     static {
         filter.add(new SubtypePredicate("Dragon"));

@@ -46,7 +46,7 @@ import org.apache.log4j.Logger;
  */
 public class GameReplay {
 
-    private final static Logger logger = Logger.getLogger(GameReplay.class);
+    private static final Logger logger = Logger.getLogger(GameReplay.class);
 
     private GameStates savedGame;
     private Game game;

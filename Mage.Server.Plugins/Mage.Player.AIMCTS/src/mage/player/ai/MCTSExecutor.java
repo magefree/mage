@@ -42,7 +42,7 @@ public class MCTSExecutor implements Callable<Boolean> {
     protected int thinkTime;
     protected UUID playerId;
 
-     private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
 
     public MCTSExecutor(Game sim, UUID playerId, int thinkTime) {
         this.playerId = playerId;

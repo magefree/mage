@@ -41,8 +41,8 @@ import org.apache.log4j.Logger;
  */
 public class DeckValidatorFactory {
 
-    private final static DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
-    private final static Logger logger = Logger.getLogger(DeckValidatorFactory.class);
+    private static final DeckValidatorFactory INSTANCE = new DeckValidatorFactory();
+    private static final Logger logger = Logger.getLogger(DeckValidatorFactory.class);
 
     private Map<String, Class> deckTypes = new LinkedHashMap<String, Class>();
 

@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class GnatMiser extends CardImpl<GnatMiser> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ElvishHandservant extends CardImpl<ElvishHandservant> {
 
-    private final static FilterSpell filter = new FilterSpell("Giant");
+    private static final FilterSpell filter = new FilterSpell("Giant");
 
     static {
         filter.add(new SubtypePredicate("Giant"));

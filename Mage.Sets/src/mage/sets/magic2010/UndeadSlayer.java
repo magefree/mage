@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class UndeadSlayer extends CardImpl<UndeadSlayer> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Skeleton, Vampire, or Zombie");
+    private static final FilterPermanent filter = new FilterPermanent("Skeleton, Vampire, or Zombie");
 
     static {
         filter.add(Predicates.or(

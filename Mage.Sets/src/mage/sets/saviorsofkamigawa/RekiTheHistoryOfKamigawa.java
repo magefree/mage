@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class RekiTheHistoryOfKamigawa extends CardImpl<RekiTheHistoryOfKamigawa> {
 
-    private final static FilterSpell filter = new FilterSpell("legendary spell");
+    private static final FilterSpell filter = new FilterSpell("legendary spell");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

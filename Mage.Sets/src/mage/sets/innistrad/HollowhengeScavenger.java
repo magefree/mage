@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class HollowhengeScavenger extends CardImpl<HollowhengeScavenger> {
 
-    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
+    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, you gain 5 life.";
 
     public HollowhengeScavenger(UUID ownerId) {
         super(ownerId, 188, "Hollowhenge Scavenger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");

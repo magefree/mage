@@ -46,8 +46,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class AgrusKosWojekVeteran extends CardImpl<AgrusKosWojekVeteran> {
 
-    private final static FilterAttackingCreature filterRed = new FilterAttackingCreature("attacking red creatures");
-    private final static FilterAttackingCreature filterWhite = new FilterAttackingCreature("attacking white creatures");
+    private static final FilterAttackingCreature filterRed = new FilterAttackingCreature("attacking red creatures");
+    private static final FilterAttackingCreature filterWhite = new FilterAttackingCreature("attacking white creatures");
 
     static {
         filterRed.add(new ColorPredicate(ObjectColor.RED));

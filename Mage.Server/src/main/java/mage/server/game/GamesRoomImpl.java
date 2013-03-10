@@ -60,7 +60,7 @@ import org.apache.log4j.Logger;
  */
 public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
-    private final static Logger logger = Logger.getLogger(GamesRoomImpl.class);
+    private static final Logger logger = Logger.getLogger(GamesRoomImpl.class);
 
     private static ScheduledExecutorService updateExecutor = Executors.newSingleThreadScheduledExecutor();
     private static List<TableView> tableView = new ArrayList<TableView>();

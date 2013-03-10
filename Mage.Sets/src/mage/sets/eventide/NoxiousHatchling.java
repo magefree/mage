@@ -48,8 +48,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class NoxiousHatchling extends CardImpl<NoxiousHatchling> {
 
-    private final static FilterSpell filterBlackSpell = new FilterSpell("a black spell");
-    private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
+    private static final FilterSpell filterBlackSpell = new FilterSpell("a black spell");
+    private static final FilterSpell filterGreenSpell = new FilterSpell("a green spell");
 
     static {
         filterBlackSpell.add(new ColorPredicate(ObjectColor.BLACK));

@@ -60,7 +60,7 @@ import java.util.UUID;
  */
 public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
-    private final static transient Logger logger = Logger.getLogger(AbilityImpl.class);
+    private static final transient Logger logger = Logger.getLogger(AbilityImpl.class);
 
     protected UUID id;
     protected UUID originalId;

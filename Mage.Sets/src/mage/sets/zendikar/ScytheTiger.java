@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ScytheTiger extends CardImpl<ScytheTiger> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public ScytheTiger(UUID ownerId) {
         super(ownerId, 183, "Scythe Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{G}");

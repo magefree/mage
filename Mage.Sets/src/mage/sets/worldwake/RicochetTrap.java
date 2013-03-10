@@ -52,7 +52,7 @@ import mage.watchers.WatcherImpl;
  */
 public class RicochetTrap extends CardImpl<RicochetTrap> {
 
-    final static private FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell();
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));

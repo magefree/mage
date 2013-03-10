@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class DayOfDestiny extends CardImpl<DayOfDestiny> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Legendary creatures");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

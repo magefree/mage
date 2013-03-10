@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RatsOfRath extends CardImpl<RatsOfRath> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact, creature, or land you control");
 
     static {
         filter.add(Predicates.or(

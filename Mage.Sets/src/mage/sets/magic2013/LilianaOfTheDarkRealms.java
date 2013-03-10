@@ -67,7 +67,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class LilianaOfTheDarkRealms extends CardImpl<LilianaOfTheDarkRealms> {
 
-    private final static FilterLandCard filter = new FilterLandCard("Swamp card");
+    private static final FilterLandCard filter = new FilterLandCard("Swamp card");
 
     static {
         filter.add(new SubtypePredicate("Swamp"));

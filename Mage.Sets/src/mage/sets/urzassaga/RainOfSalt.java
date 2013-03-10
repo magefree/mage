@@ -43,7 +43,7 @@ import mage.target.TargetPermanent;
  */
 public class RainOfSalt extends CardImpl<RainOfSalt> {
 
-    private final static FilterPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
     public RainOfSalt(UUID ownerId) {
         super(ownerId, 206, "Rain of Salt", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{4}{R}{R}");

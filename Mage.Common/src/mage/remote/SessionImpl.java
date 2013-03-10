@@ -60,7 +60,7 @@ import java.util.*;
  */
 public class SessionImpl implements Session {
 
-    private final static Logger logger = Logger.getLogger(SessionImpl.class);
+    private static final Logger logger = Logger.getLogger(SessionImpl.class);
 
     private String sessionId;
     private MageServer server;

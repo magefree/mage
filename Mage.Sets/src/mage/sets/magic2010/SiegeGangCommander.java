@@ -53,7 +53,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class SiegeGangCommander extends CardImpl<SiegeGangCommander> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

@@ -43,7 +43,7 @@ import mage.target.TargetSpell;
  */
 public class Frazzle extends CardImpl<Frazzle> {
 
-    private final static FilterSpell filter = new FilterSpell("nonblue spell");
+    private static final FilterSpell filter = new FilterSpell("nonblue spell");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLUE)));

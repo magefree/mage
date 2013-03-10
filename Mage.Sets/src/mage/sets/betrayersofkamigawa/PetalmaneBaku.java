@@ -53,7 +53,7 @@ import mage.players.Player;
  */
 public class PetalmaneBaku extends CardImpl<PetalmaneBaku> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public PetalmaneBaku(UUID ownerId) {
         super(ownerId, 139, "Petalmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

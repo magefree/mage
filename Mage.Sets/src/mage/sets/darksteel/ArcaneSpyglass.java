@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class ArcaneSpyglass extends CardImpl<ArcaneSpyglass> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public ArcaneSpyglass (UUID ownerId) {
         super(ownerId, 93, "Arcane Spyglass", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{4}");

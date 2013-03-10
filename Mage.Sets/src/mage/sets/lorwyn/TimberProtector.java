@@ -49,8 +49,8 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class TimberProtector extends CardImpl<TimberProtector> {
 
-    private final static FilterCreaturePermanent filterTreefolk = new FilterCreaturePermanent("Treefolk creatures");
-    private final static FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
+    private static final FilterCreaturePermanent filterTreefolk = new FilterCreaturePermanent("Treefolk creatures");
+    private static final FilterControlledPermanent filterBoth = new FilterControlledPermanent("Other Treefolk and Forests you control");
 
     static {
         filterTreefolk.add(new SubtypePredicate("Treefolk"));

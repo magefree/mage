@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SkullCollector extends CardImpl<SkullCollector> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("black creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

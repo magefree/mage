@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Auratog extends CardImpl<Auratog> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

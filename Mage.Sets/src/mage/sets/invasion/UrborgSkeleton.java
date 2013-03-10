@@ -49,7 +49,7 @@ import mage.counters.CounterType;
 */
 public class UrborgSkeleton extends CardImpl<UrborgSkeleton> {
 
-    private final static String staticText = "If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it";
+    private static final String staticText = "If Urborg Skeleton was kicked, it enters the battlefield with a +1/+1 counter on it";
 
     public UrborgSkeleton(UUID ownerId) {
        super(ownerId, 134, "Urborg Skeleton", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");

@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KitsuneHealer extends CardImpl<KitsuneHealer> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class FiresOfYavimaya extends CardImpl<FiresOfYavimaya> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.YOU));

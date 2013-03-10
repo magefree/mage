@@ -51,8 +51,8 @@ import mage.target.common.TargetCardInYourGraveyard;
  * @author Loki
  */
 public class LordOfTheUndead extends CardImpl<LordOfTheUndead> {
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
-    private final static FilterCard filterCard = new FilterCard("Zombie card from your graveyard");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie");
+    private static final FilterCard filterCard = new FilterCard("Zombie card from your graveyard");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));

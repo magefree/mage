@@ -53,7 +53,7 @@ import mage.game.Game;
  */
 public class BlademaneBaku extends CardImpl<BlademaneBaku> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public BlademaneBaku(UUID ownerId) {
         super(ownerId, 95, "Blademane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");

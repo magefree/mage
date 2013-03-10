@@ -21,16 +21,16 @@ import org.junit.Ignore;
 @Ignore
 public class MultiConnectTest {
 
-    private final static Logger logger = Logger.getLogger(MultiConnectTest.class);
+    private static final Logger logger = Logger.getLogger(MultiConnectTest.class);
 
     /**
      * Amount of games to be started from this test.
      */
-    private final static Integer USER_CONNECT_COUNT = 200;
+    private static final Integer USER_CONNECT_COUNT = 200;
 
-    private final static CountDownLatch latch = new CountDownLatch(USER_CONNECT_COUNT);
+    private static final CountDownLatch latch = new CountDownLatch(USER_CONNECT_COUNT);
 
-    private final static MageVersion version = new MageVersion(1, 0, 1, "");
+    private static final MageVersion version = new MageVersion(1, 0, 1, "");
 
     private static volatile int connected;
 

@@ -54,7 +54,7 @@ import mage.target.common.TargetCardInGraveyard;
  */
 public class CemeteryReaper extends CardImpl<CemeteryReaper> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Zombie creatures");
     static {
         filter.add(new SubtypePredicate("Zombie"));
     }

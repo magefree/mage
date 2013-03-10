@@ -50,7 +50,7 @@ import mage.game.permanent.token.SoldierToken;
  */
 public class CaptainOfTheWatch extends CardImpl<CaptainOfTheWatch> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier creatures");
 
     static {
         filter.add(new SubtypePredicate("Soldier"));

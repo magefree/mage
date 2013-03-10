@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class Session {
 
-    private final static Logger logger = Logger.getLogger(Session.class);
+    private static final Logger logger = Logger.getLogger(Session.class);
 
     private String sessionId;
     private UUID userId;

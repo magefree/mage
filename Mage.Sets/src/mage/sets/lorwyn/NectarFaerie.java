@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public class NectarFaerie extends CardImpl<NectarFaerie> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Faerie or Elf");
+    private static final FilterPermanent filter = new FilterPermanent("Faerie or Elf");
 
     static {
         filter.add(Predicates.or(new SubtypePredicate("Faerie"),new SubtypePredicate("Elf")));

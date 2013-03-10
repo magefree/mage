@@ -44,8 +44,8 @@ import org.apache.log4j.Logger;
  */
 public class ConfigSettings {
 
-    private final static Logger logger = Logger.getLogger(ConfigSettings.class);
-    private final static ConfigSettings INSTANCE = new ConfigSettings();
+    private static final Logger logger = Logger.getLogger(ConfigSettings.class);
+    private static final ConfigSettings INSTANCE = new ConfigSettings();
 
     private Config config;
 

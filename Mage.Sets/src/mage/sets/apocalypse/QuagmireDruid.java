@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class QuagmireDruid extends CardImpl<QuagmireDruid> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
         static {
             filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

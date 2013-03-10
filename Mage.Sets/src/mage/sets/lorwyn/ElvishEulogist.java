@@ -47,7 +47,7 @@ import java.util.UUID;
  */
 public class ElvishEulogist extends CardImpl<ElvishEulogist> {
 
-    private final static FilterCard filter = new FilterCard("Elf");
+    private static final FilterCard filter = new FilterCard("Elf");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

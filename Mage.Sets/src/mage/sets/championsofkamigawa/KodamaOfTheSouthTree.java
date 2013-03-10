@@ -48,7 +48,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class KodamaOfTheSouthTree extends CardImpl<KodamaOfTheSouthTree> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public KodamaOfTheSouthTree(UUID ownerId) {
         super(ownerId, 223, "Kodama of the South Tree", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");

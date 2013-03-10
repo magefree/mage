@@ -48,8 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class YukiOnna extends CardImpl<YukiOnna> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
-    private final static FilterPermanent filterTarget = new FilterPermanent("artifact");
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterPermanent filterTarget = new FilterPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -42,7 +42,7 @@ import mage.target.TargetPermanent;
  */
 public class Mortify extends CardImpl<Mortify> {
 
-    private final static FilterPermanent filter = new FilterPermanent("creature or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("creature or enchantment");
 
     static {
         filter.add(Predicates.or(

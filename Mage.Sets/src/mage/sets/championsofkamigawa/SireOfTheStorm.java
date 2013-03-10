@@ -44,7 +44,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public SireOfTheStorm(UUID ownerId) {
         super(ownerId, 85, "Sire of the Storm", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");

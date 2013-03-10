@@ -52,8 +52,8 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class NullmageShepherd extends CardImpl<NullmageShepherd> {
 
-    private final static FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
-    private final static FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");
+    private static final FilterControlledCreaturePermanent filterCost = new FilterControlledCreaturePermanent("untapped creatures you control");
+    private static final FilterPermanent filterTarget = new FilterPermanent("artifact or enchantment");
 
     static {
         filterCost.add(Predicates.not(new TappedPredicate()));

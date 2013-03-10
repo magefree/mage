@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Gallantry extends CardImpl<Gallantry> {
 
-    private final static FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
+    private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public Gallantry(UUID ownerId) {
         super(ownerId, 232, "Gallantry", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");

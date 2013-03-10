@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ShrapnelBlast extends CardImpl<ShrapnelBlast> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  */
 public class Thoughtbind extends CardImpl<Thoughtbind> {
 
-    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 4 or less");
 
     static {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 5));

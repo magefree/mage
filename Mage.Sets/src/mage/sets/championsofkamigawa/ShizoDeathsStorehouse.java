@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class ShizoDeathsStorehouse extends CardImpl<ShizoDeathsStorehouse> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

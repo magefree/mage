@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class HeartwoodGiant extends CardImpl<HeartwoodGiant> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Forest");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

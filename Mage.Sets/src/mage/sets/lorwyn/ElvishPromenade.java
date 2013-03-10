@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 public class ElvishPromenade extends CardImpl<ElvishPromenade> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Elf you control");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class VeteranSwordsmith extends CardImpl<VeteranSwordsmith> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Soldier");
 
     static {
         filter.add(new SubtypePredicate("Soldier"));

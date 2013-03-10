@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SelesnyaSanctuary extends CardImpl<SelesnyaSanctuary> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
 
     public SelesnyaSanctuary(UUID ownerId) {

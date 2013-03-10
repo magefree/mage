@@ -45,7 +45,7 @@ import mage.game.stack.Spell;
  */
 public class SecretsOfTheDead extends CardImpl<SecretsOfTheDead> {
 
-    private final static FilterSpell filter = new FilterSpell("a spell from your graveyard");
+    private static final FilterSpell filter = new FilterSpell("a spell from your graveyard");
 
     static {
         filter.add(new SpellZonePredicate(Zone.GRAVEYARD));

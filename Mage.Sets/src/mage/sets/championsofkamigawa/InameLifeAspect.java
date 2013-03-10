@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class InameLifeAspect extends CardImpl<InameLifeAspect> {
 
-    private final static FilterCard filter = new FilterCard("Spirit cards from your graveyard");
+    private static final FilterCard filter = new FilterCard("Spirit cards from your graveyard");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

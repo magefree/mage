@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class MoggRaider extends CardImpl<MoggRaider> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

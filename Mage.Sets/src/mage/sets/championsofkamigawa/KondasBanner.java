@@ -55,7 +55,7 @@ import mage.util.CardUtil;
 
 public class KondasBanner extends CardImpl<KondasBanner> {
 
-    private final static FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
+    private static final FilterControlledCreaturePermanent legendaryFilter = new FilterControlledCreaturePermanent("Legendary creatures");
 
     static {
         legendaryFilter.add(new SupertypePredicate("Legendary"));

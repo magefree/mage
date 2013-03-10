@@ -43,7 +43,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class JoyousRespite extends CardImpl<JoyousRespite> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public JoyousRespite (UUID ownerId) {
         super(ownerId, 216, "Joyous Respite", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

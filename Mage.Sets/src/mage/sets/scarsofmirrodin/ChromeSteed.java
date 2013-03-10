@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
  * @author Loki
  */
 public class ChromeSteed extends CardImpl<ChromeSteed> {
-    private final static String text = "Metalcraft - Chrome Steed gets +2/+2 as long as you control three or more artifacts";
+    private static final String text = "Metalcraft - Chrome Steed gets +2/+2 as long as you control three or more artifacts";
 
     public ChromeSteed (UUID ownerId) {
         super(ownerId, 142, "Chrome Steed", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");

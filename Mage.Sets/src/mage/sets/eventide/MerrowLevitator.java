@@ -52,7 +52,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class MerrowLevitator extends CardImpl<MerrowLevitator> {
 
 
-    private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
+    private static final FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
         filterBlueSpell.add(new ColorPredicate(ObjectColor.BLUE));

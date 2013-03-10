@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class GuardiansPledge extends CardImpl<GuardiansPledge> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
 
         static {
             filter.add(new ColorPredicate(ObjectColor.WHITE));

@@ -48,8 +48,8 @@ import mage.target.TargetPermanent;
  */
 public class NikkoOnna extends CardImpl<NikkoOnna> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();    
-    private final static FilterPermanent filterTarget = new FilterPermanent("enchantment");
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();    
+    private static final FilterPermanent filterTarget = new FilterPermanent("enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

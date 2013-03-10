@@ -65,7 +65,7 @@ public class Tranquility extends CardImpl<Tranquility> {
 
 class TranquilityEffect extends OneShotEffect<TranquilityEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

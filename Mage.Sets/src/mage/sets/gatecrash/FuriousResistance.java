@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class FuriousResistance extends CardImpl<FuriousResistance> {
     
-    private final static FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
+    private static final FilterCreaturePermanent filter = new FilterBlockingCreature("blocking creature");
 
     public FuriousResistance(UUID ownerId) {
         super(ownerId, 93, "Furious Resistance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

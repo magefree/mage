@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Cleanfall extends CardImpl<Cleanfall> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

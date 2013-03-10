@@ -47,8 +47,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class VoraciousHatchling extends CardImpl<VoraciousHatchling> {
 
-    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
-    private final static FilterSpell filterBlackSpell = new FilterSpell("a black spell");
+    private static final FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
+    private static final FilterSpell filterBlackSpell = new FilterSpell("a black spell");
 
     static {
         filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));

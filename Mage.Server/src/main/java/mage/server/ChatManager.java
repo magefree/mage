@@ -39,7 +39,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ChatManager {
 
-    private final static ChatManager INSTANCE = new ChatManager();
+    private static final ChatManager INSTANCE = new ChatManager();
 
     public static ChatManager getInstance() {
         return INSTANCE;

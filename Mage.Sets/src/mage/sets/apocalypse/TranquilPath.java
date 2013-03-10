@@ -69,7 +69,7 @@ public class TranquilPath extends CardImpl<TranquilPath> {
 
 class TranquilPathEffect extends OneShotEffect<TranquilPathEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

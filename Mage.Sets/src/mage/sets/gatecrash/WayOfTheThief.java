@@ -54,7 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WayOfTheThief extends CardImpl<WayOfTheThief> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Gate");
+    private static final FilterPermanent filter = new FilterPermanent("Gate");
 
     static {
         filter.add(new SubtypePredicate("Gate"));

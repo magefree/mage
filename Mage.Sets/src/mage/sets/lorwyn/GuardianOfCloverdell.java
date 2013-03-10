@@ -52,7 +52,7 @@ import java.util.UUID;
  */
 public class GuardianOfCloverdell extends CardImpl<GuardianOfCloverdell> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Kithkin");
 
     static {
         filter.add(new SubtypePredicate("Kithkin"));

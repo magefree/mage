@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  * @author Plopman
  */
 public class AuraFlux extends CardImpl<AuraFlux> {
-    private final static FilterPermanent filter = new FilterPermanent("enchantments");
+    private static final FilterPermanent filter = new FilterPermanent("enchantments");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

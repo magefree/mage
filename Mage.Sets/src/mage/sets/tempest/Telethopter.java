@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class Telethopter extends CardImpl<Telethopter> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class AzoriusChancery extends CardImpl<AzoriusChancery> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public AzoriusChancery(UUID ownerId) {
         super(ownerId, 170, "Azorius Chancery", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

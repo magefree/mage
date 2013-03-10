@@ -49,7 +49,7 @@ import mage.players.Player;
 public class CallToGlory extends CardImpl<CallToGlory> {
 
 
-private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
+private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Samurai");
 
     static {
         filter.add(new SubtypePredicate("Samurai"));

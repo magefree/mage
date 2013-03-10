@@ -23,7 +23,7 @@ public class Updater {
     /**
      * URL to get metadata and files from.
      */
-    private final static String URL_PREFIX = "http://download.magefree.com/update/";
+    private static final String URL_PREFIX = "http://download.magefree.com/update/";
 
     /**
      * Main. Application Entry Point.

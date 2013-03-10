@@ -49,8 +49,8 @@ public class UserManager {
 
     protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private final static UserManager INSTANCE = new UserManager();
-    private final static Logger logger = Logger.getLogger(UserManager.class);
+    private static final UserManager INSTANCE = new UserManager();
+    private static final Logger logger = Logger.getLogger(UserManager.class);
 
     public static UserManager getInstance() {
         return INSTANCE;

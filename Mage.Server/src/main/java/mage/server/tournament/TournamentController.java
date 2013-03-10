@@ -59,7 +59,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TournamentController {
 
-    private final static Logger logger = Logger.getLogger(TournamentController.class);
+    private static final Logger logger = Logger.getLogger(TournamentController.class);
 
     private UUID chatId;
     private UUID tableId;

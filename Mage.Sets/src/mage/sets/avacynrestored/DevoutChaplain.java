@@ -61,7 +61,7 @@ public class DevoutChaplain extends CardImpl<DevoutChaplain> {
                 new CardTypePredicate(CardType.ENCHANTMENT)));
     }
 
-    private final static FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
+    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {
         humanFilter.add(Predicates.not(new TappedPredicate()));

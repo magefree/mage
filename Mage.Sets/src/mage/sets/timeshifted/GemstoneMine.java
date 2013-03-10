@@ -53,7 +53,7 @@ import mage.game.permanent.Permanent;
  */
 public class GemstoneMine extends CardImpl<GemstoneMine> {
 
-    final static private FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(Predicates.not(new AnotherPredicate()));

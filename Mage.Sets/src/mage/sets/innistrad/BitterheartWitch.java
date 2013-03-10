@@ -84,7 +84,7 @@ public class BitterheartWitch extends CardImpl<BitterheartWitch> {
 
 class BitterheartWitchEffect extends OneShotEffect<BitterheartWitchEffect> {
 
-    private final static FilterCard filter = new FilterCard("Curse card in your library");
+    private static final FilterCard filter = new FilterCard("Curse card in your library");
 
     static {
         filter.add(new SubtypePredicate("Curse"));

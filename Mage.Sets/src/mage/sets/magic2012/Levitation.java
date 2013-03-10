@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Levitation extends CardImpl<Levitation> {
 
-    private final static FilterPermanent filter = new FilterPermanent("creatures ");
+    private static final FilterPermanent filter = new FilterPermanent("creatures ");
 
         static {
             filter.add(new CardTypePredicate(CardType.CREATURE));

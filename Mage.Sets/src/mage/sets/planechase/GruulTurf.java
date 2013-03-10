@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GruulTurf extends CardImpl<GruulTurf> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public GruulTurf(UUID ownerId) {
         super(ownerId, 134, "Gruul Turf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

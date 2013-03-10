@@ -48,7 +48,7 @@ import java.util.UUID;
  */
 public class BlackPoplarShaman extends CardImpl<BlackPoplarShaman> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Treefolk");
+    private static final FilterPermanent filter = new FilterPermanent("Treefolk");
 
     static {
         filter.add(new SubtypePredicate("Treefolk"));

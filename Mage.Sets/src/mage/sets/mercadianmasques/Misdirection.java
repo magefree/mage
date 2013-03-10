@@ -56,7 +56,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class Misdirection extends CardImpl<Misdirection> {
 
-    final static private FilterSpell filter2 = new FilterSpell();
+    private static final FilterSpell filter2 = new FilterSpell();
 
     static {
         filter2.add(new NumberOfTargetsPredicate(1));

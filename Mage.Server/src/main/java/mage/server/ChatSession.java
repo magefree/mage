@@ -45,7 +45,7 @@ import org.apache.log4j.Logger;
  */
 public class ChatSession {
 
-    private final static Logger logger = Logger.getLogger(ChatSession.class);
+    private static final Logger logger = Logger.getLogger(ChatSession.class);
     private ConcurrentHashMap<UUID, String> clients = new ConcurrentHashMap<UUID, String>();
     private UUID chatId;
     private DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);

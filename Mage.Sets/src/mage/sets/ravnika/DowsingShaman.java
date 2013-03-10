@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class DowsingShaman extends CardImpl<DowsingShaman> {
 
-    private final static FilterCard filter = new FilterCard("enchantment card from your graveyard");
+    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

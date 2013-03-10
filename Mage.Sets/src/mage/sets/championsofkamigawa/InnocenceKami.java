@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class InnocenceKami extends CardImpl<InnocenceKami> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public InnocenceKami(UUID ownerId) {
         super(ownerId, 18, "Innocence Kami", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

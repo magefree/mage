@@ -81,7 +81,7 @@ public class HuntedHorror extends CardImpl<HuntedHorror> {
 
 class CentaurToken extends Token {
 
-    private final static FilterCard filter = new FilterCard("black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

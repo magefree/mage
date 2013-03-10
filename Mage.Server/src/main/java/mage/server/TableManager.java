@@ -56,8 +56,8 @@ public class TableManager {
 
     protected static ScheduledExecutorService expireExecutor = Executors.newSingleThreadScheduledExecutor();
 
-    private final static TableManager INSTANCE = new TableManager();
-    private final static Logger logger = Logger.getLogger(TableManager.class);
+    private static final TableManager INSTANCE = new TableManager();
+    private static final Logger logger = Logger.getLogger(TableManager.class);
 
     private ConcurrentHashMap<UUID, TableController> controllers = new ConcurrentHashMap<UUID, TableController>();
     private ConcurrentHashMap<UUID, Table> tables = new ConcurrentHashMap<UUID, Table>();

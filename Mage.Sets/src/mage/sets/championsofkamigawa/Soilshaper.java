@@ -47,7 +47,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Soilshaper extends CardImpl<Soilshaper> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public Soilshaper(UUID ownerId) {
         super(ownerId, 243, "Soilshaper", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");

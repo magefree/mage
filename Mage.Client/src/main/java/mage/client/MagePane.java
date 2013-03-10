@@ -43,7 +43,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class MagePane extends javax.swing.JInternalFrame {
 
-    private final static Logger logger = Logger.getLogger(MagePane.class);
+    private static final Logger logger = Logger.getLogger(MagePane.class);
 
     /** Creates new form MagePane */
     public MagePane() {

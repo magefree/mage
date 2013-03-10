@@ -57,7 +57,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SkullmaneBaku extends CardImpl<SkullmaneBaku> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public SkullmaneBaku(UUID ownerId) {
         super(ownerId, 83, "Skullmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");

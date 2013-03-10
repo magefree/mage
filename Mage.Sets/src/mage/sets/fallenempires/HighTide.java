@@ -75,7 +75,7 @@ public class HighTide extends CardImpl<HighTide> {
 
 class HighTideTriggeredAbility extends DelayedTriggeredManaAbility<HighTideTriggeredAbility> {
 
-    private final static FilterLandPermanent filter = new FilterLandPermanent("Island");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Island");
     static {
             filter.add(new SubtypePredicate("Island"));
     }

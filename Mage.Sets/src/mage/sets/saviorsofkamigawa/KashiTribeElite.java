@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.SupertypePredicate;
  */
 public class KashiTribeElite extends CardImpl<KashiTribeElite> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Legendary Snakes");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

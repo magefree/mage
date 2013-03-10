@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class IzzetBoilerworks extends CardImpl<IzzetBoilerworks> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public IzzetBoilerworks(UUID ownerId) {
         super(ownerId, 159, "Izzet Boilerworks", Rarity.COMMON, new CardType[]{CardType.LAND}, "");

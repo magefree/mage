@@ -50,7 +50,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public class BloodfireDwarf extends CardImpl<BloodfireDwarf> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

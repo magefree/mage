@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ThreadsOfDisloyalty extends CardImpl<ThreadsOfDisloyalty> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with converted mana cost 2 or less");
 
     static {
           filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 3));

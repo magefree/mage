@@ -53,7 +53,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiSeer extends CardImpl<SoratamiSeer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands");
 
     public SoratamiSeer(UUID ownerId) {
         super(ownerId, 91, "Soratami Seer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

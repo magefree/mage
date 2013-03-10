@@ -53,9 +53,9 @@ import mage.game.permanent.Permanent;
  */
 public class GruulCharm extends CardImpl<GruulCharm> {
     
-    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
-    final static private FilterPermanent filter2 = new FilterPermanent("all permanents you own");
-    final static private FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures without flying");
+    private static final FilterPermanent filter2 = new FilterPermanent("all permanents you own");
+    private static final FilterCreaturePermanent filter3 = new FilterCreaturePermanent("creature with flying");
     
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class TraprootKami extends CardImpl<TraprootKami> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Forest");
+    private static final FilterPermanent filter = new FilterPermanent("Forest");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

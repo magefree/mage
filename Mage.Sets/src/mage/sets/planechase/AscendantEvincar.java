@@ -48,8 +48,8 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class AscendantEvincar extends CardImpl<AscendantEvincar> {
 
-    private final static FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");
-    private final static FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("Nonblack creatures");
+    private static final FilterCreaturePermanent filterBlack = new FilterCreaturePermanent("black creatures");
+    private static final FilterCreaturePermanent filterNonBlack = new FilterCreaturePermanent("Nonblack creatures");
 
     static {
         filterBlack.add(new ColorPredicate(ObjectColor.BLACK));

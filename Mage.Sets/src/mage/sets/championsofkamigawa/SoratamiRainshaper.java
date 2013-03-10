@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiRainshaper extends CardImpl<SoratamiRainshaper> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public SoratamiRainshaper(UUID ownerId) {
         super(ownerId, 89, "Soratami Rainshaper", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");

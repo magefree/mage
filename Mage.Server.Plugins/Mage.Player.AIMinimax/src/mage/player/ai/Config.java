@@ -41,7 +41,7 @@ import org.apache.log4j.Logger;
  */
 public class Config {
 
-    private final static Logger logger = Logger.getLogger(Config.class);
+    private static final Logger logger = Logger.getLogger(Config.class);
 
 //    public static final int maxDepth;
     public static final int maxNodes;

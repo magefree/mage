@@ -45,8 +45,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SessionManager {
 
-    private final static Logger logger = Logger.getLogger(SessionManager.class);
-    private final static SessionManager INSTANCE = new SessionManager();
+    private static final Logger logger = Logger.getLogger(SessionManager.class);
+    private static final SessionManager INSTANCE = new SessionManager();
 
     public static SessionManager getInstance() {
         return INSTANCE;

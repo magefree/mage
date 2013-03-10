@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class RyuseiTheFallingStar extends CardImpl<RyuseiTheFallingStar> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying");
 
     static {
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

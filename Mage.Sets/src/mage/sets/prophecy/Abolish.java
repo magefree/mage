@@ -48,8 +48,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class Abolish extends CardImpl<Abolish> {
 
-    private final static FilterCard filterCost = new FilterCard("Plains card");
-    private final static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterCard filterCost = new FilterCard("Plains card");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
         filterCost.add(new SubtypePredicate("Plains"));

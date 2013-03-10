@@ -56,7 +56,7 @@ import java.util.UUID;
  */
 public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
 
-    private final static FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
+    private static final FilterControlledPermanent humanFilter = new FilterControlledPermanent("untapped Human you control");
 
     static {
         humanFilter.add(Predicates.not(new TappedPredicate()));

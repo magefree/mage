@@ -43,7 +43,7 @@ import java.util.UUID;
  */
 public class BoggartBirthRite extends CardImpl<BoggartBirthRite> {
 
-    private final static FilterCard filter = new FilterCard("Goblin card from your graveyard");
+    private static final FilterCard filter = new FilterCard("Goblin card from your graveyard");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

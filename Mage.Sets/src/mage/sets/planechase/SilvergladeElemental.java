@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SilvergladeElemental extends CardImpl<SilvergladeElemental> {
 
-    private final static FilterLandCard filter = new FilterLandCard("Forest card");
+    private static final FilterLandCard filter = new FilterLandCard("Forest card");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

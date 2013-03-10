@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Loki
  */
 public class StrengthOfCedars extends CardImpl<StrengthOfCedars> {
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("the number of lands you control");
 
     public StrengthOfCedars (UUID ownerId) {
         super(ownerId, 245, "Strength of Cedars", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{4}{G}");

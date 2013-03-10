@@ -20,7 +20,7 @@ import java.util.Map;
 @Author(name = "nantuko")
 public class ThemePluginImpl implements ThemePlugin {
 
-    private final static Logger log = Logger.getLogger(ThemePluginImpl.class);
+    private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
 
     @Init

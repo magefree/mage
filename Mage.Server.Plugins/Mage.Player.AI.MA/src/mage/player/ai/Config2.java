@@ -43,7 +43,7 @@ import mage.util.Logging;
  */
 public class Config2 {
 
-    private final static Logger logger = Logging.getLogger(Config2.class.getName());
+    private static final Logger logger = Logging.getLogger(Config2.class.getName());
 
 //    public static final int maxDepth;
     public static final int maxNodes;

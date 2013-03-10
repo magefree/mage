@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  * @author Loki
  */
 public class SternProctor extends CardImpl<SternProctor> {
-    private final static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
 
     static {
         filter.add(Predicates.or(

@@ -43,7 +43,7 @@ import java.util.UUID;
  */
 public class AncientStirrings extends CardImpl<AncientStirrings> {
 
-    private final static FilterCard filter = new FilterCard("colorless card");
+    private static final FilterCard filter = new FilterCard("colorless card");
 
     static {
         filter.add(new ColorlessPredicate());

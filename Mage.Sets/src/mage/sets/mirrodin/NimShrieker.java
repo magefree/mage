@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class NimShrieker extends CardImpl<NimShrieker> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

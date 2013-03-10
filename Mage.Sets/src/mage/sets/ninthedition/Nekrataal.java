@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Nekrataal extends CardImpl<Nekrataal> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact, nonblack creature");
 
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));

@@ -52,7 +52,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  * @author Loki
  */
 public class CranialPlating extends CardImpl<CranialPlating> {
-    private final static FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
+    private static final FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
 
     static {
         filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -42,7 +42,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class IdyllicTutor extends CardImpl<IdyllicTutor> {
 
-    private final static FilterCard filter = new FilterCard("enchantment");
+    private static final FilterCard filter = new FilterCard("enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

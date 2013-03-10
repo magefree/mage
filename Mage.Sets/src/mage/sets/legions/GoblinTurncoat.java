@@ -47,7 +47,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class GoblinTurncoat extends CardImpl<GoblinTurncoat> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("a Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

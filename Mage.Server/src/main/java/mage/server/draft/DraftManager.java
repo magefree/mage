@@ -38,7 +38,7 @@ import mage.view.DraftPickView;
  * @author BetaSteward_at_googlemail.com
  */
 public class DraftManager {
-    private final static DraftManager INSTANCE = new DraftManager();
+    private static final DraftManager INSTANCE = new DraftManager();
 
     public static DraftManager getInstance() {
         return INSTANCE;

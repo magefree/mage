@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class Facevaulter extends CardImpl<Facevaulter> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

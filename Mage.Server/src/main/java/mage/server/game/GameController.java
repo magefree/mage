@@ -70,7 +70,7 @@ import org.apache.log4j.Logger;
 public class GameController implements GameCallback {
 
     private static ExecutorService gameExecutor = ThreadExecutor.getInstance().getGameExecutor();
-    private final static Logger logger = Logger.getLogger(GameController.class);
+    private static final Logger logger = Logger.getLogger(GameController.class);
 
     private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
     private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();

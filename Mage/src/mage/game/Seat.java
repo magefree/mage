@@ -37,7 +37,7 @@ import mage.players.Player;
  */
 public class Seat implements Serializable {
 
-//    private final static Logger logger = Logger.getLogger(Seat.class);
+//    private static final Logger logger = Logger.getLogger(Seat.class);
 
     private String playerType;
     private Player player;

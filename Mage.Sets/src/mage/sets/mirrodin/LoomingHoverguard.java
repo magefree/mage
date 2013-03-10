@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  */
 public class LoomingHoverguard extends CardImpl<LoomingHoverguard> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

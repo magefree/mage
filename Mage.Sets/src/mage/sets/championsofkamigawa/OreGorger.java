@@ -45,7 +45,7 @@ import mage.target.common.TargetNonBasicLandPermanent;
  */
 public class OreGorger extends CardImpl<OreGorger> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OreGorger(UUID ownerId) {
         super(ownerId, 182, "Ore Gorger", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

@@ -41,7 +41,7 @@ import mage.util.Logging;
  */
 public class SimulationWorker implements Callable {
 
-    private final static Logger logger = Logging.getLogger(SimulationWorker.class.getName());
+    private static final Logger logger = Logging.getLogger(SimulationWorker.class.getName());
 
     private Game game;
     private SimulatedAction previousActions;

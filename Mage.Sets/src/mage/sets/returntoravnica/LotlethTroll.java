@@ -49,7 +49,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class LotlethTroll extends CardImpl<LotlethTroll> {
 
-    final static private FilterCreatureCard filter = new FilterCreatureCard("creature card in your hand");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("creature card in your hand");
 
     public LotlethTroll(UUID ownerId) {
         super(ownerId, 177, "Lotleth Troll", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{B}{G}");

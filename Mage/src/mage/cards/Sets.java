@@ -47,7 +47,7 @@ import org.apache.log4j.Logger;
  */
 public class Sets extends HashMap<String, ExpansionSet> {
 
-    private final static Logger logger = Logger.getLogger(Sets.class);
+    private static final Logger logger = Logger.getLogger(Sets.class);
     private static final Sets fINSTANCE =  new Sets();
     protected static Random rnd = new Random();
 

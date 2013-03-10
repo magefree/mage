@@ -38,24 +38,24 @@ public class RelativeLayout implements LayoutManager2, java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
     //  Used in the constructor
-    public final static int X_AXIS = 0;
-    public final static int Y_AXIS = 1;
+    public static final int X_AXIS = 0;
+    public static final int Y_AXIS = 1;
 
     //  See setAlignment() method
-    public final static float LEADING = 0.0f;
-    public final static float CENTER = 0.5f;
-    public final static float TRAILING = 1.0f;
-    public final static float COMPONENT = -1.0f;
+    public static final float LEADING = 0.0f;
+    public static final float CENTER = 0.5f;
+    public static final float TRAILING = 1.0f;
+    public static final float COMPONENT = -1.0f;
 
     //  See setRoundingPolicy() method
-    public final static int DO_NOTHING = 0;
-    public final static int FIRST = 1;
-    public final static int LAST = 2;
-    public final static int LARGEST = 3;
-    public final static int EQUAL = 4;
+    public static final int DO_NOTHING = 0;
+    public static final int FIRST = 1;
+    public static final int LAST = 2;
+    public static final int LARGEST = 3;
+    public static final int EQUAL = 4;
 
-    private final static int MINIMUM = 0;
-    private final static int PREFERRED = 1;
+    private static final int MINIMUM = 0;
+    private static final int PREFERRED = 1;
 
     private Map<Component, Float> constraints = new HashMap<Component, Float>();
 
@@ -657,11 +657,9 @@ public class RelativeLayout implements LayoutManager2, java.io.Serializable {
         for (int i = 0; i < relativeSpace.length; i++) {
             int space = relativeSpace[i];
 
-            if (space > 0) {
-                if (largestSpace < space) {
-                    largestSpace = space;
-                    largest = i;
-                }
+            if (space > 0 && largestSpace < space) {
+                largestSpace = space;
+                largest = i;
             }
         }
 

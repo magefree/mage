@@ -44,7 +44,7 @@ import java.util.UUID;
  */
 public class EyeblightsEnding extends CardImpl<EyeblightsEnding> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("non-Elf creature");
 
     static {
         filter.add(Predicates.not(new SubtypePredicate("Elf")));

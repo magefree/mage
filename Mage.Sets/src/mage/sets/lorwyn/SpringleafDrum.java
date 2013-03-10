@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class SpringleafDrum extends CardImpl<SpringleafDrum> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

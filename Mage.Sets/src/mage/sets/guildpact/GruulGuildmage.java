@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class GruulGuildmage extends CardImpl<GruulGuildmage> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public GruulGuildmage(UUID ownerId) {
         super(ownerId, 144, "Gruul Guildmage", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{R/G}{R/G}");

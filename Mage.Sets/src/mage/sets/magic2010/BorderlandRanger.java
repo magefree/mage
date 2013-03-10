@@ -43,7 +43,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class BorderlandRanger extends CardImpl<BorderlandRanger> {
 
-    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public BorderlandRanger(UUID ownerId) {
         super(ownerId, 169, "Borderland Ranger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

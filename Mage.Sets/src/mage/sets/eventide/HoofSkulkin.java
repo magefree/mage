@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HoofSkulkin extends CardImpl<HoofSkulkin> {
 
-    private final static FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creature");
+    private static final FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creature");
 
     static {
         filterGreenCreature.add(new ColorPredicate(ObjectColor.GREEN));

@@ -79,7 +79,7 @@ public class Gravecrawler extends CardImpl<Gravecrawler> {
 
 class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("zombie");
 
     static {
         filter.add(new SubtypePredicate("Zombie"));

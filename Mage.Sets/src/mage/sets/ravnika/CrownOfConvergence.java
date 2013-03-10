@@ -85,7 +85,7 @@ public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
 
 class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creatures you control");
 
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 

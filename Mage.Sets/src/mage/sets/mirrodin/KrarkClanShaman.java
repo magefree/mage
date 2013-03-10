@@ -50,8 +50,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KrarkClanShaman extends CardImpl<KrarkClanShaman> {
 
-    private final static FilterControlledPermanent filterSacrificed = new FilterControlledPermanent("an artifact");
-    private final static FilterCreaturePermanent filterTargetedCreatures = new FilterCreaturePermanent("creature without flying");
+    private static final FilterControlledPermanent filterSacrificed = new FilterControlledPermanent("an artifact");
+    private static final FilterCreaturePermanent filterTargetedCreatures = new FilterCreaturePermanent("creature without flying");
 
     static {
         filterSacrificed.add(new CardTypePredicate(CardType.ARTIFACT));

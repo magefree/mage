@@ -45,7 +45,7 @@ import mage.game.permanent.token.Token;
  */
 public class OyobiWhoSplitTheHeavens extends CardImpl<OyobiWhoSplitTheHeavens> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public OyobiWhoSplitTheHeavens(UUID ownerId) {
         super(ownerId, 18, "Oyobi, Who Split the Heavens", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{W}");

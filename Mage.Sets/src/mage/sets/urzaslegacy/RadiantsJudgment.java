@@ -44,7 +44,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Plopman
  */
 public class RadiantsJudgment extends CardImpl<RadiantsJudgment> {
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 4 or greater");
 
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.GreaterThan, 3));

@@ -43,7 +43,7 @@ import java.util.*;
  */
 public abstract class ExpansionSet implements Serializable {
 
-    private final static Logger logger = Logger.getLogger(ExpansionSet.class);
+    private static final Logger logger = Logger.getLogger(ExpansionSet.class);
 
     protected static Random rnd = new Random();
 

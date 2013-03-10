@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class RageWeaver extends CardImpl<RageWeaver> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("black or green creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black or green creature");
 
     static {
         filter.add(Predicates.or(

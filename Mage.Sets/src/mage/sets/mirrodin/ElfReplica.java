@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 public class ElfReplica extends CardImpl<ElfReplica> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

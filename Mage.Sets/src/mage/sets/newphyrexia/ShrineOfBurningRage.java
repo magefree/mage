@@ -54,7 +54,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  * @author BetaSteward
  */
 public class ShrineOfBurningRage extends CardImpl<ShrineOfBurningRage> {
-    private final static FilterSpell filter = new FilterSpell("a red spell");
+    private static final FilterSpell filter = new FilterSpell("a red spell");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

@@ -59,7 +59,7 @@ import org.apache.log4j.Logger;
  */
 public class FeedbackPanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(FeedbackPanel.class);
+    private static final Logger logger = Logger.getLogger(FeedbackPanel.class);
 
     public enum FeedbackMode {
         INFORM, QUESTION, CONFIRM, CANCEL, SELECT, END

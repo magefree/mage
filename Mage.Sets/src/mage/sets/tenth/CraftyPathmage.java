@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class CraftyPathmage extends CardImpl<CraftyPathmage> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power 2 or less");
 
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));

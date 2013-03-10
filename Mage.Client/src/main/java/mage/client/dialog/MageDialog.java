@@ -47,7 +47,7 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class MageDialog extends javax.swing.JInternalFrame {
 
-    private final static Logger logger = Logger.getLogger(MageDialog.class);
+    private static final Logger logger = Logger.getLogger(MageDialog.class);
 
     protected boolean modal = false;
 

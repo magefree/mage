@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class GatewayShade extends CardImpl<GatewayShade> {
 
-    private final static FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("untapped Gate you control");
     static {
         filter.add(new SubtypePredicate("Gate"));
         filter.add(Predicates.not(new TappedPredicate()));

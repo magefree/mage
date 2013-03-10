@@ -46,8 +46,8 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public class GravitationalShift extends CardImpl<GravitationalShift> {
 
-    private final static FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Creatures with flying");
-    private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Creatures without flying");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("Creatures with flying");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Creatures without flying");
 
     static {
         filter1.add(new AbilityPredicate(FlyingAbility.class));

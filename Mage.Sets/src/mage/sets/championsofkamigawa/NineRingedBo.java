@@ -55,7 +55,7 @@ import mage.watchers.common.DamagedByWatcher;
  */
 public class NineRingedBo extends CardImpl<NineRingedBo> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("spirit");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class MagneticFlux extends CardImpl<MagneticFlux> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Artifact creatures");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Artifact creatures");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

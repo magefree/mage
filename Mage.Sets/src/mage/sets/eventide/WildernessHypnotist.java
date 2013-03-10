@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class WildernessHypnotist extends CardImpl<WildernessHypnotist> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("red or green creature");
 
     static {
         filter.add(Predicates.or(

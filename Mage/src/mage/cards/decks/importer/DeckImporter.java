@@ -39,7 +39,7 @@ import org.apache.log4j.Logger;
  */
 public abstract class DeckImporter {
 
-    private final static Logger logger = Logger.getLogger(DeckImporter.class);
+    private static final Logger logger = Logger.getLogger(DeckImporter.class);
     protected StringBuilder sbMessage = new StringBuilder();
     protected int lineCount;
 

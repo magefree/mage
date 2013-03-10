@@ -42,7 +42,7 @@ import java.util.Properties;
  */
 public class Config {
 
-    private final static Logger logger = Logger.getLogger(Config.class);
+    private static final Logger logger = Logger.getLogger(Config.class);
 
     public static final String remoteServer;
     public static final String serverName;

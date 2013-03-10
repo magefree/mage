@@ -60,8 +60,8 @@ public class TenzaGodosMaul extends CardImpl<TenzaGodosMaul> {
     private static final String rule1 = "As long as it's legendary, it gets an additional +2/+2";
     private static final String rule2 = "As long as it's red, it has trample.";
 
-    private final static FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary");
-    private final static FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
+    private static final FilterCreaturePermanent legendaryFilter = new FilterCreaturePermanent("legendary");
+    private static final FilterCreaturePermanent redFilter = new FilterCreaturePermanent("red");
 
     static {
         legendaryFilter.add(new SupertypePredicate("Legendary"));

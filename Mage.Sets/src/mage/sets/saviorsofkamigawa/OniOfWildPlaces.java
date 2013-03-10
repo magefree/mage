@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class OniOfWildPlaces extends CardImpl<OniOfWildPlaces> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("red creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

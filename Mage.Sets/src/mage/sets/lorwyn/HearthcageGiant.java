@@ -53,8 +53,8 @@ import java.util.UUID;
  */
 public class HearthcageGiant extends CardImpl<HearthcageGiant> {
 
-    private final static FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
-    private final static FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
+    private static final FilterControlledPermanent filterElemental = new FilterControlledPermanent("Elemental");
+    private static final FilterCreaturePermanent filterGiant = new FilterCreaturePermanent("Giant");
 
     static {
         filterElemental.add(new SubtypePredicate("Elemental"));

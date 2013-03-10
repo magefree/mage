@@ -59,7 +59,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public QuillmaneBaku(UUID ownerId) {
         super(ownerId, 48, "Quillmane Baku", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{U}");

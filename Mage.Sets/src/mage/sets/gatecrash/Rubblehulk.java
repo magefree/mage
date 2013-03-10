@@ -49,7 +49,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class Rubblehulk extends CardImpl<Rubblehulk> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("lands you control");
 
     public Rubblehulk(UUID ownerId) {
         super(ownerId, 191, "Rubblehulk", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{G}");

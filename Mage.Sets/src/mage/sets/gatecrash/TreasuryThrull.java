@@ -47,7 +47,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TreasuryThrull extends CardImpl<TreasuryThrull> {
 
-    private final static FilterCard filter = new FilterCard("artifact, creature, or enchantment card from your graveyard");
+    private static final FilterCard filter = new FilterCard("artifact, creature, or enchantment card from your graveyard");
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
                                  new CardTypePredicate(CardType.CREATURE),

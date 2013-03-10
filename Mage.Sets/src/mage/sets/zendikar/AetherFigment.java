@@ -48,7 +48,7 @@ import mage.counters.CounterType;
  */
 public class AetherFigment extends CardImpl<AetherFigment> {
 
-    private final static String staticText = "with two +1/+1 counters on it, if it was kicked";
+    private static final String staticText = "with two +1/+1 counters on it, if it was kicked";
 
     public AetherFigment(UUID ownerId) {
         super(ownerId, 40, "AEther Figment", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

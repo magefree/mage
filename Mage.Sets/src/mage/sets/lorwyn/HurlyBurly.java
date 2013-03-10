@@ -45,8 +45,8 @@ import java.util.UUID;
  */
 public class HurlyBurly extends CardImpl<HurlyBurly> {
 
-    private final static FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
-    private final static FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filterWithoutFlying = new FilterCreaturePermanent("creature without flying");
+    private static final FilterCreaturePermanent filterWithFlying = new FilterCreaturePermanent("creature with flying");
 
     static {
         filterWithoutFlying.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

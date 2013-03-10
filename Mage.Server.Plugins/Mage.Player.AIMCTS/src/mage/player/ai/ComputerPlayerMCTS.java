@@ -64,7 +64,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 
     protected transient MCTSNode root;
     protected int maxThinkTime;
-     private final static transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
+     private static final transient Logger logger = Logger.getLogger(ComputerPlayerMCTS.class);
     private transient ExecutorService pool;
     private int cores;
 

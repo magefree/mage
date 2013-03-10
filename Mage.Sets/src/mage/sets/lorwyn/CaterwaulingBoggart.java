@@ -47,8 +47,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class CaterwaulingBoggart extends CardImpl<CaterwaulingBoggart> {
 
-    private final static FilterPermanent filterGoblin = new FilterControlledCreaturePermanent("Goblin");
-    private final static FilterPermanent filterElemental = new FilterControlledCreaturePermanent("Elemental");
+    private static final FilterPermanent filterGoblin = new FilterControlledCreaturePermanent("Goblin");
+    private static final FilterPermanent filterElemental = new FilterControlledCreaturePermanent("Elemental");
 
     static {
         filterGoblin.add(new SubtypePredicate("Goblin"));

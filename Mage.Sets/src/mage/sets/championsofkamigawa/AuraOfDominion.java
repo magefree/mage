@@ -53,7 +53,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class AuraOfDominion extends CardImpl<AuraOfDominion> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class FlamekinHarbinger extends CardImpl<FlamekinHarbinger> {
 
-    private final static FilterCard filter = new FilterCard("Elemental card");
+    private static final FilterCard filter = new FilterCard("Elemental card");
 
     static {
         filter.add(new SubtypePredicate("Elemental"));

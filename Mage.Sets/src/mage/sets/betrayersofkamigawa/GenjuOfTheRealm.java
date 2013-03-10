@@ -55,7 +55,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class GenjuOfTheRealm extends CardImpl<GenjuOfTheRealm> {
     
-    private final static FilterLandPermanent filter = new FilterLandPermanent();
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
    
     public GenjuOfTheRealm(UUID ownerId) {
         super(ownerId, 151, "Genju of the Realm", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");

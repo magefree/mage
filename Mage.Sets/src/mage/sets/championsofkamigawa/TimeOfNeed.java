@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class TimeOfNeed extends CardImpl<TimeOfNeed> {
 
-    private final static FilterCard filter = new FilterCard("legendary creature card");
+    private static final FilterCard filter = new FilterCard("legendary creature card");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

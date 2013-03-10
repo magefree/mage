@@ -44,7 +44,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class YavimayaGranger extends CardImpl<YavimayaGranger> {
 
-    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public YavimayaGranger(UUID ownerId) {
         super(ownerId, 118, "Yavimaya Granger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");

@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BanishingKnack extends CardImpl<BanishingKnack> {
 
-    private final static FilterPermanent filter = new FilterNonlandPermanent();
+    private static final FilterPermanent filter = new FilterNonlandPermanent();
 
         public BanishingKnack(UUID ownerId) {
         super(ownerId, 17, "Banishing Knack", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");

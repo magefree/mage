@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 public class HaazdaExonerator extends CardImpl<HaazdaExonerator> {
 
-    private final static FilterPermanent filter = new FilterPermanent("Aura");
+    private static final FilterPermanent filter = new FilterPermanent("Aura");
 
     static {
         filter.add(new SubtypePredicate("Aura"));

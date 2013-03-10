@@ -57,7 +57,7 @@ import java.util.UUID;
  */
 public class HeWhoHungers extends CardImpl<HeWhoHungers> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Spirit");
 
     static {
         filter.add(new SubtypePredicate("Spirit"));

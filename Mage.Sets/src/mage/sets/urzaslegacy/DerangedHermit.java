@@ -49,7 +49,7 @@ import mage.game.permanent.token.SquirrelToken;
  */
 public class DerangedHermit extends CardImpl<DerangedHermit> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Squirrel creatures");
 
     static {
         filter.add(new SubtypePredicate("Squirrel"));

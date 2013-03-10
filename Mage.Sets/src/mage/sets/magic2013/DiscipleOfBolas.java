@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
     
-    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent(" another creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent(" another creature");
 
     static {
         filter.add(new AnotherPredicate());

@@ -49,7 +49,7 @@ public class ThreadExecutor {
         ((ThreadPoolExecutor)timeoutExecutor).allowCoreThreadTimeOut(true);
     }
 
-    private final static ThreadExecutor INSTANCE = new ThreadExecutor();
+    private static final ThreadExecutor INSTANCE = new ThreadExecutor();
 
     public static ThreadExecutor getInstance() {
         return INSTANCE;

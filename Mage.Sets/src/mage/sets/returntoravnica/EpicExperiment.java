@@ -79,7 +79,7 @@ public class EpicExperiment extends CardImpl<EpicExperiment> {
 
 class EpicExperimentEffect extends OneShotEffect<EpicExperimentEffect> {
 
-    private final static FilterCard filter = new FilterCard();
+    private static final FilterCard filter = new FilterCard();
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT),
                                  new CardTypePredicate(CardType.SORCERY)));

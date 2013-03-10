@@ -53,7 +53,7 @@ public class MCTSNode {
 
     private static final double selectionCoefficient = 1.0;
     private static final double passRatioTolerance = 0.0;
-     private final static transient Logger logger = Logger.getLogger(MCTSNode.class);
+     private static final transient Logger logger = Logger.getLogger(MCTSNode.class);
 
     private int visits = 0;
     private int wins = 0;

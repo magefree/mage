@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  * @author Loki
  */
 public class SpellSnare extends CardImpl<SpellSnare> {
-    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 2");
 
     static {
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 2));

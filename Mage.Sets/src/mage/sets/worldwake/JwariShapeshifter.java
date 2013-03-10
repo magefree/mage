@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class JwariShapeshifter extends CardImpl<JwariShapeshifter> {
     
-    final static private FilterPermanent filter = new FilterPermanent("Ally creature");
+    private static final FilterPermanent filter = new FilterPermanent("Ally creature");
     
     static {
         filter.add(new SubtypePredicate("Ally"));

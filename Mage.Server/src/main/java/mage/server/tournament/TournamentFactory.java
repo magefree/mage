@@ -45,8 +45,8 @@ import org.apache.log4j.Logger;
  * @author BetaSteward_at_googlemail.com
  */
 public class TournamentFactory {
-    private final static TournamentFactory INSTANCE = new TournamentFactory();
-    private final static Logger logger = Logger.getLogger(TournamentFactory.class);
+    private static final TournamentFactory INSTANCE = new TournamentFactory();
+    private static final Logger logger = Logger.getLogger(TournamentFactory.class);
 
     private Map<String, Class<Tournament>> tournaments = new HashMap<String, Class<Tournament>>();
     private Map<String, TournamentType> tournamentTypes = new HashMap<String, TournamentType>();

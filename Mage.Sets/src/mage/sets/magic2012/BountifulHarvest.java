@@ -42,7 +42,7 @@ import mage.filter.common.FilterControlledPermanent;
  */
 public class BountifulHarvest extends CardImpl<BountifulHarvest> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public BountifulHarvest(UUID ownerId) {
         super(ownerId, 166, "Bountiful Harvest", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{4}{G}");

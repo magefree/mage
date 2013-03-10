@@ -88,7 +88,7 @@ class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> 
 
 class TokTokVolcanoBorn extends Token {
 
-    private final static FilterCard filter = new FilterCard("red");
+    private static final FilterCard filter = new FilterCard("red");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.RED));

@@ -45,7 +45,7 @@ import mage.filter.predicate.permanent.TokenPredicate;
  */
 public class IntangibleVirtue extends CardImpl<IntangibleVirtue> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creature tokens");
 
     static {
         filter.add(new TokenPredicate());

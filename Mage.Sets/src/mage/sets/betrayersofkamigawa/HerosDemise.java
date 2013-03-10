@@ -42,7 +42,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HerosDemise extends CardImpl<HerosDemise> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

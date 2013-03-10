@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class EiganjoFreeRiders extends CardImpl<EiganjoFreeRiders> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("white creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

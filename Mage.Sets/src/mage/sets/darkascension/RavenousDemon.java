@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  * @author intimidatingant
  */
 public class RavenousDemon extends CardImpl<RavenousDemon> {
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Human");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Human");
 
     static {
         filter.add(new SubtypePredicate("Human"));

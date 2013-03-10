@@ -46,7 +46,7 @@ import java.util.UUID;
  */
 public class SeedguideAsh extends CardImpl<SeedguideAsh> {
 
-    private final static FilterCard filter = new FilterCard("Forest");
+    private static final FilterCard filter = new FilterCard("Forest");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

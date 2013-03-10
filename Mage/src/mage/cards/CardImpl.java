@@ -54,7 +54,7 @@ import java.util.*;
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
     private static final long serialVersionUID = 1L;
 
-    private final static Logger logger = Logger.getLogger(CardImpl.class);
+    private static final Logger logger = Logger.getLogger(CardImpl.class);
 
     protected UUID ownerId;
     protected int cardNumber;

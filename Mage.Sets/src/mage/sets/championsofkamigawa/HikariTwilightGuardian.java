@@ -50,7 +50,7 @@ import mage.game.permanent.Permanent;
  */
 public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public HikariTwilightGuardian (UUID ownerId) {
         super(ownerId, 12, "Hikari, Twilight Guardian", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");

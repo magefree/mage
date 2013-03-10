@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class GruulRagebeast extends CardImpl<GruulRagebeast> {
 
-    final private static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter2.add(new ControllerPredicate(TargetController.OPPONENT));

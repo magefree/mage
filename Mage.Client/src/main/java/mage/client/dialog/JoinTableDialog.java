@@ -40,7 +40,7 @@ import org.apache.log4j.Logger;
  */
 public class JoinTableDialog extends MageDialog {
 
-    private final static Logger logger = Logger.getLogger(JoinTableDialog.class);
+    private static final Logger logger = Logger.getLogger(JoinTableDialog.class);
 
     private UUID tableId;
     private UUID roomId;

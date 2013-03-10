@@ -50,8 +50,8 @@ import mage.target.common.TargetControlledPermanent;
  * @author Loki
  */
 public class NemataGroveGuardian extends CardImpl<NemataGroveGuardian> {
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures");
-    private final static FilterControlledPermanent filter1 = new FilterControlledPermanent("Saproling");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures");
+    private static final FilterControlledPermanent filter1 = new FilterControlledPermanent("Saproling");
 
     static {
         filter.add(new SubtypePredicate("Saproling"));

@@ -43,7 +43,7 @@ import org.apache.log4j.Logger;
  */
 public class ReplaySession implements GameCallback {
 
-    private final static Logger logger = Logger.getLogger(ReplaySession.class);
+    private static final Logger logger = Logger.getLogger(ReplaySession.class);
     private GameReplay replay;
     protected UUID userId;
 

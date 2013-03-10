@@ -51,7 +51,7 @@ import java.util.UUID;
  */
 public class ImperiousPerfect extends CardImpl<ImperiousPerfect> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
 
     static {
         filter.add(new SubtypePredicate("Elf"));

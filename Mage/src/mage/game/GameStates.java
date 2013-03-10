@@ -39,7 +39,7 @@ import org.apache.log4j.Logger;
  */
 public class GameStates implements Serializable {
 
-    private final static transient Logger logger = Logger.getLogger(GameStates.class);
+    private static final transient Logger logger = Logger.getLogger(GameStates.class);
 
 //    private List<byte[]> states = new LinkedList<byte[]>();
     private List<GameState> states = new LinkedList<GameState>();

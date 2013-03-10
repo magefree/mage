@@ -67,7 +67,7 @@ public class PlanarCleansing extends CardImpl<PlanarCleansing> {
 
 class PlanarCleansingEffect extends OneShotEffect<PlanarCleansingEffect> {
 
-    private final static FilterPermanent filter = new FilterNonlandPermanent();
+    private static final FilterPermanent filter = new FilterNonlandPermanent();
 
     public PlanarCleansingEffect() {
         super(Constants.Outcome.DestroyPermanent);

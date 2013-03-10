@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public class Tanglesap extends CardImpl<Tanglesap> {
     
-    final static private FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without trample");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures without trample");
     
     static {
         filter.add(Predicates.not(new AbilityPredicate(TrampleAbility.class)));

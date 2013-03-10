@@ -94,7 +94,7 @@ import org.apache.log4j.Logger;
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
 
-    private final static transient Logger logger = Logger.getLogger(GameImpl.class);
+    private static final transient Logger logger = Logger.getLogger(GameImpl.class);
 
     private static final FilterPermanent filterAura = new FilterPermanent();
     private static final FilterPermanent filterEquipment = new FilterPermanent();

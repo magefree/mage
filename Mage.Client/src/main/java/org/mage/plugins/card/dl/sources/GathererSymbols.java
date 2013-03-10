@@ -28,8 +28,8 @@ public class GathererSymbols implements Iterable<DownloadJob> {
     //TODO chaos and planeswalker symbol
     //chaos: http://gatherer.wizards.com/Images/Symbols/chaos.gif
 
-    private final static String SYMBOLS_PATH =  File.separator + "symbols";
-    private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SYMBOLS_PATH);
+    private static final String SYMBOLS_PATH =  File.separator + "symbols";
+    private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SYMBOLS_PATH);
     private static File outDir  = DEFAULT_OUT_DIR;
 
     private static final String   urlFmt  = "http://gatherer.wizards.com/handlers/image.ashx?size=%1$s&name=%2$s&type=symbol";

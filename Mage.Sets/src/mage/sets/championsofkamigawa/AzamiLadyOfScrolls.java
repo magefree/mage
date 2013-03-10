@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class AzamiLadyOfScrolls extends CardImpl<AzamiLadyOfScrolls> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped Wizard you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

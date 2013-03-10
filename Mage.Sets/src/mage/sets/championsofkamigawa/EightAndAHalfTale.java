@@ -53,7 +53,7 @@ import mage.target.common.TargetSpellOrPermanent;
  */
 public class EightAndAHalfTale extends CardImpl<EightAndAHalfTale> {
 
-    private final static FilterCard filter = new FilterCard("white");
+    private static final FilterCard filter = new FilterCard("white");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

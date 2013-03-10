@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class Sandsower extends CardImpl<Sandsower> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

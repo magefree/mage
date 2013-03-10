@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SoratamiCloudskater extends CardImpl<SoratamiCloudskater> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land");
 
     public SoratamiCloudskater(UUID ownerId) {
         super(ownerId, 86, "Soratami Cloudskater", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

@@ -46,7 +46,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class DarkHeartOfTheWood extends CardImpl<DarkHeartOfTheWood> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Forest");
 
     static {
         filter.add(new SubtypePredicate("Forest"));

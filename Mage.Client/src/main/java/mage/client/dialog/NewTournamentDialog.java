@@ -60,7 +60,7 @@ import java.util.UUID;
  */
 public class NewTournamentDialog extends MageDialog {
 
-    private final static Logger logger = Logger.getLogger(NewTournamentDialog.class);
+    private static final Logger logger = Logger.getLogger(NewTournamentDialog.class);
 
     private TableView table;
     private UUID playerId;

@@ -51,7 +51,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ElvishSkysweeper extends CardImpl<ElvishSkysweeper> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
         static {
             filter.add(new AbilityPredicate(FlyingAbility.class));

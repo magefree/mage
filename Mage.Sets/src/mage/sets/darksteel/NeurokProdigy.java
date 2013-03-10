@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class NeurokProdigy extends CardImpl<NeurokProdigy> {
 
-    private final static FilterCard filter = new FilterCard("an artifact card");
+    private static final FilterCard filter = new FilterCard("an artifact card");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

@@ -51,8 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class SlobadGoblinTinkerer extends CardImpl<SlobadGoblinTinkerer> {
 
-    private final static FilterPermanent filter = new FilterPermanent("artifact");
-    private final static FilterControlledPermanent filterControlled = new FilterControlledPermanent("an artifact");
+    private static final FilterPermanent filter = new FilterPermanent("artifact");
+    private static final FilterControlledPermanent filterControlled = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

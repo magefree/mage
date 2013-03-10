@@ -56,7 +56,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class TableWaitingDialog extends MageDialog {
 
-    private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
     private UUID tableId;
     private UUID roomId;
@@ -363,7 +363,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
     private TableWaitingDialog dialog;
     private int count = 0;
 
-    private final static Logger logger = Logger.getLogger(TableWaitingDialog.class);
+    private static final Logger logger = Logger.getLogger(TableWaitingDialog.class);
 
     UpdateSeatsTask(Session session, UUID roomId, UUID tableId, TableWaitingDialog dialog) {
         this.session = session;

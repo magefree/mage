@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class TragicPoet extends CardImpl<TragicPoet> {
 
-    private final static FilterCard filter = new FilterCard("enchantment card from your graveyard");
+    private static final FilterCard filter = new FilterCard("enchantment card from your graveyard");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

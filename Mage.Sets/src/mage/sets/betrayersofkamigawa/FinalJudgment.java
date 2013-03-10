@@ -67,7 +67,7 @@ public class FinalJudgment extends CardImpl<FinalJudgment> {
 
 class FinalJudgmentEffect extends OneShotEffect<FinalJudgmentEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

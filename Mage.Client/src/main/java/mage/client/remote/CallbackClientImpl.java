@@ -53,7 +53,7 @@ import java.util.UUID;
  */
 public class CallbackClientImpl implements CallbackClient {
 
-    private final static Logger logger = Logger.getLogger(CallbackClientImpl.class);
+    private static final Logger logger = Logger.getLogger(CallbackClientImpl.class);
 
     private UUID clientId;
     private MageFrame frame;

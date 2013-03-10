@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class MothdustChangeling extends CardImpl<MothdustChangeling> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creature you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

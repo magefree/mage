@@ -52,12 +52,12 @@ import java.util.prefs.Preferences;
  */
 public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
 
-    private final static Logger logger = Logger.getLogger(ConsoleFrame.class);
+    private static final Logger logger = Logger.getLogger(ConsoleFrame.class);
 
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-    private final static MageVersion version = new MageVersion(1, 0, 1, "");
+    private static final MageVersion version = new MageVersion(1, 0, 1, "");
 
     /**
      * @return the session

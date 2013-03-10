@@ -59,7 +59,7 @@ import org.apache.log4j.Logger;
  */
 public class TournamentPanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(TournamentPanel.class);
+    private static final Logger logger = Logger.getLogger(TournamentPanel.class);
 
     private UUID tournamentId;
     private Session session;
@@ -334,7 +334,7 @@ class UpdateTournamentTask extends SwingWorker<Void, TournamentView> {
     private UUID tournamentId;
     private TournamentPanel panel;
 
-    private final static Logger logger = Logger.getLogger(UpdateTournamentTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateTournamentTask.class);
 
     UpdateTournamentTask(Session session, UUID tournamentId, TournamentPanel panel) {
         this.session = session;

@@ -75,7 +75,7 @@ public class JaddiLifestrider extends CardImpl<JaddiLifestrider> {
 
 class JaddiLifestriderEffect extends OneShotEffect<JaddiLifestriderEffect> {
     
-    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
     
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.YOU));

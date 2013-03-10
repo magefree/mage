@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class TarPitcher extends CardImpl<TarPitcher> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Goblin");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));

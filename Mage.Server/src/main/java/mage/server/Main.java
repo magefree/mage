@@ -70,9 +70,9 @@ public class Main {
 
     private static Logger logger = Logger.getLogger(Main.class);
 
-    private final static String testModeArg = "-testMode=";
-    private final static String adminPasswordArg = "-adminPassword=";
-    private final static String pluginFolder = "plugins";
+    private static final String testModeArg = "-testMode=";
+    private static final String adminPasswordArg = "-adminPassword=";
+    private static final String pluginFolder = "plugins";
     private static MageVersion version = new MageVersion(1, 0, 1, "");
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
@@ -119,8 +119,9 @@ public class Main {
                 server = new MageTransporterServer(serverLocator, new MageServerImpl(adminPassword, testMode), MageServer.class.getName(), new MageServerInvocationHandler());
                 server.start();
                 logger.info("Started MAGE server - listening on " + connection.toString());
-                if (testMode)
+                if (testMode) {
                     logger.info("MAGE server running in test mode");
+                }
                 initStatistics();
             }
             else {
@@ -161,10 +162,11 @@ public class Main {
             if (session != null) {
                 String sessionName;
                 User user = UserManager.getInstance().getUser(session.getUserId());
-                if (user != null)
+                if (user != null) {
                     sessionName = user.getName() + " at " + session.getHost();
-                else
+                } else {
                     sessionName = session.getHost();
+                }
                 if (throwable instanceof ClientDisconnectedException) {                    
                     SessionManager.getInstance().disconnect(client.getSessionId(), false);
                     logger.info("client disconnected - " + sessionName);
@@ -285,8 +287,9 @@ public class Main {
 
     private static void deleteSavedGames() {
         File directory = new File("saved/");
-        if (!directory.exists())
+        if (!directory.exists()) {
             directory.mkdirs();
+        }
         File[] files = directory.listFiles(
             new FilenameFilter() {
                 @Override

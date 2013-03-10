@@ -49,8 +49,8 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ClashOfRealities extends CardImpl<ClashOfRealities> {
 
-    private final static FilterCreaturePermanent filterSpirit = new FilterCreaturePermanent("Spirit creature");
-    private final static FilterCreaturePermanent filterNotSpirit = new FilterCreaturePermanent("non-Spirit creature");
+    private static final FilterCreaturePermanent filterSpirit = new FilterCreaturePermanent("Spirit creature");
+    private static final FilterCreaturePermanent filterNotSpirit = new FilterCreaturePermanent("non-Spirit creature");
 
     static {
         filterSpirit.add(new SubtypePredicate("Spirit"));

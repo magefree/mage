@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class HandOfCruelty extends CardImpl<HandOfCruelty> {
 
-    private final static FilterCard filter = new FilterCard("white");
+    private static final FilterCard filter = new FilterCard("white");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

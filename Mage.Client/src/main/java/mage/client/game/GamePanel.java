@@ -1255,7 +1255,7 @@ class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
     private Session session;
     private UUID gameId;
 
-    private final static Logger logger = Logger.getLogger(ReplayTask.class);
+    private static final Logger logger = Logger.getLogger(ReplayTask.class);
 
     ReplayTask(Session session, UUID gameId) {
         this.session = session;

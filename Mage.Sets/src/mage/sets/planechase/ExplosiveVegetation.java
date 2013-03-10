@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class ExplosiveVegetation extends CardImpl<ExplosiveVegetation> {
 
-    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
     public ExplosiveVegetation(UUID ownerId) {
         super(ownerId, 70, "Explosive Vegetation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}");

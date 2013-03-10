@@ -53,7 +53,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class MarkForDeath extends CardImpl<MarkForDeath> {
 
-    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));

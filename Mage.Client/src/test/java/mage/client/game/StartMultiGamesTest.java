@@ -13,12 +13,12 @@ import org.junit.Ignore;
 @Ignore
 public class StartMultiGamesTest {
 
-    private final static Logger logger = Logger.getLogger(StartMultiGamesTest.class);
+    private static final Logger logger = Logger.getLogger(StartMultiGamesTest.class);
 
     /**
      * Amount of games to be started from this test.
      */
-    private final static Integer GAME_START_COUNT = 10;
+    private static final Integer GAME_START_COUNT = 10;
 
     private MageFrame frame = null;
     private Object sync = new Object();

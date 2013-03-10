@@ -70,7 +70,7 @@ public class Rivalry extends CardImpl<Rivalry> {
 
 class RivalryTriggeredAbility extends TriggeredAbilityImpl<RivalryTriggeredAbility> {
 
-    private final static FilterPermanent filter = new FilterLandPermanent();
+    private static final FilterPermanent filter = new FilterLandPermanent();
 
 
 

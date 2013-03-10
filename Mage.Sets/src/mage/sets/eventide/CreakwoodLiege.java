@@ -49,8 +49,8 @@ import mage.game.permanent.token.Token;
  */
 public class CreakwoodLiege extends CardImpl<CreakwoodLiege> {
 
-    private final static FilterCreaturePermanent filterBlackCreature = new FilterCreaturePermanent("black creatures");
-        private final static FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creatures");
+    private static final FilterCreaturePermanent filterBlackCreature = new FilterCreaturePermanent("black creatures");
+        private static final FilterCreaturePermanent filterGreenCreature = new FilterCreaturePermanent("green creatures");
 
         static {
             filterBlackCreature.add(new ColorPredicate(ObjectColor.BLACK));

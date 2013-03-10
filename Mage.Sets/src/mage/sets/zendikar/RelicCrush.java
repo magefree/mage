@@ -47,7 +47,7 @@ import mage.target.TargetPermanent;
  */
 public class RelicCrush extends CardImpl<RelicCrush> {
     
-    private final static FilterPermanent filter = new FilterPermanent("artifact or enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("artifact or enchantment");
     
     static {
         filter.add(Predicates.or(

@@ -79,7 +79,7 @@ public class PainwrackerOni extends CardImpl<PainwrackerOni> {
 
 class PainwrackerOniTriggeredAbility1 extends TriggeredAbilityImpl<PainwrackerOniTriggeredAbility1> {
 
-    private final static FilterPermanent filter = new FilterPermanent();
+    private static final FilterPermanent filter = new FilterPermanent();
 
     static {
         filter.add(new SubtypePredicate("Ogre"));

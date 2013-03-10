@@ -42,7 +42,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class FiddleheadKami extends CardImpl<FiddleheadKami> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public FiddleheadKami(UUID ownerId) {
         super(ownerId, 130, "Fiddlehead Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");

@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class SeethingPathblazer extends CardImpl<SeethingPathblazer> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elemental");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elemental");
 
     static {
         filter.add(new SubtypePredicate("Elemental"));

@@ -44,7 +44,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class ShardVolley extends CardImpl<ShardVolley> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public ShardVolley(UUID ownerId) {
         super(ownerId, 103, "Shard Volley", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R}");

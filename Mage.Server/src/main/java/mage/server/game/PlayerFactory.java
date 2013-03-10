@@ -42,8 +42,8 @@ import org.apache.log4j.Logger;
  */
 public class PlayerFactory {
 
-    private final static PlayerFactory INSTANCE = new PlayerFactory();
-    private final static Logger logger = Logger.getLogger(PlayerFactory.class);
+    private static final PlayerFactory INSTANCE = new PlayerFactory();
+    private static final Logger logger = Logger.getLogger(PlayerFactory.class);
 
     private Map<String, Class> playerTypes = new LinkedHashMap<String, Class>();
 

@@ -48,7 +48,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class JourneyersKite extends CardImpl<JourneyersKite> {
 
-    private final static FilterBasicLandCard filter = new FilterBasicLandCard();
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
 
         public JourneyersKite (UUID ownerId) {
         super(ownerId, 257, "Journeyer's Kite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");

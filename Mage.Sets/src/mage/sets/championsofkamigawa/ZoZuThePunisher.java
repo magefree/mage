@@ -51,7 +51,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class ZoZuThePunisher extends CardImpl<ZoZuThePunisher> {
 
-    private final static FilterCard filter = new FilterCard("legendary spell");
+    private static final FilterCard filter = new FilterCard("legendary spell");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

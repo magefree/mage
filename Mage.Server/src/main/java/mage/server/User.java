@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class User {
 
-    private final static Logger logger = Logger.getLogger(User.class);
+    private static final Logger logger = Logger.getLogger(User.class);
 
     public enum UserState {
         Created, Connected, Disconnected, Reconnected;

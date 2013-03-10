@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HateWeaver extends CardImpl<HateWeaver> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("blue or red creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("blue or red creature");
 
     static {
         filter.add(Predicates.or(

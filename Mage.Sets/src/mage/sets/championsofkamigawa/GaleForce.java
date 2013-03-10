@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.AbilityPredicate;
  */
 public class GaleForce extends CardImpl<GaleForce> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
 
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));

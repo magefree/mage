@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class InspiredSprite extends CardImpl<InspiredSprite> {
 
-    private final static FilterSpell filter = new FilterSpell("Wizard");
+    private static final FilterSpell filter = new FilterSpell("Wizard");
 
     static {
         filter.add(new SubtypePredicate("Wizard"));

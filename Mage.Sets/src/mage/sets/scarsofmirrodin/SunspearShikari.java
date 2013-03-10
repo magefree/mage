@@ -46,8 +46,8 @@ import mage.cards.CardImpl;
  */
 public class SunspearShikari extends CardImpl<SunspearShikari> {
 
-    private final static String rule1 = "As long as {this} is equipped, it has first strike";
-    private final static String rule2 = "As long as {this} is equipped, it has lifelink";
+    private static final String rule1 = "As long as {this} is equipped, it has first strike";
+    private static final String rule2 = "As long as {this} is equipped, it has lifelink";
 
     public SunspearShikari(UUID ownerId) {
         super(ownerId, 23, "Sunspear Shikari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");

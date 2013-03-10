@@ -52,7 +52,7 @@ import mage.players.Player;
  */
 public class WoodlandSleuth extends CardImpl<WoodlandSleuth> {
 
-    private final static String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
+    private static final String staticText = "Morbid - When {this} enters the battlefield, if a creature died this turn, return a creature card at random from your graveyard to your hand.";
 
     public WoodlandSleuth(UUID ownerId) {
         super(ownerId, 210, "Woodland Sleuth", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");

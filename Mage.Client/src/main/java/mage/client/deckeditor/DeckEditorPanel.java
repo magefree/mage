@@ -71,7 +71,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class DeckEditorPanel extends javax.swing.JPanel {
 
-    private final static Logger logger = Logger.getLogger(DeckEditorPanel.class);
+    private static final Logger logger = Logger.getLogger(DeckEditorPanel.class);
 
     private JFileChooser fcSelectDeck;
     private JFileChooser fcImportDeck;
@@ -697,7 +697,7 @@ class ImportFilter extends FileFilter {
 
 class UpdateDeckTask extends SwingWorker<Void, Void> {
 
-    private final static Logger logger = Logger.getLogger(UpdateDeckTask.class);
+    private static final Logger logger = Logger.getLogger(UpdateDeckTask.class);
 
     private Session session;
     private UUID tableId;

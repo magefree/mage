@@ -51,7 +51,7 @@ import mage.game.permanent.Permanent;
  */
 public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Snakes");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Snakes");
 
     static {
         filter.add(new SubtypePredicate("Snake"));

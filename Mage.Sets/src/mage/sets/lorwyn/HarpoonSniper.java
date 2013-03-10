@@ -50,7 +50,7 @@ import java.util.UUID;
  */
 public class HarpoonSniper extends CardImpl<HarpoonSniper> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
 
     static {
         filter.add(new SubtypePredicate("Merfolk"));

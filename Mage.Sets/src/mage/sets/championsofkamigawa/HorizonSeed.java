@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class HorizonSeed extends CardImpl<HorizonSeed> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public HorizonSeed(UUID ownerId) {
         super(ownerId, 15, "Horizon Seed", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");

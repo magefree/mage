@@ -72,7 +72,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TableController {
 
-    private final static Logger logger = Logger.getLogger(TableController.class);
+    private static final Logger logger = Logger.getLogger(TableController.class);
 
     private UUID userId;
     private UUID chatId;

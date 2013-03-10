@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class KrarkClanGrunt extends CardImpl<KrarkClanGrunt> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

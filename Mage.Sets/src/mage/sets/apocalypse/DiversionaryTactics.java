@@ -48,7 +48,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DiversionaryTactics extends CardImpl<DiversionaryTactics> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped creatures you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

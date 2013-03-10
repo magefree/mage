@@ -49,7 +49,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class RuinGhost extends CardImpl<RuinGhost> {
 
-    final static private FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.LAND));

@@ -52,8 +52,8 @@ import java.util.UUID;
  */
 public class MadAuntie extends CardImpl<MadAuntie> {
 
-    private final static FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another Goblin");
-    private final static FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");
+    private static final FilterControlledCreaturePermanent filter1 = new FilterControlledCreaturePermanent("another Goblin");
+    private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("Goblin creatures");
 
     static {
         filter1.add(new SubtypePredicate("Goblin"));

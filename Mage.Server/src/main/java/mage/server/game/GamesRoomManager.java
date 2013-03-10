@@ -37,8 +37,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GamesRoomManager {
 
-    private final static GamesRoomManager INSTANCE = new GamesRoomManager();
-//    private final static Logger logger = Logger.getLogger(GamesRoomManager.class);
+    private static final GamesRoomManager INSTANCE = new GamesRoomManager();
+//    private static final Logger logger = Logger.getLogger(GamesRoomManager.class);
 
     private ConcurrentHashMap<UUID, GamesRoom> rooms = new ConcurrentHashMap<UUID, GamesRoom>();
     private UUID mainRoomId;

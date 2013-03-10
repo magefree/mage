@@ -49,7 +49,7 @@ import mage.target.TargetPermanent;
  */
 public class OkinaTempleToTheGrandfathers extends CardImpl<OkinaTempleToTheGrandfathers> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("legendary creature");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

@@ -52,7 +52,7 @@ import mage.game.permanent.Permanent;
  */
 public class RelentlessRats extends CardImpl<RelentlessRats> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     static {
         filter.add(new NamePredicate("Relentless Rats"));

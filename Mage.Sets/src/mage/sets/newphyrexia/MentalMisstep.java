@@ -44,7 +44,7 @@ import mage.target.TargetSpell;
  */
 public class MentalMisstep extends CardImpl<MentalMisstep> {
 
-    private final static FilterSpell filter = new FilterSpell("spell with converted mana cost 1");
+    private static final FilterSpell filter = new FilterSpell("spell with converted mana cost 1");
 
        static {
            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, 1));

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class SoulOfMagma extends CardImpl<SoulOfMagma> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public SoulOfMagma(UUID ownerId) {
         super(ownerId, 189, "Soul of Magma", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}{R}");

@@ -46,8 +46,8 @@ import mage.game.permanent.token.WolfToken;
  */
 public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
 
-    private final static FilterSpell filterGreenSpell = new FilterSpell("a green spell");
-    private final static FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
+    private static final FilterSpell filterGreenSpell = new FilterSpell("a green spell");
+    private static final FilterSpell filterBlueSpell = new FilterSpell("a blue spell");
 
     static {
         filterGreenSpell.add(new ColorPredicate(ObjectColor.GREEN));

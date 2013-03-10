@@ -50,7 +50,7 @@ import mage.target.TargetPermanent;
  */
 public class MinamoSchoolAtWatersEdge extends CardImpl<MinamoSchoolAtWatersEdge> {
 
-    private final static FilterPermanent filter = new FilterPermanent("legendary permanent");
+    private static final FilterPermanent filter = new FilterPermanent("legendary permanent");
 
     static {
         filter.add(new SupertypePredicate("Legendary"));

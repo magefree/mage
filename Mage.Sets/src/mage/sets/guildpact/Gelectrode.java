@@ -50,7 +50,7 @@ import mage.target.common.TargetCreatureOrPlayer;
  */
 public class Gelectrode extends CardImpl<Gelectrode> {
 
-    private final static FilterSpell filter = new FilterSpell("an instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("an instant or sorcery spell");
 
     static {
         filter.add(Predicates.or(

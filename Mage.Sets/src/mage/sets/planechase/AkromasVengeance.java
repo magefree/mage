@@ -69,7 +69,7 @@ public class AkromasVengeance extends CardImpl<AkromasVengeance> {
 
 class AkromasVengeanceEffect extends OneShotEffect<AkromasVengeanceEffect> {
 
-    private final static FilterPermanent filter = new FilterPermanent("");
+    private static final FilterPermanent filter = new FilterPermanent("");
 
     static {
         filter.add(Predicates.or(

@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class VioletPall extends CardImpl<VioletPall> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
 
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));

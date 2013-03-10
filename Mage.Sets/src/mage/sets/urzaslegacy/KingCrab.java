@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class KingCrab extends CardImpl<KingCrab> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("green creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

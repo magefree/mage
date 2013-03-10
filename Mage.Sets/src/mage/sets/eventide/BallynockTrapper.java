@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class BallynockTrapper extends CardImpl<BallynockTrapper> {
 
-    private final static FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
+    private static final FilterSpell filterWhiteSpell = new FilterSpell("a white spell");
 
     static {
         filterWhiteSpell.add(new ColorPredicate(ObjectColor.WHITE));

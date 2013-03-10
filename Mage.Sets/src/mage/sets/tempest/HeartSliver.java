@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class HeartSliver extends CardImpl<HeartSliver> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("All sliver creatures");
 
     static {
         filter.add(new SubtypePredicate("Sliver"));

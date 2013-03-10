@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 
 public class TolarianAcademy extends CardImpl<TolarianAcademy> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact you control");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

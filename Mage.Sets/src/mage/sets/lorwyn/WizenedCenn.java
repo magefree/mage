@@ -45,7 +45,7 @@ import java.util.UUID;
  */
 public class WizenedCenn extends CardImpl<WizenedCenn> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Kithkin creatures");
 
     static {
         filter.add(new SubtypePredicate("Kithkin"));

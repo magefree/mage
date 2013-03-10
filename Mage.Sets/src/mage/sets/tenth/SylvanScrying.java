@@ -41,7 +41,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class SylvanScrying extends CardImpl<SylvanScrying> {
 
-    private final static FilterLandCard filter = new FilterLandCard("land card");
+    private static final FilterLandCard filter = new FilterLandCard("land card");
 
     public SylvanScrying(UUID ownerId) {
         super(ownerId, 302, "Sylvan Scrying", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{G}");

@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class HandOfHonor extends CardImpl<HandOfHonor> {
 
-    private final static FilterCard filter = new FilterCard("black");
+    private static final FilterCard filter = new FilterCard("black");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));

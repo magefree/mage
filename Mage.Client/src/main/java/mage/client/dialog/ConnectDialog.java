@@ -60,7 +60,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class ConnectDialog extends MageDialog {
 
-    private final static Logger logger = Logger.getLogger(ConnectDialog.class);
+    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
     private Connection connection;
     private ConnectTask task;
 

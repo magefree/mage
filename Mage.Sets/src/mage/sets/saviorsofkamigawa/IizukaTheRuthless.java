@@ -51,7 +51,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class IizukaTheRuthless extends CardImpl<IizukaTheRuthless> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Samurai");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Samurai");
 
     static {
         filter.add(new SubtypePredicate("Samurai"));

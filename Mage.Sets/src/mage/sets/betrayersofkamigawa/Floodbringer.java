@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class Floodbringer extends CardImpl<Floodbringer> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledLandPermanent("a land you control (return to hand)");
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("a land you control (return to hand)");
 
     public Floodbringer(UUID ownerId) {
         super(ownerId, 34, "Floodbringer", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

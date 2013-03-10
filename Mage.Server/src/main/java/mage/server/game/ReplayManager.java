@@ -37,7 +37,7 @@ import mage.server.UserManager;
  * @author BetaSteward_at_googlemail.com
  */
 public class ReplayManager {
-    private final static ReplayManager INSTANCE = new ReplayManager();
+    private static final ReplayManager INSTANCE = new ReplayManager();
 
     public static ReplayManager getInstance() {
         return INSTANCE;

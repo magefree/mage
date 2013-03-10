@@ -43,7 +43,7 @@ import mage.target.common.TargetAttackingCreature;
  */
 public class TerashisVerdict extends CardImpl<TerashisVerdict> {
 
-    private final static FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with power 3 or less");
+    private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creature with power 3 or less");
 
     static {
         filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, 4));

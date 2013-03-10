@@ -55,7 +55,7 @@ import java.util.UUID;
  */
 public class CloudgoatRanger extends CardImpl<CloudgoatRanger> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped Kithkin you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

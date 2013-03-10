@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class StampedingSerow extends CardImpl<StampedingSerow> {
 
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("green creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));

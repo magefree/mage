@@ -55,7 +55,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class ConnectDialog extends JDialog {
 
-    private final static Logger logger = Logger.getLogger(ConnectDialog.class);
+    private static final Logger logger = Logger.getLogger(ConnectDialog.class);
     private ConsoleFrame console;
     private Connection connection;
     private ConnectTask task;

@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class UrgeToFeed extends CardImpl<UrgeToFeed> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public UrgeToFeed(UUID ownerId) {
         super(ownerId, 70, "Urge to Feed", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}{B}");
@@ -76,7 +76,7 @@ public class UrgeToFeed extends CardImpl<UrgeToFeed> {
 
 class UrgeToFeedEffect extends OneShotEffect<UrgeToFeedEffect> {
 
-    final private static FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped Vampire creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped Vampire creatures you control");
 
     static {
         filter.add(new ControllerPredicate(Constants.TargetController.YOU));

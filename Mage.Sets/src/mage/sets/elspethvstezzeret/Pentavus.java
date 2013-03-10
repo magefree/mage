@@ -55,7 +55,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Pentavus extends CardImpl<Pentavus> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("Pentavite");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Pentavite");
 
     static {
         filter.add(new SubtypePredicate("Pentavite"));

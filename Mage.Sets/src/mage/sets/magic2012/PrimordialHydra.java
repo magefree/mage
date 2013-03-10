@@ -56,7 +56,7 @@ import java.util.UUID;
  */
 public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
-    private final static String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
+    private static final String staticText = "{this} has trample as long as it has ten or more +1/+1 counters on it";
 
     public PrimordialHydra(UUID ownerId) {
         super(ownerId, 189, "Primordial Hydra", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{X}{G}{G}");

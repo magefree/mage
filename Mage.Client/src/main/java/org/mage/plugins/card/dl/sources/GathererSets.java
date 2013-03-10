@@ -10,8 +10,8 @@ import static org.mage.plugins.card.dl.DownloadJob.toFile;
 
 public class GathererSets implements Iterable<DownloadJob> {
 
-    private final static String SETS_PATH = File.separator + "sets";
-    private final static File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
+    private static final String SETS_PATH = File.separator + "sets";
+    private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + SETS_PATH);
     private static File outDir = DEFAULT_OUT_DIR;
 
     private static final String[] symbols =     {"10E", "9ED", "8ED", "7ED", "6ED", "5ED", "4ED", "3ED", "2ED", "LEB", "LEA",

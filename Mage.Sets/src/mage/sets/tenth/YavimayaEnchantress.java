@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class YavimayaEnchantress extends CardImpl<YavimayaEnchantress> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantment on the battlefield");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment on the battlefield");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

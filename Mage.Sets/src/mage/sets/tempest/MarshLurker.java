@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class MarshLurker extends CardImpl<MarshLurker> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("a Swamp");
 
     static {
         filter.add(new SubtypePredicate("Swamp"));

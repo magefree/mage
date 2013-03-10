@@ -46,7 +46,7 @@ import mage.target.TargetPermanent;
  */
 public class KeeningApparition extends CardImpl<KeeningApparition> {
 
-    private final static FilterPermanent filter = new FilterPermanent("enchantment");
+    private static final FilterPermanent filter = new FilterPermanent("enchantment");
 
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));

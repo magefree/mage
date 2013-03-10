@@ -43,7 +43,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class PhyrexianDriver extends CardImpl<PhyrexianDriver> {
 
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("Mercenary creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Mercenary creatures");
 
     static {
         filter.add(new SubtypePredicate("Mercenary"));

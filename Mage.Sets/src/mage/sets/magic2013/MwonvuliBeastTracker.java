@@ -50,7 +50,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class MwonvuliBeastTracker extends CardImpl<MwonvuliBeastTracker> {
     
-    private final static FilterCard filter = new FilterCard("creature card with deathtouch, hexproof, reach, or trample in your library");
+    private static final FilterCard filter = new FilterCard("creature card with deathtouch, hexproof, reach, or trample in your library");
 
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));

@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  * @author Loki
  */
 public class CelestialCrusader extends CardImpl<CelestialCrusader> {
-    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("white creatures");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));

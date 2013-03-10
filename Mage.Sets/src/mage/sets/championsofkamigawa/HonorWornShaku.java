@@ -50,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class HonorWornShaku extends CardImpl<HonorWornShaku> {
 
-    private final static FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("untapped legendary permanent");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));

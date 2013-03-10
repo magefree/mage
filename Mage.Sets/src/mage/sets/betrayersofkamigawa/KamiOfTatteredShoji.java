@@ -45,7 +45,7 @@ import mage.filter.common.FilterSpiritOrArcaneCard;
  */
 public class KamiOfTatteredShoji extends CardImpl<KamiOfTatteredShoji> {
 
-    private final static FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
+    private static final FilterSpiritOrArcaneCard filter = new FilterSpiritOrArcaneCard();
 
     public KamiOfTatteredShoji(UUID ownerId) {
         super(ownerId, 11, "Kami of Tattered Shoji", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{W}");
