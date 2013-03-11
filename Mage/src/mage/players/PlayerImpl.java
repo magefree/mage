@@ -1435,8 +1435,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 }
             }
             if (targetNum < option.getTargets().size() - 2) {
-                //addTargetOptions(options, newOption, targetNum + 1, game);
-                // ayrat: bug fix
                 addTargetOptions(options, newOption, targetNum + 1, game);
             }
             else {
