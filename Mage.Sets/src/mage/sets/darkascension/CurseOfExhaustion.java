@@ -97,8 +97,9 @@ class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
+        if (condition == true) {//no need to check - condition has already occured
             return;
+        }
         if (event.getType() == GameEvent.EventType.SPELL_CAST ) {
             Permanent enchantment = game.getPermanent(this.sourceId);
             if (enchantment != null && enchantment.getAttachedTo() != null) {
@@ -116,7 +117,7 @@ class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEff
 
     public CurseOfExhaustionEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
-        staticText = "Enchanted player can't cast more than one spell each turn.";
+        staticText = "Enchanted player can't cast more than one spell each turn";
     }
 
     public CurseOfExhaustionEffect(final CurseOfExhaustionEffect effect) {
@@ -145,9 +146,10 @@ class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEff
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getPlayerId().equals(player.getId())) {
-                    Watcher watcher = game.getState().getWatchers().get("SpellCast", source.getControllerId());
-                    if (watcher != null && watcher.conditionMet())
+                    Watcher watcher = game.getState().getWatchers().get("SpellCast", player.getId());
+                    if (watcher != null && watcher.conditionMet()) {
                         return true;
+                    }
                 }
             }
         }
