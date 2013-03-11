@@ -52,7 +52,7 @@ public class TxtDeckImporter extends DeckImporter {
             return;
         }
 
-        if (line.startsWith("Sideboard")) {
+        if (line.toLowerCase().startsWith("sideboard")) {
             sideboard = true;
             return;
         }
