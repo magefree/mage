@@ -28,6 +28,7 @@
 
 package mage.player.ai;
 
+import java.util.*;
 import mage.Constants;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
@@ -39,7 +40,6 @@ import mage.game.turn.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-import java.util.*;
 
 /**
  *
@@ -85,8 +85,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     act(game);
                     return true;
                 }
-                else
+                else {
                     pass();
+                }
                 return false;
             case BEGIN_COMBAT:
                 pass();
@@ -101,8 +102,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     act(game);
                     return true;
                 }
-                else
+                else {
                     pass();
+                }
                 return false;
             case DECLARE_BLOCKERS:
             case FIRST_COMBAT_DAMAGE:
@@ -120,8 +122,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     act(game);
                     return true;
                 }
-                else
+                else {
                     pass();
+                }
                 return false;
             case END_TURN:
             case CLEANUP:
@@ -310,10 +313,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 ///val = simulateCounterAttack(game, node, depth, alpha, beta);
             }
         }
-        if (val == null)
+        if (val == null) {
             val = GameStateEvaluator2.evaluate(playerId, game);
-        if (logger.isDebugEnabled())
+        }
+        if (logger.isDebugEnabled()) {
             logger.debug("returning -- combat score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        }
         return val;
     }
 
@@ -328,8 +333,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
         SimulationNode2 bestNode = null;
         SimulatedPlayer2 attacker = (SimulatedPlayer2) game.getPlayer(attackerId);
 
-        if (logger.isDebugEnabled())
+        if (logger.isDebugEnabled()) {
             logger.debug(attacker.getName() + "'s possible attackers: " + attacker.getAvailableAttackers(game));
+        }
         for (Combat engagement: attacker.addAttackers(game)) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Sim Attackers: " + engagement.getAttackers() + ", blockers: " + engagement.getBlockers());
@@ -347,8 +353,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             }
             sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
             SimulationNode2 newNode = new SimulationNode2(node, sim, depth, attackerId);
-            if (logger.isDebugEnabled())
+            if (logger.isDebugEnabled()) {
                 logger.debug("Sim attack for player:" + game.getPlayer(attackerId).getName());
+            }
             sim.checkStateAndTriggered();
             while (!sim.getStack().isEmpty()) {
                 sim.getStack().resolve(sim);
@@ -380,15 +387,17 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 }
             }
         }
-        if (val == null)
+        if (val == null) {
             val = GameStateEvaluator2.evaluate(playerId, game);
+        }
         if (bestNode != null) {
             node.children.clear();
             node.children.add(bestNode);
             node.setScore(bestNode.getScore());
         }
-        if (logger.isDebugEnabled())
+        if (logger.isDebugEnabled()) {
             logger.debug("Sim attackers: returning score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        }
         return val;
     }
 
@@ -403,8 +412,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
         //check if defender is being attacked
         if (game.getCombat().isAttacked(defenderId, game)) {
             SimulatedPlayer2 defender = (SimulatedPlayer2) game.getPlayer(defenderId);
-            if (logger.isDebugEnabled())
+            if (logger.isDebugEnabled()) {
                 logger.debug(defender.getName() + "'s possible blockers: " + defender.getAvailableBlockers(game));
+            }
             List<Combat> combats = defender.addBlockers(game);
             for (Combat engagement: combats) {
                 if (alpha >= beta) {
@@ -422,8 +432,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 }
                 sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
                 SimulationNode2 newNode = new SimulationNode2(node, sim, depth, defenderId);
-                if (logger.isDebugEnabled())
+                if (logger.isDebugEnabled()) {
                     logger.debug("Sim block for player:" + game.getPlayer(defenderId).getName());
+                }
                 sim.checkStateAndTriggered();
                 while (!sim.getStack().isEmpty()) {
                     sim.getStack().resolve(sim);
@@ -439,8 +450,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 else if (!counter) {
                     val = simulatePostCombatMain(sim, newNode, depth-1, alpha, beta);
                 }
-                else
+                else {
                     val = GameStateEvaluator2.evaluate(playerId, sim);
+                }
                 if (!defenderId.equals(playerId)) {
                     if (val < beta) {
                         beta = val;
@@ -459,15 +471,17 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 }
             }
         }
-        if (val == null)
+        if (val == null) {
             val = GameStateEvaluator2.evaluate(playerId, game);
+        }
         if (bestNode != null) {
             node.children.clear();
             node.children.add(bestNode);
             node.setScore(bestNode.getScore());
         }
-        if (logger.isDebugEnabled())
+        if (logger.isDebugEnabled()) {
             logger.debug("Sim blockers: returning score: " + val + " depth:" + depth + " for player:" + game.getPlayer(node.getPlayerId()).getName());
+        }
         return val;
     }
 
