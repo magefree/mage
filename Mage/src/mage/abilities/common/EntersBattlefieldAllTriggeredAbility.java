@@ -102,8 +102,8 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
-                    return true;
                 }
+                return true;
             }
         }
         return false;
