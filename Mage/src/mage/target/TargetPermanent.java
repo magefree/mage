@@ -112,7 +112,7 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
     /**
      * Checks if there are enough {@link Permanent} that can be chosen.
      *
-     * Takes into account notTarget parameter, it case it's true doesn't check for protection, shroud etc.
+     * Takes into account notTarget parameter, in case it's true doesn't check for protection, shroud etc.
      *
      * @param sourceId - the target event source
      * @param sourceControllerId - controller of the target event source

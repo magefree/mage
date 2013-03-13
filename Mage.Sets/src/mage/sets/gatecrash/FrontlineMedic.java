@@ -71,7 +71,7 @@ public class FrontlineMedic extends CardImpl<FrontlineMedic> {
         this.addAbility(new BattalionAbility(new IndestructibleAllEffect(new FilterControlledCreaturePermanent(), Constants.Duration.EndOfTurn)));
 
         // Sacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays 3.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new CounterUnlessPaysEffect(new GenericManaCost(3))), new SacrificeSourceCost());
+        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new SacrificeSourceCost());
         ability.addTarget(new TargetSpell(filter));
         this.addAbility(ability);
 

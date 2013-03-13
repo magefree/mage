@@ -33,6 +33,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -77,6 +78,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn<T extends TargetCreaturePer
 
     public TargetCreaturePermanentThatDealtDamageThisTurn() {
         super(1, 1, new FilterCreaturePermanent(), false);
+        setRequired(true);
         targetName = "creature that dealt damage this turn";
     }
 
@@ -96,6 +98,30 @@ class TargetCreaturePermanentThatDealtDamageThisTurn<T extends TargetCreaturePer
     }
 
     @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        int remainingTargets = this.minNumberOfTargets - targets.size();
+        if (remainingTargets <= 0) {
+            return true;
+        }
+        int count = 0;
+        MageObject targetSource = game.getObject(sourceId);
+        SourceDidDamageWatcher watcher = (SourceDidDamageWatcher) game.getState().getWatchers().get("SourceDidDamageWatcher");
+        if (watcher != null) {
+            for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
+                if (!targets.containsKey(permanent.getId()) && watcher.damageSources.contains(permanent.getId())) {
+                    if (!notTarget || permanent.canBeTargetedBy(targetSource, sourceControllerId, game)) {
+                        count++;
+                        if (count >= remainingTargets) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
         Set<UUID> availablePossibleTargets = super.possibleTargets(sourceId, sourceControllerId, game);
         Set<UUID> possibleTargets = new HashSet<UUID>();
@@ -103,7 +129,7 @@ class TargetCreaturePermanentThatDealtDamageThisTurn<T extends TargetCreaturePer
         if (watcher != null) {
             for (UUID targetId : availablePossibleTargets) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent != null && watcher.damageSources.contains(targetId)) {
+                if (permanent != null && !targets.containsKey(permanent.getId()) && watcher.damageSources.contains(targetId)) {
                     possibleTargets.add(targetId);
                 }
             }
