@@ -32,6 +32,8 @@ import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.stack.StackObject;
@@ -44,15 +46,26 @@ import mage.players.Player;
 public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffect> {
 
     protected Cost cost;
+    protected DynamicValue genericMana;
 
     public CounterUnlessPaysEffect(Cost cost) {
         super(Outcome.Detriment);
         this.cost = cost;
     }
 
+    public CounterUnlessPaysEffect(DynamicValue genericMana) {
+        super(Outcome.Detriment);
+        this.genericMana = genericMana;
+    }
+
     public CounterUnlessPaysEffect(final CounterUnlessPaysEffect effect) {
         super(effect);
-        this.cost = effect.cost.copy();
+        if (effect.cost != null) {
+            this.cost = effect.cost.copy();
+        }
+        if (effect.genericMana != null) {
+            this.genericMana = effect.genericMana.copy();
+        }
     }
 
     @Override
@@ -66,8 +79,12 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                cost.clearPaid();
-                if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
+                Cost costToPay = cost.copy();
+                if (cost == null) {
+                    costToPay = new GenericManaCost(genericMana.calculate(game, source));
+                }
+                costToPay.clearPaid();
+                if (!costToPay.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
                     return game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
                 }
             }
@@ -84,7 +101,12 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
         else {
             sb.append("Counter target ").append(mode.getTargets().get(0).getTargetName());
         }
-        sb.append(" unless its controller pays ").append(cost.getText());
+        sb.append(" unless its controller pays ");
+        if (cost != null) {
+            sb.append(cost.getText());
+        } else {
+            sb.append("{X}");
+        }
         return sb.toString();
     }
 
