@@ -146,7 +146,7 @@ class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEff
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Player player = game.getPlayer(enchantment.getAttachedTo());
                 if (player != null && event.getPlayerId().equals(player.getId())) {
-                    Watcher watcher = game.getState().getWatchers().get("SpellCast", player.getId());
+                    Watcher watcher = game.getState().getWatchers().get("SpellCast", source.getControllerId());
                     if (watcher != null && watcher.conditionMet()) {
                         return true;
                     }
