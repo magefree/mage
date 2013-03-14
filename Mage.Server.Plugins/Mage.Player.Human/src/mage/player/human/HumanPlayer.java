@@ -61,6 +61,7 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetAttackingCreature;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
+import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
 
 import java.io.Serializable;
@@ -454,7 +455,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         if (response.getBoolean() != null) {
             return false;
         } else if (response.getUUID() != null) {
-            playManaAbilities(game);
+            playManaAbilities(unpaid, game);
         } else if (response.getString() != null && response.getString().equals("special")) {
             if (unpaid instanceof ManaCostsImpl) {
                 ManaCostsImpl<ManaCost> costs = (ManaCostsImpl<ManaCost>) unpaid;
@@ -483,12 +484,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
             cost.setPaid();
         } else if (response.getUUID() != null) {
-            playManaAbilities(game);
+            playManaAbilities(null, game);
         }
         return true;
     }
 
-    protected void playManaAbilities(Game game) {
+    protected void playManaAbilities(ManaCost unpaid, Game game) {
         updateGameStatePriority("playManaAbilities", game);
         MageObject object = game.getObject(response.getUUID());
         if (object == null) return;
@@ -497,6 +498,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         if (zone != null) {
             useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
+                useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities);
                 activateAbility(useableAbilities, game);
             }
         }
