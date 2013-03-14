@@ -191,23 +191,26 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
-        if (game.getPlayer(this.controllerId).isHuman()) {
-            // AI can't handle this yet. Uses old way of playXMana
-            VariableManaCost variableManaCost = null;
-            for (ManaCost cost: manaCostsToPay) {
-                if (cost instanceof VariableManaCost && !cost.isPaid()) {
-                    variableManaCost = (VariableManaCost) cost;
-                    break; // only one VariableManCost per spell (or is it possible to have more?)
-                }
+        VariableManaCost variableManaCost = null;
+        for (ManaCost cost: manaCostsToPay) {
+            if (cost instanceof VariableManaCost) {
+                variableManaCost = (VariableManaCost) cost;
+                break; // only one VariableManCost per spell (or is it possible to have more?)
             }
-            if (variableManaCost != null) {
-                int amount = game.getPlayer(this.controllerId).getAmount(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game);
-                game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(amount).append(" for ").append(variableManaCost.getText()).toString());
-                amount *= variableManaCost.getMultiplier();
-                manaCostsToPay.add(new ManaCostsImpl(new StringBuilder("{").append(amount).append("}").toString()));
-                manaCostsToPay.setX(amount);
+        }
+        if (variableManaCost != null) {
+            int xValue;
+            if (!variableManaCost.isPaid()) { // should only happen for human players
+                if (!noMana) {
+                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game, this);
+                    int amountMana = xValue * variableManaCost.getMultiplier();
+                    manaCostsToPay.add(new ManaCostsImpl(new StringBuilder("{").append(amountMana).append("}").toString()));
+                    manaCostsToPay.setX(amountMana);
+                }
                 variableManaCost.setPaid();
             }
+            xValue = getManaCostsToPay().getX();
+            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
         }
 
         //20121001 - 601.2c
@@ -230,7 +233,11 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             card.adjustTargets(this, game);
         }
         if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-            logger.debug("activate failed - target");
+            if (variableManaCost != null) {
+                game.informPlayers(new StringBuilder(card.getName()).append(": no valid targets with this value of X").toString());
+            } else {
+                logger.debug("activate failed - target");
+            }
             return false;
         }
 

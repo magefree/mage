@@ -62,7 +62,7 @@ public class Config2 {
                 p.load(new FileInputStream(propertiesFile));
             } else {
 //                p.setProperty("maxDepth", "10");
-                p.setProperty("maxNodes", "5000");
+                p.setProperty("maxNodes", "50000");
                 p.setProperty("evaluatorLifeFactor", "2");
                 p.setProperty("evaluatorPermanentFactor", "1");
                 p.setProperty("evaluatorCreatureFactor", "1");

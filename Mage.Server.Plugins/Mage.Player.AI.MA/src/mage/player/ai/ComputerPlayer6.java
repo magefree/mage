@@ -35,11 +35,8 @@ import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.*;
@@ -63,6 +60,7 @@ import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
+import mage.target.Targets;
 
 
 /**
@@ -87,7 +85,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
 
-    private int lastTurnOutput = 0;
+    protected int lastLoggedTurn = 0;
 
     static {
         optimizers.add(new LevelUpOptimizer());
@@ -97,7 +95,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
     public ComputerPlayer6(String name, RangeOfInfluence range, int skill) {
         super(name, range);
-        maxDepth = skill * 2;
+        if (skill < 4) {
+            maxDepth = 4;
+        } else {
+            maxDepth = skill;
+        }
         maxThink = skill * 3;
         maxNodes = Config2.maxNodes;
         getSuggestedActions();
@@ -136,10 +138,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             case POSTCOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
                     if (logger.isInfoEnabled()) {
-                        printOutState(game, playerId);
-                        for (UUID opponentId : game.getOpponents(playerId)) {
-                            printOutState(game, opponentId);
-                        }
+                        printOutState(game);
                     }
                     if (actions.size() == 0) {
                         calculateActions(game);
@@ -182,14 +181,23 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         return false;
     }
 
+    protected void printOutState(Game game) {
+        if (logger.isInfoEnabled()) {
+            printOutState(game, playerId);
+            for (UUID opponentId : game.getOpponents(playerId)) {
+                printOutState(game, opponentId);
+            }
+        }
+    }
+
     protected void printOutState(Game game, UUID playerId) {
-        if (lastTurnOutput != game.getTurnNum()) {
-            lastTurnOutput = game.getTurnNum();
-            logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append("  --------------------------------------------------------------").toString());
+        if (lastLoggedTurn != game.getTurnNum()) {
+            lastLoggedTurn = game.getTurnNum();
+            logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append("] --------------------------------------------------------------").toString());
         }
 
         Player player = game.getPlayer(playerId);
-        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("] ").append(game.getTurn().getStepType().name()).append(", life=").append(player.getLife()).toString());
+        logger.info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("], life = ").append(player.getLife()).toString());
         StringBuilder sb = new StringBuilder("-> Hand: [");
         for (Card card : player.getHand().getCards(game)) {
             sb.append(card.getName()).append(";");
@@ -219,7 +227,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             boolean usedStack = false;
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
-                logger.info(new StringBuilder("Act -------------> [").append(game.getPlayer(playerId).getName()).append("] Action: ").append(ability.toString()).toString());
+                logger.info(new StringBuilder("===> Act [").append(game.getPlayer(playerId).getName()).append("] Action: ").append(ability.toString()).toString());
                 if (ability.getTargets().size() > 0) {
                     for (Target target : ability.getTargets()) {
                         for (UUID id : target.getTargets()) {
@@ -240,9 +248,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     while (it.hasNext()) {
                         Card card = game.getCard(ability.getSourceId());
                         String action = it.next();
-                        logger.info("action=" + action + ";card=" + card);
+                        logger.info("Suggested action=" + action + ";card=" + card);
                         if (action.equals(card.getName())) {
-                            logger.info("removed from suggested=" + action);
+                            logger.info("-> removed from suggested=" + action);
                             it.remove();
                         }
                     }
@@ -287,7 +295,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 test = root;
                 root = root.children.get(0);
             }
-            logger.debug("simlating -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
+            logger.trace("Sim getNextAction -- game value:" + game.getState().getValue(true) + " test value:" + test.gameValue);
             if (!suggested.isEmpty()) {
                 return false;
             }
@@ -318,7 +326,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     protected int minimaxAB(SimulationNode2 node, int depth, int alpha, int beta) {
-        logger.info("Simulating minimaxAB -- alpha: " + alpha + " beta: " + beta + " depth:" + depth + " node-score: " + (node != null ? node.getScore() : "null"));
+        logger.trace("Sim minimaxAB ["+depth+"] -- a: " + alpha + " b: " + beta + " <" + (node != null ? node.getScore() : "null")+">");
         UUID currentPlayerId = node.getGame().getPlayerList().get();
         SimulationNode2 bestChild = null;
         for (SimulationNode2 child : node.getChildren()) {
@@ -400,7 +408,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                         SimulationNode2 newNode = new SimulationNode2(node, sim, depth, ability.getControllerId());
                         node.children.add(newNode);
                         newNode.getTargets().add(targetId);
-                        logger.debug("simulating search -- node#: " + SimulationNode2.getCount() + "for player: " + sim.getPlayer(ability.getControllerId()).getName());
+                        logger.trace("Sim search -- node#: " + SimulationNode2.getCount() + " for player: " + sim.getPlayer(ability.getControllerId()).getName());
                     }
                     return;
                 }
@@ -532,24 +540,55 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     sim.getPlayerList().getNext();
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());
+                logger.trace(new StringBuilder("Sim Prio [").append(depth).append("]#").append(counter).append(" -- newNode (").append(action.toString()).append(") ").append(newNode.hashCode()).append(" parent node ").append(node.hashCode()));
                 // int testVal = GameStateEvaluator2.evaluate(currentPlayer.getId(), sim);
-                
+
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth - 1, alpha, beta);
                 
                 if (logger.isInfoEnabled() && depth == maxDepth) {
-                    StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter).append("  -- val = ").append(val).append(" (").append(action).append(")");
+                    StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
+                            .append(" <").append(val).append("> (").append(action)
+                            .append(action.isModal() ? " Mode = "+action.getModes().getMode().toString():"")
+                            .append(listTargets(game, action.getTargets())).append(")")
+                            .append(logger.isTraceEnabled()?" #" +newNode.hashCode():"");
                     SimulationNode2 logNode = newNode;
                     while (logNode.getChildren() != null &&  logNode.getChildren().size()>0) {
                         logNode = logNode.getChildren().get(0);
                         if (logNode.getAbilities() != null && logNode.getAbilities().size()>0) {
-                            sb.append(" --> ").append(logNode.getAbilities().get(0).toString());
+                            sb.append(" -> [").append(logNode.getDepth()).append("]").append(logNode.getAbilities().toString()).append("<").append(logNode.getScore()).append(">");
                         }
                     }
-                    logger.info(sb.toString());
+                    logger.info(sb);
                 }
                 
-                if (!currentPlayer.getId().equals(playerId)) {
+                if (currentPlayer.getId().equals(playerId)) {
+                    if (val > alpha) {
+                        alpha = val;
+                        bestNode = newNode;
+                        bestNode.setScore(val);
+                        if (newNode.getChildren().size() > 0) {
+                            bestNode.setCombat(newNode.getChildren().get(0).getCombat());
+                        }
+                        /*
+                         * if (node.getTargets().size() > 0) targets =
+                         * node.getTargets(); if (node.getChoices().size() > 0)
+                         * choices = node.getChoices();
+                         */
+                        if (depth == maxDepth) {
+                            logger.info(new StringBuilder("Sim Prio [").append(depth).append("] -- Saved best node yet <").append(bestNode.getScore()).append("> ").append(bestNode.getAbilities().toString()).toString());
+                            node.children.clear();
+                            node.children.add(bestNode);
+                            node.setScore(bestNode.getScore());
+                        }
+                    }
+
+                    // no need to check other actions
+                    if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
+                        logger.debug("Sim Prio -- win - break");
+                        break;
+                    }
+                } else {
                     if (val < beta) {
                         beta = val;
                         bestNode = newNode;
@@ -564,32 +603,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                         logger.debug("Sim Prio -- lose - break");
                         break;
                     }
-                } else {
-                    if (val > alpha) {
-                        alpha = val;
-                        bestNode = newNode;
-                        bestNode.setScore(val);
-                        if (newNode.getChildren().size() > 0) {
-                            bestNode.setCombat(newNode.getChildren().get(0).getCombat());
-                        }
-                        /*
-                         * if (node.getTargets().size() > 0) targets =
-                         * node.getTargets(); if (node.getChoices().size() > 0)
-                         * choices = node.getChoices();
-                         */
-                        if (depth == maxDepth) {
-                            logger.info(new StringBuilder("Sim Prio [").append(depth).append("] -- Saved best node yet with score: ").append(bestNode.getScore()).append(" abilities: ").append(bestNode.getAbilities().toString()).toString());
-                            node.children.clear();
-                            node.children.add(bestNode);
-                            node.setScore(bestNode.getScore());
-                        }
-                    }
-
-                    // no need to check other actions
-                    if (val == GameStateEvaluator2.WIN_GAME_SCORE) {
-                        logger.debug("Sim Prio -- win - break");
-                        break;
-                    }
                 }
                 if (alpha >= beta) {
                     //logger.info("Sim Prio -- pruning");
@@ -600,16 +613,16 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     break;
                 }
             }
-        } // end for allActions
+        } // end of for (allActions)
         if (depth == maxDepth) {
-            logger.info(new StringBuilder("Sim Prio [").append(depth).append("] -- End for Max Depth").toString());
+            logger.info(new StringBuilder("Sim Prio [").append(depth).append("] -- End for Max Depth  -- Nodes calculated: ").append(SimulationNode2.nodeCount));
         }
         if (bestNode != null) {
             node.children.clear();
             node.children.add(bestNode);
             node.setScore(bestNode.getScore());
             if (logger.isTraceEnabled() && !bestNode.getAbilities().toString().equals("[Pass]") ) {
-                logger.trace(new StringBuilder("Sim Prio [").append(depth).append("] -- Set after (depth=").append(depth).append(")  Score: ").append(bestNode.getScore()).append(" abilities: ").append(bestNode.getAbilities().toString()).toString());
+                logger.trace(new StringBuilder("Sim Prio [").append(depth).append("] -- Set after (depth=").append(depth).append(")  <").append(bestNode.getScore()).append("> ").append(bestNode.getAbilities().toString()).toString());
             }
         }
 
@@ -730,21 +743,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             }
             return false;
         }
-        return true;
-    }
-
-    @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        //SimulatedPlayer.simulateVariableCosts method adds a generic mana cost for each option
-        for (ManaCost manaCost : costs) {
-            if (manaCost instanceof GenericManaCost) {
-                cost.setPayment(manaCost.getPayment());
-                logger.debug("using X = " + cost.getPayment().count());
-                break;
-            }
-        }
-        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-        cost.setPaid();
         return true;
     }
 
@@ -1288,7 +1286,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         Game sim = game.copy();
         for (Player copyPlayer : sim.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId()).copy();
-            logger.debug(origPlayer.getName() + " suggested: " + suggested);
+            if (!suggested.isEmpty()) {
+                logger.debug(origPlayer.getName() + " suggested: " + suggested);
+            }
             SimulatedPlayer2 newPlayer = new SimulatedPlayer2(copyPlayer.getId(), copyPlayer.getId().equals(playerId), suggested);
             newPlayer.restore(origPlayer);
             sim.getState().getPlayers().put(copyPlayer.getId(), newPlayer);
@@ -1297,7 +1297,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     private boolean checkForRepeatedAction(Game sim, SimulationNode2 node, Ability action, UUID playerId) {
-        if (action instanceof PassAbility) {
+        // pass or casting two times a spell multiple times on hand is ok
+        if (action instanceof PassAbility || action instanceof SpellAbility) {
             return false;
         }
         int newVal = GameStateEvaluator2.evaluate(playerId, sim);
@@ -1352,4 +1353,18 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             suggested.add(action.substring(5, action.length()));
         }
     }
+
+    protected String listTargets(Game game, Targets targets) {
+        StringBuilder sb = new StringBuilder();
+        if (targets != null) {
+            for (Target target: targets) {
+                sb.append("[").append(target.getTargetedName(game)).append("]");
+            }
+            if (sb.length()>0) {
+                sb.insert(0," targeting ");
+            }
+        }
+        return sb.toString();
+    }
+    
 }

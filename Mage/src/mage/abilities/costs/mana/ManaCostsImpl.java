@@ -120,15 +120,16 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
             else
                 return false;
         }
-        for (ManaCost cost : this.getUnpaidVariableCosts()) {
-            VariableManaCost vCost = (VariableManaCost) cost;
-            while (!vCost.isPaid()) {
-                if (player.playXMana(vCost, (ManaCosts<ManaCost>) this, game))
-                    vCost.assignPayment(game, ability, player.getManaPool());
-                else
-                    return false;
-            }
-        }
+        // no more needed because X costs are added to the cost during announcing of the X costs
+//        for (ManaCost cost : this.getUnpaidVariableCosts()) {
+//            VariableManaCost vCost = (VariableManaCost) cost;
+//            while (!vCost.isPaid()) {
+//                if (player.playXMana(vCost, (ManaCosts<ManaCost>) this, game))
+//                    vCost.assignPayment(game, ability, player.getManaPool());
+//                else
+//                    return false;
+//            }
+//        }
         return true;
     }
 

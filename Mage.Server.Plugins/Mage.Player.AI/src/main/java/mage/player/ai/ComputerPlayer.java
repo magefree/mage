@@ -1043,23 +1043,14 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        log.debug("playXMana");
-        //put everything into X
-        for (Permanent perm: this.getAvailableManaProducers(game)) {
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
-                activateAbility(ability, game);
-            }
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        log.debug("announceXMana");
+        //TODO: improve this
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+        if (numAvailable < 0) {
+            numAvailable = 0;
         }
-
-        // don't allow X=0
-        if (getManaPool().count() == 0) {
-            return false;
-        }
-
-        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-        cost.setPaid();
-        return true;
+        return numAvailable;
     }
 
     @Override
@@ -1262,13 +1253,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         log.debug("chooseMode");
+        if (modes.getMode() != null) {
+            // mode was already set by the AI
+            return modes.getMode();
+        }
         //TODO: improve this;
         return modes.values().iterator().next();
     }
 
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        log.debug("chooseTriggeredAbility");
+        log.debug("chooseTriggeredAbility: " + abilities.toString());
         //TODO: improve this
         if (abilities.size() > 0) {
             return abilities.get(0);

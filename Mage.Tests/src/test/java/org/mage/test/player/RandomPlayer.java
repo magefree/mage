@@ -363,24 +363,6 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
     }
 
     @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        for (Permanent perm: this.getAvailableManaProducers(game)) {
-            for (ManaAbility ability: perm.getAbilities().getAvailableManaAbilities(Zone.BATTLEFIELD, game)) {
-                if (rnd.nextBoolean())
-                    activateAbility(ability, game);
-            }
-        }
-
-        // don't allow X=0
-        if (getManaPool().count() == 0) {
-            return false;
-        }
-
-        cost.setPaid();
-        return true;
-    }
-
-    @Override
     public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
         return rnd.nextInt(rEffects.size());
     }

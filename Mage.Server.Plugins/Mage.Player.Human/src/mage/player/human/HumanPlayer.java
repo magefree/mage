@@ -472,20 +472,20 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         return true;
     }
 
+    /**
+     * Gets the amount of mana the player want to spent for a x spell
+     * @param min
+     * @param max
+     * @param message
+     * @param game
+     * @return
+     */
     @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        updateGameStatePriority("playXMana", game);
-        game.firePlayXManaEvent(playerId, "Pay {X}: {X}=" + cost.getAmount());
-        waitForResponse();
-        if (response.getBoolean() != null) {
-            if (!response.getBoolean())
-                return false;
-            game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-            cost.setPaid();
-        } else if (response.getUUID() != null) {
-            playManaAbilities(game);
-        }
-        return true;
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        updateGameStatePriority("announceXMana", game);
+        game.fireGetAmountEvent(playerId, message, min, max);
+        waitForIntegerResponse();
+        return response.getInteger();
     }
 
     protected void playManaAbilities(Game game) {

@@ -66,8 +66,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
 
     @Override
     public boolean priority(Game game) {
+        if (lastLoggedTurn != game.getTurnNum()) {
+            lastLoggedTurn = game.getTurnNum();
+            logger.info(new StringBuilder("------------------------ ").append("Turn: ").append(game.getTurnNum()).append(" [").append(game.getPlayer(game.getActivePlayerId()).getName()).append("----------------------------------------------------").toString());
+        }
         logState(game);
-        logger.debug("Game State: Turn-" + game.getTurnNum() + " Step-" + game.getTurn().getStepType() + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
+        logger.debug("Priority -- Step: " + (game.getTurn().getStepType() + "                       ").substring(0,25) + " ActivePlayer-" + game.getPlayer(game.getActivePlayerId()).getName() + " PriorityPlayer-" + name);
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         switch (game.getTurn().getStepType()) {
@@ -77,8 +81,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game, playerId);
-                    printOutState(game, game.getOpponents(playerId).iterator().next());
+                    printOutState(game);
                     if (actions.size() == 0) {
                         calculatePreCombatActions(game);
                     }
@@ -94,8 +97,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 return false;
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game, playerId);
-                    printOutState(game, game.getOpponents(playerId).iterator().next());
+                    printOutState(game);
                     if (actions.size() == 0) {
                         calculatePreCombatActions(game);
                     }
@@ -113,19 +115,18 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 pass();
                 return false;
             case POSTCOMBAT_MAIN:
-                if (game.getActivePlayerId().equals(playerId)) {
-                    printOutState(game, playerId);
-                    printOutState(game, game.getOpponents(playerId).iterator().next());
+//                if (game.getActivePlayerId().equals(playerId)) {
+                    printOutState(game);
                     if (actions.size() == 0) {
                         calculatePostCombatActions(game);
                     }
                     act(game);
                     return true;
-                }
-                else {
-                    pass();
-                }
-                return false;
+//                }
+//                else {
+//                    pass();
+//                }
+//                return false;
             case END_TURN:
             case CLEANUP:
                 actionCache.clear();
@@ -172,13 +173,12 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             if (root.children.size() > 0) {
                 root = root.children.get(0);
                 int bestScore = root.getScore();
-                //if (bestScore > currentScore || allowBadMoves) {
+                if (bestScore > currentScore || allowBadMoves) {
                     actions = new LinkedList<Ability>(root.abilities);
                     combat = root.combat;
-                    logger.debug("final score: " + bestScore);
-                //} else {
-                    //System.out.println("[" + game.getPlayer(playerId).getName() + "][post] Action: not better score");
-                //}
+                } else {
+                    logger.debug("[" + game.getPlayer(playerId).getName() + "] no better score  current: " + currentScore + " bestScore: " + bestScore );
+                }
             } else {
                 logger.debug("[" + game.getPlayer(playerId).getName() + "][post] Action: skip");
             }
@@ -198,21 +198,30 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
         }
+        // Condition to stop deeper simulation
         if (depth <= 0 || SimulationNode2.nodeCount > maxNodes || game.isGameOver()) {           
             val = GameStateEvaluator2.evaluate(playerId, game);
-            if (logger.isDebugEnabled()) {
-                StringBuilder sb = new StringBuilder("Add Action [").append(depth).append("] -- reached end state  val = ").append(val);
+            if (logger.isTraceEnabled()) {
+                StringBuilder sb = new StringBuilder("Add Actions -- reached end state  <").append(val).append(">");
                 SimulationNode2 logNode  = node;
-                StringBuilder sb2 = new StringBuilder(" --> ").append(node.getAbilities().get(0).toString());
-                while(logNode.getParent() != null) {
+                do {
+                    sb.append(new StringBuilder(" <- ["+logNode.getDepth()+"]" + (logNode.getAbilities() != null ? logNode.getAbilities().toString():"[empty]")));
                     logNode = logNode.getParent();
-                    sb2.insert(0,"["+node.getDepth()+"] s:" + logNode.score).insert(0," (0/"+node.getAbilities().size()+" " + node.getAbilities().get(0).toString()).insert(0, ") --> ");
-                }
-                logger.debug(sb.append(sb2));
+                } while((logNode.getParent() != null));
+                logger.trace(sb);
             }
-        }
-        else if (node.getChildren().size() > 0) {
-            logger.debug("Add Action -- something added children:" + node.getChildren().size());
+        } else if (node.getChildren().size() > 0) {
+            if (logger.isDebugEnabled()) {
+                StringBuilder sb = new StringBuilder("Add Action [").append(depth)
+                        .append("] -- something added children ")
+                        .append(node.getAbilities() != null ? node.getAbilities().toString():"null")
+                        .append(" added children: ").append(node.getChildren().size()).append(" (");
+                for (SimulationNode2 logNode: node.getChildren()) {
+                    sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():"null").append(", ");
+                }
+                sb.append(")");
+                logger.debug(sb);
+            }
             val = minimaxAB(node, depth-1, alpha, beta);
         }
         else {
@@ -263,14 +272,25 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                 }
             }
             else if (node.getChildren().size() > 0) {
-                logger.debug("Add Action -- trigger added children:" + node.getChildren().size());
+                if (logger.isDebugEnabled()) {
+                    StringBuilder sb = new StringBuilder("Add Action [").append(depth)
+                            .append("] -- trigger ")
+                            .append(node.getAbilities() != null ? node.getAbilities().toString():"null")
+                            .append(" added children: ").append(node.getChildren().size()).append(" (");
+                    for (SimulationNode2 logNode: node.getChildren()) {
+                        sb.append(logNode.getAbilities() != null ? logNode.getAbilities().toString():"null").append(", ");
+                    }
+                    sb.append(")");
+                    logger.debug(sb);
+                }
+
                 val = minimaxAB(node, depth, alpha, beta);
             }
             else {
                 val = simulatePriority(node, game, depth, alpha, beta);
             }
         }
-
+        node.setScore(val); // test
         logger.trace("returning -- score: " + val + " depth:" + depth + " step:" + game.getTurn().getStepType() + " for player:" + game.getPlayer(node.getPlayerId()).getName());
         return val;
 

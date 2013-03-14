@@ -28,6 +28,9 @@
 
 package mage.player.ai;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
@@ -47,8 +50,6 @@ import mage.players.Player;
 import mage.target.Target;
 import org.apache.log4j.Logger;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  *
@@ -123,23 +124,13 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             options = filterOptions(game, options, ability, suggested);
             options = optimizeOptions(game, options, ability);
             if (options.isEmpty()) {
-                if (ability.getManaCosts().getVariableCosts().size() > 0) {
-                    simulateVariableCosts(ability, game);
-                }
-                else {
-                    allActions.add(ability);
-                }
+                  allActions.add(ability);
 //                simulateAction(game, previousActions, ability);
             }
             else {
 //                ExecutorService simulationExecutor = Executors.newFixedThreadPool(4);
                 for (Ability option: options) {
-                    if (ability.getManaCosts().getVariableCosts().size() > 0) {
-                        simulateVariableCosts(option, game);
-                    }
-                    else {
-                        allActions.add(option);
-                    }
+                      allActions.add(option);
 //                    SimulationWorker worker = new SimulationWorker(game, this, previousActions, option);
 //                    simulationExecutor.submit(worker);
                 }
@@ -147,6 +138,53 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 //                while(!simulationExecutor.isTerminated()) {}
             }
         }
+    }
+
+    @Override
+    protected void addVariableXOptions(List<Ability> options, Ability ability, int targetNum, Game game) {
+        // calculate the mana that can be used for the x part
+        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().convertedManaCost();
+
+        Card card = game.getCard(ability.getSourceId());
+        if (card != null && numAvailable > 0) {
+            // check if variable mana costs is included and get the multiplier
+            VariableManaCost variableManaCost = null;
+            for (ManaCost cost: ability.getManaCostsToPay()) {
+                if (cost instanceof VariableManaCost && !cost.isPaid()) {
+                    variableManaCost = (VariableManaCost) cost;
+                    break; // only one VariableManCost per spell (or is it possible to have more?)
+                }
+            }
+            if (variableManaCost != null) {
+                int multiplier = variableManaCost.getMultiplier();
+
+                for (int mana = 0; mana <= numAvailable; mana++) {
+                    if (mana % multiplier == 0) { // use only values dependant from muliplier
+                        int xAmount = mana / multiplier;
+                        Ability newAbility = ability.copy();
+                        VariableManaCost varCost = null;
+                        for (ManaCost cost: newAbility.getManaCostsToPay()) {
+                            if (cost instanceof VariableManaCost && !cost.isPaid()) {
+                                varCost = (VariableManaCost) cost;
+                                break; // only one VariableManCost per spell (or is it possible to have more?)
+                            }
+                        }
+                        // add the specific value for x
+                        newAbility.getManaCostsToPay().add(new ManaCostsImpl(new StringBuilder("{").append(xAmount).append("}").toString()));
+                        newAbility.getManaCostsToPay().setX(xAmount);
+                        varCost.setPaid();
+                        card.adjustTargets(newAbility, game);
+                        // add the different possible target option for the specific X value
+                        if (newAbility.getTargets().getUnchosen().size() > 0) {
+                            addTargetOptions(options, newAbility, targetNum, game);
+                        }
+                    }
+
+                }
+            }
+
+        }
+
     }
 
 //    protected void simulateAction(Game game, SimulatedAction previousActions, Ability action) {
@@ -160,6 +198,14 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
 //        }
 //    }
 
+    /**
+     * if suggested abilities exist, return only those from playables
+     *
+     * @param game
+     * @param playables
+     * @param suggested
+     * @return
+     */
     protected List<Ability> filterAbilities(Game game, List<Ability> playables, List<String> suggested) {
         if (playables.isEmpty()) {
             return playables;
@@ -256,31 +302,6 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         }
 
         return options;
-    }
-
-    //add a generic mana cost for each amount possible
-    protected void simulateVariableCosts(Ability ability, Game game) {
-        int numAvailable = getAvailableManaProducers(game).size();
-        // Start with X = {1}
-        for (int i = 1; i < numAvailable; i++) {
-            Ability newAbility = ability.copy();
-            newAbility.getManaCostsToPay().add(new GenericManaCost(i));
-            allActions.add(newAbility);
-        }
-    }
-
-    @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        //simulateVariableCosts method adds a generic mana cost for each option
-        for (ManaCost manaCost: costs) {
-            if (manaCost instanceof GenericManaCost) {
-                cost.setPayment(manaCost.getPayment());
-                logger.debug("simulating -- X = " + cost.getPayment().count());
-                break;
-            }
-        }
-        cost.setPaid();
-        return true;
     }
 
     public List<Combat> addAttackers(Game game) {
@@ -401,4 +422,6 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
         //should never get here
         return false;
     }
+
+
 }

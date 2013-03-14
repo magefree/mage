@@ -1387,6 +1387,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return playable;
     }
 
+    /**
+     * Only used for AIs
+     *
+     * @param ability
+     * @param game
+     * @return
+     */
     @Override
     public List<Ability> getPlayableOptions(Ability ability, Game game) {
         List<Ability> options = new ArrayList<Ability>();
@@ -1394,7 +1401,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (ability.isModal()) {
             addModeOptions(options, ability, game);
         } else if (ability.getTargets().getUnchosen().size() > 0) {
-            addTargetOptions(options, ability, 0, game);
+            // TODO: Handle other variable costs than mana costs
+            if (ability.getManaCosts().getVariableCosts().size() > 0) {
+                addVariableXOptions(options, ability, 0, game);
+            } else {
+                addTargetOptions(options, ability, 0, game);
+            }
         } else if (ability.getChoices().getUnchosen().size() > 0) {
             addChoiceOptions(options, ability, 0, game);
         } else if (ability.getCosts().getTargets().getUnchosen().size() > 0) {
@@ -1408,19 +1420,27 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         for (Mode mode: option.getModes().values()) {
             Ability newOption = option.copy();
             newOption.getModes().setMode(mode);
-            if (option.getTargets().getUnchosen().size() > 0) {
-                addTargetOptions(options, option, 0, game);
-            } else if (option.getChoices().getUnchosen().size() > 0) {
-                addChoiceOptions(options, option, 0, game);
-            } else if (option.getCosts().getTargets().getUnchosen().size() > 0) {
-                addCostTargetOptions(options, option, 0, game);
+            if (newOption.getTargets().getUnchosen().size() > 0) {
+                if (newOption.getManaCosts().getVariableCosts().size() > 0) {
+                    addVariableXOptions(options, newOption, 0, game);
+                } else {
+                    addTargetOptions(options, newOption, 0, game);
+                }
+            } else if (newOption.getChoices().getUnchosen().size() > 0) {
+                addChoiceOptions(options, newOption, 0, game);
+            } else if (newOption.getCosts().getTargets().getUnchosen().size() > 0) {
+                addCostTargetOptions(options, newOption, 0, game);
             } else {
                 options.add(newOption);
             }
         }
     }
 
-    private void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+    protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum, Game game) {
+        addTargetOptions(options, option, targetNum, game);
+    }
+
+    protected void addTargetOptions(List<Ability> options, Ability option, int targetNum, Game game) {
         for (Target target: option.getTargets().getUnchosen().get(targetNum).getTargetOptions(option, game)) {
             Ability newOption = option.copy();
             if (target instanceof TargetAmount) {
