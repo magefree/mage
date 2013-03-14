@@ -27,18 +27,15 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.SpellAbility;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 
 /**
@@ -46,6 +43,7 @@ import mage.target.TargetPermanent;
  * @author LevelX2
  */
 public class Gridlock extends CardImpl<Gridlock> {
+    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents");
 
     public Gridlock(UUID ownerId) {
         super(ownerId, 36, "Gridlock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{X}{U}");
@@ -54,8 +52,10 @@ public class Gridlock extends CardImpl<Gridlock> {
         this.color.setBlue(true);
 
         // Tap X target nonland permanents.
-        this.getSpellAbility().addEffect(new GridlockTapEffect());
-        // Target handling has to be changes once handling of X costs is improved, so that the targets are shown when the spell is on the stack.
+        this.getSpellAbility().addEffect(new TapTargetEffect());
+        // Correct number of targets will be set in adjustTargets
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 1,filter, false));
+        
     }
 
     public Gridlock(final Gridlock card) {
@@ -63,47 +63,17 @@ public class Gridlock extends CardImpl<Gridlock> {
     }
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int numberToTap = ability.getManaCostsToPay().getX();
+            numberToTap = Math.min(game.getBattlefield().count(filter, ability.getSourceId(), ability.getControllerId(), game), numberToTap);
+            ability.addTarget(new TargetPermanent(numberToTap, filter));
+        }
+    }
+
+    @Override
     public Gridlock copy() {
         return new Gridlock(this);
     }
-}
-
-class GridlockTapEffect extends OneShotEffect<GridlockTapEffect> {
-
-    private static final FilterPermanent filter = new FilterNonlandPermanent();
-
-    public GridlockTapEffect() {
-        super(Outcome.Tap);
-        staticText = "Tap X target nonland permanents";
-    }
-
-    public GridlockTapEffect(final GridlockTapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int numberToTap = source.getManaCostsToPay().getX();
-        numberToTap = Math.min(game.getBattlefield().getAllActivePermanents(filter,game).size(), numberToTap);
-        TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
-            if (!target.getTargets().isEmpty()) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Permanent permanent = game.getPermanent(targetId);
-                    if (permanent != null) {
-                        permanent.tap(game);
-                    }
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public GridlockTapEffect copy() {
-        return new GridlockTapEffect(this);
-    }
-
 }

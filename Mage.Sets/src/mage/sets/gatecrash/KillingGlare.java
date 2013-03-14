@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -57,7 +58,8 @@ public class KillingGlare extends CardImpl<KillingGlare> {
         this.color.setBlack(true);
 
         // Destroy target creature with power X or less.
-        this.getSpellAbility().addEffect(new KillingGlareDestroyEffect());
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature with power X or less")));
 
     }
 
@@ -68,13 +70,11 @@ public class KillingGlare extends CardImpl<KillingGlare> {
     @Override
     public void adjustTargets(Ability ability, Game game) {
         if (ability instanceof SpellAbility) {
-            Player controller = game.getPlayer(ability.getControllerId());
-            if (controller.isHuman()) {
-                ability.getTargets().clear();
-                FilterCreaturePermanent filter = new FilterCreaturePermanent();
-                filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, ability.getManaCostsToPay().getX() + 1));
-                ability.addTarget(new TargetCreaturePermanent(filter));
-            }
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(xValue).append(" or less").toString());
+            filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, xValue + 1));
+            ability.addTarget(new TargetCreaturePermanent(filter));
         }
     }
 
@@ -82,46 +82,5 @@ public class KillingGlare extends CardImpl<KillingGlare> {
     @Override
     public KillingGlare  copy() {
         return new KillingGlare(this);
-    }
-}
-
-class KillingGlareDestroyEffect extends OneShotEffect<KillingGlareDestroyEffect> {
-
-    public KillingGlareDestroyEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target creature with power X or less";
-    }
-
-    public KillingGlareDestroyEffect(final KillingGlareDestroyEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public KillingGlareDestroyEffect copy() {
-        return new KillingGlareDestroyEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller.isHuman()) {
-            Permanent creature = game.getPermanent(getTargetPointer().getFirst(game, source));
-            if (creature == null) {
-                return false;
-            }
-            return creature.destroy(source.getSourceId(), game, false);
-        } else {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent();
-            filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
-            Target target = new TargetCreaturePermanent(filter);
-            if (controller.chooseTarget(outcome, target, source, game)) {
-                Permanent creature = game.getPermanent(target.getFirstTarget());
-                if (creature == null) {
-                    return false;
-                }
-                return creature.destroy(source.getSourceId(), game, false);
-            }
-        }
-        return false;
     }
 }

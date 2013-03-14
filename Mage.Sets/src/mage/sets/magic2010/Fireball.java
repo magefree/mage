@@ -28,6 +28,10 @@
 
 package mage.sets.magic2010;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -51,7 +55,7 @@ public class Fireball extends CardImpl<Fireball> {
         super(ownerId, 136, "Fireball", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{X}{R}");
         this.expansionSetCode = "M10";
         this.color.setRed(true);
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(0, Integer.MAX_VALUE));
+        this.getSpellAbility().addTarget(new FireballTargetCreatureOrPlayer(0, Integer.MAX_VALUE));
         this.getSpellAbility().addEffect(new FireballEffect());
     }
 
@@ -114,4 +118,82 @@ class FireballEffect extends OneShotEffect<FireballEffect> {
         return new FireballEffect(this);
     }
 
+}
+
+class FireballTargetCreatureOrPlayer extends TargetCreatureOrPlayer {
+
+    public FireballTargetCreatureOrPlayer(int minNumTargets, int maxNumTargets) {
+        super(minNumTargets, maxNumTargets);
+    }
+
+    public FireballTargetCreatureOrPlayer(final FireballTargetCreatureOrPlayer target) {
+        super(target);
+    }
+
+
+    /**
+     * This is only used by AI players
+     *
+     * @param source
+     * @param game
+     * @return
+     */
+    @Override
+    public List<TargetCreatureOrPlayer> getTargetOptions(Ability source, Game game) {
+        
+        List<TargetCreatureOrPlayer> options = new ArrayList<TargetCreatureOrPlayer>();
+        int xVal = source.getManaCostsToPay().getX();        
+
+        if (xVal < 1) {
+            return options;
+        }
+
+        for (int numberTargets = 1;  numberTargets == 1 || xVal / (numberTargets - 1) > 1  ; numberTargets++) {
+            Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), source.getControllerId(), game);
+            // less possible targets than we're trying to set
+            if (possibleTargets.size() < numberTargets) {
+                return options;
+            }
+            // less than 1 damage per target = 0, add no such options
+            if ((xVal -(numberTargets -1))/numberTargets < 1) {
+                continue;
+            }
+            
+            possibleTargets.removeAll(getTargets());
+            Iterator<UUID> it = possibleTargets.iterator();
+            while (it.hasNext()) {
+                UUID targetId = it.next();
+                TargetCreatureOrPlayer target = this.copy();
+                target.clearChosen();
+                target.addTarget(targetId, source, game, true);
+
+                if (target.getTargets().size() == numberTargets) {
+                    chosen = true;
+                }
+
+                if (!target.isChosen()) {
+                    Iterator<UUID> it2 = possibleTargets.iterator();
+                    while (it2.hasNext()&& !target.isChosen()) {
+                        UUID nextTargetId = it2.next();
+                        target.addTarget(nextTargetId, source, game, true);
+
+                        if (target.getTargets().size() == numberTargets) {
+                            chosen = true;
+                        }
+
+                    }
+                }
+                if (target.isChosen()) {
+                    options.add(target);
+                }
+            }
+        }
+        return options;
+    }
+
+    
+    @Override
+    public FireballTargetCreatureOrPlayer copy() {
+        return new FireballTargetCreatureOrPlayer(this);
+    }
 }
