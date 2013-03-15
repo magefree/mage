@@ -276,31 +276,51 @@ public class SimulatedPlayer2 extends ComputerPlayer<SimulatedPlayer2> {
             return options;
         }
 
-        // determine if all effects are bad
+        // determine if all effects are bad or good
         Iterator<Ability> iterator = options.iterator();
-        boolean bad = false;
+        boolean bad = true;
+        boolean good = true;
         for (Effect effect : ability.getEffects()) {
             if (effect.getOutcome().isGood()) {
                 bad = false;
-                break;
             } else {
-                bad = true;
+                good = false;
             }
         }
 
         if (bad) {
-            // remove its own creatures for bad effects
+            // remove its own creatures, player itself for bad effects
             while (iterator.hasNext()) {
                 Ability ability1 = iterator.next();
                 if (ability1.getTargets().size() == 1) {
                     Permanent permanent = game.getPermanent(ability1.getFirstTarget());
-                    if (permanent != null && permanent.getControllerId().equals(playerId)) {
+                    if (permanent != null && !game.getOpponents(playerId).contains(permanent.getControllerId())) {
+                        iterator.remove();
+                        continue;
+                    }
+                    if (ability1.getFirstTarget().equals(playerId)) {
                         iterator.remove();
                     }
                 }
             }
         }
-
+        if (good) {
+            // remove opponent creatures and opponent for only good effects
+            while (iterator.hasNext()) {
+                Ability ability1 = iterator.next();
+                if (ability1.getTargets().size() == 1) {
+                    Permanent permanent = game.getPermanent(ability1.getFirstTarget());
+                    if (permanent != null && game.getOpponents(playerId).contains(permanent.getControllerId())) {
+                        iterator.remove();
+                        continue;
+                    }
+                    if (game.getOpponents(playerId).contains(ability1.getFirstTarget())) {
+                        iterator.remove();
+                    }
+                }
+            }
+        }
+        
         return options;
     }
 
