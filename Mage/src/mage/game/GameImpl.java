@@ -28,15 +28,7 @@
 
 package mage.game;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import mage.Constants.CardType;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -90,6 +82,10 @@ import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
 import mage.watchers.common.*;
 import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.*;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -1093,7 +1089,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 if (perm.getAttachedTo() != null) {
                     Permanent creature = getPermanent(perm.getAttachedTo());
                     if (creature == null || !creature.getAttachments().contains(perm.getId())) {
+                        UUID wasAttachedTo = perm.getAttachedTo();
                         perm.attachTo(null, this);
+                        fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
                     } else if (!creature.getCardType().contains(CardType.CREATURE) || creature.hasProtectionFrom(perm, this)) {
                         if (creature.removeAttachment(perm.getId(), this)) {
                             somethingHappened = true;

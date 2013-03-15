@@ -28,13 +28,6 @@
 
 package mage.game.permanent;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
@@ -44,27 +37,16 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.HasteAbility;
-import mage.abilities.keyword.HexproofAbility;
-import mage.abilities.keyword.InfectAbility;
-import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.ProtectionAbility;
-import mage.abilities.keyword.ShroudAbility;
-import mage.abilities.keyword.WitherAbility;
+import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.DamageCreatureEvent;
-import mage.game.events.DamagePlaneswalkerEvent;
-import mage.game.events.DamagedCreatureEvent;
-import mage.game.events.DamagedPlaneswalkerEvent;
-import mage.game.events.EntersTheBattlefieldEvent;
-import mage.game.events.GameEvent;
+import mage.game.events.*;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
+
+import java.util.*;
 
 
 /**
