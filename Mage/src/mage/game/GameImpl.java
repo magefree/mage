@@ -693,8 +693,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         player.getLibrary().addAll(player.getHand().getCards(this), this);
         player.getHand().clear();
         player.shuffleLibrary(this);
-        player.drawCards(numCards - 1, this);
         fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
+        player.drawCards(numCards - 1, this);
     }
 
     @Override
