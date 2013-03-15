@@ -72,7 +72,7 @@ class CoercedConfessionMillEffect extends OneShotEffect<CoercedConfessionMillEff
 
     public CoercedConfessionMillEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way.";
+        this.staticText = "Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into a graveyard this way";
     }
 
     public CoercedConfessionMillEffect(final CoercedConfessionMillEffect effect) {

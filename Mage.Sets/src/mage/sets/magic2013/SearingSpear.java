@@ -48,7 +48,7 @@ public class SearingSpear extends CardImpl<SearingSpear> {
 
         // Searing Spear deals 3 damage to target creature or player.
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public SearingSpear(final SearingSpear card) {

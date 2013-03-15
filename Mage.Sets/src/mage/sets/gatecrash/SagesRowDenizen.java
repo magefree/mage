@@ -65,7 +65,7 @@ public class SagesRowDenizen extends CardImpl<SagesRowDenizen> {
 
         // Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of his or her library into his or her graveyard.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter, false);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 
