@@ -28,22 +28,11 @@
 
 package mage.player.ai;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.choices.Choice;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -52,6 +41,9 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import org.apache.log4j.Logger;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  *
@@ -155,7 +147,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
         }
     }
 
-    @Override
+    /*@Override
     public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
         //simulateVariableCosts method adds a generic mana cost for each option
         for (ManaCost manaCost: costs) {
@@ -167,7 +159,7 @@ public class SimulatedPlayer extends ComputerPlayer<SimulatedPlayer> {
         }
         cost.setPaid();
         return true;
-    }
+    }*/
 
     public List<Combat> addAttackers(Game game) {
         Map<Integer, Combat> engagements = new HashMap<Integer, Combat>();

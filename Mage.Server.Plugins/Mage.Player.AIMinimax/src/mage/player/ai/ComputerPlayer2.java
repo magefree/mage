@@ -34,10 +34,6 @@ import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Cards;
@@ -526,7 +522,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
         return true;
     }
 
-    @Override
+    /*@Override
     public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
         //SimulatedPlayer.simulateVariableCosts method adds a generic mana cost for each option
         for (ManaCost manaCost: costs) {
@@ -539,7 +535,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
         game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
         cost.setPaid();
         return true;
-    }
+    }*/
 
     public void playNext(Game game, UUID activePlayerId, SimulationNode node) {
         boolean skip = false;
