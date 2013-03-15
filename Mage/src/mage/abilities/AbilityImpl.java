@@ -266,9 +266,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             return false;
         }
 
+        //20101001 - 601.2e
+        game.getContinuousEffects().costModification(this, game);
+
         if (!useAlternativeCost(game)) {
-            //20101001 - 601.2e
-            game.getContinuousEffects().costModification(this, game);
 
             //20100716 - 601.2f
             if (!manaCostsToPay.pay(this, game, sourceId, controllerId, noMana)) {

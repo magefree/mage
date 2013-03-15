@@ -65,7 +65,7 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.adjustCost(abilityToModify, this.amount);
+        CardUtil.reduceCost(abilityToModify, this.amount);
         return true;
     }
 

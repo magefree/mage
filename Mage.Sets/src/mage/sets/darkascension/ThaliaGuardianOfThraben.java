@@ -27,7 +27,6 @@
  */
 package mage.sets.darkascension;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -35,12 +34,16 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,14 +92,13 @@ class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectI
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().add(new GenericManaCost(1));
+        CardUtil.increaseCost(abilityToModify, 1);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.getCardType().contains(CardType.CREATURE)) {
                 return true;

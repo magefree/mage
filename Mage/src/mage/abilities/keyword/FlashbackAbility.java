@@ -46,9 +46,10 @@ import mage.target.Target;
  *
  * @author nantuko
  */
-public class FlashbackAbility extends ActivatedAbilityImpl<FlashbackAbility> {
+public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<FlashbackAbility> {
 
     public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
+        //super(cost, "", new FlashbackEffect(), Constants.Zone.GRAVEYARD);
         super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
         this.timing = timingRule;
         this.usesStack = false;

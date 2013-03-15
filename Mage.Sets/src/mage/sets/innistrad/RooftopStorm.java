@@ -27,7 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -37,11 +36,15 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -92,8 +95,8 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl<Rooftop
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            SpellAbility spell = (SpellAbility) abilityToModify;
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+            Ability spell = abilityToModify;
             if (spell.getControllerId().equals(source.getControllerId())) {
                 Card sourceCard = game.getCard(spell.getSourceId());
                 if (sourceCard != null && sourceCard.hasSubtype("Zombie")) {

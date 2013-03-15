@@ -34,6 +34,8 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -87,7 +89,7 @@ class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl<ArcaneMe
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ( abilityToModify instanceof SpellAbility ) {
+        if ( abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
             Card sourceCard = game.getCard(((SpellAbility)abilityToModify).getSourceId());
             if ( sourceCard != null && (sourceCard.getCardType().contains(CardType.INSTANT) || sourceCard.getCardType().contains(CardType.SORCERY))) {
                 return true;

@@ -27,7 +27,6 @@
  */
 package mage.sets.prophecy;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -40,11 +39,15 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.continious.CanBlockAdditionalCreatureEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -138,7 +141,8 @@ class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffe
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility && abilityToModify.getSourceId().equals(source.getSourceId())) {
+        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
+                && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return true;
         }
         return false;

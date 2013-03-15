@@ -27,7 +27,6 @@
  */
 package mage.sets.ninthedition;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -36,8 +35,12 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -84,7 +87,7 @@ class DefenseGridCostModificationEffect extends CostModificationEffectImpl<Defen
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
             if(!abilityToModify.getControllerId().equals(game.getActivePlayerId())) {
                 return true;
             }

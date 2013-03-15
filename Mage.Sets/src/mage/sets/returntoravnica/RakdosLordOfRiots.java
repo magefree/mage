@@ -27,7 +27,6 @@
  */
 package mage.sets.returntoravnica;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -38,13 +37,17 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -138,12 +141,12 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl<Ra
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
+        Ability spellAbility = (SpellAbility) abilityToModify;
         if (spellAbility != null) {
             OpponentsLostLifeCount dynamicValue = new OpponentsLostLifeCount();
             int amount = dynamicValue.calculate(game, source);
             if (amount > 0) {
-                CardUtil.adjustCost(spellAbility, amount);
+                CardUtil.reduceCost(spellAbility, amount);
                 return true;
             }
         }
@@ -152,8 +155,8 @@ class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl<Ra
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+            Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && abilityToModify.getControllerId().equals(source.getControllerId()) && (sourceCard.getCardType().contains(CardType.CREATURE))) {
                 return true;
             }

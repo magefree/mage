@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,9 +36,13 @@ import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+
+import java.util.UUID;
 
 /**
  *
@@ -89,7 +92,7 @@ class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl<Lodes
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
             Card card = game.getCard(abilityToModify.getSourceId());
             if (card != null && !card.getCardType().contains(CardType.ARTIFACT)) {
                 return true;

@@ -27,7 +27,6 @@
  */
 package mage.sets.worldwake;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -43,6 +42,7 @@ import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -51,6 +51,8 @@ import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -104,13 +106,13 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneI
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
         int reductionAmount = game.getBattlefield().count(filter, source.getSourceId(),  source.getControllerId(),game);
-        CardUtil.adjustCost(abilityToModify, reductionAmount);
+        CardUtil.reduceCost(abilityToModify, reductionAmount);
         return true;
     }
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility)
+        if ((abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility)
                 && abilityToModify.getSourceId().equals(source.getSourceId())) {
             return game.getCard(abilityToModify.getSourceId()) != null;
         }

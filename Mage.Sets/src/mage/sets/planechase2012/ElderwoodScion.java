@@ -27,7 +27,6 @@
  */
 package mage.sets.planechase2012;
 
-import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -37,12 +36,16 @@ import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.target.Target;
 import mage.util.CardUtil;
+
+import java.util.UUID;
 
 /**
  *
@@ -102,7 +105,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<Elder
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
             if (abilityToModify.getControllerId().equals(source.getControllerId())) {
                 for (Target target :abilityToModify.getTargets()) {
                     for (UUID targetUUID :target.getTargets()) {

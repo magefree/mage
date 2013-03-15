@@ -33,7 +33,9 @@ import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FlashAbility;
 import mage.game.Game;
 
@@ -46,8 +48,17 @@ import java.util.UUID;
 public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
     public SpellAbility(ManaCost cost, String cardName) {
-        super(AbilityType.SPELL, Zone.HAND);
+        this(cost, cardName, Zone.HAND);
+    }
+
+    public SpellAbility(ManaCost cost, String cardName, Zone zone) {
+        super(AbilityType.SPELL, zone);
         this.addManaCost(cost);
+        this.name = "Cast " + cardName;
+    }
+
+    public SpellAbility(Cost cost, String cardName, Effect effect, Zone zone) {
+        super(zone, effect, cost);
         this.name = "Cast " + cardName;
     }
 

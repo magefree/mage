@@ -36,6 +36,8 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
@@ -136,8 +138,8 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl<Sembl
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility) {
-            Card sourceCard = game.getCard(((SpellAbility) abilityToModify).getSourceId());
+        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
+            Card sourceCard = game.getCard(abilityToModify.getSourceId());
             if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())) {
                 Permanent permanent = game.getPermanent(source.getSourceId());
                 if (permanent != null) {

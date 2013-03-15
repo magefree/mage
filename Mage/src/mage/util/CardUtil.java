@@ -32,6 +32,8 @@ import mage.Constants;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -40,6 +42,8 @@ import mage.cards.Card;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
+
+import java.util.Iterator;
 
 /**
  * @author nantuko
@@ -88,6 +92,63 @@ public class CardUtil {
 
         return false;
     }
+
+    /**
+     * Increase spell or ability cost to be paid.
+     *
+     * @param ability
+     * @param increaseCount
+     */
+    public static void increaseCost(Ability ability, int increaseCount) {
+        adjustCost(ability, -increaseCount);
+        adjustAlternativeCosts(ability, -increaseCount);
+    }
+
+    /**
+     * Reduces ability cost to be paid.
+     *
+     * @param ability
+     * @param reduceCount
+     */
+    public static void reduceCost(Ability ability, int reduceCount) {
+        adjustCost(ability, reduceCount);
+        adjustAlternativeCosts(ability, reduceCount);
+    }
+    
+    private static void adjustAlternativeCosts(Ability ability, int reduceCount) {
+        for (AlternativeCost alternativeCost : ability.getAlternativeCosts()) {
+            if (alternativeCost instanceof AlternativeCostImpl) {
+                AlternativeCostImpl impl = (AlternativeCostImpl) alternativeCost;
+                ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+                boolean updated = false;
+                Iterator it = impl.iterator();
+                while (it.hasNext()) {
+                    Object cost = it.next();
+                    if (cost instanceof ManaCosts) {
+                        for (Object object : ((ManaCosts) cost)) {
+                            if (object instanceof ManaCost) {
+                                ManaCost manaCost = (ManaCost) object;
+                                Mana mana = manaCost.getOptions().get(0);
+                                int colorless = mana != null ? mana.getColorless() : 0;
+                                if (!updated && colorless > 0) {
+                                    if ((colorless - reduceCount) > 0) {
+                                        int newColorless = colorless - reduceCount;
+                                        it.remove();
+                                        adjustedCost.add(new GenericManaCost(newColorless));
+                                    }
+                                    updated = true;
+                                } else {
+                                    adjustedCost.add(manaCost);
+                                }
+                            }
+                        }
+                    }
+                }
+                impl.add(adjustedCost);
+            }
+        }
+    }
+
     /**
      * Adjusts spell or ability cost to be paid.
      *
@@ -95,32 +156,39 @@ public class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        Ability ability = (Ability) spellAbility;
-        CardUtil.adjustCost(ability, reduceCount);
+        CardUtil.adjustCost(spellAbility, reduceCount);
+        adjustAlternativeCosts(spellAbility, reduceCount);
     }
+
     /**
      * Adjusts ability cost to be paid.
      *
      * @param ability
      * @param reduceCount
      */
-    public static void adjustCost(Ability ability, int reduceCount) {
+    private static void adjustCost(Ability ability, int reduceCount) {
         ManaCosts<ManaCost> previousCost = ability.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
-        boolean reduced = false;
+        boolean updated = false;
         for (ManaCost manaCost : previousCost) {
             Mana mana = manaCost.getOptions().get(0);
             int colorless = mana != null ? mana.getColorless() : 0;
-            if (!reduced && colorless > 0) {
+            if (!updated && colorless > 0) {
                 if ((colorless - reduceCount) > 0) {
                     int newColorless = colorless - reduceCount;
                     adjustedCost.add(new GenericManaCost(newColorless));
                 }
-                reduced = true;
+                updated = true;
             } else {
                 adjustedCost.add(manaCost);
             }
         }
+
+        // for increasing spell cost effects
+        if (!updated && reduceCount < 0) {
+            adjustedCost.add(new GenericManaCost(-reduceCount));
+        }
+
         ability.getManaCostsToPay().clear();
         ability.getManaCostsToPay().addAll(adjustedCost);
     }
@@ -129,7 +197,7 @@ public class CardUtil {
      * Adjusts spell or ability cost to be paid by colored and generic mana.
      *
      * @param spellAbility
-     * @param mana costs to reduce
+     * @param manaCostsToReduce costs to reduce
      */
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
