@@ -183,20 +183,6 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
 //        throw new UnsupportedOperationException("Not supported yet.");
 //    }
 
-    @Override
-    public boolean playXMana(VariableManaCost cost, ManaCosts<ManaCost> costs, Game game) {
-        //MCTSPlayer.simulateVariableCosts method adds a generic mana cost for each option
-        for (ManaCost manaCost: costs) {
-            if (manaCost instanceof GenericManaCost) {
-                cost.setPayment(manaCost.getPayment());
-                logger.debug("using X = " + cost.getPayment().count());
-                break;
-            }
-        }
-        game.informPlayers(getName() + " payed " + cost.getPayment().count() + " for " + cost.getText());
-        cost.setPaid();
-        return true;
-    }
 
 //    @Override
 //    public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
