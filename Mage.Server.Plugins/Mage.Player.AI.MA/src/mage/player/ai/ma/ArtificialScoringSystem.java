@@ -9,6 +9,9 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
+import mage.Constants.Outcome;
+import mage.abilities.effects.Effect;
+import mage.abilities.keyword.EnchantAbility;
 
 /**
  * @author ubeefx, nantuko
@@ -85,13 +88,21 @@ public class ArtificialScoringSystem {
                 Card card = game.getCard(uuid);
                 if (card != null) {
                     if (card.getCardType().contains(Constants.CardType.ENCHANTMENT)) {
-                        enchantments++;
+                        Effect effect = card.getSpellAbility().getEffects().get(0);
+                        if (effect != null) {
+                            Outcome outcome = effect.getOutcome();
+                            if (outcome.isGood()) {
+                                enchantments++;
+                            } else if (!outcome.equals(Outcome.Detriment)) {
+                                enchantments--;
+                            }
+                        }
                     } else {
                         equipments++;
                     }
                 }
             }
-            score += equipments*50 /*+ enchantments*100*/;
+            score += equipments*50 + enchantments*100;
 
             if (!permanent.canAttack(game)) {
                 score -= 100;
