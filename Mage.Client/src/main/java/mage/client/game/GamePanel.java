@@ -95,9 +95,9 @@ public final class GamePanel extends javax.swing.JPanel {
 
         combat = new CombatDialog();
         pickNumber = new PickNumberDialog();
-        MageFrame.getDesktop().add(combat, JLayeredPane.POPUP_LAYER);
+        MageFrame.getDesktop().add(combat, JLayeredPane.MODAL_LAYER);
         combat.hideDialog();
-        MageFrame.getDesktop().add(pickNumber, JLayeredPane.POPUP_LAYER);
+        MageFrame.getDesktop().add(pickNumber, JLayeredPane.MODAL_LAYER);
 
         this.feedbackPanel.setConnectedChatPanel(this.userChatPanel);
 

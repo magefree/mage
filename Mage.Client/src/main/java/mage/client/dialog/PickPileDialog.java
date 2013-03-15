@@ -96,7 +96,7 @@ public class PickPileDialog extends MageDialog {
         this.pile2.loadCardsNarrow(pile2, bigCard, dimension, gameId, null);
 
         if (getParent() != MageFrame.getDesktop() /*|| this.isClosed*/) {
-            MageFrame.getDesktop().add(this, JLayeredPane.POPUP_LAYER);
+            MageFrame.getDesktop().add(this, JLayeredPane.MODAL_LAYER);
         }
         pack();
 
