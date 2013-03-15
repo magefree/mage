@@ -29,6 +29,7 @@
 package mage.abilities.effects.common.counter;
 
 import mage.Constants.Outcome;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.common.PlusOneCounter;
@@ -62,6 +63,9 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment == null) {
+            enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        }
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
@@ -72,10 +76,12 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
     }
 
     private void setText() {
-        if (amount > 1)
+        if (amount > 1) {
             staticText = "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
-        else
+        }
+        else {
             staticText = "put a +1/+1 counter on enchanted creature";
+        }
     }
 
 }
