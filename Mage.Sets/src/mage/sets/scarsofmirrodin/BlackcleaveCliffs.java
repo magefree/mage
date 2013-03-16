@@ -55,7 +55,7 @@ public class BlackcleaveCliffs extends CardImpl<BlackcleaveCliffs> {
         this.expansionSetCode = "SOM";
 
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 lands";
+        String abilityText = "tapped unless you control fewer than 3 lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new BlackManaAbility());
         this.addAbility(new RedManaAbility());
