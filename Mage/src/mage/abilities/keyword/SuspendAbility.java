@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
@@ -36,6 +37,7 @@ import mage.Constants.Outcome;
 import mage.Constants.SubLayer;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
@@ -171,6 +173,18 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     }
 
     @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        MageObject object = game.getObject(sourceId);
+        if ((object.getCardType().contains(CardType.INSTANT) ||
+                object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
+                game.canPlaySorcery(playerId))) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public String getRule() {
         return ruleText;
     }
@@ -205,7 +219,13 @@ class SuspendExileEffect extends OneShotEffect<SuspendExileEffect> {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
-        if (card != null && card.getSpellAbility().canActivate(source.getControllerId(), game) && card.getSpellAbility().isInUseableZone(game, card, false)) {
+        if (card != null && controller != null) {
+            // check if user really wants to suspend the card (only if spell can't be casted because else the choose ability dialog appears)
+            if (!card.getSpellAbility().canActivate(source.getControllerId(), game)) {
+                if (!controller.chooseUse(outcome, new StringBuilder("Suspend ").append(card.getName()).append("?").toString(), game)) {
+                    return false;
+                }
+            }
             UUID exileId = (UUID) game.getState().getValue("SuspendExileId" + source.getControllerId().toString());
             if (exileId == null) {
                 exileId = UUID.randomUUID();

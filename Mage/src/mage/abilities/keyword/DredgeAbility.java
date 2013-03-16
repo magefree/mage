@@ -58,11 +58,6 @@ public class DredgeAbility extends SimpleStaticAbility {
     public DredgeAbility copy() {
         return new DredgeAbility(this);
     }
-
-    @Override
-    public String getRule() {
-        return "Dredge " + super.getRule();
-    }
 }
 
 class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
@@ -72,7 +67,8 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
     public DredgeEffect(int value) {
         super(Duration.WhileInGraveyard, Outcome.ReturnToHand);
         this.amount = value;
-        this.staticText = Integer.toString(value);
+        this.staticText = new StringBuilder("Dredge ").append(Integer.toString(value))
+                .append(" <i>(If you would draw a card, instead you may put exactly three cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>").toString();
     }
 
     public DredgeEffect(final DredgeEffect effect) {
@@ -96,12 +92,10 @@ class DredgeEffect extends ReplacementEffectImpl<DredgeEffect> {
         if (sourceCard == null) {
             return false;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Put exactly ").append(amount).append(" cards from the top of your library into your graveyard?");
-        sb.append(" If you do, return ").append(sourceCard.getName()).append(" from your graveyard to your hand. Otherwise, draw a card.");
-
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() >= amount && player.chooseUse(outcome, sb.toString(), game)) {
+        if (player != null && player.getLibrary().size() >= amount 
+                && player.chooseUse(outcome, new StringBuilder("Dredge ").append(sourceCard.getName()).
+                append(" (").append(amount).append(" cards go from top of library to graveyard)").toString(), game)) {
             for (int i = 0; i < amount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {

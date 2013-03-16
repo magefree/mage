@@ -78,7 +78,9 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
             if (!controllerId.equals(playerId)) {
                 return false;
             }
-
+            if (this.getManaCosts().isEmpty()) {
+                return false;
+            }
             if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
                 return true;
             }
