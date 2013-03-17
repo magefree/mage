@@ -78,13 +78,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
-    protected static Choice replacementEffectChoice = new ChoiceImpl(true);
-    private static Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
+    protected static final Choice replacementEffectChoice = new ChoiceImpl(true);
+    private static final Map<String, Serializable> staticOptions = new HashMap<String, Serializable>();
 
     private static final Logger log = Logger.getLogger(HumanPlayer.class);
 
     static {
-        //filter.add(new ControllerPredicate(TargetController.YOU));
         replacementEffectChoice.setMessage("Choose replacement effect");
         staticOptions.put("UI.right.btn.text", "Done");
     }
@@ -416,10 +415,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             } else if (response.getUUID() != null) {
                 MageObject object = game.getObject(response.getUUID());
                 if (object != null) {
-                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = null;
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
-                        useableAbilities = getUseableActivatedAbilities(object, zone, game);
+                        LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(object, zone, game);
                         if (useableAbilities != null && useableAbilities.size() > 0) {
                             activateAbility(useableAbilities, game);
                         }
@@ -492,11 +490,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     protected void playManaAbilities(ManaCost unpaid, Game game) {
         updateGameStatePriority("playManaAbilities", game);
         MageObject object = game.getObject(response.getUUID());
-        if (object == null) return;
-        LinkedHashMap<UUID, ManaAbility> useableAbilities = null;
+        if (object == null) {
+            return;
+        }        
         Zone zone = game.getState().getZone(object.getId());
         if (zone != null) {
-            useableAbilities = getUseableManaAbilities(object, zone, game);
+            LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities);
                 activateAbility(useableAbilities, game);
@@ -546,6 +545,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         game.getCombat().removeAttacker(attacker.getId(), game);
     }
 
+    /**
+     * Selects a defender for an attacker and adds the attacker to combat
+     *
+     * @param defenders - list of possible defender
+     * @param attackerId - UUID of attacker
+     * @param game
+     * @return
+     */
     protected boolean selectDefender(Set<UUID> defenders, UUID attackerId, Game game) {
         if (defenders.size() == 1) {
             declareAttacker(attackerId, defenders.iterator().next(), game);
@@ -631,7 +638,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
         waitForResponse();
         if (response.getBoolean() != null) {
-            return;
+            // do nothing
         } else if (response.getUUID() != null) {
             declareBlocker(blockerId, response.getUUID(), game);
         }
