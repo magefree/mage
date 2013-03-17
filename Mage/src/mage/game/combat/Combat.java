@@ -122,6 +122,32 @@ public class Combat implements Serializable, Copyable<Combat> {
         this.attackerId = playerId;
     }
 
+    /**
+     * Add an additional attacker to the combat (e.g. token of Geist of Saint Traft)
+     * This method doesn't trigger ATTACKER_DECLARED event (as intended).
+     *
+     * @param creatureId - creature that shall be added to the combat
+     * @param game
+     * @return
+     */
+    public boolean addAttackingCreature(UUID creatureId, Game game) {
+        Player player = game.getPlayer(attackerId);
+        if (defenders.size() == 1) {
+            declareAttacker(creatureId, defenders.iterator().next(), game);
+            return true;
+        }
+        else {
+            TargetDefender target = new TargetDefender(defenders, creatureId);
+            target.setRequired(true);
+            player.chooseTarget(Outcome.Damage, target, null, game);
+            if (target.getFirstTarget() != null) {
+                declareAttacker(creatureId, target.getFirstTarget(), game);
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void selectAttackers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackerId, attackerId))) {
             Player player = game.getPlayer(attackerId);
