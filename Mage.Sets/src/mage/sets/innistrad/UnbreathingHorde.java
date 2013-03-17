@@ -130,7 +130,7 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl<UnbreathingHordeEffec
 
     public UnbreathingHordeEffect2(final UnbreathingHordeEffect2 effect) {
         super(effect);
-        staticText = "If damage would be dealt to {this}, prevent that damage and remove that many +1/+1 counters from it";
+        staticText = "If damage would be dealt to {this}, prevent that damage and remove a +1/+1 counter from it";
     }
 
     @Override
@@ -155,7 +155,7 @@ class UnbreathingHordeEffect2 extends PreventionEffectImpl<UnbreathingHordeEffec
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.removeCounters(CounterType.P1P1.createInstance(damage), game);
+            permanent.removeCounters(CounterType.P1P1.createInstance(), game);
         }
         return retValue;
     }
