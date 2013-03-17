@@ -108,6 +108,7 @@ class PreeminentCaptainEffect extends OneShotEffect<PreeminentCaptainEffect> {
                 if (card != null) {
                     if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
                         Permanent permanent = game.getPermanent(card.getId());
+                        permanent.setTapped(true);
                         game.getCombat().addAttackingCreature(permanent.getId(), game);
                     }
                 }
