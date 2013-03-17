@@ -90,8 +90,7 @@ class HeroOfBladeholdEffect extends OneShotEffect<HeroOfBladeholdEffect> {
             for (int i = 0; i < 2; i++) {
                 token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
                 Permanent p = game.getPermanent(token.getLastAddedToken());
-                game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
-                p.setTapped(true);
+                game.getCombat().addAttackingCreature(p.getId(), game);
             }
         }
         return true;

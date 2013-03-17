@@ -28,7 +28,6 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -45,6 +44,7 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.AngelToken;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -92,10 +92,10 @@ class GeistOfSaintTraftEffect extends OneShotEffect<GeistOfSaintTraftEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         AngelToken token = new AngelToken();
-        if (token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId())) {
             Permanent p = game.getPermanent(token.getLastAddedToken());
-            game.getCombat().declareAttacker(p.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
-            p.setTapped(true);
+            game.getCombat().addAttackingCreature(p.getId(), game);
             Effect effect = new ExileTargetEffect();
             effect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
             CreateDelayedTriggeredAbilityEffect createEffect = new CreateDelayedTriggeredAbilityEffect(new AtTheEndOfCombatDelayedTriggeredAbility(effect));

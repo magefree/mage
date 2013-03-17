@@ -97,8 +97,7 @@ class KessigCagebreakersEffect extends OneShotEffect<KessigCagebreakersEffect> {
             for (int i = 0; i < count; i++) {
                 token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
                 Permanent permanent = game.getPermanent(token.getLastAddedToken());
-                game.getCombat().declareAttacker(permanent.getId(), game.getCombat().getDefendingPlayer(source.getSourceId()), game);
-                permanent.setTapped(true);
+                game.getCombat().addAttackingCreature(permanent.getId(), game);
             }
             return true;
         }
