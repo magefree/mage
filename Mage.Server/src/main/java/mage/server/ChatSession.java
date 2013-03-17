@@ -56,7 +56,7 @@ public class ChatSession {
 
     public void join(UUID userId) {
         User user = UserManager.getInstance().getUser(userId);
-        if (user != null) {
+        if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
             broadcast(userName, " has joined", MessageColor.BLACK);
@@ -74,17 +74,19 @@ public class ChatSession {
     }
 
     public void broadcast(String userName, String message, MessageColor color) {
-        Calendar cal = new GregorianCalendar();
-        final String msg = message;
-        final String time = timeFormatter.format(cal.getTime());
-        final String username = userName;
-        logger.debug("Broadcasting '" + msg + "' for " + chatId);
-        for (UUID userId: clients.keySet()) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null)
-                user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
-            else
-                kill(userId);
+        if (!message.isEmpty()) {
+            Calendar cal = new GregorianCalendar();
+            final String msg = message;
+            final String time = timeFormatter.format(cal.getTime());
+            final String username = userName;
+            logger.debug("Broadcasting '" + msg + "' for " + chatId);
+            for (UUID userId: clients.keySet()) {
+                User user = UserManager.getInstance().getUser(userId);
+                if (user != null)
+                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
+                else
+                    kill(userId);
+            }
         }
     }
 
