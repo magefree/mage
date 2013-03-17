@@ -44,7 +44,8 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.Target;
+import mage.target.TargetPermanent;
 
 /**
  *
@@ -68,11 +69,17 @@ public class EtherswornAdjudicator extends CardImpl<EtherswornAdjudicator> {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // {1}{W}{B}, {T}: Destroy target creature or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}{W}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetControlledPermanent(filter));
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
+        // {2}{U}: Untap Ethersworn Adjudicator.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}")));
     }
 
