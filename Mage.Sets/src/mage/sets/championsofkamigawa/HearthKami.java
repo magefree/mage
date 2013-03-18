@@ -29,30 +29,27 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
  * @author Loki
  */
 public class HearthKami extends CardImpl<HearthKami> {
-
-
-    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact with converted mana cost X");
 
     public HearthKami(UUID ownerId) {
         super(ownerId, 171, "Hearth Kami", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
@@ -61,23 +58,24 @@ public class HearthKami extends CardImpl<HearthKami> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
+
+        // {X}, Sacrifice Hearth Kami: Destroy target artifact with converted mana cost X.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        ability.addTarget(new TargetPermanent(new FilterArtifactPermanent("artifact with converted mana cost X")));
         this.addAbility(ability);
     }
 
-    public void adjustCosts(Ability ability, Game game) {
-        Card card = game.getCard(ability.getFirstTarget());
-        if (card != null) {
-            // insert at the beginning (so it will be {2}{B}, not {B}{2})
-            ability.getManaCostsToPay().add(0, new GenericManaCost(card.getManaCost().convertedManaCost()));
-        }
-        // no {X} anymore as we already have chosen the target with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
-            }
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            FilterArtifactPermanent filter = new FilterArtifactPermanent(new StringBuilder("artifact with converted mana cost ").append(xValue).toString());
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+            Target target = new TargetPermanent(filter);
+            target.setRequired(true);
+            ability.addTarget(target);
         }
     }
 

@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -37,20 +36,20 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.common.TargetCardInOpponentsGraveyard;
 
 /**
@@ -58,14 +57,6 @@ import mage.target.common.TargetCardInOpponentsGraveyard;
  * @author nantuko
  */
 public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
-
-    private static final FilterCard filter = new FilterCard("artifact or creature card from an opponent's graveyard");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.ARTIFACT),
-                new CardTypePredicate(CardType.CREATURE)));
-    }
 
     public GethLordOfTheVault (UUID ownerId) {
         super(ownerId, 64, "Geth, Lord of the Vault", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
@@ -76,24 +67,28 @@ public class GethLordOfTheVault extends CardImpl<GethLordOfTheVault> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
+        // Intimidate
         this.addAbility(IntimidateAbility.getInstance());
+        // {X}{B}: Put target artifact or creature card with converted mana cost X from an opponent's graveyard onto the battlefield under your control tapped.
+        // Then that player puts the top X cards of his or her library into his or her graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GethLordOfTheVaultEffect(), new ManaCostsImpl("{X}{B}"));
-        ability.addTarget(new TargetCardInOpponentsGraveyard(filter));
+        ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("artifact or creature card with converted mana cost X from an opponent's graveyard")));
         this.addAbility(ability);
     }
 
     @Override
-    public void adjustCosts(Ability ability, Game game) {
-        Card card = game.getCard(ability.getFirstTarget());
-        if (card != null) {
-            // insert at the beginning (so it will be {2}{B}, not {B}{2})
-            ability.getManaCostsToPay().add(0, new GenericManaCost(card.getManaCost().convertedManaCost()));
-        }
-        // no {X} anymore as we already have chosen the target with defined manacost
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableCost) {
-                cost.setPaid();
-            }
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            int xValue = ability.getManaCostsToPay().getX();
+            ability.getTargets().clear();
+            FilterCard filter = new FilterCard(new StringBuilder("artifact or creature card with converted mana cost ").append(xValue).append(" from an opponent's graveyard").toString());
+            filter.add(Predicates.or(
+                new CardTypePredicate(CardType.ARTIFACT),
+                new CardTypePredicate(CardType.CREATURE)));
+            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, xValue));
+            Target target = new TargetCardInOpponentsGraveyard(filter);
+            target.setRequired(true);
+            ability.addTarget(target);
         }
     }
 
