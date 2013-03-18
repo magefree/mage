@@ -156,7 +156,7 @@ public class CardUtil {
      * @param reduceCount
      */
     public static void adjustCost(SpellAbility spellAbility, int reduceCount) {
-        CardUtil.adjustCost(spellAbility, reduceCount);
+        CardUtil.adjustCost((Ability) spellAbility, reduceCount);
         adjustAlternativeCosts(spellAbility, reduceCount);
     }
 
