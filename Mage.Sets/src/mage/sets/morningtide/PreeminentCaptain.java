@@ -45,7 +45,6 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.common.TargetDefender;
 
 /**
  * 

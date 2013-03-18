@@ -60,8 +60,8 @@ public class CitanulFlute extends CardImpl<CitanulFlute> {
         super(ownerId, 289, "Citanul Flute", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "USG";
 
-		// {X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it,
-		// and put it into your hand. Then shuffle your library.
+        // {X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it,
+        // and put it into your hand. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CitanulFluteSearchEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -81,7 +81,7 @@ class CitanulFluteSearchEffect extends OneShotEffect<CitanulFluteSearchEffect> {
 
     public CitanulFluteSearchEffect() {
         super(Outcome.DrawCard);
-		staticText = "Search your library for a creature card with converted mana cost X or less, reveal it, and put it into your hand. Then shuffle your library";
+	staticText = "Search your library for a creature card with converted mana cost X or less, reveal it, and put it into your hand. Then shuffle your library";
     }
 
     public CitanulFluteSearchEffect(final CitanulFluteSearchEffect effect) {
@@ -105,26 +105,26 @@ class CitanulFluteSearchEffect extends OneShotEffect<CitanulFluteSearchEffect> {
         //Set the mana cost one higher to 'emulate' a less than or equal to comparison.
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, source.getManaCostsToPay().getX() + 1));
 		
-		TargetCardInLibrary target = new TargetCardInLibrary(filter);
+	TargetCardInLibrary target = new TargetCardInLibrary(filter);
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 Cards cards = new CardsImpl();
-				if (card != null){
-					card.moveToZone(Zone.HAND, source.getId(), game, false);
-					cards.add(card);
-				}
-				String name = "Reveal";
-				Card sourceCard = game.getCard(source.getSourceId());
-				if (sourceCard != null) {
-					name = sourceCard.getName();
-				}
-				player.revealCards(name, cards, game);
+                if (card != null){
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    cards.add(card);
+                }
+                String name = "Reveal";
+                Card sourceCard = game.getCard(source.getSourceId());
+                if (sourceCard != null) {
+                    name = sourceCard.getName();
+                }
+                player.revealCards(name, cards, game);
             }
             player.shuffleLibrary(game);
             return true;
         }
-		player.shuffleLibrary(game);
+	player.shuffleLibrary(game);
         return false;
     }
 }
