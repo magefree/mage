@@ -84,7 +84,7 @@ class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl<L
         if (sourceObject != null) {
             int amount = 0;
             for (UUID cardId :game.getState().getPlayer(source.getControllerId()).getGraveyard()) {
-                Card card = game.getPermanent(cardId);
+                Card card = game.getCard(cardId);
                 if (card != null && card.getName().equals(sourceObject.getName())) {
                     amount++;
                 }
