@@ -58,7 +58,7 @@ public class Sturmgeist extends CardImpl<Sturmgeist> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Sturmgeist's power and toughness are each equal to the number of cards in your hand.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
         // Whenever Sturmgeist deals combat damage to a player, draw a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1), false));
     }

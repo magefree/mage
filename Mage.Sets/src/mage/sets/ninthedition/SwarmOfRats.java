@@ -28,9 +28,13 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,7 +63,7 @@ public class SwarmOfRats extends CardImpl<SwarmOfRats> {
         this.toughness = new MageInt(1);
 
         // Swarm of Rats's power is equal to the number of Rats you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SwarmOfRatsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SwarmOfRatsEffect()));
     }
 
     public SwarmOfRats(final SwarmOfRats card) {
@@ -82,7 +86,7 @@ class SwarmOfRatsEffect extends ContinuousEffectImpl<SwarmOfRatsEffect> {
     private DynamicValue amount;
 
     public SwarmOfRatsEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.SetPT_7b, Constants.Outcome.BoostCreature);
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.amount = new PermanentsOnBattlefieldCount(filter);
         staticText = "{this}'s power is equal to the number of Rats you control";
     }

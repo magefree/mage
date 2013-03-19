@@ -65,7 +65,7 @@ public class KithkinRabble extends CardImpl<KithkinRabble> {
 
         this.addAbility(VigilanceAbility.getInstance());
         // Kithkin Rabble's power and toughness are each equal to the number of white permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public KithkinRabble(final KithkinRabble card) {

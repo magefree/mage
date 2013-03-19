@@ -28,9 +28,10 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -60,7 +61,7 @@ public class MolimoMaroSorcerer extends CardImpl<MolimoMaroSorcerer> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Molimo, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public MolimoMaroSorcerer(final MolimoMaroSorcerer card) {

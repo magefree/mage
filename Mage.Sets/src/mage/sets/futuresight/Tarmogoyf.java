@@ -28,10 +28,15 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -40,7 +45,6 @@ import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 
 /**
@@ -59,7 +63,7 @@ public class Tarmogoyf extends CardImpl<Tarmogoyf> {
         this.toughness = new MageInt(1);
 
         // Tarmogoyf's power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new mage.sets.futuresight.TarmogoyfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new TarmogoyfEffect()));
     }
 
     public Tarmogoyf(final Tarmogoyf card) {
@@ -77,7 +81,7 @@ class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
 
 
     public TarmogoyfEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.SetPT_7b, Constants.Outcome.BoostCreature);
+        super(Duration.EndOfGame, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1";
     }
 
@@ -93,7 +97,7 @@ class TarmogoyfEffect extends ContinuousEffectImpl<TarmogoyfEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(source.getSourceId());
+        MageObject target = game.getObject(source.getSourceId());
         if (target != null) {
             int number = 0;
             Cards cards = new CardsImpl();

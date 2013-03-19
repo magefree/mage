@@ -66,7 +66,7 @@ public class Broodstar extends CardImpl<Broodstar> {
         this.addAbility(new AffinityForArtifactsAbility());
         this.addAbility(FlyingAbility.getInstance());
         // Broodstar's power and toughness are each equal to the number of artifacts you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame)));
     }
 
     public Broodstar(final Broodstar card) {

@@ -65,7 +65,7 @@ public class FaerieSwarm extends CardImpl<FaerieSwarm> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Faerie Swarm's power and toughness are each equal to the number of blue permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public FaerieSwarm(final FaerieSwarm card) {

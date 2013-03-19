@@ -66,7 +66,7 @@ public class ConsumingAberration extends CardImpl<ConsumingAberration> {
         this.toughness = new MageInt(0);
 
         //Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInOpponentsGraveyardsCount(), Constants.Duration.EndOfGame)));
         //Whenever you cast a spell, each opponent reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
         this.addAbility(new SpellCastTriggeredAbility(new ConsumingAberrationEffect(), false));
     }

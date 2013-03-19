@@ -65,7 +65,7 @@ public class CrowdOfCinders extends CardImpl<CrowdOfCinders> {
 
         this.addAbility(FearAbility.getInstance());
         // Crowd of Cinders's power and toughness are each equal to the number of black permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public CrowdOfCinders(final CrowdOfCinders card) {

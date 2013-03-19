@@ -53,7 +53,7 @@ public class ScionOfTheWild extends CardImpl<ScionOfTheWild> {
         this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame)));
     }
 
     public ScionOfTheWild(final ScionOfTheWild card) {

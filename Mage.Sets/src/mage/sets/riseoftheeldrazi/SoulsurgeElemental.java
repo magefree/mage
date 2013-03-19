@@ -31,6 +31,7 @@ import java.util.UUID;
 
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,7 +59,7 @@ public class SoulsurgeElemental extends CardImpl<SoulsurgeElemental> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Duration.EndOfGame)));
     }
 
     public SoulsurgeElemental(final SoulsurgeElemental card) {

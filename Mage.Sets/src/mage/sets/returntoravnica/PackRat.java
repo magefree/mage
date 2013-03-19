@@ -85,7 +85,7 @@ public class PackRat extends CardImpl<PackRat> {
         this.toughness = new MageInt(0);
 
         // Pack Rat's power and toughness are each equal to the number of Rats you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame)));
         // {2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PackRatEffect(this), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new DiscardCardCost());

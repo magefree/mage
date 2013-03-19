@@ -68,7 +68,7 @@ public class SerpentOfTheEndlessSea extends CardImpl<SerpentOfTheEndlessSea> {
         this.toughness = new MageInt(0);
 
         // Serpent of the Endless Sea's power and toughness are each equal to the number of Islands you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // Serpent of the Endless Sea can't attack unless defending player controls an Island.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SerpentOfTheEndlessSeaEffect()));
     }

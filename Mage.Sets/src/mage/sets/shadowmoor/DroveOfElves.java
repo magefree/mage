@@ -65,7 +65,7 @@ public class DroveOfElves extends CardImpl<DroveOfElves> {
 
         this.addAbility(HexproofAbility.getInstance());
         // Drove of Elves's power and toughness are each equal to the number of green permanents you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
     }
 
     public DroveOfElves(final DroveOfElves card) {

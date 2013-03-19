@@ -53,7 +53,7 @@ public class BeastOfBurden extends CardImpl<BeastOfBurden> {
         this.toughness = new MageInt(0);
 
         // Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures on the battlefield")), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures on the battlefield")), Constants.Duration.EndOfGame)));
         
     }
 

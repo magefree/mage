@@ -66,7 +66,7 @@ public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterCounted), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterCounted), Constants.Duration.EndOfGame)));
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterBoosted, true)));
     }
 
