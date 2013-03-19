@@ -50,7 +50,7 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
     private UUID sourceId;
 
     public CopyEffect(Permanent target, UUID sourceId) {
-        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        super(Duration.Custom, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
         this.sourceId = sourceId;
     }
@@ -97,6 +97,16 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
         permanent.setCopy(true);
 
         return true;
+    }
+
+    @Override
+    public boolean isInactive(Ability source, Game game) {
+        // The copy effect is added, if the copy takes place. If source leaves battlefield, the copy effect must cease to exist
+        Permanent permanent = game.getPermanent(this.sourceId);
+        if (permanent == null) {
+            return true;
+        }
+        return false;
     }
 
     @Override
