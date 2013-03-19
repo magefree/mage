@@ -446,7 +446,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.resetForSourceId(permanent.getId());
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
-            //game.applyEffects(); // magenoxx: this causes bugs
+            game.applyEffects(); // magenoxx: this causes bugs - LevelX2: but it's neccessary for casting e.g. Kird Ape which must trigger evolve
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));

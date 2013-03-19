@@ -87,8 +87,9 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
 
         switch(effect.getDuration()) {
             case WhileOnBattlefield:
-                if (game.getObject(ability.getSourceId()) == null) //TODO: does this really works?? object is returned across the game
-                    return (true);
+                if (game.getObject(ability.getSourceId()) == null) {//TODO: does this really works?? object is returned across the game
+                    return (true);                                 // LevelX2: I guess it's not used, because effects stay the whole game
+                }
             case OneUse:
                 return effect.isUsed();
             case Custom:
