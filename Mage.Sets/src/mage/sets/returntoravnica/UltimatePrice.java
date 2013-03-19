@@ -34,6 +34,7 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.MonocoloredPredicate;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,7 +56,9 @@ public class UltimatePrice extends CardImpl<UltimatePrice> {
         this.color.setBlack(true);
 
         // Destroy target monocolored creature.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addEffect(new DestroyTargetEffect());
 
     }

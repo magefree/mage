@@ -36,6 +36,7 @@ import mage.Constants.Rarity;
 import mage.Constants.SubLayer;
 import mage.Constants.TimingRule;
 import mage.MageInt;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -110,7 +111,8 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        if (card != null) {
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (card != null && sourceObject != null) {
             FlashbackAbility ability;
             if (card.getCardType().contains(CardType.INSTANT))
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
@@ -119,6 +121,7 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card.getId(), ability);
+            game.informPlayers(new StringBuilder(sourceObject.getName()).append(" gained Flashback to ").append(card.getName()).toString());
             return true;
         }
         return false;

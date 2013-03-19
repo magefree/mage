@@ -64,7 +64,7 @@ public class SoulRansom extends CardImpl<SoulRansom> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // You control enchanted creature.
@@ -72,7 +72,7 @@ public class SoulRansom extends CardImpl<SoulRansom> {
         
         // Discard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
         Effect effect = new SacrificeSourceEffect();
-        effect.setText("{this}'s controller sacrifices it.");
+        effect.setText("{this}'s controller sacrifices it");
         SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, effect , new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
         effect = new DrawCardControllerEffect(2);
         effect.setText("Then draws two cards. Only any opponent may activate this ability");

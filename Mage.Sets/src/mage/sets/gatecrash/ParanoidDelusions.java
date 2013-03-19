@@ -50,7 +50,7 @@ public class ParanoidDelusions extends CardImpl<ParanoidDelusions> {
 
         // Target player puts the top three cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new PutLibraryIntoGraveTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         // Cipher
         this.getSpellAbility().addEffect(new CipherEffect());
     }
