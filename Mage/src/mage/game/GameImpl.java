@@ -727,6 +727,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 else {
                     state.getPlayerList().setCurrent(this.getPriorityPlayerId());
                 }
+                fireUpdatePlayersEvent();
                 Player player;
                 while (!isPaused() && !isGameOver()) {
                     try {
@@ -1332,6 +1333,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (simulation) {
             return;
         }
+        logger.trace("fireUpdatePlayersEvent");
         tableEventSource.fireTableEvent(EventType.UPDATE, null, this);
     }
 
