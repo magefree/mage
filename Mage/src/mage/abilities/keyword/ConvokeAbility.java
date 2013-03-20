@@ -124,13 +124,7 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                     if (perm == null) {
                         continue;
                     }
-
-                    Card card = game.getCard(perm.getId());
-                    if (card == null) {
-                        continue;
-                    }
-
-                    ManaCosts manaCostsCreature = card.getSpellAbility().getManaCosts();
+                    ManaCosts manaCostsCreature = perm.getSpellAbility().getManaCosts();
                     if (manaCostsCreature != null && manaCostsCreature.convertedManaCost() > 0 && perm.tap(game)) {
                         Choice chooseManaType = buildChoice(manaCostsCreature, ability.getManaCostsToPay());
                         if (chooseManaType.getChoices().size() > 0) {
