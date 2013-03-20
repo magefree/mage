@@ -639,8 +639,16 @@ class TableTableModel extends AbstractTableModel {
                         }
                         return "Join";
                     case DUELING:
+                        owner = tables[arg0].getControllerName();
+                        if (session != null && owner.equals(session.getUserName())) {
+                            return "Remove";
+                        }
                         return "Watch";
                     case FINISHED:
+                        owner = tables[arg0].getControllerName();
+                        if (session != null && owner.equals(session.getUserName())) {
+                            return "Remove";
+                        }
                         return "Replay";
                     default:
                         return "";
