@@ -118,7 +118,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         lifeLabel.setText(Integer.toString(player.getLife()));
         poisonLabel.setText(Integer.toString(player.getPoison()));
         handLabel.setText(Integer.toString(player.getHandCount()));
-        libraryLabel.setText(Integer.toString(player.getLibraryCount()));
+        int count = player.getLibraryCount();
+        if (count > 99) {
+            Font font = libraryLabel.getFont();
+            font = font.deriveFont(9f);
+            libraryLabel.setFont(font);
+            changedFont = true;
+        } else if (changedFont) {
+            Font font = libraryLabel.getFont();
+            font = font.deriveFont(12f);
+            libraryLabel.setFont(font);
+            changedFont = false;
+        }
+        libraryLabel.setText(Integer.toString(count));
         graveLabel.setText(Integer.toString(player.getGraveyard().size()));
 
         if (!MageFrame.isLite()) {
@@ -417,7 +429,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addComponent(manaCountLabelG, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(40)
-                                                .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(libraryLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(18)
                                                 .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
@@ -584,6 +596,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel libraryLabel;
     private JLabel poisonLabel;
     private JLabel graveLabel;
+    private boolean changedFont;
 
     private JPanel zonesPanel;
     private HoverButton exileZone;
