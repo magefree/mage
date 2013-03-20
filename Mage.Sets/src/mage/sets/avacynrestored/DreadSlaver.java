@@ -27,14 +27,27 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
-import mage.cards.CardImpl;
-
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
+import mage.Constants.Zone;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
+
+
 
 /**
  * @author noxx
@@ -52,7 +65,7 @@ public class DreadSlaver extends CardImpl<DreadSlaver> {
         this.toughness = new MageInt(5);
 
         // Whenever a creature dealt damage by Dread Slaver this turn dies, return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new ReturnToBattlefieldUnderYourControlTargetEffect(), false));
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new DreadSlaverEffect(), false));
     }
 
     public DreadSlaver(final DreadSlaver card) {
@@ -63,4 +76,88 @@ public class DreadSlaver extends CardImpl<DreadSlaver> {
     public DreadSlaver copy() {
         return new DreadSlaver(this);
     }
+}
+
+class DreadSlaverEffect extends OneShotEffect<DreadSlaverEffect> {
+
+    public DreadSlaverEffect() {
+        super(Outcome.Benefit);
+        staticText = "return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types";
+    }
+
+    public DreadSlaverEffect(final DreadSlaverEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DreadSlaverEffect copy() {
+        return new DreadSlaverEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(targetPointer.getFirst(game, source));
+        if (card != null) {
+            Zone currentZone = game.getState().getZone(card.getId());
+            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
+                ContinuousEffect effect = new DreadSlaverContiniousEffect();
+                effect.setTargetPointer(new FixedTarget(card.getId()));
+                game.addEffect(effect, source);
+                return true;
+            }
+        }
+        return false;
+    }
+
+}
+
+class DreadSlaverContiniousEffect extends ContinuousEffectImpl<DreadSlaverContiniousEffect> {
+
+    public DreadSlaverContiniousEffect() {
+        super(Duration.Custom, Outcome.Neutral);
+        staticText = "That creature is a black Zombie in addition to its other colors and types";
+    }
+
+    public DreadSlaverContiniousEffect(final DreadSlaverContiniousEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public DreadSlaverContiniousEffect copy() {
+        return new DreadSlaverContiniousEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (creature != null) {
+            switch (layer) {
+                case TypeChangingEffects_4:
+                    if (sublayer == SubLayer.NA) {
+                        creature.getSubtype().add("Zombie");
+                    }
+                    break;
+                case ColorChangingEffects_5:
+                    if (sublayer == SubLayer.NA) {
+                        creature.getColor().setBlack(true);
+                    }
+                    break;
+            }
+            return true;
+        } else {
+            this.used = true;
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
+    }
+
 }
