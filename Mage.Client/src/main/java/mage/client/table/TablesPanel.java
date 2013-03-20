@@ -97,6 +97,7 @@ public class TablesPanel extends javax.swing.JPanel {
         gameChooser = new GameChooser();
 
         initComponents();
+        tableModel.setSession(session);
 
         // disable replays
         chkShowCompleted.setVisible(false);
@@ -156,6 +157,8 @@ public class TablesPanel extends javax.swing.JPanel {
                         logger.info("Joining table " + tableId);
                         joinTableDialog.showDialog(roomId, tableId);
                     }
+                } else if (state.equals("Remove")) {
+                    session.removeTable(roomId, tableId);
                 } else if (state.equals("Watch")) {
                     logger.info("Watching table " + tableId);
                     session.watchTable(roomId, tableId);
@@ -278,6 +281,7 @@ public class TablesPanel extends javax.swing.JPanel {
         } else {
             hideTables();
         }
+        tableModel.setSession(session);
 
         reloadMessages();
 
@@ -590,6 +594,8 @@ class TableTableModel extends AbstractTableModel {
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
+    private Session session;
+    
     public void loadData(Collection<TableView> tables) throws MageRemoteException {
         this.tables = tables.toArray(new TableView[0]);
         this.fireTableDataChanged();
@@ -603,6 +609,10 @@ class TableTableModel extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         return columnNames.length;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 
     @Override
@@ -623,6 +633,10 @@ class TableTableModel extends AbstractTableModel {
             case 6:
                 switch (tables[arg0].getTableState()) {
                     case WAITING:
+                        String owner = tables[arg0].getControllerName();
+                        if (session != null && owner.equals(session.getUserName())) {
+                            return "Remove";
+                        }
                         return "Join";
                     case DUELING:
                         return "Watch";
