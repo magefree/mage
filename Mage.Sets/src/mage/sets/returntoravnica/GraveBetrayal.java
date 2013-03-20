@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -147,10 +148,10 @@ class GraveBetrayalEffect extends OneShotEffect<GraveBetrayalEffect> {
             Integer zoneChanges = (Integer) getValue("zoneChanges");
             if (card.getZoneChangeCounter() == zoneChanges) {
                 Zone currentZone = game.getState().getZone(card.getId());
-                if (card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId())) {
+                if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId())) {
                     Permanent creature = game.getPermanent(card.getId());
                     creature.addCounters(CounterType.P1P1.createInstance(), game);
-                    ContinuousEffectImpl effect = new GraveBetrayalContiniousEffect();
+                    ContinuousEffect effect = new GraveBetrayalContiniousEffect();
                     effect.setTargetPointer(new FixedTarget(creature.getId()));
                     game.addEffect(effect, source);
                     return true;

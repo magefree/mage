@@ -58,6 +58,7 @@ public class ChordOfCalling extends CardImpl<ChordOfCalling> {
 
         // Convoke
         this.addAbility(new ConvokeAbility());
+
         // Search your library for a creature card with converted mana cost X or less and put it onto the battlefield. Then shuffle your library.
         this.getSpellAbility().addEffect(new ChordofCallingSearchEffect());
     }
@@ -86,7 +87,8 @@ class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffec
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
+        Card sourceCard = game.getCard(source.getSourceId());
+        if (player == null || sourceCard == null) {
             return false;
         }
         int xCost = source.getManaCostsToPay().getX();
@@ -99,7 +101,8 @@ class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffec
             if (target.getTargets().size() > 0) {
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
-                    card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId());
+                    game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Put ").append(card.getName()).append(" onto the battlefield").toString());
+                    card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                 }
             }
             player.shuffleLibrary(game);
