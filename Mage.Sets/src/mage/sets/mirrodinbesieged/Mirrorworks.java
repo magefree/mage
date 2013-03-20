@@ -28,9 +28,10 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -56,6 +57,9 @@ public class Mirrorworks extends CardImpl<Mirrorworks> {
     public Mirrorworks(UUID ownerId) {
         super(ownerId, 114, "Mirrorworks", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "MBS";
+
+        // Whenever another nontoken artifact enters the battlefield under your control, you may pay {2}.
+        // If you do, put a token that's a copy of that artifact onto the battlefield.
         this.addAbility(new MirrorworksAbility());
     }
 
@@ -73,7 +77,7 @@ public class Mirrorworks extends CardImpl<Mirrorworks> {
 class MirrorworksAbility extends TriggeredAbilityImpl<MirrorworksAbility> {
 
     public MirrorworksAbility() {
-        super(Constants.Zone.BATTLEFIELD, new MirrorworksEffect());
+        super(Zone.BATTLEFIELD, new MirrorworksEffect());
      }
 
     public MirrorworksAbility(final MirrorworksAbility ability) {
@@ -107,7 +111,7 @@ class MirrorworksAbility extends TriggeredAbilityImpl<MirrorworksAbility> {
 class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
 
     public MirrorworksEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "put a token that's a copy of that artifact onto the battlefield";
     }
 
@@ -123,15 +127,18 @@ class MirrorworksEffect extends OneShotEffect<MirrorworksEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            Cost cost = new ManaCostsImpl("{2}");
-            if (player.chooseUse(outcome, "Pay " + cost.getText() + " and " + staticText, game)) {
-                cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
-                    UUID targetId = targetPointer.getFirst(game, source);
-                    if (targetId != null) {
-                        MageObject target = game.getLastKnownInformation(targetId, Constants.Zone.BATTLEFIELD);
-                        if (target != null && target instanceof Permanent) {
+        UUID targetId = targetPointer.getFirst(game, source);
+        if (targetId != null && player != null) {
+            MageObject target = game.getPermanent(targetId);
+            if (target == null) {
+                target = game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
+            }
+            if (target != null) {
+                Cost cost = new ManaCostsImpl("{2}");
+                if (player.chooseUse(outcome, new StringBuilder("Pay ").append(cost.getText()).append(" and put a token copy of ").append(target.getName()).append(" onto the battlefield").toString(), game)) {
+                    cost.clearPaid();
+                    if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
+                        if (target instanceof Permanent) {
                             EmptyToken token = new EmptyToken();
                             CardUtil.copyTo(token).from((Permanent)target);
                             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
