@@ -28,9 +28,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -66,7 +68,7 @@ public class CorpsejackMenace extends CardImpl<CorpsejackMenace> {
         this.toughness = new MageInt(4);
 
         // If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CorpsejackMenaceReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CorpsejackMenaceReplacementEffect()));
 
     }
 
@@ -83,7 +85,7 @@ public class CorpsejackMenace extends CardImpl<CorpsejackMenace> {
 
 class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl<CorpsejackMenaceReplacementEffect> {
     CorpsejackMenaceReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature, false);
         staticText = "If one or more +1/+1 counters would be placed on a creature you control, twice that many +1/+1 counters are placed on it instead";
     }
 

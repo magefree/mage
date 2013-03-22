@@ -30,6 +30,7 @@ package mage.sets.betrayersofkamigawa;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -65,7 +66,7 @@ public class OrbOfDreams extends CardImpl<OrbOfDreams> {
     private class OrbOfDreamsEffect extends ReplacementEffectImpl<OrbOfDreamsEffect> {
 
         OrbOfDreamsEffect() {
-            super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Tap);
+            super(Duration.WhileOnBattlefield, Constants.Outcome.Tap, false);
             staticText = "Permanents enter the battlefield tapped";
         }
 

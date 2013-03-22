@@ -30,21 +30,26 @@ public class OrbOfDreamsTest extends CardTestPlayerBase {
 
     @Test
     public void testOrbNotTappingItself() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 5);
         addCard(Constants.Zone.HAND, playerA, "Orb of Dreams");
+        addCard(Constants.Zone.HAND, playerA, "Razortip Whip");
 
         castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Orb of Dreams");
+        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Razortip Whip");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, Constants.PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
         assertLife(playerB, 20);
 
         assertPermanentCount(playerA, "Orb of Dreams", 1);
+        assertPermanentCount(playerA, "Razortip Whip", 1);
 
         Permanent orbOfDreams = getPermanent("Orb of Dreams", playerA.getId());
         Assert.assertFalse("Orb has tapped itself, but may not", orbOfDreams.isTapped());
+        Permanent razortipWhip = getPermanent("Razortip Whip", playerA.getId());
+        Assert.assertTrue("Razortip Whip must be tapped from Orb of Dreams but isn't", razortipWhip.isTapped());
     }
 
 }
