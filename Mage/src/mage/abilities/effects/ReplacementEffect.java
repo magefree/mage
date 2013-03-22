@@ -41,4 +41,6 @@ public interface ReplacementEffect<T extends ReplacementEffect<T>> extends Conti
     boolean replaceEvent(GameEvent event, Ability source, Game game);
     boolean applies(GameEvent event, Ability source, Game game);
 
+    boolean hasSelfScope();
+
 }

@@ -145,6 +145,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     private Player losingPlayer;
     private boolean stateCheckRequired = false;
 
+    // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
+    private boolean scopeRelevant = false;
+
     @Override
     public abstract T copy();
 
@@ -184,6 +187,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.actions = new LinkedList<MageAction>();
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
+        this.scopeRelevant = game.scopeRelevant;
     }
 
     @Override
@@ -1721,4 +1725,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         stateCheckRequired = true;
     }
 
+    /**
+     * If true, only self scope replacement effects are applied
+     *
+     * @param scopeRelevant
+     */
+    @Override
+    public void setScopeRelevant(boolean scopeRelevant) {
+        this.scopeRelevant = scopeRelevant;
+    }
+    
+    /**
+     * @return - true if only self scope replacement effects have to be applied
+     */
+    @Override
+    public boolean getScopeRelevant() {
+        return this.scopeRelevant;
+    }
 }

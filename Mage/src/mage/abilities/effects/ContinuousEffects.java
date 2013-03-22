@@ -261,8 +261,10 @@ public class ContinuousEffects implements Serializable {
             Ability ability = replacementEffects.getAbility(effect.getId());
             if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
                 if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                    if (effect.applies(event, ability, game)) {
-                        replaceEffects.add(effect);
+                    if (!game.getScopeRelevant() || effect.hasSelfScope() || !event.getTargetId().equals(this.replacementEffects.getAbility(effect.getId()).getSourceId())) {
+                        if (effect.applies(event, ability, game)) {
+                            replaceEffects.add(effect);
+                        }
                     }
                 }
             }

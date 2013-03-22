@@ -206,4 +206,8 @@ public interface Game extends MageItem, Serializable {
     // game cheats (for tests only)
     void cheat(UUID ownerId, Map<Zone, String> commands);
     void cheat(UUID ownerId, List<Card> library, List<Card> hand, List<PermanentCard> battlefield, List<Card> graveyard);
+
+    // controlling the behaviour of replacement effects
+    void setScopeRelevant(boolean scopeRelevant);
+    public boolean getScopeRelevant();
 }

@@ -317,8 +317,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     game.resetForSourceId(permanent.getId());
                     game.addPermanent(permanent);
                     game.setZone(objectId, Zone.BATTLEFIELD);
+                    game.setScopeRelevant(true);
                     game.applyEffects();
                     permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
+                    game.setScopeRelevant(false);
                     game.applyEffects();
                     if (flag) {
                         permanent.setTapped(true);
@@ -446,8 +448,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.resetForSourceId(permanent.getId());
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
+            game.setScopeRelevant(true);
             game.applyEffects(); // magenoxx: this causes bugs - LevelX2: but it's neccessary for casting e.g. Kird Ape which must trigger evolve
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
+            game.setScopeRelevant(false);
             game.applyEffects();
             game.fireEvent(new ZoneChangeEvent(permanent, controllerId, fromZone, Zone.BATTLEFIELD));
             return true;
