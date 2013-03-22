@@ -222,7 +222,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 bigCard.setPreferredSize(bbDimension);
                 pnlGameInfo.revalidate();
                 pnlGameInfo.repaint();
-                this.handContainer.sizeHand(0.8, smallMode);
+                //this.handContainer.sizeHand(0.8, smallMode);
                 for (PlayAreaPanel p: players.values()) {
                     p.sizePlayer(smallMode);
                 }
