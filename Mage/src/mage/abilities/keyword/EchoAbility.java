@@ -38,6 +38,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
@@ -73,7 +74,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent)event;
             if(zEvent.getFromZone() == null && this.echoPaid) {
                 this.echoPaid = false;
             }
