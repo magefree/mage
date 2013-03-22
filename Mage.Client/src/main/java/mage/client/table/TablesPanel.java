@@ -158,7 +158,9 @@ public class TablesPanel extends javax.swing.JPanel {
                         joinTableDialog.showDialog(roomId, tableId);
                     }
                 } else if (state.equals("Remove")) {
-                    session.removeTable(roomId, tableId);
+                    if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                        session.removeTable(roomId, tableId);
+                    }
                 } else if (state.equals("Watch")) {
                     logger.info("Watching table " + tableId);
                     session.watchTable(roomId, tableId);
