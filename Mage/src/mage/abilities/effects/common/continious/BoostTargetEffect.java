@@ -151,7 +151,7 @@ public class BoostTargetEffect extends ContinuousEffectImpl<BoostTargetEffect> {
             message = toughness.getMessage();
             fixedPart = " for each ";
         }
-        if (message != null && fixedPart != null) {
+        if (message != null && !message.isEmpty() && fixedPart != null) {
             sb.append(fixedPart).append(message);
         }
         return sb.toString();

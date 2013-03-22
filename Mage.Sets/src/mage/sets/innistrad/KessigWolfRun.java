@@ -27,7 +27,6 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
@@ -44,6 +43,8 @@ import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.Constants.Duration;
+import mage.Constants.Zone;
 
 /**
  * @author nantuko
@@ -58,10 +59,10 @@ public class KessigWolfRun extends CardImpl<KessigWolfRun> {
         this.addAbility(new ColorlessManaAbility());
 
         // {X}{R}{G}, {T}: Target creature gets +X/+0 and gains trample until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn), new ManaCostsImpl("{X}{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{X}{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Constants.Duration.EndOfTurn));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addEffect(new BoostTargetEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
