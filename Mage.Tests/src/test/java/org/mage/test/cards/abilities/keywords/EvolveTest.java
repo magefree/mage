@@ -87,4 +87,33 @@ public class EvolveTest extends CardTestPlayerBase {
         assertPowerToughness(playerA, "Experiment One", 2, 2);
         assertPowerToughness(playerA, "Kird Ape", 2, 3);
     }
+
+    @Test
+    public void testEvolveWithMasterBiomance() {
+
+        // Experiment One gets a counter because Kird Ape is 2/2 with a Forest in play
+
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Experiment One", 1);
+        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+
+        addCard(Constants.Zone.HAND, playerA, "Experiment One");
+
+        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
+
+        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        execute();
+
+        assertLife(playerA, 20);
+        assertLife(playerB, 20);
+
+        assertPermanentCount(playerA, "Experiment One", 2);
+        assertPermanentCount(playerA, "Master Biomancer", 1);
+
+        // the first Experiment One get one counter from the second Experiment one that comes into play with two +1/+1 counters
+        assertPowerToughness(playerA, "Experiment One", 2, 2);
+        // the casted Experiment One got two counters from Master Biomancer
+        assertPowerToughness(playerA, "Experiment One", 3, 3);
+
+    }
 }
