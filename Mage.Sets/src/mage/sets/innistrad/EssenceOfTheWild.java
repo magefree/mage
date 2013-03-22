@@ -78,7 +78,7 @@ public class EssenceOfTheWild extends CardImpl<EssenceOfTheWild> {
 class EssenceOfTheWildEffect extends ReplacementEffectImpl<EssenceOfTheWildEffect> {
 
     public EssenceOfTheWildEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Copy);
+        super(Duration.WhileOnBattlefield, Outcome.Copy, false);
         staticText = "Creatures you control enter the battlefield as a copy of {this}";
     }
 
