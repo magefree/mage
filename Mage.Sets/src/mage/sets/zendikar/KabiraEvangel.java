@@ -109,8 +109,7 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
             ChoiceColor colorChoice = new ChoiceColor();
             if (player.choose(Constants.Outcome.Benefit, colorChoice, game)) {
                 game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                game.getState().setValue(perm.getId() + "_color", colorChoice.getColor());
-                game.addEffect(new GainProtectionFromChosenColorEffect(), source);
+                game.addEffect(new GainProtectionFromChosenColorEffect(colorChoice.getColor()), source);
             }
         }
         return false;
@@ -131,15 +130,18 @@ class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
         filter1.add(new SubtypePredicate("Ally"));
     }
     private FilterCard filter2;
+    private ObjectColor chosenColor;
 
-    public GainProtectionFromChosenColorEffect() {
+    public GainProtectionFromChosenColorEffect(ObjectColor chosenColor) {
         super(new ProtectionAbility(new FilterCard()), Duration.EndOfTurn, filter1);
         filter2 = (FilterCard) ((ProtectionAbility) getFirstAbility()).getFilter();
+        this.chosenColor = chosenColor;
     }
 
     public GainProtectionFromChosenColorEffect(final GainProtectionFromChosenColorEffect effect) {
         super(effect);
         this.filter2 = effect.filter2.copy();
+        this.chosenColor = effect.chosenColor;
     }
 
     @Override
@@ -149,7 +151,6 @@ class GainProtectionFromChosenColorEffect extends GainAbilityControlledEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ObjectColor chosenColor = (ObjectColor) game.getState().getValue(source.getSourceId() + "_color");
         filter2.add(new ColorPredicate(chosenColor));
         filter2.setMessage(chosenColor.getDescription());
         setAbility(new ProtectionAbility(new FilterCard(filter2)));
