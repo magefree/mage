@@ -34,6 +34,7 @@ import mage.Constants.AsThoughEffectType;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.SubLayer;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.game.Game;
@@ -376,7 +377,7 @@ public class ContinuousEffects implements Serializable {
             else {
                 //20100716 - 616.1c
                 Player player = game.getPlayer(event.getPlayerId());
-                index = player.chooseEffect(rEffects, game);
+                index = player.chooseEffect(getReplacementEffectsTexts(rEffects, game), game);
             }
             ReplacementEffect rEffect = rEffects.get(index);
             caught = rEffect.replaceEvent(event, this.getAbility(rEffect.getId()), game);
@@ -539,6 +540,20 @@ public class ContinuousEffects implements Serializable {
             }
         }
         return effects;
+    }
+
+    public List<String> getReplacementEffectsTexts(List<ReplacementEffect> rEffects, Game game) {
+        List<String> texts = new ArrayList<String>();
+        for (ReplacementEffect effect: rEffects) {
+            Ability ability = replacementEffects.getAbility(effect.getId());
+            MageObject object = game.getObject(ability.getSourceId());
+            if (object != null) {
+                texts.add(ability.getRule(object.getName()));
+            } else {
+                texts.add(effect.getText(null));
+            }
+        }
+        return texts;
     }
 
 }
