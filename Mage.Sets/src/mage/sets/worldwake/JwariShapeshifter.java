@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
@@ -52,6 +53,7 @@ public class JwariShapeshifter extends CardImpl<JwariShapeshifter> {
     static {
         filter.add(new SubtypePredicate("Ally"));
         filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new AnotherPredicate()); // needed because during enters_the_battlefield event the creature is already targetable although it shouldn't
     }
 
     public JwariShapeshifter(UUID ownerId) {
@@ -65,7 +67,10 @@ public class JwariShapeshifter extends CardImpl<JwariShapeshifter> {
         this.toughness = new MageInt(0);
 
         // You may have Jwari Shapeshifter enter the battlefield as a copy of any Ally creature on the battlefield.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(filter), "You may have {this} enter the battlefield as a copy of any Ally creature on the battlefield"));
+        Ability ability = new SimpleStaticAbility(
+                Zone.BATTLEFIELD,
+                new EntersBattlefieldEffect(new CopyPermanentEffect(filter), null,
+                "You may have {this} enter the battlefield as a copy of any Ally creature on the battlefield", true, true));
         this.addAbility(ability);
     }
 

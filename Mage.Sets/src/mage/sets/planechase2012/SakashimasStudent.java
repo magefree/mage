@@ -28,9 +28,9 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -61,10 +61,10 @@ public class SakashimasStudent extends CardImpl<SakashimasStudent> {
         // Ninjutsu {1}{U}
         this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
         // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-        this.addAbility(new SimpleStaticAbility(
-                Constants.Zone.BATTLEFIELD,
-                new EntersBattlefieldEffect(new CopyPermanentEffect(new SakashimasStudentApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new EntersBattlefieldEffect(
+                new CopyPermanentEffect(new SakashimasStudentApplyToPermanent()),
+                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types",
+                true)));
 
     }
 

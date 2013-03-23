@@ -56,7 +56,10 @@ public class Vesuva extends CardImpl<Vesuva> {
         this.expansionSetCode = "TSP";
 
         // You may have Vesuva enter the battlefield tapped as a copy of any land on the battlefield.
-        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(new TapSourceEffect(true), "You may have {this} enter the battlefield tapped as a copy of any land on the battlefield");
+        EntersBattlefieldEffect effect = new EntersBattlefieldEffect(
+                new TapSourceEffect(true),
+                "You may have {this} enter the battlefield tapped as a copy of any land on the battlefield",
+                true);
         effect.addEffect(new CopyPermanentEffect(filter));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

@@ -56,7 +56,10 @@ public class SculptingSteel extends CardImpl<SculptingSteel> {
         this.expansionSetCode = "10E";
 
         // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new CopyPermanentEffect(filter), "You may have {this} enter the battlefield as a copy of any artifact on the battlefield"));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
+                new CopyPermanentEffect(filter),
+                "You may have {this} enter the battlefield as a copy of any artifact on the battlefield",
+                true));
         this.addAbility(ability);
     }
 
