@@ -28,6 +28,7 @@
 
 package mage.sets.shardsofalara;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -47,7 +48,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  * @author Loki
@@ -58,10 +58,17 @@ public class SigilOfDistinction extends CardImpl<SigilOfDistinction> {
         super(ownerId, 219, "Sigil of Distinction", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{X}");
         this.expansionSetCode = "ALA";
         this.subtype.add("Equipment");
+
+        // Sigil of Distinction enters the battlefield with X charge counters on it.
         this.addAbility(new EntersBattlefieldAbility(new SigilOfDistinctionEffect(), "{this} enters the battlefield with X charge counters on it"));
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
+
+        // Equipped creature gets +1/+1 for each charge counter on Sigil of Distinction.
         BoostEquippedEffect effect = new BoostEquippedEffect(new CountersCount(CounterType.CHARGE), new CountersCount(CounterType.CHARGE));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
+        // Equip—Remove a charge counter from Sigil of Distinction.
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new RemoveCountersSourceCost(CounterType.CHARGE.createInstance())));
+
     }
 
     public SigilOfDistinction(final SigilOfDistinction card) {
