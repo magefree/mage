@@ -82,7 +82,7 @@ public class GenjuOfTheFields extends CardImpl<GenjuOfTheFields> {
         this.addAbility(ability2);
 
         // When enchanted Plains is put into a graveyard, you may return Genju of the Fields from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Plains", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Plains", true, false);
         this.addAbility(ability3);
     }
 

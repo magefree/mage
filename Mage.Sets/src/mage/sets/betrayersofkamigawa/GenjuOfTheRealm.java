@@ -80,7 +80,7 @@ public class GenjuOfTheRealm extends CardImpl<GenjuOfTheRealm> {
         this.addAbility(ability2);
 
         // When enchanted land is put into a graveyard, you may return Genju of the Realm from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted land", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted land", true, false);
         this.addAbility(ability3);
     }
 

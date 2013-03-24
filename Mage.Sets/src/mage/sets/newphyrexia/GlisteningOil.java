@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -67,7 +68,7 @@ public class GlisteningOil extends CardImpl<GlisteningOil> {
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), Constants.AttachmentType.AURA)));
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), Constants.TargetController.YOU, false));
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public GlisteningOil(final GlisteningOil card) {

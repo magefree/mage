@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
@@ -49,7 +50,7 @@ public class GodsEyeGateToTheReikai extends CardImpl<GodsEyeGateToTheReikai> {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // When Gods' Eye, Gate to the Reikai is put into a graveyard from the battlefield, put a 1/1 colorless Spirit creature token onto the battlefield.
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiritToken(), 1), false));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiritToken(), 1), false));
     }
 
     public GodsEyeGateToTheReikai(final GodsEyeGateToTheReikai card) {

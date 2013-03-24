@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
@@ -45,7 +46,7 @@ public class HatchingPlans extends CardImpl<HatchingPlans> {
         super(ownerId, 27, "Hatching Plans", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "GPT";
         this.color.setBlue(true);
-        this.addAbility(new DiesTriggeredAbility(new DrawCardControllerEffect(3)));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new DrawCardControllerEffect(3)));
     }
 
     public HatchingPlans (final HatchingPlans card) {
