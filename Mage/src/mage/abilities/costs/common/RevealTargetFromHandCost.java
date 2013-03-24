@@ -30,8 +30,9 @@
 
 
 package mage.abilities.costs.common;
+
 import java.util.UUID;
-import mage.Constants;
+import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
@@ -44,6 +45,7 @@ import mage.target.common.TargetCardInHand;
 public class RevealTargetFromHandCost extends CostImpl<RevealTargetFromHandCost> {
    
     public int convertedManaCosts = 0;
+    protected int numberCardsRevealed = 0;
    
     public RevealTargetFromHandCost(TargetCardInHand target) {
         this.addTarget(target);
@@ -52,23 +54,28 @@ public class RevealTargetFromHandCost extends CostImpl<RevealTargetFromHandCost>
    
     public RevealTargetFromHandCost(RevealTargetFromHandCost cost) {
         super(cost);
+        this.convertedManaCosts = cost.convertedManaCosts;
+        this.numberCardsRevealed = cost.numberCardsRevealed;
     }
    
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Constants.Outcome.Benefit, controllerId, sourceId, game)) {
+        if (targets.choose(Outcome.Benefit, controllerId, sourceId, game)) {
+            convertedManaCosts = 0;
+            numberCardsRevealed = 0;
             Player player = game.getPlayer(controllerId);
             Cards cards = new CardsImpl();
             for (UUID targetId: targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);
                 if (card == null)
                     return false;
-                convertedManaCosts = card.getManaCost().convertedManaCost();
-                cards.add(card);
-                player.revealCards("Revealed card", cards, game); // this is not a boolean
+                convertedManaCosts += card.getManaCost().convertedManaCost();
+                numberCardsRevealed++;
+                cards.add(card);                
                 paid = true;
-                return paid;
             }
+            player.revealCards("Revealed card", cards, game); // this is not a boolean
+            return paid;
         }
         paid = false;
         return paid;
@@ -76,6 +83,10 @@ public class RevealTargetFromHandCost extends CostImpl<RevealTargetFromHandCost>
    
     public int getConvertedCosts() {
             return convertedManaCosts;
+        }
+
+    public int getNumberRevealedCards() {
+            return numberCardsRevealed;
         }
 
     @Override
