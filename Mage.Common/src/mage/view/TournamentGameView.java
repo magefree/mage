@@ -52,7 +52,7 @@ public class TournamentGameView implements Serializable {
         this.roundNum = roundNum;
         this.matchId = pair.getMatch().getId();
         this.gameId = game.getId();
-        this.players = pair.getPlayer1().getPlayer().getName() + " " + pair.getPlayer2().getPlayer().getName();
+        this.players = pair.getPlayer1().getPlayer().getName() + " - " + pair.getPlayer2().getPlayer().getName();
         if (game.isGameOver()) {
             this.state = "Finished";
             this.result = game.getWinner();
