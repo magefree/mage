@@ -100,7 +100,12 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         matchView = matchList;
         List<String> players = new ArrayList<String>();
         for (User user : UserManager.getInstance().getUsers()) {
-            players.add(user.getName());
+            if (user.isConnected()) {
+                players.add(user.getName());
+            } else {
+                players.add(new StringBuilder(user.getName()).append(" (discon.)").toString());
+            }
+            
         }
         playersView = players;
     }
@@ -144,8 +149,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
 
     @Override
     public TableView getTable(UUID tableId) {
-        if (tables.containsKey(tableId))
+        if (tables.containsKey(tableId)) {
             return new TableView(tables.get(tableId));
+        }
         return null;
     }
 
@@ -157,8 +163,9 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
     @Override
     public void removeTable(UUID tableId) {
         tables.remove(tableId);
-        if (logger.isDebugEnabled())
+        if (logger.isDebugEnabled()) {
             logger.debug("Table removed: " + tableId);
+        }
     }
 
     @Override
