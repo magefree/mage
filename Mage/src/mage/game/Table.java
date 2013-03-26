@@ -162,6 +162,10 @@ public class Table implements Serializable {
         return seats;
     }
 
+    public int getNumberOfSeats() {
+        return numSeats;
+    }
+
     public Seat getNextAvailableSeat(String playerType) {
         for (int i = 0; i < numSeats; i++ ) {
             if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType))

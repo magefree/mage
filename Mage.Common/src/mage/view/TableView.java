@@ -50,6 +50,7 @@ public class TableView implements Serializable {
     private String deckType;
     private String tableName;
     private String controllerName;
+    private String additionalInfo;
     private Date createTime;
     private TableState tableState;
     private boolean isTournament;
@@ -69,10 +70,14 @@ public class TableView implements Serializable {
             seats.add(new SeatView(seat));
         }
         if (!table.isTournament()) {
+            this.additionalInfo = new StringBuilder("Wins: ").append(table.getMatch().getWinsNeeded()).toString();
             for (Game game: table.getMatch().getGames()) {
                 games.add(game.getId());
             }
+        } else {
+            this.additionalInfo = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats()).toString();
         }
+
     }
 
     public UUID getTableId() {
@@ -113,6 +118,9 @@ public class TableView implements Serializable {
 
     public boolean isTournament() {
         return this.isTournament;
+    }
+    public String getAdditionalInfo() {
+        return this.additionalInfo;
     }
 
 }

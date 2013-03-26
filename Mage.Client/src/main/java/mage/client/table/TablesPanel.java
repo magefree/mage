@@ -121,10 +121,10 @@ public class TablesPanel extends javax.swing.JPanel {
      public void actionPerformed(ActionEvent e)
      {
          int modelRow = Integer.valueOf( e.getActionCommand() );
-         UUID tableId = (UUID)tableModel.getValueAt(modelRow, 9);
-         UUID gameId = (UUID)tableModel.getValueAt(modelRow, 8);
-         String state = (String)tableModel.getValueAt(modelRow, 6);
-         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 7);
+         UUID tableId = (UUID)tableModel.getValueAt(modelRow, 10);
+         UUID gameId = (UUID)tableModel.getValueAt(modelRow, 9);
+         String state = (String)tableModel.getValueAt(modelRow, 7);
+         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 8);
          String owner = (String)tableModel.getValueAt(modelRow, 1);
 
          if (state.equals("Join")) {
@@ -178,7 +178,7 @@ public class TablesPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 6);
+                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 7);
                 if (games.size() == 1) {
                     session.replayGame(games.get(0));
                 }
@@ -190,7 +190,7 @@ public class TablesPanel extends javax.swing.JPanel {
 
 
         // adds buttons (don't delete this)
-        new ButtonColumn(tableTables, joinTable, 6);
+        new ButtonColumn(tableTables, joinTable, 7);
         new ButtonColumn(tableCompleted, replayMatch, 5);
     }
 
@@ -598,7 +598,7 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Match Name", "Owner", "Game Type", "Deck Type", "Status", "Created", "Action"};
+    private String[] columnNames = new String[]{"Match Name", "Owner", "Game Type", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -635,10 +635,12 @@ class TableTableModel extends AbstractTableModel {
             case 3:
                 return tables[arg0].getDeckType().toString();
             case 4:
-                return tables[arg0].getTableState().toString();
+                return tables[arg0].getAdditionalInfo().toString();
             case 5:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getTableState().toString();
             case 6:
+                return timeFormatter.format(tables[arg0].getCreateTime());
+            case 7:
                 switch (tables[arg0].getTableState()) {
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
@@ -661,14 +663,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 7:
-                return tables[arg0].isTournament();
             case 8:
+                return tables[arg0].isTournament();
+            case 9:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 9:
+            case 10:
                 return tables[arg0].getTableId();
         }
         return "";
@@ -692,7 +694,7 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 6) {
+        if (columnIndex != 7) {
             return false;
         }
         return true;
