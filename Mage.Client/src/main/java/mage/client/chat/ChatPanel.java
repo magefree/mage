@@ -34,18 +34,17 @@
 
 package mage.client.chat;
 
-import mage.client.MageFrame;
-import mage.client.components.ColorPane;
-import mage.remote.Session;
-import mage.view.ChatMessage.MessageColor;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
 import java.util.List;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import mage.client.MageFrame;
+import mage.client.components.ColorPane;
+import mage.remote.Session;
+import mage.view.ChatMessage.MessageColor;
 
 /**
  *
@@ -136,7 +135,9 @@ public class ChatPanel extends javax.swing.JPanel {
             jScrollPane2.setBackground(new Color(0, 0, 0, 100));
             jScrollPane2.getViewport().setBackground(new Color(0, 0, 0, 100));
         }
-        if (!addPlayersTab) simplifyComponents();
+        if (!addPlayersTab) {
+            simplifyComponents();
+        }
     }
 
     public void connect(UUID chatId) {
@@ -148,8 +149,9 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void disconnect() {
-        if (session != null)
+        if (session != null) {
             session.leaveChat(chatId);
+        }
     }
 
     /**
@@ -235,8 +237,9 @@ class TableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -353,17 +356,17 @@ class TableModel extends AbstractTableModel {
 
     public void setPlayers(Collection<String> players) {
         if (players != null) {
-            boolean update = false;
+            boolean update;
             int size = players.size();
             List<String> list = new ArrayList<String>(players);
             Collections.sort(list);
             if (size != this.players.size()) {
                 update = true;
             } else {
-                update = true;
+                update = false;
                 for (int i = 0; i < size; i++) {
                     if (!list.get(i).equals(this.players.get(i))) {
-                        update = false;
+                        update = true;
                         break;
                     }
                 }
