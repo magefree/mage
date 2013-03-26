@@ -28,6 +28,10 @@
 
 package mage.server;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
@@ -53,10 +57,6 @@ import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 
 //import mage.interfaces.Server;
 
@@ -88,8 +88,9 @@ public class MageServerImpl implements MageServer {
             }
             return SessionManager.getInstance().registerUser(sessionId, userName);
         } catch (Exception ex) {
-            if (ex instanceof MageVersionException)
+            if (ex instanceof MageVersionException) {
                 throw (MageVersionException)ex;
+            }
             handleException(ex);
         }
         return false;
@@ -98,6 +99,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean setUserData(final String userName, final String sessionId, final UserDataView userDataView) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() throws MageException {
                 return SessionManager.getInstance().setUserData(userName, sessionId, userDataView);
             }
@@ -107,10 +109,12 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException {
         try {
-            if (version.compareTo(Main.getVersion()) != 0)
+            if (version.compareTo(Main.getVersion()) != 0) {
                 throw new MageException("Wrong client version " + version + ", expecting version " + Main.getVersion());
-            if (!password.equals(this.password))
+            }
+            if (!password.equals(this.password)) {
                 throw new MageException("Wrong password");
+            }
             return SessionManager.getInstance().registerAdmin(sessionId);
         } catch (Exception ex) {
             handleException(ex);
@@ -121,6 +125,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public TableView createTable(final String sessionId, final UUID roomId, final MatchOptions options) throws MageException {
         return executeWithResult("createTable", sessionId, new ActionWithTableViewResult() {
+            @Override
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
@@ -134,6 +139,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public TableView createTournamentTable(final String sessionId, final UUID roomId, final TournamentOptions options) throws MageException {
         return executeWithResult("createTournamentTable", sessionId, new ActionWithTableViewResult() {
+            @Override
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
@@ -147,6 +153,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void removeTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().removeTable(userId, tableId);
@@ -157,6 +164,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean joinTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill, final DeckCardLists deckList) throws MageException, GameException {
         return executeWithResult("joinTable", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList);
@@ -169,6 +177,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean joinTournamentTable(final String sessionId, final UUID roomId, final UUID tableId, final String name, final String playerType, final int skill) throws MageException, GameException {
         return executeWithResult("joinTournamentTable", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill);
@@ -181,6 +190,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean submitDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
         return executeWithResult("submitDeck", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
@@ -193,6 +203,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void updateDeck(final String sessionId, final UUID tableId, final DeckCardLists deckList) throws MageException, GameException {
         execute("updateDeck", sessionId, new Action() {
+            @Override
             public void execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().updateDeck(userId, tableId, deckList);
@@ -257,6 +268,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void deregisterClient(final String sessionId) throws MageException {
         execute("deregisterClient", sessionId, new Action() {
+            @Override
             public void execute() {
                 SessionManager.getInstance().disconnect(sessionId, true);
                 logger.info("Client deregistered ...");
@@ -267,6 +279,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void startMatch(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("startMatch", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().startMatch(userId, roomId, tableId);
@@ -277,6 +290,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void startChallenge(final String sessionId, final UUID roomId, final UUID tableId, final UUID challengeId) throws MageException {
         execute("startChallenge", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().startChallenge(userId, roomId, tableId, challengeId);
@@ -287,6 +301,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void startTournament(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("startTournament", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().startTournament(userId, roomId, tableId);
@@ -327,6 +342,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void joinChat(final UUID chatId, final String sessionId, final String userName) throws MageException {
         execute("joinChat", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ChatManager.getInstance().joinChat(chatId, userId);
@@ -337,6 +353,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void leaveChat(final UUID chatId, final String sessionId) throws MageException {
         execute("leaveChat", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ChatManager.getInstance().leaveChat(chatId, userId);
@@ -371,6 +388,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean isTableOwner(final String sessionId, UUID roomId, final UUID tableId) throws MageException {
         return executeWithResult("isTableOwner", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return TableManager.getInstance().isTableOwner(tableId, userId);
@@ -381,6 +399,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void swapSeats(final String sessionId, final UUID roomId, final UUID tableId, final int seatNum1, final int seatNum2) throws MageException {
         execute("swapSeats", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().swapSeats(tableId, userId, seatNum1, seatNum2);
@@ -391,6 +410,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void leaveTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         execute("leaveTable", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GamesRoomManager.getInstance().getRoom(roomId).leaveTable(userId, tableId);
@@ -413,6 +433,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void joinGame(final UUID gameId, final String sessionId) throws MageException {
         execute("joinGame", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().joinGame(gameId, userId);
@@ -423,6 +444,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void joinDraft(final UUID draftId, final String sessionId) throws MageException {
         execute("joinDraft", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 DraftManager.getInstance().joinDraft(draftId, userId);
@@ -433,6 +455,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void joinTournament(final UUID tournamentId, final String sessionId) throws MageException {
         execute("joinTournament", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TournamentManager.getInstance().joinTournament(tournamentId, userId);
@@ -467,6 +490,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendPlayerUUID(final UUID gameId, final String sessionId, final UUID data) throws MageException {
         execute("sendPlayerUUID", sessionId, new Action() {
+            @Override
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
@@ -481,6 +505,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendPlayerString(final UUID gameId, final String sessionId, final String data) throws MageException {
         execute("sendPlayerString", sessionId, new Action() {
+            @Override
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
@@ -495,6 +520,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendPlayerBoolean(final UUID gameId, final String sessionId, final Boolean data) throws MageException {
         execute("sendPlayerBoolean", sessionId, new Action() {
+            @Override
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
@@ -509,6 +535,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void sendPlayerInteger(final UUID gameId, final String sessionId, final Integer data) throws MageException {
         execute("sendPlayerInteger", sessionId, new Action() {
+            @Override
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
@@ -523,6 +550,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public DraftPickView sendCardPick(final UUID draftId, final String sessionId, final UUID cardPick) throws MageException {
         return executeWithResult("sendCardPick", sessionId, new ActionWithNullNegativeResult<DraftPickView>() {
+            @Override
             public DraftPickView execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return DraftManager.getInstance().sendCardPick(draftId, userId, cardPick);
@@ -533,6 +561,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void concedeGame(final UUID gameId, final String sessionId) throws MageException {
         execute("concedeGame", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().concedeGame(gameId, userId);
@@ -543,6 +572,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {
         return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 return GamesRoomManager.getInstance().getRoom(roomId).watchTable(userId, tableId);
@@ -553,6 +583,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void watchGame(final UUID gameId, final String sessionId) throws MageException {
         execute("watchGame", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().watchGame(gameId, userId);
@@ -563,6 +594,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void stopWatching(final UUID gameId, final String sessionId) throws MageException {
         execute("stopWatching", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().stopWatching(gameId, userId);
@@ -573,6 +605,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void replayGame(final UUID gameId, final String sessionId) throws MageException {
         execute("replayGame", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().replayGame(gameId, userId);
@@ -583,6 +616,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void startReplay(final UUID gameId, final String sessionId) throws MageException {
         execute("startReplay", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().startReplay(gameId, userId);
@@ -593,6 +627,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void stopReplay(final UUID gameId, final String sessionId) throws MageException {
         execute("stopReplay", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().stopReplay(gameId, userId);
@@ -603,6 +638,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void nextPlay(final UUID gameId, final String sessionId) throws MageException {
         execute("nextPlay", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().nextPlay(gameId, userId);
@@ -613,6 +649,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void previousPlay(final UUID gameId, final String sessionId) throws MageException {
         execute("previousPlay", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().previousPlay(gameId, userId);
@@ -623,6 +660,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void skipForward(final UUID gameId, final String sessionId, final int moves) throws MageException {
         execute("skipForward", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 ReplayManager.getInstance().skipForward(gameId, userId, moves);
@@ -651,6 +689,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void cheat(final UUID gameId, final String sessionId, final UUID playerId, final DeckCardLists deckList) throws MageException {
         execute("cheat", sessionId, new Action() {
+            @Override
             public void execute() {
                 if (testMode) {
                     UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -663,6 +702,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public boolean cheat(final UUID gameId, final String sessionId, final UUID playerId, final String cardName) throws MageException {
         return executeWithResult("cheatOne", sessionId, new ActionWithBooleanResult() {
+            @Override
             public Boolean execute() {
                 if (testMode) {
                     UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
@@ -681,6 +721,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public GameView getGameView(final UUID gameId, final String sessionId, final UUID playerId) throws MageException {
          return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<GameView>() {
+             @Override
              public GameView execute() throws MageException {
                  UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                  return GameManager.getInstance().getGameView(gameId, userId, playerId);
@@ -691,6 +732,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public List<UserView> getUsers(String sessionId) throws MageException {
         return executeWithResult("getUsers", sessionId, new ActionWithNullNegativeResult<List<UserView>>() {
+            @Override
             public List<UserView> execute() throws MageException {
                 List<UserView> users = new ArrayList<UserView>();
                 for (User user : UserManager.getInstance().getUsers()) {
@@ -704,6 +746,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void disconnectUser(final String sessionId, final String userSessionId) throws MageException {
         execute("disconnectUser", sessionId, new Action() {
+            @Override
             public void execute() {
                 SessionManager.getInstance().disconnectUser(sessionId, userSessionId);
             }
@@ -713,6 +756,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public void removeTable(final String sessionId, final UUID tableId) throws MageException {
         execute("removeTable", sessionId, new Action() {
+            @Override
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableManager.getInstance().removeTable(userId, tableId);
@@ -723,6 +767,7 @@ public class MageServerImpl implements MageServer {
     @Override
     public Object getServerMessagesCompressed(String sessionId) throws MageException {
         return executeWithResult("getGameView", sessionId, new ActionWithNullNegativeResult<Object>() {
+            @Override
              public Object execute() throws MageException {
                  return CompressUtil.compress(ServerMessagesUtil.getInstance().getMessages());
              }
@@ -733,6 +778,7 @@ public class MageServerImpl implements MageServer {
     public void sendFeedbackMessage(final String sessionId, final String username, final String title, final String type, final String message, final String email) throws MageException {
         if (title != null && message != null) {
             execute("sendFeedbackMessage", sessionId, new Action() {
+                @Override
                 public void execute() {
                     String host = SessionManager.getInstance().getSession(sessionId).getHost();
                     FeedbackServiceImpl.instance.feedback(username, title, type, message, email, host);
@@ -741,10 +787,12 @@ public class MageServerImpl implements MageServer {
             });
         }
     }
-
+    
+    @Override
     public void sendBroadcastMessage(final String sessionId, final String message) throws MageException {
         if (message != null) {
             execute("sendBroadcastMessage", sessionId, new Action() {
+                @Override
                 public void execute() {
                     for (User user : UserManager.getInstance().getUsers()) {
                         if (message.toLowerCase().startsWith("warn")) {

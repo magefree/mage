@@ -34,6 +34,18 @@
 
 package mage.client.table;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.importer.DeckImporterUtil;
@@ -53,18 +65,6 @@ import mage.view.MatchView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
 
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.beans.PropertyVetoException;
-import java.io.File;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.List;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -114,62 +114,63 @@ public class TablesPanel extends javax.swing.JPanel {
         jScrollPane1.getViewport().setBackground(new Color(255,255,255,50));
         jScrollPane2.getViewport().setBackground(new Color(255,255,255,50));
 
-        Action joinTable = new AbstractAction()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                int modelRow = Integer.valueOf( e.getActionCommand() );
-                UUID tableId = (UUID)tableModel.getValueAt(modelRow, 9);
-                UUID gameId = (UUID)tableModel.getValueAt(modelRow, 8);
-                String state = (String)tableModel.getValueAt(modelRow, 6);
-                boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 7);
-                String owner = (String)tableModel.getValueAt(modelRow, 1);
+        Action joinTable;
+        joinTable = new AbstractAction()
+ {
+     @Override
+     public void actionPerformed(ActionEvent e)
+     {
+         int modelRow = Integer.valueOf( e.getActionCommand() );
+         UUID tableId = (UUID)tableModel.getValueAt(modelRow, 9);
+         UUID gameId = (UUID)tableModel.getValueAt(modelRow, 8);
+         String state = (String)tableModel.getValueAt(modelRow, 6);
+         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 7);
+         String owner = (String)tableModel.getValueAt(modelRow, 1);
 
-                if (state.equals("Join")) {
-                    if (owner.equals(session.getUserName())) {
-                        try {
-                            JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                            JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
-                            for (JInternalFrame frame : windows) {
-                                if (frame.getTitle().equals("Waiting for players")) {
-                                    frame.toFront();
-                                    frame.setVisible(true);
-                                    try {
-                                        frame.setSelected(true);
-                                    } catch (PropertyVetoException ve) {
-                                        ve.printStackTrace();
-                                        logger.error(ve);
-                                    }
-                                }
+         if (state.equals("Join")) {
+             if (owner.equals(session.getUserName())) {
+                 try {
+                     JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                     JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+                     for (JInternalFrame frame : windows) {
+                         if (frame.getTitle().equals("Waiting for players")) {
+                             frame.toFront();
+                             frame.setVisible(true);
+                             try {
+                                 frame.setSelected(true);
+                             } catch (PropertyVetoException ve) {
+                                 ve.printStackTrace();
+                                 logger.error(ve);
+                             }
+                         }
 
-                            }
-                        } catch (Exception ex) {
-                            logger.error(ex);
-                        }
-                        return;
-                    }
-                    if (isTournament) {
-                        logger.info("Joining tournament " + tableId);
-                        session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
-                    }
-                    else {
-                        logger.info("Joining table " + tableId);
-                        joinTableDialog.showDialog(roomId, tableId);
-                    }
-                } else if (state.equals("Remove")) {
-                    if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                        session.removeTable(roomId, tableId);
-                    }
-                } else if (state.equals("Watch")) {
-                    logger.info("Watching table " + tableId);
-                    session.watchTable(roomId, tableId);
-                } else if (state.equals("Replay")) {
-                    logger.info("Replaying game " + gameId);
-                    session.replayGame(gameId);
-                }
-            }
-        };
+                     }
+                 } catch (Exception ex) {
+                     logger.error(ex);
+                 }
+                 return;
+             }
+             if (isTournament) {
+                 logger.info("Joining tournament " + tableId);
+                 session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
+             }
+             else {
+                 logger.info("Joining table " + tableId);
+                 joinTableDialog.showDialog(roomId, tableId);
+             }
+         } else if (state.equals("Remove")) {
+             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                 session.removeTable(roomId, tableId);
+             }
+         } else if (state.equals("Watch")) {
+             logger.info("Watching table " + tableId);
+             session.watchTable(roomId, tableId);
+         } else if (state.equals("Replay")) {
+             logger.info("Replaying game " + gameId);
+             session.replayGame(gameId);
+         }
+     }
+ };
 
         Action replayMatch = new AbstractAction()
         {
@@ -239,19 +240,23 @@ public class TablesPanel extends javax.swing.JPanel {
                 }
             }
             else {
-                   if (updateMatchesTask != null)
-                    updateMatchesTask.cancel(true);
+                   if (updateMatchesTask != null) {
+                        updateMatchesTask.cancel(true);
+                   }
             }
         }
     }
 
     public void stopTasks() {
-        if (updateTablesTask != null)
+        if (updateTablesTask != null) {
             updateTablesTask.cancel(true);
-        if (updatePlayersTask != null)
+        }
+        if (updatePlayersTask != null) {
             updatePlayersTask.cancel(true);
-        if (updateMatchesTask != null)
+        }
+        if (updateMatchesTask != null) {
             updateMatchesTask.cancel(true);
+        }
     }
 
     public void showTables(UUID roomId) {
@@ -319,8 +324,9 @@ public class TablesPanel extends javax.swing.JPanel {
         while (c != null && !(c instanceof TablesPane)) {
             c = c.getParent();
         }
-        if (c != null)
+        if (c != null) {
             ((TablesPane)c).hideFrame();
+        }
     }
 
     /** This method is called from within the constructor to
@@ -658,8 +664,9 @@ class TableTableModel extends AbstractTableModel {
             case 7:
                 return tables[arg0].isTournament();
             case 8:
-                if (!tables[arg0].getGames().isEmpty())
+                if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
+                }
                 return null;
             case 9:
                 return tables[arg0].getTableId();
@@ -671,8 +678,9 @@ class TableTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -684,8 +692,9 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 6)
+        if (columnIndex != 6) {
             return false;
+        }
         return true;
     }
 
@@ -711,7 +720,9 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<TableView> tables = session.getTables(roomId);
-            if (tables != null) this.publish(tables);
+            if (tables != null) {
+                this.publish(tables);
+            }
             Thread.sleep(1000);
         }
         return null;
@@ -826,8 +837,9 @@ class MatchesTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -839,8 +851,9 @@ class MatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 5)
+        if (columnIndex != 5) {
             return false;
+        }
         return true;
     }
 
@@ -864,7 +877,9 @@ class UpdateMatchesTask extends SwingWorker<Void, Collection<MatchView>> {
     protected Void doInBackground() throws Exception {
         while (!isCancelled()) {
             Collection<MatchView> matches = session.getFinishedMatches(roomId);
-            if (matches != null) this.publish(matches);
+            if (matches != null) {
+                this.publish(matches);
+            }
             Thread.sleep(5000);
         }
         return null;
@@ -897,7 +912,9 @@ class GameChooser extends JPopupMenu {
     }
 
     public void show(List<UUID> games, Point p) {
-        if (p == null) return;
+        if (p == null) {
+            return;
+        }
         this.removeAll();
         for (UUID gameId: games) {
             this.add(new GameChooserAction(gameId, gameId.toString()));

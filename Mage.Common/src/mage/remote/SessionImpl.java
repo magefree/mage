@@ -28,6 +28,8 @@
 
 package mage.remote;
 
+import java.net.*;
+import java.util.*;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -51,8 +53,6 @@ import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
 
-import java.net.*;
-import java.util.*;
 
 /**
  *
@@ -164,7 +164,7 @@ public class SessionImpl implements Session {
             callbackClient.invoke("");
 
             this.sessionId = callbackClient.getSessionId();
-            boolean registerResult = false;
+            boolean registerResult;
             if (connection.getPassword() == null) {
                 UserDataView userDataView = new UserDataView(connection.getAvatarId());
                 // for backward compatibility. don't remove twice call - first one does nothing but for version checking
@@ -238,10 +238,12 @@ public class SessionImpl implements Session {
 
     @Override
     public synchronized void disconnect(boolean showMessage) {
-        if (isConnected())
+        if (isConnected()) {
             sessionState = SessionState.DISCONNECTING;
-        if (connection == null)
+        }
+        if (connection == null) {
             return;
+        }
         try {
             callbackClient.disconnect();
             TransporterClient.destroyTransporterClient(server);
@@ -253,8 +255,9 @@ public class SessionImpl implements Session {
             logger.info("Disconnected ... ");
         }
         client.disconnected();
-        if (showMessage)
+        if (showMessage) {
             client.showError("Network error.  You have been disconnected");
+        }
     }
 
     @Override
@@ -288,8 +291,9 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean isConnected() {
-        if (callbackClient == null)
+        if (callbackClient == null) {
             return false;
+        }
         return callbackClient.isConnected();
     }
 
@@ -315,16 +319,18 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean isTestMode() {
-        if (serverState != null)
+        if (serverState != null) {
             return serverState.isTestMode();
+        }
         return false;
     }
 
     @Override
     public UUID getMainRoomId() {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getMainRoomId();
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -336,8 +342,9 @@ public class SessionImpl implements Session {
     @Override
     public UUID getRoomChatId(UUID roomId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getRoomChatId(roomId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -349,8 +356,9 @@ public class SessionImpl implements Session {
     @Override
     public UUID getTableChatId(UUID tableId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getTableChatId(tableId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -362,8 +370,9 @@ public class SessionImpl implements Session {
     @Override
     public UUID getGameChatId(UUID gameId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getGameChatId(gameId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -375,8 +384,9 @@ public class SessionImpl implements Session {
     @Override
     public TableView getTable(UUID roomId, UUID tableId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getTable(roomId, tableId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -403,8 +413,9 @@ public class SessionImpl implements Session {
     @Override
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.joinTable(sessionId, roomId, tableId, playerName, playerType, skill, deckList);
+            }
         } catch (InvalidDeckException iex) {
             handleInvalidDeckException(iex);
         } catch (GameException ex) {
@@ -420,8 +431,9 @@ public class SessionImpl implements Session {
     @Override
     public boolean joinTournamentTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.joinTournamentTable(sessionId, roomId, tableId, playerName, playerType, skill);
+            }
         } catch (GameException ex) {
             handleGameException(ex);
         } catch (MageException ex) {
@@ -435,8 +447,9 @@ public class SessionImpl implements Session {
     @Override
     public Collection<TableView> getTables(UUID roomId) throws MageRemoteException {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getTables(roomId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
             throw new MageRemoteException();
@@ -449,8 +462,9 @@ public class SessionImpl implements Session {
     @Override
     public Collection<MatchView> getFinishedMatches(UUID roomId) throws MageRemoteException {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getFinishedMatches(roomId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
             throw new MageRemoteException();
@@ -463,8 +477,9 @@ public class SessionImpl implements Session {
     @Override
     public Collection<String> getConnectedPlayers(UUID roomId) throws MageRemoteException {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getConnectedPlayers(roomId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
             throw new MageRemoteException();
@@ -477,8 +492,9 @@ public class SessionImpl implements Session {
     @Override
     public TournamentView getTournament(UUID tournamentId) throws MageRemoteException {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getTournament(tournamentId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
             throw new MageRemoteException();
@@ -491,8 +507,9 @@ public class SessionImpl implements Session {
     @Override
     public UUID getTournamentChatId(UUID tournamentId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getTournamentChatId(tournamentId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -564,8 +581,9 @@ public class SessionImpl implements Session {
     @Override
     public DraftPickView sendCardPick(UUID draftId, UUID cardId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.sendCardPick(draftId, sessionId, cardId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -718,8 +736,9 @@ public class SessionImpl implements Session {
     @Override
     public TableView createTable(UUID roomId, MatchOptions matchOptions) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.createTable(sessionId, roomId, matchOptions);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -731,8 +750,9 @@ public class SessionImpl implements Session {
     @Override
     public TableView createTournamentTable(UUID roomId, TournamentOptions tournamentOptions) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.createTournamentTable(sessionId, roomId, tournamentOptions);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -744,8 +764,9 @@ public class SessionImpl implements Session {
     @Override
     public boolean isTableOwner(UUID roomId, UUID tableId) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.isTableOwner(sessionId, roomId, tableId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -862,8 +883,9 @@ public class SessionImpl implements Session {
     @Override
     public boolean submitDeck(UUID tableId, DeckCardLists deck) {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.submitDeck(sessionId, tableId, deck);
+            }
         } catch (GameException ex) {
             handleGameException(ex);
         } catch (MageException ex) {
@@ -1014,8 +1036,9 @@ public class SessionImpl implements Session {
     @Override
     public List<UserView> getUsers() {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return server.getUsers(sessionId);
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
@@ -1027,8 +1050,9 @@ public class SessionImpl implements Session {
     @Override
     public List<String> getServerMessages() {
         try {
-            if (isConnected())
+            if (isConnected()) {
                 return (List<String>) CompressUtil.decompress(server.getServerMessagesCompressed(sessionId));
+            }
         } catch (MageException ex) {
             handleMageException(ex);
         } catch (Throwable t) {
