@@ -29,6 +29,7 @@
 package mage.abilities.effects;
 
 import mage.Constants.Duration;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
@@ -36,6 +37,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.stack.Spell;
+import mage.players.Player;
 
 /**
  *
@@ -46,6 +48,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
     protected Effects baseEffects = new Effects();
     protected String text;
     protected Condition condition;
+    protected boolean optional;
 
     public static final String SOURCE_CAST_SPELL_ABILITY = "sourceCastSpellAbility";
 
@@ -54,16 +57,23 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, String text) {
-        super(Duration.OneUse, baseEffect.getOutcome());
-        this.baseEffects.add(baseEffect);
-        this.text = text;
+        this(baseEffect, null, text, true, false);
+    }
+
+    public EntersBattlefieldEffect(Effect baseEffect, String text, boolean optional) {
+        this(baseEffect, null, text, true, optional);
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text) {
-        super(Duration.OneUse, baseEffect.getOutcome());
+        this(baseEffect, condition, text, true, false);
+    }
+
+    public EntersBattlefieldEffect(Effect baseEffect, Condition condition, String text, boolean selfScope, boolean optional) {
+        super(Duration.OneUse, baseEffect.getOutcome(), selfScope);
         this.baseEffects.add(baseEffect);
         this.text = text;
         this.condition = condition;
+        this.optional = optional;
     }
 
     public EntersBattlefieldEffect(EntersBattlefieldEffect effect) {
@@ -71,6 +81,7 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
         this.baseEffects = effect.baseEffects.copy();
         this.text = effect.text;
         this.condition = effect.condition;
+        this.optional = effect.optional;
     }
 
     public void addEffect(Effect effect) {
@@ -96,6 +107,16 @@ public class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlef
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        if (optional) {
+            Player controller = game.getPlayer(source.getControllerId());
+            MageObject object = game.getObject(source.getSourceId());
+            if (controller == null || object == null) {
+                return false;
+            }
+            if (!controller.chooseUse(outcome, new StringBuilder("Use effect of ").append(object.getName()).append("?").toString(), game)) {
+                return false;
+            }
+        }
         Spell spell = game.getStack().getSpell(event.getSourceId());
         for (Effect effect: baseEffects) {
             if (source.activate(game, false)) {

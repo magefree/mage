@@ -1244,7 +1244,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     @Override
-    public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
+    public int chooseEffect(List<String> rEffects, Game game) {
         log.debug("chooseEffect");
         //TODO: implement this
         return 0;

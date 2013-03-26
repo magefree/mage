@@ -155,12 +155,12 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     @Override
-    public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
+    public int chooseEffect(List<String> rEffects, Game game) {
         updateGameStatePriority("chooseEffect", game);
         replacementEffectChoice.getChoices().clear();
         int count = 1;
-        for (ReplacementEffect effect: rEffects) {
-            replacementEffectChoice.getChoices().add(count + ". " + effect.getText(null));
+        for (String effectText: rEffects) {
+            replacementEffectChoice.getChoices().add(count + ". " + effectText);
             count++;
         }
         if (replacementEffectChoice.getChoices().size() == 1)
@@ -173,7 +173,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 replacementEffectChoice.setChoice(response.getString());
                 count = 1;
                 for (int i = 0; i < rEffects.size(); i++) {
-                    if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i).getText(null)))
+                    if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i)))
                         return i;
                     count++;
                 }

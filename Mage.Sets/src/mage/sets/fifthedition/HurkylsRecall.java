@@ -25,66 +25,75 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase2012;
+package mage.sets.fifthedition;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.abilities.keyword.NinjutsuAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.functions.ApplyToPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class SakashimasStudent extends CardImpl<SakashimasStudent> {
+public class HurkylsRecall extends CardImpl<HurkylsRecall> {
 
-    public SakashimasStudent(UUID ownerId) {
-        super(ownerId, 24, "Sakashima's Student", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{U}{U}");
-        this.expansionSetCode = "PC2";
-        this.subtype.add("Human");
-        this.subtype.add("Ninja");
+    public HurkylsRecall(UUID ownerId) {
+        super(ownerId, 93, "Hurkyl's Recall", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{U}");
+        this.expansionSetCode = "5ED";
 
         this.color.setBlue(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
 
-        // Ninjutsu {1}{U}
-        this.addAbility(new NinjutsuAbility(new ManaCostsImpl("{1}{U}")));
-        // You may have Sakashima's Student enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,new EntersBattlefieldEffect(
-                new CopyPermanentEffect(new SakashimasStudentApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still a Ninja in addition to its other creature types",
-                true)));
-
+        // Return all artifacts target player owns to his or her hand.
+        this.getSpellAbility().addEffect(new HurkylsRecallReturnToHandEffect());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
-    public SakashimasStudent(final SakashimasStudent card) {
+    public HurkylsRecall(final HurkylsRecall card) {
         super(card);
     }
 
     @Override
-    public SakashimasStudent copy() {
-        return new SakashimasStudent(this);
+    public HurkylsRecall copy() {
+        return new HurkylsRecall(this);
     }
 }
 
-class SakashimasStudentApplyToPermanent extends ApplyToPermanent {
+class HurkylsRecallReturnToHandEffect extends OneShotEffect<HurkylsRecallReturnToHandEffect> {
+
+    public HurkylsRecallReturnToHandEffect() {
+        super(Outcome.ReturnToHand);
+        staticText = "Return all artifacts target player owns to his or her hand";
+    }
+
+    public HurkylsRecallReturnToHandEffect(final HurkylsRecallReturnToHandEffect effect) {
+        super(effect);
+    }
 
     @Override
-    public Boolean apply(Game game, Permanent permanent) {
-        if (!permanent.getSubtype().contains("Ninja")) {
-            permanent.getSubtype().add("Ninja");
+    public boolean apply(Game game, Ability source) {
+        if (targetPointer.getFirst(game, source) != null) {
+            FilterArtifactPermanent filter = new FilterArtifactPermanent();
+            filter.add(new ControllerIdPredicate(targetPointer.getFirst(game, source)));
+            for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+            }
+            return true;
         }
-        return true;
+        return false;
+    }
+
+    @Override
+    public HurkylsRecallReturnToHandEffect copy() {
+        return new HurkylsRecallReturnToHandEffect(this);
     }
 }

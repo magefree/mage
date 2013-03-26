@@ -70,7 +70,7 @@ public class CorruptedZendikon extends CardImpl<CorruptedZendikon> {
         Ability ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Constants.Duration.Custom));
         this.addAbility(ability2);
 
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land");
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
         this.addAbility(ability3);
     }
 

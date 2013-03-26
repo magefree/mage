@@ -65,7 +65,8 @@ public class PhantasmalImage extends CardImpl<PhantasmalImage> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PhantasmalImageCopyEffect(), abilityText));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
+                new PhantasmalImageCopyEffect(), abilityText, true));
         this.addAbility(ability);
     }
 

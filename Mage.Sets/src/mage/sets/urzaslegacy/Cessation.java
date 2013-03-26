@@ -34,6 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -66,7 +67,7 @@ public class Cessation extends CardImpl<Cessation> {
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CessationEffect()));
         //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
-        this.addAbility(new DiesTriggeredAbility(new ReturnToHandSourceEffect()));
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
     public Cessation(final Cessation card) {

@@ -25,50 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tenth;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.common.CopyPermanentEffect;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterBasicLandCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class SculptingSteel extends CardImpl<SculptingSteel> {
-    
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-    
+public class FlagstonesOfTrokair extends CardImpl<FlagstonesOfTrokair> {
+
+    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
+
     static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+        filter.add(new SubtypePredicate("Plains"));
     }
 
-    public SculptingSteel(UUID ownerId) {
-        super(ownerId, 342, "Sculpting Steel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
-        this.expansionSetCode = "10E";
+    public FlagstonesOfTrokair(UUID ownerId) {
+        super(ownerId, 272, "Flagstones of Trokair", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "TSP";
+        this.supertype.add("Legendary");
 
-        // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyPermanentEffect(filter),
-                "You may have {this} enter the battlefield as a copy of any artifact on the battlefield",
-                true));
-        this.addAbility(ability);
+        // {tap}: Add {W} to your mana pool.
+        this.addAbility(new WhiteManaAbility());
+        
+        // When Flagstones of Trokair is put into a graveyard from the battlefield, you may search your library for a Plains card and put it onto the battlefield tapped. If you do, shuffle your library.
+        this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), true, true), true));
     }
 
-    public SculptingSteel(final SculptingSteel card) {
+    public FlagstonesOfTrokair(final FlagstonesOfTrokair card) {
         super(card);
     }
 
     @Override
-    public SculptingSteel copy() {
-        return new SculptingSteel(this);
+    public FlagstonesOfTrokair copy() {
+        return new FlagstonesOfTrokair(this);
     }
 }

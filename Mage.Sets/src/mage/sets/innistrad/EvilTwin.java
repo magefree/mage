@@ -71,7 +71,8 @@ public class EvilTwin extends CardImpl<EvilTwin> {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new EntersBattlefieldEffect(new CopyPermanentEffect(new EvilTwinApplyToPermanent()),
-                "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"{U}{B}, {T}: Destroy target creature with the same name as this creature\"")));
+                "You may have {this} enter the battlefield as a copy of any creature on the battlefield except it gains \"{U}{B}, {T}: Destroy target creature with the same name as this creature\"",
+                true)));
     }
 
     public EvilTwin(final EvilTwin card) {

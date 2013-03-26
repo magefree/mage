@@ -79,7 +79,7 @@ public class GenjuOfTheSpires extends CardImpl<GenjuOfTheSpires> {
         this.addAbility(ability2);
 
         // When enchanted Mountain is put into a graveyard, you may return Genju of the Spires from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Mountain", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Mountain", true, false);
         this.addAbility(ability3);
     }
 

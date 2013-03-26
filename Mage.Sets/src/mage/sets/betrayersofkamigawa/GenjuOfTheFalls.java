@@ -80,7 +80,7 @@ public class GenjuOfTheFalls extends CardImpl<GenjuOfTheFalls> {
         this.addAbility(ability2);
 
         // When enchanted Island is put into a graveyard, you may return Genju of the Falls from your graveyard to your hand.        TargetPermanent auraTarget = new TargetLandPermanent(filter);
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Island", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Island", true, false);
         this.addAbility(ability3);
     }
 

@@ -374,7 +374,7 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     }
 
     @Override
-    public int chooseEffect(List<ReplacementEffect> rEffects, Game game) {
+    public int chooseEffect(List<String> rEffects, Game game) {
         if (this.isHuman())
             return rnd.nextInt(rEffects.size());
         return super.chooseEffect(rEffects, game);

@@ -71,7 +71,7 @@ public class WindZendikon extends CardImpl<WindZendikon> {
         Ability ability2 = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new ElementalToken(), "Enchanted land is a 2/2 blue Elemental creature with flying.  It's still a land", Constants.Duration.Custom));
         this.addAbility(ability2);
         
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land");
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
         this.addAbility(ability3);
     }
 

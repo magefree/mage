@@ -79,7 +79,7 @@ public class GenjuOfTheCedars extends CardImpl<GenjuOfTheCedars> {
         this.addAbility(ability2);
 
         // When enchanted Forest is put into a graveyard, you may return Genju of the Cedars from your graveyard to your hand.        
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Forest", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Forest", true, false);
         this.addAbility(ability3);
     }
 

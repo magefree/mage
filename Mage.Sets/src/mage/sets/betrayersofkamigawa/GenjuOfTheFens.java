@@ -84,7 +84,7 @@ public class GenjuOfTheFens extends CardImpl<GenjuOfTheFens> {
         this.addAbility(ability2);
 
         // When enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.
-        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Swamp", true);
+        Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandSourceEffect(), "enchanted Swamp", true, false);
         this.addAbility(ability3);
     }
 

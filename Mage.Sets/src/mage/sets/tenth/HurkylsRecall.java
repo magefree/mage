@@ -28,47 +28,25 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.EntersBattlefieldEffect;
-import mage.abilities.effects.common.CopyPermanentEffect;
-import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class SculptingSteel extends CardImpl<SculptingSteel> {
-    
-    private static final FilterPermanent filter = new FilterPermanent("artifact");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
+public class HurkylsRecall extends mage.sets.fifthedition.HurkylsRecall {
 
-    public SculptingSteel(UUID ownerId) {
-        super(ownerId, 342, "Sculpting Steel", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
+    public HurkylsRecall(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 88;
         this.expansionSetCode = "10E";
-
-        // You may have Sculpting Steel enter the battlefield as a copy of any artifact on the battlefield.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(
-                new CopyPermanentEffect(filter),
-                "You may have {this} enter the battlefield as a copy of any artifact on the battlefield",
-                true));
-        this.addAbility(ability);
     }
 
-    public SculptingSteel(final SculptingSteel card) {
+    public HurkylsRecall(final HurkylsRecall card) {
         super(card);
     }
 
     @Override
-    public SculptingSteel copy() {
-        return new SculptingSteel(this);
+    public HurkylsRecall copy() {
+        return new HurkylsRecall(this);
     }
 }

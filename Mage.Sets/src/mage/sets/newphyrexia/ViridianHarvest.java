@@ -60,7 +60,7 @@ public class ViridianHarvest extends CardImpl<ViridianHarvest> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(6), "enchanted artifact"));
+        this.addAbility(new DiesAttachedTriggeredAbility(new GainLifeEffect(6), "enchanted artifact", false, false));
     }
 
     public ViridianHarvest(final ViridianHarvest card) {

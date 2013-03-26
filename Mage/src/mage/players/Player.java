@@ -231,7 +231,7 @@ public interface Player extends MageItem, Copyable<Player> {
     // set the value for X spells and abilities
     int announceXMana(int min, int max, String message, Game game, Ability ability);
 
-    int chooseEffect(List<ReplacementEffect> rEffects, Game game);
+    int chooseEffect(List<String> rEffects, Game game);
     TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game);
     Mode chooseMode(Modes modes, Ability source, Game game);
     void selectAttackers(Game game, UUID attackingPlayerId);
