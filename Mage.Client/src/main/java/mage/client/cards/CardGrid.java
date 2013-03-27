@@ -81,6 +81,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         setOpaque(false);
     }
 
+    @Override
     public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
         boolean drawImage = showCards.size() < MAX_IMAGES;
         this.bigCard = bigCard;
@@ -114,6 +115,7 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         cards.put(card.getId(), cardImg);
     }
 
+    @Override
     public void drawCards(SortBy sortBy, boolean piles) {
         int maxWidth = this.getParent().getWidth();
         int numColumns = maxWidth / Config.dimensions.frameWidth;
@@ -222,11 +224,12 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         cards.remove(cardId);
     }
 
-
+    @Override
     public void addCardEventListener(Listener<Event> listener) {
         cardEventSource.addListener(listener);
     }
 
+    @Override
     public void clearCardEventListeners() {
         cardEventSource.clearListeners();
     }

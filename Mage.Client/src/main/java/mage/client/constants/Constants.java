@@ -110,6 +110,23 @@ public final class Constants {
         public String toString() {
             return text;
         }
+
+        public static SortBy getByString(String text) {
+            if (text.equals("Casting Cost")) {
+                return CASTING_COST;
+            } else if (text.equals("Rarity")) {
+                return RARITY;
+            } else if (text.equals("Color")) {
+                return COLOR;
+            }else if (text.equals("Color Detailed")) {
+                return COLOR_DETAILED;
+            }else if (text.equals("Name")) {
+                return NAME;
+            }else  {
+                return UNSORTED;
+            }
+        }
+
     }
 
 }
