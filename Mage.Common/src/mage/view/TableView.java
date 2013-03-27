@@ -75,7 +75,11 @@ public class TableView implements Serializable {
                 games.add(game.getId());
             }
         } else {
-            this.additionalInfo = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats()).toString();
+             StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
+            if (table.getState().equals(TableState.DUELING)) {
+                sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
+            }
+            this.additionalInfo = sb.toString();
         }
 
     }

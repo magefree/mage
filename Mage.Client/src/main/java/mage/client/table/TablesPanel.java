@@ -162,8 +162,10 @@ public class TablesPanel extends javax.swing.JPanel {
                  session.removeTable(roomId, tableId);
              }
          } else if (state.equals("Watch")) {
-             logger.info("Watching table " + tableId);
-             session.watchTable(roomId, tableId);
+             if (!isTournament) {
+                 logger.info("Watching table " + tableId);
+                 session.watchTable(roomId, tableId);
+             }
          } else if (state.equals("Replay")) {
              logger.info("Replaying game " + gameId);
              // no replay because of memory leaks
@@ -653,7 +655,12 @@ class TableTableModel extends AbstractTableModel {
                         if (session != null && owner.equals(session.getUserName())) {
                             return "Remove";
                         }
-                        return "Watch";
+                        if (tables[arg0].isTournament()) {
+                            return "None";
+                        } else {
+                            return "Watch";
+                        }
+                        
                     case FINISHED:
                         owner = tables[arg0].getControllerName();
                         if (session != null && owner.equals(session.getUserName())) {

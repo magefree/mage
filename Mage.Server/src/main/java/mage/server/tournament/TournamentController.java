@@ -39,6 +39,7 @@ import mage.game.draft.Draft;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import static mage.game.events.TableEvent.EventType.CONSTRUCT;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
@@ -89,15 +90,17 @@ public class TournamentController {
                         case START_DRAFT:
                             startDraft(event.getDraft());
                             break;
+                        case CONSTRUCT:
+                            construct();
+                            break;
                         case START_MATCH:
+                            initTournament(); // set state
                             startMatch(event.getPair(), event.getMatchOptions());
                             break;
 //                        case SUBMIT_DECK:
 //                            submitDeck(event.getPlayerId(), event.getDeck());
 //                            break;
-                        case CONSTRUCT:
-                            construct();
-                            break;
+
                         case END:
                             endTournament();
                             break;
@@ -185,6 +188,7 @@ public class TournamentController {
             tournamentSession.removeTournament();
         }
         TableManager.getInstance().endTournament(tableId, tournament);
+
     }
 
     private void startMatch(TournamentPairing pair, MatchOptions matchOptions) {
@@ -208,6 +212,10 @@ public class TournamentController {
 
     private void construct() {
         TableManager.getInstance().construct(tableId);
+    }
+
+    private void initTournament() {
+        TableManager.getInstance().initTournament(tableId);
     }
 
     private void construct(UUID playerId, int timeout) throws MageException {

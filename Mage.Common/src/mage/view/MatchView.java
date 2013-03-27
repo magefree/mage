@@ -32,8 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.match.Match;
 import mage.game.match.MatchPlayer;
+import mage.game.tournament.TournamentPlayer;
 
 /**
  *
@@ -67,6 +69,25 @@ public class MatchView implements Serializable {
             result = sb2.substring(0, sb2.length() - 2);
         }
 
+    }
+
+    // used for tournaments
+    public MatchView(Table table) {
+        this.matchId = table.getTournament().getId();
+        this.matchName = table.getName();
+        this.gameType = table.getGameType();
+        this.deckType = table.getDeckType();
+
+        StringBuilder sb1 = new StringBuilder();
+        for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
+            sb1.append(tPlayer.getPlayer().getName()).append(" (").append(tPlayer.getPoints()).append(" P.) ");
+        }
+        this.players = sb1.toString();
+        StringBuilder sb2 = new StringBuilder();
+        for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
+            sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(" ");
+        }
+        this.result = sb2.toString();
     }
 
     public UUID getMatchId() {

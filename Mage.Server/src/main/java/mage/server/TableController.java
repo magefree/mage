@@ -418,6 +418,14 @@ public class TableController {
         table.construct();
     }
 
+    public void initTournament() {
+        table.initTournament();
+    }
+
+    public void endTournament(Tournament tournament) {
+        table.endTournament();
+    }
+
     public MatchOptions getOptions() {
         return options;
     }
@@ -481,10 +489,6 @@ public class TableController {
             tournament.getPlayer(player.getPlayer().getId()).setDeck(player.getDeck());
         }
         tournament.nextStep();
-    }
-
-    public void endTournament(Tournament tournament) {
-        //TODO: implement this
     }
 
     public void swapSeats(int seatNum1, int seatNum2) {

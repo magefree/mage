@@ -112,6 +112,10 @@ public class Table implements Serializable {
         state = TableState.DUELING;
     }
 
+    public void endTournament() {
+        state = TableState.FINISHED;
+    }
+
     public void initDraft() {
         state = TableState.DRAFTING;
     }

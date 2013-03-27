@@ -273,6 +273,12 @@ public class TableManager {
         }
     }
 
+    public void initTournament(UUID tableId) {
+        if (controllers.containsKey(tableId)) {
+            controllers.get(tableId).initTournament();
+        }
+    }
+
     public void addPlayer(UUID userId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).addPlayer(userId, player, playerType, deck);

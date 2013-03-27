@@ -95,11 +95,14 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
                 tableList.add(new TableView(table));
             }
             else if (matchList.size() < 50) {
-                matchList.add(new MatchView(table.getMatch()));
-            } else {
-                // more since 50 matches finished since this match so remobe it
                 if (table.isTournament()) {
-                    // is this possible?
+                    matchList.add(new MatchView(table));
+                } else {
+                    matchList.add(new MatchView(table.getMatch()));
+                }
+            } else {
+                // more since 50 matches finished since this match so remove it
+                if (table.isTournament()) {
                     // Any special action needed?
                 }
                 this.removeTable(table.getId());

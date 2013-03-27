@@ -278,6 +278,10 @@ public abstract class TournamentImpl implements Tournament {
         tableEventSource.fireTableEvent(EventType.START_MATCH, pair, options.getMatchOptions());
     }
 
+    public void end() {
+        tableEventSource.fireTableEvent(EventType.END);
+    }
+
     protected abstract void runTournament();
 
 }

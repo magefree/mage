@@ -62,7 +62,8 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
     }
 
     protected void winners() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // TODO: Show winners and tournament result
+        // throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -83,6 +84,7 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
             case COMPETE:
                 currentStep = TournamentStep.WINNERS;
                 winners();
+                end();
                 break;
         }
     }
