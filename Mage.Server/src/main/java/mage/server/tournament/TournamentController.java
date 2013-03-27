@@ -28,6 +28,9 @@
 
 package mage.server.tournament;
 
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.game.GameException;
@@ -49,9 +52,6 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -156,8 +156,9 @@ public class TournamentController {
     }
 
     private boolean allJoined() {
-        if (!tournament.allJoined())
+        if (!tournament.allJoined()) {
             return false;
+        }
         for (TournamentPlayer player: tournament.getPlayers()) {
             if (player.getPlayer().isHuman() && tournamentSessions.get(player.getPlayer().getId()) == null) {
                 return false;
@@ -263,8 +264,9 @@ public class TournamentController {
 
     private UUID getPlayerSessionId(UUID playerId) {
         for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-            if (entry.getValue().equals(playerId))
+            if (entry.getValue().equals(playerId)) {
                 return entry.getKey();
+            }
         }
         return null;
     }

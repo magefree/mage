@@ -28,6 +28,9 @@
 
 package mage.server;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
@@ -35,9 +38,6 @@ import mage.view.UserDataView;
 import org.apache.log4j.Logger;
 import org.jboss.remoting.callback.InvokerCallbackHandler;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -55,7 +55,9 @@ public class SessionManager {
     private ConcurrentHashMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
     public Session getSession(String sessionId) {
-        if (sessions == null || sessionId == null) return null;
+        if (sessions == null || sessionId == null) {
+            return null;
+        }
         return sessions.get(sessionId);
     }
 
@@ -135,8 +137,9 @@ public class SessionManager {
     }
 
     public boolean isValidSession(String sessionId) {
-        if (sessions.containsKey(sessionId))
+        if (sessions.containsKey(sessionId)) {
             return true;
+        }
         return false;
     }
 

@@ -28,6 +28,12 @@
 
 package mage.server;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import mage.Constants;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -36,19 +42,13 @@ import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.match.MatchOptions;
+import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.players.Player;
 import mage.server.game.GamesRoomManager;
 import org.apache.log4j.Logger;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import mage.Constants;
-import mage.game.match.MatchPlayer;
 
 /**
  *
@@ -124,8 +124,9 @@ public class TableManager {
     }
 
     public Match getMatch(UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).getMatch();
+        }
         return null;
     }
 
@@ -138,26 +139,30 @@ public class TableManager {
     }
 
     public boolean joinTable(UUID userId, UUID tableId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTable(userId, name, playerType, skill, deckList);
+        }
         return false;
     }
 
     public boolean joinTournament(UUID userId, UUID tableId, String name, String playerType, int skill) throws GameException {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).joinTournament(userId, name, playerType, skill);
+        }
         return false;
     }
 
     public boolean submitDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).submitDeck(userId, deckList);
+        }
         return false;
     }
 
     public void updateDeck(UUID userId, UUID tableId, DeckCardLists deckList) throws MageException {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).updateDeck(userId, deckList);
+        }
     }
 
     public void removeSession(UUID userId) {
@@ -167,8 +172,9 @@ public class TableManager {
     }
 
     public boolean isTableOwner(UUID tableId, UUID userId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).isOwner(userId);
+        }
         return false;
     }
 
@@ -181,66 +187,78 @@ public class TableManager {
     }
 
     public void leaveTable(UUID userId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).leaveTable(userId);
+        }
     }
 
     public UUID getChatId(UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).getChatId();
+        }
         return null;
     }
 
     public void startMatch(UUID userId, UUID roomId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch(userId);
+        }
     }
 
     public void startMatch(UUID roomId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startMatch();
+        }
     }
 
     public void startChallenge(UUID userId, UUID roomId, UUID tableId, UUID challengeId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startChallenge(userId, challengeId);
+        }
     }
 
     public void startTournament(UUID userId, UUID roomId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startTournament(userId);
+        }
     }
 
     public void startDraft(UUID tableId, Draft draft) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).startDraft(draft);
+        }
     }
 
     public boolean watchTable(UUID userId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).watchTable(userId);
+        }
         return false;
     }
 
     public boolean replayTable(UUID userId, UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             return controllers.get(tableId).replayTable(userId);
+        }
         return false;
     }
 
     public void endGame(UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).endGame();
+        }
     }
 
     public void endDraft(UUID tableId, Draft draft) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).endDraft(draft);
+        }
     }
 
     public void endTournament(UUID tableId, Tournament tournament) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).endTournament(tournament);
+        }
     }
 
     public void swapSeats(UUID tableId, UUID userId, int seatNum1, int seatNum2) {
@@ -250,13 +268,15 @@ public class TableManager {
     }
 
     public void construct(UUID tableId) {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).construct();
+        }
     }
 
     public void addPlayer(UUID userId, UUID tableId, Player player, String playerType, Deck deck) throws GameException {
-        if (controllers.containsKey(tableId))
+        if (controllers.containsKey(tableId)) {
             controllers.get(tableId).addPlayer(userId, player, playerType, deck);
+        }
     }
 
     public void removeTable(UUID tableId) {
@@ -265,8 +285,9 @@ public class TableManager {
             controllers.remove(tableId);
             tables.remove(tableId);
             GamesRoomManager.getInstance().removeTable(tableId);
-            if (table.getMatch() != null && table.getMatch().getGame() != null)
+            if (table.getMatch() != null && table.getMatch().getGame() != null) {
                 table.getMatch().getGame().end();
+            }
         }
     }
 

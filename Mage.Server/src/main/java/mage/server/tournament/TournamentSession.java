@@ -124,8 +124,9 @@ public class TournamentSession {
     }
 
     private synchronized void setupTimeout(int seconds) {
-        if (futureTimeout != null && !futureTimeout.isDone())
+        if (futureTimeout != null && !futureTimeout.isDone()) {
             return;
+        }
         cancelTimeout();
         if (seconds > 0) {
             futureTimeout = timeoutExecutor.schedule(
@@ -148,8 +149,9 @@ public class TournamentSession {
 
     public void removeTournament() {
         User user = UserManager.getInstance().getUser(userId);
-        if (user != null)
+        if (user != null) {
             user.removeTournament(playerId);
+        }
     }
 
     private TournamentView getTournamentView() {

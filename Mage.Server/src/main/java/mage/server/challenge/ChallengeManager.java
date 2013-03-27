@@ -1,11 +1,10 @@
 package mage.server.challenge;
 
-import mage.Constants;
-import mage.game.match.Match;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import mage.Constants;
+import mage.game.match.Match;
 
 /**
  * Loads challenges from scenarios.

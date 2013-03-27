@@ -27,9 +27,6 @@
  */
 package mage.server;
 
-import mage.view.ChatMessage.MessageColor;
-import org.apache.log4j.Logger;
-
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.UUID;
@@ -37,6 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import mage.view.ChatMessage.MessageColor;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -68,8 +67,9 @@ public class UserManager {
     private ConcurrentHashMap<UUID, User> users = new ConcurrentHashMap<UUID, User>();
 
     public User createUser(String userName, String host) {
-        if (findUser(userName) != null)
+        if (findUser(userName) != null) {
             return null; //user already exists
+        }
         User user = new User(userName, host);
         users.put(user.getId(), user);
         return user;
@@ -81,8 +81,9 @@ public class UserManager {
 
     public User findUser(String userName) {
         for (User user: users.values()) {
-            if (user.getName().equals(userName))
+            if (user.getName().equals(userName)) {
                 return user;
+            }
         }
         return null;
     }

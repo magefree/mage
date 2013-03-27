@@ -28,6 +28,12 @@
 
 package mage.server;
 
+import java.util.Map.Entry;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.TableState;
 import mage.MageException;
@@ -59,12 +65,6 @@ import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
 import org.apache.log4j.Logger;
 
-import java.util.Map.Entry;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -95,8 +95,9 @@ public class TableController {
             User user = UserManager.getInstance().getUser(userId);
             controllerName = user.getName();
         } 
-        else
+        else {
             controllerName = "System";
+        }
         table = new Table(roomId, options.getGameType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getDeckType()), options.getPlayerTypes(), match);
         init();
     }
@@ -109,8 +110,9 @@ public class TableController {
             User user = UserManager.getInstance().getUser(userId);
             controllerName = user.getName();
         } 
-        else
+        else {
             controllerName = "System";
+        }
         table = new Table(roomId, options.getTournamentType(), options.getName(), controllerName, DeckValidatorFactory.getInstance().createDeckValidator(options.getMatchOptions().getDeckType()), options.getPlayerTypes(), tournament);
     }
 
@@ -265,8 +267,9 @@ public class TableController {
         else {
             player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
         }
-        if (player != null)
+        if (player != null) {
             logger.info("Player created " + player.getId());
+        }
         return player;
     }
 
@@ -276,8 +279,9 @@ public class TableController {
     }
 
     public synchronized void leaveTable(UUID userId) {
-        if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING)
+        if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
             table.leaveTable(userPlayerMap.get(userId));
+        }
     }
 
     public synchronized void startMatch(UUID userId) {
@@ -292,9 +296,9 @@ public class TableController {
                 match.startMatch();
                 match.startGame();
                 table.initGame();
-                GameOptions options = new GameOptions();
-                options.testMode = true;
-//                match.getGame().setGameOptions(options);
+                GameOptions gameOptions = new GameOptions();
+                gameOptions.testMode = true;
+//                match.getGame().setGameOptions(gameOptions);
                 GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), null);
                 ChallengeManager.getInstance().prepareChallenge(getPlayerId(), match);
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
@@ -312,8 +316,9 @@ public class TableController {
             playerId = entry.getValue();
             break;
         }
-        if (playerId == null)
+        if (playerId == null) {
             throw new GameException("Couldn't find a player in challenge mode.");
+        }
         return playerId;
     }
 
@@ -397,8 +402,9 @@ public class TableController {
             if (entry.getValue().equals(playerId)) {
                 User user = UserManager.getInstance().getUser(entry.getKey());
                 int remaining = (int) futureTimeout.getDelay(TimeUnit.SECONDS);
-                if (user != null)
+                if (user != null) {
                     user.sideboard(deck, table.getId(), remaining, options.isLimited());
+                }
                 break;
             }
         }
@@ -464,8 +470,9 @@ public class TableController {
 
     private void autoSideboard() {
         for (MatchPlayer player: match.getPlayers()) {
-            if (!player.isDoneSideboarding())
+            if (!player.isDoneSideboarding()) {
                 match.submitDeck(player.getPlayer().getId(), player.generateDeck());
+            }
         }
     }
 
@@ -494,8 +501,9 @@ public class TableController {
     }
 
     public boolean isOwner(UUID userId) {
-        if (userId == null)
+        if (userId == null) {
             return false;
+        }
         return userId.equals(this.userId);
     }
 

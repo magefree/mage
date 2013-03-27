@@ -148,15 +148,17 @@ public class DraftSession {
 
     public DraftPickView sendCardPick(UUID cardId) {
         cancelTimeout();
-        if (draft.addPick(playerId, cardId))
+        if (draft.addPick(playerId, cardId)) {
             return getDraftPickView(0);
+        }
         return null;
     }
 
     public void removeDraft() {
         User user = UserManager.getInstance().getUser(userId);
-        if (user != null)
+        if (user != null) {
             user.removeDraft(playerId);
+        }
     }
 
     private DraftView getDraftView() {

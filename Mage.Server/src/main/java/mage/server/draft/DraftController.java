@@ -153,8 +153,9 @@ public class DraftController {
     }
 
     private boolean allJoined() {
-        if (!draft.allJoined())
+        if (!draft.allJoined()) {
             return false;
+        }
         for (DraftPlayer player: draft.getPlayers()) {
             if (player.getPlayer().isHuman() && draftSessions.get(player.getPlayer().getId()) == null) {
                 return false;
@@ -206,8 +207,9 @@ public class DraftController {
     }
 
     private synchronized void pickCard(UUID playerId, int timeout) throws MageException {
-        if (draftSessions.containsKey(playerId))
+        if (draftSessions.containsKey(playerId)) {
             draftSessions.get(playerId).pickCard(timeout);
+        }
     }
 
 }

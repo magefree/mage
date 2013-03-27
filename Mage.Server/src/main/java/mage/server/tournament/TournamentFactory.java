@@ -33,10 +33,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import mage.cards.Sets;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentType;
-import mage.cards.Sets;
 import mage.view.TournamentTypeView;
 import org.apache.log4j.Logger;
 
