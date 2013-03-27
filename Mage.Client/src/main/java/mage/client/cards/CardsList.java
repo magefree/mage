@@ -34,19 +34,8 @@
 
 package mage.client.cards;
 
-import mage.Constants.CardType;
-import mage.cards.MageCard;
-import mage.client.constants.Constants.SortBy;
-import mage.client.deckeditor.table.TableModel;
-import mage.client.deckeditor.table.UpdateCountsCallback;
-import mage.client.plugins.impl.Plugins;
-import mage.client.util.*;
-import mage.client.util.Event;
-import mage.view.CardView;
-import mage.view.CardsView;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -56,7 +45,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import mage.Constants.CardType;
+import mage.cards.MageCard;
+import mage.client.constants.Constants.SortBy;
+import mage.client.deckeditor.table.TableModel;
+import mage.client.deckeditor.table.UpdateCountsCallback;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.plugins.impl.Plugins;
+import mage.client.util.*;
+import mage.client.util.Event;
+import mage.view.CardView;
+import mage.view.CardsView;
 
 /**
  *
@@ -79,7 +80,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         initComponents();
         makeTransparent();
         initListViewComponents();
-        currentView = mainModel; // by default we use List View
     }
 
     public void makeTransparent() {
@@ -109,8 +109,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         mainTable.getColumnModel().getColumn(6).setPreferredWidth(15);
         mainTable.getColumnModel().getColumn(7).setPreferredWidth(15);
 
-        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_PILES_TOGGLE, "cardView").equals("listView")) {
-            jScrollPane1.setViewportView(mainTable);    
+        if (PreferencesDialog.getCachedValue(PreferencesDialog.KEY_DRAFT_VIEW, "cardView").equals("listView")) {
+            jScrollPane1.setViewportView(mainTable);
+            currentView = mainModel;
             cbSortBy.setEnabled(false);
             chkPiles.setEnabled(false);
         } else {
@@ -156,7 +157,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     public List<Integer> asList(final int[] is) {
         List<Integer> list = new ArrayList<Integer>();
-        for (int i : is) list.add(i);
+        for (int i : is) {
+            list.add(i);
+        }
         return list;
     }
 
@@ -175,7 +178,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
     }
 
     private void redrawCards() {
-        if (cards == null) cards = new CardsView();
+        if (cards == null) {
+            cards = new CardsView();
+        }
            currentView.loadCards(cards, null, false, bigCard, gameId);
     }
 
@@ -192,7 +197,6 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         cardArea.removeAll();
         if (cards != null && cards.size() > 0) {
             Rectangle rectangle = new Rectangle(Config.dimensions.frameWidth, Config.dimensions.frameHeight);
-            int count = 0;
             List<CardView> sortedCards = new ArrayList<CardView>(cards.values());
             switch (sortBy) {
                 case NAME:
@@ -214,8 +218,9 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             CardView lastCard = null;
             for (CardView card: sortedCards) {
                 if (chkPiles.isSelected()) {
-                    if (lastCard == null)
+                    if (lastCard == null) {
                         lastCard = card;
+                    }
                     switch (sortBy) {
                         case NAME:
                             if (!card.getName().equals(lastCard.getName())) {
@@ -250,20 +255,24 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
                     }
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     addCard(card, bigCard, gameId, rectangle);
-                    if (card.getCardTypes().contains(CardType.LAND))
+                    if (card.getCardTypes().contains(CardType.LAND)) {
                         landCount++;
-                    if (card.getCardTypes().contains(CardType.CREATURE))
+                    }
+                    if (card.getCardTypes().contains(CardType.CREATURE)) {
                         creatureCount++;
+                    }
                     curRow++;
                     lastCard = card;
                 }
                 else {
                     rectangle.setLocation(curColumn * Config.dimensions.frameWidth, curRow * 20);
                     addCard(card, bigCard, gameId, rectangle);
-                    if (card.getCardTypes().contains(CardType.LAND))
+                    if (card.getCardTypes().contains(CardType.LAND)) {
                         landCount++;
-                    if (card.getCardTypes().contains(CardType.CREATURE))
+                    }
+                    if (card.getCardTypes().contains(CardType.CREATURE)) {
                         creatureCount++;
+                    }
                     curColumn++;
                     if (curColumn == numColumns) {
                         curColumn = 0;
@@ -493,15 +502,19 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
             e.consume();
             Object obj = e.getSource();
             if (obj instanceof Card) {
-                if (e.isShiftDown())
+                if (e.isShiftDown()) {
                     cardEventSource.shiftDoubleClick(((Card)obj).getOriginal(), "shift-double-click");
-                else
+                }
+                else {
                     cardEventSource.doubleClick(((Card)obj).getOriginal(), "double-click");
+                }
             } else if (obj instanceof MageCard) {
-                if (e.isShiftDown())
+                if (e.isShiftDown()) {
                     cardEventSource.shiftDoubleClick(((MageCard)obj).getOriginal(), "shift-double-click");
-                else
+                }
+                else {
                     cardEventSource.doubleClick(((MageCard)obj).getOriginal(), "double-click");
+                }
             }
         }
     }
