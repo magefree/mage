@@ -99,8 +99,7 @@ public class TablesPanel extends javax.swing.JPanel {
         initComponents();
         tableModel.setSession(session);
 
-        // disable replays
-        chkShowCompleted.setVisible(false);
+        chkShowCompleted.setVisible(true);
 
         tableTables.createDefaultColumnsFromModel();
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
@@ -167,7 +166,8 @@ public class TablesPanel extends javax.swing.JPanel {
              session.watchTable(roomId, tableId);
          } else if (state.equals("Replay")) {
              logger.info("Replaying game " + gameId);
-             session.replayGame(gameId);
+             // no replay because of memory leaks
+             // session.replayGame(gameId);
          }
      }
  };
@@ -178,7 +178,7 @@ public class TablesPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 7);
+                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 6);
                 if (games.size() == 1) {
                     session.replayGame(games.get(0));
                 }
@@ -659,7 +659,7 @@ class TableTableModel extends AbstractTableModel {
                         if (session != null && owner.equals(session.getUserName())) {
                             return "Remove";
                         }
-                        return "Replay";
+                        return "None";
                     default:
                         return "";
                 }
@@ -828,7 +828,7 @@ class MatchesTableModel extends AbstractTableModel {
             case 4:
                 return matches[arg0].getResult();
             case 5:
-                return "Replay";
+                return "None";
             case 6:
                 return matches[arg0].getGames();
         }

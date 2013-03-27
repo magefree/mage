@@ -47,6 +47,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import mage.Constants;
+import mage.game.match.MatchPlayer;
 
 /**
  *
@@ -68,7 +70,7 @@ public class TableManager {
      * In minutes.
      */
     private static final int EXPIRE_CHECK_PERIOD = 10;
-
+    
     /**
      * This parameters defines when table can be counted as expired.
      * Uses EXPIRE_TIME_UNIT_VALUE as unit of measurement.
@@ -274,10 +276,27 @@ public class TableManager {
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<UUID>();
         for (Table table : tables.values()) {
-            long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
-            if (diff >= EXPIRE_TIME) {
-                logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
-                toRemove.add(table.getId());
+            if (!table.getState().equals(Constants.TableState.FINISHED)) {
+                // remove all tables created more than expire_time ago
+                long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
+                if (diff >= EXPIRE_TIME) {
+                    logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
+                    toRemove.add(table.getId());
+                }
+                // remove immediately non tournament tables with no human players
+                else if (!table.isTournament()) {
+                    boolean canBeRemoved = true;
+                    for (MatchPlayer matchPlayer :table.getMatch().getPlayers()) {
+                        Player player = matchPlayer.getPlayer();
+                        if (player != null && player.isHuman()) {
+                            canBeRemoved = false;
+                        }
+                    }
+                    if (canBeRemoved) {
+                        logger.info("Table with no human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
+                        toRemove.add(table.getId());
+                    }
+                }
             }
         }
         for (UUID tableId : toRemove) {

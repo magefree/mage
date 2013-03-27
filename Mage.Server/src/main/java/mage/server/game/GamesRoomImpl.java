@@ -43,6 +43,7 @@ import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 import mage.game.Table;
+import mage.game.match.Match;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
 import mage.server.RoomImpl;
@@ -88,13 +89,21 @@ public class GamesRoomImpl extends RoomImpl implements GamesRoom, Serializable {
         ArrayList<MatchView> matchList = new ArrayList<MatchView>();
         List<Table> t = new ArrayList<Table>(tables.values());
         Collections.sort(t, new TimestampSorter());
+        Collections.reverse(t);
         for (Table table: t) {
             if (table.getState() != TableState.FINISHED) {
                 tableList.add(new TableView(table));
             }
             else if (matchList.size() < 50) {
                 matchList.add(new MatchView(table.getMatch()));
-            }
+            } else {
+                // more since 50 matches finished since this match so remobe it
+                if (table.isTournament()) {
+                    // is this possible?
+                    // Any special action needed?
+                }
+                this.removeTable(table.getId());
+           }
         }
         tableView = tableList;
         matchView = matchList;

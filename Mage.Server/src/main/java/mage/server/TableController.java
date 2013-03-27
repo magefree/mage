@@ -420,8 +420,10 @@ public class TableController {
         UUID choosingPlayerId = match.getChooser();
         match.endGame();
         table.endGame();
-        //if (!match.getGame().isSimulation())
-            //GameManager.getInstance().saveGame(match.getGame().getId());
+// Saving of games caused memory leaks - so save is deactivated
+//        if (!match.getGame().isSimulation()) {
+//            GameManager.getInstance().saveGame(match.getGame().getId());
+//        }
         GameManager.getInstance().removeGame(match.getGame().getId());
         try {
             if (!match.isMatchOver()) {
@@ -432,10 +434,7 @@ public class TableController {
                 startGame(choosingPlayerId);
             }
             else {
-                GamesRoomManager.getInstance().removeTable(table.getId());
                 match.getGames().clear();
-                match = null;
-                table = null;
             }
         } catch (GameException ex) {
             logger.fatal(null, ex);
