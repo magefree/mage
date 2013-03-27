@@ -156,7 +156,7 @@ public class HelperPanel extends JPanel {
     public void setMessage(String message) {
         if (message.startsWith("Use alternative cost")) {
             textArea.setText("Use alternative cost?");
-        } else if (message.length() > 30 && message.contains("Use")) {
+        } else if (message.length() > 40 && message.contains("Use ")) {
             textArea.setText("Use ability?");
         } else {
             textArea.setText(message);
