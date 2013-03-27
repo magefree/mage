@@ -39,20 +39,20 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
+import mage.filter.predicate.Predicates;
 
 /**
  * @author nantuko
  */
 public class EliteInquisitor extends CardImpl<EliteInquisitor> {
 
-    private static final FilterPermanent filter1 = new FilterCreaturePermanent("Vampires");
-    private static final FilterPermanent filter2 = new FilterCreaturePermanent("Werewolves");
-    private static final FilterPermanent filter3 = new FilterCreaturePermanent("Zombies");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("Vampires, from Werewolves, and from Zombies");
 
-    static {
-        filter1.add(new SubtypePredicate("Vampire"));
-        filter2.add(new SubtypePredicate("Werewolf"));
-        filter3.add(new SubtypePredicate("Zombie"));
+    static {filter.add(Predicates.or(
+            new SubtypePredicate("Vampire"),
+            new SubtypePredicate("Werewolf"),
+            new SubtypePredicate("Zombie")
+            ));
     }
 
     public EliteInquisitor(UUID ownerId) {
@@ -69,9 +69,7 @@ public class EliteInquisitor extends CardImpl<EliteInquisitor> {
         this.addAbility(VigilanceAbility.getInstance());
 
         // Protection from Vampires, from Werewolves, and from Zombies.
-        this.addAbility(new ProtectionAbility(filter1));
-        this.addAbility(new ProtectionAbility(filter2));
-        this.addAbility(new ProtectionAbility(filter3));
+        this.addAbility(new ProtectionAbility(filter));
     }
 
     public EliteInquisitor(final EliteInquisitor card) {

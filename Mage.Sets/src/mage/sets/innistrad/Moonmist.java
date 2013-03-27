@@ -86,6 +86,7 @@ class MoonmistEffect extends OneShotEffect<MoonmistEffect> {
 
     public MoonmistEffect() {
         super(Outcome.PreventDamage);
+        staticText = "Transform all Humans";
     }
 
     public MoonmistEffect(final MoonmistEffect effect) {
