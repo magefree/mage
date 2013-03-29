@@ -255,6 +255,10 @@ public class GameController implements GameCallback {
         game.concede(getPlayerId(userId));
     }
 
+    public void undo(UUID userId) {
+        game.undo(getPlayerId(userId));
+    }
+
     public void passPriorityUntilNextYourTurn(UUID userId) {
         game.passPriorityUntilNextYourTurn(getPlayerId(userId));
     }

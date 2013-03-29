@@ -28,7 +28,6 @@
 
 package mage.player.ai;
 
-import java.util.*;
 import mage.Constants;
 import mage.Constants.RangeOfInfluence;
 import mage.abilities.Ability;
@@ -39,6 +38,10 @@ import mage.game.events.GameEvent;
 import mage.game.turn.*;
 import mage.players.Player;
 import org.apache.log4j.Logger;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -77,7 +80,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
         switch (game.getTurn().getStepType()) {
             case UPKEEP:
             case DRAW:
-                pass();
+                pass(game);
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
@@ -89,11 +92,11 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     return true;
                 }
                 else {
-                    pass();
+                    pass(game);
                 }
                 return false;
             case BEGIN_COMBAT:
-                pass();
+                pass(game);
                 return false;
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
@@ -105,14 +108,14 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     return true;
                 }
                 else {
-                    pass();
+                    pass(game);
                 }
                 return false;
             case DECLARE_BLOCKERS:
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
             case END_COMBAT:
-                pass();
+                pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
 //                if (game.getActivePlayerId().equals(playerId)) {
@@ -124,13 +127,13 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     return true;
 //                }
 //                else {
-//                    pass();
+//                    pass(game);
 //                }
 //                return false;
             case END_TURN:
             case CLEANUP:
                 actionCache.clear();
-                pass();
+                pass(game);
                 return false;
         }
         return false;

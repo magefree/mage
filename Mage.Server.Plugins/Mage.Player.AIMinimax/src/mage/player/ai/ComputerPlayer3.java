@@ -74,7 +74,7 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
         switch (game.getTurn().getStepType()) {
             case UPKEEP:
             case DRAW:
-                pass();
+                pass(game);
                 return false;
             case PRECOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
@@ -85,10 +85,10 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                     return true;
                 }
                 else
-                    pass();
+                    pass(game);
                 return false;
             case BEGIN_COMBAT:
-                pass();
+                pass(game);
                 return false;
             case DECLARE_ATTACKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
@@ -99,13 +99,13 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                     return true;
                 }
                 else
-                    pass();
+                    pass(game);
                 return false;
             case DECLARE_BLOCKERS:
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
             case END_COMBAT:
-                pass();
+                pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
                 if (game.getActivePlayerId().equals(playerId)) {
@@ -116,11 +116,11 @@ public class ComputerPlayer3 extends ComputerPlayer2 implements Player {
                     return true;
                 }
                 else
-                    pass();
+                    pass(game);
                 return false;
             case END_TURN:
             case CLEANUP:
-                pass();
+                pass(game);
                 return false;
         }
         return false;

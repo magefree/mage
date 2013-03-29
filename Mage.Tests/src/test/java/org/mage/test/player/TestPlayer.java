@@ -45,6 +45,7 @@ import mage.player.ai.ComputerPlayer;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanentAmount;
 import org.junit.Ignore;
 
 import java.io.Serializable;
@@ -52,7 +53,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
@@ -124,7 +124,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 }
             }
         }
-        pass();
+        pass(game);
         return false;
     }
 

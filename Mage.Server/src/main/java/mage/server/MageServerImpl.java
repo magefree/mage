@@ -571,6 +571,17 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public void undo(final UUID gameId, final String sessionId) throws MageException {
+        execute("undo", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().undo(gameId, userId);
+            }
+        });
+    }
+
+    @Override
     public void passPriorityUntilNextYourTurn(final UUID gameId, final String sessionId) throws MageException {
         execute("passPriorityUntilNextYourTurn", sessionId, new Action() {
             @Override

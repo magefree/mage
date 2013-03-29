@@ -391,24 +391,24 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         passed = false;
         if (!abort) {
             if (passedAllTurns) {
-                pass();
+                pass(game);
                 return false;
             }
             if (passedTurn && game.getStack().isEmpty()) {
-                pass();
+                pass(game);
                 return false;
             }
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
             waitForResponse();
             if (response.getBoolean() != null) {
-                pass();
+                pass(game);
                 return false;
             } else if (response.getInteger() != null) {
                 /*if (response.getInteger() == -9999) {
                     passedAllTurns = true;
                 }*/
-                pass();
+                pass(game);
                 //passedTurn = true;
                 return false;
             } else if (response.getString() != null && response.getString().equals("special")) {

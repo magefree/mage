@@ -420,7 +420,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             savedStates.push(gameStates.getSize() - 1);
             return savedStates.size();
         }
-        return 0;
+        return savedStates.size();
     }
 
     @Override
@@ -444,8 +444,29 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 while (savedStates.size() > bookmark) {
                     savedStates.pop();
                 }
+                gameStates.remove(bookmark);
             }
         }
+    }
+
+    private void clearAllBookmarks() {
+        if (!simulation) {
+            while (!savedStates.isEmpty()) {
+                savedStates.pop();
+            }
+            gameStates.remove(0);
+            for (Player player : getPlayers().values()) {
+                player.setStoredBookmark(-1);
+            }
+        }
+    }
+
+    @Override
+    public int getSavedStateSize() {
+        if (!simulation) {
+            return savedStates.size();
+        }
+        return 0;
     }
 
     @Override
@@ -722,6 +743,19 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public synchronized void undo(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            int bookmark = player.getStoredBookmark();
+            if (bookmark != -1) {
+                restoreState(bookmark);
+                player.setStoredBookmark(-1);
+                fireUpdatePlayersEvent();
+            }
+        }
+    }
+
+    @Override
     public synchronized void passPriorityUntilNextYourTurn(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
@@ -748,6 +782,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public void playPriority(UUID activePlayerId, boolean resuming) {
         int bookmark = 0;
+        clearAllBookmarks();
         try {
             while (!isPaused() && !isGameOver()) {
                 if (!resuming) {

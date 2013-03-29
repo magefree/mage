@@ -27,9 +27,6 @@
  */
 package mage.player.ai;
 
-import java.io.File;
-import java.util.*;
-import java.util.concurrent.*;
 import mage.Constants.Outcome;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
@@ -61,6 +58,10 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
+
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.*;
 
 
 /**
@@ -132,7 +133,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
         switch (game.getTurn().getStepType()) {
             case UPKEEP:
             case DRAW:
-                pass();
+                pass(game);
                 return false;
             case PRECOMBAT_MAIN:
             case POSTCOMBAT_MAIN:
@@ -146,36 +147,36 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                     act(game);
                     return true;
                 } else {
-                    pass();
+                    pass(game);
                 }
                 return false;
             case BEGIN_COMBAT:
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
             case END_COMBAT:
-                pass();
+                pass(game);
                 return false;
             case DECLARE_ATTACKERS:
                 if (game.getActivePlayerId().equals(playerId)) {
                     //declareAttackers(game, playerId);
-                    pass();
+                    pass(game);
                 } else {
-                    pass();
+                    pass(game);
                 }
                 return false;
             case DECLARE_BLOCKERS:
                 if (!game.getActivePlayerId().equals(playerId)) {
                     declareBlockers(game, playerId);
-                    pass();
+                    pass(game);
                 } else {
-                    pass();
+                    pass(game);
                 }
                 return false;
             case END_TURN:
-                pass();
+                pass(game);
                 return false;
             case CLEANUP:
-                pass();
+                pass(game);
                 return false;
         }
         return false;
@@ -222,7 +223,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
     protected void act(Game game) {
         if (actions == null || actions.size() == 0) {
-            pass();
+            pass(game);
         } else {
             boolean usedStack = false;
             while (actions.peek() != null) {
@@ -257,7 +258,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 }
             }
             if (usedStack) {
-                pass();
+                pass(game);
             }
         }
     }
@@ -536,7 +537,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 }
                 if (!sim.isGameOver() && action.isUsesStack()) {
                     // only pass if the last action uses the stack
-                    sim.getPlayer(currentPlayer.getId()).pass();
+                    sim.getPlayer(currentPlayer.getId()).pass(game);
                     sim.getPlayerList().getNext();
                 }
                 SimulationNode2 newNode = new SimulationNode2(node, sim, action, depth, currentPlayer.getId());

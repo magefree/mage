@@ -106,7 +106,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
         switch (game.getTurn().getStepType()) {
             case UPKEEP:
             case DRAW:
-                pass();
+                pass(game);
                 return false;
             case PRECOMBAT_MAIN:
             case BEGIN_COMBAT:
@@ -123,7 +123,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                 return true;
             case END_TURN:
             case CLEANUP:
-                pass();
+                pass(game);
                 return false;
         }
         return false;
@@ -131,7 +131,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
 
     protected void act(Game game) {
         if (actions == null || actions.size() == 0)
-            pass();
+            pass(game);
         else {
             boolean usedStack = false;
             while (actions.peek() != null) {
@@ -143,7 +143,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                     usedStack = true;
             }
             if (usedStack)
-                pass();
+                pass(game);
         }
         logger.info("Turn " + game.getTurnNum() + " Step " + game.getStep().toString() + " Player " + name + " Life " + life);
     }
@@ -405,7 +405,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
                 }
                 if (!sim.isGameOver() && action.isUsesStack()) {
                     // only pass if the last action uses the stack
-                    sim.getPlayer(currentPlayer.getId()).pass();
+                    sim.getPlayer(currentPlayer.getId()).pass(game);
                     sim.getPlayerList().getNext();
                 }
                 SimulationNode newNode = new SimulationNode(node, sim, action, currentPlayer.getId());

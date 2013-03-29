@@ -490,6 +490,14 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             CombatManager.getInstance().hideCombat(gameId);
         }
+
+        System.out.println("Size: " + game.getStatesSavedSize());
+        if (game.getStatesSavedSize() > 0) {
+            feedbackPanel.allowUndo(game.getStatesSavedSize());
+        } else {
+            feedbackPanel.disableUndo();
+        }
+
         this.revalidate();
         this.repaint();
     }

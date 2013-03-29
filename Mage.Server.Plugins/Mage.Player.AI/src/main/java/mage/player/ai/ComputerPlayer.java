@@ -721,7 +721,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     break;
             }
         }
-        pass();
+        pass(game);
         return true;
     }
 

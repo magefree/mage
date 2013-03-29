@@ -164,6 +164,7 @@ public interface Game extends MageItem, Serializable {
     void mulligan(UUID playerId);
     void quit(UUID playerId);
     void concede(UUID playerId);
+    void undo(UUID playerId);
     void emptyManaPools();
     void addEffect(ContinuousEffect continuousEffect, Ability source);
     void addEmblem(Emblem emblem, Ability source);
@@ -200,6 +201,7 @@ public interface Game extends MageItem, Serializable {
     int bookmarkState();
     void restoreState(int bookmark);
     void removeBookmark(int bookmark);
+    int getSavedStateSize();
 
     // game options
     void setGameOptions(GameOptions options);

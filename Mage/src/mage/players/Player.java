@@ -94,7 +94,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void setMaxHandSize(int maxHandSize);
     boolean isPassed();
     boolean isEmptyDraw();
-    void pass();
+    void pass(Game game);
     void resetPassed();
     boolean hasLost();
     boolean hasWon();
@@ -202,6 +202,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void passPriorityUntilNextYourTurn(Game game);
     void passTurnPriority(Game game);
     void restorePriority(Game game);
+    
+    int getStoredBookmark();
+    void setStoredBookmark(int bookmark);
+    void resetStoredBookmark(Game game);
 
     void revealCards(String name, Cards cards, Game game);
     void lookAtCards(String name, Cards cards, Game game);

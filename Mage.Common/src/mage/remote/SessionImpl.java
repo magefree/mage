@@ -930,6 +930,21 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public boolean undo(UUID gameId) {
+        try {
+            if (isConnected()) {
+                server.undo(gameId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
     public boolean passPriorityUntilNextYourTurn(UUID gameId) {
         try {
             if (isConnected()) {

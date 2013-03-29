@@ -28,10 +28,11 @@
 
 package mage.game;
 
+import org.apache.log4j.Logger;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -64,6 +65,15 @@ public class GameStates implements Serializable {
             return states.get(index);
         }
         return null;
+    }
+
+    public int remove(int index) {
+        if (states.size() > 0 && index < states.size()) {
+            while (states.size() > index && states.size() > 0) {
+                states.remove(states.size() - 1);
+            }
+        }
+        return states.size();
     }
 
     public GameState get(int index) {

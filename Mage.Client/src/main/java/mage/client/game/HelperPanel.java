@@ -29,9 +29,10 @@
 package mage.client.game;
 
 
-import java.awt.*;
-import javax.swing.*;
 import mage.client.components.MageTextArea;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Panel with buttons that copy the state of feedback panel.
@@ -43,6 +44,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnSpecial;
+    private javax.swing.JButton btnUndo;
     //private javax.swing.JButton btnEndTurn;
     //private javax.swing.JButton btnStopTimer;
 
@@ -52,6 +54,7 @@ public class HelperPanel extends JPanel {
     private javax.swing.JButton linkLeft;
     private javax.swing.JButton linkRight;
     private javax.swing.JButton linkSpecial;
+    private javax.swing.JButton linkUndo;
 
     public HelperPanel() {
         initComponents();
@@ -89,6 +92,9 @@ public class HelperPanel extends JPanel {
         btnRight = new JButton("Cancel");
         btnRight.setVisible(false);
         container.add(btnRight);
+        btnUndo = new JButton("Undo");
+        btnUndo.setVisible(false);
+        container.add(btnUndo);
 
         btnLeft.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -122,6 +128,15 @@ public class HelperPanel extends JPanel {
                 }}
             }
         });
+
+        btnUndo.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (linkUndo != null) {{
+                    linkUndo.doClick();
+                }}
+            }
+        });
     }
 
     public void setState(String txtLeft, boolean leftVisible, String txtRight, boolean rightVisible) {
@@ -140,6 +155,10 @@ public class HelperPanel extends JPanel {
         this.btnSpecial.setText(txtSpecial);
     }
 
+    public void setUndoEnabled(boolean enabled) {
+        this.btnUndo.setVisible(enabled);
+    }
+
     public void setRight(String txtRight, boolean rightVisible) {
         this.btnRight.setVisible(rightVisible);
         if (!txtRight.isEmpty()) {
@@ -147,10 +166,11 @@ public class HelperPanel extends JPanel {
         }
     }
 
-    public void setLinks(JButton left, JButton right, JButton special) {
+    public void setLinks(JButton left, JButton right, JButton special, JButton undo) {
         this.linkLeft = left;
         this.linkRight = right;
         this.linkSpecial = special;
+        this.linkUndo = undo;
     }
     
     public void setMessage(String message) {

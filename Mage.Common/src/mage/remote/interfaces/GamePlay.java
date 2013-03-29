@@ -59,6 +59,8 @@ public interface GamePlay {
 
     DraftPickView sendCardPick(UUID draftId, UUID cardId);
 
+    boolean undo(UUID gameId);
+
     /*** Separate methods for priority handling ***/
     /**
      * magenoxx:

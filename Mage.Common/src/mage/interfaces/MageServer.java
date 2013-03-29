@@ -100,6 +100,7 @@ public interface MageServer {
     void sendPlayerBoolean(UUID gameId, String sessionId, Boolean data) throws MageException;
     void sendPlayerInteger(UUID gameId, String sessionId, Integer data) throws MageException;
     void concedeGame(UUID gameId, String sessionId) throws MageException;
+    void undo(UUID gameId, String sessionId) throws MageException;
     GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
     //priority methods

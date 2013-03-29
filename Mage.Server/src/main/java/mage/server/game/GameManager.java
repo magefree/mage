@@ -96,6 +96,11 @@ public class GameManager {
             gameControllers.get(gameId).concede(userId);
     }
 
+    public void undo(UUID gameId, UUID userId) {
+        if (gameControllers.containsKey(gameId))
+            gameControllers.get(gameId).undo(userId);
+    }
+
     public void passPriorityUntilNextYourTurn(UUID gameId, UUID userId) {
         if (gameControllers.containsKey(gameId))
             gameControllers.get(gameId).passPriorityUntilNextYourTurn(userId);

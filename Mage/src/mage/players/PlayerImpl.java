@@ -101,6 +101,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean passed;
     protected boolean passedTurn;
     protected int turns;
+    protected int storedBookmark = -1;
 
     /**
      * This indicates that player passed all turns until his own turn starts.
@@ -175,6 +176,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.userData = player.userData;
         this.canPayLifeCost = player.canPayLifeCost;
         this.canPaySacrificeCost = player.canPaySacrificeCost;
+        this.storedBookmark = player.storedBookmark;
     }
 
     @Override
@@ -537,6 +539,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     game.fireEvent(event);
                     game.fireInformEvent(name + spellAbility.getActivatedMessage(game));
                     game.removeBookmark(bookmark);
+                    resetStoredBookmark(game);
                     return true;
                 }
                 game.restoreState(bookmark);
@@ -556,6 +559,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LAND_PLAYED, card.getId(), playerId));
                 game.fireInformEvent(name + " plays " + card.getName());
                 game.removeBookmark(bookmark);
+                resetStoredBookmark(game);
                 return true;
             }
             game.restoreState(bookmark);
@@ -568,7 +572,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             int bookmark = game.bookmarkState();
             if (ability.activate(game, false)) {
                 ability.resolve(game);
-                game.removeBookmark(bookmark);
+                // #169
+                if (storedBookmark == -1) {
+                    setStoredBookmark(bookmark);
+                }
+                //game.removeBookmark(bookmark);
                 return true;
             }
             game.restoreState(bookmark);
@@ -587,6 +595,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.ACTIVATED_ABILITY, ability.getId(), ability.getSourceId(), playerId));
                     game.fireInformEvent(name + ability.getActivatedMessage(game));
                     game.removeBookmark(bookmark);
+                    resetStoredBookmark(game);
                     return true;
                 }
                 game.restoreState(bookmark);
@@ -596,6 +605,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (ability.activate(game, false)) {
                 ability.resolve(game);
                 game.removeBookmark(bookmark);
+                resetStoredBookmark(game);
                 return true;
             }
             game.restoreState(bookmark);
@@ -612,6 +622,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 game.fireInformEvent(name + action.getActivatedMessage(game));
                 if (action.resolve(game)) {
                     game.removeBookmark(bookmark);
+                    resetStoredBookmark(game);
                     return true;
                 }
             }
@@ -628,7 +639,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
 
         if (ability instanceof PassAbility) {
-            pass();
+            pass(game);
             return true;
         }
         else if (ability instanceof PlayLandAbility) {
@@ -1055,8 +1066,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
-    public void pass() {
+    public void pass(Game game) {
         this.passed = true;
+        resetStoredBookmark(game);
     }
 
     @Override
@@ -1598,4 +1610,21 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return turns;
     }
 
+    @Override
+    public int getStoredBookmark() {
+        return storedBookmark;
+    }
+
+    @Override
+    public void setStoredBookmark(int storedBookmark) {
+        this.storedBookmark = storedBookmark;
+    }
+
+    @Override
+    public synchronized void resetStoredBookmark(Game game) {
+        if (this.storedBookmark != -1) {
+            game.removeBookmark(this.storedBookmark);
+        }
+        setStoredBookmark(-1);
+    }
 }
