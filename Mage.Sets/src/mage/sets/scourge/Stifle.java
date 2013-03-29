@@ -27,22 +27,12 @@
  */
 package mage.sets.scourge;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.FilterAbility;
-import mage.game.Game;
-import mage.game.stack.StackObject;
-import mage.target.TargetObject;
+import mage.target.common.TargetActivatedOrTriggeredAbility;
 
 
 /**
@@ -59,7 +49,7 @@ public class Stifle extends CardImpl<Stifle> {
 
         // Counter target activated or triggered ability.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
-        this.getSpellAbility().addTarget(new StifleTarget());
+        this.getSpellAbility().addTarget(new TargetActivatedOrTriggeredAbility());
     }
 
     public Stifle(final Stifle card) {
@@ -70,75 +60,4 @@ public class Stifle extends CardImpl<Stifle> {
     public Stifle copy() {
         return new Stifle(this);
     }
-}
-
-
-class StifleTarget extends TargetObject<StifleTarget> {
-
-    public StifleTarget() {
-        this.minNumberOfTargets = 1;
-        this.maxNumberOfTargets = 1;
-        this.zone = Constants.Zone.STACK;
-        this.targetName = "target activated or triggered ability";
-    }
-
-    public StifleTarget(final StifleTarget target) {
-        super(target);
-    }
-
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        if (source != null && source.getId().equals(id)) {
-            return false;
-        }
-        
-        StackObject stackObject = game.getStack().getStackObject(id);
-        if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-        return canChoose(sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-        for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
-                    return true;
-                }
-            }
-        return false;
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-        return possibleTargets(sourceControllerId, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-        Set<UUID> possibleTargets = new HashSet<UUID>();
-        for (StackObject stackObject :  game.getStack()) {
-            if (stackObject.getStackAbility() != null && (stackObject.getStackAbility() instanceof ActivatedAbility || stackObject.getStackAbility() instanceof TriggeredAbility) && game.getPlayer(sourceControllerId).getInRange().contains(stackObject.getStackAbility().getControllerId())) {
-                possibleTargets.add(stackObject.getStackAbility().getId());
-            }
-        }
-        return possibleTargets;
-    }
-
-    @Override
-    public StifleTarget copy() {
-        return new StifleTarget(this);
-    }
-
-    @Override
-    public Filter getFilter() {
-        return new FilterAbility();
-    }
-
 }
