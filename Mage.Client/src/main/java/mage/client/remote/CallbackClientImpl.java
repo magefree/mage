@@ -105,7 +105,7 @@ public class CallbackClientImpl implements CallbackClient {
                                         "\nF2 - press Ok, Yes or Done" +
                                         "\nF4 - skip current turn but stop on declare attackers" +
                                         "\nF9 - skip everything until you next turn" +
-                                        "\nF2 - undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
+                                        "\nF3 - undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
                             } else {
                                 if (message.isUserMessage() && panel.getConnectedChat() != null) {
                                     panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
