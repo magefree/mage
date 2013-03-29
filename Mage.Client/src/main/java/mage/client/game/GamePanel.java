@@ -288,6 +288,9 @@ public final class GamePanel extends javax.swing.JPanel {
         if (!session.watchGame(gameId)) {
             hideGame();
         }
+        for (PlayAreaPanel panel : getPlayers().values()) {
+            panel.setPlayingMode(false);
+        }
     }
 
     public synchronized void replayGame(UUID gameId) {
@@ -305,6 +308,9 @@ public final class GamePanel extends javax.swing.JPanel {
         this.gameChatPanel.clear();
         if (!session.startReplay(gameId)) {
             hideGame();
+        }
+        for (PlayAreaPanel panel : getPlayers().values()) {
+            panel.setPlayingMode(false);
         }
     }
 

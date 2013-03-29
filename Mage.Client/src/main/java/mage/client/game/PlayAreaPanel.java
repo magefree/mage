@@ -51,6 +51,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private UUID playerId;
     private UUID gameId;
     private boolean smallMode = false;
+    private boolean playingMode = true;
 
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
@@ -91,7 +92,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent Me) {
-                if (Me.isPopupTrigger()) {
+                if (Me.isPopupTrigger() && playingMode) {
                     Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());
                 }
             }
@@ -181,6 +182,10 @@ public class PlayAreaPanel extends javax.swing.JPanel {
 
     public boolean isSmallMode() {
         return smallMode;
+    }
+
+    public void setPlayingMode(boolean playingMode) {
+        this.playingMode = playingMode;
     }
 
     private mage.client.game.BattlefieldPanel battlefieldPanel;
