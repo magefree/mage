@@ -33,9 +33,13 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) { 
-            if (player.chooseUse(Outcome.Benefit, "Pay " + cost.getText() /* + " or sacrifice " + permanent.getName() */ + "?", game)) {
+            StringBuilder sb = new StringBuilder(cost.getText()).append("?");
+            if (!sb.toString().toLowerCase().startsWith("exile ") && !sb.toString().toLowerCase().startsWith("return ") ) {
+                sb.insert(0, "Pay ");
+            }
+            if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false))
                     return true;
             }
             permanent.sacrifice(source.getSourceId(), game);
@@ -53,7 +57,7 @@ public class SacrificeSourceUnlessPaysEffect extends OneShotEffect<SacrificeSour
     public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
             String costText = cost.getText();
-            if (costText.toLowerCase().startsWith("discard") || costText.toLowerCase().startsWith("remove") || costText.toLowerCase().startsWith("return")) {
+            if (costText.toLowerCase().startsWith("discard") || costText.toLowerCase().startsWith("remove") || costText.toLowerCase().startsWith("return") || costText.toLowerCase().startsWith("exile")) {
                 sb.append(costText.substring(0, 1).toLowerCase());
                 sb.append(costText.substring(1));
             } 

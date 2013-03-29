@@ -74,7 +74,7 @@ public class RevealTargetFromHandCost extends CostImpl<RevealTargetFromHandCost>
                 cards.add(card);                
                 paid = true;
             }
-            player.revealCards("Revealed card", cards, game); // this is not a boolean
+            player.revealCards("card cost", cards, game); // this is not a boolean
             return paid;
         }
         paid = false;
