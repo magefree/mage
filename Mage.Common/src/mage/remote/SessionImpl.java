@@ -28,8 +28,6 @@
 
 package mage.remote;
 
-import java.net.*;
-import java.util.*;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
@@ -52,6 +50,9 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 import org.jboss.remoting.transport.bisocket.Bisocket;
 import org.jboss.remoting.transport.socket.SocketWrapper;
 import org.jboss.remoting.transporter.TransporterClient;
+
+import java.net.*;
+import java.util.*;
 
 
 /**
@@ -924,6 +925,51 @@ public class SessionImpl implements Session {
             handleMageException(ex);
         } catch (Throwable t) {
             handleThrowable(t);        
+        }
+        return false;
+    }
+
+    @Override
+    public boolean passPriorityUntilNextYourTurn(UUID gameId) {
+        try {
+            if (isConnected()) {
+                server.passPriorityUntilNextYourTurn(gameId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean passTurnPriority(UUID gameId) {
+        try {
+            if (isConnected()) {
+                server.passTurnPriority(gameId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean restorePriority(UUID gameId) {
+        try {
+            if (isConnected()) {
+                server.restorePriority(gameId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
         }
         return false;
     }

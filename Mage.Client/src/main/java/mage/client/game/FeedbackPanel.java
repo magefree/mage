@@ -34,15 +34,6 @@
 
 package mage.client.game;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.io.Serializable;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import javax.swing.*;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageTextArea;
@@ -51,6 +42,16 @@ import mage.client.util.AudioManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.remote.Session;
 import org.apache.log4j.Logger;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.io.Serializable;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -432,6 +433,14 @@ public class FeedbackPanel extends javax.swing.JPanel {
 
     public void setConnectedChatPanel(ChatPanel chatPanel) {
         this.connectedChatPanel = chatPanel;
+    }
+    
+    public void pressOKYesOrDone() {
+        if (btnLeft.getText().equals("OK") || btnLeft.getText().equals("Yes")) {
+            btnLeft.doClick();
+        } else if (btnRight.getText().equals("OK") || btnRight.getText().equals("Yes") || btnRight.getText().equals("Done")) {
+            btnRight.doClick();
+        }
     }
 
     private javax.swing.JButton btnLeft;

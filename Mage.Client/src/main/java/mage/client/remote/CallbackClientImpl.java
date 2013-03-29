@@ -28,6 +28,7 @@
 
 package mage.client.remote;
 
+import mage.Constants;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -58,12 +59,12 @@ public class CallbackClientImpl implements CallbackClient {
     private UUID clientId;
     private MageFrame frame;
     private int messageId = 0;
+    private boolean firstRun;
 
     public CallbackClientImpl(MageFrame frame) {
-
         this.clientId = UUID.randomUUID();
         this.frame = frame;
-
+        this.firstRun = true;
     }
 
     @Override
@@ -99,10 +100,18 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         ChatPanel panel = frame.getChat(callback.getObjectId());
                         if (panel != null) {
-                            if (message.isUserMessage() && panel.getConnectedChat() != null) {
-                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+                            if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE)) {
+                                panel.receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
+                                        "\nF2 - press Ok, Yes or Done" +
+                                        "\nF4 - skip current turn but stop on declare attackers" +
+                                        "\nF9 - skip everything until you next turn" +
+                                        "\nF2 - undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
                             } else {
-                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                                if (message.isUserMessage() && panel.getConnectedChat() != null) {
+                                    panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+                                } else {
+                                    panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                                }
                             }
                         }
                     } else if (callback.getMethod().equals("serverMessage")) {
@@ -138,7 +147,6 @@ public class CallbackClientImpl implements CallbackClient {
                         GamePanel panel = frame.getGame(callback.getObjectId());
                         if (panel != null) {
                             panel.init((GameView) callback.getData());
-
                         }
                     }
                     else if (callback.getMethod().equals("gameOver")) {

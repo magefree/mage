@@ -1,6 +1,7 @@
 package mage.client.util;
 
 import mage.client.constants.Constants;
+import mage.client.dialog.PreferencesDialog;
 import org.apache.log4j.Logger;
 
 import javax.sound.sampled.*;
@@ -116,7 +117,10 @@ public class AudioManager {
     private static void checkAndPlayClip(Clip clip) {
         try {
             if (clip != null) {
-                audioManager.play(clip);
+                String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_ON, "true");
+                if (soundsOn.equals("true")) {
+                    audioManager.play(clip);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -28,11 +28,12 @@
 
 package mage.server.game;
 
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 import mage.cards.decks.DeckCardLists;
 import mage.game.Game;
 import mage.view.GameView;
+
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
@@ -93,6 +94,21 @@ public class GameManager {
     public void concedeGame(UUID gameId, UUID userId) {
         if (gameControllers.containsKey(gameId))
             gameControllers.get(gameId).concede(userId);
+    }
+
+    public void passPriorityUntilNextYourTurn(UUID gameId, UUID userId) {
+        if (gameControllers.containsKey(gameId))
+            gameControllers.get(gameId).passPriorityUntilNextYourTurn(userId);
+    }
+
+    public void passTurnPriority(UUID gameId, UUID userId) {
+        if (gameControllers.containsKey(gameId))
+            gameControllers.get(gameId).passTurnPriority(userId);
+    }
+
+    public void restorePriority(UUID gameId, UUID userId) {
+        if (gameControllers.containsKey(gameId))
+            gameControllers.get(gameId).restorePriority(userId);
     }
 
     public void watchGame(UUID gameId, UUID userId) {

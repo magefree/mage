@@ -30,6 +30,8 @@ package mage;
 
 public final class Constants {
 
+    public static final String MSG_TIP_HOT_KEYS_CODE = "MSG_TIPS_0001";
+
     public enum ColoredManaSymbol {
         W("W"), U("U"), B("B"), R("R"), G("G");
 

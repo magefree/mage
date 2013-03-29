@@ -28,6 +28,7 @@
 
 package mage.game;
 
+import mage.Constants;
 import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -458,6 +459,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.gameOptions = options;
         scorePlayer = state.getPlayers().values().iterator().next();
         init(choosingPlayerId, options);
+        informPlayers(Constants.MSG_TIP_HOT_KEYS_CODE);
         play(startingPlayerId);
         //saveState();
     }
@@ -716,6 +718,30 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player != null) {
             player.concede(this);
             fireInformEvent(player.getName() + " has conceded.");
+        }
+    }
+
+    @Override
+    public synchronized void passPriorityUntilNextYourTurn(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.passPriorityUntilNextYourTurn(this);
+        }
+    }
+
+    @Override
+    public synchronized void passTurnPriority(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.passTurnPriority(this);
+        }
+    }
+
+    @Override
+    public synchronized void restorePriority(UUID playerId) {
+        Player player = state.getPlayer(playerId);
+        if (player != null) {
+            player.restorePriority(this);
         }
     }
 

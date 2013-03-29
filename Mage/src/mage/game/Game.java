@@ -169,6 +169,11 @@ public interface Game extends MageItem, Serializable {
     void addEmblem(Emblem emblem, Ability source);
     void addPermanent(Permanent permanent);
 
+    // priority methods
+    void passPriorityUntilNextYourTurn(UUID userId);
+    void passTurnPriority(UUID userId);
+    void restorePriority(UUID userId);
+
     /**
      * This version supports copying of copies of any depth.
      *

@@ -34,8 +34,9 @@ import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.mana.*;
-import mage.abilities.effects.ReplacementEffect;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
@@ -404,11 +405,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 pass();
                 return false;
             } else if (response.getInteger() != null) {
-                if (response.getInteger() == -9999) {
+                /*if (response.getInteger() == -9999) {
                     passedAllTurns = true;
-                }
+                }*/
                 pass();
-                passedTurn = true;
+                //passedTurn = true;
                 return false;
             } else if (response.getString() != null && response.getString().equals("special")) {
                 specialAction(game);
@@ -509,7 +510,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         FilterCreatureForCombat filter = filterCreatureForCombat.copy();
         filter.add(new ControllerIdPredicate(attackingPlayerId));
         while (!abort) {
-            if (passedAllTurns || passedTurn) {
+            if (passedAllTurns /*|| passedTurn*/) {
                 return;
             }
             game.fireSelectEvent(playerId, "Select attackers");
@@ -517,10 +518,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
-                if (response.getInteger() == -9999) {
-                    passedAllTurns = true;
-                }
-                passedTurn = true;
+                //if (response.getInteger() == -9999) {
+                //    passedAllTurns = true;
+                //}
+                //passedTurn = true;
                 return;
             } else if (response.getUUID() != null) {
                 Permanent attacker = game.getPermanent(response.getUUID());
@@ -579,10 +580,10 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
-                if (response.getInteger() == -9999) {
-                    passedAllTurns = true;
-                }
-                passedTurn = true;
+                //if (response.getInteger() == -9999) {
+                //    passedAllTurns = true;
+                //}
+                //passedTurn = true;
                 return;
             } else if (response.getUUID() != null) {
                 Permanent blocker = game.getPermanent(response.getUUID());
@@ -798,6 +799,15 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         synchronized(response) {
             response.notify();
             log.debug("Got cancel action from player: " + getId());
+        }
+    }
+
+    @Override
+    public void skip() {
+        synchronized(response) {
+            response.setInteger(0);
+            response.notify();
+            log.debug("Got skip action from player: " + getId());
         }
     }
 

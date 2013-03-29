@@ -58,4 +58,37 @@ public interface GamePlay {
     boolean updateDeck(UUID tableId, DeckCardLists deck);
 
     DraftPickView sendCardPick(UUID draftId, UUID cardId);
+
+    /*** Separate methods for priority handling ***/
+    /**
+     * magenoxx:
+     *   it should be done separately as sendPlayer* methods calls are injected into the game flow
+     *   - this is similar to concedeGame method
+     */
+
+    /**
+     * Pass priority until next your turn.
+     * Don't stop at all even if something happens.
+     *
+     * @param gameId
+     * @return
+     */
+    boolean passPriorityUntilNextYourTurn(UUID gameId);
+
+    /**
+     * Passes current turn but stop on pre combat phase.
+     *
+     * @param gameId
+     * @return
+     */
+    boolean passTurnPriority(UUID gameId);
+
+    /**
+     * This method cancels all other calls made before.
+     *
+     * @param gameId
+     * @return
+     */
+    boolean restorePriority(UUID gameId);
+
 }

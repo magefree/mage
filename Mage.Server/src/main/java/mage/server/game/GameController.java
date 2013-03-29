@@ -28,13 +28,6 @@
 
 package mage.server.game;
 
-import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
 import mage.Constants.Zone;
 import mage.MageException;
 import mage.abilities.Ability;
@@ -61,6 +54,14 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
+
+import java.io.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.zip.GZIPOutputStream;
 
 
 /**
@@ -252,6 +253,18 @@ public class GameController implements GameCallback {
 
     public void concede(UUID userId) {
         game.concede(getPlayerId(userId));
+    }
+
+    public void passPriorityUntilNextYourTurn(UUID userId) {
+        game.passPriorityUntilNextYourTurn(getPlayerId(userId));
+    }
+
+    public void passTurnPriority(UUID userId) {
+        game.passTurnPriority(getPlayerId(userId));
+    }
+
+    public void restorePriority(UUID userId) {
+        game.restorePriority(getPlayerId(userId));
     }
 
     private void leave(UUID userId) {

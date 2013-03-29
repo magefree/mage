@@ -798,14 +798,32 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         });
 
-        KeyStroke ks8 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
-        this.getInputMap(c).put(ks8, "F9_PRESS");
+        KeyStroke ks9 = KeyStroke.getKeyStroke(KeyEvent.VK_F9, 0);
+        this.getInputMap(c).put(ks9, "F9_PRESS");
         this.getActionMap().put("F9_PRESS", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-                    session.sendPlayerInteger(gameId, -9999);
+                btnPassPriorityUntilNextYourTurnActionPerformed(actionEvent);
+            }
+        });
+
+        KeyStroke ks2 = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
+        this.getInputMap(c).put(ks2, "F2_PRESS");
+        this.getActionMap().put("F2_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (feedbackPanel != null) {
+                    feedbackPanel.pressOKYesOrDone();
                 }
+            }
+        });
+
+        KeyStroke ks3 = KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0);
+        this.getInputMap(c).put(ks3, "F3_PRESS");
+        this.getActionMap().put("F3_PRESS", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                restorePriorityActionPerformed(actionEvent);
             }
         });
 
@@ -1123,7 +1141,19 @@ public final class GamePanel extends javax.swing.JPanel {
 
     private void btnEndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
-            session.sendPlayerInteger(gameId, 0);
+            session.passTurnPriority(gameId);
+        }
+    }
+
+    private void btnPassPriorityUntilNextYourTurnActionPerformed(java.awt.event.ActionEvent evt) {
+        if (feedbackPanel != null && FeedbackMode.SELECT.equals(feedbackPanel.getMode())) {
+            session.passPriorityUntilNextYourTurn(gameId);
+        }
+    }
+
+    private void restorePriorityActionPerformed(java.awt.event.ActionEvent evt) {
+        if (feedbackPanel != null) {
+            session.restorePriority(gameId);
         }
     }
 

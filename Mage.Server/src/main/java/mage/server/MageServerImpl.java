@@ -28,10 +28,6 @@
 
 package mage.server;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
@@ -56,6 +52,11 @@ import mage.utils.*;
 import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 
 
 //import mage.interfaces.Server;
@@ -568,6 +569,40 @@ public class MageServerImpl implements MageServer {
             }
         });
     }
+
+    @Override
+    public void passPriorityUntilNextYourTurn(final UUID gameId, final String sessionId) throws MageException {
+        execute("passPriorityUntilNextYourTurn", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().passPriorityUntilNextYourTurn(gameId, userId);
+            }
+        });
+    }
+
+    @Override
+    public void passTurnPriority(final UUID gameId, final String sessionId) throws MageException {
+        execute("passTurnPriority", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().passTurnPriority(gameId, userId);
+            }
+        });
+    }
+
+    @Override
+    public void restorePriority(final UUID gameId, final String sessionId) throws MageException {
+        execute("restorePriority", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().restorePriority(gameId, userId);
+            }
+        });
+    }
+
 
     @Override
     public boolean watchTable(final String sessionId, final UUID roomId, final UUID tableId) throws MageException {

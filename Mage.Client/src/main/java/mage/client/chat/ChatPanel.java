@@ -34,17 +34,18 @@
 
 package mage.client.chat;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.*;
-import java.util.List;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
 import mage.client.components.ColorPane;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -166,17 +167,26 @@ public class ChatPanel extends javax.swing.JPanel {
     public void receiveMessage(String username, String message, String time, MessageColor color) {
         if (extendedViewMode.equals(VIEW_MODE.GAME)) {
             this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
-            this.txtConversation.append(MESSAGE_COLOR, (username.isEmpty() ? "" : username + ":") + message + "\n");
+            Color textColor = MESSAGE_COLOR;
+            if (color.equals(MessageColor.ORANGE)) {
+                textColor = Color.ORANGE;
+            }
+            this.txtConversation.append(textColor, (username.isEmpty() ? "" : username + ":") + message + "\n");
         } else {
             this.txtConversation.append(TIMESTAMP_COLOR, time + " ");
             Color userColor;
+            Color textColor = MESSAGE_COLOR;
             if (parentChatRef != null) {
                 userColor = parentChatRef.session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
             } else {
                 userColor = session.getUserName().equals(username) ? MY_COLOR : OPPONENT_COLOR;
+                if (color.equals(MessageColor.ORANGE)) {
+                    userColor = Color.ORANGE;
+                    textColor = userColor;
+                }
             }
             this.txtConversation.append(userColor, username + ": ");
-            this.txtConversation.append(MESSAGE_COLOR, message + "\n");
+            this.txtConversation.append(textColor, message + "\n");
         }
     }
 
@@ -189,6 +199,14 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     public void setParentChat(ChatPanel parentChatRef) {
+        this.parentChatRef = parentChatRef;
+    }
+
+    public ChatPanel getParentChatRef() {
+        return parentChatRef;
+    }
+
+    public void setParentChatRef(ChatPanel parentChatRef) {
         this.parentChatRef = parentChatRef;
     }
 

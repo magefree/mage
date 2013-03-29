@@ -28,8 +28,6 @@
 
 package mage.players;
 
-import java.io.Serializable;
-import java.util.*;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -72,6 +70,9 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -1078,6 +1079,28 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.loses = true;
         this.abort();
         game.leave(playerId);
+    }
+
+    @Override
+    public void passPriorityUntilNextYourTurn(Game game) {
+        passedTurn = true;
+        passedAllTurns = true;
+        this.skip();
+        log.debug("Passed priority for turns");
+    }
+
+    @Override
+    public void passTurnPriority(Game game) {
+        passedTurn = true;
+        this.skip();
+        log.debug("Passed priority for turn");
+    }
+
+    @Override
+    public void restorePriority(Game game) {
+        passedAllTurns = false;
+        passedTurn = false;
+        log.debug("Restore priority");
     }
 
     @Override

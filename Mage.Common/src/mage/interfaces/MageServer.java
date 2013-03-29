@@ -102,6 +102,11 @@ public interface MageServer {
     void concedeGame(UUID gameId, String sessionId) throws MageException;
     GameView getGameView(UUID gameId, String sessionId, UUID playerId) throws MageException;
 
+    //priority methods
+    void passPriorityUntilNextYourTurn(UUID gameId, String sessionId) throws MageException;
+    void passTurnPriority(UUID gameId, String sessionId) throws MageException;
+    void restorePriority(UUID gameId, String sessionId) throws MageException;
+
     //tournament methods
     void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void joinTournament(UUID draftId, String sessionId) throws MageException;

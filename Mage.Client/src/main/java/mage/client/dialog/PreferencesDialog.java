@@ -72,6 +72,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_CHECK = "cardImagesCheck";
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
 
+    public static final String KEY_SOUNDS_ON = "soundsOn";
+
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
     public static final String KEY_GAMEPANEL_LAST_SIZE = "gamepanelLastSize";
@@ -186,6 +188,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         browseButton = new javax.swing.JButton();
         checkForNewImages = new javax.swing.JCheckBox();
         saveToZipFiles = new javax.swing.JCheckBox();
+        jPanel22 = new javax.swing.JPanel();
+        jEnableSounds = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -250,7 +254,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showToolTipsInAnyZone)
                     .addComponent(displayBigCardsInHand))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +282,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nonLandPermanentsInOnePile)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,7 +384,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,7 +494,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(saveToZipFiles)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,6 +530,32 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
 
         jTabbedPane1.addTab("Images", jPanel4);
+
+        jEnableSounds.setText("enable sounds");
+        jEnableSounds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEnableSoundsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jEnableSounds)
+                .addContainerGap(325, Short.MAX_VALUE))
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jEnableSounds)
+                .addContainerGap(217, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Sounds", jPanel22);
 
         lblProxyType.setText("Proxy:");
 
@@ -590,7 +620,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -905,7 +935,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -932,9 +962,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(311, Short.MAX_VALUE)
+                .addContainerGap(316, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -985,6 +1015,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
 
+        // sounds
+        save(prefs, dialog.jEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
+
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
@@ -1001,8 +1034,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.put(KEY_AVATAR, String.valueOf(selectedId));
             updateCache(KEY_AVATAR, String.valueOf(selectedId));
         }
-
-
 
         try {
             prefs.flush();
@@ -1078,6 +1109,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_checkForNewImagesActionPerformed
 
+    private void jEnableSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableSoundsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEnableSoundsActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1122,7 +1157,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     loadSelectedAvatar(prefs);
 
                     // Images
-                    loadImages(prefs);
+                    loadImagesSettings(prefs);
+
+                    // Images
+                    loadSoundSettings(prefs);
 
                     // open specified tab before displaying
                     openTab(openedTab);
@@ -1159,7 +1197,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
     }
 
-    private static void loadImages(Preferences prefs) {
+    private static void loadImagesSettings(Preferences prefs) {
         String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
         if (prop.equals("true")) {
             dialog.useDefaultImageFolder.setSelected(true);
@@ -1173,6 +1211,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         load(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true");
         load(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+    }
+
+    private static void loadSoundSettings(Preferences prefs) {
+        String prop = prefs.get(KEY_SOUNDS_ON, "true");
+        if (prop.equals("true")) {
+            dialog.jEnableSounds.setSelected(true);
+        } else {
+            dialog.jEnableSounds.setSelected(false);
+        }
     }
 
     private static void loadProxySettings(Preferences prefs) {
@@ -1391,6 +1438,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField imageFolderPath;
+    private javax.swing.JCheckBox jEnableSounds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1418,6 +1466,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

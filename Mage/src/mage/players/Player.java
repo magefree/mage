@@ -34,9 +34,6 @@ import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.ReplacementEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
@@ -56,11 +53,7 @@ import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  *
@@ -203,6 +196,12 @@ public interface Player extends MageItem, Copyable<Player> {
     void leave();
     void concede(Game game);
     void abort();
+    void skip();
+
+    //priority methods
+    void passPriorityUntilNextYourTurn(Game game);
+    void passTurnPriority(Game game);
+    void restorePriority(Game game);
 
     void revealCards(String name, Cards cards, Game game);
     void lookAtCards(String name, Cards cards, Game game);
