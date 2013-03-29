@@ -1,17 +1,21 @@
 package mage.abilities.keyword;
 
 import mage.Constants;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 /**
  * Split Second
+ *
  * As long as this spell is on the stack, players can't cast other spells or activate abilities that aren't mana abilities.
  */
+
 public class SplitSecondAbility extends SimpleStaticAbility implements MageSingleton {
     private static final SplitSecondAbility ability = new SplitSecondAbility();
 
@@ -21,11 +25,12 @@ public class SplitSecondAbility extends SimpleStaticAbility implements MageSingl
 
     private SplitSecondAbility() {
         super(Constants.Zone.STACK, new SplitSecondEffect());
+        this.setRuleAtTheTop(true);
     }
 
     @Override
     public String getRule() {
-        return "Split second";
+        return "Split second <i>(As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)</i>";
     }
 
     @Override
@@ -45,8 +50,14 @@ class SplitSecondEffect extends ReplacementEffectImpl<SplitSecondEffect> impleme
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATED_ABILITY || event.getType() == GameEvent.EventType.CAST_SPELL) {
+        if (event.getType() == GameEvent.EventType.CAST_SPELL) {
             return true;
+        }
+        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+            Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
+            if (ability != null && !(ability instanceof ManaAbility)) {
+                return true;
+            }
         }
         return false;
     }
