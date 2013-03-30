@@ -29,26 +29,30 @@
 package mage.abilities.keyword;
 
 import mage.abilities.costs.mana.ManaCosts;
-import mage.filter.common.FilterBasicLandCard;
+import mage.filter.common.FilterLandCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author Loki
+ * @author Plopman
  */
-public class BasicLandcyclingAbility extends CyclingAbility{
-    private static final FilterBasicLandCard filter = new FilterBasicLandCard();
-    private static final String text = "Basic landcycling";
-
-    public BasicLandcyclingAbility(ManaCosts costs) {
+public class IslandcyclingAbility extends CyclingAbility{
+    private static final FilterLandCard filter = new FilterLandCard("Island card");
+    private static final String text = "Islandcycling";
+    static{
+        filter.add(new SubtypePredicate("Island"));
+    }
+    
+    public IslandcyclingAbility(ManaCosts costs) {
         super(costs, filter, text);
     }
 
-    public BasicLandcyclingAbility(final BasicLandcyclingAbility ability) {
+    public IslandcyclingAbility(final IslandcyclingAbility ability) {
         super(ability);
     }
 
     @Override
-    public BasicLandcyclingAbility copy() {
-        return new BasicLandcyclingAbility(this);
+    public IslandcyclingAbility copy() {
+        return new IslandcyclingAbility(this);
     }
 }

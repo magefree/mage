@@ -4,6 +4,11 @@ Bushido|number|
 Dredge|number|
 Soulshift|number|
 Basic landcycling|cost|
+Forestcycling|cost|
+Islandcycling|cost|
+Mountaincycling|cost|
+Plainscycling|cost|
+Swampcycling|cost|
 Cycling|cost|
 Cumulative upkeep|cost|
 Level up|cost|

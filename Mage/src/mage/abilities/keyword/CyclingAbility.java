@@ -28,16 +28,15 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Outcome;
 import mage.Constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.OneShotEffect;
-import mage.game.Game;
-import mage.players.Player;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
+import mage.filter.FilterCard;
+import mage.target.common.TargetCardInLibrary;
 
 
 /**
@@ -47,16 +46,26 @@ import mage.players.Player;
 public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
     private Cost cost;
+    private String text;
     
     public CyclingAbility(Cost cost) {
-        super(Zone.HAND, new CycleEffect(), cost);
+        super(Zone.HAND, new DrawCardControllerEffect(1), cost);
         this.addCost(new DiscardSourceCost());
         this.cost = cost;
+        this.text = "Cycling";
+    }
+    
+    public CyclingAbility(Cost cost, FilterCard filter, String text){
+        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), cost);
+        this.addCost(new DiscardSourceCost());
+        this.cost = cost;
+        this.text = text;
     }
 
     public CyclingAbility(final CyclingAbility ability) {
         super(ability);
         this.cost = ability.cost;
+        this.text = ability.text;
     }
 
     @Override
@@ -66,39 +75,14 @@ public class CyclingAbility extends ActivatedAbilityImpl<CyclingAbility> {
 
     @Override
     public String getRule() {
-        String rule = "";
+        String rule;
         if(cost instanceof ManaCosts){
-            rule = "Cycling " + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+            rule = this.text + " " + cost.getText() + " <i>(" + super.getRule() + ")</i>";
         }
         else{
-            rule = "Cycling-" + cost.getText() + " <i>(" + super.getRule() + ")</i>";
+            rule = this.text + "-" + cost.getText() + " <i>(" + super.getRule() + ")</i>";
         }
         return rule;
-    }
-
-}
-
-class CycleEffect extends OneShotEffect<CycleEffect> {
-
-    public CycleEffect() {
-        super(Outcome.DrawCard);
-        staticText = "Draw a card";
-    }
-
-    public CycleEffect(final CycleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CycleEffect copy() {
-        return new CycleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        player.drawCards(1, game);
-        return true;
     }
 
 }

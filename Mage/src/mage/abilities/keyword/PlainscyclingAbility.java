@@ -28,29 +28,23 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Zone;
-import mage.abilities.ActivatedAbilityImpl;
-import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInLibrary;
 
 /**
  *
  * @author Loki
  */
-public class PlainscyclingAbility extends ActivatedAbilityImpl<PlainscyclingAbility>{
+public class PlainscyclingAbility extends CyclingAbility{    
     private static final FilterLandCard filter = new FilterLandCard("Plains card");
-
-    static {
+    private static final String text = "Plainscycling";
+    static{
         filter.add(new SubtypePredicate("Plains"));
     }
 
     public PlainscyclingAbility(ManaCosts costs) {
-        super(Zone.HAND, new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), costs);
-        this.addCost(new DiscardSourceCost());
+        super(costs, filter, text);
     }
 
     public PlainscyclingAbility(final PlainscyclingAbility ability) {
@@ -60,10 +54,5 @@ public class PlainscyclingAbility extends ActivatedAbilityImpl<PlainscyclingAbil
     @Override
     public PlainscyclingAbility copy() {
         return new PlainscyclingAbility(this);
-    }
-
-    @Override
-    public String getRule() {
-    return "Plainscycling " + super.getRule();
     }
 }
