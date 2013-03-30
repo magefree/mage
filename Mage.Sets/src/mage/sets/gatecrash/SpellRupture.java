@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,9 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -94,25 +93,21 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect<SpellRuptureCoun
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             Player controller = game.getPlayer(source.getControllerId());
-            int amount = new greatestPowerCountCreatureYouControl().calculate(game, source);
-            if (player != null && controller != null) {
-                if (amount > 0) {
-                    GenericManaCost cost = new GenericManaCost(amount);
-                    if (!cost.pay(source, game, spell.getControllerId(), spell.getControllerId(), false)) {
-
-                        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
-                        if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
-                            game.informPlayers("Spell Rupture: cost wasn't payed - countering " + stackObject.getName());
-                            if (stackObject instanceof Spell) {
-                                game.rememberLKI(source.getFirstTarget(), Constants.Zone.STACK, (Spell) stackObject);
-                            }
-                            game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-                            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
-                            return true;
-                        }
-                        return false;
+            MageObject sourceObject = game.getObject(source.getSourceId());
+            if (player != null && controller != null && sourceObject != null) {
+                int amount = new greatestPowerCountCreatureYouControl().calculate(game, source);
+                GenericManaCost cost = new GenericManaCost(amount);
+                StringBuilder sb = new StringBuilder("Pay {").append(amount).append("}? (otherwise ").append(spell.getName()).append(" will be countered)");
+                if (player.chooseUse(Constants.Outcome.Benefit, sb.toString(), game)) {
+                    cost.pay(source, game, source.getSourceId(), player.getId(), false);
+                }
+                if (!cost.isPaid()) {
+                    if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+                        game.informPlayers(new StringBuilder(sourceObject.getName()).append(": cost wasn't payed - countering ").append(spell.getName()).toString());
+                        return true;
                     }
                 }
+
             }
         }
         return false;
