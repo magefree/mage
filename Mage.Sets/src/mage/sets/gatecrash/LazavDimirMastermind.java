@@ -27,10 +27,10 @@
  */
 package mage.sets.gatecrash;
 
-import java.util.Iterator;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -107,9 +108,8 @@ class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityI
             }
             if (game.getOpponents(controllerId).contains(event.getPlayerId())
                     && card.getCardType().contains(CardType.CREATURE)) {
-                for (Effect effect : this.getEffects()) {
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                }
+                // store the card id to copy
+                game.getState().setValue(new StringBuilder("CardToCopy").append(getSourceId().toString()).toString(), card.getId());
                 return true;
             }
         }
@@ -124,12 +124,17 @@ class CreatureCardPutOpponentGraveyardTriggeredAbility extends TriggeredAbilityI
 
 class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
 
+    protected UUID IdOfCopiedCard;
+    protected Card cardToCopy;
+
     public LazavDimirEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
     }
 
     public LazavDimirEffect(final LazavDimirEffect effect) {
         super(effect);
+        this.cardToCopy = effect.cardToCopy;
+        this.IdOfCopiedCard = effect.IdOfCopiedCard;
     }
 
     @Override
@@ -139,45 +144,51 @@ class LazavDimirEffect extends ContinuousEffectImpl<LazavDimirEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(targetPointer.getFirst(game, source));
+        Object object = game.getState().getValue(new StringBuilder("CardToCopy").append(source.getSourceId().toString()).toString());
+        Card card = null;
+        if (object instanceof UUID) {
+            card = game.getCard((UUID) object);
+        }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (card == null || permanent == null) {
             return false;
         }
-        permanent.getPower().setValue(card.getPower().getValue());
-        permanent.getToughness().setValue(card.getToughness().getValue());
-        permanent.getColor().setColor(card.getColor());
+        if (IdOfCopiedCard == null || !IdOfCopiedCard.equals((UUID) object)) {
+            IdOfCopiedCard = (UUID) object;
+            cardToCopy = card.copy();
+            cardToCopy.assignNewId();
+        }
+        permanent.getPower().setValue(cardToCopy.getPower().getValue());
+        permanent.getToughness().setValue(cardToCopy.getToughness().getValue());
+        permanent.getColor().setColor(cardToCopy.getColor());
         permanent.getManaCost().clear();
-        permanent.getManaCost().add(card.getManaCost());
+        permanent.getManaCost().add(cardToCopy.getManaCost());
         permanent.getCardType().clear();
-        for (CardType type : card.getCardType()) {
+        for (CardType type : cardToCopy.getCardType()) {
             if (!permanent.getCardType().contains(type)) {
                 permanent.getCardType().add(type);
             }
         }
         permanent.getSubtype().clear();
-        for (String type : card.getSubtype()) {
+        for (String type : cardToCopy.getSubtype()) {
             if (!permanent.getSubtype().contains(type)) {
                 permanent.getSubtype().add(type);
             }
         }
         permanent.getSupertype().clear();
         permanent.getSupertype().add("Legendary");
-        for (String type : card.getSupertype()) {
+        for (String type : cardToCopy.getSupertype()) {
             if (!permanent.getSupertype().contains(type)) {
                 permanent.getSupertype().add(type);
             }
         }
-        permanent.setExpansionSetCode(card.getExpansionSetCode());
-        for (Iterator<Ability> it = permanent.getAbilities().iterator();it.hasNext();) {
-            Ability ability = it.next();
-            if (!(ability instanceof HexproofAbility) && !(ability instanceof CreatureCardPutOpponentGraveyardTriggeredAbility)) {
-                it.remove();
-            }
-        }
-        for (Ability ability : card.getAbilities()) {
+        permanent.removeAllAbilities(source.getSourceId(), game);
+        permanent.addAbility(HexproofAbility.getInstance(), source.getSourceId(), game);
+        permanent.addAbility(new CreatureCardPutOpponentGraveyardTriggeredAbility(), source.getSourceId(), game);
+
+        for (Ability ability : cardToCopy.getAbilities()) {
             if (!permanent.getAbilities().contains(ability)) {
-                permanent.addAbility(ability, source.getId(), game);
+                permanent.addAbility(ability, source.getSourceId(), game);
             }
         }
         return true;
