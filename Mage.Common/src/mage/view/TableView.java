@@ -37,6 +37,8 @@ import mage.Constants.TableState;
 import mage.game.Game;
 import mage.game.Seat;
 import mage.game.Table;
+import mage.game.match.MatchPlayer;
+import mage.game.tournament.TournamentPlayer;
 
 /**
  *
@@ -74,8 +76,22 @@ public class TableView implements Serializable {
             for (Game game: table.getMatch().getGames()) {
                 games.add(game.getId());
             }
+            StringBuilder sb = new StringBuilder();
+            for(MatchPlayer matchPlayer: table.getMatch().getPlayers()) {
+                if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
+                    sb.append(", ").append(matchPlayer.getPlayer().getName());
+                }
+            }
+            this.controllerName += sb.toString();
         } else {
-             StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
+            StringBuilder sb1 = new StringBuilder();
+            for (TournamentPlayer tp: table.getTournament().getPlayers()) {
+                if (!tp.getPlayer().getName().equals(table.getControllerName())) {
+                    sb1.append(", ").append(tp.getPlayer().getName());
+                }
+            }
+            this.controllerName += sb1.toString();
+            StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
             if (table.getState().equals(TableState.DUELING)) {
                 sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
             }

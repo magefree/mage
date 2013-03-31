@@ -600,7 +600,7 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Match Name", "Owner", "Game Type", "Deck Type", "Info", "Status", "Created", "Action"};
+    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
