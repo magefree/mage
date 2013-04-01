@@ -40,7 +40,6 @@ import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
@@ -98,7 +97,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
 
     @Override
     public String getRule() {
-        return "Echo " + manaString + " (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep," + getEffects().getText(modes.getMode()) + ")";
+        return "Echo " + manaString + " <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep," + getEffects().getText(modes.getMode()) + ")</i>";
     }
 }
 
