@@ -447,9 +447,9 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             this.txtPhase.setText("");
         }
-        updatePhases(game.getStep());
-
+        
         if (game.getStep() != null) {
+            updatePhases(game.getStep());
             this.txtStep.setText(game.getStep().toString());
         }
         else {
