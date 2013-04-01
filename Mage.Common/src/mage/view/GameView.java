@@ -74,17 +74,10 @@ public class GameView implements Serializable {
     private String priorityPlayerName = "";
     private int turn;
     private boolean special = false;
-    private int statesSavedSize;
 
     public GameView(GameState state, Game game) {
         for (Player player: state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game));
-            if (player.getStoredBookmark() > 0) {
-                if (this.statesSavedSize > 0) {
-                    throw new IllegalStateException("This shouldn't happen");
-                }
-                this.statesSavedSize = player.getStoredBookmark();
-            }
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
@@ -259,9 +252,5 @@ public class GameView implements Serializable {
 
     public boolean getSpecial() {
         return special;
-    }
-
-    public int getStatesSavedSize() {
-        return statesSavedSize;
     }
 }
