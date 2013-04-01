@@ -73,7 +73,7 @@ public class Main {
     private static final String testModeArg = "-testMode=";
     private static final String adminPasswordArg = "-adminPassword=";
     private static final String pluginFolder = "plugins";
-    private static MageVersion version = new MageVersion(1, 0, 1, "");
+    private static MageVersion version = new MageVersion(1, 0, 2, "dev");
 
     public static PluginClassLoader classLoader = new PluginClassLoader();
     public static TransporterServer server;
