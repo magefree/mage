@@ -44,6 +44,11 @@ import mage.abilities.costs.Cost;
  * plays with that card revealed until that card leaves his or her hand, that ability
  * resolves, or that ability otherwise leaves the stack.
  *
+ * You can cast a card for its miracle cost only as the miracle triggered ability resolves.
+ * If you don't want to cast it at that time (or you can't cast it, perhaps because
+ * there are no legal targets available), you won't be able to cast it later for the miracle cost.
+ *
+ *
  * @author noxx
  */
 public class MiracleAbility extends StaticAbility<MiracleAbility> {

@@ -108,6 +108,7 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
                         controller.lookAtCards("Miracle", cards, game);
                         if (controller.chooseUse(Outcome.Benefit, "Use Miracle " + manaCostsToPay.getText() + "?", game)) {
                             controller.revealCards("Miracle", cards, game);
+
                             ManaCosts costRef = card.getSpellAbility().getManaCostsToPay();
                             // replace with the new cost
                             costRef.clear();
@@ -115,6 +116,13 @@ public class MiracleWatcher extends WatcherImpl<MiracleWatcher> {
                                 costRef.add(manaCost);
                             }
                             controller.cast(card.getSpellAbility(), game, false);
+
+                            // Reset the casting costs (in case the player cancels cast and plays the card later)
+                            costRef.clear();
+                            for (ManaCost manaCost : card.getSpellAbility().getManaCosts()) {
+                                costRef.add(manaCost);
+                            }
+
                             break;
                         }
                     }

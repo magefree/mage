@@ -447,9 +447,9 @@ public final class GamePanel extends javax.swing.JPanel {
         } else {
             this.txtPhase.setText("");
         }
-        updatePhases(game.getStep());
-
+        
         if (game.getStep() != null) {
+            updatePhases(game.getStep());
             this.txtStep.setText(game.getStep().toString());
         }
         else {
@@ -491,12 +491,7 @@ public final class GamePanel extends javax.swing.JPanel {
             CombatManager.getInstance().hideCombat(gameId);
         }
 
-        System.out.println("Size: " + game.getStatesSavedSize());
-        if (game.getStatesSavedSize() > 0) {
-            feedbackPanel.allowUndo(game.getStatesSavedSize());
-        } else {
-            feedbackPanel.disableUndo();
-        }
+        feedbackPanel.disableUndo();
 
         this.revalidate();
         this.repaint();
@@ -607,6 +602,11 @@ public final class GamePanel extends javax.swing.JPanel {
                     options = new HashMap<String, Serializable>();
                     options.put("your_turn", true);
                     messageToDisplay = message + " <div style='font-size:11pt'>Your turn</div>";
+                }
+                // magenoxx: because of uncaught bug with saving state, rolling back and stack
+                // undo is allowed only for empty stack
+                if (playerView.getStatesSavedSize() > 0 && gameView.getStack().size() == 0) {
+                    feedbackPanel.allowUndo(playerView.getStatesSavedSize());
                 }
                 break;
             }

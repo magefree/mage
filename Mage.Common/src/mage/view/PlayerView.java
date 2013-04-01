@@ -62,6 +62,7 @@ public class PlayerView implements Serializable {
     private UserDataView userDataView;
     private List<EmblemView> emblemList = new ArrayList<EmblemView>();
     private List<UUID> attachments = new ArrayList<UUID>();
+    private int statesSavedSize;
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();
@@ -105,6 +106,8 @@ public class PlayerView implements Serializable {
         if (player.getAttachments() != null) {
             attachments.addAll(player.getAttachments());
         }
+
+        this.statesSavedSize = player.getStoredBookmark();
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -183,5 +186,9 @@ public class PlayerView implements Serializable {
 
     public boolean hasAttachments() {
         return attachments != null && attachments.size() > 0;
+    }
+
+    public int getStatesSavedSize() {
+        return statesSavedSize;
     }
 }

@@ -56,5 +56,12 @@ public class Extended extends Constructed {
                 setCodes.add(set.getCode());
             }
         }
+
+        banned.add("Jace, the Mind Sculptor");
+        banned.add("Mental Misstep");
+        banned.add("Ponder");
+        banned.add("Preordain");
+        banned.add("Stoneforge Mystic");
+        
     }
 }
