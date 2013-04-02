@@ -28,6 +28,8 @@
 
 package mage.player.human;
 
+import java.io.Serializable;
+import java.util.*;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
 import mage.Constants.Zone;
@@ -65,8 +67,6 @@ import mage.target.common.TargetDefender;
 import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -140,8 +140,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseMulligan", game);
         game.fireAskPlayerEvent(playerId, "Do you want to take a mulligan?");
         waitForBooleanResponse();
-        if (!abort)
+        if (!abort) {
             return response.getBoolean();
+        }
         return false;
     }
 
@@ -150,8 +151,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseUse", game);
         game.fireAskPlayerEvent(playerId, message);
         waitForBooleanResponse();
-        if (!abort)
+        if (!abort) {
             return response.getBoolean();
+        }
         return false;
     }
 
@@ -164,8 +166,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             replacementEffectChoice.getChoices().add(count + ". " + effectText);
             count++;
         }
-        if (replacementEffectChoice.getChoices().size() == 1)
+        if (replacementEffectChoice.getChoices().size() == 1) {
             return 0;
+        }
         while (!abort) {
             game.fireChooseEvent(playerId, replacementEffectChoice);
             waitForResponse();
@@ -174,8 +177,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 replacementEffectChoice.setChoice(response.getString());
                 count = 1;
                 for (int i = 0; i < rEffects.size(); i++) {
-                    if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i)))
+                    if (replacementEffectChoice.getChoice().equals(count + ". " + rEffects.get(i))) {
                         return i;
+                    }
                     count++;
                 }
             }
@@ -302,7 +306,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 required = false;
             } else {
                 int count = cards.count(target.getFilter(), game);
-                if (count == 0) required = false;
+                if (count == 0) {
+                    required = false;
+                }
             }
             Map<String, Serializable> options = getOptions(target);
             if (target.getTargets().size() > 0) {
@@ -343,7 +349,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 required = false;
             } else {
                 int count = cards.count(target.getFilter(), game);
-                if (count == 0) required = false;
+                if (count == 0) {
+                    required = false;
+                }
             }
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), null);
             waitForResponse();
@@ -438,8 +446,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             waitForResponse();
             if (response.getUUID() != null) {
                 for (TriggeredAbility ability: abilities) {
-                    if (ability.getId().equals(response.getUUID()))
+                    if (ability.getId().equals(response.getUUID())) {
                         return ability;
+                    }
                 }
             }
         }
@@ -608,8 +617,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             waitForResponse();
             if (response.getUUID() != null) {
                 for (Permanent perm: attackers) {
-                    if (perm.getId().equals(response.getUUID()))
+                    if (perm.getId().equals(response.getUUID())) {
                         return perm.getId();
+                    }
                 }
             }
         }
@@ -625,8 +635,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             waitForResponse();
             if (response.getUUID() != null) {
                 for (Permanent perm: blockers) {
-                    if (perm.getId().equals(response.getUUID()))
+                    if (perm.getId().equals(response.getUUID())) {
                         return perm.getId();
+                    }
                 }
             }
         }
@@ -651,7 +662,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         int remainingDamage = damage;
         while (remainingDamage > 0) {
             Target target = new TargetCreatureOrPlayer();
-            if (singleTargetName != null) target.setTargetName(singleTargetName);
+            if (singleTargetName != null) {
+                target.setTargetName(singleTargetName);
+            }
             choose(Outcome.Damage, target, sourceId, game);
             if (targets.isEmpty() || targets.contains(target.getFirstTarget())) {
                 int damageAmount = getAmount(0, remainingDamage, "Select amount", game);
@@ -700,8 +713,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         game.fireGetChoiceEvent(playerId, name, new ArrayList<SpecialAction>(specialActions.values()));
         waitForResponse();
         if (response.getUUID() != null) {
-            if (specialActions.containsKey(response.getUUID()))
+            if (specialActions.containsKey(response.getUUID())) {
                 activateAbility(specialActions.get(response.getUUID()), game);
+            }
         }
     }
 
@@ -717,8 +731,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(abilities.values()));
         waitForResponse();
         if (response.getUUID() != null) {
-            if (abilities.containsKey(response.getUUID()))
+            if (abilities.containsKey(response.getUUID())) {
                 activateAbility(abilities.get(response.getUUID()), game);
+            }
         }
     }
 
@@ -730,16 +745,18 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             Map<UUID, String> modeMap = new LinkedHashMap<UUID, String>();
             for (Mode mode: modes.values()) {
                 String modeText = mode.getEffects().getText(mode);
-                if (obj != null)
+                if (obj != null) {
                     modeText = modeText.replace("{source}", obj.getName());
+                }
                 modeMap.put(mode.getId(), modeText);
             }
             game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
             waitForResponse();
             if (response.getUUID() != null) {
                 for (Mode mode: modes.values()) {
-                    if (mode.getId().equals(response.getUUID()))
+                    if (mode.getId().equals(response.getUUID())) {
                         return mode;
+                    }
                 }
             }
             return null;
@@ -752,8 +769,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("choosePile", game);
         game.fireChoosePileEvent(playerId, message, pile1, pile2);
         waitForBooleanResponse();
-        if (!abort)
+        if (!abort) {
             return response.getBoolean();
+        }
         return false;
     }
 

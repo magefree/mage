@@ -34,15 +34,6 @@
 
 package mage.client.game;
 
-import mage.client.MageFrame;
-import mage.client.chat.ChatPanel;
-import mage.client.components.MageTextArea;
-import mage.client.dialog.MageDialog;
-import mage.client.util.AudioManager;
-import mage.client.util.gui.ArrowBuilder;
-import mage.remote.Session;
-import org.apache.log4j.Logger;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.Serializable;
@@ -51,6 +42,14 @@ import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import mage.client.MageFrame;
+import mage.client.chat.ChatPanel;
+import mage.client.components.MageTextArea;
+import mage.client.dialog.MageDialog;
+import mage.client.util.AudioManager;
+import mage.client.util.gui.ArrowBuilder;
+import mage.remote.Session;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -136,6 +135,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         this.btnSpecial.setVisible(special);
         this.btnSpecial.setText("Special");
         this.helper.setSpecial("Special", special);
+        // Handling Phyrexian mana
         if (message.contains("P}")) {
             this.btnSpecial.setVisible(true);
             this.btnSpecial.setText("Pay 2 life");
@@ -289,7 +289,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
         session.sendPlayerString(gameId, "special");
     }//GEN-LAST:event_btnSpecialActionPerformed
 
-    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSpecialActionPerformed
+    private void btnUndoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         session.undo(gameId);
     }
 

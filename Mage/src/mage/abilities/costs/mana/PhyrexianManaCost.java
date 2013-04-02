@@ -28,13 +28,14 @@
 
 package mage.abilities.costs.mana;
 
+import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.ManaPool;
 
-import java.util.UUID;
+
 
 /**
  * 
@@ -53,13 +54,12 @@ public class PhyrexianManaCost extends ColoredManaCost {
 
     @Override
     public void assignPayment(Game game, Ability ability, ManaPool pool) {
-        if (assignColored(ability, game, pool, this.mana))
-            return;
+        assignColored(ability, game, pool, this.mana);
     }
 
     @Override
     public String getText() {
-        return "{" + mana.toString() + "P}";
+        return new StringBuilder("{").append(mana.toString()).append("P}").toString();
     }
 
     @Override
@@ -86,4 +86,3 @@ public class PhyrexianManaCost extends ColoredManaCost {
         return new PhyrexianManaCost(this);
     }
 }
-

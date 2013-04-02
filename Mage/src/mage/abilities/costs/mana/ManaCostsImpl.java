@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.mana;
 
+import java.util.*;
 import mage.Constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -39,7 +40,7 @@ import mage.players.ManaPool;
 import mage.players.Player;
 import mage.target.Targets;
 
-import java.util.*;
+
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -115,21 +116,13 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
         Player player = game.getPlayer(controllerId);
         assignPayment(game, ability, player.getManaPool());
         while (!isPaid()) {
-            if (player.playMana(this.getUnpaid(), game))
+            if (player.playMana(this.getUnpaid(), game)) {
                 assignPayment(game, ability, player.getManaPool());
-            else
+            }
+            else {
                 return false;
+            }
         }
-        // no more needed because X costs are added to the cost during announcing of the X costs
-//        for (ManaCost cost : this.getUnpaidVariableCosts()) {
-//            VariableManaCost vCost = (VariableManaCost) cost;
-//            while (!vCost.isPaid()) {
-//                if (player.playXMana(vCost, (ManaCosts<ManaCost>) this, game))
-//                    vCost.assignPayment(game, ability, player.getManaPool());
-//                else
-//                    return false;
-//            }
-//        }
         return true;
     }
 
@@ -156,8 +149,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public ManaCosts<T> getUnpaid() {
         ManaCosts<T> unpaid = new ManaCostsImpl<T>();
         for (T cost : this) {
-            if (!(cost instanceof VariableManaCost) && !cost.isPaid())
+            if (!(cost instanceof VariableManaCost) && !cost.isPaid()) {
                 unpaid.add((T) cost.getUnpaid());
+            }
         }
         return unpaid;
     }
@@ -166,8 +160,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public ManaCosts<T> getUnpaidVariableCosts() {
         ManaCosts<T> unpaid = new ManaCostsImpl<T>();
         for (ManaCost cost : this) {
-            if (cost instanceof VariableManaCost && !cost.isPaid())
+            if (cost instanceof VariableManaCost && !cost.isPaid()) {
                 unpaid.add((T) cost.getUnpaid());
+            }
         }
         return unpaid;
     }
@@ -177,13 +172,10 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public List<VariableCost> getVariableCosts() {
         List<VariableCost> variableCosts = new ArrayList<VariableCost>();
         for (ManaCost cost : this) {
-            if (cost instanceof VariableCost)
+            if (cost instanceof VariableCost) {
                 variableCosts.add((VariableCost) cost);
+            }
         }
-//        if (variableCosts.size() == 0) {
-//            // add empty cost (#Issue 210)
-//            variableCosts.add(new VariableManaCost());
-//        }
         return variableCosts;
     }
 
@@ -191,16 +183,18 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     public int getX() {
         int amount = 0;
         List<VariableCost> variableCosts = getVariableCosts();
-        if (!variableCosts.isEmpty())
+        if (!variableCosts.isEmpty()) {
             amount = variableCosts.get(0).getAmount();
+        }
         return amount;
     }
 
     @Override
     public void setX(int x) {
         List<VariableCost> variableCosts = getVariableCosts();
-        if (!variableCosts.isEmpty())
+        if (!variableCosts.isEmpty()) {
             variableCosts.get(0).setAmount(x);
+        }
     }
 
     @Override
@@ -251,8 +245,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                 this.add((T) cost.copy());
             }
         } else {
-            if (mana == null || mana.length() == 0)
+            if (mana == null || mana.length() == 0) {
                 return;
+            }
             String[] symbols = mana.split("^\\{|\\}\\{|\\}$");
             int modifierForX = 0;
             for (String symbol : symbols) {
@@ -261,8 +256,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
                         if (Character.isDigit(symbol.charAt(0))) {
                             this.add((T) new GenericManaCost(Integer.valueOf(symbol)));
                         } else {
-                            if (!symbol.equals("X"))
+                            if (!symbol.equals("X")) {
                                 this.add((T) new ColoredManaCost(ColoredManaSymbol.lookup(symbol.charAt(0))));
+                            }
                             else {
                                 // check X wasn't added before
                                 if (modifierForX == 0) {
@@ -317,8 +313,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
 
     @Override
     public String getText() {
-        if (this.size() == 0)
+        if (this.size() == 0) {
             return "";
+        }
 
         StringBuilder sbText = new StringBuilder();
         for (ManaCost cost : this) {
@@ -346,8 +343,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean testPay(Mana testMana) {
         for (ManaCost cost : this) {
-            if (cost.testPay(testMana))
+            if (cost.testPay(testMana)) {
                 return true;
+            }
         }
         return false;
     }
@@ -355,8 +353,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         for (T cost : this) {
-            if (!cost.canPay(sourceId, controllerId, game))
+            if (!cost.canPay(sourceId, controllerId, game)) {
                 return false;
+            }
         }
         return true;
     }
@@ -364,8 +363,9 @@ public class ManaCostsImpl<T extends ManaCost> extends ArrayList<T> implements M
     @Override
     public boolean isPaid() {
         for (T cost : this) {
-            if (!((T) cost instanceof VariableManaCost) && !cost.isPaid())
+            if (!((T) cost instanceof VariableManaCost) && !cost.isPaid()) {
                 return false;
+            }
         }
         return true;
     }

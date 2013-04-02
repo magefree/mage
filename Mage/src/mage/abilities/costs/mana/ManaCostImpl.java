@@ -28,6 +28,7 @@
 
 package mage.abilities.costs.mana;
 
+import java.util.UUID;
 import mage.Constants.ColoredManaSymbol;
 import mage.Constants.ManaType;
 import mage.Mana;
@@ -39,7 +40,6 @@ import mage.game.Game;
 import mage.players.ManaPool;
 import mage.players.Player;
 
-import java.util.UUID;
 
 public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T> implements ManaCost {
 
@@ -61,8 +61,9 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
         this.payment = manaCost.payment.copy();
         this.cost = manaCost.cost.copy();
         this.options = manaCost.options.copy();
-        if (manaCost.sourceFilter != null)
+        if (manaCost.sourceFilter != null) {
             this.sourceFilter = manaCost.sourceFilter.copy();
+        }
     }
 
     @Override
@@ -168,27 +169,33 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
     protected boolean isColoredPaid(ColoredManaSymbol mana) {
         switch (mana) {
             case B:
-                if (this.payment.getBlack() > 0)
+                if (this.payment.getBlack() > 0) {
                     return true;
+                }
             case U:
-                if (this.payment.getBlue() > 0)
+                if (this.payment.getBlue() > 0) {
                     return true;
+                }
             case W:
-                if (this.payment.getWhite() > 0)
+                if (this.payment.getWhite() > 0) {
                     return true;
+                }
             case G:
-                if (this.payment.getGreen() > 0)
+                if (this.payment.getGreen() > 0) {
                     return true;
+                }
             case R:
-                if (this.payment.getRed() > 0)
+                if (this.payment.getRed() > 0) {
                     return true;
+                }
         }
         return false;
     }
 
     protected boolean isColorlessPaid(int mana) {
-        if (this.payment.count() >= mana)
+        if (this.payment.count() >= mana) {
             return true;
+        }
         return false;
     }
 
@@ -206,10 +213,12 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
         Player player = game.getPlayer(controllerId);
         assignPayment(game, ability, player.getManaPool());
         while (!isPaid()) {
-            if (player.playMana(this, game))
+            if (player.playMana(this, game)) {
                 assignPayment(game, ability, player.getManaPool());
-            else
+            }
+            else {
                 return false;
+            }
         }
         return true;
     }
