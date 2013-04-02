@@ -100,7 +100,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
             }
             return sb.toString();
         }
-        if (targetName.startsWith("another")) {
+        if (targetName.startsWith("another") || targetName.startsWith("a ") || targetName.startsWith("an ")) {
             return "Select " + targetName;
         }
         return "Select a " + targetName;
