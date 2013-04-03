@@ -158,7 +158,7 @@ class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl<In
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent != null && toCopyToPermanent != null && sourcePermanent.getAttachedTo() != null) {
             Permanent toCopyFromPermanent = game.getPermanent(sourcePermanent.getAttachedTo());
-            if (toCopyToPermanent != null) {
+            if (toCopyFromPermanent != null) {
                 game.copyPermanent(toCopyFromPermanent, toCopyToPermanent, source, new EmptyApplyToPermanent());
             }
         }
