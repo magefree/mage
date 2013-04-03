@@ -102,6 +102,11 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         return this.txtPlayerDeck.getText();
     }
 
+    public void setDeckFile(String deckFile) {
+        this.txtPlayerDeck.setText(deckFile);
+    }
+
+
     public int getLevel() {
         return Integer.valueOf((String)this.cbLevel.getSelectedItem());
     }

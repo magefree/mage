@@ -67,7 +67,6 @@ public class NewTableDialog extends MageDialog {
     /** Creates new form NewTableDialog */
     public NewTableDialog() {
         initComponents();
-        txtName.setText("Game");
         player1Panel.showLevel(false);
         this.spnNumWins.setModel(new SpinnerNumberModel(1, 1, 5, 1));
     }
@@ -308,6 +307,8 @@ public class NewTableDialog extends MageDialog {
         options.setAttackOption((MultiplayerAttackOption) this.cbAttackOption.getSelectedItem());
         options.setRange((RangeOfInfluence) this.cbRange.getSelectedItem());
         options.setWinsNeeded((Integer)this.spnNumWins.getValue());
+        saveGameSettingsToPrefs(options, this.player1Panel.getDeckFile());
+
         table = session.createTable(roomId, options);
         if (table == null) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -411,6 +412,9 @@ public class NewTableDialog extends MageDialog {
         selectLimitedByDefault();
         cbRange.setModel(new DefaultComboBoxModel(RangeOfInfluence.values()));
         cbAttackOption.setModel(new DefaultComboBoxModel(MultiplayerAttackOption.values()));
+
+        setGameSettingsFromPrefs();
+
         this.roomId = roomId;
         this.setModal(true);
         setGameOptions();
@@ -434,6 +438,58 @@ public class NewTableDialog extends MageDialog {
                 break;
             }
         }
+    }
+
+    /**
+     * set the table settings from java prefs 
+     */
+    private void setGameSettingsFromPrefs () {
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NAME, "Game"));
+        String gameTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, "Two Player Duel");
+        for (GameTypeView gtv : session.getGameTypes()) {
+            if (gtv.getName().equals(gameTypeName)) {
+                cbGameType.setSelectedItem(gtv);
+                break;
+            }
+        }
+        cbDeckType.setSelectedItem(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, "Limited"));
+        String deckFile = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, null);
+        if (deckFile != null) {
+            this.player1Panel.setDeckFile(deckFile);
+        }
+        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, "2")));
+        this.spnNumPlayers.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, "2")));
+        int range = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, "1"));
+        for (RangeOfInfluence roi :RangeOfInfluence.values()) {
+            if (roi.getRange() == range) {
+                this.cbRange.setSelectedItem(roi);
+                break;
+            }
+        }
+        String attackOption = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, "Attack Multiple Players");
+        for (MultiplayerAttackOption mao :MultiplayerAttackOption.values()) {
+            if (mao.toString().equals(attackOption)) {
+                this.cbAttackOption.setSelectedItem(mao);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Save the settings to java prefs to reload it next time the dialog will be created
+     *
+     * @param options
+     * @param deckFile
+     */
+    private void saveGameSettingsToPrefs(MatchOptions options, String deckFile) {
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NAME, options.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_TYPE, options.getDeckType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_GAME_TYPE, options.getGameType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_OF_WINS, Integer.toString(options.getWinsNeeded()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_DECK_FILE, deckFile);
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_NUMBER_PLAYERS, spnNumPlayers.getValue().toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_RANGE, Integer.toString(options.getRange().getRange()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TABLE_ATTACK_OPTION, options.getAttackOption().toString());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
