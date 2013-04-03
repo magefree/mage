@@ -29,30 +29,23 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.abilities.mana.BasicManaAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
  */
 public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
-
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
 
     public KrarkClanStoker(UUID ownerId) {
         super(ownerId, 65, "Krark-Clan Stoker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
@@ -62,8 +55,10 @@ public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new KrarkClanStokerAbility();
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+
+        // {T}, Sacrifice an artifact: Add {R}{R} to your mana pool.
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana(2), new TapSourceCost());
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledArtifactPermanent("an artifact"))));
         this.addAbility(ability);
     }
 
@@ -76,21 +71,4 @@ public class KrarkClanStoker extends CardImpl<KrarkClanStoker> {
         return new KrarkClanStoker(this);
     }
 
-}
-
-class KrarkClanStokerAbility extends BasicManaAbility<KrarkClanStokerAbility> {
-
-    public KrarkClanStokerAbility() {
-        super(new BasicManaEffect(new Mana(2, 0, 0, 0, 0, 0, 0)));
-        this.netMana.setRed(2);
-    }
-
-    public KrarkClanStokerAbility(final KrarkClanStokerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public KrarkClanStokerAbility copy() {
-        return new KrarkClanStokerAbility(this);
-    }
 }

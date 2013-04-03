@@ -28,6 +28,7 @@
 
 package mage.sets.riseoftheeldrazi;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -37,7 +38,6 @@ import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -50,7 +50,6 @@ import mage.cards.LevelerCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
-import java.util.UUID;
 
 /**
  *
@@ -74,14 +73,21 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{G}")));
 
+        // LEVEL 1-4
+        // 1/2
+        // {T}: Add {G}{G} to your mana pool.
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
         abilities1.add(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(2), new TapSourceCost()));
 
+        // LEVEL 5+
+        // 1/4
+        // Elves you control have "{T}: Add {G}{G} to your mana pool."
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
         abilities2.add(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(new SimpleManaAbility(Zone.BATTLEFIELD,
                     new BasicManaEffect(Mana.GreenMana(2)),
                     new TapSourceCost()),
                 Duration.WhileOnBattlefield, filter)));
@@ -102,4 +108,3 @@ public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
     }
 
 }
-
