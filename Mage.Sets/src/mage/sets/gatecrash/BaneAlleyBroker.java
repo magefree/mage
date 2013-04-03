@@ -30,19 +30,25 @@ package mage.sets.gatecrash;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -94,10 +100,11 @@ public class BaneAlleyBroker extends CardImpl<BaneAlleyBroker> {
         this.toughness = new MageInt(3);
 
         // {tap}: Draw a card, then exile a card from your hand face down.
-        // You may look at cards exiled with Bane Alley Broker.
+        
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerDrawExileEffect(), new TapSourceCost()));
-
-       
+        
+        // You may look at cards exiled with Bane Alley Broker.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerLookAtCardEffect(this.getId())));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{B}"));
@@ -121,7 +128,7 @@ class BaneAlleyBrokerDrawExileEffect extends OneShotEffect<BaneAlleyBrokerDrawEx
 
     public BaneAlleyBrokerDrawExileEffect() {
       super(Outcome.DrawCard);
-      staticText = "Draw a card, then exile a card from your hand face down. <br />You may look at cards exiled with Bane Alley Broker";
+      staticText = "Draw a card, then exile a card from your hand face down";
     }
 
     public BaneAlleyBrokerDrawExileEffect(final BaneAlleyBrokerDrawExileEffect effect) {
@@ -216,4 +223,52 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard<TargetCardInBaneAlleyB
     public TargetCardInBaneAlleyBrokerExile copy() {
         return new TargetCardInBaneAlleyBrokerExile(this);
     }
+}
+
+class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl<BaneAlleyBrokerLookAtCardEffect> {
+
+    private UUID cardId;
+
+    public BaneAlleyBrokerLookAtCardEffect(UUID cardId) {
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
+        this.cardId = cardId;
+        staticText = "You may look at cards exiled with {this}";
+    }
+
+    public BaneAlleyBrokerLookAtCardEffect(final BaneAlleyBrokerLookAtCardEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public BaneAlleyBrokerLookAtCardEffect copy() {
+        return new BaneAlleyBrokerLookAtCardEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
+        Card card = game.getCard(sourceId);
+        if (card != null && game.getState().getZone(sourceId) == Zone.EXILED) {
+            Card sourceCard = game.getCard(source.getSourceId());
+            if (sourceCard == null) {
+                return false;
+            }
+            UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
+            ExileZone exile = game.getExile().getExileZone(exileId);
+            if (exile != null && exile.contains(sourceId)) {
+                Cards cards = new CardsImpl(card);
+                Player controller = game.getPlayer(source.getControllerId());
+                if (controller != null) {
+                    controller.lookAtCards("Exiled with " + sourceCard.getName(), cards, game);
+                }
+            }
+        }
+        return false;
+    }
+
 }
