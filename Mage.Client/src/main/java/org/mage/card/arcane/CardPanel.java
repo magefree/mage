@@ -718,9 +718,6 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (gameCard.isFaceDown()) {
-            return;
-        }
         data.component = this;
         data.card = this.gameCard;
         data.gameId = this.gameId;
