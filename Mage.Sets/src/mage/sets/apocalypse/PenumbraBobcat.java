@@ -64,7 +64,7 @@ public class PenumbraBobcat extends CardImpl<PenumbraBobcat> {
 
 class PenumbraBobcatToken extends Token {
     PenumbraBobcatToken() {
-        super("", "2/1 black Cat creature token");
+        super("Cat", "2/1 black Cat creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Cat");

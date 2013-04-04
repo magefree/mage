@@ -64,7 +64,7 @@ public class PenumbraKavu extends CardImpl<PenumbraKavu> {
 
 class PenumbraKavuToken extends Token {
     PenumbraKavuToken() {
-        super("", "3/3 black Kavu creature token");
+        super("Kavu", "3/3 black Kavu creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Kavu");

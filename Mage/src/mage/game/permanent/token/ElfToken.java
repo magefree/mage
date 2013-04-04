@@ -38,7 +38,7 @@ import mage.MageInt;
 public class ElfToken extends Token {
 
     public ElfToken() {
-        super("", "1/1 green Elf Warrior creature token");
+        super("Elf Warrior", "1/1 green Elf Warrior creature token");
         cardType.add(Constants.CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Elf");

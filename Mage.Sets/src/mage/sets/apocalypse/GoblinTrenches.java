@@ -75,7 +75,7 @@ public class GoblinTrenches extends CardImpl<GoblinTrenches> {
 
 class GoblinTrenchesToken extends Token {
     GoblinTrenchesToken() {
-        super("", "1/1 red and white Goblin Soldier creature tokens");
+        super("Goblin Soldier", "1/1 red and white Goblin Soldier creature tokens");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setWhite(true);

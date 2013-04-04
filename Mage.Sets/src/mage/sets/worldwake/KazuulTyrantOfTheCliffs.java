@@ -148,7 +148,7 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect<KazuulTyrantOfTheCliff
 class OgreToken extends Token {
 
     OgreToken() {
-        super("", "3/3 red Ogre creature");
+        super("Ogre", "3/3 red Ogre creature");
         cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Ogre");

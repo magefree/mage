@@ -66,7 +66,7 @@ public class PenumbraWurm extends CardImpl<PenumbraWurm> {
 
 class PenumbraWurmToken extends Token {
     PenumbraWurmToken() {
-        super("", "6/6 black Wurm creature token with trample");
+        super("Wurm", "6/6 black Wurm creature token with trample");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Wurm");

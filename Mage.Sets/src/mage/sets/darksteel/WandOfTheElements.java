@@ -83,7 +83,7 @@ public class WandOfTheElements extends CardImpl<WandOfTheElements> {
 
 class WandOfTheElementsFirstToken extends Token {
     public WandOfTheElementsFirstToken() {
-        super("", "2/2 blue Elemental creature token with flying");
+        super("Elemental", "2/2 blue Elemental creature token with flying");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Elemental");
         this.color.setBlue(true);
@@ -96,7 +96,7 @@ class WandOfTheElementsFirstToken extends Token {
 
 class WandOfTheElementsSecondToken extends Token {
     public WandOfTheElementsSecondToken() {
-        super("", "3/3 red Elemental creature token");
+        super("Elemental", "3/3 red Elemental creature token");
         cardType.add(CardType.CREATURE);
         this.subtype.add("Elemental");
         this.color.setRed(true);

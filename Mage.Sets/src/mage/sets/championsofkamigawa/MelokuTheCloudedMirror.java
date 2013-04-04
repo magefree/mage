@@ -83,7 +83,7 @@ public class MelokuTheCloudedMirror extends CardImpl<MelokuTheCloudedMirror> {
 
 class MelokuTheCloudedMirrorToken extends Token {
     MelokuTheCloudedMirrorToken() {
-        super("", "a 1/1 blue Illusion creature token with flying");
+        super("Illusion", "a 1/1 blue Illusion creature token with flying");
         cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Illusion");

@@ -83,7 +83,7 @@ public class CreakwoodLiege extends CardImpl<CreakwoodLiege> {
 
 class CreakwoodLiegeToken extends Token {
     CreakwoodLiegeToken() {
-        super("", "1/1 black and green Worm creature token");
+        super("Worm", "1/1 black and green Worm creature token");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         color.setGreen(true);
