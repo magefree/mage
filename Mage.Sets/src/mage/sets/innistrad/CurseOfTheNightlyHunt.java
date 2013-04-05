@@ -96,8 +96,11 @@ class CurseOfTheNightlyHuntEffect extends RequirementEffect<CurseOfTheNightlyHun
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (source.getControllerId().equals(permanent.getControllerId())) {
-            return true;
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            if (source.getControllerId().equals(enchantment.getAttachedTo())) {
+                return true;
+            }
         }
         return false;
     }
