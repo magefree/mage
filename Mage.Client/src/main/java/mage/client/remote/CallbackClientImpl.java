@@ -102,10 +102,10 @@ public class CallbackClientImpl implements CallbackClient {
                         if (panel != null) {
                             if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE)) {
                                 panel.receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
-                                        "\nF2 - press Ok, Yes or Done" +
-                                        "\nF4 - skip current turn but stop on declare attackers" +
-                                        "\nF9 - skip everything until you next turn" +
-                                        "\nF3 - undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
+                                        "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
+                                        "\nF4 - Skip current turn but stop on declare attackers" +
+                                        "\nF9 - Skip everything until your next turn" +
+                                        "\nF3 - Undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
                             } else {
                                 if (message.isUserMessage() && panel.getConnectedChat() != null) {
                                     panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
