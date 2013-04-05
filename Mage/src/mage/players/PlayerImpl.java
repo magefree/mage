@@ -1629,4 +1629,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         }
         setStoredBookmark(-1);
     }
+
+
+    @Override
+    public void revealFaceDownCard(Card card, Game game) {
+        if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.REVEAL_FACE_DOWN, game)) {
+            Cards cards = new CardsImpl(card);
+            this.revealCards(name, cards, game);
+        }
+    }
 }

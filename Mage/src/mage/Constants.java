@@ -186,7 +186,8 @@ public final class Constants {
         TARGET,
         PAY,
         DAMAGE,
-        HEXPROOF
+        HEXPROOF,
+        REVEAL_FACE_DOWN
     }
 
     public enum Duration {

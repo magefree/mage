@@ -93,6 +93,7 @@ public class TableController {
         match = GameFactory.getInstance().createMatch(options.getGameType(), options);
         if (userId != null) {
             User user = UserManager.getInstance().getUser(userId);
+            // TODO: Handle if user == null
             controllerName = user.getName();
         } 
         else {

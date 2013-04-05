@@ -271,4 +271,10 @@ public interface Player extends MageItem, Copyable<Player> {
     void becomesActivePlayer();
 
     int getTurns();
+
+    /**
+     * asThough effect to reveal faceDown cards
+     *
+     */
+    void revealFaceDownCard(Card card, Game game);
 }

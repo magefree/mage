@@ -426,6 +426,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 if (object != null) {
                     Zone zone = game.getState().getZone(object.getId());
                     if (zone != null) {
+                        if (object instanceof Card && ((Card) object).isFaceDown()) {
+                            revealFaceDownCard((Card) object, game);
+                        }
                         LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(object, zone, game);
                         if (useableAbilities != null && useableAbilities.size() > 0) {
                             activateAbility(useableAbilities, game);
@@ -838,4 +841,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         log.debug("Setting game priority to " + getId() + " [" + methodName + "]");
         game.getState().setPriorityPlayerId(getId());
     }
+
+
 }
