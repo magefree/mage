@@ -38,6 +38,7 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.Constants;
 
 /**
  * @author LevelX
@@ -45,15 +46,22 @@ import java.util.UUID;
 public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlefieldTargetEffect> {
 
     boolean tapped;
+    boolean optional;
 
     public PutOntoBattlefieldTargetEffect(boolean tapped) {
+        this(tapped, false);
+    }
+
+    public PutOntoBattlefieldTargetEffect(boolean tapped, boolean optional) {
         super(Outcome.PutCreatureInPlay);
         this.tapped = tapped;
+        this.optional = optional;
     }
 
     public PutOntoBattlefieldTargetEffect(final PutOntoBattlefieldTargetEffect effect) {
         super(effect);
         this.tapped = effect.tapped;
+        this.optional = effect.optional;
     }
 
     @Override
@@ -64,6 +72,15 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlef
     @Override
     public boolean apply(Game game, Ability source) {
         boolean result = false;
+        if (optional) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller == null || !controller.chooseUse(Constants.Outcome.PutCreatureInPlay,
+                    new StringBuilder("Put ")
+                        .append(source.getTargets() != null ? source.getTargets().get(0).getTargetName():"target")
+                        .append(" onto the battlefield?").toString(), game)) {
+                return false;
+            }
+        }
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             Card card = game.getCard(targetId);
             if (card != null) {
@@ -91,12 +108,20 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlef
 
     @Override
     public String getText(Mode mode) {
+
+        // You may put an artifact card from your hand onto the battlefield.
         StringBuilder sb = new StringBuilder();
-        sb.append("Put ");
+        if (optional) {
+            sb.append("You may put ");
+        } else {
+            sb.append("Put ");
+        }
         if (mode.getTargets().get(0).getMaxNumberOfTargets() == 0) {
             sb.append("any number of ");
         }
-        sb.append(mode.getTargets().get(0).getTargetName());
+        if (mode.getTargets() != null) {
+            sb.append(mode.getTargets().get(0).getTargetName());
+        }
         sb.append(tapped ? "tapped" : "").append(" onto the battlefield");
         return sb.toString();
 

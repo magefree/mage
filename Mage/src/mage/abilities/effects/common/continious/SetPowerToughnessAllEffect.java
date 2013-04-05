@@ -54,16 +54,20 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     private DynamicValue toughness;
     private boolean lockedIn;
 
+    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
+    }
+
+    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedIn) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, filter, lockedIn);
+    }
+
     public SetPowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedIn) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
         this.lockedIn = lockedIn;
-    }
-
-    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration) {
-        this(new StaticValue(power), new StaticValue(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
     }
 
     public SetPowerToughnessAllEffect(final SetPowerToughnessAllEffect effect) {
@@ -108,7 +112,11 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
-        sb.append(" become ");
+        if (filter.getMessage().startsWith("Each ")) {
+            sb.append(" becomes ");
+        } else {
+            sb.append(" become ");
+        }
         sb.append(power).append("/").append(toughness);
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
