@@ -29,21 +29,24 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  * @author Loki
@@ -51,10 +54,11 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class Scarecrone extends CardImpl<Scarecrone> {
 
     private static final FilterCard filter = new FilterCard("artifact creature card from your graveyard");
-
+    private static final FilterControlledCreaturePermanent filterScarecrow = new FilterControlledCreaturePermanent("Scarecrow");
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new CardTypePredicate(CardType.CREATURE));
+        filter.add(new SubtypePredicate("Scarecrow"));
     }
 
     public Scarecrone(UUID ownerId) {
@@ -63,10 +67,14 @@ public class Scarecrone extends CardImpl<Scarecrone> {
         this.subtype.add("Scarecrow");
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
-        firstAbility.addCost(new SacrificeSourceCost());
+
+        // {1}, Sacrifice a Scarecrow: Draw a card.
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        firstAbility.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1, filterScarecrow, false, true)));
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new GenericManaCost(4));
+
+        // {4}, {T}: Return target artifact creature card from your graveyard to the battlefield.
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new GenericManaCost(4));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCardInYourGraveyard(filter));
         this.addAbility(secondAbility);
