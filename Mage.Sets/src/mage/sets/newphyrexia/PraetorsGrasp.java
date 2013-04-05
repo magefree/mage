@@ -103,11 +103,11 @@ class PraetorsGraspEffect extends OneShotEffect<PraetorsGraspEffect> {
                     card.setControllerId(player.getId());
                     card.moveToExile(getId(), "Praetor's Grasp", source.getSourceId(), game);
                     game.addEffect(new PraetorsGraspPlayEffect(card.getId()), source);
+                    game.addEffect(new PraetorsGraspRevealEffect(card.getId()), source);
                 }
             }
+            opponent.shuffleLibrary(game);
         }
-
-        opponent.shuffleLibrary(game);
         return true;
     }
 }
@@ -141,8 +141,54 @@ class PraetorsGraspPlayEffect extends AsThoughEffectImpl<PraetorsGraspPlayEffect
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(cardId)) {
             Card card = game.getCard(cardId);
-            if (card != null && game.getState().getZone(cardId) == Zone.EXILED) {
-                return true;
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
+                if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+}
+
+class PraetorsGraspRevealEffect extends AsThoughEffectImpl<PraetorsGraspRevealEffect> {
+
+    private UUID cardId;
+
+    public PraetorsGraspRevealEffect(UUID cardId) {
+        super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
+        this.cardId = cardId;
+        staticText = "You may look at and play that card for as long as it remains exiled";
+    }
+
+    public PraetorsGraspRevealEffect(final PraetorsGraspRevealEffect effect) {
+        super(effect);
+        this.cardId = effect.cardId;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return true;
+    }
+
+    @Override
+    public PraetorsGraspRevealEffect copy() {
+        return new PraetorsGraspRevealEffect(this);
+    }
+
+    @Override
+    public boolean applies(UUID sourceId, Ability source, Game game) {
+        if (sourceId.equals(cardId)) {
+            Card card = game.getCard(cardId);
+            Card sourceCard = game.getCard(source.getSourceId());
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null && card != null && game.getState().getZone(cardId) == Zone.EXILED) {
+                if (controller.chooseUse(outcome, "Reveal exiled card?", game)) {
+                    Cards cards = new CardsImpl(card);
+                    controller.lookAtCards("Exiled with " + sourceCard.getName(), cards, game);
+                }
             }
         }
         return false;

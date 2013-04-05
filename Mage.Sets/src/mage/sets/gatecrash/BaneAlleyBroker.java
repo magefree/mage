@@ -104,7 +104,7 @@ public class BaneAlleyBroker extends CardImpl<BaneAlleyBroker> {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerDrawExileEffect(), new TapSourceCost()));
         
         // You may look at cards exiled with Bane Alley Broker.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerLookAtCardEffect(this.getId())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BaneAlleyBrokerLookAtCardEffect()));
 
         // {U}{B}, {tap}: Return a card exiled with Bane Alley Broker to its owner's hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{U}{B}"));
@@ -227,17 +227,13 @@ class TargetCardInBaneAlleyBrokerExile extends TargetCard<TargetCardInBaneAlleyB
 
 class BaneAlleyBrokerLookAtCardEffect extends AsThoughEffectImpl<BaneAlleyBrokerLookAtCardEffect> {
 
-    private UUID cardId;
-
-    public BaneAlleyBrokerLookAtCardEffect(UUID cardId) {
-        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
-        this.cardId = cardId;
+    public BaneAlleyBrokerLookAtCardEffect() {
+        super(AsThoughEffectType.REVEAL_FACE_DOWN, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may look at cards exiled with {this}";
     }
 
     public BaneAlleyBrokerLookAtCardEffect(final BaneAlleyBrokerLookAtCardEffect effect) {
         super(effect);
-        this.cardId = effect.cardId;
     }
 
     @Override
