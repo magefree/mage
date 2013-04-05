@@ -58,12 +58,14 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
 
     @Override
     public String getText() {
-        if (this.size() == 0)
+        if (this.size() == 0) {
             return "";
+        }
 
         StringBuilder sbText = new StringBuilder();
         for (T cost: this) {
-            sbText.append(cost.getText()).append(", ");
+            String text = cost.getText();
+            sbText.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1)).append(", ");
         }
         sbText.setLength(sbText.length() - 2);
         return sbText.toString();
@@ -72,8 +74,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         for (T cost: this) {
-            if (!cost.canPay(sourceId, controllerId, game))
+            if (!cost.canPay(sourceId, controllerId, game)) {
                 return false;
+            }
         }
         return true;
     }
@@ -83,8 +86,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
         if (this.size() > 0) {
             while (!isPaid()) {
                 T cost = getFirstUnpaid();
-                if (!cost.pay(ability, game, sourceId, controllerId, noMana))
+                if (!cost.pay(ability, game, sourceId, controllerId, noMana)) {
                     return false;
+                }
             }
         }
         return true;
@@ -93,8 +97,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     @Override
     public boolean isPaid() {
         for (T cost: this) {
-            if (!((T)cost instanceof VariableManaCost) && !cost.isPaid())
+            if (!((T)cost instanceof VariableManaCost) && !cost.isPaid()) {
                 return false;
+            }
         }
         return true;
     }
@@ -117,8 +122,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public Costs<T> getUnpaid() {
         Costs<T> unpaid = new CostsImpl<T>();
         for (T cost: this) {
-            if (!cost.isPaid())
+            if (!cost.isPaid()) {
                 unpaid.add(cost);
+            }
         }
         return unpaid;
     }
@@ -135,8 +141,9 @@ public class CostsImpl<T extends Cost> extends ArrayList<T> implements Costs<T> 
     public List<VariableCost> getVariableCosts() {
         List<VariableCost> variableCosts = new ArrayList<VariableCost>();
         for (T cost: this) {
-            if (cost instanceof VariableCost)
+            if (cost instanceof VariableCost) {
                 variableCosts.add((VariableCost) cost);
+            }
             if (cost instanceof ManaCosts) {
                 variableCosts.addAll(((ManaCosts)cost).getVariableCosts());
             }

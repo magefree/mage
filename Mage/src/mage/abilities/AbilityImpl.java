@@ -415,7 +415,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 sbRule.append(": ");
             }
         }
-        sbRule.append(modes.getText());
+        String text = modes.getText();
+        if (!text.isEmpty()) {
+            sbRule.append(Character.toUpperCase(text.charAt(0))).append(text.substring(1));
+        }
 
         return sbRule.toString();
     }
