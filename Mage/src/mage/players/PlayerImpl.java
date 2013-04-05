@@ -718,7 +718,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
                     useable.put(ability.getId(), ability);
                 }
-            } else {
+            } 
+            //Alternative cost are not use for Flashback. This lines alloews to play spell with Alternative cost (like Force of Will) from wrong zone
+            /*else {
                 // this allows alternative costs like Flashback work from other than hand zones
                 for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
                     for (AlternativeCost cost: ability.getAlternativeCosts()) {
@@ -727,7 +729,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                         }
                     }
                 }
-            }
+            }*/
         }
         Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
         if (otherAbilities != null) {
