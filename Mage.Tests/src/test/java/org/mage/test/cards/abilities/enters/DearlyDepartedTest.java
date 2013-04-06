@@ -18,7 +18,7 @@ public class DearlyDepartedTest extends CardTestPlayerBase {
         addCard(Constants.Zone.GRAVEYARD, playerA, "Dearly Departed");
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Thraben Doomsayer");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: put a 1/1 white Human creature token onto the battlefield.");
+        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a 1/1 white Human creature token onto the battlefield.");
 
         setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
         execute();

@@ -31,7 +31,7 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
 
         addCard(Constants.Zone.BATTLEFIELD, playerB, "Coral Merfolk");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: put a -1/-1 counter on target creature. ", "Coral Merfolk");
+        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: Put a -1/-1 counter on target creature. ", "Coral Merfolk");
         setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
         execute();
 
