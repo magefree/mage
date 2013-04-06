@@ -118,7 +118,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             secondSideCard = card.secondSideCard;
             nightCard = card.nightCard;
         }
-
+        zoneChangeCounter = card.zoneChangeCounter;
         if (card.info != null) {
             info = new HashMap<String, String>();
             info.putAll(card.info);

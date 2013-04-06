@@ -62,7 +62,7 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                card.moveToZone(Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 return true;
             }
         }

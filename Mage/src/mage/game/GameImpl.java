@@ -173,10 +173,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
         // Issue 350
-        this.gameCards = game.gameCards;
-//        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
-//            this.gameCards.put(entry.getKey(), entry.getValue().copy());
-//        }
+//        this.gameCards = game.gameCards;
+        // issue #187 (else zoneChangeCounter modified by AI -> illegal target)
+        for (Map.Entry<UUID, Card> entry: game.gameCards.entrySet()) {
+            this.gameCards.put(entry.getKey(), entry.getValue().copy());
+        }
         this.simulation = game.simulation;
         this.gameOptions = game.gameOptions;
         this.lki.putAll(game.lki);
