@@ -194,6 +194,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     protected String getMessageText(Game game) {
         StringBuilder sb = new StringBuilder();
         MageObject object = game.getObject(this.sourceId);
+        if (object == null) {
+            object = game.getLastKnownInformation(this.sourceId, Zone.BATTLEFIELD);
+        }
         if (object != null) {
             if (object instanceof StackAbility) {
                 Card card = game.getCard(((StackAbility) object).getSourceId());
