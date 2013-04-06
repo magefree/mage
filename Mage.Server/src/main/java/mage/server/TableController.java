@@ -281,7 +281,18 @@ public class TableController {
 
     public synchronized void leaveTable(UUID userId) {
         if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
-            table.leaveTable(userPlayerMap.get(userId));
+            UUID playerId = userPlayerMap.get(userId);
+            if (playerId != null) {
+                table.leaveTable(playerId);
+                if (table.isTournament()) {
+                    tournament.leave(playerId);
+                } else {
+                    match.leave(playerId);
+                }
+                User user = UserManager.getInstance().getUser(userId);
+                user.removeTable(playerId);
+                userPlayerMap.remove(userId);
+            }            
         }
     }
 

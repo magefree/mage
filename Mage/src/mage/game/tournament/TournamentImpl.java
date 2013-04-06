@@ -102,7 +102,9 @@ public abstract class TournamentImpl implements Tournament {
 
     @Override
     public void leave(UUID playerId) {
-        //TODO: implement this
+        if (players.containsKey(playerId)) {
+            players.remove(playerId);
+        }
     }
 
     @Override

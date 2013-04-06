@@ -50,7 +50,10 @@ public interface Match {
     boolean isMatchOver();
     List<MatchPlayer> getPlayers();
     MatchPlayer getPlayer(UUID playerId);
+
     void addPlayer(Player player, Deck deck);
+    boolean leave(UUID playerId);
+
     void submitDeck(UUID playerId, Deck deck);
     void updateDeck(UUID playerId, Deck deck);
     void startMatch() throws GameException;

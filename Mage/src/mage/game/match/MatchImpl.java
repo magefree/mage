@@ -78,6 +78,15 @@ public abstract class MatchImpl implements Match {
     }
 
     @Override
+    public boolean leave(UUID playerId) {
+        MatchPlayer mPlayer = getPlayer(playerId);
+        if (mPlayer != null) {
+            return players.remove(mPlayer);
+        }
+        return false;
+    }
+
+    @Override
     public void startMatch() throws GameException {
 
     }
