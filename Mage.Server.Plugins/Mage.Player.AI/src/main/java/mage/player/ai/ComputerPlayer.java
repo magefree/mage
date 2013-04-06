@@ -223,6 +223,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 Card pick = pickTarget(cards, outcome, target, null, game);
                 if (pick != null) {
                     target.addTarget(pick.getId(), null, game);
+                    cards.remove(pick);
                 }
             }
             return target.isChosen();
