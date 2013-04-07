@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class ZarichiTiger extends CardImpl<ZarichiTiger> {
 
     public ZarichiTiger(UUID ownerId) {
-        super(ownerId, 28, "ZarichiTiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        super(ownerId, 28, "Zarichi Tiger", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "GTC";
         this.subtype.add("Cat");
 
