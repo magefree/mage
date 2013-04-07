@@ -44,6 +44,7 @@ public class CommanderDuelMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         CommanderDuel game = new CommanderDuel(options.getAttackOption(), options.getRange());
+        game.setStartMessage(this.createGameStartMessage());
         initGame(game);
         games.add(game);
     }

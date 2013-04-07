@@ -136,6 +136,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected RangeOfInfluence range;
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
+    protected String startMessage;
 
     public static volatile int copyCount = 0;
     public static volatile long copyTime = 0;
@@ -536,7 +537,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     private boolean playTurn(Player player) {
-        fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
+        fireStatusEvent("Turn " + Integer.toString(state.getTurnNum()), true);
         if (checkStopOnTurnOption()) {
             return false;
         }
@@ -567,7 +568,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
         }
-        fireInformEvent("game has started");
+        if (startMessage.isEmpty()) {
+            startMessage = "Game has started";
+        }
+        fireStatusEvent(startMessage, false);
+
         //saveState();
 
         //20091005 - 103.1
@@ -1395,6 +1400,14 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void fireStatusEvent(String message, boolean withTime) {
+        if (simulation) {
+            return;
+        }
+        tableEventSource.fireTableEvent(EventType.STATUS, message, withTime, this);
+    }
+
+    @Override
     public void fireUpdatePlayersEvent() {
         if (simulation) {
             return;
@@ -1803,5 +1816,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public boolean getScopeRelevant() {
         return this.scopeRelevant;
+    }
+
+    public void setStartMessage(String startMessage) {
+        this.startMessage = startMessage;
     }
 }

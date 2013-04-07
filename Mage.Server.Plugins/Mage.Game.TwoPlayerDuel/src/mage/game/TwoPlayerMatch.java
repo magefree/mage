@@ -44,6 +44,8 @@ public class TwoPlayerMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         TwoPlayerDuel game = new TwoPlayerDuel(options.getAttackOption(), options.getRange());
+        // Sets a start message about the match score
+        game.setStartMessage(this.createGameStartMessage());
         initGame(game);
         games.add(game);
     }

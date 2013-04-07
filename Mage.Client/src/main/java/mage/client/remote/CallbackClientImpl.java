@@ -100,8 +100,8 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         ChatPanel panel = frame.getChat(callback.getObjectId());
                         if (panel != null) {
-                            if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE)) {
-                                panel.receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
+                            if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE) && panel.getConnectedChat() != null) {
+                                panel.getConnectedChat().receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
                                         "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
                                         "\nF4 - Skip current turn but stop on declare attackers" +
                                         "\nF9 - Skip everything until your next turn" +

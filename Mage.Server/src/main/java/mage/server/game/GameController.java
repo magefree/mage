@@ -114,6 +114,10 @@ public class GameController implements GameCallback {
                                 ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.BLACK);
                                 logger.debug(game.getId() + " " + event.getMessage());
                                 break;
+                            case STATUS:
+                                ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime());
+                                logger.debug(game.getId() + " " + event.getMessage());
+                                break;
                             case REVEAL:
                                 revealCards(event.getMessage(), event.getCards());
                                 break;
@@ -180,11 +184,7 @@ public class GameController implements GameCallback {
                 }
             }
         );
-        for (Player player: game.getPlayers().values()) {
-            if (!player.isHuman()) {
-                ChatManager.getInstance().broadcast(chatId, "", player.getName() + " has joined the game", MessageColor.BLACK);
-            }
-        }
+
         checkStart();
     }
 
@@ -240,15 +240,21 @@ public class GameController implements GameCallback {
     }
 
     public void watch(UUID userId) {
-        GameWatcher gameWatcher = new GameWatcher(userId, game);
-        watchers.put(userId, gameWatcher);
-        gameWatcher.init();
-        ChatManager.getInstance().broadcast(chatId, "", " has started watching", MessageColor.BLACK);
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            GameWatcher gameWatcher = new GameWatcher(userId, game);
+            watchers.put(userId, gameWatcher);
+            gameWatcher.init();
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE);
+        }
     }
 
     public void stopWatching(UUID userId) {
         watchers.remove(userId);
-        ChatManager.getInstance().broadcast(chatId, "", " has stopped watching", MessageColor.BLACK);
+        User user = UserManager.getInstance().getUser(userId);
+        if (user != null) {
+            ChatManager.getInstance().broadcast(chatId, user.getName(), " has stopped watching", MessageColor.BLUE);
+        }
     }
 
     public void concede(UUID userId) {

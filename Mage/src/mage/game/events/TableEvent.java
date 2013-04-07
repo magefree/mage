@@ -46,7 +46,7 @@ import java.util.UUID;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
     public enum EventType {
-        UPDATE, INFO, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR
+        UPDATE, INFO, STATUS, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR
     }
 
     private Game game;
@@ -60,6 +60,7 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     private TournamentPairing pair;
     private MatchOptions options;
     private int timeout;
+    private boolean withTime;
 
     public TableEvent(EventType eventType) {
         super(eventType);
@@ -67,10 +68,15 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
     }
 
     public TableEvent(EventType eventType, String message, Game game) {
+        this(eventType, message, true, game);
+    }
+
+    public TableEvent(EventType eventType, String message, boolean withTime, Game game) {
         super(game);
         this.game = game;
         this.message = message;
         this.eventType = eventType;
+        this.withTime = withTime;
     }
 
     public TableEvent(EventType eventType, String message, Cards cards, Game game) {
@@ -152,5 +158,9 @@ public class TableEvent extends EventObject implements ExternalEvent, Serializab
 
     public int getTimeout() {
         return timeout;
+    }
+
+    public boolean getWithTime() {
+        return withTime;
     }
 }

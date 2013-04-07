@@ -44,6 +44,7 @@ public class FreeForAllMatch extends MatchImpl {
     @Override
     public void startGame() throws GameException {
         FreeForAll game = new FreeForAll(options.getAttackOption(), options.getRange());
+        game.setStartMessage(this.createGameStartMessage());
         initGame(game);
         games.add(game);
     }

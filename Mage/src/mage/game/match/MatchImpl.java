@@ -238,6 +238,18 @@ public abstract class MatchImpl implements Match {
             player.updateDeck(deck);
         }
     }
-
+    
+    protected String createGameStartMessage() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nMatch score:\n");
+        for (MatchPlayer mp :this.getPlayers()) {
+            sb.append("- ").append(mp.getPlayer().getName());
+            sb.append(" (").append(mp.getWins()).append(" wins / ");
+            sb.append(mp.getLoses()).append(" losses)\n");
+        }
+        sb.append("\n").append(this.getWinsNeeded()).append(" wins needed to win the match\n");
+        sb.append("\nGame has started\n");
+        return sb.toString();
+    }
 
 }

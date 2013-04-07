@@ -59,7 +59,7 @@ public class ChatSession {
         if (user != null && !clients.containsKey(userId)) {
             String userName = user.getName();
             clients.put(userId, userName);
-            broadcast(userName, " has joined", MessageColor.BLACK);
+            broadcast(userName, " has joined", MessageColor.BLUE);
             logger.info(userName + " joined chat " + chatId);
         }
     }
@@ -68,16 +68,20 @@ public class ChatSession {
         if (userId != null && clients.containsKey(userId)) {
             String userName = clients.get(userId);
             clients.remove(userId);
-            broadcast(userName, " has left", MessageColor.BLACK);
+            broadcast(userName, " has left", MessageColor.BLUE);
             logger.info(userName + " has left chat " + chatId);
         }
     }
 
     public void broadcast(String userName, String message, MessageColor color) {
+        broadcast(userName, message, color, true);        
+    }
+
+    public void broadcast(String userName, String message, MessageColor color, boolean withTime) {
         if (!message.isEmpty()) {
             Calendar cal = new GregorianCalendar();
             final String msg = message;
-            final String time = timeFormatter.format(cal.getTime());
+            final String time = (withTime ? timeFormatter.format(cal.getTime()):"");
             final String username = userName;
             logger.debug("Broadcasting '" + msg + "' for " + chatId);
             for (UUID userId: clients.keySet()) {

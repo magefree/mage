@@ -24,6 +24,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Rectangle buttonSize;
     private String text;
     private int textOffsetY = 0;
+    private int textOffsetButtonY = 2;
     private int textOffsetX = -1;
     private Dimension overlayImageSize;
 
@@ -187,15 +188,19 @@ public class HoverButton extends JPanel implements MouseListener {
     @Override
     public void setBounds(Rectangle r) {
         super.setBounds(r);
-        this.textOffsetY = r.height - 2;
+        this.textOffsetY = r.height - this.textOffsetButtonY;
         this.buttonSize = r;
     }
 
     @Override
     public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
-        this.textOffsetY = height - 2;
+        this.textOffsetY = height - this.textOffsetButtonY;
         this.buttonSize = new Rectangle(x, y, width, height);
+    }
+
+    public void setTextOffsetButtonY(int textOffsetButtonY) {
+        this.textOffsetButtonY = textOffsetButtonY;
     }
 
     public boolean isSelected() {

@@ -90,7 +90,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private static final int PANEL_HEIGHT = 242;
     private static final int PANEL_HEIGHT_SMALL = 190;
 
-    private static final Border greenBorder = new LineBorder(Color.red, 3);
+    private static final Border greenBorder = new LineBorder(Color.green, 3);
     private static final Border redBorder = new LineBorder(Color.red, 2);
     private static final Border emptyBorder = BorderFactory.createEmptyBorder(0,0,0,0);
 
@@ -224,6 +224,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         avatar = new HoverButton("player", resized, resized, resized, r);
+        avatar.setTextOffsetButtonY(10);
         avatar.setObserver(new Command() {
             @Override
             public void execute() {

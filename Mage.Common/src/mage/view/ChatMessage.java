@@ -65,6 +65,10 @@ public class ChatMessage implements Serializable {
         return color != null && color.equals(MessageColor.BLUE);
     }
 
+    public boolean isStatusMessage() {
+        return color != null && color.equals(MessageColor.ORANGE);
+    }
+
     public String getUsername() {
         return username;
     }
