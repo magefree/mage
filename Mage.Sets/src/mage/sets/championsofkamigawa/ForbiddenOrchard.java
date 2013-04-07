@@ -43,10 +43,10 @@ import mage.target.common.TargetOpponent;
  *
  * @author LevelX
  */
-public class ForbiddenOrchad extends CardImpl<ForbiddenOrchad> {
+public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
 
-    public ForbiddenOrchad (UUID ownerId) {
-        super(ownerId, 276, "Forbidden Orchad", Rarity.RARE, new CardType[]{CardType.LAND}, null);
+    public ForbiddenOrchard (UUID ownerId) {
+        super(ownerId, 276, "Forbidden Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
         // {T}: Add one mana of any color to your mana pool.
         Ability ability = new AnyColorManaAbility();
@@ -56,12 +56,12 @@ public class ForbiddenOrchad extends CardImpl<ForbiddenOrchad> {
         this.addAbility(ability);
     }
 
-    public ForbiddenOrchad (final ForbiddenOrchad card) {
+    public ForbiddenOrchard (final ForbiddenOrchard card) {
         super(card);
     }
 
     @Override
-    public ForbiddenOrchad copy() {
-        return new ForbiddenOrchad(this);
+    public ForbiddenOrchard copy() {
+        return new ForbiddenOrchard(this);
     }
 }
