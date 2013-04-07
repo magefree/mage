@@ -54,7 +54,7 @@ public class IsperiasSkywatch extends CardImpl<IsperiasSkywatch> {
     }
     
     public IsperiasSkywatch(UUID ownerId) {
-        super(ownerId, 43, "Isperias Skywatch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
+        super(ownerId, 43, "Isperia's Skywatch", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{U}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Vedalken");
         this.subtype.add("Knight");
