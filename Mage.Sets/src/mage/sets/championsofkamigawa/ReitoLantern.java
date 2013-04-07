@@ -40,12 +40,12 @@ import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author LevelX
+ * @author LevelX2
  */
 public class ReitoLantern extends CardImpl<ReitoLantern> {
 
     public ReitoLantern(UUID ownerId) {
-        super(ownerId, 267, "Reito Latern", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+        super(ownerId, 267, "Reito Lantern", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "CHK";
 
         // Put target card from a graveyard on the bottom of its owner's library.
