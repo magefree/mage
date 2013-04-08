@@ -53,7 +53,7 @@ public enum CardRepository {
     instance;
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
-    private static final long DB_VERSION = 3;
+    private static final long DB_VERSION = 4;
 
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;

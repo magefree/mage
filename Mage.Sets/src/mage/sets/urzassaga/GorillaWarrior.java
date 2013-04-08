@@ -41,7 +41,7 @@ import mage.cards.CardImpl;
 public class GorillaWarrior extends CardImpl<GorillaWarrior> {
 
     public GorillaWarrior (UUID ownerId) {
-        super(ownerId, 256, "GorillaWarrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        super(ownerId, 256, "Gorilla Warrior", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "USG";
         this.subtype.add("Ape");
         this.color.setGreen(true);

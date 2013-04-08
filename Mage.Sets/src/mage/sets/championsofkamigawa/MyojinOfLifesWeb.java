@@ -67,7 +67,7 @@ public class MyojinOfLifesWeb extends CardImpl<MyojinOfLifesWeb> {
     }
 
     public MyojinOfLifesWeb(UUID ownerId) {
-        super(ownerId, 229, "Myojin of Lifes Web", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}{G}");
+        super(ownerId, 229, "Myojin of Life's Web", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{G}{G}{G}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
