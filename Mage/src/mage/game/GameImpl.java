@@ -392,6 +392,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
+            for (Player player: state.getPlayers().values()) {
+                if (!player.hasLeft() && !player.hasLost()) {
+                    player.won(this);
+                }
+            }
             state.endGame();
             endTime = new Date();
             return true;

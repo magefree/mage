@@ -1158,8 +1158,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 //20100423 - 800.6, 801.16
                 if (game.getPlayers().size() > 2) {
                     for (UUID opponentId: game.getOpponents(playerId)) {
-                        game.getPlayer(opponentId).lost(game);
+                        Player opponent = game.getPlayer(opponentId);
+                        if (!opponent.hasLost()) {
+                            game.getPlayer(opponentId).lost(game);
+                        }
                     }
+                    this.wins = true;
                 }
                 else {
                     this.wins = true;
