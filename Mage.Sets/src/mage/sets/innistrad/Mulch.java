@@ -101,9 +101,9 @@ class MulchEffect extends OneShotEffect<MulchEffect> {
                     }
                 }
             }
-
-            if (!cards.isEmpty()) {
-                player.revealCards("Lead the Stampede", cards, game);
+            Card sourceCard = game.getCard(source.getSourceId());
+            if (!cards.isEmpty() && sourceCard != null) {
+                player.revealCards(sourceCard.getName(), cards, game);
                 return true;
             }
         }
