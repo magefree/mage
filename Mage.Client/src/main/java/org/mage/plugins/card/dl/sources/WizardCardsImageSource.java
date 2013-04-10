@@ -28,6 +28,7 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap();
         setsAliases = new HashMap();
+        setsAliases.put("DGM", "dragonsmaze/cig");
         setsAliases.put("GTC", "gatecrash/cig");
         setsAliases.put("RTR", "returntoravnica/cig");
         setsAliases.put("M13", "magic2013/cig");

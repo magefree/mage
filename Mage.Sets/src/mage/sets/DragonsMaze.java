@@ -25,26 +25,29 @@
  * authors and should not be interpreted as representing official policies, either expressed
  * or implied, of BetaSteward_at_googlemail.com.
  */
+
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.Constants;
 import mage.cards.ExpansionSet;
 
 /**
  *
  * @author LevelX2
  */
-public class Gatecrash extends ExpansionSet {
 
-    private static final Gatecrash fINSTANCE = new Gatecrash();
 
-    public static Gatecrash getInstance() {
+public class DragonsMaze extends ExpansionSet {
+
+    private static final DragonsMaze fINSTANCE = new DragonsMaze();
+
+    public static DragonsMaze getInstance() {
         return fINSTANCE;
     }
 
-    private Gatecrash() {
-        super("Gatecrash", "GTC", "seticon_mtggtc", "mage.sets.gatecrash", new GregorianCalendar(2013, 2, 01).getTime(), SetType.EXPANSION);
+    private DragonsMaze() {
+        super("Dragon's Maze", "DGM", "seticon_mtggtc", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

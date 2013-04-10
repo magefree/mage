@@ -17,12 +17,13 @@ import mage.cards.repository.CardRepository;
 public class ConstructedFormats {
 
     private static final String[] constructedFormats = {"- All Sets", "- Standard", "- Extended", "- Modern",
-                                                        "* Return to Ravnica Block", "Gatecrash","Return to Ravnica", "Magic 2013",
-                                                        "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", "Magic 2012",
-                                                        "Planechase 2012",
+                                                        "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash","Return to Ravnica", 
+                                                        "Magic 2013", "Planechase 2012",
+                                                        "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", 
+                                                        "Magic 2012", "Commander",
                                                         "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
-                                                        "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar", "Magic 2010",
-                                                        "Planechase",
+                                                        "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar", 
+                                                        "Magic 2010", "Planechase",
                                                         "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
                                                         "* Shadowmoor Block", "Shadowmoor", "Eventide",
                                                         "* Lorwyn Block", "Lorwyn", "Morningtide",
@@ -286,13 +287,16 @@ public class ConstructedFormats {
             return Arrays.asList("AVR");
         }        
         if (format.equals("* Return to Ravnica Block")) {
-            return Arrays.asList("RTR", "GTC");
+            return Arrays.asList("RTR", "GTC", "DGM");
         }
         if (format.equals("Return to Ravnica")) {
             return Arrays.asList("RTR");
         }                                                               
         if (format.equals("Gatecrash")) {
             return Arrays.asList("GTC");
+        }
+        if (format.equals("Dragon's Maze")) {
+            return Arrays.asList("DGM");
         }
         if (format.equals("Limited Edition Alpha")) {
             return Arrays.asList("LEA");
@@ -343,6 +347,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Planechase")) {
             return Arrays.asList("HOP");
+        }
+        if (format.equals("Commander")) {
+            return Arrays.asList("CMD");
         }
         if (format.equals("Planechase 2012")) {
             return Arrays.asList("PC2");

@@ -77,4 +77,4 @@ Innistrad|innistrad|
 Dark Ascension|darkascension|
 Avacyn Restored|avacynrestored|
 Gatecrash|gatecrash|
-Commander|commander|
+Magic: The Gathering-Commander|commander|
