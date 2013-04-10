@@ -30,6 +30,8 @@ package mage.sets.limitedalpha;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 
 /**
@@ -41,8 +43,13 @@ public class Taiga extends CardImpl<Taiga> {
     public Taiga(UUID ownerId) {
         super(ownerId, 292, "Taiga", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "LEA";
-        this.subtype.add("Mountain");
+        
         this.subtype.add("Forest");
+        this.subtype.add("Mountain");
+
+        this.addAbility(new GreenManaAbility());
+        this.addAbility(new RedManaAbility());
+        
     }
 
     public Taiga(final Taiga card) {
