@@ -573,7 +573,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
         }
-        if (startMessage.isEmpty()) {
+        if (startMessage == null || startMessage.isEmpty()) {
             startMessage = "Game has started";
         }
         fireStatusEvent(startMessage, false);
