@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
@@ -54,7 +55,7 @@ import mage.target.Target;
 public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
     protected TimingRule timing = TimingRule.INSTANT;
-    protected boolean onlyOpponentCanActivate = false;
+    protected Constants.TargetController mayActivate = Constants.TargetController.YOU;
     protected UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
@@ -64,7 +65,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     public ActivatedAbilityImpl(ActivatedAbilityImpl ability) {
         super(ability);
         timing = ability.timing;
-        onlyOpponentCanActivate = ability.onlyOpponentCanActivate;
+        mayActivate = ability.mayActivate;
         activatorId = ability.activatorId;
     }
 
@@ -156,9 +157,27 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
     @Override
     public boolean canActivate(UUID playerId, Game game) {
         //20091005 - 602.2
-        if ((!onlyOpponentCanActivate && !controlsAbility(playerId, game)) ||
-                (onlyOpponentCanActivate && !game.getOpponents(controllerId).contains(playerId))) {
-            return false;
+        switch(mayActivate){
+            case ANY:
+                break;
+                
+            case NOT_YOU:
+                if(controlsAbility(playerId, game)){
+                    return false;
+                }
+                break;
+                
+            case OPPONENT:
+                if(!game.getOpponents(controllerId).contains(playerId)){
+                    return false;
+                }
+                break;
+                
+            case YOU:
+                if(!controlsAbility(playerId, game)){
+                    return false;
+                }
+                break;
         }
         //20091005 - 602.5d/602.5e
         if (timing == TimingRule.INSTANT || game.canPlaySorcery(playerId)) {
@@ -240,8 +259,8 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         return sb.toString();
     }
 
-    public void setOnlyOpponentCanActivate(boolean onlyOpponentCanActivate) {
-        this.onlyOpponentCanActivate = onlyOpponentCanActivate;
+    public void setMayActivate(Constants.TargetController mayActivate) {
+        this.mayActivate = mayActivate;
     }
 
     public UUID getActivatorId() {

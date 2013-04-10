@@ -77,7 +77,7 @@ public class SoulRansom extends CardImpl<SoulRansom> {
         effect = new DrawCardControllerEffect(2);
         effect.setText("Then draws two cards. Only any opponent may activate this ability");
         ability2.addEffect(effect);
-        ability2.setOnlyOpponentCanActivate(true);
+        ability2.setMayActivate(Constants.TargetController.OPPONENT);
         this.addAbility(ability2);
 
     }

@@ -268,21 +268,23 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
         //20101001 - 601.2e
         game.getContinuousEffects().costModification(this, game);
-
+        
+        UUID activatorId = controllerId;
+        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
+             activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
+        }
+        
         if (!useAlternativeCost(game)) {
 
             //20100716 - 601.2f
-            if (!manaCostsToPay.pay(this, game, sourceId, controllerId, noMana)) {
+            if (!manaCostsToPay.pay(this, game, sourceId, activatorId, noMana)) {
                 logger.debug("activate failed - mana");
                 return false;
             }
         }
 
         //20100716 - 601.2g
-        UUID activatorId = controllerId;
-        if ((this instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl)this).getActivatorId()!= null) {
-             activatorId = ((ActivatedAbilityImpl)this).getActivatorId();
-        }
+
         if (!costs.pay(this, game, sourceId, activatorId, noMana)) {
             logger.debug("activate failed - non mana costs");
             return false;
