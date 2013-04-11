@@ -28,19 +28,18 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
 import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,11 +63,11 @@ public class ContaminatedGround extends CardImpl<ContaminatedGround> {
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ContaminatedGroundEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
         // Whenever enchanted land becomes tapped, its controller loses 2 life.
         this.addAbility(new ContaminatedGroundAbility());
     }
@@ -85,7 +84,7 @@ public class ContaminatedGround extends CardImpl<ContaminatedGround> {
 
 class ContaminatedGroundAbility extends TriggeredAbilityImpl<ContaminatedGroundAbility> {
     ContaminatedGroundAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
     }
 
     ContaminatedGroundAbility(final ContaminatedGroundAbility ability) {
@@ -118,56 +117,5 @@ class ContaminatedGroundAbility extends TriggeredAbilityImpl<ContaminatedGroundA
     @Override
     public String getRule() {
         return "Whenever enchanted land becomes tapped, its controller loses 2 life.";
-    }
-}
-
-class ContaminatedGroundEffect extends ContinuousEffectImpl<ContaminatedGroundEffect> {
-    ContaminatedGroundEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
-        this.staticText = "Enchanted land is a Swamp";
-    }
-
-    ContaminatedGroundEffect(final ContaminatedGroundEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public ContaminatedGroundEffect copy() {
-        return new ContaminatedGroundEffect(this);
-    }
-
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
-            if (land != null) {
-                switch (layer) {
-                    case AbilityAddingRemovingEffects_6:
-                        land.getAbilities().clear();
-                        land.addAbility(new BlackManaAbility(), game);
-                        break;
-                    case TypeChangingEffects_4:
-                        if (!land.getCardType().contains(CardType.LAND))
-                            land.getCardType().add(CardType.LAND);
-
-                        land.getSubtype().clear();
-                        land.getSubtype().add("Swamp");
-
-                        break;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.TypeChangingEffects_4;
     }
 }
