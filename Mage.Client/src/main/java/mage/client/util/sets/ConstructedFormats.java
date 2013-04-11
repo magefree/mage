@@ -242,13 +242,13 @@ public class ConstructedFormats {
             return Arrays.asList("ALA", "CON", "ARB");
         }
         if (format.equals("Alara Reborn")) {
-            return Arrays.asList("ALA");
+            return Arrays.asList("ARB");
         }
         if (format.equals("Conflux")) {
             return Arrays.asList("CON");
         }
         if (format.equals("Shards of Alara")) {
-            return Arrays.asList("ARB");
+            return Arrays.asList("ALA");
         }
         if (format.equals("* Zendikar Block")) {
             return Arrays.asList("ZEN", "WWK", "ROE");
