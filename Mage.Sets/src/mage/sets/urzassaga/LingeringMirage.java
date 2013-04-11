@@ -25,16 +25,18 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.urzassaga;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
+import mage.abilities.keyword.CyclingAbility;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -42,32 +44,35 @@ import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class EvilPresence extends CardImpl<EvilPresence> {
+public class LingeringMirage extends CardImpl<LingeringMirage> {
 
-    public EvilPresence(UUID ownerId) {
-        super(ownerId, 60, "Evil Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "NPH";
+    public LingeringMirage(UUID ownerId) {
+        super(ownerId, 84, "Lingering Mirage", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
+        this.expansionSetCode = "USG";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
+        this.color.setBlue(true);
 
+        // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted land is an Island.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Island")));
+        // Cycling {2}
+        this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
 
-    public EvilPresence(final EvilPresence card) {
+    public LingeringMirage(final LingeringMirage card) {
         super(card);
     }
 
     @Override
-    public EvilPresence copy() {
-        return new EvilPresence(this);
+    public LingeringMirage copy() {
+        return new LingeringMirage(this);
     }
 }

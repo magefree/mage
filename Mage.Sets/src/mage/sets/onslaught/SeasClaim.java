@@ -25,13 +25,13 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.onslaught;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
@@ -42,32 +42,33 @@ import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class EvilPresence extends CardImpl<EvilPresence> {
+public class SeasClaim extends CardImpl<SeasClaim> {
 
-    public EvilPresence(UUID ownerId) {
-        super(ownerId, 60, "Evil Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "NPH";
+    public SeasClaim(UUID ownerId) {
+        super(ownerId, 113, "Sea's Claim", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{U}");
+        this.expansionSetCode = "ONS";
         this.subtype.add("Aura");
 
-        this.color.setBlack(true);
+        this.color.setBlue(true);
 
+        // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
+        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
+        // Enchanted land is an Island.
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Island")));
     }
 
-    public EvilPresence(final EvilPresence card) {
+    public SeasClaim(final SeasClaim card) {
         super(card);
     }
 
     @Override
-    public EvilPresence copy() {
-        return new EvilPresence(this);
+    public SeasClaim copy() {
+        return new SeasClaim(this);
     }
 }

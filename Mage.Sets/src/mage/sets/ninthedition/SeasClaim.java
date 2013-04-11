@@ -25,49 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.newphyrexia;
+package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BecomesBasicLandEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
-import mage.target.common.TargetLandPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class EvilPresence extends CardImpl<EvilPresence> {
+public class SeasClaim extends mage.sets.onslaught.SeasClaim {
 
-    public EvilPresence(UUID ownerId) {
-        super(ownerId, 60, "Evil Presence", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
-        this.expansionSetCode = "NPH";
-        this.subtype.add("Aura");
-
-        this.color.setBlack(true);
-
-        TargetPermanent auraTarget = new TargetLandPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
-
-        // Enchanted land is a Swamp.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesBasicLandEnchantedEffect("Swamp")));
+    public SeasClaim(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 97;
+        this.expansionSetCode = "9ED";
     }
 
-    public EvilPresence(final EvilPresence card) {
+    public SeasClaim(final SeasClaim card) {
         super(card);
     }
 
     @Override
-    public EvilPresence copy() {
-        return new EvilPresence(this);
+    public SeasClaim copy() {
+        return new SeasClaim(this);
     }
 }
