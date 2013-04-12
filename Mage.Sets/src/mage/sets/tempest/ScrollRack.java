@@ -32,7 +32,6 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,8 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
 import mage.filter.FilterCard;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInExile;
@@ -86,7 +85,7 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterCard filter = new FilterCard("card in your hand");
+        FilterCard filter = new FilterCard("card in your hand to exile");
         FilterCard filter2 = new FilterCard("card exiled by Scroll Rack to put on top of library");
         Player you = game.getPlayer(source.getControllerId());
         TargetCardInHand target = new TargetCardInHand(0, you.getHand().size(), filter);
@@ -99,7 +98,7 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
                         Card card = game.getCard(targetId);
                         if (card != null) {
                             card.setFaceDown(true);
-                            if (card.moveToExile(source.getId(), "Scroll Rack Exile", source.getSourceId(), game)) {
+                            if (card.moveToExile(source.getSourceId(), "Scroll Rack Exile", source.getId(), game)) {
                                 amountExiled++;
                             }
                         }
@@ -111,27 +110,33 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
                 for (int i = 0; i < count; i++) {
                     Card card = you.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        card.moveToZone(Zone.HAND, id, game, false);
+                        card.moveToZone(Constants.Zone.HAND, id, game, false);
                     }
                 }
             }
-            Cards cards = game.getExile().getExileZone(source.getId());
-            TargetCardInExile targetExiled = new TargetCardInExile(filter2, source.getSourceId());
-            targetExiled.setRequired(true);
-            while (cards.size() > 1) {
-                you.choose(Constants.Outcome.Neutral, cards, targetExiled, game);
-                Card card = cards.get(targetExiled.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
+
+            TargetCardInExile target2 = new TargetCardInExile(filter2, source.getSourceId());
+            ExileZone scrollRackExileZone = game.getExile().getExileZone(source.getSourceId());
+            target2.setRequired(true);
+            if (scrollRackExileZone != null) {
+                while (scrollRackExileZone.count(filter, game) > 1) {
+                    if (you != null) {
+                        you.lookAtCards("exiled cards with " + game.getCard(source.getSourceId()).getName(), scrollRackExileZone, game);
+                    }
+                    you.choose(Constants.Outcome.Neutral, scrollRackExileZone, target2, game);
+                    Card card = game.getCard(target2.getFirstTarget());
+                    if (card != null) {
+                        game.getExile().removeCard(card, game);
+                        card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    }
+                    target2.clearChosen();
+                }
+                if (scrollRackExileZone.count(filter, game) == 1) {
+                    Card card = scrollRackExileZone.get(scrollRackExileZone.iterator().next(), game);
                     card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
                 }
-                targetExiled.clearChosen();
+                return true;
             }
-            if (cards.size() == 1) {
-                Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
-            }
-            return true;
         }
         return false;
     }
