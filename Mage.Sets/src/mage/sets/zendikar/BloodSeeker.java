@@ -28,13 +28,21 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
+import mage.abilities.Ability;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.target.TargetPlayer;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -51,7 +59,9 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        CreatureEntersBattlefieldTriggeredAbility ability = new CreatureEntersBattlefieldTriggeredAbility(new LoseLifeTargetEffect(1), true, true);
+
+        // Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
+        Ability ability = new BloodSeekerTriggeredAbility();
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -63,5 +73,40 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
     @Override
     public BloodSeeker copy() {
         return new BloodSeeker(this);
+    }
+}
+
+class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl<BloodSeekerTriggeredAbility> {
+    BloodSeekerTriggeredAbility() {
+        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
+    }
+
+    BloodSeekerTriggeredAbility(final BloodSeekerTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public BloodSeekerTriggeredAbility copy() {
+        return new BloodSeekerTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            Card card = zEvent.getTarget();
+            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.";
     }
 }
