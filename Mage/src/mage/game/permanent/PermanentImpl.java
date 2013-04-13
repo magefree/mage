@@ -187,6 +187,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void addAbility(Ability ability, UUID sourceId, Game game) {
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
+            copyAbility.newId(); // needed e.g. if a gainAll ability gives Forestwalk to multiple creatures
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
