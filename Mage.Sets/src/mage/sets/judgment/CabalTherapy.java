@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -63,7 +64,7 @@ public class CabalTherapy extends CardImpl<CabalTherapy> {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new CabalTherapyEffect());
         // Flashback-Sacrifice a creature.
-        this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1)), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,new FilterControlledCreaturePermanent("a creature"), true)), TimingRule.SORCERY));
     }
 
     public CabalTherapy(final CabalTherapy card) {
@@ -80,7 +81,7 @@ class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
 
     public CabalTherapyEffect() {
         super(Outcome.Exile);
-        staticText = "Name a nonland card. Search target player's hand for all cards with that name and discard them.";
+        staticText = "Name a nonland card. Search target player's hand for all cards with that name and discard them";
     }
 
     public CabalTherapyEffect(final CabalTherapyEffect effect) {

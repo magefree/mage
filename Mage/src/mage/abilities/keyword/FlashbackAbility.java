@@ -67,18 +67,20 @@ public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<Flas
 
     @Override
     public String getRule() {
-        StringBuilder sbRule = new StringBuilder("Flashback ");
-        boolean first = true;
+        StringBuilder sbRule = new StringBuilder("Flashback");
+        if (costs.size() > 0) {
+            sbRule.append("--");
+        } else {
+            sbRule.append(" ");
+        }
         if (manaCosts.size() > 0) {
             sbRule.append(manaCosts.getText());
-            first = false;
         }
         if (costs.size() > 0) {
-            if (first) {
-                sbRule.append(",");
-            }
             sbRule.append(costs.getText());
+            sbRule.append(".");
         }
+        sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");
         return sbRule.toString();
     }
 }
