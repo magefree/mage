@@ -288,6 +288,9 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
                 return true;
             }
         }
+        if (minNumberOfTargets == 0 && targets.isEmpty()) {
+            return true;
+        }
         return false;
     }
 
