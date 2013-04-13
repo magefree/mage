@@ -46,6 +46,7 @@ import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetCardInLibrary;
 
 import java.util.UUID;
+import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
 
 /**
  *
@@ -74,7 +75,7 @@ public class StoneforgeMystic extends CardImpl<StoneforgeMystic> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SearchLibraryPutInHandEffect(target, true, true), true));
 
         // {1}{W}, {T}: You may put an Equipment card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PlayTargetWithoutPayingManaEffect(), new ManaCostsImpl("{1}{W}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOntoBattlefieldTargetEffect(false, true), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInHand(0, 1, filter));
         this.addAbility(ability);
