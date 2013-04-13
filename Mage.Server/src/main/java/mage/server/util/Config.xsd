@@ -21,6 +21,9 @@
 			<xs:attribute name="port" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxGameThreads" type="xs:positiveInteger" use="required"/>
 			<xs:attribute name="maxSecondsIdle" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="minUserNameLength" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="maxUserNameLength" type="xs:positiveInteger" use="required"/>
+            <xs:attribute name="userNamePattern" type="xs:string" use="required"/>
 		</xs:complexType>
 	</xs:element>
 

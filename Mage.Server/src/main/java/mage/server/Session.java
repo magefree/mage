@@ -41,6 +41,9 @@ import org.jboss.remoting.callback.InvokerCallbackHandler;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import mage.server.util.ConfigSettings;
 
 /**
  *
@@ -69,6 +72,17 @@ public class Session {
         this.isAdmin = false;
         if (userName.equals("Admin"))
             throw new MageException("User name already in use");
+        if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
+            throw new MageException(new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString());
+        }
+        if (userName.length() < ConfigSettings.getInstance().getMinUserNameLength()) {
+            throw new MageException(new StringBuilder("User name may not be shorter than ").append(ConfigSettings.getInstance().getMinUserNameLength()).append(" characters").toString());
+        }
+        Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(userName);
+        if (m.find()) {
+           throw new MageException("User name includes not allowed characters: use a-z, A-Z and 0-9");
+        }
         User user = UserManager.getInstance().createUser(userName, host);
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);

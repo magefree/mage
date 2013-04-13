@@ -83,6 +83,18 @@ public class ConfigSettings {
         return config.getServer().getMaxSecondsIdle().intValue();
     }
 
+    public int getMinUserNameLength() {
+        return config.getServer().getMinUserNameLength().intValue();
+    }
+
+    public int getMaxUserNameLength() {
+        return config.getServer().getMaxUserNameLength().intValue();
+    }
+
+    public String getUserNamePattern() {
+        return config.getServer().getUserNamePattern();
+    }
+
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();
     }
