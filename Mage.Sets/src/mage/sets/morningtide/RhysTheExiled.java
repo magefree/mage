@@ -53,9 +53,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
 public class RhysTheExiled extends CardImpl<RhysTheExiled> {
 
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elf");
-
+    private static final FilterControlledCreaturePermanent filter2 = new FilterControlledCreaturePermanent("Elf you control");
     static {
         filter.add(new SubtypePredicate("Elf"));
+        filter2.add(new SubtypePredicate("Elf"));
     }
 
     public RhysTheExiled(UUID ownerId) {
@@ -67,7 +68,11 @@ public class RhysTheExiled extends CardImpl<RhysTheExiled> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
-        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter, 1)), false));
+
+        // Whenever Rhys the Exiled attacks, you gain 1 life for each Elf you control.
+        this.addAbility(new AttacksTriggeredAbility(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter2, 1)), false));
+        
+        // {B}, Sacrifice an Elf: Regenerate Rhys the Exiled.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
