@@ -73,9 +73,13 @@ public class SwordOfLightAndShadow extends CardImpl<SwordOfLightAndShadow> {
         super(ownerId, 149, "Sword of Light and Shadow", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
         this.subtype.add("Equipment");
+
+        // Equipped creature gets +2/+2 and has protection from white and from black.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new ProtectionAbility(filter), AttachmentType.EQUIPMENT)));
+        // Whenever equipped creature deals combat damage to a player, you gain 3 life and you may return up to one target creature card from your graveyard to your hand.
         this.addAbility(new SwordOfLightAndShadowAbility());
+        // Equip {2}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
@@ -95,7 +99,7 @@ class SwordOfLightAndShadowAbility extends TriggeredAbilityImpl<SwordOfLightAndS
     public SwordOfLightAndShadowAbility() {
         super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
         this.addEffect(new GainLifeEffect(3));
-        this.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
+        this.addTarget(new TargetCardInYourGraveyard(0,1,new FilterCreatureCard("creature card from your graveyard")));
     }
 
     public SwordOfLightAndShadowAbility(final SwordOfLightAndShadowAbility ability) {
