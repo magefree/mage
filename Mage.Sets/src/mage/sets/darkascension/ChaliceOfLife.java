@@ -71,8 +71,10 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
 }
 
 class ChaliceOfLifeEffect extends OneShotEffect<ChaliceOfLifeEffect> {
+
     public ChaliceOfLifeEffect() {
         super(Constants.Outcome.GainLife);
+        staticText = "You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life";
     }
 
     public ChaliceOfLifeEffect(final ChaliceOfLifeEffect effect) {
