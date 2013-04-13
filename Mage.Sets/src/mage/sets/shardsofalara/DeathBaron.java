@@ -28,10 +28,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class DeathBaron extends CardImpl<DeathBaron> {
 
     private static final FilterCreaturePermanent filterSkeletons = new FilterCreaturePermanent("Skeleton creatures");
-    private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent("Zombie creatures");
+    private static final FilterCreaturePermanent filterZombie = new FilterCreaturePermanent("other Zombie creatures");
 
     static {
         filterSkeletons.add(new SubtypePredicate("Skeleton"));
@@ -64,11 +64,13 @@ public class DeathBaron extends CardImpl<DeathBaron> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability firstPart = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterSkeletons, false));
-        firstPart.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterSkeletons, false));
+        
+        // Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.
+        Ability firstPart = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterSkeletons, false));
+        firstPart.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterSkeletons, false));
         this.addAbility(firstPart);
-        Ability secondPart = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterZombie, true));
-        secondPart.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterZombie, true));
+        Ability secondPart = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterZombie, true));
+        secondPart.addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, filterZombie, true));
         this.addAbility(secondPart);
     }
 
