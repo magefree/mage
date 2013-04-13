@@ -29,8 +29,10 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.cards.Card;
 import mage.counters.CounterType;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  * 
@@ -60,14 +62,31 @@ public class HasCounterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Card card = null;
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            card = game.getCard(source.getSourceId());
+            if (card == null) {
+                return false;
+            }
+        }
         if (from != -1) { //range compare
-            int count = game.getPermanent(source.getSourceId()).getCounters().getCount(counterType);
+            int count;
+            if (card != null) {
+                count = card.getCounters().getCount(counterType);
+            } else {
+                count = permanent.getCounters().getCount(counterType);
+            }
             if (to == Integer.MAX_VALUE) {
                 return count >= from;
             }
             return count >= from && count <= to;
         } else { // single compare (lte)
-            return game.getPermanent(source.getSourceId()).getCounters().getCount(counterType) >= amount;
+            if (card != null) {
+                return card.getCounters().getCount(counterType) >= amount;
+            } else  {
+                return permanent.getCounters().getCount(counterType) >= amount;
+            }
         }
     }
 }
