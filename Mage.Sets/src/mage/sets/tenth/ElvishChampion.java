@@ -28,10 +28,10 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
@@ -48,7 +48,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class ElvishChampion extends CardImpl<ElvishChampion> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf creatures");
-
     static {
         filter.add(new SubtypePredicate("Elf"));
     }
@@ -60,8 +59,10 @@ public class ElvishChampion extends CardImpl<ElvishChampion> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(new ForestwalkAbility(), Constants.Duration.WhileOnBattlefield, filter, true)));
+
+        // Other Elf creatures get +1/+1 and have forestwalk. (They're unblockable as long as defending player controls a Forest.)
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new ForestwalkAbility(), Duration.WhileOnBattlefield, filter, true)));
     }
 
     public ElvishChampion(final ElvishChampion card) {

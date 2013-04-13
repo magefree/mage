@@ -45,6 +45,7 @@ import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -103,7 +104,7 @@ class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl<SuturePrie
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent)event;
             Card card = zEvent.getTarget();
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {

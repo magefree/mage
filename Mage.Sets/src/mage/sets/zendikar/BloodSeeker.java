@@ -28,20 +28,19 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -61,9 +60,7 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
         this.toughness = new MageInt(1);
 
         // Whenever a creature enters the battlefield under an opponent's control, you may have that player lose 1 life.
-        Ability ability = new BloodSeekerTriggeredAbility();
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+        this.addAbility(new BloodSeekerTriggeredAbility());
     }
 
     public BloodSeeker(final BloodSeeker card) {
@@ -78,7 +75,7 @@ public class BloodSeeker extends CardImpl<BloodSeeker> {
 
 class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl<BloodSeekerTriggeredAbility> {
     BloodSeekerTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
 
     BloodSeekerTriggeredAbility(final BloodSeekerTriggeredAbility ability) {
@@ -93,7 +90,7 @@ class BloodSeekerTriggeredAbility extends TriggeredAbilityImpl<BloodSeekerTrigge
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
+            EntersTheBattlefieldEvent zEvent = (EntersTheBattlefieldEvent) event;
             Card card = zEvent.getTarget();
             if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                 for (Effect effect : this.getEffects()) {
