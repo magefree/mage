@@ -115,23 +115,48 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
     public void update(PlayerView player) {
         this.player = player;
-        lifeLabel.setText(Integer.toString(player.getLife()));
+        int playerLife = player.getLife();
+        if (playerLife > 99) {
+            Font font = lifeLabel.getFont();
+            font = font.deriveFont(9f);
+            lifeLabel.setFont(font);
+            changedFontLife = true;
+        } else if (changedFontLife) {
+            Font font = lifeLabel.getFont();
+            font = font.deriveFont(12f);
+            lifeLabel.setFont(font);
+            changedFontLife = false;
+        }
+        lifeLabel.setText(Integer.toString(playerLife));
         poisonLabel.setText(Integer.toString(player.getPoison()));
         handLabel.setText(Integer.toString(player.getHandCount()));
-        int count = player.getLibraryCount();
-        if (count > 99) {
+        int libraryCards = player.getLibraryCount();
+        if (libraryCards > 99) {
             Font font = libraryLabel.getFont();
             font = font.deriveFont(9f);
             libraryLabel.setFont(font);
-            changedFont = true;
-        } else if (changedFont) {
+            changedFontLibrary = true;
+        } else if (changedFontLibrary) {
             Font font = libraryLabel.getFont();
             font = font.deriveFont(12f);
             libraryLabel.setFont(font);
-            changedFont = false;
+            changedFontLibrary = false;
         }
-        libraryLabel.setText(Integer.toString(count));
-        graveLabel.setText(Integer.toString(player.getGraveyard().size()));
+        libraryLabel.setText(Integer.toString(libraryCards));
+
+        int graveCards = player.getGraveyard().size();
+        if (graveCards > 99) {
+            Font font = graveLabel.getFont();
+            font = font.deriveFont(9f);
+            graveLabel.setFont(font);
+            changedFontGrave = true;
+        } else if (changedFontGrave) {
+            Font font = lifeLabel.getFont();
+            font = font.deriveFont(12f);
+            graveLabel.setFont(font);
+            changedFontGrave = false;
+        }
+        graveLabel.setText(Integer.toString(graveCards));
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
@@ -378,7 +403,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(18)
                                                 .addComponent(hand, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lifeLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                 .addGap(4)
                                 .addComponent(handLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
                         .addGroup(gl_panelBackground.createSequentialGroup()
@@ -436,7 +461,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                                 .addComponent(cheat, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(5)
-                                                .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(graveLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(1)
                                                 .addComponent(manaCountLabelU, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
@@ -597,7 +622,9 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JLabel libraryLabel;
     private JLabel poisonLabel;
     private JLabel graveLabel;
-    private boolean changedFont;
+    private boolean changedFontLibrary;
+    private boolean changedFontLife;
+    private boolean changedFontGrave;
 
     private JPanel zonesPanel;
     private HoverButton exileZone;
