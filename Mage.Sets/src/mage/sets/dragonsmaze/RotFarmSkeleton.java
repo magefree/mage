@@ -25,44 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.innistrad;
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
+import mage.abilities.common.CantBlockAbility;
 import mage.abilities.costs.common.PutTopCardOfYourLibraryToGraveyardCost;
-import mage.abilities.mana.ColorlessManaAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class DerangedAssistant extends CardImpl<DerangedAssistant> {
 
-    public DerangedAssistant(UUID ownerId) {
-        super(ownerId, 52, "Deranged Assistant", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
-        this.expansionSetCode = "ISD";
-        this.subtype.add("Human");
-        this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
+public class RotFarmSkeleton extends CardImpl<RotFarmSkeleton> {
+
+    public RotFarmSkeleton (UUID ownerId) {
+        super(ownerId, 98, "Rot Farm Skeleton", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
+        this.expansionSetCode = "DGM";
+        this.subtype.add("Plant");
+        this.subtype.add("Skeleton");
+        this.color.setBlack(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(4);
         this.toughness = new MageInt(1);
 
-        // {tap}, Put the top card of your library into your graveyard: Add {1} to your mana pool.
-        ColorlessManaAbility ability = new ColorlessManaAbility();
-        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost());
+        // Rot Farm Skeleton can't block.
+        this.addAbility(new CantBlockAbility());
+        // 2{B}{G}, Put the top four cards of your library into your graveyard: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), new ManaCostsImpl("{2}{B}{G}"));
+        ability.addCost(new PutTopCardOfYourLibraryToGraveyardCost(4));
         this.addAbility(ability);
+
     }
 
-    public DerangedAssistant(final DerangedAssistant card) {
+    public RotFarmSkeleton (final RotFarmSkeleton card) {
         super(card);
     }
 
     @Override
-    public DerangedAssistant copy() {
-        return new DerangedAssistant(this);
+    public RotFarmSkeleton copy() {
+        return new RotFarmSkeleton(this);
     }
+
 }
