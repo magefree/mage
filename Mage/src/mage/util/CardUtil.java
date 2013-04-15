@@ -28,6 +28,7 @@
 
 package mage.util;
 
+import java.util.Iterator;
 import mage.Constants;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,12 +44,15 @@ import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
 
-import java.util.Iterator;
+
 
 /**
  * @author nantuko
  */
 public class CardUtil {
+
+    static String numberStrings[] = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+                                      "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen", "twenty"};
 
     /**
      * Checks whether two cards share card types.
@@ -316,5 +320,33 @@ public class CardUtil {
         permanent |= card.getCardType().contains(Constants.CardType.PLANESWALKER);
 
         return permanent;
+    }
+
+    /**
+     * Converts an integer number to string
+     * Numbers > 20 will be returned as digits
+     *
+     */
+    public static String numberToText(int number) {
+        if (number >= 0 && number < 21) {
+            return numberStrings[number];
+        }
+        return Integer.toString(number);
+    }
+
+    public static String numberToText(String number) {
+        if (checkNumeric(number)) {
+            return numberToText(Integer.parseInt(number));
+        }
+        return number;
+    }
+
+    public static boolean checkNumeric(String s) {
+        for(int i = 0; i < s.length(); i++) {
+            if(!Character.isDigit(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
