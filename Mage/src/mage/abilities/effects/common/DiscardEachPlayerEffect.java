@@ -10,6 +10,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 
 public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffect> {
@@ -67,7 +68,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append("Each player discards ");
-        sb.append(amount).append(" card");
+        sb.append(CardUtil.numberToText(amount.toString())).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");

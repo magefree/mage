@@ -34,6 +34,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -46,7 +47,7 @@ public class DrawCardAllEffect extends OneShotEffect<DrawCardAllEffect> {
     public DrawCardAllEffect(int amount) {
         super(Outcome.DrawCard);
         this.amount = amount;
-        staticText = "Each player draws " + Integer.toString(amount) + " card" + (amount == 1?"":"s");
+        staticText = "Each player draws " + CardUtil.numberToText(amount) + " card" + (amount == 1?"":"s");
     }
 
     public DrawCardAllEffect(final DrawCardAllEffect effect) {

@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -101,7 +102,7 @@ public class DiscardControllerEffect extends OneShotEffect<DiscardControllerEffe
         if (amount.toString().equals("1")) {
             sb.append("a");
         } else {
-            sb.append(amount);
+            sb.append(CardUtil.numberToText(amount.toString()));
         }
         sb.append(" card");
         try {

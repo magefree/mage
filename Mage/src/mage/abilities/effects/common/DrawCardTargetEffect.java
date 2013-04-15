@@ -36,6 +36,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -82,7 +83,7 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
         } else {
             sb.append("that player");
         }
-        sb.append(" draws ").append(amount).append(" card");
+        sb.append(" draws ").append(CardUtil.numberToText(amount.toString())).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");

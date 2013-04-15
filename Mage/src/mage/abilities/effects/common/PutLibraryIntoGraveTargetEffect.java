@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -78,10 +79,12 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
             int cardsCount = Math.min(amount.calculate(game, source), player.getLibrary().size());
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
-                if (card != null)
+                if (card != null) {
                     card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
-                else
+                }
+                else {
                     break;
+                }
             }
         }
         return true;
@@ -98,7 +101,7 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
             if (amount.toString().equals("1")) {
                 sb.append("card ");
             } else {
-                sb.append(amount.toString()).append(" cards ");
+                sb.append(CardUtil.numberToText(amount.toString())).append(" cards ");
             }
         } else {
             sb.append(" X cards ");
