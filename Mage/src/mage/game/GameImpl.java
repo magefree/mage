@@ -1486,6 +1486,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return getActivePlayerId().equals(playerId) && getStack().isEmpty() && isMainPhase();
     }
 
+    /**
+     * 800.4a When a player leaves the game, all objects (see rule 109) owned by that player leave 
+     * the game and any effects which give that player control of any objects or players end. Then, 
+     * if that player controlled any objects on the stack not represented by cards, those objects 
+     * cease to exist. Then, if there are any objects still controlled by that player, those objects
+     * are exiled. This is not a state-based action. It happens as soon as the player leaves the game.
+     * If the player who left the game had priority at the time he or she left, priority passes to
+     * the next player in turn order who's still in the game. #
+     * 
+     * @param playerId 
+     */
+
     @Override
     public void leave(UUID playerId) {
         Player player = getPlayer(playerId);

@@ -28,7 +28,6 @@
 
 package mage.game;
 
-import mage.game.match.MatchType;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +35,7 @@ import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
+import mage.game.match.MatchType;
 import mage.players.Player;
 
 /**
@@ -82,8 +82,9 @@ public class FreeForAll extends GameImpl<FreeForAll> {
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<UUID>();
         for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId))
+            if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
+            }
         }
         return opponents;
     }
@@ -100,8 +101,8 @@ public class FreeForAll extends GameImpl<FreeForAll> {
         player.getLibrary().addAll(player.getHand().getCards(this), this);
         player.getHand().clear();
         player.shuffleLibrary(this);
-        player.drawCards(numCards - 1, this);
         fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
+        player.drawCards(numCards - 1, this);
     }
 
     @Override
