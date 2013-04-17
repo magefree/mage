@@ -130,25 +130,25 @@ public class TraceUtil {
     }
 
     private static void traceForPermanent(Game game, Permanent permanent, String uuid, ContinuousEffectsList<RestrictionEffect> restrictionEffects) {
-        Ability ability;
         for (RestrictionEffect effect: restrictionEffects) {
-            ability = restrictionEffects.getAbility(effect.getId());
-            if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
-                log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
-            } else {
-                boolean usable = ability.isInUseableZone(game, permanent, false);
-                log.error(uuid+"        instanceof: " + (ability instanceof StaticAbility) + ", ability=" + ability);
-                log.error(uuid+"        usable: " + usable + ", ability=" + ability);
-                if (!usable) {
-                    Constants.Zone zone = ability.getZone();
-                    log.error(uuid+"        zone: " + zone);
-                    MageObject object = game.getObject(ability.getSourceId());
-                    log.error(uuid+"        object: " + object);
-                    if (object != null) {
-                        log.error(uuid + "        contains:" + object.getAbilities().contains(ability));
+            for (Ability ability : restrictionEffects.getAbility(effect.getId())) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
+                    log.error(uuid+"        ability=" + ability + ", applies_to_attacker=" + effect.applies(permanent, ability, game));
+                } else {
+                    boolean usable = ability.isInUseableZone(game, permanent, false);
+                    log.error(uuid+"        instanceof: " + (ability instanceof StaticAbility) + ", ability=" + ability);
+                    log.error(uuid+"        usable: " + usable + ", ability=" + ability);
+                    if (!usable) {
+                        Constants.Zone zone = ability.getZone();
+                        log.error(uuid+"        zone: " + zone);
+                        MageObject object = game.getObject(ability.getSourceId());
+                        log.error(uuid+"        object: " + object);
+                        if (object != null) {
+                            log.error(uuid + "        contains:" + object.getAbilities().contains(ability));
+                        }
+                        Constants.Zone test = game.getState().getZone(ability.getSourceId());
+                        log.error(uuid+"        test_zone: " + test);
                     }
-                    Constants.Zone test = game.getState().getZone(ability.getSourceId());
-                    log.error(uuid+"        test_zone: " + test);
                 }
             }
         }

@@ -567,7 +567,7 @@ public class GameState implements Serializable, Copyable<GameState> {
      *
      * @param sourceId
      */
-    public void resetForSourceId(UUID sourceId) {
+    public void resetTriggersForSourceId(UUID sourceId) {
         List<String> keysToRemove = triggers.removeGainedAbilitiesForSource(sourceId);
         for (String key : keysToRemove) {
             triggers.remove(key);

@@ -1642,7 +1642,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
         getContinuousEffects().removeGainedEffectsForSource(sourceId);
         // remove gained triggered abilities
-        getState().resetForSourceId(sourceId);
+        getState().resetTriggersForSourceId(sourceId);
     }
 
     @Override

@@ -18,6 +18,12 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
     @Test
     public void testCastWithRebound() {
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        /*
+         * Instant and sorcery spells you control have rebound. (Exile the spell as
+         * it resolves if you cast it from your hand. At the beginning of your next
+         * upkeep, you may cast that card from exile without paying its mana cost.)
+         *
+         */
         addCard(Constants.Zone.BATTLEFIELD, playerA, "Cast Through Time");
         addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
 

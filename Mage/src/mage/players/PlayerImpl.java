@@ -801,7 +801,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         //20091005 - 502.2
         for (Permanent permanent: game.getBattlefield().getAllActivePermanents(playerId)) {
             boolean untap = true;
-            for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game)) {
+            for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(permanent, game).keySet()) {
                 untap &= effect.canBeUntapped(permanent, game);
             }
             if (untap) {
@@ -944,7 +944,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     Permanent source = game.getPermanent(sourceId);
                     if(source == null){
                         MageObject lastKnownInformation = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
-                        if(lastKnownInformation instanceof Permanent){
+                        if(lastKnownInformation != null &&  lastKnownInformation instanceof Permanent){
                             source = (Permanent) lastKnownInformation;
                         }
                     }

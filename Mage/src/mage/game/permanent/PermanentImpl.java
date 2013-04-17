@@ -187,7 +187,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void addAbility(Ability ability, UUID sourceId, Game game) {
         if (!abilities.containsKey(ability.getId())) {
             Ability copyAbility = ability.copy();
-            copyAbility.newId(); // needed e.g. if a gainAll ability gives Forestwalk to multiple creatures
             copyAbility.setControllerId(controllerId);
             copyAbility.setSourceId(objectId);
             game.getState().addAbility(copyAbility, sourceId, this);
@@ -201,7 +200,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         // removes abilities that were gained from abilities of this permanent
         game.getContinuousEffects().removeGainedEffectsForSource(this.getId());
         // remove gained triggered abilities
-        game.getState().resetForSourceId(this.getId());
+        game.getState().resetTriggersForSourceId(this.getId());
     }
 
     @Override
@@ -836,7 +835,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             return false;
         }
         //20101001 - 508.1c
-        for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
+        for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).keySet()) {
             if (!effect.canAttack(game)) {
                 return false;
             }
@@ -854,19 +853,24 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
         Permanent attacker = game.getPermanent(attackerId);
         //20101001 - 509.1b
-        for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
-            if (!effect.canBlock(attacker, this, game.getContinuousEffects().getAbility(effect.getId()), game)) {
-                return false;
+        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
+            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                if (!effect.canBlock(attacker, this, ability, game)) {
+                    return false;
+                }
             }
         }
         // check also attacker's restriction effects
-        for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game)) {
-            /*if (!effect.canBlock(attacker, this, game))
-                   return false;*/
-            if (!effect.canBeBlocked(attacker, this, game.getContinuousEffects().getAbility(effect.getId()), game)) {
-                return false;
+        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(attacker, game).entrySet()) {
+            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
+            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                if (!effect.canBeBlocked(attacker, this, ability, game)) {
+                    return false;
+                }
             }
         }
+
         if (attacker != null && attacker.hasProtectionFrom(this, game)) {
             return false;
         }
@@ -880,9 +884,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
 
         //20101001 - 509.1b
-        for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(this, game)) {
-            if (!effect.canBlock(null, this, game.getContinuousEffects().getAbility(effect.getId()), game)) {
-                return false;
+        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
+            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                if (!effect.canBlock(null, this, ability, game)) {
+                    return false;
+                }
             }
         }
 

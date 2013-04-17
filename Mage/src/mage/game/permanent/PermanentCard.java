@@ -79,6 +79,8 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
     public void reset(Game game) {
         // when the permanent is reset copy all original values from the card
         // must copy card each reset so that the original values don't get modified
+        // game.getState().getContinuousEffects().removeGainedEffectsForSource(objectId);
+        // game.getState().resetTriggersForSourceId(this.getId());
         copyFromCard(card, game);
         super.reset(game);
     }
@@ -126,6 +128,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
 
     protected void copyFromCard(Card card, Game game) {
         this.name = card.getName();
+        // this.removeAllAbilities(objectId, game);
         this.abilities.clear();
         this.abilities.addAll(card.getAbilities());
         this.abilities.setControllerId(this.controllerId);

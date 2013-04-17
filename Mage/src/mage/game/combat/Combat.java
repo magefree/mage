@@ -31,6 +31,7 @@ package mage.game.combat;
 import java.io.Serializable;
 import java.util.*;
 import mage.Constants.Outcome;
+import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
@@ -176,21 +177,24 @@ public class Combat implements Serializable, Copyable<Combat> {
     protected void checkAttackRequirements(Player player, Game game) {
         //20101001 - 508.1d
         for (Permanent creature : player.getAvailableAttackers(game)) {
-            for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+            for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                RequirementEffect effect = (RequirementEffect)entry.getKey();
                 if (effect.mustAttack(game)) {
-                    UUID defenderId = effect.mustAttackDefender(game.getContinuousEffects().getAbility(effect.getId()), game);
-                    if (defenderId == null) {
-                        if (defenders.size() == 1) {
-                            player.declareAttacker(creature.getId(), defenders.iterator().next(), game);
-                        } else {
-                            TargetDefender target = new TargetDefender(defenders, creature.getId());
-                            target.setRequired(true);
-                            if (player.chooseTarget(Outcome.Damage, target, null, game)) {
-                                player.declareAttacker(creature.getId(), target.getFirstTarget(), game);
+                    for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                        UUID defenderId = effect.mustAttackDefender(ability, game);
+                        if (defenderId == null) {
+                            if (defenders.size() == 1) {
+                                player.declareAttacker(creature.getId(), defenders.iterator().next(), game);
+                            } else {
+                                TargetDefender target = new TargetDefender(defenders, creature.getId());
+                                target.setRequired(true);
+                                if (player.chooseTarget(Outcome.Damage, target, null, game)) {
+                                    player.declareAttacker(creature.getId(), target.getFirstTarget(), game);
+                                }
                             }
+                        } else {
+                            player.declareAttacker(creature.getId(), defenderId, game);
                         }
-                    } else {
-                        player.declareAttacker(creature.getId(), defenderId, game);
                     }
                 }
             }
@@ -269,12 +273,15 @@ public class Combat implements Serializable, Copyable<Combat> {
         //20101001 - 509.1c
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
             if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
-                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+                for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                    RequirementEffect effect = (RequirementEffect)entry.getKey();
                     if (effect.mustBlock(game)) {
-                        UUID attackId = effect.mustBlockAttacker(game.getContinuousEffects().getAbility(effect.getId()), game);
-                        Player defender = game.getPlayer(creature.getControllerId());
-                        if (attackId != null && defender != null) {
-                            defender.declareBlocker(creature.getId(), attackId, game);
+                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                            UUID attackId = effect.mustBlockAttacker(ability, game);
+                            Player defender = game.getPlayer(creature.getControllerId());
+                            if (attackId != null && defender != null) {
+                                defender.declareBlocker(creature.getId(), attackId, game);
+                            }
                         }
                     }
                 }
@@ -286,7 +293,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         //20101001 - 509.1c
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
             if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
-                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game)) {
+                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).keySet()) {
                     if (effect.mustBlockAny(game)) {
                         // check that it can block an attacker
                         boolean mayBlock = false;

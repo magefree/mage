@@ -32,6 +32,9 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 import java.util.*;
+import static mage.Constants.Duration.Custom;
+import static mage.Constants.Duration.OneUse;
+import static mage.Constants.Duration.WhileOnBattlefield;
 
 /**
  *
@@ -39,7 +42,8 @@ import java.util.*;
  */
 public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList<T> {
 
-    private final Map<UUID, Ability> abilityMap = new HashMap<UUID, Ability>();
+    // the effectAbilityMap holds for each effect all abilities that are connected (used) with this effect
+    private final Map<UUID, HashSet<Ability>> effectAbilityMap = new HashMap<UUID, HashSet<Ability>>();
 
     public ContinuousEffectsList() { }
 
@@ -48,8 +52,12 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
         for (ContinuousEffect cost: effects) {
             this.add((T)cost.copy());
         }
-        for (Map.Entry<UUID, Ability> entry: effects.abilityMap.entrySet()) {
-            abilityMap.put(entry.getKey(), entry.getValue().copy());
+        for (Map.Entry<UUID, HashSet<Ability>> entry: effects.effectAbilityMap.entrySet()) {
+            HashSet<Ability> newSet = new HashSet<Ability>();
+            for (Ability ability :(HashSet<Ability>)entry.getValue()) {
+                newSet.add(ability.copy());
+            }
+            effectAbilityMap.put(entry.getKey(), newSet);
         }
     }
 
@@ -62,7 +70,7 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             T entry = i.next();
             if (entry.getDuration() == Constants.Duration.EndOfTurn) {
                 i.remove();
-                abilityMap.remove(entry.getId());
+                effectAbilityMap.remove(entry.getId());
             }
         }
     }
@@ -72,58 +80,100 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
             T entry = i.next();
             if (isInactive(entry, game)) {
                 i.remove();
-                abilityMap.remove(entry.getId());
+                effectAbilityMap.remove(entry.getId());
             }
         }
     }
 
     private boolean isInactive(T effect, Game game) {
-        Ability ability = abilityMap.get(effect.getId());
-        if (ability == null)
-            return true;
-
-        if (effect.isDiscarded())
-            return true;
-
-        switch(effect.getDuration()) {
-            case WhileOnBattlefield:
-                if (game.getObject(ability.getSourceId()) == null) {//TODO: does this really works?? object is returned across the game
-                    return (true);                                 // LevelX2: I guess it's not used, because effects stay the whole game
+        HashSet<Ability> set = effectAbilityMap.get(effect.getId());
+        Iterator it = set.iterator();
+        while (it.hasNext()) {
+            Ability ability = (Ability)it.next();
+            if (ability == null) {
+                it.remove();
+            } else  if (effect.isDiscarded()) {
+                it.remove();
+            } else {
+                switch(effect.getDuration()) {
+                    case WhileOnBattlefield:
+                        if (game.getObject(ability.getSourceId()) == null) {//TODO: does this really works?? object is returned across the game
+                            it.remove();                                
+                        }
+                    case OneUse:
+                        if (effect.isUsed()) {
+                            it.remove();
+                        }
+                    case Custom:
+                        if (effect.isInactive(ability , game)) {
+                               it.remove();
+                        }
                 }
-            case OneUse:
-                return effect.isUsed();
-            case Custom:
-                return effect.isInactive(abilityMap.get(effect.getId()), game);
+            }
         }
-        return false;
+        return set.isEmpty();
     }
 
+    /**
+     * Adds an effect and its connected ability to the list.
+     * For each effect will be stored, which abilities are connected to the effect.
+     * So an effect can be connected to multiple abilities.
+     *
+     * @param effect - effect to add
+     * @param source - connected ability
+     */
     public void addEffect(T effect, Ability source) {
-        if (abilityMap.containsKey(effect.getId()))
+        if (effectAbilityMap.containsKey(effect.getId())) {
+            HashSet<Ability> set = effectAbilityMap.get(effect.getId());
+            for (Ability ability: set) {
+                if (ability.getId().equals(source.getId()) && ability.getSourceId().equals(source.getSourceId()) ) {
+                    return;
+                }
+            }
+            set.add(source);
             return;
+        }
+        HashSet<Ability> set = new HashSet<Ability>();
+        set.add(source);
+        this.effectAbilityMap.put(effect.getId(), set);
         this.add(effect);
-        this.abilityMap.put(effect.getId(), source);
     }
 
-    public Ability getAbility(UUID effectId) {
-        return abilityMap.get(effectId);
+    public HashSet<Ability> getAbility(UUID effectId) {
+        return effectAbilityMap.get(effectId);
     }
 
-    public void removeEffect(T effect) {
+    /**
+     * Removes an effect and / or a connected ability.
+     * If no ability for this effect is left in the effectAbilityMap, the effect will be removed.
+     * Otherwise the effect won't be removed.
+     *
+     * @param effect - effect to remove if all abilities are removed
+     * @param ability - ability to remove
+     */
+
+    public void removeEffect(T effect, Ability ability) {
         for (Iterator<T> i = this.iterator(); i.hasNext();) {
             T entry = i.next();
             if (entry.equals(effect)) {
-                i.remove();
-                if (abilityMap.containsKey(effect.getId())) {
-                    abilityMap.remove(effect.getId());
+                HashSet<Ability> abilities = effectAbilityMap.get(effect.getId());
+                if (!abilities.isEmpty()) {
+                    abilities.remove(ability);
+                }
+                if (abilities.isEmpty()) {
+                    i.remove();
                 }
             }
         }
     }
 
+    public void removeEffectAbilityMap(UUID effectId) {
+        effectAbilityMap.remove(effectId);
+    }
+
     @Override
     public void clear() {
         super.clear();
-        abilityMap.clear();
+        effectAbilityMap.clear();
     }
 }

@@ -27,6 +27,7 @@
  */
 package mage.sets.newphyrexia;
 
+import java.util.Map;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
@@ -97,7 +98,7 @@ class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
                 game.getState().setValue(source.getSourceId() + "applied", true);
                 for (Permanent artifact: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                     boolean untap = true;
-                    for (RestrictionEffect effect : game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game)) {
+                    for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game).keySet()) {
                         untap &= effect.canBeUntapped(artifact, game);
                     }
                     if (untap) artifact.untap(game);

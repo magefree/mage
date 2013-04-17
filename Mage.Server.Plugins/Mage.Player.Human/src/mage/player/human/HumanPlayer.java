@@ -550,7 +550,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     }
 
     private void removeAttackerIfPossible(Game game, Permanent attacker) {
-        for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(attacker, game)) {
+        for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(attacker, game).entrySet()) {
+            RequirementEffect effect = (RequirementEffect)entry.getKey();
             if (effect.mustAttack(game)) {
                 return; // we can't cancel attacking
             }
