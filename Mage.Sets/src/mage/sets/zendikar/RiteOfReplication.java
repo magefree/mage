@@ -31,14 +31,15 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
 import mage.target.common.TargetCreaturePermanent;
 import mage.util.CardUtil;
@@ -96,10 +97,13 @@ class RiteOfReplicationEffect extends OneShotEffect<RiteOfReplicationEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+            CardUtil.copyTo(token).from(permanent);
             token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());
             return true;
         }

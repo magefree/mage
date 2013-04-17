@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -119,10 +120,13 @@ class PackRatEffect extends OneShotEffect<PackRatEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent packRat = game.getPermanent(source.getSourceId());
-        if (packRat != null) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null) {
             EmptyToken newToken = new EmptyToken();
-            CardUtil.copyTo(newToken).from(packRat);
+            CardUtil.copyTo(newToken).from(permanent);
             return newToken.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         }
         return false;

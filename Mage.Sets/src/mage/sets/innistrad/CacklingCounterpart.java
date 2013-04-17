@@ -32,13 +32,14 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.TimingRule;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.util.CardUtil;
@@ -85,10 +86,13 @@ class CacklingCounterpartEffect extends OneShotEffect<CacklingCounterpartEffect>
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(this.targetPointer.getFirst(game, source));
-        if (card != null) {
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+        if (permanent == null) {
+            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+        }
+        if (permanent != null) {
             EmptyToken token = new EmptyToken();
-            CardUtil.copyTo(token).from(card);
+            CardUtil.copyTo(token).from(permanent);
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }
