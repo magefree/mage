@@ -42,15 +42,17 @@ public class CopyFunction implements Function<Card, Card> {
     protected Game game;
 
     public CopyFunction(Card target) {
-        if (target == null)
+        if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
+        }
         this.target = target;
     }
 
     @Override
     public Card apply(Card source) {
-        if (target == null)
+        if (target == null) {
             throw new IllegalArgumentException("Target can't be null");
+        }
 
         target.setName(source.getName());
         target.getColor().setColor(source.getColor());

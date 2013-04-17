@@ -60,15 +60,15 @@ public class PermanentToken extends PermanentImpl<PermanentToken> {
 
     @Override
     public void reset(Game game) {
-        Token copy = token.copy();
-        copyFromToken(copy, game);
+        Token tokenCopy = token.copy();
+        copyFromToken(tokenCopy, game);
         super.reset(game);
     }
 
-    protected void copyFromToken(Token token, Game game) {
+    private void copyFromToken(Token token, Game game) {
         this.name = token.getName();
         this.abilities.clear();
-        for (Ability ability: token.getAbilities()) {
+        for (Ability ability : token.getAbilities()) {
             this.addAbility(ability, game);
         }
         this.manaCost.clear();
