@@ -31,12 +31,13 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -64,8 +65,10 @@ public class Archaeomancer extends CardImpl<Archaeomancer> {
         this.toughness = new MageInt(2);
 
         // When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.
-        EntersBattlefieldAbility ability = new EntersBattlefieldAbility(new ReturnToHandTargetEffect());
-        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        Target target = new TargetCardInYourGraveyard(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
