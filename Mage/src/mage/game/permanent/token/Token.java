@@ -28,6 +28,8 @@
 
 package mage.game.permanent.token;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObjectImpl;
@@ -41,8 +43,6 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.PermanentToken;
 
-import java.util.List;
-import java.util.UUID;
 
 public class Token extends MageObjectImpl<Token> {
 
@@ -107,22 +107,32 @@ public class Token extends MageObjectImpl<Token> {
     }
 
     public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId) {
+        return this.putOntoBattlefield(amount, game, sourceId, controllerId, false, false);
+    }
+
+    public boolean putOntoBattlefield(int amount, Game game, UUID sourceId, UUID controllerId, boolean tapped, boolean attacking) {
         Card source = game.getCard(sourceId);
         String setCode = source != null ? source.getExpansionSetCode() : null;
         GameEvent event = GameEvent.getEvent(EventType.CREATE_TOKEN, null, sourceId, controllerId, amount);
         if (!game.replaceEvent(event)) {
             amount = event.getAmount();
             for (int i = 0; i < amount; i++) {
-                PermanentToken permanent = new PermanentToken(this, controllerId, setCode, game);
-                game.getState().addCard(permanent);
-                game.addPermanent(permanent);
-                this.lastAddedTokenId = permanent.getId();
+                PermanentToken newToken = new PermanentToken(this, controllerId, setCode, game);
+                game.getState().addCard(newToken);
+                game.addPermanent(newToken);
+                if (tapped) {
+                    newToken.setTapped(true);
+                }
+                this.lastAddedTokenId = newToken.getId();
                 game.setScopeRelevant(true);
                 game.applyEffects();
-                permanent.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
+                newToken.entersBattlefield(sourceId, game, Zone.OUTSIDE, true);
                 game.setScopeRelevant(false);
                 game.applyEffects();
-                game.fireEvent(new ZoneChangeEvent(permanent, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
+                game.fireEvent(new ZoneChangeEvent(newToken, controllerId, Zone.OUTSIDE, Zone.BATTLEFIELD));
+                if (attacking && game.getCombat() != null) {
+                    game.getCombat().addAttackingCreature(newToken.getId(), game);
+                }
             }
             return true;
         }

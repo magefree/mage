@@ -35,6 +35,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
+import mage.util.CardUtil;
 
 /**
  *
@@ -44,6 +45,8 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
 
     private Token token;
     private DynamicValue amount;
+    private boolean tapped;
+    private boolean attacking;
 
     public CreateTokenEffect(Token token) {
         this(token, new StaticValue(1));
@@ -54,9 +57,19 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
     }
 
     public CreateTokenEffect(Token token, DynamicValue amount) {
+        this(token, amount, false, false);
+    }
+    
+    public CreateTokenEffect(Token token, int amount, boolean tapped, boolean attacking) {
+        this(token, new StaticValue(amount), tapped, attacking);
+    }
+
+    public CreateTokenEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
+        this.tapped = tapped;
+        this.attacking = attacking;
         setText();
     }
 
@@ -64,6 +77,8 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
         super(effect);
         this.amount = effect.amount.copy();
         this.token = effect.token.copy();
+        this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -76,21 +91,30 @@ public class CreateTokenEffect extends OneShotEffect<CreateTokenEffect> {
         int value = amount.calculate(game, source);
         Token tokenCopy = token.copy();
         tokenCopy.getAbilities().newId(); // neccessary if token has ability like DevourAbility()
-        tokenCopy.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId());
+        tokenCopy.putOntoBattlefield(value, game, source.getSourceId(), source.getControllerId(), tapped, attacking);
         return true;
     }
-
+        
     private void setText() {
         StringBuilder sb = new StringBuilder("put ");
         if (amount.toString().equals("1")) {
             sb.append("a ").append(token.getDescription());
         } else {
-            sb.append(amount.toString()).append(" ").append(token.getDescription());
+            sb.append(CardUtil.numberToText(amount.toString())).append(" ").append(token.getDescription());
             if (token.getDescription().endsWith("token")) {
                 sb.append("s ");
             }
         }
         sb.append(" onto the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        if (attacking) {
+            if (tapped) {
+                sb.append(" and");
+            }
+            sb.append(" attacking");
+        }
         String message = amount.getMessage();
         if (message.length() > 0) {
             if (amount.toString().equals("X")) {
