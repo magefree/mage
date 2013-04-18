@@ -95,7 +95,7 @@ class CryptGhastTriggeredAbility extends TriggeredManaAbility<CryptGhastTriggere
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
             Permanent land = game.getPermanent(event.getTargetId());
-            if (land != null && filter.match(land, game)) {
+            if (land != null && filter.match(land, this.getSourceId(), this.getControllerId(), game)) {
                 return true;
             }
         }
