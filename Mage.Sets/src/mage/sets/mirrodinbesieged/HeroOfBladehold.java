@@ -29,20 +29,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.BattleCryAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.game.permanent.token.SoldierToken;
-import mage.players.Player;
 
 /**
  * @author Loki
@@ -57,8 +51,13 @@ public class HeroOfBladehold extends CardImpl<HeroOfBladehold> {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
+
+        // Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
         this.addAbility(new BattleCryAbility());
-        this.addAbility(new AttacksTriggeredAbility(new HeroOfBladeholdEffect(), false));
+
+        // Whenever Hero of Bladehold attacks, put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking.
+        this.addAbility(new AttacksTriggeredAbility(new CreateTokenEffect(new SoldierToken(), 2, true, true), false));
+
     }
 
     public HeroOfBladehold(final HeroOfBladehold card) {
@@ -68,38 +67,6 @@ public class HeroOfBladehold extends CardImpl<HeroOfBladehold> {
     @Override
     public HeroOfBladehold copy() {
         return new HeroOfBladehold(this);
-    }
-
-}
-
-class HeroOfBladeholdEffect extends OneShotEffect<HeroOfBladeholdEffect> {
-    HeroOfBladeholdEffect() {
-        super(Outcome.PutCreatureInPlay);
-        staticText = "put two 1/1 white Soldier creature tokens onto the battlefield tapped and attacking";
-    }
-
-    HeroOfBladeholdEffect(final HeroOfBladeholdEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        SoldierToken token = new SoldierToken();
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            for (int i = 0; i < 2; i++) {
-                token.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
-                Permanent p = game.getPermanent(token.getLastAddedToken());
-                p.setTapped(true);
-                game.getCombat().addAttackingCreature(p.getId(), game);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public HeroOfBladeholdEffect copy() {
-        return new HeroOfBladeholdEffect(this);
     }
 
 }

@@ -27,7 +27,12 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -52,8 +57,6 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCardInHand;
 
-import java.util.UUID;
-
 
 /**
  * @author Loki
@@ -73,9 +76,12 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
 
         // {T}: You may put a land card from your hand onto the battlefield. If you control ten or more lands, flip Budoka Gardener.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BudokaGardenerEffect(), new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(new FilterLandCard()));
+        ability.addTarget(new TargetCardInHand(0, 1, new FilterLandCard()));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "")));
+
+        Ability flipAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "{this} becomes Dokai, Weaver of Life"));
+        ability.setRuleVisible(false);
+        this.addAbility(flipAbility);
     }
 
     public BudokaGardener(final BudokaGardener card) {
@@ -156,4 +162,3 @@ class DokaiWeaverofLifeToken extends Token {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(controlledLands, controlledLands, Duration.WhileOnBattlefield)));
     }
 }
-
