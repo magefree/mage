@@ -16,7 +16,7 @@ public class BattleCryAbility extends AttacksTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)";
+        return "Battle cry <i>(Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)</i>";
     }
 
     @Override
