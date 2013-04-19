@@ -87,6 +87,7 @@ import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
+import java.util.Map.Entry;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -1515,6 +1516,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 it.remove();
             }
         }
+        this.getState().getContinuousEffects().removeInactiveEffects(this);
         for (Iterator<StackObject> it = getStack().iterator(); it.hasNext();) {
             StackObject object = it.next();
             if (object.getControllerId().equals(playerId)) {
@@ -1527,6 +1529,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 perm.moveToExile(null, "", null, this);
             }
         }
+        
+        Iterator it = gameCards.entrySet().iterator();
+        while(it.hasNext()) {
+            Entry<UUID,Card> entry = (Entry<UUID,Card>) it.next();
+            Card card = entry.getValue();
+            if (card.getOwnerId().equals(playerId)) {
+                it.remove();
+            }            
+        }
+
     }
 
     @Override
