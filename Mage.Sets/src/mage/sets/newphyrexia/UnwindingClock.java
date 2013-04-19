@@ -27,7 +27,6 @@
  */
 package mage.sets.newphyrexia;
 
-import java.util.Map;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;

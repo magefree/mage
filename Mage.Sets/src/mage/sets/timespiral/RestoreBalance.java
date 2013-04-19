@@ -27,8 +27,6 @@
  */
 package mage.sets.timespiral;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
@@ -37,8 +35,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
@@ -50,7 +46,6 @@ import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
 import mage.target.common.TargetCardInHand;
 import mage.target.common.TargetControlledPermanent;
 

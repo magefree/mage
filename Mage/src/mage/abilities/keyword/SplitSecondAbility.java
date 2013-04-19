@@ -1,7 +1,6 @@
 package mage.abilities.keyword;
 
 import mage.Constants;
-import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;

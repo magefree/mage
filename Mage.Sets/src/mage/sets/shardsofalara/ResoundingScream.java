@@ -33,12 +33,10 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;
-import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *

@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
-import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.MountaincyclingAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ForestcyclingAbility;

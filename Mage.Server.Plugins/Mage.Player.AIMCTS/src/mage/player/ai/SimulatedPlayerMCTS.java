@@ -28,15 +28,9 @@
 package mage.player.ai;
 
 import mage.Constants.Outcome;
-import mage.Constants.Zone;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.ManaCosts;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.effects.ReplacementEffect;
-import mage.abilities.mana.ManaAbility;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;

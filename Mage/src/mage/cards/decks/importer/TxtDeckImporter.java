@@ -31,7 +31,6 @@ package mage.cards.decks.importer;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Random;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.DeckCardLists;

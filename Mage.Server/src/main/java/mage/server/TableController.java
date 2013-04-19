@@ -40,7 +40,6 @@ import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
-import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.Seat;
@@ -64,7 +63,6 @@ import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import mage.view.ChatMessage.MessageColor;
 import org.apache.log4j.Logger;
 
 

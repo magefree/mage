@@ -11,7 +11,6 @@ import mage.game.permanent.Permanent;
 import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.effects.Effect;
-import mage.abilities.keyword.EnchantAbility;
 
 /**
  * @author ubeefx, nantuko

@@ -37,7 +37,6 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
