@@ -100,13 +100,11 @@ class EnsnaringBridgeEffect extends ReplacementEffectImpl<EnsnaringBridgeEffect>
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent != null) {
                 Player player = game.getPlayer(source.getControllerId());
-                if (player.getInRange().contains(permanent.getControllerId())) {
+                if (player != null && player.getInRange().contains(permanent.getControllerId())) {
                     Player controller = game.getPlayer(source.getControllerId());
-                    if(player != null){
-                        int cardInHand = controller.getHand().size();
-                        if (permanent.getPower().getValue() > cardInHand){
-                            return true;
-                        }
+                    int cardInHand = controller.getHand().size();
+                    if (permanent.getPower().getValue() > cardInHand){
+                        return true;
                     }
                 }
             }
