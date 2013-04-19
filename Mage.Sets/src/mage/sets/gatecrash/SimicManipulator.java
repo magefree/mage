@@ -81,8 +81,8 @@ public class SimicManipulator extends CardImpl<SimicManipulator> {
 
         // {tap}, Remove one or more +1/+1 counters from Simic Manipulator: Gain control of target creature with power less than or equal to the number of +1/+1 counters removed this way.
         // TODO: Improve targeting, that only valid targets (power <= removed counters) can be choosen
-        //       Disadvante now is, that a creature can be targeted that couldn't be targeted by rules.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SimicManipulatorGainControlTargetEffect(Duration.WhileOnBattlefield), new TapSourceCost());
+        //       Disadvantage now is, that a creature can be targeted that couldn't be targeted by rules.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SimicManipulatorGainControlTargetEffect(Duration.Custom), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new RemoveVariableCountersSourceCost(CounterType.P1P1.createInstance(),1));
         this.addAbility(ability);
@@ -100,21 +100,19 @@ public class SimicManipulator extends CardImpl<SimicManipulator> {
 
 class SimicManipulatorGainControlTargetEffect extends ContinuousEffectImpl<SimicManipulatorGainControlTargetEffect> {
 
+    private boolean valid;
+
     public SimicManipulatorGainControlTargetEffect(Duration duration) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
     public SimicManipulatorGainControlTargetEffect(final SimicManipulatorGainControlTargetEffect effect) {
         super(effect);
+        this.valid = effect.valid;
     }
 
     @Override
-    public SimicManipulatorGainControlTargetEffect copy() {
-        return new SimicManipulatorGainControlTargetEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
+    public void init(Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
             int maxPower = 0;
@@ -125,8 +123,21 @@ class SimicManipulatorGainControlTargetEffect extends ContinuousEffectImpl<Simic
                 }
             }
             if (permanent.getPower().getValue() <= maxPower) {
-                return permanent.changeControllerId(source.getControllerId(), game);
+                valid = true;
             }
+        }
+    }
+
+    @Override
+    public SimicManipulatorGainControlTargetEffect copy() {
+        return new SimicManipulatorGainControlTargetEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (permanent != null && valid) {
+            return permanent.changeControllerId(source.getControllerId(), game);
         }
         return false;
     }
