@@ -29,8 +29,17 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreatureCard;
+import mage.game.Game;
+import mage.players.Player;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -45,6 +54,7 @@ public class Exhume extends CardImpl<Exhume> {
         this.color.setBlack(true);
 
         // Each player puts a creature card from his or her graveyard onto the battlefield.
+        this.getSpellAbility().addEffect(new ExhumeEffect());
     }
 
     public Exhume(final Exhume card) {
@@ -54,5 +64,45 @@ public class Exhume extends CardImpl<Exhume> {
     @Override
     public Exhume copy() {
         return new Exhume(this);
+    }
+}
+
+class ExhumeEffect extends OneShotEffect<ExhumeEffect> {
+
+    public ExhumeEffect() {
+        super(Outcome.PutCreatureInPlay);
+        this.staticText = "Each player puts a creature card from his or her graveyard onto the battlefield";
+    }
+
+    public ExhumeEffect(final ExhumeEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ExhumeEffect copy() {
+        return new ExhumeEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller == null) {
+            return false;
+        }
+
+        for (UUID playerId : controller.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
+                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCreatureCard);
+                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                    Card card = game.getCard(target.getFirstTarget());
+                    if (card != null) {
+                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
