@@ -26,105 +26,74 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.guildpact;
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
+import mage.abilities.effects.common.UnblockableSourceEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.target.common.TargetOpponent;
+
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GhostCouncilOfOrzhova extends CardImpl<GhostCouncilOfOrzhova> {
 
-    public GhostCouncilOfOrzhova (UUID ownerId) {
-        super(ownerId, 114, "Ghost Council of Orzhova", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}{W}{B}{B}");
-        this.expansionSetCode = "GPT";
-        this.supertype.add("Legendary");
-        this.subtype.add("Spirit");
-        this.color.setWhite(true);
-        this.color.setBlack(true);
+
+public class AEtherling extends CardImpl<AEtherling> {
+
+    public AEtherling (UUID ownerId) {
+        super(ownerId, 11, "AEtherling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
+        this.expansionSetCode = "DGM";
+        this.subtype.add("Shapeshifter");
+        this.color.setGreen(true);
         this.power = new MageInt(4);
-        this.toughness = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        // When Ghost Council of Orzhova enters the battlefield, target opponent loses 1 life and you gain 1 life.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GhostCouncilOfOrzhovaEffect());
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
-        
-        // {1}, Sacrifice a creature: Exile Ghost Council of Orzhova. Return it to the battlefield under its owner's control at the beginning of the next end step.
-        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GhostCouncilOfOrzhovaRemovingEffect(), new GenericManaCost(1));
-        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
-        this.addAbility(ability);
+        // {U}: Exile AEtherling. Return it to the battlefield under its owner's control at the beginning of the next end step.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AEherlingRemovingEffect(), new ManaCostsImpl("{U}")));
+        // {U}: AEtherling is unblockable this turn
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableSourceEffect(), new ManaCostsImpl("{U}")));
+        // {1}: AEtherling gets +1/-1 until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, -1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
+        // {1}: AEtherling gets -1/+1 until end of turn
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(-1, 1, Duration.EndOfTurn), new ManaCostsImpl("{1}")));
     }
 
-    public GhostCouncilOfOrzhova (final GhostCouncilOfOrzhova card) {
+    public AEtherling (final AEtherling card) {
         super(card);
     }
 
     @Override
-    public GhostCouncilOfOrzhova copy() {
-        return new GhostCouncilOfOrzhova(this);
+    public AEtherling copy() {
+        return new AEtherling(this);
     }
 
 }
-
-class GhostCouncilOfOrzhovaEffect extends OneShotEffect<GhostCouncilOfOrzhovaEffect> {
-    GhostCouncilOfOrzhovaEffect() {
-        super(Outcome.Damage);
-        staticText = "target opponent loses 1 life and you gain 1 life";
-    }
-
-    GhostCouncilOfOrzhovaEffect(final GhostCouncilOfOrzhovaEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        Player controllerPlayer = game.getPlayer(source.getControllerId());
-        if (targetPlayer != null && controllerPlayer != null) {
-            targetPlayer.damage(1, source.getSourceId(), game, false, true);
-            controllerPlayer.gainLife(1, game);
-        }
-        return false;
-    }
-
-    @Override
-    public GhostCouncilOfOrzhovaEffect copy() {
-        return new GhostCouncilOfOrzhovaEffect(this);
-    }
-
-}
-
-class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOrzhovaRemovingEffect> {
+class AEherlingRemovingEffect extends OneShotEffect<AEherlingRemovingEffect> {
 
     private static final String effectText = "Exile {this}. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
-    GhostCouncilOfOrzhovaRemovingEffect () {
+    AEherlingRemovingEffect () {
         super(Outcome.Benefit);
         staticText = effectText;
     }
 
-    GhostCouncilOfOrzhovaRemovingEffect(GhostCouncilOfOrzhovaRemovingEffect effect) {
+    AEherlingRemovingEffect(AEherlingRemovingEffect effect) {
         super(effect);
     }
 
@@ -132,7 +101,7 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (permanent.moveToExile(source.getSourceId(), " Ghost Council of Orzhova Exile", source.getId(), game)) {
+            if (permanent.moveToExile(source.getSourceId(), "AEherling Exile", source.getId(), game)) {
                 //create delayed triggered ability
                 AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
                         new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
@@ -146,8 +115,8 @@ class GhostCouncilOfOrzhovaRemovingEffect extends OneShotEffect<GhostCouncilOfOr
     }
 
     @Override
-    public GhostCouncilOfOrzhovaRemovingEffect copy() {
-        return new GhostCouncilOfOrzhovaRemovingEffect(this);
+    public AEherlingRemovingEffect copy() {
+        return new AEherlingRemovingEffect(this);
     }
 
 }
