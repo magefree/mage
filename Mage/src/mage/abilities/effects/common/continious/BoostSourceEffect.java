@@ -113,7 +113,7 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> i
         sb.append(p).append("/");
         String t = toughness.toString();
         if(!t.startsWith("-")){
-            if(p.startsWith("-"))
+            if(t.startsWith("-"))
                 sb.append("-");
             else
                 sb.append("+");
