@@ -45,6 +45,7 @@ import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.game.permanent.token.KnightToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 

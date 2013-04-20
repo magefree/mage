@@ -30,12 +30,9 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KnightToken;
 
 /**
  *
@@ -60,17 +57,5 @@ public class KnightWatch extends CardImpl<KnightWatch> {
     @Override
     public KnightWatch  copy() {
         return new KnightWatch(this);
-    }
-}
-
-class KnightToken extends Token {
-    KnightToken() {
-        super("Knight", "2/2 white Knight creature tokens with vigilance");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Knight");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(VigilanceAbility.getInstance());
     }
 }

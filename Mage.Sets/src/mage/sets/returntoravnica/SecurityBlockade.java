@@ -48,6 +48,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.token.KnightToken;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 

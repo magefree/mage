@@ -31,20 +31,17 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
-import mage.game.permanent.token.Token;
+import mage.game.permanent.token.KnightToken;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -89,17 +86,5 @@ public class SelesnyaCharm extends CardImpl<SelesnyaCharm> {
     @Override
     public SelesnyaCharm copy() {
         return new SelesnyaCharm(this);
-    }
-}
-
-class KnightToken extends Token {
-    KnightToken() {
-        super("Knight", "2/2 white Knight creature token with vigilance");
-        cardType.add(CardType.CREATURE);
-        color = ObjectColor.WHITE;
-        subtype.add("Knight");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        this.addAbility(VigilanceAbility.getInstance());
     }
 }
