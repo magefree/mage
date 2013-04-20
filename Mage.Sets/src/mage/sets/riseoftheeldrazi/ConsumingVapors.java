@@ -58,8 +58,12 @@ public class ConsumingVapors extends CardImpl<ConsumingVapors> {
         this.expansionSetCode = "ROE";
 
         this.color.setBlack(true);
+
+        // Target player sacrifices a creature. You gain life equal to that creature's toughness.
         this.getSpellAbility().addEffect(new ConsumingVaporsEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
+
+        // Rebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)
         this.addAbility(new ReboundAbility());
     }
 
@@ -92,7 +96,8 @@ class ConsumingVaporsEffect extends OneShotEffect<ConsumingVaporsEffect> {
         FilterControlledPermanent filter = new FilterControlledPermanent("creature");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+        TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, true);
+        target.setRequired(true);
 
         //A spell or ability could have removed the only legal target this player
         //had, if thats the case this ability should fizzle.
