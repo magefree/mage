@@ -135,7 +135,9 @@ class EvolveEffect extends OneShotEffect<EvolveEffect> {
         if (triggeringCreature != null) {
             Permanent sourceCreature = game.getPermanent(source.getSourceId());
             if (sourceCreature != null && EvolveAbility.isPowerOrThoughnessGreater(sourceCreature, triggeringCreature)) {
+                game.getState().setValue("EvolveAddCounterActive", Boolean.TRUE);
                 sourceCreature.addCounters(CounterType.P1P1.createInstance(), game);
+                game.getState().setValue("EvolveAddCounterActive", Boolean.FALSE);
                 return true;
             }
         }
