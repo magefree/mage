@@ -41,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -72,7 +73,9 @@ public class SyggRiverGuide extends CardImpl<SyggRiverGuide> {
         // {1}{W}: Target Merfolk you control gains protection from the color of your choice until end of turn.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainProtectionFromColorTargetEffect(Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
         ability.addChoice(new ChoiceColor());
-        ability.addTarget(new TargetControlledCreaturePermanent(1,1,filter, false));
+        Target target = new TargetControlledCreaturePermanent(1,1,filter, false);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
 
     }
