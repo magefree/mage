@@ -103,9 +103,10 @@ class AbattoirGhoulEffect extends ReplacementEffectImpl<AbattoirGhoulEffect> {
         Permanent permanent = ((ZoneChangeEvent)event).getTarget();
         if (permanent != null) {
             MageInt toughness = permanent.getToughness();
-            Player player = (Player)this.getValue("player");
-            player.gainLife(toughness.getValue(), game);
-            return true;
+            Player player = game.getPlayer(source.getControllerId());
+            if (player != null) {
+                player.gainLife(toughness.getValue(), game);
+            }
         }
         return false;
     }
