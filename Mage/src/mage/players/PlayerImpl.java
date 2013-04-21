@@ -380,7 +380,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public int drawCards(int num, Game game) {
-        return game.doAction(new MageDrawAction(this, num));
+        return game.doAction(new MageDrawAction(this, num, null));
+    }
+
+    @Override
+    public int drawCards(int num, Game game, ArrayList<UUID> appliedEffects) {
+        return game.doAction(new MageDrawAction(this, num, appliedEffects));
     }
 
     @Override

@@ -253,6 +253,11 @@ public class ContinuousEffects implements Serializable {
         }
         //get all applicable transient Replacement effects
         for (ReplacementEffect effect: replacementEffects) {
+            if (event.getAppliedEffects() != null && event.getAppliedEffects().contains(effect.getId())) {
+                // Effect already applied to this event, ignore it
+                // TODO: Handle also gained effect that are connected to different abilities.
+                continue;
+            }
             HashSet<Ability> abilities = replacementEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<Ability>();
             for (Ability ability : abilities) {
@@ -450,6 +455,7 @@ public class ContinuousEffects implements Serializable {
             }
 
             if (rEffect != null) {
+                event.getAppliedEffects().add(rEffect.getId());
                 caught = rEffect.replaceEvent(event, rAbility, game);
             }
             if (caught) { // Event was completely replaced -> stop applying effects to it

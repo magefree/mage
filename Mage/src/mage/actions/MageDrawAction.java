@@ -1,5 +1,6 @@
 package mage.actions;
 
+import java.util.ArrayList;
 import mage.Constants;
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
@@ -9,6 +10,7 @@ import mage.game.events.GameEvent;
 import mage.players.Player;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Action for drawing cards.
@@ -19,13 +21,15 @@ public class MageDrawAction extends MageAction {
 
     private final Player player;
     private final int amount;
+    private ArrayList<UUID> appliedEffects;
     private List<Card> drawnCards;
 
     private static final int NEGATIVE_VALUE = -1000000;
 
-    public MageDrawAction(Player player, int amount) {
+    public MageDrawAction(Player player, int amount, ArrayList<UUID> appliedEffects) {
         this.player = player;
         this.amount = amount;
+        this.appliedEffects = appliedEffects;
     }
 
     /**
@@ -39,13 +43,15 @@ public class MageDrawAction extends MageAction {
         int score = 0;
         for (int i = 0; i < amount; i++) {
             int value = drawCard(game);
-            if (value == -1) {
-                break;
+            if (value == NEGATIVE_VALUE) {
+                continue;
             }
             numDrawn++;
             score += value;
         }
-        game.fireInformEvent(player.getName() + " draws " + Integer.toString(numDrawn) + " card" + (numDrawn > 1 ? "s" : ""));
+        if (numDrawn > 0) {
+            game.fireInformEvent(player.getName() + " draws " + Integer.toString(numDrawn) + " card" + (numDrawn > 1 ? "s" : ""));
+        }
         if (player.isEmptyDraw()) {
             game.doAction(new MageLoseGameAction(player, MageLoseGameAction.DRAW_REASON));
         }
@@ -64,7 +70,9 @@ public class MageDrawAction extends MageAction {
      * @return
      */
     protected int drawCard(Game game) {
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, player.getId(), player.getId()))) {
+        GameEvent event = GameEvent.getEvent(GameEvent.EventType.DRAW_CARD, player.getId(), player.getId());
+        event.setAppliedEffects(appliedEffects);
+        if (!game.replaceEvent(event)) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
                 card.moveToZone(Constants.Zone.HAND, null, game, false);
