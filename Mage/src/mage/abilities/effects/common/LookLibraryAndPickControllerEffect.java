@@ -29,11 +29,14 @@
  */
 package mage.abilities.effects.common;
 
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
@@ -55,6 +58,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     protected Zone targetPickedCards = Zone.HAND; // HAND 
     protected int foundCardsToPick = 0;
     protected boolean optional;
+    private boolean upTo;
 
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, boolean putOnTop) {
             this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, putOnTop, true);
@@ -65,10 +69,19 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
     }
 
     public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal) {
+        this(numberOfCards, mayShuffleAfter, numberToPick, pickFilter, targetZoneLookedCards, putOnTop, reveal, false);
+    }
+
+    public LookLibraryAndPickControllerEffect(int numberOfCards, int numberToPick, FilterCard pickFilter, boolean upTo) {
+        this(new StaticValue(numberOfCards), false, new StaticValue(numberToPick), pickFilter, Zone.LIBRARY, false, true, upTo);
+    }
+
+    public LookLibraryAndPickControllerEffect(DynamicValue numberOfCards, boolean mayShuffleAfter, DynamicValue numberToPick, FilterCard pickFilter, Zone targetZoneLookedCards, boolean putOnTop, boolean reveal, boolean upTo) {
             super(Outcome.DrawCard, numberOfCards, mayShuffleAfter, targetZoneLookedCards, putOnTop);
             this.numberToPick = numberToPick;
             this.filter = pickFilter;
             this.revealPickedCards = reveal;
+            this.upTo = upTo;
     }
 
     public LookLibraryAndPickControllerEffect(final LookLibraryAndPickControllerEffect effect) {
@@ -77,6 +90,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         this.filter = effect.filter.copy();
         this.revealPickedCards = effect.revealPickedCards;
         this.targetPickedCards = effect.targetPickedCards;
+        this.upTo = effect.upTo;
     }
 
     @Override
@@ -105,18 +119,23 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 sb.append("put into your hand");
 
                 pickFilter.setMessage(sb.toString());
-                TargetCard target = new TargetCard(Zone.PICK, pickFilter);
+                TargetCard target = new TargetCard((upTo ? 0:numberToPick.calculate(game, source)),numberToPick.calculate(game, source), Zone.PICK, pickFilter);
                 if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                    Card card = cards.get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(targetPickedCards, source.getId(), game, false);
-                        if (revealPickedCards) {
-                            Cards reveal = new CardsImpl();
-                            reveal.add(card);
-                            player.revealCards(windowName, reveal, game);
+                    Cards reveal = new CardsImpl();
+                    for (UUID cardId : (List<UUID>)target.getTargets()) {
+                        Card card = cards.get(cardId, game);
+                        if (card != null) {
+                            cards.remove(card);
+                            card.moveToZone(targetPickedCards, source.getId(), game, false);
+                            if (revealPickedCards) {
+                                reveal.add(card);
+                            }
                         }
                     }
+                    if (revealPickedCards) {
+                        player.revealCards(windowName, reveal, game);
+                    }
+
                 }
             }
         }
@@ -128,7 +147,7 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
         StringBuilder sb = new StringBuilder();
         if (numberToPick.calculate(null, null) > 0) {
             if (revealPickedCards) {
-                sb.append(". You may reveal a ");
+                sb.append(". You may reveal ");
                 sb.append(filter.getMessage()).append(" from among them and put it into your ");
             } else {
                 sb.append(". Put one of them into your ");
