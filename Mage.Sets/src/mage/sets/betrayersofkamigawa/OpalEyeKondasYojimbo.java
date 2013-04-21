@@ -146,8 +146,6 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl<OpalEy
                 }
             }
             game.informPlayers(message.toString());
-            // remember redirection effect (614.5)
-            event.getAppliedEffects().add(getId());
             // redirect damage
             this.used = true;
             sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());

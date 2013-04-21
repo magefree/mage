@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -40,21 +39,17 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetArtifactPermanent;
 
@@ -64,6 +59,11 @@ import mage.target.common.TargetArtifactPermanent;
  */
 public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
 
+    private static final FilterCard filter = new FilterCard("an artifact card");
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+
     public TezzeretAgentOfBolas(UUID ownerId) {
         super(ownerId, 97, "Tezzeret, Agent of Bolas", Rarity.MYTHIC, new CardType[]{CardType.PLANESWALKER}, "{2}{U}{B}");
         this.expansionSetCode = "MBS";
@@ -72,12 +72,15 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
         this.color.setBlack(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
-        this.addAbility(new LoyaltyAbility(new TezzeretAgentOfBolasEffect1(), 1));
+        // +1: Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order.
+        this.addAbility(new LoyaltyAbility(new LookLibraryAndPickControllerEffect(5, 1, filter, true), 1));
 
+        // -1: Target artifact becomes a 5/5 artifact creature.
         LoyaltyAbility ability1 = new LoyaltyAbility(new BecomesCreatureTargetEffect(new ArtifactCreatureToken(), "", Duration.EndOfGame), -1);
         ability1.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability1);
 
+        // -4: Target player loses X life and you gain X life, where X is twice the number of artifacts you control.
         LoyaltyAbility ability2 = new LoyaltyAbility(new TezzeretAgentOfBolasEffect2(), -4);
         ability2.addTarget(new TargetPlayer());
         this.addAbility(ability2);
@@ -93,79 +96,6 @@ public class TezzeretAgentOfBolas extends CardImpl<TezzeretAgentOfBolas> {
         return new TezzeretAgentOfBolas(this);
     }
 
-}
-
-class TezzeretAgentOfBolasEffect1 extends OneShotEffect<TezzeretAgentOfBolasEffect1> {
-
-    public TezzeretAgentOfBolasEffect1() {
-        super(Outcome.DrawCard);
-        staticText = "Look at the top five cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in any order";
-    }
-
-    public TezzeretAgentOfBolasEffect1(final TezzeretAgentOfBolasEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public TezzeretAgentOfBolasEffect1 copy() {
-        return new TezzeretAgentOfBolasEffect1(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl(Zone.PICK);
-        boolean artifactFound = false;
-        int count = Math.min(player.getLibrary().size(), 5);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-                if (card.getCardType().contains(CardType.ARTIFACT)) {
-                    artifactFound = true;
-                }
-            }
-        }
-        player.lookAtCards("Tezzeret, Agent of Bolas", cards, game);
-
-        if (artifactFound && player.chooseUse(Outcome.DrawCard, "Do you wish to reveal an artifact card and put it into your hand?", game)) {
-            TargetCard target = new TargetCard(Zone.PICK, new FilterArtifactCard("artifact card to reveal and put into your hand"));
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                Card card = cards.get(target.getFirstTarget(), game);
-                if (card != null) {
-                    cards.remove(card);
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
-
-                    Cards reveal = new CardsImpl(Zone.OUTSIDE);
-                    reveal.add(card);
-                    player.revealCards("Tezzeret, Agent of Bolas", reveal, game);
-                }
-            }
-        }
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-        }
-
-        return true;
-    }
 }
 
 class ArtifactCreatureToken extends Token {

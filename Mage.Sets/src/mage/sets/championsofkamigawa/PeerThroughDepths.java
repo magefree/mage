@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class PeerThroughDepths extends CardImpl<PeerThroughDepths> {
 
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
+    private static final FilterCard filter = new FilterCard("an instant or sorcery card");
     static {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.SORCERY),

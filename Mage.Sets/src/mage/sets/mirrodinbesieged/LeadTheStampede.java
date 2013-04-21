@@ -27,23 +27,13 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
-import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -51,13 +41,18 @@ import mage.target.TargetCard;
  */
 public class LeadTheStampede extends CardImpl<LeadTheStampede> {
 
+    private static final FilterCard filter = new FilterCard("any number of creature cards");
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
     public LeadTheStampede(UUID ownerId) {
         super(ownerId, 82, "Lead the Stampede", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
         this.expansionSetCode = "MBS";
 
         this.color.setGreen(true);
-
-        this.getSpellAbility().addEffect(new LeadTheStampedeEffect());
+        // Look at the top five cards of your library. You may reveal any number of creature cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.
+        this.getSpellAbility().addEffect(new LookLibraryAndPickControllerEffect(5, 5, filter, true));
     }
 
     public LeadTheStampede(final LeadTheStampede card) {
@@ -67,83 +62,5 @@ public class LeadTheStampede extends CardImpl<LeadTheStampede> {
     @Override
     public LeadTheStampede copy() {
         return new LeadTheStampede(this);
-    }
-}
-
-class LeadTheStampedeEffect extends OneShotEffect<LeadTheStampedeEffect> {
-
-    public LeadTheStampedeEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Look at the top five cards of your library. You may reveal any number of creature cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order";
-    }
-
-    public LeadTheStampedeEffect(final LeadTheStampedeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public LeadTheStampedeEffect copy() {
-        return new LeadTheStampedeEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-
-        Cards cards = new CardsImpl(Zone.PICK);
-        int creatureCardsFound = 0;
-        int count = Math.min(player.getLibrary().size(), 5);
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                game.setZone(card.getId(), Zone.PICK);
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    creatureCardsFound++;
-                }
-            }
-        }
-        player.lookAtCards("Lead the Stampede", cards, game);
-
-        if (creatureCardsFound > 0 && player.chooseUse(Outcome.DrawCard, "Do you wish to reveal creature cards and put them into your hand?", game)) {
-            Cards revealedCards = new CardsImpl();
-            TargetCard target = new TargetCard(0, creatureCardsFound, Zone.PICK, new FilterCreatureCard("creature cards to reveal and put into your hand"));
-
-            if (player.choose(Outcome.DrawCard, cards, target, game)) {
-                List<UUID> targets = target.getTargets();
-                for (UUID targetId : targets) {
-                    Card card = cards.get(targetId, game);
-                    if (card != null) {
-                        cards.remove(card);
-                        card.moveToZone(Zone.HAND, source.getId(), game, false);
-                        revealedCards.add(card);
-                    }
-                }
-            }
-            if (!revealedCards.isEmpty()) {
-                player.revealCards("Lead the Stampede", revealedCards, game);
-            }
-        }
-
-        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-        target.setRequired(true);
-        while (cards.size() > 1) {
-            player.choose(Outcome.Neutral, cards, target, game);
-            Card card = cards.get(target.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-            }
-            target.clearChosen();
-        }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-        }
-
-        return true;
     }
 }
