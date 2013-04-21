@@ -31,12 +31,10 @@ package mage.abilities.effects.common;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
-import mage.util.CardUtil;
 
 /**
  *
@@ -78,7 +76,7 @@ public class LoseLifeSourceEffect extends OneShotEffect<LoseLifeSourceEffect> {
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("You lose ").append(CardUtil.numberToText(amount.toString())).append(" life");
+        sb.append("You lose ").append(amount.toString()).append(" life");
         String message = amount.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");
