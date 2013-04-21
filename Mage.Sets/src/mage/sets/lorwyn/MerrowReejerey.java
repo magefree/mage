@@ -44,6 +44,7 @@ import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -75,6 +76,8 @@ public class MerrowReejerey extends CardImpl<MerrowReejerey> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         // Whenever you cast a Merfolk spell, you may tap or untap target permanent.
         Ability ability = new SpellCastTriggeredAbility(new MayTapOrUntapTargetEffect(), filter2, true);
+        Target target = new TargetPermanent();
+        target.setRequired(true);
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }
