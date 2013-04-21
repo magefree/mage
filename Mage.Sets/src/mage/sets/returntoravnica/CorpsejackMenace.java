@@ -97,7 +97,6 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl<Corpsejack
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent p = game.getPermanent(event.getTargetId());
         if (p != null) {
-            event.getAppliedEffects().add(getId()); // because replaced events are droped, this keeps track of consumed replacement effects for one origin event
             p.addCounters(CounterType.P1P1.createInstance(event.getAmount()*2), game, event.getAppliedEffects());
         }
         return true;
@@ -105,8 +104,7 @@ class CorpsejackMenaceReplacementEffect extends ReplacementEffectImpl<Corpsejack
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ADD_COUNTER && !event.getAppliedEffects().contains(getId())
-                                                               && event.getData().equals(CounterType.P1P1.getName())) {
+        if (event.getType() == GameEvent.EventType.ADD_COUNTER && event.getData().equals(CounterType.P1P1.getName())) {
             Permanent target = game.getPermanent(event.getTargetId());
             if (target != null && target.getControllerId().equals(source.getControllerId())
                                && target.getCardType().contains(CardType.CREATURE)) {

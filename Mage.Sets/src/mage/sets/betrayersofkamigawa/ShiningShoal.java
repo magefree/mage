@@ -147,14 +147,12 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<Shining
                 if (permanent != null) {
                     game.informPlayers("Dealing " + prevented + " to " + permanent.getName() + " instead");
                     // keep the original source id as it is redirecting
-                    event.getAppliedEffects().add(getId());
                     permanent.damage(prevented, event.getSourceId(), game, true, false, event.getAppliedEffects());
                 }
                 Player player = game.getPlayer(redirectTo);
                 if (player != null) {
                     game.informPlayers("Dealing " + prevented + " to " + player.getName() + " instead");
                     // keep the original source id as it is redirecting
-                    event.getAppliedEffects().add(getId());
                     player.damage(prevented, event.getSourceId(), game, true, false, event.getAppliedEffects());
                 }
             }
@@ -164,7 +162,7 @@ class ShiningShoalPreventDamageTargetEffect extends PreventionEffectImpl<Shining
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game) && !event.getAppliedEffects().contains(getId())) {
+        if (!this.used && super.applies(event, source, game)) {
 
             // check source
             MageObject object = game.getObject(event.getSourceId());

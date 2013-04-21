@@ -180,9 +180,7 @@ class BuybackEffect extends ReplacementEffectImpl<BuybackEffect> {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.STACK && 
-                    (event.getAppliedEffects() == null || !event.getAppliedEffects().contains(this.getId()))) {
-                event.getAppliedEffects().add(this.getId());
+            if (zEvent.getFromZone() == Zone.STACK ) {
                 return true;
             }
         }

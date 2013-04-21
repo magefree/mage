@@ -99,23 +99,17 @@ class DoranTheSiegeTowerEffect extends ReplacementEffectImpl<DoranTheSiegeTowerE
     public boolean applies(GameEvent event, Ability source, Game game) {
         switch (event.getType()) {
             case DAMAGE_PLAYER:
-                 if (((DamagePlayerEvent) event).isCombatDamage() &&
-                    (event.getAppliedEffects() == null || !event.getAppliedEffects().contains(this.getId()))) {
-                    event.getAppliedEffects().add(this.getId());
+                 if (((DamagePlayerEvent) event).isCombatDamage())  {
                     return true;
                  }
                  break;
             case DAMAGE_PLANESWALKER:
-                 if (((DamagePlaneswalkerEvent) event).isCombatDamage() &&
-                    (event.getAppliedEffects() == null || !event.getAppliedEffects().contains(this.getId()))) {
-                    event.getAppliedEffects().add(this.getId());
+                 if (((DamagePlaneswalkerEvent) event).isCombatDamage()) {
                     return true;
                  }
                  break;
             case DAMAGE_CREATURE:
-                 if (((DamageCreatureEvent) event).isCombatDamage() &&
-                    (event.getAppliedEffects() == null || !event.getAppliedEffects().contains(this.getId()))) {
-                    event.getAppliedEffects().add(this.getId());
+                 if (((DamageCreatureEvent) event).isCombatDamage()) {
                     return true;
                  }
                  break;

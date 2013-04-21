@@ -87,13 +87,11 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!event.getAppliedEffects().contains(this.getId())) {
-            switch (event.getType()) {
-                case DAMAGE_PLAYER:
-                    return true;
-                case DAMAGE_CREATURE:
-                    return true;
-            }
+        switch (event.getType()) {
+            case DAMAGE_PLAYER:
+                return true;
+            case DAMAGE_CREATURE:
+                return true;
         }
         return false;
     }
@@ -106,7 +104,6 @@ class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent)event;
-        damageEvent.getAppliedEffects().add(getId());
         if (damageEvent.getType() == EventType.DAMAGE_PLAYER) {
             Player targetPlayer = game.getPlayer(event.getTargetId());
             if (targetPlayer != null) {

@@ -104,8 +104,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl<PalisadeGiant
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId())
-                && !event.getAppliedEffects().contains(getId()))
+        if (event.getType() == GameEvent.EventType.DAMAGE_PLAYER && event.getPlayerId().equals(source.getControllerId()))
         {
 
            return true;
@@ -116,8 +115,7 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl<PalisadeGiant
             Permanent sourcePermanent = game.getPermanent(source.getSourceId());
             if (targetPermanent != null && 
                     targetPermanent.getControllerId().equals(source.getControllerId()) &&
-                    !targetPermanent.getName().equals(sourcePermanent.getName()) && // no redirection from or to other Palisade Giants
-                    !event.getAppliedEffects().contains(getId())) {
+                    !targetPermanent.getName().equals(sourcePermanent.getName())) {  // no redirection from or to other Palisade Giants
                 return true;
             }
         }
@@ -148,8 +146,6 @@ class PalisadeGiantReplacementEffect extends ReplacementEffectImpl<PalisadeGiant
 
             }
             game.informPlayers(message.toString());
-            // remember redirection effect (614.5)
-            event.getAppliedEffects().add(getId());
             // redirect damage
             sourcePermanent.damage(damageEvent.getAmount(), damageEvent.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
             return true;
