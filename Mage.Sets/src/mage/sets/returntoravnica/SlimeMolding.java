@@ -80,8 +80,8 @@ class SlimeMoldingEffect extends OneShotEffect<SlimeMoldingEffect> {
         int count = source.getManaCostsToPay().getX();
 
         OozeToken oozeToken = new OozeToken();
-        oozeToken.getPower().setValue(count);
-        oozeToken.getToughness().setValue(count);
+        oozeToken.getPower().initValue(count);
+        oozeToken.getToughness().initValue(count);
         oozeToken.putOntoBattlefield(1, game, source.getId(), source.getControllerId());
         return true;
     }
