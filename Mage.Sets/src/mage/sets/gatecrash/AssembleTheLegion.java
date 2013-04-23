@@ -32,6 +32,7 @@ import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -87,10 +88,24 @@ class AssembleTheLegionEffect extends OneShotEffect<AssembleTheLegionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+       /* 1/24/2013: If Assemble the Legion isn’t on the battlefield when its ability resolves,
+        * use the number of muster counters it had when it was last on the battlefield to
+        * determine how many Soldier tokens to put onto the battlefield.
+        */
+
        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-       if (sourcePermanent != null) {
+       int amountCounters = 0;
+       if (sourcePermanent == null) {
+           Permanent lki = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+           if (lki != null) {
+               amountCounters = lki.getCounters().getCount("Muster");
+           }
+       } else {
            new AddCountersSourceEffect(new MusterCounter(),false).apply(game, source);
-           int amountCounters = sourcePermanent.getCounters().getCount("Muster");
+           amountCounters = sourcePermanent.getCounters().getCount("Muster");
+           
+       }
+       if (amountCounters > 0) {
            return new CreateTokenEffect(new SoldierToken(), amountCounters).apply(game, source);
        }
        return false;
