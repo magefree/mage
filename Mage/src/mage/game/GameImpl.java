@@ -88,6 +88,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -1134,9 +1135,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         }
                         else {
                             Filter auraFilter = perm.getSpellAbility().getTargets().get(0).getFilter();
-                            if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
-                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-                                    somethingHappened = true;
+                            if (auraFilter instanceof FilterControlledCreaturePermanent) {
+                                if (!((FilterControlledCreaturePermanent)auraFilter).match(attachedTo, perm.getId(), perm.getControllerId(), this) || attachedTo.hasProtectionFrom(perm, this)) {
+                                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                        somethingHappened = true;
+                                    }
+                                }
+                            } else {
+                                if (!auraFilter.match(attachedTo, this) || attachedTo.hasProtectionFrom(perm, this)) {
+                                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                        somethingHappened = true;
+                                    }
                                 }
                             }
                         }
