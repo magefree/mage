@@ -95,7 +95,8 @@ class ExhumeEffect extends OneShotEffect<ExhumeEffect> {
             if (player != null) {
                 FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCreatureCard);
-                if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+                target.setRequired(true);
+                if (player.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());
