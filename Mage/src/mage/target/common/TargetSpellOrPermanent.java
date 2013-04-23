@@ -128,6 +128,11 @@ public class TargetSpellOrPermanent extends TargetImpl<TargetSpellOrPermanent> {
         return false;
     }
 
+    @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
     /**
      * Checks if there are enough {@link mage.game.permanent.Permanent} or {@link mage.game.stack.Spell} that can be chosen.  Should only be used
      * for Ability targets since this checks for protection, shroud etc.

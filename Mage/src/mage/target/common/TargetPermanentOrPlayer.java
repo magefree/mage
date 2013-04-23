@@ -104,6 +104,11 @@ public class TargetPermanentOrPlayer extends TargetImpl<TargetPermanentOrPlayer>
     }
 
     @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
+    @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         Player player = game.getPlayer(id);

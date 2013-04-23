@@ -111,6 +111,11 @@ public class TargetCreatureOrPlayerAmount extends TargetAmount<TargetCreatureOrP
     }
 
     @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
+    @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);

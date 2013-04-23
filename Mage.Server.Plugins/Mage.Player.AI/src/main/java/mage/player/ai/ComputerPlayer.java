@@ -591,7 +591,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 card = pickWorstCard(cards, null, target, source, game);
             }
             if (source != null) {
-                if (target.canTarget(card.getId(), source, game)) {
+                if (target.canTarget(card.getId(), this.getId(), source, game)) {
                     return card;
                 }
             }

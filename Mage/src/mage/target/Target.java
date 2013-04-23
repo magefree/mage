@@ -61,6 +61,7 @@ public interface Target extends Serializable {
     void addTarget(UUID id, int amount, Ability source, Game game, boolean skipEvent);
     boolean canTarget(UUID id, Game game);
     boolean canTarget(UUID id, Ability source, Game game);
+    boolean canTarget(UUID id, UUID playerId, Ability source, Game game);
     boolean isLegal(Ability source, Game game);
     List<? extends Target> getTargetOptions(Ability source, Game game);
 

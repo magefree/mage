@@ -87,4 +87,9 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
         return canTarget(id, game);
     }
 
+    @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
 }

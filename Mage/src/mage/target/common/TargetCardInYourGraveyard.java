@@ -72,6 +72,16 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
         return false;
     }
 
+    @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability ability, Game game) {
+        Card card = game.getCard(id);
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+            if (game.getPlayer(playerId).getGraveyard().contains(id)) {
+                return filter.match(card, game);
+            }
+        return false;
+    }
+
     /**
      * Checks if there are enough {@link Card} that can be selected.
      *

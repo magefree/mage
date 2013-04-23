@@ -207,6 +207,11 @@ public class TargetDefender extends TargetImpl<TargetDefender> {
     }
 
     @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+    
+    @Override
     public TargetDefender copy() {
         return new TargetDefender(this);
     }
