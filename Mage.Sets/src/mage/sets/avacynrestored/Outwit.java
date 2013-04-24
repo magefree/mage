@@ -75,110 +75,109 @@ public class Outwit extends CardImpl<Outwit> {
         return new Outwit(this);
     }
 
-
     private class CustomTargetSpell extends TargetObject<CustomTargetSpell> {
 
         protected FilterSpell filter;
 
-    public CustomTargetSpell() {
-            this(1, 1, new FilterSpell());
-    }
-
-    public CustomTargetSpell(FilterSpell filter) {
-            this(1, 1, filter);
-    }
-
-    public CustomTargetSpell(int numTargets, FilterSpell filter) {
-            this(numTargets, numTargets, filter);
-    }
-
-    public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
-            this.minNumberOfTargets = minNumTargets;
-            this.maxNumberOfTargets = maxNumTargets;
-            this.zone = Constants.Zone.STACK;
-            this.filter = filter;
-            this.targetName = filter.getMessage();
-    }
-
-    public CustomTargetSpell(final CustomTargetSpell target) {
-            super(target);
-            this.filter = target.filter.copy();
-    }
-
-    @Override
-    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
-            return canChoose(sourceControllerId, game);
-    }
-
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
-            return possibleTargets(sourceControllerId, game);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-            if (super.canTarget(id, source, game)) {
-                if (targetsPlayer(id, game)) {
-                    return true;
+        public CustomTargetSpell() {
+                this(1, 1, new FilterSpell());
         }
-            }
-            return false;
-    }
 
-    @Override
-    public boolean canChoose(UUID sourceControllerId, Game game) {
-            int count = 0;
-            for (StackObject stackObject : game.getStack()) {
-        if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
-                    if (targetsPlayer(stackObject.getId(), game)) {
-                        count++;
-            if (count >= this.minNumberOfTargets)
-                            return true;
-                    }
+        public CustomTargetSpell(FilterSpell filter) {
+                this(1, 1, filter);
         }
-            }
-            return false;
-    }
 
-    @Override
-    public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
-            Set<UUID> possibleTargets = new HashSet<UUID>();
-            for (StackObject stackObject : game.getStack()) {
-                if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
-                    if (targetsPlayer(stackObject.getId(), game)) {
-                        possibleTargets.add(stackObject.getId());
-                    }
+        public CustomTargetSpell(int numTargets, FilterSpell filter) {
+                this(numTargets, numTargets, filter);
         }
+
+        public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
+                this.minNumberOfTargets = minNumTargets;
+                this.maxNumberOfTargets = maxNumTargets;
+                this.zone = Constants.Zone.STACK;
+                this.filter = filter;
+                this.targetName = filter.getMessage();
+        }
+
+        public CustomTargetSpell(final CustomTargetSpell target) {
+                super(target);
+                this.filter = target.filter.copy();
+        }
+
+        @Override
+        public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+                return canChoose(sourceControllerId, game);
+        }
+
+        @Override
+        public Set<UUID> possibleTargets(UUID sourceId, UUID sourceControllerId, Game game) {
+                return possibleTargets(sourceControllerId, game);
+        }
+
+        @Override
+        public boolean canTarget(UUID id, Ability source, Game game) {
+                if (super.canTarget(id, source, game)) {
+                    if (targetsPlayer(id, game)) {
+                        return true;
             }
-            return possibleTargets;
-    }
+                }
+                return false;
+        }
 
-    @Override
-    public Filter getFilter() {
-            return filter;
-    }
-
-    private boolean targetsPlayer(UUID id, Game game) {
-            StackObject spell = game.getStack().getStackObject(id);
-            if (spell != null) {
-        Ability ability = spell.getStackAbility();
-                if (ability != null && !ability.getTargets().isEmpty()) {
-                    for (Target target : ability.getTargets()) {
-                        for (UUID playerId : target.getTargets()) {
-                            Player player = game.getPlayer(playerId);
-                            if (player != null) {
+        @Override
+        public boolean canChoose(UUID sourceControllerId, Game game) {
+                int count = 0;
+                for (StackObject stackObject : game.getStack()) {
+            if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
+                        if (targetsPlayer(stackObject.getId(), game)) {
+                            count++;
+                if (count >= this.minNumberOfTargets)
                                 return true;
+                        }
+            }
+                }
+                return false;
+        }
+
+        @Override
+        public Set<UUID> possibleTargets(UUID sourceControllerId, Game game) {
+                Set<UUID> possibleTargets = new HashSet<UUID>();
+                for (StackObject stackObject : game.getStack()) {
+                    if (stackObject instanceof Spell && filter.match((Spell) stackObject, game)) {
+                        if (targetsPlayer(stackObject.getId(), game)) {
+                            possibleTargets.add(stackObject.getId());
+                        }
+            }
+                }
+                return possibleTargets;
+        }
+
+        @Override
+        public Filter getFilter() {
+                return filter;
+        }
+
+        private boolean targetsPlayer(UUID id, Game game) {
+                StackObject spell = game.getStack().getStackObject(id);
+                if (spell != null) {
+            Ability ability = spell.getStackAbility();
+                    if (ability != null && !ability.getTargets().isEmpty()) {
+                        for (Target target : ability.getTargets()) {
+                            for (UUID playerId : target.getTargets()) {
+                                Player player = game.getPlayer(playerId);
+                                if (player != null) {
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
-            }
-            return false;
-    }
+                return false;
+        }
 
-    @Override
-    public CustomTargetSpell copy() {
-            return new CustomTargetSpell(this);
-    }
+        @Override
+        public CustomTargetSpell copy() {
+                return new CustomTargetSpell(this);
+        }
     }
 }

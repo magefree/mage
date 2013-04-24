@@ -117,9 +117,9 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         StringBuilder sb = new StringBuilder("Whenever ").append(filter.getMessage());
         sb.append(" enters the battlefield");
         if (controlled) {
-            sb.append("under your control,");
+            sb.append("under your control, ");
         } else {
-            sb.append(",");
+            sb.append(", ");
         }
         sb.append(super.getRule());
         return sb.toString();
