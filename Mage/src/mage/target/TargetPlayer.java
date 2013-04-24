@@ -189,6 +189,11 @@ public class TargetPlayer<T extends TargetPlayer<T>> extends TargetImpl<TargetPl
     }
 
     @Override
+    public boolean canTarget(UUID id, UUID playerId, Ability source, Game game) {
+        return canTarget(id, source, game);
+    }
+
+    @Override
     public String getTargetedName(Game game) {
         StringBuilder sb = new StringBuilder();
         for (UUID targetId: getTargets()) {
