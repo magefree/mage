@@ -165,6 +165,21 @@ public enum CardRepository {
         return names;
     }
 
+    public Set<String> getNonLandAndNonCreatureNames() {
+        Set<String> names = new TreeSet<String>();
+        try {
+            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
+            qb.distinct().selectColumns("name");
+            qb.where().not().in("types", CardType.LAND.name(), CardType.CREATURE.name());
+            List<CardInfo> results = cardDao.query(qb.prepare());
+            for (CardInfo card : results) {
+                names.add(card.getName());
+            }
+        } catch (SQLException ex) {
+        }
+        return names;
+    }
+
     public Set<String> getCreatureTypes() {
         TreeSet<String> subtypes = new TreeSet<String>();
         try {
