@@ -36,6 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,7 +58,7 @@ public class ScreechingSkaab extends CardImpl<ScreechingSkaab> {
         this.toughness = new MageInt(1);
 
         // When Screeching Skaab enters the battlefield, put the top two cards of your library into your graveyard.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ScreechingSkaabEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfYourLibraryIntoGraveEffect(2)));
     }
 
     public ScreechingSkaab(final ScreechingSkaab card) {
@@ -67,38 +68,5 @@ public class ScreechingSkaab extends CardImpl<ScreechingSkaab> {
     @Override
     public ScreechingSkaab copy() {
         return new ScreechingSkaab(this);
-    }
-}
-
-class ScreechingSkaabEffect extends OneShotEffect<ScreechingSkaabEffect> {
-
-    public ScreechingSkaabEffect() {
-        super(Outcome.Discard);
-        this.staticText = "put the top two cards of your library into your graveyard";
-    }
-
-    public ScreechingSkaabEffect(final ScreechingSkaabEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ScreechingSkaabEffect copy() {
-        return new ScreechingSkaabEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int cardsCount = Math.min(2, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, true);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

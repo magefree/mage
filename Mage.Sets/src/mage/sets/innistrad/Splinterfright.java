@@ -39,6 +39,7 @@ import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
@@ -68,7 +69,7 @@ public class Splinterfright extends CardImpl<Splinterfright> {
         CardsInControllerGraveyardCount count = new CardsInControllerGraveyardCount(new FilterCreatureCard("creature cards"));
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(count, Duration.EndOfGame)));
         // At the beginning of your upkeep, put the top two cards of your library into your graveyard.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new SplinterfrightEffect(), false));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new PutTopCardOfYourLibraryIntoGraveEffect(2), false));
     }
 
     public Splinterfright(final Splinterfright card) {
@@ -78,38 +79,5 @@ public class Splinterfright extends CardImpl<Splinterfright> {
     @Override
     public Splinterfright copy() {
         return new Splinterfright(this);
-    }
-}
-
-class SplinterfrightEffect extends OneShotEffect<SplinterfrightEffect> {
-
-    public SplinterfrightEffect() {
-        super(Outcome.Discard);
-        this.staticText = "put the top two cards of your library into your graveyard";
-    }
-
-    public SplinterfrightEffect(final SplinterfrightEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SplinterfrightEffect copy() {
-        return new SplinterfrightEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            int cardsCount = Math.min(2, player.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = player.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }
