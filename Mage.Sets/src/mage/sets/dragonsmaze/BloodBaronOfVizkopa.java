@@ -141,7 +141,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl<BloodBaronOfVizkopa
         if (player != null && player.getLife() >= 30) {
             for (UUID opponentId :player.getInRange()) {
                 Player opponent = game.getPlayer(opponentId);
-                if (opponent != null && opponent.getLife() > 11) {
+                if (opponent != null && opponent.getLife() < 11) {
                     return true;
                 }
             }
