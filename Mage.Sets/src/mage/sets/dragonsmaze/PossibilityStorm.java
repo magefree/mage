@@ -140,12 +140,11 @@ class PossibilityStormEffect extends OneShotEffect<PossibilityStormEffect> {
                     do {
                         card = library.removeFromTop(game);
                         if (card != null) {
-                            card.moveToExile(source.getId(), "Possibility Storm Exile", source.getSourceId(), game);
+                            card.moveToExile(source.getSourceId(), "Possibility Storm Exile", source.getSourceId(), game);
                         }
                     } while (library.size() > 0 && card != null && !sharesType(card, spell.getCardType()));
 
                     if (card != null && sharesType(card, spell.getCardType())) {
-                        player.revealCards("Possibility Storm cast", new CardsImpl(card), game);
                         if(player.chooseUse(Outcome.PlayForFree, new StringBuilder("Cast ").append(card.getName()).append(" without paying cost?").toString(), game)) {
                             player.cast(card.getSpellAbility(), game, true);
                         }
