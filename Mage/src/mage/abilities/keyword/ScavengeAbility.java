@@ -79,7 +79,7 @@ public class ScavengeAbility extends ActivatedAbilityImpl<ScavengeAbility> {
 
     @Override
     public String getRule() {
-        return "Scavenge " + getManaCosts().getText() + " (" + getManaCosts().getText() + ", Exile this card from your graveyard: Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.)";
+        return "Scavenge " + getManaCosts().getText() + " <i>(" + getManaCosts().getText() + ", Exile this card from your graveyard: Put a number of +1/+1 counter's equal to this card's power on target creature. Scavenge only as a sorcery.)</i>";
     }
 }
 
