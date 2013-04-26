@@ -155,7 +155,7 @@ class KnowledgePoolEffect2 extends OneShotEffect<KnowledgePoolEffect2> {
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(targetPointer.getFirst(game, source));
         if (spell != null) {
-            if (spell.moveToExile(source.getSourceId(), "Knowledge Pool Exile", id, game)) {
+            if (spell.moveToExile(source.getSourceId(), "Knowledge Pool Exile", source.getSourceId(), game)) {
                 Player player = game.getPlayer(spell.getControllerId());
                 if (player != null && player.chooseUse(Outcome.PlayForFree, "Cast another nonland card exiled with Knowledge Pool without paying that card's mana cost?", game)) {
                     TargetCardInExile target = new TargetCardInExile(filter, source.getSourceId());
