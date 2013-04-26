@@ -60,7 +60,7 @@ public class AEtherling extends CardImpl<AEtherling> {
         super(ownerId, 11, "AEtherling", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Shapeshifter");
-        this.color.setGreen(true);
+        this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
 
