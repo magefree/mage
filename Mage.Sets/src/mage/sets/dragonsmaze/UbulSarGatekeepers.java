@@ -63,7 +63,7 @@ public class UbulSarGatekeepers extends CardImpl<UbulSarGatekeepers> {
     }
 
     public UbulSarGatekeepers (UUID ownerId) {
-        super(ownerId, 29, "Ubul Sar Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
+        super(ownerId, 30, "Ubul Sar Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Zombie");
         this.subtype.add("Soldier");
