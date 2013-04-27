@@ -41,6 +41,7 @@ import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -105,7 +106,7 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
                 sb.append("detain ").append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
             }
         } else {
-                sb.append("detain up to ").append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName());
+                sb.append("detain up to ").append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName());
         }
         sb.append(". <i>(Until your next turn, ");
 
