@@ -40,8 +40,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.PreventAllDamageToControllerEffect;
 import mage.abilities.keyword.CumulativeUpkeepAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
@@ -71,7 +71,7 @@ public class GlacialChasm extends CardImpl<GlacialChasm> {
         // Creatures you control can't attack.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantAttackEffect()));
         // Prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect()));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     public GlacialChasm(final GlacialChasm card) {
@@ -188,50 +188,4 @@ class CantAttackEffect extends ReplacementEffectImpl<CantAttackEffect> {
         }
         return false;
     }
-}
-
-class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAllDamageToControllerEffect> {
-
-
-    public PreventAllDamageToControllerEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Prevent all damage that would be dealt to you";
-    }
-
-    public PreventAllDamageToControllerEffect(final PreventAllDamageToControllerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PreventAllDamageToControllerEffect copy() {
-        return new PreventAllDamageToControllerEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
-        if (!game.replaceEvent(preventEvent)) {
-            int damage = event.getAmount();
-            event.setAmount(0);
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.PREVENTED_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), damage));
-        }
-        return false;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId())){
-                return true;
-            }
-
-        }
-        return false;
-    }
-
 }
