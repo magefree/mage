@@ -28,9 +28,16 @@
 
 package mage.sets;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import mage.Constants;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
 import mage.cards.ExpansionSet;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
  *
@@ -50,7 +57,8 @@ public class DragonsMaze extends ExpansionSet {
         super("Dragon's Maze", "DGM", "seticon_mtggtc", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
-        this.numBoosterLands = 1;
+        this.numBoosterSpecial = 1;
+        this.numBoosterLands = 0;
         this.numBoosterCommon = 10;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
@@ -58,4 +66,63 @@ public class DragonsMaze extends ExpansionSet {
         this.parentSet = ReturnToRavnica.getInstance();
         this.hasBasicLands = false;
     }
+
+    @Override
+    public List<CardInfo> getCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes(this.code).rarities(Rarity.COMMON).notTypes(CardType.LAND).doubleFaced(false);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialCommon() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.COMMON).setCodes(this.code).types(CardType.LAND);
+        return CardRepository.instance.findCards(criteria);
+    }
+
+    @Override
+    public List<CardInfo> getSpecialRare() {
+        List<CardInfo> specialRare = new ArrayList<CardInfo>();
+        CardCriteria criteria = new CardCriteria();
+        criteria.setCodes("GTC").name("Breeding Pool");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("GTC").name("Godless Shrine");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("GTC").name("Sacred Foundry");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("GTC").name("Stomping Ground");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("GTC").name("Watery Grave");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+
+        criteria = new CardCriteria();
+        criteria.setCodes("RTR").name("Blood Crypt");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("RTR").name("Hallowed Fountain");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("RTR").name("Overgrown Tomb");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("RTR").name("Steam Vents");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        criteria = new CardCriteria();
+        criteria.setCodes("RTR").name("Temple Garden");
+        specialRare.addAll(CardRepository.instance.findCards(criteria));
+        return specialRare;
+    }
+    
+    @Override
+    public List<CardInfo> getSpecialMythic() {
+        CardCriteria criteria = new CardCriteria();
+        criteria.rarities(Rarity.MYTHIC).setCodes(this.code).types(Constants.CardType.LAND);
+        return CardRepository.instance.findCards(criteria);
+    }    
+      
 }
