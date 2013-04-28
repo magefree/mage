@@ -21565,3 +21565,174 @@ Halo Hunter|Zendikar|96|R|{2}{B}{B}{B}|Creature - Demon|6|3|Intimidate <i>(This 
 Heartstabber Mosquito|Zendikar|97|C|{3}{B}|Creature - Insect|2|2|Kicker {2}{B} <i>(You may pay an additional {2}{B} as you cast this spell.)</i>$Flying$When Heartstabber Mosquito enters the battlefield, if it was kicked, destroy target creature.|
 Hideous End|Zendikar|98|C|{1}{B}{B}|Instant|||Destroy target nonblack creature. Its controller loses 2 life.|
 Kalitas, Bloodchief of Ghet|Zendikar|99|M|{5}{B}{B}|Legendary Creature - Vampire Warrior|5|5|{B}{B}{B}, {tap}: Destroy target creature. If that creature dies this way, put a black Vampire creature token onto the battlefield. Its power is equal to that creature's power and its toughness is equal to that creature's toughness.|
+Boros Mastiff|Dragon's Maze|1|C|{1}{W}|Creature - Hound|2|2|Battalion - Whenever Boros Mastiff and at least two other creatures attack, Boros Mastiff gains lifelink until end of turn. <i>(Damage dealt by a creature with lifelink also causes its controller to gain that much life.)</i>|
+Wake the Reflections|Dragon's Maze|10|C|{W}|Sorcery|||Populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Savageborn Hydra|Dragon's Maze|100|M|{X}{R}{G}|Creature - Hydra|0|0|Double strike$Savageborn Hydra enters the battlefield with X +1/+1 counters on it.${1}{RG}: Put a +1/+1 counter on Savageborn Hydra. Activate this ability only any time you could cast a sorcery.|
+Scab-Clan Giant|Dragon's Maze|101|U|{4}{R}{G}|Creature - Giant Warrior|4|5|When Scab-Clan Giant enters the battlefield, it fights target creature an opponent controls chosen at random.|
+Showstopper|Dragon's Maze|102|U|{1}{B}{R}|Instant|||Until end of turn, creatures you control gain "When this creature dies, it deals 2 damage to target creature an opponent controls."|
+Sin Collector|Dragon's Maze|103|U|{1}{W}{B}|Creature - Human Cleric|2|1|When Sin Collector enters the battlefield, target opponent reveals his or her hand. You choose an instant or sorcery card from it and exile that card.|
+Sire of Insanity|Dragon's Maze|104|R|{4}{B}{R}|Creature - Demon|6|4|At the beginning of each end step, each player discards his or her hand.|
+Species Gorger|Dragon's Maze|105|U|{3}{G}{U}|Creature - Frog Beast|6|6|At the beginning of your upkeep, return a creature you control to its owner's hand.|
+Spike Jester|Dragon's Maze|106|U|{B}{R}|Creature - Goblin Warrior|3|1|Haste|
+Tajic, Blade of the Legion|Dragon's Maze|107|R|{2}{R}{W}|Legendary Creature - Human Soldier|2|2|Tajic, Blade of the Legion is indestructible.$Battalion - Whenever Tajic and at least two other creatures attack, Tajic gets +5/+5 until end of turn.|
+Teysa, Envoy of Ghosts|Dragon's Maze|108|R|{5}{W}{B}|Legendary Creature - Human Advisor|4|4|Vigilance, protection from creatures$Whenever a creature deals combat damage to you, destroy that creature. Put a 1/1 white and black Spirit creature token with flying onto the battlefield.|
+Tithe Drinker|Dragon's Maze|109|C|{W}{B}|Creature - Vampire|2|1|Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>$Extort <i>(Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)</i>|
+AEtherling|Dragon's Maze|11|R|{4}{U}{U}|Creature - Shapeshifter|4|5|{U}: Exile &AElig;therling. Return it to the battlefield under its owner's control at the beginning of the next end step.${U}: &AElig;therling is unblockable this turn.${1}: &AElig;therling gets +1/-1 until end of turn.${1}: &AElig;therling gets -1/+1 until end of turn.|
+Trostani's Summoner|Dragon's Maze|110|U|{5}{G}{W}|Creature - Elf Shaman|1|1|When Trostani's Summoner enters the battlefield, put a 2/2 white Knight creature token with vigilance, a 3/3 green Centaur creature token, and a 4/4 green Rhino creature token with trample onto the battlefield.|
+Unflinching Courage|Dragon's Maze|111|U|{1}{G}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has trample and lifelink.|
+Varolz, the Scar-Striped|Dragon's Maze|112|R|{1}{B}{G}|Legendary Creature - Troll Warrior|2|2|Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost. <i>(Exile a creature card from your graveyard and pay its mana cost: Put a number of +1/+1 counters equal to that card's power on target creature. Scavenge only as a sorcery.)</i>$Sacrifice another creature: Regenerate Varolz, the Scar-Striped.|
+Viashino Firstblade|Dragon's Maze|113|C|{1}{R}{W}|Creature - Viashino Soldier|2|2|Haste$When Viashino Firstblade enters the battlefield, it gets +2/+2 until end of turn.|
+Voice of Resurgence|Dragon's Maze|114|M|{G}{W}|Creature - Elemental|2|2|Whenever an opponent casts a spell during your turn or when Voice of Resurgence dies, put a green and white Elemental creature token onto the battlefield with "This creature's power and toughness are each equal to the number of creatures you control."|
+Vorel of the Hull Clade|Dragon's Maze|115|R|{1}{G}{U}|Legendary Creature - Human Merfolk|1|4|{G}{U}, {tap}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.|
+Warleader's Helix|Dragon's Maze|116|U|{2}{R}{W}|Instant|||Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.|
+Warped Physique|Dragon's Maze|117|U|{U}{B}|Instant|||Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.|
+Woodlot Crawler|Dragon's Maze|118|U|{U}{B}|Creature - Insect|2|1|Forestwalk, protection from green|
+Zhur-Taa Ancient|Dragon's Maze|119|R|{3}{R}{G}|Creature - Beast|7|5|Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.|
+Hidden Strings|Dragon's Maze|12|C|{1}{U}|Sorcery|||You may tap or untap target permanent, then you may tap or untap another target permanent.$Cipher <i>(Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)</i>|
+Zhur-Taa Druid|Dragon's Maze|120|C|{R}{G}|Creature - Human Druid|1|1|{tap}: Add {G} to your mana pool.$Whenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.|
+Alive|Dragon's Maze|121a|U|{3}{G}|Sorcery|||Put a 3/3 green Centaur creature token onto the battlefield.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Well|Dragon's Maze|121b|U|{W}|Sorcery|||You gain 2 life for each creature you control.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Dangerous|Dragon's Maze|122a|U|{3}{G}|Sorcery|||All creatures able to block target creature this turn do so.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Armed|Dragon's Maze|122b|U|{1}{R}|Sorcery|||Target creature gets +1/+1 and gains double strike until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Beck|Dragon's Maze|123a|R|{G}{U}|Sorcery|||Whenever a creature enters the battlefield this turn, you may draw a card.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Call|Dragon's Maze|123b|R|{4}{W}{U}|Sorcery|||Put four 1/1 white Bird creature tokens with flying onto the battlefield.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Breaking|Dragon's Maze|124a|R|{U}{B}|Sorcery|||Target player puts the top eight cards of his or her library into his or her graveyard.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Entering|Dragon's Maze|124b|R|{4}{U}{B}|Sorcery|||Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Catch|Dragon's Maze|125a|R|{1}{U}{R}|Sorcery|||Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Release|Dragon's Maze|125b|R|{4}{R}{W}|Sorcery|||Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Dirty|Dragon's Maze|126a|U|{2}{G}|Sorcery|||Return target card from your graveyard to your hand.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Down|Dragon's Maze|126b|U|{3}{B}|Sorcery|||Target player discards two cards.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Far|Dragon's Maze|127a|U|{1}{U}|Instant|||Return target creature to its owner's hand.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Away|Dragon's Maze|127b|U|{2}{B}|Instant|||Target player sacrifices a creature.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Flesh|Dragon's Maze|128a|R|{3}{B}{G}|Sorcery|||Exile target creature card from a graveyard. Put X +1/+1 counters on target creature, where X is the power of the card you exiled.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Blood|Dragon's Maze|128b|R|{R}{G}|Sorcery|||Target creature you control deals damage equal to its power to target creature or player.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Give|Dragon's Maze|129a|U|{2}{G}|Sorcery|||Put three +1/+1 counters on target creature.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Take|Dragon's Maze|129b|U|{2}{U}|Sorcery|||Remove all +1/+1 counters from target creature you control. Draw that many cards.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Maze Glider|Dragon's Maze|13|C|{5}{U}|Creature - Elemental|3|5|Flying$Multicolored creatures you control have flying.|
+Profit|Dragon's Maze|130a|U|{1}{W}|Instant|||Creatures you control get +1/+1 until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Loss|Dragon's Maze|130b|U|{2}{B}|Instant|||Creatures your opponents control get -1/-1 until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Protect|Dragon's Maze|131a|U|{2}{W}|Instant|||Target creature gets +2/+4 until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Serve|Dragon's Maze|131b|U|{1}{U}|Instant|||Target creature gets -6/-0 until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Ready|Dragon's Maze|132a|R|{1}{G}{W}|Instant|||Creatures you control are indestructible this turn. Untap each creature you control.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Willing|Dragon's Maze|132b|R|{1}{W}{B}|Instant|||Creatures you control gain deathtouch and lifelink until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Trouble|Dragon's Maze|133a|U|{2}{R}|Sorcery|||Trouble deals damage to target player equal to the number of cards in that player's hand.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Toil|Dragon's Maze|133b|U|{2}{B}|Sorcery|||Target player draws two cards and loses 2 life.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Burn|Dragon's Maze|134a|U|{1}{R}|Instant|||Burn deals 2 damage to target creature or player.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Turn|Dragon's Maze|134b|U|{2}{U}|Instant|||Target creature loses all abilities and becomes a 0/1 red Weird until end of turn.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Tear|Dragon's Maze|135a|U|{W}|Instant|||Destroy target enchantment.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Wear|Dragon's Maze|135b|U|{1}{R}|Instant|||Destroy target artifact.$Fuse <i>(You may cast one or both halves of this card from your hand.)</i>|
+Azorius Cluestone|Dragon's Maze|136|C|{3}|Artifact|||{tap}: Add {W} or {U} to your mana pool.${W}{U}, {tap}, Sacrifice Azorius Cluestone: Draw a card.|
+Boros Cluestone|Dragon's Maze|137|C|{3}|Artifact|||{tap}: Add {R} or {W} to your mana pool.${R}{W}, {tap}, Sacrifice Boros Cluestone: Draw a card.|
+Dimir Cluestone|Dragon's Maze|138|C|{3}|Artifact|||{tap}: Add {U} or {B} to your mana pool.${U}{B}, {tap}, Sacrifice Dimir Cluestone: Draw a card.|
+Golgari Cluestone|Dragon's Maze|139|C|{3}|Artifact|||{tap}: Add {B} or {G} to your mana pool.${B}{G}, {tap}, Sacrifice Golgari Cluestone: Draw a card.|
+Mindstatic|Dragon's Maze|14|C|{3}{U}|Instant|||Counter target spell unless its controller pays {6}.|
+Gruul Cluestone|Dragon's Maze|140|C|{3}|Artifact|||{tap}: Add {R} or {G} to your mana pool.${R}{G}, {tap}, Sacrifice Gruul Cluestone: Draw a card.|
+Izzet Cluestone|Dragon's Maze|141|C|{3}|Artifact|||{tap}: Add {U} or {R} to your mana pool.${U}{R}, {tap}, Sacrifice Izzet Cluestone: Draw a card.|
+Orzhov Cluestone|Dragon's Maze|142|C|{3}|Artifact|||{tap}: Add {W} or {B} to your mana pool.${W}{B}, {tap}, Sacrifice Orzhov Cluestone: Draw a card.|
+Rakdos Cluestone|Dragon's Maze|143|C|{3}|Artifact|||{tap}: Add {B} or {R} to your mana pool.${B}{R}, {tap}, Sacrifice Rakdos Cluestone: Draw a card.|
+Selesnya Cluestone|Dragon's Maze|144|C|{3}|Artifact|||{tap}: Add {G} or {W} to your mana pool.${G}{W}, {tap}, Sacrifice Selesnya Cluestone: Draw a card.|
+Simic Cluestone|Dragon's Maze|145|C|{3}|Artifact|||{tap}: Add {G} or {U} to your mana pool.${G}{U}, {tap}, Sacrifice Simic Cluestone: Draw a card.|
+Azorius Guildgate|Dragon's Maze|146|C||Land - Gate|||Azorius Guildgate enters the battlefield tapped.${tap}: Add {W} or {U} to your mana pool.|
+Boros Guildgate|Dragon's Maze|147|C||Land - Gate|||Boros Guildgate enters the battlefield tapped.${tap}: Add {R} or {W} to your mana pool.|
+Dimir Guildgate|Dragon's Maze|148|C||Land - Gate|||Dimir Guildgate enters the battlefield tapped.${tap}: Add {U} or {B} to your mana pool.|
+Golgari Guildgate|Dragon's Maze|149|C||Land - Gate|||Golgari Guildgate enters the battlefield tapped.${tap}: Add {B} or {G} to your mana pool.|
+Murmuring Phantasm|Dragon's Maze|15|C|{1}{U}|Creature - Spirit|0|5|Defender|
+Gruul Guildgate|Dragon's Maze|150|C||Land - Gate|||Gruul Guildgate enters the battlefield tapped.${tap}: Add {R} or {G} to your mana pool.|
+Izzet Guildgate|Dragon's Maze|151|C||Land - Gate|||Izzet Guildgate enters the battlefield tapped.${tap}: Add {U} or {R} to your mana pool.|
+Maze's End|Dragon's Maze|152|M||Land|||Maze's End enters the battlefield tapped.${tap}: Add {1} to your mana pool.${3}, {tap}, Return Maze's End to its owner's hand: Search your library for a Gate card, put it onto the battlefield, then shuffle your library. If you control ten or more Gates with different names, you win the game.|
+Orzhov Guildgate|Dragon's Maze|153|C||Land - Gate|||Orzhov Guildgate enters the battlefield tapped.${tap}: Add {W} or {B} to your mana pool.|
+Rakdos Guildgate|Dragon's Maze|154|C||Land - Gate|||Rakdos Guildgate enters the battlefield tapped.${tap}: Add {B} or {R} to your mana pool.|
+Selesnya Guildgate|Dragon's Maze|155|C||Land - Gate|||Selesnya Guildgate enters the battlefield tapped.${tap}: Add {G} or {W} to your mana pool.|
+Simic Guildgate|Dragon's Maze|156|C||Land - Gate|||Simic Guildgate enters the battlefield tapped.${tap}: Add {G} or {U} to your mana pool.|
+Opal Lake Gatekeepers|Dragon's Maze|16|C|{3}{U}|Creature - Vedalken Soldier|2|4|When Opal Lake Gatekeepers enters the battlefield, if you control two or more Gates, you may draw a card.|
+Runner's Bane|Dragon's Maze|17|C|{1}{U}|Enchantment - Aura|||Enchant creature with power 3 or less$When Runner's Bane enters the battlefield, tap enchanted creature.$Enchanted creature doesn't untap during its controller's untap step.|
+Trait Doctoring|Dragon's Maze|18|R|{U}|Sorcery|||Change the text of target permanent by replacing all instances of one color word with another or one basic land type with another until end of turn.$Cipher <i>(Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)</i>|
+Uncovered Clues|Dragon's Maze|19|C|{2}{U}|Sorcery|||Look at the top four cards of your library. You may reveal up to two instant and/or sorcery cards from among them and put the revealed cards into your hand. Put the rest on the bottom of your library in any order.|
+Haazda Snare Squad|Dragon's Maze|2|C|{2}{W}|Creature - Human Soldier|1|4|Whenever Haazda Snare Squad attacks, you may pay {W}. If you do, tap target creature an opponent controls.|
+Wind Drake|Dragon's Maze|20|C|{2}{U}|Creature - Drake|2|2|Flying|
+Bane Alley Blackguard|Dragon's Maze|21|C|{1}{B}|Creature - Human Rogue|1|3||
+Blood Scrivener|Dragon's Maze|22|R|{1}{B}|Creature - Zombie Wizard|2|1|If you would draw a card while you have no cards in hand, instead draw two cards and lose 1 life.|
+Crypt Incursion|Dragon's Maze|23|C|{2}{B}|Instant|||Exile all creature cards from target player's graveyard. You gain 3 life for each card exiled this way.|
+Fatal Fumes|Dragon's Maze|24|C|{3}{B}|Instant|||Target creature gets -4/-2 until end of turn.|
+Hired Torturer|Dragon's Maze|25|C|{2}{B}|Creature - Human Rogue|2|3|Defender${3}{B}, {tap}: Target opponent loses 2 life, then reveals a card at random from his or her hand.|
+Maze Abomination|Dragon's Maze|26|C|{5}{B}|Creature - Elemental|4|5|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>$Multicolored creatures you control have deathtouch.|
+Pontiff of Blight|Dragon's Maze|27|R|{4}{B}{B}|Creature - Zombie Cleric|2|7|Extort <i>(Whenever you cast a spell, you may pay {WB}. If you do, each opponent loses 1 life and you gain that much life.)</i>$Other creatures you control have extort. <i>(If a creature has multiple instances of extort, each triggers separately.)</i>|
+Rakdos Drake|Dragon's Maze|28|C|{2}{B}|Creature - Drake|1|2|Flying$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>|
+Sinister Possession|Dragon's Maze|29|C|{B}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks or blocks, its controller loses 2 life.|
+Lyev Decree|Dragon's Maze|3|C|{1}{W}|Sorcery|||Detain up to two target creatures your opponents control. <i>(Until your next turn, those creatures can't attack or block and their activated abilities can't be activated.)</i>|
+Ubul Sar Gatekeepers|Dragon's Maze|30|C|{3}{B}|Creature - Zombie Soldier|2|4|When Ubul Sar Gatekeepers enters the battlefield, if you control two or more Gates, target creature an opponent controls gets -2/-2 until end of turn.|
+Awe for the Guilds|Dragon's Maze|31|C|{2}{R}|Sorcery|||Monocolored creatures can't block this turn.|
+Clear a Path|Dragon's Maze|32|C|{R}|Sorcery|||Destroy target creature with defender.|
+Maze Rusher|Dragon's Maze|33|C|{5}{R}|Creature - Elemental|6|3|Haste$Multicolored creatures you control have haste.|
+Possibility Storm|Dragon's Maze|34|R|{3}{R}{R}|Enchantment|||Whenever a player casts a spell from his or her hand, that player exiles it, then exiles cards from the top of his or her library until he or she exiles a card that shares a card type with it. That player may cast that card without paying its mana cost. Then he or she puts all cards exiled with Possibility Storm on the bottom of his or her library in a random order.|
+Punish the Enemy|Dragon's Maze|35|C|{4}{R}|Instant|||Punish the Enemy deals 3 damage to target player and 3 damage to target creature.|
+Pyrewild Shaman|Dragon's Maze|36|R|{2}{R}|Creature - Goblin Shaman|3|1|Bloodrush - {1}{R}, Discard Pyrewild Shaman: Target attacking creature gets +3/+1 until end of turn.$Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.|
+Riot Piker|Dragon's Maze|37|C|{1}{R}|Creature - Goblin Berserker|2|1|First strike$Riot Piker attacks each turn if able.|
+Rubblebelt Maaka|Dragon's Maze|38|C|{3}{R}|Creature - Cat|3|3|Bloodrush - {R}, Discard Rubblebelt Maaka: Target attacking creature gets +3/+3 until end of turn.|
+Smelt-Ward Gatekeepers|Dragon's Maze|39|C|{3}{R}|Creature - Human Warrior|2|4|When Smelt-Ward Gatekeepers enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.|
+Maze Sentinel|Dragon's Maze|4|C|{5}{W}|Creature - Elemental|3|6|Vigilance$Multicolored creatures you control have vigilance.|
+Weapon Surge|Dragon's Maze|40|C|{R}|Instant|||Target creature you control gets +1/+0 and gains first strike until end of turn.$Overload {1}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Battering Krasis|Dragon's Maze|41|C|{2}{G}|Creature - Fish Beast|2|1|Trample$Evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>|
+Kraul Warrior|Dragon's Maze|42|C|{1}{G}|Creature - Insect Warrior|2|2|{5}{G}: Kraul Warrior gets +3/+3 until end of turn.|
+Maze Behemoth|Dragon's Maze|43|C|{5}{G}|Creature - Elemental|5|4|Trample$Multicolored creatures you control have trample.|
+Mending Touch|Dragon's Maze|44|C|{G}|Instant|||Regenerate target creature.|
+Mutant's Prey|Dragon's Maze|45|C|{G}|Instant|||Target creature you control with a +1/+1 counter on it fights target creature an opponent controls. <i>(Each deals damage equal to its power to the other.)</i>|
+Phytoburst|Dragon's Maze|46|C|{1}{G}|Sorcery|||Target creature gets +5/+5 until end of turn.|
+Renegade Krasis|Dragon's Maze|47|R|{1}{G}{G}|Creature - Beast Mutant|3|2|Evolve <i>(Whenever a creature enters the battlefield under your control, if that creature has greater power or toughness than this creature, put a +1/+1 counter on this creature.)</i>$Whenever Renegade Krasis evolves, put a +1/+1 counter on each other creature you control with a +1/+1 counter on it.|
+Saruli Gatekeepers|Dragon's Maze|48|C|{3}{G}|Creature - Elf Warrior|2|4|When Saruli Gatekeepers enters the battlefield, if you control two or more Gates, you gain 7 life.|
+Skylasher|Dragon's Maze|49|R|{1}{G}|Creature - Insect|2|2|Flash$Skylasher can't be countered.$Reach, protection from blue|
+Renounce the Guilds|Dragon's Maze|5|R|{1}{W}|Instant|||Each player sacrifices a multicolored permanent.|
+Thrashing Mossdog|Dragon's Maze|50|C|{3}{G}|Creature - Plant Hound|3|3|Reach <i>(This creature can block creatures with flying.)</i>$Scavenge {4}{G}{G} <i>({4}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)</i>|
+Advent of the Wurm|Dragon's Maze|51|R|{1}{G}{G}{W}|Instant|||Put a 5/5 green Wurm creature token with trample onto the battlefield.|
+Armored Wolf-Rider|Dragon's Maze|52|C|{3}{G}{W}|Creature - Elf Knight|4|6||
+Ascended Lawmage|Dragon's Maze|53|U|{2}{W}{U}|Creature - Vedalken Wizard|3|2|Flying, hexproof|
+Beetleform Mage|Dragon's Maze|54|C|{1}{G}{U}|Creature - Human Insect Wizard|2|2|{G}{U}: Beetleform Mage gets +2/+2 and gains flying until end of turn. Activate this ability only once each turn.|
+Blast of Genius|Dragon's Maze|55|U|{4}{U}{R}|Sorcery|||Choose target creature or player. Draw three cards, then discard a card. Blast of Genius deals damage equal to the discarded card's converted mana cost to that creature or player.|
+Blaze Commando|Dragon's Maze|56|U|{3}{R}{W}|Creature - Minotaur Soldier|5|3|Whenever an instant or sorcery spell you control deals damage, put two 1/1 red and white Soldier creature tokens with haste onto the battlefield.|
+Blood Baron of Vizkopa|Dragon's Maze|57|M|{3}{W}{B}|Creature - Vampire|4|4|Lifelink, protection from white and from black$As long as you have 30 or more life and an opponent has 10 or less life, Blood Baron of Vizkopa gets +6/+6 and has flying.|
+Boros Battleshaper|Dragon's Maze|58|R|{5}{R}{W}|Creature - Minotaur Soldier|5|5|At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.|
+Bred for the Hunt|Dragon's Maze|59|U|{1}{G}{U}|Enchantment|||Whenever a creature you control with a +1/+1 counter on it deals combat damage to a player, you may draw a card.|
+Riot Control|Dragon's Maze|6|C|{2}{W}|Instant|||You gain 1 life for each creature your opponents control. Prevent all damage that would be dealt to you this turn.|
+Bronzebeak Moa|Dragon's Maze|60|U|{2}{G}{W}|Creature - Bird|2|2|Whenever another creature enters the battlefield under your control, Bronzebeak Moa gets +3/+3 until end of turn.|
+Carnage Gladiator|Dragon's Maze|61|U|{2}{B}{R}|Creature - Skeleton Warrior|4|2|Whenever a creature blocks, that creature's controller loses 1 life.${1}{B}{R}: Regenerate Carnage Gladiator.|
+Council of the Absolute|Dragon's Maze|62|M|{2}{W}{U}|Creature - Human Advisor|2|4|As Council of the Absolute enters the battlefield, name a card other than a creature or land card.$Your opponents can't cast cards with the chosen name.$Spells with the chosen name you cast cost {2} less to cast.|
+Deadbridge Chant|Dragon's Maze|63|M|{4}{B}{G}|Enchantment|||When Deadbridge Chant enters the battlefield, put the top ten cards of your library into your graveyard.$At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.|
+Debt to the Deathless|Dragon's Maze|64|U|{X}{W}{W}{B}{B}|Sorcery|||Each opponent loses two times X life. You gain life equal to the life lost this way.|
+Deputy of Acquittals|Dragon's Maze|65|C|{W}{U}|Creature - Human Wizard|2|2|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$When Deputy of Acquittals enters the battlefield, you may return another target creature you control to its owner's hand.|
+Dragonshift|Dragon's Maze|66|R|{1}{U}{R}|Instant|||Until end of turn, target creature you control becomes a 4/4 blue and red Dragon, loses all abilities, and gains flying.$Overload {3}{U}{U}{R}{R} <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")</i>|
+Drown in Filth|Dragon's Maze|67|C|{B}{G}|Sorcery|||Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.|
+Emmara Tandris|Dragon's Maze|68|R|{5}{G}{W}|Legendary Creature - Elf Shaman|5|7|Prevent all damage that would be dealt to creature tokens you control.|
+Exava, Rakdos Blood Witch|Dragon's Maze|69|R|{2}{B}{R}|Legendary Creature - Human Cleric|3|3|First strike, haste$Unleash <i>(You may have this creature enter the battlefield with a +1/+1 counter on it. It can't block as long as it has a +1/+1 counter on it.)</i>$Each other creature you control with a +1/+1 counter on it has haste.|
+Scion of Vitu-Ghazi|Dragon's Maze|7|R|{3}{W}{W}|Creature - Elemental|4|4|When Scion of Vitu-Ghazi enters the battlefield, if you cast it from your hand, put a 1/1 white Bird creature token with flying onto the battlefield, then populate. <i>(Put a token onto the battlefield that's a copy of a creature token you control.)</i>|
+Feral Animist|Dragon's Maze|70|U|{1}{R}{G}|Creature - Goblin Shaman|2|1|{3}: Feral Animist gets +X/+0 until end of turn, where X is its power.|
+Fluxcharger|Dragon's Maze|71|U|{2}{U}{R}|Creature - Weird|1|5|Flying$Whenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.|
+Gaze of Granite|Dragon's Maze|72|R|{X}{B}{B}{G}|Sorcery|||Destroy each nonland permanent with converted mana cost X or less.|
+Gleam of Battle|Dragon's Maze|73|U|{4}{R}{W}|Enchantment|||Whenever a creature you control attacks, put a +1/+1 counter on it.|
+Goblin Test Pilot|Dragon's Maze|74|U|{1}{U}{R}|Creature - Goblin Wizard|0|2|Flying${tap}: Goblin Test Pilot deals 2 damage to target creature or player chosen at random.|
+Gruul War Chant|Dragon's Maze|75|U|{2}{R}{G}|Enchantment|||Each attacking creature you control gets +1/+0 and can't be blocked except by two or more creatures.|
+Haunter of Nightveil|Dragon's Maze|76|U|{3}{U}{B}|Creature - Spirit|3|4|Creatures your opponents control get -1/-0.|
+Jelenn Sphinx|Dragon's Maze|77|U|{3}{W}{U}|Creature - Sphinx|1|5|Flying, vigilance$Whenever Jelenn Sphinx attacks, other attacking creatures get +1/+1 until end of turn.|
+Korozda Gorgon|Dragon's Maze|78|U|{3}{B}{G}|Creature - Gorgon|2|5|Deathtouch${2}, Remove a +1/+1 counter from a creature you control: Target creature gets -1/-1 until end of turn.|
+Krasis Incubation|Dragon's Maze|79|U|{2}{G}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature can't attack or block, and its activated abilities can't be activated.${1}{G}{U}, Return Krasis Incubation to its owner's hand: Put two +1/+1 counters on enchanted creature.|
+Steeple Roc|Dragon's Maze|8|C|{4}{W}|Creature - Bird|3|1|Flying, first strike|
+Lavinia of the Tenth|Dragon's Maze|80|R|{3}{W}{U}|Legendary Creature - Human Soldier|4|4|Protection from red$When Lavinia of the Tenth enters the battlefield, detain each nonland permanent your opponents control with converted mana cost 4 or less. <i>(Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)</i>|
+Legion's Initiative|Dragon's Maze|81|M|{R}{W}|Enchantment|||Red creatures you control get +1/+0.$White creatures you control get +0/+1.${R}{W}, Exile Legion's Initiative: Exile all creatures you control. At the beginning of the next combat, return those cards to the battlefield under their owner's control and those creatures gain haste until end of turn.|
+Master of Cruelties|Dragon's Maze|82|M|{3}{B}{R}|Creature - Demon|1|4|First strike, deathtouch$Master of Cruelties can only attack alone.$Whenever Master of Cruelties attacks a player and isn't blocked, that player's life total becomes 1. Master of Cruelties assigns no combat damage this combat.|
+Maw of the Obzedat|Dragon's Maze|83|U|{3}{W}{B}|Creature - Thrull|3|3|Sacrifice a creature: Creatures you control get +1/+1 until end of turn.|
+Melek, Izzet Paragon|Dragon's Maze|84|R|{4}{U}{R}|Legendary Creature - Weird Wizard|2|4|Play with the top card of your library revealed.$You may cast the top card of your library if it's an instant or sorcery card.$Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.|
+Mirko Vosk, Mind Drinker|Dragon's Maze|85|R|{3}{U}{B}|Legendary Creature - Vampire|2|4|Flying$Whenever Mirko Vosk, Mind Drinker deals combat damage to a player, that player reveals cards from the top of his or her library until he or she reveals four land cards, then puts those cards into his or her graveyard.|
+Morgue Burst|Dragon's Maze|86|C|{4}{B}{R}|Sorcery|||Return target creature card from your graveyard to your hand. Morgue Burst deals damage to target creature or player equal to the power of the card returned this way.|
+Nivix Cyclops|Dragon's Maze|87|C|{1}{U}{R}|Creature - Cyclops|1|4|Defender$Whenever you cast an instant or sorcery spell, Nivix Cyclops gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.|
+Notion Thief|Dragon's Maze|88|R|{2}{U}{B}|Creature - Human Rogue|3|1|Flash$If an opponent would draw a card except the first one he or she draws in each of his or her draw steps, instead that player skips that draw and you draw a card.|
+Obzedat's Aid|Dragon's Maze|89|R|{3}{W}{B}|Sorcery|||Return target permanent card from your graveyard to the battlefield.|
+Sunspire Gatekeepers|Dragon's Maze|9|C|{3}{W}|Creature - Human Soldier|2|4|When Sunspire Gatekeepers enters the battlefield, if you control two or more Gates, put a 2/2 white Knight creature token with vigilance onto the battlefield.|
+Pilfered Plans|Dragon's Maze|90|C|{1}{U}{B}|Sorcery|||Target player puts the top two cards of his or her library into his or her graveyard. Draw two cards.|
+Plasm Capture|Dragon's Maze|91|R|{G}{G}{U}{U}|Instant|||Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.|
+Progenitor Mimic|Dragon's Maze|92|M|{4}{G}{U}|Creature - Shapeshifter|0|0|You may have Progenitor Mimic enter the battlefield as a copy of any creature on the battlefield except it gains "At the beginning of your upkeep, if this creature isn't a token, put a token onto the battlefield that's a copy of this creature."|
+Putrefy|Dragon's Maze|93|U|{1}{B}{G}|Instant|||Destroy target artifact or creature. It can't be regenerated.|
+Ral Zarek|Dragon's Maze|94|M|{2}{U}{R}|Planeswalker - Ral|||+1: Tap target permanent, then untap another target permanent.$-2: Ral Zarek deals 3 damage to target creature or player.$-7: Flip five coins. Take an extra turn after this one for each coin that comes up heads.|
+Reap Intellect|Dragon's Maze|95|M|{X}{2}{U}{B}|Sorcery|||Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library.|
+Render Silent|Dragon's Maze|96|R|{W}{U}{U}|Instant|||Counter target spell. Its controller can't cast spells this turn.|
+Restore the Peace|Dragon's Maze|97|U|{1}{W}{U}|Instant|||Return each creature that dealt damage this turn to its owner's hand.|
+Rot Farm Skeleton|Dragon's Maze|98|U|{2}{B}{G}|Creature - Plant Skeleton|4|1|Rot Farm Skeleton can't block.${2}{B}{G}, Put the top four cards of your library into your graveyard: Return Rot Farm Skeleton from your graveyard to the battlefield. Activate this ability only any time you could cast a sorcery.|
+Ruric Thar, the Unbowed|Dragon's Maze|99|R|{4}{R}{G}|Legendary Creature - Ogre Warrior|6|6|Vigilance, reach$Ruric Thar, the Unbowed attacks each turn if able.$Whenever a player casts a noncreature spell, Ruric Thar deals 6 damage to that player.|
