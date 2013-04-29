@@ -99,7 +99,11 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
         if (mode.getTargets().get(0).getNumberOfTargets() == 0 && mode.getTargets().get(0).getMaxNumberOfTargets() > 0) {
             return "Return up to " + mode.getTargets().get(0).getMaxNumberOfTargets() +" target " + mode.getTargets().get(0).getTargetName() + " to their owners' hand";
         } else {
-            return "Return target " + mode.getTargets().get(0).getTargetName() + " to it's owner's hand";
+            StringBuilder sb = new StringBuilder("Return ");
+            if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
+                sb.append(" target ");
+            }
+            return sb.append(mode.getTargets().get(0).getTargetName()).append(" to it's owner's hand").toString();
         }
     }
 

@@ -100,6 +100,7 @@ public class TargetCreatureOrPlayer extends TargetImpl<TargetCreatureOrPlayer> {
         return canTarget(null, id, source, game);
     }
 
+    @Override
     public boolean canTarget(UUID controllerId, UUID id, Ability source, Game game) {
         Permanent permanent = game.getPermanent(id);
         Player player = game.getPlayer(id);

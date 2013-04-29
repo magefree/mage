@@ -73,6 +73,11 @@ public class OverloadAbility extends SpellAbility {
     }
 
     @Override
+    public String getRule(boolean all) {
+        return getRule();
+    }
+
+    @Override
     public String getRule() {
         return "Overload " + getManaCostsToPay().getText()+ " <i>(You may cast this spell for its overload cost. If you do, change its text by replacing all instances of \"target\" with \"each.\")</i>";
     }

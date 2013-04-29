@@ -88,6 +88,9 @@ public interface Target extends Serializable {
     boolean isRequired();
     void setRequired(boolean required);
 
+    boolean isRandom();
+    void setRandom(boolean atRandom);
+
     UUID getFirstTarget();
 
     Target copy();

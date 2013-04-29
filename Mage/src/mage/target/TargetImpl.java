@@ -55,6 +55,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     protected boolean required = false;
     protected boolean chosen = false;
     protected boolean notTarget = false;
+    protected boolean atRandom = false;
 
     @Override
     public abstract T copy();
@@ -76,6 +77,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
         this.chosen = target.chosen;
         this.targets.putAll(target.targets);
         this.zoneChangeCounters.putAll(target.zoneChangeCounters);
+        this.atRandom = target.atRandom;
     }
 
     @Override
@@ -113,7 +115,11 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 
     @Override
     public String getTargetName() {
-        return targetName;
+        StringBuilder sb = new StringBuilder(targetName);
+        if (isRandom()) {
+            sb.append(" chosen at random");
+        }
+        return sb.toString();
     }
 
     @Override
@@ -263,8 +269,24 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
         Player player = game.getPlayer(playerId);
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= minNumberOfTargets;
-            if (!player.chooseTarget(outcome, this, source, game)) {
-                return chosen;
+            if (isRandom()) {
+                Set<UUID> possibleTargets = possibleTargets(source.getSourceId(), playerId, game);
+                if (possibleTargets.size() > 0) {
+                    int i = 0;
+                    int rnd = new Random().nextInt(possibleTargets.size());
+                    Iterator it = possibleTargets.iterator();
+                    while( i < rnd) {
+                        it.next();
+                        i++;
+                    }
+                    this.addTarget(((UUID) it.next()), source, game);
+                } else {
+                    return chosen;
+                }
+            } else {
+                if (!player.chooseTarget(outcome, this, source, game)) {
+                    return chosen;
+                }
             }
             chosen = targets.size() >= minNumberOfTargets;
         }
@@ -344,4 +366,16 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     public void setNotTarget(boolean notTarget) {
         this.notTarget = notTarget;
     }
+
+    @Override
+    public boolean isRandom() {
+        return this.atRandom;
+    }
+
+    @Override
+    public void setRandom(boolean atRandom) {
+        this.atRandom = atRandom;
+    }
+
+
 }
