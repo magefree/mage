@@ -163,7 +163,7 @@ public class Session {
 
     public void kill() {
         logger.info("session killed for user " + userId);
-        UserManager.getInstance().removeUser(userId);
+        UserManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
     }
 
     synchronized void fireCallback(final ClientCallback call) {

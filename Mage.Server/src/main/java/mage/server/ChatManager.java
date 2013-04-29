@@ -60,7 +60,7 @@ public class ChatManager {
     }
 
     public void leaveChat(UUID chatId, UUID userId) {
-        chatSessions.get(chatId).kill(userId);
+        chatSessions.get(chatId).kill(userId, User.DisconnectReason.CleaningUp);
     }
 
     public void destroyChatSession(UUID chatId) {
@@ -87,15 +87,16 @@ public class ChatManager {
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
             for (ChatSession chat: chatSessions.values()) {
-                if (chat.hasUser(userId))
+                if (chat.hasUser(userId)) {
                     chat.broadcast(user.getName(), message, color);
+                }
             }
         }
     }
 
-    public void removeUser(UUID userId) {
+    public void removeUser(UUID userId, User.DisconnectReason reason) {
         for (ChatSession chat: chatSessions.values()) {
-            chat.kill(userId);
+            chat.kill(userId, reason);
         }
     }
 }

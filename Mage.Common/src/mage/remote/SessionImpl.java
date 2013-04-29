@@ -177,8 +177,8 @@ public class SessionImpl implements Session {
             if (registerResult) {
                 sessionState = SessionState.CONNECTED;
                 serverState = server.getServerState();
-                logger.info("Connected to MAGE server at " + connection.getHost() + ":" + connection.getPort());
-                client.connected("Connected to " + connection.getHost() + ":" + connection.getPort() + " ");
+                logger.info(new StringBuilder("Connected as ").append(this.getUserName()).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                client.connected(new StringBuilder("Connected as ").append(this.getUserName()).append(" to ").append(connection.getHost()).append(":").append(connection.getPort()).append(" ").toString());
                 return true;
             }
             disconnect(false);
@@ -1189,7 +1189,9 @@ public class SessionImpl implements Session {
     public boolean ping() {
         try {
             if (isConnected()) {
-                server.ping(sessionId);
+                if (!server.ping(sessionId)) {
+                     logger.error(new StringBuilder("Ping failed: ").append(this.getUserName()).append(" Session: ").append(sessionId).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
+                }
             }
             return true;
         } catch (MageException ex) {

@@ -856,6 +856,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         if (session.isConnected()) {
             if (JOptionPane.showConfirmDialog(this, "Are you sure you want to disconnect?", "Confirm disconnect", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 session.disconnect(false);
+                tablesPane.clearChat();
                 showMessage("You have disconnected");
             }
         } else {

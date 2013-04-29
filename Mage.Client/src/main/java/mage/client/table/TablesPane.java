@@ -71,6 +71,9 @@ public class TablesPane extends MagePane {
         tablesPanel.hideTables();
     }
 
+    public void clearChat() {
+        tablesPanel.getChatPanel().clear();
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

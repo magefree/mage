@@ -56,6 +56,10 @@ public class User {
         Created, Connected, Disconnected, Reconnected;
     }
 
+    public enum DisconnectReason {
+        SessionExpired, Disconnected, CleaningUp;
+    }
+
     private UUID userId = UUID.randomUUID();
     private String userName;
     private String sessionId = "";
@@ -64,7 +68,7 @@ public class User {
     private Date lastActivity = new Date();
     private UserState userState;
     private Map<UUID, Table> tables = new HashMap<UUID, Table>();
-     private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
+    private Map<UUID, GameSession> gameSessions = new HashMap<UUID, GameSession>();
     private Map<UUID, DraftSession> draftSessions = new HashMap<UUID, DraftSession>();
     private Map<UUID, TournamentSession> tournamentSessions = new HashMap<UUID, TournamentSession>();
     private Map<UUID, TournamentSession> constructing = new HashMap<UUID, TournamentSession>();
@@ -98,14 +102,14 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.info("User " + userName + " disconnected");
+            logger.info(new StringBuilder("User ").append(userName).append(" disconnected").toString());
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.info("User " + userName + " created");
+            logger.info(new StringBuilder("User ").append(userName).append(" created").toString());
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info("User " + userName + " reconnected");
+            logger.info(new StringBuilder("User ").append(userName).append(" reconnected").toString());
         }
     }
 
@@ -184,6 +188,7 @@ public class User {
     }
 
     public boolean isExpired(Date expired) {
+        logger.trace(new StringBuilder("isExpired: User ").append(userName).append(" lastActivity: ").append(lastActivity).append(" expired: ").append(expired).toString());
         return /*userState == UserState.Disconnected && */ lastActivity.before(expired);
     }
 
@@ -259,7 +264,7 @@ public class User {
         sideboarding.remove(tableId);
     }
 
-    public void kill() {
+    public void kill(DisconnectReason reason) {
         for (GameSession session: gameSessions.values()) {
             session.kill();
         }
@@ -275,6 +280,7 @@ public class User {
                 TableManager.getInstance().removeTable(userId, entry.getValue().getId());
             }
         }
+        ChatManager.getInstance().removeUser(userId, reason);
     }
 
     public void setUserData(UserData userData) {

@@ -275,8 +275,7 @@ class TableModel extends AbstractTableModel {
 }
 
     public void clear() {
-        this.txtConversation.selectAll();
-        this.txtConversation.replaceSelection("");
+        this.txtConversation.setText("");
     }
 
     /** This method is called from within the constructor to

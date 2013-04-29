@@ -102,7 +102,7 @@ public class UserManager {
 
     public void disconnect(UUID userId) {
         if (userId != null) {
-            ChatManager.getInstance().removeUser(userId);
+            ChatManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
             if (users.containsKey(userId)) {
                 logger.info("user disconnected " + userId);
                 users.get(userId).setSessionId("");
@@ -118,12 +118,12 @@ public class UserManager {
         return false;
     }
 
-    public void removeUser(UUID userId) {
+    public void removeUser(UUID userId, User.DisconnectReason reason) {
         if (users.containsKey(userId)) {
             logger.info("user removed" + userId);
-            users.get(userId).setSessionId("");
+            ChatManager.getInstance().removeUser(userId, reason);
             ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
-            users.get(userId).kill();
+            users.get(userId).kill(User.DisconnectReason.Disconnected);
             users.remove(userId);
         }
     }
@@ -142,7 +142,7 @@ public class UserManager {
         for (User user: users.values()) {
             if (user.isExpired(expired.getTime())) {
                 logger.info(user.getName() + " session expired " + user.getId());
-                user.kill();
+                user.kill(User.DisconnectReason.SessionExpired);
                 users.remove(user.getId());
             }
         }

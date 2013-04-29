@@ -64,12 +64,23 @@ public class ChatSession {
         }
     }
 
-    public void kill(UUID userId) {
+    public void kill(UUID userId, User.DisconnectReason reason) {
         if (userId != null && clients.containsKey(userId)) {
             String userName = clients.get(userId);
+            String message;
             clients.remove(userId);
-            broadcast(userName, " has left", MessageColor.BLUE);
-            logger.info(userName + " has left chat " + chatId);
+            switch (reason) {
+                case Disconnected:
+                    message = " has quit MAGE";
+                    break;
+                 case SessionExpired:
+                    message = " session expired";
+                    break;
+                 default:
+                     message = " has left chat";
+            }
+            broadcast(userName, message, MessageColor.BLUE);
+            logger.info(userName + message + " " + chatId);
         }
     }
 
@@ -86,10 +97,12 @@ public class ChatSession {
             logger.debug("Broadcasting '" + msg + "' for " + chatId);
             for (UUID userId: clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
-                if (user != null)
+                if (user != null) {
                     user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
-                else
-                    kill(userId);
+                }
+                else {
+                    kill(userId, User.DisconnectReason.CleaningUp);
+                }
             }
         }
     }

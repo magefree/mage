@@ -99,7 +99,7 @@ public class SessionManager {
 
     public synchronized void disconnect(String sessionId, boolean voluntary) {
         Session session = sessions.get(sessionId);
-           sessions.remove(sessionId);
+        sessions.remove(sessionId);
         if (session != null) {
             if (voluntary) {
                 session.kill();
