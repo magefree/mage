@@ -28,7 +28,8 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
+import mage.Constants.Outcome;
+import mage.Constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -42,28 +43,55 @@ import mage.players.Player;
  */
 public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
     private DynamicValue amount;
+    private TargetController controller;
 
     public DamagePlayersEffect(int amount) {
-        this(Constants.Outcome.Damage, new StaticValue(amount));
+        this(Outcome.Damage, new StaticValue(amount));
     }
 
-    public DamagePlayersEffect(Constants.Outcome outcome, DynamicValue amount) {
+    public DamagePlayersEffect(int amount, TargetController controller) {
+        this(Outcome.Damage, new StaticValue(amount), controller);
+    }
+
+    public DamagePlayersEffect(Outcome outcome, DynamicValue amount) {
+        this(outcome, amount, TargetController.ANY);
+    }
+
+    public DamagePlayersEffect(Outcome outcome, DynamicValue amount, TargetController controller) {
         super(outcome);
         this.amount = amount;
-        staticText = "{source} deals " + amount + " damage to each player";
+        this.controller = controller;
+        setText();
     }
+
 
     public DamagePlayersEffect(final DamagePlayersEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.controller = effect.controller;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null)
-                player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+        switch (controller) {
+            case ANY:
+                for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+                    }
+                }
+                break;
+            case OPPONENT:
+                for (UUID playerId: game.getOpponents(source.getControllerId())) {
+                    Player player = game.getPlayer(playerId);
+                    if (player != null) {
+                        player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+                    }
+                }
+                break;
+            default:
+                throw new UnsupportedOperationException("TargetController type not supported.");
         }
         return true;
     }
@@ -71,6 +99,22 @@ public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
     @Override
     public DamagePlayersEffect copy() {
         return new DamagePlayersEffect(this);
+    }
+
+    private void setText()
+    {
+        StringBuilder sb = new StringBuilder("{source} deals ").append(amount.toString());
+        switch (controller) {
+            case ANY:
+                sb.append(" damage to each player");
+                break;
+            case OPPONENT:
+                sb.append(" damage to each opponent");
+                break;
+            default:
+                throw new UnsupportedOperationException("TargetController type not supported.");
+        }
+        staticText = sb.toString();
     }
 
 }
