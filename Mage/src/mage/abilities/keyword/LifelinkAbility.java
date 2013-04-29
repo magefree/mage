@@ -56,7 +56,7 @@ public class LifelinkAbility extends StaticAbility<LifelinkAbility> implements M
 
     @Override
     public String getRule() {
-        return "Lifelink";
+        return "Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>";
     }
 
     @Override
