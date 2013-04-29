@@ -32,16 +32,19 @@ package mage.sets.championsofkamigawa;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
+import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.token.SpiritToken;
 import mage.target.common.TargetOpponent;
 
 /**
  *
- * @author LevelX
+ * @author LevelX2
  */
 public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
 
@@ -49,11 +52,9 @@ public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
         super(ownerId, 276, "Forbidden Orchard", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "CHK";
         // {T}: Add one mana of any color to your mana pool.
-        Ability ability = new AnyColorManaAbility();
+        this.addAbility(new AnyColorManaAbility());
         // Whenever you tap Forbidden Orchard for mana, put a 1/1 colorless Spirit creature token onto the battlefield under target opponent's control.
-        ability.addEffect(new CreateTokenTargetEffect(new SpiritToken()));
-        ability.addTarget(new TargetOpponent());
-        this.addAbility(ability);
+        this.addAbility(new ForbiddenOrchardTriggeredAbility());
     }
 
     public ForbiddenOrchard (final ForbiddenOrchard card) {
@@ -64,4 +65,35 @@ public class ForbiddenOrchard extends CardImpl<ForbiddenOrchard> {
     public ForbiddenOrchard copy() {
         return new ForbiddenOrchard(this);
     }
+}
+
+class ForbiddenOrchardTriggeredAbility extends TriggeredAbilityImpl<ForbiddenOrchardTriggeredAbility> {
+
+    public ForbiddenOrchardTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CreateTokenTargetEffect(new SpiritToken()));
+        this.addTarget(new TargetOpponent(true));
+    }
+
+    public ForbiddenOrchardTriggeredAbility(final ForbiddenOrchardTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA && event.getSourceId().equals(getSourceId())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return new StringBuilder("Whenever you tap {this} for mana, ").append(super.getRule()).toString() ;
+    }
+
+    @Override
+    public ForbiddenOrchardTriggeredAbility copy() {
+        return new ForbiddenOrchardTriggeredAbility(this);
+    }
+
 }

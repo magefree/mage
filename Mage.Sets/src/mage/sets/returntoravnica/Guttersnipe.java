@@ -32,10 +32,12 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -67,7 +69,7 @@ public class Guttersnipe extends CardImpl<Guttersnipe> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, Guttersnipe deals 2 damage to each opponent.
-        this.addAbility(new SpellCastTriggeredAbility(new GuttersnipeEffect(), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), filter, false));
     }
 
     public Guttersnipe (final Guttersnipe card) {
@@ -77,39 +79,5 @@ public class Guttersnipe extends CardImpl<Guttersnipe> {
     @Override
     public Guttersnipe copy() {
         return new Guttersnipe(this);
-    }
-
-    private class GuttersnipeEffect extends OneShotEffect<GuttersnipeEffect> {
-
-        public GuttersnipeEffect() {
-            super(Constants.Outcome.Damage);
-            staticText = "{this} deals 2 damage to each opponent";
-        }
-
-        public GuttersnipeEffect(final GuttersnipeEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                for (UUID playerId: controller.getInRange()) {
-                    if (playerId != source.getControllerId()) {
-                        Player opponent = game.getPlayer(playerId);
-                        if (opponent != null) {
-                            opponent.damage(2, source.getId(), game, false, true);
-                        }
-                    }
-                }
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public GuttersnipeEffect copy() {
-            return new GuttersnipeEffect(this);
-        }
     }
 }
