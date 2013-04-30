@@ -142,7 +142,7 @@ public class UserManager {
         for (User user: users.values()) {
             if (user.isExpired(expired.getTime())) {
                 logger.info(user.getName() + " session expired " + user.getId());
-                user.kill(User.DisconnectReason.SessionExpired);
+                user.kill(User.DisconnectReason.LostConnection);
                 users.remove(user.getId());
             }
         }

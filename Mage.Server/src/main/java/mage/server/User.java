@@ -57,7 +57,7 @@ public class User {
     }
 
     public enum DisconnectReason {
-        SessionExpired, Disconnected, CleaningUp;
+        LostConnection, Disconnected, CleaningUp;
     }
 
     private UUID userId = UUID.randomUUID();

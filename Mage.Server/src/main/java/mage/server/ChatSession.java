@@ -71,10 +71,10 @@ public class ChatSession {
             clients.remove(userId);
             switch (reason) {
                 case Disconnected:
-                    message = " has quit MAGE";
+                    message = " has left MAGE";
                     break;
-                 case SessionExpired:
-                    message = " session expired";
+                 case LostConnection:
+                    message = " has lost connection";
                     break;
                  default:
                      message = " has left chat";
