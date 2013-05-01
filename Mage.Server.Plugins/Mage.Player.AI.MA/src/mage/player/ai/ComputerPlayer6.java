@@ -1102,7 +1102,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 for (Permanent blocker : possibleBlockers) {
                     int blockerValue = eval.evaluate(blocker, game);
                     if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
-                            && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
+                            && attacker.getToughness().getValue() <= blocker.getPower().getValue()
+                            && attacker.getPower().getValue() == 0) {
                         safeToAttack = false;
                     }
 
