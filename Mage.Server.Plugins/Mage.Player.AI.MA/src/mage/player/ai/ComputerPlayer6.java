@@ -63,7 +63,6 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.*;
 
-
 /**
  *
  * @author nantuko
@@ -85,7 +84,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     private List<String> suggested = new ArrayList<String>();
     protected Set<String> actionCache;
     private static final List<TreeOptimizer> optimizers = new ArrayList<TreeOptimizer>();
-
     protected int lastLoggedTurn = 0;
 
     static {
@@ -327,7 +325,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     protected int minimaxAB(SimulationNode2 node, int depth, int alpha, int beta) {
-        logger.trace("Sim minimaxAB ["+depth+"] -- a: " + alpha + " b: " + beta + " <" + (node != null ? node.getScore() : "null")+">");
+        logger.trace("Sim minimaxAB [" + depth + "] -- a: " + alpha + " b: " + beta + " <" + (node != null ? node.getScore() : "null") + ">");
         UUID currentPlayerId = node.getGame().getPlayerList().get();
         SimulationNode2 bestChild = null;
         for (SimulationNode2 child : node.getChildren()) {
@@ -424,12 +422,11 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
     /**
      * Base call for simulation of AI actions
-     * 
+     *
      * @return
      */
     protected Integer addActionsTimed() {
         FutureTask<Integer> task = new FutureTask<Integer>(new Callable<Integer>() {
-
             @Override
             public Integer call() throws Exception {
                 return addActions(root, maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE);
@@ -457,8 +454,8 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     }
 
     protected int addActions(SimulationNode2 node, int depth, int alpha, int beta) {
-        if (logger.isInfoEnabled() && node !=null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")){
-            logger.info("Add actions [" + depth +"] " + (node.getAbilities().toString()+ " -- a: " + alpha + " b: " + beta));
+        if (logger.isInfoEnabled() && node != null && node.getAbilities() != null && !node.getAbilities().toString().equals("[Pass]")) {
+            logger.info("Add actions [" + depth + "] " + (node.getAbilities().toString() + " -- a: " + alpha + " b: " + beta));
         }
         Game game = node.getGame();
         int val;
@@ -546,23 +543,23 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
 
                 sim.checkStateAndTriggered();
                 int val = addActions(newNode, depth - 1, alpha, beta);
-                
+
                 if (logger.isInfoEnabled() && depth == maxDepth) {
                     StringBuilder sb = new StringBuilder("Sim Prio [").append(depth).append("] #").append(counter)
                             .append(" <").append(val).append("> (").append(action)
-                            .append(action.isModal() ? " Mode = "+action.getModes().getMode().toString():"")
+                            .append(action.isModal() ? " Mode = " + action.getModes().getMode().toString() : "")
                             .append(listTargets(game, action.getTargets())).append(")")
-                            .append(logger.isTraceEnabled()?" #" +newNode.hashCode():"");
+                            .append(logger.isTraceEnabled() ? " #" + newNode.hashCode() : "");
                     SimulationNode2 logNode = newNode;
-                    while (logNode.getChildren() != null &&  logNode.getChildren().size()>0) {
+                    while (logNode.getChildren() != null && logNode.getChildren().size() > 0) {
                         logNode = logNode.getChildren().get(0);
-                        if (logNode.getAbilities() != null && logNode.getAbilities().size()>0) {
+                        if (logNode.getAbilities() != null && logNode.getAbilities().size() > 0) {
                             sb.append(" -> [").append(logNode.getDepth()).append("]").append(logNode.getAbilities().toString()).append("<").append(logNode.getScore()).append(">");
                         }
                     }
                     logger.info(sb);
                 }
-                
+
                 if (currentPlayer.getId().equals(playerId)) {
                     if (val > alpha) {
                         alpha = val;
@@ -622,7 +619,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             node.children.clear();
             node.children.add(bestNode);
             node.setScore(bestNode.getScore());
-            if (logger.isTraceEnabled() && !bestNode.getAbilities().toString().equals("[Pass]") ) {
+            if (logger.isTraceEnabled() && !bestNode.getAbilities().toString().equals("[Pass]")) {
                 logger.trace(new StringBuilder("Sim Prio [").append(depth).append("] -- Set after (depth=").append(depth).append(")  <").append(bestNode.getScore()).append("> ").append(bestNode.getAbilities().toString()).toString());
             }
         }
@@ -656,7 +653,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             optimizer.optimize(game, allActions);
         }
         Collections.sort(allActions, new Comparator<Ability>() {
-
             @Override
             public int compare(Ability ability, Ability ability1) {
                 String rule = ability.toString();
@@ -1105,7 +1101,6 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                             && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
                         safeToAttack = false;
                     }
-
                     if (attacker.getToughness().getValue() == blocker.getPower().getValue()
                             && attacker.getPower().getValue() == blocker.getToughness().getValue()) {
                         if (attackerValue > blockerValue
@@ -1120,13 +1115,18 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                             safeToAttack = false;
                         }
                     }
-                }
-                if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                        || attacker.getAbilities().contains(new IndestructibleAbility())) {
-                    safeToAttack = true;
-                }
-                if (attacker.getPower().getValue() == 0) {
-                    safeToAttack = false;
+                    if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
+                            || attacker.getAbilities().contains(new IndestructibleAbility())) {
+                        safeToAttack = true;
+                    }
+                    if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
+                            && !blocker.getAbilities().containsKey(FlyingAbility.getInstance().getId())
+                            && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
+                        safeToAttack = true;
+                    }
+                    if (attacker.getPower().getValue() == 0) {
+                        safeToAttack = false;
+                    }
                 }
                 if (safeToAttack) {
                     attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
@@ -1361,14 +1361,13 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
     protected String listTargets(Game game, Targets targets) {
         StringBuilder sb = new StringBuilder();
         if (targets != null) {
-            for (Target target: targets) {
+            for (Target target : targets) {
                 sb.append("[").append(target.getTargetedName(game)).append("]");
             }
-            if (sb.length()>0) {
-                sb.insert(0," targeting ");
+            if (sb.length() > 0) {
+                sb.insert(0, " targeting ");
             }
         }
         return sb.toString();
     }
-    
 }
