@@ -36,7 +36,7 @@ import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -60,7 +60,7 @@ public class KeymasterRogue extends CardImpl<KeymasterRogue> {
         this.addAbility(new UnblockableAbility());
         // When Keymaster Rogue enters the battlefield, return a creature you control to its owner's hand.
         Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        Target target = new TargetControlledPermanent(1, 1, new FilterControlledLandPermanent(), false);
+        Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), false);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
