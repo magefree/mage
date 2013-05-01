@@ -35,6 +35,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -43,6 +44,7 @@ import mage.game.permanent.Permanent;
 public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbilityImpl<AttacksCreatureYourControlTriggeredAbility> {
 
     protected FilterControlledCreaturePermanent filter;
+    protected boolean setTargetPointer;
 
     public AttacksCreatureYourControlTriggeredAbility(Effect effect) {
         this(effect, false);
@@ -51,15 +53,25 @@ public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbility
     public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional) {
         this(effect, optional, new FilterControlledCreaturePermanent());
     }
-    
+
+    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
+        this(effect, optional, new FilterControlledCreaturePermanent(), setTargetPointer);
+    }
+
     public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter) {
+        this(effect, optional, filter, false);
+    }
+
+    public AttacksCreatureYourControlTriggeredAbility(Effect effect, boolean optional, FilterControlledCreaturePermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public AttacksCreatureYourControlTriggeredAbility(AttacksCreatureYourControlTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
@@ -67,6 +79,11 @@ public class AttacksCreatureYourControlTriggeredAbility extends TriggeredAbility
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED) {
             Permanent sourcePermanent = game.getPermanent(event.getSourceId());
             if (sourcePermanent != null && filter.match(sourcePermanent, sourceId, controllerId, game)) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getSourceId()));
+                    }
+                }
                 return true;
             }
         }
