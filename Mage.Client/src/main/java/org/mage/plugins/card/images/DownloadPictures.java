@@ -244,6 +244,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (card.isFlipCard()) {
                         url.setFlipCard(true);
                     }
+                    if (card.isSplitCard()) {
+                        url.setSplitCard(true);
+                    }
                     allCardsUrls.add(url);
                     if (card.canTransform()) {
                         // add second side for downloading
@@ -417,7 +420,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
                     } else {
                         url = cardImageSource.generateURL(card.getCollectorId(), card.getDownloadName(), card.getSet(),
-                                card.isTwoFacedCard(), card.isSecondSide(), card.isFlipCard(), card.isFlippedSide());
+                                card.isTwoFacedCard(), card.isSecondSide(), card.isFlipCard(), card.isSplitCard(), card.isFlippedSide());
                     }
 
                     if (url != null) {

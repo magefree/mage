@@ -16,6 +16,7 @@ public class CardInfo {
     private boolean secondSide;
     private boolean flipCard;
     private boolean flippedSide;
+    private boolean splitCard;
     private boolean usesVariousArt;
 
     public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
@@ -145,6 +146,14 @@ public class CardInfo {
 
     public void setFlipCard(boolean flipCard) {
         this.flipCard = flipCard;
+    }
+
+    public boolean isSplitCard() {
+        return splitCard;
+    }
+
+    public void setSplitCard(boolean splitCard) {
+        this.splitCard = splitCard;
     }
 
     public Integer getType() {

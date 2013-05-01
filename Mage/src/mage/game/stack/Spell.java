@@ -338,6 +338,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public boolean isSplitCard() {
+        return false;
+    }
+
+    @Override
     public boolean canTransform() {
         return false;
     }

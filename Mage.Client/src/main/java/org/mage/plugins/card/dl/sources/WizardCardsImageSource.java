@@ -93,7 +93,7 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard, boolean flippedView) throws Exception {
+    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard, boolean isSplitCard, boolean flippedView) throws Exception {
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }

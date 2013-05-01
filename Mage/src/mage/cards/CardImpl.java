@@ -72,6 +72,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected Map<String, String> info;
     protected boolean usesVariousArt = false;
     protected Counters counters;
+    protected boolean splitCard;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         this(ownerId, name);
@@ -123,7 +124,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             info = new HashMap<String, String>();
             info.putAll(card.info);
         }
-        usesVariousArt = card.usesVariousArt;
+        this.flipCard = card.flipCard;
+        this.flipCardName = card.flipCardName;
+        this.splitCard = card.splitCard;
+        this.usesVariousArt = card.usesVariousArt;
         this.counters = card.counters.copy();
     }
 
@@ -497,6 +501,11 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     @Override
     public boolean isFlipCard() {
         return flipCard;
+    }
+
+    @Override
+    public boolean isSplitCard() {
+        return splitCard;
     }
 
     @Override
