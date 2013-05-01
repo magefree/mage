@@ -81,7 +81,6 @@ public class Vintage extends Constructed {
         restricted.add("Mystical Tutor");
         restricted.add("Necropotence");
         restricted.add("Ponder");
-        restricted.add("Regrowth");
         restricted.add("Sol Ring");
         restricted.add("Strip Mine");
         restricted.add("Thirst for Knowledge");

@@ -40,6 +40,7 @@ public class ReturnToRavnicaBlock extends Constructed {
         super("Constructed - Return to Ravnica Block");
         setCodes.add("RTR");
         setCodes.add("GTC");
+        setCodes.add("DGM");
     }
 
 }
