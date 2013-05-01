@@ -1102,8 +1102,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 for (Permanent blocker : possibleBlockers) {
                     int blockerValue = eval.evaluate(blocker, game);
                     if (attacker.getPower().getValue() <= blocker.getToughness().getValue()
-                            && attacker.getToughness().getValue() <= blocker.getPower().getValue()
-                            && attacker.getPower().getValue() == 0) {
+                            && attacker.getToughness().getValue() <= blocker.getPower().getValue()) {
                         safeToAttack = false;
                     }
 
@@ -1125,6 +1124,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
                         || attacker.getAbilities().contains(new IndestructibleAbility())) {
                     safeToAttack = true;
+                }
+                if (attacker.getPower().getValue() == 0) {
+                    safeToAttack = false;
                 }
                 if (safeToAttack) {
                     attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
