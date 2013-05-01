@@ -55,17 +55,17 @@ public class AssaultBattery extends SplitCard<AssaultBattery> {
         this.color.setGreen(true);
 
         // Assault
-        Card leftHalvCard = this.createLeftHalveCard("Assault", "{R}");
+        Card leftHalfCard = this.createLeftHalfCard("Assault", "{R}");
         // Assault deals 2 damage to target creature or player.
         Effect effect = new DamageTargetEffect(2);
         effect.setText("Assault deals 2 damage to target creature or player");
-        leftHalvCard.getSpellAbility().addEffect(effect);
-        leftHalvCard.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        leftHalfCard.getSpellAbility().addEffect(effect);
+        leftHalfCard.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 
         // Battery
-        Card rightHalvCard = this.createRightHalveCard("Battery", "{3}{G}");
+        Card rightHalfCard = this.createRightHalfCard("Battery", "{3}{G}");
         // Put a 3/3 green Elephant creature token onto the battlefield.
-        rightHalvCard.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
+        rightHalfCard.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
 
     }
 

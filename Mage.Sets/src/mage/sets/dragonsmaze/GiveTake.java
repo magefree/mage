@@ -58,16 +58,16 @@ public class GiveTake extends SplitCard<GiveTake> {
         this.color.setBlue(true);
 
         // Give
-        Card leftHalvCard = this.createLeftHalveCard("Give", "{2}{G}");
+        Card leftHalfCard = this.createLeftHalfCard("Give", "{2}{G}");
         // Put three +1/+1 counters on target creature.
-        leftHalvCard.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
-        leftHalvCard.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        leftHalfCard.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(3)));
+        leftHalfCard.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
         // Take
-        Card rightHalvCard = this.createRightHalveCard("Take", "{2}{U}");
+        Card rightHalfCard = this.createRightHalfCard("Take", "{2}{U}");
         // Remove all +1/+1 counters from target creature you control. Draw that many cards.
-        rightHalvCard.getSpellAbility().addEffect(new TakeEffect());
-        rightHalvCard.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
+        rightHalfCard.getSpellAbility().addEffect(new TakeEffect());
+        rightHalfCard.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
 
 
         // Fuse (You may cast one or both halves of this card from your hand.)
