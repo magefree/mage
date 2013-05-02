@@ -30,21 +30,15 @@ package mage.sets.zendikar;
 
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
 import mage.abilities.effects.common.continious.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandCard;
-import mage.game.Game;
-import mage.players.Player;
 
 import java.util.UUID;
 
@@ -65,7 +59,7 @@ public class OracleOfMulDaya extends CardImpl<OracleOfMulDaya> {
         this.toughness = new MageInt(2);
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OracleOfMulDayaEffect1()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
         // Play with the top card of your library revealed.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
         // You may play the top card of your library if it's a land card.
@@ -79,34 +73,6 @@ public class OracleOfMulDaya extends CardImpl<OracleOfMulDaya> {
     @Override
     public OracleOfMulDaya copy() {
         return new OracleOfMulDaya(this);
-    }
-
-}
-
-class OracleOfMulDayaEffect1 extends ContinuousEffectImpl<OracleOfMulDayaEffect1> {
-
-    public OracleOfMulDayaEffect1() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.PutLandInPlay);
-        staticText = "You may play an additional land on each of your turns";
-    }
-
-    public OracleOfMulDayaEffect1(final OracleOfMulDayaEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.setLandsPerTurn(player.getLandsPerTurn() + 1);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public OracleOfMulDayaEffect1 copy() {
-        return new OracleOfMulDayaEffect1(this);
     }
 
 }

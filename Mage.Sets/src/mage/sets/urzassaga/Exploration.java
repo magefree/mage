@@ -28,15 +28,13 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.Ability;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -51,7 +49,8 @@ public class Exploration extends CardImpl<Exploration> {
         this.color.setGreen(true);
 
         // You may play an additional land on each of your turns.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ExplorationEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+				new PlayAdditionalLandsControllerEffect(1, Duration.WhileOnBattlefield)));
     }
 
     public Exploration(final Exploration card) {
@@ -62,34 +61,4 @@ public class Exploration extends CardImpl<Exploration> {
     public Exploration copy() {
         return new Exploration(this);
     }
-}
-
-class ExplorationEffect extends ContinuousEffectImpl<ExplorationEffect> {
-
-    public ExplorationEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Benefit);
-        staticText = "You may play an additional land on each of your turns";
-    }
-
-    public ExplorationEffect(final ExplorationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ExplorationEffect copy() {
-        return new ExplorationEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && game.getActivePlayerId().equals(source.getControllerId())) {
-            player.setLandsPerTurn(player.getLandsPerTurn() + 1);
-            return true;
-        }
-        return true;
-    }
-
-
-
 }
