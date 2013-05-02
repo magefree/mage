@@ -35,6 +35,7 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -53,8 +54,7 @@ public class ToilsOfNightAndDay extends CardImpl<ToilsOfNightAndDay> {
         this.color.setBlue(true);
         // You may tap or untap target permanent, then you may tap or untap another target permanent.
         this.getSpellAbility().addEffect(new ToilsOfNightAndDayEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent());
-        this.getSpellAbility().addTarget(new TargetPermanent());
+        this.getSpellAbility().addTarget(new TargetPermanent(0, 2, new FilterPermanent(), false));
     }
 
     public ToilsOfNightAndDay(final ToilsOfNightAndDay card) {
@@ -85,36 +85,21 @@ public class ToilsOfNightAndDay extends CardImpl<ToilsOfNightAndDay> {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            boolean result = false;
-
             Player player = game.getPlayer(source.getControllerId());
             if (player != null) {
-                Permanent permanent = game.getPermanent(source.getFirstTarget());
-                if (permanent != null) {
-                    if (permanent.isTapped()) {
-                        if (player.chooseUse(Constants.Outcome.Untap, "Untap that permanent?", game)) {
-                            result |= permanent.untap(game);
-                        }
-                    } else {
-                        if (player.chooseUse(Constants.Outcome.Tap, "Tap that permanent?", game)) {
-                            result |= permanent.tap(game);
+                for (UUID targetId : source.getTargets().get(0).getTargets()) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        if (player.chooseUse(Constants.Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), game)) {
+                            permanent.tap(game);
+                        } else if (player.chooseUse(Constants.Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), game)) {
+                            permanent.untap(game);
                         }
                     }
                 }
-                permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-                if (permanent != null) {
-                    if (permanent.isTapped()) {
-                        if (player.chooseUse(Constants.Outcome.Untap, "Untap that permanent?", game)) {
-                            result |= permanent.untap(game);
-                        }
-                    } else {
-                        if (player.chooseUse(Constants.Outcome.Tap, "Tap that permanent?", game)) {
-                            result |= permanent.tap(game);
-                        }
-                    }
-                }
+                return true;
             }
-            return result;
+            return false;
         }
     }
 }

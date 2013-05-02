@@ -39,6 +39,11 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.filter.Filter;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -106,11 +111,15 @@ class VoidEffect extends OneShotEffect<VoidEffect> {
                 permanent.destroy(source.getId(), game, false);
             }
         }
+        FilterCard filterCard = new FilterCard();
+        filterCard.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, number));
+        filterCard.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
             targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
             for (Card card : targetPlayer.getHand().getCards(game)) {
-                if (!card.getCardType().contains(CardType.LAND) && card.getManaCost().convertedManaCost() == number) {
+                if (filterCard.match(card, game)) {
                     card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
                 }
             }
