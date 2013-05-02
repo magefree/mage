@@ -32,7 +32,6 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FuseAbility;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterEnchantment;
 import mage.target.Target;
@@ -46,27 +45,27 @@ import mage.target.common.TargetArtifactPermanent;
 public class WearTear extends SplitCard<WearTear> {
 
     public WearTear(UUID ownerId) {
-        super(ownerId, 135, "Wear - Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}{W}");
+        super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}");
         this.expansionSetCode = "DGM";
 
         this.color.setRed(true);
         this.color.setWhite(true);
 
         // Wear
-        Card leftHalfCard = this.createLeftHalfCard("Wear", "{1}{R}");
         // Destroy target artifact.
-        leftHalfCard.getSpellAbility().addEffect(new DestroyTargetEffect());
+        getLeftHalfCard().getColor().setRed(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         Target target = new TargetArtifactPermanent();
         target.setRequired(true);
-        leftHalfCard.getSpellAbility().addTarget(target);
+        getLeftHalfCard().getSpellAbility().addTarget(target);
 
         // Tear
-        Card rightHalfCard = this.createRightHalfCard("Tear", "{W}");
         // Destroy target enchantment.
-        rightHalfCard.getSpellAbility().addEffect(new DestroyTargetEffect());
+        getRightHalfCard().getColor().setWhite(true);
+        getRightHalfCard().getSpellAbility().addEffect(new DestroyTargetEffect());
         target = new TargetPermanent(new FilterEnchantment());
         target.setRequired(true);
-        rightHalfCard.getSpellAbility().addTarget(target);
+        getRightHalfCard().getSpellAbility().addTarget(target);
 
 
         // Fuse (You may cast one or both halves of this card from your hand.)

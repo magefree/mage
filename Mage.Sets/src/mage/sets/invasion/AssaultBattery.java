@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.game.permanent.token.ElephantToken;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -48,24 +47,24 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class AssaultBattery extends SplitCard<AssaultBattery> {
 
     public AssaultBattery(UUID ownerId) {
-        super(ownerId, 295, "Assault - Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}{3}{G}");
+        super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}");
         this.expansionSetCode = "INV";
 
         this.color.setRed(true);
         this.color.setGreen(true);
 
         // Assault
-        Card leftHalfCard = this.createLeftHalfCard("Assault", "{R}");
         // Assault deals 2 damage to target creature or player.
+        getLeftHalfCard().getColor().setRed(true);
         Effect effect = new DamageTargetEffect(2);
         effect.setText("Assault deals 2 damage to target creature or player");
-        leftHalfCard.getSpellAbility().addEffect(effect);
-        leftHalfCard.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        getLeftHalfCard().getSpellAbility().addEffect(effect);
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 
         // Battery
-        Card rightHalfCard = this.createRightHalfCard("Battery", "{3}{G}");
         // Put a 3/3 green Elephant creature token onto the battlefield.
-        rightHalfCard.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
+        getRightHalfCard().getColor().setGreen(true);
+        getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
 
     }
 

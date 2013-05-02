@@ -32,8 +32,6 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
@@ -41,11 +39,9 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FuseAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.permanent.token.Token;
 
 /**
  *
@@ -54,7 +50,7 @@ import mage.game.permanent.token.Token;
 public class ReadyWilling extends SplitCard<ReadyWilling> {
 
     public ReadyWilling(UUID ownerId) {
-        super(ownerId, 132, "Ready - Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}{1}{W}{B}");
+        super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}");
         this.expansionSetCode = "DGM";
 
         this.color.setGreen(true);
@@ -62,18 +58,20 @@ public class ReadyWilling extends SplitCard<ReadyWilling> {
         this.color.setBlack(true);
 
         // Ready
-        Card leftHalfCard = this.createLeftHalfCard("Ready", "{1}{G}{W}");
         // Creatures you control are indestructible this turn. Untap each creature you control.
-        leftHalfCard.getSpellAbility().addEffect(new IndestructibleAllEffect(new FilterControlledCreaturePermanent("Creatures you controll"), Constants.Duration.EndOfTurn));
-        leftHalfCard.getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(),"Untap each creature you control"));
+        getLeftHalfCard().getColor().setGreen(true);
+        getLeftHalfCard().getColor().setWhite(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new IndestructibleAllEffect(new FilterControlledCreaturePermanent("Creatures you controll"), Constants.Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(),"Untap each creature you control"));
 
         // Willing
-        Card rightHalfCard = this.createRightHalfCard("Willing", "{1}{W}{B}");
         // Creatures you control gain deathtouch and lifelink until end of turn.
-        rightHalfCard.getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures")) );
+        getRightHalfCard().getColor().setWhite(true);
+        getRightHalfCard().getColor().setBlack(true);
+        getRightHalfCard().getSpellAbility().addEffect(new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures")) );
         Effect effect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent("Creatures"));
         effect.setText("Creatures you control gain lifelink until end of turn.");
-        rightHalfCard.getSpellAbility().addEffect(effect);
+        getRightHalfCard().getSpellAbility().addEffect(effect);
 
         // Fuse (You may cast one or both halves of this card from your hand.)
         this.addAbility(new FuseAbility(this, this.getManaCost()));
@@ -86,19 +84,6 @@ public class ReadyWilling extends SplitCard<ReadyWilling> {
     @Override
     public ReadyWilling copy() {
         return new ReadyWilling(this);
-    }
-
-    private class WeirdToken extends Token {
-
-        private WeirdToken() {
-            super("Weird", "0/1 red Weird");
-            cardType.add(Constants.CardType.CREATURE);
-            color = ObjectColor.RED;
-            subtype.add("Weird");
-            power = new MageInt(0);
-            toughness = new MageInt(1);
-        }
-
     }
 
 }

@@ -39,7 +39,6 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
 import mage.abilities.keyword.FuseAbility;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -52,26 +51,26 @@ import mage.target.common.TargetCreaturePermanent;
 public class TurnBurn extends SplitCard<TurnBurn> {
 
     public TurnBurn(UUID ownerId) {
-        super(ownerId, 134, "Turn - Burn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}{1}{R}");
+        super(ownerId, 134, "Turn", "Burn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}", "{1}{R}");
         this.expansionSetCode = "DGM";
 
         this.color.setBlue(true);
         this.color.setRed(true);
 
         // Turn
-        Card leftHalfCard = this.createLeftHalfCard("Turn", "{2}{U}");
         // Target creature loses all abilities and becomes a 0/1 red Weird until end of turn.
-        leftHalfCard.getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
-        leftHalfCard.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new WeirdToken(),null, Duration.EndOfTurn));
-        leftHalfCard.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        getLeftHalfCard().getColor().setBlue(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new LoseAllAbilitiesTargetEffect(Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new WeirdToken(),null, Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
         // Burn
-        Card rightHalfCard = this.createRightHalfCard("Burn", "{1}{R}");
         // Burn deals 2 damage to target creature or player.
+        getRightHalfCard().getColor().setRed(true);
         Effect effect = new DamageTargetEffect(2);
         effect.setText("Burn deals 2 damage to target creature or player.");
-        rightHalfCard.getSpellAbility().addEffect(effect);
-        rightHalfCard.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        getRightHalfCard().getSpellAbility().addEffect(effect);
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 
 
         // Fuse (You may cast one or both halves of this card from your hand.)
