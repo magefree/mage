@@ -1124,9 +1124,9 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                             && !blocker.getAbilities().containsKey(ReachAbility.getInstance().getId())) {
                         safeToAttack = true;
                     }
-                    if (attacker.getPower().getValue() == 0) {
-                        safeToAttack = false;
-                    }
+                }
+                if (attacker.getPower().getValue() == 0) {
+                    safeToAttack = false;
                 }
                 if (safeToAttack) {
                     attackingPlayer.declareAttacker(attacker.getId(), defenderId, game);
