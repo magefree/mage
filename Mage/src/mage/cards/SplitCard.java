@@ -58,8 +58,10 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     private ActiveCardHalf activeCardHalf = ActiveCardHalf.NONE;
 
-    public SplitCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+    public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight) {
+        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" - ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight);
+        this.createLeftHalfCard(nameLeft, costsLeft);
+        this.createRightHalfCard(nameRight, costsRight);
         this.splitCard = true;
     }
 
@@ -70,21 +72,23 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
         this.activeCardHalf = card.activeCardHalf;
     }
 
-    public Card createLeftHalfCard (String name, String costs) {
+    private Card createLeftHalfCard (String nameLeft, String costsLeft) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
+        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft);
         leftHalfCard.getAbilities().setSourceId(objectId);
         return leftHalfCard;
     }
 
-    public Card createRightHalfCard (String name, String costs) {
+    private Card createRightHalfCard (String nameRight, String costsRight) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        rightHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
+        rightHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight);
         rightHalfCard.getAbilities().setSourceId(objectId);
         return rightHalfCard;
     }
+
+
 
     public Card getLeftHalfCard () {
         return leftHalfCard;
