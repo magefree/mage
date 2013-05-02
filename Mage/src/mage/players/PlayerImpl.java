@@ -1255,7 +1255,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean flipCoin(Game game) {
         boolean result = rnd.nextBoolean();
-        game.informPlayers("[Flip a coin] " + getName() + (result ? " won." : " lost."));
+        game.informPlayers("[Flip a coin] " + getName() + (result ? " won (head)." : " lost (tail)."));
         return result;
     }
 
