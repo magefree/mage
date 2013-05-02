@@ -73,7 +73,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     public Card createLeftHalfCard (String name, String costs) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        leftHalfCard = new leftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
+        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
         leftHalfCard.getAbilities().setSourceId(objectId);
         return leftHalfCard;
     }
@@ -81,7 +81,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     public Card createRightHalfCard (String name, String costs) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        rightHalfCard = new leftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
+        rightHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), name, this.rarity, cardTypes, costs);
         rightHalfCard.getAbilities().setSourceId(objectId);
         return rightHalfCard;
     }
@@ -216,45 +216,42 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
         }
         return allWatchers;
     }
-
-
-
 }
 
 /*
  * The left side card of the split card
  */
-class leftHalfCard  extends CardImpl<leftHalfCard> {
+class LeftHalfCard  extends CardImpl<LeftHalfCard> {
 
-    public leftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs);
     }
 
-    public leftHalfCard(final leftHalfCard card) {
+    public LeftHalfCard(final LeftHalfCard card) {
         super(card);
     }
 
     @Override
-    public leftHalfCard copy() {
-        return new leftHalfCard(this);
+    public LeftHalfCard copy() {
+        return new LeftHalfCard(this);
     }
 }
 
 /*
  * The right side card of the split card
  */
-class rightHalfCard  extends CardImpl<rightHalfCard> {
+class RightHalfCard  extends CardImpl<RightHalfCard> {
 
-    public rightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+    public RightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs);
     }
 
-    public rightHalfCard(final rightHalfCard card) {
+    public RightHalfCard(final RightHalfCard card) {
         super(card);
     }
 
     @Override
-    public rightHalfCard copy() {
-        return new rightHalfCard(this);
+    public RightHalfCard copy() {
+        return new RightHalfCard(this);
     }
 }
