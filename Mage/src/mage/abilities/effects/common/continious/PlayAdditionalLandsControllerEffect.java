@@ -73,8 +73,9 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<Pl
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("You may play ").append(Integer.toString(additionalCards)).append(" additional land").append((additionalCards == 1?"":"s"));
-        sb.append((duration==Duration.EndOfTurn?" this turn":""));
+        sb.append("You may play ").append(Integer.toString(additionalCards))
+                .append(" additional land").append((additionalCards == 1 ? "" : "s"))
+                .append(duration == Duration.EndOfTurn ? " this turn" : "on each of your turns");
         staticText = sb.toString();
     }
 
