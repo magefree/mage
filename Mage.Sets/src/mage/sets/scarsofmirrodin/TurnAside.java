@@ -45,6 +45,7 @@ import mage.target.TargetObject;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.target.Target;
 
 /**
  * @author ayratn
@@ -57,6 +58,8 @@ public class TurnAside extends CardImpl<TurnAside> {
         super(ownerId, 49, "Turn Aside", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}");
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
+
+        // Counter target spell that targets a permanent you control.
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new CustomTargetSpell(filter));
     }
@@ -157,10 +160,12 @@ public class TurnAside extends CardImpl<TurnAside> {
             StackObject spell = game.getStack().getStackObject(id);
             if (spell != null) {
                 Ability ability = spell.getStackAbility();
-                for (UUID permanentId : ability.getTargets().get(0).getTargets()) {
-                    Permanent permanent = game.getPermanent(permanentId);
-                    if (permanent != null && permanent.getControllerId().equals(controllerId)) {
-                        return true;
+                for (Target target : ability.getTargets()) {
+                    for (UUID permanentId : target.getTargets()) {
+                        Permanent permanent = game.getPermanent(permanentId);
+                        if (permanent != null && permanent.getControllerId().equals(controllerId)) {
+                            return true;
+                        }
                     }
                 }
             }
