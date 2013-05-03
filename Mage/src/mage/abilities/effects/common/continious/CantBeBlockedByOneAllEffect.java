@@ -36,6 +36,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +55,7 @@ public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl<CantBeBloc
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.filter = filter;
-        staticText = "Each " + filter.getMessage() + " can't be blocked except by " + amount + " or more creatures";
+        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
     }
 
     public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {

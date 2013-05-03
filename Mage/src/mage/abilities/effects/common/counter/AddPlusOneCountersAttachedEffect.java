@@ -35,6 +35,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.counters.common.PlusOneCounter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -77,7 +78,7 @@ public class AddPlusOneCountersAttachedEffect extends OneShotEffect<AddPlusOneCo
 
     private void setText() {
         if (amount > 1) {
-            staticText = "put " + Integer.toString(amount) + " +1/+1 counters on enchanted creature";
+            staticText = new StringBuilder("put ").append(CardUtil.numberToText(amount)).append(" +1/+1 counters on enchanted creature").toString();
         }
         else {
             staticText = "put a +1/+1 counter on enchanted creature";
