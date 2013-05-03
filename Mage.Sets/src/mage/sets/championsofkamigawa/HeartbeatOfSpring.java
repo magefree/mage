@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
@@ -54,15 +53,15 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class HeartbeatOfSpring extends CardImpl<HeartbeatOfSpring> {
 
-    public HeartbeatOfSpring (UUID ownerId) {
+    public HeartbeatOfSpring(UUID ownerId) {
         super(ownerId, 212, "Heartbeat of Spring", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
         this.expansionSetCode = "CHK";
-    this.color.setGreen(true);
+        this.color.setGreen(true);
         // Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
         this.addAbility(new HeartbeatOfSpringAbility());
     }
 
-    public HeartbeatOfSpring (final HeartbeatOfSpring card) {
+    public HeartbeatOfSpring(final HeartbeatOfSpring card) {
         super(card);
     }
 
@@ -70,7 +69,6 @@ public class HeartbeatOfSpring extends CardImpl<HeartbeatOfSpring> {
     public HeartbeatOfSpring copy() {
         return new HeartbeatOfSpring(this);
     }
-
 }
 
 class HeartbeatOfSpringAbility extends TriggeredManaAbility<HeartbeatOfSpringAbility> {
@@ -87,14 +85,14 @@ class HeartbeatOfSpringAbility extends TriggeredManaAbility<HeartbeatOfSpringAbi
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA ) {
+        if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent == null) {
                 permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
             }
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
-                                return true;
+                getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
+                return true;
             }
         }
         return false;
@@ -127,50 +125,52 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
         Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
         Mana types = new Mana();
-        for (ManaAbility ability: mana) {
+        for (ManaAbility ability : mana) {
             types.add(ability.getNetMana(game));
         }
         Choice choice = new ChoiceImpl(true);
         choice.setMessage("Pick a mana color");
-        if (types.getBlack() > 0)
+        if (types.getBlack() > 0) {
             choice.getChoices().add("Black");
-        if (types.getRed() > 0)
+        }
+        if (types.getRed() > 0) {
             choice.getChoices().add("Red");
-        if (types.getBlue() > 0)
+        }
+        if (types.getBlue() > 0) {
             choice.getChoices().add("Blue");
-        if (types.getGreen() > 0)
+        }
+        if (types.getGreen() > 0) {
             choice.getChoices().add("Green");
-        if (types.getWhite() > 0)
+        }
+        if (types.getWhite() > 0) {
             choice.getChoices().add("White");
-        if (types.getColorless() > 0)
+        }
+        if (types.getColorless() > 0) {
             choice.getChoices().add("Colorless");
+        }
         if (choice.getChoices().size() > 0) {
-            Player player = game.getPlayer(source.getControllerId());
-            if (choice.getChoices().size() == 1)
+            Player player = game.getPlayer(land.getControllerId());
+            if (choice.getChoices().size() == 1) {
                 choice.setChoice(choice.getChoices().iterator().next());
-            else
+            } else {
                 player.choose(outcome, choice, game);
+            }
             if (choice.getChoice().equals("Black")) {
                 player.getManaPool().addMana(Mana.BlackMana, game, source);
                 return true;
-            }
-            else if (choice.getChoice().equals("Blue")) {
+            } else if (choice.getChoice().equals("Blue")) {
                 player.getManaPool().addMana(Mana.BlueMana, game, source);
                 return true;
-            }
-            else if (choice.getChoice().equals("Red")) {
+            } else if (choice.getChoice().equals("Red")) {
                 player.getManaPool().addMana(Mana.RedMana, game, source);
                 return true;
-            }
-            else if (choice.getChoice().equals("Green")) {
+            } else if (choice.getChoice().equals("Green")) {
                 player.getManaPool().addMana(Mana.GreenMana, game, source);
                 return true;
-            }
-            else if (choice.getChoice().equals("White")) {
+            } else if (choice.getChoice().equals("White")) {
                 player.getManaPool().addMana(Mana.WhiteMana, game, source);
                 return true;
-            }
-            else if (choice.getChoice().equals("Colorless")) {
+            } else if (choice.getChoice().equals("Colorless")) {
                 player.getManaPool().addMana(Mana.ColorlessMana, game, source);
                 return true;
             }
@@ -182,5 +182,4 @@ class HeartbeatOfSpringEffect extends ManaEffect<HeartbeatOfSpringEffect> {
     public HeartbeatOfSpringEffect copy() {
         return new HeartbeatOfSpringEffect(this);
     }
-
 }

@@ -51,7 +51,7 @@ import mage.watchers.Watcher;
 public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     public enum ActiveCardHalf {
-        NONE, LEFT, RIGHT
+        NONE, LEFT, RIGHT, BOTH
     }
     private Card leftHalfCard;
     private Card rightHalfCard;
@@ -67,8 +67,8 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     public SplitCard(SplitCard card) {
         super(card);
-        this.leftHalfCard = card.leftHalfCard;
-        this.rightHalfCard = card.rightHalfCard;
+        this.leftHalfCard = card.leftHalfCard.copy();
+        this.rightHalfCard = card.rightHalfCard.copy();
         this.activeCardHalf = card.activeCardHalf;
     }
 
@@ -104,16 +104,19 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
     @Override
     public boolean cast(Game game, Constants.Zone fromZone, SpellAbility ability, UUID controllerId) {
+        if (this.getAbilities().contains(ability)) {
+            activeCardHalf = ActiveCardHalf.BOTH;
+        } else if (leftHalfCard.getAbilities().contains(ability)) {
+            activeCardHalf = ActiveCardHalf.LEFT;
+        } else if (rightHalfCard.getAbilities().contains(ability)) {
+            activeCardHalf = ActiveCardHalf.RIGHT;
+        } else {
+            activeCardHalf = ActiveCardHalf.NONE;
+        }
         if (super.cast(game, fromZone, ability, controllerId)) {
-            if (leftHalfCard.getAbilities().contains(ability)) {
-                activeCardHalf = ActiveCardHalf.LEFT;
-            } else if (rightHalfCard.getAbilities().contains(ability)) {
-                activeCardHalf = ActiveCardHalf.RIGHT;
-            } else {
-                activeCardHalf = ActiveCardHalf.NONE;
-            }
             return true;
         }
+        activeCardHalf = ActiveCardHalf.NONE;
         return false;
     }
 
