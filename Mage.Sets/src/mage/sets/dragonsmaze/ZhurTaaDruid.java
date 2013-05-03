@@ -28,22 +28,17 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants.AbilityType;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
