@@ -27,6 +27,8 @@
  */
 package mage.sets.dragonsmaze;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -61,5 +63,12 @@ public class WarleadersHelix extends CardImpl<WarleadersHelix> {
     @Override
     public WarleadersHelix copy() {
         return new WarleadersHelix(this);
+    }
+    
+    @Override
+    public List<String> getRules() {
+        List<String> rules = new ArrayList<String>();
+        rules.add("Warleader's Helix deals 4 damage to target creature or player and you gain 4 life.");
+        return rules;
     }
 }
