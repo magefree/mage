@@ -31,19 +31,23 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
-
-
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author LevelX2
  */
  public class GoblinWarDrums1 extends CardImpl<GoblinWarDrums1> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    static {
+        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+    }
 
     public GoblinWarDrums1(UUID ownerId) {
         super(ownerId, 118, "Goblin War Drums", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}");
@@ -52,10 +56,7 @@ import mage.filter.common.FilterControlledCreaturePermanent;
         this.color.setRed(true);
 
         // Each creature you control can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
-                Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent(),
-                "Each creature you control can't be blocked except by two or more creatures")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneAllEffect(2, filter)));
     }
 
     public GoblinWarDrums1(final GoblinWarDrums1 card) {
