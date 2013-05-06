@@ -38,7 +38,6 @@ import mage.abilities.effects.common.MustBlockSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -51,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class ArmedDangerous extends SplitCard<ArmedDangerous> {
 
     public ArmedDangerous(UUID ownerId) {
-        super(ownerId, 122, "Armed", "Dangerous", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}");
+        super(ownerId, 122, "Armed", "Dangerous", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{1}{R}", "{3}{G}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setRed(true);
@@ -70,8 +69,6 @@ public class ArmedDangerous extends SplitCard<ArmedDangerous> {
         getRightHalfCard().getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), Duration.EndOfTurn));
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
 
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
 
     }
 

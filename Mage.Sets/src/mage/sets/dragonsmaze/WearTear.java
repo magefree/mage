@@ -31,7 +31,6 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterEnchantment;
 import mage.target.Target;
@@ -45,7 +44,7 @@ import mage.target.common.TargetArtifactPermanent;
 public class WearTear extends SplitCard<WearTear> {
 
     public WearTear(UUID ownerId) {
-        super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}");
+        super(ownerId, 135, "Wear", "Tear", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}", "{W}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setRed(true);
@@ -66,10 +65,6 @@ public class WearTear extends SplitCard<WearTear> {
         target = new TargetPermanent(new FilterEnchantment());
         target.setRequired(true);
         getRightHalfCard().getSpellAbility().addTarget(target);
-
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
     }
 
     public WearTear(final WearTear card) {

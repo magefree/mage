@@ -47,7 +47,7 @@ import mage.target.common.TargetCreatureOrPlayer;
 public class AssaultBattery extends SplitCard<AssaultBattery> {
 
     public AssaultBattery(UUID ownerId) {
-        super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}");
+        super(ownerId, 295, "Assault", "Battery", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{R}", "{3}{G}", false);
         this.expansionSetCode = "INV";
 
         this.color.setRed(true);

@@ -39,7 +39,6 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfTargetPlayerLibraryIntoGraveEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
@@ -60,7 +59,7 @@ import mage.target.targetpointer.FixedTarget;
 public class BreakingEntering extends SplitCard<BreakingEntering> {
 
     public BreakingEntering(UUID ownerId) {
-        super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{U}{B}");
+        super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{U}{B}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setBlue(true);
@@ -78,9 +77,6 @@ public class BreakingEntering extends SplitCard<BreakingEntering> {
         getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new EnteringReturnFromGraveyardToBattlefieldEffect());
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
 
     }
 

@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
@@ -48,7 +47,7 @@ import mage.players.Player;
 public class AliveWell extends SplitCard<AliveWell> {
 
     public AliveWell(UUID ownerId) {
-        super(ownerId, 121, "Alive", "Well", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}","{W}");
+        super(ownerId, 121, "Alive", "Well", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{G}","{W}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setGreen(true);
@@ -65,9 +64,6 @@ public class AliveWell extends SplitCard<AliveWell> {
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new WellEffect());
 
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
     }
 
     public AliveWell(final AliveWell card) {

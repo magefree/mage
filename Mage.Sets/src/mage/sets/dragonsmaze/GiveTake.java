@@ -34,7 +34,6 @@ import mage.Constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -50,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class GiveTake extends SplitCard<GiveTake> {
 
     public GiveTake(UUID ownerId) {
-        super(ownerId, 129, "Give", "Take", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}","{2}{U}");
+        super(ownerId, 129, "Give", "Take", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}","{2}{U}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setGreen(true);
@@ -67,9 +66,6 @@ public class GiveTake extends SplitCard<GiveTake> {
         getRightHalfCard().getSpellAbility().addEffect(new TakeEffect());
         getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
         getLeftHalfCard().getColor().setBlue(true);
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
     }
 
     public GiveTake(final GiveTake card) {

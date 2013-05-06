@@ -36,7 +36,6 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -52,7 +51,7 @@ import mage.game.permanent.Permanent;
 public class BeckCall extends SplitCard<BeckCall> {
 
     public BeckCall(UUID ownerId) {
-        super(ownerId, 123, "Beck", "Call", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}");
+        super(ownerId, 123, "Beck", "Call", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{G}{U}", "{4}{W}{U}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setWhite(true);
@@ -70,9 +69,6 @@ public class BeckCall extends SplitCard<BeckCall> {
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getColor().setBlue(true);
         getRightHalfCard().getSpellAbility().addEffect(new CreateTokenEffect(new BirdToken(),4));
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
 
     }
 

@@ -38,7 +38,6 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.continious.LoseAllAbilitiesTargetEffect;
-import mage.abilities.keyword.FuseAbility;
 import mage.cards.SplitCard;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -51,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class TurnBurn extends SplitCard<TurnBurn> {
 
     public TurnBurn(UUID ownerId) {
-        super(ownerId, 134, "Turn", "Burn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}", "{1}{R}");
+        super(ownerId, 134, "Turn", "Burn", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{U}", "{1}{R}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setBlue(true);
@@ -72,9 +71,6 @@ public class TurnBurn extends SplitCard<TurnBurn> {
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 
-
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
     }
 
     public TurnBurn(final TurnBurn card) {

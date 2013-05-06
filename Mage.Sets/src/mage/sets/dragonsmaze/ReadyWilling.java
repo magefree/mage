@@ -37,7 +37,6 @@ import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
-import mage.abilities.keyword.FuseAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -50,7 +49,7 @@ import mage.filter.common.FilterCreaturePermanent;
 public class ReadyWilling extends SplitCard<ReadyWilling> {
 
     public ReadyWilling(UUID ownerId) {
-        super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}");
+        super(ownerId, 132, "Ready", "Willing", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{G}{W}", "{1}{W}{B}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setGreen(true);
@@ -73,8 +72,6 @@ public class ReadyWilling extends SplitCard<ReadyWilling> {
         effect.setText("Creatures you control gain lifelink until end of turn.");
         getRightHalfCard().getSpellAbility().addEffect(effect);
 
-        // Fuse (You may cast one or both halves of this card from your hand.)
-        this.addAbility(new FuseAbility(this, this.getManaCost()));
     }
 
     public ReadyWilling(final ReadyWilling card) {
