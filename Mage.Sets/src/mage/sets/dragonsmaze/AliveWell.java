@@ -35,13 +35,11 @@ import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FuseAbility;
-import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.token.CentaurToken;
 import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -66,7 +64,6 @@ public class AliveWell extends SplitCard<AliveWell> {
         // You gain 2 life for each creature you control.
         getRightHalfCard().getColor().setWhite(true);
         getRightHalfCard().getSpellAbility().addEffect(new WellEffect());
-        getRightHalfCard().getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
 
 
         // Fuse (You may cast one or both halves of this card from your hand.)
