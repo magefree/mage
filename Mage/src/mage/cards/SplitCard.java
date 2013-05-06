@@ -31,16 +31,13 @@ package mage.cards;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.Constants.SpellAbilityType;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
-import mage.abilities.keyword.FuseAbility;
-import mage.game.Game;
 import mage.watchers.Watcher;
 
 /**
@@ -50,16 +47,11 @@ import mage.watchers.Watcher;
 
 public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
-    public enum ActiveCardHalf {
-        NONE, LEFT, RIGHT, BOTH
-    }
     private Card leftHalfCard;
     private Card rightHalfCard;
 
-    private ActiveCardHalf activeCardHalf = ActiveCardHalf.NONE;
-
-    public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight) {
-        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" - ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight);
+    public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
+        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" - ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ?SpellAbilityType.SPLIT_FUSED:SpellAbilityType.SPLIT));
         this.createLeftHalfCard(nameLeft, costsLeft);
         this.createRightHalfCard(nameRight, costsRight);
         this.splitCard = true;
@@ -69,7 +61,6 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
         super(card);
         this.leftHalfCard = card.leftHalfCard.copy();
         this.rightHalfCard = card.rightHalfCard.copy();
-        this.activeCardHalf = card.activeCardHalf;
     }
 
     private Card createLeftHalfCard (String nameLeft, String costsLeft) {
@@ -83,7 +74,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     private Card createRightHalfCard (String nameRight, String costsRight) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        rightHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight);
+        rightHalfCard = new RightHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight);
         rightHalfCard.getAbilities().setSourceId(objectId);
         return rightHalfCard;
     }
@@ -98,96 +89,28 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
         return rightHalfCard;
     }
 
-    public ActiveCardHalf getActiveCardHalf() {
-        return activeCardHalf;
-    }
-
-    @Override
-    public boolean cast(Game game, Constants.Zone fromZone, SpellAbility ability, UUID controllerId) {
-        if (this.getAbilities().contains(ability)) {
-            activeCardHalf = ActiveCardHalf.BOTH;
-        } else if (leftHalfCard.getAbilities().contains(ability)) {
-            activeCardHalf = ActiveCardHalf.LEFT;
-        } else if (rightHalfCard.getAbilities().contains(ability)) {
-            activeCardHalf = ActiveCardHalf.RIGHT;
-        } else {
-            activeCardHalf = ActiveCardHalf.NONE;
-        }
-        if (super.cast(game, fromZone, ability, controllerId)) {
-            return true;
-        }
-        activeCardHalf = ActiveCardHalf.NONE;
-        return false;
-    }
-
-    @Override
-    public boolean moveToZone(Constants.Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
-        if (super.moveToZone(toZone, sourceId, game, flag, appliedEffects)) {
-            if (!toZone.equals(Zone.STACK)) {
-                activeCardHalf = ActiveCardHalf.NONE;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
-        if(super.moveToExile(exileId, name, sourceId, game, appliedEffects)) {
-            activeCardHalf = ActiveCardHalf.NONE;
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public Abilities<Ability> getAbilities(){
         Abilities<Ability> allAbilites = new AbilitiesImpl<Ability>();
-        if (activeCardHalf.equals(ActiveCardHalf.NONE) || activeCardHalf.equals(ActiveCardHalf.LEFT)) {
-            allAbilites.addAll(leftHalfCard.getAbilities());
-        }
-        if (activeCardHalf.equals(ActiveCardHalf.NONE) || activeCardHalf.equals(ActiveCardHalf.RIGHT)) {
-            allAbilites.addAll(rightHalfCard.getAbilities());
-        }
-        for (Ability ability: super.getAbilities()) {
-            if (ability instanceof FuseAbility) {
+        for (Ability ability : super.getAbilities()) {
+            if (ability instanceof SpellAbility && !((SpellAbility)ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
                 allAbilites.add(ability);
             }
         }
+        allAbilites.addAll(super.getAbilities());
+        allAbilites.addAll(leftHalfCard.getAbilities());
+        allAbilites.addAll(rightHalfCard.getAbilities());                
         return allAbilites;
-    }
-
-    @Override
-    public SpellAbility getSpellAbility() {
-        switch (activeCardHalf) {
-            case LEFT:
-                return leftHalfCard.getSpellAbility();
-            case RIGHT:
-                return rightHalfCard.getSpellAbility();
-        }
-        return null;
     }
 
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<String>();
-        if (activeCardHalf.equals(ActiveCardHalf.NONE) || activeCardHalf.equals(ActiveCardHalf.LEFT)) {
-            rules.add(new StringBuilder("<b>").append(leftHalfCard.getName()).append("<b/>").toString());
-            rules.addAll(leftHalfCard.getRules());
-        }
-        if (activeCardHalf.equals(ActiveCardHalf.NONE)) {
-            rules.add("<br/>");
-        }
-        if (activeCardHalf.equals(ActiveCardHalf.NONE) || activeCardHalf.equals(ActiveCardHalf.RIGHT)) {
-            rules.add(new StringBuilder("<b>").append(rightHalfCard.getName()).append("<b/>").toString());
-            rules.addAll(rightHalfCard.getRules());
-        }
-
-        for (Ability ability: super.getAbilities()) {
-            if (ability instanceof FuseAbility) {
-                rules.add("<br/>------------------------------------------------------------");
-                rules.add(ability.getRule());
-            }
+        rules.addAll(leftHalfCard.getRules());
+        rules.addAll(rightHalfCard.getRules());
+        if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+            rules.add("------------------------------------------------------------------------");
+            rules.add("Fuse (You may cast one or both halves of this card from your hand.)");
         }
         return rules;
     }
@@ -213,14 +136,9 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     @Override
     public List<Watcher> getWatchers() {
         List<Watcher> allWatchers = new ArrayList<Watcher>();
-        switch (activeCardHalf) {
-            case LEFT:
-                allWatchers.addAll(leftHalfCard.getWatchers());
-                break;
-            case RIGHT:
-                allWatchers.addAll(rightHalfCard.getWatchers());
-                break;
-        }
+        allWatchers.addAll(super.getWatchers());
+        allWatchers.addAll(leftHalfCard.getWatchers());
+        allWatchers.addAll(rightHalfCard.getWatchers());
         return allWatchers;
     }
 }
@@ -230,8 +148,8 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
  */
 class LeftHalfCard  extends CardImpl<LeftHalfCard> {
 
-    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs ) {
+        super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_LEFT);
     }
 
     public LeftHalfCard(final LeftHalfCard card) {
@@ -242,6 +160,16 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
     public LeftHalfCard copy() {
         return new LeftHalfCard(this);
     }
+
+    @Override
+    public List<String> getRules() {
+        List<String> rules = new ArrayList<String>();
+        rules.add(new StringBuilder("<b>").append(this.getName()).append("<b/>").toString());
+        rules.addAll(super.getRules());
+        return rules;
+    }
+
+
 }
 
 /*
@@ -250,7 +178,7 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
 class RightHalfCard  extends CardImpl<RightHalfCard> {
 
     public RightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
-        super(ownerId, cardNumber, name, rarity, cardTypes, costs);
+        super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_RIGHT);
     }
 
     public RightHalfCard(final RightHalfCard card) {
@@ -260,5 +188,13 @@ class RightHalfCard  extends CardImpl<RightHalfCard> {
     @Override
     public RightHalfCard copy() {
         return new RightHalfCard(this);
+    }
+
+    @Override
+    public List<String> getRules() {
+        List<String> rules = new ArrayList<String>();
+        rules.add(new StringBuilder("<b>").append(this.getName()).append("<b/>").toString());
+        rules.addAll(super.getRules());
+        return rules;
     }
 }

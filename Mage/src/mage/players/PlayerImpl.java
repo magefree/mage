@@ -73,6 +73,10 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.Constants;
+import mage.Constants.SpellAbilityType;
+import mage.cards.SplitCard;
+import mage.game.stack.Spell;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -598,13 +602,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 int bookmark = game.bookmarkState();
                 Zone fromZone = game.getState().getZone(card.getId());
                 card.cast(game, fromZone, ability, playerId);
-
-                SpellAbility spellAbility = game.getStack().getSpell(ability.getId()).getSpellAbility();
-                if (spellAbility.activate(game, noMana)) {
-                    GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spellAbility.getId(), spellAbility.getSourceId(), playerId);
+                Spell spell = game.getStack().getSpell(ability.getId());
+                if (spell.activate(game, noMana)) {
+                    GameEvent event = GameEvent.getEvent(GameEvent.EventType.SPELL_CAST, spell.getSpellAbility().getId(), spell.getSpellAbility().getSourceId(), playerId);
                     event.setZone(fromZone);
                     game.fireEvent(event);
-                    game.fireInformEvent(name + spellAbility.getActivatedMessage(game));
+                    game.fireInformEvent(new StringBuilder(name).append(spell.getActivatedMessage(game)).toString());
                     game.removeBookmark(bookmark);
                     resetStoredBookmark(game);
                     return true;
@@ -775,7 +778,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
         for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
-            
+
             if (ability.canActivate(playerId, game)) {
                 useable.put(ability.getId(), ability);
             }
@@ -785,7 +788,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
                     useable.put(ability.getId(), ability);
                 }
-            } 
+            }
             //Alternative cost are not use for Flashback. This lines alloews to play spell with Alternative cost (like Force of Will) from wrong zone
             /*else {
                 // this allows alternative costs like Flashback work from other than hand zones
@@ -801,11 +804,39 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
         if (otherAbilities != null) {
             for (ActivatedAbility ability: otherAbilities) {
-                useable.put(ability.getId(), ability);
+                Card card = game.getCard(ability.getSourceId());
+                if (card.isSplitCard() && ability instanceof FlashbackAbility) {
+                    FlashbackAbility flashbackAbility;
+                    if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
+                    }
+                    else {
+                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                    }
+                    flashbackAbility.setSourceId(card.getId());
+                    flashbackAbility.setControllerId(card.getOwnerId());
+                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
+                    flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
+                    useable.put(flashbackAbility.getId(), flashbackAbility);
+                    if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
+                    }
+                    else {
+                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                    }
+                    flashbackAbility.setSourceId(card.getId());
+                    flashbackAbility.setControllerId(card.getOwnerId());
+                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
+                    flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
+                    useable.put(flashbackAbility.getId(), flashbackAbility);
+
+                } else {
+                    useable.put(ability.getId(), ability);
+                }
             }
         }
         return useable;
-    }
+    } 
 
     protected LinkedHashMap<UUID, ManaAbility> getUseableManaAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ManaAbility> useable = new LinkedHashMap<UUID, ManaAbility>();

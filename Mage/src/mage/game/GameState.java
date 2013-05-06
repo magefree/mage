@@ -37,6 +37,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.choices.Choice;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -453,6 +454,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         for (Ability ability: card.getAbilities()) {
             addAbility(ability, card);
+        }
+        if (card.isSplitCard()) {
+            addCard( ((SplitCard)card).getLeftHalfCard());
+            addCard( ((SplitCard)card).getRightHalfCard());
         }
     }
 

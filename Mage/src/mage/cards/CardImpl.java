@@ -49,6 +49,7 @@ import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
+import mage.Constants.SpellAbilityType;
 
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
@@ -75,6 +76,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
     protected boolean splitCard;
 
     public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+        this(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.BASE);
+    }
+
+    public CardImpl(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SpellAbilityType spellAbilityType) {
         this(ownerId, name);
         this.rarity = rarity;
         this.cardNumber = cardNumber;
@@ -84,7 +89,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             addAbility(new PlayLandAbility(name));
         }
         else {
-            addAbility(new SpellAbility(manaCost, name));
+            addAbility(new SpellAbility(manaCost, name, Zone.HAND, spellAbilityType));
         }
         this.usesVariousArt = Character.isDigit(this.getClass().getName().charAt(this.getClass().getName().length()-1));
         this.counters = new Counters();

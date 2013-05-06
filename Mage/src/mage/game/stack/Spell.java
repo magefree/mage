@@ -55,6 +55,10 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants;
+import static mage.Constants.SpellAbilityType.SPLIT_LEFT;
+import static mage.Constants.SpellAbilityType.SPLIT_RIGHT;
+import mage.cards.SplitCard;
 
 /**
  *
@@ -62,35 +66,87 @@ import java.util.UUID;
  */
 public class Spell<T extends Spell<T>> implements StackObject, Card {
 
+    private List<Card> spellCards = new ArrayList<Card>();
+    private List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+
     private Card card;
     private SpellAbility ability;
     private UUID controllerId;
     private boolean copiedSpell;
     private Zone fromZone;
+    private UUID id;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
+        id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
+        if (ability.getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+            spellCards.add(((SplitCard) card).getLeftHalfCard());
+            spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());
+            spellCards.add(((SplitCard) card).getRightHalfCard());
+            spellAbilities.add(((SplitCard) card).getRightHalfCard().getSpellAbility().copy());
+        } else {
+            spellCards.add(card);
+            spellAbilities.add(ability);
+        }
         this.controllerId = controllerId;
         this.fromZone = fromZone;
     }
 
     public Spell(final Spell<T> spell) {
-        this.card = spell.card.copy();
-        this.ability = spell.ability.copy();
+        this.id = spell.id;
+        for (SpellAbility spellAbility: spell.spellAbilities) {
+            this.spellAbilities.add(spellAbility.copy());
+        }
+        for (Card spellCard: spell.spellCards) {
+            this.spellCards.add(spellCard.copy());
+        }
+        if (spell.spellAbilities.get(0).equals(spell.ability)) {
+            this.ability = spellAbilities.get(0);
+        } else {
+            this.ability = spell.ability.copy();
+        }
+        if (spell.spellCards.get(0).equals(spell.card)) {
+            this.card = spellCards.get(0);
+        } else {
+            this.card = spell.card.copy();
+        }
         this.controllerId = spell.controllerId;
         this.fromZone = spell.fromZone;
         this.copiedSpell = spell.copiedSpell;
+    }
+
+
+    public boolean activate(Game game, boolean noMana) {
+        for (SpellAbility spellAbility: spellAbilities) {
+            if (!spellAbility.activate(game, noMana)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String getActivatedMessage(Game game) {
+        return ability.getActivatedMessage(game);
     }
 
     @Override
     public boolean resolve(Game game) {
         boolean result;
         if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
-            if (ability.getTargets().stillLegal(ability, game)) {
-                updateOptionalCosts();
-                result = ability.resolve(game);
+            int index = 0;
+            result = false;
+            boolean legalParts = false;
+            for(SpellAbility spellAbility: this.spellAbilities) {
+                if (spellAbility.getTargets().stillLegal(ability, game)) {
+                    legalParts = true;
+                    updateOptionalCosts(index);
+                    result |= spellAbility.resolve(game);
+                }
+                index++;
+            }
+            if (legalParts) {
                 if (!copiedSpell) {
                     for (Effect effect : ability.getEffects()) {
                         if (effect instanceof PostResolveEffect) {
@@ -102,7 +158,6 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         card.moveToZone(Zone.GRAVEYARD, ability.getId(), game, false);
                     }
                 }
-
                 return result;
             }
             //20091005 - 608.2b
@@ -111,7 +166,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             return false;
         } else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
-                updateOptionalCosts();
+                updateOptionalCosts(0);
                 if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
                     return ability.resolve(game);
                 }
@@ -122,7 +177,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             counter(null, game);
             return false;
         } else {
-            updateOptionalCosts();
+            updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
             return result;
         }
@@ -133,10 +188,10 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
      * This information will be used later by effects, e.g. to determine whether card was kicked or not.
      * E.g. Desolation Angel
      */
-    private void updateOptionalCosts() {
-        Ability abilityOrig = card.getAbilities().get(ability.getId());
+    private void updateOptionalCosts(int index) {
+        Ability abilityOrig = spellCards.get(index).getAbilities().get(spellAbilities.get(index).getId());
         if (abilityOrig != null) {
-            for (Object object : ability.getOptionalCosts()) {
+            for (Object object : spellAbilities.get(index).getOptionalCosts()) {
                 Cost cost = (Cost) object;
                 for (Cost costOrig : abilityOrig.getOptionalCosts()) {
                     if (cost.getId().equals(costOrig.getId())) {
@@ -163,29 +218,31 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public boolean chooseNewTargets(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
-            for (Target target: ability.getTargets()) {
-                Target newTarget = target.copy();
-                newTarget.clearChosen();
-                for (UUID targetId: target.getTargets()) {
-                    MageObject object = game.getObject(targetId);
-                    String name = null;
-                    if (object == null) {
-                        Player targetPlayer = game.getPlayer(targetId);
-                        if (targetPlayer != null) name = targetPlayer.getName();
-                    } else {
-                        name = object.getName();
+            for(SpellAbility spellAbility: spellAbilities) {
+                for (Target target: spellAbility.getTargets()) {
+                    Target newTarget = target.copy();
+                    newTarget.clearChosen();
+                    for (UUID targetId: target.getTargets()) {
+                        MageObject object = game.getObject(targetId);
+                        String name = null;
+                        if (object == null) {
+                            Player targetPlayer = game.getPlayer(targetId);
+                            if (targetPlayer != null) name = targetPlayer.getName();
+                        } else {
+                            name = object.getName();
+                        }
+                        if (name != null && player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
+                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game))
+                                newTarget.addTarget(targetId, spellAbility, game, false);
+                        }
+                        else {
+                            newTarget.addTarget(targetId, spellAbility, game, false);
+                        }
                     }
-                    if (name != null && player.chooseUse(ability.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-                        if (!player.chooseTarget(ability.getEffects().get(0).getOutcome(), newTarget, ability, game))
-                            newTarget.addTarget(targetId, ability, game, false);
+                    target.clearChosen();
+                    for (UUID newTargetId: newTarget.getTargets()) {
+                        target.addTarget(newTargetId, spellAbility, game, false);
                     }
-                    else {
-                        newTarget.addTarget(targetId, ability, game, false);
-                    }
-                }
-                target.clearChosen();
-                for (UUID newTargetId: newTarget.getTargets()) {
-                    target.addTarget(newTargetId, ability, game, false);
                 }
             }
             return true;
@@ -271,7 +328,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public UUID getId() {
-        return ability.getId();
+        return id;
     }
 
     @Override
@@ -293,6 +350,9 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public void setControllerId(UUID controllerId) {
         this.ability.setControllerId(controllerId);
+        for (SpellAbility spellAbility: spellAbilities) {
+            spellAbility.setControllerId(controllerId);
+        }
         this.controllerId = controllerId;
     }
 
@@ -301,12 +361,26 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public List<String> getRules() {
-        return card.getRules();
+        switch (ability.getSpellAbilityType()) {
+            case SPLIT_LEFT:
+                return ((SplitCard)card).getLeftHalfCard().getRules();
+            case SPLIT_RIGHT:
+                return ((SplitCard)card).getRightHalfCard().getRules();
+            default:
+                return card.getRules();
+        }
     }
 
     @Override
     public List<Watcher> getWatchers() {
-        return card.getWatchers();
+        switch (ability.getSpellAbilityType()) {
+            case SPLIT_LEFT:
+                return ((SplitCard)card).getLeftHalfCard().getWatchers();
+            case SPLIT_RIGHT:
+                return ((SplitCard)card).getLeftHalfCard().getWatchers();
+            default:
+                return card.getWatchers();
+        }
     }
 
     @Override

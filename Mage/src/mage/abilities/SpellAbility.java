@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.Constants.SpellAbilityType;
 
 /**
  *
@@ -47,23 +48,39 @@ import java.util.UUID;
  */
 public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
 
+    private SpellAbilityType spellAbilityType;
+
     public SpellAbility(ManaCost cost, String cardName) {
         this(cost, cardName, Zone.HAND);
     }
 
     public SpellAbility(ManaCost cost, String cardName, Zone zone) {
-        super(AbilityType.SPELL, zone);
-        this.addManaCost(cost);
-        this.name = "Cast " + cardName;
+        this(cost, cardName, zone, SpellAbilityType.BASE);
     }
 
-    public SpellAbility(Cost cost, String cardName, Effect effect, Zone zone) {
-        super(zone, effect, cost);
-        this.name = "Cast " + cardName;
+    public SpellAbility(ManaCost cost, String cardName, Zone zone, SpellAbilityType spellAbilityType) {
+        super(AbilityType.SPELL, zone);
+        this.spellAbilityType = spellAbilityType;
+        this.addManaCost(cost);
+        switch(spellAbilityType) {
+            case SPLIT_FUSED:
+                this.name = "Cast fused " + cardName;
+                break;
+            default:
+                this.name = "Cast " + cardName;
+        }
+        
     }
+
+//    public SpellAbility(Cost cost, String cardName, Effect effect, Zone zone) {
+//        super(zone, effect, cost);
+//        this.spellAbilityType = SpellAbilityType.BASE;
+//        this.name = "Cast " + cardName;
+//    }
 
     public SpellAbility(SpellAbility ability) {
         super(ability);
+        this.spellAbilityType = ability.spellAbilityType;
     }
 
     @Override
@@ -122,6 +139,14 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
         SpellAbility spell = new SpellAbility(this);
         spell.id = UUID.randomUUID();
         return spell;
+    }
+
+    public SpellAbilityType getSpellAbilityType() {
+        return spellAbilityType;
+    }
+
+    public void setSpellAbilityType(SpellAbilityType spellAbilityType) {
+        this.spellAbilityType = spellAbilityType;
     }
 
 }

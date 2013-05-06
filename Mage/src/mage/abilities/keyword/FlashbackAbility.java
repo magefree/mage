@@ -28,14 +28,18 @@
 package mage.abilities.keyword;
 
 import mage.Constants;
+import mage.Constants.SpellAbilityType;
+import static mage.Constants.SpellAbilityType.SPLIT_LEFT;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
+import mage.cards.SplitCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -48,16 +52,22 @@ import mage.target.Target;
  */
 public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<FlashbackAbility> {
 
+    private Constants.SpellAbilityType spellAbilityType;
+    private String abilityName;
+
     public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
         //super(cost, "", new FlashbackEffect(), Constants.Zone.GRAVEYARD);
         super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
         this.timing = timingRule;
         this.usesStack = false;
+        this.spellAbilityType = SpellAbilityType.BASE;
         this.addEffect(new CreateDelayedTriggeredAbilityEffect(new FlashbackTriggeredAbility()));
     }
 
     public FlashbackAbility(final FlashbackAbility ability) {
         super(ability);
+        this.spellAbilityType = ability.spellAbilityType;
+        this.abilityName = ability.abilityName;
     }
 
     @Override
@@ -66,10 +76,15 @@ public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<Flas
     }
 
     @Override
+    public String getRule(boolean all) {
+        return this.getRule();
+    }
+
+    @Override
     public String getRule() {
         StringBuilder sbRule = new StringBuilder("Flashback");
         if (costs.size() > 0) {
-            sbRule.append("--");
+            sbRule.append(" - ");
         } else {
             sbRule.append(" ");
         }
@@ -80,9 +95,26 @@ public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<Flas
             sbRule.append(costs.getText());
             sbRule.append(".");
         }
+        if (abilityName != null) {
+            sbRule.append(" ");
+            sbRule.append(abilityName);
+        }
         sbRule.append(" <i>(You may cast this card from your graveyard for its flashback cost. Then exile it.)</i>");
         return sbRule.toString();
     }
+
+    public void setSpellAbilityType(SpellAbilityType spellAbilityType) {
+        this.spellAbilityType = spellAbilityType;
+    }
+
+    public SpellAbilityType getSpellAbilityType() {
+        return this.spellAbilityType;
+    }
+
+    public void setAbilityName(String abilityName) {
+        this.abilityName = abilityName;
+    }
+
 }
 
 class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
@@ -107,13 +139,25 @@ class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
         if (card != null) {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
-                card.getSpellAbility().clear();
+                SpellAbility spellAbility;
+                switch(((FlashbackAbility) source).getSpellAbilityType()) {
+                    case SPLIT_LEFT:
+                        spellAbility = ((SplitCard)card).getLeftHalfCard().getSpellAbility();
+                        break;
+                    case SPLIT_RIGHT:
+                        spellAbility = ((SplitCard)card).getRightHalfCard().getSpellAbility();
+                        break;
+                    default:
+                        spellAbility = card.getSpellAbility();
+                }
+
+                spellAbility.clear();
                 int amount = source.getManaCostsToPay().getX();
-                card.getSpellAbility().getManaCostsToPay().setX(amount);
-                for (Target target : card.getSpellAbility().getTargets()) {
+                spellAbility.getManaCostsToPay().setX(amount);
+                for (Target target : spellAbility.getTargets()) {
                     target.setRequired(true);
                 }
-                return controller.cast(card.getSpellAbility(), game, true);
+                return controller.cast(spellAbility, game, true);
             }
         }
         return false;

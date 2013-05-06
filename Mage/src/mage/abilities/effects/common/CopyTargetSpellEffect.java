@@ -61,7 +61,7 @@ public class CopyTargetSpellEffect extends OneShotEffect<CopyTargetSpellEffect> 
             game.getStack().push(copy);
             copy.chooseNewTargets(game, source.getControllerId());
             Player player = game.getPlayer(source.getControllerId());
-            String activateMessage = copy.getSpellAbility().getActivatedMessage(game);
+            String activateMessage = copy.getActivatedMessage(game);
             if (activateMessage.startsWith(" casts ")) {
                 activateMessage = activateMessage.substring(6);
             }

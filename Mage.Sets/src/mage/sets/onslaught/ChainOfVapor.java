@@ -108,7 +108,7 @@ class ChainOfVaporEffect extends OneShotEffect<ChainOfVaporEffect> {
                                 copy.setCopiedSpell(true);
                                 game.getStack().push(copy);
                                 copy.chooseNewTargets(game, source.getControllerId());
-                                String activateMessage = copy.getSpellAbility().getActivatedMessage(game);
+                                String activateMessage = copy.getActivatedMessage(game);
                                 if (activateMessage.startsWith(" casts ")) {
                                     activateMessage = activateMessage.substring(6);
                                 }
