@@ -78,16 +78,17 @@ public class ScionOfVituGhazi extends CardImpl<ScionOfVituGhazi> {
         return new ScionOfVituGhazi(this);
     }
 
-    private class BirdToken extends Token {
+}
 
-        public BirdToken() {
-            super("Bird", "1/1 white Bird creature token with flying");
-            cardType.add(CardType.CREATURE);
-            color.setWhite(true);
-            subtype.add("Bird");
-            power = new MageInt(1);
-            toughness = new MageInt(1);
-            addAbility(FlyingAbility.getInstance());
-        }
+
+class BirdToken extends Token {
+    public BirdToken() {
+        super("Bird", "1/1 white Bird creature token with flying");
+        cardType.add(CardType.CREATURE);
+        color.setWhite(true);
+        subtype.add("Bird");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        addAbility(FlyingAbility.getInstance());
     }
 }
