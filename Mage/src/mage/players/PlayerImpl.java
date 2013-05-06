@@ -148,35 +148,97 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public PlayerImpl(final PlayerImpl<T> player) {
         this.abort = player.abort;
         this.playerId = player.playerId;
+
         this.name = player.name;
         this.human = player.human;
         this.life = player.life;
         this.wins = player.wins;
         this.loses = player.loses;
+
         this.library = player.library.copy();
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
         this.abilities = player.abilities.copy();
         this.counters = player.counters.copy();
+
         this.landsPlayed = player.landsPlayed;
         this.landsPerTurn = player.landsPerTurn;
         this.maxHandSize = player.maxHandSize;
         this.manaPool = player.manaPool.copy();
-        this.passed = player.passed;
-        this.passedTurn = player.passedTurn;
-        this.passedAllTurns = player.passedAllTurns;
         this.turns = player.turns;
+
         this.left = player.left;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
         this.attachments.addAll(player.attachments);
+
         this.inRange.addAll(player.inRange);
         this.userData = player.userData;
         this.canPayLifeCost = player.canPayLifeCost;
         this.canPaySacrificeCost = player.canPaySacrificeCost;
         this.storedBookmark = player.storedBookmark;
+
+        this.topCardRevealed = player.topCardRevealed;
+        this.playersUnderYourControl.clear();
+        this.playersUnderYourControl.addAll(player.playersUnderYourControl);
+        this.isTestMode = player.isTestMode;
+        this.isGameUnderControl = player.isGameUnderControl;
+
+        this.turnController = player.turnController;
+        this.passed = player.passed;
+        
+        this.passedTurn = player.passedTurn;
+        this.passedAllTurns = player.passedAllTurns;
+
+    }
+
+    @Override
+    public void restore(Player player) {
+        this.name = player.getName();
+        this.human = player.isHuman();
+        this.life = player.getLife();
+        this.wins = player.hasWon();
+        this.loses = player.hasLost();
+
+        this.library = player.getLibrary().copy();
+        this.sideboard = player.getSideboard().copy();
+        this.hand = player.getHand().copy();
+        this.graveyard = player.getGraveyard().copy();
+        this.abilities = player.getAbilities().copy();
+        this.counters = player.getCounters().copy();
+
+        this.landsPlayed = player.getLandsPlayed();
+        this.landsPerTurn = player.getLandsPerTurn();
+        this.maxHandSize = player.getMaxHandSize();
+        this.manaPool = player.getManaPool().copy();
+        this.turns = player.getTurns();
+
+
+        this.left = player.hasLeft();
+        this.range = player.getRange();
+        this.canGainLife = player.isCanGainLife();
+        this.canLoseLife = player.isCanLoseLife();
+        this.attachments.clear();
+        this.attachments.addAll(player.getAttachments());
+
+        this.inRange.clear();
+        this.inRange.addAll(player.getInRange());
+        this.userData = player.getUserData();
+        this.canPayLifeCost = player.canPayLifeCost();
+        this.canPaySacrificeCost = player.canPaySacrificeCost();
+        this.storedBookmark = player.getStoredBookmark();
+
+        this.topCardRevealed = player.isTopCardRevealed();
+        this.playersUnderYourControl.clear();
+        this.playersUnderYourControl.addAll(player.getPlayersUnderYourControl());
+        this.isTestMode = player.isTestMode();
+        this.isGameUnderControl = player.isGameUnderControl();
+
+        this.turnController = player.getTurnControlledBy();
+        this.passed = player.isPassed();
+
     }
 
     @Override
@@ -1037,35 +1099,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void setResponseInteger(Integer responseInteger) {}
-
-    @Override
-    public void restore(Player player) {
-        this.library = player.getLibrary().copy();
-        this.sideboard = player.getSideboard().copy();
-        this.hand = player.getHand().copy();
-        this.graveyard = player.getGraveyard().copy();
-        this.abilities = player.getAbilities().copy();
-        this.manaPool = player.getManaPool().copy();
-        this.life = player.getLife();
-        this.counters = player.getCounters().copy();
-        this.inRange.clear();
-        this.inRange.addAll(player.getInRange());
-        this.landsPlayed = player.getLandsPlayed();
-        this.name = player.getName();
-        this.range = player.getRange();
-        this.passed = player.isPassed();
-        this.human = player.isHuman();
-        this.wins = player.hasWon();
-        this.loses = player.hasLost();
-        this.landsPerTurn = player.getLandsPerTurn();
-        this.maxHandSize = player.getMaxHandSize();
-        this.left = player.hasLeft();
-        this.canGainLife = player.isCanGainLife();
-        this.canLoseLife = player.isCanLoseLife();
-        this.attachments.clear();
-        this.attachments.addAll(player.getAttachments());
-        this.userData = player.getUserData();
-    }
 
     @Override
     public boolean isPassed() {
