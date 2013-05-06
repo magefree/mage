@@ -127,6 +127,6 @@ class PyrewildShamanTriggeredAbility extends TriggeredAbilityImpl<PyrewildShaman
 
     @Override
     public String getRule() {
-        return "Whenever one or more creatures you control deal combat damage to a player, if Pyrewild Shaman is in your graveyard, you may pay {3}. If you do, return Pyrewild Shaman to your hand.";
+        return "Whenever one or more creatures you control deal combat damage to a player, if {this} is in your graveyard, you may pay {3}. If you do, return {this} to your hand.";
     }
 }
