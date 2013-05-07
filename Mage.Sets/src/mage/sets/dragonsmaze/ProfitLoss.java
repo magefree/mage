@@ -25,38 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.cards.CardImpl;
+import mage.cards.SplitCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GloriousCharge extends CardImpl<GloriousCharge> {
 
-    public GloriousCharge(UUID ownerId) {
-        super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "M10";
-        this.color.setWhite(true);
-        
-        // Creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+
+public class ProfitLoss extends SplitCard<ProfitLoss> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures your opponents control");
+    static {
+        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
     }
 
-    public GloriousCharge(final GloriousCharge card) {
+    public ProfitLoss(UUID ownerId) {
+        super(ownerId, 130, "Profit", "Loss", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}", "{2}{B}", true);
+        this.expansionSetCode = "DGM";
+
+        this.color.setWhite(true);
+        this.color.setBlack(true);
+
+        // Profit
+        // Creatures you control get +1/+1 until end of turn.
+        getLeftHalfCard().getColor().setBlue(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostControlledEffect(1,1, Duration.EndOfTurn, new FilterCreaturePermanent()));
+
+        // Loss
+        // Creatures your opponents control get -1/-1 until end of turn.
+        getRightHalfCard().getColor().setBlack(true);
+        getRightHalfCard().getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, filter, false));
+
+    }
+
+    public ProfitLoss(final ProfitLoss card) {
         super(card);
     }
 
     @Override
-    public GloriousCharge copy() {
-        return new GloriousCharge(this);
+    public ProfitLoss copy() {
+        return new ProfitLoss(this);
     }
 }

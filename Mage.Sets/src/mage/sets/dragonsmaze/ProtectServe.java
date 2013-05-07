@@ -25,38 +25,52 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.cards.SplitCard;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GloriousCharge extends CardImpl<GloriousCharge> {
 
-    public GloriousCharge(UUID ownerId) {
-        super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "M10";
+
+public class ProtectServe extends SplitCard<ProtectServe> {
+
+    public ProtectServe(UUID ownerId) {
+        super(ownerId, 131, "Protect", "Serve", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{2}{W}", "{1}{U}", true);
+        this.expansionSetCode = "DGM";
+
         this.color.setWhite(true);
-        
-        // Creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.color.setBlue(true);
+
+        // Protect
+        // Target creature gets +2/+4 until end of turn.
+        getLeftHalfCard().getColor().setWhite(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(2,4, Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+
+        // Serve
+        // Target creature gets -6/-0 until end of turn.
+        getRightHalfCard().getColor().setBlue(true);
+        getRightHalfCard().getSpellAbility().addEffect(new BoostTargetEffect(-6,0, Duration.EndOfTurn));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+
     }
 
-    public GloriousCharge(final GloriousCharge card) {
+    public ProtectServe(final ProtectServe card) {
         super(card);
     }
 
     @Override
-    public GloriousCharge copy() {
-        return new GloriousCharge(this);
+    public ProtectServe copy() {
+        return new ProtectServe(this);
     }
 }

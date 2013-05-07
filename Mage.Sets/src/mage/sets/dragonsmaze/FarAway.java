@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.cards.CardImpl;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.SacrificeEffect;
+import mage.cards.SplitCard;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GloriousCharge extends CardImpl<GloriousCharge> {
 
-    public GloriousCharge(UUID ownerId) {
-        super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "M10";
-        this.color.setWhite(true);
-        
-        // Creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+
+public class FarAway extends SplitCard<FarAway> {
+
+    public FarAway(UUID ownerId) {
+        super(ownerId, 127, "Far", "Away", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{U}", "{2}{B}", true);
+        this.expansionSetCode = "DGM";
+
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+
+        // Far
+        // Return target creature to its owner's hand.
+        getLeftHalfCard().getColor().setBlue(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new ReturnToHandTargetEffect());
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+
+        // Away
+        // Target player sacrifices a creature.
+        getRightHalfCard().getColor().setBlack(true);
+        getRightHalfCard().getSpellAbility().addEffect(new SacrificeEffect(new FilterCreaturePermanent(), 1, "Target player"));
+        getRightHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+
     }
 
-    public GloriousCharge(final GloriousCharge card) {
+    public FarAway(final FarAway card) {
         super(card);
     }
 
     @Override
-    public GloriousCharge copy() {
-        return new GloriousCharge(this);
+    public FarAway copy() {
+        return new FarAway(this);
     }
 }

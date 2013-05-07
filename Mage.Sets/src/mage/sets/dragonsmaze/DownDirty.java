@@ -25,38 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
+import mage.cards.SplitCard;
+import mage.target.TargetPlayer;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class GloriousCharge extends CardImpl<GloriousCharge> {
 
-    public GloriousCharge(UUID ownerId) {
-        super(ownerId, 11, "Glorious Charge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
-        this.expansionSetCode = "M10";
-        this.color.setWhite(true);
-        
-        // Creatures you control get +1/+1 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+
+public class DownDirty extends SplitCard<DownDirty> {
+
+    public DownDirty(UUID ownerId) {
+        super(ownerId, 126, "Down", "Dirty", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}", "{2}{G}", true);
+        this.expansionSetCode = "DGM";
+
+        this.color.setBlack(true);
+        this.color.setGreen(true);
+
+        // Down
+        // Target player discards two cards.
+        getLeftHalfCard().getColor().setBlack(true);
+        getLeftHalfCard().getSpellAbility().addEffect(new DiscardTargetEffect(2));
+        getLeftHalfCard().getSpellAbility().addTarget(new TargetPlayer(true));
+
+        // Dirty
+        // Return target card from your graveyard to your hand.
+        getRightHalfCard().getColor().setGreen(true);
+        getRightHalfCard().getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
+        getRightHalfCard().getSpellAbility().addTarget(new TargetCardInYourGraveyard());
+
     }
 
-    public GloriousCharge(final GloriousCharge card) {
+    public DownDirty(final DownDirty card) {
         super(card);
     }
 
     @Override
-    public GloriousCharge copy() {
-        return new GloriousCharge(this);
+    public DownDirty copy() {
+        return new DownDirty(this);
     }
 }
