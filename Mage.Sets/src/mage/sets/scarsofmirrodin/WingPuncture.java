@@ -80,7 +80,7 @@ class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
 
     public WingPunctureEffect() {
         super(Outcome.Damage);
-        staticText = "Target creature you control deals damage equal to its power to target creature with flying.";
+        staticText = "Target creature you control deals damage equal to its power to target creature with flying";
      }
 
     public WingPunctureEffect(final WingPunctureEffect effect) {
@@ -91,7 +91,7 @@ class WingPunctureEffect extends OneShotEffect<WingPunctureEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getFirstTarget());
         if (sourcePermanent == null) {
-            game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
 
         Permanent targetPermanent = (Permanent) game.getPermanent(source.getTargets().get(1).getFirstTarget());
