@@ -67,7 +67,7 @@ public class TurnBurn extends SplitCard<TurnBurn> {
         // Burn deals 2 damage to target creature or player.
         getRightHalfCard().getColor().setRed(true);
         Effect effect = new DamageTargetEffect(2);
-        effect.setText("Burn deals 2 damage to target creature or player.");
+        effect.setText("Burn deals 2 damage to target creature or player");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
 

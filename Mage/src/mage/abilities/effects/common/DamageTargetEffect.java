@@ -133,6 +133,9 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         String message = amount.getMessage();
         sb.append("{source} deals ");

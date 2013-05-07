@@ -38,6 +38,8 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.watchers.Watcher;
 
 /**
@@ -109,7 +111,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
         rules.addAll(leftHalfCard.getRules());
         rules.addAll(rightHalfCard.getRules());
         if (getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-            rules.add("------------------------------------------------------------------------");
+            rules.add("--------------------------------------------------------------------------");
             rules.add("Fuse (You may cast one or both halves of this card from your hand.)");
         }
         return rules;
@@ -164,7 +166,17 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<String>();
-        rules.add(new StringBuilder("<b>").append(this.getName()).append("<b/>").toString());
+        // TODO: Move formatting to client CardInfoPaneImpl.java
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
+        buffer.append("<tr><td valign='top'><b>");
+        buffer.append(this.getName());
+        buffer.append("</b></td><td align='right' valign='top' style='width:");
+        buffer.append(getSpellAbility().getManaCosts().getSymbols().size() * 11 + 1);
+        buffer.append("px'>");
+        buffer.append(getSpellAbility().getManaCosts().getText());
+        buffer.append("</td></tr></table>");
+        rules.add(buffer.toString());
         rules.addAll(super.getRules());
         return rules;
     }
@@ -193,7 +205,17 @@ class RightHalfCard  extends CardImpl<RightHalfCard> {
     @Override
     public List<String> getRules() {
         List<String> rules = new ArrayList<String>();
-        rules.add(new StringBuilder("<b>").append(this.getName()).append("<b/>").toString());
+        // TODO: Move formatting to client CardInfoPaneImpl.java
+        StringBuilder buffer = new StringBuilder();
+        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
+        buffer.append("<tr><td valign='top'><b>");
+        buffer.append(this.getName());
+        buffer.append("</b></td><td align='right' valign='top' style='width:");
+        buffer.append(getSpellAbility().getManaCosts().getSymbols().size() * 11 + 1);
+        buffer.append("px'>");
+        buffer.append(getSpellAbility().getManaCosts().getText());
+        buffer.append("</td></tr></table>");
+        rules.add(buffer.toString());
         rules.addAll(super.getRules());
         return rules;
     }
