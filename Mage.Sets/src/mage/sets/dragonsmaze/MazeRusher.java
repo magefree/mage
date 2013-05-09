@@ -55,7 +55,7 @@ public class MazeRusher extends CardImpl<MazeRusher> {
     }
 
     public MazeRusher (UUID ownerId) {
-        super(ownerId, 31, "Maze Rusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
+        super(ownerId, 33, "Maze Rusher", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Elemental");
         this.color.setRed(true);

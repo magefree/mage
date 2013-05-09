@@ -45,7 +45,7 @@ import mage.cards.CardImpl;
 public class RiotPiker extends CardImpl<RiotPiker> {
 
     public RiotPiker (UUID ownerId) {
-        super(ownerId, 36, "Riot Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        super(ownerId, 37, "Riot Piker", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Goblin");
         this.subtype.add("Berserker");

@@ -46,7 +46,7 @@ import mage.cards.CardImpl;
 public class RubblebeltMaaka extends CardImpl<RubblebeltMaaka> {
 
     public RubblebeltMaaka (UUID ownerId) {
-        super(ownerId, 37, "Rubblebelt Maaka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 38, "Rubblebelt Maaka", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Cat");
         this.color.setRed(true);

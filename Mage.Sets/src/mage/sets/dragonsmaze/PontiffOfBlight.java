@@ -32,23 +32,16 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -65,7 +58,7 @@ public class PontiffOfBlight extends CardImpl<PontiffOfBlight> {
     }
 
     public PontiffOfBlight (UUID ownerId) {
-        super(ownerId, 27, "Pontiff of Blight", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
+        super(ownerId, 27, "Pontiff of Blight", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}{B}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Zombie");
         this.subtype.add("Cleric");

@@ -67,7 +67,7 @@ public class SmeltWardGatekeepers extends CardImpl<SmeltWardGatekeepers> {
     }
 
     public SmeltWardGatekeepers (UUID ownerId) {
-        super(ownerId, 38, "Smelt-Ward Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 39, "Smelt-Ward Gatekeepers", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "DGM";
         this.subtype.add("Human");
         this.subtype.add("Soldier");
