@@ -53,7 +53,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     private Card rightHalfCard;
 
     public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
-        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" - ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ?SpellAbilityType.SPLIT_FUSED:SpellAbilityType.SPLIT));
+        super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" // ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ?SpellAbilityType.SPLIT_FUSED:SpellAbilityType.SPLIT));
         this.createLeftHalfCard(nameLeft, costsLeft);
         this.createRightHalfCard(nameRight, costsRight);
         this.splitCard = true;

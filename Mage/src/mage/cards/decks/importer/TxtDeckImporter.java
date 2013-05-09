@@ -58,7 +58,7 @@ public class TxtDeckImporter extends DeckImporter {
 
         int delim = line.indexOf(' ');
         String lineNum = line.substring(0, delim).trim();
-        String lineName = line.substring(delim).trim();
+        String lineName = line.substring(delim).replace("’","\'").trim();
         try {
             int num = Integer.parseInt(lineNum);
             List<CardInfo> cards = CardRepository.instance.findCards(lineName);
