@@ -25,94 +25,118 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.returntoravnica;
+package mage.sets.dragonsmaze;
 
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.common.delayed.AtTheBeginOfPreCombatMainPhaseTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
-import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
+import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class AxebaneGuardian extends CardImpl<AxebaneGuardian> {
+public class PlasmCapture extends CardImpl<PlasmCapture> {
 
-    public AxebaneGuardian(UUID ownerId) {
-        super(ownerId, 115, "Axebane Guardian", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
-        this.expansionSetCode = "RTR";
-        this.subtype.add("Human");
-        this.subtype.add("Druid");
+    public PlasmCapture(UUID ownerId) {
+        super(ownerId, 91, "Plasm Capture", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{G}{G}{U}{U}");
+        this.expansionSetCode = "DGM";
 
+        this.color.setBlue(true);
         this.color.setGreen(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(3);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-        // {tap}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new AxebaneGuardianManaEffect(), new TapSourceCost()));
+        // Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost.
+        this.getSpellAbility().addTarget(new TargetSpell());
+        this.getSpellAbility().addEffect(new PlasmCaptureCounterEffect());
     }
 
-    public AxebaneGuardian(final AxebaneGuardian card) {
+    public PlasmCapture(final PlasmCapture card) {
         super(card);
     }
 
     @Override
-    public AxebaneGuardian copy() {
-        return new AxebaneGuardian(this);
+    public PlasmCapture copy() {
+        return new PlasmCapture(this);
     }
 }
 
+class PlasmCaptureCounterEffect extends OneShotEffect<PlasmCaptureCounterEffect> {
 
-class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
-
-
-    private static final FilterPermanent filter = new FilterControlledCreaturePermanent("creatures with defender you control");
-    static{
-        filter.add(new AbilityPredicate(DefenderAbility.class));
-    }
-    public AxebaneGuardianManaEffect() {
-        super();
-        this.staticText = "Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control";
+    public PlasmCaptureCounterEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "Counter target spell. At the beginning of your next precombat main phase, add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost";
     }
 
-    public AxebaneGuardianManaEffect(final AxebaneGuardianManaEffect effect) {
+    public PlasmCaptureCounterEffect(final PlasmCaptureCounterEffect effect) {
         super(effect);
     }
 
     @Override
-    public AxebaneGuardianManaEffect copy() {
-        return new AxebaneGuardianManaEffect(this);
+    public PlasmCaptureCounterEffect copy() {
+        return new PlasmCaptureCounterEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        boolean result = false;
+        Spell spell = game.getStack().getSpell(getTargetPointer().getFirst(game, source));
+        if (spell != null) {
+            result = game.getStack().counter(getTargetPointer().getFirst(game, source), source.getSourceId(), game);
+            int mana = spell.getManaCost().convertedManaCost();
+            AtTheBeginOfPreCombatMainPhaseTriggeredAbility delayedAbility =
+                    new AtTheBeginOfPreCombatMainPhaseTriggeredAbility(new PlasmCaptureManaEffect(mana), TargetController.YOU);
+            delayedAbility.setSourceId(source.getSourceId());
+            delayedAbility.setControllerId(source.getControllerId());
+            game.addDelayedTriggeredAbility(delayedAbility);
+        }
+        return result;
+    }
+}
+
+class PlasmCaptureManaEffect extends ManaEffect<PlasmCaptureManaEffect> {
+
+    int amountOfMana;
+
+    public PlasmCaptureManaEffect(int amountOfMana) {
+        super();
+        this.amountOfMana = amountOfMana;
+        this.staticText = "add X mana in any combination of colors to your mana pool, where X is that spell's converted mana cost";
+    }
+
+    public PlasmCaptureManaEffect(final PlasmCaptureManaEffect effect) {
+        super(effect);
+        this.amountOfMana = effect.amountOfMana;
+    }
+
+    @Override
+    public PlasmCaptureManaEffect copy() {
+        return new PlasmCaptureManaEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if(player != null){
-                int x = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
-
             Mana mana = new Mana();
-            for(int i = 0; i < x; i++){
+            for(int i = 0; i < amountOfMana; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
                 while (!player.choose(Constants.Outcome.Benefit, choiceColor, game)) {
                     game.debugMessage("player canceled choosing color. retrying.");
                 }
-                
+
                 if (choiceColor.getColor().isBlack()) {
                     mana.addBlack();
                 } else if (choiceColor.getColor().isBlue()) {
