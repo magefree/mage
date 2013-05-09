@@ -33,9 +33,7 @@ import mage.Constants.AsThoughEffectType;
 import mage.Constants.CardType;
 import mage.Constants.Zone;
 import mage.MageObject;
-import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.effects.Effect;
 import mage.abilities.keyword.FlashAbility;
 import mage.game.Game;
 
@@ -90,7 +88,9 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
                 object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
                 game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
                 game.canPlaySorcery(playerId))) {
-
+            if (spellAbilityType.equals(SpellAbilityType.SPLIT)) {
+                return false;
+            }
             // fix for Gitaxian Probe and casting opponent's spells
             if (!controllerId.equals(playerId)) {
                 return false;

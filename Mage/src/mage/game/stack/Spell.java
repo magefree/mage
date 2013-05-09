@@ -591,4 +591,8 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public void removeCounters(Counter counter, Game game) {}
+
+    public Card getCard() {
+        return card;
+    }
 }

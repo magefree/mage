@@ -595,6 +595,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {
+        if (!ability.getSpellAbilityType().equals(SpellAbilityType.BASE)) {
+            ability = chooseSpellAbilityForCast(ability, game, noMana);
+        }
         //20091005 - 601.2a
         Card card = game.getCard(ability.getSourceId());
         if (card != null) {
@@ -616,6 +619,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             }
         }
         return false;
+    }
+
+    @Override
+    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
+        return ability;
     }
 
     @Override
@@ -774,6 +782,31 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         game.restoreState(bookmark);
         return false;
     }
+
+    protected LinkedHashMap<UUID, ActivatedAbility> getSpellAbilities(MageObject object, Zone zone, Game game) {
+        LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
+        for (Ability ability: object.getAbilities()) {
+            if (ability instanceof SpellAbility) {
+                if (((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                    if (zone.equals(Zone.HAND)) {
+                        // Fix so you don't need to choose Fuse twice
+                        useable.clear();
+                        useable.put(ability.getId(), (SpellAbility) ability);
+                        return useable;
+                    } else {
+                        // Fuse only allowed from hand
+                        continue;
+                    }
+                }
+                if (((SpellAbility) ability).getSpellAbilityType().equals(SpellAbilityType.SPLIT)) {
+                    continue;
+                }
+                useable.put(ability.getId(), (SpellAbility) ability);
+            }
+        }
+        return useable;
+    }
+
 
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();

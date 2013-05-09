@@ -39,7 +39,7 @@ public class SystemUtil {
     public static void addCardsForTesting(Game game) {
         try {
             File f = new File(INIT_FILE_PATH);
-            Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\-.!'\\d]*):([\\d]*)");
+            Pattern pattern = Pattern.compile("([a-zA-Z]*):([\\w]*):([a-zA-Z ,\\/\\-.!'\\d]*):([\\d]*)");
             if (!f.exists()) {
                 logger.warn("Couldn't find init file: " + INIT_FILE_PATH);
                 return;

@@ -167,6 +167,7 @@ public interface Player extends MageItem, Copyable<Player> {
     int drawCards(int num, Game game);
     int drawCards(int num, Game game, ArrayList<UUID> appliedEffects);
     boolean cast(SpellAbility ability, Game game, boolean noMana);
+    SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana);
     boolean putInHand(Card card, Game game);
     boolean removeFromHand(Card card, Game game);
     boolean removeFromBattlefield(Permanent permanent, Game game);

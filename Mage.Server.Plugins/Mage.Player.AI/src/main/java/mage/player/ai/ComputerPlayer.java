@@ -80,6 +80,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import static mage.Constants.SpellAbilityType.SPLIT;
+import static mage.Constants.SpellAbilityType.SPLIT_FUSED;
 
 
 
@@ -1202,6 +1204,26 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         log.debug("chooseEffect");
         //TODO: implement this
         return 0;
+    }
+
+    @Override
+    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
+        switch(ability.getSpellAbilityType()) {
+            case SPLIT:
+            case SPLIT_FUSED:
+                MageObject object = game.getObject(ability.getSourceId());
+                if (object != null) {
+                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+                    if (useableAbilities != null && useableAbilities.size() > 0) {
+                        game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(useableAbilities.values()));
+                        // TODO: Improve this
+                        return (SpellAbility) useableAbilities.values().iterator().next();
+                    }
+                }
+                return null;
+            default:
+                return ability;
+        }
     }
 
     @Override

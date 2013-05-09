@@ -40,7 +40,7 @@ public class MageTextArea extends JEditorPane {
         buffer.append("pt;margin:3px 3px 3px 3px;color: #FFFFFF'><b><center>");
 
         text = text.replaceAll("#([^#]+)#", "<i>$1</i>");
-        text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
+        //text = text.replaceAll("\\s*//\\s*", "<hr width='50%'>");
         text = text.replace("\r\n", "<div style='font-size:5pt'></div>");
         //text += "<br>";
 

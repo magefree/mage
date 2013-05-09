@@ -32,6 +32,8 @@ import java.io.Serializable;
 import java.util.*;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
+import static mage.Constants.SpellAbilityType.SPLIT;
+import static mage.Constants.SpellAbilityType.SPLIT_FUSED;
 import mage.Constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
@@ -738,6 +740,32 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (abilities.containsKey(response.getUUID())) {
                 activateAbility(abilities.get(response.getUUID()), game);
             }
+        }
+    }
+
+    @Override
+    public SpellAbility chooseSpellAbilityForCast(SpellAbility ability, Game game, boolean noMana) {
+        switch(ability.getSpellAbilityType()) {
+            case SPLIT:
+            case SPLIT_FUSED:
+                MageObject object = game.getObject(ability.getSourceId());
+                if (object != null) {
+                    LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getSpellAbilities(object, game.getState().getZone(object.getId()), game);
+                    if (useableAbilities != null && useableAbilities.size() == 1) {
+                        return (SpellAbility) useableAbilities.values().iterator().next();
+                    } else if (useableAbilities != null && useableAbilities.size() > 0) {
+                        game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(useableAbilities.values()));
+                        waitForResponse();
+                        if (response.getUUID() != null) {
+                            if (useableAbilities.containsKey(response.getUUID())) {
+                                return (SpellAbility) useableAbilities.get(response.getUUID());
+                            }
+                        }
+                    }
+                }
+                return null;
+            default:
+                return ability;
         }
     }
 

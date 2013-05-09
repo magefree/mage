@@ -33,14 +33,11 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageObject;
 import mage.ObjectColor;
-import mage.abilities.Mode;
 import mage.cards.Card;
-import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.target.Target;
 import mage.target.Targets;
@@ -48,6 +45,11 @@ import mage.target.Targets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.Mode;
+import mage.abilities.costs.mana.ManaCosts;
+import mage.cards.SplitCard;
+import mage.counters.Counter;
+import mage.game.stack.Spell;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -57,6 +59,7 @@ public class CardView extends SimpleCardView {
 
     protected UUID parentId;
     protected String name;
+    protected String displayName;
     protected List<String> rules;
     protected String power;
     protected String toughness;
@@ -75,6 +78,14 @@ public class CardView extends SimpleCardView {
     protected boolean canTransform;
     protected CardView secondCardFace;
     protected boolean transformed;
+
+    protected boolean isSplitCard;
+    protected String leftSplitName;
+    protected ManaCosts leftSplitCosts;
+    protected List<String> leftSplitRules;
+    protected String rightSplitName;
+    protected ManaCosts rightSplitCosts;
+    protected List<String> rightSplitRules;
 
     protected List<UUID> targets;
 
@@ -95,9 +106,44 @@ public class CardView extends SimpleCardView {
             fillEmpty();
             return;
         }
+        Card cardHalf = null;
+        SplitCard splitCard = null;
+        this.isSplitCard = card.isSplitCard();
+        if (card instanceof Spell) {
+            if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_LEFT)) {
+                splitCard = (SplitCard) ((Spell) card).getCard();
+                cardHalf = ((SplitCard) splitCard).getLeftHalfCard();
+            } else if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_RIGHT)) {
+                splitCard = (SplitCard) ((Spell) card).getCard();
+                cardHalf = ((SplitCard) splitCard).getRightHalfCard();
+            } else if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+                isSplitCard = true;
+                splitCard = (SplitCard) ((Spell) card).getCard();
+            }
+        } else if (card.isSplitCard()) {
+            splitCard = (SplitCard) card;
+        }
+        if (this.isSplitCard && splitCard != null) {
+            leftSplitName = splitCard.getLeftHalfCard().getName();
+            leftSplitCosts = splitCard.getLeftHalfCard().getManaCost();
+            leftSplitRules = splitCard.getLeftHalfCard().getRules();
+            rightSplitName = splitCard.getRightHalfCard().getName();
+            rightSplitCosts = splitCard.getRightHalfCard().getManaCost();
+            rightSplitRules = splitCard.getRightHalfCard().getRules();
+        }
 
         this.name = card.getName();
-        this.rules = card.getRules();
+        if (cardHalf != null) {
+            this.displayName = cardHalf.getName();
+            this.rules = cardHalf.getRules();
+            this.manaCost = cardHalf.getManaCost().getSymbols();
+            this.convertedManaCost = cardHalf.getManaCost().convertedManaCost();
+        } else {
+            this.displayName = card.getName();
+            this.rules = card.getRules();
+            this.manaCost = card.getManaCost().getSymbols();
+            this.convertedManaCost = card.getManaCost().convertedManaCost();
+        }
         if (card instanceof Permanent) {
             Permanent permanent = (Permanent)card;
             this.power = Integer.toString(card.getPower().getValue());
@@ -113,9 +159,9 @@ public class CardView extends SimpleCardView {
         this.subTypes = card.getSubtype();
         this.superTypes = card.getSupertype();
         this.color = card.getColor();
-        this.manaCost = card.getManaCost().getSymbols();
-        this.convertedManaCost = card.getManaCost().convertedManaCost();
         this.canTransform = card.canTransform();
+
+
         if (card instanceof PermanentToken) {
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
@@ -152,7 +198,6 @@ public class CardView extends SimpleCardView {
 
     public CardView(MageObject card) {
         super(card.getId(), "", 0, false, false);
-
         this.name = card.getName();
         if (card instanceof Permanent) {
             this.power = Integer.toString(card.getPower().getValue());
@@ -254,6 +299,10 @@ public class CardView extends SimpleCardView {
 
     public String getName() {
         return name;
+    }
+
+    public String getDisplayName() {
+        return displayName;
     }
 
     public List<String> getRules() {
@@ -379,6 +428,34 @@ public class CardView extends SimpleCardView {
 
     public boolean canTransform() {
         return this.canTransform;
+    }
+
+    public boolean isSplitCard() {
+        return this.isSplitCard;
+    }
+
+    public String getLeftSplitName() {
+        return leftSplitName;
+    }
+
+    public ManaCosts getLeftSplitCosts() {
+        return leftSplitCosts;
+    }
+
+    public List<String> getLeftSplitRules() {
+        return leftSplitRules;
+    }
+
+    public String getRightSplitName() {
+        return rightSplitName;
+    }
+
+    public ManaCosts getRightSplitCosts() {
+        return rightSplitCosts;
+    }
+
+    public List<String> getRightSplitRules() {
+        return rightSplitRules;
     }
 
     public CardView getSecondCardFace() {

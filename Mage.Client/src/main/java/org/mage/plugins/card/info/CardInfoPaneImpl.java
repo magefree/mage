@@ -117,11 +117,13 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                     buffer.append("pt;margin:0px 1px 0px 1px'>");
                     buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
                     buffer.append("<tr><td valign='top'><b>");
-                    buffer.append(card.getName());
+                    buffer.append(card.getDisplayName());
                     buffer.append("</b></td><td align='right' valign='top' style='width:");
                     buffer.append(symbolCount * 11 + 1);
                     buffer.append("px'>");
-                    buffer.append(castingCost);
+                    if (!card.isSplitCard()) {
+                        buffer.append(castingCost);
+                    }
                     buffer.append("</td></tr></table>");
                     buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'><tr><td style='margin-left: 1px'>");
                     buffer.append(getTypes(card));
@@ -160,24 +162,49 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         buffer.append("</td></tr></table>");
                     }
 
-                    String legal = "";
-                    if (rulings.size() > 0) {
-                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
-                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
-                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
-                        legal += "<br>";
-                        for (String ruling : rulings) {
+                    StringBuilder rule = new StringBuilder("<br/>");
+                    if (card.isSplitCard()) {
+                        rule.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
+                        rule.append("<tr><td valign='top'><b>");
+                        rule.append(card.getLeftSplitName());
+                        rule.append("</b></td><td align='right' valign='top' style='width:");
+                        rule.append(card.getLeftSplitCosts().getSymbols().size() * 11 + 1);
+                        rule.append("px'>");
+                        rule.append(card.getLeftSplitCosts().getText());
+                        rule.append("</td></tr></table>");
+                        for (String ruling : card.getLeftSplitRules()) {
                             if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
-                                legal += "<p style='margin: 2px'>";
-                                legal += ruling;
-                                legal += "</p>";
+                                rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
+                            }
+                        }
+                        rule.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
+                        rule.append("<tr><td valign='top'><b>");
+                        rule.append(card.getRightSplitName());
+                        rule.append("</b></td><td align='right' valign='top' style='width:");
+                        rule.append(card.getRightSplitCosts().getSymbols().size() * 11 + 1);
+                        rule.append("px'>");
+                        rule.append(card.getRightSplitCosts().getText());
+                        rule.append("</td></tr></table>");
+                        for (String ruling : card.getRightSplitRules()) {
+                            if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
+                                rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
                             }
                         }
                     }
+                    if (rulings.size() > 0) {
+                        for (String ruling : rulings) {
+                            if (ruling != null && !ruling.replace(".", "").trim().isEmpty()) {
+                                rule.append("<p style='margin: 2px'>").append(ruling).append("</p>");
+                            }
+                        }                        
+                    }
 
-
+                    String legal = rule.toString();
                     if (legal.length() > 0) {
-                        //buffer.append("<br>");
+// this 2 replaces were only done with the empty string, is it any longer needed? (LevelX2)
+//                        legal = legal.replaceAll("#([^#]+)#", "<i>$1</i>");
+//                        legal = legal.replaceAll("\\s*//\\s*", "<hr width='50%'>");
+//                        legal = legal.replace("\r\n", "<div style='font-size:5pt'></div>");
                         legal = legal.replaceAll("\\{this\\}", card.getName());
                         legal = legal.replaceAll("\\{source\\}", card.getName());
                         buffer.append(ManaSymbols.replaceSymbolsWithHTML(legal, ManaSymbols.Type.CARD));
