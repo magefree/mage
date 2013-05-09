@@ -33,6 +33,7 @@ import java.util.*;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -206,6 +207,24 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (CombatGroup group: groups) {
             count += group.getAttackers().size();
         }
+
+        if (count > 1) {
+            List<UUID> tobeRemoved = new ArrayList<UUID>();
+            for (CombatGroup group: groups) {
+                for (UUID attackingCreatureId: group.getAttackers()) {
+                    Permanent attacker = game.getPermanent(attackingCreatureId);
+                    if (count >1 && attacker != null && attacker.getAbilities().containsKey(CanAttackOnlyAloneAbility.getInstance().getId())) {
+                        game.informPlayers(attacker.getName() + " can only attack alone. Removing it from combat.");
+                        tobeRemoved.add(attackingCreatureId);
+                        count--;
+                    }
+                }
+            }
+            for (UUID attackingCreatureId : tobeRemoved) {
+                this.removeAttacker(attackingCreatureId, game);
+            }
+        }
+
         if (count == 1) {
             List<UUID> tobeRemoved = new ArrayList<UUID>();
             for (CombatGroup group: groups) {
@@ -222,6 +241,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
 
         }
+
     }
 
     public void selectBlockers(Game game) {
