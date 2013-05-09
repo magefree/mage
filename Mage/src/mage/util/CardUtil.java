@@ -32,6 +32,7 @@ import java.util.Iterator;
 import mage.Constants;
 import mage.Mana;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -339,6 +340,12 @@ public class CardUtil {
             return numberToText(Integer.parseInt(number));
         }
         return number;
+    }
+
+    public static String replaceSourceName(String message, String sourceName) {
+        message = message.replace("{this}", sourceName);
+        message = message.replace("{source}", sourceName);
+        return message;
     }
 
     public static boolean checkNumeric(String s) {

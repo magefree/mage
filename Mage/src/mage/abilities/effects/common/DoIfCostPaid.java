@@ -1,12 +1,14 @@
 package mage.abilities.effects.common;
 
 import mage.Constants;
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     private OneShotEffect executingEffect;
@@ -27,8 +29,11 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            if (player.chooseUse(executingEffect.getOutcome(), "Pay " + cost.getText() + " and " + executingEffect.getText(source.getModes().getMode()), game)) {
+        MageObject mageObject = game.getObject(source.getSourceId());
+        if (player != null && mageObject != null) {
+            String message = new StringBuilder("Pay ").append(cost.getText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).toString();
+            message = CardUtil.replaceSourceName(message, mageObject.getName());
+            if (player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     executingEffect.setTargetPointer(this.targetPointer);

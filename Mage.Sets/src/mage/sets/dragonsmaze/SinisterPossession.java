@@ -41,6 +41,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,6 +56,7 @@ public class SinisterPossession extends CardImpl<SinisterPossession> {
 
     public SinisterPossession(UUID ownerId) {
         super(ownerId, 29, "Sinister Possession", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}");
+        this.subtype.add("Aura");
         this.expansionSetCode = "DGM";
         this.color.setBlack(true);
 
@@ -66,7 +68,7 @@ public class SinisterPossession extends CardImpl<SinisterPossession> {
         this.addAbility(ability);
 
         // Whenever enchanted creature attacks or blocks, it's controller loses 2 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeAttachedEffect(2)));
+        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeControllerAttachedEffect(2)));
     }
 
     public SinisterPossession(final SinisterPossession card) {
@@ -79,37 +81,48 @@ public class SinisterPossession extends CardImpl<SinisterPossession> {
     }
 }
 
-class LoseLifeAttachedEffect extends OneShotEffect<LoseLifeAttachedEffect> {
+class LoseLifeControllerAttachedEffect extends OneShotEffect<LoseLifeControllerAttachedEffect> {
 
     protected DynamicValue amount;
 
-    public LoseLifeAttachedEffect(int amount) {
+    public LoseLifeControllerAttachedEffect(int amount) {
         this(new StaticValue(amount));
     }
 
-    public LoseLifeAttachedEffect(DynamicValue amount) {
+    public LoseLifeControllerAttachedEffect(DynamicValue amount) {
         super(Outcome.Damage);
         this.amount = amount;
         setText();
     }
 
-    public LoseLifeAttachedEffect(final LoseLifeAttachedEffect effect) {
+    public LoseLifeControllerAttachedEffect(final LoseLifeControllerAttachedEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
     }
 
     @Override
-    public LoseLifeAttachedEffect copy() {
-        return new LoseLifeAttachedEffect(this);
+    public LoseLifeControllerAttachedEffect copy() {
+        return new LoseLifeControllerAttachedEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.loseLife(amount.calculate(game, source), game);
-            return true;
+        Permanent enchantment = game.getPermanent(source.getSourceId());
+        if (enchantment == null) {
+            enchantment = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+        }
+        if (enchantment != null && enchantment.getAttachedTo() != null) {
+            Permanent creature = game.getPermanent(enchantment.getAttachedTo());
+            if (creature == null) {
+                creature = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            }
+            if (creature != null) {
+                Player player = game.getPlayer(creature.getControllerId());
+                if (player != null) {
+                    player.loseLife(amount.calculate(game, source), game);
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -124,6 +137,4 @@ class LoseLifeAttachedEffect extends OneShotEffect<LoseLifeAttachedEffect> {
         }
         staticText = sb.toString();
     }
-
 }
-
