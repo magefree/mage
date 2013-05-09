@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.SecondTargetPointer;
@@ -60,15 +61,18 @@ public class MartialGlory extends CardImpl<MartialGlory> {
         // Target creature gets +3/+0 until end of turn.
         Effect effect = new BoostTargetEffect(3,0, Duration.EndOfTurn);
         effect.setText("Target creature gets +3/+0 until end of turn");
-        this.getSpellAbility().addEffect(effect);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("first creature")));
+        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
         
         // Target creature gets +0/+3 until end of turn.
         Effect effect2 = new BoostTargetEffect(0,3, Duration.EndOfTurn);
         effect2.setText("<br></br>Target creature gets +0/+3 until end of turn");
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
-        this.getSpellAbility().addEffect(effect2);
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)")));
+        target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
+
         
     }
 

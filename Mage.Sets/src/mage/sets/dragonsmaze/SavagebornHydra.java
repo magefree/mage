@@ -86,6 +86,7 @@ class SavageBornHydraEffect extends OneShotEffect<SavageBornHydraEffect> {
 
     public SavageBornHydraEffect() {
         super(Constants.Outcome.BoostCreature);
+        staticText = "with X +1/+1 counters on it";
     }
 
     public SavageBornHydraEffect(final SavageBornHydraEffect effect) {

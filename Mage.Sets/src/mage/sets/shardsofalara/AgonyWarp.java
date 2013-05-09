@@ -30,17 +30,14 @@ package mage.sets.shardsofalara;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.SecondTargetPointer;
 
 /**
  *
@@ -56,10 +53,21 @@ public class AgonyWarp extends CardImpl<AgonyWarp> {
         this.color.setBlack(true);
 
         // Target creature gets -3/-0 until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature to get -3/-0")));
+        Effect effect = new BoostTargetEffect(-3,0, Duration.EndOfTurn);
+        effect.setText("Target creature gets -3/-0 until end of turn");
+        this.getSpellAbility().addEffect(effect);
+        Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
+
         // Target creature gets -0/-3 until end of turn.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature to get -0/-3")));
-        this.getSpellAbility().addEffect(new AgonyWarpEffect());
+        Effect effect2 = new BoostTargetEffect(-0,-3, Duration.EndOfTurn);
+        effect2.setText("<br></br>Target creature gets -0/-3 until end of turn");
+        effect2.setTargetPointer(SecondTargetPointer.getInstance());
+        this.getSpellAbility().addEffect(effect2);
+        target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
+        target.setRequired(true);
+        this.getSpellAbility().addTarget(target);
     }
 
     public AgonyWarp(final AgonyWarp card) {
@@ -69,38 +77,5 @@ public class AgonyWarp extends CardImpl<AgonyWarp> {
     @Override
     public AgonyWarp copy() {
         return new AgonyWarp(this);
-    }
-}
-
-class AgonyWarpEffect extends ContinuousEffectImpl<AgonyWarpEffect> {
-
-    public AgonyWarpEffect() {
-        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.UnboostCreature);
-        this.staticText = "Target creature gets -0/-3 until end of turn";
-    }
-
-    public AgonyWarpEffect(final AgonyWarpEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AgonyWarpEffect copy() {
-        return new AgonyWarpEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        int affectedTargets = 0;
-        Permanent target1 = game.getPermanent(source.getFirstTarget());
-        Permanent target2 = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (target1 != null) {
-            target1.addPower(-3);
-            affectedTargets++;
-        }
-        if (target2 != null) {
-            target2.addToughness(-3);
-            affectedTargets++;
-        }
-        return affectedTargets > 0;
     }
 }
