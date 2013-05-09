@@ -366,6 +366,13 @@ public class GameState implements Serializable, Copyable<GameState> {
         battlefield.fireControlChangeEvents(game);
     }
 
+    // Remove End of Combat effects
+    public void removeEocEffects(Game game) {
+        effects.removeEndOfCombatEffects();
+        delayed.removeEndOfCombatAbilities();
+        applyEffects(game);
+    }
+
     public void removeEotEffects(Game game) {
         effects.removeEndOfTurnEffects();
         delayed.removeEndOfTurnAbilities();

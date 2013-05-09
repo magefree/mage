@@ -73,5 +73,15 @@ import mage.game.events.GameEvent;
         }
     }
 
+    public void removeEndOfCombatAbilities() {
+        for (Iterator<DelayedTriggeredAbility> it = this.iterator();it.hasNext();) {
+            DelayedTriggeredAbility ability = it.next();
+            if (ability.getDuration() == Duration.EndOfCombat) {
+                it.remove();
+            }
+        }
+    }
+
+
 }
 

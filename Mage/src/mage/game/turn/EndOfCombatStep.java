@@ -55,6 +55,7 @@ public class EndOfCombatStep extends Step<EndOfCombatStep> {
         super.endStep(game, activePlayerId);
         //20091005 - 511.3
         game.getCombat().endCombat(game);
+        game.getState().removeEocEffects(game);
 //        game.saveState();
     }
 

@@ -27,14 +27,11 @@
 */
 package mage.abilities.effects;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.game.Game;
 
 import java.util.*;
-import static mage.Constants.Duration.Custom;
-import static mage.Constants.Duration.OneUse;
-import static mage.Constants.Duration.WhileOnBattlefield;
+import mage.Constants.Duration;
 
 /**
  *
@@ -68,7 +65,17 @@ public class ContinuousEffectsList<T extends ContinuousEffect> extends ArrayList
     public void removeEndOfTurnEffects() {
         for (Iterator<T> i = this.iterator(); i.hasNext();) {
             T entry = i.next();
-            if (entry.getDuration() == Constants.Duration.EndOfTurn) {
+            if (entry.getDuration() == Duration.EndOfTurn) {
+                i.remove();
+                effectAbilityMap.remove(entry.getId());
+            }
+        }
+    }
+
+    public void removeEndOfCombatEffects() {
+        for (Iterator<T> i = this.iterator(); i.hasNext();) {
+            T entry = i.next();
+            if (entry.getDuration() == Duration.EndOfCombat) {
                 i.remove();
                 effectAbilityMap.remove(entry.getId());
             }

@@ -117,6 +117,16 @@ public class ContinuousEffects implements Serializable {
         return restrictionEffects;
     }
 
+    public void removeEndOfCombatEffects() {
+        layeredEffects.removeEndOfCombatEffects();
+        replacementEffects.removeEndOfCombatEffects();
+        preventionEffects.removeEndOfCombatEffects();
+        requirementEffects.removeEndOfCombatEffects();
+        restrictionEffects.removeEndOfCombatEffects();
+        asThoughEffects.removeEndOfCombatEffects();
+        costModificationEffects.removeEndOfCombatEffects();
+    }
+
     public void removeEndOfTurnEffects() {
         layeredEffects.removeEndOfTurnEffects();
         replacementEffects.removeEndOfTurnEffects();
