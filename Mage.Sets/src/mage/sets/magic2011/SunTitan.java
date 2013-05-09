@@ -45,6 +45,7 @@ import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.target.Target;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -92,7 +93,9 @@ class SunTitanAbility extends TriggeredAbilityImpl<SunTitanAbility> {
 
     public SunTitanAbility() {
         super(Zone.BATTLEFIELD, null, true);
-        this.addTarget(new TargetCardInYourGraveyard(filter));
+        Target target = new TargetCardInYourGraveyard(filter);
+        target.setRequired(true);
+        this.addTarget(target);
         this.addEffect(new ReturnFromGraveyardToBattlefieldTargetEffect());
     }
 
