@@ -31,11 +31,13 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -65,7 +67,7 @@ public class CracklingPerimeter extends CardImpl<CracklingPerimeter> {
         this.color.setRed(true);
 
         // Tap an untapped Gate you control: Crackling Perimeter deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CracklingPerimeterEffect(), new TapTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public CracklingPerimeter(final CracklingPerimeter card) {
@@ -75,36 +77,5 @@ public class CracklingPerimeter extends CardImpl<CracklingPerimeter> {
     @Override
     public CracklingPerimeter copy() {
         return new CracklingPerimeter(this);
-    }
-}
-
-class CracklingPerimeterEffect extends OneShotEffect<CracklingPerimeterEffect> {
-
-    public CracklingPerimeterEffect() {
-        super(Constants.Outcome.Damage);
-        staticText = "{this} deals 1 damage to each opponent";
-    }
-
-    public CracklingPerimeterEffect(final CracklingPerimeterEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        boolean result = true;
-        for (UUID playerId : game.getOpponents(source.getControllerId())) {
-            Player opponent = game.getPlayer(playerId);
-            if (opponent != null) {
-                opponent.damage(1, source.getSourceId(), game, false, true);
-            } else {
-                result = false;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public CracklingPerimeterEffect copy() {
-        return new CracklingPerimeterEffect(this);
     }
 }

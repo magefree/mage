@@ -32,20 +32,19 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.players.Player;
 
 /**
  *
@@ -65,9 +64,8 @@ public class LobberCrew extends CardImpl<LobberCrew> {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {T}: Lobber Crew deals 1 damage to each opponent.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LobberCrewEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamagePlayersEffect(1, TargetController.OPPONENT), new TapSourceCost()));
         // Whenever you cast a multicolored spell, untap Lobber Crew.
-
         this.addAbility(new LobberCrewTriggeredAbility());
     }
 
@@ -78,40 +76,6 @@ public class LobberCrew extends CardImpl<LobberCrew> {
     @Override
     public LobberCrew copy() {
         return new LobberCrew(this);
-    }
-
-    private class LobberCrewEffect extends OneShotEffect<LobberCrewEffect> {
-
-        public LobberCrewEffect() {
-            super(Constants.Outcome.Damage);
-            staticText = "{this} deals 1 damage to each opponent";
-        }
-
-        public LobberCrewEffect(final LobberCrewEffect effect) {
-            super(effect);
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player controller = game.getPlayer(source.getControllerId());
-            if (controller != null) {
-                for (UUID playerId: controller.getInRange()) {
-                    if (playerId != source.getControllerId()) {
-                        Player opponent = game.getPlayer(playerId);
-                        if (opponent != null) {
-                            opponent.damage(1, source.getId(), game, false, true);
-                        }
-                    }
-                }
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public LobberCrewEffect copy() {
-            return new LobberCrewEffect(this);
-        }
     }
 }
 
@@ -142,6 +106,6 @@ class LobberCrewTriggeredAbility extends TriggeredAbilityImpl<LobberCrewTriggere
 
     @Override
     public String getRule() {
-        return "Whenever you cast a multicolored spell, untap {this}";
+        return "Whenever you cast a multicolored spell, untap {this}.";
     }
 }
