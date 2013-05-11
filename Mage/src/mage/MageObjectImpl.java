@@ -99,6 +99,11 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
     }
 
     @Override
+    public String getImageName() {
+        return name;
+    }
+
+    @Override
     public void setName(String name) {
         this.name = name;
     }

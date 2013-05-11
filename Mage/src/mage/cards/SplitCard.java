@@ -31,6 +31,7 @@ package mage.cards;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.SpellAbilityType;
@@ -38,6 +39,7 @@ import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
+import mage.game.Game;
 import mage.watchers.Watcher;
 
 /**
@@ -66,16 +68,16 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     private Card createLeftHalfCard (String nameLeft, String costsLeft) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft);
-        leftHalfCard.getAbilities().setSourceId(objectId);
+        leftHalfCard = new LeftHalfCard(this.getOwnerId(), this.getCardNumber(), nameLeft, this.rarity, cardTypes, costsLeft, this);
+        //leftHalfCard.getAbilities().setSourceId(objectId);
         return leftHalfCard;
     }
 
     private Card createRightHalfCard (String nameRight, String costsRight) {
         CardType[] cardTypes = new CardType[getCardType().size()];
         this.getCardType().toArray(cardTypes);
-        rightHalfCard = new RightHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight);
-        rightHalfCard.getAbilities().setSourceId(objectId);
+        rightHalfCard = new RightHalfCard(this.getOwnerId(), this.getCardNumber(), nameRight, this.rarity, cardTypes, costsRight, this);
+        //rightHalfCard.getAbilities().setSourceId(objectId);
         return rightHalfCard;
     }
 
@@ -90,6 +92,18 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     }
 
     @Override
+    public boolean cast(Game game, Constants.Zone fromZone, SpellAbility ability, UUID controllerId) {
+        switch(ability.getSpellAbilityType()) {
+            case SPLIT_LEFT:
+                return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);
+            case SPLIT_RIGHT:
+                return this.getRightHalfCard().cast(game, fromZone, ability, controllerId);
+            default:
+                return super.cast(game, fromZone, ability, controllerId);
+        }
+    }
+    
+    @Override
     public Abilities<Ability> getAbilities(){
         Abilities<Ability> allAbilites = new AbilitiesImpl<Ability>();
         for (Ability ability : super.getAbilities()) {
@@ -97,7 +111,6 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
                 allAbilites.add(ability);
             }
         }
-        allAbilites.addAll(super.getAbilities());
         allAbilites.addAll(leftHalfCard.getAbilities());
         allAbilites.addAll(rightHalfCard.getAbilities());                
         return allAbilites;
@@ -147,12 +160,16 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
  */
 class LeftHalfCard  extends CardImpl<LeftHalfCard> {
 
-    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs ) {
+    SplitCard splitCardParent;
+
+    public LeftHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_LEFT);
+        this.splitCardParent = splitCardParent;
     }
 
     public LeftHalfCard(final LeftHalfCard card) {
         super(card);
+        this.splitCardParent = card.splitCardParent;
     }
 
     @Override
@@ -160,25 +177,20 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
         return new LeftHalfCard(this);
     }
 
-//    @Override
-//    public List<String> getRules() {
-//        List<String> rules = new ArrayList<String>();
-//        // TODO: Move formatting to client CardInfoPaneImpl.java
-//        StringBuilder buffer = new StringBuilder();
-//        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
-//        buffer.append("<tr><td valign='top'><b>");
-//        buffer.append(this.getName());
-//        buffer.append("</b></td><td align='right' valign='top' style='width:");
-//        buffer.append(getSpellAbility().getManaCosts().getSymbols().size() * 11 + 1);
-//        buffer.append("px'>");
-//        buffer.append(getSpellAbility().getManaCosts().getText());
-//        buffer.append("</td></tr></table>");
-//
-//        rules.add(buffer.toString());
-//        rules.addAll(super.getRules());
-//        return rules;
-//    }
+    @Override
+    public String getImageName() {
+        return splitCardParent.getImageName();
+    }
 
+    @Override
+    public String getExpansionSetCode() {
+        return splitCardParent.getExpansionSetCode();
+    }
+
+    @Override
+    public int getCardNumber() {
+        return splitCardParent.getCardNumber();
+    }
 
 }
 
@@ -187,12 +199,16 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
  */
 class RightHalfCard  extends CardImpl<RightHalfCard> {
 
-    public RightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs) {
+    SplitCard splitCardParent;
+    
+    public RightHalfCard(UUID ownerId, int cardNumber, String name, Rarity rarity, CardType[] cardTypes, String costs, SplitCard splitCardParent) {
         super(ownerId, cardNumber, name, rarity, cardTypes, costs, SpellAbilityType.SPLIT_RIGHT);
+        this.splitCardParent = splitCardParent;
     }
 
     public RightHalfCard(final RightHalfCard card) {
         super(card);
+        this.splitCardParent = card.splitCardParent;
     }
 
     @Override
@@ -200,21 +216,19 @@ class RightHalfCard  extends CardImpl<RightHalfCard> {
         return new RightHalfCard(this);
     }
 
-//    @Override
-//    public List<String> getRules() {
-//        List<String> rules = new ArrayList<String>();
-//        // TODO: Move formatting to client CardInfoPaneImpl.java
-//        StringBuilder buffer = new StringBuilder();
-//        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%'>");
-//        buffer.append("<tr><td valign='top'><b>");
-//        buffer.append(this.getName());
-//        buffer.append("</b></td><td align='right' valign='top' style='width:");
-//        buffer.append(getSpellAbility().getManaCosts().getSymbols().size() * 11 + 1);
-//        buffer.append("px'>");
-//        buffer.append(getSpellAbility().getManaCosts().getText());
-//        buffer.append("</td></tr></table>");
-//        rules.add(buffer.toString());
-//        rules.addAll(super.getRules());
-//        return rules;
-//    }
+    @Override
+    public String getImageName() {
+        return splitCardParent.getImageName();
+    }
+
+    @Override
+    public String getExpansionSetCode() {
+        return splitCardParent.getExpansionSetCode();
+    }
+
+    @Override
+    public int getCardNumber() {
+        return splitCardParent.getCardNumber();
+    }
+
 }

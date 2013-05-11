@@ -46,6 +46,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Mode;
+import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.SplitCard;
 import mage.counters.Counter;
@@ -106,24 +107,17 @@ public class CardView extends SimpleCardView {
             fillEmpty();
             return;
         }
-        Card cardHalf = null;
+
         SplitCard splitCard = null;
-        this.isSplitCard = card.isSplitCard();
-        if (card instanceof Spell) {
-            if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_LEFT)) {
-                splitCard = (SplitCard) ((Spell) card).getCard();
-                cardHalf = ((SplitCard) splitCard).getLeftHalfCard();
-            } else if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_RIGHT)) {
-                splitCard = (SplitCard) ((Spell) card).getCard();
-                cardHalf = ((SplitCard) splitCard).getRightHalfCard();
-            } else if (((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
-                isSplitCard = true;
+        if (card.isSplitCard()) {
+            splitCard = (SplitCard) card;
+        } else {
+            if (card instanceof Spell && ((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
                 splitCard = (SplitCard) ((Spell) card).getCard();
             }
-        } else if (card.isSplitCard()) {
-            splitCard = (SplitCard) card;
         }
-        if (this.isSplitCard && splitCard != null) {
+        if (splitCard != null) {
+            this.isSplitCard = true;
             leftSplitName = splitCard.getLeftHalfCard().getName();
             leftSplitCosts = splitCard.getLeftHalfCard().getManaCost();
             leftSplitRules = splitCard.getLeftHalfCard().getRules();
@@ -132,18 +126,12 @@ public class CardView extends SimpleCardView {
             rightSplitRules = splitCard.getRightHalfCard().getRules();
         }
 
-        this.name = card.getName();
-        if (cardHalf != null) {
-            this.displayName = cardHalf.getName();
-            this.rules = cardHalf.getRules();
-            this.manaCost = cardHalf.getManaCost().getSymbols();
-            this.convertedManaCost = cardHalf.getManaCost().convertedManaCost();
-        } else {
-            this.displayName = card.getName();
-            this.rules = card.getRules();
-            this.manaCost = card.getManaCost().getSymbols();
-            this.convertedManaCost = card.getManaCost().convertedManaCost();
-        }
+        this.name = card.getImageName();
+        this.displayName = card.getName();
+        this.rules = card.getRules();
+        this.manaCost = card.getManaCost().getSymbols();
+        this.convertedManaCost = card.getManaCost().convertedManaCost();
+
         if (card instanceof Permanent) {
             Permanent permanent = (Permanent)card;
             this.power = Integer.toString(card.getPower().getValue());
@@ -182,8 +170,10 @@ public class CardView extends SimpleCardView {
 
         if (card instanceof Spell) {
             Spell<?> spell = (Spell<?>) card;
-            if (spell.getSpellAbility().getTargets().size() > 0) {
-                setTargets(spell.getSpellAbility().getTargets());
+            for (SpellAbility spellAbility: spell.getSpellAbilities()) {
+                if (spellAbility.getTargets().size() > 0) {
+                    setTargets(spellAbility.getTargets());
+                }
             }
             // show for modal spell, which mode was choosen
             if (spell.getSpellAbility().isModal()) {

@@ -34,6 +34,7 @@ import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.MageObject;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
@@ -240,10 +241,30 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         } else {
             sb.append("unknown");
         }
-        if (getTargets().size() > 0) {
-            sb.append(" targeting ");
-            for (Target target: getTargets()) {
-                sb.append(target.getTargetedName(game));
+        if (object instanceof Spell && ((Spell) object).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+            Spell<?> spell = (Spell<?>) object;
+            int i = 0;
+            for (SpellAbility spellAbility : spell.getSpellAbilities()) {
+                i++;
+                String half;
+                if (i == 1) {
+                    half = " left";
+                } else {
+                    half = " right";
+                }
+                if (spellAbility.getTargets().size() > 0) {
+                    sb.append(half).append(" half targeting ");
+                    for (Target target: spellAbility.getTargets()) {
+                        sb.append(target.getTargetedName(game));
+                    }
+                }
+            }
+        } else {
+            if (getTargets().size() > 0) {
+                sb.append(" targeting ");
+                for (Target target: getTargets()) {
+                    sb.append(target.getTargetedName(game));
+                }
             }
         }
         return sb.toString();

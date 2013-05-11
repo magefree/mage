@@ -13,6 +13,7 @@ import java.util.List;
 public interface MageObject extends MageItem, Serializable {
 
     String getName();
+    String getImageName();
     void setName(String name);
 
     List<CardType> getCardType();

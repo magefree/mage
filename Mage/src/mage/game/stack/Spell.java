@@ -56,8 +56,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants;
-import static mage.Constants.SpellAbilityType.SPLIT_LEFT;
-import static mage.Constants.SpellAbilityType.SPLIT_RIGHT;
 import mage.cards.SplitCard;
 
 /**
@@ -139,7 +137,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             result = false;
             boolean legalParts = false;
             for(SpellAbility spellAbility: this.spellAbilities) {
-                if (spellAbility.getTargets().stillLegal(ability, game)) {
+                if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
                     legalParts = true;
                     updateOptionalCosts(index);
                     result |= spellAbility.resolve(game);
@@ -271,6 +269,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     @Override
+    public String getImageName() {
+        return card.getImageName();
+    }
+
+    @Override
     public void setName(String name) {}
 
     @Override
@@ -299,6 +302,11 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public List<String> getSupertype() {
         return card.getSupertype();
+    }
+
+
+    public List<SpellAbility> getSpellAbilities() {
+        return spellAbilities;
     }
 
     @Override
@@ -361,26 +369,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public List<String> getRules() {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT_LEFT:
-                return ((SplitCard)card).getLeftHalfCard().getRules();
-            case SPLIT_RIGHT:
-                return ((SplitCard)card).getRightHalfCard().getRules();
-            default:
-                return card.getRules();
-        }
+        return card.getRules();
     }
 
     @Override
     public List<Watcher> getWatchers() {
-        switch (ability.getSpellAbilityType()) {
-            case SPLIT_LEFT:
-                return ((SplitCard)card).getLeftHalfCard().getWatchers();
-            case SPLIT_RIGHT:
-                return ((SplitCard)card).getLeftHalfCard().getWatchers();
-            default:
-                return card.getWatchers();
-        }
+        return card.getWatchers();
     }
 
     @Override

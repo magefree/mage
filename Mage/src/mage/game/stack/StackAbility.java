@@ -110,6 +110,11 @@ public class StackAbility implements StackObject, Ability {
         return name;
     }
 
+    @Override
+    public String getImageName() {
+        return name;
+    }
+
     public String getExpansionSetCode() {
         return expansionSetCode;
     }

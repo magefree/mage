@@ -88,6 +88,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 
@@ -234,6 +235,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             card.setOwnerId(ownerId);
             gameCards.put(card.getId(), card);
             state.addCard(card);
+            if (card.isSplitCard()) {
+                Card leftCard = ((SplitCard)card).getLeftHalfCard();
+                leftCard.setOwnerId(ownerId);
+                gameCards.put(leftCard.getId(), leftCard);
+                state.addCard(leftCard);
+                Card rightCard = ((SplitCard)card).getRightHalfCard();
+                rightCard.setOwnerId(ownerId);
+                gameCards.put(rightCard.getId(), rightCard);
+                state.addCard(rightCard);
+            }
         }
     }
 
@@ -1681,7 +1692,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         case LIBRARY:
                             if (command.getValue().equals("clear")) {
                                 for (UUID card : player.getLibrary().getCardList()) {
-                                    gameCards.remove(card);
+                                    removeCard(card);
                                 }
                                 player.getLibrary().clear();
                             }
@@ -1710,9 +1721,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     private void removeCards(Cards cards) {
         for (UUID card : cards) {
-            gameCards.remove(card);
+            removeCard(card);
         }
         cards.clear();
+    }
+
+    private void removeCard(UUID cardId) {
+        Card card = this.getCard(cardId);
+        if(card != null && card.isSplitCard()) {
+            gameCards.remove(((SplitCard)card).getLeftHalfCard().getId());
+            gameCards.remove(((SplitCard)card).getRightHalfCard().getId());
+        }
+        gameCards.remove(cardId);
     }
 
     @Override
@@ -1763,7 +1783,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         Player player = getPlayer(ownerId);
         if (player != null) {
             for (UUID card : player.getLibrary().getCardList()) {
-                gameCards.remove(card);
+                removeCard(card);
             }
             player.getLibrary().clear();
             Set<Card> cards = new HashSet<Card>();

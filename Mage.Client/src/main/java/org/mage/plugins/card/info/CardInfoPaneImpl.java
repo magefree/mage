@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import mage.abilities.SpellAbility;
 
 /**
  * Card info pane for displaying card rules.

@@ -39,6 +39,7 @@ import mage.game.Game;
 
 import java.util.UUID;
 import mage.Constants.SpellAbilityType;
+import mage.cards.SplitCard;
 
 /**
  *
@@ -98,8 +99,18 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
             if (this.getManaCosts().isEmpty()) {
                 return false;
             }
-            if (costs.canPay(sourceId, controllerId, game) && canChooseTarget(game)) {
-                return true;
+            if (costs.canPay(sourceId, controllerId, game)) {
+                if (getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                    SplitCard splitCard = (SplitCard) game.getCard(getSourceId());
+                    if (splitCard != null) {
+                        return (splitCard.getLeftHalfCard().getSpellAbility().canChooseTarget(game) 
+                                && splitCard.getRightHalfCard().getSpellAbility().canChooseTarget(game));
+                    }
+                    return false;
+
+                } else {
+                    return  canChooseTarget(game);
+                }
             }
         }
         return false;

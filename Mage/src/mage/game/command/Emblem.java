@@ -98,6 +98,11 @@ public class Emblem implements CommandObject {
     }
 
     @Override
+    public String getImageName() {
+        return "";
+    }
+
+    @Override
     public void setName(String name) {}
 
     @Override
