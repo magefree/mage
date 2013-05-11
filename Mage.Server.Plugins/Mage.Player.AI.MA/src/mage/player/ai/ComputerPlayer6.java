@@ -529,7 +529,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
             if (sim.getPlayer(currentPlayer.getId()).activateAbility((ActivatedAbility) action.copy(), sim)) {
                 sim.applyEffects();
                 if (checkForRepeatedAction(sim, node, action, currentPlayer.getId())) {
-                    logger.info("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
+                    logger.debug("Sim Prio [" + depth + "] -- repeated action: " + action.toString());
                     continue;
                 }
                 if (!sim.isGameOver() && action.isUsesStack()) {
