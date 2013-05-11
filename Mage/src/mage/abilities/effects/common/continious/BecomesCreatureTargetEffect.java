@@ -48,6 +48,12 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
     protected Token token;
     protected String type;
 
+    /**
+     *
+     * @param token
+     * @param subType - subType the target remains (used in rule text), if set the subtypes are not cleared
+     * @param duration
+     */
     public BecomesCreatureTargetEffect(Token token, String type, Duration duration) {
         super(duration, Outcome.BecomeCreature);
         this.token = token;
@@ -74,18 +80,19 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                 switch (layer) {
                     case TypeChangingEffects_4:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getCardType().size() > 0) {
-                                for (CardType t : token.getCardType()) {
-                                    if (!permanent.getCardType().contains(t)) {
-                                        permanent.getCardType().add(t);
-                                    }
-                                }
-                            }
                             if (type == null) {
                                 permanent.getSubtype().clear();
-                            }
-                            if (token.getSubtype().size() > 0) {
-                                permanent.getSubtype().addAll(token.getSubtype());
+                                if (token.getSubtype().size() > 0) {
+                                    permanent.getSubtype().addAll(token.getSubtype());
+                                }
+                            } else {
+                                if (token.getCardType().size() > 0) {
+                                    for (CardType t : token.getCardType()) {
+                                        if (!permanent.getCardType().contains(t)) {
+                                            permanent.getCardType().add(t);
+                                        }
+                                    }
+                                }
                             }
                         }
                         break;
@@ -106,12 +113,8 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            int power = token.getPower().getValue();
-                            int toughness = token.getToughness().getValue();
-                            if (power != 0 && toughness != 0) {
-                                permanent.getPower().setValue(power);
-                                permanent.getToughness().setValue(toughness);
-                            }
+                            permanent.getToughness().setValue(token.getToughness().getValue());
+                            permanent.getPower().setValue(token.getPower().getValue());
                         }
                 }
             }
