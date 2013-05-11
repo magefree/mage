@@ -35,6 +35,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.SpellAbilityType;
+import mage.Constants.Zone;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -191,7 +192,25 @@ class LeftHalfCard  extends CardImpl<LeftHalfCard> {
     public int getCardNumber() {
         return splitCardParent.getCardNumber();
     }
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        return splitCardParent.moveToZone(toZone, sourceId, game, flag, null);
+    }
 
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+        return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        return splitCardParent.moveToExile(exileId, name, sourceId, game, null);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+        return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
+    }
 }
 
 /*
@@ -231,4 +250,23 @@ class RightHalfCard  extends CardImpl<RightHalfCard> {
         return splitCardParent.getCardNumber();
     }
 
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag) {
+        return splitCardParent.moveToZone(toZone, sourceId, game, flag, null);
+    }
+
+    @Override
+    public boolean moveToZone(Zone toZone, UUID sourceId, Game game, boolean flag, ArrayList<UUID> appliedEffects) {
+        return splitCardParent.moveToZone(toZone, sourceId, game, flag, appliedEffects);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game) {
+        return splitCardParent.moveToExile(exileId, name, sourceId, game, null);
+    }
+
+    @Override
+    public boolean moveToExile(UUID exileId, String name, UUID sourceId, Game game, ArrayList<UUID> appliedEffects) {
+        return splitCardParent.moveToExile(exileId, name, sourceId, game, appliedEffects);
+    }
 }
