@@ -4,14 +4,17 @@ MAGE is a client/server implementation of a popular CCG without the collecting p
 The server hosts games and enforces the rules.  The client creates or joins games, 
 displays the current state of a game in progress and sends user events to the server.
 
-You will need to have the Java Runtime Environment Version 6 Update 10 or greater.
+You will need to have the Java Runtime Environment Version 6 Update 33 or greater.
 You can download this from:  http://java.com/
 
 -----------------------------------------------------------------------------------
 Installing and running MAGE
 
 You will need to download both the client and the server applications.  These can be
-obtained from http://code.google.com/p/magic--another-game-engine/downloads/list.
+obtained from 
+http://download.magefree.com
+or
+http://176.31.186.181/
 Extact the client and the server to separate folders.
 
 To play a game you can either connect to a server or start your own server.  To
@@ -55,4 +58,5 @@ Notes
 
 MAGE is still very much in the testing phase so there can be lots of bugs and/or
 missing functionality.  Please be patient.  If you notice anything or want to
-make suggestions please contact me at BetaSteward@googlemail.com
+make suggestions goto https://github.com/magefree/mage/issues
+

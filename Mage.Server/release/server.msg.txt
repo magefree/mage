@@ -1,3 +1,3 @@
-Welcome! You are playing Mage version 1.0.1.
+Welcome! You are playing Mage version 1.0.2.
 Find what was changed since previous versions on project Wiki.
 Contact us on www.slightlymagic.net.

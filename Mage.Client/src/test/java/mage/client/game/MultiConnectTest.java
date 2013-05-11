@@ -30,7 +30,7 @@ public class MultiConnectTest {
 
     private static final CountDownLatch latch = new CountDownLatch(USER_CONNECT_COUNT);
 
-    private static final MageVersion version = new MageVersion(1, 0, 1, "");
+    private static final MageVersion version = new MageVersion(1, 0, 2, "");
 
     private static volatile int connected;
 

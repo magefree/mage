@@ -82,6 +82,7 @@ $raritiesConversion{'C'} = 'COMMON';
 $raritiesConversion{'U'} = 'UNCOMMON';
 $raritiesConversion{'R'} = 'RARE';
 $raritiesConversion{'M'} = 'MYTHIC';
+$raritiesConversion{'Special'} = 'SPECIAL';
 
 my %manaToColor;
 $manaToColor{'B'} = 'Black';
