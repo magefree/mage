@@ -36,11 +36,8 @@ import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.MustBlockSourceEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
@@ -59,7 +56,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledPermanent;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -149,11 +145,11 @@ class ReleaseSacrificeEffect extends OneShotEffect<ReleaseSacrificeEffect> {
             target4.setRequired(true);
             target5.setRequired(true);
 
-            target1.setNotTarget(true);
-            target2.setNotTarget(true);
-            target3.setNotTarget(true);
-            target4.setNotTarget(true);
-            target5.setNotTarget(true);
+            target1.setNotTarget(false);
+            target2.setNotTarget(false);
+            target3.setNotTarget(false);
+            target4.setNotTarget(false);
+            target5.setNotTarget(false);
 
             if (target1.canChoose(player.getId(), game)) {
                 while (!target1.isChosen() && target1.canChoose(player.getId(), game)) {

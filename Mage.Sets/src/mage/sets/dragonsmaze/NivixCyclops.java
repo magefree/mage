@@ -88,20 +88,14 @@ public class NivixCyclops extends CardImpl<NivixCyclops> {
     @Override
     public NivixCyclops copy() {
         return new NivixCyclops(this);
-    }
-    
-    @Override
-    public List<String> getRules() {
-        List<String> rules = new ArrayList<String>();
-        rules.add("Whenever you cast an instant or sorcery spell, Nivix Cyclops gets +3/+0 until end of turn and it can attack as though it didn't have defender.");
-        return rules;
-    }
+    }    
 }
 
 class AsThoughNoDefenderEffect extends AsThoughEffectImpl<AsThoughNoDefenderEffect> {
 
     public AsThoughNoDefenderEffect() {
         super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        staticText ="and it can attack as though it didn't have defender";
     }
 
     public AsThoughNoDefenderEffect(final AsThoughNoDefenderEffect effect) {
