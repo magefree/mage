@@ -63,6 +63,7 @@ public class RunnersBane extends CardImpl<RunnersBane> {
     public RunnersBane(UUID ownerId) {
         super(ownerId, 17, "Runner's Bane", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "DGM";
+        this.subtype.add("Aura");
         this.color.setBlue(true);
 
         // Enchant creature with power 3 or less

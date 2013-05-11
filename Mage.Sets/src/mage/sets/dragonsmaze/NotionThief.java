@@ -152,7 +152,9 @@ class NotionThiefDrawWatcher extends WatcherImpl<NotionThiefDrawWatcher> {
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
         }
-        if (event.getType() == GameEvent.EventType.DREW_CARD && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
+        if (event.getType() == GameEvent.EventType.DREW_CARD
+                && game.getPhase() != null
+                && game.getPhase().getStep().getType().equals(PhaseStep.DRAW)) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Integer amount = amountOfCardsDrawnThisTurn.get(playerId);
