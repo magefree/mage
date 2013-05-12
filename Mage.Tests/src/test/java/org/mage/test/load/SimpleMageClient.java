@@ -17,7 +17,7 @@ import java.util.UUID;
 public class SimpleMageClient implements MageClient {
 
     private UUID clientId;
-    private static final MageVersion version = new MageVersion(1, 0, 2, "");
+    private static final MageVersion version = new MageVersion(1, 0, 3, "");
 
     private static final transient Logger log = Logger.getLogger(SimpleMageClient.class);
 
