@@ -34,6 +34,7 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -58,6 +59,7 @@ public class CloudstoneCurio extends CardImpl<CloudstoneCurio> {
     private static final FilterPermanent filter = new FilterPermanent("a nonartifact permanent");
     static {
         filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public CloudstoneCurio(UUID ownerId) {
@@ -65,7 +67,7 @@ public class CloudstoneCurio extends CardImpl<CloudstoneCurio> {
         this.expansionSetCode = "RAV";
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, true, ""));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, "", true));
 
 
     }

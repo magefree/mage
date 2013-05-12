@@ -63,8 +63,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional) {
-        this(zone, effect, filter, optional, null);
-        this.filter = filter;
+        this(zone, effect, filter, optional, false, null, false);
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
@@ -72,16 +71,18 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule, boolean controlled) {
+        this(zone, effect, filter, optional, false, rule, controlled);
+    }
+
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule) {
+        this(zone, effect, filter, optional, setTargetPointer, rule, false);
+    }
+
+    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule, boolean controlled) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
         this.rule = rule;
         this.controlled = controlled;
-    }
-
-    public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = filter;
-        this.rule = rule;
         this.setTargetPointer = setTargetPointer;
     }
 
