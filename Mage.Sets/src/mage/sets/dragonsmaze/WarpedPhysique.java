@@ -34,6 +34,7 @@ import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -55,7 +56,7 @@ public class WarpedPhysique extends CardImpl<WarpedPhysique> {
 
         // Target creature gets +X/-X until end of turn, where X is the number of cards in your hand.
         DynamicValue xValue =  new CardsInControllerHandCount();
-        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, xValue, Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(xValue, new SignInversionDynamicValue(xValue), Duration.EndOfTurn, true));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
