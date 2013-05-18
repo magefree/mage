@@ -115,9 +115,6 @@ public class GameSession extends GameWatcher {
             setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                List<CardsView> piles = new ArrayList<CardsView>();
-                piles.add(pile1);
-                piles.add(pile2);
                 user.fireCallback(new ClientCallback("gameChoosePile", game.getId(), new GameClientMessage(message, pile1, pile2)));
             }
         }
@@ -128,7 +125,7 @@ public class GameSession extends GameWatcher {
             setupTimeout();
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
-                user.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[0]), message)));
+                user.fireCallback(new ClientCallback("gameChoose", game.getId(), new GameClientMessage(choices.toArray(new String[choices.size()]), message)));
             }
         }
     }
@@ -173,8 +170,9 @@ public class GameSession extends GameWatcher {
     }
 
     private synchronized void setupTimeout() {
-        if (!useTimeout)
+        if (!useTimeout) {
             return;
+        }
         cancelTimeout();
         futureTimeout = timeoutExecutor.schedule(
             new Runnable() {
@@ -222,8 +220,8 @@ public class GameSession extends GameWatcher {
 
         if (player.getPlayersUnderYourControl().size() > 0) {
             Map<String, SimpleCardsView> handCards = new HashMap<String, SimpleCardsView>();
-            for (UUID playerId : player.getPlayersUnderYourControl()) {
-                Player opponent = game.getPlayer(playerId);
+            for (UUID controlledPlayerId : player.getPlayersUnderYourControl()) {
+                Player opponent = game.getPlayer(controlledPlayerId);
                 handCards.put(opponent.getName(), new SimpleCardsView(opponent.getHand().getCards(game)));
             }
             gameView.setOpponentHands(handCards);
@@ -243,8 +241,9 @@ public class GameSession extends GameWatcher {
 
     public void removeGame() {
         User user = UserManager.getInstance().getUser(userId);
-        if (user != null)
+        if (user != null) {
             user.removeGame(playerId);
+        }
     }
 
     public UUID getGameId() {

@@ -55,6 +55,7 @@ import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 
@@ -721,8 +722,8 @@ public class MageServerImpl implements MageServer {
             return new ServerState(
                     GameFactory.getInstance().getGameTypes(),
                     TournamentFactory.getInstance().getTournamentTypes(),
-                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[0]),
-                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[0]),
+                    PlayerFactory.getInstance().getPlayerTypes().toArray(new String[PlayerFactory.getInstance().getPlayerTypes().size()]),
+                    DeckValidatorFactory.getInstance().getDeckTypes().toArray(new String[DeckValidatorFactory.getInstance().getDeckTypes().size()]),
                     testMode,
                     Main.getVersion());
         }
@@ -841,7 +842,7 @@ public class MageServerImpl implements MageServer {
                 @Override
                 public void execute() {
                     for (User user : UserManager.getInstance().getUsers()) {
-                        if (message.toLowerCase().startsWith("warn")) {
+                        if (message.toLowerCase(Locale.ENGLISH).startsWith("warn")) {
                             user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.RED)));
                         } else {
                             user.fireCallback(new ClientCallback("serverMessage", null, new ChatMessage("SERVER", message, null, MessageColor.BLUE)));
