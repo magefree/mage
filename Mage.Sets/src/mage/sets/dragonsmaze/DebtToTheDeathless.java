@@ -86,7 +86,7 @@ class DebtToTheDeathlessEffect extends OneShotEffect<DebtToTheDeathlessEffect> {
         int damage = 0;
         int xValue = source.getManaCostsToPay().getX();
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            damage += game.getPlayer(opponentId).damage(xValue, source.getSourceId(), game, false, true);
+            damage += game.getPlayer(opponentId).damage(xValue * 2, source.getSourceId(), game, false, true);
         }
         game.getPlayer(source.getControllerId()).gainLife(damage, game);
         return true;

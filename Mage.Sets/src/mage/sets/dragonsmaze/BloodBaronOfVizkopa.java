@@ -97,7 +97,7 @@ public class BloodBaronOfVizkopa extends CardImpl<BloodBaronOfVizkopa> {
 }
 
 class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl<BloodBaronOfVizkopaEffect> {
-
+     
     public BloodBaronOfVizkopaEffect() {
         super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "As long as you have 30 or more life and an opponent has 10 or less life, {this} gets +6/+6 and has flying";
@@ -129,6 +129,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl<BloodBaronOfVizkopa
                                 creature.addAbility(FlyingAbility.getInstance(), game);
                             }
                             break;
+                        default:
                     }
                     return true;
             }
@@ -157,6 +158,7 @@ class BloodBaronOfVizkopaEffect extends ContinuousEffectImpl<BloodBaronOfVizkopa
     @Override
     public boolean hasLayer(Layer layer) {
         return (layer.equals(Layer.AbilityAddingRemovingEffects_6) || layer.equals(layer.PTChangingEffects_7));
-    }
+
+   }
 
 }

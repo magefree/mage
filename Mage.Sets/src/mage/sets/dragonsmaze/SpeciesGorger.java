@@ -95,6 +95,7 @@ class ReturnToHandChooseEffect extends OneShotEffect<ReturnToHandChooseEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
+            target.setRequired(true);
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
