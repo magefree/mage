@@ -27,6 +27,7 @@
  */
 package mage.sets.magic2012;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -43,8 +44,6 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -116,67 +115,67 @@ class SphinxOfUthuunEffect extends OneShotEffect<SphinxOfUthuunEffect> {
         Set<UUID> opponents = game.getOpponents(source.getControllerId());
         if (!opponents.isEmpty()) {
             Player opponent = game.getPlayer(opponents.iterator().next());
-            TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
 
-            Cards pile1 = new CardsImpl();
+            TargetCard target = new TargetCard(0, cards.size(), Zone.PICK, new FilterCard("cards to put in the first pile"));
+            List<Card> pile1 = new ArrayList<Card>();
+            Cards pile1CardsIds = new CardsImpl();
             if (opponent.choose(Outcome.Neutral, cards, target, game)) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {
-                    Card card = cards.get(targetId, game);
+                    Card card = game.getCard(targetId);
                     if (card != null) {
                         pile1.add(card);
-                        cards.remove(card);
+                        pile1CardsIds.add(card.getId());
                     }
                 }
             }
-
-            player.revealCards("Pile 1 (Sphinx of Uthuun)", pile1, game);
-            player.revealCards("Pile 2 (Sphinx of Uthuun)", cards, game);
-
-            Choice choice = new ChoiceImpl(true);
-            choice.setMessage("Select a pile of cards to put into your hand:");
-
-            StringBuilder sb = new StringBuilder("Pile 1: ");
-            for (UUID cardId : pile1) {
-                Card card = pile1.get(cardId, game);
-                if (card != null) {
-                    sb.append(card.getName()).append("; ");
+            List<Card> pile2 = new ArrayList<Card>();
+            Cards pile2CardsIds = new CardsImpl();
+            for (UUID cardId :cards) {
+                Card card = game.getCard(cardId);
+                if (card != null && !pile1.contains(card)) {
+                    pile2.add(card);
+                    pile2CardsIds.add(card.getId());
                 }
             }
-            sb.delete(sb.length() - 2, sb.length());
-            choice.getChoices().add(sb.toString());
-
-            sb = new StringBuilder("Pile 2: ");
-            for (UUID cardId : cards) {
-                Card card = cards.get(cardId, game);
-                if (card != null) {
-                    sb.append(card.getName()).append("; ");
-                }
-            }
-            sb.delete(sb.length() - 2, sb.length());
-            choice.getChoices().add(sb.toString());
+            boolean choice = player.choosePile(Outcome.DestroyPermanent, "Choose a pile to put into hand.", pile1, pile2, game);
 
             Zone pile1Zone = Zone.GRAVEYARD;
             Zone pile2Zone = Zone.HAND;
-            if (player.choose(Outcome.Neutral, choice, game)) {
-                if (choice.getChoice().startsWith("Pile 1")) {
-                    pile1Zone = Zone.HAND;
-                    pile2Zone = Zone.GRAVEYARD;
-                }
+            if (choice) {
+                pile1Zone = Zone.HAND;
+                pile2Zone = Zone.GRAVEYARD;
             }
 
-            for (UUID cardUuid : pile1) {
-                Card card = pile1.get(cardUuid, game);
+            StringBuilder sb = new StringBuilder("Sphinx of Uthuun: Pile 1, going to ").append(pile1Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (": ");
+            int i = 0;
+            for (UUID cardUuid : pile1CardsIds) {
+                i++;
+                Card card = game.getCard(cardUuid);
                 if (card != null) {
+                    sb.append(card.getName());
+                    if (i < pile1CardsIds.size()) {
+                        sb.append(", ");
+                    }
                     card.moveToZone(pile1Zone, source.getId(), game, false);
                 }
             }
-            for (UUID cardUuid : cards) {
-                Card card = cards.get(cardUuid, game);
+            game.informPlayers(sb.toString());
+
+            sb = new StringBuilder("Sphinx of Uthuun: Pile 2, going to ").append(pile2Zone.equals(Zone.HAND)?"Hand":"Graveyard").append (":");
+            i = 0;
+            for (UUID cardUuid : pile2CardsIds) {
+                Card card = game.getCard(cardUuid);
                 if (card != null) {
+                    i++;
+                    sb.append(" ").append(card.getName());
+                    if (i < pile2CardsIds.size()) {
+                        sb.append(", ");
+                    }
                     card.moveToZone(pile2Zone, source.getId(), game, false);
                 }
             }
+            game.informPlayers(sb.toString());
         }
 
         return true;
