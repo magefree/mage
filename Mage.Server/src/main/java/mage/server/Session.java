@@ -70,8 +70,9 @@ public class Session {
 
     public void registerUser(String userName) throws MageException {
         this.isAdmin = false;
-        if (userName.equals("Admin"))
+        if (userName.equals("Admin")) {
             throw new MageException("User name already in use");
+        }
         if (userName.length() > ConfigSettings.getInstance().getMaxUserNameLength()) {
             throw new MageException(new StringBuilder("User name may not be longer than ").append(ConfigSettings.getInstance().getMaxUserNameLength()).append(" characters").toString());
         }
@@ -87,8 +88,9 @@ public class Session {
         if (user == null) {  // user already exists
             user = UserManager.getInstance().findUser(userName);
             if (user.getHost().equals(host)) {
-                if (user.getSessionId().isEmpty())
+                if (user.getSessionId().isEmpty()) {
                     logger.info("Reconnecting session for " + userName);
+                }
                 else {
                     //throw new MageException("This machine is already connected");
                     //disconnect previous one
@@ -100,8 +102,9 @@ public class Session {
                 throw new MageException("User name already in use");
             }
         }
-        if (!UserManager.getInstance().connectToSession(sessionId, user.getId()))
+        if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
             throw new MageException("Error connecting");
+        }
         this.userId = user.getId();
     }
 

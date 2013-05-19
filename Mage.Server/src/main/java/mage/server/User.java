@@ -102,14 +102,14 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.info(new StringBuilder("User ").append(userName).append(" disconnected").toString());
+            logger.info(new StringBuilder("User ").append(userName).append(" disconnected - userId = ").append(userId.toString()).toString());
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.info(new StringBuilder("User ").append(userName).append(" created").toString());
+            logger.info(new StringBuilder("User ").append(userName).append(" created - userId = ").append(userId.toString()).toString());
         } else {
             userState = UserState.Reconnected;
             reconnect();
-            logger.info(new StringBuilder("User ").append(userName).append(" reconnected").toString());
+            logger.info(new StringBuilder("User ").append(userName).append(" reconnected - userId = ").append(userId.toString()).toString());
         }
     }
 

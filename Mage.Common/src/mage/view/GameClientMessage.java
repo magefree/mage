@@ -44,9 +44,7 @@ public class GameClientMessage implements Serializable {
     private CardsView cardsView;
     private CardsView cardsView2;
     private String message;
-    private AbilityPickerView abilityView;
     private boolean flag;
-    private boolean cancel;
     private String[] strings;
     private Set<UUID> targets;
     private int min;
@@ -107,10 +105,6 @@ public class GameClientMessage implements Serializable {
 
     public String getMessage() {
         return message;
-    }
-
-    public AbilityPickerView getAbilityView() {
-        return abilityView;
     }
 
     public boolean isFlag() {
