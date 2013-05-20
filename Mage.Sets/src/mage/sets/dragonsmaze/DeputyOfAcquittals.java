@@ -30,6 +30,7 @@ package mage.sets.dragonsmaze;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +39,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -50,6 +52,7 @@ public class DeputyOfAcquittals extends CardImpl<DeputyOfAcquittals> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("another target creature you control");
     static {
         filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DeputyOfAcquittals(UUID ownerId) {
