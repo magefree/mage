@@ -117,7 +117,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl<OdricMas
 
     @Override
     public String getRule() {
-        return "Whenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block";
+        return "Whenever Odric, Master Tactician and at least three other creatures attack, you choose which creatures block this combat and how those creatures block.";
     }
 
 }
