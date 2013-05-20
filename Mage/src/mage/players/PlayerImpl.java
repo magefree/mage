@@ -751,7 +751,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public boolean triggerAbility(TriggeredAbility source, Game game) {
         if (source == null) {
             log.warn("Null source in triggerAbility method");
-            return false;
+            throw new IllegalArgumentException("source TriggeredAbility  must not be null");
         }
         //20091005 - 603.3c, 603.3d
         int bookmark = game.bookmarkState();
@@ -1065,6 +1065,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
 
+    @SuppressWarnings({"null", "ConstantConditions"})
     private int doDamage(int damage, UUID sourceId, Game game, boolean combatDamage, boolean preventable, ArrayList<UUID> appliedEffects) {
         if (damage > 0 && canDamage(game.getObject(sourceId), game)) {
             GameEvent event = new DamagePlayerEvent(playerId, sourceId, playerId, damage, preventable, combatDamage);
