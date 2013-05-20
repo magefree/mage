@@ -244,8 +244,8 @@ public abstract class MatchImpl implements Match {
         sb.append("\nMatch score:\n");
         for (MatchPlayer mp :this.getPlayers()) {
             sb.append("- ").append(mp.getPlayer().getName());
-            sb.append(" (").append(mp.getWins()).append(" wins / ");
-            sb.append(mp.getLoses()).append(" losses)\n");
+            sb.append(" (").append(mp.getWins()).append(mp.getWins()==1?" win / ":" wins / ");
+            sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)\n":" losses)\n");
         }
         sb.append("\n").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " win":" wins").append(" needed to win the match\n");
         sb.append("\nGame has started\n");
