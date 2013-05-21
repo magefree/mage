@@ -28,9 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,6 +41,7 @@ import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
 
 /**
@@ -52,6 +54,7 @@ public class SagesRowDenizen extends CardImpl<SagesRowDenizen> {
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter.add(new AnotherPredicate());
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     public SagesRowDenizen(UUID ownerId) {
         super(ownerId, 46, "Sage's Row Denizen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
@@ -64,7 +67,7 @@ public class SagesRowDenizen extends CardImpl<SagesRowDenizen> {
         this.toughness = new MageInt(3);
 
         // Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of his or her library into his or her graveyard.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter, false);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), filter, false, null, true);
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
