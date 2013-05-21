@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -57,7 +57,7 @@ public class CourtStreetDenizen extends CardImpl<CourtStreetDenizen> {
         filter.add(new AnotherPredicate());
         filter.add(new ColorPredicate(ObjectColor.WHITE));
         filter.add(new ControllerPredicate(TargetController.YOU));
-        filterOpponentCreature.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filterOpponentCreature.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     public CourtStreetDenizen(UUID ownerId) {
         super(ownerId, 8, "Court Street Denizen", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{W}");
@@ -70,7 +70,7 @@ public class CourtStreetDenizen extends CardImpl<CourtStreetDenizen> {
         this.toughness = new MageInt(2);
 
         // Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(),filter,false);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new TapTargetEffect(),filter,false,null, true);
         ability.addTarget(new TargetCreaturePermanent(filterOpponentCreature));
         this.addAbility(ability);
     }

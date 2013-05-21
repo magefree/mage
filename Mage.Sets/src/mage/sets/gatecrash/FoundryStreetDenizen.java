@@ -28,10 +28,11 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -49,7 +50,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class FoundryStreetDenizen extends CardImpl<FoundryStreetDenizen> {
 
-    private static final FilterPermanent filter = new FilterCreaturePermanent("another red creature under your control");
+    private static final FilterPermanent filter = new FilterCreaturePermanent("another red creature");
     static {
         filter.add(new AnotherPredicate());
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -67,7 +68,7 @@ public class FoundryStreetDenizen extends CardImpl<FoundryStreetDenizen> {
         this.toughness = new MageInt(1);
 
         // Whenever another red creature enters the battlefield under your control, Foundry Street Denizen gets +1/+0 until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), filter, false));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), filter, false, null, true));
     }
 
     public FoundryStreetDenizen(final FoundryStreetDenizen card) {

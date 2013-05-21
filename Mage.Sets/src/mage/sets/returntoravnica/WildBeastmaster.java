@@ -34,6 +34,7 @@ import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.dynamicvalue.common.SourcePermanentPowerCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
@@ -43,6 +44,8 @@ import mage.filter.common.FilterCreaturePermanent;
  * @author LevelX2
  */
 public class WildBeastmaster extends CardImpl<WildBeastmaster> {
+
+    private static final String EFFECT_TEXT ="each other creature you control gets +X/+X until end of turn, where X is {this}'s power";
 
     public WildBeastmaster(UUID ownerId) {
         super(ownerId, 139, "Wild Beastmaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}");
@@ -55,7 +58,9 @@ public class WildBeastmaster extends CardImpl<WildBeastmaster> {
 
         // Whenever Wild Beastmaster attacks, each other creature you control gets +X/+X until end of turn, where X is Wild Beastmaster's power.
         SourcePermanentPowerCount creaturePower = new SourcePermanentPowerCount();
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, new FilterCreaturePermanent(),true, true), false));
+        Effect effect = new BoostControlledEffect(creaturePower, creaturePower, Duration.EndOfTurn, new FilterCreaturePermanent(),true, true);
+        effect.setText(EFFECT_TEXT);
+        this.addAbility(new AttacksTriggeredAbility(effect, false));
     }
 
     public WildBeastmaster(final WildBeastmaster card) {

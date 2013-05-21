@@ -28,8 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.MageInt;
@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ShadowAlleyDenizen extends CardImpl<ShadowAlleyDenizen> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another black creature under your control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another black creature");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLACK));
@@ -71,8 +71,8 @@ public class ShadowAlleyDenizen extends CardImpl<ShadowAlleyDenizen> {
         // Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Constants.Duration.EndOfTurn),
-                filter, false);
+                new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn),
+                filter, false, null, true);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }

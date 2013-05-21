@@ -136,10 +136,10 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
         String message = null;
         StringBuilder sb = new StringBuilder();
         if (excludeSource) {
-            sb.append("each other ");
+            sb.append("Other ");
         }
         sb.append(filter.getMessage());
-        sb.append(" you control gets ");
+        sb.append(" you control get ");
 
         String p = power.toString();
         if(!p.startsWith("-")) {

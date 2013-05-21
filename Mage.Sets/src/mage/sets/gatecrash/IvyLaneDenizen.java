@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -49,7 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class IvyLaneDenizen extends CardImpl<IvyLaneDenizen> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another green creature under your control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another green creature");
     static {
         filter.add(new ColorPredicate(ObjectColor.GREEN));
         filter.add(new AnotherPredicate());
@@ -67,9 +67,9 @@ public class IvyLaneDenizen extends CardImpl<IvyLaneDenizen> {
 
         // Whenever another green creature enters the battlefield under your control, put a +1/+1 counter on target creature.
         Ability ability = new EntersBattlefieldAllTriggeredAbility(
-                Constants.Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
-                filter, false);
+                filter, false, null, true);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
