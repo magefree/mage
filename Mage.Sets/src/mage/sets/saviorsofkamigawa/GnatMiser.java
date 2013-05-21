@@ -54,7 +54,7 @@ public class GnatMiser extends CardImpl<GnatMiser> {
     }
 
     public GnatMiser(UUID ownerId) {
-        super(ownerId, 70, "Gnat Miser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{U}");
+        super(ownerId, 70, "Gnat Miser", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "SOK";
         this.subtype.add("Rat");
         this.subtype.add("Shaman");
