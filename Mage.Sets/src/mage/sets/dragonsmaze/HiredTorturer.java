@@ -36,6 +36,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -69,6 +70,7 @@ public class HiredTorturer extends CardImpl<HiredTorturer> {
 
         // {3}{B}, {T}: Target opponent loses 2 life and reveals a card at random from his or her hand.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2),new ManaCostsImpl("{3}{B}"));
+        ability.addCost(new TapSourceCost());
         ability.addEffect(new HiredTorturerEffect());
         ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
