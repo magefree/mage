@@ -1536,6 +1536,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 it.remove();
             }
         }
+        // Then, if that player controlled any objects on the stack not represented by cards, those objects cease to exist.
         this.getState().getContinuousEffects().removeInactiveEffects(this);
         for (Iterator<StackObject> it = getStack().iterator(); it.hasNext();) {
             StackObject object = it.next();
@@ -1543,13 +1544,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 it.remove();
             }
         }
+        // Then, if there are any objects still controlled by that player, those objects are exiled.
         for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
             if (perm.getControllerId().equals(playerId)) {
                 perm.moveToExile(null, "", null, this);
             }
         }
-        
+
+        // Remove cards from the player in all exile zones
+        for (ExileZone exile: this.getExile().getExileZones()) {
+            for (Iterator<UUID> it = exile.iterator(); it.hasNext();) {
+                Card card = this.getCard(it.next());
+                if (card != null && card.getOwnerId().equals(playerId)) {
+                    it.remove();
+                }
+            }
+        }
+
         Iterator it = gameCards.entrySet().iterator();
         while(it.hasNext()) {
             Entry<UUID,Card> entry = (Entry<UUID,Card>) it.next();
