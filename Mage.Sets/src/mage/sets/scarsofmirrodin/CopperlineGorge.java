@@ -54,8 +54,9 @@ public class CopperlineGorge extends CardImpl<CopperlineGorge> {
         super(ownerId, 225, "Copperline Gorge", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "SOM";
 
+        // Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.
         Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 lands";
+        String abilityText = "tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());
         this.addAbility(new GreenManaAbility());
