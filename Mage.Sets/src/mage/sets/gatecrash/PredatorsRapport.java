@@ -53,7 +53,7 @@ public class PredatorsRapport extends CardImpl<PredatorsRapport> {
         this.color.setGreen(true);
 
         // Choose target creature you control. You gain life equal to that creature's power plus its toughness.
-        Effect effect = new GainLifeEffect(new TargetPermanentPowerToughnessCount());
+        Effect effect = new GainLifeEffect(new TargetPermanentPowerPlusToughnessCount());
         effect.setText("Choose target creature you control. You gain life equal to that creature's power plus its toughness");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
@@ -69,7 +69,7 @@ public class PredatorsRapport extends CardImpl<PredatorsRapport> {
     }
 }
 
-class TargetPermanentPowerToughnessCount implements DynamicValue {
+class TargetPermanentPowerPlusToughnessCount implements DynamicValue {
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
@@ -82,7 +82,7 @@ class TargetPermanentPowerToughnessCount implements DynamicValue {
 
     @Override
     public DynamicValue copy() {
-        return new TargetPermanentPowerCount();
+        return new TargetPermanentPowerPlusToughnessCount();
     }
 
     @Override
