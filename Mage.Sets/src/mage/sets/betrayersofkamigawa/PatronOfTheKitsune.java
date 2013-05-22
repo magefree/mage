@@ -52,7 +52,7 @@ public class PatronOfTheKitsune extends CardImpl<PatronOfTheKitsune> {
         this.subtype.add("Spirit");
         this.color.setWhite(true);
         this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.toughness = new MageInt(6);
 
         // Fox offering (You may cast this card any time you could cast an instant by sacrificing a Fox and paying the difference in mana costs between this and the sacrificed Fox. Mana cost includes color.)
         this.addAbility(new OfferingAbility("Fox"));
