@@ -96,6 +96,7 @@ class TributeToHungerEffect extends OneShotEffect<TributeToHungerEffect> {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new ControllerPredicate(TargetController.YOU));
         TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
+        target.setRequired(true);
 
         if (target.canChoose(player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
