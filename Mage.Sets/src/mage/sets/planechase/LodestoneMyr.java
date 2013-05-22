@@ -29,16 +29,17 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.TappedPredicate;
@@ -49,11 +50,10 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class LodestoneMyr extends CardImpl<LodestoneMyr> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("untapped artifact you control");
+    private static final FilterControlledArtifactPermanent filter = new FilterControlledArtifactPermanent("untapped artifact you control");
 
     static {
         filter.add(Predicates.not(new TappedPredicate()));
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public LodestoneMyr(UUID ownerId) {
@@ -63,7 +63,7 @@ public class LodestoneMyr extends CardImpl<LodestoneMyr> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new TapTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public LodestoneMyr(final LodestoneMyr card) {
