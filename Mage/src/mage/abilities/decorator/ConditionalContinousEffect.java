@@ -3,6 +3,7 @@ package mage.abilities.decorator;
 import mage.Constants;
 import mage.Constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FixedCondition;
 import mage.abilities.effects.ContinuousEffect;
@@ -101,6 +102,14 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
             used = true;
         }
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText == null || staticText.isEmpty() && this.effect != null) { // usefull for conditional night/day card abilities
+            return effect.getText(mode);
+        }
+        return staticText;
     }
 
     @Override

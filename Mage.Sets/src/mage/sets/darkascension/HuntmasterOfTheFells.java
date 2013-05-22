@@ -147,6 +147,8 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbi
         target1.setRequired(true);
         this.addTarget(target1);
         this.addTarget(new RavagerOfTheFellsTarget());
+        // Rule only shown on the night side
+        this.setRuleVisible(false);
     }
 
     public RavagerOfTheFellsAbility(final RavagerOfTheFellsAbility ability) {
