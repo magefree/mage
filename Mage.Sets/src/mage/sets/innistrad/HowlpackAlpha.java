@@ -47,6 +47,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.WolfToken;
 
 import java.util.UUID;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.Effect;
 
 /**
  *
@@ -76,7 +78,9 @@ public class HowlpackAlpha extends CardImpl<HowlpackAlpha> {
         this.toughness = new MageInt(3);
 
         // Other Werewolf and Wolf creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        Effect effect = new ConditionalContinousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new TransformedCondition(), null);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
         // At the beginning of your end step, put a 2/2 green Wolf creature token onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new WolfToken()), false), new TransformedCondition(), ruleText));
 
