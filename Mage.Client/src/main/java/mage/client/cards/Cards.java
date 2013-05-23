@@ -44,12 +44,15 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.*;
 import java.util.Map.Entry;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class Cards extends javax.swing.JPanel {
+
+    private static final Logger logger = Logger.getLogger(Cards.class);
 
     private Map<UUID, MageCard> cards = new LinkedHashMap<UUID, MageCard>();
     private boolean dontDisplayTapped = false;
@@ -97,6 +100,7 @@ public class Cards extends javax.swing.JPanel {
         this.isVisibleIfEmpty = isVisibleIfEmpty;
     }
 
+    @Override
     public void setBorder(Border border) {
         super.setBorder(border);
         if (jScrollPane1 != null) {
@@ -112,6 +116,7 @@ public class Cards extends javax.swing.JPanel {
     public boolean loadCards(CardsView cardsView, BigCard bigCard, UUID gameId, java.util.List<UUID> order) {
         boolean changed = false;
 
+        // remove objects no longer on the stack from display
         for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
             Entry<UUID, MageCard> entry = i.next();
             if (!cardsView.containsKey(entry.getKey())) {
@@ -121,11 +126,31 @@ public class Cards extends javax.swing.JPanel {
             }
         }
 
+        // Workaround for bug leaving display of objects on the stack (issue #213 https://github.com/magefree/mage/issues/213)
+        if (cardsView.size() == 0 && countCards() > 0) {
+            // problem happens with transformable cards
+            logger.fatal("Card object on the cards panel was not removed");
+            for (Component comp: cardArea.getComponents()) {
+                if (comp instanceof Card) {
+                    Card card = (Card)comp;
+                    logger.fatal("Card name:" + card.getName() + " type:" + card.getType(null));
+                } else if (comp instanceof MageCard) {
+                    MageCard mageCard = (MageCard)comp;
+                    logger.fatal("MageCard name:" + mageCard.getName() + " toolTiptext:" + mageCard.getToolTipText());
+                } else  {
+                    logger.fatal("Unknown object:" + comp.getName() + " className:" + comp.getClass().getName());
+                }
+                cardArea.remove(comp);
+            }
+        }
+
+        // order objects for display
         java.util.List<CardView> orderedList = new ArrayList<CardView>();
         for (CardView card: cardsView.values()) {
             orderedList.add(0, card);
         }
 
+        // add objects to the panel
         for (CardView card: orderedList) {
             if (dontDisplayTapped) {
                 if (card instanceof PermanentView) {
@@ -176,7 +201,9 @@ public class Cards extends javax.swing.JPanel {
 
     private void addCard(CardView card, BigCard bigCard, UUID gameId) {
         MageCard cardImg = Plugins.getInstance().getMageCard(card, bigCard, getCardDimension(), gameId, true);
-        if (zone != null) cardImg.setZone(zone);
+        if (zone != null) {
+            cardImg.setZone(zone);
+        }
         cards.put(card.getId(), cardImg);
         cardArea.add(cardImg);
     }
@@ -193,6 +220,14 @@ public class Cards extends javax.swing.JPanel {
                 }
             }
         }
+    }
+
+    private int countCards() {
+        int count = 0;
+        for (Component comp: cardArea.getComponents()) {
+            count++;
+        }
+        return count;
     }
 
     private void layoutCards(Dimension dimension, Map<UUID, MageCard> cards, java.util.List<UUID> order) {
