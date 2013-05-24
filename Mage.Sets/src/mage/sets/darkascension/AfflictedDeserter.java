@@ -31,26 +31,15 @@ import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
-import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.TargetPermanent;
 
 /**
  *
@@ -70,6 +59,11 @@ public class AfflictedDeserter extends CardImpl<AfflictedDeserter> {
         this.color.setRed(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(2);
+
+        // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
+        Ability ability1 = new WerewolfRansackerAbility();
+        ability1.setRuleVisible(false); // rule will be shown only on the other face of the card but triggers only on this side
+        this.addAbility(ability1);
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Afflicted Deserter.
         this.addAbility(new TransformAbility());

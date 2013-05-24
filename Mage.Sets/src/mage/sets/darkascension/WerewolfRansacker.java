@@ -36,6 +36,8 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -70,7 +72,7 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        this.addAbility(new WerewolfRansackerAbility());
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EmptyEffect(WerewolfRansackerAbility.RULE_TEXT)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
         TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
@@ -90,6 +92,7 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
 class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbility> {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
+    public static final String RULE_TEXT = "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller";
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
@@ -125,7 +128,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbi
 
     @Override
     public String getRule() {
-        return "Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.";
+        return RULE_TEXT + '.';
     }
 
 }
