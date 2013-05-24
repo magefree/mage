@@ -56,6 +56,7 @@ import mage.game.Game;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
@@ -79,12 +80,14 @@ public class TamiyoTheMoonSage extends CardImpl<TamiyoTheMoonSage> {
         // +1: Tap target permanent. It doesn't untap during its controller's next untap step.
         LoyaltyAbility ability = new LoyaltyAbility(new TapTargetEffect(), 1);
         ability.addEffect(new SkipNextUntapTargetEffect());
-        ability.addTarget(new TargetPermanent());
+        Target target = new TargetPermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
 
         // -2: Draw a card for each tapped creature target player controls.
         ability = new LoyaltyAbility(new DrawCardControllerEffect(new TappedCreaturesControlledByTargetCount()), -2);
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
 
         // -8: You get an emblem with "You have no maximum hand size" and "Whenever a card is put into your graveyard from anywhere, you may return it to your hand."
