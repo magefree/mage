@@ -60,7 +60,6 @@ public class TormentorExarch extends CardImpl<TormentorExarch> {
         mode.getEffects().add(new BoostTargetEffect(0, -2, Constants.Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
-        ability.addMode(mode);
         this.addAbility(ability);
     }
 
