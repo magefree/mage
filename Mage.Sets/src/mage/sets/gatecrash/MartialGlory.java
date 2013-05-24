@@ -63,6 +63,7 @@ public class MartialGlory extends CardImpl<MartialGlory> {
         effect.setText("Target creature gets +3/+0 until end of turn");
         Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("first creature"));
         target.setRequired(true);
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(target);
         
         // Target creature gets +0/+3 until end of turn.
@@ -71,6 +72,7 @@ public class MartialGlory extends CardImpl<MartialGlory> {
         effect2.setTargetPointer(SecondTargetPointer.getInstance());
         target = new TargetCreaturePermanent(new FilterCreaturePermanent("second creature (can be the same as the first)"));
         target.setRequired(true);
+        this.getSpellAbility().addEffect(effect2);
         this.getSpellAbility().addTarget(target);
 
         
@@ -83,29 +85,5 @@ public class MartialGlory extends CardImpl<MartialGlory> {
     @Override
     public MartialGlory copy() {
         return new MartialGlory(this);
-    }
-}
-class MartialGloryEffect1 extends OneShotEffect<MartialGloryEffect1> {
-
-    public MartialGloryEffect1() {
-        super(Outcome.BoostCreature);
-        staticText = "Target creature gets +3/+0 until end of turn.";
-    }
-
-    public MartialGloryEffect1(final MartialGloryEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        ContinuousEffect effect = new BoostTargetEffect(3,0, Duration.EndOfTurn);
-        effect.setTargetPointer(new FixedTarget(source.getTargets().get(0).getFirstTarget()));
-        game.addEffect(effect, source);
-        return true;
-    }
-
-    @Override
-    public MartialGloryEffect1 copy() {
-        return new MartialGloryEffect1(this);
     }
 }
