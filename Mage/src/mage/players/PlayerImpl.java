@@ -1049,8 +1049,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         GameEvent event = new GameEvent(GameEvent.EventType.GAIN_LIFE, playerId, playerId, playerId, amount, false);
         if (!game.replaceEvent(event)) {
             this.life += event.getAmount();
-            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, amount));
-            return amount;
+            game.fireEvent(GameEvent.getEvent(GameEvent.EventType.GAINED_LIFE, playerId, playerId, playerId, event.getAmount()));
+            return event.getAmount();
         }
         return 0;
     }
