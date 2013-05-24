@@ -59,11 +59,12 @@ import mage.target.targetpointer.FixedTarget;
 public class BreakingEntering extends SplitCard<BreakingEntering> {
 
     public BreakingEntering(UUID ownerId) {
-        super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{U}{B}", true);
+        super(ownerId, 124, "Breaking", "Entering", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{U}{B}", "{4}{B}{R}", true);
         this.expansionSetCode = "DGM";
 
         this.color.setBlue(true);
         this.color.setBlack(true);
+        this.color.setRed(true);
 
         // Breaking
         // Target player puts the top eight cards of his or her library into his or her graveyard.
@@ -74,7 +75,7 @@ public class BreakingEntering extends SplitCard<BreakingEntering> {
 
         // Entering
         // Put a creature card from a graveyard onto the battlefield under your control. It gains haste until end of turn.
-        getRightHalfCard().getColor().setBlue(true);
+        getRightHalfCard().getColor().setRed(true);
         getRightHalfCard().getColor().setBlack(true);
         getRightHalfCard().getSpellAbility().addEffect(new EnteringReturnFromGraveyardToBattlefieldEffect());
 
