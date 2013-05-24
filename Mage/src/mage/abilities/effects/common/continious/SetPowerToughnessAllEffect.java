@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.Locale;
 import mage.Constants.Duration;
 import mage.Constants.Layer;
 import mage.Constants.Outcome;
@@ -38,7 +39,6 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.filter.FilterPermanent;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -52,22 +52,22 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     private FilterPermanent filter;
     private DynamicValue power;
     private DynamicValue toughness;
-    private boolean lockedIn;
+    private boolean lockedInPT;
 
     public SetPowerToughnessAllEffect(int power, int toughness, Duration duration) {
         this(new StaticValue(power), new StaticValue(toughness), duration, new FilterCreaturePermanent("Creatures"), true);
     }
 
-    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedIn) {
-        this(new StaticValue(power), new StaticValue(toughness), duration, filter, lockedIn);
+    public SetPowerToughnessAllEffect(int power, int toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
+        this(new StaticValue(power), new StaticValue(toughness), duration, filter, lockedInPT);
     }
 
-    public SetPowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedIn) {
+    public SetPowerToughnessAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterPermanent filter, boolean lockedInPT) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
-        this.lockedIn = lockedIn;
+        this.lockedInPT = lockedInPT;
     }
 
     public SetPowerToughnessAllEffect(final SetPowerToughnessAllEffect effect) {
@@ -75,7 +75,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
         this.power = effect.power;
         this.toughness = effect.toughness;
         this.filter = effect.filter;
-        this.lockedIn = effect.lockedIn;
+        this.lockedInPT = effect.lockedInPT;
     }
 
     @Override
@@ -86,10 +86,10 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     @Override
     public void init(Ability source, Game game) {
         super.init(source, game);
-        for (Permanent perm: game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), source.getControllerId(), source.getSourceId(), game)) {
+        for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             objects.add(perm.getId());
         }
-        if (lockedIn) {
+        if (lockedInPT) {
             power = new StaticValue(power.calculate(game, source));
             toughness = new StaticValue(toughness.calculate(game, source));
         }
@@ -112,7 +112,7 @@ public class SetPowerToughnessAllEffect extends ContinuousEffectImpl<SetPowerTou
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
-        if (filter.getMessage().startsWith("Each ")) {
+        if (filter.getMessage().toLowerCase(Locale.ENGLISH).startsWith("Each ")) {
             sb.append(" becomes ");
         } else {
             sb.append(" become ");
