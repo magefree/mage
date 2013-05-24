@@ -54,7 +54,7 @@ import mage.game.permanent.Permanent;
  * @author Loki
  */
 public class MyrGalvanizer extends CardImpl<MyrGalvanizer> {
-    static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Myr creatures");
 
     static {
         filter.add(new SubtypePredicate("Myr"));
@@ -66,7 +66,10 @@ public class MyrGalvanizer extends CardImpl<MyrGalvanizer> {
         this.subtype.add("Myr");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        // Other Myr creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
+        
+        // {1}, {T}: Untap each other Myr you control.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrGalvanizerEffect(), new TapSourceCost());
         ability.addCost(new GenericManaCost(1));
         this.addAbility(ability);
@@ -86,6 +89,7 @@ class MyrGalvanizerEffect extends OneShotEffect<MyrGalvanizerEffect> {
 
     MyrGalvanizerEffect() {
         super(Constants.Outcome.Untap);
+        staticText = "Untap each other Myr you control";
     }
 
     MyrGalvanizerEffect(final MyrGalvanizerEffect effect) {
@@ -95,8 +99,9 @@ class MyrGalvanizerEffect extends OneShotEffect<MyrGalvanizerEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent: game.getBattlefield().getActivePermanents(MyrGalvanizer.filter, source.getControllerId(), game)) {
-            if (!permanent.getId().equals(source.getSourceId()))
+           if (!permanent.getId().equals(source.getSourceId())) {
                 permanent.untap(game);
+            }
         }
         return true;
     }
