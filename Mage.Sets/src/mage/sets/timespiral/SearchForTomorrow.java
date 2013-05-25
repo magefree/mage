@@ -28,8 +28,8 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
@@ -52,7 +52,7 @@ public class SearchForTomorrow extends CardImpl<SearchForTomorrow> {
 
         // Search your library for a basic land card and put it onto the battlefield. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, true, Constants.Outcome.PutLandInPlay));
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(target, false, Outcome.PutLandInPlay));
         
         // Suspend 2-{G}
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{G}"), this));
