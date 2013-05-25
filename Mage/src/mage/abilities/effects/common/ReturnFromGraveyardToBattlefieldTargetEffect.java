@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common;
 
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -37,6 +38,8 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
@@ -67,28 +70,37 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
-                    if (tapped) {
-                        Permanent permanent = game.getPermanent(card.getId());
-                        if (permanent != null) {
-                            permanent.setTapped(true);
+        for (UUID targetId: getTargetPointer().getTargets(game, source)) {
+            Card card = game.getCard(targetId);
+            if (card != null) {
+                Player player = game.getPlayer(card.getOwnerId());
+                if (player != null) {
+                    if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
+                        if (tapped) {
+                            Permanent permanent = game.getPermanent(card.getId());
+                            if (permanent != null) {
+                                permanent.setTapped(true);
+                            }
                         }
                     }
-                    return true;
                 }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Return target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
+        Target target = mode.getTargets().get(0);
+        sb.append("Return ");
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName()).append(" to the battlefield");
         if (tapped) {
             sb.append(" tapped");
         }

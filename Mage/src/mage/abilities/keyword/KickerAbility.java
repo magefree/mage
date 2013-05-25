@@ -80,21 +80,21 @@ import mage.players.Player;
  */
 public class KickerAbility extends StaticAbility<KickerAbility> implements OptionalAdditionalSourceCosts {
 
-    protected static final String KickerKeyword = "Kicker";
-    protected static final String KickerReminderMana = "(You may pay an additional {cost} as you cast this spell.)";
-    protected static final String KickerReminderCost = "(You may {cost} in addition to any other costs as you cast this spell.)";
+    protected static final String KICKER_KEYWORD = "Kicker";
+    protected static final String KICKER_REMINDER_MANA = "(You may pay an additional {cost} as you cast this spell.)";
+    protected static final String KICKER_REMINDER_COST = "(You may {cost} in addition to any other costs as you cast this spell.)";
 
     protected String keywordText;
     protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
 
     public KickerAbility(String manaString) {
-       this(KickerKeyword, KickerReminderMana);
+       this(KICKER_KEYWORD, KICKER_REMINDER_MANA);
        this.addKickerCost(manaString);
     }
 
     public KickerAbility(Cost cost) {
-       this(KickerKeyword, KickerReminderCost);
+       this(KICKER_KEYWORD, KICKER_REMINDER_COST);
        this.addKickerCost(cost);
     }
 

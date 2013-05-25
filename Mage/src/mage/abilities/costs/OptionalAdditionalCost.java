@@ -36,7 +36,7 @@ public interface OptionalAdditionalCost extends Cost {
     String getName();
 
     /**
-     * Returns the complete text for the addional coast or if onlyCost is true
+     * Returns the complete text for the addional cost or if onlyCost is true
      * only the pure text fore the included native cost
      *
      * @param onlyCost

@@ -145,6 +145,7 @@ public class OptionalAdditionalCostImpl <T extends OptionalAdditionalCostImpl<T>
      * Set if the cost be multiple times activated
      *
      */
+    @Override
     public void setRepeatable(boolean repeatable) {
         this.repeatable = repeatable;
     }  
