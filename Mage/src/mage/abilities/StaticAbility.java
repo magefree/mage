@@ -44,8 +44,9 @@ public abstract class StaticAbility<T extends StaticAbility<T>> extends AbilityI
 
     public StaticAbility(Zone zone, Effect effect) {
         super(AbilityType.STATIC, zone);
-        if (effect != null)
+        if (effect != null) {
             this.addEffect(effect);
+        }
     }
 
     public StaticAbility(StaticAbility ability) {

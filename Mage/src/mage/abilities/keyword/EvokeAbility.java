@@ -68,13 +68,13 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
         this.addEvokeCost(manaString);
         Ability ability = new ConditionalTriggeredAbility(new EntersBattlefieldTriggeredAbility(new SacrificeSourceEffect()), EvokedCondition.getInstance(), "Sacrifice {this} when it enters the battlefield and was evoked.");
         ability.setRuleVisible(false);
-        ability.setRuleVisible(false);
         card.addAbility(ability);
 
     }
 
     public EvokeAbility(final EvokeAbility ability) {
        super(ability);
+       this.evokeCosts.addAll(ability.evokeCosts);
     }
 
     @Override
