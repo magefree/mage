@@ -131,7 +131,7 @@ class VoiceOfResurgenceToken extends Token {
         subtype.add("Elemental");
         power = new MageInt(0);
         toughness = new MageInt(0);
-        FilterControlledPermanent filter = new FilterControlledPermanent();
+        FilterControlledPermanent filter = new FilterControlledPermanent("creatures you control");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         DynamicValue creaturesControlled = new PermanentsOnBattlefieldCount(filter);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(creaturesControlled, Constants.Duration.EndOfGame)));
