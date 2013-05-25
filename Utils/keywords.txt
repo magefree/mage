@@ -2,6 +2,7 @@ Annihilator|number|
 Bloodthirst|number|
 Bushido|number|
 Dredge|number|
+Evoke|card, manaString|
 Soulshift|number|
 Basic landcycling|cost|
 Forestcycling|cost|

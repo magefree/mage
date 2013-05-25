@@ -182,6 +182,12 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // A player can't apply two alternative methods of casting or two alternative costs to a single spell.
         if (card != null) {
             for (Ability ability : card.getAbilities()) {
+                if (ability instanceof AlternativeSourceCosts) {
+                    if (((AlternativeSourceCosts)ability).askToActivateAlternativeCosts(this, game)) {
+                        // only one alternative costs may be activated
+                        break;
+                    }
+                }
                 if (ability instanceof OptionalAdditionalSourceCosts) {
                     ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
                 }

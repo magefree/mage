@@ -34,7 +34,7 @@ import mage.Constants.AbilityType;
 import mage.Constants.TimingRule;
 import mage.Constants.Zone;
 import mage.MageObject;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
@@ -275,6 +275,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         for (Ability ability : (Abilities<Ability>) spell.getAbilities()) {
             if (ability instanceof OptionalAdditionalSourceCosts) {
                 sb.append(((OptionalAdditionalSourceCosts) ability).getCastMessageSuffix());
+            }
+            if (ability instanceof AlternativeSourceCosts) {
+                sb.append(((AlternativeSourceCosts) ability).getCastMessageSuffix());
             }
         }
         return sb.toString();
