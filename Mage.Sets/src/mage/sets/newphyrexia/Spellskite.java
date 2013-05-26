@@ -41,6 +41,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetStackObject;
@@ -88,12 +90,24 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        if (spell != null) {
-            Targets targets = spell.getSpellAbility().getTargets();
+        StackObject stackObject = game.getStack().getStackObject(source.getFirstTarget());
+        MageObject sourceObject = game.getObject(source.getSourceId());
+        if (stackObject != null && sourceObject != null) {
+            Targets targets;
+            MageObject oldTarget = null;
+            if (stackObject instanceof Spell) {
+                Spell spell = (Spell)stackObject;
+                targets = spell.getSpellAbility().getTargets();
+            } else if (stackObject instanceof StackAbility) {
+                StackAbility stackAbility = (StackAbility)stackObject;
+                targets = stackAbility.getTargets();
+            } else {
+                return false;
+            }
             if (targets.size() == 1 && targets.get(0).getTargets().size() == 1) {
                 Target target = targets.get(0);
                 if (target.canTarget(source.getSourceId(), game)) {
+                    oldTarget = game.getObject(targets.getFirstTarget());
                     target.clearChosen();
                     target.add(source.getSourceId(), game);
                 }
@@ -103,15 +117,16 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
                 for (Target target: targets) {
                     for (UUID targetId: target.getTargets()) {
                         MageObject object = game.getObject(targetId);
-                        String name = null;
+                        String name;
                         if (object == null) {
                             Player targetPlayer = game.getPlayer(targetId);
                             name = targetPlayer.getName();
                         } else {
                             name = object.getName();
                         }
-                        if (name != null && player.chooseUse(Outcome.Neutral, "Change target from " + name + " to {this}?", game)) {
+                        if (name != null && player.chooseUse(Outcome.Neutral, new StringBuilder("Change target from ").append(name).append(" to ").append(sourceObject.getName()).append("?").toString(), game)) {
                             if (target.canTarget(source.getSourceId(), game)) {
+                                oldTarget = game.getObject(targets.getFirstTarget());
                                 target.remove(targetId);
                                 target.addTarget(source.getSourceId(), source, game);
                                 break;
@@ -120,6 +135,10 @@ class SpellskiteEffect extends OneShotEffect<SpellskiteEffect> {
                     }
                 }
             }
+            if (oldTarget != null) {
+                game.informPlayers(new StringBuilder(sourceObject.getName()).append(": Changed target of ").append(stackObject.getName()).append(" from ").append(oldTarget.getName()).append(" to ").append(sourceObject.getName()).toString());
+            }
+            return true;
         }
         return false;
     }
