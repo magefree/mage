@@ -32,14 +32,15 @@ import java.util.Iterator;
 import mage.Constants;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.AlternativeCostImpl;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
@@ -207,6 +208,13 @@ public class CardUtil {
     public static void adjustCost(SpellAbility spellAbility, ManaCosts<ManaCost> manaCostsToReduce) {
         ManaCosts<ManaCost> previousCost = spellAbility.getManaCostsToPay();
         ManaCosts<ManaCost> adjustedCost = new ManaCostsImpl<ManaCost>();
+        // save X value (e.g. convoke ability)
+        for (VariableCost vCost: previousCost.getVariableCosts()) {
+            if (vCost instanceof VariableManaCost) {
+                adjustedCost.add((VariableManaCost) vCost);
+            }
+        }
+
 
         Mana reduceMana = new Mana();
         for (ManaCost manaCost : manaCostsToReduce) {
