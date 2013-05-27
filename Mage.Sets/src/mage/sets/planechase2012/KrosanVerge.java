@@ -25,61 +25,68 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.morningtide;
+package mage.sets.planechase2012;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileFromGraveCost;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class EverbarkShaman extends CardImpl<EverbarkShaman> {
+public class KrosanVerge extends CardImpl<KrosanVerge> {
 
-    private static final FilterCard filterForest = new FilterCard("Forest");
-    private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
+    private static final FilterCard filterForest = new FilterCard("a Forest");
+    private static final FilterCard filterPlains = new FilterCard("a Plains");
 
     static {
-        filterForest.add(new NamePredicate("Forest"));
-        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filterForest.add(new SubtypePredicate("Forest"));
+        filterPlains.add(new SubtypePredicate("Plains"));
     }
 
-    public EverbarkShaman(UUID ownerId) {
-        super(ownerId, 121, "Everbark Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
-        this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+    public KrosanVerge(UUID ownerId) {
+        super(ownerId, 123, "Krosan Verge", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "PC2";
 
-        // {T}, Exile a Treefolk card from your graveyard: Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(2, filterForest), true, Constants.Outcome.PutLandInPlay), new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filterTreefolk)));
+        // Krosan Verge enters the battlefield tapped.
+        this.addAbility(new EntersBattlefieldTappedAbility());
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        // {2}, {T}, Sacrifice Krosan Verge: Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library.
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterForest), true, Outcome.PutLandInPlay);
+        effect.setText("Search your library for a Forest card and a Plains card and put them onto the battlefield tapped. Then shuffle your library");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new GenericManaCost(2));
+        effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filterPlains), true, Outcome.PutLandInPlay);
+        effect.setText(null);
+        ability.addEffect(effect);
+        ability.addCost(new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
+
     }
 
-    public EverbarkShaman(final EverbarkShaman card) {
+    public KrosanVerge(final KrosanVerge card) {
         super(card);
     }
 
     @Override
-    public EverbarkShaman copy() {
-        return new EverbarkShaman(this);
+    public KrosanVerge copy() {
+        return new KrosanVerge(this);
     }
 }

@@ -61,12 +61,12 @@ public class AttachEffect extends OneShotEffect<AttachEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             return permanent.addAttachment(source.getSourceId(), game);
         }
         else {
-            Player player = game.getPlayer(source.getFirstTarget());
+            Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
             if (player != null) {
                 return player.addAttachment(source.getSourceId(), game);
             }

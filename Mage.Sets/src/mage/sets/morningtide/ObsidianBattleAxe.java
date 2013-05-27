@@ -28,58 +28,61 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
-import mage.MageInt;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.ExileFromGraveCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.continious.BoostEquippedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
+import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.NamePredicate;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
-import mage.target.common.TargetCardInLibrary;
-import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class EverbarkShaman extends CardImpl<EverbarkShaman> {
+public class ObsidianBattleAxe extends CardImpl<ObsidianBattleAxe> {
 
-    private static final FilterCard filterForest = new FilterCard("Forest");
-    private static final FilterCard filterTreefolk = new FilterCard("Treefolk from your graveyard");
-
+    private static final FilterPermanent filter = new FilterCreaturePermanent("a Warrior creature");
     static {
-        filterForest.add(new NamePredicate("Forest"));
-        filterTreefolk.add(new SubtypePredicate("Treefolk"));
+        filter.add(new SubtypePredicate("Warrior"));
     }
 
-    public EverbarkShaman(UUID ownerId) {
-        super(ownerId, 121, "Everbark Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{G}");
+    public ObsidianBattleAxe(UUID ownerId) {
+        super(ownerId, 144, "Obsidian Battle-Axe", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MOR";
-        this.subtype.add("Treefolk");
-        this.subtype.add("Shaman");
-        this.color.setGreen(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(5);
+        this.supertype.add("Tribal");
+        this.subtype.add("Warrior");
+        this.subtype.add("Equipment");
 
-        // {T}, Exile a Treefolk card from your graveyard: Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(2, filterForest), true, Constants.Outcome.PutLandInPlay), new TapSourceCost());
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filterTreefolk)));
+        // Equipped creature gets +2/+1 and has haste.
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 1));
+        ability.addEffect(new GainAbilityAttachedEffect(HasteAbility.getInstance(), AttachmentType.EQUIPMENT));
         this.addAbility(ability);
+        // Whenever a Warrior creature enters the battlefield, you may attach Obsidian Battle-Axe to it.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(
+                Zone.BATTLEFIELD, new AttachEffect(Outcome.Detriment, "attach {source} to it"),
+                filter, true, true, null));
+        // Equip {3}
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
-    public EverbarkShaman(final EverbarkShaman card) {
+    public ObsidianBattleAxe(final ObsidianBattleAxe card) {
         super(card);
     }
 
     @Override
-    public EverbarkShaman copy() {
-        return new EverbarkShaman(this);
+    public ObsidianBattleAxe copy() {
+        return new ObsidianBattleAxe(this);
     }
 }

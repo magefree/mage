@@ -25,43 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.judgment;
 
-import mage.Constants.SpellAbilityType;
-import mage.MageObject;
-import mage.cards.SplitCard;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
+import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class NamePredicate implements Predicate<MageObject> {
+public class KrosanVerge extends mage.sets.planechase2012.KrosanVerge {
 
-    private final String name;
+    public KrosanVerge(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 141;
+        this.expansionSetCode = "JUD";
+    }
 
-    public NamePredicate(String name) {
-        this.name = name;
+    public KrosanVerge(final KrosanVerge card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        // If a player names a card, the player may name either half of a split card, but not both. 
-        // A split card has the chosen name if one of its two names matches the chosen name.
-        if (input instanceof SplitCard) {
-            return name.equals(((SplitCard)input).getLeftHalfCard().getName()) || name.equals(((SplitCard)input).getRightHalfCard().getName());
-        } else if (input instanceof Spell && ((Spell)input).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)){
-            SplitCard card = (SplitCard) ((Spell)input).getCard();
-            return name.equals(card.getLeftHalfCard().getName()) || name.equals(card.getRightHalfCard().getName());
-        } else {
-            return name.equals(input.getName());
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Name(" + name + ')';
+    public KrosanVerge copy() {
+        return new KrosanVerge(this);
     }
 }

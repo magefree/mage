@@ -76,7 +76,9 @@ public class ArachnusSpinner extends CardImpl<ArachnusSpinner> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(7);
 
+        // Reach (This creature can block creatures with flying.)
         this.addAbility(ReachAbility.getInstance());
+        // Tap an untapped Spider you control: Search your graveyard and/or library for a card named Arachnus Web and put it onto the battlefield attached to target creature. If you search your library this way, shuffle it.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new ArachnusSpinnerEffect(),
                 new TapTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
@@ -144,6 +146,7 @@ class ArachnusSpinnerEffect extends OneShotEffect<ArachnusSpinnerEffect> {
         if (card != null) {
             Permanent permanent = game.getPermanent(source.getFirstTarget());
             if (permanent != null) {
+                game.getState().setValue("attachTo:" + card.getId(), permanent.getId());
                 card.putOntoBattlefield(game, zone, source.getSourceId(), source.getControllerId());
                 return permanent.addAttachment(card.getId(), game);
             }
