@@ -144,7 +144,13 @@ public enum CardRepository {
             qb.distinct().selectColumns("name");
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                names.add(card.getName());
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result+4));
+                } else {
+                    names.add(card.getName());
+                }
             }
         } catch (SQLException ex) {
         }
@@ -159,7 +165,13 @@ public enum CardRepository {
             qb.where().not().like("types", new SelectArg('%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                names.add(card.getName());
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result+4));
+                } else {
+                    names.add(card.getName());
+                }
             }
         } catch (SQLException ex) {
         }
@@ -175,7 +187,13 @@ public enum CardRepository {
             where.and(where.not().like("types", '%' + CardType.CREATURE.name() +'%'),where.not().like("types", '%' + CardType.LAND.name() + '%'));
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
-                names.add(card.getName());
+                int result = card.getName().indexOf(" // ");
+                if (result > 0) {
+                    names.add(card.getName().substring(0, result));
+                    names.add(card.getName().substring(result+4));
+                } else {
+                    names.add(card.getName());
+                }
             }
         } catch (SQLException ex) {
         }
