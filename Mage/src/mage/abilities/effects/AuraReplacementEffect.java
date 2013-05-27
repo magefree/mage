@@ -46,6 +46,11 @@ import mage.target.Target;
 import java.util.UUID;
 
 /**
+ * Cards with the Aura subtype don't change the zone they are in, if there is no
+ * valid target on the battlefield. Also, when entering the Battlefield and it
+ * was not cast, this effect gets the target to witch to attach it.
+ *
+ * This effect is automatically added to ContinuousEffects at the start of a game
  *
  * @author North
  */
