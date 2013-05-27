@@ -67,6 +67,8 @@ public class EverbarkShaman extends CardImpl<EverbarkShaman> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(5);
+
+        // {T}, Exile a Treefolk card from your graveyard: Search your library for up to two Forest cards and put them onto the battlefield tapped. Then shuffle your library.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(2, filterForest), true, Constants.Outcome.PutLandInPlay), new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(filterTreefolk)));
         this.addAbility(ability);
