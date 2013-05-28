@@ -1520,9 +1520,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
      */
 
     @Override
-    public void leave(UUID playerId) {
+    public synchronized void leave(UUID playerId) {
         Player player = getPlayer(playerId);
         player.leave();
+        if (this.isGameOver()) {
+            // no need to remove objects if only one player is left
+            return;
+        }
         //20100423 - 800.4a
         for (Iterator<Permanent> it = getBattlefield().getAllPermanents().iterator(); it.hasNext();) {
             Permanent perm = it.next();
