@@ -143,6 +143,7 @@ class TrepanationBladeBoostEffect extends ContinuousEffectImpl<TrepanationBladeB
 
     public TrepanationBladeBoostEffect() {
         super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        staticText = null;
     }
 
     public TrepanationBladeBoostEffect(final TrepanationBladeBoostEffect effect) {

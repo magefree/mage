@@ -28,9 +28,13 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.Constants.Zone;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -64,15 +68,15 @@ public class RingOfEvosIsle extends CardImpl<RingOfEvosIsle> {
         this.subtype.add("Equipment");
 
         // {2}: Equipped creature gains hexproof until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.EndOfTurn), new GenericManaCost(2)));
 
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), Constants.TargetController.YOU, false);
-        ConditionalTriggeredAbility ability2 = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue");
+        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false);
+        ConditionalTriggeredAbility ability2 = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's blue.");
         this.addAbility(ability2);
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
     public RingOfEvosIsle(final RingOfEvosIsle card) {

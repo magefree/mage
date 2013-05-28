@@ -131,6 +131,9 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
             sb.append("gains ");
         }
         sb.append(ability.getRule());
+        if (!duration.toString().isEmpty()) {
+            sb.append(" ").append(duration.toString());
+        }
         staticText = sb.toString();
     }
 
