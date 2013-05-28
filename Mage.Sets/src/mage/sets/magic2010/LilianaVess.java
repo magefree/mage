@@ -98,7 +98,7 @@ class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
         for (Player player: game.getPlayers().values()) {
             for (Card card: player.getGraveyard().getCards(game)) {
                 if (card.getCardType().contains(CardType.CREATURE)) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
                 }
             }
         }
