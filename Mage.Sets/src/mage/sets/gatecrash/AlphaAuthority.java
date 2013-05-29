@@ -49,6 +49,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -99,7 +100,7 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl<Cant
         super(duration, Outcome.Benefit);
         this.amount = amount;
         this.attachmentType = attachmentType;
-        staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted" : "Equipped") + " creature can't be blocked by more than " + amount + " creature" + (amount==1 ?"":"s");
+        staticText = (attachmentType.equals(AttachmentType.AURA) ? "Enchanted" : "Equipped") + " creature can't be blocked by more than " + CardUtil.numberToText(amount) + " creature" + (amount==1 ?"":"s");
     }
 
     public CantBeBlockedByMoreThanOneAttachedEffect(final CantBeBlockedByMoreThanOneAttachedEffect effect) {

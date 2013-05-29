@@ -257,8 +257,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                     if (game.isPaused() || game.isGameOver()) {
                         return;
                     }
-                    choose = !checkBlockRestrictions(game.getPlayer(defenderId), game);
-                    choose |= !checkBlockRequirementsAfter(defender, defender, game);
+                    if (!checkBlockRestrictions(game.getPlayer(defenderId), game)) {
+                        // only human player can decide to do the block in another way
+                        if (player.isHuman()) {
+                            continue;
+                        }
+                    }
+                    
+                    choose = !checkBlockRequirementsAfter(defender, defender, game);
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
             }
@@ -266,6 +272,12 @@ public class Combat implements Serializable, Copyable<Combat> {
         }
     }
 
+/**
+ * Check the block restrictions
+ * @param player
+ * @param game
+ * @return false - if block restrictions were not complied
+ */
     public boolean checkBlockRestrictions(Player player, Game game) {
         int count = 0;
         boolean blockWasLegal = true;
