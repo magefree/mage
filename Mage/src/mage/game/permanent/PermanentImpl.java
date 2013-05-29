@@ -68,8 +68,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected boolean faceUp = true;
     protected boolean attacking;
     protected int blocking;
+    // number of creatures the permanent can block
     protected int maxBlocks = 1;
+    // minimal number of creatures the creature can be blocked by
     protected int minBlockedBy = 1;
+    // maximal number of creatures the creature can be blocked by  0 = no restriction
+    protected int maxBlockedBy = 0;
     protected boolean loyaltyUsed;
     protected boolean deathtouched;
     protected List<UUID> attachments = new ArrayList<UUID>();
@@ -124,6 +128,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
         this.attachedTo = permanent.attachedTo;
         this.minBlockedBy = permanent.minBlockedBy;
+        this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.pairedCard = permanent.pairedCard;
         this.copy = permanent.copy;
@@ -151,6 +156,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
         this.maxBlocks = 1;
         this.minBlockedBy = 1;
+        this.maxBlockedBy = 0;
         this.copy = false;
     }
 
@@ -432,6 +438,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public int getMinBlockedBy() {
         return minBlockedBy;
+    }
+
+   @Override
+    public int getMaxBlockedBy() {
+        return maxBlockedBy;
     }
 
     @Override
@@ -914,6 +925,12 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public void setMinBlockedBy(int minBlockedBy) {
         this.minBlockedBy = minBlockedBy;
+    }
+
+
+    @Override
+    public void setMaxBlockedBy(int maxBlockedBy) {
+        this.maxBlockedBy = maxBlockedBy;
     }
 
     @Override

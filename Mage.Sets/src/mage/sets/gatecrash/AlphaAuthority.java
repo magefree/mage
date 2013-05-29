@@ -121,7 +121,7 @@ class CantBeBlockedByMoreThanOneAttachedEffect extends ContinuousEffectImpl<Cant
                 if (attachment != null && attachment.getAttachedTo() != null) {
                     Permanent perm = game.getPermanent(attachment.getAttachedTo());
                     if (perm != null) {
-                        perm.setMaxBlocks(amount);
+                        perm.setMaxBlockedBy(amount);
                         return true;
                     }
                 }

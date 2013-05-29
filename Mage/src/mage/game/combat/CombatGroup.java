@@ -486,15 +486,17 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         }
     }
 
-    public void checkBlockRestrictions(Game game, int blockersCount) {
+    public boolean checkBlockRestrictions(Game game, int blockersCount) {
+        boolean blockWasLegal = true;
         if (attackers.isEmpty()) {
-            return;
+            return blockWasLegal;
         }
         if (blockersCount == 1) {
             List<UUID> toBeRemoved = new ArrayList<UUID>();
             for (UUID blockerId: getBlockers()) {
                 Permanent blocker = game.getPermanent(blockerId);
                 if (blocker != null && blocker.getAbilities().containsKey(CantBlockAloneAbility.getInstance().getId())) {
+                    blockWasLegal = false;
                     game.informPlayers(blocker.getName() + " can't block alone. Removing it from combat.");
                     toBeRemoved.add(blockerId);
                 }
@@ -507,8 +509,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 this.blocked = false;
             }
         }
+
         for (UUID uuid : attackers) {
             Permanent attacker = game.getPermanent(uuid);
+            // Check if there are enough blockers to have a legal block
             if (attacker != null && this.blocked && attacker.getMinBlockedBy() > 1 && blockers.size() > 0 && blockers.size() < attacker.getMinBlockedBy()) {
                 for (UUID blockerId : blockers) {
                     Permanent blocker = game.getPermanent(blockerId);
@@ -520,9 +524,28 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 blockerOrder.clear();
                 this.blocked = false;
                 game.informPlayers(attacker.getName() + " can't be blocked except by " + attacker.getMinBlockedBy() + " or more creatures. Blockers discarded.");
-                return;
+                blockWasLegal = false;
             }
+            // Check if there are to many blockers (maxBlockedBy = 0 means no restrictions)
+            if (attacker != null && this.blocked && attacker.getMaxBlockedBy() > 0 && attacker.getMaxBlockedBy() < blockers.size()) {
+                for (UUID blockerId : blockers) {
+                    Permanent blocker = game.getPermanent(blockerId);
+                    if (blocker != null) {
+                        blocker.setBlocking(blocker.getBlocking() - 1);
+                    }
+                }
+                blockers.clear();
+                blockerOrder.clear();
+                this.blocked = false;
+                game.informPlayers(new StringBuilder(attacker.getName())
+                        .append(" can't be blocked by more than ").append(attacker.getMaxBlockedBy())
+                        .append(attacker.getMaxBlockedBy()==1?" creature.":" creatures.")
+                        .append(" Blockers discarded.").toString());
+                blockWasLegal = false;
+            }
+
         }
+        return blockWasLegal;
     }
 
     @Override
