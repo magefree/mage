@@ -28,16 +28,17 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -57,7 +58,8 @@ public class IchorExplosion extends CardImpl<IchorExplosion> {
         // As an additional cost to cast Ichor Explosion, sacrifice a creature.
         this.getSpellAbility().addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         // All creatures get -X/-X until end of turn, where X is the sacrificed creature's power.
-        this.getSpellAbility().addEffect(new BoostAllEffect(new IchorExplosionDynamicValue(), new IchorExplosionDynamicValue(), Constants.Duration.EndOfTurn));
+        DynamicValue xValue = new IchorExplosionDynamicValue();
+        this.getSpellAbility().addEffect(new BoostAllEffect(xValue, xValue, Duration.EndOfTurn, new FilterCreaturePermanent(), false, null, true));
 
     }
 
@@ -78,7 +80,7 @@ class IchorExplosionDynamicValue implements DynamicValue {
         if (sourceCard != null) {
             for (Object cost: sourceAbility.getCosts()) {
                 if (cost instanceof SacrificeTargetCost) {
-                    Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Constants.Zone.BATTLEFIELD);
+                    Permanent p = (Permanent) game.getLastKnownInformation(((SacrificeTargetCost) cost).getPermanents().get(0).getId(), Zone.BATTLEFIELD);
                     return -1 * p.getPower().getValue();
                 }
             }

@@ -50,6 +50,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
     protected DynamicValue toughness;
     protected boolean excludeSource;
     protected FilterCreaturePermanent filter;
+    protected boolean lockedInPT;
 
     public BoostAllEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, new FilterCreaturePermanent(), false);
@@ -68,21 +69,26 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource) {
-        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
-        this.power = power;
-        this.toughness = toughness;
-        this.filter = filter;
-        this.excludeSource = excludeSource;
-        setText();
+        this(power, toughness, duration, filter, excludeSource, null);
     }
-    
+
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
+        this(power, toughness, duration, filter, excludeSource, null, false);
+    }
+
+    public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule, boolean lockedInPT) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, isCanKill(toughness) ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
         this.excludeSource = excludeSource;
-        this.staticText = rule;
+        
+        this.lockedInPT = lockedInPT;
+        if (rule == null) {
+            setText();
+        } else {
+            this.staticText = rule;
+        }
     }
 
     public BoostAllEffect(final BoostAllEffect effect) {
@@ -91,7 +97,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
         this.toughness = effect.toughness;
         this.filter = effect.filter.copy();
         this.excludeSource = effect.excludeSource;
-        this.staticText = effect.staticText;
+        this.lockedInPT = effect.lockedInPT;
     }
 
     @Override
@@ -108,6 +114,10 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
                     objects.add(perm.getId());
                 }
             }
+        }
+        if (lockedInPT) {
+            power = new StaticValue(power.calculate(game, source));
+            toughness = new StaticValue(toughness.calculate(game, source));
         }
     }
 
