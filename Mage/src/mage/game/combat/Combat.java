@@ -259,7 +259,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                     }
                     if (!checkBlockRestrictions(game.getPlayer(defenderId), game)) {
                         // only human player can decide to do the block in another way
-                        if (player.isHuman()) {
+                        if (defender.isHuman()) {
                             continue;
                         }
                     }
