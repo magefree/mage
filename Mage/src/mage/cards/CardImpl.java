@@ -403,7 +403,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getPlayer(ownerId).removeFromLibrary(this, game);
                         break;
                     default:
-                        //logger.warning("moveToExile, not fully implemented: from="+fromZone);
+                        logger.warn("moveToExile, not fully implemented: from="+fromZone);
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
             }

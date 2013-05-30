@@ -28,12 +28,17 @@
 
 package mage.game;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.UUID;
 import mage.cards.Card;
 import mage.util.Copyable;
 
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  *
@@ -75,7 +80,7 @@ public class Exile implements Serializable, Copyable<Exile> {
         return createZone(id, name + " - Exile", false);
     }
 
-    public ExileZone createZone(UUID id, String name, boolean hidden) {
+    private ExileZone createZone(UUID id, String name, boolean hidden) {
         if (!exileZones.containsKey(id)) {
             ExileZone exile = new ExileZone(id, name, hidden);
             exileZones.put(id, exile);
@@ -89,8 +94,9 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     public Card getCard(UUID cardId, Game game) {
         for (ExileZone exile: exileZones.values()) {
-            if (exile.contains(cardId))
+            if (exile.contains(cardId)) {
                 return game.getCard(cardId);
+            }
         }
         return null;
     }
@@ -105,8 +111,9 @@ public class Exile implements Serializable, Copyable<Exile> {
 
     public void removeCard(Card card, Game game) {
         for (ExileZone exile: exileZones.values()) {
-            if (exile.contains(card.getId()))
+            if (exile.contains(card.getId())) {
                 exile.remove(card);
+            }
         }
     }
 

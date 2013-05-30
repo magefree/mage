@@ -27,9 +27,11 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
+import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -50,7 +52,6 @@ import mage.sets.tokens.EmptyToken;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
 
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -65,7 +66,7 @@ public class PrototypePortal extends CardImpl<PrototypePortal> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PrototypePortalEffect(), true));
 
         // {X}, {tap}: Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PrototypePortalCreateTokenEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -102,10 +103,10 @@ public class PrototypePortal extends CardImpl<PrototypePortal> {
 
 class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
 
-    private static FilterCard filter = new FilterArtifactCard();
+    private static final FilterCard  filter = new FilterArtifactCard();
 
     public PrototypePortalEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile an artifact card from your hand";
     }
 
@@ -117,9 +118,9 @@ class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setRequired(true);
-            player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
+            player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToExile(getId(), "Prototype Portal (Imprint)", source.getSourceId(), game);
@@ -143,7 +144,7 @@ class PrototypePortalEffect extends OneShotEffect<PrototypePortalEffect> {
 class PrototypePortalCreateTokenEffect extends OneShotEffect<PrototypePortalCreateTokenEffect> {
 
     public PrototypePortalCreateTokenEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a token that's a copy of the exiled card onto the battlefield. X is the converted mana cost of that card";
     }
 
@@ -159,7 +160,9 @@ class PrototypePortalCreateTokenEffect extends OneShotEffect<PrototypePortalCrea
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null) return false;
+        if (permanent == null) {
+            return false;
+        }
 
         if (permanent.getImprinted().size() > 0) {
             Card card = game.getCard(permanent.getImprinted().get(0));
