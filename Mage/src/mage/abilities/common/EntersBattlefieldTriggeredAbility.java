@@ -40,16 +40,25 @@ import mage.game.events.GameEvent;
  */
 public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
+    protected String rulePrefix;
+
     public EntersBattlefieldTriggeredAbility(Effect effect) {
         this(effect, false);
     }
 
     public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(effect, optional, null);
     }
+
+    public EntersBattlefieldTriggeredAbility(Effect effect, boolean optional, String rulePrefix) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.rulePrefix = rulePrefix;
+    }
+
 
     public EntersBattlefieldTriggeredAbility(EntersBattlefieldTriggeredAbility ability) {
         super(ability);
+        this.rulePrefix = ability.rulePrefix;
     }
 
     @Override
@@ -63,7 +72,7 @@ public class EntersBattlefieldTriggeredAbility extends TriggeredAbilityImpl {
 
     @Override
     public String getRule() {
-        return "When {this} enters the battlefield, " + super.getRule();
+        return new StringBuilder(rulePrefix != null?rulePrefix:"").append("When {this} enters the battlefield, ").append(super.getRule()).toString();
     }
 
     @Override
