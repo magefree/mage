@@ -85,6 +85,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     private static Random rnd = new Random();
 
+    /**
+     * Means what exactly?
+     */
     protected boolean abort;
     protected final UUID playerId;
     protected String name;
@@ -1279,6 +1282,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean hasLost() {
         return this.loses;
+    }
+    @Override
+    public boolean isInGame() {
+        return !hasLost() && !hasWon() && !hasLeft();
     }
 
     @Override

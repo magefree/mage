@@ -96,9 +96,16 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean isEmptyDraw();
     void pass(Game game);
     void resetPassed();
+
     boolean hasLost();
     boolean hasWon();
     boolean hasLeft();
+    /**
+     * Player is still active in game (has not left, lost or won the game).
+     * @return
+     */
+    boolean isInGame();
+
     ManaPool getManaPool();
     Set<UUID> getInRange();
     boolean isTopCardRevealed();

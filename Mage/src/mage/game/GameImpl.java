@@ -824,7 +824,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                             //bookmark = bookmarkState();
                         player = getPlayer(state.getPlayerList().get());
                         state.setPriorityPlayerId(player.getId());
-                        while (!player.isPassed() && !player.hasLost() && !player.hasLeft() && !isPaused() && !isGameOver()) {
+                        while (!player.isPassed() && player.isInGame() && !isPaused() && !isGameOver()) {
                             if (!resuming) {
                                 if (checkStateAndTriggered()) {
                                     applyEffects();
@@ -903,7 +903,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     protected boolean allPassed() {
         for (Player player: state.getPlayers().values()) {
-            if (!player.isPassed() && !player.hasLost() && !player.hasLeft()) {
+            if (!player.isPassed() && player.isInGame()) {
                 return false;
             }
         }
@@ -1050,7 +1050,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         boolean played = false;
         for (UUID playerId: state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
-            while (true) {
+            while (player.isInGame()) { // player can die or win caused by triggered abilities
                 List<TriggeredAbility> abilities = state.getTriggered(player.getId());
                 if (abilities.isEmpty()) {
                     break;
@@ -1264,7 +1264,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
             }
         }
-
+        // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
+        for(Card card: this.getState().getExile().getAllCards(this)) {
+            if (card.isCopy()) {
+                this.getState().getExile().removeCard(card, this);
+                this.removeCard(card.getId());
+            }
+        }
         //TODO: implement the rest
 
         return somethingHappened;
