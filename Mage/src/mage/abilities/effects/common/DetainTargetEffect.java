@@ -33,10 +33,8 @@ import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
 import mage.target.Target;
@@ -85,8 +83,9 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
                 game.informPlayers("Detained permanent: " + permanent.getName());
             }
         }
-        game.getContinuousEffects().addEffect(new DetainReplacementEffect(), source);
-        game.getContinuousEffects().addEffect(new DetainRestrictionEffect(), source);
+        DetainRestrictionEffect effect = new DetainRestrictionEffect();
+        effect.getTargetPointer().init(game, source); // needed to init zoneChangeCounter
+        game.addEffect(effect, source);
         return true;
     }
 
@@ -123,55 +122,6 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
         return sb.toString();
     }
 }
-
-
-class DetainReplacementEffect extends ReplacementEffectImpl<DetainReplacementEffect> {
- 
-    public DetainReplacementEffect() {
-        super(Constants.Duration.Custom, Constants.Outcome.LoseAbility);
-        staticText = "";
-    }
- 
-    public DetainReplacementEffect(final DetainReplacementEffect effect) {
-        super(effect);
-    }
- 
-    @Override
-    public DetainReplacementEffect copy() {
-        return new DetainReplacementEffect(this);
-    }
- 
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
-        {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
- 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
- 
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
- 
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            if (this.targetPointer.getTargets(game, source).contains(event.getSourceId())) {
-                return true;
-            }            
-        }
-        return false;
-    }
-}
  
 class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect> {
  
@@ -183,12 +133,29 @@ class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect>
     public DetainRestrictionEffect(final DetainRestrictionEffect effect) {
         super(effect);
     }
- 
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]");
+            }
+        }
+    }
+
     @Override
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
+                for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+                    Permanent permanent = game.getPermanent(targetId);
+                    if (permanent != null) {
+                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"");
+                    }
+                }
                 return true;
             }
         }
@@ -212,7 +179,12 @@ class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect>
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
     }
- 
+
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return false;
+    }
+
     @Override
     public DetainRestrictionEffect copy() {
         return new DetainRestrictionEffect(this);

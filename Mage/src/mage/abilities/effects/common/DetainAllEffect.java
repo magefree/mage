@@ -28,17 +28,19 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -67,81 +69,43 @@ public class DetainAllEffect extends OneShotEffect<DetainAllEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        List<FixedTarget> detainedObjects = new ArrayList<FixedTarget>();
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             game.informPlayers("Detained permanent: " + permanent.getName());
+            FixedTarget fixedTarget = new FixedTarget(permanent.getId());
+            fixedTarget.init(game, source);
+            detainedObjects.add(fixedTarget);
         }
-        game.getContinuousEffects().addEffect(new DetainAllReplacementEffect(filter), source);
-        game.getContinuousEffects().addEffect(new DetainAllRestrictionEffect(filter), source);
-        return false;
-    }
-}
 
-class DetainAllReplacementEffect extends ReplacementEffectImpl<DetainAllReplacementEffect> {
-
-    private FilterPermanent filter = new FilterPermanent();
-
-    public DetainAllReplacementEffect(FilterPermanent filter) {
-        super(Constants.Duration.Custom, Constants.Outcome.LoseAbility);
-        this.filter = filter;
-        staticText = "";
-    }
-
-    public DetainAllReplacementEffect(final DetainAllReplacementEffect effect) {
-        super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public DetainAllReplacementEffect copy() {
-        return new DetainAllReplacementEffect(this);
-    }
-
-    @Override
-    public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
-        {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent permanent = game.getPermanent(event.getSourceId());
-            if (permanent != null && filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-                return true;
-            }
-        }
+        game.addEffect(new DetainAllRestrictionEffect(detainedObjects), source);
         return false;
     }
 }
 
 class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionEffect> {
 
-    private FilterPermanent filter = new FilterPermanent();
+    private List<FixedTarget> detainedObjects;
 
-    public DetainAllRestrictionEffect(FilterPermanent filter) {
+    public DetainAllRestrictionEffect(List<FixedTarget> detainedObjects) {
         super(Constants.Duration.Custom);
-        this.filter = filter;
+        this.detainedObjects = detainedObjects;
         staticText = "";
     }
 
     public DetainAllRestrictionEffect(final DetainAllRestrictionEffect effect) {
         super(effect);
-        this.filter = effect.filter;
+        this.detainedObjects = effect.detainedObjects;
+    }
+
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        for(FixedTarget fixedTarget :this.detainedObjects) {
+            Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
+            if (permanent != null) {
+                permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"[Detained]");
+            }
+        }
     }
 
     @Override
@@ -149,6 +113,12 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
         if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
+                for(FixedTarget fixedTarget :this.detainedObjects) {
+                    Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
+                    if (permanent != null) {
+                        permanent.addInfo(new StringBuilder("detain").append(getId()).toString(),"");
+                    }
+                }
                 return true;
             }
         }
@@ -157,8 +127,11 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (filter.match(permanent, source.getSourceId(), source.getControllerId(), game)) {
-            return true;
+        for(FixedTarget fixedTarget :this.detainedObjects) {
+            UUID targetId = fixedTarget.getFirst(game, source);
+            if (targetId != null && targetId.equals(permanent.getId())) {
+                return true;
+            }
         }
         return false;
     }
@@ -170,6 +143,11 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
 
     @Override
     public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+    
+    @Override
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
         return false;
     }
 
