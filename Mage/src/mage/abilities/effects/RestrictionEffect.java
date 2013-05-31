@@ -32,6 +32,7 @@ import mage.Constants.Duration;
 import mage.Constants.EffectType;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -72,5 +73,10 @@ public abstract class RestrictionEffect<T extends RestrictionEffect<T>> extends 
     public boolean canBeUntapped(Permanent permanent, Game game) {
         return true;
     }
+
+    public boolean canUseActivatedAbilities(Permanent permanent, Ability source, Game game) {
+        return true;
+    }
+
 
 }

@@ -38,6 +38,7 @@ import mage.game.Game;
 import java.util.List;
 import java.util.UUID;
 import mage.Constants.Zone;
+import mage.abilities.ActivatedAbility;
 
 public interface Permanent extends Card, Controllable {
 
@@ -150,6 +151,15 @@ public interface Permanent extends Card, Controllable {
     boolean canAttack(Game game);
     boolean canBlock(UUID attackerId, Game game);
     boolean canBlockAny(Game game);
+    
+    /**
+     * Checks by restriction effects if the permanent can use activated abilities
+     *
+     * @param game
+     * @return true - permanent can use activated abilities
+     */
+    boolean canUseActivatedAbilities(Game game);
+
     boolean removeFromCombat(Game game);
     boolean isDeathtouched();
 

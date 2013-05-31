@@ -813,61 +813,53 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     protected LinkedHashMap<UUID, ActivatedAbility> getUseableActivatedAbilities(MageObject object, Zone zone, Game game) {
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
-        for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
+        if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
+            for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
 
-            if (ability.canActivate(playerId, game)) {
-                useable.put(ability.getId(), ability);
-            }
-        }
-        if (zone != Zone.HAND) {
-            if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
-                for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                if (ability.canActivate(playerId, game)) {
                     useable.put(ability.getId(), ability);
                 }
             }
-            //Alternative cost are not use for Flashback. This lines alloews to play spell with Alternative cost (like Force of Will) from wrong zone
-            /*else {
-                // this allows alternative costs like Flashback work from other than hand zones
-                for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                    for (AlternativeCost cost: ability.getAlternativeCosts()) {
-                        if (cost.isAvailable(game, ability)) {
-                            useable.put(ability.getId(), ability);
+            if (zone != Zone.HAND) {
+                if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
+                    for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        useable.put(ability.getId(), ability);
+                    }
+                }
+            }
+
+            Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
+            if (otherAbilities != null) {
+                for (ActivatedAbility ability: otherAbilities) {
+                    Card card = game.getCard(ability.getSourceId());
+                    if (card.isSplitCard() && ability instanceof FlashbackAbility) {
+                        FlashbackAbility flashbackAbility;
+                        if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
                         }
-                    }
-                }
-            }*/
-        }
-        Abilities<ActivatedAbility> otherAbilities = game.getState().getOtherAbilities(object.getId(), zone);
-        if (otherAbilities != null) {
-            for (ActivatedAbility ability: otherAbilities) {
-                Card card = game.getCard(ability.getSourceId());
-                if (card.isSplitCard() && ability instanceof FlashbackAbility) {
-                    FlashbackAbility flashbackAbility;
-                    if (card.getCardType().contains(Constants.CardType.INSTANT)) {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
-                    }
-                    else {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
-                    }
-                    flashbackAbility.setSourceId(card.getId());
-                    flashbackAbility.setControllerId(card.getOwnerId());
-                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
-                    flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
-                    useable.put(flashbackAbility.getId(), flashbackAbility);
-                    if (card.getCardType().contains(Constants.CardType.INSTANT)) {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
-                    }
-                    else {
-                        flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
-                    }
-                    flashbackAbility.setSourceId(card.getId());
-                    flashbackAbility.setControllerId(card.getOwnerId());
-                    flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
-                    flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
-                    useable.put(flashbackAbility.getId(), flashbackAbility);
+                        else {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                        }
+                        flashbackAbility.setSourceId(card.getId());
+                        flashbackAbility.setControllerId(card.getOwnerId());
+                        flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
+                        flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
+                        useable.put(flashbackAbility.getId(), flashbackAbility);
+                        if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
+                        }
+                        else {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                        }
+                        flashbackAbility.setSourceId(card.getId());
+                        flashbackAbility.setControllerId(card.getOwnerId());
+                        flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_RIGHT);
+                        flashbackAbility.setAbilityName(((SplitCard) card).getRightHalfCard().getName());
+                        useable.put(flashbackAbility.getId(), flashbackAbility);
 
-                } else {
-                    useable.put(ability.getId(), ability);
+                    } else {
+                        useable.put(ability.getId(), ability);
+                    }
                 }
             }
         }

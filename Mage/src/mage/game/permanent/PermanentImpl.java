@@ -907,6 +907,26 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         return true;
     }
 
+    /**
+     * Checks by restriction effects if the permanent can use activated abilities
+     *
+     * @param game
+     * @return true - permanent can use activated abilities
+     */
+    @Override
+    public boolean canUseActivatedAbilities(Game game) {
+        for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
+            RestrictionEffect effect = (RestrictionEffect)entry.getKey();
+            for (Ability ability : (HashSet<Ability>) entry.getValue()) {
+                if (!effect.canUseActivatedAbilities(this, ability, game)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
