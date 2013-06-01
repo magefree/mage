@@ -28,16 +28,16 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,7 +58,7 @@ public class LordOfExtinction extends CardImpl<LordOfExtinction> {
         this.toughness = new MageInt(0);
 
         // Lord of Extinction's power and toughness are each equal to the number of cards in all graveyards.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(new LordOfExtinctionDynamicCount(), Duration.WhileOnBattlefield)));
     }
 
     public LordOfExtinction(final LordOfExtinction card) {
@@ -76,10 +76,10 @@ class LordOfExtinctionDynamicCount implements DynamicValue {
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         int count = 0;
-        FilterCard cardsInAllGraveyards = new FilterCard();
-        for (Player player : game.getPlayers().values()) {
+        for (UUID playerId : game.getPlayer(sourceAbility.getControllerId()).getInRange()) {
+            Player player = game.getPlayer(playerId);
             if (player != null) {
-                count += player.getGraveyard().count(cardsInAllGraveyards, game);
+                count += player.getGraveyard().size();
             }
         }
         return count;
