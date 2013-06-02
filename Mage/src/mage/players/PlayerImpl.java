@@ -281,6 +281,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.passedAllTurns = false;
         this.canGainLife = true;
         this.canLoseLife = true;
+        this.topCardRevealed = false;
+        this.setLife(game.getLife(), game);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
     }
 
