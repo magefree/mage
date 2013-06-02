@@ -102,7 +102,7 @@ class ConsumeSpiritEffect extends OneShotEffect<ConsumeSpiritEffect> {
                     return false;
                 }
             }
-            Player controller = game.getPlayer(source.getSourceId());
+            Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 controller.gainLife(amount, game);
             } else {
