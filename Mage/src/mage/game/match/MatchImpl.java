@@ -28,6 +28,11 @@
 
 package mage.game.match;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.GameException;
@@ -37,7 +42,6 @@ import mage.game.events.TableEvent.EventType;
 import mage.game.events.TableEventSource;
 import mage.players.Player;
 
-import java.util.*;
 
 /**
  *
