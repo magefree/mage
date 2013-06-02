@@ -30,7 +30,6 @@ package mage.sets.ravnika;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -67,7 +66,7 @@ public class CloudstoneCurio extends CardImpl<CloudstoneCurio> {
         this.expansionSetCode = "RAV";
 
         // Whenever a nonartifact permanent enters the battlefield under your control, you may return another permanent you control that shares a card type with it to its owner's hand.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, "", true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new CloudstoneCurioEffect(), filter, true, true, "", true));
 
 
     }
@@ -107,7 +106,7 @@ class CloudstoneCurioEffect extends OneShotEffect<CloudstoneCurioEffect> {
         if (triggeringCreature != null) {
             FilterPermanent filter = new FilterPermanent("another permanent you control that shares a card type with " + triggeringCreature.getName());
             filter.add(Predicates.not(new PermanentIdPredicate(triggeringCreature.getId())));
-            filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+            filter.add(new ControllerPredicate(TargetController.YOU));
             Set<CardTypePredicate> cardTypes = new HashSet<CardTypePredicate>();
             for (CardType cardType :triggeringCreature.getCardType()) {
                 cardTypes.add(new CardTypePredicate(cardType));
