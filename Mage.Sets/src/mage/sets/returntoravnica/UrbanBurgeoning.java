@@ -29,20 +29,27 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Layer;
 import mage.Constants.Outcome;
+import mage.Constants.PhaseStep;
 import mage.Constants.Rarity;
+import mage.Constants.SubLayer;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUntapTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetLandPermanent;
 
@@ -68,8 +75,8 @@ public class UrbanBurgeoning extends CardImpl<UrbanBurgeoning> {
         this.addAbility(ability);
 
         // Enchanted land has "Untap this land during each other player's untap step."
-        Ability gainedAbility = new BeginningOfUntapTriggeredAbility(new UntapSourceEffect(), Constants.TargetController.OPPONENT, false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Constants.Duration.WhileOnBattlefield, rule)));
+        Ability gainedAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new UrbanBurgeoningUntapEffect());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainedAbility, AttachmentType.AURA, Duration.WhileOnBattlefield, rule)));
     }
 
     public UrbanBurgeoning (final UrbanBurgeoning card) {
@@ -79,5 +86,58 @@ public class UrbanBurgeoning extends CardImpl<UrbanBurgeoning> {
     @Override
     public UrbanBurgeoning copy() {
         return new UrbanBurgeoning(this);
+    }
+}
+
+class UrbanBurgeoningUntapEffect extends ContinuousEffectImpl<UrbanBurgeoningUntapEffect> {
+
+    public UrbanBurgeoningUntapEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        staticText = "Untap this land during each other player's untap step";
+    }
+
+    public UrbanBurgeoningUntapEffect(final UrbanBurgeoningUntapEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public UrbanBurgeoningUntapEffect copy() {
+        return new UrbanBurgeoningUntapEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Boolean applied = (Boolean) game.getState().getValue(source.getSourceId() + "applied");
+        if (applied == null) {
+            applied = Boolean.FALSE;
+        }
+        if (!applied && layer.equals(Layer.RulesEffects)) {
+            if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
+                game.getState().setValue(source.getSourceId() + "applied", true);
+                Permanent land = game.getPermanent(source.getSourceId());
+                boolean untap = true;
+                for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(land, game).keySet()) {
+                    untap &= effect.canBeUntapped(land, game);
+                }
+                if (untap) {
+                    land.untap(game);
+                }
+            }
+        } else if (applied && layer.equals(Layer.RulesEffects)) {
+            if (game.getStep().getType() == PhaseStep.END_TURN) {
+                game.getState().setValue(source.getSourceId() + "applied", false);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        return false;
+    }
+
+    @Override
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }
