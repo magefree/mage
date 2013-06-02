@@ -90,8 +90,9 @@ class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Boolean applied = (Boolean) game.getState().getValue(source.getSourceId() + "applied");
-        if (applied == null)
+        if (applied == null) {
             applied = Boolean.FALSE;
+        }
         if (!applied && layer.equals(Layer.RulesEffects)) {
             if (!game.getActivePlayerId().equals(source.getControllerId()) && game.getStep().getType() == PhaseStep.UNTAP) {
                 game.getState().setValue(source.getSourceId() + "applied", true);
@@ -100,7 +101,9 @@ class UnwindingClockEffect extends ContinuousEffectImpl<UnwindingClockEffect> {
                     for (RestrictionEffect effect: game.getContinuousEffects().getApplicableRestrictionEffects(artifact, game).keySet()) {
                         untap &= effect.canBeUntapped(artifact, game);
                     }
-                    if (untap) artifact.untap(game);
+                    if (untap) {
+                        artifact.untap(game);
+                    }
                 }
             }
         } else if (applied && layer.equals(Layer.RulesEffects)) {

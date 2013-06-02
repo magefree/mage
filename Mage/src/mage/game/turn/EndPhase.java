@@ -61,8 +61,9 @@ public class EndPhase extends Phase<EndPhase> {
             }
             currentStep.endStep(game, activePlayerId);
         }
-        else
+        else {
             super.playStep(game);
+        }
     }
 
     @Override
