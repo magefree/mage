@@ -49,12 +49,22 @@ import mage.players.Player;
 public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
     //20091005 - 702.82
 
+    private boolean withReminder;
+
+    private final static String reminderText = " <i>(When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)</i>";
+
     public CascadeAbility() {
+        this(true);
+    }
+
+    public CascadeAbility(boolean withReminder) {
         super(Zone.STACK, new CascadeEffect());
+        this.withReminder = withReminder;
     }
 
     public CascadeAbility(CascadeAbility ability) {
         super(ability);
+        this.withReminder = ability.withReminder;
     }
 
     @Override
@@ -70,7 +80,11 @@ public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
 
     @Override
     public String getRule() {
-        return "Cascade";
+        StringBuilder sb = new StringBuilder("Cascade");
+        if (withReminder) {
+            sb.append(reminderText);
+        }
+        return sb.toString();
     }
 
     @Override
@@ -97,8 +111,10 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
         int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
         do {
             card = player.getLibrary().removeFromTop(game);
-            if (card == null)
+            if (card == null) {
                 break;
+            }
+                
             card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
         } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 
