@@ -1,3 +1,5 @@
+|Generate|TOK:DGM|Elemental|
+
 |Generate|TOK:GTC|Angel|
 |Generate|TOK:GTC|Rat|
 |Generate|TOK:GTC|Frog-Lizard|
