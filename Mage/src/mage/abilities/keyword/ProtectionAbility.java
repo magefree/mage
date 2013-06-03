@@ -67,18 +67,21 @@ public class ProtectionAbility extends StaticAbility<ProtectionAbility> {
 
     public boolean canTarget(MageObject source, Game game) {
         if (filter instanceof FilterPermanent) {
-            if (source instanceof Permanent)
+            if (source instanceof Permanent) {
                 return !filter.match(source, game);
+            }
             return true;
         }
         if (filter instanceof FilterSpell) {
-            if (source instanceof Spell)
+            if (source instanceof Spell) {
                 return !filter.match(source, game);
+            }
             return true;
         }
         if (filter instanceof FilterCard) {
-            if (source instanceof Card)
+            if (source instanceof Card) {
                 return !filter.match(source, game);
+            }
             return true;
         }
         if (filter instanceof FilterObject) {
