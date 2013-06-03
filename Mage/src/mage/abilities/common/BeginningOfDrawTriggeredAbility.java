@@ -12,6 +12,13 @@ import mage.target.targetpointer.FixedTarget;
 public class BeginningOfDrawTriggeredAbility extends TriggeredAbilityImpl<BeginningOfDrawTriggeredAbility> {
     private TargetController targetController;
 
+    /**
+     * The Ability sets if no target is defined the target pointer to the active player of the current draw phase
+     * 
+     * @param effect
+     * @param targetController
+     * @param isOptional 
+     */
     public BeginningOfDrawTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
         this(Zone.BATTLEFIELD, effect, targetController, isOptional);
     }

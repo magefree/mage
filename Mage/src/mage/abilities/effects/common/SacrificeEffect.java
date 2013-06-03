@@ -42,6 +42,7 @@ import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -128,7 +129,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
             sb.append(" sacrifice ");
         }
         if (!count.toString().equals("1")) {
-            sb.append(count).append(" ");
+            sb.append(CardUtil.numberToText(count.toString())).append(" ");
         } else {
             sb.append("a ");
         }

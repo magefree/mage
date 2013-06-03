@@ -315,6 +315,16 @@ public class Battlefield implements Serializable {
         return active;
     }
 
+    /**
+     * Returns all {@link Permanent} that are within the range of influence  of the specified player id
+     * and that match the supplied filter.
+     *
+     * @param filter
+     * @param sourcePlayerId
+     * @param game
+     * @return a list of {@link Permanent}
+     * @see Permanent
+     */
     public List<Permanent> getActivePermanents(FilterPermanent filter, UUID sourcePlayerId, Game game) {
         return getActivePermanents(filter, sourcePlayerId, null, game);
     }
