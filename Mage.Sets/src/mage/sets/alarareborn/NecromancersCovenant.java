@@ -28,9 +28,9 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
@@ -42,6 +42,7 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.token.ZombieToken;
@@ -89,7 +90,7 @@ public class NecromancersCovenant extends CardImpl<NecromancersCovenant> {
 class NecromancersConvenantEffect extends OneShotEffect<NecromancersConvenantEffect> {
 
     public NecromancersConvenantEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "exile all creature cards from target player's graveyard, then put a 2/2 black Zombie creature token onto the battlefield for each card exiled this way";
     }
 
@@ -104,7 +105,7 @@ class NecromancersConvenantEffect extends OneShotEffect<NecromancersConvenantEff
             return false;
         }
         int count = 0;
-        for (Card card : player.getGraveyard().getCards(game)) {
+        for (Card card : player.getGraveyard().getCards(new FilterCreatureCard(), game)) {
             if (card.moveToExile(source.getSourceId(), "Necromancer Covenant", source.getSourceId(), game)) {
                 count += 1;
             }
