@@ -90,6 +90,16 @@ public class FreeForAll extends GameImpl<FreeForAll> {
     }
 
     @Override
+    public int mulliganDownTo(UUID playerId) {
+        Player player = getPlayer(playerId);
+        int numCards = player.getHand().size();
+        if (!mulliganed.contains(playerId)) {
+            numCards += 1;
+        }
+        return numCards -1;
+    }
+
+    @Override
     public void mulligan(UUID playerId) {
         Player player = getPlayer(playerId);
         int numCards = player.getHand().size();

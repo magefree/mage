@@ -738,6 +738,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public int mulliganDownTo(UUID playerId) {
+        Player player = getPlayer(playerId);
+        return player.getHand().size() -1;
+    }
+
+
+    @Override
     public void mulligan(UUID playerId) {
         Player player = getPlayer(playerId);
         int numCards = player.getHand().size();

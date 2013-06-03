@@ -140,7 +140,11 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     @Override
     public boolean chooseMulligan(Game game) {
         updateGameStatePriority("chooseMulligan", game);
-        game.fireAskPlayerEvent(playerId, "Do you want to take a mulligan?");
+        int nextHandSize = game.mulliganDownTo(playerId);
+        game.fireAskPlayerEvent(playerId, new StringBuilder("Mulligan ")
+                .append(getHand().size() > nextHandSize?"down":"")
+                .append(" to ").append(nextHandSize)
+                .append(nextHandSize == 1?" card?":" cards?").toString());
         waitForBooleanResponse();
         if (!abort) {
             return response.getBoolean();
