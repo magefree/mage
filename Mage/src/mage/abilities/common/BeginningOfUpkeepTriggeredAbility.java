@@ -121,7 +121,7 @@ public class BeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<Begi
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder(getEffects().getText(modes.getMode()));
+        StringBuilder sb = new StringBuilder(super.getRule());
         switch (targetController) {
             case YOU:
                 if (this.optional) {
