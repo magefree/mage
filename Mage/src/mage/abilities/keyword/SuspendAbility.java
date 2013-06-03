@@ -153,13 +153,20 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
                                     .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
                                     .append(")</i>")
                                     .toString();
+        if (card.getManaCost().isEmpty()) {
+            setRuleAtTheTop(true);
+        }
+        
+        // add triggered ability to remove the counter from the card
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
                 SuspendedCondition.getInstance(),
                 "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
         ability.setRuleVisible(false);
         card.addAbility(ability);
+        // add triggered ability that casts the suspended card, if all counters are removed
         card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
+        // if it's a creature card, add Haste ability
         if (card.getCardType().contains(CardType.CREATURE)) {
             ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
             ability.setRuleVisible(false);
@@ -220,7 +227,7 @@ class SuspendExileEffect extends OneShotEffect<SuspendExileEffect> {
         Card card = game.getCard(source.getSourceId());
         Player controller = game.getPlayer(source.getControllerId());
         if (card != null && controller != null) {
-            // check if user really wants to suspend the card (only if spell can't be casted because else the choose ability dialog appears)
+            // check if the user really wants to suspend the card (only if spell can't be casted because else the choose ability dialog appears)
             if (!card.getSpellAbility().canActivate(source.getControllerId(), game)) {
                 if (!controller.chooseUse(outcome, new StringBuilder("Suspend ").append(card.getName()).append("?").toString(), game)) {
                     return false;
@@ -256,8 +263,8 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl<SuspendPlayCardAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.COUNTER_REMOVED && event.getTargetId().equals(getSourceId())) {
             Card card = game.getCard(getSourceId());
-            if (game.getState().getZone(card.getId()) == Zone.EXILED 
-                    && card != null && card.getCounters().getCount(CounterType.TIME) == 0) {
+            if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED
+                    && card.getCounters().getCount(CounterType.TIME) == 0) {
                 return true;
             }
         }
