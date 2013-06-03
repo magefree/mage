@@ -47,7 +47,7 @@ import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.LevelerCard;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 
@@ -57,7 +57,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class JoragaTreespeaker extends LevelerCard<JoragaTreespeaker> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elves");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Elves you control");
 
     static {
         filter.add(new SubtypePredicate("Elf"));
