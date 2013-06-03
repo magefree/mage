@@ -39,6 +39,7 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
 
 import java.util.*;
+import static mage.Constants.Zone.STACK;
 
 /**
  *
@@ -65,8 +66,12 @@ public class CardsView extends LinkedHashMap<UUID, CardView> {
                     break;
                 case BATTLEFIELD:
                     sourceCard = game.getPermanent(ability.getSourceId());
-                    if (sourceCard == null)
+                    if (sourceCard == null) {
                         sourceCard = (Permanent)game.getLastKnownInformation(ability.getSourceId(), Zone.BATTLEFIELD);
+                    }
+                    break;
+                case STACK:
+                    sourceCard = game.getCard(ability.getSourceId());
                     break;
                 case COMMAND:
                     ability.newId();
