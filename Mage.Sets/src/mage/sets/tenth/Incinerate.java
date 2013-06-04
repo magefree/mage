@@ -55,7 +55,7 @@ public class Incinerate extends CardImpl<Incinerate> {
         this.color.setRed(true);
 
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
         this.getSpellAbility().addEffect(new IncinerateEffect());
         this.addWatcher(new DamagedByWatcher());
     }

@@ -28,7 +28,6 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Outcome;
@@ -98,7 +97,7 @@ class WrexialEffect extends OneShotEffect<WrexialEffect> {
     static final private FilterCard filter = new FilterCard("target instant or sorcery card from damaged player's graveyard");
 
     public WrexialEffect() {
-        super(Constants.Outcome.PlayForFree);
+        super(Outcome.PlayForFree);
         staticText = "you may cast target instant or sorcery card from that player's graveyard without paying its mana cost. If that card would be put into a graveyard this turn, exile it instead";
     }
 
@@ -123,8 +122,8 @@ class WrexialEffect extends OneShotEffect<WrexialEffect> {
 
         Target target = new TargetCardInGraveyard(filter);
 
-        if (you != null && target != null) {
-            if (you.chooseTarget(Constants.Outcome.PlayForFree, target, source, game)) {
+        if (you != null) {
+            if (you.chooseTarget(Outcome.PlayForFree, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     you.cast(card.getSpellAbility(), game, true);
@@ -164,12 +163,14 @@ class WrexialReplacementEffect extends ReplacementEffectImpl<WrexialReplacementE
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         UUID eventObject = ((ZoneChangeEvent) event).getTargetId();
         StackObject card = game.getStack().getStackObject(eventObject);
-        if (card instanceof Spell) {
-            game.rememberLKI(card.getId(), Zone.STACK, (Spell) card);
-        }
-        if (card instanceof Card && card != null && eventObject == cardid) {
-            ((Card) card).moveToExile(id, "Wrexial, The Risen Deep", id, game);
-            return true;
+        if (card != null) {
+            if (card instanceof Spell) {
+                game.rememberLKI(card.getId(), Zone.STACK, (Spell) card);
+            }
+            if (card instanceof Card && eventObject == cardid) {
+                ((Card) card).moveToExile(source.getSourceId(), "Wrexial, The Risen Deep", source.getSourceId(), game);
+                return true;
+            }
         }
         return false;
     }
