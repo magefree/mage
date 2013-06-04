@@ -71,6 +71,9 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Return target ").append(mode.getTargets().get(0).getTargetName()).append(" to your hand");
         return sb.toString();

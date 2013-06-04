@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.target.targetpointer.FirstTargetPointer;
 
 /**
  *
@@ -73,7 +74,7 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        if (source.getTargets().size() > 1) { // for Rain of Thorns
+        if (source.getTargets().size() > 1 && targetPointer instanceof FirstTargetPointer) { // for Rain of Thorns
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
