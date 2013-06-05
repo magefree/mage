@@ -43,6 +43,7 @@ import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.components.MageRoundPane;
 import mage.client.components.ext.dlg.DialogManager;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.plugins.adapters.MageActionCallback;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.CardsViewUtil;
@@ -85,6 +86,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private BigCard bigCard;
 
     private static final int AVATAR_COUNT = 77;
+    
+    private static final String DEFAULT_AVATAR_PATH = "/avatars/51.jpg";
     
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 242;
@@ -160,7 +163,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         if (!MageFrame.isLite()) {
             int id = player.getUserData().getAvatarId();
-            if (id > 0 && id != avatarId) {
+            if (id <= 0) {
+                id = PreferencesDialog.DEFAULT_AVATAR_ID;
+            }
+            if (id != avatarId) {
                 avatarId = id;
                 String path = "/avatars/" + String.valueOf(avatarId) + ".jpg";
                 if (avatarId == 64) {
@@ -241,7 +247,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         panelBackground.setVisible(true);
 
         // Avatar
-        Image image = ImageHelper.getImageFromResources("/avatars/unknown.jpg");
+        Image image = ImageHelper.getImageFromResources(DEFAULT_AVATAR_PATH);
 
         topCardPanel = Plugins.getInstance().getMageCard(new CardView(CardRepository.instance.findCard("Forest").getCard()), bigCard, topCardDimension, gameId, true);
         topCardPanel.setVisible(false);
