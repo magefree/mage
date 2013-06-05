@@ -64,7 +64,9 @@ public class ChandraTheFirebrand extends CardImpl<ChandraTheFirebrand> {
         ability1.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability1);
 
-        this.addAbility(new LoyaltyAbility(new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility()), -2));
+        Effect effect =  new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility());
+        effect .setText("When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy");
+        this.addAbility(new LoyaltyAbility(effect, -2));
 
         LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6), -6);
         ability2.addTarget(new TargetCreatureOrPlayer(0, 6));

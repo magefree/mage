@@ -118,17 +118,18 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
             }
             return true;
         }
-        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
-        if (permanent != null) {
-            permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
-            return true;
+        for (UUID targetId :this.getTargetPointer().getTargets(game, source)) {
+            Permanent permanent = game.getPermanent(targetId);
+            if (permanent != null) {
+                permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
+            } else {
+                Player player = game.getPlayer(targetPointer.getFirst(game, source));
+                if (player != null) {
+                    player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
+                }
+            }
         }
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
