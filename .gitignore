@@ -46,6 +46,7 @@ Utils/author.txt
 .metadata
 .project
 .settings
+.idea
 syntax: regexp
 \.class
 \.jar

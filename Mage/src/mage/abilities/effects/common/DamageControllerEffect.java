@@ -30,6 +30,9 @@ package mage.abilities.effects.common;
 
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,7 +43,7 @@ import mage.players.Player;
  */
 public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect> {
 
-    protected int amount;
+    protected DynamicValue amount;
     protected boolean preventable;
 
     public DamageControllerEffect(int amount) {
@@ -49,13 +52,22 @@ public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect
 
     public DamageControllerEffect(int amount, boolean preventable) {
         super(Outcome.Damage);
-        this.amount = amount;
+        this.amount = new StaticValue(amount);
         this.preventable = preventable;
-        setText();
     }
 
+    public DamageControllerEffect(DynamicValue amount) {
+        super(Outcome.Damage);
+        this.amount = amount;
+        this.preventable = true;
+    }
+        
     public int getAmount() {
-        return amount;
+        if (amount instanceof StaticValue) {
+            return amount.calculate(null, null);
+        } else {
+            return 0;
+        }
     }
 
     public DamageControllerEffect(final DamageControllerEffect effect) {
@@ -73,18 +85,40 @@ public class DamageControllerEffect extends OneShotEffect<DamageControllerEffect
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.damage(amount, source.getId(), game, false, preventable);
+            player.damage(amount.calculate(game, source), source.getId(), game, false, preventable);
             return true;
         }
         return false;
     }
-
-    private void setText() {
+    
+    @Override
+    public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
-        sb.append("{source} deals ").append(Integer.toString(amount)).append(" damage to you");
-        if (!preventable)
+        String message = amount.getMessage();
+        sb.append("{source} deals ");
+        if (message.isEmpty() || !message.equals("1")) {
+            sb.append(amount);
+        }
+        sb.append(" damage to you");
+        if (message.length() > 0) {
+            if (message.equals("1")) {
+                sb.append(" equal to the number of ");
+            } else {
+                if (message.startsWith("the") || message.startsWith("twice")) {
+                    sb.append(" equal to ");
+                } else {
+                    sb.append(" for each ");
+                }
+            }
+            sb.append(message);
+        }
+        if (!preventable) {
             sb.append(". The damage can't be prevented");
-        staticText = sb.toString();
+        }
+        return sb.toString();
     }
 
 }
