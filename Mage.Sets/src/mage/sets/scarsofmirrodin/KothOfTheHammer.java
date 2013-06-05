@@ -41,11 +41,13 @@ import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DynamicManaEffect;
+import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -55,6 +57,7 @@ import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
+import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -80,14 +83,21 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Koth");
         this.color.setRed(true);
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
+
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
+        
+        // +1: Untap target Mountain. It becomes a 4/4 red Elemental creature until end of turn. It's still a land.
         Ability ability = new LoyaltyAbility(new UntapTargetEffect(), 1);
         ability.addEffect(new BecomesCreatureTargetEffect(new KothOfTheHammerToken(), "land", Duration.EndOfTurn));
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
+
+        // -2: Add {R} to your mana pool for each Mountain you control.
         this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filterCount)), -2));
-        this.addAbility(new LoyaltyAbility(new KothOfTheHammerThirdEffect(), -5));
+
+        // -5: You get an emblem with "Mountains you control have ‘{T}: This land deals 1 damage to target creature or player.'
+        this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 
     public KothOfTheHammer (final KothOfTheHammer card) {
@@ -109,6 +119,14 @@ class KothOfTheHammerToken extends Token {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+    }
+}
+
+class KothOfTheHammerEmblem extends Emblem {
+    // "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'"
+    public KothOfTheHammerEmblem() {
+        this.setName("Kothe of the Hammer Emblem");
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new KothOfTheHammerThirdEffect()));
     }
 }
 
