@@ -123,7 +123,7 @@ public class DamageTargetEffect extends OneShotEffect<DamageTargetEffect> {
             if (permanent != null) {
                 permanent.damage(amount.calculate(game, source), source.getSourceId(), game, preventable, false);
             } else {
-                Player player = game.getPlayer(targetPointer.getFirst(game, source));
+                Player player = game.getPlayer(targetId);
                 if (player != null) {
                     player.damage(amount.calculate(game, source), source.getSourceId(), game, false, preventable);
                 }
