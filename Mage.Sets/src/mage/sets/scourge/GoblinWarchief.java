@@ -49,7 +49,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
 public class GoblinWarchief extends CardImpl<GoblinWarchief> {
 
     private static final FilterCard filterSpells = new FilterCard("Goblin spells");
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblin creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Goblins");
 
     static {
         filter.add(new SubtypePredicate("Goblin"));
@@ -68,7 +68,7 @@ public class GoblinWarchief extends CardImpl<GoblinWarchief> {
         // Goblin spells you cast cost {1} less to cast.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filterSpells, 1)));
         // Goblin creatures you control have haste.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
     }
 
     public GoblinWarchief(final GoblinWarchief card) {
