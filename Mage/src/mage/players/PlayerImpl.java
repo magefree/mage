@@ -28,6 +28,7 @@
 
 package mage.players;
 
+import java.awt.Event;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -461,10 +462,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void discardToMax(Game game) {
-        while (hand.size() > this.maxHandSize) {
-            TargetDiscard target = new TargetDiscard(playerId);
-            choose(Outcome.Discard, target, null, game);
-            discard(hand.get(target.getFirstTarget(), game), null, game);
+        int cardsStart = hand.size();
+        if (cardsStart > this.maxHandSize) {
+            while (hand.size() > this.maxHandSize) {
+                TargetDiscard target = new TargetDiscard(playerId);
+                target.setTargetName(new StringBuilder(" card to discard (").append(hand.size() - this.maxHandSize).append(" in total)").toString());
+                choose(Outcome.Discard, target, null, game);
+                discard(hand.get(target.getFirstTarget(), game), null, game);
+            }
+            int discarded =cardsStart - hand.size();
+            game.informPlayers(new StringBuilder(getName()).append(" discards ").append(discarded).append(discarded == 1?"card":"cards").append(" (cleanup)").toString());
         }
     }
 
@@ -1347,15 +1354,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return false;
     }
 
+
+    @Override
+    public boolean flipCoin(Game game) {
+            return this.flipCoin(game, null);
+    }
+    
     /**
      *
      * @return true if player won the toss
      */
     @Override
-    public boolean flipCoin(Game game) {
+    public boolean flipCoin(Game game, ArrayList<UUID> appliedEffects) {
         boolean result = rnd.nextBoolean();
         game.informPlayers("[Flip a coin] " + getName() + (result ? " won (head)." : " lost (tail)."));
-        return result;
+        GameEvent event = new GameEvent(GameEvent.EventType.FLIP_COIN, playerId, null, playerId, 0, result);
+        event.setAppliedEffects(appliedEffects);
+        game.replaceEvent(event);
+        return event.getFlag();
     }
 
     @Override

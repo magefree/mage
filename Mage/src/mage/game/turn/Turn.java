@@ -239,7 +239,12 @@ public class Turn implements Serializable {
             this.play(game, activePlayerId);
         }
     }*/
-
+/**
+ * Used for some spells with end turn effect (e.g. Time Stop).
+ *
+ * @param game
+ * @param activePlayerId
+ */
     public void endTurn(Game game, UUID activePlayerId) {
         // Exile all spells and abilities on the stack
         game.getStack().clear();

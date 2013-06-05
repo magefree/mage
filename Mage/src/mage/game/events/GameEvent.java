@@ -103,6 +103,7 @@ public class GameEvent {
         SHUFFLE_LIBRARY, LIBRARY_SHUFFLED,
         ENCHANT_PLAYER, ENCHANTED_PLAYER,
         CAN_TAKE_MULLIGAN,
+        FLIP_COIN,
 
         //permanent events
         ENTERS_THE_BATTLEFIELD,
@@ -187,13 +188,18 @@ public class GameEvent {
         return amount;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public boolean getFlag() {
         return flag;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
+
 
     public String getData() {
         return data;
