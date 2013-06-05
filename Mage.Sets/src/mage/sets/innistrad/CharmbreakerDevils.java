@@ -118,7 +118,7 @@ class CharmbreakerDevilsEffect extends OneShotEffect<CharmbreakerDevilsEffect> {
                 Random rnd = new Random();
                 Card card = cards[rnd.nextInt(cards.length)];
                 card.moveToZone(Zone.HAND, source.getId(), game, true);
-                game.informPlayers(card.getName() + "returned to the hand of" + player.getName());
+                game.informPlayers(new StringBuilder("Charmbreaker Devils: ").append(card.getName()).append(" returned to the hand of ").append(player.getName()).toString());
                 return true;
             }
         }
