@@ -30,6 +30,7 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.LoyaltyAbility;
@@ -44,6 +45,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
+import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.targetpointer.FixedTarget;
 
@@ -60,15 +62,19 @@ public class ChandraTheFirebrand extends CardImpl<ChandraTheFirebrand> {
         this.color.setRed(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(3)), false));
 
+        // +1: Chandra, the Firebrand deals 1 damage to target creature or player.
+
         LoyaltyAbility ability1 = new LoyaltyAbility(new DamageTargetEffect(1), 1);
         ability1.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability1);
 
+        // -2: When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
         Effect effect =  new CreateDelayedTriggeredAbilityEffect(new ChandraTheFirebrandAbility());
         effect .setText("When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy");
         this.addAbility(new LoyaltyAbility(effect, -2));
 
-        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6), -6);
+        // -6: Chandra, the Firebrand deals 6 damage to each of up to six target creatures and/or players
+        LoyaltyAbility ability2 = new LoyaltyAbility(new DamageTargetEffect(6, true, "each of up to six target creatures and/or players"), -6);
         ability2.addTarget(new TargetCreatureOrPlayer(0, 6));
         this.addAbility(ability2);
     }
@@ -86,7 +92,7 @@ public class ChandraTheFirebrand extends CardImpl<ChandraTheFirebrand> {
 
 class ChandraTheFirebrandAbility extends DelayedTriggeredAbility<ChandraTheFirebrandAbility> {
     ChandraTheFirebrandAbility() {
-        super(new CopyTargetSpellEffect());
+        super(new CopyTargetSpellEffect(), Duration.EndOfTurn);
     }
 
     ChandraTheFirebrandAbility(final ChandraTheFirebrandAbility ability) {
