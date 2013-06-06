@@ -67,6 +67,7 @@ Masters Edition|MED|
 Mirage|MIR|
 Mercadian Masques|MMQ|
 Morningtide|MOR|
+Modern Masters|MMA|
 Mirrodin|MRD|
 Mirrodin Besieged|MBS|
 MTGO Vanguard|VGO|

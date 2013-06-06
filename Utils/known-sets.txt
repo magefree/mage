@@ -79,3 +79,4 @@ Avacyn Restored|avacynrestored|
 Gatecrash|gatecrash|
 Magic: The Gathering-Commander|commander|
 Dragon's Maze|dragonsmaze|
+Modern Masters|modernmasters|

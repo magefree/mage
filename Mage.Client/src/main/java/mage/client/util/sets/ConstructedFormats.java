@@ -17,6 +17,7 @@ import mage.cards.repository.CardRepository;
 public class ConstructedFormats {
 
     private static final String[] constructedFormats = {"- All Sets", "- Standard", "- Extended", "- Modern",
+                                                        "Modern Masters",
                                                         "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash","Return to Ravnica", 
                                                         "Magic 2013", "Planechase 2012",
                                                         "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", 
@@ -353,6 +354,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Planechase 2012")) {
             return Arrays.asList("PC2");
+        }
+        if (format.equals("Modern Masters")) {
+            return Arrays.asList("MMA");
         }
 
         if (format.equals("Guru")) {
