@@ -29,10 +29,11 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -52,7 +53,7 @@ public class Propaganda extends CardImpl<Propaganda> {
         super(ownerId, 80, "Propaganda", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "TMP";
         this.color.setBlue(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PropagandaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PropagandaReplacementEffect()));
     }
 
     public Propaganda (final Propaganda card) {
@@ -85,17 +86,14 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER) {
-            Player player = game.getPlayer(event.getPlayerId());
-
-            if ( player != null ) {
-                ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
-                if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Constants.Outcome.Neutral, "Pay {2} to declare attacker?", game) )
-                {
-                    if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
-                        return false;
-                    }
+        Player player = game.getPlayer(event.getPlayerId());
+        if ( player != null ) {
+            ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
+            if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
+                 player.chooseUse(Outcome.Neutral, "Pay {2} to declare attacker?", game) )
+            {
+                if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId()) ) {
+                    return false;
                 }
             }
             return true;
@@ -105,7 +103,7 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER ) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && event.getTargetId().equals(source.getControllerId())) {
             return true;
         }
         return false;
