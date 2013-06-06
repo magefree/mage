@@ -27,6 +27,7 @@
  */
 package mage.sets.timespiral;
 
+import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
@@ -46,7 +47,6 @@ import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 
-import java.util.UUID;
 
 /**
  *
