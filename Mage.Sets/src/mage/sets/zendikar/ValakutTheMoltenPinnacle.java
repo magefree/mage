@@ -31,6 +31,7 @@ package mage.sets.zendikar;
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -39,6 +40,7 @@ import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -54,6 +56,7 @@ public class ValakutTheMoltenPinnacle extends CardImpl<ValakutTheMoltenPinnacle>
     static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Mountain"));
     }
 
