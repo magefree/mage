@@ -116,6 +116,11 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     }
 
     @Override
+    public FilterMana getFilter() {
+        return filter;
+    }
+
+    @Override
     public VariableManaCost copy() {
         return new VariableManaCost(this);
     }

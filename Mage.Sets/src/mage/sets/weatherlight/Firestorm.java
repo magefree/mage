@@ -166,8 +166,21 @@ class FirestormCost extends CostImpl<FirestormCost> implements VariableCost {
         return amountPaid;
     }
 
+    /**
+     * Not Supported
+     * @param filter
+     */
     @Override
     public void setFilter(FilterMana filter) {
+    }
+
+    /**
+     * Not supported
+     * @return
+     */
+    @Override
+    public FilterMana getFilter() {
+        return new FilterMana();
     }
 
     @Override

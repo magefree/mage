@@ -196,28 +196,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
-        // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
-        VariableManaCost variableManaCost = null;
-        for (ManaCost cost: manaCostsToPay) {
-            if (cost instanceof VariableManaCost) {
-                variableManaCost = (VariableManaCost) cost;
-                break; // only one VariableManCost per spell (or is it possible to have more?)
-            }
-        }
-        if (variableManaCost != null) {
-            int xValue;
-            if (!variableManaCost.isPaid()) { // should only happen for human players
-                if (!noMana) {
-                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game, this);
-                    int amountMana = xValue * variableManaCost.getMultiplier();
-                    manaCostsToPay.add(new ManaCostsImpl(new StringBuilder("{").append(amountMana).append("}").toString()));
-                    manaCostsToPay.setX(amountMana);
-                }
-                variableManaCost.setPaid();
-            }
-            xValue = getManaCostsToPay().getX();
-            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
-        }
+        VariableManaCost variableManaCost = handleXCosts(game, noMana);
 
         //20121001 - 601.2c
         // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
@@ -296,6 +275,66 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Handles the announcement of X mana costs and sets manaCostsToPay.
+     * 
+     * @param game
+     * @param noMana
+     * @return variableManaCost for late check
+     */
+    protected VariableManaCost handleXCosts(Game game, boolean noMana) {
+        // 20121001 - 601.2b
+        // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
+        // its mana cost; see rule 107.3), the player announces the value of that variable.
+        // TODO: Handle announcing other variable costs here like: RemoveVariableCountersSourceCost
+        VariableManaCost variableManaCost = null;
+        for (ManaCost cost: manaCostsToPay) {
+            if (cost instanceof VariableManaCost) {
+                variableManaCost = (VariableManaCost) cost;
+                break; // only one VariableManCost per spell (or is it possible to have more?)
+            }
+        }
+        if (variableManaCost != null) {
+            int xValue;
+            if (!variableManaCost.isPaid()) { // should only happen for human players
+                if (!noMana) {
+                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game, this);
+                    int amountMana = xValue * variableManaCost.getMultiplier();
+                    StringBuilder manaString = new StringBuilder();
+                    if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isColorless()) {
+                        manaString.append("{").append(amountMana).append("}");
+                    } else {
+                        String manaSymbol = null;
+                        if (variableManaCost.getFilter().isBlack()) {
+                            manaSymbol = "B";
+                        } else if (variableManaCost.getFilter().isRed()) {
+                            manaSymbol = "R";
+                        } else if (variableManaCost.getFilter().isBlue()) {
+                            manaSymbol = "U";
+                        } else if (variableManaCost.getFilter().isGreen()) {
+                            manaSymbol = "G";
+                        } else if (variableManaCost.getFilter().isWhite()) {
+                            manaSymbol = "W";
+                        }
+                        if (manaSymbol == null) {
+                            throw new UnsupportedOperationException("ManaFilter is not supported: " +this.toString() );
+                        }
+                        for (int i = 0; i < amountMana; i++) {
+                            manaString.append("{").append(manaSymbol).append("}");
+                        }
+                    }
+                    manaCostsToPay.add(new ManaCostsImpl(manaString.toString()));
+                    manaCostsToPay.setX(amountMana);
+                }
+                variableManaCost.setPaid();
+            }
+            xValue = getManaCostsToPay().getX();
+            game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xValue).append(" for ").append(variableManaCost.getText()).toString());
+        }
+
+        return variableManaCost;
     }
 
     @Override

@@ -39,4 +39,5 @@ public interface VariableCost {
     int getAmount();
     void setAmount(int amount);
     void setFilter(FilterMana filter);
+    FilterMana getFilter();
 }

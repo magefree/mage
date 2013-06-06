@@ -129,8 +129,21 @@ class BurnAtTheStakeCost extends CostImpl<BurnAtTheStakeCost> implements Variabl
         return this.amountPaid;
     }
 
+    /**
+     * Not Supported
+     * @param filter
+     */
     @Override
     public void setFilter(FilterMana filter) {
+    }
+
+    /**
+     * Not supported
+     * @return 
+     */
+    @Override
+    public FilterMana getFilter() {
+        return new FilterMana();
     }
 
     @Override
