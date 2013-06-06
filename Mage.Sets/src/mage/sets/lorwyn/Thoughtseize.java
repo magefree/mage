@@ -58,7 +58,7 @@ public class Thoughtseize extends CardImpl<Thoughtseize> {
         this.color.setBlack(true);
 
         // Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new ThoughtseizeEffect());
         this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
     }
@@ -98,7 +98,8 @@ class ThoughtseizeEffect extends OneShotEffect<ThoughtseizeEffect> {
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
                 TargetCard target = new TargetCard(Zone.HAND, filter);
-                if (you.chooseTarget(outcome, player.getHand(), target, source, game)) {
+                target.setRequired(true);
+                if (target.canChoose(source.getControllerId(), game) && you.chooseTarget(outcome, player.getHand(), target, source, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);
