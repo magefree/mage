@@ -34,6 +34,7 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;
+import mage.target.TargetSpell;
 
 /**
  *
@@ -49,6 +50,7 @@ public class Condescend extends CardImpl<Condescend> {
 
         // Counter target spell unless its controller pays {X}.
         this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManacostVariableValue()));
+        this.getSpellAbility().addTarget(new TargetSpell());
         // Scry 2.
         this.getSpellAbility().addEffect(new ScryEffect(2));
 

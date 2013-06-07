@@ -79,8 +79,10 @@ public class CounterUnlessPaysEffect extends OneShotEffect<CounterUnlessPaysEffe
         if (spell != null) {
             Player player = game.getPlayer(spell.getControllerId());
             if (player != null) {
-                Cost costToPay = cost.copy();
-                if (cost == null) {
+                Cost costToPay;
+                if (cost != null) {
+                    costToPay = cost.copy();
+                } else  {
                     costToPay = new GenericManaCost(genericMana.calculate(game, source));
                 }
                 costToPay.clearPaid();
