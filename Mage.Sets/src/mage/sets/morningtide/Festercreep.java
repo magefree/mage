@@ -34,7 +34,7 @@ import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -57,7 +57,11 @@ public class Festercreep extends CardImpl<Festercreep> {
         this.color.setBlack(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
+        
+        // Festercreep enters the battlefield with a +1/+1 counter on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(1))));
+        
+        // {1}{B}, Remove a +1/+1 counter from Festercreep: All other creatures get -1/-1 until end of turn.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), true), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(ability);
