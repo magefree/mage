@@ -66,19 +66,22 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
-            if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id))
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
+            if (game.getPlayer(source.getControllerId()).getGraveyard().contains(id)) {
                 return filter.match(card, game);
+            }
+        }
         return false;
     }
 
     @Override
     public boolean canTarget(UUID id, UUID playerId, Ability ability, Game game) {
         Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getPlayer(playerId).getGraveyard().contains(id)) {
                 return filter.match(card, game);
             }
+        }
         return false;
     }
 
@@ -91,9 +94,14 @@ public class TargetCardInYourGraveyard extends TargetCard<TargetCardInYourGravey
      */
     @Override
     public boolean canChoose(UUID sourceControllerId, Game game) {
-        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets)
+        if (game.getPlayer(sourceControllerId).getGraveyard().count(filter, game) >= this.minNumberOfTargets) {
             return true;
+        }
         return false;
+    }
+    @Override
+    public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
+        return canChoose(sourceControllerId, game);
     }
 
     @Override
