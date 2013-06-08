@@ -215,6 +215,27 @@ public class Sets extends HashMap<String, ExpansionSet> {
                 }
             }
         }
+        if (landSets.isEmpty()) {
+            // if set has no lands and also it has no parent or parent has no lands get last set with lands
+            // select a set with basic lands by random
+            Random generator = new Random();
+            int maxRndValue = 0;
+            String selectedSetCode = null;
+            for (ExpansionSet set :Sets.getInstance().getSortedByReleaseDate()) {
+                if (set.hasBasicLands) {
+                    int rndValue = generator.nextInt(100);
+                    if (rndValue >= maxRndValue) {
+                        maxRndValue = rndValue;
+                        selectedSetCode = set.getCode();
+                    }
+                }
+            }
+            if (selectedSetCode != null) {
+                landSets.add(selectedSetCode);
+            } else {
+                throw new IllegalArgumentException("No set with basic land was found");
+            }
+        }
         return landSets;
     }
 
