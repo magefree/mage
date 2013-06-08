@@ -21,6 +21,7 @@ chdir("temp");
 move("../Mage.Client/target/mage-client.zip", "client.zip");
 move("../Mage.Server/target/mage-server.zip", "server.zip");
 copy("../Utils/release/startMage.bat", "startMage.bat");
+copy("../Utils/release/startMageWin7.bat", "startMageWin7.bat");
 
 my $f = Archive::Extract->new( archive => "client.zip");
 $f->extract( to => "client/");
@@ -33,6 +34,7 @@ my $zip = Archive::Zip->new();;
 $zip->addTree("client", "mage-client");
 $zip->addTree("server", "mage-server");
 $zip->addFile("startMage.bat");
+$zip->addFile("startMageWin7.bat");
 $zip->writeToFileNamed("../mage-bundle.zip");
 chdir("..");
 
