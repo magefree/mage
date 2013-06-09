@@ -29,19 +29,17 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantAttackBlockAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,7 +60,8 @@ public class Pacifism extends CardImpl<Pacifism> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Removal));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PacifismEffect()));
+        // Enchanted creature can't attack or block.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackBlockAttachedEffect(AttachmentType.AURA)));
 
     }
 
@@ -74,40 +73,4 @@ public class Pacifism extends CardImpl<Pacifism> {
     public Pacifism copy() {
         return new Pacifism(this);
     }
-}
-
-class PacifismEffect extends RestrictionEffect<PacifismEffect> {
-
-    public PacifismEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Enchanted creature can't attack or block";
-    }
-
-    public PacifismEffect(final PacifismEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAttachments().contains((source.getSourceId()))) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public PacifismEffect copy() {
-        return new PacifismEffect(this);
-    }
-
 }
