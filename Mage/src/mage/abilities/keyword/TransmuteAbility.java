@@ -38,7 +38,9 @@ public class TransmuteAbility extends SimpleActivatedAbility {
 
     @Override
     public String getRule() {
-        return "Transmute " + this.getManaCosts().getText();
+        return new StringBuilder("Transmute ").append(this.getManaCosts().getText())
+                .append(" (").append(this.getManaCosts().getText())
+                .append(", Discard this card: Search your library for a card with the same converted mana cost as this card, reveal it, and put it into your hand. Then shuffle your library. Transmute only as a sorcery.)").toString();
     }
 }
 
