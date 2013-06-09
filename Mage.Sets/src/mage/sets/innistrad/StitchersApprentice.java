@@ -35,6 +35,7 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -64,6 +65,7 @@ public class StitchersApprentice extends CardImpl<StitchersApprentice> {
 
         // {1}{U}, {tap}: Put a 2/2 blue Homunculus creature token onto the battlefield, then sacrifice a creature.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new HomunculusToken()), new ManaCostsImpl("{1}{U}"));
+        ability.addCost(new TapSourceCost());
         ability.addEffect(new StitchersApprenticeEffect());
         this.addAbility(ability);
     }
