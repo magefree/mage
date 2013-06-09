@@ -471,7 +471,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 discard(hand.get(target.getFirstTarget(), game), null, game);
             }
             int discarded =cardsStart - hand.size();
-            game.informPlayers(new StringBuilder(getName()).append(" discards ").append(discarded).append(discarded == 1?"card":"cards").append(" (cleanup)").toString());
+            game.informPlayers(new StringBuilder(getName()).append(" discards ").append(discarded).append(discarded == 1?" card":" cards").append(" (cleanup)").toString());
         }
     }
 
