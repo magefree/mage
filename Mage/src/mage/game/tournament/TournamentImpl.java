@@ -53,6 +53,7 @@ public abstract class TournamentImpl implements Tournament {
     protected String matchName;
     protected TournamentOptions options;
     protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
+    protected String setsInfoShort;
 
     protected TableEventSource tableEventSource = new TableEventSource();
     protected PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
@@ -98,6 +99,16 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public List<ExpansionSet> getSets() {
         return sets;
+    }
+
+    @Override
+    public void setSetsFormatedShort(String setsInfoShort) {
+        this.setsInfoShort = setsInfoShort;
+    }
+
+    @Override
+    public String getSetsFormatedShort() {
+        return setsInfoShort;
     }
 
     @Override

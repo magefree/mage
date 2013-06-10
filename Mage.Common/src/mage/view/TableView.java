@@ -65,7 +65,6 @@ public class TableView implements Serializable {
         this.tableName = table.getName();
         this.controllerName = table.getControllerName();
         this.createTime = table.getCreateTime();
-        this.deckType = table.getDeckType();
         this.tableState = table.getState();
         this.isTournament = table.isTournament();
         for (Seat seat: table.getSeats()) {
@@ -83,6 +82,7 @@ public class TableView implements Serializable {
                 }
             }
             this.controllerName += sb.toString();
+            this.deckType = table.getDeckType();
         } else {
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp: table.getTournament().getPlayers()) {
@@ -96,6 +96,7 @@ public class TableView implements Serializable {
                 sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
             }
             this.additionalInfo = sb.toString();
+            this.deckType =  new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getSetsFormatedShort()).toString();
         }
 
     }

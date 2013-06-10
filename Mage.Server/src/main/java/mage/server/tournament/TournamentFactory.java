@@ -31,6 +31,7 @@ package mage.server.tournament;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import mage.cards.Sets;
@@ -65,9 +66,18 @@ public class TournamentFactory {
         try {
             con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
             tournament = con.newInstance(new Object[] {options});
+            // transfer set information, create short info string for included sets
+            Map<String,Integer> setInfo = new LinkedHashMap<String,Integer>();
             for (String setCode: options.getLimitedOptions().getSetCodes()) {
                 tournament.getSets().add(Sets.findSet(setCode));
+                int count = setInfo.containsKey(setCode) ? setInfo.get(setCode) : 0;
+                setInfo.put(setCode, count + 1);
             }
+            StringBuilder sb = new StringBuilder();
+            for (Map.Entry<String,Integer> entry:setInfo.entrySet()) {
+                sb.append(entry.getValue().toString()).append("x").append(entry.getKey()).append(" ");
+            }
+            tournament.setSetsFormatedShort(sb.toString());
         } catch (Exception ex) {
             logger.fatal("TournamentFactory error ", ex);
             return null;
