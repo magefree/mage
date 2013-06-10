@@ -70,6 +70,8 @@ public interface Tournament {
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void fireConstructEvent(UUID playerId);
 
+    TournamentOptions getOptions();
+    
     // tournament times
     Date getStartTime();
     Date getEndTime();

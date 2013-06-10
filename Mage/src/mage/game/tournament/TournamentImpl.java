@@ -91,6 +91,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public TournamentOptions getOptions() {
+        return options;
+    }
+
+    @Override
     public Collection<TournamentPlayer> getPlayers() {
         return players.values();
     }
