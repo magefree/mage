@@ -36,8 +36,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterCreatureCard;
-import mage.target.common.TargetCardInHand;
 
 import java.util.UUID;
 
@@ -62,7 +60,6 @@ public class ElvishPiper extends CardImpl<ElvishPiper> {
                 new PutCreatureOnBattlefieldEffect(),
                 new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new TargetCardInHand(new FilterCreatureCard()));
         this.addAbility(ability);
     }
 
