@@ -58,10 +58,14 @@ public abstract class TournamentImpl implements Tournament {
     protected TableEventSource tableEventSource = new TableEventSource();
     protected PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
+    protected Date startTime;
+    protected Date endTime;
+
     private static final int CONSTRUCT_TIME = 600;
 
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
+        startTime = new Date();
     }
 
     @Override
@@ -292,9 +296,20 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     public void end() {
+        endTime = new Date();
         tableEventSource.fireTableEvent(EventType.END);
     }
 
     protected abstract void runTournament();
+
+    @Override
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    @Override
+    public Date getEndTime() {
+        return endTime;
+    }
 
 }

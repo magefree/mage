@@ -29,6 +29,7 @@
 package mage.game.tournament;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.ExpansionSet;
@@ -69,4 +70,7 @@ public interface Tournament {
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void fireConstructEvent(UUID playerId);
 
+    // tournament times
+    Date getStartTime();
+    Date getEndTime();
 }

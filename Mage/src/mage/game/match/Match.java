@@ -28,6 +28,7 @@
 
 package mage.game.match;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.decks.Deck;
@@ -71,4 +72,7 @@ public interface Match {
     void addTableEventListener(Listener<TableEvent> listener);
     void fireSideboardEvent(UUID playerId, Deck deck);
 
+    // match times
+    Date getStartTime();
+    Date getEndTime();
 }

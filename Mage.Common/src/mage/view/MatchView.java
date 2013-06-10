@@ -29,6 +29,7 @@ package mage.view;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.game.Game;
@@ -49,8 +50,11 @@ public class MatchView implements Serializable {
     private String deckType;
 
     private List<UUID> games = new ArrayList<UUID>();
-     private String result;
+    private String result;
     private String players;
+    
+    private Date startTime;
+    private Date endTime;
 
     public MatchView(Match match) {
         this.matchId = match.getId();
@@ -68,7 +72,8 @@ public class MatchView implements Serializable {
             players = sb1.substring(0, sb1.length() - 2);
             result = sb2.substring(0, sb2.length() - 2);
         }
-
+        this.startTime = match.getStartTime();
+        this.endTime = match.getEndTime();
     }
 
     // used for tournaments
@@ -88,6 +93,8 @@ public class MatchView implements Serializable {
             sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(" ");
         }
         this.result = sb2.toString();
+        this.startTime = table.getTournament().getStartTime();
+        this.endTime = table.getTournament().getEndTime();
     }
 
     public UUID getMatchId() {
@@ -118,4 +125,11 @@ public class MatchView implements Serializable {
         return players;
     }
 
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
 }
