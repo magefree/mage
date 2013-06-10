@@ -32,17 +32,21 @@ import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
+import mage.Constants.TargetController;
+import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.game.permanent.token.GoblinToken;
+import mage.game.permanent.token.Token;
 
 /**
  *
@@ -57,7 +61,7 @@ public class GoblinAssault extends CardImpl<GoblinAssault> {
         this.color.setRed(true);
 
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinToken()), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinAssaultToken()), TargetController.YOU, false));
         // Goblin creatures attack each turn if able.
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GoblinAssaultEffect()));
     }
@@ -112,4 +116,18 @@ class GoblinAssaultEffect extends RequirementEffect<GoblinAssaultEffect> {
         return false;
     }
 
+}
+
+class GoblinAssaultToken extends Token {
+
+    public GoblinAssaultToken() {
+        super("Goblin", "1/1 red Goblin creature token with haste");
+        cardType.add(CardType.CREATURE);
+        subtype.add("Goblin");
+
+        color = ObjectColor.RED;
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+        this.addAbility(HasteAbility.getInstance());
+    }
 }
