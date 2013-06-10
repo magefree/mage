@@ -79,7 +79,7 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
     }
 
     public EntersBattlefieldAllTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule, boolean controlled) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        super(zone, effect, optional);
         this.filter = filter;
         this.rule = rule;
         this.controlled = controlled;
