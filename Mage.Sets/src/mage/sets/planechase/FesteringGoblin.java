@@ -54,7 +54,7 @@ public class FesteringGoblin extends CardImpl<FesteringGoblin> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), false);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
