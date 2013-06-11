@@ -87,15 +87,17 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Card get(UUID cardId, Game game) {
-        if (this.contains(cardId))
+        if (this.contains(cardId)) {
             return game.getCard(cardId);
+        }
         return null;
     }
 
     @Override
     public void remove(Card card) {
-        if (card == null)
+        if (card == null) {
             return;
+        }
         this.remove(card.getId());
     }
 
@@ -109,8 +111,9 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
 
     @Override
     public Card getRandom(Game game) {
-        if (this.size() == 0)
+        if (this.size() == 0) {
             return null;
+        }
         UUID[] cards = this.toArray(new UUID[0]);
         return game.getCard(cards[rnd.nextInt(cards.length)]);
     }
@@ -118,9 +121,10 @@ public class CardsImpl extends LinkedHashSet<UUID> implements Cards, Serializabl
     @Override
     public int count(FilterCard filter, Game game) {
         int result = 0;
-        for (UUID card: this) {
-            if (filter.match(game.getCard(card), game))
+        for (UUID cardId: this) {
+            if (filter.match(game.getCard(cardId), game)) {
                 result++;
+            }
         }
         return result;
     }
