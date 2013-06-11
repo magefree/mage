@@ -85,7 +85,7 @@ public class ElderwoodScion extends CardImpl<ElderwoodScion> {
 
 class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<ElderwoodScionCostReductionEffect> {
 
-    private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
+    private static final String effectText = "Spells you cast that target {this} cost {2} less to cast";
 
     ElderwoodScionCostReductionEffect() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
@@ -128,7 +128,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<Elder
 
 class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl<ElderwoodScionCostReductionEffect2> {
 
-    private static final String effectText = "Spells you cast that target {this} cost {2} less to cast";
+    private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
 
     ElderwoodScionCostReductionEffect2() {
         super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
