@@ -64,21 +64,23 @@ public class SarkhanVol extends CardImpl<SarkhanVol> {
         this.color.setGreen(true);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
 
+        // +1: Creatures you control get +1/+1 and gain haste until end of turn.
         Effects effects1 = new Effects();
         effects1.add(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
         effects1.add(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(new LoyaltyAbility(effects1, 1));
 
+        // -2: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
         Effects effects2 = new Effects();
         effects2.add(new GainControlTargetEffect(Duration.EndOfTurn));
         effects2.add(new UntapTargetEffect());
         effects2.add(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
-
         LoyaltyAbility ability = new LoyaltyAbility(effects2, -2);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
-        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken), -6));
+        // -6: Put five 4/4 red Dragon creature tokens with flying onto the battlefield.
+        this.addAbility(new LoyaltyAbility(new CreateTokenEffect(dragonToken, 5), -6));
     }
 
     public SarkhanVol(final SarkhanVol card) {
