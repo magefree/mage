@@ -73,6 +73,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_CARD_IMAGES_SAVE_TO_ZIP = "cardImagesSaveToZip";
 
     public static final String KEY_SOUNDS_ON = "soundsOn";
+    public static final String KEY_MUSICS_ON = "MusicsOn";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
@@ -201,6 +202,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         saveToZipFiles = new javax.swing.JCheckBox();
         jPanel22 = new javax.swing.JPanel();
         jEnableSounds = new javax.swing.JCheckBox();
+        jEnableMusics = new javax.swing.JCheckBox();
         jPanel6 = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -322,7 +324,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Main", jPanel1);
@@ -537,7 +539,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Images", jPanel4);
@@ -549,13 +551,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        jEnableMusics.setText("enable BGM");
+        jEnableMusics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEnableMusicsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jEnableSounds)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jEnableSounds)
+                    .addComponent(jEnableMusics))
                 .addContainerGap(325, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
@@ -563,7 +574,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jEnableSounds)
-                .addContainerGap(217, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jEnableMusics)
+                .addContainerGap(194, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sounds", jPanel22);
@@ -605,7 +618,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10));
+        jLabel11.setFont(new java.awt.Font("Tahoma", 2, 10)); // NOI18N
         jLabel11.setText("Note: password won't be encrypted!");
 
         javax.swing.GroupLayout pnlProxyLayout = new javax.swing.GroupLayout(pnlProxy);
@@ -747,7 +760,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel12.setText("Choose your avatar:");
 
         jPanel12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -789,7 +802,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel13.setText("New avatars:");
 
         jPanel16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -975,7 +988,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(316, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1028,7 +1041,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         // sounds
         save(prefs, dialog.jEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
-
+        save(prefs, dialog.jEnableMusics, KEY_MUSICS_ON, "true", "false", UPDATE_CACHE_POLICY);
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
@@ -1123,6 +1136,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void jEnableSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableSoundsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jEnableSoundsActionPerformed
+
+    private void jEnableMusicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableMusicsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEnableMusicsActionPerformed
 
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
@@ -1230,6 +1247,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.jEnableSounds.setSelected(true);
         } else {
             dialog.jEnableSounds.setSelected(false);
+        }
+        prop = prefs.get(KEY_MUSICS_ON, "true");
+        if (prop.equals("true")) {
+            dialog.jEnableMusics.setSelected(true);
+        } else {
+            dialog.jEnableMusics.setSelected(false);
         }
     }
 
@@ -1449,6 +1472,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
     private javax.swing.JTextField imageFolderPath;
+    private javax.swing.JCheckBox jEnableMusics;
     private javax.swing.JCheckBox jEnableSounds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

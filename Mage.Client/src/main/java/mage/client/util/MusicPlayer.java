@@ -2,6 +2,7 @@ package mage.client.util;
 import java.io.File;
 import java.awt.List;
 import javax.sound.sampled.*;
+import mage.client.constants.Constants;
 
 
 /**
@@ -16,15 +17,13 @@ public class MusicPlayer {
     List filelist = new List();
     static MusicPlayer player = null;
     
-    public static String BASE_BGM_PATH =  "G:\\mp3\\东方\\TH13_-_东方神灵庙BGM\\";
-    
     public MusicPlayer(){
     	open();
     }
     
     //open file and add list
     private void open(){
-    	filepath = BASE_BGM_PATH;
+    	filepath = Constants.BASE_MUSICS_PATH;
     	filelist.removeAll();
     	File filedir = new File(filepath);
     	File[] fileread = filedir.listFiles();
@@ -122,7 +121,7 @@ public class MusicPlayer {
     		}
     		
     	}
-    	
+        
     	public void run(){
     		try {
 				Thread.sleep(100);
