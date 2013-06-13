@@ -120,10 +120,10 @@ public class TablesPanel extends javax.swing.JPanel {
      public void actionPerformed(ActionEvent e)
      {
          int modelRow = Integer.valueOf( e.getActionCommand() );
-         UUID tableId = (UUID)tableModel.getValueAt(modelRow, 10);
-         UUID gameId = (UUID)tableModel.getValueAt(modelRow, 9);
-         String state = (String)tableModel.getValueAt(modelRow, 7);
-         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, 8);
+         UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
+         UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
+         String state = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
+         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
          String owner = (String)tableModel.getValueAt(modelRow, 1);
 
          if (state.equals("Join")) {
@@ -180,7 +180,7 @@ public class TablesPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, 6);
+                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
                 if (games.size() == 1) {
                     session.replayGame(games.get(0));
                 }
@@ -191,9 +191,9 @@ public class TablesPanel extends javax.swing.JPanel {
         };
 
 
-        // adds buttons (don't delete this)
-        new ButtonColumn(tableTables, joinTable, 7);
-        new ButtonColumn(tableCompleted, replayMatch, 5);
+        // adds buttons to the table panel (don't delete this)
+        new ButtonColumn(tableTables, joinTable, TableTableModel.ACTION_COLUMN);
+        new ButtonColumn(tableCompleted, replayMatch, MatchesTableModel.ACTION_COLUMN);
     }
 
     public Map<String, JComponent> getUIComponents() {
@@ -605,7 +605,10 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 }
 
 class TableTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Deck Type", "Info", "Status", "Created", "Action"};
+
+    public static int ACTION_COLUMN = 8; // column the action is located (starting with 0)
+
+    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -638,16 +641,18 @@ class TableTableModel extends AbstractTableModel {
             case 1:
                 return tables[arg0].getControllerName();
             case 2:
-                return tables[arg0].getGameType().toString();
+                return tables[arg0].getGameType();
             case 3:
-                return tables[arg0].getDeckType().toString();
+                return Integer.toString(tables[arg0].getWins());
             case 4:
-                return tables[arg0].getAdditionalInfo().toString();
+                return tables[arg0].getDeckType();
             case 5:
-                return tables[arg0].getTableState().toString();
+                return tables[arg0].getAdditionalInfo();
             case 6:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getTableState().toString();
             case 7:
+                return timeFormatter.format(tables[arg0].getCreateTime());
+            case 8:
                 switch (tables[arg0].getTableState()) {
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
@@ -675,14 +680,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 8:
-                return tables[arg0].isTournament();
             case 9:
+                return tables[arg0].isTournament();
+            case 10:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 10:
+            case 11:
                 return tables[arg0].getTableId();
         }
         return "";
@@ -706,7 +711,7 @@ class TableTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 7) {
+        if (columnIndex != ACTION_COLUMN) {
             return false;
         }
         return true;
@@ -807,9 +812,12 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
 }
 
 class MatchesTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Action"};
+
+    public static int ACTION_COLUMN = 7; // column the action is located (starting with 0)
+
+    private String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Start Time", "End Time","Action"};
     private MatchView[] matches = new MatchView[0];
-    private static final DateFormat timeFormatter = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
+    private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
     public void loadData(Collection<MatchView> matches) throws MageRemoteException {
         this.matches = matches.toArray(new MatchView[0]);
@@ -840,8 +848,12 @@ class MatchesTableModel extends AbstractTableModel {
             case 4:
                 return matches[arg0].getResult();
             case 5:
-                return "None";
+                return timeFormatter.format(matches[arg0].getStartTime());
             case 6:
+                return timeFormatter.format(matches[arg0].getEndTime());
+            case 7:
+                return "None";
+            case 8:
                 return matches[arg0].getGames();
         }
         return "";
@@ -865,7 +877,7 @@ class MatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 5) {
+        if (columnIndex != ACTION_COLUMN) {
             return false;
         }
         return true;

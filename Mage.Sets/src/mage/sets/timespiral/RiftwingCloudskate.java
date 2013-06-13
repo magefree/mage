@@ -25,50 +25,53 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class RiftwingCloudskate extends CardImpl<RiftwingCloudskate> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+    public RiftwingCloudskate(UUID ownerId) {
+        super(ownerId, 73, "Riftwing Cloudskate", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Illusion");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Riftwing Cloudskate enters the battlefield, return target permanent to its owner's hand.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
+        ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
+
+        // Suspend 3-{1}{U}
+        this.addAbility(new SuspendAbility(3, new ManaCostsImpl("{1}{U}"),this));
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public RiftwingCloudskate(final RiftwingCloudskate card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public RiftwingCloudskate copy() {
+        return new RiftwingCloudskate(this);
     }
 }

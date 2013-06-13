@@ -25,50 +25,55 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.modernmasters;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Rarity;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class Peppersmoke extends CardImpl<Peppersmoke> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("If you control a Faerie,");
+    static {
+        filter.add(new SubtypePredicate("Faerie"));
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public Peppersmoke(UUID ownerId) {
+        super(ownerId, 92, "Peppersmoke", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        this.expansionSetCode = "MMA";
+        this.supertype.add("Tribal");
+        this.subtype.add("Faerie");
+
+        this.color.setBlack(true);
+
+        // Target creature gets -1/-1 until end of turn. If you control a Faerie, draw a card.
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-1,-1,Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(
+                new ConditionalOneShotEffect(new DrawCardControllerEffect(1),
+                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0),
+                "If you control a Faerie, draw a card"));
+    }
+
+    public Peppersmoke(final Peppersmoke card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public Peppersmoke copy() {
+        return new Peppersmoke(this);
     }
 }

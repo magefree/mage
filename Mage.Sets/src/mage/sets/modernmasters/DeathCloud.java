@@ -25,50 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.modernmasters;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
+import mage.abilities.effects.common.DiscardEachPlayerEffect;
+import mage.abilities.effects.common.LoseLifePlayersEffect;
+import mage.abilities.effects.common.SacrificeAllEffect;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class DeathCloud extends CardImpl<DeathCloud> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+    public DeathCloud(UUID ownerId) {
+        super(ownerId, 76, "Death Cloud", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{X}{B}{B}{B}");
+        this.expansionSetCode = "MMA";
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
 
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        // Each player loses X life, discards X cards, sacrifices X creatures, then sacrifices X lands.
+        DynamicValue xValue = new ManacostVariableValue();
+        this.getSpellAbility().addEffect(new LoseLifePlayersEffect(xValue));
+        this.getSpellAbility().addEffect(new DiscardEachPlayerEffect(xValue, false));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(xValue, new FilterControlledCreaturePermanent("creatures")));
+        this.getSpellAbility().addEffect(new SacrificeAllEffect(xValue, new FilterControlledLandPermanent("lands")));
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public DeathCloud(final DeathCloud card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public DeathCloud copy() {
+        return new DeathCloud(this);
     }
 }

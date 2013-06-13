@@ -25,50 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class ErrantEphemeron extends CardImpl<ErrantEphemeron> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
+    public ErrantEphemeron(UUID ownerId) {
+        super(ownerId, 60, "Errant Ephemeron", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{U}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Illusion");
 
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlue(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // Suspend 4-{1}{U}
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("{1}{U}"), this));
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public ErrantEphemeron(final ErrantEphemeron card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public ErrantEphemeron copy() {
+        return new ErrantEphemeron(this);
     }
 }

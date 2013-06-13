@@ -25,50 +25,30 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
+import mage.Constants.Rarity;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class PetalsOfInsight extends mage.sets.modernmasters.PetalsOfInsight {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
-        this.subtype.add("Shaman");
-
-        this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
-
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    public PetalsOfInsight(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 79;
+        this.expansionSetCode = "CHK";
+        this.rarity = Rarity.UNCOMMON;
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public PetalsOfInsight(final PetalsOfInsight card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public PetalsOfInsight copy() {
+        return new PetalsOfInsight(this);
     }
 }

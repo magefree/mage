@@ -49,6 +49,7 @@ public class TableView implements Serializable {
 
     private UUID tableId;
     private String gameType;
+    private int wins;
     private String deckType;
     private String tableName;
     private String controllerName;
@@ -65,25 +66,36 @@ public class TableView implements Serializable {
         this.tableName = table.getName();
         this.controllerName = table.getControllerName();
         this.createTime = table.getCreateTime();
-        this.deckType = table.getDeckType();
         this.tableState = table.getState();
         this.isTournament = table.isTournament();
         for (Seat seat: table.getSeats()) {
             seats.add(new SeatView(seat));
         }
         if (!table.isTournament()) {
-            this.additionalInfo = new StringBuilder("Wins: ").append(table.getMatch().getWinsNeeded()).toString();
+            this.wins = table.getMatch().getWinsNeeded();
             for (Game game: table.getMatch().getGames()) {
                 games.add(game.getId());
             }
             StringBuilder sb = new StringBuilder();
+            StringBuilder sbScore = new StringBuilder("Score: ");
             for(MatchPlayer matchPlayer: table.getMatch().getPlayers()) {
                 if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
                     sb.append(", ").append(matchPlayer.getPlayer().getName());
+                    sbScore.append("-").append(matchPlayer.getWins());
+                } else {
+                    sbScore.insert(0,matchPlayer.getWins()).insert(0,"Score: ");
                 }
             }
             this.controllerName += sb.toString();
+            this.deckType = table.getDeckType();
+            if (table.getMatch().getGames().isEmpty()) {
+                this.additionalInfo = "";
+            } else {
+                this.additionalInfo = sbScore.toString();
+            }
+
         } else {
+            this.wins = table.getTournament().getOptions().getMatchOptions().getWinsNeeded();
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp: table.getTournament().getPlayers()) {
                 if (!tp.getPlayer().getName().equals(table.getControllerName())) {
@@ -96,8 +108,8 @@ public class TableView implements Serializable {
                 sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
             }
             this.additionalInfo = sb.toString();
+            this.deckType =  new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getSetsFormatedShort()).toString();
         }
-
     }
 
     public UUID getTableId() {
@@ -114,6 +126,10 @@ public class TableView implements Serializable {
 
     public String getGameType() {
         return gameType;
+    }
+
+    public int getWins() {
+        return wins;
     }
 
     public String getDeckType() {

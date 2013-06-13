@@ -36,6 +36,11 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
         this.condition = triggered.condition;
         this.text = triggered.text;
     }
+    
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        return condition.apply(game, this);
+    }
 
     @Override
     public ConditionalTriggeredAbility copy() {
@@ -47,9 +52,9 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
         ability.setSourceId(this.getSourceId());
         ability.setControllerId(this.getControllerId());
         if (ability.checkTrigger(event, game)) {
-            if (condition.apply(game, this)) {
+//            if (condition.apply(game, this)) {
                 return true;
-            }
+//            }
         }
         return false;
     }

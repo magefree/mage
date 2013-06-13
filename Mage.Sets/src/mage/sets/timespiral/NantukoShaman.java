@@ -25,50 +25,61 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
+import mage.filter.common.FilterLandPermanent;
+import mage.filter.predicate.permanent.TappedPredicate;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class NantukoShaman extends CardImpl<NantukoShaman> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
+    private static final FilterLandPermanent filter = new FilterLandPermanent();
+    static {
+        filter.add(new TappedPredicate());
+    }
+
+    public NantukoShaman(UUID ownerId) {
+        super(ownerId, 208, "Nantuko Shaman", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
+        this.expansionSetCode = "TSP";
+        this.subtype.add("Insect");
         this.subtype.add("Shaman");
 
         this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(2);
 
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
+        // When Nantuko Shaman enters the battlefield, if you control no tapped lands, draw a card.
+        Ability ability = new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)),
+                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.EQUAL_TO, 0),
+                "When {this} enters the battlefield, if you control no tapped lands, draw a card");
         this.addAbility(ability);
+
+        // Suspend 1-{2}{G}{G}
+        this.addAbility(new SuspendAbility(1, new ManaCostsImpl("{2}{G}{G}"), this));
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public NantukoShaman(final NantukoShaman card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public NantukoShaman copy() {
+        return new NantukoShaman(this);
     }
 }

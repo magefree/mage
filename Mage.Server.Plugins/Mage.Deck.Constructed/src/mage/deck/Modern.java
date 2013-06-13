@@ -44,7 +44,7 @@ public class Modern extends Constructed {
     public Modern() {
         super("Constructed - Modern");
 
-        Date cutoff = EighthEdition.getInstance().getReleaseDate();
+        Date cutoff = EighthEdition.getInstance().getReleaseDate(); // 2003 / 07 / 28
         for (ExpansionSet set: Sets.getInstance().values()) {
             if ((set.getReleaseDate().after(cutoff) || set.getReleaseDate().equals(cutoff)) && set.getSetType() != SetType.REPRINT) {
                 setCodes.add(set.getCode());

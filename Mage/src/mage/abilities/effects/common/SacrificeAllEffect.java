@@ -28,18 +28,21 @@
 
 package mage.abilities.effects.common;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.Constants.Outcome;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetControlledPermanent;
+import mage.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -47,18 +50,21 @@ import java.util.UUID;
  */
 public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
 
-    protected int amount;
+    protected DynamicValue amount;
     protected FilterControlledPermanent filter;
 
     public SacrificeAllEffect(FilterControlledPermanent filter) {
         this(1, filter);
     }
-
     public SacrificeAllEffect(int amount, FilterControlledPermanent filter) {
+        this(new StaticValue(amount), filter);
+    }
+
+    public SacrificeAllEffect(DynamicValue amount, FilterControlledPermanent filter) {
         super(Outcome.Sacrifice);
         this.amount = amount;
         this.filter = filter;
-                setText();
+        setText();
     }
 
     public SacrificeAllEffect(final SacrificeAllEffect effect) {
@@ -83,7 +89,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
         for (UUID playerId : controller.getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
-                int numTargets = Math.min(amount, game.getBattlefield().countAll(filter, player.getId(), game));
+                int numTargets = Math.min(amount.calculate(game, source), game.getBattlefield().countAll(filter, player.getId(), game));
                 TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
                 if (target.canChoose(player.getId(), game)) {
                     while (!target.isChosen()) {
@@ -105,13 +111,13 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("Each players sacrifices ");
-        if (amount > 1)
-            sb.append(amount).append(" ");
-        else
-            sb.append("a ");
+        if (amount.toString().equals("X")) {
+            sb.append(amount.toString()).append(" ");
+        } else {
+            sb.append(CardUtil.numberToText(amount.toString()));
+        }
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }
-
 
 }

@@ -29,6 +29,7 @@
 package mage.game.tournament;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.ExpansionSet;
@@ -50,6 +51,13 @@ public interface Tournament {
     Collection<TournamentPlayer> getPlayers();
     Collection<Round> getRounds();
     List<ExpansionSet> getSets();
+
+    void setSetsFormatedShort(String setInfo);
+    /**
+     * Gives back a String that shows the included sets (e.g. "3xRTR" or "1xDGM 1xGTC 1xRTR")
+     * @return String
+     */
+    String getSetsFormatedShort();
     void submitDeck(UUID playerId, Deck deck);
     void updateDeck(UUID playerId, Deck deck);
     void autoSubmit(UUID playerId, Deck deck);
@@ -62,4 +70,9 @@ public interface Tournament {
     void addPlayerQueryEventListener(Listener<PlayerQueryEvent> listener);
     void fireConstructEvent(UUID playerId);
 
+    TournamentOptions getOptions();
+    
+    // tournament times
+    Date getStartTime();
+    Date getEndTime();
 }

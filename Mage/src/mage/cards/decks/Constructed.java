@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import mage.cards.Card;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 
 /**
  *
@@ -99,7 +101,16 @@ public class Constructed extends DeckValidatorImpl {
         if (!setCodes.isEmpty()) {
             for (Card card: deck.getCards()) {
                 if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if (!invalid.containsKey(card.getName())) {
+                    // check if card is legal if taken from other set
+                    boolean legal = false;
+                    List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
+                    for (CardInfo cardInfo: cardInfos) {
+                        if (setCodes.contains(cardInfo.getSetCode())) {
+                            legal = true;
+                            break;
+                        }
+                    }
+                    if (!legal && !invalid.containsKey(card.getName())) {
                         invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
                         valid = false;
                     }
@@ -107,7 +118,16 @@ public class Constructed extends DeckValidatorImpl {
             }
             for (Card card: deck.getSideboard()) {
                 if (!setCodes.contains(card.getExpansionSetCode())) {
-                    if (!invalid.containsKey(card.getName())) {
+                    // check if card is legal if taken from other set
+                    boolean legal = false;
+                    List<CardInfo> cardInfos = CardRepository.instance.findCards(card.getName());
+                    for (CardInfo cardInfo: cardInfos) {
+                        if (setCodes.contains(cardInfo.getSetCode())) {
+                            legal = true;
+                            break;
+                        }
+                    }
+                    if (!legal && !invalid.containsKey(card.getName())) {
                         invalid.put(card.getName(), "Invalid set: " + card.getExpansionSetCode());
                         valid = false;
                     }

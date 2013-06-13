@@ -27,6 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
+import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -43,7 +44,6 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.PermanentCard;
 import mage.game.stack.Spell;
 
-import java.util.UUID;
 
 /**
  * @author noxx
@@ -106,7 +106,7 @@ class SigardaHostOfHeronsEffect extends ReplacementEffectImpl<SigardaHostOfHeron
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT) {
+        if (event.getType() == GameEvent.EventType.SACRIFICE_PERMANENT && event.getPlayerId().equals(source.getControllerId())) {
             MageObject object = game.getObject(event.getSourceId());
             if (object instanceof PermanentCard) {
                 if (game.getOpponents(source.getControllerId()).contains(((PermanentCard)object).getControllerId())) {

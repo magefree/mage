@@ -25,50 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
-
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.MageInt;
-import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.cards.CardImpl;
+package mage.sets.shadowmoor;
 
 import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Rarity;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.PersistAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.cards.CardImpl;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetPermanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class ElvishPiper extends CardImpl<ElvishPiper> {
+public class WoodfallPrimus extends CardImpl<WoodfallPrimus> {
 
-    public ElvishPiper(UUID ownerId) {
-        super(ownerId, 177, "Elvish Piper", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Elf");
+    private static final FilterPermanent filter = new FilterPermanent("noncreature permanent");
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+    }
+
+    public WoodfallPrimus(UUID ownerId) {
+        super(ownerId, 135, "Woodfall Primus", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}{G}{G}");
+        this.expansionSetCode = "SHM";
+        this.subtype.add("Treefolk");
         this.subtype.add("Shaman");
 
         this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.power = new MageInt(6);
+        this.toughness = new MageInt(6);
 
-        // {G}, {tap}: You may put a creature card from your hand onto the battlefield.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new PutCreatureOnBattlefieldEffect(),
-                new ManaCostsImpl("{G}"));
-        ability.addCost(new TapSourceCost());
+        // Trample
+        this.addAbility(TrampleAbility.getInstance());
+        // When Woodfall Primus enters the battlefield, destroy target noncreature permanent.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
+        ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
+        // Persist
+        this.addAbility(new PersistAbility());
     }
 
-    public ElvishPiper(final ElvishPiper card) {
+    public WoodfallPrimus(final WoodfallPrimus card) {
         super(card);
     }
 
     @Override
-    public ElvishPiper copy() {
-        return new ElvishPiper(this);
+    public WoodfallPrimus copy() {
+        return new WoodfallPrimus(this);
     }
 }

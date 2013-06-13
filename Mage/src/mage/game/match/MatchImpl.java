@@ -30,6 +30,7 @@ package mage.game.match;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -56,8 +57,12 @@ public abstract class MatchImpl implements Match {
 
     protected TableEventSource tableEventSource = new TableEventSource();
 
+    protected Date startTime;
+    protected Date endTime;
+
     public MatchImpl(MatchOptions options) {
         this.options = options;
+        startTime = new Date();
     }
 
     @Override
@@ -114,6 +119,7 @@ public abstract class MatchImpl implements Match {
     public boolean isMatchOver() {
         for (MatchPlayer player: players) {
             if (player.getWins() >= options.getWinsNeeded()) {
+                endTime = new Date();
                 return true;
             }
         }
@@ -254,6 +260,16 @@ public abstract class MatchImpl implements Match {
         sb.append("\n").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " win":" wins").append(" needed to win the match\n");
         sb.append("\nGame has started\n");
         return sb.toString();
+    }
+    
+    @Override
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    @Override
+    public Date getEndTime() {
+        return endTime;
     }
 
 }
