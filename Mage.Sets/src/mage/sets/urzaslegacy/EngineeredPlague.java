@@ -41,7 +41,6 @@ import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,11 +57,10 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
 
         this.color.setBlack(true);
 
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("All creatures of the chosen type");
         // As Engineered Plague enters the battlefield, choose a creature type.
-        this.addAbility(new AsEntersBattlefieldAbility(new EngineeredPlagueEntersBattlefieldEffect(filter), "choose a creature type"));
+        this.addAbility(new AsEntersBattlefieldAbility(new EngineeredPlagueEntersBattlefieldEffect(), "choose a creature type"));
         // All creatures of the chosen type get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.WhileOnBattlefield, new FilterEngineeredPlague(), false)));
     }
 
     public EngineeredPlague(final EngineeredPlague card) {
@@ -76,16 +74,13 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
     
     class EngineeredPlagueEntersBattlefieldEffect extends OneShotEffect<EngineeredPlagueEntersBattlefieldEffect> {
 
-        private FilterCreaturePermanent filter;
-        public EngineeredPlagueEntersBattlefieldEffect(FilterCreaturePermanent filter) {
+        public EngineeredPlagueEntersBattlefieldEffect() {
             super(Constants.Outcome.Benefit);
-            this.filter = filter;
             staticText = "As {this} enters the battlefield, choose a creature type";
         }
 
         public EngineeredPlagueEntersBattlefieldEffect(final EngineeredPlagueEntersBattlefieldEffect effect) {
             super(effect);
-            this.filter = effect.filter;
         }
 
         @Override
@@ -100,7 +95,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
                     game.debugMessage("player canceled choosing type. retrying.");
                 }
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
-                filter.add(new SubtypePredicate(typeChoice.getChoice()));
+                game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
                 permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice() + "</i>");
             }
             return false;
@@ -113,7 +108,36 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
 
     }
     
-    
+    class FilterEngineeredPlague extends FilterCreaturePermanent {
+
+        public FilterEngineeredPlague() {
+            super("All creatures of the chosen type");
+        }
+
+        public FilterEngineeredPlague(final FilterEngineeredPlague filter) {
+            super(filter);
+        }
+
+        @Override
+        public FilterEngineeredPlague copy() {
+            return new FilterEngineeredPlague(this);
+        }
+
+        @Override
+        public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {
+            if(super.match(permanent, sourceId, playerId, game)){
+                String subtype = (String) game.getState().getValue(sourceId + "_type");
+                if(subtype != null && !subtype.equals("") && permanent.hasSubtype(subtype)){
+                    return true;
+                }
+            }
+            return false;
+        }
+
+           
+
+    }
+
     
 }
 
