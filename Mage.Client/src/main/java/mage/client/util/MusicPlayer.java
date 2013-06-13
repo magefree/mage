@@ -3,6 +3,8 @@ import java.io.File;
 import java.awt.List;
 import javax.sound.sampled.*;
 import mage.client.constants.Constants;
+import mage.client.dialog.PreferencesDialog;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -11,7 +13,7 @@ import mage.client.constants.Constants;
  */
 
 public class MusicPlayer {
- 
+    private static final Logger log = Logger.getLogger(AudioManager.class);
     String filepath;
     String filename;
     List filelist = new List();
@@ -45,11 +47,14 @@ public class MusicPlayer {
     }
     
     public void play(){
-    	player.stopped = false;
-		player.breaked_out = false;
-		player.breaked = false;
-    	Thread player = new Thread(new playerThread());
-    	player.start();
+        String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MUSICS_ON, "true");
+        if(soundsOn.equals("true")){
+            player.stopped = false;
+            player.breaked_out = false;
+            player.breaked = false;
+            Thread player = new Thread(new playerThread());
+            player.start();
+        }
     }
     
     public static void stopBGM(){
@@ -116,8 +121,7 @@ public class MusicPlayer {
     			volume = (FloatControl)sourceDataLine.getControl(FloatControl.Type.MASTER_GAIN);
     			sourceDataLine.start();
     		}catch(Exception e){	
-    			e.printStackTrace();
-	            System.exit(0);
+    			log.error("Couldn't load file: " + file + " " + e);
     		}
     		
     	}
@@ -139,6 +143,7 @@ public class MusicPlayer {
     				try {
         				Thread.sleep(10);
         			} catch (Exception e) {
+                                    log.error("Thread error: " + e);
         			}
         		}
     			breaked = false;
@@ -161,8 +166,7 @@ public class MusicPlayer {
 	            sourceDataLine.close();
 	            breaked = true;
     		}catch(Exception e){
-    			e.printStackTrace();
-	            System.exit(0);
+                    log.error("Thread error: " + e);
     		}
     	}	
     };   
