@@ -241,6 +241,18 @@ public interface Player extends MageItem, Copyable<Player> {
     boolean choose(Outcome outcome, Choice choice, Game game);
     boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game);
     boolean playMana(ManaCost unpaid, Game game);
+
+    /**
+     * Moves the cards form <cards> to the bottom of the players library.
+     *
+     * @param cards - list of cards that have to be moved
+     * @param game - game
+     * @param anyOrder - true if player can determine the order of the cards
+     * @param source - source ability
+     * @return
+     */
+    boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder);
+
     // set the value for X spells and abilities
     int announceXMana(int min, int max, String message, Game game, Ability ability);
 
