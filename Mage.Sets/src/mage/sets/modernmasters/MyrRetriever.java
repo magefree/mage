@@ -25,50 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.sets.modernmasters;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterArtifactCard;
+import mage.filter.predicate.mageobject.AnotherCardPredicate;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LevelX2
  */
-public class DrownInFilth extends CardImpl<DrownInFilth> {
+public class MyrRetriever extends CardImpl<MyrRetriever> {
 
-    public DrownInFilth(UUID ownerId) {
-        super(ownerId, 67, "Drown in Filth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
-        this.expansionSetCode = "DGM";
-
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
-        // Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        Effect effect = new PutTopCardOfYourLibraryIntoGraveEffect(4);
-        effect.setText("Choose target creature. Put the top four cards of your library into your graveyard");
-        this.getSpellAbility().addEffect(effect);
-        DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn));
+    private static final FilterArtifactCard filter = new FilterArtifactCard("another target artifact card from your graveyard");
+    static {
+        filter.add(new AnotherCardPredicate());
     }
 
-    public DrownInFilth(final DrownInFilth card) {
+    public MyrRetriever(UUID ownerId) {
+        super(ownerId, 210, "Myr Retriever", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}");
+        this.expansionSetCode = "MMA";
+        this.subtype.add("Myr");
+
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // When Myr Retriever dies, return another target artifact card from your graveyard to your hand.
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("return another target artifact card from your graveyard to your hand");
+        Ability ability = new DiesTriggeredAbility(effect);
+        ability.addTarget(new TargetCardInYourGraveyard(filter));
+        this.addAbility(ability);
+    }
+
+    public MyrRetriever(final MyrRetriever card) {
         super(card);
     }
 
     @Override
-    public DrownInFilth copy() {
-        return new DrownInFilth(this);
+    public MyrRetriever copy() {
+        return new MyrRetriever(this);
     }
 }

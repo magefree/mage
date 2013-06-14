@@ -28,7 +28,6 @@
 
 package mage.players;
 
-import java.awt.Event;
 import mage.Constants.AsThoughEffectType;
 import mage.Constants.Outcome;
 import mage.Constants.RangeOfInfluence;
@@ -77,7 +76,9 @@ import java.util.*;
 import mage.Constants;
 import mage.Constants.SpellAbilityType;
 import mage.cards.SplitCard;
+import mage.filter.FilterCard;
 import mage.game.stack.Spell;
+import mage.target.TargetCard;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -604,6 +605,39 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.graveyard.remove(card);
         return true;
     }
+
+
+    @Override
+    public boolean putCardsOnBottomOfLibrary(Cards cards, Game game, Ability source, boolean anyOrder) {
+        if (cards.size() != 0) {
+            if (!anyOrder) {
+                for (UUID cardId : cards) {
+                    Card card =game.getCard(cardId);
+                    if (card != null) {
+                        card.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                    }
+                }
+            } else {
+                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+                target.setRequired(true);
+                while (cards.size() > 1) {
+                    this.choose(Constants.Outcome.Neutral, cards, target, game);
+                    Card chosenCard = cards.get(target.getFirstTarget(), game);
+                    if (chosenCard != null) {
+                        cards.remove(chosenCard);
+                        chosenCard.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                    }
+                    target.clearChosen();
+                }
+                if (cards.size() == 1) {
+                    Card chosenCard = cards.get(cards.iterator().next(), game);
+                    chosenCard.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                }
+            }
+        }
+        return true;
+    }
+
 
     @Override
     public boolean cast(SpellAbility ability, Game game, boolean noMana) {

@@ -25,50 +25,58 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.dragonsmaze;
+package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 import mage.Constants.CardType;
-import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.dynamicvalue.DynamicValue;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
+import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
-import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterLandCard;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.game.Game;
+import mage.target.Target;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
  * @author LevelX2
  */
-public class DrownInFilth extends CardImpl<DrownInFilth> {
+public class DeathDenied extends CardImpl<DeathDenied> {
 
-    public DrownInFilth(UUID ownerId) {
-        super(ownerId, 67, "Drown in Filth", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{B}{G}");
-        this.expansionSetCode = "DGM";
+    public DeathDenied(UUID ownerId) {
+        super(ownerId, 63, "Death Denied", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{X}{B}{B}");
+        this.expansionSetCode = "SOK";
+        this.subtype.add("Arcane");
 
-        this.color.setGreen(true);
         this.color.setBlack(true);
 
-        // Choose target creature. Put the top four cards of your library into your graveyard, then that creature gets -1/-1 until end of turn for each land card in your graveyard.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-        Effect effect = new PutTopCardOfYourLibraryIntoGraveEffect(4);
-        effect.setText("Choose target creature. Put the top four cards of your library into your graveyard");
+        // Return X target creature cards from your graveyard to your hand.
+        Effect effect = new ReturnFromGraveyardToHandTargetEffect();
+        effect.setText("Return X target creature cards from your graveyard to your hand");
         this.getSpellAbility().addEffect(effect);
-        DynamicValue landCards = new SignInversionDynamicValue(new CardsInControllerGraveyardCount(new FilterLandCard()));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(landCards, landCards, Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(1, new FilterCreatureCard()));
+
     }
 
-    public DrownInFilth(final DrownInFilth card) {
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SpellAbility) {
+            ability.getTargets().clear();
+            int xValue = ability.getManaCostsToPay().getX();
+            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1?" creatures":"creature").toString()));
+            ability.addTarget(target);     
+        }
+    }
+
+    public DeathDenied(final DeathDenied card) {
         super(card);
     }
 
     @Override
-    public DrownInFilth copy() {
-        return new DrownInFilth(this);
+    public DeathDenied copy() {
+        return new DeathDenied(this);
     }
 }

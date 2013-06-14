@@ -25,64 +25,70 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.riseoftheeldrazi;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
-import mage.target.common.TargetCreatureOrPlayer;
+import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
+
+
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class ExplosiveRevelation extends CardImpl<ExplosiveRevelation> {
+public class ErraticMutation extends CardImpl<ErraticMutation> {
 
-    public ExplosiveRevelation(UUID ownerId) {
-        super(ownerId, 143, "Explosive Revelation", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{R}{R}");
-        this.expansionSetCode = "ROE";
+    public ErraticMutation(UUID ownerId) {
+        super(ownerId, 41, "Erratic Mutation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
+        this.expansionSetCode = "PLC";
 
-        this.color.setRed(true);
+        this.color.setBlue(true);
 
-        // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
-        this.getSpellAbility().addEffect(new ExplosiveRevelationEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
+        // Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order.
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(new ErraticMutationEffect());
+
     }
 
-    public ExplosiveRevelation(final ExplosiveRevelation card) {
+    public ErraticMutation(final ErraticMutation card) {
         super(card);
     }
 
     @Override
-    public ExplosiveRevelation copy() {
-        return new ExplosiveRevelation(this);
+    public ErraticMutation copy() {
+        return new ErraticMutation(this);
     }
 }
 
-class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect> {
+class ErraticMutationEffect extends OneShotEffect<ErraticMutationEffect> {
 
-    public ExplosiveRevelationEffect() {
-        super(Constants.Outcome.DrawCard);
-        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
+    public ErraticMutationEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Choose target creature. Reveal cards from the top of your library until you reveal a nonland card. That creature gets +X/-X until end of turn, where X is that card's converted mana cost. Put all cards revealed this way on the bottom of your library in any order";
     }
 
-    public ExplosiveRevelationEffect(final ExplosiveRevelationEffect effect) {
+    public ErraticMutationEffect(final ErraticMutationEffect effect) {
         super(effect);
     }
 
     @Override
-    public ExplosiveRevelationEffect copy() {
-        return new ExplosiveRevelationEffect(this);
+    public ErraticMutationEffect copy() {
+        return new ErraticMutationEffect(this);
     }
 
     @Override
@@ -100,28 +106,15 @@ class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect>
             } while (library.size() > 0 && card != null && card.getCardType().contains(CardType.LAND));
             // reveal cards
             if (!cards.isEmpty()) {
-                player.revealCards("Explosive Revelation", cards, game);
+                player.revealCards("Erratic Mutation", cards, game);
             }
             // the nonland card
-            int damage = card.getManaCost().convertedManaCost();
-            // assign damage to target
-            for (UUID targetId: targetPointer.getTargets(game, source)) {
-                Permanent targetedCreature = game.getPermanent(targetId);
-                if (targetedCreature != null) {
-                    targetedCreature.damage(damage, source.getSourceId(), game, true, false);
-                }
-                else {
-                    Player targetedPlayer = game.getPlayer(targetId);
-                    if (targetedPlayer != null) {
-                        targetedPlayer.damage(damage, source.getSourceId(), game, false, true);
-                    }
-                }
-            }
-            // move nonland card to hand
-            card.moveToZone(Constants.Zone.HAND, id, game, true);
-            // remove nonland card from revealed card list
-            cards.remove(card);
-            // put the rest of the cards on the bottom of the library in any order
+            int boostValue = card.getManaCost().convertedManaCost();
+            // unboost target
+            ContinuousEffect effect = new BoostTargetEffect(boostValue, boostValue * -1, Duration.EndOfTurn);
+            effect.setTargetPointer(new FixedTarget(this.getTargetPointer().getFirst(game, source)));
+            game.addEffect(effect, source);
+            // put the cards on the bottom of the library in any order
             return player.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
         return false;
