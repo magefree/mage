@@ -93,7 +93,7 @@ class MistbindCliqueAbility extends ZoneChangeTriggeredAbility<MistbindCliqueAbi
 
     public MistbindCliqueAbility() {
         super(Zone.BATTLEFIELD, Zone.EXILED, new MistbindCliqueTapEffect(), "When a Faerie is championed with {this}, ", false);
-        this.addTarget(new TargetPlayer());
+        this.addTarget(new TargetPlayer(true));
     }
 
     public MistbindCliqueAbility(MistbindCliqueAbility ability) {

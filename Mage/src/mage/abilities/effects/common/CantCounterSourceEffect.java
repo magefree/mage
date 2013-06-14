@@ -71,8 +71,9 @@ public class CantCounterSourceEffect extends ReplacementEffectImpl<CantCounterSo
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.COUNTER) {
             UUID spellId = game.getCard(source.getSourceId()).getSpellAbility().getId();
-            if (event.getTargetId().equals(spellId))
+            if (event.getTargetId().equals(spellId)) {
                 return true;
+            }
         }
         return false;
     }

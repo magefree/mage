@@ -25,60 +25,40 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.returntoravnica;
+package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DrawCardTargetEffect;
+import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.target.common.TargetNonlandPermanent;
+import mage.target.TargetPlayer;
 
 /**
  *
- * @author LevelX2
+ * @author Plopman
  */
-public class AbruptDecay extends CardImpl<AbruptDecay> {
+public class AncestralVision extends CardImpl<AncestralVision> {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
+    public AncestralVision(UUID ownerId) {
+        super(ownerId, 48, "Ancestral Vision", Rarity.RARE, new CardType[]{CardType.SORCERY}, "");
+        this.expansionSetCode = "TSP";
 
-    static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        // Suspend 4-{U}
+        this.addAbility(new SuspendAbility(4, new ManaCostsImpl("U"), this));
+        // Target player draws three cards.
+        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
     }
 
-    public AbruptDecay (UUID ownerId) {
-        super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
-        this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
-        // Abrupt Decay can't be countered by spells or abilities.
-        Effect effect =  new CantCounterSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-
-        // Destroy target nonland permanent with converted mana cost 3 or less.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
-    }
-
-    public AbruptDecay (final AbruptDecay card) {
+    public AncestralVision(final AncestralVision card) {
         super(card);
     }
 
     @Override
-    public AbruptDecay copy() {
-        return new AbruptDecay(this);
+    public AncestralVision copy() {
+        return new AncestralVision(this);
     }
 }

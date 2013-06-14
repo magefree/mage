@@ -25,60 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
-package mage.sets.returntoravnica;
+package mage.sets.commander;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
-import mage.Constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.CounterUnlessPaysEffect;
+import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
-import mage.filter.Filter;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.target.common.TargetNonlandPermanent;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.TargetSpell;
 
 /**
  *
- * @author LevelX2
+ * @author Plopman
  */
-public class AbruptDecay extends CardImpl<AbruptDecay> {
+public class Flusterstorm extends CardImpl<Flusterstorm> {
 
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanent with converted mana cost 3 or less");
-
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
+        filter.add(Predicates.or(new CardTypePredicate(Constants.CardType.INSTANT), new CardTypePredicate(Constants.CardType.SORCERY)));
+    }
+    
+    public Flusterstorm(UUID ownerId) {
+        super(ownerId, 46, "Flusterstorm", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{U}");
+        this.expansionSetCode = "CMD";
+
+        this.color.setBlue(true);
+
+        // Counter target instant or sorcery spell unless its controller pays {1}.
+        this.getSpellAbility().addEffect(new CounterUnlessPaysEffect(new ManaCostsImpl("{1}")));
+        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        // Storm
+        this.addAbility(new StormAbility());
     }
 
-    public AbruptDecay (UUID ownerId) {
-        super(ownerId, 141, "Abrupt Decay", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}{G}");
-        this.expansionSetCode = "RTR";
-        this.color.setGreen(true);
-        this.color.setBlack(true);
-
-        // Abrupt Decay can't be countered by spells or abilities.
-        Effect effect =  new CantCounterSourceEffect();
-        effect.setText("{this} can't be countered by spells or abilities");
-        Ability ability = new SimpleStaticAbility(Zone.STACK,effect);
-        ability.setRuleAtTheTop(true);
-        this.addAbility(ability);
-
-        // Destroy target nonland permanent with converted mana cost 3 or less.
-        this.getSpellAbility().addEffect(new DestroyTargetEffect());
-        this.getSpellAbility().addTarget(new TargetNonlandPermanent(filter));
-    }
-
-    public AbruptDecay (final AbruptDecay card) {
+    public Flusterstorm(final Flusterstorm card) {
         super(card);
     }
 
     @Override
-    public AbruptDecay copy() {
-        return new AbruptDecay(this);
+    public Flusterstorm copy() {
+        return new Flusterstorm(this);
     }
 }

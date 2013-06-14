@@ -55,8 +55,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
             top = this.peek();
             top.resolve(game);
         } finally {
-            if (top != null)
+            if (top != null) {
                 this.remove(top);
+            }
         }
     }
 
@@ -89,11 +90,13 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public StackObject getStackObject(UUID id) {
         for (StackObject stackObject: this) {
             UUID objectId = stackObject.getId();
-            if (objectId.equals(id))
+            if (objectId.equals(id)) {
                 return stackObject;
+            }
             UUID sourceId = stackObject.getSourceId();
-            if (sourceId.equals(id))
+            if (sourceId.equals(id)) {
                 return stackObject;
+            }
         }
         return null;
     }
@@ -101,10 +104,12 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public Spell getSpell(UUID id) {
         for (StackObject stackObject: this) {
             if (stackObject.getId().equals(id)) {
-                if (stackObject instanceof Spell)
+                if (stackObject instanceof Spell) {
                     return (Spell)stackObject;
-                else
+                }
+                else {
                     return null;
+                }
             }
         }
         return null;
