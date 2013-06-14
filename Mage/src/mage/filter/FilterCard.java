@@ -38,7 +38,6 @@ import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -48,7 +47,7 @@ import mage.game.permanent.Permanent;
 public class FilterCard extends FilterObject<Card> {
 
     private static final long serialVersionUID = 1L;
-    protected List<ObjectPlayerPredicate<ObjectPlayer<Permanent>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>();
+    protected List<ObjectPlayerPredicate<ObjectPlayer<Card>>> extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Card>>>();
 
     public FilterCard() {
         super("card");
@@ -60,7 +59,7 @@ public class FilterCard extends FilterObject<Card> {
 
     public FilterCard(FilterCard filter) {
         super(filter);
-        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Permanent>>>(filter.extraPredicates);
+        this.extraPredicates = new ArrayList<ObjectPlayerPredicate<ObjectPlayer<Card>>>(filter.extraPredicates);
     }
 
     public boolean match(Card card, UUID playerId, Game game) {
