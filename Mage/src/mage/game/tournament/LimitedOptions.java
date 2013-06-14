@@ -39,9 +39,18 @@ import java.util.List;
 public class LimitedOptions implements Serializable {
 
     protected List<String> sets = new ArrayList<String>();
+    protected int constructionTime;
 
     public List<String> getSetCodes() {
         return sets;
     }
 
+    public int getConstructionTime() {
+        return constructionTime;
+    }
+
+    public void setConstructionTime(int constructionTime) {
+        this.constructionTime = constructionTime;
+    }
+    
 }

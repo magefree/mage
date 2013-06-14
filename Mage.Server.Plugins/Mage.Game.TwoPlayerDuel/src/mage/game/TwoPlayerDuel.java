@@ -28,19 +28,19 @@
 
 package mage.game;
 
-import mage.game.match.MatchType;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.PhaseStep;
 import mage.Constants.RangeOfInfluence;
+import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 
 public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
-    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-        super(attackOption, range);
+    public TwoPlayerDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
+        super(attackOption, range, freeMulligans);
     }
 
     public TwoPlayerDuel(final TwoPlayerDuel game) {
@@ -78,8 +78,9 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<UUID>();
         for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId))
+            if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
+            }
         }
         return opponents;
     }

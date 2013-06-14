@@ -149,6 +149,11 @@ public abstract class MatchImpl implements Match {
         return options.getWinsNeeded();
     }
 
+    @Override
+    public int getFreeMulligans() {
+        return options.getFreeMulligans();
+    }
+
     protected void initGame(Game game) throws GameException {
         shufflePlayers();
         for (MatchPlayer matchPlayer: this.players) {

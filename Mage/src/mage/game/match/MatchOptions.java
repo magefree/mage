@@ -44,6 +44,7 @@ public class MatchOptions implements Serializable {
     protected MultiplayerAttackOption attackOption;
     protected RangeOfInfluence range;
     protected int winsNeeded;
+    protected int freeMulligans;
     protected String gameType;
     protected String deckType;
     protected boolean limited;
@@ -82,6 +83,13 @@ public class MatchOptions implements Serializable {
         this.winsNeeded = winsNeeded;
     }
 
+    public int getFreeMulligans() {
+        return freeMulligans;
+    }
+
+    public void setFreeMulligans(int freeMulligans) {
+        this.freeMulligans = freeMulligans;
+    }
     public String getGameType() {
         return gameType;
     }

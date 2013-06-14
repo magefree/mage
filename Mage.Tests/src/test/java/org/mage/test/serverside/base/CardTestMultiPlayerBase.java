@@ -44,7 +44,7 @@ public abstract class CardTestMultiPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new FreeForAll(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ONE);
+        Game game = new FreeForAll(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ONE, 0);
 
         playerA = createPlayer(game, playerA, "PlayerA");
         playerB = createPlayer(game, playerB, "PlayerB");
@@ -85,7 +85,7 @@ public abstract class CardTestMultiPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL);
+        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL, 0);
 
         playerA = createNewPlayer("ComputerA");
         playerA.setTestMode(true);

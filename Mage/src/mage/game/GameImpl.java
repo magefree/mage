@@ -137,6 +137,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     protected transient GameStates gameStates = new GameStates();
     protected RangeOfInfluence range;
+    protected int freeMulligans;
+    protected Map<UUID, Integer> usedFreeMulligans = new LinkedHashMap<UUID, Integer>();
     protected MultiplayerAttackOption attackOption;
     protected GameOptions gameOptions;
     protected String startMessage;
@@ -156,9 +158,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public abstract T copy();
 
-    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
+    public GameImpl(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         this.id = UUID.randomUUID();
         this.range = range;
+        this.freeMulligans = freeMulligans;
         this.attackOption = attackOption;
         this.state = new GameState();
         this.actions = new LinkedList<MageAction>();
@@ -174,6 +177,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.startingPlayerId = game.startingPlayerId;
         this.winnerId = game.winnerId;
         this.range = game.range;
+        this.freeMulligans = game.freeMulligans;
         this.attackOption = game.attackOption;
         this.state = game.state.copy();
         // Issue 350
@@ -740,7 +744,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public int mulliganDownTo(UUID playerId) {
         Player player = getPlayer(playerId);
-        return player.getHand().size() -1;
+        int deduction = 1;
+        if (freeMulligans > 0) {
+            if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+                int used = usedFreeMulligans.get(player.getId()).intValue();
+                if (used < freeMulligans ) {
+                    deduction = 0;
+                }
+            } else {
+                deduction = 0;
+            }
+        }
+        return player.getHand().size() - deduction;
     }
 
 
@@ -751,8 +766,25 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         player.getLibrary().addAll(player.getHand().getCards(this), this);
         player.getHand().clear();
         player.shuffleLibrary(this);
-        fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
-        player.drawCards(numCards - 1, this);
+        int deduction = 1;
+        if (freeMulligans > 0) {
+            if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+                int used = usedFreeMulligans.get(player.getId()).intValue();
+                if (used < freeMulligans ) {
+                    deduction = 0;
+                    usedFreeMulligans.put(player.getId(), new Integer(used+1));
+                }
+            } else {
+                deduction = 0;
+                usedFreeMulligans.put(player.getId(), new Integer(1));
+            }
+        }
+        fireInformEvent(new StringBuilder(player.getName())
+                .append(" mulligans")
+                .append(deduction == 0 ? " for free and draws ":" down to ")
+                .append(Integer.toString(numCards - deduction))
+                .append(numCards - deduction == 1? " card":" cards").toString());
+        player.drawCards(numCards - deduction, this);
     }
 
     @Override

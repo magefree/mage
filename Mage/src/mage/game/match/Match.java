@@ -64,6 +64,7 @@ public interface Match {
     Game getGame();
     List<Game> getGames();
     int getWinsNeeded();
+    int getFreeMulligans();
     int getNumGames();
     boolean isDoneSideboarding();
     UUID getChooser();

@@ -606,9 +606,9 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 
 class TableTableModel extends AbstractTableModel {
 
-    public static int ACTION_COLUMN = 8; // column the action is located (starting with 0)
+    public static int ACTION_COLUMN = 9; // column the action is located (starting with 0)
 
-    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Deck Type", "Info", "Status", "Created", "Action"};
+    private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
     private static final DateFormat timeFormatter = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 
@@ -645,14 +645,16 @@ class TableTableModel extends AbstractTableModel {
             case 3:
                 return Integer.toString(tables[arg0].getWins());
             case 4:
-                return tables[arg0].getDeckType();
+                return Integer.toString(tables[arg0].getFreeMulligans());
             case 5:
-                return tables[arg0].getAdditionalInfo();
+                return tables[arg0].getDeckType();
             case 6:
-                return tables[arg0].getTableState().toString();
+                return tables[arg0].getAdditionalInfo();
             case 7:
-                return timeFormatter.format(tables[arg0].getCreateTime());
+                return tables[arg0].getTableState().toString();
             case 8:
+                return timeFormatter.format(tables[arg0].getCreateTime());
+            case 9:
                 switch (tables[arg0].getTableState()) {
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
@@ -680,14 +682,14 @@ class TableTableModel extends AbstractTableModel {
                     default:
                         return "";
                 }
-            case 9:
-                return tables[arg0].isTournament();
             case 10:
+                return tables[arg0].isTournament();
+            case 11:
                 if (!tables[arg0].getGames().isEmpty()) {
                     return tables[arg0].getGames().get(0);
                 }
                 return null;
-            case 11:
+            case 12:
                 return tables[arg0].getTableId();
         }
         return "";
