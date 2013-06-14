@@ -36,12 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
-import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
 import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -58,7 +56,7 @@ public class ExplosiveRevelation extends CardImpl<ExplosiveRevelation> {
 
         // Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card. Explosive Revelation deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.
         this.getSpellAbility().addEffect(new ExplosiveRevelationEffect());
-        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
     public ExplosiveRevelation(final ExplosiveRevelation card) {
@@ -75,7 +73,7 @@ class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect>
 
     public ExplosiveRevelationEffect() {
         super(Constants.Outcome.DrawCard);
-        this.staticText = "Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order.";
+        this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
     }
 
     public ExplosiveRevelationEffect(final ExplosiveRevelationEffect effect) {
@@ -123,25 +121,8 @@ class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect>
             card.moveToZone(Constants.Zone.HAND, id, game, true);
             // remove nonland card from revealed card list
             cards.remove(card);
-            // put the rest of the cards into the bottom of the library in any order
-            if (cards.size() != 0) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
-                target.setRequired(true);
-                while (cards.size() > 1) {
-                    player.choose(Constants.Outcome.Neutral, cards, target, game);
-                    Card chosenCard = cards.get(target.getFirstTarget(), game);
-                    if (chosenCard != null) {
-                        cards.remove(card);
-                        chosenCard.moveToZone(Constants.Zone.LIBRARY, id, game, false);
-                    }
-                    target.clearChosen();
-                }
-                if (cards.size() == 1) {
-                    Card chosenCard = cards.get(cards.iterator().next(), game);
-                    chosenCard.moveToZone(Constants.Zone.LIBRARY, id, game, false);
-                }
-            }
-            return true;
+            // put the rest of the cards on the bottom of the library in any order
+            return player.putCardsOnBottomOfLibrary(cards, game, source, true);
         }
         return false;
     }
