@@ -28,6 +28,8 @@
 
 package mage.game.tournament;
 
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
@@ -37,8 +39,6 @@ import mage.game.match.Match;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  *
@@ -60,8 +60,6 @@ public abstract class TournamentImpl implements Tournament {
 
     protected Date startTime;
     protected Date endTime;
-
-    private static final int CONSTRUCT_TIME = 600;
 
     public TournamentImpl(TournamentOptions options) {
         this.options = options;
@@ -227,8 +225,9 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public boolean isDoneConstructing() {
         for (TournamentPlayer player: this.players.values()) {
-            if (!player.isDoneConstructing())
+            if (!player.isDoneConstructing()) {
                 return false;
+            }
         }
         return true;
     }
@@ -236,8 +235,9 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public boolean allJoined() {
         for (TournamentPlayer player: this.players.values()) {
-            if (!player.isJoined())
+            if (!player.isJoined()) {
                 return false;
+            }
         }
         return true;
     }
@@ -254,8 +254,7 @@ public abstract class TournamentImpl implements Tournament {
 
     @Override
     public void fireConstructEvent(UUID playerId) {
-        TournamentPlayer player = players.get(playerId);
-        playerQueryEventSource.construct(playerId, "Construct", CONSTRUCT_TIME);
+        playerQueryEventSource.construct(playerId, "Construct", getOptions().getLimitedOptions().getConstructionTime());
     }
 
     public void construct() {

@@ -28,15 +28,12 @@
 
 package mage.game;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import mage.Constants.MultiplayerAttackOption;
 import mage.Constants.RangeOfInfluence;
 import mage.game.match.MatchType;
-import mage.players.Player;
 
 /**
  *
@@ -45,18 +42,14 @@ import mage.players.Player;
 public class FreeForAll extends GameImpl<FreeForAll> {
 
     private int numPlayers;
-    private List<UUID> mulliganed = new ArrayList<UUID>();
 
-    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-        super(attackOption, range);
+    public FreeForAll(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
+        super(attackOption, range, freeMulligans);
     }
 
     public FreeForAll(final FreeForAll game) {
         super(game);
         this.numPlayers = game.numPlayers;
-        for (UUID playerId: game.mulliganed) {
-            mulliganed.add(playerId);
-        }
     }
 
     @Override
@@ -87,32 +80,6 @@ public class FreeForAll extends GameImpl<FreeForAll> {
             }
         }
         return opponents;
-    }
-
-    @Override
-    public int mulliganDownTo(UUID playerId) {
-        Player player = getPlayer(playerId);
-        int numCards = player.getHand().size();
-        if (!mulliganed.contains(playerId)) {
-            numCards += 1;
-        }
-        return numCards -1;
-    }
-
-    @Override
-    public void mulligan(UUID playerId) {
-        Player player = getPlayer(playerId);
-        int numCards = player.getHand().size();
-        //record first mulligan and increment card count
-        if (!mulliganed.contains(playerId)) {
-            numCards += 1;
-            mulliganed.add(playerId);
-        }
-        player.getLibrary().addAll(player.getHand().getCards(this), this);
-        player.getHand().clear();
-        player.shuffleLibrary(this);
-        fireInformEvent(player.getName() + " mulligans down to " + Integer.toString(numCards - 1) + " cards");
-        player.drawCards(numCards - 1, this);
     }
 
     @Override

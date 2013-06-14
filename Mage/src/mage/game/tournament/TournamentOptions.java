@@ -39,6 +39,7 @@ import mage.game.match.MatchOptions;
  */
 public class TournamentOptions implements Serializable {
 
+
     protected String name;
     protected String tournamentType;
     protected List<String> playerTypes = new ArrayList<String>();

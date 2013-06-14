@@ -142,8 +142,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseMulligan", game);
         int nextHandSize = game.mulliganDownTo(playerId);
         game.fireAskPlayerEvent(playerId, new StringBuilder("Mulligan ")
-                .append(getHand().size() > nextHandSize?"down":"")
-                .append(" to ").append(nextHandSize)
+                .append(getHand().size() > nextHandSize?"down to ":"for free, draw ")
+                .append(nextHandSize)
                 .append(nextHandSize == 1?" card?":" cards?").toString());
         waitForBooleanResponse();
         if (!abort) {

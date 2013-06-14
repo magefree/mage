@@ -39,8 +39,8 @@ import mage.game.turn.TurnMod;
 
 public class CommanderDuel extends GameImpl<CommanderDuel> {
 
-    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range) {
-        super(attackOption, range);
+    public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
+        super(attackOption, range, freeMulligans);
     }
 
     public CommanderDuel(final CommanderDuel game) {

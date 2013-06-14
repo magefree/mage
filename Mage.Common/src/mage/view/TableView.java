@@ -50,6 +50,7 @@ public class TableView implements Serializable {
     private UUID tableId;
     private String gameType;
     private int wins;
+    private int freeMulligans;
     private String deckType;
     private String tableName;
     private String controllerName;
@@ -73,11 +74,12 @@ public class TableView implements Serializable {
         }
         if (!table.isTournament()) {
             this.wins = table.getMatch().getWinsNeeded();
+            this.freeMulligans = table.getMatch().getFreeMulligans();
             for (Game game: table.getMatch().getGames()) {
                 games.add(game.getId());
             }
             StringBuilder sb = new StringBuilder();
-            StringBuilder sbScore = new StringBuilder("Score: ");
+            StringBuilder sbScore = new StringBuilder();
             for(MatchPlayer matchPlayer: table.getMatch().getPlayers()) {
                 if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
                     sb.append(", ").append(matchPlayer.getPlayer().getName());
@@ -96,6 +98,7 @@ public class TableView implements Serializable {
 
         } else {
             this.wins = table.getTournament().getOptions().getMatchOptions().getWinsNeeded();
+            this.freeMulligans = table.getTournament().getOptions().getMatchOptions().getFreeMulligans();
             StringBuilder sb1 = new StringBuilder();
             for (TournamentPlayer tp: table.getTournament().getPlayers()) {
                 if (!tp.getPlayer().getName().equals(table.getControllerName())) {
@@ -104,8 +107,15 @@ public class TableView implements Serializable {
             }
             this.controllerName += sb1.toString();
             StringBuilder sb = new StringBuilder("Seats: ").append(table.getTournament().getPlayers().size()).append("/").append(table.getNumberOfSeats());
-            if (table.getState().equals(TableState.DUELING)) {
-                sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
+            switch (table.getState()) {
+                case WAITING:
+                case STARTING:
+                    sb.append(" Constr. Time: ").append(table.getTournament().getOptions().getLimitedOptions().getConstructionTime()/60).append(" Min.");
+                    break;
+                case DUELING:
+                    sb.append(" - Running round: ").append(table.getTournament().getRounds().size());
+                    break;
+                default:
             }
             this.additionalInfo = sb.toString();
             this.deckType =  new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getSetsFormatedShort()).toString();
@@ -130,6 +140,10 @@ public class TableView implements Serializable {
 
     public int getWins() {
         return wins;
+    }
+
+    public int getFreeMulligans() {
+        return freeMulligans;
     }
 
     public String getDeckType() {
