@@ -25,6 +25,7 @@ public class MusicPlayer {
     	filelist.removeAll();
     	File filedir = new File(filepath);
     	File[] fileread = filedir.listFiles();
+        if(fileread == null) return false;
     	if(fileread.length == 0)return false;
     	String filename;
     	for(File f:fileread){
