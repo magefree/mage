@@ -399,7 +399,7 @@ public class ContinuousEffects implements Serializable {
                 ReplacementEffect entry = it1.next();
                 if (consumed.containsKey(entry.getId())) {
                     HashSet<UUID> consumedAbilitiesIds = consumed.get(entry.getId());
-                    if (consumedAbilitiesIds.size() == ((HashSet<Ability>) rEffects.get(entry)).size()) {
+                    if (rEffects.get(entry) == null || consumedAbilitiesIds.size() == ((HashSet<Ability>) rEffects.get(entry)).size()) {
                         it1.remove();
                     } else {
                         Iterator it = ((HashSet<Ability>) rEffects.get(entry)).iterator();
