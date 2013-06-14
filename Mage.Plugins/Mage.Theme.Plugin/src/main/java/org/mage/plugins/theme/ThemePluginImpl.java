@@ -42,6 +42,7 @@ public class ThemePluginImpl implements ThemePlugin {
     public boolean loadimages(){
         File filedir = new File(BackgroundDir);
         File[] filelist = filedir.listFiles();
+        if(filelist == null) return false;
         if(filelist.length == 0) return false;
         for(File f:filelist){
             String filename = f.getName().toLowerCase();
@@ -55,14 +56,19 @@ public class ThemePluginImpl implements ThemePlugin {
     } 
     public void applyInGame(Map<String, JComponent> ui) {
         String filename;
+        BufferedImage background;
+       try { 
         if(loadimages()){
             int it = (int)Math.abs(Math.random()*(flist.getItemCount()));
-            filename = BackgroundDir + flist.getItem(it);
+            filename = BackgroundDir + flist.getItem(it);       
+            background = ImageIO.read(new File(filename));
         }else{
             filename = "/dragon.png";
+            InputStream is = this.getClass().getResourceAsStream(filename);
+            if (is == null)
+               throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+            background = ImageIO.read(is);
         }
-        try {
-            BufferedImage background = ImageIO.read(new File(filename));
             
             if (background == null) {
                 throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
