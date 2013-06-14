@@ -123,6 +123,21 @@
             <version>7.6.3</version>
             <!--<scope>runtime</scope>-->
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>mp3spi</artifactId>
+            <version>1.9.5-1</version>
+        </dependency>
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mobicents.external.tritonus</groupId>
+            <artifactId>tritonus_share</artifactId>
+            <version>0.3.6</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Map;
@@ -22,7 +23,9 @@ public class ThemePluginImpl implements ThemePlugin {
 
     private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
-
+    private List flist = new List();
+    private String BackgroundDir = "plugins" + File.separator + "plugin.data" + File.separator 
+                + "background" + File.separator;
     @Init
     public void init() {
     }
@@ -36,17 +39,37 @@ public class ThemePluginImpl implements ThemePlugin {
         return "[Theme plugin, version 0.5]";
     }
 
-    public void applyInGame(Map<String, JComponent> ui) {
-        String filename = "/dragon.png";
-        try {
-            InputStream is = this.getClass().getResourceAsStream(filename);
-
-            if (is == null) {
-                throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+    public boolean loadimages(){
+        File filedir = new File(BackgroundDir);
+        File[] filelist = filedir.listFiles();
+        if(filelist == null) return false;
+        if(filelist.length == 0) return false;
+        for(File f:filelist){
+            String filename = f.getName().toLowerCase();
+            if(filename != null && (filename.endsWith(".png") || filename.endsWith(".jpg") 
+                    || filename.endsWith(".bmp"))){
+                   flist.add(filename);
             }
-
-            BufferedImage background = ImageIO.read(is);
-
+        }
+        if(flist.getItemCount() == 0) return false;
+        return true;
+    } 
+    public void applyInGame(Map<String, JComponent> ui) {
+        String filename;
+        BufferedImage background;
+       try { 
+        if(loadimages()){
+            int it = (int)Math.abs(Math.random()*(flist.getItemCount()));
+            filename = BackgroundDir + flist.getItem(it);       
+            background = ImageIO.read(new File(filename));
+        }else{
+            filename = "/dragon.png";
+            InputStream is = this.getClass().getResourceAsStream(filename);
+            if (is == null)
+               throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+            background = ImageIO.read(is);
+        }
+            
             if (background == null) {
                 throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
             }

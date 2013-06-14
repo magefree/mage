@@ -66,6 +66,7 @@ import mage.client.tournament.TournamentPanel;
 import mage.client.util.EDTExceptionHandler;
 import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.client.util.MusicPlayer;
 import mage.components.ImagePanel;
 import mage.interfaces.Action;
 import mage.interfaces.MageClient;
@@ -540,10 +541,14 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         ArrowBuilder.getBuilder().hideAllPanels();
         if (frame instanceof GamePane) {
             ArrowBuilder.getBuilder().showPanel(((GamePane) frame).getGameId());
+            MusicPlayer.playBGM();
+        }else{
+            MusicPlayer.stopBGM();
         }
     }
 
     public static void deactivate(MagePane frame) {
+        //MusicPlayer.stopBGM();
         frame.setVisible(false);
         MagePane topmost = getTopMost(frame);
         if (activeFrame != frame) {
