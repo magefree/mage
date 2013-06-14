@@ -6,7 +6,6 @@ import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import org.apache.log4j.Logger;
 
-
 /**
  *
  * @author renli
@@ -19,17 +18,14 @@ public class MusicPlayer {
     List filelist = new List();
     static MusicPlayer player = null;
     
-    public MusicPlayer(){
-    	open();
-    }
     
     //open file and add list
-    private void open(){
+    private boolean open(){
     	filepath = Constants.BASE_MUSICS_PATH;
     	filelist.removeAll();
     	File filedir = new File(filepath);
     	File[] fileread = filedir.listFiles();
-    	if(fileread.length == 0){System.out.println("No file readed.");}
+    	if(fileread.length == 0)return false;
     	String filename;
     	for(File f:fileread){
     		filename = f.getName().toLowerCase();		
@@ -37,21 +33,26 @@ public class MusicPlayer {
     			filelist.add(filename);
     		}
     	}
+        if(filelist.getItemCount() == 0) return false;
+        return true;
     }
     
     public static void playBGM(){
+        stopBGM();
     	if(player == null){
     		player = new MusicPlayer();
-    	}
-    	player.play();
+    	}       
+        if(player.open()){
+            player.play();
+        }
     }
     
     public void play(){
         String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MUSICS_ON, "true");
         if(soundsOn.equals("true")){
-            player.stopped = false;
-            player.breaked_out = false;
             player.breaked = false;
+            player.breaked_out = false;
+            player.stopped = false;
             Thread player = new Thread(new playerThread());
             player.start();
         }
@@ -63,32 +64,11 @@ public class MusicPlayer {
     		player.breaked_out = true;
     		player.breaked = true;
     		try {
-				Thread.sleep(100);
-			} catch (Exception e) {
-			}
+		    Thread.sleep(100);
+                } catch (Exception e) {
+                    log.error("Thread error: " + e);
+                }
     	}
-    	System.out.println("stoped");
-    }
-    
-    /* maximum value 6.0206 */
-    public static void addVolume(){
-    	try{
-    	float v = player.volume.getValue();
-    	player.volume.setValue(++v);
-    	System.out.println("Volume: " + v);
-    	}catch(IllegalArgumentException e){
-    		e.printStackTrace();
-    	}
-    }
-    /* minimum value -80 */
-    public static void abstructVolume(){
-    	try{
-        	float v = player.volume.getValue();
-        	player.volume.setValue(--v);
-        	System.out.println("Volume: " + v);
-        	}catch(IllegalArgumentException e){
-        		e.printStackTrace();
-        	}
     }
 
     	public volatile boolean breaked = false;
@@ -134,11 +114,9 @@ public class MusicPlayer {
     		while(!stopped){
     			int it = (int)Math.abs(Math.random()*(filelist.getItemCount()));
     			File file = new File(filepath + filelist.getItem(it));
-    				System.out.println(filepath + filelist.getItem(it));
     			load(file);
     			Thread PlayThread = new Thread(new PlayThread());
     			PlayThread.start();
-    				System.out.println("playing: " + filelist.getItem(it));	
     			while (!(breaked || breaked_out)) {
     				try {
         				Thread.sleep(10);
@@ -162,7 +140,7 @@ public class MusicPlayer {
     				if(len > 0) sourceDataLine.write(tempBuffer, 0, len);
     			}
     			//breaked or stopped
-    			sourceDataLine.drain();
+                    sourceDataLine.flush();
 	            sourceDataLine.close();
 	            breaked = true;
     		}catch(Exception e){

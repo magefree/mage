@@ -548,7 +548,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public static void deactivate(MagePane frame) {
-        MusicPlayer.stopBGM();
+        //MusicPlayer.stopBGM();
         frame.setVisible(false);
         MagePane topmost = getTopMost(frame);
         if (activeFrame != frame) {
