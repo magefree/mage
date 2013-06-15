@@ -50,7 +50,11 @@ public class CopyEffect extends ContinuousEffectImpl<CopyEffect> {
     private UUID sourceId;
 
     public CopyEffect(Permanent target, UUID sourceId) {
-        super(Duration.Custom, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
+        this(Duration.Custom, target, sourceId);
+    }
+    
+    public CopyEffect(Duration duration, Permanent target, UUID sourceId) {
+        super(duration, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.target = target;
         this.sourceId = sourceId;
     }

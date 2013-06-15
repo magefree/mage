@@ -997,6 +997,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
+        return copyPermanent(Duration.Custom, copyFromPermanent, copyToPermanent, source, applier);
+    }
+
+    @Override
+    public Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier) {
         Permanent permanent = copyFromPermanent.copy();
 
         //getState().addCard(permanent);
@@ -1009,7 +1014,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
         Ability newAbility = source.copy();
 
-        CopyEffect newEffect = new CopyEffect(permanent, copyToPermanent.getId());
+        CopyEffect newEffect = new CopyEffect(duration, permanent, copyToPermanent.getId());
         newEffect.newId();
         newEffect.setTimestamp();
         newEffect.init(newAbility, this);

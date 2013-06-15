@@ -27,12 +27,17 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants.*;
+import java.util.UUID;
+import mage.Constants.CardType;
+import mage.Constants.Duration;
+import mage.Constants.Outcome;
+import mage.Constants.Rarity;
+import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,7 +45,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 import mage.util.functions.EmptyApplyToPermanent;
 
-import java.util.UUID;
 
 /**
  *
@@ -106,32 +110,34 @@ class RenegadeDoppelgangerTriggeredAbility extends TriggeredAbilityImpl<Renegade
     }
 }
 
-class RenegadeDoppelgangerEffect extends ContinuousEffectImpl<RenegadeDoppelgangerEffect> {
+class RenegadeDoppelgangerEffect extends OneShotEffect<RenegadeDoppelgangerEffect> {
 
-    RenegadeDoppelgangerEffect() {
-        super(Duration.EndOfTurn, Layer.CopyEffects_1, SubLayer.NA, Outcome.Copy);
+    public RenegadeDoppelgangerEffect() {
+        super(Outcome.Benefit);
+        this.staticText = "have {this} become a copy of that creature until end of turn";
     }
 
-    RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
+    public RenegadeDoppelgangerEffect(final RenegadeDoppelgangerEffect effect) {
         super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
-        Permanent permanent = game.getPermanent(source.getSourceId());
-
-        if (creature == null || permanent == null) {
-            return false;
-        }
-
-        game.copyPermanent(creature, permanent, source, new EmptyApplyToPermanent());
-
-        return true;
     }
 
     @Override
     public RenegadeDoppelgangerEffect copy() {
         return new RenegadeDoppelgangerEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        Permanent targetCreature = game.getPermanent(targetPointer.getFirst(game, source));
+        if (targetCreature == null) {
+            targetCreature = (Permanent) game.getLastKnownInformation(getTargetPointer().getFirst(game, source), Zone.BATTLEFIELD);
+        }
+        if (targetCreature == null || permanent == null) {
+            return false;
+        }
+
+        game.copyPermanent(Duration.EndOfTurn, targetCreature, permanent, source, new EmptyApplyToPermanent());
+        return false;
     }
 }
