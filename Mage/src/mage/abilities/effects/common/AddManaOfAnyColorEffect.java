@@ -32,6 +32,7 @@ import mage.abilities.Ability;
 import mage.choices.ChoiceColor;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -47,7 +48,11 @@ public class AddManaOfAnyColorEffect extends ManaEffect<AddManaOfAnyColorEffect>
     public AddManaOfAnyColorEffect(final int amount) {
         super();
         this.amount = amount;
-        this.staticText = "add " + amount + " mana of any color to your mana pool";
+        this.staticText = new StringBuilder("add ")
+                .append(CardUtil.numberToText(amount))
+                .append(" mana of any ")
+                .append(amount > 1 ?"one ":"")
+                .append("color to your mana pool").toString();
     }
 
     public AddManaOfAnyColorEffect(final AddManaOfAnyColorEffect effect) {
