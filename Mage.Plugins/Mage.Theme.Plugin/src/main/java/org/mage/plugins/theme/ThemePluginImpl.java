@@ -2,6 +2,7 @@ package org.mage.plugins.theme;
 
 import mage.components.ImagePanel;
 import mage.interfaces.plugin.ThemePlugin;
+import mage.client.dialog.PreferencesDialog;
 import net.xeoh.plugins.base.annotations.PluginImplementation;
 import net.xeoh.plugins.base.annotations.events.Init;
 import net.xeoh.plugins.base.annotations.events.PluginLoaded;
@@ -13,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -53,11 +54,33 @@ public class ThemePluginImpl implements ThemePlugin {
         }
         if(flist.getItemCount() == 0) return false;
         return true;
-    } 
+    }
+
     public void applyInGame(Map<String, JComponent> ui) {
-        String filename;
         BufferedImage background;
-       try { 
+       try {
+           
+        if(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_DEFAULT,
+                "true").equals("true")){
+            
+           background = loadbuffer_default();
+           
+        }else if(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE_RANDOM,
+                "true").equals("true")){
+            
+            background = loadbuffer_random();
+            
+        }else if(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_BATTLEFIELD_IMAGE, "") != null){
+            
+            background = loadbuffer_selected();
+            
+        }else{
+            background = loadbuffer_default();
+        }
+        
+        
+        
+        /*   
         if(loadimages()){
             int it = (int)Math.abs(Math.random()*(flist.getItemCount()));
             filename = BackgroundDir + flist.getItem(it);       
@@ -69,9 +92,9 @@ public class ThemePluginImpl implements ThemePlugin {
                throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
             background = ImageIO.read(is);
         }
-            
+        */    
             if (background == null) {
-                throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+                throw new FileNotFoundException("Couldn't find background file in resources.");
             }
 
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
@@ -95,6 +118,37 @@ public class ThemePluginImpl implements ThemePlugin {
             return;
         }
     }
+    
+    
+     private BufferedImage loadbuffer_default() throws IOException{ 
+            String filename = "/dragon.png";
+            BufferedImage res;
+            InputStream is = this.getClass().getResourceAsStream(filename);
+            res = ImageIO.read(is);
+            return res;
+     }
+     
+        private BufferedImage loadbuffer_random() throws IOException{
+            BufferedImage res;
+            if(loadimages()){
+                int it = (int)Math.abs(Math.random()*(flist.getItemCount()));
+                String filename = BackgroundDir + flist.getItem(it);       
+                res = ImageIO.read(new File(filename));
+                return res;
+            }
+            return null;
+        }
+        
+        private BufferedImage loadbuffer_selected() throws IOException{
+            BufferedImage res;
+            String path = PreferencesDialog.getCachedValue(PreferencesDialog.
+                    KEY_BATTLEFIELD_IMAGE, "");
+            if(path != null){
+                res = ImageIO.read(new File(path));
+                return res;
+            }
+            return null;
+        }
 
 
     public JComponent updateTable(Map<String, JComponent> ui) {
@@ -116,13 +170,26 @@ public class ThemePluginImpl implements ThemePlugin {
                 if (background == null) {
                     String filename = "/background.png";
                     try {
-                        InputStream is = this.getClass().getResourceAsStream(filename);
-
-                        if (is == null)
+                        if(PreferencesDialog.getCachedValue(PreferencesDialog.
+                             KEY_BACKGROUND_IMAGE_DEFAULT, "true").equals("true")){ 
+                            InputStream is = this.getClass().getResourceAsStream(filename);
+                            if (is == null)
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-
-                        background = ImageIO.read(is);
-
+                            background = ImageIO.read(is);
+                        }else if(PreferencesDialog.getCachedValue(PreferencesDialog.
+                                KEY_BACKGROUND_IMAGE, "") != null){
+                            String path = PreferencesDialog.getCachedValue(PreferencesDialog.
+                                 KEY_BATTLEFIELD_IMAGE, "");
+                            if(path != null){
+                                    background = ImageIO.read(new File(path));  
+                            }else{
+                                 InputStream is = this.getClass().getResourceAsStream(filename);
+                                 if (is == null)
+                                   throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
+                                 background = ImageIO.read(is);
+                            }    
+                        }
+                        
                         if (background == null)
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                     } catch (Exception e) {
