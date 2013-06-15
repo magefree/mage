@@ -65,6 +65,7 @@ import mage.util.functions.ApplyToPermanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.Constants.Duration;
 
 public interface Game extends MageItem, Serializable {
 
@@ -189,6 +190,8 @@ public interface Game extends MageItem, Serializable {
      * @param applier
      */
     Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
+
+    Permanent copyPermanent(Duration duration, Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
     
     Card copyCard(Card cardToCopy, Ability source, UUID newController);
 
