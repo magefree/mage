@@ -29,7 +29,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
 import mage.MageInt;
@@ -54,7 +53,7 @@ public class KondaLordOfEiganjo extends CardImpl<KondaLordOfEiganjo> {
         this.toughness = new MageInt(3);
         this.addAbility(VigilanceAbility.getInstance());
         this.addAbility(new BushidoAbility(5));
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
     public KondaLordOfEiganjo(final KondaLordOfEiganjo card) {

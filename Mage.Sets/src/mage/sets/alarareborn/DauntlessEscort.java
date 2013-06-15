@@ -35,7 +35,9 @@ import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -59,9 +61,9 @@ public class DauntlessEscort extends CardImpl<DauntlessEscort> {
 
         // Sacrifice Dauntless Escort: Creatures you control are indestructible this turn.
         FilterPermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new IndestructibleAllEffect(filter, Duration.EndOfTurn),
-                new SacrificeSourceCost()));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Creatures you control are indestructible this turn");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new SacrificeSourceCost()));
     }
 
     public DauntlessEscort(final DauntlessEscort card) {

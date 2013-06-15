@@ -29,7 +29,6 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
@@ -38,8 +37,10 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.IndestructibleTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -60,9 +61,9 @@ public class DeathlessAngel extends CardImpl<DeathlessAngel> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {W}{W}: Target creature is indestructible this turn.
+        Effect effect = new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, "Target creature is indestructible this turn");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new IndestructibleTargetEffect(Duration.EndOfTurn),
-                new ManaCostsImpl("{W}{W}"));
+                effect, new ManaCostsImpl("{W}{W}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -28,16 +28,20 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
+import mage.Constants;
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.IndestructibleAllEffect;
-import mage.abilities.effects.common.IndestructibleAttachedEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -67,9 +71,13 @@ public class ShieldOfKaldra extends CardImpl<ShieldOfKaldra> {
         this.subtype.add("Equipment");
 
         // Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(filter)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Equipped creature is indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAttachedEffect(AttachmentType.EQUIPMENT)));
+        effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT, Constants.Duration.WhileOnBattlefield);
+        effect.setText("Equipped creature is indestructible");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Equip {4}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(4)));
     }

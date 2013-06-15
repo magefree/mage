@@ -26,7 +26,6 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.innistrad;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -59,7 +58,7 @@ public class CreepyDoll extends CardImpl<CreepyDoll> {
         this.toughness = new MageInt(1);
 
         // Creepy Doll is indestructible.
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
 
         // Whenever Creepy Doll deals combat damage to a creature, flip a coin. If you win the flip, destroy that creature.
         this.addAbility(new CreepyDollTriggeredAbility());

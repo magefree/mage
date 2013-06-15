@@ -29,7 +29,7 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
+import mage.Constants;
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
 import mage.Constants.Outcome;
@@ -37,7 +37,7 @@ import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.IndestructibleAttachedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
@@ -54,9 +54,10 @@ public class DarksteelPlate extends CardImpl<DarksteelPlate> {
         this.subtype.add("Equipment");
 
         // Darksteel Plate is indestructible.
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         // Equipped creature is indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAttachedEffect(AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT, Constants.Duration.WhileOnBattlefield)));        
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(2)));
     }

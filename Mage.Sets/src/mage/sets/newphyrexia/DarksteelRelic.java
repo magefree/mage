@@ -43,7 +43,7 @@ public class DarksteelRelic extends CardImpl<DarksteelRelic> {
         super(ownerId, 134, "Darksteel Relic", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "NPH";
 
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 
     public DarksteelRelic(final DarksteelRelic card) {

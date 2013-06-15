@@ -70,7 +70,7 @@ public class FalkenrathAristocrat extends CardImpl<FalkenrathAristocrat> {
         // Sacrifice a creature: Falkenrath Aristocrat is indestructible this turn.
         // If the sacrificed creature was a Human, put a +1/+1 counter on Falkenrath Aristocrat.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(new IndestructibleAbility(), Duration.EndOfTurn),
+                new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addEffect(new FalkenrathAristocratEffect());
         this.addAbility(ability);

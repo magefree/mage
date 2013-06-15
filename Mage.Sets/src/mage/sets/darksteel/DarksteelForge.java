@@ -31,10 +31,13 @@ package mage.sets.darksteel;
 import java.util.UUID;
 
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -55,7 +58,9 @@ public class DarksteelForge extends CardImpl<DarksteelForge> {
         this.expansionSetCode = "DST";
 
         // Artifacts you control are indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(filter)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Artifacts you control are indestructible");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
 

@@ -29,7 +29,6 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -59,7 +58,7 @@ public class MyrMatrix extends CardImpl<MyrMatrix> {
         public MyrMatrix (UUID ownerId) {
         super(ownerId, 132, "Myr Matrix", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
         this.expansionSetCode = "DST";
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, false)));
         this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new MyrToken()), new GenericManaCost(5)));
 

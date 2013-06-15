@@ -127,6 +127,6 @@ class MaritLageToken extends Token {
         toughness = new MageInt(20);
         
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
     }
 }

@@ -36,8 +36,10 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
@@ -73,7 +75,10 @@ public class ThatWhichWasTaken extends CardImpl<ThatWhichWasTaken> {
         this.addAbility(ability);
 
         // Each permanent with a divinity counter on it is indestructible.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new IndestructibleAllEffect(filterIndestructible)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterIndestructible, false);
+        effect.setText("Each permanent with a divinity counter on it is indestructible");
+        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+                effect));
 
     }
 

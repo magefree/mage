@@ -36,9 +36,11 @@ import mage.Constants.TargetController;
 import mage.Constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -74,7 +76,10 @@ public class KnightExemplar extends CardImpl<KnightExemplar> {
         indestructibleFilter.add(new AnotherPredicate());
         indestructibleFilter.add(new ControllerPredicate(TargetController.YOU));
         indestructibleFilter.setMessage("Other Knight creatures you control");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAllEffect(indestructibleFilter)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, indestructibleFilter, false);
+        effect.setText("Other Knight creatures you control are indestructible");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
+
     }
 
     public KnightExemplar(final KnightExemplar card) {
