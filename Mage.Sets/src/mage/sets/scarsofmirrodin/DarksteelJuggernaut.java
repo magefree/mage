@@ -29,7 +29,6 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -63,7 +62,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
 
         SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new AttacksEachTurnStaticAbility());
     }
 

@@ -31,8 +31,10 @@ import java.util.UUID;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.PopulateEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -53,7 +55,10 @@ public class RootbornDefenses extends CardImpl<RootbornDefenses> {
         // token you control. Damage and effects that say "destroy" don't destroy 
         // indestructible creatures.)
         this.getSpellAbility().addEffect(new PopulateEffect());
-        this.getSpellAbility().addEffect(new IndestructibleAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false);
+        effect.setText("Creatures you control are indestructible this turn");
+        this.getSpellAbility().addEffect(effect);
+
     }
 
     public RootbornDefenses(final RootbornDefenses card) {

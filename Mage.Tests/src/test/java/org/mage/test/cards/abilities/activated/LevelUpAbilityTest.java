@@ -31,7 +31,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
         Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(new IndestructibleAbility()));
+        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -53,7 +53,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         Assert.assertEquals(3, master.getPower().getValue());
         Assert.assertEquals(3, master.getToughness().getValue());
         Assert.assertFalse(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(master.getAbilities().contains(new IndestructibleAbility()));
+        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -79,7 +79,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         // since now Lifelink will appear
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
         // but still no Indestructible
-        Assert.assertFalse(master.getAbilities().contains(new IndestructibleAbility()));
+        Assert.assertFalse(master.getAbilities().contains(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -103,7 +103,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(new IndestructibleAbility()));
+        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
     /**
@@ -127,7 +127,7 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(new IndestructibleAbility()));
+        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
 }

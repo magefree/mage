@@ -29,7 +29,6 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-
 import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Rarity;
@@ -58,7 +57,7 @@ public class DarksteelColossus extends CardImpl<DarksteelColossus> {
         this.power = new MageInt(11);
         this.toughness = new MageInt(11);
         this.addAbility(TrampleAbility.getInstance());
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new DarksteelColossusEffect(), false));
     }
 

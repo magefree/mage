@@ -30,13 +30,16 @@ package mage.sets.magic2010;
 import java.util.UUID;
 import mage.Constants.AttachmentType;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Outcome;
 import mage.Constants.Rarity;
 import mage.Constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.IndestructibleAttachedEffect;
+import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
 
@@ -59,7 +62,9 @@ public class Indestructibility extends CardImpl<Indestructibility> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
         // Enchanted permanent is indestructible.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IndestructibleAttachedEffect(AttachmentType.AURA)));
+        Effect effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield);
+        effect.setText("Enchanted permanent is indestructible");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public Indestructibility(final Indestructibility card) {

@@ -1108,7 +1108,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                                 || blocker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
                                 || blocker.getAbilities().contains(new ExaltedAbility())
                                 || blocker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                                || blocker.getAbilities().contains(new IndestructibleAbility())
+                                || blocker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())
                                 || !attacker.getAbilities().containsKey(FirstStrikeAbility.getInstance().getId())
                                 || !attacker.getAbilities().containsKey(DoubleStrikeAbility.getInstance().getId())
                                 || !attacker.getAbilities().contains(new ExaltedAbility())) {
@@ -1116,7 +1116,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                         }
                     }
                     if (attacker.getAbilities().containsKey(DeathtouchAbility.getInstance().getId())
-                            || attacker.getAbilities().contains(new IndestructibleAbility())) {
+                            || attacker.getAbilities().containsKey(IndestructibleAbility.getInstance().getId())) {
                         safeToAttack = true;
                     }
                     if (attacker.getAbilities().containsKey(FlyingAbility.getInstance().getId())

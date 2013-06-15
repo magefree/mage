@@ -56,7 +56,7 @@ public class TajicBladeOfTheLegion extends CardImpl<TajicBladeOfTheLegion> {
         this.toughness = new MageInt(2);
 
         // Tajic, Blade of the Legion is indestructible.
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         
         // Battalion - Whenever Tajic and at least two other creatures attack, Tajic gets +5/+5 until end of turn.
         this.addAbility(new BattalionAbility(new BoostSourceEffect(5, 5, Duration.EndOfTurn)));

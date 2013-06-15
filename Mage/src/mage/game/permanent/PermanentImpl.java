@@ -785,6 +785,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public boolean destroy(UUID sourceId, Game game, boolean noRegen) {
         //20091005 - 701.6
         //TODO: handle noRegen
+        
+        if(abilities.containsKey(IndestructibleAbility.getInstance().getId())) {
+            return false;
+        }
+        
         if (!game.replaceEvent(GameEvent.getEvent(EventType.DESTROY_PERMANENT, objectId, sourceId, controllerId, noRegen ? 1 : 0))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, false)) {
                 game.fireEvent(GameEvent.getEvent(EventType.DESTROYED_PERMANENT, objectId, sourceId, controllerId));

@@ -36,14 +36,16 @@ import mage.Constants.Zone;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
-import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
@@ -102,6 +104,8 @@ class ElspethKnightErrantEmblem extends Emblem {
                 new CardTypePredicate(CardType.CREATURE),
                 new CardTypePredicate(CardType.ENCHANTMENT),
                 new CardTypePredicate(CardType.LAND)));
-        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, new IndestructibleAllEffect(filter)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
+        effect.setText("Artifacts, creatures, enchantments, and lands you control are indestructible");
+        this.getAbilities().add(new SimpleStaticAbility(Zone.COMMAND, effect));
     }
 }

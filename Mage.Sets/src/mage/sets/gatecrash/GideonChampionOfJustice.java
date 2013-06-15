@@ -162,7 +162,7 @@ class GideonChampionOfJusticeToken extends Token {
         power = new MageInt(0);
         toughness = new MageInt(0);
 
-        this.addAbility(new IndestructibleAbility());
+        this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.LOYALTY), Constants.Duration.WhileOnBattlefield)));
     }
 

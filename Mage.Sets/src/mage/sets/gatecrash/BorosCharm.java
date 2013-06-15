@@ -30,12 +30,15 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
@@ -59,7 +62,9 @@ public class BorosCharm extends CardImpl<BorosCharm> {
         this.getSpellAbility().addTarget(new TargetPlayer());
         //or permanents you control are indestructible this turn
         Mode mode = new Mode();
-        mode.getEffects().add(new IndestructibleAllEffect(new FilterControlledPermanent(), Constants.Duration.EndOfTurn));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent(), false);
+        effect.setText("permanents you control are indestructible this turn");
+        mode.getEffects().add(effect);
         this.getSpellAbility().addMode(mode);
         //or target creature gains double strike until end of turn.
         Mode mode2 = new Mode();

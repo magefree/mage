@@ -22,7 +22,7 @@ public class MagicAbility {
         put(FlyingAbility.getInstance().getRule(), 50);
         put(new ForestwalkAbility().getRule(), 10);
         put(HasteAbility.getInstance().getRule(), 0);
-        put(new IndestructibleAbility().getRule(), 150);
+        put(IndestructibleAbility.getInstance().getRule(), 150);
         put(InfectAbility.getInstance().getRule(), 60);
         put(IntimidateAbility.getInstance().getRule(), 50);
         put(new IslandwalkAbility().getRule(), 10);

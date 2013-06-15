@@ -84,13 +84,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
         Assert.assertEquals("Power different", 9, master.getPower().getValue());
         Assert.assertEquals("Toughness different", 9, master.getToughness().getValue());
         Assert.assertTrue(master.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertTrue(master.getAbilities().containsRule(new IndestructibleAbility()));
+        Assert.assertTrue(master.getAbilities().containsRule(IndestructibleAbility.getInstance()));
 
         // But copied one should not
         Assert.assertEquals("Power different", 3, masterCopied.getPower().getValue());
         Assert.assertEquals("Toughness different", 3, masterCopied.getToughness().getValue());
         Assert.assertFalse(masterCopied.getAbilities().contains(LifelinkAbility.getInstance()));
-        Assert.assertFalse(masterCopied.getAbilities().containsRule(new IndestructibleAbility()));
+        Assert.assertFalse(masterCopied.getAbilities().containsRule(IndestructibleAbility.getInstance()));
     }
 
     /**

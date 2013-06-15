@@ -30,15 +30,18 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.Constants;
 import mage.Constants.CardType;
+import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
-import mage.abilities.effects.common.IndestructibleAllEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.BattalionAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -68,7 +71,9 @@ public class FrontlineMedic extends CardImpl<FrontlineMedic> {
         this.toughness = new MageInt(3);
 
         // Battalion - Whenever Frontline Medic and at least two other creatures attack, creatures you control are indestructible this turn.
-        this.addAbility(new BattalionAbility(new IndestructibleAllEffect(new FilterControlledCreaturePermanent(), Constants.Duration.EndOfTurn)));
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false);
+        effect.setText("creatures you control are indestructible this turn");
+        this.addAbility(new BattalionAbility(effect));
 
         // Sacrifice Frontline Medic: Counter target spell with {X} in its mana cost unless its controller pays 3.
         Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterUnlessPaysEffect(new GenericManaCost(3)), new SacrificeSourceCost());

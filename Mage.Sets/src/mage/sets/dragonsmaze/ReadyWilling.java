@@ -28,15 +28,15 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
 import mage.Constants.CardType;
 import mage.Constants.Duration;
 import mage.Constants.Rarity;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.IndestructibleAllEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.SplitCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
@@ -60,7 +60,8 @@ public class ReadyWilling extends SplitCard<ReadyWilling> {
         // Creatures you control are indestructible this turn. Untap each creature you control.
         getLeftHalfCard().getColor().setGreen(true);
         getLeftHalfCard().getColor().setWhite(true);
-        getLeftHalfCard().getSpellAbility().addEffect(new IndestructibleAllEffect(new FilterControlledCreaturePermanent("Creatures you controll"), Constants.Duration.EndOfTurn));
+        getLeftHalfCard().getSpellAbility().addEffect(
+                new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures you controll"), false));
         getLeftHalfCard().getSpellAbility().addEffect(new UntapAllControllerEffect(new FilterControlledCreaturePermanent(),"Untap each creature you control"));
 
         // Willing

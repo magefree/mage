@@ -27,27 +27,59 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
+import java.io.ObjectStreamException;
 import mage.Constants.Zone;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.IndestructibleSourceEffect;
 
 /**
+ * OLD RULES:
+ * 700.4. If a permanent is indestructible, rules and effects can't destroy it. (See rule 701.6, "Destroy.")
+ * Such permanents are not destroyed by lethal damage, and they ignore the lethal-damage state-based action
+ * (see rule 704.5g). Rules or effects may cause an indestructible permanent to be sacrificed, put into a
+ * graveyard, or exiled. #
  *
+ *   700.4a Although the text "[This permanent] is indestructible" is an ability, actually being
+ *   indestructible is neither an ability nor a characteristic. It's just something that's true
+ *   about a permanent.
+ *
+ * NEW RULES
+ *
+ *
+ *
+ *
+ *
+ * 
  * @author BetaSteward_at_googlemail.com
  */
+
 public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> {
 
-    public IndestructibleAbility() {
-        super(Zone.BATTLEFIELD, new IndestructibleSourceEffect(Duration.WhileOnBattlefield));
+    private static final IndestructibleAbility fINSTANCE;
+
+    static {
+        fINSTANCE = new IndestructibleAbility();
     }
 
-    private IndestructibleAbility(IndestructibleAbility ability) {
-        super(ability);
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
+
+    public static IndestructibleAbility getInstance() {
+        return fINSTANCE;
+    }
+
+    private IndestructibleAbility() {
+        super(Zone.BATTLEFIELD, null);
     }
 
     @Override
     public IndestructibleAbility copy() {
-        return new IndestructibleAbility(this);
+        return fINSTANCE;
     }
+
+    @Override
+    public String getRule() {
+        return "{this} is indestructible.";
+    }
+
 }
