@@ -13,7 +13,7 @@ public class ChampionsOfKamigawa extends ExpansionSet {
     }
 
     private ChampionsOfKamigawa() {
-        super("Champions of Kamigawa", "CHK", "", "mage.sets.championsofkamigawa",  new GregorianCalendar(2004, 9, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Champions of Kamigawa", "CHK", "mage.sets.championsofkamigawa",  new GregorianCalendar(2004, 9, 1).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Kamigawa";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -44,7 +44,7 @@ public class Torment extends ExpansionSet {
     }
 
     private Torment() {
-        super("Torment", "TOR", "", "mage.sets.torment", new GregorianCalendar(2002, 0, 26).getTime(), Constants.SetType.EXPANSION);
+        super("Torment", "TOR", "mage.sets.torment", new GregorianCalendar(2002, 0, 26).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Odyssey";
         this.parentSet = Odyssey.getInstance();
         this.hasBasicLands = false;

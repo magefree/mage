@@ -46,7 +46,7 @@ public class Weatherlight extends ExpansionSet {
     }
 
     private Weatherlight() {
-        super("Weatherlight", "WTH", "exp_symbol_mtgwth", "mage.sets.weatherlight", new GregorianCalendar(1997, 5, 31).getTime(), SetType.EXPANSION);
+        super("Weatherlight", "WTH", "mage.sets.weatherlight", new GregorianCalendar(1997, 5, 31).getTime(), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;

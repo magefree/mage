@@ -45,7 +45,7 @@ public class Magic2010 extends ExpansionSet {
     }
 
     private Magic2010() {
-        super("Magic 2010", "M10", "seticon_M10", "mage.sets.magic2010", new GregorianCalendar(2009, 6, 17).getTime(), SetType.CORE);
+        super("Magic 2010", "M10", "mage.sets.magic2010", new GregorianCalendar(2009, 6, 17).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

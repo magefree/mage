@@ -44,7 +44,7 @@ public class Coldsnap extends ExpansionSet {
     }
 
     private Coldsnap() {
-        super("Coldsnap", "CSP", "", "mage.sets.coldsnap", new GregorianCalendar(2006, 6, 21).getTime(), Constants.SetType.EXPANSION);
+        super("Coldsnap", "CSP", "mage.sets.coldsnap", new GregorianCalendar(2006, 6, 21).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.hasBoosters = true;
         this.numBoosterLands = 0;

@@ -45,7 +45,7 @@ public class Innistrad extends ExpansionSet {
     }
 
     private Innistrad() {
-        super("Innistrad", "ISD", "seticon_mtgisd", "mage.sets.innistrad", new GregorianCalendar(2011, 9, 30).getTime(), SetType.EXPANSION);
+        super("Innistrad", "ISD", "mage.sets.innistrad", new GregorianCalendar(2011, 9, 30).getTime(), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

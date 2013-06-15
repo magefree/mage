@@ -45,7 +45,7 @@ public class ModernMasters extends ExpansionSet {
     }
 
     private ModernMasters() {
-        super("Modern Masters", "MMA", "", "mage.sets.modernmasters", new GregorianCalendar(2016, 6, 7).getTime(), SetType.REPRINT);
+        super("Modern Masters", "MMA", "mage.sets.modernmasters", new GregorianCalendar(2016, 6, 7).getTime(), SetType.REPRINT);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

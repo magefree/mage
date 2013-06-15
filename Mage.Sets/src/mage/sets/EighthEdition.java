@@ -13,7 +13,7 @@ public class EighthEdition extends ExpansionSet {
     }
 
     private EighthEdition() {
-        super("Eighth Edition", "8ED", "", "mage.sets.eighthedition", new GregorianCalendar(2003, 7, 28).getTime(), SetType.CORE);
+        super("Eighth Edition", "8ED", "mage.sets.eighthedition", new GregorianCalendar(2003, 7, 28).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

@@ -47,7 +47,7 @@ public class MirrodinBesieged extends ExpansionSet {
     }
 
     private MirrodinBesieged() {
-        super("Mirrodin Besieged", "MBS", "seticon_mtgmbs", "mage.sets.mirrodinbesieged", new GregorianCalendar(2011, 1, 4).getTime(), SetType.EXPANSION);
+        super("Mirrodin Besieged", "MBS", "mage.sets.mirrodinbesieged", new GregorianCalendar(2011, 1, 4).getTime(), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBasicLands = false;

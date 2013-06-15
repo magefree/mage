@@ -44,7 +44,7 @@ public class SixthEdition extends ExpansionSet {
     }
 
     private SixthEdition() {
-        super("Sixth Edition", "6ED", "", "mage.sets.sixthedition", new GregorianCalendar(1999, 3, 28).getTime(), Constants.SetType.CORE);
+        super("Sixth Edition", "6ED", "mage.sets.sixthedition", new GregorianCalendar(1999, 3, 28).getTime(), Constants.SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

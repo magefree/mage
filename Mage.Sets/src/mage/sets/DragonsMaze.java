@@ -54,7 +54,7 @@ public class DragonsMaze extends ExpansionSet {
     }
 
     private DragonsMaze() {
-        super("Dragon's Maze", "DGM", "seticon_mtggtc", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), Constants.SetType.EXPANSION);
+        super("Dragon's Maze", "DGM", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;

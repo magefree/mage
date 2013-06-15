@@ -44,7 +44,7 @@ public class MercadianMasques extends ExpansionSet {
     }
 
     private MercadianMasques() {
-        super("Mercadian Masques", "MMQ", "", "mage.sets.mercadianmasques", new GregorianCalendar(1999, 8, 25).getTime(), Constants.SetType.EXPANSION);
+        super("Mercadian Masques", "MMQ", "mage.sets.mercadianmasques", new GregorianCalendar(1999, 8, 25).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Masques";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

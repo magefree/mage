@@ -44,7 +44,7 @@ public class Visions extends ExpansionSet {
     }
 
     private Visions() {
-        super("Visions", "VIS", "", "mage.sets.visions", new GregorianCalendar(1997, 0, 11).getTime(), Constants.SetType.EXPANSION);
+        super("Visions", "VIS", "mage.sets.visions", new GregorianCalendar(1997, 0, 11).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Mirage";
         this.parentSet = Mirage.getInstance();
         this.hasBasicLands = false;

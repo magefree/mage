@@ -44,7 +44,7 @@ public class Prophecy extends ExpansionSet {
     }
 
     private Prophecy() {
-        super("Prophecy", "PCY", "", "mage.sets.prophecy", new GregorianCalendar(2000, 4, 27).getTime(), Constants.SetType.EXPANSION);
+        super("Prophecy", "PCY", "mage.sets.prophecy", new GregorianCalendar(2000, 4, 27).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Masques";
         this.parentSet = MercadianMasques.getInstance();
         this.hasBasicLands = false;

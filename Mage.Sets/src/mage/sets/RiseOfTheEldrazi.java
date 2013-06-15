@@ -45,7 +45,7 @@ public class RiseOfTheEldrazi extends ExpansionSet {
     }
 
     private RiseOfTheEldrazi() {
-        super("Rise of the Eldrazi", "ROE", "seticon_ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), SetType.EXPANSION);
+        super("Rise of the Eldrazi", "ROE", "mage.sets.riseoftheeldrazi", new GregorianCalendar(2010, 3, 17).getTime(), SetType.EXPANSION);
         this.blockName = "Zendikar";
         this.parentSet = Zendikar.getInstance();
         this.hasBoosters = true;

@@ -47,7 +47,7 @@ public class Commander extends ExpansionSet {
     }
 
     private Commander() {
-        super("Magic: The Gathering-Commander", "CMD", "", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        super("Magic: The Gathering-Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
     }
 
 }

@@ -17,7 +17,7 @@ public class RevisedEdition extends ExpansionSet {
     }
 
     private RevisedEdition() {
-        super("Revised Edition", "3ED", "", "mage.sets.revisededition", new GregorianCalendar(1994, 3, 1).getTime(), Constants.SetType.CORE);
+        super("Revised Edition", "3ED", "mage.sets.revisededition", new GregorianCalendar(1994, 3, 1).getTime(), Constants.SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

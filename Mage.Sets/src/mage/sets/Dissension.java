@@ -47,7 +47,7 @@ public class Dissension extends ExpansionSet {
     }
 
     private Dissension() {
-        super("Dissension", "DIS", "", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), Constants.SetType.EXPANSION);
+        super("Dissension", "DIS", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Ravnika";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

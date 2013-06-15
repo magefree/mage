@@ -44,7 +44,7 @@ public class SeventhEdition extends ExpansionSet {
     }
 
     private SeventhEdition() {
-        super("Seventh Edition", "7ED", "", "mage.sets.seventhedition", new GregorianCalendar(2001, 3, 11).getTime(), Constants.SetType.CORE);
+        super("Seventh Edition", "7ED", "mage.sets.seventhedition", new GregorianCalendar(2001, 3, 11).getTime(), Constants.SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

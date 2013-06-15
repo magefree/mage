@@ -44,7 +44,7 @@ public class Lorwyn extends ExpansionSet {
     }
 
     private Lorwyn() {
-        super("Lorwyn", "LRW", "", "mage.sets.lorwyn", new GregorianCalendar(2007, 9, 12).getTime(), SetType.EXPANSION);
+        super("Lorwyn", "LRW", "mage.sets.lorwyn", new GregorianCalendar(2007, 9, 12).getTime(), SetType.EXPANSION);
         this.blockName = "Lorwyn";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

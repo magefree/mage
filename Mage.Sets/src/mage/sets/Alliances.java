@@ -13,7 +13,7 @@ public class Alliances extends ExpansionSet {
     }
 
     private Alliances() {
-        super("Alliances", "ALL", "", "mage.sets.alliances", new GregorianCalendar(1996, 6, 10).getTime(), Constants.SetType.EXPANSION);
+        super("Alliances", "ALL", "mage.sets.alliances", new GregorianCalendar(1996, 6, 10).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Ice Age";
         this.parentSet = IceAge.getInstance();
         this.hasBasicLands = false;

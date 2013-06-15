@@ -13,7 +13,7 @@ public class Onslaught extends ExpansionSet {
     }
 
     private Onslaught() {
-        super("Onslaught", "ONS", "", "mage.sets.onslaught", new GregorianCalendar(2002, 10, 7).getTime(), Constants.SetType.EXPANSION);
+        super("Onslaught", "ONS", "mage.sets.onslaught", new GregorianCalendar(2002, 10, 7).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Onslaught";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

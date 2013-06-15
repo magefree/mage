@@ -33,28 +33,25 @@ import mage.Constants.SetType;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import org.apache.log4j.Logger;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author BetaSteward_at_googlemail.com
  */
 public abstract class ExpansionSet implements Serializable {
 
-    private static final Logger logger = Logger.getLogger(ExpansionSet.class);
-
     protected static Random rnd = new Random();
 
     protected String name;
     protected String code;
-    protected String symbolCode;
     protected Date releaseDate;
     protected ExpansionSet parentSet;
-    protected List<Card> cards;
     protected SetType setType;
-    protected Map<Rarity, List<Card>> rarities;
     protected boolean hasBasicLands = true;
 
     protected String blockName;
@@ -69,10 +66,9 @@ public abstract class ExpansionSet implements Serializable {
 
     protected String packageName;
 
-    public ExpansionSet(String name, String code, String symbolCode, String packageName, Date releaseDate, SetType setType) {
+    public ExpansionSet(String name, String code, String packageName, Date releaseDate, SetType setType) {
         this.name = name;
         this.code = code;
-        this.symbolCode = symbolCode;
         this.releaseDate = releaseDate;
         this.setType = setType;
         this.packageName = packageName;
@@ -84,10 +80,6 @@ public abstract class ExpansionSet implements Serializable {
 
     public String getCode() {
         return code;
-    }
-
-    public String getSymbolCode() {
-        return symbolCode;
     }
 
     public Date getReleaseDate() {

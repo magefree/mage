@@ -45,7 +45,7 @@ public class Planechase2012 extends ExpansionSet {
     }
 
     private Planechase2012() {
-        super("Planechase (2012 Edition)", "PC2", "", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.REPRINT);
+        super("Planechase (2012 Edition)", "PC2", "mage.sets.planechase2012", new GregorianCalendar(2012, 6, 1).getTime(), SetType.REPRINT);
     }
 
 }

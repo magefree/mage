@@ -13,7 +13,7 @@ public class NewPhyrexia extends ExpansionSet {
     }
 
     private NewPhyrexia() {
-        super("New Phyrexia", "NPH", "", "mage.sets.newphyrexia", new GregorianCalendar(2011, 4, 4).getTime(), Constants.SetType.EXPANSION);
+        super("New Phyrexia", "NPH", "mage.sets.newphyrexia", new GregorianCalendar(2011, 4, 4).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.parentSet = ScarsOfMirrodin.getInstance();
         this.hasBoosters = true;

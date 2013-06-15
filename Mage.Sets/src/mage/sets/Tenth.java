@@ -45,7 +45,7 @@ public class Tenth extends ExpansionSet {
     }
 
     private Tenth() {
-        super("Tenth Edition", "10E", "exp_symbol_mtg10e", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
+        super("Tenth Edition", "10E", "mage.sets.tenth", new GregorianCalendar(2007, 6, 14).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

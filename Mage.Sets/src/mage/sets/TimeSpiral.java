@@ -14,7 +14,7 @@ public class TimeSpiral extends ExpansionSet {
     }
 
     private TimeSpiral() {
-        super("Time Spiral", "TSP", "", "mage.sets.timespiral", new GregorianCalendar(2006, 9, 9).getTime(), Constants.SetType.EXPANSION);
+        super("Time Spiral", "TSP", "mage.sets.timespiral", new GregorianCalendar(2006, 9, 9).getTime(), Constants.SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.hasBoosters = true;
         this.numBoosterLands = 1;
