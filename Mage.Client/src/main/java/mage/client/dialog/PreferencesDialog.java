@@ -180,7 +180,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             
         @Override
         public String getDescription() {
-            if(extend.equals(".png") || extend.equals(".jpg")) 
+            if(extend.equals(".png") || extend.equals(".bmp")) 
                 return "Image File(*.png, *.bmp)";
             if(extend.equals(".jpg") || extend.equals(".jpg")) 
                 return "JEGP file(*.jpg,*.jepg)";
@@ -325,7 +325,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showToolTipsInAnyZone)
                     .addComponent(displayBigCardsInHand))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,7 +353,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(nonLandPermanentsInOnePile)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +382,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(230, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Main", jPanel1);
@@ -455,7 +455,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,7 +510,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnYou)
                     .addComponent(jLabel8)
                     .addComponent(checkBoxEndTurnOthers))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Phases", jPanel2);
@@ -565,7 +565,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(saveToZipFiles)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -682,12 +682,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(useDefaultBattleImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(useRandomBattleImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BattlefieldBrowseButton)
                     .addComponent(jLabel15))
-                .addContainerGap())
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -707,8 +707,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Images", jPanel4);
@@ -736,7 +736,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jEnableSounds)
                     .addComponent(jEnableMusics))
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,7 +745,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jEnableSounds)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jEnableMusics)
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(332, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sounds", jPanel22);
@@ -813,7 +813,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -883,7 +883,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1128,11 +1128,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Avatars", jPanel8);
@@ -1166,12 +1166,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitButton)
                     .addComponent(saveButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -1209,8 +1209,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         
         save(prefs, dialog.useDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.useDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.useRandomBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.useDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.useRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
 
         // sounds
         save(prefs, dialog.jEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);

@@ -37,13 +37,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPane1" min="-2" pref="394" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="430" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="exitButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +82,7 @@
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="194" max="32767" attributes="0"/>
+                      <EmptySpace pref="230" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -110,7 +110,7 @@
                               <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
                               <Component id="displayBigCardsInHand" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="166" max="32767" attributes="0"/>
+                          <EmptySpace pref="164" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -164,7 +164,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="nonLandPermanentsInOnePile" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="204" max="32767" attributes="0"/>
+                          <EmptySpace pref="202" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -262,7 +262,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="105" max="32767" attributes="0"/>
+                      <EmptySpace pref="103" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -334,7 +334,7 @@
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="126" max="32767" attributes="0"/>
+                      <EmptySpace pref="162" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -448,8 +448,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jPanel23" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -492,7 +492,7 @@
                                   <Component id="saveToZipFiles" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="15" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -621,13 +621,13 @@
                           <Component id="useDefaultBattleImage" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="useRandomBattleImage" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="9" max="32767" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="BattlefieldImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="BattlefieldBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace pref="21" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -715,7 +715,7 @@
                           <Component id="jEnableSounds" min="-2" max="-2" attributes="0"/>
                           <Component id="jEnableMusics" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="325" max="32767" attributes="0"/>
+                      <EmptySpace pref="323" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -726,7 +726,7 @@
                       <Component id="jEnableSounds" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEnableMusics" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="296" max="32767" attributes="0"/>
+                      <EmptySpace pref="332" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -789,7 +789,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlProxySettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -864,7 +864,7 @@
                                       <Component id="txtPasswordField" alignment="0" max="32767" attributes="1"/>
                                       <Component id="txtProxyUserName" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
                                   </Group>
-                                  <Component id="txtProxyServer" alignment="0" pref="300" max="32767" attributes="1"/>
+                                  <Component id="txtProxyServer" alignment="0" pref="298" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -972,12 +972,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="439" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="437" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="366" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="402" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
