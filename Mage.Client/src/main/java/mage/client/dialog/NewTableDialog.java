@@ -39,7 +39,7 @@ import mage.Constants.RangeOfInfluence;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.components.MageComponents;
-import mage.client.table.TablePlayerPanel;
+import mage.client.table.*;
 import mage.client.util.Event;
 import mage.client.util.Listener;
 import mage.game.match.MatchOptions;
