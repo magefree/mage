@@ -30,9 +30,8 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -42,6 +41,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -57,10 +58,10 @@ public class CullingDais extends CardImpl<CullingDais> {
     public CullingDais (UUID ownerId) {
         super(ownerId, 148, "Culling Dais", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CullingDaisEffect(), new GenericManaCost(1));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CullingDaisEffect(), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -78,7 +79,7 @@ public class CullingDais extends CardImpl<CullingDais> {
 
 class CullingDaisEffect extends OneShotEffect<CullingDaisEffect> {
     CullingDaisEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Draw a card for each charge counter on {this}";
     }
 
@@ -88,7 +89,7 @@ class CullingDaisEffect extends OneShotEffect<CullingDaisEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        Permanent p = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         Player player = game.getPlayer(source.getControllerId());
         if (p != null && player != null) {
             int count = p.getCounters().getCount(CounterType.CHARGE);

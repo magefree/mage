@@ -27,9 +27,8 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -38,6 +37,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -56,10 +57,10 @@ public class WoodenStake extends CardImpl<WoodenStake> {
         this.subtype.add("Equipment");
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
 
         // Whenever equipped creature blocks or becomes blocked by a Vampire, destroy that creature. It can't be regenerated.
         this.addAbility(new WoodenStakeBlocksOrBecomesBlockedTriggeredAbility());
@@ -78,7 +79,7 @@ public class WoodenStake extends CardImpl<WoodenStake> {
 class WoodenStakeBlocksOrBecomesBlockedTriggeredAbility extends TriggeredAbilityImpl<WoodenStakeBlocksOrBecomesBlockedTriggeredAbility> {
 
     public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(true), false);
     }
 
     public WoodenStakeBlocksOrBecomesBlockedTriggeredAbility(final WoodenStakeBlocksOrBecomesBlockedTriggeredAbility ability) {

@@ -27,14 +27,14 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -53,7 +53,7 @@ public class KinsbaileSkirmisher extends CardImpl<KinsbaileSkirmisher> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(1, 1, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

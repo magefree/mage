@@ -28,15 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -77,7 +78,7 @@ public class KreshTheBloodbraided extends CardImpl<KreshTheBloodbraided> {
 class KreshTheBloodbraidedEffect extends OneShotEffect<KreshTheBloodbraidedEffect> {
 
     KreshTheBloodbraidedEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "you may put X +1/+1 counters on Kresh the Bloodbraided, where X is that creature's power";
     }
 

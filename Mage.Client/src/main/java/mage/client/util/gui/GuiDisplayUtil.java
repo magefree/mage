@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.view.CardView;
 

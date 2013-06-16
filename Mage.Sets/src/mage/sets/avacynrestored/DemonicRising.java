@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
@@ -74,7 +73,7 @@ public class DemonicRising extends CardImpl<DemonicRising> {
 class DemonToken extends Token {
     public DemonToken() {
         super("Demon", "a 5/5 black Demon creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;
         subtype.add("Demon");
         power = new MageInt(5);

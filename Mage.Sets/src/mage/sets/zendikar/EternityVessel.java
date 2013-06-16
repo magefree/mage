@@ -28,10 +28,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +39,7 @@ import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -58,7 +59,7 @@ public class EternityVessel extends CardImpl<EternityVessel> {
         this.addAbility(new EntersBattlefieldAbility(new EternityVesselEffect()));
         
         // Landfall - Whenever a land enters the battlefield under your control, you may have your life total become the number of charge counters on Eternity Vessel.
-        this.addAbility(new LandfallAbility(Constants.Zone.BATTLEFIELD, new EternityVesselEffect2(), true));
+        this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new EternityVesselEffect2(), true));
     }
 
     public EternityVessel(final EternityVessel card) {

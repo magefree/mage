@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class FallenEmpires extends ExpansionSet {
     }
 
     private FallenEmpires() {
-        super("Fallen Empires", "FEM", "mage.sets.fallenempires", new GregorianCalendar(1994, 10, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Fallen Empires", "FEM", "mage.sets.fallenempires", new GregorianCalendar(1994, 10, 1).getTime(), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

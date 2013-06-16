@@ -28,15 +28,17 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -73,7 +75,7 @@ public class RapidHybridization extends CardImpl<RapidHybridization> {
 class RapidHybridizationEffect extends OneShotEffect<RapidHybridizationEffect> {
 
     public RapidHybridizationEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "That creature's controller puts a 3/3 green Frog Lizard creature token onto the battlefield";
     }
 
@@ -88,7 +90,7 @@ class RapidHybridizationEffect extends OneShotEffect<RapidHybridizationEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         if (permanent != null) {
             RapidHybridizationToken token = new RapidHybridizationToken();
             token.putOntoBattlefield(1, game, source.getId(), permanent.getControllerId());

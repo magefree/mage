@@ -29,9 +29,7 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
@@ -62,10 +60,10 @@ public class KrallenhordeKiller extends CardImpl<KrallenhordeKiller> {
         this.canTransform = true;
 
         // {3}{G}: Krallenhorde Killer gets +4/+4 until end of turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Constants.Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Krallenhorde Killer.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 

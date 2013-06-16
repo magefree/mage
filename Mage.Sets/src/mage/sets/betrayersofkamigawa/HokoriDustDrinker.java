@@ -28,11 +28,11 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,6 +40,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
+import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -67,7 +70,7 @@ public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerReplacementEffect()));
 
         // At the beginning of each player's upkeep, that player untaps a land he or she controls.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerUntapEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HokoriDustDrinkerUntapEffect(), TargetController.ANY, false));
 
 
     }
@@ -85,7 +88,7 @@ public class HokoriDustDrinker extends CardImpl<HokoriDustDrinker> {
 class HokoriDustDrinkerReplacementEffect extends ReplacementEffectImpl<HokoriDustDrinkerReplacementEffect> {
 
     public HokoriDustDrinkerReplacementEffect() {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
     }
 
     public HokoriDustDrinkerReplacementEffect(final HokoriDustDrinkerReplacementEffect effect) {
@@ -110,7 +113,7 @@ class HokoriDustDrinkerReplacementEffect extends ReplacementEffectImpl<HokoriDus
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP &&
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
                 event.getType() == GameEvent.EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent.getCardType().contains(CardType.LAND)) {

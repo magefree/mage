@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers.dies;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,17 +19,17 @@ public class BloodArtistTest extends CardTestPlayerBase {
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Blood Artist", 2);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Blood Artist", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Blood Artist", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Blood Artist", 1);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Bloodflow Connoisseur", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Bloodflow Connoisseur", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Blood Artist");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Bloodflow Connoisseur");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Blood Artist");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Bloodflow Connoisseur");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 23);

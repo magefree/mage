@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 
@@ -64,7 +65,7 @@ public class Rubblehulk extends CardImpl<Rubblehulk> {
         DynamicValue controlledLands = new PermanentsOnBattlefieldCount(filter);
         
         // Rubblehulk's power and toughness are each equal to the number of lands you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(controlledLands, Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(controlledLands, Duration.EndOfGame)));
 
         // Bloodrush - 1{R}{G}, Discard Rubblehulk: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.
         this.addAbility(new BloodrushAbility("{1}{R}{G}", new BoostTargetEffect(controlledLands,controlledLands, Duration.EndOfTurn)));

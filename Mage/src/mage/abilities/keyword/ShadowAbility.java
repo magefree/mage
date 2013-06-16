@@ -1,10 +1,10 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,7 +44,7 @@ public class ShadowAbility extends EvasionAbility<ShadowAbility> implements Mage
 class ShadowEffect extends RestrictionEffect<ShadowEffect> implements MageSingleton {
 
     public ShadowEffect() {
-        super(Constants.Duration.EndOfGame);
+        super(Duration.EndOfGame);
     }
 
     public ShadowEffect(final ShadowEffect effect) {

@@ -28,9 +28,9 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.SubLayer;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.game.Game;
 

@@ -28,9 +28,9 @@
 package mage.sets.timeshifted;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -88,7 +89,7 @@ class GemstoneMineTriggeredAbility extends StateTriggeredAbility<GemstoneMineTri
     private static final String staticText = "If there are no mining counters on {this}, sacrifice it.";
 
     public GemstoneMineTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     public GemstoneMineTriggeredAbility(GemstoneMineTriggeredAbility ability) {

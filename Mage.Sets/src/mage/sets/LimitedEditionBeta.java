@@ -1,8 +1,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -17,7 +18,7 @@ public class LimitedEditionBeta extends ExpansionSet {
     }
 
     private LimitedEditionBeta() {
-        super("Limited Edition Beta", "LEB", "mage.sets.limitedbeta", new GregorianCalendar(1993, 9, 1).getTime(), Constants.SetType.CORE);
+        super("Limited Edition Beta", "LEB", "mage.sets.limitedbeta", new GregorianCalendar(1993, 9, 1).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

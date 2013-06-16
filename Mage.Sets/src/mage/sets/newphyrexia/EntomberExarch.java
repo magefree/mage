@@ -29,9 +29,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -40,6 +39,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
@@ -93,7 +94,7 @@ class EntomberExarchEffect extends OneShotEffect<EntomberExarchEffect> {
     }
 
     EntomberExarchEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "target opponent reveals his or her hand, you choose a noncreature card from it, then that player discards that card";
     }
 
@@ -108,9 +109,9 @@ class EntomberExarchEffect extends OneShotEffect<EntomberExarchEffect> {
             player.revealCards("Entomber Exarch", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.PICK, filter);
                 target.setRequired(true);
-                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);

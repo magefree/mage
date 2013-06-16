@@ -28,10 +28,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -42,6 +42,7 @@ import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.TurnPhase;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
@@ -100,7 +101,7 @@ class HellkiteChargerEffect extends OneShotEffect<HellkiteChargerEffect> {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     new UntapAllControllerEffect(new FilterAttackingCreature(),"").apply(game, source);
-                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), Constants.TurnPhase.COMBAT, null, false));
+                    game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
                     return true;
                 }
             }

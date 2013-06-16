@@ -30,10 +30,9 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -56,7 +57,7 @@ public class GoldenUrn extends CardImpl<GoldenUrn> {
     public GoldenUrn (UUID ownerId) {
         super(ownerId, 158, "Golden Urn", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "SOM";
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), Constants.TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, true));
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoldenUrnEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -75,7 +76,7 @@ public class GoldenUrn extends CardImpl<GoldenUrn> {
 
 class GoldenUrnEffect extends OneShotEffect<GoldenUrnEffect> {
     public GoldenUrnEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain life equal to the number of charge counters on {this}";
     }
 

@@ -28,9 +28,9 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -61,7 +63,7 @@ public class WildGrowth extends CardImpl<WildGrowth> {
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool.
@@ -82,7 +84,7 @@ class WildGrowthTriggeredAbility extends TriggeredManaAbility<WildGrowthTriggere
 
 
     public WildGrowthTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new WildGrowthEffect());
+        super(Zone.BATTLEFIELD, new WildGrowthEffect());
     }
 
     public WildGrowthTriggeredAbility(final WildGrowthTriggeredAbility ability) {

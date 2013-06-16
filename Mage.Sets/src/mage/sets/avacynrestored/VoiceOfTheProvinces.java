@@ -29,9 +29,8 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -73,7 +72,7 @@ public class VoiceOfTheProvinces extends CardImpl<VoiceOfTheProvinces> {
 class HumanToken extends Token {
     public HumanToken() {
         super("Human", "a 1/1 white Human creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color = ObjectColor.WHITE;
         subtype.add("Human");
         power = new MageInt(1);

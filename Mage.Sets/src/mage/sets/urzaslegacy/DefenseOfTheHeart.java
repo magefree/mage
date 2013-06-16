@@ -29,9 +29,8 @@ package mage.sets.urzaslegacy;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -58,8 +57,8 @@ public class DefenseOfTheHeart extends CardImpl<DefenseOfTheHeart> {
         this.color.setGreen(true);
 
         // At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice Defense of the Heart, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect(), Constants.TargetController.YOU, false);
-        ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), false, Constants.Outcome.PutLandInPlay));
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
+        ability.addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 2, new FilterCreatureCard()), false, Outcome.PutLandInPlay));
         DefenseOfTheHeartCondition contition = new DefenseOfTheHeartCondition();
         this.addAbility(new ConditionalTriggeredAbility(ability, contition, "At the beginning of your upkeep, if an opponent controls three or more creatures, sacrifice {this}, search your library for up to two creature cards, and put those cards onto the battlefield. Then shuffle your library"));
         

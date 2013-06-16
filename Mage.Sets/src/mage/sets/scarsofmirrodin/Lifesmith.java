@@ -29,9 +29,9 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -39,6 +39,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -80,7 +81,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
 
 class LifesmithEffect extends OneShotEffect<LifesmithEffect> {
     LifesmithEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "you may pay {1}. If you do, you gain 3 life";
     }
 

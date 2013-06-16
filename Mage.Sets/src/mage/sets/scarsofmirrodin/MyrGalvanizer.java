@@ -30,11 +30,10 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +43,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -88,7 +88,7 @@ public class MyrGalvanizer extends CardImpl<MyrGalvanizer> {
 class MyrGalvanizerEffect extends OneShotEffect<MyrGalvanizerEffect> {
 
     MyrGalvanizerEffect() {
-        super(Constants.Outcome.Untap);
+        super(Outcome.Untap);
         staticText = "Untap each other Myr you control";
     }
 

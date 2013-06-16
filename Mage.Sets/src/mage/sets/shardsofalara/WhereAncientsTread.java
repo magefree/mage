@@ -28,13 +28,14 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -58,7 +59,7 @@ import mage.target.common.TargetCreatureOrPlayer;
         this.color.setRed(true);
 
         // Whenever a creature with power 5 or greater enters the battlefield under your control, you may have Where Ancients Tread deal 5 damage to target creature or player.
-        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(5), filter, true);
+        Ability ability = new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new DamageTargetEffect(5), filter, true);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

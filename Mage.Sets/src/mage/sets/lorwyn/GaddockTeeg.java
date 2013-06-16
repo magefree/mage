@@ -28,9 +28,8 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,9 +58,9 @@ public class GaddockTeeg extends CardImpl<GaddockTeeg> {
         this.toughness = new MageInt(2);
 
         // Noncreature spells with converted mana cost 4 or greater can't be cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GaddockTeegReplacementEffect4()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffect4()));
         // Noncreature spells with {X} in their mana costs can't be cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GaddockTeegReplacementEffectX()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GaddockTeegReplacementEffectX()));
     }
 
     public GaddockTeeg(final GaddockTeeg card) {
@@ -77,7 +76,7 @@ public class GaddockTeeg extends CardImpl<GaddockTeeg> {
 class GaddockTeegReplacementEffect4 extends ReplacementEffectImpl<GaddockTeegReplacementEffect4> {
 
     public GaddockTeegReplacementEffect4() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with converted mana cost 4 or greater can't be cast. Noncreature spells with {X} in their mana costs can't be cast.";
     }
 
@@ -116,7 +115,7 @@ class GaddockTeegReplacementEffect4 extends ReplacementEffectImpl<GaddockTeegRep
 class GaddockTeegReplacementEffectX extends ReplacementEffectImpl<GaddockTeegReplacementEffectX> {
 
     public GaddockTeegReplacementEffectX() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Noncreature spells with {X} in their mana costs can't be cast.";
     }
 

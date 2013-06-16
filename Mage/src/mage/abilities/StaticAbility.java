@@ -28,8 +28,8 @@
 
 package mage.abilities;
 
-import mage.Constants.AbilityType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.abilities.effects.Effect;
 
 /**

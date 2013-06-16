@@ -38,7 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import mage.Constants.TableState;
+import mage.constants.TableState;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;

@@ -28,10 +28,11 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
 import mage.abilities.effects.OneShotEffect;
@@ -82,7 +83,7 @@ class DisasterRadiusEffect extends OneShotEffect<DisasterRadiusEffect> {
     }
 
     public DisasterRadiusEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "{this} deals X damage to each creature your opponents control, where X is the revealed card's converted mana cost";
     }
 

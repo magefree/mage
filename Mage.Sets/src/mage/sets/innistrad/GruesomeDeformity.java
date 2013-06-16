@@ -29,9 +29,7 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -58,11 +56,11 @@ public class GruesomeDeformity extends CardImpl<GruesomeDeformity> {
         // Enchant creature
         TargetPermanent target = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());
         this.addAbility(ability);
         // Enchanted creature has intimidate.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.AURA)));
     }
 
     public GruesomeDeformity(final GruesomeDeformity card) {

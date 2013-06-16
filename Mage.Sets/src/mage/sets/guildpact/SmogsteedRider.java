@@ -28,14 +28,15 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -52,7 +53,7 @@ public class SmogsteedRider extends CardImpl<SmogsteedRider> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
+        this.addAbility(new AttacksTriggeredAbility(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature(), true), false));
     }
 
     public SmogsteedRider(final SmogsteedRider card) {

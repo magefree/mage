@@ -29,14 +29,14 @@ package mage.sets.returntoravnica;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -55,7 +55,7 @@ public class SelesnyaSentry extends CardImpl<SelesnyaSentry> {
         this.toughness = new MageInt(2);
 
         // {5}{G}: Regenerate Selesnya Sentry.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{5}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{5}{G}")));
     }
 
     public SelesnyaSentry(final SelesnyaSentry card) {

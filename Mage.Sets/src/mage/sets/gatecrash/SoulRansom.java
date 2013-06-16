@@ -28,9 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -64,20 +63,20 @@ public class SoulRansom extends CardImpl<SoulRansom> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.GainControl));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
         
         // Discard two cards: Soul Ransom's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
         Effect effect = new SacrificeSourceEffect();
         effect.setText("{this}'s controller sacrifices it");
-        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, effect , new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
+        SimpleActivatedAbility ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect , new DiscardTargetCost(new TargetCardInHand(2,2, new FilterCard("two cards"))));
         effect = new DrawCardControllerEffect(2);
         effect.setText("Then draws two cards. Only any opponent may activate this ability");
         ability2.addEffect(effect);
-        ability2.setMayActivate(Constants.TargetController.OPPONENT);
+        ability2.setMayActivate(TargetController.OPPONENT);
         this.addAbility(ability2);
 
     }

@@ -30,9 +30,8 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -40,6 +39,8 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,8 +54,8 @@ public class RazorfieldRhino extends CardImpl<RazorfieldRhino> {
         this.subtype.add("Rhino");
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Constants.Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(effect1, MetalcraftCondition.getInstance(), "Metalcraft - Razorfield Rhino gets +2/+2 as long as you control three or more artifacts")));
+        ContinuousEffect effect1 = new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect1, MetalcraftCondition.getInstance(), "Metalcraft - Razorfield Rhino gets +2/+2 as long as you control three or more artifacts")));
     }
 
     public RazorfieldRhino (final RazorfieldRhino card) {

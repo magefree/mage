@@ -28,9 +28,8 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -58,7 +57,7 @@ public class CircleOfProtectionBlack extends CardImpl<CircleOfProtectionBlack> {
         this.color.setWhite(true);
 
         // {1}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CircleOfProtectionBlackEffect() , new ManaCostsImpl("1")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CircleOfProtectionBlackEffect() , new ManaCostsImpl("1")));
     }
 
     public CircleOfProtectionBlack(final CircleOfProtectionBlack card) {
@@ -80,7 +79,7 @@ class CircleOfProtectionBlackEffect extends PreventionEffectImpl<CircleOfProtect
     private TargetSource target;
 
     public CircleOfProtectionBlackEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         target = new TargetSource(filter);
         
         staticText = "The next time a black source of your choice would deal damage to you this turn, prevent that damage";
@@ -103,7 +102,7 @@ class CircleOfProtectionBlackEffect extends PreventionEffectImpl<CircleOfProtect
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Constants.Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
     }
 
     @Override

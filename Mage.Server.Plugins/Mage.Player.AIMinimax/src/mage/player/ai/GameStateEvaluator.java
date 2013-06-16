@@ -29,8 +29,8 @@
 package mage.player.ai;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FirstStrikeAbility;

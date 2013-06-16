@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.OneControlledCreatureCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -39,6 +38,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -56,13 +57,13 @@ public class HomicidalSeclusion extends CardImpl<HomicidalSeclusion> {
         this.color.setBlack(true);
 
         // As long as you control exactly one creature, that creature gets +3/+1 and has lifelink.
-        ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Constants.Duration.WhileOnBattlefield);
+        ContinuousEffect boostEffect = new BoostControlledEffect(3, 1, Duration.WhileOnBattlefield);
         Effect effect = new ConditionalContinousEffect(boostEffect, new OneControlledCreatureCondition(), rule);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
-        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Constants.Duration.WhileOnBattlefield);
+        ContinuousEffect lifelinkEffect = new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield);
         effect = new ConditionalContinousEffect(lifelinkEffect, new OneControlledCreatureCondition(), null);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public HomicidalSeclusion(final HomicidalSeclusion card) {

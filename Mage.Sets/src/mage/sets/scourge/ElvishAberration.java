@@ -28,9 +28,9 @@
 package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.ForestcyclingAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -56,7 +57,7 @@ public class ElvishAberration extends CardImpl<ElvishAberration> {
         this.toughness = new MageInt(5);
 
         // {tap}: Add {G}{G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.GreenMana(3), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.GreenMana(3), new TapSourceCost()));
         // Forestcycling {2}
         this.addAbility(new ForestcyclingAbility(new ManaCostsImpl("{2}")));
     }

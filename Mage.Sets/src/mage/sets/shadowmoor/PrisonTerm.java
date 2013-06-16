@@ -28,10 +28,10 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,7 +60,7 @@ public class PrisonTerm extends CardImpl<PrisonTerm> {
     private static final FilterPermanent filter = new FilterCreaturePermanent("a creature");
     
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public PrisonTerm(UUID ownerId) {
@@ -71,7 +73,7 @@ public class PrisonTerm extends CardImpl<PrisonTerm> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -96,7 +98,7 @@ public class PrisonTerm extends CardImpl<PrisonTerm> {
 class PrisonTermEffect extends OneShotEffect<PrisonTermEffect> {
 
     public PrisonTermEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public PrisonTermEffect(final PrisonTermEffect effect) {

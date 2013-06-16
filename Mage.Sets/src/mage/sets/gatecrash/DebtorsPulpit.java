@@ -28,11 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -68,9 +65,9 @@ public class DebtorsPulpit extends CardImpl<DebtorsPulpit> {
 
 
         // Enchanted land has "{T}: Tap target creature."
-        Ability gainAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TapTargetEffect(), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, Constants.AttachmentType.AURA,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
                 Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Tap target creature.\"")));
 
     }

@@ -29,9 +29,8 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -50,7 +49,7 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifacts you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DarksteelJuggernaut (UUID ownerId) {
@@ -60,8 +59,8 @@ public class DarksteelJuggernaut extends CardImpl<DarksteelJuggernaut> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, effect));
+        SetPowerToughnessSourceEffect effect = new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame);
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new AttacksEachTurnStaticAbility());
     }

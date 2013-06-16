@@ -30,14 +30,14 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -70,7 +70,7 @@ public class Blistergrub extends CardImpl<Blistergrub> {
 class BlistergrubEffect extends OneShotEffect<BlistergrubEffect> {
 
     public BlistergrubEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each opponent loses 2 life";
     }
 

@@ -29,15 +29,15 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -67,7 +67,7 @@ public class KrarkClanShaman extends CardImpl<KrarkClanShaman> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrificed))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filterTargetedCreatures), new SacrificeTargetCost(new TargetControlledPermanent(filterSacrificed))));
     }
 
     public KrarkClanShaman(final KrarkClanShaman card) {

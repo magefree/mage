@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Mirage extends ExpansionSet {
     }
 
     private Mirage() {
-        super("Mirage", "MIR", "mage.sets.mirage", new GregorianCalendar(1996, 8, 21).getTime(), Constants.SetType.EXPANSION);
+        super("Mirage", "MIR", "mage.sets.mirage", new GregorianCalendar(1996, 8, 21).getTime(), SetType.EXPANSION);
         this.blockName = "Mirage";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,8 @@ import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreatureCard;
@@ -82,16 +84,16 @@ public class JaradGolgariLichLord extends CardImpl<JaradGolgariLichLord> {
 
         // Jarad, Golgari Lich Lord gets +1/+1 for each creature card in your graveyard.
         DynamicValue amount = new CardsInControllerGraveyardCount(new FilterCreatureCard());
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Constants.Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(amount, amount, Duration.WhileOnBattlefield));
         this.addAbility(ability);
         
         // {1}{B}{G}, Sacrifice another creature: Each opponent loses life equal to the sacrificed creature's power.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(new SacrificeCostCreaturesPower()),new ManaCostsImpl("{1}{B}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeOpponentsEffect(new SacrificeCostCreaturesPower()),new ManaCostsImpl("{1}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false)));
         this.addAbility(ability);
         
         // Sacrifice a Swamp and a Forest: Return Jarad from your graveyard to your hand.
-        ability = new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
+        ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(),
                 new SacrificeTargetCost(new TargetControlledPermanent(filterSwamp)));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filterForest)));
         this.addAbility(ability);

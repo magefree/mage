@@ -30,9 +30,8 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInHand;
@@ -56,7 +57,7 @@ public class WalkingAtlas extends CardImpl<WalkingAtlas> {
         this.subtype.add("Construct");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new WalkingAtlasEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WalkingAtlasEffect(), new TapSourceCost());
         ability.addTarget(new TargetCardInHand(new FilterLandCard()));
         this.addAbility(ability);
     }
@@ -74,7 +75,7 @@ public class WalkingAtlas extends CardImpl<WalkingAtlas> {
 
 class WalkingAtlasEffect extends OneShotEffect<WalkingAtlasEffect> {
     WalkingAtlasEffect() {
-        super(Constants.Outcome.PutLandInPlay);
+        super(Outcome.PutLandInPlay);
         staticText = "You may put a land card from your hand onto the battlefield";
     }
 
@@ -86,7 +87,7 @@ class WalkingAtlasEffect extends OneShotEffect<WalkingAtlasEffect> {
     public boolean apply(Game game, Ability source) {
         Card c = game.getCard(targetPointer.getFirst(game, source));
         if (c != null) {
-            c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
+            c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
             return true;
         }
         return false;

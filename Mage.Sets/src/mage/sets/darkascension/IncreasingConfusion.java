@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +58,7 @@ public class IncreasingConfusion extends CardImpl<IncreasingConfusion> {
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // Flashback {X}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{U}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{U}"), TimingRule.SORCERY));
     }
 
     public IncreasingConfusion(final IncreasingConfusion card) {
@@ -75,7 +74,7 @@ public class IncreasingConfusion extends CardImpl<IncreasingConfusion> {
 class IncreasingConfusionEffect extends OneShotEffect<IncreasingConfusionEffect> {
 
     public IncreasingConfusionEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Target player puts the top X cards of his or her library into his or her graveyard. If Increasing Confusion was cast from a graveyard, that player puts twice that many cards into his or her graveyard instead";
     }
 
@@ -90,14 +89,14 @@ class IncreasingConfusionEffect extends OneShotEffect<IncreasingConfusionEffect>
             int amount = source.getManaCostsToPay().getX();
             Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
             if (spell != null) {
-                if (spell.getFromZone() == Constants.Zone.GRAVEYARD) {
+                if (spell.getFromZone() == Zone.GRAVEYARD) {
                     amount *= 2;
                 }
                 Card card;
                 for (int i = 0; i < amount; i++) {
                     card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                     } else {
                         break;
                     }

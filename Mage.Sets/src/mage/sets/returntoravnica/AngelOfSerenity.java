@@ -28,11 +28,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -134,7 +134,7 @@ class AngelOfSerenityTriggeredAbility extends ZoneChangeTriggeredAbility<AngelOf
 class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffect> {
 
     public AngelOfSerenityEnterEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.staticText = "you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards";
     }
 
@@ -177,7 +177,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
 class AngelOfSerenityLeaveEffect extends OneShotEffect<AngelOfSerenityLeaveEffect> {
 
     public AngelOfSerenityLeaveEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.staticText = "return the exiled cards to their owners' hands";
     }
 
@@ -196,7 +196,7 @@ class AngelOfSerenityLeaveEffect extends OneShotEffect<AngelOfSerenityLeaveEffec
         if (exZone != null) {
             for (Card card : exZone.getCards(game)) {
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
             }
             return true;

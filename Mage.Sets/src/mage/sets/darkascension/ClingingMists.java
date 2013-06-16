@@ -27,9 +27,8 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.FatefulHourCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
@@ -37,6 +36,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
 import mage.game.Game;
@@ -60,7 +62,7 @@ public class ClingingMists extends CardImpl<ClingingMists> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Constants.Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(filter, Duration.EndOfTurn, true));
 
         // Fateful hour - If you have 5 or less life, tap all attacking creatures. Those creatures don't untap during their controller's next untap step.
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(new ClingingMistsEffect(),
@@ -83,7 +85,7 @@ class ClingingMistsEffect extends OneShotEffect<ClingingMistsEffect> {
     private static final FilterAttackingCreature filter = new FilterAttackingCreature("attacking creatures");
 
     public ClingingMistsEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "tap all attacking creatures. Those creatures don't untap during their controller's next untap step";
     }
 
@@ -112,7 +114,7 @@ class ClingingMistsEffect2 extends ReplacementEffectImpl<ClingingMistsEffect2> {
     protected UUID creatureId;
 
     public ClingingMistsEffect2(UUID creatureId) {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
         this.creatureId = creatureId;
     }
 
@@ -139,7 +141,7 @@ class ClingingMistsEffect2 extends ReplacementEffectImpl<ClingingMistsEffect2> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP &&
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
                 event.getType() == GameEvent.EventType.UNTAP &&
                 event.getTargetId().equals(creatureId)) {
             return true;

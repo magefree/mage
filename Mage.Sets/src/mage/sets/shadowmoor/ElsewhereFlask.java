@@ -29,9 +29,8 @@ package mage.sets.shadowmoor;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -62,7 +61,7 @@ public class ElsewhereFlask extends CardImpl<ElsewhereFlask> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
 
         // Sacrifice Elsewhere Flask: Choose a basic land type. Each land you control becomes that type until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ElsewhereFlaskEffect(), new SacrificeSourceCost()));
     }
 
     public ElsewhereFlask(final ElsewhereFlask card) {
@@ -78,7 +77,7 @@ public class ElsewhereFlask extends CardImpl<ElsewhereFlask> {
 class ElsewhereFlaskEffect extends OneShotEffect<ElsewhereFlaskEffect> {
 
     public ElsewhereFlaskEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "Choose a basic land type.  Each land you control becomes that type until end of turn";
     }
 
@@ -102,7 +101,7 @@ class ElsewhereFlaskEffect extends OneShotEffect<ElsewhereFlaskEffect> {
             choicesSet.add("Mountain");
             choicesSet.add("Island");
             choicesSet.add("Swamp");
-            if (player.choose(Constants.Outcome.Neutral, choices, game)) {
+            if (player.choose(Outcome.Neutral, choices, game)) {
                 game.getState().setValue(source.getSourceId().toString() + "_ElsewhereFlask", choices.getChoice());
             }
             game.addEffect(new ElsewhereFlaskContinuousEffect(), source);
@@ -117,7 +116,7 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlask
     private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
 
     public ElsewhereFlaskContinuousEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Neutral);
+        super(Duration.EndOfTurn, Outcome.Neutral);
     }
 
     public ElsewhereFlaskContinuousEffect(final ElsewhereFlaskContinuousEffect effect) {
@@ -130,20 +129,20 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlask
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         String choice = (String) game.getState().getValue(source.getSourceId().toString() + "_ElsewhereFlask");
         if (choice != null) {
             for (Permanent land : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (land != null) {
                     switch (layer) {
                         case TypeChangingEffects_4:
-                            if (sublayer == Constants.SubLayer.NA) {
+                            if (sublayer == SubLayer.NA) {
                                 land.getSubtype().clear();
                                 land.getSubtype().add(choice);
                             }
                             break;
                         case AbilityAddingRemovingEffects_6:
-                            if (sublayer == Constants.SubLayer.NA) {
+                            if (sublayer == SubLayer.NA) {
                                 land.getAbilities().clear();
                                 if (choice.equals("Forest")) {
                                     land.addAbility(new GreenManaAbility(), id, game);
@@ -176,7 +175,7 @@ class ElsewhereFlaskContinuousEffect extends ContinuousEffectImpl<ElsewhereFlask
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 }

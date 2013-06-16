@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -63,7 +65,7 @@ public class AgadeemOccultist extends CardImpl<AgadeemOccultist> {
         this.toughness = new MageInt(2);
 
         // {tap}: Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AgadeemOccultistEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AgadeemOccultistEffect(), new TapSourceCost()));
 
     }
 
@@ -80,7 +82,7 @@ public class AgadeemOccultist extends CardImpl<AgadeemOccultist> {
 class AgadeemOccultistEffect extends OneShotEffect<AgadeemOccultistEffect> {
 
     public AgadeemOccultistEffect() {
-        super(Constants.Outcome.GainControl);
+        super(Outcome.GainControl);
         this.staticText = "Put target creature card from an opponent's graveyard onto the battlefield under your control if its converted mana cost is less than or equal to the number of Allies you control";
     }
 
@@ -110,12 +112,12 @@ class AgadeemOccultistEffect extends OneShotEffect<AgadeemOccultistEffect> {
 
         if (you != null) {
             if (target.canChoose(source.getControllerId(), game)
-                    && you.choose(Constants.Outcome.GainControl, target, source.getSourceId(), game)) {
+                    && you.choose(Outcome.GainControl, target, source.getSourceId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         if (card.getManaCost().convertedManaCost() <= allycount) {
-                            card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
                             return true;
                         }
                     }

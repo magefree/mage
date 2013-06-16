@@ -28,8 +28,8 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;

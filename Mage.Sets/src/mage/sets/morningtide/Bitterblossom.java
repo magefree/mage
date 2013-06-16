@@ -29,9 +29,8 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.permanent.token.Token;
 
 /**
@@ -53,7 +53,7 @@ public class Bitterblossom extends CardImpl<Bitterblossom> {
         this.supertype.add("Tribal");
         this.subtype.add("Faerie");
         this.color.setBlack(true);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new LoseLifeSourceEffect(1), TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new FaerieToken(), 1));
         this.addAbility(ability);
     }

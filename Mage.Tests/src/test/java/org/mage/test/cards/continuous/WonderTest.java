@@ -1,8 +1,9 @@
 package org.mage.test.cards.continuous;
 
-import mage.Constants;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -20,15 +21,15 @@ public class WonderTest extends CardTestPlayerBase {
      */
     @Test
     public void testCardWithAllConditionsMet() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Wonder");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Runeclaw Bear");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.GRAVEYARD, playerA, "Wonder");
+        addCard(Zone.GRAVEYARD, playerA, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertAbility(playerA, "Elite Vanguard", FlyingAbility.getInstance(), true);
@@ -45,14 +46,14 @@ public class WonderTest extends CardTestPlayerBase {
 
     @Test
     public void testNoIsland() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Wonder");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.GRAVEYARD, playerA, "Wonder");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertAbility(playerA, "Elite Vanguard", FlyingAbility.getInstance(), false);
@@ -60,14 +61,14 @@ public class WonderTest extends CardTestPlayerBase {
 
     @Test
     public void testOtherZones() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Wonder");
-        addCard(Constants.Zone.HAND, playerA, "Wonder");
-        addCard(Constants.Zone.LIBRARY, playerA, "Wonder");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Wonder");
+        addCard(Zone.HAND, playerA, "Wonder");
+        addCard(Zone.LIBRARY, playerA, "Wonder");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertAbility(playerA, "Elite Vanguard", FlyingAbility.getInstance(), false);
@@ -75,15 +76,15 @@ public class WonderTest extends CardTestPlayerBase {
 
     @Test
     public void testDestroyIsland() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Wonder");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Demolish");
+        addCard(Zone.GRAVEYARD, playerA, "Wonder");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Demolish");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Demolish", "Island");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Demolish", "Island");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertAbility(playerA, "Elite Vanguard", FlyingAbility.getInstance(), false);

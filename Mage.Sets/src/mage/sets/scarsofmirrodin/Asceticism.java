@@ -28,9 +28,7 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -56,15 +54,15 @@ public class Asceticism extends CardImpl<Asceticism> {
     private static final FilterStackObject filter = new FilterStackObject("spells or abilities your opponents control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public Asceticism(UUID ownerId) {
         super(ownerId, 110, "Asceticism", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{G}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AsceticismEffect(filter, Constants.Duration.WhileOnBattlefield)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AsceticismEffect(filter, Duration.WhileOnBattlefield)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateTargetEffect(), new ManaCostsImpl("{1}{G}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -84,8 +82,8 @@ class AsceticismEffect extends ReplacementEffectImpl<AsceticismEffect> {
 
     private FilterStackObject filterSource;
 
-    public AsceticismEffect(FilterStackObject filterSource, Constants.Duration duration) {
-        super(duration, Constants.Outcome.Benefit);
+    public AsceticismEffect(FilterStackObject filterSource, Duration duration) {
+        super(duration, Outcome.Benefit);
         this.filterSource = filterSource;
         staticText = "Creatures you control can't be the targets of spells or abilities your opponents control";
     }

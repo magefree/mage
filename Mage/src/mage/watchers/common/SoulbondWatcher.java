@@ -28,11 +28,13 @@
 
 package mage.watchers.common;
 
-import mage.Constants;
-import mage.Constants.WatcherScope;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -70,18 +72,18 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE)) {
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 if (permanent.getAbilities().contains(SoulbondAbility.getInstance())) {
                     Player controller = game.getPlayer(permanent.getControllerId());
                     if (controller != null) {
-                        Cards cards = new CardsImpl(Constants.Zone.PICK);
+                        Cards cards = new CardsImpl(Zone.PICK);
                         cards.add(permanent);
                         controller.lookAtCards("Soulbond", cards, game);
-                        if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond?", game)) {
+                        if (controller.chooseUse(Outcome.Benefit, "Use Soulbond?", game)) {
                             TargetControlledPermanent target = new TargetControlledPermanent(filter);
                             target.setNotTarget(true);
                             if (target.canChoose(permanent.getId(), controller.getId(), game)) {
-                                if (controller.choose(Constants.Outcome.Benefit, target, permanent.getId(), game)) {
+                                if (controller.choose(Outcome.Benefit, target, permanent.getId(), game)) {
                                     Permanent chosen = game.getPermanent(target.getFirstTarget());
                                     if (chosen != null) {
                                         chosen.setPairedCard(permanent.getId());
@@ -103,10 +105,10 @@ public class SoulbondWatcher extends WatcherImpl<SoulbondWatcher> {
                                 controller = game.getPlayer(permanent.getControllerId());
                             }
                             if (controller != null) {
-                                Cards cards = new CardsImpl(Constants.Zone.PICK);
+                                Cards cards = new CardsImpl(Zone.PICK);
                                 cards.add(chosen);
                                 controller.lookAtCards("Soulbond", cards, game);
-                                if (controller.chooseUse(Constants.Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
+                                if (controller.chooseUse(Outcome.Benefit, "Use Soulbond for recent " + permanent.getName() + "?", game)) {
                                     chosen.setPairedCard(permanent.getId());
                                     permanent.setPairedCard(chosen.getId());
                                     break;

@@ -29,9 +29,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,8 +59,8 @@ public class UrabraskTheHidden extends CardImpl<UrabraskTheHidden> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new UrabraskTheHiddenEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new UrabraskTheHiddenEffect()));
     }
 
     public UrabraskTheHidden(final UrabraskTheHidden card) {
@@ -77,7 +75,7 @@ public class UrabraskTheHidden extends CardImpl<UrabraskTheHidden> {
 
 class UrabraskTheHiddenEffect extends ReplacementEffectImpl<UrabraskTheHiddenEffect> {
     UrabraskTheHiddenEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Tap);
+        super(Duration.WhileOnBattlefield, Outcome.Tap);
         staticText = "Creatures your opponents control enter the battlefield tapped";
     }
 

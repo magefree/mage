@@ -29,12 +29,13 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,7 +50,7 @@ public class CumberStone extends CardImpl<CumberStone> {
         this.color.setBlue(true);
 
         // Creatures your opponents control get -1/-0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostOpponentsEffect(-1, 0, Duration.WhileOnBattlefield)));
     }
 
     public CumberStone(final CumberStone card) {

@@ -27,9 +27,8 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.SpellAbilityType;
-import static mage.Constants.SpellAbilityType.SPLIT_LEFT;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -52,12 +53,12 @@ import mage.target.Target;
  */
 public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<FlashbackAbility> {
 
-    private Constants.SpellAbilityType spellAbilityType;
+    private SpellAbilityType spellAbilityType;
     private String abilityName;
 
-    public FlashbackAbility(Cost cost, Constants.TimingRule timingRule) {
+    public FlashbackAbility(Cost cost, TimingRule timingRule) {
         //super(cost, "", new FlashbackEffect(), Constants.Zone.GRAVEYARD);
-        super(Constants.Zone.GRAVEYARD, new FlashbackEffect(), cost);
+        super(Zone.GRAVEYARD, new FlashbackEffect(), cost);
         this.timing = timingRule;
         this.usesStack = false;
         this.spellAbilityType = SpellAbilityType.BASE;
@@ -120,7 +121,7 @@ public class FlashbackAbility extends /*SpellAbility*/ ActivatedAbilityImpl<Flas
 class FlashbackEffect extends OneShotEffect<FlashbackEffect> {
 
     public FlashbackEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "";
     }
 
@@ -184,7 +185,7 @@ class FlashbackTriggeredAbility extends DelayedTriggeredAbility<FlashbackTrigger
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.sourceId)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Constants.Zone.STACK) {
+            if (zEvent.getFromZone() == Zone.STACK) {
                 return true;
             }
         }

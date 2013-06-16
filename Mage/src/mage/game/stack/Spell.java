@@ -28,9 +28,9 @@
 
 package mage.game.stack;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -44,6 +44,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
+import mage.constants.SpellAbilityType;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -55,7 +56,7 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
+
 import mage.cards.SplitCard;
 
 /**
@@ -79,7 +80,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         id = ability.getId();
         this.ability = ability;
         this.ability.setControllerId(controllerId);
-        if (ability.getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+        if (ability.getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
             spellCards.add(((SplitCard) card).getLeftHalfCard());
             spellAbilities.add(((SplitCard) card).getLeftHalfCard().getSpellAbility().copy());
             spellCards.add(((SplitCard) card).getRightHalfCard());

@@ -27,11 +27,10 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.*;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -59,7 +58,7 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public DungeonGeists(UUID ownerId) {
@@ -96,7 +95,7 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
 class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
 
     public DungeonGeistsEffect() {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
         this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists";
     }
 
@@ -136,7 +135,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
         }
 
 
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             if (event.getTargetId().equals(targetPointer.getFirst(game, source))) {
                 return true;
             }

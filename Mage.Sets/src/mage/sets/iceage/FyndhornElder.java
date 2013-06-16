@@ -28,14 +28,15 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,7 +55,7 @@ public class FyndhornElder extends CardImpl<FyndhornElder> {
         this.toughness = new MageInt(1);
 
         // {tap}: Add {G}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 2, 0, 0, 0, 0, 0), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 2, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 
     public FyndhornElder(final FyndhornElder card) {

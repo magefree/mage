@@ -28,9 +28,9 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -65,8 +67,8 @@ public class MatsuTribeBirdstalker extends CardImpl<MatsuTribeBirdstalker> {
         this.addAbility(ability);
 
         // {G}: Matsu-Tribe Birdstalker gains reach until end of turn. (It can block creatures with flying.)
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(ReachAbility.getInstance(), Constants.Duration.EndOfTurn),
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(ReachAbility.getInstance(), Duration.EndOfTurn),
                 new ManaCostsImpl("{G}")));
     }
 

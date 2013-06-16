@@ -28,9 +28,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +40,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -81,7 +83,7 @@ public class VoiceOfResurgence extends CardImpl<VoiceOfResurgence> {
 class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl<VoiceOfResurgenceTriggeredAbility> {
 
     public VoiceOfResurgenceTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new VoiceOfResurgenceToken()), false);
     }
 
     public VoiceOfResurgenceTriggeredAbility(final VoiceOfResurgenceTriggeredAbility ability) {
@@ -102,9 +104,9 @@ class VoiceOfResurgenceTriggeredAbility extends TriggeredAbilityImpl<VoiceOfResu
         // Voice Of Resurgence Dies
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             if (super.getSourceId().equals(event.getTargetId())) {
-                MageObject before = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
-                Constants.Zone after = game.getState().getZone(event.getTargetId());
-                return before != null && after != null && Constants.Zone.GRAVEYARD.match(after);
+                MageObject before = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
+                Zone after = game.getState().getZone(event.getTargetId());
+                return before != null && after != null && Zone.GRAVEYARD.match(after);
             }
         }
         return false;
@@ -125,7 +127,7 @@ class VoiceOfResurgenceToken extends Token {
 
     public VoiceOfResurgenceToken() {
         super("Elemental", "X/X green and white Elemental creature with with \"This creature's power and toughness are each equal to the number of creatures you control.");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setGreen(true);
         color.setWhite(true);
         subtype.add("Elemental");
@@ -134,6 +136,6 @@ class VoiceOfResurgenceToken extends Token {
         FilterControlledPermanent filter = new FilterControlledPermanent("creatures you control");
         filter.add(new CardTypePredicate(CardType.CREATURE));
         DynamicValue creaturesControlled = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(creaturesControlled, Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SetPowerToughnessSourceEffect(creaturesControlled, Duration.EndOfGame)));
     }
 }

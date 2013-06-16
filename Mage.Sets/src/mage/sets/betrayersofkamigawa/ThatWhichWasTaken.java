@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -69,15 +70,15 @@ public class ThatWhichWasTaken extends CardImpl<ThatWhichWasTaken> {
         this.supertype.add("Legendary");
 
         // {4}, {T}: Put a divinity counter on target permanent other than That Which Was Taken.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new GenericManaCost(4));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.DIVINITY.createInstance()), new GenericManaCost(4));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // Each permanent with a divinity counter on it is indestructible.
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filterIndestructible, false);
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filterIndestructible, false);
         effect.setText("Each permanent with a divinity counter on it is indestructible");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 effect));
 
     }

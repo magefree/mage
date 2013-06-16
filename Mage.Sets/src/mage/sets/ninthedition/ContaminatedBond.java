@@ -29,16 +29,16 @@ package mage.sets.ninthedition;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -58,11 +58,11 @@ public class ContaminatedBond extends CardImpl<ContaminatedBond> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Whenever enchanted creature attacks or blocks, its controller loses 3 life.
-        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Constants.Zone.BATTLEFIELD, new LoseLifeSourceEffect(3)));
+        this.addAbility(new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceEffect(3)));
     }
 
     public ContaminatedBond(final ContaminatedBond card) {

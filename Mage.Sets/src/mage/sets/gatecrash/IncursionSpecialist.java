@@ -28,9 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.UnblockableSourceEffect;
@@ -76,8 +75,8 @@ public class IncursionSpecialist extends CardImpl<IncursionSpecialist> {
 class IncursionTriggeredAbility extends TriggeredAbilityImpl<IncursionTriggeredAbility> {
 
     public IncursionTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn));
-        this.addEffect(new UnblockableSourceEffect(Constants.Duration.EndOfTurn));
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn));
+        this.addEffect(new UnblockableSourceEffect(Duration.EndOfTurn));
     }
 
     public IncursionTriggeredAbility(final IncursionTriggeredAbility ability) {
@@ -111,7 +110,7 @@ class IncursionWatcher extends WatcherImpl<IncursionWatcher> {
     int spellCount = 0;
 
     public IncursionWatcher() {
-        super("SecondSpellCast", Constants.WatcherScope.PLAYER);
+        super("SecondSpellCast", WatcherScope.PLAYER);
     }
 
     public IncursionWatcher(final IncursionWatcher watcher) {

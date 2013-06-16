@@ -28,9 +28,9 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +38,7 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.WinGameEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 
 /**
@@ -53,7 +54,7 @@ public class NearDeathExperience extends CardImpl<NearDeathExperience> {
         this.color.setWhite(true);
 
         // At the beginning of your upkeep, if you have exactly 1 life, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), Constants.TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, new OneLifeCondition(), "At the beginning of your upkeep, if you have exactly 1 life, you win the game."));
     }
 

@@ -29,7 +29,7 @@
 package mage.abilities.costs.mana;
 
 import java.util.*;
-import mage.Constants.ColoredManaSymbol;
+import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.VariableCost;

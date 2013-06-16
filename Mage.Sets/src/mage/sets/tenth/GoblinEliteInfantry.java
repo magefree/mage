@@ -29,13 +29,13 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -51,7 +51,7 @@ public class GoblinEliteInfantry extends CardImpl<GoblinEliteInfantry> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(-1, -1, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new BlocksOrBecomesBlockedTriggeredAbility(new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false));
     }
 
     public GoblinEliteInfantry(final GoblinEliteInfantry card) {

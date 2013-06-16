@@ -29,10 +29,10 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,7 +63,7 @@ public class SilhanaLedgewalker extends CardImpl<SilhanaLedgewalker> {
         this.addAbility(HexproofAbility.getInstance());
 
         // Silhana Ledgewalker can't be blocked except by creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SilhanaLedgewalkerEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SilhanaLedgewalkerEffect()));
     }
 
     public SilhanaLedgewalker (final SilhanaLedgewalker card) {

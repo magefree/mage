@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +38,8 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -79,7 +81,7 @@ public class KazuulTyrantOfTheCliffs extends CardImpl<KazuulTyrantOfTheCliffs> {
 class KazuulTyrantOfTheCliffsTriggeredAbility extends TriggeredAbilityImpl<KazuulTyrantOfTheCliffsTriggeredAbility> {
 
     public KazuulTyrantOfTheCliffsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new KazuulTyrantOfTheCliffsEffect(new GenericManaCost(3)));
+        super(Zone.BATTLEFIELD, new KazuulTyrantOfTheCliffsEffect(new GenericManaCost(3)));
     }
 
     public KazuulTyrantOfTheCliffsTriggeredAbility(final KazuulTyrantOfTheCliffsTriggeredAbility ability) {
@@ -118,7 +120,7 @@ class KazuulTyrantOfTheCliffsEffect extends OneShotEffect<KazuulTyrantOfTheCliff
     private static OgreToken token = new OgreToken();
 
     public KazuulTyrantOfTheCliffsEffect(Cost cost) {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.cost = cost;
     }
 

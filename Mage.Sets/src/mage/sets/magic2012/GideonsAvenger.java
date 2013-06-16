@@ -29,13 +29,13 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -71,7 +71,7 @@ public class GideonsAvenger extends CardImpl<GideonsAvenger> {
 
 class GideonsAvengerTriggeredAbility extends TriggeredAbilityImpl<GideonsAvengerTriggeredAbility> {
     GideonsAvengerTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
     }
 
     GideonsAvengerTriggeredAbility(final GideonsAvengerTriggeredAbility ability) {

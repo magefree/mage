@@ -30,12 +30,12 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -55,7 +55,7 @@ public class GuardiansPledge extends CardImpl<GuardiansPledge> {
         super(ownerId, 22, "Guardians' Pledge", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{W}{W}");
         this.expansionSetCode = "M12";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Constants.Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 2, Duration.EndOfTurn, filter, false));
     }
 
     public GuardiansPledge (final GuardiansPledge card) {

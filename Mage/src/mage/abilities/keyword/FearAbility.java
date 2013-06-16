@@ -28,8 +28,8 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.Duration;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
@@ -91,7 +91,7 @@ class FearEffect extends RestrictionEffect<FearEffect> implements MageSingleton 
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) || blocker.getColor().isBlack()) {
+        if (blocker.getCardType().contains(CardType.ARTIFACT) || blocker.getColor().isBlack()) {
             return true;
         }
         return false;

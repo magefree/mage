@@ -29,15 +29,17 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -75,7 +77,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect<OtherworldlyJourneyEffect>
     private static final String effectText = "Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it";
 
     OtherworldlyJourneyEffect ( ) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -93,7 +95,7 @@ class OtherworldlyJourneyEffect extends OneShotEffect<OtherworldlyJourneyEffect>
                 if (exile != null && !exile.isEmpty()) {
                     //create delayed triggered ability
                     AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
-                            new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
+                            new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, "return that card to the battlefield under its owner's control with a +1/+1 counter on it"));
                     delayedAbility.setSourceId(source.getSourceId());
                     delayedAbility.setControllerId(source.getControllerId());
                     AddCountersTargetEffect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());

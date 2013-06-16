@@ -30,14 +30,14 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -71,7 +71,7 @@ public class InfectiousHorror extends CardImpl<InfectiousHorror> {
 class InfectiousHorrorEffect extends OneShotEffect<InfectiousHorrorEffect> {
 
     InfectiousHorrorEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each opponent loses 2 life";
     }
 

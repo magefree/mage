@@ -29,12 +29,13 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -71,7 +72,7 @@ public class HomingLightning extends CardImpl<HomingLightning> {
 class HomingLightningEffect extends OneShotEffect<HomingLightningEffect> {
 
     public HomingLightningEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals 4 damage to target creature and each other creature with the same name as that creature";
     }
 

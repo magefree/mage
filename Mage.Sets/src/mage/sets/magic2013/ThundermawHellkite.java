@@ -28,9 +28,9 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +39,8 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -55,7 +57,7 @@ public class ThundermawHellkite extends CardImpl<ThundermawHellkite> {
     
     static {
         filter.add(new AbilityPredicate(FlyingAbility.class));
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public ThundermawHellkite(UUID ownerId) {
@@ -94,7 +96,7 @@ class TapAllEffect extends OneShotEffect<TapAllEffect> {
     private FilterCreaturePermanent filter;
 
     public TapAllEffect(FilterCreaturePermanent filter) {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         this.filter = filter;
         staticText = "Tap those creatures";
     }

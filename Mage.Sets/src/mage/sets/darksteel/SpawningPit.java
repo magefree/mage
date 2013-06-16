@@ -30,9 +30,8 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.counters.common.ChargeCounter;
 import mage.game.permanent.token.Token;
@@ -56,8 +56,8 @@ public class SpawningPit extends CardImpl<SpawningPit> {
     public SpawningPit (UUID ownerId) {
         super(ownerId, 141, "Spawning Pit", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "DST";
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(new ChargeCounter()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningPitToken()), new GenericManaCost(1));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(new ChargeCounter()), new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SpawningPitToken()), new GenericManaCost(1));
         ability.addCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(2)));
         this.addAbility(ability);
     }

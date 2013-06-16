@@ -29,9 +29,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
@@ -62,11 +60,11 @@ public class GlisteningOil extends CardImpl<GlisteningOil> {
         this.color.setBlack(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), Constants.AttachmentType.AURA)));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.AURA)));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GlisteningOilEffect(), TargetController.YOU, false));
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
 
@@ -82,7 +80,7 @@ public class GlisteningOil extends CardImpl<GlisteningOil> {
 
 class GlisteningOilEffect extends OneShotEffect<GlisteningOilEffect> {
     GlisteningOilEffect() {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         staticText = "put a -1/-1 counter on enchanted creature";
     }
 

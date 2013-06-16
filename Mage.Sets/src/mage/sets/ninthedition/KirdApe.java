@@ -28,15 +28,17 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -63,8 +65,8 @@ public class KirdApe extends CardImpl<KirdApe> {
         this.toughness = new MageInt(1);
 
         // Kird Ape gets +1/+2 as long as you control a Forest.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
-                new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Constants.Duration.WhileOnBattlefield),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter), rule)));
     }
 

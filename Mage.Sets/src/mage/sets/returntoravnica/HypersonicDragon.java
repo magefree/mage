@@ -27,9 +27,7 @@
  */
 package mage.sets.returntoravnica;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +60,7 @@ public class HypersonicDragon extends CardImpl<HypersonicDragon> {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // You may cast sorcery spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new HypersonicDragonEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HypersonicDragonEffect()));
     }
 
     public HypersonicDragon(final HypersonicDragon card) {
@@ -78,7 +76,7 @@ public class HypersonicDragon extends CardImpl<HypersonicDragon> {
 class HypersonicDragonEffect extends AsThoughEffectImpl<HypersonicDragonEffect> {
 
     public HypersonicDragonEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast sorcery spells as though they had flash";
     }
 

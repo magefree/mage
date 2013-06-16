@@ -28,10 +28,13 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -41,8 +44,8 @@ import mage.game.permanent.Permanent;
 public class AddCardSubTypeTargetEffect extends ContinuousEffectImpl<AddCardSubTypeTargetEffect> {
     private String addedSubType;
 
-    public AddCardSubTypeTargetEffect(String addedSubType, Constants.Duration duration) {
-        super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+    public AddCardSubTypeTargetEffect(String addedSubType, Duration duration) {
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedSubType = addedSubType;
     }
 

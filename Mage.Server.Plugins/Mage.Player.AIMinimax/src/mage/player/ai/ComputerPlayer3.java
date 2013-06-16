@@ -28,8 +28,8 @@
 
 package mage.player.ai;
 
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.combat.Combat;

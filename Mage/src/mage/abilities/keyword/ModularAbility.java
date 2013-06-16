@@ -1,9 +1,8 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -58,7 +57,7 @@ public class ModularAbility extends DiesTriggeredAbility {
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
+        MageObject before = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
         if (before != null && ((Permanent) before).getCounters().getCount(CounterType.P1P1) > 0) {
             return super.checkTrigger(event, game);
         }
@@ -80,7 +79,7 @@ public class ModularAbility extends DiesTriggeredAbility {
 class ModularStaticAbility extends StaticAbility<ModularStaticAbility> {
 
     public ModularStaticAbility(int amount) {
-        super(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
+        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
     }
 
     public ModularStaticAbility(final ModularStaticAbility ability) {

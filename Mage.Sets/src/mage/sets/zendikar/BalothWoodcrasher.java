@@ -28,10 +28,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
@@ -55,7 +55,7 @@ public class BalothWoodcrasher extends CardImpl<BalothWoodcrasher> {
         this.toughness = new MageInt(4);
 
         LandfallAbility ability = new LandfallAbility(new BoostSourceEffect(4, 4, Duration.EndOfTurn), false);
-        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
     }
 

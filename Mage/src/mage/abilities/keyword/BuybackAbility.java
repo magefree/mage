@@ -28,8 +28,8 @@
 package mage.abilities.keyword;
 
 import java.util.Iterator;
-import mage.Constants;
-import mage.Constants.Zone;
+
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -41,6 +41,8 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -115,7 +117,7 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
             if (player != null) {
                 this.resetBuyback();
                 if (buybackCost != null) {
-                    if (player.chooseUse(Constants.Outcome.Benefit,new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), game)) {
+                    if (player.chooseUse(Outcome.Benefit,new StringBuilder("Pay ").append(buybackCost.getText(false)).append(" ?").toString(), game)) {
                         buybackCost.activate();
                         for (Iterator it = ((Costs) buybackCost).iterator(); it.hasNext();) {
                             Cost cost = (Cost) it.next();
@@ -163,7 +165,7 @@ public class BuybackAbility extends StaticAbility<BuybackAbility> implements Opt
 class BuybackEffect extends ReplacementEffectImpl<BuybackEffect> {
 
     public BuybackEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "When {this} resolves and you payed buyback costs, put it back to hand instead";
     }
 

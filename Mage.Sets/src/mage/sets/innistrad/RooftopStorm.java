@@ -27,10 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,7 +56,7 @@ public class RooftopStorm extends CardImpl<RooftopStorm> {
         this.color.setBlue(true);
 
         // You may pay {0} rather than pay the mana cost for Zombie creature spells you cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RooftopStormCostReductionEffect()));
 
     }
 
@@ -78,7 +75,7 @@ class RooftopStormCostReductionEffect extends CostModificationEffectImpl<Rooftop
     private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
 
     RooftopStormCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 

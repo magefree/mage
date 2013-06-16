@@ -28,8 +28,8 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;

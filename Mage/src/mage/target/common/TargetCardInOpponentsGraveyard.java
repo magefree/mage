@@ -1,8 +1,8 @@
 package mage.target.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;
@@ -23,7 +23,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOppon
     }
 
     public TargetCardInOpponentsGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter, boolean allFromOneOpponent) {
-        super(minNumTargets, maxNumTargets, Constants.Zone.GRAVEYARD, filter);
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
         this.targetName = filter.getMessage();
         this.allFromOneOpponent = allFromOneOpponent;
     }
@@ -36,7 +36,7 @@ public class TargetCardInOpponentsGraveyard extends TargetCard<TargetCardInOppon
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         Card card = game.getCard(id);
-        if (card != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD) {
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (game.getOpponents(source.getControllerId()).contains(card.getOwnerId())) {
                 if (allFromOneOpponent && !targets.isEmpty()) {
                     Card firstCard = game.getCard((UUID)targets.keySet().iterator().next());

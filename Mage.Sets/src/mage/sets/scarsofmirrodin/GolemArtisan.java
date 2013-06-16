@@ -27,9 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -77,13 +75,13 @@ public class GolemArtisan extends CardImpl<GolemArtisan> {
         this.toughness = new MageInt(3);
 
         // {2}: Target artifact creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new GenericManaCost(2));
         Target target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
 
         // {2}: Target artifact creature gains your choice of flying, trample, or haste until end of turn.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GolemArtisanEffect(), new GenericManaCost(2));
         target = new TargetPermanent(filter);
         ability.addTarget(target);
         this.addAbility(ability);
@@ -102,7 +100,7 @@ public class GolemArtisan extends CardImpl<GolemArtisan> {
 
 class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
     GolemArtisanEffect() {
-        super(Constants.Outcome.AddAbility);
+        super(Outcome.AddAbility);
         staticText = "Target artifact creature gains your choice of flying, trample, or haste until end of turn";
     }
 
@@ -123,7 +121,7 @@ class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
             abilities.add(TrampleAbility.getInstance().getRule());
             abilities.add(HasteAbility.getInstance().getRule());
             abilityChoice.setChoices(abilities);
-            playerControls.choose(Constants.Outcome.AddAbility, abilityChoice, game);
+            playerControls.choose(Outcome.AddAbility, abilityChoice, game);
 
             String chosen = abilityChoice.getChoice();
             Ability ability = null;
@@ -136,7 +134,7 @@ class GolemArtisanEffect extends OneShotEffect<GolemArtisanEffect> {
             }
 
             if (ability != null) {
-                ContinuousEffect effect = new GainAbilityTargetEffect(ability, Constants.Duration.EndOfTurn);
+                ContinuousEffect effect = new GainAbilityTargetEffect(ability, Duration.EndOfTurn);
                 game.addEffect(effect, source);
                 return true;
             }

@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.CipherEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -77,7 +79,7 @@ class VoidwalkEffect extends OneShotEffect<VoidwalkEffect> {
     private static final String effectText = "Exile target creature. Return it to the battlefield under its owner's control at the beginning of the next end step";
 
     VoidwalkEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -93,7 +95,7 @@ class VoidwalkEffect extends OneShotEffect<VoidwalkEffect> {
             if (permanent != null) {
                 if (permanent.moveToExile(source.getSourceId(), "Voidwalk", source.getSourceId(), game)) {
                     if (card != null) {
-                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));
+                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(card.getOwnerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

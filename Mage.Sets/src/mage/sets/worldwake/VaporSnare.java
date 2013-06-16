@@ -28,9 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -63,15 +62,15 @@ public class VaporSnare extends CardImpl<VaporSnare> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
 
         // At the beginning of your upkeep, sacrifice Vapor Snare unless you return a land you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporSnareEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new VaporSnareEffect(), TargetController.YOU, false));
     }
 
     public VaporSnare(final VaporSnare card) {
@@ -90,7 +89,7 @@ class VaporSnareEffect extends OneShotEffect<VaporSnareEffect> {
     private static final String effectText = "sacrifice {this} unless you return a land you control to its owner's hand";
 
     VaporSnareEffect( ) {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         staticText = effectText;
     }
 
@@ -105,12 +104,12 @@ class VaporSnareEffect extends OneShotEffect<VaporSnareEffect> {
         TargetPermanent target = new TargetPermanent(1, 1, filter, false);
 
         if (target.canChoose(player.getId(), game)) {
-            player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
 
             if ( permanent != null ) {
                 targetChosen = true;
-                permanent.moveToZone(Constants.Zone.HAND, this.getId(), game, false);
+                permanent.moveToZone(Zone.HAND, this.getId(), game, false);
             }
         }
 

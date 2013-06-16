@@ -29,10 +29,9 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -70,12 +70,12 @@ public class EightAndAHalfTale extends CardImpl<EightAndAHalfTale> {
         this.toughness = new MageInt(2);
         // {1}{W}: Target permanent you control gains protection from white until end of turn.
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(
-                new ProtectionAbility(filter), Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
+                new ProtectionAbility(filter), Duration.EndOfTurn), new ManaCostsImpl("{1}{W}"));
         ability1.addTarget(new TargetControlledPermanent());
         this.addAbility(ability1);
         // {1}: Target spell or permanent becomes white until end of turn.
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SetCardColorTargetEffect(
-                ObjectColor.WHITE, Constants.Duration.EndOfTurn),new ManaCostsImpl("{1}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetCardColorTargetEffect(
+                ObjectColor.WHITE, Duration.EndOfTurn),new ManaCostsImpl("{1}"));
         ability2.addTarget(new TargetSpellOrPermanent());
         this.addAbility(ability2);
 

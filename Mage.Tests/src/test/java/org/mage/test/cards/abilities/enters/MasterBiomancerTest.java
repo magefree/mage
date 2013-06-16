@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.enters;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -25,13 +26,13 @@ public class MasterBiomancerTest extends CardTestPlayerBase {
 
         // a creature enters the battlefield and gets a counter for each point of power of Master Biomancer
         
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
-        addCard(Constants.Zone.HAND, playerA, "Mindeye Drake");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+        addCard(Zone.HAND, playerA, "Mindeye Drake");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -52,18 +53,18 @@ public class MasterBiomancerTest extends CardTestPlayerBase {
         // doubled by Corpsejack Menace (when he ist cast, his own ability will not apply)
         // http://blogs.magicjudges.org/rulestips/2013/03/corpsejack-menace-and-master-biomancer/
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Corpsejack Menace");
-        addCard(Constants.Zone.HAND, playerA, "Mindeye Drake");
+        addCard(Zone.HAND, playerA, "Corpsejack Menace");
+        addCard(Zone.HAND, playerA, "Mindeye Drake");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Corpsejack Menace");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Corpsejack Menace");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

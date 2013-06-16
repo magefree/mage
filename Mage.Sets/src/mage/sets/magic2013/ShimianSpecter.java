@@ -28,9 +28,9 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -88,7 +90,7 @@ class ShimianSpecterEffect extends OneShotEffect<ShimianSpecterEffect> {
     }
 
     public ShimianSpecterEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library";
     }
 
@@ -103,24 +105,24 @@ class ShimianSpecterEffect extends OneShotEffect<ShimianSpecterEffect> {
         if (damagedPlayer != null && you != null) {
             damagedPlayer.revealCards("Shimian Specter", damagedPlayer.getHand(), game);
 
-            TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+            TargetCard target = new TargetCard(Zone.PICK, filter);
             target.setRequired(true);
             target.setNotTarget(true);
-            if (you.choose(Constants.Outcome.Benefit, damagedPlayer.getHand(), target, game)) {
+            if (you.choose(Outcome.Benefit, damagedPlayer.getHand(), target, game)) {
                 Card chosenCard = damagedPlayer.getHand().get(target.getFirstTarget(), game);
                 if (chosenCard != null && damagedPlayer != null) {
 
                     //cards in Library
-                    Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
+                    Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                     cardsInLibrary.addAll(damagedPlayer.getLibrary().getCards(game));
                     you.lookAtCards(damagedPlayer.getName() + ": cards in library", cardsInLibrary, game);
 
                     // cards in Graveyard
-                    Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
+                    Cards cardsInGraveyard = new CardsImpl(Zone.GRAVEYARD);
                     cardsInGraveyard.addAll(damagedPlayer.getGraveyard());
 
                     // cards in Hand
-                    Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
+                    Cards cardsInHand = new CardsImpl(Zone.HAND);
                     cardsInHand.addAll(damagedPlayer.getHand());
                     you.lookAtCards(damagedPlayer.getName() + ": cards in hand", cardsInHand, game);
 

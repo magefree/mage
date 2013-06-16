@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -58,7 +59,7 @@ public class ThespiansStage extends CardImpl<ThespiansStage> {
         this.addAbility(new ColorlessManaAbility());
 
         // 2, {T}: Thespian's Stage becomes a copy of target land and gains this ability.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
@@ -97,7 +98,7 @@ class ThespiansStageCopyEffect extends OneShotEffect<ThespiansStageCopyEffect> {
         Permanent copyFromPermanent = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (sourcePermanent != null && copyFromPermanent != null) {
             Permanent newPermanent = game.copyPermanent(copyFromPermanent, sourcePermanent, source, new EmptyApplyToPermanent());
-            Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
+            Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ThespiansStageCopyEffect(), new GenericManaCost(2));
             ability.addCost(new TapSourceCost());
             ability.addTarget(new TargetLandPermanent());
             newPermanent.addAbility(ability, source.getSourceId(), game);

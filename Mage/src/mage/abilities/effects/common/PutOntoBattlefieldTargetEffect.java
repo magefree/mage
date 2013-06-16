@@ -28,8 +28,8 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -38,7 +38,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-import mage.Constants;
 
 /**
  * @author LevelX
@@ -74,7 +73,7 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlef
         boolean result = false;
         if (optional) {
             Player controller = game.getPlayer(source.getControllerId());
-            if (controller == null || !controller.chooseUse(Constants.Outcome.PutCreatureInPlay,
+            if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay,
                     new StringBuilder("Put ")
                         .append(source.getTargets() != null ? source.getTargets().get(0).getTargetName():"target")
                         .append(" onto the battlefield?").toString(), game)) {

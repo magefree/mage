@@ -28,11 +28,12 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -48,7 +49,7 @@ import mage.watchers.common.CastSpellLastTurnWatcher;
 public class StormAbility extends TriggeredAbilityImpl<StormAbility> {
 
     public StormAbility() {
-        super(Constants.Zone.STACK, new StormEffect());
+        super(Zone.STACK, new StormEffect());
     }
 
     private StormAbility(final StormAbility ability) {
@@ -82,7 +83,7 @@ public class StormAbility extends TriggeredAbilityImpl<StormAbility> {
 class StormEffect extends OneShotEffect<StormEffect> {
 
     public StormEffect() {
-        super(Constants.Outcome.Copy);
+        super(Outcome.Copy);
     }
 
     public StormEffect(final StormEffect effect) {

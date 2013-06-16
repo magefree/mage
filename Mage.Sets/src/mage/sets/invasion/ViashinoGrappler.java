@@ -29,9 +29,7 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -55,7 +53,7 @@ public class ViashinoGrappler extends CardImpl<ViashinoGrappler> {
         this.toughness = new MageInt(1);
 
         // {G}: Viashino Grappler gains trample until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     public ViashinoGrappler(final ViashinoGrappler card) {

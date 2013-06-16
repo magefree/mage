@@ -29,8 +29,8 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants.AttachmentType;
-import mage.Constants.Duration;
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;

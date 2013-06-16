@@ -29,10 +29,9 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -40,6 +39,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -59,7 +59,7 @@ public class SoulsurgeElemental extends CardImpl<SoulsurgeElemental> {
         this.toughness = new MageInt(1);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Duration.EndOfGame)));
     }
 
     public SoulsurgeElemental(final SoulsurgeElemental card) {

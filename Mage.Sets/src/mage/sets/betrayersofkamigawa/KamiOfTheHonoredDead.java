@@ -29,10 +29,9 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -80,7 +80,7 @@ public class KamiOfTheHonoredDead extends CardImpl<KamiOfTheHonoredDead> {
 class KamiOfTheHonoredDeadTriggeredAbility extends TriggeredAbilityImpl<KamiOfTheHonoredDeadTriggeredAbility> {
 
     public KamiOfTheHonoredDeadTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());
+        super(Zone.BATTLEFIELD, new KamiOfTheHonoredDeadGainLifeEffect());
     }
 
     public KamiOfTheHonoredDeadTriggeredAbility(final KamiOfTheHonoredDeadTriggeredAbility effect) {

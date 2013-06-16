@@ -30,9 +30,8 @@ package mage.sets.shardsofalara;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,7 +60,7 @@ public class EtherswornCanonist extends CardImpl<EtherswornCanonist> {
 
         // Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells.
         this.addWatcher(new EtherswornCanonistWatcher());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EtherswornCanonistReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EtherswornCanonistReplacementEffect()));
     }
 
     public EtherswornCanonist(final EtherswornCanonist card) {
@@ -79,7 +78,7 @@ class EtherswornCanonistWatcher extends WatcherImpl<EtherswornCanonistWatcher> {
     private Map<UUID, Boolean> castNonartifactSpell = new HashMap<UUID, Boolean>();
     
     public EtherswornCanonistWatcher() {
-        super("EtherswornCanonistWatcher", Constants.WatcherScope.GAME);
+        super("EtherswornCanonistWatcher", WatcherScope.GAME);
     }
 
     public EtherswornCanonistWatcher(final EtherswornCanonistWatcher watcher) {
@@ -123,7 +122,7 @@ class EtherswornCanonistWatcher extends WatcherImpl<EtherswornCanonistWatcher> {
 class EtherswornCanonistReplacementEffect extends ReplacementEffectImpl<EtherswornCanonistReplacementEffect> {
 
     public EtherswornCanonistReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each player who has cast a nonartifact spell this turn can't cast additional nonartifact spells";
     }
 

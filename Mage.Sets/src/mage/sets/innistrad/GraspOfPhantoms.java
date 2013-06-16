@@ -29,13 +29,13 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,7 +55,7 @@ public class GraspOfPhantoms extends CardImpl<GraspOfPhantoms> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {7}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));
     }
 
     public GraspOfPhantoms(final GraspOfPhantoms card) {

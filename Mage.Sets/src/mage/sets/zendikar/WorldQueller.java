@@ -32,11 +32,11 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -100,7 +100,7 @@ class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
     }
 
     public WorldQuellerEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "you may choose a card type. If you do, each player sacrifices a permanent of that type";
     }
 
@@ -153,7 +153,7 @@ class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
             // you always go first
             if (target.canChoose(you.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(you.getId(), game)) {
-                    you.choose(Constants.Outcome.Sacrifice, target, source.getId(), game);
+                    you.choose(Outcome.Sacrifice, target, source.getId(), game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
@@ -169,7 +169,7 @@ class WorldQuellerEffect extends OneShotEffect<WorldQuellerEffect> {
                     Player player = game.getPlayer(playerId);
                     if (target.canChoose(playerId, game)) {
                         while (!target.isChosen() && target.canChoose(playerId, game)) {
-                            player.choose(Constants.Outcome.Sacrifice, target, source.getId(), game);
+                            player.choose(Outcome.Sacrifice, target, source.getId(), game);
                         }
                         Permanent permanent = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {

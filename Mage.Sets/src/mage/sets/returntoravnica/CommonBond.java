@@ -28,12 +28,13 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -73,7 +74,7 @@ public class CommonBond extends CardImpl<CommonBond> {
 class CommonBondEffect extends OneShotEffect<CommonBondEffect> {
 
     public CommonBondEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "Put a +1/+1 counter on target creature. Put a +1/+1 counter on target creature.";
     }
 

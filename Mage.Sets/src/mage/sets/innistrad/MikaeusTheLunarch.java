@@ -27,9 +27,8 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -77,11 +78,11 @@ public class MikaeusTheLunarch extends CardImpl<MikaeusTheLunarch> {
         this.addAbility(new EntersBattlefieldAbility(new MikaeusTheLunarchEffect()));
 
         // {T}: Put a +1/+1 counter on Mikaeus.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new TapSourceCost()));
 
         // {T}, Remove a +1/+1 counter from Mikaeus: Put a +1/+1 counter on each other creature you control.
         Effect effect = new AddCountersAllEffect(CounterType.P1P1.createInstance(), filter);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, effect, new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
     }
@@ -99,7 +100,7 @@ public class MikaeusTheLunarch extends CardImpl<MikaeusTheLunarch> {
 class MikaeusTheLunarchEffect extends OneShotEffect<MikaeusTheLunarchEffect> {
 
     public MikaeusTheLunarchEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it";
     }
 

@@ -39,8 +39,8 @@ import mage.game.stack.StackObject;
 
 import java.util.UUID;
 
-import static mage.Constants.Outcome;
-import static mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 
 /**
  * @author nantuko, North

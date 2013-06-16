@@ -1,6 +1,7 @@
 package org.mage.test.cards.replacement;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,20 +18,20 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sigarda, Host of Herons");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
-        addCard(Constants.Zone.HAND, playerA, "Diabolic Edict");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Sigarda, Host of Herons");
+        addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.HAND, playerA, "Diabolic Edict");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
-        addCard(Constants.Zone.HAND, playerB, "Diabolic Edict");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sheoldred, Whispering One");
+        addCard(Zone.HAND, playerB, "Diabolic Edict");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Sheoldred, Whispering One");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict", playerA);
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Diabolic Edict", playerA);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Diabolic Edict", playerB);
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -50,14 +51,14 @@ public class SigardaHostOfHeronsTest extends CardTestPlayerBase {
      */
     @Test
     public void testSacrificeCost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sigarda, Host of Herons");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Sigarda, Host of Herons");
+        addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{B}");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);

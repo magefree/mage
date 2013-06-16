@@ -30,9 +30,8 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledLandPermanent;
@@ -90,7 +90,7 @@ public class GarrukPrimalHunter extends CardImpl<GarrukPrimalHunter> {
 
 class GarrukPrimalHunterEffect extends OneShotEffect<GarrukPrimalHunterEffect> {
     GarrukPrimalHunterEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Draw cards equal to the greatest power among creatures you control";
     }
 

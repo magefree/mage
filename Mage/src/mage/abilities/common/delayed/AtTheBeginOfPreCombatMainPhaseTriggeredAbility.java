@@ -28,11 +28,7 @@
 
 package mage.abilities.common.delayed;
 
-import mage.Constants.TargetController;
-import static mage.Constants.TargetController.ANY;
-import static mage.Constants.TargetController.CONTROLLER_ATTACHED_TO;
-import static mage.Constants.TargetController.OPPONENT;
-import static mage.Constants.TargetController.YOU;
+import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.game.Game;

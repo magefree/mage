@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnFromExileForSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -72,12 +73,12 @@ public class AdmonitionAngel extends CardImpl<AdmonitionAngel> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Landfall - Whenever a land enters the battlefield under your control, you may exile target nonland permanent other than Admonition Angel.
-        TriggeredAbility ability = new LandfallAbility(Constants.Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Admonition Angel Exile"), true);
+        TriggeredAbility ability = new LandfallAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Admonition Angel Exile"), true);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
 
         // When Admonition Angel leaves the battlefield, return all cards exiled with it to the battlefield under their owners' control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Constants.Zone.BATTLEFIELD), false);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         this.addAbility(ability2);
     }
 

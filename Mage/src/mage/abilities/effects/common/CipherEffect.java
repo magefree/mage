@@ -28,8 +28,8 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;

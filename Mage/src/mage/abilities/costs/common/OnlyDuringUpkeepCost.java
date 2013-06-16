@@ -28,7 +28,7 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;

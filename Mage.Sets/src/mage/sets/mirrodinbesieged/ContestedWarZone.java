@@ -28,14 +28,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -84,7 +84,7 @@ public class ContestedWarZone extends CardImpl<ContestedWarZone> {
 class ContestedWarZoneAbility extends TriggeredAbilityImpl<ContestedWarZoneAbility> {
 
     public ContestedWarZoneAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ContestedWarZoneEffect());
+        super(Zone.BATTLEFIELD, new ContestedWarZoneEffect());
      }
 
     public ContestedWarZoneAbility(final ContestedWarZoneAbility ability) {

@@ -30,14 +30,14 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,8 +52,8 @@ public class ViridescentWisps extends CardImpl<ViridescentWisps> {
         this.color.setGreen(true);
         //    Target creature becomes green and gets +1/+0 until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.GREEN, Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.GREEN, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(1,0, Duration.EndOfTurn));
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }

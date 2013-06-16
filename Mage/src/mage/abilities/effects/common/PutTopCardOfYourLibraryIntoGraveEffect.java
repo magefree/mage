@@ -28,14 +28,14 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
-import mage.Constants;
 import mage.util.CardUtil;
 
 /**
@@ -70,7 +70,7 @@ public class PutTopCardOfYourLibraryIntoGraveEffect extends OneShotEffect<PutTop
             for (int i = 0; i < cardsCount; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, true);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
                 }
             }
             return true;

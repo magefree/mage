@@ -30,11 +30,10 @@
 
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -100,7 +99,7 @@ class ShidakoBroodmistress extends Token {
     ShidakoBroodmistress() {
         super("Shidako, Broodmistress", "");
         supertype.add("Legendary");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Snake");
         subtype.add("Shaman");

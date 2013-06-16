@@ -29,15 +29,15 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  * @author Loki
@@ -49,7 +49,7 @@ public class AncientTomb extends CardImpl<AncientTomb> {
         this.expansionSetCode = "TMP";
 
         // {tap}: Add  to your mana pool. Ancient Tomb deals 2 damage to you.
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(2));
         this.addAbility(ability);
     }

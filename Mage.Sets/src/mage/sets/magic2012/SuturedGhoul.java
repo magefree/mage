@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -71,9 +69,9 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
         this.addAbility(new AsEntersBattlefieldAbility(new SuturedGhoulEffect(), staticText));
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
-        BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Constants.Duration.WhileOnBattlefield);
+        BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Duration.WhileOnBattlefield);
         effect.setRule(staticText2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public SuturedGhoul(final SuturedGhoul card) {
@@ -89,7 +87,7 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
 class SuturedGhoulEffect extends OneShotEffect<SuturedGhoulEffect> {
 
     public SuturedGhoulEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile any number of creature cards from your graveyard";
     }
 
@@ -104,7 +102,7 @@ class SuturedGhoulEffect extends OneShotEffect<SuturedGhoulEffect> {
         if (player.getGraveyard().size() > 0) {
 
             TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(0, Integer.MAX_VALUE, new FilterCreatureCard("creature cards from your graveyard"));
-            if (player.chooseTarget(Constants.Outcome.Benefit, target, source, game)) {
+            if (player.chooseTarget(Outcome.Benefit, target, source, game)) {
                 int count = 0;
                 for (UUID uuid : target.getTargets()) {
                     Card card = player.getGraveyard().get(uuid, game);

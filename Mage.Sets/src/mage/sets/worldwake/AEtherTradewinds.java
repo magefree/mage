@@ -28,9 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -50,7 +49,7 @@ public class AEtherTradewinds extends CardImpl<AEtherTradewinds> {
     private static final FilterPermanent filter = new FilterPermanent("permanent you don't control");
     
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public AEtherTradewinds(UUID ownerId) {
@@ -79,7 +78,7 @@ public class AEtherTradewinds extends CardImpl<AEtherTradewinds> {
 class AEtherTradewindsEffect extends OneShotEffect<AEtherTradewindsEffect> {
 
     public AEtherTradewindsEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.staticText = "Return target permanent you control and target permanent you don't control to their owners' hands";
     }
 
@@ -98,11 +97,11 @@ class AEtherTradewindsEffect extends OneShotEffect<AEtherTradewindsEffect> {
 
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            result |= permanent.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+            result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
         }
         permanent = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (permanent != null) {
-            result |= permanent.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+            result |= permanent.moveToZone(Zone.HAND, source.getId(), game, false);
         }
 
         return result;

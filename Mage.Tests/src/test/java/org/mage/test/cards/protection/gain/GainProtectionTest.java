@@ -1,7 +1,7 @@
 package org.mage.test.cards.protection.gain;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,11 +12,11 @@ public class GainProtectionTest extends CardTestPlayerBase {
 
     @Test
     public void testGainProtectionFromSpellColor() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Apostle's Blessing");
-        addCard(Constants.Zone.HAND, playerA, "Titanic Growth");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Apostle's Blessing");
+        addCard(Zone.HAND, playerA, "Titanic Growth");
 
         setChoice(playerA, "Green");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
@@ -32,11 +32,11 @@ public class GainProtectionTest extends CardTestPlayerBase {
 
     @Test
     public void testGainProtectionFromAnotherColor() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Apostle's Blessing");
-        addCard(Constants.Zone.HAND, playerA, "Titanic Growth");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Apostle's Blessing");
+        addCard(Zone.HAND, playerA, "Titanic Growth");
 
         setChoice(playerA, "Black");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");
@@ -52,11 +52,11 @@ public class GainProtectionTest extends CardTestPlayerBase {
 
     @Test
     public void testGainProtectionFromArtifacts() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Apostle's Blessing");
-        addCard(Constants.Zone.HAND, playerA, "Titanic Growth");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Apostle's Blessing");
+        addCard(Zone.HAND, playerA, "Titanic Growth");
 
         setChoice(playerA, "Artifacts");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");

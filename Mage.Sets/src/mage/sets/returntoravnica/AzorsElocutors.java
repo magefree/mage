@@ -28,11 +28,12 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -83,7 +84,7 @@ public class AzorsElocutors extends CardImpl<AzorsElocutors> {
 class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl<AzorsElocutorsTriggeredAbility> {
 
     public AzorsElocutorsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster",1)), false);
+        super(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(new Counter("filibuster",1)), false);
     }
 
     public AzorsElocutorsTriggeredAbility(final AzorsElocutorsTriggeredAbility ability) {
@@ -113,7 +114,7 @@ class AzorsElocutorsTriggeredAbility extends TriggeredAbilityImpl<AzorsElocutors
 class AzorsElocutorsEffect extends OneShotEffect<AzorsElocutorsEffect> {
 
     public AzorsElocutorsEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
     }
 
     public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {

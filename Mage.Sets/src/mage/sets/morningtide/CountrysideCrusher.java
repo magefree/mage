@@ -28,10 +28,10 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -65,7 +67,7 @@ public class CountrysideCrusher extends CardImpl<CountrysideCrusher> {
         this.toughness = new MageInt(3);
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CountrysideCrusherEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CountrysideCrusherEffect(), TargetController.YOU, false));
         // Whenever a land card is put into your graveyard from anywhere, put a +1/+1 counter on Countryside Crusher.
         this.addAbility(new CountrysideCrusherTriggeredAbility());
     }
@@ -83,7 +85,7 @@ public class CountrysideCrusher extends CardImpl<CountrysideCrusher> {
 class CountrysideCrusherEffect extends OneShotEffect<CountrysideCrusherEffect> {
 
     public CountrysideCrusherEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a land card, put it into your graveyard and repeat this process";
     }
 

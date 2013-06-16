@@ -28,9 +28,12 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -42,7 +45,7 @@ import mage.players.Player;
 public class PlayAdditionalLandsAllEffect extends ContinuousEffectImpl<PlayAdditionalLandsAllEffect> {
 
     public PlayAdditionalLandsAllEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "Each player may play an additional land on each of his or her turns";
     }
 

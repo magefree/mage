@@ -29,9 +29,9 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -41,6 +41,9 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +62,7 @@ public class JunkyoBell extends CardImpl<JunkyoBell> {
         // At the beginning of your upkeep, you may have target creature you control get +X/+X until end of turn, 
         // where X is the number of creatures you control. If you do, sacrifice that creature at the beginning of the next end step.
         PermanentsOnBattlefieldCount amount = new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Constants.Duration.EndOfTurn), Constants.TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BoostTargetEffect(amount, amount, Duration.EndOfTurn), TargetController.YOU, true);
         ability.addTarget(new TargetControlledCreaturePermanent());
         ability.addEffect(new JunkyoBellSacrificeEffect());
         this.addAbility(ability);
@@ -78,7 +81,7 @@ public class JunkyoBell extends CardImpl<JunkyoBell> {
 private class JunkyoBellSacrificeEffect extends OneShotEffect<JunkyoBellSacrificeEffect> {
 
     public JunkyoBellSacrificeEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         this.staticText = "If you do, sacrifice that creature at the beginning of the next end step";
     }
 

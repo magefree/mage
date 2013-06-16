@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -43,7 +43,7 @@ import mage.game.permanent.Permanent;
 public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl<CantBlockAttackActivateAttachedEffect> {
 
     public CantBlockAttackActivateAttachedEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
     }
 

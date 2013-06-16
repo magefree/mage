@@ -27,13 +27,14 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TimingRule;
 
 import java.util.UUID;
 
@@ -49,10 +50,10 @@ public class RallyThePeasants extends CardImpl<RallyThePeasants> {
         this.color.setWhite(true);
 
         // Creatures you control get +2/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
 
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.INSTANT));
     }
 
     public RallyThePeasants(final RallyThePeasants card) {

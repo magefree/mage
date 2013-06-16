@@ -27,9 +27,8 @@
  */
 package mage.sets.judgment;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.abilities.keyword.FlashbackAbility;
@@ -37,6 +36,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -84,7 +85,7 @@ public class QuietSpeculation extends CardImpl<QuietSpeculation> {
 class SearchLibraryPutInGraveEffect extends SearchEffect<SearchLibraryPutInGraveEffect> {
 
     public SearchLibraryPutInGraveEffect(TargetCardInLibrary target) {
-        super(target, Constants.Outcome.Neutral);
+        super(target, Outcome.Neutral);
         staticText = "Search target player's library for up to three cards with flashback and put them into that player's graveyard. Then the player shuffles his or her library.";
     }
 
@@ -109,7 +110,7 @@ class SearchLibraryPutInGraveEffect extends SearchEffect<SearchLibraryPutInGrave
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
-                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                         cards.add(card);
                     }
                 }

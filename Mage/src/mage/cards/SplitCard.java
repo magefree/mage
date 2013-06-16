@@ -31,11 +31,11 @@ package mage.cards;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.SpellAbilityType;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -93,7 +93,7 @@ public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
     }
 
     @Override
-    public boolean cast(Game game, Constants.Zone fromZone, SpellAbility ability, UUID controllerId) {
+    public boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId) {
         switch(ability.getSpellAbilityType()) {
             case SPLIT_LEFT:
                 return this.getLeftHalfCard().cast(game, fromZone, ability, controllerId);

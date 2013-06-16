@@ -30,9 +30,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffec
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -59,10 +59,10 @@ public class SheoldredWhisperingOne extends CardImpl<SheoldredWhisperingOne> {
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
         this.addAbility(new SwampwalkAbility());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnFromGraveyardToBattlefieldTargetEffect(false), TargetController.YOU, false);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard("creature card from your graveyard")));
         this.addAbility(ability);
-        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player "), Constants.TargetController.OPPONENT, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new SacrificeEffect(new FilterCreaturePermanent(), 1, "that player "), TargetController.OPPONENT, false);
         this.addAbility(ability);
     }
 

@@ -28,9 +28,9 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.keyword.StormAbility;
@@ -48,7 +48,7 @@ public class Flusterstorm extends CardImpl<Flusterstorm> {
 
     private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {
-        filter.add(Predicates.or(new CardTypePredicate(Constants.CardType.INSTANT), new CardTypePredicate(Constants.CardType.SORCERY)));
+        filter.add(Predicates.or(new CardTypePredicate(CardType.INSTANT), new CardTypePredicate(CardType.SORCERY)));
     }
     
     public Flusterstorm(UUID ownerId) {

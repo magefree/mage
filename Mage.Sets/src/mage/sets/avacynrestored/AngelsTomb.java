@@ -29,15 +29,15 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.CreatureEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 
 /**
@@ -51,7 +51,7 @@ public class AngelsTomb extends CardImpl<AngelsTomb> {
         this.expansionSetCode = "AVR";
 
         // Whenever a creature enters the battlefield under your control, you may have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn.
-        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new BecomesCreatureSourceEffect(new AngelTombToken(), "", Constants.Duration.EndOfTurn), true));
+        this.addAbility(new CreatureEntersBattlefieldTriggeredAbility(new BecomesCreatureSourceEffect(new AngelTombToken(), "", Duration.EndOfTurn), true));
     }
 
     public AngelsTomb(final AngelsTomb card) {

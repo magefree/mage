@@ -30,8 +30,8 @@ package mage.game.permanent.token;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.MageObjectImpl;
 import mage.ObjectColor;
 import mage.abilities.Abilities;

@@ -28,16 +28,17 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
 import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -58,7 +59,7 @@ public class MinamoScrollkeeper extends CardImpl<MinamoScrollkeeper> {
         this.addAbility(DefenderAbility.getInstance());
 
         // Your maximum hand size is increased by one.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(1, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
     }
 

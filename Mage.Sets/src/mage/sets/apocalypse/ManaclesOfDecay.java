@@ -29,9 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,12 +56,12 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
         this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ManaclesOfDecayFirstEffect()));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ManaclesOfDecaySecondEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.R)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ManaclesOfDecayFirstEffect()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ManaclesOfDecaySecondEffect(), new ColoredManaCost(ColoredManaSymbol.R)));
 
     }
 
@@ -80,7 +78,7 @@ public class ManaclesOfDecay extends CardImpl<ManaclesOfDecay> {
 class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstEffect> {
 
     public ManaclesOfDecayFirstEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack";
     }
 
@@ -111,7 +109,7 @@ class ManaclesOfDecayFirstEffect extends RestrictionEffect<ManaclesOfDecayFirstE
 class ManaclesOfDecaySecondEffect extends RestrictionEffect<ManaclesOfDecaySecondEffect> {
 
     public ManaclesOfDecaySecondEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         staticText = "Enchanted creature can't block until end of turn";
     }
 

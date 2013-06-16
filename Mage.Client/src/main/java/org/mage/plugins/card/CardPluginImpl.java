@@ -2,6 +2,7 @@ package org.mage.plugins.card;
 
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
+import mage.constants.Rarity;
 import mage.interfaces.plugin.CardPlugin;
 import mage.utils.CardUtil;
 import mage.view.CardView;
@@ -80,7 +81,7 @@ public class CardPluginImpl implements CardPlugin {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
         CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, foil);
         cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
-        boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
+        boolean implemented = !permanent.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }
@@ -90,7 +91,7 @@ public class CardPluginImpl implements CardPlugin {
         boolean foil = canBeFoil && (new Random()).nextInt(5) == 0;
         CardPanel cardPanel = new CardPanel(permanent, gameId, loadImage, callback, foil);
         cardPanel.setCardBounds(0, 0, dimension.width, dimension.height);
-        boolean implemented = !permanent.getRarity().equals(mage.Constants.Rarity.NA);
+        boolean implemented = !permanent.getRarity().equals(Rarity.NA);
         cardPanel.setShowCastingCost(implemented);
         return cardPanel;
     }

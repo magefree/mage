@@ -28,10 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -55,12 +53,12 @@ public class SkyblinderStaff extends CardImpl<SkyblinderStaff> {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +1/+0 and can't be blocked by creatures with flying.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0));
         ability.addEffect(new CantBeBlockedByCreaturesWithFlyingAttachedEffect());
         this.addAbility(ability);
         
         // Equip {3}
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
 
     }
 

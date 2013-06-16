@@ -28,10 +28,8 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -51,7 +49,7 @@ public class OrbOfDreams extends CardImpl<OrbOfDreams> {
         this.expansionSetCode = "BOK";
         
         // Permanents enter the battlefield tapped.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new OrbOfDreamsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OrbOfDreamsEffect()));
     }
 
     public OrbOfDreams(final OrbOfDreams card) {
@@ -66,7 +64,7 @@ public class OrbOfDreams extends CardImpl<OrbOfDreams> {
     private class OrbOfDreamsEffect extends ReplacementEffectImpl<OrbOfDreamsEffect> {
 
         OrbOfDreamsEffect() {
-            super(Duration.WhileOnBattlefield, Constants.Outcome.Tap, false);
+            super(Duration.WhileOnBattlefield, Outcome.Tap, false);
             staticText = "Permanents enter the battlefield tapped";
         }
 

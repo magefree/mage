@@ -28,9 +28,9 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
@@ -58,7 +60,7 @@ public class EngineeredExplosives extends CardImpl<EngineeredExplosives> {
         // Sunburst
         this.addAbility(new SunburstAbility());
         // {2}, Sacrifice Engineered Explosives: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EngineeredExplosivesEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -79,7 +81,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
    
 
     public EngineeredExplosivesEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Engineered Explosives";
     }
 
@@ -95,7 +97,7 @@ class EngineeredExplosivesEffect extends OneShotEffect {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject engineeredExplosives = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        MageObject engineeredExplosives = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if(engineeredExplosives != null && engineeredExplosives instanceof Permanent){
             int count = ((Permanent)engineeredExplosives).getCounters().getCount(CounterType.CHARGE);
             for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {

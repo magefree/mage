@@ -28,8 +28,8 @@
 package mage.sets.newphyrexia;
 
 import mage.ConditionalMana;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;

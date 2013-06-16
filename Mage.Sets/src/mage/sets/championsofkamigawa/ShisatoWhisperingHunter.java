@@ -28,15 +28,16 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeControllerEffect;
 import mage.abilities.effects.common.SkipNextPlayerUntapStepEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -65,7 +66,7 @@ public class ShisatoWhisperingHunter extends CardImpl<ShisatoWhisperingHunter> {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, sacrifice a Snake.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), Constants.TargetController.YOU, false));        
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeControllerEffect(filter, 1,""), TargetController.YOU, false));
         // Whenever Shisato, Whispering Hunter deals combat damage to a player, that player skips his or her next untap step.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SkipNextPlayerUntapStepEffect("that "),false, true));
     }

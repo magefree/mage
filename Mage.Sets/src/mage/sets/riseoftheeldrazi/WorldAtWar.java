@@ -27,14 +27,15 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -78,7 +79,7 @@ public class WorldAtWar extends CardImpl<WorldAtWar> {
 class WorldAtWarEffect extends OneShotEffect<WorldAtWarEffect> {
 
     public WorldAtWarEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn";
     }
 
@@ -94,7 +95,7 @@ class WorldAtWarEffect extends OneShotEffect<WorldAtWarEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         // we can't add two turn modes at once, will add additional post combat on delayed trigger resolution
-        TurnMod combat = new TurnMod(source.getControllerId(), Constants.TurnPhase.COMBAT, Constants.TurnPhase.POSTCOMBAT_MAIN, false);
+        TurnMod combat = new TurnMod(source.getControllerId(), TurnPhase.COMBAT, TurnPhase.POSTCOMBAT_MAIN, false);
         game.getState().getTurnMods().add(combat);
         UntapDelayedTriggeredAbility delayedTriggeredAbility = new UntapDelayedTriggeredAbility();
         delayedTriggeredAbility.setSourceId(source.getSourceId());
@@ -134,7 +135,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility<UntapDelayedT
         }
         if (event.getType() == GameEvent.EventType.COMBAT_PHASE_PRE && enabled) {
             // add additional post combat phase after that
-            game.getState().getTurnMods().add(new TurnMod(getControllerId(), Constants.TurnPhase.POSTCOMBAT_MAIN, Constants.TurnPhase.COMBAT, false));
+            game.getState().getTurnMods().add(new TurnMod(getControllerId(), TurnPhase.POSTCOMBAT_MAIN, TurnPhase.COMBAT, false));
             enabled = false;
             return true;
         }
@@ -154,7 +155,7 @@ class UntapDelayedTriggeredAbility extends DelayedTriggeredAbility<UntapDelayedT
 class UntapAttackingThisTurnEffect extends OneShotEffect<UntapAttackingThisTurnEffect> {
 
     public UntapAttackingThisTurnEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
     }
 
     public UntapAttackingThisTurnEffect(final UntapAttackingThisTurnEffect effect) {

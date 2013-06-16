@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,14 +13,14 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Altar of the Lost");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Lingering Souls");
+        addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
+        addCard(Zone.GRAVEYARD, playerA, "Lingering Souls");
 
         setChoice(playerA, "Black");
         setChoice(playerA, "Black");
 
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -29,15 +30,15 @@ public class AltarOfTheLostTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Altar of the Lost");
-        addCard(Constants.Zone.HAND, playerA, "Lingering Souls");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Altar of the Lost");
+        addCard(Zone.HAND, playerA, "Lingering Souls");
 
         setChoice(playerA, "Black");
         setChoice(playerA, "Black");
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lingering Souls");
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lingering Souls");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -28,9 +28,9 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -88,7 +90,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect<AngelOfGlorysRiseEffect> {
     }
 
     public AngelOfGlorysRiseEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Exile all Zombies, then return all Human creature cards from your graveyard to the battlefield";
     }
 
@@ -109,7 +111,7 @@ class AngelOfGlorysRiseEffect extends OneShotEffect<AngelOfGlorysRiseEffect> {
                 zombie.moveToExile(source.getId(), zombie.getName(), source.getSourceId(), game);
             }
             for (Card human : player.getGraveyard().getCards(filterHuman, game)) {
-                human.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                human.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
             }
         }
         return true;

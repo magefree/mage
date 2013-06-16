@@ -28,15 +28,14 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
-import mage.target.Target;
 import mage.target.TargetPlayer;
 
 /**

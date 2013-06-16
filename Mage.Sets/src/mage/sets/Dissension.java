@@ -27,8 +27,8 @@
 */
 package mage.sets;
 
-import mage.Constants;
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 import java.util.GregorianCalendar;
 
@@ -47,7 +47,7 @@ public class Dissension extends ExpansionSet {
     }
 
     private Dissension() {
-        super("Dissension", "DIS", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), Constants.SetType.EXPANSION);
+        super("Dissension", "DIS", "mage.sets.dissension", new GregorianCalendar(2006, 4, 5).getTime(), SetType.EXPANSION);
         this.blockName = "Ravnika";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

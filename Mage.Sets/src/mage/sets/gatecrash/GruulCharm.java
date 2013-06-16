@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -71,11 +71,11 @@ public class GruulCharm extends CardImpl<GruulCharm> {
         this.color.setGreen(true);
 
         // Choose one - Creatures without flying can't block this turn;
-        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBlockAllEffect(filter, Duration.EndOfTurn));
         
         // or gain control of all permanents you own;
         Mode mode = new Mode();
-        mode.getEffects().add(new GainControlAllEffect(Constants.Duration.EndOfGame, filter2));
+        mode.getEffects().add(new GainControlAllEffect(Duration.EndOfGame, filter2));
         this.getSpellAbility().addMode(mode);
         
         // or Gruul Charm deals 3 damage to each creature with flying.
@@ -98,8 +98,8 @@ class GainControlAllEffect extends ContinuousEffectImpl<GainControlAllEffect> {
 
     final FilterPermanent filter;
 
-    public GainControlAllEffect(Constants.Duration duration, FilterPermanent filter) {
-        super(duration, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+    public GainControlAllEffect(Duration duration, FilterPermanent filter) {
+        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.filter = filter;
     }
 

@@ -28,9 +28,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -61,7 +63,7 @@ public class ThoughtcutterAgent extends CardImpl<ThoughtcutterAgent> {
         this.toughness = new MageInt(1);
 
         // {U}{B}, {tap}: Target player loses 1 life and reveals his or her hand.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{U}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), new ManaCostsImpl("{U}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new RevealHandTargetEffect());
         ability.addTarget(new TargetPlayer());
@@ -83,7 +85,7 @@ class RevealHandTargetEffect extends OneShotEffect<RevealHandTargetEffect> {
 
 
     public RevealHandTargetEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "and reveals his or her hand";
     }
 

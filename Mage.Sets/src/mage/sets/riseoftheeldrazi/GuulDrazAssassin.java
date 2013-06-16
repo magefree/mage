@@ -28,9 +28,8 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -64,13 +65,13 @@ public class GuulDrazAssassin extends LevelerCard<GuulDrazAssassin> {
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{1}{B}")));
 
         Abilities<Ability> abilities1 = new AbilitiesImpl<Ability>();
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         abilities1.add(ability);
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-4, -4, Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-4, -4, Duration.EndOfTurn), new ManaCostsImpl("{B}"));
         ability2.addTarget(new TargetCreaturePermanent());
         ability2.addCost(new TapSourceCost());
         abilities2.add(ability2);

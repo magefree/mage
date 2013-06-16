@@ -27,12 +27,11 @@
  */
 package mage.sets.dragonsmaze;
 
-import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -76,7 +76,7 @@ public class VorelOfTheHullClade extends CardImpl<VorelOfTheHullClade> {
         this.toughness = new MageInt(4);
 
         // {G}{U}, {tap}: For each counter on target artifact, creature, or land, put another of those counters on that permanent.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl("{G}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VorelOfTheHullCladeEffect(), new ManaCostsImpl("{G}{U}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

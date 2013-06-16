@@ -29,14 +29,15 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -55,7 +56,7 @@ public class MatcaRioters extends CardImpl<MatcaRioters> {
         this.toughness = new MageInt(0);
 
         // Domain - Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new DomainValue(), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new DomainValue(), Duration.EndOfGame)));
     }
 
     public MatcaRioters(final MatcaRioters card) {

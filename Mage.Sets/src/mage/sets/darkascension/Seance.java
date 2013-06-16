@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +39,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.sets.tokens.EmptyToken;
@@ -59,7 +61,7 @@ public class Seance extends CardImpl<Seance> {
         this.color.setWhite(true);
 
         // At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), Constants.TargetController.ANY, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new SeanceEffect(), TargetController.ANY, true);
         ability.addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
         this.addAbility(ability);
     }
@@ -77,7 +79,7 @@ public class Seance extends CardImpl<Seance> {
 class SeanceEffect extends OneShotEffect<SeanceEffect> {
 
     public SeanceEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step";
     }
 

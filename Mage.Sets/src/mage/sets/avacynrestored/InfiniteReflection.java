@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -67,7 +65,7 @@ public class InfiniteReflection extends CardImpl<InfiniteReflection> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Copy));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Copy));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -75,7 +73,7 @@ public class InfiniteReflection extends CardImpl<InfiniteReflection> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new InfiniteReflectionTriggeredEffect()));
 
         // Nontoken creatures you control enter the battlefield as a copy of enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new InfiniteReflectionEntersBattlefieldEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InfiniteReflectionEntersBattlefieldEffect()));
     }
 
     public InfiniteReflection(final InfiniteReflection card) {
@@ -93,7 +91,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflection
     private static final FilterPermanent filter = new FilterControlledCreaturePermanent();
 
     public InfiniteReflectionTriggeredEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         this.staticText = " attached to a creature, each other nontoken creature you control becomes a copy of that creature";
     }
 
@@ -127,7 +125,7 @@ class InfiniteReflectionTriggeredEffect extends OneShotEffect<InfiniteReflection
 class InfiniteReflectionEntersBattlefieldEffect extends ReplacementEffectImpl<InfiniteReflectionEntersBattlefieldEffect> {
 
     public InfiniteReflectionEntersBattlefieldEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
     public InfiniteReflectionEntersBattlefieldEffect(InfiniteReflectionEntersBattlefieldEffect effect) {

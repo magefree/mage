@@ -28,10 +28,10 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -63,7 +64,7 @@ public class FogBank extends CardImpl<FogBank> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Prevent all combat damage that would be dealt to and dealt by Fog Bank.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield));
         ability.addEffect(new PreventCombatDamageFromSourceEffect(Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }

@@ -1,7 +1,7 @@
 package org.mage.test.cards.mana.phyrexian;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,9 +13,9 @@ public class PhyrexianManaTest extends CardTestPlayerBase {
 
     @Test
     public void testNoManaToCast() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Apostle's Blessing");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Apostle's Blessing");
 
         setChoice(playerA, "Black");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Apostle's Blessing", "Elite Vanguard");

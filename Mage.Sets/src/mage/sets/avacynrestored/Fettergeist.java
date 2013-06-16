@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -38,6 +37,8 @@ import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -64,7 +65,7 @@ public class Fettergeist extends CardImpl<Fettergeist> {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, sacrifice Fettergeist unless you pay {1} for each other creature you control.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new FettergeistUnlessPaysEffect(), TargetController.YOU, false));
 
     }
 
@@ -87,7 +88,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect<FettergeistUnlessPaysEff
     }
 
     public FettergeistUnlessPaysEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         staticText = "sacrifice {this} unless you pay {1} for each other creature you control.";
     }
 
@@ -105,7 +106,7 @@ class FettergeistUnlessPaysEffect extends OneShotEffect<FettergeistUnlessPaysEff
             if (count == 0) {
                 return true;
             }
-            if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + count + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Pay " + count + "?", game)) {
                 GenericManaCost cost = new GenericManaCost(count);
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     return true;

@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -56,7 +54,7 @@ public class CrownOfEmpires extends CardImpl<CrownOfEmpires> {
         this.expansionSetCode = "M12";
 
         // {3}, {tap}: Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfEmpiresEffect(), new GenericManaCost(3));
         ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -75,7 +73,7 @@ public class CrownOfEmpires extends CardImpl<CrownOfEmpires> {
 class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
 
     public CrownOfEmpiresEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "Tap target creature. Gain control of that creature instead if you control artifacts named Scepter of Empires and Throne of Empires";
     }
 
@@ -116,7 +114,7 @@ class CrownOfEmpiresEffect extends OneShotEffect<CrownOfEmpiresEffect> {
 class CrownOfEmpiresControlEffect extends ContinuousEffectImpl<CrownOfEmpiresControlEffect> {
 
     public CrownOfEmpiresControlEffect() {
-        super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
     }
 
     public CrownOfEmpiresControlEffect(final CrownOfEmpiresControlEffect effect) {

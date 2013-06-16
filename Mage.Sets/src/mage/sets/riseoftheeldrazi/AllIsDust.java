@@ -29,12 +29,13 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -64,7 +65,7 @@ public class AllIsDust extends CardImpl<AllIsDust> {
 class AllIsDustEffect extends OneShotEffect<AllIsDustEffect> {
 
     AllIsDustEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Each player sacrifices all colored permanents he or she controls";
     }
 

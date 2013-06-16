@@ -28,9 +28,9 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.NoCreatureOpponentCondition;
@@ -38,6 +38,8 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 
 /**
  *
@@ -59,7 +61,7 @@ public class Kezzerdrix extends CardImpl<Kezzerdrix> {
         this.addAbility(FirstStrikeAbility.getInstance());
         
         // At the beginning of your upkeep, if your opponents control no creatures, Kezzerdrix deals 4 damage to you.
-        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new DamageControllerEffect(4), Constants.TargetController.YOU, false), NoCreatureOpponentCondition.getInstance(), "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you.");
+        ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DamageControllerEffect(4), TargetController.YOU, false), NoCreatureOpponentCondition.getInstance(), "At the beginning of your upkeep, if your opponents control no creatures, {this} deals 4 damage to you.");
         this.addAbility(ability);
     }
 

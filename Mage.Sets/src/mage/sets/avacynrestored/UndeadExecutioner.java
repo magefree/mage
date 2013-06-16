@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -56,7 +56,7 @@ public class UndeadExecutioner extends CardImpl<UndeadExecutioner> {
         this.toughness = new MageInt(2);
 
         // When Undead Executioner dies, you may have target creature get -2/-2 until end of turn.
-        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), true);
+        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

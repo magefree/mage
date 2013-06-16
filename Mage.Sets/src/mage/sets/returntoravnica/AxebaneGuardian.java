@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -40,6 +40,8 @@ import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -65,7 +67,7 @@ public class AxebaneGuardian extends CardImpl<AxebaneGuardian> {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // {tap}: Add X mana in any combination of colors to your mana pool, where X is the number of creatures with defender you control.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new AxebaneGuardianManaEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new AxebaneGuardianManaEffect(), new TapSourceCost()));
     }
 
     public AxebaneGuardian(final AxebaneGuardian card) {
@@ -109,7 +111,7 @@ class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
             Mana mana = new Mana();
             for(int i = 0; i < x; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Constants.Outcome.Benefit, choiceColor, game)) {
+                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
                     game.debugMessage("player canceled choosing color. retrying.");
                 }
                 

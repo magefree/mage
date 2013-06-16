@@ -28,15 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -73,7 +75,7 @@ public class GrislySalvage extends CardImpl<GrislySalvage> {
 class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
 
     public GrislySalvageEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard";
     }
 
@@ -90,7 +92,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Constants.Zone.PICK);
+            Cards cards = new CardsImpl(Zone.PICK);
 
             boolean properCardFound = false;
             int count = Math.min(player.getLibrary().size(), 5);
@@ -108,12 +110,12 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
                 player.revealCards("Grisly Salvage", cards, game);
                 FilterCard filter = new FilterCard("creature or land card to put in hand");
                 filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-                if (properCardFound && player.choose(Constants.Outcome.DrawCard, cards, target, game)) {
+                TargetCard target = new TargetCard(Zone.PICK, filter);
+                if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getId(), game, false);
                     }
 
                 }
@@ -121,7 +123,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
                 for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, true);
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
                     }
                 }
             }

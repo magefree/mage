@@ -28,12 +28,13 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.PopulateEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -45,7 +46,7 @@ public class GrowingRanks extends CardImpl<GrowingRanks> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public GrowingRanks(UUID ownerId) {
@@ -56,7 +57,7 @@ public class GrowingRanks extends CardImpl<GrowingRanks> {
         this.color.setGreen(true);
 
         // At the beginning of your upkeep, populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PopulateEffect(""), TargetController.YOU, false));
     }
 
     public GrowingRanks(final GrowingRanks card) {

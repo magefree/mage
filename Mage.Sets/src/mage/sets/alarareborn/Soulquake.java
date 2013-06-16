@@ -28,14 +28,15 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -92,13 +93,13 @@ class SoulquakeEffect extends OneShotEffect<SoulquakeEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         for (UUID playerId : game.getPlayer(source.getControllerId()).getInRange()) {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 for (Card card : player.getGraveyard().getCards(filter2, game)) {
-                    card.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
             }
         }

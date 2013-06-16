@@ -28,15 +28,18 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.BlocksIfAbleTargetEffect;
 import mage.abilities.effects.common.CantBlockAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
@@ -56,7 +59,7 @@ public class MarkForDeath extends CardImpl<MarkForDeath> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public MarkForDeath(UUID ownerId) {
@@ -83,7 +86,7 @@ public class MarkForDeath extends CardImpl<MarkForDeath> {
 class MarkForDeathEffect extends OneShotEffect<MarkForDeathEffect> {
 
     public MarkForDeathEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn";
     }
 
@@ -101,13 +104,13 @@ class MarkForDeathEffect extends OneShotEffect<MarkForDeathEffect> {
         filter.add(new ControllerIdPredicate(target.getControllerId()));
         filter.add(Predicates.not(new CardIdPredicate(target.getId())));
         
-        ContinuousEffect effect = new BlocksIfAbleTargetEffect(Constants.Duration.EndOfTurn);
+        ContinuousEffect effect = new BlocksIfAbleTargetEffect(Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(target.getId()));
         game.addEffect(effect, source);
         
         target.untap(game);
         
-        ContinuousEffect effect2 = new CantBlockAllEffect(filter, Constants.Duration.EndOfTurn);
+        ContinuousEffect effect2 = new CantBlockAllEffect(filter, Duration.EndOfTurn);
         game.addEffect(effect2, source);
         return true;
     }

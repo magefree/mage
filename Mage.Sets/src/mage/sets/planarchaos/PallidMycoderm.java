@@ -28,12 +28,12 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -61,7 +61,7 @@ public class PallidMycoderm extends CardImpl<PallidMycoderm> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control that's a Fungus or a Saproling");
     private static final FilterControlledCreaturePermanent filterSaproling = new FilterControlledCreaturePermanent("Saproling");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.or(new SubtypePredicate("Fungus"), new SubtypePredicate("Saproling")));
         filterSaproling.add(new SubtypePredicate("Saproling"));
     }

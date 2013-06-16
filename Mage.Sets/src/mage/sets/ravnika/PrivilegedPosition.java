@@ -29,13 +29,14 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 
 /**
@@ -52,7 +53,7 @@ public class PrivilegedPosition extends CardImpl<PrivilegedPosition> {
         this.color.setWhite(true);
 
         // Other permanents you control have hexproof.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterPermanent(), true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent(), true)));
     }
 
     public PrivilegedPosition(final PrivilegedPosition card) {

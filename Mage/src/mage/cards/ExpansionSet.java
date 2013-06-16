@@ -28,8 +28,8 @@
 
 package mage.cards;
 
-import mage.Constants.Rarity;
-import mage.Constants.SetType;
+import mage.constants.Rarity;
+import mage.constants.SetType;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;

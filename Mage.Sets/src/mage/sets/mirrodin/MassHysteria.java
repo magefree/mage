@@ -29,13 +29,14 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -48,7 +49,7 @@ public class MassHysteria extends CardImpl<MassHysteria> {
         super(ownerId, 99, "Mass Hysteria", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
         this.expansionSetCode = "MRD";
         this.color.setRed(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false)));
     }
 
     public MassHysteria(final MassHysteria card) {

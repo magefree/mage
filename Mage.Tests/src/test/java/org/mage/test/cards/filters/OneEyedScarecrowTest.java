@@ -1,7 +1,8 @@
 package org.mage.test.cards.filters;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,13 +14,13 @@ public class OneEyedScarecrowTest extends CardTestPlayerBase {
 
     @Test
     public void testBoost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "One-Eyed Scarecrow");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Screeching Bat");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Screeching Bat");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "One-Eyed Scarecrow");
+        addCard(Zone.BATTLEFIELD, playerA, "Screeching Bat");
+        addCard(Zone.BATTLEFIELD, playerA, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerB, "Screeching Bat");
+        addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent scarecrow = getPermanent("One-Eyed Scarecrow", playerA.getId());
@@ -54,11 +55,11 @@ public class OneEyedScarecrowTest extends CardTestPlayerBase {
 
     @Test
     public void testMultiEffects() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "One-Eyed Scarecrow", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Screeching Bat");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
+        addCard(Zone.BATTLEFIELD, playerA, "One-Eyed Scarecrow", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Screeching Bat");
+        addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // -1/2

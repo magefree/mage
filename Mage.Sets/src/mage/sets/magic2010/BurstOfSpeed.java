@@ -29,12 +29,12 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
@@ -47,7 +47,7 @@ public class BurstOfSpeed extends CardImpl<BurstOfSpeed> {
         super(ownerId, 129, "Burst of Speed", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{R}");
         this.expansionSetCode = "M10";
         this.color.setRed(true);
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false));
     }
 
     public BurstOfSpeed(final BurstOfSpeed card) {

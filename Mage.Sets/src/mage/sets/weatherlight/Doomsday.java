@@ -28,16 +28,17 @@
 package mage.sets.weatherlight;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +74,7 @@ public class Doomsday extends CardImpl<Doomsday> {
 class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
 
     public DoomsdayEffect() {
-        super(Constants.Outcome.LoseLife);
+        super(Outcome.LoseLife);
         staticText = "Search your library and graveyard for five cards and exile the rest. Put the chosen cards on top of your library in any order. You lose half your life, rounded up";
     }
 
@@ -92,12 +93,12 @@ class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
         
         if (player != null) {
             //Search your library and graveyard for five cards
-            Cards allCards = new CardsImpl(Constants.Zone.PICK);
-            Cards cards = new CardsImpl(Constants.Zone.PICK);
+            Cards allCards = new CardsImpl(Zone.PICK);
+            Cards cards = new CardsImpl(Zone.PICK);
             allCards.addAll(player.getLibrary().getCardList());
             allCards.addAll(player.getGraveyard());
             int number = Math.min(5, allCards.size());
-            TargetCard target = new TargetCard(number, number, Constants.Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(number, number, Zone.PICK, new FilterCard());
             
             if(player.choose(Outcome.Benefit, allCards, target, game)){
                 // exile the rest
@@ -114,20 +115,20 @@ class DoomsdayEffect extends OneShotEffect<DoomsdayEffect> {
                     
                 }
                 //Put the chosen cards on top of your library in any order
-                target = new TargetCard(Constants.Zone.PICK, new FilterCard("Card to put on top"));
+                target = new TargetCard(Zone.PICK, new FilterCard("Card to put on top"));
                 target.setRequired(true);
                 while (cards.size() > 1) {
                     player.choose(Outcome.Neutral, cards, target, game);
                     Card card = cards.get(target.getFirstTarget(), game);
                     if (card != null) {
                         cards.remove(card);
-                        card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                 }
             }
             

@@ -1,6 +1,7 @@
 package org.mage.test.cards.continuous;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,11 +19,11 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      */
     @Test
     public void testBoost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -38,16 +39,16 @@ public class AngelOfJubilationTest extends CardTestPlayerBase {
      */
     @Test
     public void testNoBoostOnBattlefieldLeave() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.BATTLEFIELD, playerA, "Angel of Jubilation");
+        addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
 
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Angel of Jubilation");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Angel of Jubilation");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

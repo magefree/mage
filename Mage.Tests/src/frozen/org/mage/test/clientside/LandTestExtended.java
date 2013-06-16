@@ -1,6 +1,6 @@
 package org.mage.test.clientside;
 
-import mage.Constants;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.clientside.base.MageAPIExtended;
 
@@ -10,7 +10,7 @@ public class LandTestExtended extends MageAPIExtended {
 
     @Test
     public void testPlayingLandInMainPhase() throws Exception {
-        addCard("Mountain", Constants.Zone.HAND);
+        addCard("Mountain", Zone.HAND);
         setPhase("Precombat Main", mine);
         play("Mountain");
         assertBattlefield("Mountain");

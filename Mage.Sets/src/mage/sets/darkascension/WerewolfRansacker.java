@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -72,10 +71,10 @@ public class WerewolfRansacker extends CardImpl<WerewolfRansacker> {
         this.toughness = new MageInt(4);
 
         // Whenever this creature transforms into Werewolf Ransacker, you may destroy target artifact. If that artifact is put into a graveyard this way, Werewolf Ransacker deals 3 damage to that artifact's controller.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EmptyEffect(WerewolfRansackerAbility.RULE_TEXT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmptyEffect(WerewolfRansackerAbility.RULE_TEXT)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Werewolf Ransacker.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
     }
 
@@ -99,7 +98,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbi
     }
 
     public WerewolfRansackerAbility() {
-        super(Constants.Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
+        super(Zone.BATTLEFIELD, new WerewolfRansackerEffect(), true);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         this.addTarget(target);
@@ -136,7 +135,7 @@ class WerewolfRansackerAbility extends TriggeredAbilityImpl<WerewolfRansackerAbi
 class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
 
     public WerewolfRansackerEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
     }
 
     public WerewolfRansackerEffect(final WerewolfRansackerEffect effect) {
@@ -157,7 +156,7 @@ class WerewolfRansackerEffect extends OneShotEffect<WerewolfRansackerEffect> {
                 if (permanent != null) {
                     if (permanent.destroy(source.getId(), game, false)) {
                         affectedTargets++;
-                        if (game.getState().getZone(permanent.getId()) == Constants.Zone.GRAVEYARD) {
+                        if (game.getState().getZone(permanent.getId()) == Zone.GRAVEYARD) {
                             Player player = game.getPlayer(permanent.getControllerId());
                             if (player != null)
                                 player.damage(3, source.getSourceId(), game, false, true);

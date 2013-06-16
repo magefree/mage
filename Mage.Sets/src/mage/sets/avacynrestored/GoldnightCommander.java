@@ -27,13 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 import java.util.UUID;
 
@@ -54,7 +54,7 @@ public class GoldnightCommander extends CardImpl<GoldnightCommander> {
         this.toughness = new MageInt(2);
 
         // Whenever another creature enters the battlefield under your control, creatures you control get +1/+1 until end of turn.
-        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn)));
+        this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn)));
     }
 
     public GoldnightCommander(final GoldnightCommander card) {

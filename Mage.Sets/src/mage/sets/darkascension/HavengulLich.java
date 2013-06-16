@@ -28,12 +28,13 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -45,6 +46,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -93,7 +96,7 @@ public class HavengulLich extends CardImpl<HavengulLich> {
 class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> {
 
     public HavengulLichPlayEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast target creature card in a graveyard this turn";
     }
 
@@ -114,7 +117,7 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
         Card card = game.getCard(sourceId);
-        if (card != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD) {
+        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
             if (targetPointer.getFirst(game, source).equals(card.getId()))
                 return true;
         }
@@ -185,7 +188,7 @@ class HavengulLichEffect extends ContinuousEffectImpl<HavengulLichEffect> {
     private UUID cardId;
 
     public HavengulLichEffect(UUID cardId) {
-        super(Duration.EndOfTurn, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.cardId = cardId;
     }
 

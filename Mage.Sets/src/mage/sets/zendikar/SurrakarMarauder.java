@@ -28,14 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -52,7 +53,7 @@ public class SurrakarMarauder extends CardImpl<SurrakarMarauder> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Constants.Duration.EndOfTurn), false));
+        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
     public SurrakarMarauder(final SurrakarMarauder card) {

@@ -29,8 +29,8 @@
 package mage.target.common;
 
 import java.util.List;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.CardsImpl;

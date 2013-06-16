@@ -28,15 +28,16 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -65,7 +66,7 @@ public class MidnightBanshee extends CardImpl<MidnightBanshee> {
 
         this.addAbility(WitherAbility.getInstance());
         // At the beginning of your upkeep, put a -1/-1 counter on each nonblack creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersAllEffect(CounterType.M1M1.createInstance(), filter), TargetController.YOU, false));
     }
 
     public MidnightBanshee(final MidnightBanshee card) {

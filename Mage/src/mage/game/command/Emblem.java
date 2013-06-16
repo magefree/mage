@@ -27,7 +27,6 @@
 */
 package mage.game.command;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Abilities;
@@ -36,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.constants.CardType;
 import mage.game.Game;
 
 import java.util.ArrayList;
@@ -106,7 +106,7 @@ public class Emblem implements CommandObject {
     public void setName(String name) {}
 
     @Override
-    public List<Constants.CardType> getCardType() {
+    public List<CardType> getCardType() {
         return emptyList;
     }
 

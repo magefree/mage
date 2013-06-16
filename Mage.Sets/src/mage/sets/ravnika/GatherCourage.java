@@ -28,12 +28,13 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -51,7 +52,7 @@ public class GatherCourage extends CardImpl<GatherCourage> {
         // Convoke
         this.addAbility(new ConvokeAbility());
         // Target creature gets +2/+2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

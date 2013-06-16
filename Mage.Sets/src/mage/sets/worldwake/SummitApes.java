@@ -28,15 +28,16 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -63,7 +64,7 @@ public class SummitApes extends CardImpl<SummitApes> {
         this.toughness = new MageInt(2);
 
         // As long as you control a Mountain, Summit Apes can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(new CantBeBlockedByOneEffect(2), new ControlsPermanentCondition(filter), rule)));
     }
 

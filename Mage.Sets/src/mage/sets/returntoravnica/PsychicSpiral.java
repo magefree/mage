@@ -28,13 +28,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -70,7 +72,7 @@ public class PsychicSpiral extends CardImpl<PsychicSpiral> {
 class PsychicSpiralEffect extends OneShotEffect<PsychicSpiralEffect> {
 
     public PsychicSpiralEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "Shuffle all cards from your graveyard into your library. Target player puts that many cards from the top of his or her library into his or her graveyard";
     }
 
@@ -94,7 +96,7 @@ class PsychicSpiralEffect extends OneShotEffect<PsychicSpiralEffect> {
                         if (!targetPlayer.getLibrary().getCardList().isEmpty()) {
                             Card card = targetPlayer.getLibrary().removeFromTop(game);
                             if (card != null) {
-                                card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                             }
                         }
                     }

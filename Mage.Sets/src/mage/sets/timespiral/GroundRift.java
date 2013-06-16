@@ -28,13 +28,14 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.StormAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -60,7 +61,7 @@ public class GroundRift extends CardImpl<GroundRift> {
 
         // Target creature without flying can't block this turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBlockTargetEffect(Duration.EndOfTurn));
         // Storm
         this.addAbility(new StormAbility());
     }

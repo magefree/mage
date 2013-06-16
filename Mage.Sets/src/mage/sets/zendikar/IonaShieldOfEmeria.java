@@ -28,9 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -69,7 +68,7 @@ public class IonaShieldOfEmeria extends CardImpl<IonaShieldOfEmeria> {
         this.addAbility(new AsEntersBattlefieldAbility(new IonaShieldOfEmeriaChooseColorEffect()));
 
         // Your opponents can't cast spells of the chosen color.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new IonaShieldOfEmeriaReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IonaShieldOfEmeriaReplacementEffect()));
 
     }
 
@@ -86,7 +85,7 @@ public class IonaShieldOfEmeria extends CardImpl<IonaShieldOfEmeria> {
 class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmeriaChooseColorEffect> {
 
     public IonaShieldOfEmeriaChooseColorEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "choose a color";
     }
 
@@ -100,7 +99,7 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmer
         Permanent perm = game.getPermanent(source.getSourceId());
         if (player != null && perm != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.Detriment, colorChoice, game)) {
+            if (player.choose(Outcome.Detriment, colorChoice, game)) {
                 game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(perm.getId() + "_color", colorChoice.getColor());
             }
@@ -116,7 +115,7 @@ class IonaShieldOfEmeriaChooseColorEffect extends OneShotEffect<IonaShieldOfEmer
 
 class IonaShieldOfEmeriaReplacementEffect extends ReplacementEffectImpl<IonaShieldOfEmeriaReplacementEffect> {
     IonaShieldOfEmeriaReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Your opponents can't cast spells of the chosen color";
     }
 

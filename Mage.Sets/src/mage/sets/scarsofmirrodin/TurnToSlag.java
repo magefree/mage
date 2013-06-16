@@ -32,12 +32,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -69,7 +69,7 @@ public class TurnToSlag extends CardImpl<TurnToSlag> {
 class TurnToSlagEffect extends OneShotEffect<TurnToSlagEffect> {
 
     public TurnToSlagEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "{this} deals 5 damage to target creature. Destroy all Equipment attached to that creature";
     }
 

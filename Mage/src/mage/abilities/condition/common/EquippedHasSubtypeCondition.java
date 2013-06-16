@@ -27,9 +27,9 @@
  */
 package mage.abilities.condition.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -57,7 +57,7 @@ public class EquippedHasSubtypeCondition implements Condition {
         if (permanent != null && permanent.getAttachedTo() != null) {
             Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
             if (attachedTo == null) {
-                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Constants.Zone.BATTLEFIELD);
+                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
             }
             if (attachedTo != null) {
                 if (subType != null) {

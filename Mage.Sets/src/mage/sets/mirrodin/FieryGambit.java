@@ -28,16 +28,16 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.abilities.effects.common.UntapAllLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -107,7 +107,7 @@ class FieryGambitEffect extends OneShotEffect<FieryGambitEffect> {
                     creature.damage(3, source.getSourceId(), game, true, false);
                 }
                 if (flipsWon > 1) {
-                    new DamagePlayersEffect(6, Constants.TargetController.OPPONENT).apply(game, source);
+                    new DamagePlayersEffect(6, TargetController.OPPONENT).apply(game, source);
                 }
                 if (flipsWon > 2) {
                     controller.drawCards(9, game);

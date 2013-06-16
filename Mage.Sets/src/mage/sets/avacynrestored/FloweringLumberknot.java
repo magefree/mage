@@ -27,15 +27,16 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,7 +57,7 @@ public class FloweringLumberknot extends CardImpl<FloweringLumberknot> {
         this.toughness = new MageInt(5);
 
         // Flowering Lumberknot can't attack or block unless it's paired with a creature with soulbond.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new FloweringLumberknotEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FloweringLumberknotEffect()));
     }
 
     public FloweringLumberknot(final FloweringLumberknot card) {
@@ -72,7 +73,7 @@ public class FloweringLumberknot extends CardImpl<FloweringLumberknot> {
 class FloweringLumberknotEffect extends RestrictionEffect<FloweringLumberknotEffect> {
 
     public FloweringLumberknotEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it's paired with a creature with soulbond";
     }
 

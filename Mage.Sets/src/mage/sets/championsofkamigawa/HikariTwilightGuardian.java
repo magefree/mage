@@ -29,9 +29,9 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -80,7 +82,7 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
     private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
     HikariTwilightGuardianEffect ( ) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -95,7 +97,7 @@ class HikariTwilightGuardianEffect extends OneShotEffect<HikariTwilightGuardianE
             if (permanent.moveToExile(source.getSourceId(), "Hikari, Twilight Guardian", source.getId(), game)) {
                 //create delayed triggered ability
                 AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(
-                        new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD));
+                        new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);

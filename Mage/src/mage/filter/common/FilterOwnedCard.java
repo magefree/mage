@@ -28,7 +28,7 @@
 
 package mage.filter.common;
 
-import mage.Constants;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerPredicate;
 
@@ -44,7 +44,7 @@ public class FilterOwnedCard extends FilterCard {
 
     public FilterOwnedCard(String name) {
         super(name);
-        this.add(new OwnerPredicate(Constants.TargetController.YOU));
+        this.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public FilterOwnedCard(final FilterOwnedCard filter) {

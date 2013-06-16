@@ -29,9 +29,8 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -69,7 +70,7 @@ public class WickerboughElder extends CardImpl<WickerboughElder> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(1)), false));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ColoredManaCost(ColoredManaSymbol.G));
         ability.addCost(new RemoveCountersSourceCost(CounterType.M1M1.createInstance(1)));
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);

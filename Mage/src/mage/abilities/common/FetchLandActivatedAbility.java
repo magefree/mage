@@ -29,9 +29,9 @@
 package mage.abilities.common;
 
 import java.util.ArrayList;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.PayLifeCost;

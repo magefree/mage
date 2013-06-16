@@ -30,10 +30,9 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ProtectionAbility;
@@ -101,7 +100,7 @@ class ApostlesBlessingEffect extends GainAbilityTargetEffect {
         FilterCard protectionFilter = new FilterCard();
         ChoiceColorOrArtifact choice = (ChoiceColorOrArtifact) source.getChoices().get(0);
         if (choice.isArtifactSelected()) {
-            protectionFilter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
+            protectionFilter.add(new CardTypePredicate(CardType.ARTIFACT));
         } else {
             protectionFilter.add(new ColorPredicate(choice.getColor()));
         }

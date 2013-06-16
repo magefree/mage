@@ -29,9 +29,9 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
-import mage.Constants.Duration;
-import mage.Constants.EffectType;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.DamageEvent;

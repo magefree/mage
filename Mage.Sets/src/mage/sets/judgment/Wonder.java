@@ -27,9 +27,8 @@
  */
 package mage.sets.judgment;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
@@ -38,6 +37,8 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -74,10 +75,10 @@ public class Wonder extends CardImpl<Wonder> {
 
         // As long as Wonder is in your graveyard and you control an Island, creatures you control have flying.
         ContinuousEffect effect = new GainAbilityControlledEffect(FlyingAbility.getInstance(),
-                Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent());
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent());
         ConditionalContinousEffect wonderEffect = new ConditionalContinousEffect(effect,
                 new ControlsPermanentCondition(filter), ruleText);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD, wonderEffect));
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD, wonderEffect));
     }
 
     public Wonder(final Wonder card) {

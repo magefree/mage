@@ -28,15 +28,17 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.EnchantedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -56,7 +58,7 @@ public class DreampodDruid extends CardImpl<DreampodDruid> {
 
         // At the beginning of each upkeep, if Dreampod Druid is enchanted, put a 1/1 green Saproling creature token onto the battlefield.
         this.addAbility(new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),1), Constants.TargetController.ANY, false, false),
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),1), TargetController.ANY, false, false),
                 new EnchantedCondition(),
                 "At the beginning of each upkeep, if Dreampod Druid is enchanted, put a 1/1 green Saproling creature token onto the battlefield."));
     }

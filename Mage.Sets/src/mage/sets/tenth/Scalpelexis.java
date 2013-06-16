@@ -30,9 +30,9 @@ package mage.sets.tenth;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -78,7 +79,7 @@ public class Scalpelexis extends CardImpl<Scalpelexis> {
 class ScalpelexisEffect extends OneShotEffect<ScalpelexisEffect> {
 
     public ScalpelexisEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         this.staticText = "that player exiles the top four cards of his or her library. If two or more of those cards have the same name, repeat this process";
     }
 

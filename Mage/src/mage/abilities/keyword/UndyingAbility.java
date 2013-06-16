@@ -1,13 +1,13 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -36,7 +36,7 @@ public class UndyingAbility extends DiesTriggeredAbility {
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (super.checkTrigger(event, game)) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (!p.getCounters().containsKey(CounterType.P1P1) || p.getCounters().getCount(CounterType.P1P1) == 0) {
                 game.getState().setValue(new StringBuilder("undying").append(getSourceId()).toString(), new FixedTarget(p.getId()));
                 return true;

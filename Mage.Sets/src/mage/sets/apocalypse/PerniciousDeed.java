@@ -28,15 +28,17 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -61,7 +63,7 @@ public class PerniciousDeed extends CardImpl<PerniciousDeed> {
         this.color.setBlack(true);
 
         // {X}, Sacrifice Pernicious Deed: Destroy each artifact, creature, and enchantment with converted mana cost X or less.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PerniciousDeedEffect(), new VariableManaCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PerniciousDeedEffect(), new VariableManaCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -81,7 +83,7 @@ class PerniciousDeedEffect extends OneShotEffect {
 
 
     public PerniciousDeedEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy each artifact, creature, and enchantment with converted mana cost X or less";
     }
 

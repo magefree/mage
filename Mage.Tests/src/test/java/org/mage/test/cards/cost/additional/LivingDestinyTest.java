@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.additional;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,13 +13,13 @@ public class LivingDestinyTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Living Destiny");
-        addCard(Constants.Zone.HAND, playerA, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Living Destiny");
+        addCard(Zone.HAND, playerA, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Living Destiny", 1);
@@ -31,12 +32,12 @@ public class LivingDestinyTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantCast() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Living Destiny");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Living Destiny");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // card is still at hand
@@ -48,13 +49,13 @@ public class LivingDestinyTest extends CardTestPlayerBase {
      */
     @Test
     public void testNonCreatureCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Living Destiny");
-        addCard(Constants.Zone.HAND, playerA, "Divination");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Living Destiny");
+        addCard(Zone.HAND, playerA, "Divination");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Living Destiny");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // cards are still at hand

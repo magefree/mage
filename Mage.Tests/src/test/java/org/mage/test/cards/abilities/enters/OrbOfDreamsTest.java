@@ -1,6 +1,7 @@
  package org.mage.test.cards.abilities.enters;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,14 +31,14 @@ public class OrbOfDreamsTest extends CardTestPlayerBase {
 
     @Test
     public void testOrbNotTappingItself() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 5);
-        addCard(Constants.Zone.HAND, playerA, "Orb of Dreams");
-        addCard(Constants.Zone.HAND, playerA, "Razortip Whip");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, "Orb of Dreams");
+        addCard(Zone.HAND, playerA, "Razortip Whip");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Orb of Dreams");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Razortip Whip");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Orb of Dreams");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Razortip Whip");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

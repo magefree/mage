@@ -28,13 +28,14 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.target.common.TargetControlledPermanent;
 
@@ -49,7 +50,7 @@ public class ZuranOrb extends CardImpl<ZuranOrb> {
         this.expansionSetCode = "ICE";
 
         // Sacrifice a land: You gain 2 life.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
     }
 
     public ZuranOrb(final ZuranOrb card) {

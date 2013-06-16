@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +39,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -76,7 +77,7 @@ public class SpireTracer extends CardImpl<SpireTracer> {
 class CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect extends RestrictionEffect<CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect> {
 
     public CantBeBlockedExceptByCreaturesWithFlyingOrReachEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Can't be blocked except by creatures with flying or reach";
     }
 

@@ -1,11 +1,12 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -32,7 +33,7 @@ public class LivingWeaponAbility extends EntersBattlefieldTriggeredAbility {
 
 class LivingWeaponEffect extends OneShotEffect<LivingWeaponEffect> {
     LivingWeaponEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
     }
 
     LivingWeaponEffect(final LivingWeaponEffect effect) {
@@ -59,7 +60,7 @@ class LivingWeaponEffect extends OneShotEffect<LivingWeaponEffect> {
 class GermToken extends Token {
     public GermToken() {
         super("Germ", "a 0/0 black Germ creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color = ObjectColor.BLACK;
         subtype.add("Germ");
         power = new MageInt(0);

@@ -28,9 +28,9 @@
 package mage.sets.alliances;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -55,7 +57,7 @@ public class HelmOfObedience extends CardImpl<HelmOfObedience> {
         this.expansionSetCode = "ALL";
 
         // {X}, {tap}: Target opponent puts cards from the top of his or her library into his or her graveyard until a creature card or X cards are put into that graveyard this way, whichever comes first. If a creature card is put into that graveyard this way, sacrifice Helm of Obedience and put that card onto the battlefield under your control. X can't be 0.
-        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new HelmOfObedienceEffect(), new TapSourceCost());
+        SimpleActivatedAbility abilitiy = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelmOfObedienceEffect(), new TapSourceCost());
         abilitiy.addCost(new VariableManaCost());
         abilitiy.addTarget(new TargetOpponent());
         this.addAbility(abilitiy);
@@ -78,7 +80,7 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
     private static final ManacostVariableValue amount = new ManacostVariableValue();
     
     public HelmOfObedienceEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public HelmOfObedienceEffect(final HelmOfObedienceEffect effect) {
@@ -102,7 +104,7 @@ class HelmOfObedienceEffect extends OneShotEffect<HelmOfObedienceEffect> {
                 while(player.getLibrary().size() > 0) {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null){
-                        if(card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false)){
+                        if(card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false)){
                             if(card.getCardType().contains(CardType.CREATURE)){
                                 break;
                             }

@@ -28,9 +28,9 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -43,6 +43,8 @@ import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +62,7 @@ public class CursedScroll extends CardImpl<CursedScroll> {
         this.expansionSetCode = "TMP";
 
         // {3}, {tap}: Name a card. Reveal a card at random from your hand. If it's the named card, Cursed Scroll deals 2 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CursedScrollEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CursedScrollEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -78,7 +80,7 @@ public class CursedScroll extends CardImpl<CursedScroll> {
 class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
 
     public CursedScrollEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Name a card. Reveal a card at random from your hand. If it's the named card, {this} deals 2 damage to target creature or player";
     }
 
@@ -93,7 +95,7 @@ class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
-            while (!you.choose(Constants.Outcome.Damage, cardChoice, game)) {
+            while (!you.choose(Outcome.Damage, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
             String cardName = cardChoice.getChoice();
@@ -106,7 +108,7 @@ class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
                 if (card.getName().equals(cardName)) {
                     TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
                     if (target.canChoose(you.getId(), game)) {
-                        if (you.chooseTarget(Constants.Outcome.Damage, target, source, game)) {
+                        if (you.chooseTarget(Outcome.Damage, target, source, game)) {
                             Permanent creature = game.getPermanent(target.getFirstTarget());
                             if (creature != null) {
                                 creature.damage(2, source.getSourceId(), game, true, false);

@@ -1,8 +1,8 @@
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -21,7 +21,7 @@ public class DealsCombatDamageToAPlayerAttachedTriggeredAbility extends Triggere
     }
 
     public DealsCombatDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
         this.setFixedTargetPointer = setFixedTargetPointer;
         this.attachedDescription = attachedDescription;
     }

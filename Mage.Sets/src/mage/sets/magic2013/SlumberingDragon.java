@@ -28,9 +28,9 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +39,8 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +66,7 @@ public class SlumberingDragon extends CardImpl<SlumberingDragon> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Slumbering Dragon can't attack or block unless it has five or more +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SlumberingDragonEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SlumberingDragonEffect()));
         
         // Whenever a creature attacks you or a planeswalker you control, put a +1/+1 counter on Slumbering Dragon.
         this.addAbility(new SlumberingDragonTriggeredAbility());
@@ -84,7 +86,7 @@ public class SlumberingDragon extends CardImpl<SlumberingDragon> {
 class SlumberingDragonEffect extends RestrictionEffect<SlumberingDragonEffect> {
 
     public SlumberingDragonEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack or block unless it has five or more +1/+1 counters on it";
     }
 
@@ -123,7 +125,7 @@ class SlumberingDragonEffect extends RestrictionEffect<SlumberingDragonEffect> {
 class SlumberingDragonTriggeredAbility extends TriggeredAbilityImpl<SlumberingDragonTriggeredAbility> {
 
     public SlumberingDragonTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false);
     }
 
     public SlumberingDragonTriggeredAbility(final SlumberingDragonTriggeredAbility ability) {

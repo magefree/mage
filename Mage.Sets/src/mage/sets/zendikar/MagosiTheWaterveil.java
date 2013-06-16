@@ -28,9 +28,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +42,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,12 +67,12 @@ public class MagosiTheWaterveil extends CardImpl<MagosiTheWaterveil> {
         this.addAbility(new BlueManaAbility());
         
         // {U}, {tap}: Put an eon counter on Magosi, the Waterveil. Skip your next turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MagosiTheWaterveilEffect(), new ManaCostsImpl("{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MagosiTheWaterveilEffect(), new ManaCostsImpl("{U}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
         
         // {tap}, Remove an eon counter from Magosi, the Waterveil and return it to its owner's hand: Take an extra turn after this one.
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
         ability2.addCost(new RemoveCountersSourceCost(CounterType.EON.createInstance()));
         ability2.addCost(new ReturnToHandSourceCost());
         this.addAbility(ability2);
@@ -90,7 +92,7 @@ public class MagosiTheWaterveil extends CardImpl<MagosiTheWaterveil> {
 class MagosiTheWaterveilEffect extends OneShotEffect<MagosiTheWaterveilEffect> {
 
     public MagosiTheWaterveilEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Put an eon counter on Magosi, the Waterveil. Skip your next turn";
     }
 

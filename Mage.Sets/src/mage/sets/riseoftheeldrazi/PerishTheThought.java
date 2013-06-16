@@ -28,13 +28,15 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +75,7 @@ class PerishTheThoughtEffect extends OneShotEffect<PerishTheThoughtEffect> {
     private static final FilterCard filter = new FilterCard("card in target opponent's hand");
     
     public PerishTheThoughtEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "Target opponent reveals his or her hand. You choose a card from it. That player shuffles that card into his or her library";
     }
 
@@ -94,14 +96,14 @@ class PerishTheThoughtEffect extends OneShotEffect<PerishTheThoughtEffect> {
                 targetOpponent.revealCards("Perish the Thought", targetOpponent.getHand(), game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
-                    TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                    TargetCard target = new TargetCard(Zone.PICK, filter);
                     target.setRequired(true);
                     target.setNotTarget(true);
-                    if (you.choose(Constants.Outcome.Neutral, targetOpponent.getHand(), target, game)) {
+                    if (you.choose(Outcome.Neutral, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
                             if (targetOpponent != null) {
-                                chosenCard.moveToZone(Constants.Zone.LIBRARY, id, game, false);
+                                chosenCard.moveToZone(Zone.LIBRARY, id, game, false);
                                 targetOpponent.shuffleLibrary(game);
                             }
                         }

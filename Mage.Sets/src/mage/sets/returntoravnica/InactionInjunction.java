@@ -28,12 +28,13 @@
 package mage.sets.returntoravnica;
  
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,7 +48,7 @@ public class InactionInjunction extends CardImpl<InactionInjunction> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
  
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
  
     public InactionInjunction(UUID ownerId) {

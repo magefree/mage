@@ -28,10 +28,10 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -58,7 +59,7 @@ public class SpellstutterSprite extends CardImpl<SpellstutterSprite> {
     
     public static final FilterCreaturePermanent filter = new FilterCreaturePermanent("number of Faeries you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Faerie"));
     }
 

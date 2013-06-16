@@ -27,8 +27,8 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants.Outcome;
-import mage.Constants.TargetController;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.filter.FilterPermanent;

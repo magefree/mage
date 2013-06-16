@@ -29,11 +29,11 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardTriggeredAbility;
@@ -42,6 +42,7 @@ import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,7 +60,7 @@ public class PsychosisCrawler extends CardImpl<PsychosisCrawler> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInControllerHandCount(), Duration.EndOfGame)));
         this.addAbility(new DrawCardTriggeredAbility(new LoseLifeOpponentsEffect(), false));
     }
 

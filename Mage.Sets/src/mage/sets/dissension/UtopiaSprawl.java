@@ -28,10 +28,10 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,6 +43,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -74,7 +75,7 @@ public class UtopiaSprawl extends CardImpl<UtopiaSprawl> {
         // Enchant Forest
         TargetPermanent auraTarget = new TargetLandPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // As Utopia Sprawl enters the battlefield, choose a color.
@@ -96,7 +97,7 @@ public class UtopiaSprawl extends CardImpl<UtopiaSprawl> {
 class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
 
     public ChooseColorEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose a color";
     }
 
@@ -110,7 +111,7 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.Neutral, colorChoice, game)) {
+            if (player.choose(Outcome.Neutral, colorChoice, game)) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
             }

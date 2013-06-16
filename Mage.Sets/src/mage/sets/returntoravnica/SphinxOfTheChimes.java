@@ -31,9 +31,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterNonlandCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -70,7 +71,7 @@ public class SphinxOfTheChimes extends CardImpl<SphinxOfTheChimes> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Discard two nonland cards with the same name: Draw four cards.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(4), new DiscardTwoNonlandCardsWithTheSameNameCost());
         this.addAbility(ability);
 
     }

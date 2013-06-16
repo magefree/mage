@@ -1,8 +1,8 @@
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -18,7 +18,7 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilit
     }
 
     public PutIntoGraveFromBattlefieldTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.ALL, effect, optional);
+        super(Zone.ALL, effect, optional);
     }
 
     PutIntoGraveFromBattlefieldTriggeredAbility(PutIntoGraveFromBattlefieldTriggeredAbility ability) {
@@ -38,8 +38,8 @@ public class PutIntoGraveFromBattlefieldTriggeredAbility extends TriggeredAbilit
             Permanent permanent = zEvent.getTarget();
 
             if (permanent != null &&
-                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
+                    zEvent.getToZone() == Zone.GRAVEYARD &&
+                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
                     permanent.getId().equals(this.getSourceId())) {
                 return true;
             }

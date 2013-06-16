@@ -1,10 +1,11 @@
 package org.mage.test.serverside.base;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -54,8 +55,8 @@ public abstract class MageTestBase {
     protected List<Card> libraryCardsA = new ArrayList<Card>();
     protected List<Card> libraryCardsB = new ArrayList<Card>();
 
-    protected Map<Constants.Zone, String> commandsA = new HashMap<Constants.Zone, String>();
-    protected Map<Constants.Zone, String> commandsB = new HashMap<Constants.Zone, String>();
+    protected Map<Zone, String> commandsA = new HashMap<Zone, String>();
+    protected Map<Zone, String> commandsB = new HashMap<Zone, String>();
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -215,26 +216,26 @@ public abstract class MageTestBase {
             if (nickname.equals("ComputerA") || nickname.equals("ComputerB")) {
                 List<Card> cards = null;
                 List<PermanentCard> perms = null;
-                Constants.Zone gameZone;
+                Zone gameZone;
                 if ("hand".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.HAND;
+                    gameZone = Zone.HAND;
                     cards = nickname.equals("ComputerA") ? handCardsA : handCardsB;
                 } else if ("battlefield".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.BATTLEFIELD;
+                    gameZone = Zone.BATTLEFIELD;
                     perms = nickname.equals("ComputerA") ? battlefieldCardsA : battlefieldCardsB;
                 } else if ("graveyard".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.GRAVEYARD;
+                    gameZone = Zone.GRAVEYARD;
                     cards = nickname.equals("ComputerA") ? graveyardCardsA : graveyardCardsB;
                 } else if ("library".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.LIBRARY;
+                    gameZone = Zone.LIBRARY;
                     cards = nickname.equals("ComputerA") ? libraryCardsA : libraryCardsB;
                 } else if ("player".equalsIgnoreCase(zone)) {
                     String command = m.group(3);
                     if ("life".equals(command)) {
                         if (nickname.equals("ComputerA")) {
-                            commandsA.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
+                            commandsA.put(Zone.OUTSIDE, "life:" + m.group(4));
                         } else {
-                            commandsB.put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
+                            commandsB.put(Zone.OUTSIDE, "life:" + m.group(4));
                         }
                     }
                     return;
@@ -257,7 +258,7 @@ public abstract class MageTestBase {
                         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
-                            if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
+                            if (gameZone.equals(Zone.BATTLEFIELD)) {
                                 PermanentCard p = new PermanentCard(card, null);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -299,7 +300,7 @@ public abstract class MageTestBase {
     }
 
     protected Player createPlayer(String name, String playerType) {
-        return PlayerFactory.getInstance().createPlayer(playerType, name, Constants.RangeOfInfluence.ALL, 5);
+        return PlayerFactory.getInstance().createPlayer(playerType, name, RangeOfInfluence.ALL, 5);
     }
 
     protected Player createRandomPlayer(String name) {

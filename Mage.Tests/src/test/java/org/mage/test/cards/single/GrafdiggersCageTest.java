@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,12 +13,12 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 2);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Lingering Souls");
+        addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Lingering Souls");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {1}{B}");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -28,13 +29,13 @@ public class GrafdiggersCageTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 5);
-        addCard(Constants.Zone.HAND, playerA, "Rise from the Grave", 1);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Grafdigger's Cage");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Rise from the Grave", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Rise from the Grave", "Craw Wurm");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Rise from the Grave", "Craw Wurm");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -27,9 +27,9 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -40,11 +40,11 @@ import mage.target.targetpointer.FixedTarget;
 public class DealsDamageToOpponentTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToOpponentTriggeredAbility> {
 
     public DealsDamageToOpponentTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
     
     public DealsDamageToOpponentTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public DealsDamageToOpponentTriggeredAbility(final DealsDamageToOpponentTriggeredAbility ability) {

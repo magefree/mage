@@ -28,14 +28,15 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 
 /**
@@ -51,7 +52,7 @@ public class Subversion extends CardImpl<Subversion> {
         this.color.setBlack(true);
 
         // At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SubversionEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SubversionEffect(), TargetController.YOU, false));
     }
 
     public Subversion(final Subversion card) {

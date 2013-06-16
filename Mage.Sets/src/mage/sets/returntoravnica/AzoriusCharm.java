@@ -28,15 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
@@ -54,7 +55,7 @@ public class AzoriusCharm extends CardImpl<AzoriusCharm> {
         this.color.setBlue(true);
 
         // Choose one — Creatures you control gain lifelink until end of turn;
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
 
         // or draw a card;
         Mode mode = new Mode();

@@ -28,9 +28,9 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Outcome;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;

@@ -30,13 +30,13 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  * @author Loki
@@ -51,7 +51,7 @@ public class BenalishVeteran extends CardImpl<BenalishVeteran> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), false));
     }
 
     public BenalishVeteran(final BenalishVeteran card) {

@@ -27,7 +27,7 @@
  */
 package mage.abilities.mana;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;

@@ -28,14 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -49,7 +51,7 @@ public class GlazeFiend extends CardImpl<GlazeFiend> {
     private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("another artifact");
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
     public GlazeFiend(UUID ownerId) {
@@ -64,7 +66,7 @@ public class GlazeFiend extends CardImpl<GlazeFiend> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever another artifact enters the battlefield under your control, Glaze Fiend gets +2/+2 until end of turn.
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), filter));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), filter));
     }
 
     public GlazeFiend(final GlazeFiend card) {

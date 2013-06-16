@@ -29,9 +29,7 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.AddCardTypeAttachedEffect;
@@ -50,9 +48,9 @@ public class SilverskinArmor extends CardImpl<SilverskinArmor> {
         this.expansionSetCode = "MBS";
         this.subtype.add("Equipment");
 
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new ManaCostsImpl("{2}")));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardTypeAttachedEffect(CardType.ARTIFACT, Constants.Duration.WhileOnBattlefield, Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardTypeAttachedEffect(CardType.ARTIFACT, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
     }
 
     public SilverskinArmor(final SilverskinArmor card) {

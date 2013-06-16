@@ -28,9 +28,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,7 +58,7 @@ public class DryadMilitant extends CardImpl<DryadMilitant> {
         this.toughness = new MageInt(1);
 
         // If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DryadMilitantReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DryadMilitantReplacementEffect()));
     }
 
     public DryadMilitant(final DryadMilitant card) {
@@ -75,7 +74,7 @@ public class DryadMilitant extends CardImpl<DryadMilitant> {
 class DryadMilitantReplacementEffect extends ReplacementEffectImpl<DryadMilitantReplacementEffect> {
 
     public DryadMilitantReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If an instant or sorcery card would be put into a graveyard from anywhere, exile it instead";
     }
 
@@ -104,7 +103,7 @@ class DryadMilitantReplacementEffect extends ReplacementEffectImpl<DryadMilitant
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD) {
             Card card = (Card) game.getCard(event.getTargetId());
             if (card != null && (card.getCardType().contains(CardType.SORCERY) || card.getCardType().contains(CardType.INSTANT))) {
                 return true;

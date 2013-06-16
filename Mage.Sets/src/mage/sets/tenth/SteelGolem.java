@@ -28,9 +28,8 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -55,7 +54,7 @@ public class SteelGolem extends CardImpl<SteelGolem> {
         this.toughness = new MageInt(4);
 
         // You can't cast creature spells.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SteelGolemEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelGolemEffect()));
     }
 
     public SteelGolem(final SteelGolem card) {
@@ -71,7 +70,7 @@ public class SteelGolem extends CardImpl<SteelGolem> {
 class SteelGolemEffect extends ReplacementEffectImpl<SteelGolemEffect> {
     
     public SteelGolemEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "You can't cast creature spells.";
     }
 

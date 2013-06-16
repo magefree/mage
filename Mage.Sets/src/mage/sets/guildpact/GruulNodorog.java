@@ -28,9 +28,8 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -55,7 +54,7 @@ public class GruulNodorog extends CardImpl<GruulNodorog> {
         this.toughness = new MageInt(4);
 
         //{R}: Gruul Nodorog can't be blocked this turn except by two or more creatures.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 
     public GruulNodorog(final GruulNodorog card) {
@@ -70,7 +69,7 @@ public class GruulNodorog extends CardImpl<GruulNodorog> {
 
 class GruulNodorogEffect extends OneShotEffect<GruulNodorogEffect> {
     public GruulNodorogEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each opponent loses 1 life. You gain life equal to the life lost this way";
     }
 

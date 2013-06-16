@@ -33,10 +33,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import mage.Constants;
+
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckValidatorImpl;
+import mage.constants.CardType;
 import mage.filter.FilterMana;
 
 /**
@@ -133,7 +134,7 @@ public class Commander extends DeckValidatorImpl {
         
         if(deck.getSideboard().size() == 1){
             Card commander = (Card)deck.getSideboard().toArray()[0];
-            if(commander != null && commander.getCardType().contains(Constants.CardType.CREATURE) && commander.getSupertype().contains("Legendary")){
+            if(commander != null && commander.getCardType().contains(CardType.CREATURE) && commander.getSupertype().contains("Legendary")){
                 FilterMana color = getColorIdentity(commander);
                 for(Card card : deck.getCards()){
                     if(!cardHasValideColor(color, card)){

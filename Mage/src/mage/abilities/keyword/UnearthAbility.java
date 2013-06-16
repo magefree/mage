@@ -28,10 +28,10 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;

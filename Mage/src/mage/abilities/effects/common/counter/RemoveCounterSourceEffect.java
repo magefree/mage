@@ -1,9 +1,9 @@
 package mage.abilities.effects.common.counter;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -12,7 +12,7 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
     private Counter counter;
 
     public RemoveCounterSourceEffect(Counter counter) {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         this.counter = counter;
         setText();
     }

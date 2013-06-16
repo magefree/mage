@@ -28,15 +28,17 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -71,7 +73,7 @@ public class GrafdiggersCage extends CardImpl<GrafdiggersCage> {
 class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect> {
 
     public GrafdiggersCageEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature cards can't enter the battlefield from graveyards or libraries";
     }
 
@@ -113,7 +115,7 @@ class GrafdiggersCageEffect extends ReplacementEffectImpl<GrafdiggersCageEffect>
 class GrafdiggersCageEffect2 extends ReplacementEffectImpl<GrafdiggersCageEffect2> {
 
     public GrafdiggersCageEffect2() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Players can't cast cards in graveyards or libraries";
     }
 
@@ -142,7 +144,7 @@ class GrafdiggersCageEffect2 extends ReplacementEffectImpl<GrafdiggersCageEffect
             Card card = game.getCard(event.getSourceId());
             if (card != null) {
                 Zone zone = game.getState().getZone(card.getId());
-                if (zone != null && (zone == Constants.Zone.GRAVEYARD || zone == Constants.Zone.LIBRARY)) {
+                if (zone != null && (zone == Zone.GRAVEYARD || zone == Zone.LIBRARY)) {
                     return true;
                 }
             }

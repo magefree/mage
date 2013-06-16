@@ -30,9 +30,8 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,7 +76,7 @@ public class FlameblastDragon extends CardImpl<FlameblastDragon> {
 
 class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
     FlameblastDragonEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "you may pay {X}{R}. If you do, {this} deals X damage to target creature or player";
     }
 
@@ -89,7 +89,7 @@ class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
         Player player = game.getPlayer(source.getControllerId());
         ManaCosts cost = new ManaCostsImpl("{X}{R}");
         if (player != null) {
-            if (player.chooseUse(Constants.Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to target creature or player", game)) {
+            if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to target creature or player", game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     int costX = cost.getX();

@@ -29,8 +29,8 @@
 package mage.cards.basiclands;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.mana.ManaAbility;
 import mage.cards.CardImpl;
 

@@ -28,9 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
@@ -105,7 +104,7 @@ class CardsInControllerLibraryCount implements DynamicValue {
 class PutCardOnLibraryEffect extends OneShotEffect<PutCardOnLibraryEffect> {
 
     public PutCardOnLibraryEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Then put a card from your hand on top of your library";
     }
 
@@ -124,11 +123,11 @@ class PutCardOnLibraryEffect extends OneShotEffect<PutCardOnLibraryEffect> {
         if (player != null) {
             TargetCardInHand target = new TargetCardInHand();
             target.setRequired(true);
-            player.chooseTarget(Constants.Outcome.ReturnToHand, target, source, game);
+            player.chooseTarget(Outcome.ReturnToHand, target, source, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.getHand().remove(card);
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
             }
             return true;
         }
@@ -140,7 +139,7 @@ class PutCardOnLibraryEffect extends OneShotEffect<PutCardOnLibraryEffect> {
 class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect{
     
     public MaximumHandSizeEffect(){
-        super(Integer.MAX_VALUE, Constants.Duration.Custom, MaximumHandSizeControllerEffect.HandSizeModification.SET);
+        super(Integer.MAX_VALUE, Duration.Custom, MaximumHandSizeControllerEffect.HandSizeModification.SET);
         staticText = "You have no maximum hand size until your next turn";
     }
     
@@ -150,7 +149,7 @@ class MaximumHandSizeEffect extends MaximumHandSizeControllerEffect{
  
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;

@@ -29,14 +29,14 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -52,7 +52,7 @@ public class CompositeGolem extends CardImpl<CompositeGolem> {
         this.toughness = new MageInt(4);
 
         // Sacrifice Composite Golem: Add {W}{U}{B}{R}{G} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0), new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 1, 1, 1, 0, 0), new SacrificeSourceCost()));
     }
 
     public CompositeGolem(final CompositeGolem card) {

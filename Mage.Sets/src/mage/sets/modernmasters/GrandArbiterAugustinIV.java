@@ -28,11 +28,11 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -41,6 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -94,7 +95,7 @@ class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImp
     private static final String effectText = "Spells your opponents cast cost {1} more to cast";
 
     GrandArbiterAugustinIVCostIncreaseEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 

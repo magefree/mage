@@ -28,9 +28,8 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -65,7 +64,7 @@ public class SigardaHostOfHerons extends CardImpl<SigardaHostOfHerons> {
         this.addAbility(HexproofAbility.getInstance());
 
         // Spells and abilities your opponents control can't cause you to sacrifice permanents.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SigardaHostOfHeronsEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SigardaHostOfHeronsEffect()));
     }
 
     public SigardaHostOfHerons(final SigardaHostOfHerons card) {
@@ -81,7 +80,7 @@ public class SigardaHostOfHerons extends CardImpl<SigardaHostOfHerons> {
 class SigardaHostOfHeronsEffect extends ReplacementEffectImpl<SigardaHostOfHeronsEffect> {
 
     public SigardaHostOfHeronsEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 

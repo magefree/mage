@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -12,6 +11,7 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -40,9 +40,9 @@ public class MadnessAbility extends StaticAbility<MadnessAbility> {
     private Cost madnessCost;
     
     public MadnessAbility(Card card, Cost cost) {
-        super(Constants.Zone.STACK, null);
+        super(Zone.STACK, null);
         this.madnessCost = cost;
-        card.addAbility(new SimpleStaticAbility(Constants.Zone.EXILED, new MadnessPlayEffect(cost)));
+        card.addAbility(new SimpleStaticAbility(Zone.EXILED, new MadnessPlayEffect(cost)));
         card.addAbility(new MadnessTriggeredAbility());
         card.addWatcher(new MadnessCleanUpWatcher());
     }
@@ -79,7 +79,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
     private Cost cost;
 
     public MadnessPlayEffect(Cost cost) {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
         staticText = null;
         this.cost = cost;
     }
@@ -103,7 +103,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Constants.Zone.EXILED) {
+            if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
                 Object object = game.getState().getValue("madness_" + card.getId());
                 if (object != null && object.equals(true)) {
                     Object alfreadyConfirmed = game.getState().getValue("madness_ok_" + card.getId());
@@ -112,7 +112,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
                     }
                     Player player = game.getPlayer(card.getOwnerId());
                     String message = "Cast " + card.getName() + " by its madness cost?";
-                    if (player != null && player.chooseUse(Constants.Outcome.Benefit, message, game)) {
+                    if (player != null && player.chooseUse(Outcome.Benefit, message, game)) {
                         Cost costToPay = cost.copy();
                         card.getSpellAbility().getManaCostsToPay().clear();
                         card.getSpellAbility().getManaCostsToPay().add((ManaCost)costToPay);
@@ -135,7 +135,7 @@ class MadnessPlayEffect extends AsThoughEffectImpl<MadnessPlayEffect> {
 class MadnessTriggeredAbility extends TriggeredAbilityImpl<MadnessTriggeredAbility> {
 
     MadnessTriggeredAbility() {
-        super(Constants.Zone.GRAVEYARD, new MadnessExileEffect(), true);
+        super(Zone.GRAVEYARD, new MadnessExileEffect(), true);
     }
 
     MadnessTriggeredAbility(final MadnessTriggeredAbility ability) {
@@ -175,7 +175,7 @@ class MadnessTriggeredAbility extends TriggeredAbilityImpl<MadnessTriggeredAbili
 class MadnessExileEffect extends OneShotEffect<MadnessExileEffect> {
 
     public MadnessExileEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
     }
 
     public MadnessExileEffect(final MadnessExileEffect effect) {
@@ -217,7 +217,7 @@ class MadnessExileEffect extends OneShotEffect<MadnessExileEffect> {
 class MadnessCleanUpWatcher extends WatcherImpl<MadnessCleanUpWatcher> {
 
     public MadnessCleanUpWatcher() {
-        super("MadnessPlayWasCanceled", Constants.WatcherScope.GAME);
+        super("MadnessPlayWasCanceled", WatcherScope.GAME);
     }
 
     public MadnessCleanUpWatcher(final MadnessCleanUpWatcher watcher) {
@@ -239,7 +239,7 @@ class MadnessCleanUpWatcher extends WatcherImpl<MadnessCleanUpWatcher> {
                     // reset
                     game.getState().setValue("madness_" + card.getId(), null);
                     game.getState().setValue("madness_ok_" + card.getId(), null);
-                    card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, true);
+                    card.moveToZone(Zone.GRAVEYARD, sourceId, game, true);
                 }
             }
         }

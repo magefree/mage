@@ -28,10 +28,12 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.MageInt;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -39,7 +41,7 @@ import mage.cards.CardImpl;
  */
 public class WirewoodElf extends CardImpl<WirewoodElf> {
     public WirewoodElf(UUID ownerId) {
-        super(ownerId, 301, "Wirewood Elf", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{G}");
+        super(ownerId, 301, "Wirewood Elf", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "ONS";
         this.subtype.add("Elf");
         this.subtype.add("Druid");

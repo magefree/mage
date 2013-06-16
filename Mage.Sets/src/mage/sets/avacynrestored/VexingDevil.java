@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -75,7 +75,7 @@ public class VexingDevil extends CardImpl<VexingDevil> {
 class VexingDevilEffect extends OneShotEffect<VexingDevilEffect> {
 
     public VexingDevilEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "any opponent may have it deal 4 damage to him or her. If a player does, sacrifice Vexing Devil";
     }
 
@@ -94,7 +94,7 @@ class VexingDevilEffect extends OneShotEffect<VexingDevilEffect> {
             Set<UUID> opponents = game.getOpponents(source.getControllerId());
             for (UUID opponentUuid : opponents) {
                 Player opponent = game.getPlayer(opponentUuid);
-                if (opponent != null && opponent.chooseUse(Constants.Outcome.LoseLife, sb.toString(), game)) {
+                if (opponent != null && opponent.chooseUse(Outcome.LoseLife, sb.toString(), game)) {
                     game.informPlayers(opponent.getName() + " has chosen to receive 4 damage from " + permanent.getName());
                     int dealt = opponent.damage(4, permanent.getId(), game, false, true);
                     if (dealt == 4) {

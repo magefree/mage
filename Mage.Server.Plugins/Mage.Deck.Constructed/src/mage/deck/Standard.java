@@ -30,7 +30,7 @@ package mage.deck;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Constructed;
 import mage.cards.Sets;

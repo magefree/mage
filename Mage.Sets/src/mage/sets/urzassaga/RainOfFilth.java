@@ -28,15 +28,17 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 
 /**
@@ -52,8 +54,8 @@ public class RainOfFilth extends CardImpl<RainOfFilth> {
         this.color.setBlack(true);
 
         // Until end of turn, lands you control gain "Sacrifice this land: Add {B} to your mana pool."
-        ManaAbility ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost());
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Constants.Duration.EndOfTurn, new FilterControlledLandPermanent()));
+        ManaAbility ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new SacrificeSourceCost());
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ability, Duration.EndOfTurn, new FilterControlledLandPermanent()));
     }
 
     public RainOfFilth(final RainOfFilth card) {

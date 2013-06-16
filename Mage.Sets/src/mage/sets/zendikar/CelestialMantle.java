@@ -30,9 +30,7 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -64,10 +62,10 @@ public class CelestialMantle extends CardImpl<CelestialMantle> {
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
         this.addAbility(new CelestialMantleAbility());
     }
 
@@ -85,7 +83,7 @@ public class CelestialMantle extends CardImpl<CelestialMantle> {
 class CelestialMantleAbility extends TriggeredAbilityImpl<CelestialMantleAbility> {
 
     public CelestialMantleAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CelestialMantleEffect());
+        super(Zone.BATTLEFIELD, new CelestialMantleEffect());
         this.addEffect(new UntapAllLandsControllerEffect());
     }
 
@@ -118,7 +116,7 @@ class CelestialMantleAbility extends TriggeredAbilityImpl<CelestialMantleAbility
 
 class CelestialMantleEffect extends OneShotEffect<CelestialMantleEffect> {
     CelestialMantleEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
     }
 
     CelestialMantleEffect(final CelestialMantleEffect effect) {

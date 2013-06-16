@@ -30,9 +30,8 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,7 +59,7 @@ public class PestilenceDemon extends CardImpl<PestilenceDemon> {
         this.power = new MageInt(7);
         this.toughness = new MageInt(6);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new PestilenceDemonEffect(), new ManaCostsImpl("{B}")));
     }
 
     public PestilenceDemon (final PestilenceDemon card) {
@@ -74,7 +75,7 @@ public class PestilenceDemon extends CardImpl<PestilenceDemon> {
 
 class PestilenceDemonEffect extends OneShotEffect<PestilenceDemonEffect> {
     PestilenceDemonEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals 1 damage to each creature and each player";
     }
 

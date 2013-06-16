@@ -1,10 +1,12 @@
 package mage.player.ai.utils;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Outcome;
 import mage.target.Target;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,20 +49,20 @@ public class RateCard {
      * @param card
      * @return
      */
-    public static int rateCard(Card card, List<Constants.ColoredManaSymbol> allowedColors) {
+    public static int rateCard(Card card, List<ColoredManaSymbol> allowedColors) {
         if (allowedColors == null && rated.containsKey(card.getName())) {
             return rated.get(card.getName());
         }
         int type = 0;
-        if (card.getCardType().contains(Constants.CardType.PLANESWALKER)) {
+        if (card.getCardType().contains(CardType.PLANESWALKER)) {
             type = 15;
-        } if (card.getCardType().contains(Constants.CardType.CREATURE)) {
+        } if (card.getCardType().contains(CardType.CREATURE)) {
             type = 10;
         } else if (card.getSubtype().contains("Equipment")) {
             type = 8;
         } else if (card.getSubtype().contains("Aura")) {
             type = 5;
-        } else if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+        } else if (card.getCardType().contains(CardType.INSTANT)) {
             type = 7;
         } else {
             type = 6;
@@ -73,16 +75,16 @@ public class RateCard {
     }
 
     private static int isRemoval(Card card) {
-        if (card.getSubtype().contains("Aura") || card.getCardType().contains(Constants.CardType.INSTANT)
-                || card.getCardType().contains(Constants.CardType.SORCERY)) {
+        if (card.getSubtype().contains("Aura") || card.getCardType().contains(CardType.INSTANT)
+                || card.getCardType().contains(CardType.SORCERY)) {
 
             for (Ability ability : card.getAbilities()) {
                 for (Effect effect : ability.getEffects()) {
-                    if (effect.getOutcome().equals(Constants.Outcome.Removal)) {
+                    if (effect.getOutcome().equals(Outcome.Removal)) {
                         log.debug("Found removal: " + card.getName());
                         return 1;
                     }
-                    if (effect.getOutcome().equals(Constants.Outcome.Damage)) {
+                    if (effect.getOutcome().equals(Outcome.Damage)) {
                         if (effect instanceof DamageTargetEffect) {
                             DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
                             if (damageEffect.getAmount() > 1) {
@@ -95,7 +97,7 @@ public class RateCard {
                             }
                         }
                     }
-                    if (effect.getOutcome().equals(Constants.Outcome.DestroyPermanent)) {
+                    if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
                         for (Target target : ability.getTargets()) {
                             if (target instanceof TargetCreaturePermanent) {
                                 log.info("Found destroyer: " + card.getName());
@@ -175,7 +177,7 @@ public class RateCard {
      * @param allowedColors Can be null.
      * @return
      */
-    private static int getManaCostScore(Card card, List<Constants.ColoredManaSymbol> allowedColors) {
+    private static int getManaCostScore(Card card, List<ColoredManaSymbol> allowedColors) {
         int converted = card.getManaCost().convertedManaCost();
         if (allowedColors == null) {
             int colorPenalty = 0;
@@ -192,7 +194,7 @@ public class RateCard {
             int count = 0;
             symbol = symbol.replace("{", "").replace("}", "");
             if (isColoredMana(symbol)) {
-                for (Constants.ColoredManaSymbol allowed : allowedColors) {
+                for (ColoredManaSymbol allowed : allowedColors) {
                     if (allowed.toString().equals(symbol)) {
                         count++;
                     }

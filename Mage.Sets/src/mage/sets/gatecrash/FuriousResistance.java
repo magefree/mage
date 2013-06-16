@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -77,7 +79,7 @@ public class FuriousResistance extends CardImpl<FuriousResistance> {
 class FuriousResistanceEffect extends OneShotEffect<FuriousResistanceEffect> {
 
     public FuriousResistanceEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "Target blocking creature gets +3/+0 and gains first strike until end of turn";
     }
 
@@ -92,8 +94,8 @@ class FuriousResistanceEffect extends OneShotEffect<FuriousResistanceEffect> {
             return false;
         }
         
-        ContinuousEffect effect = new BoostTargetEffect(3, 0, Constants.Duration.EndOfTurn);
-        ContinuousEffect effect2 = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn);
+        ContinuousEffect effect = new BoostTargetEffect(3, 0, Duration.EndOfTurn);
+        ContinuousEffect effect2 = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
         effect.setTargetPointer(new FixedTarget(target.getId()));
         effect2.setTargetPointer(new FixedTarget(target.getId()));
         game.addEffect(effect, source);

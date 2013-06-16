@@ -28,10 +28,8 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -67,7 +65,7 @@ public class DefilerOfSouls extends CardImpl<DefilerOfSouls> {
         this.addAbility(FlyingAbility.getInstance());
         
         // At the beginning of each player's upkeep, that player sacrifices a monocolored creature.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new DefilerOfSoulsEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DefilerOfSoulsEffect(), TargetController.ANY, false, true));
     }
 
     public DefilerOfSouls(final DefilerOfSouls card) {
@@ -83,7 +81,7 @@ public class DefilerOfSouls extends CardImpl<DefilerOfSouls> {
 class DefilerOfSoulsEffect extends OneShotEffect<DefilerOfSoulsEffect> {
 
     DefilerOfSoulsEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         staticText = "that player sacrifices a monocolored creature";
     }
 
@@ -98,7 +96,7 @@ class DefilerOfSoulsEffect extends OneShotEffect<DefilerOfSoulsEffect> {
         if (player == null) {
             return false;
         }
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new MonocoloredPredicate());
         
         int amount;
@@ -114,7 +112,7 @@ class DefilerOfSoulsEffect extends OneShotEffect<DefilerOfSoulsEffect> {
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
             while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
             for ( int idx = 0; idx < target.getTargets().size(); idx++) {

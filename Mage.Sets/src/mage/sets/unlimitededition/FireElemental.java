@@ -28,7 +28,7 @@
 package mage.sets.unlimitededition;
 
 import java.util.UUID;
-import mage.Constants.Rarity;
+import mage.constants.Rarity;
 
 /**
  *

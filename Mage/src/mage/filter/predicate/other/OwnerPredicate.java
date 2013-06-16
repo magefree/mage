@@ -28,7 +28,7 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.cards.Card;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;

@@ -28,10 +28,11 @@
 
 package mage.sets.darksteel;
 
-import mage.Constants;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -42,7 +43,7 @@ import java.util.UUID;
 public class DarksteelIngot extends CardImpl<DarksteelIngot> {
 
     public DarksteelIngot(UUID ownerId) {
-        super(ownerId, 112, "Darksteel Ingot", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.ARTIFACT}, "{3}");
+        super(ownerId, 112, "Darksteel Ingot", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "DST";
         this.addAbility(IndestructibleAbility.getInstance());
         this.addAbility(new AnyColorManaAbility());

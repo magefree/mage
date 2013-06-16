@@ -28,9 +28,9 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,6 +43,7 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,7 +65,7 @@ public class TombOfUrami extends CardImpl<TombOfUrami> {
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
         // {2}{B}{B}, {tap}, Sacrifice all lands you control: Put a legendary 5/5 black Demon Spirit creature token with flying named Urami onto the battlefield.
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new UramiToken()), new ManaCostsImpl("{2}{B}{B}"));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new UramiToken()), new ManaCostsImpl("{2}{B}{B}"));
         ability2.addCost(new TapSourceCost());
         ability2.addCost(new SacrificeAllLandCost());
         this.addAbility(ability2);

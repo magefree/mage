@@ -29,11 +29,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbility;
@@ -49,6 +49,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.ActivateOncePerTurnManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -76,7 +77,7 @@ public class ManaBloom extends CardImpl<ManaBloom> {
         this.addAbility(ability);
 
         // At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(), Constants.TargetController.YOU, false);
+        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandSourceEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(triggeredAbility, new HasCounterCondition(CounterType.CHARGE, 0,0), "At the beginning of your upkeep, if Mana Bloom has no charge counters on it, return it to its owner's hand."));
 
     }

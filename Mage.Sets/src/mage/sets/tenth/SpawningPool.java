@@ -29,10 +29,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -56,7 +53,7 @@ public class SpawningPool extends CardImpl<SpawningPool> {
         this.expansionSetCode = "10E";
         this.addAbility(new EntersBattlefieldTappedAbility());
         this.addAbility(new BlackManaAbility());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SkeletonToken(), "land", Duration.EndOfTurn), new ManaCostsImpl("{1}{B}")));
     }
 
     public SpawningPool(final SpawningPool card) {
@@ -77,6 +74,6 @@ class SkeletonToken extends Token {
         color = ObjectColor.BLACK;
         power = new MageInt(1);
         toughness = new MageInt(1);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 }

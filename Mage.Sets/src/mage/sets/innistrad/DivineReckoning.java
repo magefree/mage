@@ -27,15 +27,17 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -63,7 +65,7 @@ public class DivineReckoning extends CardImpl<DivineReckoning> {
         this.getSpellAbility().addEffect(new DivineReckoningEffect());
 
         // Flashback {5}{W}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}{W}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{W}{W}"), TimingRule.SORCERY));
     }
 
     public DivineReckoning(final DivineReckoning card) {
@@ -81,11 +83,11 @@ class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DivineReckoningEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Each player chooses a creature he or she controls. Destroy the rest";
     }
 
@@ -104,7 +106,7 @@ class DivineReckoningEffect extends OneShotEffect<DivineReckoningEffect> {
             target.setRequired(true);
             if (target.canChoose(player.getId(), game)) {
                 while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                    player.choose(Constants.Outcome.Benefit, target, source.getSourceId(), game);
+                    player.choose(Outcome.Benefit, target, source.getSourceId(), game);
                 }
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {

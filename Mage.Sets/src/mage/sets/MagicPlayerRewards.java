@@ -1,7 +1,7 @@
 package mage.sets;
 
-import mage.Constants;
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 import java.util.GregorianCalendar;
 
@@ -13,7 +13,7 @@ public class MagicPlayerRewards extends ExpansionSet {
     }
 
     private MagicPlayerRewards() {
-        super("Magic Player Rewards", "MPR", "mage.sets.playerrewards", new GregorianCalendar(1990, 1, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Magic Player Rewards", "MPR", "mage.sets.playerrewards", new GregorianCalendar(1990, 1, 1).getTime(), SetType.EXPANSION);
         this.hasBoosters = false;
     }
 }

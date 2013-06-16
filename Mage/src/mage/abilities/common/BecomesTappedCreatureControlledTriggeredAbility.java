@@ -4,10 +4,10 @@
  */
 package mage.abilities.common;
 
-import mage.Constants;
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -19,7 +19,7 @@ import mage.game.permanent.Permanent;
 public class BecomesTappedCreatureControlledTriggeredAbility extends TriggeredAbilityImpl<BecomesTappedCreatureControlledTriggeredAbility>{
     
     public BecomesTappedCreatureControlledTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public BecomesTappedCreatureControlledTriggeredAbility(final BecomesTappedCreatureControlledTriggeredAbility ability) {

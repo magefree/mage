@@ -28,16 +28,17 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.PreventCombatDamageSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.Constants.Zone;
+import mage.constants.Zone;
+import mage.constants.Duration;
 
 /**
  *
@@ -58,7 +59,7 @@ public class GuardGomazoa extends CardImpl<GuardGomazoa> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Prevent all combat damage that would be dealt to Guard Gomazoa.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
     }
 
     public GuardGomazoa(final GuardGomazoa card) {

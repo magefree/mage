@@ -28,16 +28,18 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
 
 /**
  *
@@ -58,8 +60,8 @@ public class HorrorOfTheDim extends CardImpl<HorrorOfTheDim> {
         // {U}: Horror of the Dim gains hexproof until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(HexproofAbility.getInstance(), Constants.Duration.EndOfTurn),
-                new ColoredManaCost(Constants.ColoredManaSymbol.U)));
+                new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn),
+                new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     public HorrorOfTheDim(final HorrorOfTheDim card) {

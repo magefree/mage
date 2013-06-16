@@ -28,9 +28,8 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.AttachEffect;
@@ -53,7 +52,7 @@ public class GraniteGrip extends CardImpl<GraniteGrip> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public GraniteGrip(UUID ownerId) {
@@ -66,13 +65,13 @@ public class GraniteGrip extends CardImpl<GraniteGrip> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature gets +1/+0 for each Mountain you control.
-        SimpleStaticAbility ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostEnchantedEffect(new PermanentsOnBattlefieldCount(filter, 1), new PermanentsOnBattlefieldCount(filter, 0),
-                Constants.Duration.WhileOnBattlefield));
+                Duration.WhileOnBattlefield));
         this.addAbility(ability);
     }
 

@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class MercadianMasques extends ExpansionSet {
     }
 
     private MercadianMasques() {
-        super("Mercadian Masques", "MMQ", "mage.sets.mercadianmasques", new GregorianCalendar(1999, 8, 25).getTime(), Constants.SetType.EXPANSION);
+        super("Mercadian Masques", "MMQ", "mage.sets.mercadianmasques", new GregorianCalendar(1999, 8, 25).getTime(), SetType.EXPANSION);
         this.blockName = "Masques";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

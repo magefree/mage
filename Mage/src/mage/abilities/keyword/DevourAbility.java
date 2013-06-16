@@ -27,7 +27,7 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DevourEffect;
 import mage.abilities.effects.common.DevourEffect.DevourFactor;

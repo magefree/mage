@@ -28,12 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -66,7 +67,7 @@ public class RepayInKind extends CardImpl<RepayInKind> {
 class RepayInKindEffect extends OneShotEffect<RepayInKindEffect> {
 
     public RepayInKindEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "Each player's life total becomes the lowest life total among all players";
     }
 

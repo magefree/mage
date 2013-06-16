@@ -28,10 +28,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -72,9 +73,9 @@ public class KondasHatamoto extends CardImpl<KondasHatamoto>{
         this.addAbility(new BushidoAbility(1));
 
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 2, Duration.WhileOnBattlefield), new ControlsPermanentCondition(filter), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }
 

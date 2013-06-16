@@ -1,11 +1,12 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -21,7 +22,7 @@ import mage.target.targetpointer.FixedTarget;
 public class FlankingAbility extends TriggeredAbilityImpl<FlankingAbility> {
 
     public FlankingAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), false);
+        super(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false);
     }
 
     public FlankingAbility(final FlankingAbility ability) {

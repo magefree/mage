@@ -29,9 +29,8 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -52,9 +53,9 @@ public class StaffOfNin extends CardImpl<StaffOfNin> {
         this.expansionSetCode = "M13";
 
         // At the beginning of your upkeep, draw a card.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false));
         // {tap}: Staff of Nin deals 1 damage to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

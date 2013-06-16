@@ -28,9 +28,9 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -72,7 +73,7 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
         this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability firstAbility = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), filterBlue, false);
+        Ability firstAbility = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filterBlue, false);
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
         this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(1, filter), filterRed, false));

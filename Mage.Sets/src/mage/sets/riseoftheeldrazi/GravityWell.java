@@ -29,9 +29,8 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.Iterator;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.cards.CardImpl;
@@ -72,7 +71,7 @@ public class GravityWell extends CardImpl<GravityWell> {
 class GravityWellTriggeredAbility extends TriggeredAbilityImpl<GravityWellTriggeredAbility> {
 
     public GravityWellTriggeredAbility() {
-    super(Constants.Zone.BATTLEFIELD, new GravityWellEffect());
+    super(Zone.BATTLEFIELD, new GravityWellEffect());
     }
 
     public GravityWellTriggeredAbility(final GravityWellTriggeredAbility ability) {
@@ -107,7 +106,7 @@ class GravityWellTriggeredAbility extends TriggeredAbilityImpl<GravityWellTrigge
 class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
 
     public GravityWellEffect() {
-    super(Constants.Duration.EndOfTurn, Constants.Outcome.LoseAbility);
+    super(Duration.EndOfTurn, Outcome.LoseAbility);
     staticText = "it loses flying until end of turn";
     }
 
@@ -121,12 +120,12 @@ class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
     Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
     if (permanent != null) {
             switch (layer) {
                 case AbilityAddingRemovingEffects_6:
-                    if (sublayer == Constants.SubLayer.NA) {
+                    if (sublayer == SubLayer.NA) {
             for (Iterator<Ability> i = permanent.getAbilities().iterator(); i.hasNext();) {
                             Ability entry = i.next();
                             if (entry.getId().equals(FlyingAbility.getInstance().getId()))
@@ -146,8 +145,8 @@ class GravityWellEffect extends ContinuousEffectImpl<GravityWellEffect> {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-    return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
+    public boolean hasLayer(Layer layer) {
+    return layer == Layer.AbilityAddingRemovingEffects_6;
     }
 
 }

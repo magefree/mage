@@ -29,9 +29,7 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -61,7 +59,7 @@ public class SpikeshotGoblin extends CardImpl<SpikeshotGoblin> {
         this.toughness = new MageInt(2);
 
         // {R}, {tap}: Spikeshot Goblin deals damage equal to its power to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SpikeshotGoblinEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpikeshotGoblinEffect(), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -79,7 +77,7 @@ public class SpikeshotGoblin extends CardImpl<SpikeshotGoblin> {
 
 class SpikeshotGoblinEffect extends OneShotEffect<SpikeshotGoblinEffect> {
     public SpikeshotGoblinEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals damage equal to its power to target creature or player";
     }
 
@@ -91,7 +89,7 @@ class SpikeshotGoblinEffect extends OneShotEffect<SpikeshotGoblinEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (sourcePermanent == null) {
             return false;

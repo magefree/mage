@@ -27,9 +27,8 @@
  */
 package mage.sets.zendikar;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.turn.ControlTargetPlayerNextTurnEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -93,7 +93,7 @@ public class SorinMarkov extends CardImpl<SorinMarkov> {
 class SorinMarkovEffect extends OneShotEffect<SorinMarkovEffect> {
 
     public SorinMarkovEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Target opponent's life total becomes 10";
     }
 

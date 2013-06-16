@@ -28,13 +28,14 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 
@@ -67,7 +68,7 @@ public class GelatinousGenesis extends CardImpl<GelatinousGenesis> {
 class GelatinousGenesisEffect extends OneShotEffect<GelatinousGenesisEffect> {
 
     public GelatinousGenesisEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Put X X/X green Ooze creature tokens onto the battlefield";
     }
 

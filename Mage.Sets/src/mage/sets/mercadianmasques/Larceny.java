@@ -28,13 +28,14 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
@@ -70,7 +71,7 @@ public class Larceny extends CardImpl<Larceny> {
 class LarcenyTriggeredAbility extends TriggeredAbilityImpl<LarcenyTriggeredAbility> {
 
     public LarcenyTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), false);
     }
 
     public LarcenyTriggeredAbility(final LarcenyTriggeredAbility ability) {

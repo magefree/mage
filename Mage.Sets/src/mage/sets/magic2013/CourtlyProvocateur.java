@@ -27,9 +27,8 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -60,14 +61,14 @@ public class CourtlyProvocateur extends CardImpl<CourtlyProvocateur> {
         this.toughness = new MageInt(1);
 
         // {tap}: Target creature attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Constants.Duration.EndOfTurn), new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Constants.Duration.EndOfTurn, null));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {tap}: Target creature blocks this turn if able.
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Constants.Duration.EndOfTurn), new TapSourceCost());
-        ability2.addEffect(new GainAbilityTargetEffect(BlocksThisTurnMarkerAbility.getInstance(), Constants.Duration.EndOfTurn, null));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlocksIfAbleTargetEffect(Duration.EndOfTurn), new TapSourceCost());
+        ability2.addEffect(new GainAbilityTargetEffect(BlocksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
         ability2.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability2);
     }

@@ -30,14 +30,14 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,7 +52,7 @@ public class NiveousWisps extends CardImpl<NiveousWisps> {
         this.color.setWhite(true);
         // Target creature becomes white until end of turn. Tap that creature.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.WHITE, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.WHITE, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new TapTargetEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));

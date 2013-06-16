@@ -27,9 +27,9 @@
  */
 package mage.game.permanent.token;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.CardType;
 
 /**
  * @author nantuko
@@ -38,7 +38,7 @@ public class SpiritWhiteToken extends Token {
 
     public SpiritWhiteToken() {
         super("Spirit", "1/1 white Spirit creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         subtype.add("Spirit");
         color.setWhite(true);
         power = new MageInt(1);

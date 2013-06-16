@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class FourthEdition extends ExpansionSet {
     }
 
     private FourthEdition() {
-        super("Fourth Edition", "4ED", "mage.sets.fourthedition", new GregorianCalendar(1995, 3, 1).getTime(), Constants.SetType.CORE);
+        super("Fourth Edition", "4ED", "mage.sets.fourthedition", new GregorianCalendar(1995, 3, 1).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

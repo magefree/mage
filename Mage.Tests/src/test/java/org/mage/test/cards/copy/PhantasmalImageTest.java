@@ -1,9 +1,10 @@
 package org.mage.test.cards.copy;
 
 import junit.framework.Assert;
-import mage.Constants;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -17,13 +18,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
     @Test
     public void testCopyCreature() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -37,13 +38,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyEntersBattlefieldTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Howling Banshee");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.BATTLEFIELD, playerB, "Howling Banshee");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Howling Banshee", 1);
@@ -58,20 +59,20 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyCreatureWithLevelUpAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 12);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 12);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.HAND, playerB, "Phantasmal Image");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
 
 
         for (int i = 0; i < 12; i++) {
-            activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
         }
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Transcendent Master", 1);
@@ -98,17 +99,17 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyBecomesTargetTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Illusionary Servant");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Phantasmal Image", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Illusionary Servant");
 
         setChoice(playerA, "Illusionary Servant");
         setChoice(playerA, "Illusionary Servant-M10");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -124,16 +125,16 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyAlreadyTransformed() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerB, "Phantasmal Image");
-        addCard(Constants.Zone.HAND, playerB, "Titanic Growth");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Phantasmal Image");
+        addCard(Zone.HAND, playerB, "Titanic Growth");
+        addCard(Zone.BATTLEFIELD, playerA, "Huntmaster of the Fells");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
-        castSpell(2, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells-M12");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Phantasmal Image");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Titanic Growth", "Ravager of the Fells-M12");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         // check opponent's creature wasn't chosen as a target for Titanic Growth
@@ -149,13 +150,13 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyEntersTapped() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Geralf's Messenger");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.BATTLEFIELD, playerB, "Geralf's Messenger");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent copy = getPermanent("Geralf's Messenger", playerA.getId());
@@ -173,17 +174,17 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyAsEntersBattlefieldAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.HAND, playerA, "Lurebound Scarecrow");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
         setChoice(playerA, "Green");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
         setChoice(playerA, "Red");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lurebound Scarecrow", 1);
@@ -195,18 +196,18 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyAsEntersBattlefieldAbility2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Goblin");
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.HAND, playerA, "Lurebound Scarecrow");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Goblin");
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.HAND, playerA, "Lurebound Scarecrow");
 
         setChoice(playerA, "Green");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lurebound Scarecrow");
         setChoice(playerA, "Red");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Phantasmal Image");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lurebound Scarecrow", 2);
@@ -214,22 +215,22 @@ public class PhantasmalImageTest extends CardTestPlayerBase {
 
     @Test
     public void testCopiedFlyingWorks() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Phantasmal Image");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Phantasmal Image");
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Azure Drake");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Azure Drake");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Phantasmal Image");
         attack(1, playerA, "Azure Drake");
         block(1, playerB, "Llanowar Elves", "Azure Drake");
 
         attack(2, playerB, "Azure Drake");
         block(2, playerA, "Elite Vanguard", "Azure Drake");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 18);

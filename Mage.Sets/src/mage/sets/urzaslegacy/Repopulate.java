@@ -29,15 +29,17 @@ package mage.sets.urzaslegacy;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -75,7 +77,7 @@ public class Repopulate extends CardImpl<Repopulate> {
 class RepopulateEffect extends OneShotEffect<RepopulateEffect> {
 
     RepopulateEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Shuffle all creature cards from target player's graveyard into that player's library";
     }
 
@@ -90,7 +92,7 @@ class RepopulateEffect extends OneShotEffect<RepopulateEffect> {
             Set<Card> cards = player.getGraveyard().getCards(new FilterCreatureCard(), game);
             for(Card card : cards)
             {
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
             }
             player.shuffleLibrary(game);
             return true;

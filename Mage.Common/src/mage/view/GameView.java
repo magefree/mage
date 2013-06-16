@@ -28,12 +28,12 @@
 
 package mage.view;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
-import mage.Constants.TurnPhase;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
@@ -176,7 +176,7 @@ public class GameView implements Serializable {
         }
         Permanent permanent = game.getPermanent(card.getId());
         if (permanent == null) {
-            permanent = (Permanent)game.getLastKnownInformation(card.getId(), Constants.Zone.BATTLEFIELD);
+            permanent = (Permanent)game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
         }
         if (permanent != null) {
             if (permanent.isTransformed()) {

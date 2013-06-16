@@ -28,9 +28,9 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
@@ -38,6 +38,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterMana;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
@@ -98,7 +99,7 @@ class DevastatingSummonsCost extends CostImpl<DevastatingSummonsCost> implements
         TargetLandPermanent target = new TargetLandPermanent(filter);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Constants.Outcome.Sacrifice, controllerId, sourceId, game)) {
+            if (target.canChoose(controllerId, game) && target.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
                 UUID land = target.getFirstTarget();
                 if (land != null) {
                     game.getPermanent(land).sacrifice(sourceId, game);
@@ -148,7 +149,7 @@ class DevastatingSummonsCost extends CostImpl<DevastatingSummonsCost> implements
 class DevastatingSummonsEffect extends OneShotEffect<DevastatingSummonsEffect> {
 
     public DevastatingSummonsEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Put two X/X red Elemental creature tokens onto the battlefield";
     }
 

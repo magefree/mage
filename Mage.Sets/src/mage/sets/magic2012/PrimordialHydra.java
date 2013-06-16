@@ -28,9 +28,7 @@
 package mage.sets.magic2012;
 
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -68,9 +66,9 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
         this.toughness = new MageInt(0);
 
         this.addAbility(new EntersBattlefieldAbility(new PrimordialHydraEntersEffect(), "{this} enters the battlefield with X +1/+1 counters on it"));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new PrimordialHydraDoubleEffect(), TargetController.YOU, false));
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(TrampleAbility.getInstance()), new HasCounterCondition(CounterType.P1P1, 10), staticText);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
     }
 
@@ -86,7 +84,7 @@ public class PrimordialHydra extends CardImpl<PrimordialHydra> {
 
 class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEffect> {
     public PrimordialHydraEntersEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
     }
 
     public PrimordialHydraEntersEffect(final PrimordialHydraEntersEffect effect) {
@@ -116,7 +114,7 @@ class PrimordialHydraEntersEffect extends OneShotEffect<PrimordialHydraEntersEff
 
 class PrimordialHydraDoubleEffect extends OneShotEffect<PrimordialHydraDoubleEffect> {
     PrimordialHydraDoubleEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "double the number of +1/+1 counters on {this}";
     }
 

@@ -28,14 +28,15 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -92,7 +93,7 @@ class NightTerrorsEffect extends OneShotEffect<NightTerrorsEffect> {
         if (player != null && targetPlayer != null) {
             targetPlayer.revealCards("Night Terrors", targetPlayer.getHand(), game);
 
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterNonlandCard("nonland card to exile"));
+            TargetCard target = new TargetCard(Zone.PICK, new FilterNonlandCard("nonland card to exile"));
             target.setRequired(true);
             if (player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);

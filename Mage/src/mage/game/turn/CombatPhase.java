@@ -28,7 +28,7 @@
 
 package mage.game.turn;
 
-import mage.Constants.TurnPhase;
+import mage.constants.TurnPhase;
 import mage.game.events.GameEvent.EventType;
 
 /**

@@ -28,9 +28,9 @@
 package mage.sets.mirage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +39,8 @@ import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -59,7 +61,7 @@ public class SearingSpearAskari extends CardImpl<SearingSpearAskari> {
         // Flanking
         this.addAbility(new FlankingAbility());
         // {1}{R}: Searing Spear Askari can't be blocked except by two or more creatures this turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
     public SearingSpearAskari(final SearingSpearAskari card) {

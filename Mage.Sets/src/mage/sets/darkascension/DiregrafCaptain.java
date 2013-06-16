@@ -27,9 +27,8 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -37,6 +36,8 @@ import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -72,7 +73,7 @@ public class DiregrafCaptain extends CardImpl<DiregrafCaptain> {
 
         this.addAbility(DeathtouchAbility.getInstance());
         // Other Zombie creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // Whenever another Zombie you control dies, target opponent loses 1 life.
         this.addAbility(new DiregrafCaptainTriggeredAbility());
     }
@@ -96,7 +97,7 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCapta
     }
 
     public DiregrafCaptainTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
         this.addTarget(new TargetOpponent());
     }
 
@@ -108,8 +109,8 @@ class DiregrafCaptainTriggeredAbility extends TriggeredAbilityImpl<DiregrafCapta
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && !event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
-                Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+                Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (p != null && p.getControllerId().equals(this.controllerId) && filter.match(p, game)) {
                     return true;
                 }

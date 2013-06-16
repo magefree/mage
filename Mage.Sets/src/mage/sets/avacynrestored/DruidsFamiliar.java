@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ public class DruidsFamiliar extends CardImpl<DruidsFamiliar> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Druid's Familiar is paired with another creature, each of those creatures gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(2, 2, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(2, 2, ruleText)));
     }
 
     public DruidsFamiliar(final DruidsFamiliar card) {

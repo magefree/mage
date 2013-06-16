@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.activated;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,13 +17,13 @@ public class EquipAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testEquipHexproof() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Spy");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk Spy");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Merfolk Spy");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Merfolk Spy");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent merfolk = getPermanent("Merfolk Spy", playerA);
@@ -35,13 +36,13 @@ public class EquipAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testEquipShroud() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Simic Sky Swallower");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
+        addCard(Zone.BATTLEFIELD, playerA, "Simic Sky Swallower");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Simic Sky Swallower");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Simic Sky Swallower");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent sky = getPermanent("Simic Sky Swallower", playerA);
@@ -54,13 +55,13 @@ public class EquipAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testEquipOpponentsCreature() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Ring of Evos Isle");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Llanowar Elves");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip", "Llanowar Elves");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Permanent elves = getPermanent("Llanowar Elves", playerB);

@@ -1,7 +1,7 @@
 package mage.sets;
 
-import mage.Constants;
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 import java.util.GregorianCalendar;
 
@@ -13,7 +13,7 @@ public class Eventide extends ExpansionSet {
     }
 
     private Eventide() {
-        super("Eventide", "EVE", "mage.sets.eventide", new GregorianCalendar(2008, 6, 25).getTime(), Constants.SetType.EXPANSION);
+        super("Eventide", "EVE", "mage.sets.eventide", new GregorianCalendar(2008, 6, 25).getTime(), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.parentSet = Shadowmoor.getInstance();
         this.hasBasicLands = false;

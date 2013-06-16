@@ -29,9 +29,7 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +57,7 @@ public class CreepingRenaissance extends CardImpl<CreepingRenaissance> {
         this.getSpellAbility().addEffect(new CreepingRenaissanceEffect());
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
 
     public CreepingRenaissance(final CreepingRenaissance card) {
@@ -75,7 +73,7 @@ public class CreepingRenaissance extends CardImpl<CreepingRenaissance> {
 class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect> {
 
     public CreepingRenaissanceEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Choose a permanent type. Return all cards of the chosen type from your graveyard to your hand";
     }
 
@@ -96,7 +94,7 @@ class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect>
             typeChoice.getChoices().add(CardType.LAND.toString());
             typeChoice.getChoices().add(CardType.PLANESWALKER.toString());
 
-            while (!controller.choose(Constants.Outcome.ReturnToHand, typeChoice, game));
+            while (!controller.choose(Outcome.ReturnToHand, typeChoice, game));
 
             String typeName = typeChoice.getChoice();
             CardType chosenType = null;
@@ -108,7 +106,7 @@ class CreepingRenaissanceEffect extends OneShotEffect<CreepingRenaissanceEffect>
             if (chosenType != null) {
                 for (Card card : controller.getGraveyard().getCards(game)) {
                     if (card.getCardType().contains(chosenType)) {
-                        card.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     }
                 }
                 return true;

@@ -28,10 +28,10 @@
 
 package mage.abilities;
 
-import mage.Constants.AbilityType;
-import mage.Constants.EffectType;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.costs.*;
 import mage.abilities.costs.mana.ManaCost;

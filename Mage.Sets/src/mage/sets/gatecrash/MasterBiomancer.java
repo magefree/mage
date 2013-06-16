@@ -28,11 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -65,7 +62,7 @@ public class MasterBiomancer extends CardImpl<MasterBiomancer> {
        this.toughness = new MageInt(4);
 
        // Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to Master Biomancer's power and as a Mutant in addition to its other types.
-       this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MasterBiomancerEntersBattlefieldEffect()));
+       this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MasterBiomancerEntersBattlefieldEffect()));
     }
 
     public MasterBiomancer(final MasterBiomancer card) {

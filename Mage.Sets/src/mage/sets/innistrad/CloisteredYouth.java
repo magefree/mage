@@ -29,14 +29,14 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 
 /**
  *
@@ -58,7 +58,7 @@ public class CloisteredYouth extends CardImpl<CloisteredYouth> {
 
         // At the beginning of your upkeep, you may transform Cloistered Youth.
         this.addAbility(new TransformAbility());
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), Constants.TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.YOU, true));
     }
 
     public CloisteredYouth(final CloisteredYouth card) {

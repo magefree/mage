@@ -28,9 +28,9 @@
 
 package mage.watchers.common;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.WatcherScope;
+import mage.constants.CardType;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -56,7 +56,7 @@ public class MorbidWatcher extends WatcherImpl<MorbidWatcher> {
         if (condition == true) //no need to check - condition has already occured
             return;
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (p != null && p.getCardType().contains(CardType.CREATURE)) {
                 condition = true;
             }

@@ -1,6 +1,7 @@
 package org.mage.test.cards.replacement.lifereduce;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,16 +18,16 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
      */
     @Test
     public void testDirectDamage() {
-        addCard(Constants.Zone.HAND, playerA, "Lava Axe");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Lava Axe");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elderscale Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Elderscale Wurm");
 
         setLife(playerB, 8);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Axe", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Axe", playerB);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // 5 damage dealt but it reduces life only to 7
@@ -39,19 +40,19 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
      */
     @Test
     public void testLessLifeTotal() {
-        addCard(Constants.Zone.HAND, playerA, "Lava Axe");
-        addCard(Constants.Zone.HAND, playerA, "Bump in the Night");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 5);
+        addCard(Zone.HAND, playerA, "Lava Axe");
+        addCard(Zone.HAND, playerA, "Bump in the Night");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elderscale Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Elderscale Wurm");
 
         setLife(playerB, 8);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Bump in the Night", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Axe", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Bump in the Night", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lava Axe", playerB);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // 5 damage dealt but it reduces life only to 7
@@ -64,17 +65,17 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
      */
     @Test
     public void testWorshipWithCreature() {
-        addCard(Constants.Zone.HAND, playerA, "Volcanic Hammer");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Volcanic Hammer");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Worship");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Worship");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         setLife(playerB, 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 1);
@@ -86,19 +87,19 @@ public class DamageSetToXLifeInsteadTest extends CardTestPlayerBase {
      */
     @Test
     public void testWorshipWithoutCreature() {
-        addCard(Constants.Zone.HAND, playerA, "Volcanic Hammer", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.HAND, playerA, "Volcanic Hammer", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Worship");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Worship");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         setLife(playerB, 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", "Elite Vanguard");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Volcanic Hammer", playerB);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, -1);

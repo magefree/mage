@@ -28,12 +28,13 @@
 
 package mage.view;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -112,7 +113,7 @@ public class CardView extends SimpleCardView {
         if (card.isSplitCard()) {
             splitCard = (SplitCard) card;
         } else {
-            if (card instanceof Spell && ((Spell) card).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+            if (card instanceof Spell && ((Spell) card).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
                 splitCard = (SplitCard) ((Spell) card).getCard();
             }
         }
@@ -217,7 +218,7 @@ public class CardView extends SimpleCardView {
             this.rarity = Rarity.NA;
             this.rules = new ArrayList<String>();
             this.rules.add(stackAbility.getRule());
-            if (stackAbility.getZone().equals(Constants.Zone.COMMAND)) {
+            if (stackAbility.getZone().equals(Zone.COMMAND)) {
                 this.expansionSetCode = stackAbility.getExpansionSetCode();
             }
         }

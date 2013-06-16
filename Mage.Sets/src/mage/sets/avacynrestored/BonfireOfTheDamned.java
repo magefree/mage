@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MiracleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -79,7 +79,7 @@ class BonfireOfTheDamnedEffect extends OneShotEffect<BonfireOfTheDamnedEffect> {
     private static FilterPermanent filter = new FilterCreaturePermanent();
 
     public BonfireOfTheDamnedEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Bonfire of the Damned deals X damage to target player and each creature he or she controls";
     }
 

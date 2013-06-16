@@ -29,9 +29,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -57,7 +57,7 @@ public class ElvesOfDeepShadow extends CardImpl<ElvesOfDeepShadow> {
         this.toughness = new MageInt(1);
 
         // {tap}: Add {B} to your mana pool. Elves of Deep Shadow deals 1 damage to you.
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost());
         ability.addEffect(new DamageControllerEffect(1));
         this.addAbility(ability);
     }

@@ -34,11 +34,7 @@ package mage.sets.championsofkamigawa;
  */
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -64,10 +60,10 @@ public class GeneralsKabuto extends CardImpl<GeneralsKabuto> {
         this.subtype.add("Equipment");
 
         // Equipped creature has shroud. (It can't be the target of spells or abilities.)
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ShroudAbility.getInstance(), AttachmentType.EQUIPMENT)));
 
         // Prevent all combat damage that would be dealt to equipped creature
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GeneralsKabutoEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GeneralsKabutoEffect()));
 
         // Equip {2}
         this.addAbility(new EquipAbility(Outcome.PreventDamage, new GenericManaCost(2)));

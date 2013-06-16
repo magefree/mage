@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
@@ -38,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -67,7 +68,7 @@ public class ArmoryGuard extends CardImpl<ArmoryGuard> {
 
         // Armory Guard has vigilance as long as you control a Gate.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new ControlsPermanentCondition(filter), rule);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public ArmoryGuard(final ArmoryGuard card) {

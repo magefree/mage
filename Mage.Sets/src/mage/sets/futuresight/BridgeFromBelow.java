@@ -28,14 +28,16 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -58,9 +60,9 @@ public class BridgeFromBelow extends CardImpl<BridgeFromBelow> {
     private static final FilterCreaturePermanent filter2 = new FilterCreaturePermanent("When a creature is put into an opponent's graveyard from the battlefield");
     
     static{
-        filter1.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter1.add(new ControllerPredicate(TargetController.YOU));
         filter1.add(Predicates.not(new TokenPredicate()));
-        filter2.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter2.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
     public BridgeFromBelow(UUID ownerId) {
@@ -90,7 +92,7 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl<BridgeFromBelowAbility
     protected FilterCreaturePermanent filter;
 
     public BridgeFromBelowAbility(Effect effect, FilterCreaturePermanent filter) {
-        super(Constants.Zone.GRAVEYARD, effect, false);
+        super(Zone.GRAVEYARD, effect, false);
         this.filter = filter;
     }
 
@@ -110,8 +112,8 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl<BridgeFromBelowAbility
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
 
 
-            if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD && zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
-                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
+                Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {
                     return true;
                 }

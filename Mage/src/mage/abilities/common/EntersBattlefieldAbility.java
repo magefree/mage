@@ -28,7 +28,7 @@
 
 package mage.abilities.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;

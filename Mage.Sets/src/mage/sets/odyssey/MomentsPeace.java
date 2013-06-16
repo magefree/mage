@@ -28,13 +28,15 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TimingRule;
 
 /**
  *
@@ -49,9 +51,9 @@ public class MomentsPeace extends CardImpl<MomentsPeace> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
         // Flashback {2}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), TimingRule.INSTANT));
     }
 
     public MomentsPeace(final MomentsPeace card) {

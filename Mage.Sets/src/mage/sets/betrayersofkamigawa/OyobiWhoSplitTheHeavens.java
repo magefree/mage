@@ -29,9 +29,8 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -73,7 +72,7 @@ public class OyobiWhoSplitTheHeavens extends CardImpl<OyobiWhoSplitTheHeavens> {
 class AnotherSpiritToken extends Token {
     AnotherSpiritToken() {
         super("Spirit", "3/3 white Spirit creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Spirit");
         power = new MageInt(3);

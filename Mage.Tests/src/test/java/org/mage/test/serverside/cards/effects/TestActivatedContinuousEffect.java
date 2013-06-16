@@ -1,6 +1,7 @@
 package org.mage.test.serverside.cards.effects;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,13 +14,13 @@ public class TestActivatedContinuousEffect extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Captive Flame");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Captive Flame");
+        addCard(Zone.BATTLEFIELD, playerA, "White Knight");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -31,14 +32,14 @@ public class TestActivatedContinuousEffect extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Captive Flame");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Captive Flame");
+        addCard(Zone.BATTLEFIELD, playerA, "White Knight");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{R}:", "White Knight");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

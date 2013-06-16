@@ -28,8 +28,8 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.EffectType;
-import mage.Constants.Outcome;
+import mage.constants.EffectType;
+import mage.constants.Outcome;
 import mage.abilities.MageSingleton;
 import mage.abilities.Mode;
 import mage.target.targetpointer.FirstTargetPointer;

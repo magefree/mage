@@ -28,15 +28,17 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -56,7 +58,7 @@ public class SawtoothThresher extends CardImpl<SawtoothThresher> {
         // Sunburst
         this.addAbility(new SunburstAbility());
         // Remove two +1/+1 counters from Sawtooth Thresher: Sawtooth Thresher gets +4/+4 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(4, 4, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.P1P1.createInstance(2))));
     }
 
     public SawtoothThresher(final SawtoothThresher card) {

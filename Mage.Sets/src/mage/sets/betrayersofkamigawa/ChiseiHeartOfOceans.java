@@ -28,10 +28,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.common.RemoveCounterCost;
@@ -53,7 +53,7 @@ public class ChiseiHeartOfOceans extends CardImpl<ChiseiHeartOfOceans> {
     private static final  FilterPermanent filter = new FilterControlledPermanent("remove a counter from a permanent you control");
     
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterAnyPredicate());
     }       
     

@@ -29,9 +29,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.abilities.keyword.CyclingAbility;

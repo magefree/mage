@@ -28,15 +28,18 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Duration;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -63,7 +66,7 @@ public class RefractionTrap extends CardImpl<RefractionTrap> {
         this.getSpellAbility().addAlternativeCost(new RefractionTrapAlternativeCost());
 
         // Prevent the next 3 damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, Refraction Trap deals that much damage to target creature or player.
-        this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Constants.Duration.EndOfTurn, 3));
+        this.getSpellAbility().addEffect(new RefractionTrapPreventDamageEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
@@ -83,7 +86,7 @@ public class RefractionTrap extends CardImpl<RefractionTrap> {
 class RefractionTrapWatcher extends WatcherImpl<RefractionTrapWatcher> {
 
     public RefractionTrapWatcher() {
-        super("RefractionTrapWatcher", Constants.WatcherScope.GAME);
+        super("RefractionTrapWatcher", WatcherScope.GAME);
     }
 
     public RefractionTrapWatcher(final RefractionTrapWatcher watcher) {
@@ -124,7 +127,7 @@ class RefractionTrapAlternativeCost extends AlternativeCostImpl<RefractionTrapAl
 
     public RefractionTrapAlternativeCost() {
         super("You may pay {W} rather than pay Refraction Trap's mana cost");
-        this.add(new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        this.add(new ColoredManaCost(ColoredManaSymbol.W));
     }
 
     public RefractionTrapAlternativeCost(final RefractionTrapAlternativeCost cost) {
@@ -155,7 +158,7 @@ class RefractionTrapPreventDamageEffect extends PreventionEffectImpl<RefractionT
 
     private int amount;
 
-    public RefractionTrapPreventDamageEffect(Constants.Duration duration, int amount) {
+    public RefractionTrapPreventDamageEffect(Duration duration, int amount) {
         super(duration);
         this.amount = amount;
         staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";

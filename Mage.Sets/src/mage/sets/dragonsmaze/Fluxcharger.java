@@ -28,14 +28,15 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.SwitchPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,7 +67,7 @@ public class Fluxcharger extends CardImpl<Fluxcharger> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new SwitchPowerToughnessSourceEffect(Constants.Duration.EndOfTurn), filter, true));
+        this.addAbility(new SpellCastTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), filter, true));
 
     }
 

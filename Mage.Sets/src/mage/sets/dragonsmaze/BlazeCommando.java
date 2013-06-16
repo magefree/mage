@@ -31,10 +31,10 @@ package mage.sets.dragonsmaze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -44,7 +44,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.game.permanent.token.MerfolkToken;
 import mage.game.permanent.token.Token;
 import mage.game.stack.StackObject;
 
@@ -130,7 +129,7 @@ class BlazeCommandoSoldierToken extends Token {
 
     public BlazeCommandoSoldierToken() {
         super("Soldier", "1/1 red and white Soldier creature tokens with haste");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setRed(true);
         color.setWhite(true);
         subtype.add("Soldier");

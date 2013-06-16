@@ -29,13 +29,14 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.SplitCard;
+import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
@@ -51,8 +52,8 @@ public class BoomBust extends SplitCard<BoomBust> {
     private static final FilterLandPermanent filter1 = new FilterLandPermanent("land you control");
     private static final FilterLandPermanent filter2 = new FilterLandPermanent("land you don't control");
     static {
-        filter1.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filter2.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
+        filter1.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
 
     public BoomBust(UUID ownerId) {

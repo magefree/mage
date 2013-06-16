@@ -29,9 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -55,11 +53,11 @@ public class CetaDisciple extends CardImpl<CetaDisciple> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new TapSourceCost());
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
-        Ability secondAbility = new AnyColorManaAbility(new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        Ability secondAbility = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G));
         secondAbility.addCost(new TapSourceCost());
         this.addAbility(secondAbility);
     }

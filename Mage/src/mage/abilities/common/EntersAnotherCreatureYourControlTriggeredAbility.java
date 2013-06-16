@@ -28,9 +28,9 @@
 
 package mage.abilities.common;
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.effects.Effect;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -57,7 +57,7 @@ public class EntersAnotherCreatureYourControlTriggeredAbility extends ZoneChange
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && !event.getTargetId().equals(this.getSourceId())) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent != null && permanent.getCardType().contains(Constants.CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
                 return true;
             }
         }

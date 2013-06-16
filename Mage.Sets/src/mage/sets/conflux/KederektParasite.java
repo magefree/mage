@@ -28,13 +28,14 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -72,7 +73,7 @@ public class KederektParasite extends CardImpl<KederektParasite> {
 class KederektParasiteTriggeredAbility extends TriggeredAbilityImpl<KederektParasiteTriggeredAbility> {
 
     KederektParasiteTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "opponent"), true);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1, false, "opponent"), true);
     }
 
     KederektParasiteTriggeredAbility(final KederektParasiteTriggeredAbility ability) {

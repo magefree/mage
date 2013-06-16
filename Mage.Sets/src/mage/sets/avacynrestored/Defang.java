@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -60,12 +58,12 @@ public class Defang extends CardImpl<Defang> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Prevent all damage that would be dealt by enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DefangEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefangEffect()));
     }
 
     public Defang(final Defang card) {
@@ -81,7 +79,7 @@ public class Defang extends CardImpl<Defang> {
 class DefangEffect extends PreventionEffectImpl<DefangEffect> {
 
     public DefangEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt by enchanted creature";
     }
 

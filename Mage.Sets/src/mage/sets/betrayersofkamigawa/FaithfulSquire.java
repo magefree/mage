@@ -30,11 +30,10 @@
 
 package mage.sets.betrayersofkamigawa;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.*;
@@ -87,7 +86,7 @@ public class FaithfulSquire extends CardImpl<FaithfulSquire> {
                 new HasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
                 "At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it.", true));
 
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KaisoMemoryOfLoyalty()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KaisoMemoryOfLoyalty()), FlippedCondition.getInstance(), "")));
    }
 
     public FaithfulSquire(final FaithfulSquire card) {

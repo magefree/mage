@@ -29,9 +29,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.effects.common.BasicManaEffect;

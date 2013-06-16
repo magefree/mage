@@ -1,6 +1,7 @@
 package org.mage.test.cards.filters;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,17 +13,17 @@ public class WhipflareTest extends CardTestPlayerBase {
 
     @Test
     public void testDealDamage() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Constants.Zone.HAND, playerA, "Whipflare");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.HAND, playerA, "Whipflare");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Myr Enforcer", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Myr Enforcer", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Myr Enforcer", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Myr Enforcer", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Whipflare");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Whipflare");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

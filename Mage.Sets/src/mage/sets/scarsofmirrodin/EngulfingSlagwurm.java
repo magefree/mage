@@ -30,9 +30,8 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -40,6 +39,8 @@ import mage.abilities.common.BlocksOrBecomesBlockedByCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -76,7 +77,7 @@ public class EngulfingSlagwurm extends CardImpl<EngulfingSlagwurm> {
 
 class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     EngulfingSlagwurmEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain life equal to that creature's toughness";
     }
 
@@ -87,7 +88,7 @@ class EngulfingSlagwurmEffect extends OneShotEffect<EngulfingSlagwurmEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
-        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+        MageObject c = game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         if (c != null && controller != null) {
             controller.gainLife(c.getPower().getValue(), game);
         }

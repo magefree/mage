@@ -29,9 +29,9 @@ package mage.sets.futuresight;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -93,7 +95,7 @@ class GlitteringWishEffect extends OneShotEffect<GlitteringWishEffect> {
     }
 
     public GlitteringWishEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "You may choose a multicolored card you own from outside the game, reveal that card, and put it into your hand. Exile Glittering Wish";
     }
 
@@ -110,7 +112,7 @@ class GlitteringWishEffect extends OneShotEffect<GlitteringWishEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            while (player.chooseUse(Constants.Outcome.Benefit, choiceText, game)) {
+            while (player.chooseUse(Outcome.Benefit, choiceText, game)) {
                 Cards cards = player.getSideboard();
                 if(cards.isEmpty()) {
                     game.informPlayer(player, "You have no cards outside the game.");
@@ -128,12 +130,12 @@ class GlitteringWishEffect extends OneShotEffect<GlitteringWishEffect> {
                     filteredCards.add(card.getId());
                 }
 
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
-                if (player.choose(Constants.Outcome.Benefit, filteredCards, target, game)) {
+                TargetCard target = new TargetCard(Zone.PICK, filter);
+                if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                     Card card = player.getSideboard().get(target.getFirstTarget(), game);
                     if (card != null) {
 
-                        card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getId(), game, false);
                         Cards revealCard = new CardsImpl();
                         revealCard.add(card);
                         player.revealCards("Glittering Wish", revealCard, game);

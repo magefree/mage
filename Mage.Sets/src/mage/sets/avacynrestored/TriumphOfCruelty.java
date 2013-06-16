@@ -27,15 +27,15 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.ControlsBiggestOrTiedCreatureCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
 
@@ -56,7 +56,7 @@ public class TriumphOfCruelty extends CardImpl<TriumphOfCruelty> {
         this.color.setBlack(true);
 
         // At the beginning of your upkeep, target opponent discards a card if you control the creature with the greatest power or tied for the greatest power.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), Constants.TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new DiscardTargetEffect(1), TargetController.YOU, false);
         Target target =  new TargetOpponent();
         target.setRequired(true);
         ability.addTarget(target);

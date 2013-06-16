@@ -29,15 +29,16 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,7 +55,7 @@ public class TwinbladeSlasher extends CardImpl<TwinbladeSlasher> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(WitherAbility.getInstance());
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
     public TwinbladeSlasher(final TwinbladeSlasher card) {

@@ -28,15 +28,16 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -58,7 +59,7 @@ public class Ephemeron extends CardImpl<Ephemeron> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Discard a card: Return Ephemeron to its owner's hand.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardTargetCost(new TargetCardInHand())));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new DiscardTargetCost(new TargetCardInHand())));
     }
 
     public Ephemeron(final Ephemeron card) {

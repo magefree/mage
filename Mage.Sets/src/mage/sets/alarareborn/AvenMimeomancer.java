@@ -28,9 +28,9 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +39,7 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +66,7 @@ public class AvenMimeomancer extends CardImpl<AvenMimeomancer> {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), Constants.TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.FEATHER.createInstance()), TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent());
         ability.addEffect(new AvenEffect());
         ability.addEffect(new AvenEffect2());
@@ -85,7 +86,7 @@ public class AvenMimeomancer extends CardImpl<AvenMimeomancer> {
 class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
 
     public AvenEffect() {
-        super(Constants.Duration.Custom, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.SetPT_7b, Constants.Outcome.BoostCreature);
+        super(Duration.Custom, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
     }
 
     public AvenEffect(final AvenEffect effect) {
@@ -128,7 +129,7 @@ class AvenEffect extends ContinuousEffectImpl<AvenEffect> {
 class AvenEffect2 extends ContinuousEffectImpl<AvenEffect2> {
 
     public AvenEffect2() {
-        super(Constants.Duration.Custom, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.BoostCreature);
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
     }
 
     public AvenEffect2(final AvenEffect2 effect) {

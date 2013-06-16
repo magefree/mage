@@ -1,8 +1,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -17,7 +18,7 @@ public class RevisedEdition extends ExpansionSet {
     }
 
     private RevisedEdition() {
-        super("Revised Edition", "3ED", "mage.sets.revisededition", new GregorianCalendar(1994, 3, 1).getTime(), Constants.SetType.CORE);
+        super("Revised Edition", "3ED", "mage.sets.revisededition", new GregorianCalendar(1994, 3, 1).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

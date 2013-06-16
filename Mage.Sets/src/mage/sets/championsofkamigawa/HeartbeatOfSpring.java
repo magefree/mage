@@ -29,9 +29,9 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;

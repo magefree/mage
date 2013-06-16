@@ -29,9 +29,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,6 +40,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -79,7 +80,7 @@ public class InvaderParasite extends CardImpl<InvaderParasite> {
 
 class InvaderParasiteImprintEffect extends OneShotEffect<InvaderParasiteImprintEffect> {
     InvaderParasiteImprintEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "exile target land";
     }
 
@@ -106,7 +107,7 @@ class InvaderParasiteImprintEffect extends OneShotEffect<InvaderParasiteImprintE
 
 class InvaderParasiteTriggeredAbility extends TriggeredAbilityImpl<InvaderParasiteTriggeredAbility> {
     InvaderParasiteTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2));
     }
 
     InvaderParasiteTriggeredAbility(final InvaderParasiteTriggeredAbility ability) {

@@ -29,9 +29,8 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -59,7 +58,7 @@ public class OrnateKanzashi extends CardImpl<OrnateKanzashi> {
         this.expansionSetCode = "BOK";
 
         // {2}, {T}: Target opponent exiles the top card of his or her library. You may play that card this turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new OrnateKanzashiEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrnateKanzashiEffect(), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
@@ -78,7 +77,7 @@ public class OrnateKanzashi extends CardImpl<OrnateKanzashi> {
 class OrnateKanzashiEffect extends OneShotEffect<OrnateKanzashiEffect> {
 
     public OrnateKanzashiEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "Target opponent exiles the top card of his or her library. You may play that card this turn";
     }
 
@@ -114,7 +113,7 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl<OrnateKanzash
     private UUID cardId;
 
     public OrnateKanzashiCastFromExileEffect(UUID cardId) {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play card from exile";
         this.cardId = cardId;
     }
@@ -138,9 +137,9 @@ class OrnateKanzashiCastFromExileEffect extends AsThoughEffectImpl<OrnateKanzash
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Constants.Zone.EXILED) {
+            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
                 Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Constants.Outcome.Benefit, "Play this card?", game)) {
+                if (player != null && player.chooseUse(Outcome.Benefit, "Play this card?", game)) {
                     if (card.getCardType().contains(CardType.LAND)) {
                         // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
                         if (game.getActivePlayerId().equals(player.getId()) && player.getLandsPlayed() < player.getLandsPerTurn()) {

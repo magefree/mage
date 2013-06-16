@@ -28,15 +28,17 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -54,7 +56,7 @@ public class EnergyField extends CardImpl<EnergyField> {
         this.color.setBlue(true);
 
         // Prevent all damage that would be dealt to you by sources you don't control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EnergyFieldEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnergyFieldEffect()));
         // When a card is put into your graveyard from anywhere, sacrifice Energy Field.
         this.addAbility(new PutIntoYourGraveyardTriggeredAbility());
     }
@@ -72,7 +74,7 @@ public class EnergyField extends CardImpl<EnergyField> {
 class EnergyFieldEffect extends PreventionEffectImpl<EnergyFieldEffect> {
 
     public EnergyFieldEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Prevent all damage that would be dealt to you by sources you don't control";
     }
 
@@ -118,7 +120,7 @@ class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl<PutIntoY
 
 
     public PutIntoYourGraveyardTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect(), false);
     }
 
     public PutIntoYourGraveyardTriggeredAbility(PutIntoYourGraveyardTriggeredAbility ability) {
@@ -134,7 +136,7 @@ class PutIntoYourGraveyardTriggeredAbility extends TriggeredAbilityImpl<PutIntoY
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getToZone() == Constants.Zone.GRAVEYARD) {
+            if (zEvent.getToZone() == Zone.GRAVEYARD) {
                 if(game.getControllerId(event.getTargetId()) != this.getControllerId()){
                     return true;
                 }

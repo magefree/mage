@@ -28,13 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -52,7 +53,7 @@ public class Hydroform extends CardImpl<Hydroform> {
         this.color.setGreen(true);
 
         // Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
-        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new HydroformToken(), "land", Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BecomesCreatureTargetEffect(new HydroformToken(), "land", Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetLandPermanent());
     }
 

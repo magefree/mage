@@ -29,10 +29,10 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import static mage.Constants.Zone;
+import mage.constants.Zone;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;

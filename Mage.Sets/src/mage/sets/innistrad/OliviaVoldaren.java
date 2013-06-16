@@ -29,9 +29,7 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -81,21 +79,21 @@ public class OliviaVoldaren extends CardImpl<OliviaVoldaren> {
         String rule = "Gain control of target Vampire for as long as you control Olivia Voldaren";
 
         FilterPermanent filter2 = new FilterPermanent();
-        filter2.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter2.add(new ControllerPredicate(TargetController.YOU));
         filter2.add(new CardIdPredicate(this.getId()));
 
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Olivia Voldaren deals 1 damage to another target creature. That creature becomes a Vampire in addition to its other types. Put a +1/+1 counter on Olivia Voldaren.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{1}{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
-        ability.addEffect(new AddCardSubTypeTargetEffect("Vampire", Constants.Duration.WhileOnBattlefield));
+        ability.addEffect(new AddCardSubTypeTargetEffect("Vampire", Duration.WhileOnBattlefield));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         this.addAbility(ability);
 
         // {3}{B}{B}: Gain control of target Vampire for as long as you control Olivia Voldaren.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Constants.Duration.Custom), new ControlsPermanentCondition(filter2), rule);
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(filter2), rule);
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{3}{B}{B}"));
         ability2.addTarget(new TargetCreaturePermanent(vampireFilter));
         this.addAbility(ability2);
     }

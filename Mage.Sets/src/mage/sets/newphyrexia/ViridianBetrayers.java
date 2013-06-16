@@ -29,9 +29,9 @@ package mage.sets.newphyrexia;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -64,7 +65,7 @@ public class ViridianBetrayers extends CardImpl<ViridianBetrayers> {
 
         // Viridian Betrayers has infect as long as an opponent is poisoned.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(InfectAbility.getInstance()), PoisonedCondition.getInstance(), rule);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public ViridianBetrayers(final ViridianBetrayers card) {

@@ -30,13 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -50,8 +50,8 @@ public class RallyTheForces extends CardImpl<RallyTheForces> {
         super(ownerId, 73, "Rally the Forces", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{R}");
         this.expansionSetCode = "MBS";
         this.color.setRed(true);
-        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, filter, false));
     }
 
     public RallyTheForces (final RallyTheForces card) {

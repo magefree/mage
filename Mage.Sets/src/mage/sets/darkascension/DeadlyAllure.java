@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.MustBlockSourceEffect;
@@ -53,12 +52,12 @@ public class DeadlyAllure extends CardImpl<DeadlyAllure> {
         this.color.setBlack(true);
 
         // Target creature gains deathtouch until end of turn and must be blocked this turn if able.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MustBlockSourceEffect()), Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{G}"), TimingRule.SORCERY));
 
     }
 

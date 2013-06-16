@@ -27,7 +27,7 @@
  */
 package mage.abilities.condition.common;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;

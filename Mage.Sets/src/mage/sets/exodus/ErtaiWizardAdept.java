@@ -28,9 +28,9 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetSpell;
 
 /**
@@ -58,7 +59,7 @@ public class ErtaiWizardAdept extends CardImpl<ErtaiWizardAdept> {
         this.toughness = new MageInt(1);
 
         // {2}{U}{U}, {tap}: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}{U}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new ManaCostsImpl("{2}{U}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

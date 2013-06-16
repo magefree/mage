@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
@@ -64,7 +65,7 @@ public class SoratamiMindsweeper extends CardImpl<SoratamiMindsweeper> {
         this.addAbility(FlyingAbility.getInstance());
 
         // {2}, Return a land you control to its owner's hand: Target player puts the top two cards of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,new PutLibraryIntoGraveTargetEffect(2), new ManaCostsImpl("{2}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new ReturnToHandTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

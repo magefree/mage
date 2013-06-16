@@ -28,14 +28,16 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FlankingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 
@@ -64,7 +66,7 @@ public class CavalryMaster extends CardImpl<CavalryMaster> {
         // Flanking
         this.addAbility(new FlankingAbility());
         // Other creatures you control with flanking have flanking.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(new FlankingAbility(), Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new FlankingAbility(), Duration.WhileOnBattlefield, filter, true)));
     }
 
     public CavalryMaster(final CavalryMaster card) {

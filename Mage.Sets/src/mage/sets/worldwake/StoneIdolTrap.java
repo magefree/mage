@@ -27,11 +27,7 @@
  */
 package mage.sets.worldwake;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -69,7 +65,7 @@ public class StoneIdolTrap extends CardImpl<StoneIdolTrap> {
         this.color.setRed(true);
 
         // Stone Idol Trap costs {1} less to cast for each attacking creature.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.STACK, new StoneIdolTrapCostReductionEffect());
+        Ability ability = new SimpleStaticAbility(Zone.STACK, new StoneIdolTrapCostReductionEffect());
         ability.setRuleAtTheTop(true);
         this.addAbility(ability);
 
@@ -128,7 +124,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneI
 class StoneIdolTrapEffect extends OneShotEffect<StoneIdolTrapEffect> {
 
     public StoneIdolTrapEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a 6/12 colorless Construct artifact creature token with trample onto the battlefield. Exile it at the beginning of your next end step";
     }
 
@@ -147,7 +143,7 @@ class StoneIdolTrapEffect extends OneShotEffect<StoneIdolTrapEffect> {
         token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
         ExileTargetEffect exileEffect = new ExileTargetEffect("exile the token");
         exileEffect.setTargetPointer(new FixedTarget(token.getLastAddedToken()));
-        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect, Constants.TargetController.YOU);
+        DelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(exileEffect, TargetController.YOU);
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
         game.addDelayedTriggeredAbility(delayedAbility);

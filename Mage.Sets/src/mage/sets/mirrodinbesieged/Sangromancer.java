@@ -30,14 +30,14 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -74,7 +74,7 @@ public class Sangromancer extends CardImpl<Sangromancer> {
 
 class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl<SangromancerFirstTriggeredAbility> {
     SangromancerFirstTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3), true);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }
 
     SangromancerFirstTriggeredAbility(final SangromancerFirstTriggeredAbility ability) {
@@ -89,7 +89,7 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl<Sangromance
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (p != null && p.getCardType().contains(CardType.CREATURE) && game.getOpponents(this.getControllerId()).contains(p.getControllerId())) {
                 return true;
             }
@@ -105,7 +105,7 @@ class SangromancerFirstTriggeredAbility extends TriggeredAbilityImpl<Sangromance
 
 class SangromancerSecondTriggeredAbility extends TriggeredAbilityImpl<SangromancerSecondTriggeredAbility> {
     SangromancerSecondTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(3), true);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(3), true);
     }
 
     SangromancerSecondTriggeredAbility(final SangromancerSecondTriggeredAbility ability) {

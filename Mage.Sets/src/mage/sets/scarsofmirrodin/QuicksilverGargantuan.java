@@ -28,15 +28,18 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -75,7 +78,7 @@ public class QuicksilverGargantuan extends CardImpl<QuicksilverGargantuan> {
     private class QuicksilverGargantuanCopyEffect extends ContinuousEffectImpl<QuicksilverGargantuanCopyEffect> {
 
         public QuicksilverGargantuanCopyEffect() {
-            super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+            super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
             staticText =  "You may have {this} enter the battlefield as a copy of any creature on the battlefield, except it's still 7/7";
         }
 

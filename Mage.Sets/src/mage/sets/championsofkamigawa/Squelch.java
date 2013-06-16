@@ -30,14 +30,15 @@ package mage.sets.championsofkamigawa;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterAbility;
 import mage.game.Game;
@@ -79,7 +80,7 @@ class ActivatedAbilityTarget extends TargetObject<ActivatedAbilityTarget> {
     public ActivatedAbilityTarget() {
         this.minNumberOfTargets = 1;
         this.maxNumberOfTargets = 1;
-        this.zone = Constants.Zone.STACK;
+        this.zone = Zone.STACK;
         this.targetName = "activated ability";
     }
 

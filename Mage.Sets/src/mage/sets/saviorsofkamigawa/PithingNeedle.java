@@ -28,9 +28,8 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -59,7 +58,7 @@ public class PithingNeedle extends CardImpl<PithingNeedle> {
         this.addAbility(new AsEntersBattlefieldAbility(new NameCard()));
         
         // Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PithingNeedleEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PithingNeedleEffect()));
     }
 
     public PithingNeedle(final PithingNeedle card) {
@@ -75,7 +74,7 @@ public class PithingNeedle extends CardImpl<PithingNeedle> {
 class NameCard extends OneShotEffect<NameCard> {
 
     public NameCard() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "name a card";
     }
 
@@ -90,7 +89,7 @@ class NameCard extends OneShotEffect<NameCard> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
-            while (!controller.choose(Constants.Outcome.Detriment, cardChoice, game)) {
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
             String cardName = cardChoice.getChoice();
@@ -110,7 +109,7 @@ class NameCard extends OneShotEffect<NameCard> {
 class PithingNeedleEffect extends ReplacementEffectImpl<PithingNeedleEffect> {
 
     public PithingNeedleEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities";
     }
 
@@ -139,7 +138,7 @@ class PithingNeedleEffect extends ReplacementEffectImpl<PithingNeedleEffect> {
             MageObject object = game.getObject(event.getSourceId());
             Ability ability = game.getAbility(event.getTargetId(), event.getSourceId());
             if (ability != null && object != null) {
-                if (ability.getAbilityType() != Constants.AbilityType.MANA &&
+                if (ability.getAbilityType() != AbilityType.MANA &&
                     object.getName().equals(game.getState().getValue(source.getSourceId().toString()))) {
                         return true;
                 }

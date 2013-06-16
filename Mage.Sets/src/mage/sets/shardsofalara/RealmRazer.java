@@ -29,9 +29,9 @@ package mage.sets.shardsofalara;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,7 +39,8 @@ import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -81,7 +82,7 @@ public class RealmRazer extends CardImpl<RealmRazer> {
 class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
 
     public ExileAllEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "exile all lands";
     }
 
@@ -109,7 +110,7 @@ class ExileAllEffect extends OneShotEffect<ExileAllEffect> {
 class RealmRazerEffect extends OneShotEffect<RealmRazerEffect> {
 
     public RealmRazerEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.staticText = "return the exiled cards to the battlefield tapped under their owners' control";
     }
 
@@ -128,7 +129,7 @@ class RealmRazerEffect extends OneShotEffect<RealmRazerEffect> {
         if (exZone != null) {
             for (Card card : exZone.getCards(game)) {
                 if (card != null) {
-                    if(card.putOntoBattlefield(game, Constants.Zone.EXILED, source.getSourceId(), card.getOwnerId())){
+                    if(card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId())){
                         game.getPermanent(card.getId()).setTapped(true);
                     }
                 }

@@ -31,9 +31,9 @@ package mage.game;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 

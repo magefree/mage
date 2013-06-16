@@ -28,15 +28,17 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -62,7 +64,7 @@ public class WarFalcon extends CardImpl<WarFalcon> {
         this.addAbility(FlyingAbility.getInstance());
         
         // War Falcon can't attack unless you control a Knight or a Soldier.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new WarFalconEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarFalconEffect()));
     }
 
     public WarFalcon(final WarFalcon card) {
@@ -86,7 +88,7 @@ class WarFalconEffect extends RestrictionEffect<WarFalconEffect> {
     }
 
     public WarFalconEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you control a Knight or a Soldier";
     }
 

@@ -29,9 +29,8 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -68,10 +69,10 @@ public class BloodlineKeeper extends CardImpl<BloodlineKeeper> {
 
         this.addAbility(FlyingAbility.getInstance());
         // {tap}: Put a 2/2 black Vampire creature token with flying onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new VampireToken()), new TapSourceCost()));
         // {B}: Transform Bloodline Keeper. Activate this ability only if you control five or more Vampires.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new ControlFiveVampiresCost());
         this.addAbility(ability);
     }
@@ -89,7 +90,7 @@ public class BloodlineKeeper extends CardImpl<BloodlineKeeper> {
 class VampireToken extends Token {
     VampireToken() {
         super("Vampire", "a 2/2 black Vampire creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Vampire");
         power = new MageInt(2);

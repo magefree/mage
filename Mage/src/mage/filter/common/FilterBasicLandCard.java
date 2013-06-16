@@ -28,7 +28,7 @@
 
 package mage.filter.common;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;

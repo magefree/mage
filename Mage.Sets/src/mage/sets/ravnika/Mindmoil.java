@@ -28,9 +28,9 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -72,7 +74,7 @@ public class Mindmoil extends CardImpl<Mindmoil> {
 class MindmoilEffect extends OneShotEffect<MindmoilEffect> {
 
     public MindmoilEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "put the cards in your hand on the bottom of your library in any order, then draw that many cards";
     }
 
@@ -89,20 +91,20 @@ class MindmoilEffect extends OneShotEffect<MindmoilEffect> {
             for (Card card : you.getHand().getCards(game)) {
                 cards.add(card.getId());
             }
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
             while (cards.size() > 1) {
-                you.choose(Constants.Outcome.Neutral, cards, target, game);
+                you.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
                 target.clearChosen();
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
             }
             you.getHand().clear();
             you.drawCards(count, game);

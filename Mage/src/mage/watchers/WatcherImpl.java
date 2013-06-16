@@ -29,7 +29,7 @@
 package mage.watchers;
 
 import java.util.UUID;
-import mage.Constants.WatcherScope;
+import mage.constants.WatcherScope;
 
 /**
  *

@@ -28,10 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -66,7 +64,7 @@ public class MordantDragon extends CardImpl<MordantDragon> {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}{R}: Mordant Dragon gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
 
         // Whenever Mordant Dragon deals combat damage to a player, you may have it deal that much damage to target creature that player controls.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MordantDragonEffect(), true, true));
@@ -102,7 +100,7 @@ class MordantDragonEffect extends OneShotEffect<MordantDragonEffect> {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("creature " + player.getName() + " controls");
                 filter.add(new ControllerIdPredicate(player.getId()));
                 TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Damage, source.getControllerId(), source.getId(), game)) {
+                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Damage, source.getControllerId(), source.getId(), game)) {
                     UUID creature = target.getFirstTarget();
                     if (creature != null) {
                         game.getPermanent(creature).damage(amount, source.getSourceId(), game, true, false);

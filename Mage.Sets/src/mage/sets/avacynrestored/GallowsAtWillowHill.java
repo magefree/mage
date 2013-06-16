@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -37,6 +36,8 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -68,7 +69,7 @@ public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
         this.expansionSetCode = "AVR";
 
         // {3}, {tap}, Tap three untapped Humans you control: Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GallowsAtWillowHillEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GallowsAtWillowHillEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addCost(new TapTargetCost(new TargetControlledPermanent(3, 3, humanFilter, false)));
         ability.addTarget(new TargetCreaturePermanent());
@@ -88,7 +89,7 @@ public class GallowsAtWillowHill extends CardImpl<GallowsAtWillowHill> {
 class GallowsAtWillowHillEffect extends OneShotEffect<GallowsAtWillowHillEffect> {
 
     public GallowsAtWillowHillEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy target creature. Its controller puts a 1/1 white Spirit creature token with flying onto the battlefield";
     }
 

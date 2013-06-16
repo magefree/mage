@@ -1,6 +1,6 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.Constants.ManaType;
+import mage.constants.ManaType;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;

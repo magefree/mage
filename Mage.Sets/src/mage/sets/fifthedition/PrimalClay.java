@@ -29,10 +29,7 @@ package mage.sets.fifthedition;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,7 +57,7 @@ public class PrimalClay extends CardImpl<PrimalClay> {
         this.toughness = new MageInt(0);
 
         // As Primal Clay enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalClayEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types"));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalClayEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types"));
         ability.addChoice(new PrimalClayChoice());
         this.addAbility(ability);
     }
@@ -77,7 +74,7 @@ public class PrimalClay extends CardImpl<PrimalClay> {
 
 class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
     PrimalClayEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
     }
 
     PrimalClayEffect(final PrimalClayEffect effect) {
@@ -85,7 +82,7 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         PrimalClayChoice choice = (PrimalClayChoice) source.getChoices().get(0);
         if (permanent == null) {
@@ -124,8 +121,8 @@ class PrimalClayEffect extends ContinuousEffectImpl<PrimalClayEffect> {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.TypeChangingEffects_4;
     }
 
     @Override

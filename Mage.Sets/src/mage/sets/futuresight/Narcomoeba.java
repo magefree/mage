@@ -27,14 +27,14 @@
  */
 package mage.sets.futuresight;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -72,8 +72,8 @@ public class Narcomoeba extends CardImpl<Narcomoeba> {
 
 class NarcomoebaAbility extends ZoneChangeTriggeredAbility<NarcomoebaAbility> {
     public NarcomoebaAbility() {
-        super(Constants.Zone.LIBRARY, Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), "",  true);
-        this.zone = Constants.Zone.ALL;
+        super(Zone.LIBRARY, Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), "",  true);
+        this.zone = Zone.ALL;
     }
 
     public NarcomoebaAbility(final NarcomoebaAbility ability) {

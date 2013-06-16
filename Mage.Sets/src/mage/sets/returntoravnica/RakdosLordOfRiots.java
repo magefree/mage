@@ -27,9 +27,7 @@
  */
 package mage.sets.returntoravnica;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -73,7 +71,7 @@ public class RakdosLordOfRiots extends CardImpl<RakdosLordOfRiots> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RakdosLordOfRiotsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RakdosLordOfRiotsCostReductionEffect()));
     }
 
     public RakdosLordOfRiots(final RakdosLordOfRiots card) {
@@ -131,7 +129,7 @@ class RakdosLordOfRiotsCost extends CostImpl<RakdosLordOfRiotsCost> {
 class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl<RakdosLordOfRiotsCostReductionEffect> {
 
     RakdosLordOfRiotsCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 

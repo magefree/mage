@@ -27,7 +27,7 @@
  */
 package mage.abilities.common.delayed;
 
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.game.Game;

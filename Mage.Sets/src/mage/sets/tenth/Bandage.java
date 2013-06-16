@@ -29,12 +29,12 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,7 +47,7 @@ public class Bandage extends CardImpl<Bandage> {
         super(ownerId, 9, "Bandage", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{W}");
         this.expansionSetCode = "10E";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1));
+        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }

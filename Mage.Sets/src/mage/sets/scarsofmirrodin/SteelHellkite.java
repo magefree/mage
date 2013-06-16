@@ -27,10 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
@@ -67,9 +64,9 @@ public class SteelHellkite extends CardImpl<SteelHellkite> {
 
         this.addAbility(FlyingAbility.getInstance());
         // {2}: Steel Hellkite gets +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Constants.Duration.EndOfTurn), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new GenericManaCost(2)));
         // {X}: Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new SteelHellkiteDestroyEffect(), new ManaCostsImpl("{X}")));
 
         this.addWatcher(new SteelHellkiteWatcher());
     }
@@ -87,7 +84,7 @@ public class SteelHellkite extends CardImpl<SteelHellkite> {
 class SteelHellkiteDestroyEffect extends OneShotEffect {
 
     public SteelHellkiteDestroyEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy each nonland permanent with converted mana cost X whose controller was dealt combat damage by Steel Hellkite this turn";
     }
 

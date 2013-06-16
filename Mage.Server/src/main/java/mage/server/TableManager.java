@@ -33,10 +33,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import mage.Constants;
+
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
+import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -303,7 +304,7 @@ public class TableManager {
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<UUID>();
         for (Table table : tables.values()) {
-            if (!table.getState().equals(Constants.TableState.FINISHED)) {
+            if (!table.getState().equals(TableState.FINISHED)) {
                 // remove all tables created more than expire_time ago
                 long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
                 if (diff >= EXPIRE_TIME) {

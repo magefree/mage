@@ -28,8 +28,8 @@
 
 package mage.sets.magic2011;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetSpell;

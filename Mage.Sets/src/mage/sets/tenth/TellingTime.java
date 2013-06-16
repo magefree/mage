@@ -28,11 +28,11 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -131,7 +131,7 @@ class TellingTimeEffect extends OneShotEffect<TellingTimeEffect> {
             return cards.getRandom(null);
         }
 
-        TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard(message));
+        TargetCard target = new TargetCard(Zone.PICK, new FilterCard(message));
         target.setRequired(true);
         if (player.choose(Outcome.Benefit, cards, target, game)) {
             Card card = cards.get(target.getFirstTarget(), game);

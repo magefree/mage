@@ -1,22 +1,23 @@
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfCombatTriggeredAbility extends TriggeredAbilityImpl<BeginningOfCombatTriggeredAbility> {
     
-    private Constants.TargetController targetController;
+    private TargetController targetController;
     private boolean setTargetPointer;
 
-    public BeginningOfCombatTriggeredAbility(Effect effect, Constants.TargetController targetController, boolean isOptional) {
-        this(Constants.Zone.BATTLEFIELD, effect, targetController, isOptional, false);
+    public BeginningOfCombatTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, isOptional, false);
     }
 
-    public BeginningOfCombatTriggeredAbility(Constants.Zone zone, Effect effect, Constants.TargetController targetController, boolean isOptional, boolean setTargetPointer) {
+    public BeginningOfCombatTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional, boolean setTargetPointer) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.setTargetPointer = setTargetPointer;

@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.oneshot.sacrifice;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,20 +15,20 @@ public class BarterInBloodTest extends CardTestPlayerBase {
      */
     @Test
     public void testSacrifice() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Constants.Zone.HAND, playerA, "Barter in Blood");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Barter in Blood");
         
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Memnite");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Royal Assassin");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sengir Vampire");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Royal Assassin");
+        addCard(Zone.BATTLEFIELD, playerA, "Sengir Vampire");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Flowering Lumberknot");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Moorland Inquisitor");
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.BATTLEFIELD, playerB, "Flowering Lumberknot");
+        addCard(Zone.BATTLEFIELD, playerB, "Moorland Inquisitor");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Barter in Blood");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Barter in Blood");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, 5);

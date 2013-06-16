@@ -29,7 +29,6 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.Cost;
@@ -38,6 +37,8 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -54,7 +55,7 @@ public class CumulativeUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     private Cost cumulativeCost;
     
     public CumulativeUpkeepAbility(Cost cumulativeCost) {
-        super(new AddCountersSourceEffect(CounterType.AGE.createInstance()), Constants.TargetController.YOU, false);
+        super(new AddCountersSourceEffect(CounterType.AGE.createInstance()), TargetController.YOU, false);
         this.addEffect(new CumulativeUpkeepEffect(cumulativeCost));
         this.cumulativeCost = cumulativeCost;
     }
@@ -88,7 +89,7 @@ class CumulativeUpkeepEffect extends OneShotEffect<CumulativeUpkeepEffect> {
     private Cost cumulativeCost;
     
     CumulativeUpkeepEffect(Cost cumulativeCost) {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         this.cumulativeCost = cumulativeCost;
     }
 
@@ -109,7 +110,7 @@ class CumulativeUpkeepEffect extends OneShotEffect<CumulativeUpkeepEffect> {
                 for(int i = 0 ; i < ageCounter; i++){
                     totalCost.add(cumulativeCost.copy());
                 }
-                if (player.chooseUse(Constants.Outcome.Benefit, "Pay " + totalCost.getText() + "?", game)) {
+                if (player.chooseUse(Outcome.Benefit, "Pay " + totalCost.getText() + "?", game)) {
                     totalCost.clearPaid();
                     if (totalCost.payOrRollback(source, game, source.getId(), source.getControllerId())){
                         return true;
@@ -123,7 +124,7 @@ class CumulativeUpkeepEffect extends OneShotEffect<CumulativeUpkeepEffect> {
                 for(int i = 0 ; i < ageCounter; i++){
                     totalCost.add(cumulativeCost.copy());
                 }
-                if (player.chooseUse(Constants.Outcome.Benefit, totalCost.getText() + "?", game)) {
+                if (player.chooseUse(Outcome.Benefit, totalCost.getText() + "?", game)) {
                     totalCost.clearPaid();
                     int bookmark = game.bookmarkState();
                     if (totalCost.pay(source, game, source.getId(), source.getControllerId(), false)){

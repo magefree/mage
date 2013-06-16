@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -63,15 +62,15 @@ public class RingOfXathrid extends CardImpl<RingOfXathrid> {
         this.subtype.add("Equipment");
 
         // {2}: Regenerate equipped creature.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateAttachedEffect(Constants.AttachmentType.EQUIPMENT), new GenericManaCost(2)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateAttachedEffect(AttachmentType.EQUIPMENT), new GenericManaCost(2)));
         
         // At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black.
-        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), Constants.TargetController.YOU, false);
+        TriggeredAbility triggeredAbility = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new AddPlusOneCountersAttachedEffect(1), TargetController.YOU, false);
         ConditionalTriggeredAbility ability = new ConditionalTriggeredAbility(triggeredAbility, new EquippedMatchesFilterCondition(filter), "At the beginning of your upkeep, put a +1/+1 counter on equipped creature if it's black");
         this.addAbility(ability);
         
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(1)));
     }
 
     public RingOfXathrid(final RingOfXathrid card) {

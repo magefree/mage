@@ -27,7 +27,7 @@
  */
 package mage.sets;
 
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 import java.util.GregorianCalendar;

@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -72,7 +70,7 @@ public class FaithsReward extends CardImpl<FaithsReward> {
 class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
 
     FaithsRewardEffect() {
-        super(Constants.Outcome.PutCardInPlay);
+        super(Outcome.PutCardInPlay);
         staticText = "Return to the battlefield all permanent cards in your graveyard that were put there from the battlefield this turn";
     }
 
@@ -86,8 +84,8 @@ class FaithsRewardEffect extends OneShotEffect<FaithsRewardEffect> {
         if (watcher != null) {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
-                if (c != null && c.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(id) == Constants.Zone.GRAVEYARD) {
-                    c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                if (c != null && c.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(id) == Zone.GRAVEYARD) {
+                    c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 }
             }
             return true;
@@ -105,7 +103,7 @@ class FaithsRewardWatcher extends WatcherImpl<FaithsRewardWatcher> {
     ArrayList<UUID> cards = new ArrayList<UUID>();
 
     public FaithsRewardWatcher() {
-        super("FaithsRewardWatcher", Constants.WatcherScope.GAME);
+        super("FaithsRewardWatcher", WatcherScope.GAME);
     }
 
     public FaithsRewardWatcher(final FaithsRewardWatcher watcher) {

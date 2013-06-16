@@ -30,14 +30,14 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.SacrificeEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -76,7 +76,7 @@ public class AkkiUnderminer extends CardImpl<AkkiUnderminer> {
 class AkkiUnderminerAbility extends TriggeredAbilityImpl<AkkiUnderminerAbility> {
 
     public AkkiUnderminerAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, ""));
+        super(Zone.BATTLEFIELD, new SacrificeEffect(new FilterPermanent(), 1, ""));
     }
 
     public AkkiUnderminerAbility(final AkkiUnderminerAbility ability) {

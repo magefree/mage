@@ -27,9 +27,9 @@
  */
 package mage.util.functions;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -59,7 +59,7 @@ public class CopyFunction implements Function<Card, Card> {
         target.getManaCost().clear();
         target.getManaCost().add(source.getManaCost());
         target.getCardType().clear();
-        for (Constants.CardType type : source.getCardType()) {
+        for (CardType type : source.getCardType()) {
             target.getCardType().add(type);
         }
         target.getSubtype().clear();

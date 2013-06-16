@@ -27,12 +27,13 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -50,7 +51,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect<CastCardFrom
     private FilterCard filterCard;
 
     public CastCardFromOutsideTheGameEffect(FilterCard filter, String ruleText) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = ruleText;
         this.filterCard = filter;
     }
@@ -72,7 +73,7 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect<CastCardFrom
             return false;
         }
 
-        while (player.chooseUse(Constants.Outcome.Benefit, choiceText, game)) {
+        while (player.chooseUse(Outcome.Benefit, choiceText, game)) {
             Cards cards = player.getSideboard();
             if (cards.isEmpty()) {
                 game.informPlayer(player, "You have no cards outside the game.");
@@ -90,8 +91,8 @@ public class CastCardFromOutsideTheGameEffect extends OneShotEffect<CastCardFrom
                 filteredCards.add(card.getId());
             }
 
-            TargetCard target = new TargetCard(Constants.Zone.PICK, filterCard);
-            if (player.choose(Constants.Outcome.Benefit, filteredCards, target, game)) {
+            TargetCard target = new TargetCard(Zone.PICK, filterCard);
+            if (player.choose(Outcome.Benefit, filteredCards, target, game)) {
                 Card card = player.getSideboard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.cast(card.getSpellAbility(), game, true);

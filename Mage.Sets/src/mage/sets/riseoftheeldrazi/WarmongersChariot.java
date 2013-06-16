@@ -27,9 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -56,13 +54,13 @@ public class WarmongersChariot extends CardImpl<WarmongersChariot> {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
 
         // As long as equipped creature has defender, it can attack as though it didn't have defender.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new WarmongersChariotEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WarmongersChariotEffect()));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     public WarmongersChariot(final WarmongersChariot card) {
@@ -78,7 +76,7 @@ public class WarmongersChariot extends CardImpl<WarmongersChariot> {
 class WarmongersChariotEffect extends AsThoughEffectImpl<WarmongersChariotEffect> {
 
     public WarmongersChariotEffect() {
-        super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as equipped creature has defender, it can attack as though it didn't have defender";
     }
 

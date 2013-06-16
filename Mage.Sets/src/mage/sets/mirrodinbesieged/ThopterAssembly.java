@@ -27,15 +27,15 @@
  */
 package mage.sets.mirrodinbesieged;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -75,7 +75,7 @@ public class ThopterAssembly extends CardImpl<ThopterAssembly> {
 
 class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemblyTriggeredAbility> {
     ThopterAssemblyTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandSourceEffect());
         this.addEffect(new CreateTokenEffect(new ThopterToken(), 5));
     }
 
@@ -110,8 +110,8 @@ class ThopterAssemblyTriggeredAbility extends TriggeredAbilityImpl<ThopterAssemb
 class ThopterToken extends Token {
     ThopterToken() {
         super("Thopter", "a 1/1 colorless Thopter artifact creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
-        cardType.add(Constants.CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
         subtype.add("Thopter");
         power = new MageInt(1);
         toughness = new MageInt(1);

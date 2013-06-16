@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -54,13 +52,13 @@ public class AngelicArmaments extends CardImpl<AngelicArmaments> {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +2/+2, has flying, and is a white Angel in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.WHITE, Constants.Duration.WhileOnBattlefield, Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Angel", Constants.Duration.WhileOnBattlefield, Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Angel", Duration.WhileOnBattlefield, AttachmentType.EQUIPMENT)));
 
         // Equip {4}
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(4)));
     }
 
     public AngelicArmaments(final AngelicArmaments card) {

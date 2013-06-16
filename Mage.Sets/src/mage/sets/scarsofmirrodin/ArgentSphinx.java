@@ -30,10 +30,9 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +43,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -82,7 +82,7 @@ class ArgentSphinxEffect extends OneShotEffect<ArgentSphinxEffect> {
     private static final String effectText = "Exile {this}. Return it to the battlefield under your control at the beginning of the next end step";
 
     ArgentSphinxEffect ( ) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 
