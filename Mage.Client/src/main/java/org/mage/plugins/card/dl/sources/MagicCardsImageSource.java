@@ -1,5 +1,6 @@
 package org.mage.plugins.card.dl.sources;
 
+import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import java.util.HashMap;
@@ -64,7 +65,9 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard, boolean isSplitCard, boolean flippedView) throws Exception {
+    public String generateURL(CardDownloadData card) throws Exception {
+        Integer collectorId = card.getCollectorId();
+        String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
@@ -72,14 +75,14 @@ public class MagicCardsImageSource implements CardImageSource {
         StringBuilder url = new StringBuilder("http://magiccards.info/scans/en/");
         url.append(set.toLowerCase()).append("/").append(collectorId);
 
-        if (twoFacedCard) {
-            url.append(secondSide ? "b" : "a");
+        if (card.isTwoFacedCard()) {
+            url.append(card.isSecondSide() ? "b" : "a");
         }
-        if (isSplitCard) {
+        if (card.isSplitCard()) {
             url.append("a");
         }
-        if (isFlipCard) {
-            if (flippedView) { // download rotated by 180 degree image
+        if (card.isFlipCard()) {
+            if (card.isFlippedSide()) { // download rotated by 180 degree image
                 url.append("b");
             } else {
                 url.append("a");
@@ -91,17 +94,15 @@ public class MagicCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(String name, String set) {
-        String _name = name.replaceAll(" ", "-").replace(",", "").toLowerCase();
-        String _set = "not-supported-set";
-        if (setNameReplacement.containsKey(set)) {
-            _set = setNameReplacement.get(set);
+    public String generateTokenUrl(CardDownloadData card) {
+        String name = card.getName().replaceAll(" ", "-").replace(",", "").toLowerCase();
+        String set = "not-supported-set";
+        if (setNameReplacement.containsKey(card.getSet())) {
+            set = setNameReplacement.get(card.getSet());
         } else {
-            _set += "-" + set;
+            set += "-" + card.getSet();
         }
-        String url = "http://magiccards.info/extras/token/" + _set + "/" + _name + ".jpg";
-        return url;
-
+        return "http://magiccards.info/extras/token/" + set + "/" + name + ".jpg";
     }
 
     @Override

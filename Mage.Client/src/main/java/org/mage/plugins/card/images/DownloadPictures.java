@@ -60,8 +60,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     private ExecutorService executor = Executors.newFixedThreadPool(10);
 
-    public static final Proxy.Type[] types = Proxy.Type.values();
-
     public static void main(String[] args) {
         startDownload(null, null, null);
     }
@@ -399,10 +397,9 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         if (card.getCollectorId() != 0) {
                             continue;
                         }
-                        url = cardImageSource.generateTokenUrl(card.getName(), card.getSet());
+                        url = cardImageSource.generateTokenUrl(card);
                     } else {
-                        url = cardImageSource.generateURL(card.getCollectorId(), card.getDownloadName(), card.getSet(),
-                                card.isTwoFacedCard(), card.isSecondSide(), card.isFlipCard(), card.isSplitCard(), card.isFlippedSide());
+                        url = cardImageSource.generateURL(card);
                     }
 
                     if (url != null) {
@@ -566,7 +563,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             count = DownloadPictures.this.cards.size();
 
             if (count == 0) {
-                bar.setString(String.format("0 cards remaining! Please close!", count));
+                bar.setString("0 cards remaining! Please close!");
             } else {
                 bar.setString(String.format("%d cards remaining! Please choose another source!", count));
                 //executor = Executors.newFixedThreadPool(10);

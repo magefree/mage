@@ -3,6 +3,7 @@ package org.mage.plugins.card.dl.sources;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.mage.plugins.card.images.CardDownloadData;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -15,8 +16,8 @@ import java.util.Map;
 public class WizardCardsImageSource implements CardImageSource {
 
     private static CardImageSource instance;
-    private static Map setsAliases;
-    private Map sets;
+    private static Map<String, String> setsAliases;
+    private Map<String, Map<String, String>> sets;
 
     public static CardImageSource getInstance() {
         if (instance == null) {
@@ -26,8 +27,8 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     public WizardCardsImageSource() {
-        sets = new HashMap();
-        setsAliases = new HashMap();
+        sets = new HashMap<String, Map<String, String>>();
+        setsAliases = new HashMap<String, String>();
         setsAliases.put("MMA", "modernmasters/cig");
         setsAliases.put("DGM", "dragonsmaze/cig");
         setsAliases.put("GTC", "gatecrash/cig");
@@ -56,7 +57,7 @@ public class WizardCardsImageSource implements CardImageSource {
     private Map<String, String> getSetLinks(String cardSet) {
         Map<String, String> setLinks = new HashMap<String, String>();
         try {
-            Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + (String) setsAliases.get(cardSet)).get();
+            Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");
             for (int i = 0; i < cardsImages.size(); i++) {
                 String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE").replace("\u2019", "'");
@@ -94,20 +95,22 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondSide, boolean isFlipCard, boolean isSplitCard, boolean flippedView) throws Exception {
+    public String generateURL(CardDownloadData card) throws Exception {
+        Integer collectorId = card.getCollectorId();
+        String cardSet = card.getSet();
         if (collectorId == null || cardSet == null) {
             throw new Exception("Wrong parameters for image: collector id: " + collectorId + ",card set: " + cardSet);
         }
-        if (flippedView) { //doesn't support rotated images
+        if (card.isFlippedSide()) { //doesn't support rotated images
             return null;
         }
         if (setsAliases.get(cardSet) != null) {
-            Map<String, String> setLinks = (Map<String, String>) sets.get(cardSet);
+            Map<String, String> setLinks = sets.get(cardSet);
             if (setLinks == null) {
                 setLinks = getSetLinks(cardSet);
                 sets.put(cardSet, setLinks);
             }
-            String link = setLinks.get(cardName);
+            String link = setLinks.get(card.getDownloadName());
             if (link == null) {
                 if (setLinks.size() >= collectorId) {
                     link = setLinks.get(Integer.toString(collectorId - 1));
@@ -127,7 +130,7 @@ public class WizardCardsImageSource implements CardImageSource {
     }
 
     @Override
-    public String generateTokenUrl(String name, String set) {
+    public String generateTokenUrl(CardDownloadData card) {
         return null;
     }
 
