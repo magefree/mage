@@ -37,7 +37,6 @@ package mage.client;
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
-import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -479,19 +478,9 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         menu.show(component, 0, component.getHeight());
     }
 
-    private List<Card> getAllCards() {
-        List<Card> cards = new ArrayList<Card>();
-        List<CardInfo> allCards = CardRepository.instance.getAllCards();
-        for (CardInfo cardInfo : allCards) {
-            cards.add(cardInfo.getCard());
-        }
-
-        return cards;
-    }
-
     private void checkForNewImages() {
         long beforeCall = System.currentTimeMillis();
-        List<Card> cards = getAllCards();
+        List<CardInfo> cards = CardRepository.instance.getAllCards();
         logger.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
 
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
@@ -507,7 +496,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        List<Card> cards = getAllCards();
+        List<CardInfo> cards = CardRepository.instance.getAllCards();
 
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);

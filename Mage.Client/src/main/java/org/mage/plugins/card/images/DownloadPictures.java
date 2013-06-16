@@ -4,7 +4,7 @@ import de.schlichtherle.truezip.file.TFile;
 import de.schlichtherle.truezip.file.TFileOutputStream;
 import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
-import mage.cards.Card;
+import mage.cards.repository.CardInfo;
 import mage.client.dialog.PreferencesDialog;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
@@ -64,7 +64,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         startDownload(null, null, null);
     }
 
-    public static void startDownload(JFrame frame, List<Card> allCards, String imagesPath) {
+    public static void startDownload(JFrame frame, List<CardInfo> allCards, String imagesPath) {
         ArrayList<CardDownloadData> cards = getNeededCards(allCards, imagesPath);
 
         /*
@@ -186,11 +186,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     }
 
-    public static boolean checkForNewCards(List<Card> allCards, String imagesPath) {
+    public static boolean checkForNewCards(List<CardInfo> allCards, String imagesPath) {
         TFile file;
-        for (Card card : allCards) {
-            if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()) {
-                CardDownloadData url = new CardDownloadData(card.getName(), card.getExpansionSetCode(), card.getCardNumber(),card.getUsesVariousArt(),0 , false, card.canTransform(), card.isNightCard());
+        for (CardInfo card : allCards) {
+            if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()) {
+                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
                 file = new TFile(CardImageUtils.getImagePath(url, imagesPath));
                 if (!file.exists()) {
                     return true;
@@ -200,7 +200,17 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return false;
     }
 
-    private static ArrayList<CardDownloadData> getNeededCards(List<Card> allCards, String imagesPath) {
+    private static boolean usesVariousArt(CardInfo card) {
+        String className = card.getClassName();
+        return Character.isDigit(className.charAt(className.length() - 1));
+    }
+
+    private static String createDownloadName(CardInfo card) {
+        String className = card.getClassName();
+        return className.substring(className.lastIndexOf('.') + 1);
+    }
+
+    private static ArrayList<CardDownloadData> getNeededCards(List<CardInfo> allCards, String imagesPath) {
 
         ArrayList<CardDownloadData> cardsToDownload = new ArrayList<CardDownloadData>();
 
@@ -213,34 +223,31 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         try {
             offlineMode = true;
 
-            for (Card card : allCards) {
-                if (card.getCardNumber() > 0 && !card.getExpansionSetCode().isEmpty()
-                        && !ignoreUrls.contains(card.getExpansionSetCode())) {
+            for (CardInfo card : allCards) {
+                if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()
+                        && !ignoreUrls.contains(card.getSetCode())) {
                     String cardName = card.getName();
-                    CardDownloadData url = new CardDownloadData(cardName, card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
                     if (url.getUsesVariousArt()) {
-                        url.setDownloadName(card.getClass().getName().replace(card.getClass().getPackage().getName() + ".", ""));
+                        url.setDownloadName(createDownloadName(card));
                     }
-                    if (card.isFlipCard()) {
-                        url.setFlipCard(true);
-                    }
-                    if (card.isSplitCard()) {
-                        url.setSplitCard(true);
-                    }
+
+                    url.setFlipCard(card.isFlipCard());
+                    url.setSplitCard(card.isSplitCard());
+
                     allCardsUrls.add(url);
-                    if (card.canTransform()) {
+                    if (card.isDoubleFaced()) {
                         // add second side for downloading
                         // it has the same expansion set code and card number as original one
                         // second side = true;
-                        Card secondSide = card.getSecondCardFace();
-                        url = new CardDownloadData(secondSide.getName(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), true);
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), true);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
                         }
-                        url = new CardDownloadData(card.getFlipCardName(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), 0, false, card.canTransform(), card.isNightCard());
+                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
                         url.setFlipCard(true);
                         url.setFlippedSide(true);
                         allCardsUrls.add(url);
@@ -249,7 +256,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     if (card.getCardNumber() < 1) {
                         System.err.println("There was a critical error!");
                         log.error("Card has no collector ID and won't be sent to client: " + card);
-                    } else if (card.getExpansionSetCode().isEmpty()) {
+                    } else if (card.getSetCode().isEmpty()) {
                         System.err.println("There was a critical error!");
                         log.error("Card has no set name and won't be sent to client:" + card);
                     }
