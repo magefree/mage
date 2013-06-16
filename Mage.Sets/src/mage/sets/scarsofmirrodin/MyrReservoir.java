@@ -28,9 +28,8 @@
 package mage.sets.scarsofmirrodin;
 
 import mage.ConditionalMana;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.BasicManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -68,7 +68,7 @@ public class MyrReservoir extends CardImpl<MyrReservoir> {
         this.addAbility(new MyrReservoirManaAbility());
 
         // {3}, {tap}: Return target Myr card from your graveyard to your hand.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard(myrCardFilter));
         this.addAbility(ability);

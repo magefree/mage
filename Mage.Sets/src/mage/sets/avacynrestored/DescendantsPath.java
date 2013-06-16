@@ -29,9 +29,9 @@ package mage.sets.avacynrestored;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -39,6 +39,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -60,7 +62,7 @@ public class DescendantsPath extends CardImpl<DescendantsPath> {
         this.color.setGreen(true);
 
         // At the beginning of your upkeep, reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DescendantsPathEffect(), TargetController.YOU, false);
         this.addAbility(ability);
     }
 
@@ -77,7 +79,7 @@ public class DescendantsPath extends CardImpl<DescendantsPath> {
 class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
 
     public DescendantsPathEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "reveal the top card of your library. If it's a creature card that shares a creature type with a creature you control, you may cast that card without paying its mana cost. Otherwise, put that card on the bottom of your library";
     }
 
@@ -109,7 +111,7 @@ class DescendantsPathEffect extends OneShotEffect<DescendantsPathEffect> {
                     int count = game.getBattlefield().getAllActivePermanents(filter, player.getId(), game).size();
                     if (count > 0) {
                         game.informPlayers("DescendantsPath: Found a creature that shares a creature type with the revealed card.");
-                        if (player.chooseUse(Constants.Outcome.Benefit, "Cast the card?", game)) {
+                        if (player.chooseUse(Outcome.Benefit, "Cast the card?", game)) {
                             player.cast(card.getSpellAbility(), game, true);
                         } else {
                             game.informPlayers("DescendantsPath: " + player.getName() + " canceled casting the card.");

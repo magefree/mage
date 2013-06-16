@@ -28,15 +28,17 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -75,7 +77,7 @@ public class HamletbackGoliath extends CardImpl<HamletbackGoliath> {
 
 class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl<HamletbackGoliathTriggeredAbility> {
     HamletbackGoliathTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new HamletbackGoliathEffect(), true);
+        super(Zone.BATTLEFIELD, new HamletbackGoliathEffect(), true);
     }
 
     HamletbackGoliathTriggeredAbility(final HamletbackGoliathTriggeredAbility ability) {
@@ -111,7 +113,7 @@ class HamletbackGoliathTriggeredAbility extends TriggeredAbilityImpl<HamletbackG
 
 class HamletbackGoliathEffect extends OneShotEffect<HamletbackGoliathEffect> {
     HamletbackGoliathEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
     }
 
     HamletbackGoliathEffect(final HamletbackGoliathEffect effect) {
@@ -123,7 +125,7 @@ class HamletbackGoliathEffect extends OneShotEffect<HamletbackGoliathEffect> {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent HamletbackGoliath = game.getPermanent(source.getSourceId());
         if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+            creature = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         }
         if (creature != null) {
            HamletbackGoliath.addCounters(CounterType.P1P1.createInstance(creature.getPower().getValue()), game);

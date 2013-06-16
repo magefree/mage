@@ -28,10 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -63,7 +61,7 @@ public class QuestForUlasTemple extends CardImpl<QuestForUlasTemple> {
         this.color.setBlue(true);
 
         // At the beginning of your upkeep, you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on Quest for Ula's Temple.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new QuestForUlasTempleEffect(), TargetController.YOU, true));
 
         // At the beginning of each end step, if there are three or more quest counters on Quest for Ula's Temple, you may put a Kraken, Leviathan, Octopus, or Serpent creature card from your hand onto the battlefield.
         this.addAbility(new QuestForUlasTempleTriggeredAbility());
@@ -82,7 +80,7 @@ public class QuestForUlasTemple extends CardImpl<QuestForUlasTemple> {
 class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
 
     public QuestForUlasTempleEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "you may look at the top card of your library. If it's a creature card, you may reveal it and put a quest counter on {this}";
     }
 
@@ -104,7 +102,7 @@ class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
             cards.add(card);
             player.lookAtCards("This card", cards, game);
             if (card.getCardType().contains(CardType.CREATURE)) {
-                if (player.chooseUse(Constants.Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", game)) {
+                if (player.chooseUse(Outcome.DrawCard, "Do you wish to reveal the creature card at the top of the library?", game)) {
                     player.revealCards("Quest for Ula's Temple", cards, game);
                     Permanent questForUlasTemple = game.getPermanent(source.getSourceId());
                     if (questForUlasTemple != null) {
@@ -121,7 +119,7 @@ class QuestForUlasTempleEffect extends OneShotEffect<QuestForUlasTempleEffect> {
 class QuestForUlasTempleTriggeredAbility extends TriggeredAbilityImpl<QuestForUlasTempleTriggeredAbility> {
 
     public QuestForUlasTempleTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new QuestForUlasTempleEffect2(), true);
+        super(Zone.BATTLEFIELD, new QuestForUlasTempleEffect2(), true);
     }
 
     public QuestForUlasTempleTriggeredAbility(final QuestForUlasTempleTriggeredAbility ability) {
@@ -164,7 +162,7 @@ class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2>
     }
 
     QuestForUlasTempleEffect2() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
     }
 
     QuestForUlasTempleEffect2(final QuestForUlasTempleEffect2 effect) {
@@ -174,14 +172,14 @@ class QuestForUlasTempleEffect2 extends OneShotEffect<QuestForUlasTempleEffect2>
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Constants.Outcome.PutCreatureInPlay, query, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutCreatureInPlay, query, game)) {
             return false;
         }
         TargetCardInHand target = new TargetCardInHand(filter);
-        if (player.choose(Constants.Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
                 return true;
             }
         }

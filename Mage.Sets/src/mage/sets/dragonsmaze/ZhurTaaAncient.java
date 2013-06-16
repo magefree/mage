@@ -28,9 +28,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Abilities;
@@ -41,6 +41,7 @@ import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -82,7 +83,7 @@ class ZhurTaaAncientAbility extends TriggeredManaAbility<ZhurTaaAncientAbility> 
     private static final String staticText = "Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.";
 
     public ZhurTaaAncientAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ZhurTaaAncientEffect());
+        super(Zone.BATTLEFIELD, new ZhurTaaAncientEffect());
     }
 
     public ZhurTaaAncientAbility(ZhurTaaAncientAbility ability) {
@@ -94,7 +95,7 @@ class ZhurTaaAncientAbility extends TriggeredManaAbility<ZhurTaaAncientAbility> 
         if (event.getType() == GameEvent.EventType.TAPPED_FOR_MANA) {
             Permanent permanent = game.getPermanent(event.getSourceId());
             if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Constants.Zone.BATTLEFIELD);
+                permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
             }
             if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getId()));
@@ -129,7 +130,7 @@ class ZhurTaaAncientEffect extends ManaEffect<ZhurTaaAncientEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Constants.Zone.BATTLEFIELD);
+        Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
         Mana types = new Mana();
         for (ManaAbility ability : mana) {
             types.add(ability.getNetMana(game));

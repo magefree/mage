@@ -30,13 +30,14 @@ package mage.abilities.effects.common.continious;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
 import java.util.UUID;
-
-import static mage.Constants.*;
 
 /**
  * @author nantuko

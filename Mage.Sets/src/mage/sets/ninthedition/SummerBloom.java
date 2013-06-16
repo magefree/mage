@@ -28,11 +28,12 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.PlayAdditionalLandsControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -47,7 +48,7 @@ public class SummerBloom extends CardImpl<SummerBloom> {
         this.color.setGreen(true);
 
         // You may play up to three additional lands this turn.
-        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PlayAdditionalLandsControllerEffect(3, Duration.EndOfTurn));
     }
 
     public SummerBloom(final SummerBloom card) {

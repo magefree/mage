@@ -28,10 +28,10 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -100,7 +100,7 @@ class MemoryPlunderEffect extends OneShotEffect<MemoryPlunderEffect> {
         Card card = game.getCard(getTargetPointer().getFirst(game, source));
         if (card != null) {
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Constants.Outcome.Benefit, "Cast " + card.getName() +" without paying cost?", game)) {
+            if (player != null && player.chooseUse(Outcome.Benefit, "Cast " + card.getName() +" without paying cost?", game)) {
                 player.cast(card.getSpellAbility(), game, true);
             }
         }

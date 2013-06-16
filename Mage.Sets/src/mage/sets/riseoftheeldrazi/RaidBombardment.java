@@ -28,12 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -68,7 +69,7 @@ public class RaidBombardment extends CardImpl<RaidBombardment> {
 class RaidBombardmentTriggeredAbility extends TriggeredAbilityImpl<RaidBombardmentTriggeredAbility> {
 
     public RaidBombardmentTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(1));
     }
 
     public RaidBombardmentTriggeredAbility(final RaidBombardmentTriggeredAbility ability) {

@@ -28,9 +28,9 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
@@ -38,6 +38,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -53,7 +55,7 @@ public class BreedingPit extends CardImpl<BreedingPit> {
         this.color.setBlack(true);
 
         // At the beginning of your upkeep, sacrifice Breeding Pit unless you pay {B}{B}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{B}{B}")), TargetController.YOU, false));
         
         // At the beginning of your end step, put a 0/1 black Thrull creature token onto the battlefield.
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new CreateTokenEffect(new ThrullToken()), false));

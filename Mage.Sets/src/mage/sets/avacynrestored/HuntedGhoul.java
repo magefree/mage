@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -97,7 +97,7 @@ class HuntedGhoulAbility extends EvasionAbility<HuntedGhoulAbility> {
 class HuntedGhoulEffect extends RestrictionEffect<HuntedGhoulEffect> {
 
     public HuntedGhoulEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
     }
 
     public HuntedGhoulEffect(final HuntedGhoulEffect effect) {

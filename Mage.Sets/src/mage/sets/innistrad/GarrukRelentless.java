@@ -27,9 +27,8 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -93,7 +94,7 @@ public class GarrukRelentless extends CardImpl<GarrukRelentless> {
 class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl<GarrukRelentlessTriggeredAbility> {
 
     public GarrukRelentlessTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
     }
 
     public GarrukRelentlessTriggeredAbility(GarrukRelentlessTriggeredAbility ability) {
@@ -125,7 +126,7 @@ class GarrukRelentlessTriggeredAbility extends TriggeredAbilityImpl<GarrukRelent
 class GarrukRelentlessDamageEffect extends OneShotEffect<GarrukRelentlessDamageEffect> {
 
     public GarrukRelentlessDamageEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Garruk Relentless deals 3 damage to target creature. That creature deals damage equal to its power to him";
     }
 

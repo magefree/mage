@@ -28,13 +28,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -68,7 +69,7 @@ public class SkullRend extends CardImpl<SkullRend> {
     private class SkullRendEffect extends OneShotEffect<SkullRendEffect> {
 
         public SkullRendEffect() {
-            super(Constants.Outcome.Damage);
+            super(Outcome.Damage);
             staticText = "{this} deals 2 damage to each opponent. Those players each discard two cards at random";
         }
 

@@ -28,9 +28,9 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -63,13 +65,13 @@ public class SpikeWeaver extends CardImpl<SpikeWeaver> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3))));
         
         // {2}, Remove a +1/+1 counter from Spike Weaver: Put a +1/+1 counter on target creature.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.P1P1.createInstance()), new GenericManaCost(2));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         
         // {1}, Remove a +1/+1 counter from Spike Weaver: Prevent all combat damage that would be dealt this turn.
-        Ability ability2 = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true), new GenericManaCost(1));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventAllDamageEffect(Duration.EndOfTurn, true), new GenericManaCost(1));
         ability2.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance()));
         this.addAbility(ability2);
     }

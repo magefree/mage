@@ -29,14 +29,15 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -74,7 +75,7 @@ public class ClutchOfTheUndercity extends CardImpl<ClutchOfTheUndercity> {
 
 class ClutchOfTheUndercityEffect extends OneShotEffect<ClutchOfTheUndercityEffect> {
     ClutchOfTheUndercityEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Its controller loses 3 life";
     }
 
@@ -84,7 +85,7 @@ class ClutchOfTheUndercityEffect extends OneShotEffect<ClutchOfTheUndercityEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+        Permanent p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         if (p != null) {
             Player player = game.getPlayer(p.getControllerId());
             if (player != null) {

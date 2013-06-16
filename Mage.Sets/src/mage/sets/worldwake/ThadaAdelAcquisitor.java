@@ -28,9 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -81,7 +80,7 @@ public class ThadaAdelAcquisitor extends CardImpl<ThadaAdelAcquisitor> {
 class ThadaAdelAcquisitorEffect extends OneShotEffect<ThadaAdelAcquisitorEffect> {
 
     ThadaAdelAcquisitorEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "search that player's library for an artifact card and exile it.  Then that player shuffles his or her library.  Until end of turn, you may play that card";
     }
 
@@ -123,7 +122,7 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl<ThadaAdelPlayFromE
     private UUID cardId;
 
     public ThadaAdelPlayFromExileEffect(UUID cardId) {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may play this card from exile";
         this.cardId = cardId;
     }
@@ -147,9 +146,9 @@ class ThadaAdelPlayFromExileEffect extends AsThoughEffectImpl<ThadaAdelPlayFromE
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Constants.Zone.EXILED) {
+            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
                 Player you = game.getPlayer(source.getControllerId());
-                if (you != null && you.chooseUse(Constants.Outcome.Benefit, "Play the card?", game)) {
+                if (you != null && you.chooseUse(Outcome.Benefit, "Play the card?", game)) {
                     if (card.getCardType().contains(CardType.LAND)) {
                         you.playLand(card, game);
                     } else {

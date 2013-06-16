@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -56,10 +54,10 @@ public class InquisitorsFlail extends CardImpl<InquisitorsFlail> {
 
         // If equipped creature would deal combat damage, it deals double that damage instead.
         // If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new InquisitorsFlailEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new InquisitorsFlailEffect()));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public InquisitorsFlail(final InquisitorsFlail card) {
@@ -75,7 +73,7 @@ public class InquisitorsFlail extends CardImpl<InquisitorsFlail> {
 class InquisitorsFlailEffect extends ReplacementEffectImpl<InquisitorsFlailEffect> {
 
     public InquisitorsFlailEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If equipped creature would deal combat damage, it deals double that damage instead. \n"
                 + "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead";
     }

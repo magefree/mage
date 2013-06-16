@@ -28,10 +28,10 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -41,6 +41,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +60,7 @@ public class GoblinCharbelcher extends CardImpl<GoblinCharbelcher> {
         this.expansionSetCode = "MRD";
 
         // {3}, {tap}: Reveal cards from the top of your library until you reveal a land card. Goblin Charbelcher deals damage equal to the number of nonland cards revealed this way to target creature or player. If the revealed land card was a Mountain, Goblin Charbelcher deals double that damage instead. Put the revealed cards on the bottom of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl("{3}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinCharbelcherEffect(), new ManaCostsImpl("{3}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -100,7 +101,7 @@ class GoblinCharbelcherEffect extends OneShotEffect<GoblinCharbelcherEffect> {
         if (player == null || sourceCard == null) {
             return false;
         }
-        Cards cards = new CardsImpl(Constants.Zone.PICK);
+        Cards cards = new CardsImpl(Zone.PICK);
         while (player.getLibrary().size() > 0) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
@@ -133,14 +134,14 @@ class GoblinCharbelcherEffect extends OneShotEffect<GoblinCharbelcherEffect> {
             }
         }
         
-        TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+        TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
         target.setRequired(true);
         while (cards.size() > 1) {
             player.choose(Outcome.Neutral, cards, target, game);
             Card card = cards.get(target.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.moveToZone(Constants.Zone.PICK, source.getId(), game, false);
+                card.moveToZone(Zone.PICK, source.getId(), game, false);
             }
             target.clearChosen();
         }

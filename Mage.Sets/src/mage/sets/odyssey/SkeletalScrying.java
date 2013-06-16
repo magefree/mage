@@ -28,9 +28,9 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
@@ -40,6 +40,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.players.Player;
@@ -101,7 +102,7 @@ class ExileXFromGraveyardCost extends CostImpl<ExileXFromGraveyardCost> implemen
         Player player = game.getPlayer(controllerId);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Constants.Outcome.Exile, controllerId, sourceId, game)) {
+            if (target.canChoose(controllerId, game) && target.choose(Outcome.Exile, controllerId, sourceId, game)) {
                 Card card = player.getGraveyard().get(target.getFirstTarget(), game);
                 if (card != null) {
                     player.getGraveyard().remove(card);
@@ -159,7 +160,7 @@ class SkeletalScryingEffect extends OneShotEffect<SkeletalScryingEffect> {
     }
     
     public SkeletalScryingEffect(DynamicValue amount) {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.amount = amount.copy();
         staticText = "You draw " + amount + " cards and you lose " + amount + " life";
     }

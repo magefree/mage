@@ -28,9 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -54,7 +53,7 @@ public class LichsMirror extends CardImpl<LichsMirror> {
         this.expansionSetCode = "ALA";
 
         // If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LichsMirrorEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LichsMirrorEffect()));
     }
 
     public LichsMirror(final LichsMirror card) {
@@ -70,7 +69,7 @@ public class LichsMirror extends CardImpl<LichsMirror> {
 class LichsMirrorEffect extends ReplacementEffectImpl<LichsMirrorEffect> {
 
     public LichsMirrorEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would lose the game, instead shuffle your hand, your graveyard, and all permanents you own into your library, then draw seven cards and your life total becomes 20";
     }
 
@@ -97,19 +96,19 @@ class LichsMirrorEffect extends ReplacementEffectImpl<LichsMirrorEffect> {
             for (UUID uuid : player.getHand().copy()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                 }
             }
         
             for (UUID uuid : player.getGraveyard().copy()) {
                 Card card = game.getCard(uuid);
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                 }
             }
             
             for(Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)){
-                permanent.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                permanent.moveToZone(Zone.LIBRARY, source.getId(), game, true);
             }
             player.shuffleLibrary(game);
             

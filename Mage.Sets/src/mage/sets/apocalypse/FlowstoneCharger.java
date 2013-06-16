@@ -29,13 +29,13 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -51,7 +51,7 @@ public class FlowstoneCharger extends CardImpl<FlowstoneCharger> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, -3, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(3, -3, Duration.EndOfTurn), false));
     }
 
     public FlowstoneCharger(final FlowstoneCharger card) {

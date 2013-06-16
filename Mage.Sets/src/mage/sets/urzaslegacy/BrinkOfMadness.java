@@ -29,9 +29,8 @@ package mage.sets.urzaslegacy;
 
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -58,7 +57,7 @@ public class BrinkOfMadness extends CardImpl<BrinkOfMadness> {
         this.color.setBlack(true);
 
         // At the beginning of your upkeep, if you have no cards in hand, sacrifice Brink of Madness and target opponent discards his or her hand.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect(), Constants.TargetController.YOU, false);
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new BrinkOfMadnessEffect());
         ability.addTarget(new TargetOpponent());
         CardsInHandCondition contition = new CardsInHandCondition(CardsInHandCondition.CountType.EQUAL_TO, 0);
@@ -78,7 +77,7 @@ public class BrinkOfMadness extends CardImpl<BrinkOfMadness> {
     class BrinkOfMadnessEffect extends OneShotEffect<BrinkOfMadnessEffect> {
 
     public BrinkOfMadnessEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "Target player discards his or her hand";
     }
 

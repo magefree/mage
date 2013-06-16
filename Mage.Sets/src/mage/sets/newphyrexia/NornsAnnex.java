@@ -30,9 +30,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -51,7 +49,7 @@ public class NornsAnnex extends CardImpl<NornsAnnex> {
         super(ownerId, 17, "Norn's Annex", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{3}{WP}{WP}");
         this.expansionSetCode = "NPH";
         this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new NornsAnnexReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new NornsAnnexReplacementEffect()));
     }
 
     public NornsAnnex(final NornsAnnex card) {
@@ -70,7 +68,7 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
     private static final String effectText = "Creatures can't attack you unless their controller pays {WP} for each creature he or she controls that's attacking you";
 
     NornsAnnexReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -90,7 +88,7 @@ class NornsAnnexReplacementEffect extends ReplacementEffectImpl<NornsAnnexReplac
             if (player != null && event.getTargetId().equals(source.getControllerId())) {
                 ManaCostsImpl propagandaTax = new ManaCostsImpl("{WP}");
                 if (propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                        player.chooseUse(Constants.Outcome.Benefit, "Pay {WP} to declare attacker?", game)) {
+                        player.chooseUse(Outcome.Benefit, "Pay {WP} to declare attacker?", game)) {
                     if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }

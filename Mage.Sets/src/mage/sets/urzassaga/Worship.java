@@ -27,9 +27,7 @@
  */
 package mage.sets.urzassaga;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -54,7 +52,7 @@ public class Worship extends CardImpl<Worship> {
         this.color.setWhite(true);
 
         // If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new WorshipReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WorshipReplacementEffect()));
     }
 
     public Worship(final Worship card) {
@@ -70,7 +68,7 @@ public class Worship extends CardImpl<Worship> {
 class WorshipReplacementEffect extends ReplacementEffectImpl<WorshipReplacementEffect> {
 
     public WorshipReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead";
     }
 
@@ -88,7 +86,7 @@ class WorshipReplacementEffect extends ReplacementEffectImpl<WorshipReplacementE
         if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
             if (permanent != null) {
                 Player controller = game.getPlayer(permanent.getControllerId());

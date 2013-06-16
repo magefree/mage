@@ -28,10 +28,10 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -63,7 +65,7 @@ public class QuestForPureFlame extends CardImpl<QuestForPureFlame> {
         this.addAbility(new QuestForPureFlameTriggeredAbility());
 
         // Remove four quest counters from Quest for Pure Flame and sacrifice it: If any source you control would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new QuestForPureFlameEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(4)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuestForPureFlameEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(4)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -123,7 +125,7 @@ class QuestForPureFlameTriggeredAbility extends TriggeredAbilityImpl<QuestForPur
 class QuestForPureFlameEffect extends ReplacementEffectImpl<QuestForPureFlameEffect> {
 
     public QuestForPureFlameEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Damage);
+        super(Duration.EndOfTurn, Outcome.Damage);
         staticText = "If any source you control would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead";
     }
 

@@ -1,6 +1,5 @@
 package mage.client.plugins.adapters;
 
-import mage.Constants;
 import mage.cards.MageCard;
 import mage.cards.MagePermanent;
 import mage.cards.action.ActionCallback;
@@ -17,6 +16,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.components.CardInfoPane;
+import mage.constants.Rarity;
 import mage.remote.Session;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
@@ -195,7 +195,7 @@ public class MageActionCallback implements ActionCallback {
 
     private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
         // skip popup for not implemented cards (they have Rarity.NA)
-        if (data.card.getRarity().equals(Constants.Rarity.NA)) {
+        if (data.card.getRarity().equals(Rarity.NA)) {
             return;
         }
 

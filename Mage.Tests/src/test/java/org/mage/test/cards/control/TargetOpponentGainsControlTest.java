@@ -1,6 +1,7 @@
 package org.mage.test.cards.control;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class TargetOpponentGainsControlTest extends CardTestPlayerBase {
 
     @Test
     public void testPermanentControlEffect() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Treacherous Pit-Dweller");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Treacherous Pit-Dweller");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // under opponent's control
@@ -29,18 +30,18 @@ public class TargetOpponentGainsControlTest extends CardTestPlayerBase {
 
     @Test
     public void testChangeControlEffectFromTwoCards() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 3);
-        addCard(Constants.Zone.HAND, playerA, "Unhallowed Pact", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Treacherous Pit-Dweller");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 3);
+        addCard(Zone.HAND, playerA, "Unhallowed Pact", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Treacherous Pit-Dweller");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Unhallowed Pact", "Treacherous Pit-Dweller");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Unhallowed Pact", "Treacherous Pit-Dweller");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Treacherous Pit-Dweller");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         // went to graveyard

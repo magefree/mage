@@ -1,6 +1,7 @@
 package org.mage.test.cards.copy;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,14 +15,14 @@ public class CloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCloneTriggered() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Bloodgift Demon", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Bloodgift Demon", 1);
 
-        addCard(Constants.Zone.HAND, playerB, "Clone");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 18);
@@ -41,18 +42,18 @@ public class CloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCloneSacrifice() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Bloodgift Demon", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Bloodgift Demon", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Diabolic Edict");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.HAND, playerA, "Diabolic Edict");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
 
-        addCard(Constants.Zone.HAND, playerB, "Clone");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
-        castSpell(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Diabolic Edict", playerB);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Diabolic Edict", playerB);
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Bloodgift Demon", 1);
@@ -71,18 +72,18 @@ public class CloneTest extends CardTestPlayerBase {
 
     @Test
     public void testCard3() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Constants.Zone.HAND, playerA, "Public Execution");
-        addCard(Constants.Zone.HAND, playerA, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.HAND, playerA, "Clone");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Public Executio", "Llanowar Elves");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Clone");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Llanowar Elves", 0);

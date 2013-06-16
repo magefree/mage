@@ -28,9 +28,9 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +40,7 @@ import mage.abilities.keyword.SuspendAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Zone;
 
 /**
  *
@@ -55,7 +56,7 @@ public class LotusBloom extends CardImpl<LotusBloom> {
         this.addAbility(new SuspendAbility(3, new GenericManaCost(0), this));
 
         // {tap}, Sacrifice Lotus Bloom: Add three mana of any one color to your mana pool.
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);

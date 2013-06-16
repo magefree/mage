@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,7 +57,7 @@ public class GroundSeal extends CardImpl<GroundSeal> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
         
         // Cards in graveyards can't be the targets of spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GroundSealEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GroundSealEffect()));
     }
 
     public GroundSeal(final GroundSeal card) {
@@ -74,7 +73,7 @@ public class GroundSeal extends CardImpl<GroundSeal> {
 class GroundSealEffect extends ReplacementEffectImpl<GroundSealEffect> {
 
     public GroundSealEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Cards in graveyards can't be the targets of spells or abilities";
     }
 
@@ -103,8 +102,8 @@ class GroundSealEffect extends ReplacementEffectImpl<GroundSealEffect> {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
             if (targetCard != null && stackObject != null) {
-                Constants.Zone zone = game.getState().getZone(targetCard.getId());
-                if (zone != null && (zone == Constants.Zone.GRAVEYARD)) {
+                Zone zone = game.getState().getZone(targetCard.getId());
+                if (zone != null && (zone == Zone.GRAVEYARD)) {
                     return true;
                 }
             }

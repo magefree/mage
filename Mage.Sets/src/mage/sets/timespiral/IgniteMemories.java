@@ -28,9 +28,9 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.StormAbility;
@@ -38,6 +38,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -75,7 +76,7 @@ public class IgniteMemories extends CardImpl<IgniteMemories> {
 class IgniteMemoriesEffect extends OneShotEffect<IgniteMemoriesEffect> {
 
     public IgniteMemoriesEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Target player reveals a card at random from his or her hand. Ignite Memories deals damage to that player equal to that card's converted mana cost";
     }
 

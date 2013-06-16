@@ -28,15 +28,17 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -80,7 +82,7 @@ public class MurderousRedcap extends CardImpl<MurderousRedcap> {
 class MurderousRedcapEffect extends OneShotEffect<MurderousRedcapEffect> {
 
     public MurderousRedcapEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "it deals damage equal to its power to target creature or player";
     }
 
@@ -93,7 +95,7 @@ class MurderousRedcapEffect extends OneShotEffect<MurderousRedcapEffect> {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (sourcePermanent != null && permanent != null) {
             permanent.damage(sourcePermanent.getPower().getValue(), sourcePermanent.getId(), game, true, false);

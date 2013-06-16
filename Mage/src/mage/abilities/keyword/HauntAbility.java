@@ -28,7 +28,6 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -36,10 +35,10 @@ import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.ENTERS_THE_BATTLEFIELD;
-import static mage.game.events.GameEvent.EventType.ZONE_CHANGE;
 import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -67,7 +66,7 @@ public class HauntAbility extends TriggeredAbilityImpl<HauntAbility> {
     private boolean usedFromExile = false;
 
     public HauntAbility(Card card, Effect effect) {
-        super(Constants.Zone.ALL, effect , false);
+        super(Zone.ALL, effect , false);
         card.addAbility(new HauntExileAbility());
     }
 
@@ -85,12 +84,12 @@ public class HauntAbility extends TriggeredAbilityImpl<HauntAbility> {
     public boolean checkTrigger(GameEvent event, Game game) {
         switch (event.getType()) {
             case ENTERS_THE_BATTLEFIELD:
-                if (game.getState().getZone(getSourceId()).equals(Constants.Zone.BATTLEFIELD)) {
+                if (game.getState().getZone(getSourceId()).equals(Zone.BATTLEFIELD)) {
                     return event.getTargetId().equals(getSourceId());
                 }
                 break;
             case ZONE_CHANGE:
-                if (!usedFromExile &&game.getState().getZone(getSourceId()).equals(Constants.Zone.EXILED)) {
+                if (!usedFromExile &&game.getState().getZone(getSourceId()).equals(Zone.EXILED)) {
                     ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
                     if (zEvent.isDiesEvent()) {
                         Card card = game.getCard(getSourceId());
@@ -124,7 +123,7 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility<HauntExileAbility> {
 
     private final static String RULE_TEXT_CREATURE = "Haunt <i>(When this creature dies, exile it haunting target creature.)</i>";
     public HauntExileAbility() {
-        super(Constants.Zone.BATTLEFIELD, Constants.Zone.GRAVEYARD, new HauntEffect(), null, false);
+        super(Zone.BATTLEFIELD, Zone.GRAVEYARD, new HauntEffect(), null, false);
         this.setRuleAtTheTop(true);
         this.addTarget(new TargetCreaturePermanent(true));
 
@@ -137,10 +136,10 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility<HauntExileAbility> {
     @Override
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
         // check it was previously on battlefield
-        MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
+        MageObject before = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
         // check now it is in graveyard
-        Constants.Zone after = game.getState().getZone(sourceId);
-        return before != null && after != null && Constants.Zone.GRAVEYARD.match(after);
+        Zone after = game.getState().getZone(sourceId);
+        return before != null && after != null && Zone.GRAVEYARD.match(after);
     }
 
     @Override
@@ -157,7 +156,7 @@ class HauntExileAbility extends ZoneChangeTriggeredAbility<HauntExileAbility> {
 class HauntEffect extends OneShotEffect<HauntEffect> {
 
     public HauntEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "exile it haunting target creature";
     }
 

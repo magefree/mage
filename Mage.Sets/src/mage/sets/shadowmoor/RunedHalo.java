@@ -28,10 +28,10 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +43,7 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.FilterObject;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -85,7 +86,7 @@ public class RunedHalo extends CardImpl<RunedHalo> {
 class NameCard extends OneShotEffect<NameCard> {
 
     public NameCard() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "name a card";
     }
 
@@ -100,7 +101,7 @@ class NameCard extends OneShotEffect<NameCard> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
-            while (!controller.choose(Constants.Outcome.Detriment, cardChoice, game)) {
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
             String cardName = cardChoice.getChoice();

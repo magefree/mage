@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.oneshot.regenerate;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,17 +15,17 @@ public class NecrobiteRegenerateTest extends CardTestPlayerBase {
 
     @Test
     public void testRegenerateAndDeathtouch() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 3);
-        addCard(Constants.Zone.HAND, playerB, "Necrobite");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Zone.HAND, playerB, "Necrobite");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Craw Wurm", "Elite Vanguard");
-        castSpell(2, Constants.PhaseStep.DECLARE_BLOCKERS, playerB, "Necrobite", "Elite Vanguard");
+        castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerB, "Necrobite", "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);

@@ -1,8 +1,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 
 public class Apocalypse extends ExpansionSet {
@@ -13,7 +14,7 @@ public class Apocalypse extends ExpansionSet {
     }
 
     private Apocalypse() {
-        super("Apocalypse", "APC", "", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Apocalypse", "APC", "mage.sets.apocalypse", new GregorianCalendar(2001, 5, 1).getTime(), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;

@@ -27,9 +27,7 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -59,7 +57,7 @@ public class TajuruPreserver extends CardImpl<TajuruPreserver> {
         this.toughness = new MageInt(1);
 
         // Spells and abilities your opponents control can't cause you to sacrifice permanents.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new TajuruPreserverEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TajuruPreserverEffect()));
     }
 
     public TajuruPreserver(final TajuruPreserver card) {
@@ -75,7 +73,7 @@ public class TajuruPreserver extends CardImpl<TajuruPreserver> {
 class TajuruPreserverEffect extends ReplacementEffectImpl<TajuruPreserverEffect> {
 
     public TajuruPreserverEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells and abilities your opponents control can't cause you to sacrifice permanents";
     }
 

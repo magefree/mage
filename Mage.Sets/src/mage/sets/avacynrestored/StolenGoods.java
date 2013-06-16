@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -73,7 +71,7 @@ public class StolenGoods extends CardImpl<StolenGoods> {
 class StolenGoodsEffect extends OneShotEffect<StolenGoodsEffect> {
 
     public StolenGoodsEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "Target opponent exiles cards from the top of his or her library until he or she exiles a nonland card. Until end of turn, you may cast that card without paying its mana cost";
     }
 
@@ -114,7 +112,7 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl<StolenGoodsCastF
     private UUID cardId;
 
     public StolenGoodsCastFromExileEffect(UUID cardId) {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast card from exile";
         this.cardId = cardId;
     }
@@ -138,9 +136,9 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl<StolenGoodsCastF
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
-            if (card != null && game.getState().getZone(this.cardId) == Constants.Zone.EXILED) {
+            if (card != null && game.getState().getZone(this.cardId) == Zone.EXILED) {
                 Player player = game.getPlayer(source.getControllerId());
-                if (player != null && player.chooseUse(Constants.Outcome.Benefit, "Cast the card without paying cost?", game)) {
+                if (player != null && player.chooseUse(Outcome.Benefit, "Cast the card without paying cost?", game)) {
                     player.cast(card.getSpellAbility(), game, true);
                 }
                 return false;

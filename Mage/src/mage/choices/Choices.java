@@ -30,7 +30,7 @@ package mage.choices;
 
 import java.util.ArrayList;
 import java.util.List;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.players.Player;

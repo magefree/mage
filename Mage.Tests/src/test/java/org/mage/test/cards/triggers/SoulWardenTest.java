@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,17 +19,17 @@ public class SoulWardenTest extends CardTestPlayerBase {
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Soul Warden", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Elite Vanguard", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Soul Warden", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Soul Warden");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", "Soul Warden");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 21);

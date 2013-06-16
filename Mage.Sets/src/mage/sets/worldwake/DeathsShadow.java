@@ -28,15 +28,17 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.ControllerLifeCount;
 import mage.abilities.dynamicvalue.common.SignInversionDynamicValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,7 +56,7 @@ public class DeathsShadow extends CardImpl<DeathsShadow> {
         this.toughness = new MageInt(13);
 
         // Death's Shadow gets -X/-X, where X is your life total.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new SignInversionDynamicValue(new ControllerLifeCount()), new SignInversionDynamicValue(new ControllerLifeCount()), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new SignInversionDynamicValue(new ControllerLifeCount()), new SignInversionDynamicValue(new ControllerLifeCount()), Duration.WhileOnBattlefield)));
     }
 
     public DeathsShadow(final DeathsShadow card) {

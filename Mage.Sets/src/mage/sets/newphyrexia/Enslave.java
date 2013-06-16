@@ -30,9 +30,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,11 +58,11 @@ public class Enslave extends CardImpl<Enslave> {
         this.color.setBlack(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new EnslaveEffect(), TargetController.YOU, false));
     }
 
     public Enslave (final Enslave card) {
@@ -80,7 +78,7 @@ public class Enslave extends CardImpl<Enslave> {
 
 class EnslaveEffect extends OneShotEffect<EnslaveEffect> {
     EnslaveEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "enchanted creature deals 1 damage to its owner";
     }
 

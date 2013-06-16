@@ -27,8 +27,6 @@
  */
 package mage.sets.zendikar;
 
-import mage.Constants;
-import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -36,6 +34,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +63,7 @@ public class ArchmageAscension extends CardImpl<ArchmageAscension> {
         this.addWatcher(new CardsDrawnControllerWatcher());
 
         // As long as Archmage Ascension has six or more quest counters on it, if you would draw a card, you may instead search your library for a card, put that card into your hand, then shuffle your library.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ArchmageAscensionReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArchmageAscensionReplacementEffect()));
         
     }
 
@@ -81,7 +80,7 @@ public class ArchmageAscension extends CardImpl<ArchmageAscension> {
 class ArchmageAscensionTriggeredAbility extends TriggeredAbilityImpl<ArchmageAscensionTriggeredAbility> {
 
     public ArchmageAscensionTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)), true);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance(1)), true);
     }
 
     public ArchmageAscensionTriggeredAbility(final ArchmageAscensionTriggeredAbility ability) {
@@ -174,7 +173,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl<ArchmageA
             if (player.searchLibrary(target, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.HAND, id, game, false);
+                    card.moveToZone(Zone.HAND, id, game, false);
                     player.shuffleLibrary(game);
                 }
             }
@@ -191,7 +190,7 @@ class ArchmageAscensionReplacementEffect extends ReplacementEffectImpl<ArchmageA
                 && archmage != null
                 && archmage.getCounters().getCount(CounterType.QUEST) >= 6
                 && you != null
-                && you.chooseUse(Constants.Outcome.Benefit, "Would you like to search you library instead of drawing a card?", game)) {
+                && you.chooseUse(Outcome.Benefit, "Would you like to search you library instead of drawing a card?", game)) {
             return true;
         }
         return false;

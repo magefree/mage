@@ -30,10 +30,9 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,6 +40,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -96,7 +96,7 @@ class ZuberasDiedWatcher extends WatcherImpl<ZuberasDiedWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).isDiesEvent()) {
-            MageObject card = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            MageObject card = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (card != null && card.hasSubtype("Zubera")) {
                 zuberasDiedThisTurn++;
             }

@@ -32,8 +32,8 @@ import mage.abilities.StaticAbility;
 
 import java.io.ObjectStreamException;
 
-import static mage.Constants.AbilityType;
-import static mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 
 /**
  * @author BetaSteward

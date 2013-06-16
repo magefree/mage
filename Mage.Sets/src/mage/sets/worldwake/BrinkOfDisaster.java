@@ -29,14 +29,15 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -70,7 +71,7 @@ public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
         // Enchant creature or land
         TargetPermanent auraTarget = new TargetPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
 
         // When enchanted permanent becomes tapped, destroy it.
         this.addAbility(new EnchantedBecomesTappedTriggeredAbility(new DestroyTargetEffect()));
@@ -89,7 +90,7 @@ public class BrinkOfDisaster extends CardImpl<BrinkOfDisaster> {
 class EnchantedBecomesTappedTriggeredAbility extends TriggeredAbilityImpl<EnchantedBecomesTappedTriggeredAbility> {
 
     public EnchantedBecomesTappedTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
 
     public EnchantedBecomesTappedTriggeredAbility(final EnchantedBecomesTappedTriggeredAbility ability) {

@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
@@ -94,7 +95,7 @@ class GiantAdephageCopyEffect extends OneShotEffect<GiantAdephageCopyEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (thisCard != null && thisCard instanceof Permanent) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from((Permanent)thisCard);

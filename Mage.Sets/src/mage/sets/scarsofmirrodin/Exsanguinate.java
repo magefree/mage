@@ -30,12 +30,12 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -64,7 +64,7 @@ public class Exsanguinate extends CardImpl<Exsanguinate> {
 
 class ExsanguinateEffect extends OneShotEffect<ExsanguinateEffect> {
     public ExsanguinateEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Each opponent loses X life. You gain life equal to the life lost this way";
     }
 

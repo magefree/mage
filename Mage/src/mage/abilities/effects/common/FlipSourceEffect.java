@@ -1,8 +1,8 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -13,7 +13,7 @@ import mage.game.permanent.Permanent;
 public class FlipSourceEffect extends OneShotEffect<FlipSourceEffect> {
 
     public FlipSourceEffect() {
-        super(Constants.Outcome.BecomeCreature);
+        super(Outcome.BecomeCreature);
         staticText = "flip it";
     }
 

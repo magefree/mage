@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import org.junit.Test;
@@ -16,17 +17,17 @@ public class TurnToFrogTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Ravine");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Ravine");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Turn to Frog");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
         attack(1, playerA, "Raging Ravine");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -37,19 +38,19 @@ public class TurnToFrogTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Raging Ravine");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Raging Ravine");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.HAND, playerB, "Turn to Frog");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
 
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
         attack(3, playerA, "Raging Ravine");
 
-        setStopAt(3, Constants.PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -60,20 +61,20 @@ public class TurnToFrogTest extends CardTestPlayerBase {
 
     @Test
     public void testCard3() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Constants.Zone.HAND, playerA, "Public Execution");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.HAND, playerA, "Public Execution");
         // Turn to Frog - Instant, 1U - Target creature loses all abilities and becomes a 1/1 blue Frog until end of turn.
-        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
+        addCard(Zone.HAND, playerA, "Turn to Frog");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
         // Craw Wurm - Creature — Wurm 6/4, 4GG
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Public Execution", "Llanowar Elves");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Turn to Frog", "Craw Wurm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Public Execution", "Llanowar Elves");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Turn to Frog", "Craw Wurm");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Llanowar Elves", 0);

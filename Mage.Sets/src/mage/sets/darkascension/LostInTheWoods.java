@@ -27,10 +27,9 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +37,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -102,7 +102,7 @@ class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
                         permanent.removeFromCombat(game);
                     }
                 }
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 return true;
             }
         }
@@ -119,7 +119,7 @@ class LostInTheWoodsEffect extends OneShotEffect<LostInTheWoodsEffect> {
 class LostInTheWoodsTriggeredAbility extends TriggeredAbilityImpl<LostInTheWoodsTriggeredAbility> {
 
     public LostInTheWoodsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LostInTheWoodsEffect(), false);
+        super(Zone.BATTLEFIELD, new LostInTheWoodsEffect(), false);
     }
 
     public LostInTheWoodsTriggeredAbility(final LostInTheWoodsTriggeredAbility ability) {

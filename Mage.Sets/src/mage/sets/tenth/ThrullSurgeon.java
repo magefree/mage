@@ -28,9 +28,9 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -62,7 +64,7 @@ public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
         this.toughness = new MageInt(1);
 
         // {1}{B}, Sacrifice Thrull Surgeon: Look at target player's hand and choose a card from it. That player discards that card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new ThrullSurgeonEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new ThrullSurgeonEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
@@ -81,7 +83,7 @@ public class ThrullSurgeon extends CardImpl<ThrullSurgeon> {
 class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
 
     public ThrullSurgeonEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Look at target player's hand and choose a card from it. That player discards that card.";
     }
 
@@ -95,10 +97,10 @@ class ThrullSurgeonEffect extends OneShotEffect<ThrullSurgeonEffect> {
         Player you = game.getPlayer(source.getControllerId());
         if (targetPlayer != null && you != null) {
             you.lookAtCards("Discard", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+            TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
             target.setRequired(true);
             target.setNotTarget(true);
-            if (you.choose(Constants.Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+            if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                 Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     return targetPlayer.discard(card, source, game);

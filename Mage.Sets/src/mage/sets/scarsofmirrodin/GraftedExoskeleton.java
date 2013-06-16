@@ -29,9 +29,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.UnattachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -53,10 +51,10 @@ public class GraftedExoskeleton extends CardImpl<GraftedExoskeleton> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
 
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
         // Equipped creature gets +2/+2 and has infect.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(InfectAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2)));
         // Whenever Grafted Exoskeleton becomes unattached from a permanent, sacrifice that permanent.
         this.addAbility(new UnattachedTriggeredAbility(new SacrificeEquippedEffect(), false));
     }

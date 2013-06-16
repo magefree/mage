@@ -1,11 +1,11 @@
 package org.mage.test.serverside.base.impl;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -31,23 +31,23 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
     public void useRedDefault() {
         // *** ComputerA ***
         // battlefield:ComputerA:Mountain:5
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
         // hand:ComputerA:Mountain:4
-        addCard(Constants.Zone.HAND, playerA, "Mountain", 5);
+        addCard(Zone.HAND, playerA, "Mountain", 5);
         // library:ComputerA:clear:0
         removeAllCardsFromLibrary(playerA);
         // library:ComputerA:Mountain:10
-        addCard(Constants.Zone.LIBRARY, playerA, "Mountain", 10);
+        addCard(Zone.LIBRARY, playerA, "Mountain", 10);
 
         // *** ComputerB ***
         // battlefield:ComputerB:Plains:2
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
         // hand:ComputerB:Plains:2
-        addCard(Constants.Zone.HAND, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Plains", 2);
         // library:ComputerB:clear:0
         removeAllCardsFromLibrary(playerB);
         // library:ComputerB:Plains:10
-        addCard(Constants.Zone.LIBRARY, playerB, "Plains", 10);
+        addCard(Zone.LIBRARY, playerB, "Plains", 10);
     }
 
     /**
@@ -55,16 +55,16 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      */
     public void useWhiteDefault() {
         // *** ComputerA ***
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Constants.Zone.HAND, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, "Plains", 5);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.LIBRARY, playerA, "Plains", 10);
+        addCard(Zone.LIBRARY, playerA, "Plains", 10);
 
         // *** ComputerB ***
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Constants.Zone.HAND, playerB, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Plains", 2);
         removeAllCardsFromLibrary(playerB);
-        addCard(Constants.Zone.LIBRARY, playerB, "Plains", 10);
+        addCard(Zone.LIBRARY, playerB, "Plains", 10);
     }
 
     /**
@@ -75,49 +75,49 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      */
     public void removeAllCardsFromLibrary(Player player) {
         if (player.equals(playerA)) {
-            commandsA.put(Constants.Zone.LIBRARY, "clear");
+            commandsA.put(Zone.LIBRARY, "clear");
         } else if (player.equals(playerB)) {
-            commandsB.put(Constants.Zone.LIBRARY, "clear");
+            commandsB.put(Zone.LIBRARY, "clear");
         }
     }
 
     /**
      * Add a card to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName) {
+    public void addCard(Zone gameZone, TestPlayer player, String cardName) {
         addCard(gameZone, player, cardName, 1, false);
     }
 
     /**
      * Add any amount of cards to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count) {
+    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count) {
         addCard(gameZone, player, cardName, count, false);
     }
 
     /**
      * Add any amount of cards to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    public void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
+    public void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped) {
 
 
-        if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
+        if (gameZone.equals(Zone.BATTLEFIELD)) {
             for (int i = 0; i < count; i++) {
                 CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                 Card card = cardInfo != null ? cardInfo.getCard() : null;
@@ -152,21 +152,21 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      * @param player
      * @return
      */
-    private List<Card> getCardList(Constants.Zone gameZone, Player player) {
+    private List<Card> getCardList(Zone gameZone, Player player) {
         if (player.equals(playerA)) {
-            if (gameZone.equals(Constants.Zone.HAND)) {
+            if (gameZone.equals(Zone.HAND)) {
                 return handCardsA;
-            } else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
+            } else if (gameZone.equals(Zone.GRAVEYARD)) {
                 return graveyardCardsA;
-            } else if (gameZone.equals(Constants.Zone.LIBRARY)) {
+            } else if (gameZone.equals(Zone.LIBRARY)) {
                 return libraryCardsA;
             }
         } else if (player.equals(playerB)) {
-            if (gameZone.equals(Constants.Zone.HAND)) {
+            if (gameZone.equals(Zone.HAND)) {
                 return handCardsB;
-            } else if (gameZone.equals(Constants.Zone.GRAVEYARD)) {
+            } else if (gameZone.equals(Zone.GRAVEYARD)) {
                 return graveyardCardsB;
-            } else if (gameZone.equals(Constants.Zone.LIBRARY)) {
+            } else if (gameZone.equals(Zone.LIBRARY)) {
                 return libraryCardsB;
             }
         }
@@ -181,9 +181,9 @@ public abstract class CardTestAPIImpl extends MageTestBase implements CardTestAP
      */
     public void setLife(TestPlayer player, int life) {
         if (player.equals(playerA)) {
-            commandsA.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsA.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
         } else if (player.equals(playerB)) {
-            commandsB.put(Constants.Zone.OUTSIDE, "life:" + String.valueOf(life));
+            commandsB.put(Zone.OUTSIDE, "life:" + String.valueOf(life));
         }
     }
 

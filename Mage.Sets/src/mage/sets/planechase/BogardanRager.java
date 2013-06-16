@@ -29,15 +29,15 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,7 +54,7 @@ public class BogardanRager extends CardImpl<BogardanRager> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(FlashAbility.getInstance());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(4, 0, Constants.Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(4, 0, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

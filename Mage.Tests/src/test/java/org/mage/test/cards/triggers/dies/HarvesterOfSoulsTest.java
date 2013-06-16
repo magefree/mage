@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers.dies;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,19 +19,19 @@ public class HarvesterOfSoulsTest extends CardTestPlayerBase {
      */
     @Test
     public void testDisabledEffectOnChangeZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.HAND, playerA, "Day of Judgment", 1);
-        addCard(Constants.Zone.HAND, playerA, "Thatcher Revolt", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Day of Judgment", 1);
+        addCard(Zone.HAND, playerA, "Thatcher Revolt", 1);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Harvester of Souls", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Craw Wurm", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Harvester of Souls", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Thatcher Revolt");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Day of Judgment");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Thatcher Revolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Day of Judgment");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -28,14 +28,15 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetSpell;
@@ -83,7 +84,7 @@ class LayBareEffect extends OneShotEffect<LayBareEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Card target = (Card) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.STACK);
+        Card target = (Card) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.STACK);
         if (target != null) {
             Player controller = game.getPlayer(target.getOwnerId());
             if (controller != null) {

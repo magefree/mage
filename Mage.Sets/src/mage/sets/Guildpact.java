@@ -28,8 +28,8 @@
 
 package mage.sets;
 
-import mage.Constants;
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 import java.util.GregorianCalendar;
 
@@ -47,7 +47,7 @@ public class Guildpact extends ExpansionSet {
     }
 
     private Guildpact() {
-        super("Guildpact", "GPT", "", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), Constants.SetType.EXPANSION);
+        super("Guildpact", "GPT", "mage.sets.guildpact", new GregorianCalendar(2006, 1, 3).getTime(), SetType.EXPANSION);
         this.blockName = "Ravnika";
         this.parentSet = RavnicaCityOfGuilds.getInstance();
         this.hasBasicLands = false;

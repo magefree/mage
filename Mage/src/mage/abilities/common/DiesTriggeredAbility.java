@@ -28,8 +28,7 @@
 
 package mage.abilities.common;
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
@@ -55,7 +54,7 @@ public class DiesTriggeredAbility extends ZoneChangeTriggeredAbility<DiesTrigger
     @Override
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
         // check it was previously on battlefield
-        MageObject before = game.getLastKnownInformation(sourceId, Constants.Zone.BATTLEFIELD);
+        MageObject before = game.getLastKnownInformation(sourceId, Zone.BATTLEFIELD);
         // check now it is in graveyard
         Zone after = game.getState().getZone(sourceId);
         return before != null && after != null && Zone.GRAVEYARD.match(after);

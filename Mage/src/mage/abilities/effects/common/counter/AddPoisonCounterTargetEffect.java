@@ -27,7 +27,7 @@
  */
 package mage.abilities.effects.common.counter;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;

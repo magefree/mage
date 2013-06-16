@@ -28,12 +28,14 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -77,7 +79,7 @@ class ReduceToDreamsEffect extends OneShotEffect<ReduceToDreamsEffect> {
     }
     
     public ReduceToDreamsEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return all artifacts and enchantments to their owners' hands";
     }
 
@@ -88,7 +90,7 @@ class ReduceToDreamsEffect extends OneShotEffect<ReduceToDreamsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

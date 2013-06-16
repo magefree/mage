@@ -30,9 +30,8 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -68,15 +67,15 @@ public class KondasBanner extends CardImpl<KondasBanner> {
         this.subtype.add("Equipment");
 
         // Creatures that share a color with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerColorBoostEffect()));
 
         // Creatures that share a creature type with equipped creature get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new KondasBannerTypeBoostEffect()));
 
         // Konda's Banner can be attached only to a legendary creature.
         // Equip {2}
         this.addAbility(new EquipAbility(
-                Constants.Outcome.AddAbility, 
+                Outcome.AddAbility,
                 new GenericManaCost(2), 
                 new TargetControlledCreaturePermanent(1,1, legendaryFilter, false)));
 
@@ -97,7 +96,7 @@ class KondasBannerTypeBoostEffect extends BoostAllEffect  {
     private static final String effectText = "Creatures that share a creature type with equipped creature get +1/+1";
 
     KondasBannerTypeBoostEffect() {
-        super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
         staticText = effectText;
     }
 
@@ -141,7 +140,7 @@ class KondasBannerColorBoostEffect extends BoostAllEffect  {
     private static final String effectText = "Creatures that share a color with equipped creature get +1/+1.";
 
     KondasBannerColorBoostEffect() {
-        super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+        super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
         staticText = effectText;
     }
 

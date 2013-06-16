@@ -30,9 +30,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -88,7 +88,7 @@ public class SuturePriest extends CardImpl<SuturePriest> {
 
 class SuturePriestSecondTriggeredAbility extends TriggeredAbilityImpl<SuturePriestSecondTriggeredAbility> {
     SuturePriestSecondTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), true);
     }
 
     SuturePriestSecondTriggeredAbility(final SuturePriestSecondTriggeredAbility ability) {

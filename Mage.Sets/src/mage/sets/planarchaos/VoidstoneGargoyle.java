@@ -28,9 +28,8 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -67,9 +66,9 @@ public class VoidstoneGargoyle extends CardImpl<VoidstoneGargoyle> {
         // As Voidstone Gargoyle enters the battlefield, name a nonland card.
         this.addAbility(new AsEntersBattlefieldAbility(new VoidstoneGargoyleChooseCardEffect()));
         // The named card can't be cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect1()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect1()));
         // Activated abilities of sources with the chosen name can't be activated.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new VoidstoneGargoyleReplacementEffect2()));
     }
 
     public VoidstoneGargoyle(final VoidstoneGargoyle card) {
@@ -85,7 +84,7 @@ public class VoidstoneGargoyle extends CardImpl<VoidstoneGargoyle> {
 class VoidstoneGargoyleChooseCardEffect extends OneShotEffect<VoidstoneGargoyleChooseCardEffect> {
 
     public VoidstoneGargoyleChooseCardEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "name a nonland card";
     }
 
@@ -100,7 +99,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect<VoidstoneGargoyleC
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
-            while (!controller.choose(Constants.Outcome.Detriment, cardChoice, game)) {
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
             String cardName = cardChoice.getChoice();
@@ -120,7 +119,7 @@ class VoidstoneGargoyleChooseCardEffect extends OneShotEffect<VoidstoneGargoyleC
 class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl<VoidstoneGargoyleReplacementEffect1> {
 
     public VoidstoneGargoyleReplacementEffect1() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "The named card can't be cast";
     }
 
@@ -159,7 +158,7 @@ class VoidstoneGargoyleReplacementEffect1 extends ReplacementEffectImpl<Voidston
 class VoidstoneGargoyleReplacementEffect2 extends ReplacementEffectImpl<VoidstoneGargoyleReplacementEffect2> {
 
     public VoidstoneGargoyleReplacementEffect2() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Activated abilities of sources with the chosen name can't be activated.";
     }
 

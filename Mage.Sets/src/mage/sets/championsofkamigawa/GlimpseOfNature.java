@@ -28,13 +28,14 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -71,7 +72,7 @@ class GlimpseOfNatureTriggeredAbility extends DelayedTriggeredAbility<GlimpseOfN
     }
 
     public GlimpseOfNatureTriggeredAbility() {
-        super(new DrawCardControllerEffect(1), Constants.Duration.EndOfTurn, false);
+        super(new DrawCardControllerEffect(1), Duration.EndOfTurn, false);
     }
 
     public GlimpseOfNatureTriggeredAbility(GlimpseOfNatureTriggeredAbility ability) {

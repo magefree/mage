@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -66,7 +64,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
         this.toughness = new MageInt(1);
 
         // {tap}: Draw a card, then discard a card. If a creature card is discarded this way, untap Civilized Scholar, then transform it.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CivilizedScholarEffect(), new TapSourceCost()));
         this.addAbility(new TransformAbility());
 
         this.addWatcher(new HomicidalBruteWatcher());
@@ -85,7 +83,7 @@ public class CivilizedScholar extends CardImpl<CivilizedScholar> {
 class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
 
     public HomicidalBruteWatcher() {
-        super("HomicidalBruteAttacked", Constants.WatcherScope.CARD);
+        super("HomicidalBruteAttacked", WatcherScope.CARD);
     }
 
     public HomicidalBruteWatcher(final HomicidalBruteWatcher watcher) {
@@ -110,7 +108,7 @@ class HomicidalBruteWatcher extends WatcherImpl<HomicidalBruteWatcher> {
 class CivilizedScholarEffect extends OneShotEffect<CivilizedScholarEffect> {
 
     public CivilizedScholarEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Draw a card, then discard a card";
     }
 
@@ -129,7 +127,7 @@ class CivilizedScholarEffect extends OneShotEffect<CivilizedScholarEffect> {
         if (player != null) {
             player.drawCards(1, game);
             TargetDiscard target = new TargetDiscard(player.getId());
-            player.choose(Constants.Outcome.Discard, target, source.getSourceId(), game);
+            player.choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 player.discard(card, source, game);

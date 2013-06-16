@@ -28,9 +28,9 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -55,7 +57,7 @@ public class ErraticPortal extends CardImpl<ErraticPortal> {
         this.expansionSetCode = "EXO";
 
         // {1}, {tap}: Return target creature to its owner's hand unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ErraticPortalEffect(new GenericManaCost(1)), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ErraticPortalEffect(new GenericManaCost(1)), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -76,7 +78,7 @@ class ErraticPortalEffect extends OneShotEffect<ErraticPortalEffect> {
     protected Cost cost;
 
     public ErraticPortalEffect(Cost cost) {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "Return target creature to its owner's hand unless its controller pays {1}";
         this.cost = cost;
     }
@@ -99,7 +101,7 @@ class ErraticPortalEffect extends OneShotEffect<ErraticPortalEffect> {
             if (player != null) {
                 cost.clearPaid();
                 if (!cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), false)) {
-                    return targetCreature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+                    return targetCreature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                 }
             }
         }

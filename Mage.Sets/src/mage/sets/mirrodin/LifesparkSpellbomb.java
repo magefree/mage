@@ -29,10 +29,7 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -54,11 +51,11 @@ public class LifesparkSpellbomb extends CardImpl<LifesparkSpellbomb> {
     public LifesparkSpellbomb(UUID ownerId) {
         super(ownerId, 197, "Lifespark Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new LifesparkSpellbombToken(), "land", Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new LifesparkSpellbombToken(), "land", Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.G));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetLandPermanent());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

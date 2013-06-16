@@ -28,12 +28,12 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -80,7 +82,7 @@ public class GoblinWarPaint extends CardImpl<GoblinWarPaint> {
 class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
 
     public GoblinWarPaintEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Enchanted creature gets +2/+2 and has haste";
     }
 
@@ -89,20 +91,20 @@ class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent enchantment = game.getPermanent(source.getSourceId());
         if (enchantment != null && enchantment.getAttachedTo() != null) {
             Permanent creature = game.getPermanent(enchantment.getAttachedTo());
             if (creature != null) {
                 switch (layer) {
                     case PTChangingEffects_7:
-                        if (sublayer == Constants.SubLayer.ModifyPT_7c) {
+                        if (sublayer == SubLayer.ModifyPT_7c) {
                             creature.addPower(2);
                             creature.addToughness(2);
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:
-                        if (sublayer == Constants.SubLayer.NA) {
+                        if (sublayer == SubLayer.NA) {
                             creature.addAbility(HasteAbility.getInstance(), game);
                         }
                         break;
@@ -119,8 +121,8 @@ class GoblinWarPaintEffect extends ContinuousEffectImpl<GoblinWarPaintEffect> {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == layer.PTChangingEffects_7;
     }
 
     @Override

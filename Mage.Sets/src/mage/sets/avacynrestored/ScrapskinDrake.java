@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CanBlockOnlyFlyingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -58,7 +58,7 @@ public class ScrapskinDrake extends CardImpl<ScrapskinDrake> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Scrapskin Drake can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
     }
 
     public ScrapskinDrake(final ScrapskinDrake card) {

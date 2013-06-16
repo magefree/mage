@@ -28,9 +28,8 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -56,7 +55,7 @@ public class FurnaceOfRath extends CardImpl<FurnaceOfRath> {
         this.color.setRed(true);
 
         // If a source would deal damage to a creature or player, it deals double that damage to that creature or player instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FurnaceOfRathEffect()));
     }
 
     public FurnaceOfRath(final FurnaceOfRath card) {
@@ -72,7 +71,7 @@ public class FurnaceOfRath extends CardImpl<FurnaceOfRath> {
 class FurnaceOfRathEffect extends ReplacementEffectImpl<FurnaceOfRathEffect> {
 
     public FurnaceOfRathEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to a creature or player, that source deals double that damage to that creature or player instead";
     }
 

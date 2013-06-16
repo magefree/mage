@@ -31,8 +31,8 @@ package mage.player.ai;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

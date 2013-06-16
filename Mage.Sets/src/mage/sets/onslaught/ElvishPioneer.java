@@ -28,15 +28,17 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -78,7 +80,7 @@ class PutLandOnBattlefieldEffect extends OneShotEffect<PutLandOnBattlefieldEffec
     private static final String choiceText = "Put a land card from your hand onto the battlefield?";
 
     public PutLandOnBattlefieldEffect() {
-        super(Constants.Outcome.PutLandInPlay);
+        super(Outcome.PutLandInPlay);
         this.staticText = "put a land card from your hand onto the battlefield";
     }
 
@@ -94,15 +96,15 @@ class PutLandOnBattlefieldEffect extends OneShotEffect<PutLandOnBattlefieldEffec
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null || !player.chooseUse(Constants.Outcome.PutLandInPlay, choiceText, game)) {
+        if (player == null || !player.chooseUse(Outcome.PutLandInPlay, choiceText, game)) {
             return false;
         }
 
         TargetCardInHand target = new TargetCardInHand(new FilterLandCard());
-        if (player.choose(Constants.Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
+        if (player.choose(Outcome.PutLandInPlay, target, source.getSourceId(), game)) {
             Card card = game.getCard(target.getFirstTarget());
             if (card != null) {
-                card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
                 Permanent permanent = game.getPermanent(card.getId());
                 if (permanent != null) {
                         permanent.setTapped(true);

@@ -28,9 +28,8 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -63,13 +62,13 @@ public class BondsOfFaith extends CardImpl<BondsOfFaith> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Neutral));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BondsOfFaithEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BondsOfFaithEffect()));
     }
 
     public BondsOfFaith(final BondsOfFaith card) {
@@ -87,7 +86,7 @@ class BondsOfFaithEffect extends RestrictionEffect<BondsOfFaithEffect> {
     private static final Condition condition = new EquippedHasSubtypeCondition("Human");
 
     public BondsOfFaithEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Otherwise, it can't attack or block";
     }
 

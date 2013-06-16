@@ -29,9 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,11 +56,11 @@ public class RecumbentBliss extends CardImpl<RecumbentBliss> {
         this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RecumbentBlissEffect()));
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), Constants.TargetController.YOU, true));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RecumbentBlissEffect()));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new GainLifeEffect(1), TargetController.YOU, true));
     }
 
     public RecumbentBliss(final RecumbentBliss card) {
@@ -78,7 +76,7 @@ public class RecumbentBliss extends CardImpl<RecumbentBliss> {
 class RecumbentBlissEffect extends RestrictionEffect<RecumbentBlissEffect> {
 
     public RecumbentBlissEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }
 

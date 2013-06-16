@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.StaticAbility;
 import mage.cards.Card;

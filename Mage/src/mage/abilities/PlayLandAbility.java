@@ -29,8 +29,8 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.Constants.AbilityType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**

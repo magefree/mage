@@ -29,9 +29,9 @@ package mage.sets.tempest;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -57,7 +59,7 @@ public class ScrollRack extends CardImpl<ScrollRack> {
         this.expansionSetCode = "TMP";
 
         // {1}, {tap}: Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScrollRackEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScrollRackEffect(), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -75,7 +77,7 @@ public class ScrollRack extends CardImpl<ScrollRack> {
 class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
 
     public ScrollRackEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Exile any number of cards from your hand face down. Put that many cards from the top of your library into your hand. Then look at the exiled cards and put them on top of your library in any order";
     }
 
@@ -91,7 +93,7 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
         TargetCardInHand target = new TargetCardInHand(0, you.getHand().size(), filter);
         int amountExiled = 0;
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     List<UUID> targets = target.getTargets();
                     for (UUID targetId : targets) {
@@ -110,7 +112,7 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
                 for (int i = 0; i < count; i++) {
                     Card card = you.getLibrary().removeFromTop(game);
                     if (card != null) {
-                        card.moveToZone(Constants.Zone.HAND, id, game, false);
+                        card.moveToZone(Zone.HAND, id, game, false);
                     }
                 }
             }
@@ -123,17 +125,17 @@ class ScrollRackEffect extends OneShotEffect<ScrollRackEffect> {
                     if (you != null) {
                         you.lookAtCards("exiled cards with " + game.getCard(source.getSourceId()).getName(), scrollRackExileZone, game);
                     }
-                    you.choose(Constants.Outcome.Neutral, scrollRackExileZone, target2, game);
+                    you.choose(Outcome.Neutral, scrollRackExileZone, target2, game);
                     Card card = game.getCard(target2.getFirstTarget());
                     if (card != null) {
                         game.getExile().removeCard(card, game);
-                        card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                     }
                     target2.clearChosen();
                 }
                 if (scrollRackExileZone.count(filter, game) == 1) {
                     Card card = scrollRackExileZone.get(scrollRackExileZone.iterator().next(), game);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                 }
                 return true;
             }

@@ -28,14 +28,15 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -69,7 +70,7 @@ public class ArchangelsLight extends CardImpl<ArchangelsLight> {
 class ArchangelsLightEffect extends OneShotEffect<ArchangelsLightEffect> {
 
     public ArchangelsLightEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain 2 life for each card in your graveyard, then shuffle your graveyard into your library";
     }
 

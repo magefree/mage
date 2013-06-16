@@ -27,10 +27,7 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -64,9 +61,9 @@ public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
         // As Adaptive Automaton enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new AdaptiveAutomatonEffect()));
         // Adaptive Automaton is the chosen type in addition to its other types.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonAddSubtypeEffect()));
         // Other creatures you control of the chosen type get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AdaptiveAutomatonBoostControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AdaptiveAutomatonBoostControlledEffect()));
     }
 
     public AdaptiveAutomaton(final AdaptiveAutomaton card) {
@@ -82,7 +79,7 @@ public class AdaptiveAutomaton extends CardImpl<AdaptiveAutomaton> {
 class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
     public AdaptiveAutomatonEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose a creature type";
     }
 
@@ -98,7 +95,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
+            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
@@ -116,7 +113,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
 
 class AdaptiveAutomatonAddSubtypeEffect extends ContinuousEffectImpl<AdaptiveAutomatonAddSubtypeEffect> {
     public AdaptiveAutomatonAddSubtypeEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "{this} is the chosen type in addition to its other types";
     }
 
@@ -147,7 +144,7 @@ class AdaptiveAutomatonBoostControlledEffect extends ContinuousEffectImpl<Adapti
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public AdaptiveAutomatonBoostControlledEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Other creatures you control of the chosen type get +1/+1";
     }
 

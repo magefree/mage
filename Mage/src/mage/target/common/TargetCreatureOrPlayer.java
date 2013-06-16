@@ -28,7 +28,7 @@
 
 package mage.target.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.filter.Filter;

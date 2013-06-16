@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,13 +13,13 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
     // blocked trigger
     @Test
     public void testCardBlocked() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arrogant Bloodlord");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Wall of Air");
+        addCard(Zone.BATTLEFIELD, playerA, "Arrogant Bloodlord");
+        addCard(Zone.BATTLEFIELD, playerB, "Wall of Air");
 
         attack(1, playerA, "Arrogant Bloodlord");
         block(1, playerB, "Wall of Air", "Arrogant Bloodlord");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -29,13 +30,13 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
     // blocks trigger
     @Test
     public void testCardBlocker() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Caravan Hurda");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord");
+        addCard(Zone.BATTLEFIELD, playerA, "Caravan Hurda");
+        addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord");
 
         attack(1, playerA, "Caravan Hurda");
         block(1, playerB, "Arrogant Bloodlord", "Caravan Hurda");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 21);
@@ -46,13 +47,13 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
     // blocked no trigger
     @Test
     public void testCardBlockedNonTrigger() {
-       addCard(Constants.Zone.BATTLEFIELD, playerA, "Arrogant Bloodlord");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Grizzly Bears");
+       addCard(Zone.BATTLEFIELD, playerA, "Arrogant Bloodlord");
+        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
 
         attack(1, playerA, "Arrogant Bloodlord");
         block(1, playerB, "Grizzly Bears", "Arrogant Bloodlord");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -63,13 +64,13 @@ public class ArrogantBloodlordTest extends CardTestPlayerBase {
     // blocks no trigger
     @Test
     public void testCardBlocksNonTrigger() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Acid Web Spider");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord");
+        addCard(Zone.BATTLEFIELD, playerA, "Acid Web Spider");
+        addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord");
 
         attack(1, playerA, "Acid Web Spider");
         block(1, playerB, "Arrogant Bloodlord", "Acid Web Spider");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

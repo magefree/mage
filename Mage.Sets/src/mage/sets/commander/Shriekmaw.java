@@ -28,19 +28,13 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.AlternativeCostImpl;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.CostsImpl;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;

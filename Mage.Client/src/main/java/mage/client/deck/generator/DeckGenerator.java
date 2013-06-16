@@ -1,7 +1,7 @@
 package mage.client.deck.generator;
 
-import mage.Constants.CardType;
-import mage.Constants.ColoredManaSymbol;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -11,6 +11,7 @@ import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.sets.ConstructedFormats;
+import mage.constants.Rarity;
 import mage.interfaces.rate.RateCallback;
 import mage.cards.Sets;
 import mage.utils.DeckBuilder;
@@ -26,7 +27,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
 
 /**
@@ -369,7 +370,7 @@ public class DeckGenerator {
         if (!landSets.isEmpty()) {
             criteria.setCodes(landSets.toArray(new String[landSets.size()]));
         }
-        criteria.rarities(Constants.Rarity.LAND).name(cardName);
+        criteria.rarities(Rarity.LAND).name(cardName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
 
         if (cards.isEmpty() && !setsToUse.isEmpty()) {

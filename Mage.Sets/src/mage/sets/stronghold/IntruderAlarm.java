@@ -28,12 +28,8 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -61,7 +57,7 @@ public class IntruderAlarm extends CardImpl<IntruderAlarm> {
         this.color.setBlue(true);
 
         // Creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new IntruderAlarmEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new IntruderAlarmEffect()));
         // Whenever a creature enters the battlefield, untap all creatures.
         this.addAbility(new EntersBattlefieldAllTriggeredAbility(new UntapAllCreatureEffect(), new FilterCreaturePermanent()));
     }

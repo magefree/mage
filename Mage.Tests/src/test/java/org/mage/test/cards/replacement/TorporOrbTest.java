@@ -1,6 +1,7 @@
 package org.mage.test.cards.replacement;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class TorporOrbTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Torpor Orb");
-        addCard(Constants.Zone.HAND, playerA, "Wall of Omens");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Torpor Orb");
+        addCard(Zone.HAND, playerA, "Wall of Omens");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Wall of Omens");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Wall of Omens");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

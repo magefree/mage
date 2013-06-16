@@ -28,9 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -90,8 +89,8 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> 
         filterForest.add(new SubtypePredicate("Forest"));
     }
     public QasaliAmbusherAbility() {
-        super(Constants.Zone.HAND, new QasaliAmbusherEffect(), new ManaCostsImpl());
-        this.timing = Constants.TimingRule.INSTANT;
+        super(Zone.HAND, new QasaliAmbusherEffect(), new ManaCostsImpl());
+        this.timing = TimingRule.INSTANT;
         this.usesStack = false;
     }
 
@@ -135,7 +134,7 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> 
 class QasaliAmbusherEffect extends OneShotEffect<QasaliAmbusherEffect> {
 
     public QasaliAmbusherEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "";
     }
 

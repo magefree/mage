@@ -29,7 +29,7 @@
 package mage.game.permanent;
 
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.game.Game;

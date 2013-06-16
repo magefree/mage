@@ -27,9 +27,8 @@
  */
 package mage.sets.torment;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.Costs;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.PayLifeCost;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 import java.util.UUID;
@@ -61,7 +61,7 @@ public class DeepAnalysis extends CardImpl<DeepAnalysis> {
         Costs costs = new CostsImpl();
         costs.add(new ManaCostsImpl("{1}{U}"));
         costs.add(new PayLifeCost(3));
-        this.addAbility(new FlashbackAbility(costs, Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(costs, TimingRule.SORCERY));
     }
 
     public DeepAnalysis(final DeepAnalysis card) {

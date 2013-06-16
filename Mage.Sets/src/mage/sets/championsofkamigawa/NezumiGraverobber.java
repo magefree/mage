@@ -27,9 +27,8 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -70,11 +71,11 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         this.flipCard = true;
         this.flipCardName = "Nighteyes The Desecrator";
 
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{1}{B}"));
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         ability.addEffect(new NezumiGraverobberFlipEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), "")));
     }
 
     public NezumiGraverobber(final NezumiGraverobber card) {
@@ -90,7 +91,7 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
 class NezumiGraverobberFlipEffect extends OneShotEffect<NezumiGraverobberFlipEffect> {
 
     NezumiGraverobberFlipEffect() {
-        super(Constants.Outcome.BecomeCreature);
+        super(Outcome.BecomeCreature);
         staticText = "If no cards are in that graveyard, flip {this}";
     }
 
@@ -132,7 +133,7 @@ class NighteyesTheDesecratorToken extends Token {
         subtype.add("Wizard");
         power = new MageInt(4);
         toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnFromGraveyardToBattlefieldTargetEffect(), new ManaCostsImpl("{4}{B}"));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));
         this.addAbility(ability);
     }

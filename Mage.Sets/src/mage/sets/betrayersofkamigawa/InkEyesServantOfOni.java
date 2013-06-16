@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -71,7 +73,7 @@ public class InkEyesServantOfOni extends CardImpl<InkEyesServantOfOni> {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new InkEyesServantOfOniEffect(), true, true));
 
         // {1}{B}: Regenerate Ink-Eyes.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
     public InkEyesServantOfOni(final InkEyesServantOfOni card) {
@@ -87,7 +89,7 @@ public class InkEyesServantOfOni extends CardImpl<InkEyesServantOfOni> {
 class InkEyesServantOfOniEffect extends OneShotEffect<InkEyesServantOfOniEffect> {
 
     public InkEyesServantOfOniEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "you may put target creature card from that player's graveyard onto the battlefield under your control";
     }
 
@@ -109,10 +111,10 @@ class InkEyesServantOfOniEffect extends OneShotEffect<InkEyesServantOfOniEffect>
         filter.add(new OwnerIdPredicate(damagedPlayer.getId()));
         TargetCardInGraveyard target = new TargetCardInGraveyard(filter);
         if (target.canChoose(source.getSourceId(), you.getId(), game)) {
-            if (you.chooseTarget(Constants.Outcome.PutCreatureInPlay, target, source, game)) {
+            if (you.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, id, you.getId());
+                    card.putOntoBattlefield(game, Zone.GRAVEYARD, id, you.getId());
                     return true;
                 }
             }

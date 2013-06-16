@@ -28,9 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -64,8 +63,8 @@ public class FeralHydra extends CardImpl<FeralHydra> {
         // Feral Hydra enters the battlefield with X +1/+1 counters on it.
         this.addAbility(new EntersBattlefieldAbility(new FeralHydraEffect(), true));
         // {3}: Put a +1/+1 counter on Feral Hydra. Any player may activate this ability.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()) , new ManaCostsImpl("{3}"));
-        ability.setMayActivate(Constants.TargetController.ANY);
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()) , new ManaCostsImpl("{3}"));
+        ability.setMayActivate(TargetController.ANY);
         ability.addEffect(new EmptyEffect("Any player may activate this ability"));
         this.addAbility(ability);
     }
@@ -84,7 +83,7 @@ public class FeralHydra extends CardImpl<FeralHydra> {
 class FeralHydraEffect extends OneShotEffect<FeralHydraEffect> {
 
     public FeralHydraEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "{this} enters the battlefield with X +1/+1 counters on it";
     }
 

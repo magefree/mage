@@ -29,11 +29,11 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -83,7 +83,7 @@ public class RagDealer extends CardImpl<RagDealer> {
 class RagDealerTargetCardsInGraveyard extends TargetCard<RagDealerTargetCardsInGraveyard> {
 
     public RagDealerTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Constants.Zone.GRAVEYARD, filter);
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
         this.targetName = "up to three target cards from a single graveyard";
     }
 

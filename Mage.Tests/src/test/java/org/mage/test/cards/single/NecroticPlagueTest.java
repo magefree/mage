@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,13 +16,13 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Constants.Zone.HAND, playerA, "Necrotic Plague");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Necrotic Plague");
+        addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
 
-        setStopAt(2, Constants.PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(2, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);
@@ -34,14 +35,14 @@ public class NecroticPlagueTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Goblin Deathraiders");
-        addCard(Constants.Zone.HAND, playerA, "Necrotic Plague");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Goblin Deathraiders");
+        addCard(Zone.HAND, playerA, "Necrotic Plague");
+        addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Necrotic Plague", "Sejiri Merfolk");
 
-        setStopAt(3, Constants.PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);

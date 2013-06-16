@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageAllEffect;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OverloadAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -53,7 +54,7 @@ public class StreetSpasm extends CardImpl<StreetSpasm> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature without flying you don't control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
         filter.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));
     }
 

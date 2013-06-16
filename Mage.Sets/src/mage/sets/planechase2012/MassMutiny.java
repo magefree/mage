@@ -28,11 +28,11 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.ContinuousEffect;
@@ -119,7 +119,7 @@ class MassMutinyEffect extends OneShotEffect<MassMutinyEffect> {
                     effect1.setTargetPointer(new FixedTarget(targetCreature.getId()));
                     game.addEffect(effect1, source);
 
-                    ContinuousEffect effect2 = new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn);
+                    ContinuousEffect effect2 = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                     effect2.setTargetPointer(new FixedTarget(targetCreature.getId()));
                     game.addEffect(effect2, source);
 

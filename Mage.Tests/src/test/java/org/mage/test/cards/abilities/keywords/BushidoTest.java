@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class BushidoTest extends CardTestPlayerBase {
      */
     @Test
     public void testBeingBlocked() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Isao, Enlightened Bushi");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Isao, Enlightened Bushi");
 
         attack(2, playerB, "Isao, Enlightened Bushi");
         block(2, playerA, "Elite Vanguard", "Isao, Enlightened Bushi");
 
-        setStopAt(2, Constants.PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
         assertPowerToughness(playerB, "Isao, Enlightened Bushi", 4, 3);
@@ -32,13 +33,13 @@ public class BushidoTest extends CardTestPlayerBase {
      */
     @Test
     public void testBlocking() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Isao, Enlightened Bushi");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Isao, Enlightened Bushi");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Isao, Enlightened Bushi", "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
         assertPowerToughness(playerA, "Isao, Enlightened Bushi", 4, 3);

@@ -27,10 +27,9 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantBlockAbility;
@@ -38,6 +37,9 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -86,7 +88,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> 
     }
 
     public GravecrawlerPlayEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast Gravecrawler from your graveyard as long as you control a Zombie";
     }
 
@@ -108,7 +110,7 @@ class GravecrawlerPlayEffect extends AsThoughEffectImpl<GravecrawlerPlayEffect> 
     public boolean applies(UUID sourceId, Ability source, Game game) {
         if (sourceId.equals(source.getSourceId())) {
             Card card = game.getCard(source.getSourceId());
-            if (card != null && game.getState().getZone(source.getSourceId()) == Constants.Zone.GRAVEYARD && game.canPlaySorcery(source.getControllerId())) {
+            if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD && game.canPlaySorcery(source.getControllerId())) {
                 if (game.getBattlefield().countAll(filter, source.getControllerId(), game) > 0)
                     return true;
             }

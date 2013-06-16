@@ -28,11 +28,8 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Layer;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +59,7 @@ public class PrimalPlasma extends CardImpl<PrimalPlasma> {
         this.toughness = new MageInt(0);
 
         // As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalPlasmaEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender"));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new PrimalPlasmaEffect(), "As {this} enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender"));
         ability.addChoice(new PrimalPlasmaChoice());
         this.addAbility(ability);
     }
@@ -79,7 +76,7 @@ public class PrimalPlasma extends CardImpl<PrimalPlasma> {
 
 class PrimalPlasmaEffect extends ContinuousEffectImpl<PrimalPlasmaEffect> {
     PrimalPlasmaEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
     }
 
     PrimalPlasmaEffect(final PrimalPlasmaEffect effect) {

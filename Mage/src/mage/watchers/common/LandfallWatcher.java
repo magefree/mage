@@ -1,6 +1,7 @@
 package mage.watchers.common;
 
-import mage.Constants;
+import mage.constants.CardType;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -13,7 +14,7 @@ import mage.watchers.WatcherImpl;
 public class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
 
     public LandfallWatcher() {
-        super("LandPlayed", Constants.WatcherScope.PLAYER);
+        super("LandPlayed", WatcherScope.PLAYER);
     }
 
     public LandfallWatcher(final LandfallWatcher watcher) {
@@ -32,7 +33,7 @@ public class LandfallWatcher extends WatcherImpl<LandfallWatcher> {
         }
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent.getCardType().contains(Constants.CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
+            if (permanent.getCardType().contains(CardType.LAND) && permanent.getControllerId().equals(this.controllerId)) {
                 condition = true;
             }
         }

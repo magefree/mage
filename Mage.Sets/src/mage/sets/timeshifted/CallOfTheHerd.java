@@ -29,13 +29,13 @@ package mage.sets.timeshifted;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.ElephantToken;
 
 /**
@@ -53,7 +53,7 @@ public class CallOfTheHerd extends CardImpl<CallOfTheHerd> {
         // Put a 3/3 green Elephant creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new ElephantToken()));
         // Flashback {3}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }
 
     public CallOfTheHerd(final CallOfTheHerd card) {

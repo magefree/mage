@@ -28,14 +28,15 @@
 package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -55,7 +56,7 @@ public class Massacre extends CardImpl<Massacre> {
         // If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost.
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("If an opponent controls a Plains and you control a Swamp, you may cast Massacre without paying its mana cost", new MassacreCost()));
         // All creatures get -2/-2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-2, -2, Duration.EndOfTurn));
     }
 
     public Massacre(final Massacre card) {

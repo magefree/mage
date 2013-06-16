@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,11 +15,11 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
     public void testCard() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Civilized Scholar");
-        addCard(Constants.Zone.LIBRARY, playerA, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
+        addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -32,11 +33,11 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
     public void testCardNegative() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Civilized Scholar");
-        addCard(Constants.Zone.LIBRARY, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
+        addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -50,11 +51,11 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
     public void testCardTransform() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Civilized Scholar");
-        addCard(Constants.Zone.LIBRARY, playerA, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
+        addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
-        setStopAt(2, Constants.PhaseStep.UPKEEP);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
         assertLife(playerA, 20);
@@ -68,12 +69,12 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
     public void testCardNotTransform() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Civilized Scholar");
-        addCard(Constants.Zone.LIBRARY, playerA, "Sejiri Merfolk", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
+        addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk", 2);
 
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
         attack(3, playerA, "Homicidal Brute");
-        setStopAt(4, Constants.PhaseStep.UPKEEP);
+        setStopAt(4, PhaseStep.UPKEEP);
         execute();
 
         assertLife(playerA, 20);

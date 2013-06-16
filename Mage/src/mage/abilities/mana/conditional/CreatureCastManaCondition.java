@@ -27,11 +27,11 @@
 */
 package mage.abilities.mana.conditional;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.condition.Condition;
+import mage.constants.CardType;
 import mage.game.Game;
 
 import java.util.UUID;
@@ -44,7 +44,7 @@ public class CreatureCastManaCondition extends ManaCondition implements Conditio
     public boolean apply(Game game, Ability source) {
         if (source instanceof SpellAbility) {
             MageObject object = game.getObject(source.getSourceId());
-            if (object != null && object.getCardType().contains(Constants.CardType.CREATURE)) {
+            if (object != null && object.getCardType().contains(CardType.CREATURE)) {
                 return true;
             }
         }

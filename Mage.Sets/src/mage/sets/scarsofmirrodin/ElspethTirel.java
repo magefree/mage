@@ -28,9 +28,8 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -79,7 +79,7 @@ public class ElspethTirel extends CardImpl<ElspethTirel> {
 
 class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
     public ElspethTirelFirstEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain 1 life for each creature you control";
     }
 
@@ -106,7 +106,7 @@ class ElspethTirelFirstEffect extends OneShotEffect<ElspethTirelFirstEffect> {
 
 class ElspethTirelThirdEffect extends OneShotEffect<ElspethTirelThirdEffect> {
     public ElspethTirelThirdEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy all other permanents except for lands and tokens";
     }
 

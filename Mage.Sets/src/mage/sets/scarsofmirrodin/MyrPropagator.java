@@ -27,9 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -37,6 +36,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
@@ -60,7 +61,7 @@ public class MyrPropagator extends CardImpl<MyrPropagator> {
         this.toughness = new MageInt(1);
 
         // {3}, {tap}: Put a token that's a copy of Myr Propagator onto the battlefield.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MyrPropagatorCreateTokenEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyrPropagatorCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -78,7 +79,7 @@ public class MyrPropagator extends CardImpl<MyrPropagator> {
 class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTokenEffect> {
 
     public MyrPropagatorCreateTokenEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a token that's a copy of Myr Propagator onto the battlefield";
     }
 
@@ -93,7 +94,7 @@ class MyrPropagatorCreateTokenEffect extends OneShotEffect<MyrPropagatorCreateTo
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        MageObject thisCard = game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (thisCard != null && thisCard instanceof Permanent) {
             EmptyToken token = new EmptyToken();
             CardUtil.copyTo(token).from((Permanent)thisCard);

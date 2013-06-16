@@ -28,10 +28,10 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -40,6 +40,7 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -113,7 +114,7 @@ class OrimsThunderEffect2 extends OneShotEffect<OrimsThunderEffect2> {
     @Override
     public boolean apply(Game game, Ability source) {
         int damage = 0;
-        MageObject firstTarget = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        MageObject firstTarget = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         Permanent secondTarget = game.getPermanent(source.getTargets().get(1).getFirstTarget());
         if (firstTarget != null) {
             damage = firstTarget.getManaCost().convertedManaCost();

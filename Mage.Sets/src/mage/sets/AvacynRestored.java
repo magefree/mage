@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class AvacynRestored extends ExpansionSet {
     }
 
     private AvacynRestored() {
-        super("Avacyn Restored", "AVR", "seticon_mtgavr", "mage.sets.avacynrestored", new GregorianCalendar(2012, 4, 4).getTime(), SetType.EXPANSION);
+        super("Avacyn Restored", "AVR", "mage.sets.avacynrestored", new GregorianCalendar(2012, 4, 4).getTime(), SetType.EXPANSION);
         this.blockName = "Innistrad";
         this.parentSet = Innistrad.getInstance();
         this.hasBoosters = true;

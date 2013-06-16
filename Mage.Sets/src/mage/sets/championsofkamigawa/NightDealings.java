@@ -29,10 +29,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterNonlandCard;
@@ -87,7 +88,7 @@ public class NightDealings extends CardImpl<NightDealings> {
     private class NightDealingsTriggeredAbility extends TriggeredAbilityImpl<NightDealingsTriggeredAbility> {
 
         public NightDealingsTriggeredAbility() {
-            super(Constants.Zone.BATTLEFIELD, new NightDealingsEffect());
+            super(Zone.BATTLEFIELD, new NightDealingsEffect());
         }
 
         public NightDealingsTriggeredAbility(final NightDealingsTriggeredAbility ability) {
@@ -134,7 +135,7 @@ public class NightDealings extends CardImpl<NightDealings> {
     private class NightDealingsEffect extends OneShotEffect<NightDealingsEffect> {
 
         public NightDealingsEffect() {
-            super(Constants.Outcome.Damage);
+            super(Outcome.Damage);
             this.staticText = "put that many theft counters on Night Dealings";
         }
 
@@ -164,7 +165,7 @@ public class NightDealings extends CardImpl<NightDealings> {
     private class NightDealingsSearchEffect extends OneShotEffect<NightDealingsSearchEffect> {
 
         public NightDealingsSearchEffect() {
-            super(Constants.Outcome.DrawCard);
+            super(Outcome.DrawCard);
             this.staticText = "Search your library for a nonland card with converted mana cost X, reveal it, and put it into your hand. Then shuffle your library";
         }
 

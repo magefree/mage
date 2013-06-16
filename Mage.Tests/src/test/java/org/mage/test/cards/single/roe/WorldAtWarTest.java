@@ -1,6 +1,7 @@
 package org.mage.test.cards.single.roe;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,20 +18,20 @@ public class WorldAtWarTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.HAND, playerA, "World at War");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.HAND, playerA, "World at War");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
 
         attack(1, playerA, "Elite Vanguard");
         attack(1, playerA, "Elite Vanguard");
         attack(1, playerA, "Warclamp Mastiff");
         attack(1, playerA, "Warclamp Mastiff");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
         
         assertLife(playerB, 14);
@@ -43,13 +44,13 @@ public class WorldAtWarTest extends CardTestPlayerBase {
      */
     @Test
     public void testCardWithRebound() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.HAND, playerA, "World at War");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.HAND, playerA, "World at War");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
 
         attack(1, playerA, "Elite Vanguard");
         attack(1, playerA, "Elite Vanguard");
@@ -61,7 +62,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
         attack(3, playerA, "Warclamp Mastiff");
         attack(3, playerA, "Warclamp Mastiff");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 8);
@@ -74,14 +75,14 @@ public class WorldAtWarTest extends CardTestPlayerBase {
      */
     @Test
     public void testDoubleCast() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 10);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.HAND, playerA, "World at War", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.HAND, playerA, "World at War", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Warclamp Mastiff");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "World at War");
 
         attack(1, playerA, "Elite Vanguard");
         attack(1, playerA, "Elite Vanguard");
@@ -90,7 +91,7 @@ public class WorldAtWarTest extends CardTestPlayerBase {
         attack(1, playerA, "Warclamp Mastiff");
         attack(1, playerA, "Warclamp Mastiff");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 11);

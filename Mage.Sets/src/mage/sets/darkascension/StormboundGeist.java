@@ -29,15 +29,15 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CanBlockOnlyFlyingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  * @author Loki
@@ -55,7 +55,7 @@ public class StormboundGeist extends CardImpl<StormboundGeist> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Stormbound Geist can block only creatures with flying.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CanBlockOnlyFlyingEffect()));
         // Undying
         this.addAbility(new UndyingAbility());
     }

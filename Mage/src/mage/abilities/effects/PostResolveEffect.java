@@ -28,7 +28,7 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.game.Game;

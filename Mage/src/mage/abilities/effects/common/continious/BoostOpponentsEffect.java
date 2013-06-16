@@ -1,8 +1,11 @@
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -15,12 +18,12 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
     protected int toughness;
     protected FilterCreaturePermanent filter;
 
-    public BoostOpponentsEffect(int power, int toughness, Constants.Duration duration) {
+    public BoostOpponentsEffect(int power, int toughness, Duration duration) {
         this(power, toughness, duration, new FilterCreaturePermanent("Creatures"));
     }
 
-    public BoostOpponentsEffect(int power, int toughness, Constants.Duration duration, FilterCreaturePermanent filter) {
-        super(duration, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, toughness < 0 ? Constants.Outcome.UnboostCreature : Constants.Outcome.BoostCreature);
+    public BoostOpponentsEffect(int power, int toughness, Duration duration, FilterCreaturePermanent filter) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, toughness < 0 ? Outcome.UnboostCreature : Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         this.filter = filter;
@@ -70,7 +73,7 @@ public class BoostOpponentsEffect extends ContinuousEffectImpl<BoostOpponentsEff
         StringBuilder sb = new StringBuilder();
         sb.append(filter.getMessage());
         sb.append(" your opponents control get ").append(String.format("%1$+d/%2$+d", power, toughness));
-        sb.append((duration== Constants.Duration.EndOfTurn?" until end of turn":""));
+        sb.append((duration== Duration.EndOfTurn?" until end of turn":""));
         staticText = sb.toString();
     }
 }

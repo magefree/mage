@@ -1,6 +1,6 @@
 package mage.game.permanent.token;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.keyword.VigilanceAbility;

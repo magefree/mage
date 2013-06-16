@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -54,7 +53,7 @@ public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
 
     static {
         filter.add(new AnotherPredicate());
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public DiscipleOfBolas(UUID ownerId) {
@@ -86,7 +85,7 @@ public class DiscipleOfBolas extends CardImpl<DiscipleOfBolas> {
 class DiscipleOfBolasEffect extends OneShotEffect<DiscipleOfBolasEffect> {
 
     public DiscipleOfBolasEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "sacrifice another creature. You gain X life and draw X cards, where X is that creature's power";
     }
 
@@ -106,7 +105,7 @@ class DiscipleOfBolasEffect extends OneShotEffect<DiscipleOfBolasEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (sacrificed != null && player != null) {
             sacrificed.sacrifice(source.getSourceId(), game);
-            Permanent lastKnownState = (Permanent) game.getLastKnownInformation(sacrificed.getId(), Constants.Zone.BATTLEFIELD);
+            Permanent lastKnownState = (Permanent) game.getLastKnownInformation(sacrificed.getId(), Zone.BATTLEFIELD);
             int power = lastKnownState.getPower().getValue();
             player.gainLife(power, game);
             player.drawCards(power, game); 

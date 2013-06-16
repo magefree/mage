@@ -28,10 +28,10 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,6 +41,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
@@ -62,7 +63,7 @@ public class Metalworker extends CardImpl<Metalworker> {
         this.toughness = new MageInt(2);
 
         // {tap}: Reveal any number of artifact cards in your hand. Add {2} to your mana pool for each card revealed this way.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new MetalworkerManaEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new MetalworkerManaEffect(), new TapSourceCost()));
     }
 
     public Metalworker(final Metalworker card) {

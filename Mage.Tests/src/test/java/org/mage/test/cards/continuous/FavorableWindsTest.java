@@ -1,6 +1,7 @@
 package org.mage.test.cards.continuous;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,14 +17,14 @@ public class FavorableWindsTest extends CardTestPlayerBase {
      */
     @Test
     public void testBoostForFlyingCreatures() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Favorable Winds", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Looter", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sky Spirit", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Merfolk Looter", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sky Spirit", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Favorable Winds", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk Looter", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Sky Spirit", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Merfolk Looter", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Sky Spirit", 2);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -71,14 +72,14 @@ public class FavorableWindsTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiBoostForFlyingCreatures() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Favorable Winds", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk Looter", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sky Spirit", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Merfolk Looter", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sky Spirit", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Favorable Winds", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk Looter", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Sky Spirit", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Merfolk Looter", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Sky Spirit", 2);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

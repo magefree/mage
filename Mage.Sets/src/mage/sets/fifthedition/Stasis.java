@@ -28,9 +28,8 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -54,10 +53,10 @@ public class Stasis extends CardImpl<Stasis> {
         this.color.setBlue(true);
 
         // Players skip their untap steps.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SkipUntapStepEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipUntapStepEffect()));
 
         // At the beginning of your upkeep, sacrifice Stasis unless you pay {U}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{U}")), TargetController.YOU, false));
 
     }
 
@@ -74,7 +73,7 @@ public class Stasis extends CardImpl<Stasis> {
 class SkipUntapStepEffect extends ReplacementEffectImpl<SkipUntapStepEffect> {
 
     public SkipUntapStepEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Players skip their untap steps";
     }
 

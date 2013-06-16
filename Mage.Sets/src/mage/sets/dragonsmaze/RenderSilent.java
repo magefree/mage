@@ -29,15 +29,16 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.game.Game;
@@ -118,7 +119,7 @@ class RenderSilentCounterEffect extends OneShotEffect<RenderSilentCounterEffect>
 class RenderSilentEffect extends ReplacementEffectImpl<RenderSilentEffect> {
 
     public RenderSilentEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Its controller can't cast spells this turn";
     }
 

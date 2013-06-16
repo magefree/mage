@@ -27,7 +27,7 @@
  */
 package mage.watchers.common;
 
-import mage.Constants;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.watchers.WatcherImpl;
@@ -44,7 +44,7 @@ public class AttackedThisTurnWatcher extends WatcherImpl<AttackedThisTurnWatcher
     public Set<UUID> attackedThisTurnCreatures = new HashSet<UUID>();
 
     public AttackedThisTurnWatcher() {
-        super("AttackedThisTurn", Constants.WatcherScope.GAME);
+        super("AttackedThisTurn", WatcherScope.GAME);
     }
 
     public AttackedThisTurnWatcher(final AttackedThisTurnWatcher watcher) {

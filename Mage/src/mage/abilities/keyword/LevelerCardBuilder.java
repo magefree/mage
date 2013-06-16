@@ -28,8 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 
 import java.util.ArrayList;
@@ -80,7 +80,7 @@ public class LevelerCardBuilder {
             constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, abEffect));
         }
 
-        ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Constants.Duration.WhileOnBattlefield);
+        ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
         ConditionalContinousEffect ptEffect = new ConditionalContinousEffect(effect, condition, rule);
         constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, ptEffect));
 

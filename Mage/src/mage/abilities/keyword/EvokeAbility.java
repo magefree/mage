@@ -31,8 +31,8 @@ package mage.abilities.keyword;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import mage.Constants;
-import mage.Constants.Zone;
+
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -47,6 +47,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -111,7 +112,7 @@ public class EvokeAbility extends StaticAbility<EvokeAbility> implements Alterna
                 this.resetEvoke();
                 for (AlternativeCost2 evokeCost: evokeCosts) {
                     if (evokeCost.canPay(sourceId, controllerId, game) &&
-                        player.chooseUse(Constants.Outcome.Benefit, new StringBuilder(EVOKE_KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), game)) {
+                        player.chooseUse(Outcome.Benefit, new StringBuilder(EVOKE_KEYWORD).append(" the creature for ").append(evokeCost.getText(true)).append(" ?").toString(), game)) {
                         evokeCost.activate();
                         ability.getManaCostsToPay().clear();
                         ability.getCosts().clear();

@@ -29,9 +29,9 @@ package mage.sets.weatherlight;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
@@ -39,6 +39,8 @@ import mage.abilities.dynamicvalue.common.GetXValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterMana;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -79,7 +81,7 @@ public class Firestorm extends CardImpl<Firestorm> {
 class FirestormEffect extends OneShotEffect<FirestormEffect> {
 
     public FirestormEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "{this} deals X damage to each of X target creatures and/or players";
     }
 
@@ -93,7 +95,7 @@ class FirestormEffect extends OneShotEffect<FirestormEffect> {
         int amount = (new GetXValue()).calculate(game, source);
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer(amount);
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
                 if (!target.getTargets().isEmpty()) {
                     List<UUID> targets = target.getTargets();
                     for (UUID targetId : targets) {
@@ -146,11 +148,11 @@ class FirestormCost extends CostImpl<FirestormCost> implements VariableCost {
         Player you = game.getPlayer(controllerId);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(controllerId, game) && target.choose(Constants.Outcome.Discard, controllerId, sourceId, game)) {
+            if (target.canChoose(controllerId, game) && target.choose(Outcome.Discard, controllerId, sourceId, game)) {
                 Card card = you.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     you.getHand().remove(card);
-                    card.moveToZone(Constants.Zone.GRAVEYARD, sourceId, game, false);
+                    card.moveToZone(Zone.GRAVEYARD, sourceId, game, false);
                     amountPaid++;
                 }
             } else {

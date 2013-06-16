@@ -29,16 +29,17 @@ package mage.sets.tempest;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -112,19 +113,19 @@ class IntuitionEffect extends SearchEffect<IntuitionEffect> {
                 }
                 player.revealCards("Reveal", cards, game);
                 
-                TargetCard targetCard = new TargetCard(Constants.Zone.PICK, new FilterCard());
+                TargetCard targetCard = new TargetCard(Zone.PICK, new FilterCard());
                 targetCard.setRequired(true);
                 
                 while(!opponent.choose(Outcome.Neutral, cards, targetCard, game));
                 Card card = cards.get(targetCard.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
                 
                 for(UUID uuid : cards){
                     card = cards.get(uuid, game);
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 }
                 
             }

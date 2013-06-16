@@ -28,10 +28,9 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
@@ -42,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.LevelUpAbility;
 import mage.abilities.keyword.LevelerCardBuilder;
 import mage.cards.LevelerCard;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.turn.TurnMod;
@@ -90,7 +90,7 @@ public class LighthouseChronologist extends LevelerCard<LighthouseChronologist> 
 class LighthouseChronologistAbility extends TriggeredAbilityImpl<LighthouseChronologistAbility> {
 
     public LighthouseChronologistAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LighthouseChronologistEffect(), false);
+        super(Zone.BATTLEFIELD, new LighthouseChronologistEffect(), false);
     }
 
     public LighthouseChronologistAbility(final LighthouseChronologistAbility ability) {

@@ -28,24 +28,25 @@
 
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 public class BeginningOfEndStepTriggeredAbility extends TriggeredAbilityImpl<BeginningOfEndStepTriggeredAbility> {
-    private Constants.TargetController targetController;
+    private TargetController targetController;
     private Condition interveningIfClauseCondition;
 
-    public BeginningOfEndStepTriggeredAbility(Effect effect, Constants.TargetController targetController, boolean isOptional) {
-        this(Constants.Zone.BATTLEFIELD, effect, targetController, null, isOptional);
+    public BeginningOfEndStepTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, null, isOptional);
     }
 
-    public BeginningOfEndStepTriggeredAbility(Constants.Zone zone, Effect effect, Constants.TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
+    public BeginningOfEndStepTriggeredAbility(Zone zone, Effect effect, TargetController targetController, Condition interveningIfClauseCondition, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
         this.interveningIfClauseCondition = interveningIfClauseCondition;

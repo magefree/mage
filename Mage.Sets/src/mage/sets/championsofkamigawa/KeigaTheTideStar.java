@@ -30,15 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -56,7 +56,7 @@ public class KeigaTheTideStar extends CardImpl<KeigaTheTideStar> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Constants.Duration.Custom));
+        Ability ability = new DiesTriggeredAbility(new GainControlTargetEffect(Duration.Custom));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

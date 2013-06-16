@@ -29,10 +29,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -64,7 +65,7 @@ public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
         this.addAbility(new BushidoAbility(1));
         // {1}{W}, {T}: Put a training counter on target creature. 
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(new TrainingCounter()), new ManaCostsImpl("{1}{W}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(new TrainingCounter()), new ManaCostsImpl("{1}{W}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.

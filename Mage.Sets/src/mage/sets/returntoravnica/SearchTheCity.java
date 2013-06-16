@@ -28,16 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.ExileZone;
@@ -83,7 +84,7 @@ public class SearchTheCity extends CardImpl<SearchTheCity> {
 class SearchTheCityExileEffect extends OneShotEffect<SearchTheCityExileEffect> {
 
     public SearchTheCityExileEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "exile the top five cards of your library";
     }
 
@@ -171,7 +172,7 @@ class SearchTheCityTriggeredAbility extends TriggeredAbilityImpl<SearchTheCityTr
 class SearchTheCityExiledCardToHandEffect extends OneShotEffect<SearchTheCityExiledCardToHandEffect> {
 
     public SearchTheCityExiledCardToHandEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "you may put one of those cards with that name into its owner's hand. Then if there are no cards exiled with Search the City, sacrifice it. If you do, take an extra turn after this one";
     }
 

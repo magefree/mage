@@ -27,13 +27,13 @@
  */
 package mage.sets.magic2010;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,7 +55,7 @@ public class HarmsWay extends CardImpl<HarmsWay> {
         this.color.setWhite(true);
 
         // The next 2 damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead.
-        this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect(Constants.Duration.EndOfTurn, 2));
+        this.getSpellAbility().addEffect(new HarmsWayPreventDamageTargetEffect(Duration.EndOfTurn, 2));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
@@ -74,7 +74,7 @@ class HarmsWayPreventDamageTargetEffect extends PreventionEffectImpl<HarmsWayPre
 
     private int amount;
 
-    public HarmsWayPreventDamageTargetEffect(Constants.Duration duration, int amount) {
+    public HarmsWayPreventDamageTargetEffect(Duration duration, int amount) {
         super(duration);
         this.amount = amount;
         staticText = "The next " + amount + " damage that a source of your choice would deal to you and/or permanents you control this turn is dealt to target creature or player instead";

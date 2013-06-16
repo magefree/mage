@@ -29,16 +29,17 @@ package mage.sets.invasion;
 
 import java.util.HashSet;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
@@ -120,7 +121,7 @@ class VoidEffect extends OneShotEffect<VoidEffect> {
             targetPlayer.revealCards("Void", targetPlayer.getHand(), game);
             for (Card card : targetPlayer.getHand().getCards(game)) {
                 if (filterCard.match(card, game)) {
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 }
             }
         } else {

@@ -28,9 +28,9 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -39,6 +39,7 @@ import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
@@ -94,7 +95,7 @@ public class Misdirection extends CardImpl<Misdirection> {
 class MisdirectionEffect extends OneShotEffect<MisdirectionEffect> {
 
     public MisdirectionEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Change the target of target spell with a single target";
     }
 

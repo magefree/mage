@@ -29,7 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -45,7 +45,7 @@ public class Conflux extends ExpansionSet {
     }
 
     private Conflux() {
-        super("Conflux", "CON", "seticon_conflux", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), SetType.EXPANSION);
+        super("Conflux", "CON", "mage.sets.conflux", new GregorianCalendar(2009, 0, 31).getTime(), SetType.EXPANSION);
         this.blockName = "Shards of Alara";
         this.parentSet = ShardsOfAlara.getInstance();
         this.hasBasicLands = false;

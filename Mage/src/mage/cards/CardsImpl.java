@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 

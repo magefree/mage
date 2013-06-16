@@ -29,7 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -47,7 +47,7 @@ public class Commander extends ExpansionSet {
     }
 
     private Commander() {
-        super("Magic: The Gathering-Commander", "CMD", "", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
+        super("Magic: The Gathering-Commander", "CMD", "mage.sets.commander", new GregorianCalendar(2011, 6, 17).getTime(), SetType.REPRINT);
     }
 
 }

@@ -31,11 +31,11 @@ package mage.sets.dragonsmaze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
@@ -43,6 +43,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.SplitCard;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -107,15 +108,15 @@ class ReleaseSacrificeEffect extends OneShotEffect<ReleaseSacrificeEffect> {
     private static final FilterPlaneswalkerPermanent filter5 = new FilterPlaneswalkerPermanent("planeswalker you control");
 
     static {
-        filter1.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filter2.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filter3.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filter4.add(new ControllerPredicate(Constants.TargetController.YOU));
-        filter5.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter1.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter3.add(new ControllerPredicate(TargetController.YOU));
+        filter4.add(new ControllerPredicate(TargetController.YOU));
+        filter5.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ReleaseSacrificeEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Each player sacrifices an artifact, a creature, an enchantment, a land, and a planeswalker";
     }
 

@@ -27,12 +27,12 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -49,7 +49,7 @@ public class HideousVisage extends CardImpl<HideousVisage> {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent("Creatures")));
     }
 
     public HideousVisage(final HideousVisage card) {

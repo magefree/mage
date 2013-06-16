@@ -28,15 +28,17 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -88,7 +90,7 @@ class MindclawShamanEffect extends OneShotEffect<MindclawShamanEffect> {
     }
     
     public MindclawShamanEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "target opponent reveals his or her hand. You may cast an instant or sorcery card from it without paying its mana cost";
     }
 
@@ -109,14 +111,14 @@ class MindclawShamanEffect extends OneShotEffect<MindclawShamanEffect> {
                 targetOpponent.revealCards("Mindclaw Shaman", targetOpponent.getHand(), game);
                 Player you = game.getPlayer(source.getControllerId());
                 if (you != null) {
-                    TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                    TargetCard target = new TargetCard(Zone.PICK, filter);
                     target.setRequired(true);
                     target.setNotTarget(true);
-                    if (you.choose(Constants.Outcome.Benefit, targetOpponent.getHand(), target, game)) {
+                    if (you.choose(Outcome.Benefit, targetOpponent.getHand(), target, game)) {
                         Card chosenCard = targetOpponent.getHand().get(target.getFirstTarget(), game);
                         if (chosenCard != null) {
                             if (targetOpponent != null) {
-                                if (you.chooseUse(Constants.Outcome.Benefit, "Cast the chosen card?", game)) {
+                                if (you.chooseUse(Outcome.Benefit, "Cast the chosen card?", game)) {
                                     you.cast(chosenCard.getSpellAbility(), game, true);
                                 } else {
                                         game.informPlayers("Mindclaw Shaman: " + you.getName() + " canceled casting the card.");

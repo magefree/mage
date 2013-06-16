@@ -28,13 +28,14 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -68,7 +69,7 @@ public class DeathPitsOfRath extends CardImpl<DeathPitsOfRath> {
 class DeathPitsOfRathTriggeredAbility extends TriggeredAbilityImpl<DeathPitsOfRathTriggeredAbility> {
 
     public DeathPitsOfRathTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(true));
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect(true));
     }
 
     public DeathPitsOfRathTriggeredAbility(final DeathPitsOfRathTriggeredAbility effect) {

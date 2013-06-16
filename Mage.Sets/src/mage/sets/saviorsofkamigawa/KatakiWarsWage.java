@@ -29,9 +29,7 @@ package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -65,10 +63,10 @@ public class KatakiWarsWage extends CardImpl<KatakiWarsWage> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
         // All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {1}."
-        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), Constants.TargetController.YOU, false);
-        Effect effect = new GainAbilityAllEffect(gainedAbility, Constants.Duration.WhileOnBattlefield, filter, false);
+        Ability gainedAbility = new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new GenericManaCost(1)), TargetController.YOU, false);
+        Effect effect = new GainAbilityAllEffect(gainedAbility, Duration.WhileOnBattlefield, filter, false);
         effect.setText("All artifacts have \"At the beginning of your upkeep, sacrifice this artifact unless you pay {1}.\"");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public KatakiWarsWage(final KatakiWarsWage card) {

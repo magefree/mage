@@ -28,9 +28,8 @@
 package mage.sets.innistrad;
 
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -42,6 +41,8 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -70,7 +71,7 @@ public class DearlyDeparted extends CardImpl<DearlyDeparted> {
         this.addAbility(FlyingAbility.getInstance());
 
         // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.GRAVEYARD,
+        this.addAbility(new SimpleStaticAbility(Zone.GRAVEYARD,
                 new EntersBattlefieldEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance(1)), ruleText)));
     }
 
@@ -96,7 +97,7 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEff
     }
 
     public EntersBattlefieldEffect(Effect baseEffect, String text) {
-        super(Constants.Duration.OneUse, baseEffect.getOutcome());
+        super(Duration.OneUse, baseEffect.getOutcome());
         this.baseEffects.add(baseEffect);
         this.text = text;
     }

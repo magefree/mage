@@ -28,15 +28,16 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -74,7 +75,7 @@ public class MolderBeast extends CardImpl<MolderBeast> {
 class MolderBeastTriggeredAbility extends TriggeredAbilityImpl<MolderBeastTriggeredAbility> {
 
     public MolderBeastTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), false);
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(2, 0, Duration.EndOfTurn), false);
     }
 
     public MolderBeastTriggeredAbility(final MolderBeastTriggeredAbility ability) {

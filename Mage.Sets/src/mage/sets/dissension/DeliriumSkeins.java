@@ -28,8 +28,8 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.cards.CardImpl;
 

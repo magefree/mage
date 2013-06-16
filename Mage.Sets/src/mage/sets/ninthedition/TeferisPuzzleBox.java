@@ -27,9 +27,7 @@
  */
 package mage.sets.ninthedition;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +57,7 @@ public class TeferisPuzzleBox extends CardImpl<TeferisPuzzleBox> {
     @Override
     public void build() {
         // At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards.
-        Ability ability = new BeginningOfDrawTriggeredAbility(new TeferisPuzzleBoxEffect(), Constants.TargetController.ANY, false);
+        Ability ability = new BeginningOfDrawTriggeredAbility(new TeferisPuzzleBoxEffect(), TargetController.ANY, false);
         this.addAbility(ability);
     }
 
@@ -76,7 +74,7 @@ public class TeferisPuzzleBox extends CardImpl<TeferisPuzzleBox> {
 class TeferisPuzzleBoxEffect extends OneShotEffect<TeferisPuzzleBoxEffect> {
 
     public TeferisPuzzleBoxEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "At the beginning of each player's draw step, that player puts the cards in his or her hand on the bottom of his or her library in any order, then draws that many cards";
     }
 
@@ -96,20 +94,20 @@ class TeferisPuzzleBoxEffect extends OneShotEffect<TeferisPuzzleBoxEffect> {
                 cards.add(card.getId());
             }
             
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
             while (cards.size() > 1) {
-                player.choose(Constants.Outcome.Neutral, cards, target, game);
+                player.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
                 target.clearChosen();
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
             }
             player.getHand().clear();
 

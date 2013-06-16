@@ -34,7 +34,7 @@
 
 package mage.client.deckeditor;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;

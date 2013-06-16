@@ -28,9 +28,9 @@
 
 package mage.cards;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageObjectImpl;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -49,7 +49,7 @@ import org.apache.log4j.Logger;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
-import mage.Constants.SpellAbilityType;
+import mage.constants.SpellAbilityType;
 
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {

@@ -28,7 +28,7 @@
 package mage.sets.returntoravnica;
  
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,6 +37,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
  
@@ -47,14 +48,14 @@ import mage.game.permanent.Permanent;
 public class CivicSaber extends CardImpl<CivicSaber> {
  
     public CivicSaber(UUID ownerId) {
-        super(ownerId, 227, "Civic Saber", Constants.Rarity.UNCOMMON, new Constants.CardType[]{Constants.CardType.ARTIFACT}, "{1}");
+        super(ownerId, 227, "Civic Saber", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "RTR";
         this.subtype.add("Equipment");
  
         // Equipped creature gets +1/+0 for each of its colors.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), new StaticValue(0), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new CivicSaberColorCount(), new StaticValue(0), Duration.WhileOnBattlefield)));
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
  
     public CivicSaber(final CivicSaber card) {

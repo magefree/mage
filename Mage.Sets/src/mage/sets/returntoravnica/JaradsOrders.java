@@ -29,15 +29,17 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -76,7 +78,7 @@ class JaradsOrdersEffect extends OneShotEffect<JaradsOrdersEffect> {
     protected static final FilterCard filter = new FilterCard("card to put into your hand");
 
     public JaradsOrdersEffect() {
-        super(Constants.Outcome.PutLandInPlay);
+        super(Outcome.PutLandInPlay);
         staticText = "Search your library for up to two creature cards and reveal them. Put one into your hand and the other into your graveyard. Then shuffle your library";
     }
 
@@ -102,18 +104,18 @@ class JaradsOrdersEffect extends OneShotEffect<JaradsOrdersEffect> {
                 }
                 player.revealCards("Jarad's Orders", revealed, game);
                 if (target.getTargets().size() == 2) {
-                    TargetCard target2 = new TargetCard(Constants.Zone.PICK, filter);
+                    TargetCard target2 = new TargetCard(Zone.PICK, filter);
                     target2.setRequired(true);
-                    player.choose(Constants.Outcome.Benefit, revealed, target2, game);
+                    player.choose(Outcome.Benefit, revealed, target2, game);
                     Card card = revealed.get(target2.getFirstTarget(), game);
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                     revealed.remove(card);
                     card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 }
                 else if (target.getTargets().size() == 1) {
                     Card card = revealed.getCards(game).iterator().next();
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
 
             }

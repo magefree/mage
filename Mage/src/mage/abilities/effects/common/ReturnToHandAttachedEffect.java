@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -62,7 +62,7 @@ public class ReturnToHandAttachedEffect extends OneShotEffect<ReturnToHandAttach
         if (object != null && object instanceof Permanent) {
             Card card = game.getCard(((Permanent)object).getId());
             if (card != null) {
-                if (card.moveToZone(Constants.Zone.HAND, source.getId(), game, false)) {
+                if (card.moveToZone(Zone.HAND, source.getId(), game, false)) {
                     return true;
                 }
             }

@@ -27,15 +27,15 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.PlayTheTopCardEffect;
 import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 
 import java.util.UUID;
@@ -56,9 +56,9 @@ public class GarruksHorde extends CardImpl<GarruksHorde> {
 
         this.addAbility(TrampleAbility.getInstance());
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
         // You may cast the top card of your library if it's a creature card.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCreatureCard())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(new FilterCreatureCard())));
     }
 
     public GarruksHorde(final GarruksHorde card) {

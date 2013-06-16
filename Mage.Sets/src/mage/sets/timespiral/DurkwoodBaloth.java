@@ -28,12 +28,12 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *

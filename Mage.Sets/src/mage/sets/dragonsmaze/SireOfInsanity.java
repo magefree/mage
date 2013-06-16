@@ -28,15 +28,16 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -76,7 +77,7 @@ public class SireOfInsanity extends CardImpl<SireOfInsanity> {
 
 class SireOfInsanityEffect extends OneShotEffect<SireOfInsanityEffect> {
     SireOfInsanityEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "each player discards his or her hand";
     }
 

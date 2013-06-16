@@ -29,9 +29,9 @@ package mage.sets.mirrodin;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,6 +44,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,7 +67,7 @@ public class ChromeMox extends CardImpl<ChromeMox> {
         // Imprint - When Chrome Mox enters the battlefield, you may exile a nonartifact, nonland card from your hand.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ChromeMoxEffect(), true));
         // {tap}: Add one mana of any of the exiled card's colors to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ChromeMoxManaEffect(), new TapSourceCost()));
     }
 
     public ChromeMox(final ChromeMox card) {
@@ -85,7 +87,7 @@ class ChromeMoxEffect extends OneShotEffect<ChromeMoxEffect> {
         filter.add(Predicates.not(Predicates.or(new CardTypePredicate(CardType.LAND), new CardTypePredicate(CardType.ARTIFACT))));
     }
     public ChromeMoxEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile a nonartifact, nonland card from your hand";
     }
 
@@ -97,8 +99,8 @@ class ChromeMoxEffect extends OneShotEffect<ChromeMoxEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
-            player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
+            player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToExile(getId(), "Chrome Mox (Imprint)", source.getSourceId(), game);

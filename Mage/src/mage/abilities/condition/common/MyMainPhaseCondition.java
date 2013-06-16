@@ -29,7 +29,7 @@ package mage.abilities.condition.common;
 
 import java.util.HashSet;
 import java.util.Set;
-import mage.Constants.TurnPhase;
+import mage.constants.TurnPhase;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;

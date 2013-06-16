@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.oneshot.sacrifice;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class GethsVerdictTest extends CardTestPlayerBase {
      */
     @Test
     public void testVersusProtectionFromBlack() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
-        addCard(Constants.Zone.HAND, playerA, "Geth's Verdict");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.HAND, playerA, "Geth's Verdict");
+        addCard(Zone.BATTLEFIELD, playerB, "White Knight");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Geth's Verdict");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Geth's Verdict");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerB, "White Knight", 0);

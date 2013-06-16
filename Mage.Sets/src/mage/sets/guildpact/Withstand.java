@@ -28,12 +28,13 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -46,7 +47,7 @@ public class Withstand extends CardImpl<Withstand> {
         super(ownerId, 21, "Withstand", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{W}");
         this.expansionSetCode = "GPT";
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 3));
+        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         // Prevent the next 3 damage that would be dealt to target creature or player this turn.

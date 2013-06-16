@@ -29,11 +29,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -81,7 +81,7 @@ public class LobberCrew extends CardImpl<LobberCrew> {
 
 class LobberCrewTriggeredAbility extends TriggeredAbilityImpl<LobberCrewTriggeredAbility> {
     public LobberCrewTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new UntapSourceEffect());
+        super(Zone.BATTLEFIELD, new UntapSourceEffect());
     }
 
     public LobberCrewTriggeredAbility(final LobberCrewTriggeredAbility ability) {

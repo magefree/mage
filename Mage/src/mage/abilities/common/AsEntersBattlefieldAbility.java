@@ -27,10 +27,10 @@
  */
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
+import mage.constants.Zone;
 
 /**
  *
@@ -39,11 +39,11 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 public class AsEntersBattlefieldAbility extends StaticAbility<AsEntersBattlefieldAbility> {
 
     public AsEntersBattlefieldAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
+        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect));
     }
 
     public AsEntersBattlefieldAbility(Effect effect, String text) {
-        super(Constants.Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, text));
+        super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(effect, text));
     }
 
     public AsEntersBattlefieldAbility(AsEntersBattlefieldAbility ability) {

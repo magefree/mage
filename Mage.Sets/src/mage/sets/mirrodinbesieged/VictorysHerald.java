@@ -30,9 +30,8 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 
 /**
@@ -55,8 +55,8 @@ public class VictorysHerald extends CardImpl<VictorysHerald> {
         this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new AttacksTriggeredAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature()), false);
-        ability.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterAttackingCreature()));
+        Ability ability = new AttacksTriggeredAbility(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()), false);
+        ability.addEffect(new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn, new FilterAttackingCreature()));
         this.addAbility(ability);
     }
 

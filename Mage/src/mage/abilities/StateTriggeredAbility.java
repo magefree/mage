@@ -29,7 +29,7 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 

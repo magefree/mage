@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class Shadowmoor extends ExpansionSet {
     }
 
     private Shadowmoor() {
-        super("Shadowmoor", "SHM", "", "mage.sets.shadowmoor", new GregorianCalendar(2008, 4, 2).getTime(), SetType.EXPANSION);
+        super("Shadowmoor", "SHM", "mage.sets.shadowmoor", new GregorianCalendar(2008, 4, 2).getTime(), SetType.EXPANSION);
         this.blockName = "Shadowmoor";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

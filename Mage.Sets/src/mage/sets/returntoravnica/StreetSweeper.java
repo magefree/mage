@@ -29,9 +29,9 @@ package mage.sets.returntoravnica;
  
 import java.util.LinkedList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +39,7 @@ import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.game.Game;
@@ -86,7 +87,7 @@ public class StreetSweeper extends CardImpl<StreetSweeper> {
 class StreetSweeperDestroyEffect extends OneShotEffect<StreetSweeperDestroyEffect> {
  
     public StreetSweeperDestroyEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
     }
  
     public StreetSweeperDestroyEffect(final StreetSweeperDestroyEffect effect) {

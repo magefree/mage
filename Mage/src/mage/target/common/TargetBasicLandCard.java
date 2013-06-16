@@ -28,8 +28,8 @@
 
 package mage.target.common;
 
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.target.TargetCard;

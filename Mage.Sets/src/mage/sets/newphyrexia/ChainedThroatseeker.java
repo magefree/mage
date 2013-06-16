@@ -29,11 +29,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +58,7 @@ public class ChainedThroatseeker extends CardImpl<ChainedThroatseeker> {
         this.toughness = new MageInt(5);
 
         this.addAbility(InfectAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ChainedThroatseekerEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChainedThroatseekerEffect()));
     }
 
     public ChainedThroatseeker(final ChainedThroatseeker card) {

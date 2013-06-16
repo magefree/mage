@@ -28,13 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -53,7 +54,7 @@ public class BorosElite extends CardImpl<BorosElite> {
         this.toughness = new MageInt(1);
 
         // Battalion - Whenever Boros Elite and at least two other creatures attack, Boros Elite gets +2/+2 until end of turn.
-        this.addAbility(new BattalionAbility(new BoostSourceEffect(2,2, Constants.Duration.EndOfTurn)));
+        this.addAbility(new BattalionAbility(new BoostSourceEffect(2,2, Duration.EndOfTurn)));
     }
 
     public BorosElite(final BorosElite card) {

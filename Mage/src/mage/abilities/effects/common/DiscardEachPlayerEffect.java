@@ -1,13 +1,14 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -27,7 +28,7 @@ public class DiscardEachPlayerEffect extends OneShotEffect<DiscardEachPlayerEffe
     }
 
     public DiscardEachPlayerEffect(DynamicValue amount, boolean randomDiscard) {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.randomDiscard = randomDiscard;
         this.amount = amount;
     }

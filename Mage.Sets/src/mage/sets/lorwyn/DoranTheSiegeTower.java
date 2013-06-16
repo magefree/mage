@@ -28,22 +28,22 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
-import static mage.game.events.GameEvent.EventType.DAMAGE_PLANESWALKER;
 import mage.game.permanent.Permanent;
 
 /**
@@ -82,7 +82,7 @@ public class DoranTheSiegeTower extends CardImpl<DoranTheSiegeTower> {
 class DoranTheSiegeTowerEffect extends ReplacementEffectImpl<DoranTheSiegeTowerEffect> {
 
     public DoranTheSiegeTowerEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
     }
 

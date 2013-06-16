@@ -30,9 +30,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -52,7 +50,7 @@ public class GhostlyPrison extends CardImpl<GhostlyPrison> {
         super(ownerId, 10, "Ghostly Prison", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{W}");
         this.expansionSetCode = "CHK";
         this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostlyPrisonReplacementEffect()));
     }
 
     public GhostlyPrison (final GhostlyPrison card) {
@@ -71,7 +69,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
     private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
     GhostlyPrisonReplacementEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = effectText;
     }
 
@@ -91,7 +89,7 @@ class GhostlyPrisonReplacementEffect extends ReplacementEffectImpl<GhostlyPrison
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
                 ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
                 if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
                     if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }

@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersAnotherCreatureYourControlTriggeredAbility;
@@ -37,6 +36,8 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -59,7 +60,7 @@ public class ChampionOfLambholt extends CardImpl<ChampionOfLambholt> {
         this.toughness = new MageInt(1);
 
         // Creatures with power less than Champion of Lambholt's power can't block creatures you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ChampionOfLambholtEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ChampionOfLambholtEffect()));
 
         // Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
         this.addAbility(new EntersAnotherCreatureYourControlTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance())));
@@ -78,7 +79,7 @@ public class ChampionOfLambholt extends CardImpl<ChampionOfLambholt> {
 class ChampionOfLambholtEffect extends RestrictionEffect<ChampionOfLambholtEffect> {
 
     ChampionOfLambholtEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Creatures with power less than {this}'s power can't block creatures you control";
     }
 

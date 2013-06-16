@@ -29,15 +29,16 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -72,7 +73,7 @@ public class ShardConvergence extends CardImpl<ShardConvergence> {
 
 class ShardConvergenceEffect extends OneShotEffect<ShardConvergenceEffect> {
     ShardConvergenceEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Search your library for a Plains card, an Island card, a Swamp card, and a Mountain card. Reveal those cards and put them into your hand. Then shuffle your library";
     }
 
@@ -107,7 +108,7 @@ class ShardConvergenceEffect extends OneShotEffect<ShardConvergenceEffect> {
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
                 cards.add(card);
             }
         }

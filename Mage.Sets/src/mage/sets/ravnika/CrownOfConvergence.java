@@ -28,18 +28,20 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.TopLibraryCardTypeCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.cards.Card;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.players.Player;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
 import static mage.abilities.condition.common.TopLibraryCardTypeCondition.CheckType.*;
 import mage.abilities.common.SimpleStaticAbility;
@@ -67,7 +69,7 @@ public class CrownOfConvergence extends CardImpl<CrownOfConvergence> {
 
         // As long as the top card of your library is a creature card, creatures you control that share a color with that card get +1/+1.
         ConditionalContinousEffect effect = new ConditionalContinousEffect(new CrownOfConvergenceColorBoostEffect(), new TopLibraryCardTypeCondition(CREATURE), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // {G}{W}: Put the top card of your library on the bottom of your library.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CrownOfConvergenceEffect(), new ManaCostsImpl("{G}{W}")));
@@ -90,7 +92,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
     private static final String effectText = "creatures you control that share a color with that card get +1/+1";
 
     CrownOfConvergenceColorBoostEffect() {
-    super(1,1, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
+    super(1,1, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), false);
     staticText = effectText;
     }
 
@@ -125,7 +127,7 @@ class CrownOfConvergenceColorBoostEffect extends BoostAllEffect  {
 class CrownOfConvergenceEffect extends OneShotEffect<CrownOfConvergenceEffect> {
 
     public CrownOfConvergenceEffect() {
-    super(Constants.Outcome.Neutral);
+    super(Outcome.Neutral);
     staticText = "Put the top card of your library on the bottom of your library";
     }
 
@@ -144,7 +146,7 @@ class CrownOfConvergenceEffect extends OneShotEffect<CrownOfConvergenceEffect> {
         if (you != null) {
             Card card = you.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
             }
             return true;
         }

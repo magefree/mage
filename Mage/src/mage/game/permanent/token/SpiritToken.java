@@ -27,8 +27,8 @@
  */
 package mage.game.permanent.token;
 
-import mage.Constants;
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  * @author Loki
@@ -36,7 +36,7 @@ import mage.MageInt;
 public class SpiritToken extends Token {
     public SpiritToken() {
         super("Spirit", "1/1 colorless Spirit creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         subtype.add("Spirit");
         power = new MageInt(1);
         toughness = new MageInt(1);

@@ -29,9 +29,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -39,6 +38,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.MyrToken;
@@ -60,10 +61,10 @@ public class ParasiticImplant extends CardImpl<ParasiticImplant> {
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Sacrifice));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Sacrifice));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), Constants.TargetController.YOU, false);
+        ability = new BeginningOfUpkeepTriggeredAbility(new ParasiticImplantEffect(), TargetController.YOU, false);
         ability.addEffect(new CreateTokenEffect(new MyrToken()));
         this.addAbility(ability);
     }
@@ -80,7 +81,7 @@ public class ParasiticImplant extends CardImpl<ParasiticImplant> {
 
 class ParasiticImplantEffect extends OneShotEffect<ParasiticImplantEffect> {
     ParasiticImplantEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         staticText = "enchanted creature's controller sacrifices it";
     }
 

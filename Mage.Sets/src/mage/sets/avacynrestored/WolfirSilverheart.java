@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -59,7 +59,7 @@ public class WolfirSilverheart extends CardImpl<WolfirSilverheart> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Wolfir Silverheart is paired with another creature, each of those creatures gets +4/+4.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostPairedEffect(4, 4, ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostPairedEffect(4, 4, ruleText)));
     }
 
     public WolfirSilverheart(final WolfirSilverheart card) {

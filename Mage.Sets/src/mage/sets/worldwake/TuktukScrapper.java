@@ -28,10 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -81,7 +79,7 @@ public class TuktukScrapper extends CardImpl<TuktukScrapper> {
 class TuktukScrapperTriggeredAbility extends TriggeredAbilityImpl<TuktukScrapperTriggeredAbility> {
 
     public TuktukScrapperTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TuktukScrapperEffect(), true);
+        super(Zone.BATTLEFIELD, new TuktukScrapperEffect(), true);
     }
 
     public TuktukScrapperTriggeredAbility(final TuktukScrapperTriggeredAbility ability) {
@@ -125,7 +123,7 @@ class TuktukScrapperEffect extends OneShotEffect<TuktukScrapperEffect> {
     }
 
     public TuktukScrapperEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
     }
 
     public TuktukScrapperEffect(final TuktukScrapperEffect effect) {
@@ -142,7 +140,7 @@ class TuktukScrapperEffect extends OneShotEffect<TuktukScrapperEffect> {
         TargetArtifactPermanent target = new TargetArtifactPermanent();
         Player you = game.getPlayer(source.getControllerId());
         if (you != null) {
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.DestroyPermanent, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.DestroyPermanent, source.getControllerId(), source.getId(), game)) {
                 Permanent targetedArtifact = game.getPermanent(target.getFirstTarget());
                 if (targetedArtifact != null) {
                     Card artifact = game.getCard(targetedArtifact.getId());

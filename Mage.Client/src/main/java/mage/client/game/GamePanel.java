@@ -27,7 +27,6 @@
 */
 package mage.client.game;
 
-import mage.Constants;
 import mage.cards.action.ActionCallback;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
@@ -45,6 +44,7 @@ import mage.client.util.Config;
 import mage.client.util.GameManager;
 import mage.client.util.PhaseManager;
 import mage.client.util.gui.ArrowBuilder;
+import mage.constants.PhaseStep;
 import mage.remote.Session;
 import mage.view.*;
 import org.apache.log4j.Logger;
@@ -504,7 +504,7 @@ public final class GamePanel extends javax.swing.JPanel {
     /**
      * Update phase buttons\labels.
      */
-    private void updatePhases(Constants.PhaseStep step) {
+    private void updatePhases(PhaseStep step) {
         if (step == null) {
             logger.warn("step is null");
             return;

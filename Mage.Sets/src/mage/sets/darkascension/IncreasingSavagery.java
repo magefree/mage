@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +58,7 @@ public class IncreasingSavagery extends CardImpl<IncreasingSavagery> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 
         // Flashback {5}{G}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{5}{G}{G}"), TimingRule.SORCERY));
     }
 
     public IncreasingSavagery(final IncreasingSavagery card) {
@@ -75,7 +74,7 @@ public class IncreasingSavagery extends CardImpl<IncreasingSavagery> {
 class IncreasingSavageryEffect extends OneShotEffect<IncreasingSavageryEffect> {
 
     public IncreasingSavageryEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "Put five +1/+1 counters on target creature. If Increasing Savagery was cast from a graveyard, put ten +1/+1 counters on that creature instead";
     }
 
@@ -88,7 +87,7 @@ class IncreasingSavageryEffect extends OneShotEffect<IncreasingSavageryEffect> {
         int amount = 5;
         Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
         if (spell != null) {
-            if (spell.getFromZone() == Constants.Zone.GRAVEYARD) {
+            if (spell.getFromZone() == Zone.GRAVEYARD) {
                 amount = 10;
             }
             Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));

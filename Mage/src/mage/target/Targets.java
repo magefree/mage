@@ -31,7 +31,7 @@ package mage.target;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
 

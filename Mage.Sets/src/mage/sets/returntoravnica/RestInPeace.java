@@ -28,11 +28,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -127,7 +128,7 @@ class RestInPeaceExileAllEffect extends OneShotEffect<RestInPeaceExileAllEffect>
 class RestInPeaceReplacementEffect extends ReplacementEffectImpl<RestInPeaceReplacementEffect> {
 
     public RestInPeaceReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a card or token would be put into a graveyard from anywhere, exile it instead";
     }
 

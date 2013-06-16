@@ -28,14 +28,16 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -57,7 +59,7 @@ public class Karma extends CardImpl<Karma> {
         this.color.setWhite(true);
 
         // At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new KarmaDamageTargetEffect(), TargetController.ANY, false));
     }
 
     public Karma(final Karma card) {
@@ -79,7 +81,7 @@ class KarmaDamageTargetEffect extends OneShotEffect<KarmaDamageTargetEffect>{
     
     public KarmaDamageTargetEffect()
     {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
     
     public KarmaDamageTargetEffect(KarmaDamageTargetEffect copy)

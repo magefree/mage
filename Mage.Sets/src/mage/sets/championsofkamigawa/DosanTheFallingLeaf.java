@@ -29,9 +29,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,7 +56,7 @@ public class DosanTheFallingLeaf extends CardImpl<DosanTheFallingLeaf> {
         this.toughness = new MageInt(2);
 
         // Players can cast spells only during their own turns.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DosanTheFallingLeafEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DosanTheFallingLeafEffect()));
     }
 
     public DosanTheFallingLeaf(final DosanTheFallingLeaf card) {
@@ -73,7 +71,7 @@ public class DosanTheFallingLeaf extends CardImpl<DosanTheFallingLeaf> {
 
 class DosanTheFallingLeafEffect extends ReplacementEffectImpl<DosanTheFallingLeafEffect> {
     DosanTheFallingLeafEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can cast spells only during their own turns";
     }
 

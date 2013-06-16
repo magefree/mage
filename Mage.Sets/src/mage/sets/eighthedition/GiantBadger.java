@@ -28,13 +28,14 @@
 package mage.sets.eighthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BlocksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -52,7 +53,7 @@ public class GiantBadger extends CardImpl<GiantBadger> {
         this.toughness = new MageInt(2);
 
         // Whenever Giant Badger blocks, it gets +2/+2 until end of turn.
-        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(2, 2, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new BlocksTriggeredAbility(new BoostSourceEffect(2, 2, Duration.EndOfTurn), false));
     }
 
     public GiantBadger(final GiantBadger card) {

@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -69,10 +67,10 @@ public class AngelOfJubilation extends CardImpl<AngelOfJubilation> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Other nonblack creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterNonBlack, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterNonBlack, true)));
 
         // Players can't pay life or sacrifice creatures to cast spells or activate abilities.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AngelOfJubilationEffect(Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AngelOfJubilationEffect(Duration.WhileOnBattlefield)));
     }
 
     public AngelOfJubilation(final AngelOfJubilation card) {
@@ -87,8 +85,8 @@ public class AngelOfJubilation extends CardImpl<AngelOfJubilation> {
 
 class AngelOfJubilationEffect extends ContinuousEffectImpl<AngelOfJubilationEffect> {
 
-    public AngelOfJubilationEffect(Constants.Duration duration) {
-        super(duration, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Detriment);
+    public AngelOfJubilationEffect(Duration duration) {
+        super(duration, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Players can't pay life or sacrifice creatures to cast spells or activate abilities";
     }
 

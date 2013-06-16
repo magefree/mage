@@ -30,15 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -56,7 +56,7 @@ public class OrbweaverKumo extends CardImpl<OrbweaverKumo> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         this.addAbility(ReachAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Constants.Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), filter, false));
     }
 
     public OrbweaverKumo(final OrbweaverKumo card) {

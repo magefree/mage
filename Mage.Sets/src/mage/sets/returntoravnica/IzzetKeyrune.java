@@ -28,9 +28,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -59,7 +58,7 @@ public class IzzetKeyrune extends CardImpl<IzzetKeyrune> {
         this.addAbility(new RedManaAbility());
 
         // {U}{R}: Until end of turn, Izzet Keyrune becomes a 2/1 blue and red Elemental artifact creature.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new IzzetKeyruneToken(), "", Constants.Duration.EndOfTurn), new ManaCostsImpl("{U}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new IzzetKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{U}{R}")));
 
         // Whenever Izzet Keyrune deals combat damage to a player, you may draw a card. If you do, discard a card.
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new IzzetKeyruneEffect(), true));
@@ -77,7 +76,7 @@ public class IzzetKeyrune extends CardImpl<IzzetKeyrune> {
     private class IzzetKeyruneEffect extends OneShotEffect<IzzetKeyruneEffect> {
 
         public IzzetKeyruneEffect() {
-            super(Constants.Outcome.DrawCard);
+            super(Outcome.DrawCard);
             this.staticText = "you may draw a card. If you do, discard a card";
         }
 
@@ -93,7 +92,7 @@ public class IzzetKeyrune extends CardImpl<IzzetKeyrune> {
         @Override
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
-            if (player != null && player.chooseUse(Constants.Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", game)) {
+            if (player != null && player.chooseUse(Outcome.DrawCard, "Do you wish to draw a card? If you do, discard a card.", game)) {
                 if (player.drawCards(1, game) > 0) {
                     player.discard(1, source, game);
                 }

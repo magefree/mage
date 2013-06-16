@@ -28,9 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -123,7 +122,7 @@ class MinionReflectorTriggeredAbility extends EntersBattlefieldAllTriggeredAbili
 class MinionReflectorEffect extends OneShotEffect<MinionReflectorEffect> {
 
     public MinionReflectorEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "put a token that's a copy of that creature onto the battlefield. That token has haste and \"At the beginning of the end step, sacrifice this permanent.";
     }
 
@@ -140,7 +139,7 @@ class MinionReflectorEffect extends OneShotEffect<MinionReflectorEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent == null) {
-            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+            permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
 
         if (permanent != null) {
@@ -148,7 +147,7 @@ class MinionReflectorEffect extends OneShotEffect<MinionReflectorEffect> {
             CardUtil.copyTo(token).from(permanent);
 
             token.addAbility(HasteAbility.getInstance());
-            token.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), Constants.TargetController.ANY, true));
+            token.addAbility(new BeginningOfEndStepTriggeredAbility(new SacrificeSourceEffect(), TargetController.ANY, true));
             token.putOntoBattlefield(1, game, source.getSourceId(), source.getControllerId());
             return true;
         }

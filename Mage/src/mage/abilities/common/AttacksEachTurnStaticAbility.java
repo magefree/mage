@@ -28,8 +28,8 @@
 
 package mage.abilities.common;
 
-import mage.Constants.Duration;
-import mage.Constants.Zone;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
 

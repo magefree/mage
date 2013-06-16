@@ -28,9 +28,9 @@
 
 package mage.player.ai;
 
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;

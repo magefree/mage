@@ -28,9 +28,8 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -57,9 +56,9 @@ public class ElephantGrass extends CardImpl<ElephantGrass> {
         // Cumulative upkeep {1}
         this.addAbility(new CumulativeUpkeepAbility(new ManaCostsImpl("{1}")));
         // Black creatures can't attack you.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ElephantGrassReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElephantGrassReplacementEffect()));
         // Nonblack creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ElephantGrassReplacementEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElephantGrassReplacementEffect2()));
     }
 
     public ElephantGrass(final ElephantGrass card) {
@@ -77,7 +76,7 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl<ElephantGrass
 
    
     ElephantGrassReplacementEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Black creatures can't attack you";
     }
 
@@ -116,7 +115,7 @@ class ElephantGrassReplacementEffect extends ReplacementEffectImpl<ElephantGrass
 class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl<ElephantGrassReplacementEffect2> {
 
     ElephantGrassReplacementEffect2 ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = "Nonblack creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
     }
 
@@ -136,7 +135,7 @@ class ElephantGrassReplacementEffect2 extends ReplacementEffectImpl<ElephantGras
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
                 ManaCostsImpl cost = new ManaCostsImpl("{2}");
                 if ( cost.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) ) {
                     if (cost.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;
                     }

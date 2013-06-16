@@ -30,13 +30,13 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -52,7 +52,7 @@ public class BluntTheAssault extends CardImpl<BluntTheAssault> {
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
         this.getSpellAbility().addEffect(new GainLifeEffect(new PermanentsOnBattlefieldCount(filter)));
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
     }
 
     public BluntTheAssault (final BluntTheAssault card) {

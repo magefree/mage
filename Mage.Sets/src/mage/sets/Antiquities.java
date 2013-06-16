@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Antiquities extends ExpansionSet {
     }
 
     private Antiquities() {
-        super("Antiquities", "ATQ", "", "mage.sets.antiquities", new GregorianCalendar(1994, 2, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Antiquities", "ATQ", "mage.sets.antiquities", new GregorianCalendar(1994, 2, 1).getTime(), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

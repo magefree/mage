@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -54,7 +56,7 @@ public class SelesnyaKeyrune extends CardImpl<SelesnyaKeyrune> {
         this.addAbility(new WhiteManaAbility());
 
         // {G}{W}: Selesnya Keyrune becomes a 3/3 green and white Wolf artifact creature until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SelesnyaKeyruneToken(), "", Constants.Duration.EndOfTurn), new ManaCostsImpl("{G}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new SelesnyaKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{G}{W}")));
     }
 
     public SelesnyaKeyrune(final SelesnyaKeyrune card) {

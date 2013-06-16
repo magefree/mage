@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -67,14 +65,14 @@ public class DarkImpostor extends CardImpl<DarkImpostor> {
         this.toughness = new MageInt(2);
 
         // {4}{B}{B}: Exile target creature and put a +1/+1 counter on Dark Impostor.\
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ImprintTargetEffect(), new ManaCostsImpl("{4}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ImprintTargetEffect(), new ManaCostsImpl("{4}{B}{B}"));
         ability.addEffect(new ExileTargetEffect(null, "Dark Impostor"));
         ability.addEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // Dark Impostor has all activated abilities of all creature cards exiled with it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DarkImpostorContinuousEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DarkImpostorContinuousEffect()));
     }
 
     public DarkImpostor(final DarkImpostor card) {
@@ -90,7 +88,7 @@ public class DarkImpostor extends CardImpl<DarkImpostor> {
 class DarkImpostorContinuousEffect extends ContinuousEffectImpl<DarkImpostorContinuousEffect> {
 
     public DarkImpostorContinuousEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "{this} has all activated abilities of all creature cards exiled with it";
     }
 

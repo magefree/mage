@@ -29,9 +29,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.SplitCard;
 import mage.target.common.TargetCreaturePermanent;

@@ -27,7 +27,7 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.PreventionEffectImpl;

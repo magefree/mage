@@ -28,9 +28,8 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -52,7 +51,7 @@ public class BoonReflection extends CardImpl<BoonReflection> {
         this.color.setWhite(true);
 
         // If you would gain life, you gain twice that much life instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoonReflectionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoonReflectionEffect()));
     }
 
     public BoonReflection(final BoonReflection card) {
@@ -68,7 +67,7 @@ public class BoonReflection extends CardImpl<BoonReflection> {
 class BoonReflectionEffect extends ReplacementEffectImpl<BoonReflectionEffect> {
 
     public BoonReflectionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If you would gain life, you gain twice that much life instead";
     }
 

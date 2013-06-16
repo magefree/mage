@@ -28,7 +28,7 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-import mage.Constants.Rarity;
+import mage.constants.Rarity;
 
 /**
  *

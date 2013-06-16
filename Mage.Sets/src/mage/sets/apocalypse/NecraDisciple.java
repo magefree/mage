@@ -29,9 +29,7 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -56,10 +54,10 @@ public class NecraDisciple extends CardImpl<NecraDisciple> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability firstAbility = new AnyColorManaAbility(new ColoredManaCost(Constants.ColoredManaSymbol.G));
+        Ability firstAbility = new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G));
         firstAbility.addCost(new TapSourceCost());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new ColoredManaCost(ColoredManaSymbol.W));
         secondAbility.addCost(new TapSourceCost());
         secondAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(secondAbility);

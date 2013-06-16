@@ -29,14 +29,15 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Outcome;
+
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
 import mage.game.events.GameEvent;
@@ -54,7 +55,7 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
     protected String manaString;
 
     public EchoAbility(String manaString) {
-        super(Constants.Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl(manaString)), false);
+        super(Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl(manaString)), false);
         this.echoPaid = false;
         this.manaString = manaString;
     }

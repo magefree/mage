@@ -28,15 +28,16 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -102,7 +103,7 @@ class CutTheTethersEffect extends OneShotEffect<CutTheTethersEffect> {
                         paid = true;
                     }
                     if (!paid) {
-                        creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+                        creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                     }
                 }
             }

@@ -28,10 +28,8 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -73,7 +71,7 @@ public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
         this.toughness = new MageInt(4);
 
         // Other Snake creatures you control get +1/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter, true)));
         // Whenever a Warrior you control deals combat damage to a creature, destroy that creature at end of combat.
         this.addAbility(new SosukeSonOfSeshiroTriggeredAbility());
     }
@@ -91,7 +89,7 @@ public class SosukeSonOfSeshiro extends CardImpl<SosukeSonOfSeshiro> {
 class SosukeSonOfSeshiroTriggeredAbility extends TriggeredAbilityImpl<SosukeSonOfSeshiroTriggeredAbility> {
 
     SosukeSonOfSeshiroTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SosukeSonOfSeshiroEffect());
+        super(Zone.BATTLEFIELD, new SosukeSonOfSeshiroEffect());
     }
 
     SosukeSonOfSeshiroTriggeredAbility(final SosukeSonOfSeshiroTriggeredAbility ability) {

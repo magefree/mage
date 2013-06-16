@@ -28,7 +28,7 @@
 
 package mage.sets;
 
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 import java.util.GregorianCalendar;
@@ -46,7 +46,7 @@ public class ScarsOfMirrodin extends ExpansionSet {
     }
 
     private ScarsOfMirrodin() {
-        super("Scars of Mirrodin", "SOM", "seticon_mtgsom", "mage.sets.scarsofmirrodin", new GregorianCalendar(2010, 10, 1).getTime(), SetType.EXPANSION);
+        super("Scars of Mirrodin", "SOM", "mage.sets.scarsofmirrodin", new GregorianCalendar(2010, 10, 1).getTime(), SetType.EXPANSION);
         this.blockName = "Scars of Mirrodin";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

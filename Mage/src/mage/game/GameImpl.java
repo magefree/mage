@@ -29,7 +29,7 @@
 package mage.game;
 
 import mage.Constants;
-import mage.Constants.*;
+import mage.constants.CardType;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -51,6 +51,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;

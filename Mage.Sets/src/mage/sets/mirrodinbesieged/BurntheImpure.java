@@ -30,13 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -70,7 +70,7 @@ public class BurntheImpure extends CardImpl<BurntheImpure> {
     protected int amount;
 
     public BurntheImpureEffect(int amount) {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.amount = amount;
         staticText = "{this} deals 3 damage to target creature. If that creature has infect, {this} deals 3 damage to that creature's controller.";
     }

@@ -29,7 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -45,7 +45,7 @@ public class ModernMasters extends ExpansionSet {
     }
 
     private ModernMasters() {
-        super("Modern Masters", "MMA", "", "mage.sets.modernmasters", new GregorianCalendar(2016, 6, 7).getTime(), SetType.REPRINT);
+        super("Modern Masters", "MMA", "mage.sets.modernmasters", new GregorianCalendar(2016, 6, 7).getTime(), SetType.REPRINT);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 0;

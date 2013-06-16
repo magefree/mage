@@ -28,12 +28,12 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterSpell;
 import mage.game.Game;
@@ -92,7 +92,7 @@ public class TurnAside extends CardImpl<TurnAside> {
         public CustomTargetSpell(int minNumTargets, int maxNumTargets, FilterSpell filter) {
             this.minNumberOfTargets = minNumTargets;
             this.maxNumberOfTargets = maxNumTargets;
-            this.zone = Constants.Zone.STACK;
+            this.zone = Zone.STACK;
             this.filter = filter;
             this.targetName = filter.getMessage();
         }

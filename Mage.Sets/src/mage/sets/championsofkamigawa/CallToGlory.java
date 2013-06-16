@@ -30,13 +30,14 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -60,7 +61,7 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
         this.expansionSetCode = "CHK";
         this.color.setWhite(true);
         this.getSpellAbility().addEffect(new CalltoGloryFirstEffect());
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false));
     }
 
     public CallToGlory(final CallToGlory card) {
@@ -78,7 +79,7 @@ private static final FilterCreaturePermanent filter = new FilterCreaturePermanen
 class CalltoGloryFirstEffect extends OneShotEffect<CalltoGloryFirstEffect> {
 
     public CalltoGloryFirstEffect() {
-        super(Constants.Outcome.Untap);
+        super(Outcome.Untap);
         staticText = "Untap all creatures you control";
     }
 

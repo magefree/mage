@@ -30,13 +30,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FearAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -49,8 +49,8 @@ public class DanceOfShadows extends CardImpl<DanceOfShadows> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Arcane");
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FearAbility.getInstance(), Duration.EndOfTurn));
     }
 
     public DanceOfShadows (final DanceOfShadows card) {

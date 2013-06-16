@@ -29,9 +29,9 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -41,6 +41,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -59,14 +60,14 @@ public class ArcaneSpyglass extends CardImpl<ArcaneSpyglass> {
         this.expansionSetCode = "DST";
 
         // {2}, {T} , Sacrifice a land: Draw a card and put a charge counter on Arcane Spyglass.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addEffect(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()));
         this.addAbility(ability);
 
         // Remove three charge counters from Arcane Spyglass: Draw a card.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 
     public ArcaneSpyglass (final ArcaneSpyglass card) {

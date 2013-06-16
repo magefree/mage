@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;

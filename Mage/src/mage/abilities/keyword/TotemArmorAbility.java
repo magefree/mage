@@ -28,10 +28,12 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -49,7 +51,7 @@ import mage.game.permanent.Permanent;
 
 public class TotemArmorAbility extends SimpleStaticAbility {
     public TotemArmorAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TotemArmorEffect());
+        super(Zone.BATTLEFIELD, new TotemArmorEffect());
     }
 
     public TotemArmorAbility(final TotemArmorAbility ability) {
@@ -69,7 +71,7 @@ public class TotemArmorAbility extends SimpleStaticAbility {
 
 class TotemArmorEffect extends ReplacementEffectImpl<TotemArmorEffect> {
     TotemArmorEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
     TotemArmorEffect(final TotemArmorEffect effect) {

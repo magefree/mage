@@ -1,12 +1,14 @@
 package mage.sets.innistrad;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.Target;
@@ -22,7 +24,7 @@ public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
     }
 
     public AngelOfFlightAlabaster(UUID ownerId) {
-        super(ownerId, 2, "Angel of Flight Alabaster", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{4}{W}");
+        super(ownerId, 2, "Angel of Flight Alabaster", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}");
         this.expansionSetCode = "ISD";
         this.subtype.add("Angel");
         this.color.setWhite(true);
@@ -30,7 +32,7 @@ public class AngelOfFlightAlabaster extends CardImpl<AngelOfFlightAlabaster> {
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
         Target target = new TargetCardInYourGraveyard(filter);
         target.setRequired(true);
         ability.addTarget(target);

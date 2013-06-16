@@ -28,14 +28,16 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -56,7 +58,7 @@ public class WakeThrasher extends CardImpl<WakeThrasher> {
         this.toughness = new MageInt(1);
 
         // Whenever a permanent you control becomes untapped, Wake Thrasher gets +1/+1 until end of turn.
-        this.addAbility(new BecomesUntappedControlledPermanentTriggeredAbility(new BoostSourceEffect(1,1, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new BecomesUntappedControlledPermanentTriggeredAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn), false));
 
     }
 
@@ -73,7 +75,7 @@ public class WakeThrasher extends CardImpl<WakeThrasher> {
 class BecomesUntappedControlledPermanentTriggeredAbility extends TriggeredAbilityImpl<BecomesUntappedControlledPermanentTriggeredAbility>{
 
     public BecomesUntappedControlledPermanentTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public BecomesUntappedControlledPermanentTriggeredAbility(final BecomesUntappedControlledPermanentTriggeredAbility ability) {

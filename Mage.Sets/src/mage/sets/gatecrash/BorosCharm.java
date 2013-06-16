@@ -28,10 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -68,7 +68,7 @@ public class BorosCharm extends CardImpl<BorosCharm> {
         this.getSpellAbility().addMode(mode);
         //or target creature gains double strike until end of turn.
         Mode mode2 = new Mode();
-        mode2.getEffects().add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.EndOfTurn));
+        mode2.getEffects().add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         mode2.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode2);
     }

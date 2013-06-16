@@ -29,9 +29,8 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -68,15 +69,15 @@ public class EmberWeaver extends CardImpl<EmberWeaver> {
         // As long as you control a red permanent, Ember Weaver gets +1/+0 and has first strike.
         this.addAbility(
                 new SimpleStaticAbility(
-                        Constants.Zone.BATTLEFIELD,
+                        Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
-                                new BoostSourceEffect(1, 0, Constants.Duration.WhileOnBattlefield),
+                                new BoostSourceEffect(1, 0, Duration.WhileOnBattlefield),
                                 new ControlsPermanentCondition(redPermanentFilter), "{this} gets +1/+0 as long as you control a red permanent")));
         this.addAbility(
                 new SimpleStaticAbility(
-                        Constants.Zone.BATTLEFIELD,
+                        Zone.BATTLEFIELD,
                         new ConditionalContinousEffect(
-                                new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+                                new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.WhileOnBattlefield),
                                 new ControlsPermanentCondition(redPermanentFilter), "{this} has first strike as long as you control a red permanent")));
 
     }

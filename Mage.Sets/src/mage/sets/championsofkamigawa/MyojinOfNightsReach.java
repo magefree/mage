@@ -28,9 +28,8 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -72,10 +71,10 @@ public class MyojinOfNightsReach extends CardImpl<MyojinOfNightsReach> {
         // Myojin of Night's Reach enters the battlefield with a divinity counter on it if you cast it from your hand.
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new AddCountersSourceEffect(CounterType.DIVINITY.createInstance()), new CastFromHandCondition(), ""), "{this} enters the battlefield with a divinity counter on it if you cast it from your hand"));
         // Myojin of Night's Reach is indestructible as long as it has a divinity counter on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield),
                 new HasCounterCondition(CounterType.DIVINITY), "{this} is indestructible as long as it has a divinity counter on it")));
         // Remove a divinity counter from Myojin of Night's Reach: Each opponent discards his or her hand.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MyojinOfNightsReachEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MyojinOfNightsReachEffect(), new RemoveCountersSourceCost(CounterType.DIVINITY.createInstance()));
         this.addAbility(ability);
     }
 
@@ -91,7 +90,7 @@ public class MyojinOfNightsReach extends CardImpl<MyojinOfNightsReach> {
 
 class MyojinOfNightsReachEffect extends OneShotEffect<MyojinOfNightsReachEffect> {
     public MyojinOfNightsReachEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Each opponent discards his or her hand";
     }
 
@@ -102,10 +101,10 @@ class MyojinOfNightsReachEffect extends OneShotEffect<MyojinOfNightsReachEffect>
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId : game.getOpponents(source.getControllerId())) {
-                Player opponent = game.getPlayer(opponentId);
-                for (Card c : opponent.getHand().getCards(game)) {
-                    opponent.discard(c, source, game);
-                }
+            Player opponent = game.getPlayer(opponentId);
+            for (Card c : opponent.getHand().getCards(game)) {
+                opponent.discard(c, source, game);
+            }
         }
         return true;
     }

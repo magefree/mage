@@ -28,15 +28,17 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -80,7 +82,7 @@ public class MinamoSightbender extends CardImpl<MinamoSightbender> {
 class MinamoSightbenderAbility extends ActivatedAbilityImpl<MinamoSightbenderAbility> {
 
     public MinamoSightbenderAbility() {
-        super(Constants.Zone.BATTLEFIELD,new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
+        super(Zone.BATTLEFIELD,new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
         this.addCost(new TapSourceCost());
     }
 
@@ -101,7 +103,7 @@ class MinamoSightbenderAbility extends ActivatedAbilityImpl<MinamoSightbenderAbi
         Target target = new TargetPermanent(filter);
         Player player = game.getPlayer(controllerId);
         if (player != null) {
-            if (player.chooseTarget(Constants.Outcome.Benefit, target, this, game)) {
+            if (player.chooseTarget(Outcome.Benefit, target, this, game)) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(target.getFirstTarget()));
                 return super.resolve(game);
             }

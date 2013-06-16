@@ -29,10 +29,11 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AbilityType;
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+
+import mage.constants.AbilityType;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -43,6 +44,7 @@ import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
@@ -56,7 +58,7 @@ import mage.target.Target;
 public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> extends AbilityImpl<T> implements ActivatedAbility {
 
     protected TimingRule timing = TimingRule.INSTANT;
-    protected Constants.TargetController mayActivate = Constants.TargetController.YOU;
+    protected TargetController mayActivate = TargetController.YOU;
     protected UUID activatorId;
 
     protected ActivatedAbilityImpl(AbilityType abilityType, Zone zone) {
@@ -241,7 +243,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         } else {
             sb.append("unknown");
         }
-        if (object instanceof Spell && ((Spell) object).getSpellAbility().getSpellAbilityType().equals(Constants.SpellAbilityType.SPLIT_FUSED)) {
+        if (object instanceof Spell && ((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
             Spell<?> spell = (Spell<?>) object;
             int i = 0;
             for (SpellAbility spellAbility : spell.getSpellAbilities()) {
@@ -283,7 +285,7 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         return sb.toString();
     }
 
-    public void setMayActivate(Constants.TargetController mayActivate) {
+    public void setMayActivate(TargetController mayActivate) {
         this.mayActivate = mayActivate;
     }
 

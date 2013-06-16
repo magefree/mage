@@ -28,13 +28,15 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -67,7 +69,7 @@ public class HeedTheMists extends CardImpl<HeedTheMists> {
     private class HeedTheMistsEffect extends OneShotEffect<HeedTheMistsEffect> {
 
             public HeedTheMistsEffect() {
-                    super(Constants.Outcome.DrawCard);
+                    super(Outcome.DrawCard);
                     staticText = "Put the top card of your library into your graveyard, then draw cards equal to that card's converted mana cost";
             }
 
@@ -83,7 +85,7 @@ public class HeedTheMists extends CardImpl<HeedTheMists> {
                     Card card = player.getLibrary().removeFromTop(game);
                     if (card != null) {
                         int cmc = card.getManaCost().convertedManaCost();
-                        result = card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, true);
+                        result = card.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
                         player.drawCards(cmc, game);
                     }
                 } 

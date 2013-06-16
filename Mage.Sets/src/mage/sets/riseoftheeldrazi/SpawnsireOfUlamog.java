@@ -27,9 +27,8 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.CastCardFromOutsideTheGameEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.EldraziSpawnToken;
@@ -68,10 +68,10 @@ public class SpawnsireOfUlamog extends CardImpl<SpawnsireOfUlamog> {
         this.addAbility(new AnnihilatorAbility(1));
 
         // {4}: Put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken(), 2), new GenericManaCost(4)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new EldraziSpawnToken(), 2), new GenericManaCost(4)));
 
         // {20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CastCardFromOutsideTheGameEffect(filter, ruleText), new GenericManaCost(20)));
     }
 
     public SpawnsireOfUlamog(final SpawnsireOfUlamog card) {

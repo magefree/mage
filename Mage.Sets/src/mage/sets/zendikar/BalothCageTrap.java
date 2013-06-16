@@ -28,9 +28,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -38,6 +38,7 @@ import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -78,7 +79,7 @@ public class BalothCageTrap extends CardImpl<BalothCageTrap> {
 class BalothCageTrapWatcher extends WatcherImpl<BalothCageTrapWatcher> {
 
     public BalothCageTrapWatcher() {
-        super("BalothCageTrapWatcher", Constants.WatcherScope.GAME);
+        super("BalothCageTrapWatcher", WatcherScope.GAME);
     }
 
     public BalothCageTrapWatcher(final BalothCageTrapWatcher watcher) {

@@ -1,8 +1,9 @@
 package org.mage.test.cards.copy;
 
-import mage.Constants;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,15 +29,15 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopySimpleCreature() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
-        addCard(Constants.Zone.LIBRARY, playerB, "Assault Griffin",5);
+        addCard(Zone.LIBRARY, playerB, "Assault Griffin",5);
         skipInitShuffling();
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
@@ -52,18 +53,18 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
      */
     @Test
     public void testRatsHaveDeathtouch() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Gutter Skulk", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Gutter Skulk", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
         // Whenever another nontoken creature dies, you may put a 1/1 black Rat creature token onto the battlefield.
         // Rats you control have deathtouch.
-        addCard(Constants.Zone.LIBRARY, playerB, "Ogre Slumlord",5);
+        addCard(Zone.LIBRARY, playerB, "Ogre Slumlord",5);
         skipInitShuffling();
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
@@ -89,21 +90,21 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyNightveilSpecter() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
-        addCard(Constants.Zone.LIBRARY, playerB, "Silvercoat Lion",2);
-        addCard(Constants.Zone.LIBRARY, playerB, "Nightveil Specter",1);
+        addCard(Zone.LIBRARY, playerB, "Silvercoat Lion",2);
+        addCard(Zone.LIBRARY, playerB, "Nightveil Specter",1);
         skipInitShuffling();
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
 
         attack(3, playerA, "Lazav, Dimir Mastermind");
 
-        castSpell(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Silvercoat Lion");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);
@@ -121,20 +122,20 @@ public class LazavDimirMastermindTest extends CardTestPlayerBase {
 
     @Test
     public void testCopyMultipleTimes() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Lazav, Dimir Mastermind", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Codex Shredder", 1);
 
-        addCard(Constants.Zone.LIBRARY, playerB, "Silvercoat Lion",2);
-        addCard(Constants.Zone.LIBRARY, playerB, "Nightveil Specter",1);
+        addCard(Zone.LIBRARY, playerB, "Silvercoat Lion",2);
+        addCard(Zone.LIBRARY, playerB, "Nightveil Specter",1);
         skipInitShuffling();
 
         // Lazav becomes a Nightveil Specter
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
 
         // Lazav becomes a Silvercoat Lion
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Target player puts the top card of his or her library into his or her graveyard.", playerB);
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Lazav, Dimir Mastermind", 1);

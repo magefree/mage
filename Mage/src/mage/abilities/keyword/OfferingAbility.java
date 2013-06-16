@@ -29,11 +29,11 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -189,7 +189,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl<OfferingCos
     private ManaCosts<ManaCost> manaCostsToReduce;
 
     OfferingCostReductionEffect (UUID spellAbilityId, ManaCosts<ManaCost> manaCostsToReduce, UUID activationId) {
-        super(Constants.Duration.OneUse, Constants.Outcome.Benefit);
+        super(Duration.OneUse, Outcome.Benefit);
         this.spellAbilityId = spellAbilityId;
         this.manaCostsToReduce = manaCostsToReduce;
         this.activationId = activationId;

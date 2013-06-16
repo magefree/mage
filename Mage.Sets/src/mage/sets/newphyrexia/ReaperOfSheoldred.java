@@ -29,15 +29,15 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -74,7 +74,7 @@ public class ReaperOfSheoldred extends CardImpl<ReaperOfSheoldred> {
 
 class ReaperOfSheoldredTriggeredAbility extends TriggeredAbilityImpl<ReaperOfSheoldredTriggeredAbility> {
     ReaperOfSheoldredTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.POISON.createInstance()));
+        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.POISON.createInstance()));
     }
 
     ReaperOfSheoldredTriggeredAbility(final ReaperOfSheoldredTriggeredAbility ability) {

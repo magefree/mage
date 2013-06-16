@@ -28,9 +28,8 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -54,7 +53,7 @@ public class LocketOfYesterdays extends CardImpl<LocketOfYesterdays> {
         this.expansionSetCode = "TSP";
 
         // Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LocketOfYesterdaysCostReductionEffect()));
     }
 
     public LocketOfYesterdays(final LocketOfYesterdays card) {
@@ -70,7 +69,7 @@ public class LocketOfYesterdays extends CardImpl<LocketOfYesterdays> {
 class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl<LocketOfYesterdaysCostReductionEffect> {
 
     LocketOfYesterdaysCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard";
     }
 

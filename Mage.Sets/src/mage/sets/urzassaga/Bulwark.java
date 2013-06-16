@@ -28,14 +28,15 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -53,7 +54,7 @@ public class Bulwark extends CardImpl<Bulwark> {
 		
         // At the beginning of your upkeep, Bulwark deals X damage to target opponent, where X is
 		// the number of cards in your hand minus the number of cards in that player's hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect(), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new BulwarkDamageEffect(), TargetController.YOU, false);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

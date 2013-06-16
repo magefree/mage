@@ -28,8 +28,8 @@
 
 package mage.cards;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 import java.util.UUID;
 

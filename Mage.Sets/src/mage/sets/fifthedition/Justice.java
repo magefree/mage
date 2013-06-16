@@ -27,9 +27,7 @@
  */
 package mage.sets.fifthedition;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -61,7 +59,7 @@ public class Justice extends CardImpl<Justice> {
         this.color.setWhite(true);
 
         // At the beginning of your upkeep, sacrifice Justice unless you pay {W}{W}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceUnlessPaysEffect(new ManaCostsImpl("{W}{W}")), TargetController.YOU, false));
         
         // Whenever a red creature or spell deals damage, Justice deals that much damage to that creature's or spell's controller.
         this.addAbility(new JusticeTriggeredAbility(new JusticeEffect()));
@@ -80,7 +78,7 @@ public class Justice extends CardImpl<Justice> {
 class JusticeTriggeredAbility extends TriggeredAbilityImpl<JusticeTriggeredAbility> {
 
     public JusticeTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
 
     public JusticeTriggeredAbility(final JusticeTriggeredAbility ability) {
@@ -119,7 +117,7 @@ class JusticeTriggeredAbility extends TriggeredAbilityImpl<JusticeTriggeredAbili
 class JusticeEffect extends OneShotEffect<JusticeEffect> {
 
     public JusticeEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
 
     public JusticeEffect(final JusticeEffect effect) {

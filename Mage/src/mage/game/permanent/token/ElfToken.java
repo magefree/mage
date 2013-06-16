@@ -28,8 +28,8 @@
 
 package mage.game.permanent.token;
 
-import mage.Constants;
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ElfToken extends Token {
 
     public ElfToken() {
         super("Elf Warrior", "1/1 green Elf Warrior creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Elf");
         subtype.add("Warrior");

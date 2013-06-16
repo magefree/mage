@@ -27,10 +27,9 @@
  */
 package mage.sets.prophecy;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,6 +42,8 @@ import mage.abilities.keyword.FlashbackAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -85,7 +86,7 @@ public class AvatarOfHope extends CardImpl<AvatarOfHope> {
 class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSourceCosts {
 
     public AdjustingCostsAbility() {
-        super(Constants.Zone.OUTSIDE, new AdjustingCostsEffect());
+        super(Zone.OUTSIDE, new AdjustingCostsEffect());
     }
 
     public AdjustingCostsAbility(final AdjustingCostsAbility ability) {
@@ -114,7 +115,7 @@ class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSour
 class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffect> {
 
     public AdjustingCostsEffect() {
-        super(Constants.Duration.Custom, Constants.Outcome.Benefit);
+        super(Duration.Custom, Outcome.Benefit);
     }
 
     public AdjustingCostsEffect(final AdjustingCostsEffect effect) {

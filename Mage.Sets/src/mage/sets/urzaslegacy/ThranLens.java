@@ -28,9 +28,8 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -49,7 +48,7 @@ public class ThranLens extends CardImpl<ThranLens> {
         super(ownerId, 133, "Thran Lens", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "ULG";
         // All permanents are colorless.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ThranLensEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThranLensEffect()));
     }
 
     public ThranLens(final ThranLens card) {
@@ -69,7 +68,7 @@ public class ThranLens extends CardImpl<ThranLens> {
     
     public ThranLensEffect()
     {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         staticText = "All permanents are colorless";
     }
     @Override

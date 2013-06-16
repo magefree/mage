@@ -28,9 +28,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -39,6 +39,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -83,7 +86,7 @@ public class LorthosTheTidemaker extends CardImpl<LorthosTheTidemaker> {
 class LorthosTheTideMakerEffect extends OneShotEffect<LorthosTheTideMakerEffect> {
 
     public LorthosTheTideMakerEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         this.staticText = "you may pay {8}. If you do, tap up to eight target permanents. Those permanents don't untap during their controllers' next untap steps";
     }
 
@@ -101,7 +104,7 @@ class LorthosTheTideMakerEffect extends OneShotEffect<LorthosTheTideMakerEffect>
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
             Cost cost = new ManaCostsImpl("{8}");
-            if (player.chooseUse(Constants.Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, game)) {
+            if (player.chooseUse(Outcome.Tap, "Pay " + cost.getText() + " and " + staticText, game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     for (UUID target : this.targetPointer.getTargets(game, source)) {
@@ -124,7 +127,7 @@ class LorthosTheTideMakerEffect2 extends ReplacementEffectImpl<LorthosTheTideMak
     protected UUID permanentId;
 
     public LorthosTheTideMakerEffect2(UUID permanentId) {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
         this.permanentId = permanentId;
     }
 
@@ -151,7 +154,7 @@ class LorthosTheTideMakerEffect2 extends ReplacementEffectImpl<LorthosTheTideMak
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == GameEvent.EventType.UNTAP
                 && event.getTargetId().equals(permanentId)) {
             return true;

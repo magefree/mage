@@ -28,9 +28,8 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -62,7 +61,7 @@ public class SlumberingTora extends CardImpl<SlumberingTora> {
         this.expansionSetCode = "BOK";
         // {2}, Discard a Spirit or Arcane card: Slumbering Tora becomes an X/X Cat artifact creature until end of turn,
         // where X is the discarded card's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SlumberingToraEffect(), new ManaCostsImpl("{2}"));
         ability.addCost(new DiscardTargetCost(new TargetCardInHand(filter)));
         this.addAbility(ability);
     }
@@ -79,7 +78,7 @@ public class SlumberingTora extends CardImpl<SlumberingTora> {
     private class SlumberingToraEffect extends ContinuousEffectImpl<SlumberingToraEffect> {
 
         public SlumberingToraEffect() {
-            super(Constants.Duration.EndOfTurn, Constants.Outcome.BecomeCreature);
+            super(Duration.EndOfTurn, Outcome.BecomeCreature);
             setText();
         }
 
@@ -93,18 +92,18 @@ public class SlumberingTora extends CardImpl<SlumberingTora> {
         }
 
         @Override
-        public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+        public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 switch (layer) {
                     case TypeChangingEffects_4:
-                        if (sublayer == Constants.SubLayer.NA) {
+                        if (sublayer == SubLayer.NA) {
                             permanent.getCardType().add(CardType.CREATURE);
                             permanent.getSubtype().add("Cat");
                         }
                         break;
                     case PTChangingEffects_7:
-                        if (sublayer == Constants.SubLayer.SetPT_7b) {
+                        if (sublayer == SubLayer.SetPT_7b) {
                             int convManaCosts = 0;
                             for (Cost cost: source.getCosts()) {
                                 if (cost instanceof DiscardTargetCost && ((DiscardTargetCost)cost).getCards().size() > 0) {
@@ -131,8 +130,8 @@ public class SlumberingTora extends CardImpl<SlumberingTora> {
         }
 
         @Override
-        public boolean hasLayer(Constants.Layer layer) {
-            return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.TypeChangingEffects_4;
+        public boolean hasLayer(Layer layer) {
+            return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
         }
     }
 

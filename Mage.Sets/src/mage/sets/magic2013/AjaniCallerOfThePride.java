@@ -29,9 +29,8 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -46,6 +45,7 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
@@ -73,8 +73,8 @@ public class AjaniCallerOfThePride extends CardImpl<AjaniCallerOfThePride> {
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
         Effects effects = new Effects();
-        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
-        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.EndOfTurn));
+        effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         ability = new LoyaltyAbility(effects, -3);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -29,15 +29,15 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -85,7 +85,7 @@ public class AuriokSurvivors extends CardImpl<AuriokSurvivors> {
 
 class AuriokSurvivorsEffect extends OneShotEffect<AuriokSurvivorsEffect> {
     AuriokSurvivorsEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "If you do, you may attach it to {this}";
     }
 
@@ -99,7 +99,7 @@ class AuriokSurvivorsEffect extends OneShotEffect<AuriokSurvivorsEffect> {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         Player player = game.getPlayer(source.getControllerId());
         if (p != null && player != null && sourcePermanent != null) {
-            if (player.chooseUse(Constants.Outcome.Benefit, "Attach " + p.getName() + " to " + sourcePermanent.getName() + "?", game)) {
+            if (player.chooseUse(Outcome.Benefit, "Attach " + p.getName() + " to " + sourcePermanent.getName() + "?", game)) {
                 sourcePermanent.addAttachment(p.getId(), game);
             }
             return true;

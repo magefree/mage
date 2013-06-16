@@ -27,13 +27,14 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -74,7 +75,7 @@ class MonomaniaEffect extends OneShotEffect<MonomaniaEffect> {
     private static final FilterCard filter = new FilterCard("a card");
 
     public MonomaniaEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Target player chooses a card in his or her hand and discards the rest";
     }
 
@@ -86,9 +87,9 @@ class MonomaniaEffect extends OneShotEffect<MonomaniaEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         if (player != null) {
-            TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+            TargetCard target = new TargetCard(Zone.PICK, filter);
             target.setRequired(true);
-            if (player.choose(Constants.Outcome.Detriment, player.getHand(), target, game)) {
+            if (player.choose(Outcome.Detriment, player.getHand(), target, game)) {
                 while (player.getHand().size() > 1) {
                     for (UUID uuid : player.getHand()) {
                         if (!uuid.equals(target.getFirstTarget())) {

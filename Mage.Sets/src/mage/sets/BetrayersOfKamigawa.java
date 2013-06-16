@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class BetrayersOfKamigawa extends ExpansionSet {
     }
 
     private BetrayersOfKamigawa() {
-        super("Betrayers of Kamigawa", "BOK", "", "mage.sets.betrayersofkamigawa", new GregorianCalendar(2005, 1, 4).getTime(), SetType.EXPANSION);
+        super("Betrayers of Kamigawa", "BOK", "mage.sets.betrayersofkamigawa", new GregorianCalendar(2005, 1, 4).getTime(), SetType.EXPANSION);
         this.blockName = "Kamigawa";
         this.parentSet = ChampionsOfKamigawa.getInstance();
         this.hasBasicLands = false;

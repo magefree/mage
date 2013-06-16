@@ -28,10 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -83,7 +81,7 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
 
         
         // Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Constants.Duration.WhileOnBattlefield, filter, true, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
         
     }
 

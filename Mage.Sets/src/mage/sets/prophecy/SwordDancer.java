@@ -28,15 +28,17 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -56,7 +58,7 @@ public class SwordDancer extends CardImpl<SwordDancer> {
         this.toughness = new MageInt(2);
 
         // {W}{W}: Target attacking creature gets -1/-0 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-1, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, 0, Duration.EndOfTurn), new ManaCostsImpl("{W}{W}"));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

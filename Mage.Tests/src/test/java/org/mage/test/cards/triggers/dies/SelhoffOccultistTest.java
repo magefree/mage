@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers.dies;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,14 +18,14 @@ public class SelhoffOccultistTest extends CardTestPlayerBase {
      */
     @Test
     public void testDiesTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Selhoff Occultist");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Selhoff Occultist");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -40,15 +41,15 @@ public class SelhoffOccultistTest extends CardTestPlayerBase {
      */
     @Test
     public void testDiesTriggeredAbilityForTwoCopies() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ana Disciple", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Ana Disciple", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Ana Disciple");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Ana Disciple");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -64,17 +65,17 @@ public class SelhoffOccultistTest extends CardTestPlayerBase {
      */
     @Test
     public void testDiesTriggeredAbilityInOtherZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 2);
-        addCard(Constants.Zone.HAND, playerB, "Selhoff Occultist", 1);
-        addCard(Constants.Zone.GRAVEYARD, playerB, "Selhoff Occultist", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ana Disciple", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Selhoff Occultist", 2);
+        addCard(Zone.HAND, playerB, "Selhoff Occultist", 1);
+        addCard(Zone.GRAVEYARD, playerB, "Selhoff Occultist", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Ana Disciple", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Ana Disciple");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Ana Disciple");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

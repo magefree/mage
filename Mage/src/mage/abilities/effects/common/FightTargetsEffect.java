@@ -27,8 +27,8 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;

@@ -28,13 +28,13 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -93,7 +93,7 @@ public class PollenbrightWings extends CardImpl<PollenbrightWings> {
 class PollenbrightWingsAbility extends TriggeredAbilityImpl<PollenbrightWingsAbility> {
 
     public PollenbrightWingsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new PollenbrightWingsEffect());
+        super(Zone.BATTLEFIELD, new PollenbrightWingsEffect());
         this.addEffect(new UntapAllLandsControllerEffect());
     }
 

@@ -27,15 +27,15 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -67,7 +67,7 @@ public class CastThroughTime extends CardImpl<CastThroughTime> {
         this.color.setBlue(true);
 
         // Instant and sorcery spells you control have rebound.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainReboundEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainReboundEffect()));
 
         this.addWatcher(new LeavesBattlefieldWatcher());
     }
@@ -85,7 +85,7 @@ public class CastThroughTime extends CardImpl<CastThroughTime> {
 class GainReboundEffect extends ContinuousEffectImpl<GainReboundEffect> {
 
     public GainReboundEffect() {
-        super(Constants.Duration.Custom, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Instant and sorcery spells you control have rebound";
     }
 
@@ -132,7 +132,7 @@ class AttachedReboundAbility extends ReboundAbility {}
 class LeavesBattlefieldWatcher extends WatcherImpl<LeavesBattlefieldWatcher> {
 
     public LeavesBattlefieldWatcher() {
-        super("LeavesBattlefieldWatcher", Constants.WatcherScope.CARD);
+        super("LeavesBattlefieldWatcher", WatcherScope.CARD);
     }
 
     public LeavesBattlefieldWatcher(final LeavesBattlefieldWatcher watcher) {
@@ -143,7 +143,7 @@ class LeavesBattlefieldWatcher extends WatcherImpl<LeavesBattlefieldWatcher> {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Constants.Zone.BATTLEFIELD) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 Player player = game.getPlayer(this.getControllerId());
                 if (player != null) {
                     for (Card card : player.getHand().getCards(CastThroughTime.filter, game)) {

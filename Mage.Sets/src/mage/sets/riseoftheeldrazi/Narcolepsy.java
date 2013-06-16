@@ -28,16 +28,18 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -61,12 +63,12 @@ public class Narcolepsy extends CardImpl<Narcolepsy> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         EnchantAbility ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // At the beginning of each upkeep, if enchanted creature is untapped, tap it.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NarcolepsyEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new NarcolepsyEffect(), TargetController.ANY, false));
     }
 
     public Narcolepsy(final Narcolepsy card) {
@@ -82,7 +84,7 @@ public class Narcolepsy extends CardImpl<Narcolepsy> {
 class NarcolepsyEffect extends OneShotEffect<NarcolepsyEffect> {
 
     public NarcolepsyEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "if enchanted creature is untapped, tap it";
     }
 

@@ -30,16 +30,17 @@ package mage.sets.commander;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -122,7 +123,7 @@ class VeteranExplorerEffect extends OneShotEffect<VeteranExplorerEffect> {
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), player.getId());
+                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), player.getId());
                         }
                     }
                 }

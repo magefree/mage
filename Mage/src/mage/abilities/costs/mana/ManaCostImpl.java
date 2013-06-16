@@ -29,8 +29,8 @@
 package mage.abilities.costs.mana;
 
 import java.util.UUID;
-import mage.Constants.ColoredManaSymbol;
-import mage.Constants.ManaType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;

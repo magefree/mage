@@ -28,9 +28,9 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -56,7 +58,7 @@ public class BatonOfCourage extends CardImpl<BatonOfCourage> {
         // Sunburst
         this.addAbility(new SunburstAbility());
         // Remove a charge counter from Baton of Courage: Target creature gets +1/+1 until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

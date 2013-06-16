@@ -28,9 +28,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -39,6 +39,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -87,7 +88,7 @@ public class TeysaEnvoyOfGhosts extends CardImpl<TeysaEnvoyOfGhosts> {
 class TeysaEnvoyOfGhostsTriggeredAbility extends TriggeredAbilityImpl<TeysaEnvoyOfGhostsTriggeredAbility> {
 
     public TeysaEnvoyOfGhostsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         this.addEffect(new CreateTokenEffect(new TeysaEnvoyOfGhostsToken(), 1));
 
      }

@@ -27,9 +27,7 @@
  */
 package mage.sets.worldwake;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -59,7 +57,7 @@ public class LodestoneGolem extends CardImpl<LodestoneGolem> {
         this.toughness = new MageInt(3);
 
         // Nonartifact spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LodestoneGolemCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LodestoneGolemCostReductionEffect()));
     }
 
     public LodestoneGolem(final LodestoneGolem card) {
@@ -75,7 +73,7 @@ public class LodestoneGolem extends CardImpl<LodestoneGolem> {
 class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl<LodestoneGolemCostReductionEffect> {
 
     LodestoneGolemCostReductionEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Nonartifact spells cost {1} more to cast";
     }
 

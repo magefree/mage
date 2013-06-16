@@ -28,9 +28,11 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 /**
  *
@@ -39,7 +41,7 @@ import mage.cards.CardImpl;
 public class Vizzerdrix extends CardImpl<Vizzerdrix> {
 
     public Vizzerdrix(UUID ownerId) {
-        super(ownerId, 110, "Vizzerdrix", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{6}{U}");
+        super(ownerId, 110, "Vizzerdrix", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}");
         this.expansionSetCode = "7ED";
         this.subtype.add("Rabbit");
         this.subtype.add("Beast");

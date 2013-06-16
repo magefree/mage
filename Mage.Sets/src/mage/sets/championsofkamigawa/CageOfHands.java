@@ -30,9 +30,7 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,11 +58,11 @@ public class CageOfHands extends CardImpl<CageOfHands> {
         this.color.setWhite(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Neutral));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Neutral));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CageOfHandsEffect()));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{W}")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CageOfHandsEffect()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{1}{W}")));
     }
 
     public CageOfHands (final CageOfHands card) {
@@ -80,7 +78,7 @@ public class CageOfHands extends CardImpl<CageOfHands> {
 class CageOfHandsEffect extends RestrictionEffect<CageOfHandsEffect> {
 
     public CageOfHandsEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack or block";
     }
 

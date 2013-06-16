@@ -28,7 +28,7 @@
 
 package mage.target;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.game.Game;

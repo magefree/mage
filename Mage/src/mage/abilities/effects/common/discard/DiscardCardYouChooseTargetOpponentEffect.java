@@ -27,10 +27,11 @@
  */
 package mage.abilities.effects.common.discard;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -43,7 +44,7 @@ import mage.target.TargetCard;
 public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<DiscardCardYouChooseTargetOpponentEffect> {
 
     public DiscardCardYouChooseTargetOpponentEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
     }
 
@@ -58,9 +59,9 @@ public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<Disc
             player.revealCards("Discard", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard());
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
                                 target.setRequired(true);
-                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);

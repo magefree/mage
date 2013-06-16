@@ -28,9 +28,9 @@
 package mage.sets.coldsnap;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.StateTriggeredAbility;
@@ -44,6 +44,7 @@ import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -65,7 +66,7 @@ public class DarkDepths extends CardImpl<DarkDepths> {
         // Dark Depths enters the battlefield with ten ice counters on it.
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.ICE.createInstance(10)), "with ten ice counters on it"));
         // {3}: Remove an ice counter from Dark Depths.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterSourceEffect(CounterType.ICE.createInstance(1)), new ManaCostsImpl("{3}")));
         // When Dark Depths has no ice counters on it, sacrifice it. If you do, put a legendary 20/20 black Avatar creature token with flying and "This creature is indestructible" named Marit Lage onto the battlefield.
         this.addAbility(new DarkDepthsAbility());
     }
@@ -83,7 +84,7 @@ public class DarkDepths extends CardImpl<DarkDepths> {
 class DarkDepthsAbility extends StateTriggeredAbility<DarkDepthsAbility> {
 
     public DarkDepthsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         this.addEffect(new CreateTokenEffect(new MaritLageToken()));
     }
 

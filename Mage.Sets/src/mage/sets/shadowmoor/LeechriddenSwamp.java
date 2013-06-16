@@ -28,10 +28,10 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -43,6 +43,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -61,13 +62,13 @@ public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
         this.subtype.add("Swamp");
 
         // ({tap}: Add {B} to your mana pool.)
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.BlackMana, new TapSourceCost()));
 
         // Leechridden Swamp enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // {B}, {tap}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LeechriddenSwampLoseLifeEffect(), new ManaCostsImpl("{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechriddenSwampLoseLifeEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new ControlTwoOrMoreBlackPermanentsCost());
         this.addAbility(ability);
     }

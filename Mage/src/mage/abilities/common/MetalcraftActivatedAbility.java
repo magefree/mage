@@ -28,7 +28,7 @@
 
 package mage.abilities.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.Costs;

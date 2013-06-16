@@ -28,9 +28,9 @@
 package mage.sets.torment;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,6 +40,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -68,7 +69,7 @@ public class MajorTeroh extends CardImpl<MajorTeroh> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {3}{W}{W}, Sacrifice Major Teroh: Exile all black creatures.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileAllEffect(filter),new ManaCostsImpl("{3}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileAllEffect(filter),new ManaCostsImpl("{3}{W}{W}"));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

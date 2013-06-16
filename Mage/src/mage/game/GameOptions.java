@@ -1,7 +1,7 @@
 package mage.game;
 
 import java.io.Serializable;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 
 /**
  * Game options for Mage game.

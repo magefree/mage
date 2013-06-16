@@ -30,9 +30,8 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -77,7 +78,7 @@ public class BlightsteelColossus extends CardImpl<BlightsteelColossus> {
 
 class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect> {
     BlightsteelColossusEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "reveal {this} and shuffle it into its owner's library";
     }
 
@@ -94,7 +95,7 @@ class BlightsteelColossusEffect extends OneShotEffect<BlightsteelColossusEffect>
                 Cards cards = new CardsImpl();
                 cards.add(c);
                 player.revealCards("Blightsteel Colossus", cards, game);
-                c.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, true);
+                c.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 player.shuffleLibrary(game);
                 return true;
             }

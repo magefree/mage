@@ -28,11 +28,12 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Duration;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.HasCounterCondition;
@@ -72,7 +73,7 @@ public class QuestForTheGoblinLord extends CardImpl<QuestForTheGoblinLord> {
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.QUEST.createInstance()), goblinFilter, true));
 
         // As long as Quest for the Goblin Lord has five or more quest counters on it, creatures you control get +2/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostAllEffect(2, 0, Constants.Duration.WhileOnBattlefield, filter, false), new HasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostAllEffect(2, 0, Duration.WhileOnBattlefield, filter, false), new HasCounterCondition(CounterType.QUEST, 5, Integer.MAX_VALUE), rule)));
     }
 
     public QuestForTheGoblinLord(final QuestForTheGoblinLord card) {

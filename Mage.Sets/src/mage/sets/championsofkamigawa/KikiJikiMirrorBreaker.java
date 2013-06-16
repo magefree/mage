@@ -28,10 +28,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -42,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -78,7 +79,7 @@ public class KikiJikiMirrorBreaker extends CardImpl<KikiJikiMirrorBreaker> {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // {tap}: Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new KikiJikiMirrorBreakerEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KikiJikiMirrorBreakerEffect(), new TapSourceCost());
         ability.addTarget(new TargetControlledCreaturePermanent(1, 1, filter, false));
         this.addAbility(ability);
 
@@ -97,7 +98,7 @@ public class KikiJikiMirrorBreaker extends CardImpl<KikiJikiMirrorBreaker> {
 class KikiJikiMirrorBreakerEffect extends OneShotEffect<KikiJikiMirrorBreakerEffect> {
 
     public KikiJikiMirrorBreakerEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a token that's a copy of target nonlegendary creature you control onto the battlefield. That token has haste. Sacrifice it at the beginning of the next end step";
     }
 

@@ -28,11 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -77,7 +74,7 @@ public class KabiraEvangel extends CardImpl<KabiraEvangel> {
         new SubtypePredicate("Ally")));
 
         // Whenever Kabira Evangel or another Ally enters the battlefield under your control, you may choose a color. If you do, Allies you control gain protection from the chosen color until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new ChooseColorEffect(), filter, true));
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new ChooseColorEffect(), filter, true));
     }
 
     public KabiraEvangel(final KabiraEvangel card) {
@@ -93,7 +90,7 @@ public class KabiraEvangel extends CardImpl<KabiraEvangel> {
 class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
 
     public ChooseColorEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "choose a color.  All Allies you control gain protection from the chosen color until end of turn";
     }
 
@@ -107,7 +104,7 @@ class ChooseColorEffect extends OneShotEffect<ChooseColorEffect> {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (player != null && perm != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.Benefit, colorChoice, game)) {
+            if (player.choose(Outcome.Benefit, colorChoice, game)) {
                 game.informPlayers(perm.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.addEffect(new GainProtectionFromChosenColorEffect(colorChoice.getColor()), source);
             }

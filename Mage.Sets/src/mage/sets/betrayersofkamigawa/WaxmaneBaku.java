@@ -30,10 +30,10 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
@@ -91,7 +92,7 @@ class WaxmaneBakuTapEffect extends OneShotEffect<WaxmaneBakuTapEffect> {
     private static final FilterPermanent filter = new FilterCreaturePermanent();
 
     public WaxmaneBakuTapEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "Tap X target creatures";
     }
 
@@ -108,7 +109,7 @@ class WaxmaneBakuTapEffect extends OneShotEffect<WaxmaneBakuTapEffect> {
             }
         }
         TargetPermanent target = new TargetPermanent(numberToTap, filter);
-        if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+        if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
             if (!target.getTargets().isEmpty()) {
                 List<UUID> targets = target.getTargets();
                 for (UUID targetId : targets) {

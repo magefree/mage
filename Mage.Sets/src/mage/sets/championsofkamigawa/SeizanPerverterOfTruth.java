@@ -30,15 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 
 /**
  *
@@ -55,7 +55,7 @@ public class SeizanPerverterOfTruth extends CardImpl<SeizanPerverterOfTruth> {
         this.color.setBlack(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(5);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(2), Constants.TargetController.ANY, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(2), TargetController.ANY, false);
         ability.addEffect(new LoseLifeTargetEffect(2));
         this.addAbility(ability);
 

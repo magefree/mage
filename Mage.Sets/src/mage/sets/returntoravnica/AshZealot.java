@@ -29,9 +29,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -83,7 +84,7 @@ public class AshZealot extends CardImpl<AshZealot> {
 class AshZealotTriggeredAbility extends TriggeredAbilityImpl<AshZealotTriggeredAbility> {
 
     public AshZealotTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(3), false);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(3), false);
     }
 
     public AshZealotTriggeredAbility(final AshZealotTriggeredAbility ability) {
@@ -97,7 +98,7 @@ class AshZealotTriggeredAbility extends TriggeredAbilityImpl<AshZealotTriggeredA
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Constants.Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getZone() == Zone.GRAVEYARD) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
             if (spell != null) {
                 for (Effect effect : this.getEffects()) {

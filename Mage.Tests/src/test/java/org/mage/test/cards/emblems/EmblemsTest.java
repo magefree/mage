@@ -1,7 +1,8 @@
 package org.mage.test.cards.emblems;
 
-import mage.Constants;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,16 +19,16 @@ public class EmblemsTest extends CardTestPlayerBase {
      */
     @Test
     public void testVenserTheSojournerEmblem() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Venser, the Sojourner");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Venser, the Sojourner");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Venser, the Sojourner", CounterType.LOYALTY, 5);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Venser, the Sojourner", CounterType.LOYALTY, 5);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 17);
@@ -44,18 +45,18 @@ public class EmblemsTest extends CardTestPlayerBase {
      */
     @Test
     public void testSorinLordOfInnistradEmblem() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.HAND, playerA, "Elite Inquisitor");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Elite Inquisitor");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Inquisitor");
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Inquisitor");
 
-        setStopAt(3, Constants.PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Sorin, Lord of Innistrad", 1);
@@ -73,13 +74,13 @@ public class EmblemsTest extends CardTestPlayerBase {
      */
     @Test
     public void testTamiyoTheMoonSageFirstEmblem() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Tamiyo, the Moon Sage");
-        addCard(Constants.Zone.HAND, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, the Moon Sage");
+        addCard(Zone.HAND, playerA, "Mountain", 10);
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Tamiyo, the Moon Sage", CounterType.LOYALTY, 4);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Tamiyo, the Moon Sage", CounterType.LOYALTY, 4);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
 
-        setStopAt(2, Constants.PhaseStep.UPKEEP);
+        setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
         assertEmblemCount(playerA, 1);
@@ -94,16 +95,16 @@ public class EmblemsTest extends CardTestPlayerBase {
      */
     @Test
     public void testTamiyoTheMoonSageSecondEmblem() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Tamiyo, the Moon Sage");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain");
-        addCard(Constants.Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Tamiyo, the Moon Sage");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Tamiyo, the Moon Sage", CounterType.LOYALTY, 4);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Elite Vanguard");
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Tamiyo, the Moon Sage", CounterType.LOYALTY, 4);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-8: You get an emblem");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertEmblemCount(playerA, 1);

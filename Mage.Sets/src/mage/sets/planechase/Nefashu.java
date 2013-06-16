@@ -28,14 +28,15 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +58,7 @@ public class Nefashu extends CardImpl<Nefashu> {
         this.toughness = new MageInt(3);
 
         // Whenever Nefashu attacks, up to five target creatures each get -1/-1 until end of turn.
-        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), false, rule);
+        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(-1, -1, Duration.EndOfTurn), false, rule);
         ability.addTarget(new TargetCreaturePermanent(0, 5));
         this.addAbility(ability);
     }

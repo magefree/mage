@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,14 +18,14 @@ public class EvolveTest extends CardTestPlayerBase {
 
         // Cloudfin Raptor gets one +1/+1 because Mindeye Drake comes into play
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cloudfin Raptor", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Cloudfin Raptor", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Mindeye Drake");
+        addCard(Zone.HAND, playerA, "Mindeye Drake");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mindeye Drake");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -42,14 +43,14 @@ public class EvolveTest extends CardTestPlayerBase {
 
         // Experiment One gets no counter because Kird Ape is 1/1 with no Forest in play
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Experiment One", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Experiment One", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Kird Ape");
+        addCard(Zone.HAND, playerA, "Kird Ape");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Kird Ape");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kird Ape");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -67,15 +68,15 @@ public class EvolveTest extends CardTestPlayerBase {
 
         // Experiment One gets a counter because Kird Ape is 2/2 with a Forest in play
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Experiment One", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Experiment One", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Kird Ape");
+        addCard(Zone.HAND, playerA, "Kird Ape");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Kird Ape");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Kird Ape");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -93,15 +94,15 @@ public class EvolveTest extends CardTestPlayerBase {
 
         // Experiment One gets a counter because Kird Ape is 2/2 with a Forest in play
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Experiment One", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Experiment One", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
 
-        addCard(Constants.Zone.HAND, playerA, "Experiment One");
+        addCard(Zone.HAND, playerA, "Experiment One");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Experiment One");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

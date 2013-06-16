@@ -28,8 +28,8 @@
 
 package mage.abilities;
 
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.common.PayVariableLoyaltyCost;
 import mage.abilities.effects.Effect;

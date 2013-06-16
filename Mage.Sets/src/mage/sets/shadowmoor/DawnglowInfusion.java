@@ -28,15 +28,16 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.ManaType;
 
 /**
  *
@@ -55,10 +56,10 @@ public class DawnglowInfusion extends CardImpl<DawnglowInfusion> {
         DynamicValue xValue = new ManacostVariableValue();
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(Constants.ManaType.GREEN), "You gain X life if {G} was spent to cast {this}"));
+                new ManaWasSpentCondition(ManaType.GREEN), "You gain X life if {G} was spent to cast {this}"));
         this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
                 new GainLifeEffect(xValue),
-                new ManaWasSpentCondition(Constants.ManaType.WHITE), " And X life if {W} was spent to cast it"));
+                new ManaWasSpentCondition(ManaType.WHITE), " And X life if {W} was spent to cast it"));
         this.addInfo("Info1", "<i>(Do both if {G}{W} was spent.)</i>");
 
 

@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -67,7 +69,7 @@ public class PatronOfTheMoon extends CardImpl<PatronOfTheMoon> {
         this.addAbility(FlyingAbility.getInstance());
 
         // {1}: Put up to two land cards from your hand onto the battlefield tapped.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PatronOfTheMoonEffect(), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheMoonEffect(), new ManaCostsImpl("{1}"));
         ability.addTarget(new TargetCardInHand(0,2, new FilterLandCard()));
         this.addAbility(ability);
 
@@ -85,7 +87,7 @@ public class PatronOfTheMoon extends CardImpl<PatronOfTheMoon> {
 
 class PatronOfTheMoonEffect extends OneShotEffect<PatronOfTheMoonEffect> {
     PatronOfTheMoonEffect() {
-        super(Constants.Outcome.PutLandInPlay);
+        super(Outcome.PutLandInPlay);
         staticText = "Put up to two land cards from your hand onto the battlefield tapped";
     }
 
@@ -98,7 +100,7 @@ class PatronOfTheMoonEffect extends OneShotEffect<PatronOfTheMoonEffect> {
         for (UUID cardId : targetPointer.getTargets(game, source)) {
             Card c = game.getCard(cardId);
             if (c != null) {
-                c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 Permanent land = game.getPermanent(cardId);
                 if (land != null) {
                     land.setTapped(true);

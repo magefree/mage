@@ -29,13 +29,14 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -72,7 +73,7 @@ public class SufferThePast extends CardImpl<SufferThePast> {
 class SufferThePastEffect extends OneShotEffect<SufferThePastEffect> {
     
     public SufferThePastEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "Exile X target cards from target player's graveyard. For each card exiled this way, that player loses 1 life and you gain 1 life";
     }
 
@@ -95,7 +96,7 @@ class SufferThePastEffect extends OneShotEffect<SufferThePastEffect> {
             int numberToTarget = Math.min(targetPlayer.getGraveyard().size(), source.getManaCostsToPay().getX());
             TargetCardInOpponentsGraveyard target = new TargetCardInOpponentsGraveyard(numberToTarget, numberToTarget, filter);
             if (you != null) {
-                if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
+                if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Neutral, source.getControllerId(), source.getId(), game)) {
                     if (!target.getTargets().isEmpty()) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {

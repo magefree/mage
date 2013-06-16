@@ -27,13 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -51,8 +51,8 @@ public class LeapOfFaith extends CardImpl<LeapOfFaith> {
         this.color.setWhite(true);
 
         // Target creature gains flying until end of turn. Prevent all damage that would be dealt to that creature this turn.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, Integer.MAX_VALUE));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

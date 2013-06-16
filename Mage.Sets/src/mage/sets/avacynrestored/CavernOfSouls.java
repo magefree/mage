@@ -28,9 +28,7 @@
 package mage.sets.avacynrestored;
 
 import mage.ConditionalMana;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -78,7 +76,7 @@ public class CavernOfSouls extends CardImpl<CavernOfSouls> {
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder()));
         this.addWatcher(new CavernOfSoulsWatcher());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CavernOfSoulsCantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernOfSoulsCantCounterEffect()));
     }
 
     public CavernOfSouls(final CavernOfSouls card) {
@@ -94,7 +92,7 @@ public class CavernOfSouls extends CardImpl<CavernOfSouls> {
 class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
 
     public CavernOfSoulsEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "As {this} enters the battlefield, choose a creature type";
     }
 
@@ -110,7 +108,7 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Constants.Outcome.Benefit, typeChoice, game)) {
+            while (!player.choose(Outcome.Benefit, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
@@ -172,7 +170,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     public List<UUID> spells = new ArrayList<UUID>();
 
     public CavernOfSoulsWatcher() {
-        super("ManaPaidFromCavernOfSoulsWatcher", Constants.WatcherScope.GAME);
+        super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.GAME);
     }
 
     public CavernOfSoulsWatcher(final CavernOfSoulsWatcher watcher) {
@@ -204,7 +202,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
 class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSoulsCantCounterEffect> {
 
     public CavernOfSoulsCantCounterEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = null;
     }
 

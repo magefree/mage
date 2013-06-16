@@ -34,7 +34,7 @@
 
 package mage.client.cards;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
@@ -264,7 +264,7 @@ public class Card extends MagePermanent implements MouseMotionListener, MouseLis
             sbType.append(superType).append(" ");
         }
 
-        for (mage.Constants.CardType cardType: card.getCardTypes()) {
+        for (CardType cardType: card.getCardTypes()) {
             sbType.append(cardType.toString()).append(" ");
         }
 

@@ -29,13 +29,13 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -55,7 +55,7 @@ public class PurifyTheGrave extends CardImpl<PurifyTheGrave> {
         this.getSpellAbility().addTarget(new TargetCardInGraveyard());
 
         // Flashback {W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{W}"), TimingRule.INSTANT));
     }
 
     public PurifyTheGrave(final PurifyTheGrave card) {

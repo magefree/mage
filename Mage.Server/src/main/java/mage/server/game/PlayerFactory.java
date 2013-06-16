@@ -32,7 +32,7 @@ import java.lang.reflect.Constructor;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.RangeOfInfluence;
 import mage.players.Player;
 import org.apache.log4j.Logger;
 

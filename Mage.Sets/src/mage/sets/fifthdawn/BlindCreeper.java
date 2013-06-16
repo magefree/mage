@@ -29,13 +29,14 @@ package mage.sets.fifthdawn;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -73,7 +74,7 @@ public class BlindCreeper extends CardImpl<BlindCreeper> {
 class BlindCreeperAbility extends TriggeredAbilityImpl<BlindCreeperAbility> {
 
     public BlindCreeperAbility() {
-        super(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Constants.Duration.EndOfTurn), false);
+        super(Zone.BATTLEFIELD, new BoostSourceEffect(-1, -1, Duration.EndOfTurn), false);
     }
 
     public BlindCreeperAbility(final BlindCreeperAbility ability) {

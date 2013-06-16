@@ -30,12 +30,12 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -65,7 +65,7 @@ public class RuthlessInvasion extends CardImpl<RuthlessInvasion> {
 
 class RuthlessInvasionEffect extends RestrictionEffect<RuthlessInvasionEffect> {
     RuthlessInvasionEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         staticText = "Nonartifact creatures can't block this turn";
     }
 

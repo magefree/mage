@@ -28,11 +28,8 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -69,9 +66,9 @@ public class GlacialChasm extends CardImpl<GlacialChasm> {
         // When Glacial Chasm enters the battlefield, sacrifice a land.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeControllerEffect(new FilterLandPermanent(), 1, "")));
         // Creatures you control can't attack.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantAttackEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantAttackEffect()));
         // Prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     public GlacialChasm(final GlacialChasm card) {
@@ -113,7 +110,7 @@ class SacrificeControllerEffect extends OneShotEffect<SacrificeControllerEffect>
             return false;
         }
 
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
 
         int amount = count.calculate(game, source);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);

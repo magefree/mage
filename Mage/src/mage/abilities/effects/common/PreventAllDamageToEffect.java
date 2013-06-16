@@ -28,7 +28,7 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.filter.FilterInPlay;

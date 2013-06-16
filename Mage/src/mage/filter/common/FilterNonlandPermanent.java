@@ -28,7 +28,7 @@
 
 package mage.filter.common;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;

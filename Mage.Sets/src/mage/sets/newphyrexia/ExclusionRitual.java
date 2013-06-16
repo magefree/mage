@@ -29,9 +29,7 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -68,7 +66,7 @@ public class ExclusionRitual extends CardImpl<ExclusionRitual> {
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
         // Players can't cast spells with the same name as the exiled card.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ExclusionRitualReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ExclusionRitualReplacementEffect()));
     }
 
     public ExclusionRitual(final ExclusionRitual card) {
@@ -83,7 +81,7 @@ public class ExclusionRitual extends CardImpl<ExclusionRitual> {
 
 class ExclusionRitualImprintEffect extends OneShotEffect<ExclusionRitualImprintEffect> {
     ExclusionRitualImprintEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "exile target nonland permanent";
     }
 
@@ -110,7 +108,7 @@ class ExclusionRitualImprintEffect extends OneShotEffect<ExclusionRitualImprintE
 
 class ExclusionRitualReplacementEffect extends ReplacementEffectImpl<ExclusionRitualReplacementEffect> {
     ExclusionRitualReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't cast spells with the same name as the exiled card";
     }
 

@@ -28,9 +28,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.CantCounterAbility;
@@ -76,7 +75,7 @@ public class LoxodonSmiter extends CardImpl<LoxodonSmiter> {
         this.addAbility(new CantCounterAbility());
 
         // Sacrifice Judge's Familiar: Counter target instant or sorcery spell unless its controller pays {1}.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.HAND, new LoxodonSmiterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.HAND, new LoxodonSmiterEffect()));
     }
 
     public LoxodonSmiter(final LoxodonSmiter card) {
@@ -92,7 +91,7 @@ public class LoxodonSmiter extends CardImpl<LoxodonSmiter> {
 class LoxodonSmiterEffect extends ReplacementEffectImpl<LoxodonSmiterEffect> {
 
     public LoxodonSmiterEffect() {
-        super(Constants.Duration.EndOfGame, Constants.Outcome.PutCardInPlay);
+        super(Duration.EndOfGame, Outcome.PutCardInPlay);
         staticText = "If a spell or ability an opponent controls causes you to discard {this}, put it onto the battlefield instead of putting it into your graveyard";
     }
 
@@ -109,7 +108,7 @@ class LoxodonSmiterEffect extends ReplacementEffectImpl<LoxodonSmiterEffect> {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zcEvent = (ZoneChangeEvent) event;
-            if (zcEvent.getFromZone() == Constants.Zone.HAND && zcEvent.getToZone() == Constants.Zone.GRAVEYARD) {
+            if (zcEvent.getFromZone() == Zone.HAND && zcEvent.getToZone() == Zone.GRAVEYARD) {
                 StackObject spell = game.getStack().getStackObject(event.getSourceId());
                 if (spell != null && game.getOpponents(source.getControllerId()).contains(spell.getControllerId())) {
                     return true;
@@ -125,7 +124,7 @@ class LoxodonSmiterEffect extends ReplacementEffectImpl<LoxodonSmiterEffect> {
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                if (card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), player.getId())) {
+                if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId())) {
                     game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source.getId(), player.getId()));
                     return true;
                 }

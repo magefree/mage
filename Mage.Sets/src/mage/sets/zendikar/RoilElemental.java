@@ -28,10 +28,8 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -70,8 +68,8 @@ public class RoilElemental extends CardImpl<RoilElemental> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Landfall - Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Constants.Duration.Custom), new ControlsPermanentCondition(filter), rule);
-        Ability ability = new LandfallAbility(Constants.Zone.BATTLEFIELD, effect, true);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(filter), rule);
+        Ability ability = new LandfallAbility(Zone.BATTLEFIELD, effect, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

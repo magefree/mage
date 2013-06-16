@@ -1,7 +1,8 @@
 package org.mage.test.cards.abilities.enters;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -14,13 +15,13 @@ public class DearlyDepartedTest extends CardTestPlayerBase {
 
     @Test
     public void testEnteringWithCounters() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Dearly Departed");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Thraben Doomsayer");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.GRAVEYARD, playerA, "Dearly Departed");
+        addCard(Zone.BATTLEFIELD, playerA, "Thraben Doomsayer");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a 1/1 white Human creature token onto the battlefield.");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a 1/1 white Human creature token onto the battlefield.");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

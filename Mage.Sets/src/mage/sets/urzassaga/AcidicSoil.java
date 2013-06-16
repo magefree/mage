@@ -29,12 +29,13 @@ package mage.sets.urzassaga;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +69,7 @@ public class AcidicSoil extends CardImpl<AcidicSoil> {
 class AcidicSoilEffect extends OneShotEffect<AcidicSoilEffect> {
 
     AcidicSoilEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Acidic Soil deals damage to each player equal to the number of lands he or she controls";
     }
 

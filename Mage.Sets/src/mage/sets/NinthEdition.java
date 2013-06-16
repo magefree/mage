@@ -1,7 +1,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 public class NinthEdition extends ExpansionSet {
@@ -13,7 +13,7 @@ public class NinthEdition extends ExpansionSet {
     }
 
     private NinthEdition() {
-        super("Ninth Edition", "9ED", "", "mage.sets.ninthedition", new GregorianCalendar(2005, 7, 29).getTime(), SetType.CORE);
+        super("Ninth Edition", "9ED", "mage.sets.ninthedition", new GregorianCalendar(2005, 7, 29).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

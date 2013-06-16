@@ -29,9 +29,9 @@ package mage.sets.zendikar;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -74,7 +76,7 @@ public class BalaGedThief extends CardImpl<BalaGedThief> {
                 new SubtypePredicate("Ally")));
 
         // Whenever Bala Ged Thief or another Ally enters the battlefield under your control, target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card.
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Constants.Zone.BATTLEFIELD, new BalaGedThiefEffect(), filter, false);
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BalaGedThiefEffect(), filter, false);
         TargetPlayer target = new TargetPlayer();
         target.setRequired(true);
         ability.addTarget(target);
@@ -94,7 +96,7 @@ public class BalaGedThief extends CardImpl<BalaGedThief> {
 class BalaGedThiefEffect extends OneShotEffect<BalaGedThiefEffect> {
 
     public BalaGedThiefEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "target player reveals a number of cards from his or her hand equal to the number of Allies you control. You choose one of them. That player discards that card";
     }
 
@@ -122,16 +124,16 @@ class BalaGedThiefEffect extends OneShotEffect<BalaGedThiefEffect> {
 
         int numberOfAllies = game.getBattlefield().countAll(filter, you.getId(), game);
 
-        Cards cardsInHand = new CardsImpl(Constants.Zone.PICK);
+        Cards cardsInHand = new CardsImpl(Zone.PICK);
         cardsInHand.addAll(targetPlayer.getHand());
 
         int count = Math.min(cardsInHand.size(), numberOfAllies);
 
-        TargetCard target = new TargetCard(count, Constants.Zone.PICK, new FilterCard());
+        TargetCard target = new TargetCard(count, Zone.PICK, new FilterCard());
         target.setRequired(true);
         Cards revealedCards = new CardsImpl();
 
-        if (targetPlayer.choose(Constants.Outcome.DrawCard, cardsInHand, target, game)) {
+        if (targetPlayer.choose(Outcome.DrawCard, cardsInHand, target, game)) {
             List<UUID> targets = target.getTargets();
             for (UUID targetId : targets) {
                 Card card = game.getCard(targetId);
@@ -141,12 +143,12 @@ class BalaGedThiefEffect extends OneShotEffect<BalaGedThiefEffect> {
             }
         }
 
-        TargetCard targetInHand = new TargetCard(Constants.Zone.PICK, new FilterCard("card to discard"));
+        TargetCard targetInHand = new TargetCard(Zone.PICK, new FilterCard("card to discard"));
         targetInHand.setRequired(true);
 
         if (!revealedCards.isEmpty()) {
             targetPlayer.revealCards("Bala Ged Thief", revealedCards, game);
-            you.choose(Constants.Outcome.Neutral, revealedCards, targetInHand, game);
+            you.choose(Outcome.Neutral, revealedCards, targetInHand, game);
             Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
             if (card != null) {
                 targetPlayer.discard(card, source, game);

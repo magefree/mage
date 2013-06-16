@@ -28,10 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
@@ -72,7 +70,7 @@ public class SapphireDrake extends CardImpl<SapphireDrake> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Each creature you control with a +1/+1 counter on it has flying.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
     }
 
     public SapphireDrake(final SapphireDrake card) {

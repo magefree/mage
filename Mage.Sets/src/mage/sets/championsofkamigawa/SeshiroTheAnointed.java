@@ -30,15 +30,16 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -66,7 +67,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.WhileOnBattlefield, filter, true)));
         this.addAbility(new SeshiroTheAnointedAbility());
     }
 
@@ -84,7 +85,7 @@ public class SeshiroTheAnointed extends CardImpl<SeshiroTheAnointed> {
 class SeshiroTheAnointedAbility extends TriggeredAbilityImpl<SeshiroTheAnointedAbility> {
 
     public SeshiroTheAnointedAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
+        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
     }
 
     public SeshiroTheAnointedAbility(final SeshiroTheAnointedAbility ability) {

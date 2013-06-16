@@ -1,6 +1,7 @@
 package org.mage.test.cards.conditional;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -12,15 +13,15 @@ public class MulDayaChannelersTest extends CardTestPlayerBase {
 
     @Test
     public void testBoostFromTopCreatureCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Mul Daya Channelers");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Mul Daya Channelers");
 
-        addCard(Constants.Zone.LIBRARY, playerA, "Memnite");
+        addCard(Zone.LIBRARY, playerA, "Memnite");
         skipInitShuffling();
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -31,13 +32,13 @@ public class MulDayaChannelersTest extends CardTestPlayerBase {
 
     @Test
     public void testNoBoostFromTopNonCreatureCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Mul Daya Channelers");
-        addCard(Constants.Zone.LIBRARY, playerA, "Shock");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Mul Daya Channelers");
+        addCard(Zone.LIBRARY, playerA, "Shock");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -48,16 +49,16 @@ public class MulDayaChannelersTest extends CardTestPlayerBase {
 
     @Test
     public void testBoostLossThroughPhases() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Mul Daya Channelers");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Mul Daya Channelers");
 
-        addCard(Constants.Zone.LIBRARY, playerA, "Shock");
-        addCard(Constants.Zone.LIBRARY, playerA, "Memnite");
+        addCard(Zone.LIBRARY, playerA, "Shock");
+        addCard(Zone.LIBRARY, playerA, "Memnite");
         skipInitShuffling();
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mul Daya Channelers");
 
-        setStopAt(3, Constants.PhaseStep.PRECOMBAT_MAIN);
+        setStopAt(3, PhaseStep.PRECOMBAT_MAIN);
         execute();
 
         assertLife(playerA, 20);

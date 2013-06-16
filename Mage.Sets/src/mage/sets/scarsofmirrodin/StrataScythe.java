@@ -30,9 +30,8 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -62,8 +63,8 @@ public class StrataScythe extends CardImpl<StrataScythe> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
         this.addAbility(new EntersBattlefieldTriggeredAbility(new StrataScytheImprintEffect()));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(SameNameAsExiledCountValue.getInstance(), SameNameAsExiledCountValue.getInstance())));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
     }
 
     public StrataScythe (final StrataScythe card) {
@@ -79,7 +80,7 @@ public class StrataScythe extends CardImpl<StrataScythe> {
 
 class StrataScytheImprintEffect extends OneShotEffect<StrataScytheImprintEffect> {
     StrataScytheImprintEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "search your library for a land card, exile it, then shuffle your library";
     }
 

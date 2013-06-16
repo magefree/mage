@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -68,11 +66,11 @@ public class FullMoonsRise extends CardImpl<FullMoonsRise> {
         this.color.setGreen(true);
 
         // Werewolf creatures you control get +1/+0 and have trample.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.WhileOnBattlefield, filter)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
 
         // Sacrifice Full Moon's Rise: Regenerate all Werewolf creatures you control.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new FullMoonsRiseEffect(filter), new SacrificeSourceCost()));
     }
 
     public FullMoonsRise(final FullMoonsRise card) {
@@ -90,7 +88,7 @@ class FullMoonsRiseEffect extends OneShotEffect<FullMoonsRiseEffect> {
     private FilterPermanent filter;
 
     public FullMoonsRiseEffect(FilterPermanent filter) {
-        super(Constants.Outcome.Regenerate);
+        super(Outcome.Regenerate);
         this.filter = filter;
         staticText = "Regenerate all Werewolf creatures you control";
     }

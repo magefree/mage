@@ -28,14 +28,16 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -51,7 +53,7 @@ public class ClearwaterGoblet extends CardImpl<ClearwaterGoblet> {
         // Sunburst
         this.addAbility(new SunburstAbility());
         // At the beginning of your upkeep, you may gain life equal to the number of charge counters on Clearwater Goblet.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(new CountersCount(CounterType.CHARGE)), Constants.TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersCount(CounterType.CHARGE)), TargetController.YOU, true));
     }
 
     public ClearwaterGoblet(final ClearwaterGoblet card) {

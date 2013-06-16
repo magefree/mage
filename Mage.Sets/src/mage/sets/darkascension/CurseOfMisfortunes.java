@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -67,7 +69,7 @@ public class CurseOfMisfortunes extends CardImpl<CurseOfMisfortunes> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // At the beginning of your upkeep, you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle your library.
@@ -87,7 +89,7 @@ public class CurseOfMisfortunes extends CardImpl<CurseOfMisfortunes> {
 class CurseOfMisfortunesEffect extends OneShotEffect<CurseOfMisfortunesEffect> {
 
     public CurseOfMisfortunesEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "you may search your library for a Curse card that doesn't have the same name as a Curse attached to enchanted player, put it onto the battlefield attached to that player, then shuffle your library";
     }
 
@@ -120,7 +122,7 @@ class CurseOfMisfortunesEffect extends OneShotEffect<CurseOfMisfortunesEffect> {
                         this.setTargetPointer(new FixedTarget(targetPlayer.getId()));
                         game.getState().setValue("attachTo:" + card.getId(), targetPlayer.getId());
                         player.shuffleLibrary(game);
-                        return card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId());
+                        return card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
                     }
                 }
                 player.shuffleLibrary(game);

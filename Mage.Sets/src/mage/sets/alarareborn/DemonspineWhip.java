@@ -28,9 +28,8 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -57,10 +56,10 @@ public class DemonspineWhip extends CardImpl<DemonspineWhip> {
         this.color.setBlack(true);
 
         // {X}: Equipped creature gets +X/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), new StaticValue(0), Constants.Duration.EndOfTurn), new ManaCostsImpl("{X}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(new XPaid(), new StaticValue(0), Duration.EndOfTurn), new ManaCostsImpl("{X}")));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     public DemonspineWhip(final DemonspineWhip card) {

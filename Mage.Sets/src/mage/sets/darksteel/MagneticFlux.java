@@ -30,12 +30,12 @@ package mage.sets.darksteel;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
@@ -55,7 +55,7 @@ public class MagneticFlux extends CardImpl<MagneticFlux> {
         super(ownerId, 25, "Magnetic Flux", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{U}");
         this.expansionSetCode = "DST";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.EndOfTurn, filter, false));
     }
 
     public MagneticFlux(final MagneticFlux card) {

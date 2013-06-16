@@ -28,6 +28,9 @@
 
 package mage.abilities.effects.common;
 
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;

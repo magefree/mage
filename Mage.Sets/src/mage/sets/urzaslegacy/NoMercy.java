@@ -28,13 +28,14 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -68,7 +69,7 @@ public class NoMercy extends CardImpl<NoMercy> {
     public class NoMercyTriggeredAbility extends TriggeredAbilityImpl<NoMercyTriggeredAbility> {
         public NoMercyTriggeredAbility()
         {
-            super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect());
+            super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         }
         
         public NoMercyTriggeredAbility(final NoMercyTriggeredAbility ability) {

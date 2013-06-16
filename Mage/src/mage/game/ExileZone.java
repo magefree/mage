@@ -30,7 +30,7 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.cards.CardsImpl;
 
 /**

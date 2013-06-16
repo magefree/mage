@@ -29,8 +29,8 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;

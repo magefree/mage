@@ -1,8 +1,8 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -10,7 +10,7 @@ import mage.game.permanent.Permanent;
 
 public class VanishingSacrificeAbility extends TriggeredAbilityImpl<VanishingSacrificeAbility> {
     public VanishingSacrificeAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     public VanishingSacrificeAbility(final VanishingSacrificeAbility ability) {

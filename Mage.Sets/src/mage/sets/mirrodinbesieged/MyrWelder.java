@@ -29,14 +29,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -89,7 +89,7 @@ public class MyrWelder extends CardImpl<MyrWelder> {
 class MyrWelderEffect extends OneShotEffect<MyrWelderEffect> {
 
     public MyrWelderEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "Exile target artifact card from a graveyard";
     }
 

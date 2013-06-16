@@ -27,15 +27,15 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -56,7 +56,7 @@ public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
         // When Sower of Temptation enters the battlefield, gain control of target creature for as long as Sower of Temptation remains on the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.WhileOnBattlefield), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

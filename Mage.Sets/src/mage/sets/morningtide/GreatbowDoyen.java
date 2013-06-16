@@ -28,9 +28,8 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -55,7 +54,7 @@ public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Archer creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Archer"));
     }
 
@@ -70,7 +69,7 @@ public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
         this.toughness = new MageInt(4);
 
         // Other Archer creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Whenever an Archer you control deals damage to a creature, that Archer deals that much damage to that creature's controller.
         this.addAbility(new GreatbowDoyenTriggeredAbility());
@@ -89,7 +88,7 @@ public class GreatbowDoyen extends CardImpl<GreatbowDoyen> {
 class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl<GreatbowDoyenTriggeredAbility> {
 
     public GreatbowDoyenTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GreatbowDoyenEffect());
+        super(Zone.BATTLEFIELD, new GreatbowDoyenEffect());
     }
 
     public GreatbowDoyenTriggeredAbility(final GreatbowDoyenTriggeredAbility ability) {
@@ -128,7 +127,7 @@ class GreatbowDoyenTriggeredAbility extends TriggeredAbilityImpl<GreatbowDoyenTr
 class GreatbowDoyenEffect extends OneShotEffect<GreatbowDoyenEffect> {
 
     public GreatbowDoyenEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.staticText = "that Archer deals that much damage to that creature's controller";
     }
 
@@ -149,7 +148,7 @@ class GreatbowDoyenEffect extends OneShotEffect<GreatbowDoyenEffect> {
         if (damageAmount != null && controllerId != null) {
             Permanent permanent = game.getPermanent(sourceOfDamage);
             if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(sourceOfDamage, Constants.Zone.BATTLEFIELD);
+                permanent = (Permanent) game.getLastKnownInformation(sourceOfDamage, Zone.BATTLEFIELD);
             }
             if (permanent != null) {
                 Player player = game.getPlayer(controllerId);

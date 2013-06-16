@@ -28,7 +28,7 @@
 
 package mage.view;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -39,7 +39,6 @@ import mage.game.permanent.Permanent;
 import mage.target.targetpointer.TargetPointer;
 
 import java.util.*;
-import static mage.Constants.Zone.STACK;
 
 /**
  *

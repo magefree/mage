@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -44,6 +44,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -96,7 +97,7 @@ class EntersBattlefieldEffect extends ReplacementEffectImpl<EntersBattlefieldEff
     protected String text;
 
     public EntersBattlefieldEffect(Effect baseEffect, String text) {
-        super(Constants.Duration.EndOfTurn, baseEffect.getOutcome());
+        super(Duration.EndOfTurn, baseEffect.getOutcome());
         this.baseEffects.add(baseEffect);
         this.text = text;
     }

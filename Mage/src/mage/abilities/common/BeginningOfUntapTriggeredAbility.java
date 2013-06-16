@@ -4,9 +4,10 @@
  */
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -17,13 +18,13 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl<BeginningOfUntapTriggeredAbility> {
     
-    private Constants.TargetController targetController;
+    private TargetController targetController;
 
-    public BeginningOfUntapTriggeredAbility(Effect effect, Constants.TargetController targetController, boolean isOptional) {
-        this(Constants.Zone.BATTLEFIELD, effect, targetController, isOptional);
+    public BeginningOfUntapTriggeredAbility(Effect effect, TargetController targetController, boolean isOptional) {
+        this(Zone.BATTLEFIELD, effect, targetController, isOptional);
     }
 
-    public BeginningOfUntapTriggeredAbility(Constants.Zone zone, Effect effect, Constants.TargetController targetController, boolean isOptional) {
+    public BeginningOfUntapTriggeredAbility(Zone zone, Effect effect, TargetController targetController, boolean isOptional) {
         super(zone, effect, isOptional);
         this.targetController = targetController;
     }

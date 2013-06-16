@@ -28,16 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,7 +67,7 @@ public class DesecrationDemon extends CardImpl<DesecrationDemon> {
         this.addAbility(FlyingAbility.getInstance());
 
         // At the beginning of each combat, any opponent may sacrifice a creature. If a player does, tap Desecration Demon and put a +1/+1 counter on it.
-        this.addAbility(new BeginningOfCombatTriggeredAbility(new DesecrationDemonEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfCombatTriggeredAbility(new DesecrationDemonEffect(), TargetController.ANY, false));
     }
 
     public DesecrationDemon(final DesecrationDemon card) {
@@ -81,7 +82,7 @@ public class DesecrationDemon extends CardImpl<DesecrationDemon> {
 
 class DesecrationDemonEffect extends OneShotEffect<DesecrationDemonEffect> {
     DesecrationDemonEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "any opponent may sacrifice a creature. If a player does, tap {this} and put a +1/+1 counter on it";
     }
 
@@ -99,7 +100,7 @@ class DesecrationDemonEffect extends OneShotEffect<DesecrationDemonEffect> {
                 if (opponent != null) {
                     FilterControlledPermanent filter = new FilterControlledPermanent("creature to sacrifice");
                     filter.add(new CardTypePredicate(CardType.CREATURE));
-                    filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+                    filter.add(new ControllerPredicate(TargetController.YOU));
                     TargetControlledPermanent target = new TargetControlledPermanent(1, 1, filter, false);
                     if (target.canChoose(opponent.getId(), game)) {
                         if (opponent.chooseUse(Outcome.Detriment, new StringBuilder("Sacrifice a creature to tap ").append(descrationDemon.getName()).append("and put a +1/+1 counter on it?").toString(), game))

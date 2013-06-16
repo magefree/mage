@@ -29,9 +29,10 @@
 package mage.abilities.costs;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Targets;
@@ -96,7 +97,7 @@ public class OrCost implements Cost {
                     sb.append("Pay ");
                 }
                 sb.append(firstCost.getText()).append("?");
-                if (controller.chooseUse(Constants.Outcome.Detriment, sb.toString(), game)) {
+                if (controller.chooseUse(Outcome.Detriment, sb.toString(), game)) {
                     selectedCost = firstCost;
                 } else {
                     selectedCost = secondCost;

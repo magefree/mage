@@ -1,7 +1,8 @@
 package org.mage.test.cards.continuous;
 
-import mage.Constants;
 import mage.abilities.keyword.IslandwalkAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,19 +13,19 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
     @Test
     public void testLordAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Master of the Pearl Trident");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
 
         attack(3, playerA, "Merfolk of the Pearl Trident");
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Master of the Pearl Trident", 1);
@@ -35,22 +36,22 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
     @Test
     public void testLordAbilityGone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Master of the Pearl Trident");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island");
-        addCard(Constants.Zone.HAND, playerB, "Murder");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Island");
+        addCard(Zone.HAND, playerB, "Murder");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
-        castSpell(3, Constants.PhaseStep.DECLARE_ATTACKERS, playerB, "Murder", "Master of the Pearl Trident");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
+        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Murder", "Master of the Pearl Trident");
 
         attack(3, playerA, "Merfolk of the Pearl Trident");
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20);
@@ -60,21 +61,21 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
     @Test
     public void testTurnToFrog() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Master of the Pearl Trident");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.HAND, playerB, "Turn to Frog");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
-        castSpell(3, Constants.PhaseStep.DECLARE_ATTACKERS, playerB, "Turn to Frog", "Master of the Pearl Trident");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
+        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Turn to Frog", "Master of the Pearl Trident");
 
         attack(3, playerA, "Merfolk of the Pearl Trident");
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 20);
@@ -84,24 +85,24 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
 
     @Test
     public void testTurnToFrogAndMurder() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Master of the Pearl Trident");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Master of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Merfolk of the Pearl Trident");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.HAND, playerB, "Turn to Frog");
-        addCard(Constants.Zone.HAND, playerB, "Murder");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.HAND, playerB, "Turn to Frog");
+        addCard(Zone.HAND, playerB, "Murder");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
-        castSpell(3, Constants.PhaseStep.BEGIN_COMBAT, playerB, "Turn to Frog", "Master of the Pearl Trident");
-        castSpell(3, Constants.PhaseStep.DECLARE_ATTACKERS, playerB, "Murder", "Master of the Pearl Trident");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Master of the Pearl Trident");
+        castSpell(3, PhaseStep.BEGIN_COMBAT, playerB, "Turn to Frog", "Master of the Pearl Trident");
+        castSpell(3, PhaseStep.DECLARE_ATTACKERS, playerB, "Murder", "Master of the Pearl Trident");
 
         attack(3, playerA, "Merfolk of the Pearl Trident");
         block(3, playerB, "Llanowar Elves", "Merfolk of the Pearl Trident");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerB, "Turn to Frog", 1);
@@ -116,17 +117,17 @@ public class MasterOfThePearlTridentTest extends CardTestPlayerBase {
      */
     @Test
     public void testLooseAndGainControl() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master of the Pearl Trident");
-        addCard(Constants.Zone.HAND, playerA, "Merfolk of the Pearl Trident");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Master of the Pearl Trident");
+        addCard(Zone.HAND, playerA, "Merfolk of the Pearl Trident");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 5);
-        addCard(Constants.Zone.HAND, playerB, "Zealous Conscripts");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 5);
+        addCard(Zone.HAND, playerB, "Zealous Conscripts");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Zealous Conscripts");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Zealous Conscripts");
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk of the Pearl Trident");
-        setStopAt(3, Constants.PhaseStep.POSTCOMBAT_MAIN);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk of the Pearl Trident");
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
 
         execute();
 

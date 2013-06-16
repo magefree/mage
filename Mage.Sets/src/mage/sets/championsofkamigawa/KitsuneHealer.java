@@ -30,9 +30,8 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SupertypePredicate;
 import mage.game.Game;
@@ -66,10 +67,10 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new KitsuneHealerEffect(), new TapSourceCost());
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsuneHealerEffect(), new TapSourceCost());
         secondAbility.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(secondAbility);
     }
@@ -88,7 +89,7 @@ public class KitsuneHealer extends CardImpl<KitsuneHealer> {
 class KitsuneHealerEffect extends PreventionEffectImpl<KitsuneHealerEffect> {
 
     public KitsuneHealerEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         staticText = "Prevent all damage that would be dealt to target legendary creature this turn";
     }
 

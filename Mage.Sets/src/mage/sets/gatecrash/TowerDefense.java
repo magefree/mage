@@ -28,13 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -46,7 +48,7 @@ public class TowerDefense extends CardImpl<TowerDefense> {
     
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Creatures you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public TowerDefense(UUID ownerId) {
@@ -56,8 +58,8 @@ public class TowerDefense extends CardImpl<TowerDefense> {
         this.color.setGreen(true);
 
         // Creatures you control get +0/+5 and gain reach until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(0, 5, Constants.Duration.EndOfTurn, filter , false));
-        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ReachAbility.getInstance(), Constants.Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new BoostAllEffect(0, 5, Duration.EndOfTurn, filter , false));
+        this.getSpellAbility().addEffect(new GainAbilityAllEffect(ReachAbility.getInstance(), Duration.EndOfTurn, filter));
     }
 
     public TowerDefense(final TowerDefense card) {

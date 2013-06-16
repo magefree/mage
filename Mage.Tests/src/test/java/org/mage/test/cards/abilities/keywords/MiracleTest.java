@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,17 +15,17 @@ public class MiracleTest extends CardTestPlayerBase {
      */
     @Test
     public void testMiracleCost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.LIBRARY, playerA, "Terminus");
-        addCard(Constants.Zone.HAND, playerA, "Think Twice");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.LIBRARY, playerA, "Terminus");
+        addCard(Zone.HAND, playerA, "Think Twice");
         skipInitShuffling();
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Think Twice");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Think Twice");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // check Terminus was played
@@ -36,18 +37,18 @@ public class MiracleTest extends CardTestPlayerBase {
      */
     @Test
     public void testMiracleOnExtraTurn() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Constants.Zone.LIBRARY, playerA, "Terminus");
-        addCard(Constants.Zone.LIBRARY, playerA, "Temporal Mastery");
-        addCard(Constants.Zone.HAND, playerA, "Think Twice");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.LIBRARY, playerA, "Terminus");
+        addCard(Zone.LIBRARY, playerA, "Temporal Mastery");
+        addCard(Zone.HAND, playerA, "Think Twice");
         skipInitShuffling();
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Think Twice");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Think Twice");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // check Terminus was played

@@ -27,7 +27,7 @@
  */
 package mage.player.ai;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;

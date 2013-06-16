@@ -27,14 +27,12 @@
  */
 package mage.sets.mirrodin;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -91,7 +89,7 @@ class IsochronScepterImprintEffect extends OneShotEffect<IsochronScepterImprintE
     }
 
     public IsochronScepterImprintEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "you may exile an instant card with converted mana cost 2 or less from your hand";
     }
 
@@ -106,7 +104,7 @@ class IsochronScepterImprintEffect extends OneShotEffect<IsochronScepterImprintE
             TargetCard target = new TargetCard(Zone.HAND, filter);
             target.setRequired(true);
             if (target.canChoose(source.getSourceId(), source.getControllerId(), game) 
-                    && player.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                    && player.choose(Outcome.Benefit, player.getHand(), target, game)) {
                 Card card = player.getHand().get(target.getFirstTarget(), game);
                 if (card != null) {
                     card.moveToExile(source.getSourceId(), "Isochron Scepter (Imprint)", source.getSourceId(), game);

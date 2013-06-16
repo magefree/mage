@@ -29,7 +29,7 @@
 package mage.util;
 
 import java.util.Iterator;
-import mage.Constants;
+
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -42,6 +42,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
@@ -69,7 +70,7 @@ public class CardUtil {
             throw new IllegalArgumentException("Params can't be null");
         }
 
-        for (Constants.CardType type : card1.getCardType()) {
+        for (CardType type : card1.getCardType()) {
             if (card2.getCardType().contains(type)) {
                 return true;
             }
@@ -322,11 +323,11 @@ public class CardUtil {
     public static boolean isPermanentCard ( Card card )  {
         boolean permanent = false;
 
-        permanent |= card.getCardType().contains(Constants.CardType.ARTIFACT);
-        permanent |= card.getCardType().contains(Constants.CardType.CREATURE);
-        permanent |= card.getCardType().contains(Constants.CardType.ENCHANTMENT);
-        permanent |= card.getCardType().contains(Constants.CardType.LAND);
-        permanent |= card.getCardType().contains(Constants.CardType.PLANESWALKER);
+        permanent |= card.getCardType().contains(CardType.ARTIFACT);
+        permanent |= card.getCardType().contains(CardType.CREATURE);
+        permanent |= card.getCardType().contains(CardType.ENCHANTMENT);
+        permanent |= card.getCardType().contains(CardType.LAND);
+        permanent |= card.getCardType().contains(CardType.PLANESWALKER);
 
         return permanent;
     }

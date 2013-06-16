@@ -28,10 +28,8 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,13 +57,13 @@ public class RazorBoomerang extends CardImpl<RazorBoomerang> {
         this.subtype.add("Equipment");
 
         // Equipped creature has "{tap}, Unattach Razor Boomerang: Razor Boomerang deals 1 damage to target creature or player. Return Razor Boomerang to its owner's hand."
-        Ability gainAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RazorBoomerangEffect(this.getId()), new TapSourceCost());
+        Ability gainAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RazorBoomerangEffect(this.getId()), new TapSourceCost());
         gainAbility.addCost(new UnattachCost(this.getId()));
         gainAbility.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.EQUIPMENT)));
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public RazorBoomerang(final RazorBoomerang card) {
@@ -153,7 +151,7 @@ class RazorBoomerangEffect extends OneShotEffect<RazorBoomerangEffect> {
         }
         Permanent razor = game.getPermanent(attachmentid);
         if (razor != null) {
-            razor.moveToZone(Constants.Zone.HAND, id, game, true);
+            razor.moveToZone(Zone.HAND, id, game, true);
         }
         return true;
     }

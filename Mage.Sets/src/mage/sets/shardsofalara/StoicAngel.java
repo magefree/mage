@@ -29,11 +29,11 @@ package mage.sets.shardsofalara;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +41,9 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
+import mage.constants.WatcherScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
@@ -90,7 +93,7 @@ public class StoicAngel extends CardImpl<StoicAngel> {
 class StoicAngelWatcher extends WatcherImpl<StoicAngelWatcher> {
 
     public StoicAngelWatcher() {
-        super("StoicAngelWatcher", Constants.WatcherScope.GAME);
+        super("StoicAngelWatcher", WatcherScope.GAME);
     }
 
     public StoicAngelWatcher(final StoicAngelWatcher watcher) {
@@ -117,7 +120,7 @@ class StoicAngelEffect extends ReplacementEffectImpl<StoicAngelEffect> {
         filter.add(new TappedPredicate());
     }
     public StoicAngelEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
@@ -161,7 +164,7 @@ class StoicAngelEffect extends ReplacementEffectImpl<StoicAngelEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP){
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP){
             Player player = game.getPlayer(event.getPlayerId());
             Permanent permanent = game.getPermanent(event.getTargetId());
             if(player != null && game.getActivePlayerId().equals(event.getPlayerId())

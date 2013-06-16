@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,16 +13,16 @@ public class ZombieApocalypseTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 6);
-        addCard(Constants.Zone.HAND, playerA, "Zombie Apocalypse");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Bog Raiders", 2);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Toxic Nim", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Black Knight", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
+        addCard(Zone.HAND, playerA, "Zombie Apocalypse");
+        addCard(Zone.GRAVEYARD, playerA, "Bog Raiders", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Toxic Nim", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerB, "Black Knight", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Zombie Apocalypse");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Zombie Apocalypse");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, 2);

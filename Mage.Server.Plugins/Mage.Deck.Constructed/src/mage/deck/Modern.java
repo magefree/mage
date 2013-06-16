@@ -28,7 +28,7 @@
 package mage.deck;
 
 import java.util.Date;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.Constructed;

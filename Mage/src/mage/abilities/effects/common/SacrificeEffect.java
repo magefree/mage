@@ -27,12 +27,12 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
@@ -81,7 +81,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
             return false;
         }
 
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
 
         int amount = count.calculate(game, source);
         int realCount = game.getBattlefield().countAll(filter, player.getId(), game);

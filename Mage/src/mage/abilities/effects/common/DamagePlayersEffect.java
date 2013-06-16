@@ -28,8 +28,8 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants.Outcome;
-import mage.Constants.TargetController;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;

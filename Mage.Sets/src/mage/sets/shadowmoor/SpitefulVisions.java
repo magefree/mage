@@ -28,9 +28,9 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfDrawTriggeredAbility;
@@ -38,6 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.targetpointer.FixedTarget;
@@ -56,7 +58,7 @@ public class SpitefulVisions extends CardImpl<SpitefulVisions> {
         this.color.setBlack(true);
 
         // At the beginning of each player's draw step, that player draws an additional card.
-        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfDrawTriggeredAbility(new DrawCardTargetEffect(1), TargetController.ANY, false));
 
         // Whenever a player draws a card, Spiteful Visions deals 1 damage to that player.
         TriggeredAbility triggeredAbility = new SpitefulVisionsTriggeredAbility(new DamageTargetEffect(1), false);
@@ -76,7 +78,7 @@ public class SpitefulVisions extends CardImpl<SpitefulVisions> {
 class SpitefulVisionsTriggeredAbility  extends TriggeredAbilityImpl<SpitefulVisionsTriggeredAbility> {
 
     public SpitefulVisionsTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public SpitefulVisionsTriggeredAbility(final SpitefulVisionsTriggeredAbility ability) {

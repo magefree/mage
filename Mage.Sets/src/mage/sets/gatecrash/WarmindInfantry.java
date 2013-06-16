@@ -28,13 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -53,7 +54,7 @@ public class WarmindInfantry extends CardImpl<WarmindInfantry> {
         this.toughness = new MageInt(3);
 
         // Battalion - Whenever Warmind Infantry and at least two other creatures attack, Warmind Infantry gets +2/+0 until end of turn.
-        this.addAbility(new BattalionAbility(new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn)));
+        this.addAbility(new BattalionAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn)));
     }
 
     public WarmindInfantry(final WarmindInfantry card) {

@@ -29,9 +29,7 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -54,11 +52,11 @@ public class MoonsilverSpear extends CardImpl<MoonsilverSpear> {
         this.subtype.add("Equipment");
 
         // Equipped creature has first strike.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature attacks, put a 4/4 white Angel creature token with flying onto the battlefield.
         this.addAbility(new AttacksEquippedTriggeredAbility(new CreateTokenEffect(new AngelToken())));
         // Equip {4}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(4)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(4)));
     }
 
     public MoonsilverSpear(final MoonsilverSpear card) {

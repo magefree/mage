@@ -28,11 +28,11 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.CostImpl;
@@ -131,7 +131,7 @@ class BackFromTheBrinkCost extends CostImpl<BackFromTheBrinkCost> {
             Player player = game.getPlayer(controllerId);
             if (player != null) {
                 Card card = player.getGraveyard().get(targets.getFirstTarget(), game);
-                if (card != null && card.moveToZone(Constants.Zone.EXILED, sourceId, game, false)) {
+                if (card != null && card.moveToZone(Zone.EXILED, sourceId, game, false)) {
                     ability.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
                     paid = card.getManaCost().pay(ability, game, sourceId, controllerId, noMana);
                 }

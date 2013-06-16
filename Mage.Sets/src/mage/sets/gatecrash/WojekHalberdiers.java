@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -55,7 +56,7 @@ public class WojekHalberdiers extends CardImpl<WojekHalberdiers> {
         this.toughness = new MageInt(2);
 
         // Battalion - Whenever Wojek Halberdiers and at least two other creatures attack, Wojek Halberdiers gains first strike until end of turn.
-        this.addAbility(new BattalionAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn)));
+        this.addAbility(new BattalionAbility(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn)));
     }
 
     public WojekHalberdiers(final WojekHalberdiers card) {

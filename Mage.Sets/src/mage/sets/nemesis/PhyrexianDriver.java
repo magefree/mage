@@ -28,13 +28,14 @@
 package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -59,7 +60,7 @@ public class PhyrexianDriver extends CardImpl<PhyrexianDriver> {
         this.toughness = new MageInt(1);
 		
 		//When Phyrexian Driver enters the battlefield, other Mercenary creatures get +1/+1 until end of turn.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(1, 1, Constants.Duration.EndOfTurn, filter, true)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BoostAllEffect(1, 1, Duration.EndOfTurn, filter, true)));
     }
 
     public PhyrexianDriver(final PhyrexianDriver card) {

@@ -30,10 +30,10 @@ package mage.abilities.effects;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.SubLayer;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;

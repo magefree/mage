@@ -28,7 +28,7 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Mode;
 
 import java.util.ArrayList;

@@ -29,12 +29,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +65,7 @@ public class HavocFestival extends CardImpl<HavocFestival> {
         this.color.setRed(true);
 
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new HavocFestivalEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HavocFestivalEffect()));
 
         // At the beginning of each player's upkeep, that player loses half his or her life, rounded up.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HavocFestivalLoseLifeEffect(), TargetController.ANY, false);
@@ -84,7 +87,7 @@ public class HavocFestival extends CardImpl<HavocFestival> {
 class HavocFestivalEffect extends ContinuousEffectImpl<HavocFestivalEffect> {
 
     public HavocFestivalEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
         staticText = "Players can't gain life";
     }
 

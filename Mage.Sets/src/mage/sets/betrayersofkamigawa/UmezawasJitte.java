@@ -27,9 +27,7 @@
  */
 package mage.sets.betrayersofkamigawa;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -66,9 +64,9 @@ public class UmezawasJitte extends CardImpl<UmezawasJitte> {
         this.addAbility(new UmezawasJitteAbility());
 
         // Remove a charge counter from Umezawa's Jitte: Choose one Equipped creature gets +2/+2 until end of turn; or target creature gets -1/-1 until end of turn; or you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Constants.Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 2, Duration.EndOfTurn), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance()));
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn));
+        mode.getEffects().add(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
         mode = new Mode();
@@ -77,7 +75,7 @@ public class UmezawasJitte extends CardImpl<UmezawasJitte> {
         this.addAbility(ability);
 
         // Equip {2}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public UmezawasJitte(final UmezawasJitte card) {
@@ -93,7 +91,7 @@ public class UmezawasJitte extends CardImpl<UmezawasJitte> {
 class UmezawasJitteAbility extends TriggeredAbilityImpl<UmezawasJitteAbility> {
 
     public UmezawasJitteAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance(2)));
     }
 
     public UmezawasJitteAbility(final UmezawasJitteAbility ability) {

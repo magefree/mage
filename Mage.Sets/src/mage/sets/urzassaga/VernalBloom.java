@@ -28,15 +28,16 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -79,7 +80,7 @@ class VernalBloomTriggeredAbility extends TriggeredManaAbility<VernalBloomTrigge
     }
 
     public VernalBloomTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddGreenToTargetEffect());
+        super(Zone.BATTLEFIELD, new AddGreenToTargetEffect());
         this.usesStack = false;
     }
 

@@ -1,9 +1,10 @@
 package org.mage.test.cards.abilities.flicker;
 
-import mage.Constants;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,17 +21,17 @@ public class CloudshiftTest extends CardTestPlayerBase {
      */
     @Test
     public void testSpellFizzle() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.HAND, playerA, "Cloudshift");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cloudshift", "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // should be alive because of Cloudshift
@@ -43,21 +44,21 @@ public class CloudshiftTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyEffectDiscarded() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Knight of Meadowgrain");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Heirs of Stromkirk");
+        addCard(Zone.BATTLEFIELD, playerB, "Knight of Meadowgrain");
+        addCard(Zone.BATTLEFIELD, playerB, "Heirs of Stromkirk");
 
-        addCard(Constants.Zone.HAND, playerA, "Clone");
-        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
+        addCard(Zone.HAND, playerA, "Clone");
+        addCard(Zone.HAND, playerA, "Cloudshift");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clone");
         setChoice(playerA, "Knight of Meadowgrain");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Clone");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Clone");
         setChoice(playerA, "Heirs of Stromkirk");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         Permanent clone = getPermanent("Heirs of Stromkirk", playerA.getId());
@@ -68,16 +69,16 @@ public class CloudshiftTest extends CardTestPlayerBase {
     }
     @Test
     public void testEquipmentDetached() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Bonesplitter");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Bonesplitter");
 
-        addCard(Constants.Zone.HAND, playerA, "Cloudshift");
+        addCard(Zone.HAND, playerA, "Cloudshift");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Silvercoat Lion");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Cloudshift", "Silvercoat Lion");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         Permanent bonesplitter = getPermanent("Bonesplitter", playerA.getId());

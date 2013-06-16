@@ -27,9 +27,8 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -37,6 +36,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -82,7 +83,7 @@ public class FlayerOfTheHatebound extends CardImpl<FlayerOfTheHatebound> {
 class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility> {
 
     public FlayerTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new FlayerEffect(), false);
+        super(Zone.BATTLEFIELD, new FlayerEffect(), false);
     }
 
     public FlayerTriggeredAbility(FlayerTriggeredAbility ability) {
@@ -93,7 +94,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
-            if (((EntersTheBattlefieldEvent) event).getFromZone() == Constants.Zone.GRAVEYARD
+            if (((EntersTheBattlefieldEvent) event).getFromZone() == Zone.GRAVEYARD
                     && permanent.getOwnerId().equals(controllerId)
                     && permanent.getCardType().contains(CardType.CREATURE)) {
                 Effect effect = this.getEffects().get(0);
@@ -118,7 +119,7 @@ class FlayerTriggeredAbility extends TriggeredAbilityImpl<FlayerTriggeredAbility
 class FlayerEffect extends OneShotEffect<FlayerEffect> {
 
     public FlayerEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "that creature deals damage equal to its power to target creature or player";
     }
 
@@ -136,7 +137,7 @@ class FlayerEffect extends OneShotEffect<FlayerEffect> {
         UUID creatureId = (UUID) getValue("damageSource");
         Permanent creature = game.getPermanent(creatureId);
         if (creature == null) {
-            creature = (Permanent) game.getLastKnownInformation(creatureId, Constants.Zone.BATTLEFIELD);
+            creature = (Permanent) game.getLastKnownInformation(creatureId, Zone.BATTLEFIELD);
         }
         if (creature != null) {
             int amount = creature.getPower().getValue();

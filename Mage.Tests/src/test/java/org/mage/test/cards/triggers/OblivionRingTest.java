@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,13 +18,13 @@ public class OblivionRingTest extends CardTestPlayerBase {
      */
     @Test
     public void testFirstTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Constants.Zone.HAND, playerA, "Oblivion Ring");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Oblivion Ring");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -37,17 +38,17 @@ public class OblivionRingTest extends CardTestPlayerBase {
      */
     @Test
     public void testSecondTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Constants.Zone.HAND, playerA, "Oblivion Ring");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Oblivion Ring");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerB, "Naturalize");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest", 2);
+        addCard(Zone.HAND, playerB, "Naturalize");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Naturalize", "Oblivion Ring");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Naturalize", "Oblivion Ring");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -58,17 +59,17 @@ public class OblivionRingTest extends CardTestPlayerBase {
 
     @Test
     public void testWithOblivionRingExile() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Constants.Zone.HAND, playerA, "Oblivion Ring");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.HAND, playerA, "Oblivion Ring");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 3);
-        addCard(Constants.Zone.HAND, playerB, "Revoke Existence");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 3);
+        addCard(Zone.HAND, playerB, "Revoke Existence");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Revoke Existence", "Oblivion Ring");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Revoke Existence", "Oblivion Ring");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -82,17 +83,17 @@ public class OblivionRingTest extends CardTestPlayerBase {
      */
     @Test
     public void testExilePlaneswalker() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Constants.Zone.HAND, playerA, "Oblivion Ring");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Jace Beleren");
-        addCard(Constants.Zone.HAND, playerA, "Revoke Existence");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, "Oblivion Ring");
+        addCard(Zone.BATTLEFIELD, playerA, "Jace Beleren");
+        addCard(Zone.HAND, playerA, "Revoke Existence");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Revoke Existence", "Oblivion Ring");
-        activateAbility(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Oblivion Ring");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Revoke Existence", "Oblivion Ring");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "-1: Target player draws one card", playerA);
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Oblivion Ring", 0);

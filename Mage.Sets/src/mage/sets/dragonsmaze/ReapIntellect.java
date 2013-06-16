@@ -29,11 +29,11 @@ package mage.sets.dragonsmaze;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -86,7 +86,7 @@ class ReapIntellectEffect extends OneShotEffect<ReapIntellectEffect> {
     }
 
     public ReapIntellectEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Target opponent reveals his or her hand. You choose up to X nonland cards from it and exile them. For each card exiled this way, search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles his or her library";
     }
 
@@ -120,17 +120,17 @@ class ReapIntellectEffect extends OneShotEffect<ReapIntellectEffect> {
                                 Card card = game.getCard(cardId);
 
                                 // cards in Graveyard
-                                Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
+                                Cards cardsInGraveyard = new CardsImpl(Zone.GRAVEYARD);
                                 cardsInGraveyard.addAll(targetPlayer.getGraveyard());
                                 you.lookAtCards("Reap Intellect search of Graveyard", cardsInGraveyard, game);
                                 
                                 // cards in Hand
-                                Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
+                                Cards cardsInHand = new CardsImpl(Zone.HAND);
                                 cardsInHand.addAll(targetPlayer.getHand());
                                 you.lookAtCards("Reap Intellect search of Hand", cardsInHand, game);
 
                                 //cards in Library
-                                Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
+                                Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                                 cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
                                 you.lookAtCards("Reap Intellect search of Library", cardsInLibrary, game);
 

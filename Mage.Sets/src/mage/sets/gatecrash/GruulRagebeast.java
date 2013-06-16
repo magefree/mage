@@ -28,10 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -92,7 +90,7 @@ public class GruulRagebeast extends CardImpl<GruulRagebeast> {
 class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl<GruulRagebeastTriggeredAbility> {
 
     GruulRagebeastTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);
+        super(Zone.BATTLEFIELD, new GruulRagebeastEffect(), false);
     }
 
     GruulRagebeastTriggeredAbility(final GruulRagebeastTriggeredAbility ability) {
@@ -131,7 +129,7 @@ class GruulRagebeastTriggeredAbility extends TriggeredAbilityImpl<GruulRagebeast
 class GruulRagebeastEffect extends OneShotEffect<GruulRagebeastEffect> {
 
     GruulRagebeastEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
 
     GruulRagebeastEffect(final GruulRagebeastEffect effect) {

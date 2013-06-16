@@ -1,7 +1,8 @@
 package org.mage.test.combat;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
@@ -16,13 +17,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
 
     @Test
     public void testFlyingVsNonFlying() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Captain of the Mists");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mist Raven");
+        addCard(Zone.BATTLEFIELD, playerA, "Captain of the Mists");
+        addCard(Zone.BATTLEFIELD, playerB, "Mist Raven");
 
         attack(2, playerB, "Mist Raven");
         block(2, playerA, "Captain of the Mists", "Mist Raven");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 18);
@@ -37,13 +38,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testWallofWrost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Wall of Frost");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Wall of Frost");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(2, playerB, "Craw Wurm");
         block(2, playerA, "Wall of Frost", "Craw Wurm");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -60,13 +61,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testFilteredBlocking() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Hunted Ghoul", "Elite Vanguard");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 18);
@@ -80,13 +81,13 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testFilteredBlocking2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Hunted Ghoul");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(2, playerB, "Craw Wurm");
         block(2, playerA, "Hunted Ghoul", "Craw Wurm");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -100,17 +101,17 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testBowerPassage() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Bower Passage");
+        addCard(Zone.BATTLEFIELD, playerB, "Bower Passage");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sky Ruin Drake");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Zone.BATTLEFIELD, playerB, "Assault Griffin");
+        addCard(Zone.BATTLEFIELD, playerB, "Sky Ruin Drake");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sentinel Spider");
+        addCard(Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Sentinel Spider");
 
         // attacker vs. blocker:
         // non flying vs. flying
@@ -126,7 +127,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         attack(2, playerB, "Sky Ruin Drake");
         block(2, playerA, "Sentinel Spider", "Sky Ruin Drake");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 15);
@@ -138,18 +139,18 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testBowerPassageDestroyed() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Bower Passage");
+        addCard(Zone.BATTLEFIELD, playerB, "Bower Passage");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Zone.BATTLEFIELD, playerB, "Assault Griffin");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerA, "Naturalize");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Naturalize");
 
         // attacker vs. blocker:
         // non flying vs. flying
@@ -162,9 +163,9 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         attack(2, playerB, "Assault Griffin");
         block(2, playerA, "Air Elemental", "Assault Griffin");
 
-        castSpell(2, Constants.PhaseStep.DECLARE_ATTACKERS, playerA, "Naturalize", "Bower Passage");
+        castSpell(2, PhaseStep.DECLARE_ATTACKERS, playerA, "Naturalize", "Bower Passage");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Bower Passage", 0);
@@ -181,26 +182,26 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         //  Champion of Lambholt: Creature — Human Warrior 1/1, 1GG
         //  - Creatures with power less than Champion of Lambholt's power can't block creatures you control.
         //  - Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Champion of Lambholt.
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Champion of Lambholt");
+        addCard(Zone.BATTLEFIELD, playerB, "Champion of Lambholt");
 
         // Elite Vanguard: Creature — Human Soldier 2/1, W
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
         // Arbor Elf: Creature — Elf Druid 1/1, G - {T}: Untap target Forest.
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arbor Elf");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Assault Griffin");
+        addCard(Zone.BATTLEFIELD, playerB, "Arbor Elf");
+        addCard(Zone.BATTLEFIELD, playerB, "Assault Griffin");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 5);
         //  Baneslayer Angel: Creature — Angel 5/5, 3WW - Flying, first strike, lifelink, protection from Demons and from Dragons
-        addCard(Constants.Zone.HAND, playerB, "Baneslayer Angel");
+        addCard(Zone.HAND, playerB, "Baneslayer Angel");
 
         // Angelic Wall: Creature — Wall 0/4, 1W - Defender, flying
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Angelic Wall");
+        addCard(Zone.BATTLEFIELD, playerA, "Angelic Wall");
         // Air Elemental: Creature — Elemental 4/4, 3UU - Flying
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
         // Llanowar Elves: Creature — Elf Druid 1/1, G - {T}: Add {G} to your mana pool.
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Baneslayer Angel");
 
         // non flying vs. flying
         attack(2, playerB, "Elite Vanguard");
@@ -212,7 +213,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         attack(2, playerB, "Assault Griffin");
         block(2, playerA, "Air Elemental", "Assault Griffin"); // can block
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertPowerToughness(playerB, "Champion of Lambholt", 2, 2);
@@ -226,18 +227,18 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testUnblockable() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Blighted Agent");
+        addCard(Zone.BATTLEFIELD, playerB, "Blighted Agent");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Blighted Agent");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Birds of Paradise");
+        addCard(Zone.BATTLEFIELD, playerA, "Blighted Agent");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Birds of Paradise");
 
         attack(2, playerB, "Blighted Agent");
         block(2, playerA, "Blighted Agent", "Blighted Agent");
         block(2, playerA, "Llanowar Elves", "Blighted Agent");
         block(2, playerA, "Birds of Paradise", "Blighted Agent");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertCounterCount(playerA, CounterType.POISON, 1);
@@ -245,14 +246,14 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
     
     @Test
     public void testUnblockableTormentedSoul() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Tormented Soul");
+        addCard(Zone.BATTLEFIELD, playerB, "Tormented Soul");
         
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Memnite");
+        addCard(Zone.BATTLEFIELD, playerA, "Memnite");
         
         attack(2, playerB, "Tormented Soul");
         block(2, playerA, "Tormented Soul", "Memnite");
         
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
         
         assertPermanentCount(playerA, "Memnite", 1);
@@ -266,17 +267,17 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
      */
     @Test
     public void testFlyingVsNonFlying2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Savannah Lions");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Azure Drake");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Aven Squire");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Savannah Lions");
+        addCard(Zone.BATTLEFIELD, playerA, "Azure Drake");
+        addCard(Zone.BATTLEFIELD, playerA, "Aven Squire");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.HAND, playerA, "Turn to Frog");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Walking Corpse");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Walking Corpse");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Aven Squire");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Aven Squire");
 
         attack(3, playerA, "Llanowar Elves");
         attack(3, playerA, "Azure Drake");
@@ -286,7 +287,7 @@ public class AttackBlockRestrictionsTest extends CardTestPlayerBase {
         block(3, playerB, "Llanowar Elves", "Azure Drake"); // won't be able to block
         block(3, playerB, "Walking Corpse", "Aven Squire"); // able to block because of Turn to Frog
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerB, 15);

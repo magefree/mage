@@ -28,9 +28,9 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -60,9 +61,9 @@ public class SunspearShikari extends CardImpl<SunspearShikari> {
         this.toughness = new MageInt(2);
 
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(LifelinkAbility.getInstance()), EquippedCondition.getInstance(), rule2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
     }
 
     public SunspearShikari(final SunspearShikari card) {

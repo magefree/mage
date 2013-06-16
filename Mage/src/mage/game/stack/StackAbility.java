@@ -28,10 +28,10 @@
 
 package mage.game.stack;
 
-import mage.Constants.AbilityType;
-import mage.Constants.CardType;
-import mage.Constants.EffectType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.CardType;
+import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.ObjectColor;

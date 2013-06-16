@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -82,7 +82,7 @@ class HavengulSkaabAbility extends TriggeredAbilityImpl<HavengulSkaabAbility> {
     }
 
     public HavengulSkaabAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
         this.addEffect(new ReturnToHandTargetEffect());
     }
 

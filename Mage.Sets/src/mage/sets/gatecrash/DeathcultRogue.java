@@ -28,15 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -58,7 +59,7 @@ public class DeathcultRogue extends CardImpl<DeathcultRogue> {
         this.toughness = new MageInt(2);
 
         // Deathcult Rogue can't be blocked except by Rogues.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DeathcultRogueRestrictionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DeathcultRogueRestrictionEffect()));
 
     }
 

@@ -29,9 +29,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
@@ -46,6 +46,8 @@ import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceE
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetOpponent;
@@ -93,11 +95,11 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
 class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility<BeginningOfYourUpkeepdelayTriggeredAbility> {
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
-        this(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), Constants.TargetController.YOU);
-        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), TargetController.YOU);
+        this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
-    public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, Constants.TargetController targetController) {
+    public BeginningOfYourUpkeepdelayTriggeredAbility(Effect effect, TargetController targetController) {
         super(effect);
     }
 

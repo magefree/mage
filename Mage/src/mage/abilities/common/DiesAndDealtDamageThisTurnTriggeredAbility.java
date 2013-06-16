@@ -1,9 +1,9 @@
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -17,7 +17,7 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
     }
 
     public DiesAndDealtDamageThisTurnTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.ALL, effect, optional);
+        super(Zone.ALL, effect, optional);
     }
 
     public DiesAndDealtDamageThisTurnTriggeredAbility(final DiesAndDealtDamageThisTurnTriggeredAbility ability) {
@@ -32,7 +32,7 @@ public class DiesAndDealtDamageThisTurnTriggeredAbility extends TriggeredAbility
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            MageObject object = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (object instanceof Permanent && ((Permanent)object).getDealtDamageByThisTurn().contains(this.sourceId)) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

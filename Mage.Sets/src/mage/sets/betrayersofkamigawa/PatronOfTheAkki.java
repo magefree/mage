@@ -28,14 +28,15 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
 
@@ -57,7 +58,7 @@ public class PatronOfTheAkki extends CardImpl<PatronOfTheAkki> {
         this.addAbility(new OfferingAbility("Goblin"));
 
         // Whenever Patron of the Akki attacks, creatures you control get +2/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(2, 0, Duration.EndOfTurn, new FilterCreaturePermanent(), false), false));
     }
 
     public PatronOfTheAkki(final PatronOfTheAkki card) {

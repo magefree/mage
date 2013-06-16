@@ -28,15 +28,16 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -74,7 +75,7 @@ public class GroveOfTheBurnwillows extends CardImpl<GroveOfTheBurnwillows> {
 class GroveOfTheBurnwillowsEffect extends OneShotEffect<GroveOfTheBurnwillowsEffect> {
 
     GroveOfTheBurnwillowsEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Each opponent gains 1 life";
     }
 

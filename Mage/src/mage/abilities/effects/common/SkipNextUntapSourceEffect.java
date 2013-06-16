@@ -1,15 +1,17 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
 public class SkipNextUntapSourceEffect extends ReplacementEffectImpl<SkipNextUntapSourceEffect> {
 
     public SkipNextUntapSourceEffect() {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
         staticText = "{this} doesn't untap during your next untap step";
     }
 
@@ -35,7 +37,7 @@ public class SkipNextUntapSourceEffect extends ReplacementEffectImpl<SkipNextUnt
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == GameEvent.EventType.UNTAP
                 && event.getTargetId().equals(source.getSourceId())) {
             return true;

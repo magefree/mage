@@ -27,9 +27,8 @@
  */
 package mage.sets.shadowmoor;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -40,6 +39,8 @@ import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -82,7 +83,7 @@ public class LureboundScarecrow extends CardImpl<LureboundScarecrow> {
 class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecrowChooseColorEffect> {
     
     public LureboundScarecrowChooseColorEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose a color";
     }
 
@@ -97,7 +98,7 @@ class LureboundScarecrowChooseColorEffect extends OneShotEffect<LureboundScarecr
         Card card = game.getCard(source.getSourceId());
         if (player != null && sourceStackObject != null && card != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.BoostCreature, colorChoice, game)) {
+            if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 game.informPlayers(sourceStackObject.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(card.getId() + "_color", colorChoice.getColor());
             }
@@ -117,7 +118,7 @@ class LureboundScarecrowTriggeredAbility extends StateTriggeredAbility<Lurebound
     private static final String staticText = "When you control no permanents of the chosen color, sacrifice {this}.";
 
     public LureboundScarecrowTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     public LureboundScarecrowTriggeredAbility(LureboundScarecrowTriggeredAbility ability) {

@@ -28,17 +28,17 @@
 
 package mage.abilities;
 
-import mage.Constants.AbilityType;
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.FlashAbility;
 import mage.game.Game;
 
 import java.util.UUID;
-import mage.Constants.SpellAbilityType;
+import mage.constants.SpellAbilityType;
 import mage.cards.SplitCard;
 
 /**

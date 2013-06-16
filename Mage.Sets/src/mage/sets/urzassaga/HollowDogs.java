@@ -29,13 +29,13 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -54,7 +54,7 @@ public class HollowDogs extends CardImpl<HollowDogs> {
         this.toughness = new MageInt(3);
 
         // Whenever Hollow Dogs attacks, it gets +2/+0 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), false));
     }
 
     public HollowDogs(final HollowDogs card) {

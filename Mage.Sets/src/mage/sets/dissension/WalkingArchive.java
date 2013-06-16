@@ -28,9 +28,9 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -64,10 +66,10 @@ public class WalkingArchive extends CardImpl<WalkingArchive> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), "Walking Archive enters the battlefield with a +1/+1 counter on it"));
         
         // At the beginning of each player's upkeep, that player draws a card for each +1/+1 counter on Walking Archive.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(new CountersCount(CounterType.P1P1)), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DrawCardTargetEffect(new CountersCount(CounterType.P1P1)), TargetController.ANY, false));
         
         // {2}{W}{U}: Put a +1/+1 counter on Walking Archive.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}{W}{U}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance()), new ManaCostsImpl("{2}{W}{U}")));
     }
 
     public WalkingArchive(final WalkingArchive card) {
