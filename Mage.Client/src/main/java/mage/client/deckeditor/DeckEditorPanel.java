@@ -277,7 +277,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         this.setVisible(true);
         this.repaint();
     }
-
+    
     private void hidePopup() {
         Plugins.getInstance().getActionCallback().mouseExited(null, null);
     }

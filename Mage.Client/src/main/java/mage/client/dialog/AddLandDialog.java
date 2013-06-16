@@ -34,11 +34,13 @@
 
 package mage.client.dialog;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLayeredPane;
 import mage.Constants;
+import mage.Mana;
 import mage.cards.Card;
 import mage.cards.Sets;
 import mage.cards.decks.Deck;
@@ -55,6 +57,8 @@ public class AddLandDialog extends MageDialog {
 
     private Deck deck;
     private Set<String> setCodesland;
+    
+    private static int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
     /** Creates new form AddLandDialog */
     public AddLandDialog() {
@@ -110,6 +114,7 @@ public class AddLandDialog extends MageDialog {
         lblSwamp = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        btnAutoAdd = new javax.swing.JButton();
 
         jButton2.setText("jButton2");
 
@@ -149,6 +154,13 @@ public class AddLandDialog extends MageDialog {
             }
         });
 
+        btnAutoAdd.setText("Suggest");
+        btnAutoAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutoAddActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -157,32 +169,33 @@ public class AddLandDialog extends MageDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPains)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnPlains, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIsland)
+                                    .addComponent(lblMountain)
+                                    .addComponent(lblForest))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(spnMountain, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+                                    .addComponent(spnIsland)
+                                    .addComponent(spnForest)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblPains)
+                                .addGap(21, 21, 21)
+                                .addComponent(spnPlains))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblSwamp)
+                                .addGap(14, 14, 14)
+                                .addComponent(spnSwamp)))
+                        .addGap(114, 114, 114))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMountain)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnMountain, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblIsland)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnIsland, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblForest)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnForest, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSwamp)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spnSwamp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(50, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(btnCancel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAdd)
-                .addContainerGap())
+                        .addComponent(btnCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAutoAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAdd)
+                        .addGap(0, 40, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,10 +220,11 @@ public class AddLandDialog extends MageDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSwamp)
                     .addComponent(spnSwamp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(btnAutoAdd))
                 .addContainerGap())
         );
 
@@ -236,9 +250,47 @@ public class AddLandDialog extends MageDialog {
         this.hideDialog();
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnAutoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutoAddActionPerformed
+        autoAddLands();
+    }//GEN-LAST:event_btnAutoAddActionPerformed
 
+    private void autoAddLands(){
+        int red = 0;
+        int green = 0;
+        int black = 0;
+        int blue = 0;
+        int white = 0;
+        Set<Card> cards = deck.getCards();
+        int land_number = DEFAULT_SEALED_DECK_CARD_NUMBER - cards.size();
+        if(land_number < 0) land_number = 0;
+        for (Card cd : cards) {
+            Mana m = cd.getManaCost().getMana();
+            red += m.getRed();
+            green += m.getGreen();
+            black += m.getBlack();
+            blue += m.getBlue();
+            white += m.getWhite();
+        }
+        int total = red + green + black + blue + white;
+        int redcards = Math.round(land_number*((float)red/(float)total));
+        total -= red;   land_number -= redcards;
+        int greencards = Math.round(land_number*((float)green/(float)total));
+        total -= green;   land_number -= greencards;
+        int blackcards = Math.round(land_number*((float)black/(float)total));
+        total -= black;   land_number -= blackcards;
+        int bluecards = Math.round(land_number*((float)blue/(float)total));
+        total -= blue;   land_number -= bluecards;
+        int whitecards = land_number;
+        spnMountain.setValue(redcards);
+        spnForest.setValue(greencards);
+        spnSwamp.setValue(blackcards);
+        spnIsland.setValue(bluecards);
+        spnPlains.setValue(whitecards);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAutoAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblForest;

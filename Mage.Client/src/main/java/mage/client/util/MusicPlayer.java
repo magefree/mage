@@ -134,11 +134,12 @@ public class MusicPlayer {
     	byte tempBuffer[] = new byte[320];  	
     	public void run(){
     		try{
-    			int len;
-    			while ((len = audioInputStream.read(tempBuffer, 0,
-	                    tempBuffer.length)) != -1){
-    				if(breaked_out) break;
-    				if(len > 0) sourceDataLine.write(tempBuffer, 0, len);
+                    sourceDataLine.flush();   
+                    int len;
+                    while ((len = audioInputStream.read(tempBuffer, 0,
+	                tempBuffer.length)) != -1){
+    			if(breaked_out) break;
+    			if(len > 0) sourceDataLine.write(tempBuffer, 0, len);
     			}
     			//breaked or stopped
                     sourceDataLine.flush();
