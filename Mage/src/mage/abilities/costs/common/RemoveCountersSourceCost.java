@@ -34,6 +34,7 @@ import mage.abilities.costs.CostImpl;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -47,8 +48,10 @@ public class RemoveCountersSourceCost extends CostImpl<RemoveCountersSourceCost>
     public RemoveCountersSourceCost(Counter counter) {
         this.amount = counter.getCount();
         this.name = counter.getName();
-        this.text = "Remove " + (amount == 1 ? "a" : amount) + " " + name + " counter"
-            + (amount != 1 ? "s" : "") + " from {this}";
+        this.text = new StringBuilder("Remove ").append((amount == 1 ? "a" : CardUtil.numberToText(amount)))
+                .append(" ").append(name).append(" counter").append((amount != 1 ? "s" : ""))
+                .append(" from {this}").toString();
+
     }
 
     public RemoveCountersSourceCost(RemoveCountersSourceCost cost) {
