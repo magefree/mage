@@ -28,10 +28,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.effects.Effect;
@@ -86,7 +86,7 @@ public class TurnBurn extends SplitCard<TurnBurn> {
 
         private WeirdToken() {
             super("Weird", "0/1 red Weird");
-            cardType.add(Constants.CardType.CREATURE);
+            cardType.add(CardType.CREATURE);
             color = ObjectColor.RED;
             subtype.add("Weird");
             power = new MageInt(0);

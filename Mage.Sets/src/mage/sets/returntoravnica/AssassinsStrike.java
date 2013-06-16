@@ -28,13 +28,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -71,7 +73,7 @@ public class AssassinsStrike extends CardImpl<AssassinsStrike> {
 class AssassinsStrikeEffect extends OneShotEffect<AssassinsStrikeEffect> {
 
     public AssassinsStrikeEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "Its controller discards a card";
     }
 
@@ -86,7 +88,7 @@ class AssassinsStrikeEffect extends OneShotEffect<AssassinsStrikeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (permanent != null) {
             Player player = game.getPlayer(permanent.getControllerId());
             if (player != null) {

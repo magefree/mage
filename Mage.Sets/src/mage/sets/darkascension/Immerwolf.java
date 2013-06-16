@@ -27,9 +27,7 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -71,10 +69,10 @@ public class Immerwolf extends CardImpl<Immerwolf> {
         this.addAbility(IntimidateAbility.getInstance());
 
         // Other Wolf and Werewolf creatures you control get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
 
         // Non-Human Werewolves you control can't transform.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ImmerwolfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ImmerwolfEffect()));
 
     }
 
@@ -99,7 +97,7 @@ class ImmerwolfEffect extends ReplacementEffectImpl<ImmerwolfEffect> {
     }
 
     public ImmerwolfEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Non-Human Werewolves you control can't transform";
     }
 

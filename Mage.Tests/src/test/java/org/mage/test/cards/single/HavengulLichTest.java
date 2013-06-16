@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,14 +13,14 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Havengul Lich");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
+        addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}", playerB);
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
+        activateAbility(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "{T}", playerB);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -33,13 +34,13 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Havengul Lich");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Black Cat");        
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
+        addCard(Zone.GRAVEYARD, playerA, "Black Cat");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Black Cat");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Black Cat");
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Black Cat");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Black Cat");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -51,15 +52,15 @@ public class HavengulLichTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Havengul Lich");
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");        
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Havengul Lich");
+        addCard(Zone.GRAVEYARD, playerA, "Prodigal Pyromancer");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}", "Prodigal Pyromancer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Prodigal Pyromancer");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}", playerB);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

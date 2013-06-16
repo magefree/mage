@@ -28,9 +28,9 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -40,6 +40,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,9 +54,9 @@ public class SkarrgTheRagePits extends CardImpl<SkarrgTheRagePits> {
         super(ownerId, 163, "Skarrg, the Rage Pits", Rarity.UNCOMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "GPT";
         this.addAbility(new ColorlessManaAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1, 1, Duration.EndOfTurn), new ManaCostsImpl("{R}{G}"));
         ability.addCost(new TapSourceCost());
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

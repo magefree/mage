@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +42,8 @@ import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.TokenPredicate;
@@ -72,13 +74,13 @@ public class KorozdaGuildmage extends CardImpl<KorozdaGuildmage> {
         this.toughness = new MageInt(2);
 
         // {1}{B}{G}: Target creature gets +1/+1 and gains intimidate until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Constants.Duration.EndOfTurn),new ManaCostsImpl("{1}{B}{G}"));
-        ability.addEffect(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Constants.Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(1,1, Duration.EndOfTurn),new ManaCostsImpl("{1}{B}{G}"));
+        ability.addEffect(new GainAbilityTargetEffect(IntimidateAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
         // {2}{B}{G}, Sacrifice a nontoken creature: Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),new SacrificeCostCreaturesToughness()),new ManaCostsImpl("{2}{B}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SaprolingToken(),new SacrificeCostCreaturesToughness()),new ManaCostsImpl("{2}{B}{G}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true, true)));
         this.addAbility(ability);
         

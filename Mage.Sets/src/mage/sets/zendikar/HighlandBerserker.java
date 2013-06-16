@@ -29,15 +29,15 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,7 +52,7 @@ public class HighlandBerserker extends CardImpl<HighlandBerserker> {
 
     static {
         filter.add(new SubtypePredicate("Ally"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
    }
 
     public HighlandBerserker(UUID ownerId) {

@@ -30,11 +30,10 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.*;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -73,9 +72,9 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filterCount.add(new SubtypePredicate("Mountain"));
-        filterCount.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filterCount.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public KothOfTheHammer (UUID ownerId) {
@@ -132,7 +131,7 @@ class KothOfTheHammerEmblem extends Emblem {
 
 class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThirdEffect> {
     public KothOfTheHammerThirdEffect() {
-        super(Duration.EndOfGame, Constants.Outcome.AddAbility);
+        super(Duration.EndOfGame, Outcome.AddAbility);
         staticText = "You get an emblem with \"Mountains you control have '{T}: This land deals 1 damage to target creature or player.'\"";
     }
 
@@ -141,10 +140,10 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case AbilityAddingRemovingEffects_6:
-                if (sublayer == Constants.SubLayer.NA) {
+                if (sublayer == SubLayer.NA) {
                     for (Permanent p : game.getBattlefield().getActivePermanents(KothOfTheHammer.filter, source.getControllerId(), game)) {
                         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
                         ability.addTarget(new TargetCreatureOrPlayer());
@@ -167,8 +166,8 @@ class KothOfTheHammerThirdEffect extends ContinuousEffectImpl<KothOfTheHammerThi
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.AbilityAddingRemovingEffects_6;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6;
     }
 
 }

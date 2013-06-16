@@ -29,15 +29,15 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -98,7 +98,7 @@ class VendettaEffect extends OneShotEffect<VendettaEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (player != null && target != null) {
             player.loseLife(target.getToughness().getValue(), game);
             return true;

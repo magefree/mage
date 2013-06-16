@@ -29,9 +29,7 @@ package mage.sets.dissension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -60,7 +58,7 @@ public class BeaconHawk extends CardImpl<BeaconHawk> {
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new UntapTargetEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.W)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(0, 1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.W)));
     }
 
     public BeaconHawk(final BeaconHawk card) {

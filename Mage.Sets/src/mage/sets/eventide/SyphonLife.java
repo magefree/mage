@@ -28,14 +28,15 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,7 +56,7 @@ public class SyphonLife extends CardImpl<SyphonLife> {
         this.getSpellAbility().addTarget(new TargetPlayer());
         this.getSpellAbility().addEffect(new GainLifeEffect(2));
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{1}{B}{B}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{1}{B}{B}"), TimingRule.SORCERY));
     }
 
     public SyphonLife(final SyphonLife card) {

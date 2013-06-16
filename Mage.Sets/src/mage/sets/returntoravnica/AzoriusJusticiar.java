@@ -28,14 +28,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +50,7 @@ public class AzoriusJusticiar extends CardImpl<AzoriusJusticiar> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures your opponents control");
  
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
     public AzoriusJusticiar(UUID ownerId) {

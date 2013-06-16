@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -53,11 +51,11 @@ public class TormentorsTrident extends CardImpl<TormentorsTrident> {
         this.subtype.add("Equipment");
 
         // Equipped creature gets +3/+0 and attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 0)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.EQUIPMENT)));
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
     }
 
     public TormentorsTrident(final TormentorsTrident card) {

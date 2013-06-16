@@ -27,15 +27,15 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public class SkeletalChangeling extends CardImpl<SkeletalChangeling> {
         // Changeling
         this.addAbility(ChangelingAbility.getInstance());
         // {1}{B}: Regenerate Skeletal Changeling.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ManaCostsImpl("{1}{B}")));
     }
 
     public SkeletalChangeling(final SkeletalChangeling card) {

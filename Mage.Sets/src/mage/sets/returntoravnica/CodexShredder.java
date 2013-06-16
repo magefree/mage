@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCardInYourGraveyard;
 
@@ -51,12 +52,12 @@ public class CodexShredder extends CardImpl<CodexShredder> {
         this.expansionSetCode = "RTR";
 
         // {T}: Target player puts the top card of his or her library into his or her graveyard.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
         // {5}, {T}, Sacrifice Codex Shredder: Return target card from your graveyard to your hand.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{5}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{5}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetCardInYourGraveyard());

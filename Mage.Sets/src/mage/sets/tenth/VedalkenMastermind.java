@@ -29,9 +29,8 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -55,7 +56,7 @@ public class VedalkenMastermind extends CardImpl<VedalkenMastermind> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent());
         this.addAbility(ability);

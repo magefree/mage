@@ -31,7 +31,7 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;

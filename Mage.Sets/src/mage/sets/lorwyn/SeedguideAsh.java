@@ -27,13 +27,13 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCardInLibrary;
@@ -61,7 +61,7 @@ public class SeedguideAsh extends CardImpl<SeedguideAsh> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
         // When Seedguide Ash dies, you may search your library for up to three Forest cards and put them onto the battlefield tapped. If you do, shuffle your library.
-        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, filter), true, false, Constants.Outcome.PutLandInPlay), true));
+        this.addAbility(new DiesTriggeredAbility(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(0, 3, filter), true, false, Outcome.PutLandInPlay), true));
     }
 
     public SeedguideAsh(final SeedguideAsh card) {

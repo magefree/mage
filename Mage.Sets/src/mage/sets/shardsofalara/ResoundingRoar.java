@@ -28,15 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.CycleTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -52,12 +53,12 @@ public class ResoundingRoar extends CardImpl<ResoundingRoar> {
         this.color.setGreen(true);
 
         // Target creature gets +3/+3 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Cycling {5}{R}{G}{W}
         this.addAbility(new CyclingAbility(new ManaCostsImpl("{5}{R}{G}{W}")));
         // When you cycle Resounding Roar, target creature gets +6/+6 until end of turn.
-        Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(6, 6, Constants.Duration.EndOfTurn));
+        Ability ability = new CycleTriggeredAbility(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }

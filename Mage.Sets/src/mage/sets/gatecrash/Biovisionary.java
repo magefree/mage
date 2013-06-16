@@ -28,14 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.effects.common.WinGameEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 
@@ -64,7 +66,7 @@ public class Biovisionary extends CardImpl<Biovisionary> {
         this.toughness = new MageInt(3);
 
         //At the beginning of the end step, if you control four or more creatures named Biovisionary, you win the game.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Constants.Zone.BATTLEFIELD, new WinGameEffect(), Constants.TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new WinGameEffect(), TargetController.ANY, new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 3), false));
     }
 
     public Biovisionary(final Biovisionary card) {

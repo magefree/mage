@@ -28,16 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.Predicates;
@@ -127,7 +128,7 @@ class DetentionSphereEntersEffect extends OneShotEffect<DetentionSphereEntersEff
 class DetentionSphereLeavesEffect extends OneShotEffect<DetentionSphereLeavesEffect> {
 
     public DetentionSphereLeavesEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "return the exiled cards to the battlefield under their owner's control";
     }
 
@@ -143,7 +144,7 @@ class DetentionSphereLeavesEffect extends OneShotEffect<DetentionSphereLeavesEff
             exile = exile.copy();
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
-                card.putOntoBattlefield(game, Constants.Zone.EXILED, source.getId(), card.getOwnerId());
+                card.putOntoBattlefield(game, Zone.EXILED, source.getId(), card.getOwnerId());
             }
             game.getExile().getExileZone(exileId).clear();
             return true;

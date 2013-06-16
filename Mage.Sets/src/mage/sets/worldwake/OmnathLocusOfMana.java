@@ -30,11 +30,8 @@ package mage.sets.worldwake;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.ManaType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -63,11 +60,11 @@ public class OmnathLocusOfMana extends CardImpl<OmnathLocusOfMana> {
         this.toughness = new MageInt(1);
 
         // Green mana doesn't empty from your mana pool as steps and phases end.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new OmnathReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OmnathReplacementEffect()));
 
         // Omnath, Locus of Mana gets +1/+1 for each green mana in your mana pool
         DynamicValue boost = new ManaTypeInManaPoolCount(ManaType.GREEN);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(boost, boost, Duration.WhileOnBattlefield)));
 
     }
 
@@ -93,7 +90,7 @@ class OmnathReplacementEffect extends ReplacementEffectImpl<OmnathReplacementEff
     }
 
     public OmnathReplacementEffect() {
-        super(Duration.WhileOnBattlefield, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "Green mana doesn't empty from your mana pool as steps and phases end";
     }
 

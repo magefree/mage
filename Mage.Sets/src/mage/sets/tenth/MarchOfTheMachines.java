@@ -28,9 +28,8 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -54,7 +53,7 @@ public class MarchOfTheMachines extends CardImpl<MarchOfTheMachines> {
         this.color.setBlue(true);
 
         // Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MarchOfTheMachinesEffect()));
     }
 
     public MarchOfTheMachines(final MarchOfTheMachines card) {
@@ -74,7 +73,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEf
         filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
     }
     public MarchOfTheMachinesEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost";
     }
 
@@ -88,10 +87,10 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEf
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case TypeChangingEffects_4:
-                if (sublayer == Constants.SubLayer.NA) {
+                if (sublayer == SubLayer.NA) {
                     objects.clear();
                     for(Permanent permanent : game.getBattlefield().getAllActivePermanents(filter, game)){
                         if(permanent != null){
@@ -103,7 +102,7 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEf
                 break;
 
             case PTChangingEffects_7:
-                if (sublayer == Constants.SubLayer.SetPT_7b) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     for(UUID uuid : objects){
                         Permanent permanent = game.getPermanent(uuid);
                         if(permanent != null){
@@ -124,8 +123,8 @@ class MarchOfTheMachinesEffect extends ContinuousEffectImpl<MarchOfTheMachinesEf
 
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.ColorChangingEffects_5 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

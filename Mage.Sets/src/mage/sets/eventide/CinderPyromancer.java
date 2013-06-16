@@ -29,9 +29,9 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -41,6 +41,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.target.TargetPlayer;
@@ -64,7 +65,7 @@ public class CinderPyromancer extends CardImpl<CinderPyromancer> {
         this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));

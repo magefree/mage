@@ -28,7 +28,7 @@
 
 package mage.filter.common;
 
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 

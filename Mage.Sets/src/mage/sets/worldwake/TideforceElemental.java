@@ -29,9 +29,8 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -41,6 +40,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -68,9 +69,9 @@ public class TideforceElemental extends CardImpl<TideforceElemental> {
 
         // {U}, {tap}: You may tap or untap another target creature.
         Ability ability = new SimpleActivatedAbility(
-                Constants.Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 new MayTapOrUntapTargetEffect(), 
-                new ColoredManaCost(Constants.ColoredManaSymbol.U));
+                new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);

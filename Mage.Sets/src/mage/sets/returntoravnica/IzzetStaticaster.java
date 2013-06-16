@@ -29,9 +29,9 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -69,7 +71,7 @@ public class IzzetStaticaster extends CardImpl<IzzetStaticaster> {
         this.addAbility(HasteAbility.getInstance());
 
         // {T}: Izzet Staticaster deals 1 damage to target creature and each other creature with the same name as that creature.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new IzzetStaticasterDamageEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new IzzetStaticasterDamageEffect(), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -87,7 +89,7 @@ public class IzzetStaticaster extends CardImpl<IzzetStaticaster> {
 class IzzetStaticasterDamageEffect extends OneShotEffect<IzzetStaticasterDamageEffect> {
 
     public IzzetStaticasterDamageEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         this.staticText = "{this} deals 1 damage to target creature and each other creature with the same name as that creature";
     }
 

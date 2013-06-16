@@ -30,11 +30,11 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -46,7 +46,7 @@ public class TurnTheTide extends CardImpl<TurnTheTide> {
         super(ownerId, 35, "Turn the Tide", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{U}");
         this.expansionSetCode = "MBS";
         this.color.setBlue(true);
-        this.getSpellAbility().addEffect(new BoostOpponentsEffect(-2, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostOpponentsEffect(-2, 0, Duration.EndOfTurn));
     }
 
     public TurnTheTide (final TurnTheTide card) {

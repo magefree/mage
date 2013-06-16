@@ -28,13 +28,15 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -75,7 +77,7 @@ class HibernationEffect extends OneShotEffect<HibernationEffect> {
     }
     
     public HibernationEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return all green permanents to their owners' hands";
     }
 
@@ -86,7 +88,7 @@ class HibernationEffect extends OneShotEffect<HibernationEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

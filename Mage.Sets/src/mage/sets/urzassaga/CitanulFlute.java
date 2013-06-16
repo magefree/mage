@@ -28,11 +28,11 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -62,7 +62,7 @@ public class CitanulFlute extends CardImpl<CitanulFlute> {
 
         // {X}, {T}: Search your library for a creature card with converted mana cost X or less, reveal it,
         // and put it into your hand. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CitanulFluteSearchEffect(), new ManaCostsImpl("{X}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CitanulFluteSearchEffect(), new ManaCostsImpl("{X}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

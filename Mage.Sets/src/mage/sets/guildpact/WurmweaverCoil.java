@@ -28,9 +28,8 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -68,11 +67,11 @@ public class WurmweaverCoil extends CardImpl<WurmweaverCoil> {
         this.color.setGreen(true);
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Constants.Duration.WhileOnBattlefield)));
-        Ability activatedAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WurmweaverCoilToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(6, 6, Duration.WhileOnBattlefield)));
+        Ability activatedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WurmweaverCoilToken(), 1), new ManaCostsImpl("{G}{G}{G}"));
         activatedAbility.addCost(new SacrificeSourceCost());
         this.addAbility(activatedAbility);
     }

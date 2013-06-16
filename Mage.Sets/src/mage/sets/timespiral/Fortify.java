@@ -29,12 +29,12 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -49,9 +49,9 @@ public class Fortify extends CardImpl<Fortify> {
         this.color.setWhite(true);
 
         // Choose one - Creatures you control get +2/+0 until end of turn; or creatures you control get +0/+2 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn));
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostControlledEffect(0, 2, Constants.Duration.EndOfTurn));
+        mode.getEffects().add(new BoostControlledEffect(0, 2, Duration.EndOfTurn));
         this.getSpellAbility().addMode(mode);
     }
 

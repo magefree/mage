@@ -28,10 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
@@ -77,7 +75,7 @@ public class PyreheartWolf extends CardImpl<PyreheartWolf> {
 class PyreheartWolfEffect extends OneShotEffect<PyreheartWolfEffect> {
 
     public PyreheartWolfEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "creatures you control can't be blocked except by two or more creatures until end of turn";
     }
 
@@ -96,7 +94,7 @@ class PyreheartWolfEffect extends OneShotEffect<PyreheartWolfEffect> {
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
         for (Permanent perm: game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             CantBeBlockedByOneEffect effect = new CantBeBlockedByOneEffect(2, Duration.EndOfTurn);
-            SimpleStaticAbility ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect);
+            SimpleStaticAbility ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect);
             perm.addAbility(ability, game);
         }
         return false;

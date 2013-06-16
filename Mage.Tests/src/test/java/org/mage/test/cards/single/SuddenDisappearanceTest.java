@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,15 +13,15 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 6);
-        addCard(Constants.Zone.HAND, playerA, "Sudden Disappearance");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.HAND, playerA, "Sudden Disappearance");
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -36,15 +37,15 @@ public class SuddenDisappearanceTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 6);
-        addCard(Constants.Zone.HAND, playerA, "Sudden Disappearance");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 6);
+        addCard(Zone.HAND, playerA, "Sudden Disappearance");
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
+        addCard(Zone.BATTLEFIELD, playerB, "Altar of the Lost", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sudden Disappearance", playerB);
 
-        setStopAt(2, Constants.PhaseStep.UPKEEP);
+        setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
         assertLife(playerA, 20);

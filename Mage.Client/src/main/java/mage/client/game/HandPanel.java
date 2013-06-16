@@ -1,10 +1,10 @@
 package mage.client.game;
 
-import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.Config;
+import mage.constants.Zone;
 import mage.view.SimpleCardsView;
 
 import javax.swing.*;
@@ -55,7 +55,7 @@ public class HandPanel extends JPanel {
         hand.setBackgroundColor(new Color(0, 0, 0, 100));
         hand.setVisibleIfEmpty(false);
         hand.setBorder(emptyBorder);
-        hand.setZone(Constants.Zone.HAND.toString());
+        hand.setZone(Zone.HAND.toString());
     }
 
     public void loadCards(SimpleCardsView cards, BigCard bigCard, UUID gameId) {

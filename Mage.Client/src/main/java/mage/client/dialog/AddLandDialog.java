@@ -25,21 +25,12 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * AddLandDialog.java
- *
- * Created on Jan 11, 2011, 1:20:45 PM
- */
-
 package mage.client.dialog;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLayeredPane;
-import mage.Constants;
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.Sets;
@@ -48,6 +39,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.MageFrame;
+import mage.constants.Rarity;
 
 /**
  *
@@ -80,7 +72,7 @@ public class AddLandDialog extends MageDialog {
         if (!setCodesland.isEmpty()) {
             criteria.setCodes(setCodesland.toArray(new String[setCodesland.size()]));
         }
-        criteria.rarities(Constants.Rarity.LAND).name(landName);
+        criteria.rarities(Rarity.LAND).name(landName);
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.isEmpty()) {
             return;

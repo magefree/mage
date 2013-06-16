@@ -28,7 +28,7 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.StaticAbility;
 
 /**

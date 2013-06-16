@@ -28,12 +28,12 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAttachedTriggeredAbility;
@@ -80,7 +80,7 @@ public class GenjuOfTheFens extends CardImpl<GenjuOfTheFens> {
         this.addAbility(ability);
 
         // {2}: Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with "{B}: This creature gets +1/+1 until end of turn." It's still a land.
-        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Constants.Duration.EndOfTurn),new GenericManaCost(2));
+        Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new SpiritToken(), "Until end of turn, enchanted Swamp becomes a 2/2 black Spirit creature with \"{B}: This creature gets +1/+1 until end of turn.\" It's still a land", Duration.EndOfTurn),new GenericManaCost(2));
         this.addAbility(ability2);
 
         // When enchanted Swamp is put into a graveyard, you may return Genju of the Fens from your graveyard to your hand.

@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers.dies;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,14 +15,14 @@ public class RotcrownGhoulTest extends CardTestPlayerBase {
 
     @Test
     public void testDiesTriggeredAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Rotcrown Ghoul", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Rotcrown Ghoul", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Rotcrown Ghoul");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Rotcrown Ghoul");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -34,14 +35,14 @@ public class RotcrownGhoulTest extends CardTestPlayerBase {
 
     @Test
     public void testDiesTriggeredAbilityForTwoCopies() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Rotcrown Ghoul", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Rotcrown Ghoul", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Rotcrown Ghoul");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Rotcrown Ghoul");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -28,9 +28,9 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.SunburstAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.TargetPlayer;
 
@@ -58,7 +59,7 @@ public class EtchedOracle extends CardImpl<EtchedOracle> {
         // Sunburst
         this.addAbility(new SunburstAbility());
         // {1}, Remove four +1/+1 counters from Etched Oracle: Target player draws three cards.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{1}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{1}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(4)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

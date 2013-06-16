@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +37,8 @@ import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,12 +63,12 @@ public class SpectralPrison extends CardImpl<SpectralPrison> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
 
         // Enchanted creature doesn't untap during its controller's untap step.
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
 
         // When enchanted creature becomes the target of a spell, sacrifice Spectral Prison.
         this.addAbility(new SpectralPrisonAbility());
@@ -86,7 +87,7 @@ public class SpectralPrison extends CardImpl<SpectralPrison> {
 class SpectralPrisonAbility extends TriggeredAbilityImpl<SpectralPrisonAbility> {
 
     public SpectralPrisonAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroySourceEffect());
+        super(Zone.BATTLEFIELD, new DestroySourceEffect());
     }
 
     public SpectralPrisonAbility(final SpectralPrisonAbility ability) {

@@ -28,10 +28,8 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -79,7 +77,7 @@ class GhostwayEffect extends OneShotEffect<GhostwayEffect> {
     }
 
     public GhostwayEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Exile each creature you control. Return those cards to the battlefield under their owner's control at the beginning of the next end step";
     }
 
@@ -94,7 +92,7 @@ class GhostwayEffect extends OneShotEffect<GhostwayEffect> {
             for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
                 if (creature != null) {
                     if (creature.moveToExile(source.getSourceId(), "Ghostway Exile", source.getId(), game)) {
-                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Constants.Zone.BATTLEFIELD, true));
+                        AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
                         delayedAbility.setSourceId(source.getSourceId());
                         delayedAbility.setControllerId(source.getControllerId());
                         game.addDelayedTriggeredAbility(delayedAbility);

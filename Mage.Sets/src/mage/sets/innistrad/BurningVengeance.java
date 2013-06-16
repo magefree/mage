@@ -27,12 +27,12 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -69,7 +69,7 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl<BurningVengeanc
     private static final String abilityText = "Whenever you cast a spell from your graveyard, Burning Vengeance deals 2 damage to target creature or player";
 
     BurningVengeanceOnCastAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(2), false);
         TargetCreatureOrPlayer target = new TargetCreatureOrPlayer();
         target.setRequired(true);
         this.addTarget(target);
@@ -83,7 +83,7 @@ class BurningVengeanceOnCastAbility extends TriggeredAbilityImpl<BurningVengeanc
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST
                 && event.getPlayerId().equals(controllerId)
-                && event.getZone().equals(Constants.Zone.GRAVEYARD)) {
+                && event.getZone().equals(Zone.GRAVEYARD)) {
             return true;
         }
         return false;

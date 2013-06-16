@@ -29,14 +29,15 @@ package mage.sets.urzassaga;
 
 import java.util.HashSet;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -91,7 +92,7 @@ class TurnaboutEffect extends OneShotEffect<TurnaboutEffect> {
     }
     
     public TurnaboutEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Choose artifact, creature, or land. Tap all untapped permanents of the chosen type target player controls, or untap all tapped permanents of that type that player controls";
     }
 

@@ -28,15 +28,16 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -77,7 +78,7 @@ public class PerimeterCaptain extends CardImpl<PerimeterCaptain> {
 class PerimeterCaptainTriggeredAbility extends TriggeredAbilityImpl<PerimeterCaptainTriggeredAbility> {
 
     public PerimeterCaptainTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public PerimeterCaptainTriggeredAbility(final PerimeterCaptainTriggeredAbility ability) {

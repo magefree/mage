@@ -28,14 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.game.Game;
@@ -63,7 +64,7 @@ public class LethargyTrap extends CardImpl<LethargyTrap> {
         this.getSpellAbility().addAlternativeCost(new LethargyTrapAlternativeCost());
         
         // Attacking creatures get -3/-0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostAllEffect(-3, 0, Constants.Duration.EndOfTurn, filter, false));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-3, 0, Duration.EndOfTurn, filter, false));
         
     }
 

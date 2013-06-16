@@ -28,17 +28,14 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.ObjectColor;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterPermanent;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
@@ -80,7 +77,7 @@ public class Pyroblast extends CardImpl<Pyroblast> {
 class CounterTargetEffect extends OneShotEffect<CounterTargetEffect> {
 
     public CounterTargetEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public CounterTargetEffect(final CounterTargetEffect effect) {
@@ -112,7 +109,7 @@ class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
 
 
     public DestroyTargetEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
     }
 
     public DestroyTargetEffect(final DestroyTargetEffect effect) {

@@ -29,13 +29,13 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
@@ -50,6 +50,7 @@ import mage.abilities.effects.common.WinGameEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
@@ -81,7 +82,7 @@ public class HellkiteTyrant extends CardImpl<HellkiteTyrant> {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new HellkiteTyrantEffect(),false, true));
 
         // At the beginning of your upkeep, if you control twenty or more artifacts, you win the game.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), Constants.TargetController.YOU, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new WinGameEffect(), TargetController.YOU, false);
         this.addAbility(new ConditionalTriggeredAbility(
                 ability,
                 new ControlsPermanentCondition(new FilterArtifactPermanent(), ControlsPermanentCondition.CountType.MORE_THAN,19),

@@ -27,11 +27,11 @@
  */
 package mage.sets.seventhedition;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -49,7 +49,7 @@ public class MemoryLapse extends CardImpl<MemoryLapse> {
         this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, put it on top of its owner's library instead of into that player's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Constants.Zone.LIBRARY, true));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.LIBRARY, true));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

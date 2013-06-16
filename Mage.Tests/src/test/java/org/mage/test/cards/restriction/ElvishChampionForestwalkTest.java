@@ -28,7 +28,8 @@
 
 package org.mage.test.cards.restriction;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -51,20 +52,20 @@ public class ElvishChampionForestwalkTest extends CardTestPlayerBase {
 
     @Test
     public void testCannotBlockCreatureWithForestwalk() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elvish Champion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arbor Elf");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Defiant Elf");
+        addCard(Zone.BATTLEFIELD, playerA, "Elvish Champion");
+        addCard(Zone.BATTLEFIELD, playerA, "Arbor Elf");
+        addCard(Zone.BATTLEFIELD, playerA, "Defiant Elf");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Canyon Minotaur");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest");
+        addCard(Zone.BATTLEFIELD, playerB, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerB, "Canyon Minotaur");
 
         attack(3, playerA, "Arbor Elf");
         attack(3, playerA, "Defiant Elf");
         block(3, playerB, "Silvercoat Lion", "Arbor Elf");
         block(3, playerB, "Canyon Minotaur", "Defiant Elf");
 
-        setStopAt(3, Constants.PhaseStep.POSTCOMBAT_MAIN);
+        setStopAt(3, PhaseStep.POSTCOMBAT_MAIN);
         execute();
 
         assertPermanentCount(playerA, "Arbor Elf", 1);

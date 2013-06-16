@@ -29,9 +29,7 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -51,9 +49,9 @@ public class ExecutionersHood extends CardImpl<ExecutionersHood> {
         this.subtype.add("Equipment");
 
         // Equipped creature has intimidate.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(IntimidateAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Equip {2}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(2)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 
     public ExecutionersHood(final ExecutionersHood card) {

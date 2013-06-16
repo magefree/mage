@@ -29,11 +29,8 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -72,7 +69,7 @@ public class KitsunePalliator extends CardImpl<KitsunePalliator> {
         this.toughness = new MageInt(2);
 
         // {T}: Prevent the next 1 damage that would be dealt to each creature and each player this turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new KitsunePalliatorEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new KitsunePalliatorEffect(), new TapSourceCost()));
     }
 
     public KitsunePalliator(final KitsunePalliator card) {
@@ -103,7 +100,7 @@ class KitsunePalliatorEffect extends OneShotEffect<KitsunePalliatorEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        PreventDamageTargetEffect effect = new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1);
+        PreventDamageTargetEffect effect = new PreventDamageTargetEffect(Duration.EndOfTurn, 1);
 
         List<Permanent> permanents = game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game);
         for (Permanent permanent: permanents) {

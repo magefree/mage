@@ -29,9 +29,8 @@ package mage.sets.magic2013;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +61,7 @@ public class VoidStalker extends CardImpl<VoidStalker> {
         this.toughness = new MageInt(1);
 
         // {2}{U}, {tap}: Put Void Stalker and target creature on top of their owners' libraries, then those players shuffle their libraries.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new VoidStalkerEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VoidStalkerEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -78,7 +79,7 @@ public class VoidStalker extends CardImpl<VoidStalker> {
 
 class VoidStalkerEffect extends OneShotEffect<VoidStalkerEffect> {
     VoidStalkerEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Put {this} and target creature on top of their owners' libraries, then those players shuffle their libraries";
     }
 
@@ -91,13 +92,13 @@ class VoidStalkerEffect extends OneShotEffect<VoidStalkerEffect> {
         Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
         Permanent s = game.getPermanent(source.getSourceId());
         if (p != null) {
-            p.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, true);
+            p.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             Player pl = game.getPlayer(p.getControllerId());
             if (pl != null)
                 pl.shuffleLibrary(game);
         }
         if (s != null) {
-            s.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, true);
+            s.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
             Player pl = game.getPlayer(s.getControllerId());
             if (pl != null)
                 pl.shuffleLibrary(game);

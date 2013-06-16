@@ -30,9 +30,8 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.SacrificeTargetEffect;
@@ -40,6 +39,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -80,7 +81,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
     private class ShapeAnewEffect extends OneShotEffect<ShapeAnewEffect> {
 
         public ShapeAnewEffect() {
-            super(Constants.Outcome.PutCardInPlay);
+            super(Outcome.PutCardInPlay);
             staticText = "Then reveals cards from the top of his or her library until he or she reveals an artifact card. That player puts that card onto the battlefield, then shuffles all other cards revealed this way into his or her library";
         }
 
@@ -90,7 +91,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
 
         @Override
         public boolean apply(Game game, Ability source) {
-            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+            Permanent sourcePermanent = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
             if (sourcePermanent == null) {
                 return false;
             }
@@ -112,7 +113,7 @@ public class ShapeAnew extends CardImpl<ShapeAnew> {
             }
             player.revealCards("Shape Anew", revealed, game);
             if (artifactCard != null) {
-                artifactCard.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), player.getId());
+                artifactCard.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), player.getId());
             }
             player.getLibrary().addAll(nonArtifactCards.getCards(game), game);
             player.shuffleLibrary(game);

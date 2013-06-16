@@ -29,9 +29,8 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -67,7 +68,7 @@ public class LudevicsTestSubject extends CardImpl<LudevicsTestSubject> {
         this.addAbility(DefenderAbility.getInstance());
         // {1}{U}: Put a hatchling counter on Ludevic's Test Subject. Then if there are five or more hatchling counters on it, remove all of them and transform it.
         this.addAbility(new TransformAbility());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HATCHLING.createInstance()), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.HATCHLING.createInstance()), new ManaCostsImpl("{1}{U}"));
         ability.addEffect(new LudevicsTestSubjectEffect());
         this.addAbility(ability);
     }
@@ -84,7 +85,7 @@ public class LudevicsTestSubject extends CardImpl<LudevicsTestSubject> {
 
 class LudevicsTestSubjectEffect extends OneShotEffect<LudevicsTestSubjectEffect> {
     LudevicsTestSubjectEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Then if there are five or more hatchling counters on it, remove all of them and transform it";
     }
 

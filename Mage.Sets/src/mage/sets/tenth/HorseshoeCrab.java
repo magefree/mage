@@ -29,14 +29,15 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 
 /**
  *
@@ -51,7 +52,7 @@ public class HorseshoeCrab extends CardImpl<HorseshoeCrab> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.U)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ColoredManaCost(ColoredManaSymbol.U)));
     }
 
     public HorseshoeCrab(final HorseshoeCrab card) {

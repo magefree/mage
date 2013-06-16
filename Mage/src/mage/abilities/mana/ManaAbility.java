@@ -28,8 +28,8 @@
 
 package mage.abilities.mana;
 
-import mage.Constants.AbilityType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;

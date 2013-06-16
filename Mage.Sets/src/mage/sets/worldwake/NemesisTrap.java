@@ -29,9 +29,9 @@ package mage.sets.worldwake;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -39,6 +39,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
@@ -113,7 +115,7 @@ class NemesisTrapAlternativeCost extends AlternativeCostImpl<NemesisTrapAlternat
 class NemesisTrapEffect extends OneShotEffect<NemesisTrapEffect> {
 
     public NemesisTrapEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         this.staticText = "Exile target attacking creature. Put a token that's a copy of that creature onto the battlefield. Exile it at the beginning of the next end step";
     }
 
@@ -130,7 +132,7 @@ class NemesisTrapEffect extends OneShotEffect<NemesisTrapEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent targetedCreature = game.getPermanent(source.getFirstTarget());
         if (targetedCreature == null) {
-            targetedCreature = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+            targetedCreature = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         }
         if (targetedCreature != null) {
             targetedCreature.moveToExile(id, "Nemesis Trap Exile", id, game);

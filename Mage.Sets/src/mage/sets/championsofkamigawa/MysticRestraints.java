@@ -29,11 +29,10 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -85,7 +84,7 @@ public class MysticRestraints extends CardImpl<MysticRestraints> {
 
 class MysticRestraintsEffect extends OneShotEffect<MysticRestraintsEffect> {
     MysticRestraintsEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "tap enchanted creature";
     }
 

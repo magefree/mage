@@ -27,7 +27,7 @@
  */
 package mage.filter.predicate.mageobject;
 
-import mage.Constants.SpellAbilityType;
+import mage.constants.SpellAbilityType;
 import mage.MageObject;
 import mage.cards.SplitCard;
 import mage.filter.predicate.Predicate;

@@ -28,14 +28,15 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -74,7 +75,7 @@ public class PatronOfTheKitsune extends CardImpl<PatronOfTheKitsune> {
 class PatronOfTheKitsuneTriggeredAbility extends TriggeredAbilityImpl<PatronOfTheKitsuneTriggeredAbility> {
 
     public PatronOfTheKitsuneTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), true);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), true);
     }
 
     public PatronOfTheKitsuneTriggeredAbility(PatronOfTheKitsuneTriggeredAbility ability) {

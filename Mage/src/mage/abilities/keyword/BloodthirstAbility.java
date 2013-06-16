@@ -1,9 +1,9 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -42,7 +42,7 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
     private int amount;
 
     BloodthirstEffect(int amount) {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         this.amount = amount;
         staticText = "this permanent comes into play with " + amount + " +1/+1 counters on it";
     }

@@ -1,6 +1,8 @@
 package org.mage.test.cards.control;
 
-import mage.Constants;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,17 +15,17 @@ public class BattlefieldTriggeredAbilitiesTest extends CardTestPlayerBase {
 
     @Test
     public void testBeguilerofWillsAndPrimevalTitan() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Primeval Titan");
-        addCard(Constants.Zone.LIBRARY, playerA, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerA, "Primeval Titan");
+        addCard(Zone.LIBRARY, playerA, "Mountain", 10);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Beguiler of Wills");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 5);
-        addCard(Constants.Zone.LIBRARY, playerB, "Mountain", 10);
+        addCard(Zone.BATTLEFIELD, playerB, "Beguiler of Wills");
+        addCard(Zone.BATTLEFIELD, playerB, "Arrogant Bloodlord", 5);
+        addCard(Zone.LIBRARY, playerB, "Mountain", 10);
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Gain control", "Primeval Titan");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerB, "{T}: Gain control", "Primeval Titan");
         attack(4, playerB, "Primeval Titan");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 14);
@@ -39,7 +41,7 @@ public class BattlefieldTriggeredAbilitiesTest extends CardTestPlayerBase {
         int playerACount = 0;
         int playerBCount = 0;
         for (Permanent p : currentGame.getBattlefield().getAllActivePermanents()) {
-            if (p.getCardType().contains(Constants.CardType.LAND)) {
+            if (p.getCardType().contains(CardType.LAND)) {
                 if (p.getControllerId().equals(playerB.getId())) {
                     playerBCount++;
                 }

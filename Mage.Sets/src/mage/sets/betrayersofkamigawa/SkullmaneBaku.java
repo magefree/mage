@@ -29,10 +29,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -46,6 +46,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
@@ -90,7 +92,7 @@ public class SkullmaneBaku extends CardImpl<SkullmaneBaku> {
     class SkullmaneBakuUnboostEffect extends OneShotEffect<SkullmaneBakuUnboostEffect> {
 
         public SkullmaneBakuUnboostEffect() {
-            super(Constants.Outcome.UnboostCreature);
+            super(Outcome.UnboostCreature);
             staticText = "Target creature gets -X/-X until end of turn";
         }
 
@@ -108,7 +110,7 @@ public class SkullmaneBaku extends CardImpl<SkullmaneBaku> {
             }
             Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
             if (creature != null && numberToUnboost != 0) {
-                creature.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(numberToUnboost, numberToUnboost, Constants.Duration.EndOfTurn)), game);
+                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(numberToUnboost, numberToUnboost, Duration.EndOfTurn)), game);
             }
             return true;
         }

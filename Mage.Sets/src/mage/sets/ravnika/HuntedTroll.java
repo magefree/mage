@@ -29,9 +29,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.CreateTokenTargetEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 import mage.target.Target;
 import mage.target.common.TargetOpponent;
@@ -69,7 +70,7 @@ public class HuntedTroll extends CardImpl<HuntedTroll> {
         ability.addTarget(target);
         this.addAbility(ability);
         // {G}: Regenerate Hunted Troll.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.G)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     public HuntedTroll(final HuntedTroll card) {

@@ -27,12 +27,12 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPlayer;
@@ -49,7 +49,7 @@ public class Dreadwaters extends CardImpl<Dreadwaters> {
     private static final FilterLandPermanent filter = new FilterLandPermanent("lands you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public Dreadwaters(UUID ownerId) {

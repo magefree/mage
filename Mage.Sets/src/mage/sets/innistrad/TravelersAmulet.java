@@ -29,15 +29,15 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -53,7 +53,7 @@ public class TravelersAmulet extends CardImpl<TravelersAmulet> {
 
         // {1}, Sacrifice Traveler's Amulet: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.
         TargetCardInLibrary target = new TargetCardInLibrary(new FilterBasicLandCard());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInHandEffect(target, true), new GenericManaCost(1));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

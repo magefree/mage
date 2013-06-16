@@ -29,15 +29,17 @@ package mage.sets.odyssey;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +75,7 @@ public class Entomb extends CardImpl<Entomb> {
 class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveyard> {
 
   public SearchLibraryPutInGraveyard() {
-        super(new TargetCardInLibrary(new FilterCreatureCard()), Constants.Outcome.Neutral);
+        super(new TargetCardInLibrary(new FilterCreatureCard()), Outcome.Neutral);
         staticText = "Search your library for a card and put that card into your graveyard. Then shuffle your library";
     }
 
@@ -98,7 +100,7 @@ class SearchLibraryPutInGraveyard extends SearchEffect<SearchLibraryPutInGraveya
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
-                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                     }
                 }
             }

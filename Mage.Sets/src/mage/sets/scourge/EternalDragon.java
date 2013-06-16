@@ -29,9 +29,8 @@ package mage.sets.scourge;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.PlainscyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -61,7 +61,7 @@ public class EternalDragon extends CardImpl<EternalDragon> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {3}{W}{W}: Return Eternal Dragon from your graveyard to your hand. Activate this ability only during your upkeep.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}{W}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnToHandSourceEffect(), new ManaCostsImpl("{3}{W}{W}"));
         ability.addCost(new OnlyDuringUpkeepCost());
         this.addAbility(ability);
         // PlainscyclingAbility {2}

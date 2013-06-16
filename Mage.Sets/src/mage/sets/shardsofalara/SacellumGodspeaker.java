@@ -28,9 +28,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -38,6 +38,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -61,7 +63,7 @@ public class SacellumGodspeaker extends CardImpl<SacellumGodspeaker> {
         this.toughness = new MageInt(2);
 
         // {tap}: Reveal any number of creature cards with power 5 or greater from your hand. Add {G} to your mana pool for each card revealed this way.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new SacellumGodspeakerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new SacellumGodspeakerEffect(), new TapSourceCost()));
     }
 
     public SacellumGodspeaker(final SacellumGodspeaker card) {
@@ -100,7 +102,7 @@ class SacellumGodspeakerEffect extends ManaEffect<SacellumGodspeakerEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         TargetCardInHand target = new TargetCardInHand(0,Integer.MAX_VALUE, filter);
-        if (target.choose(Constants.Outcome.Benefit, source.getControllerId(), source.getId(), game)) {
+        if (target.choose(Outcome.Benefit, source.getControllerId(), source.getId(), game)) {
             game.getPlayer(source.getControllerId()).getManaPool().addMana(Mana.GreenMana(target.getTargets().size()), game, source);
             return true;
         }

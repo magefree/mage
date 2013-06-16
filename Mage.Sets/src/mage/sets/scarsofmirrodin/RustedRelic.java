@@ -30,11 +30,10 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.MetalcraftCondition;
@@ -74,7 +73,7 @@ class RustedRelicToken extends Token {
 
     public RustedRelicToken() {
         super("Rusted Relic", "a 5/5 Golem artifact creature");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         subtype.add("Golem");
         power = new MageInt(5);
         toughness = new MageInt(5);

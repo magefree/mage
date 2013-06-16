@@ -29,14 +29,14 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -62,7 +62,7 @@ public class NagaoBoundByHonor extends CardImpl<NagaoBoundByHonor> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(1));
-        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn, filter, false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn, filter, false), false));
     }
 
     public NagaoBoundByHonor(final NagaoBoundByHonor card) {

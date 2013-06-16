@@ -28,9 +28,9 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
@@ -39,6 +39,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -60,10 +62,10 @@ public class LeoninDenGuard extends CardImpl<LeoninDenGuard> {
         this.toughness = new MageInt(3);
 
         // As long as Leonin Den-Guard is equipped, it gets +1/+1 and has vigilance.        
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(VigilanceAbility.getInstance()), EquippedCondition.getInstance(), rule2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }
 

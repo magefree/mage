@@ -28,7 +28,7 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants.Rarity;
+import mage.constants.Rarity;
 
 /**
  *

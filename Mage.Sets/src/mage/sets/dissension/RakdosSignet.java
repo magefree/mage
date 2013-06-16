@@ -28,15 +28,16 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,7 +50,7 @@ public class RakdosSignet extends CardImpl<RakdosSignet> {
         this.expansionSetCode = "DIS";
 
         // {1}, {tap}: Add {B}{R} to your mana pool.
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new GenericManaCost(1));
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

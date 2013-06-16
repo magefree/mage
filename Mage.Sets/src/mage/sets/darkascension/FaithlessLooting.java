@@ -29,14 +29,14 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 
 /**
  *
@@ -54,7 +54,7 @@ public class FaithlessLooting extends CardImpl<FaithlessLooting> {
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
         this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
         // Flashback {2}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }
 
     public FaithlessLooting(final FaithlessLooting card) {

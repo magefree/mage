@@ -1,10 +1,11 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,7 +33,7 @@ public class IntimidateAbility extends EvasionAbility<IntimidateAbility> impleme
 
 class IntimidateEffect extends RestrictionEffect<IntimidateEffect> implements MageSingleton {
     public IntimidateEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
     }
 
     public IntimidateEffect(final IntimidateEffect effect) {
@@ -50,7 +51,7 @@ class IntimidateEffect extends RestrictionEffect<IntimidateEffect> implements Ma
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         boolean result = false;
-        if (blocker.getCardType().contains(Constants.CardType.ARTIFACT) && (blocker.getCardType().contains(Constants.CardType.CREATURE)))
+        if (blocker.getCardType().contains(CardType.ARTIFACT) && (blocker.getCardType().contains(CardType.CREATURE)))
             result = true;
         if (attacker.getColor().shares(blocker.getColor()))
             result = true;

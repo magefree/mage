@@ -28,7 +28,7 @@
 package mage.abilities.effects.common.turn;
 
 import java.util.UUID;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;

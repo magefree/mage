@@ -1,6 +1,7 @@
 package org.mage.test.multiplayer;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -20,12 +21,12 @@ public class SimpleGameTest extends CardTestMultiPlayerBase {
 
     @Test
     public void testSimple() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerC, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerD, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerB, "Forest");
+        addCard(Zone.BATTLEFIELD, playerC, "Forest");
+        addCard(Zone.BATTLEFIELD, playerD, "Forest");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -29,7 +29,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -45,7 +45,7 @@ public class Planechase extends ExpansionSet {
     }
 
     private Planechase() {
-        super("Planechase", "HOP", "", "mage.sets.planechase", new GregorianCalendar(2009, 8, 4).getTime(), SetType.REPRINT);
+        super("Planechase", "HOP", "mage.sets.planechase", new GregorianCalendar(2009, 8, 4).getTime(), SetType.REPRINT);
     }
 
 }

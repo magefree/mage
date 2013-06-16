@@ -29,14 +29,15 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -55,7 +56,7 @@ public class CarrionHowler extends CardImpl<CarrionHowler> {
         this.toughness = new MageInt(2);
 
         // Pay 1 life: Carrion Howler gets +2/-1 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Constants.Duration.EndOfTurn), new PayLifeCost(1)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, -1, Duration.EndOfTurn), new PayLifeCost(1)));
     }
 
     public CarrionHowler(final CarrionHowler card) {

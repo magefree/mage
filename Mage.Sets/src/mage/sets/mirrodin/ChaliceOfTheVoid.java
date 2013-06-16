@@ -28,10 +28,10 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +40,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -109,7 +110,7 @@ class ChaliceOfTheVoidTriggeredAbility extends TriggeredAbilityImpl<ChaliceOfThe
    
 
     public ChaliceOfTheVoidTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CounterEffect());
+        super(Zone.BATTLEFIELD, new CounterEffect());
     }
 
 

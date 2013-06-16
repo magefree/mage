@@ -28,10 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,14 +60,14 @@ public class Skygames extends CardImpl<Skygames> {
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Benefit));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Benefit));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
         // Enchanted land has "{tap}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery."
-        Ability gainAbility = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), new TapSourceCost());
+        Ability gainAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         gainAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, Constants.AttachmentType.AURA,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(gainAbility, AttachmentType.AURA,
                 Duration.WhileOnBattlefield, "Enchanted land has \"{T}: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery.\"")));
     }
 

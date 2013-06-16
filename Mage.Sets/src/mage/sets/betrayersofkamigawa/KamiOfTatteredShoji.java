@@ -29,14 +29,14 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 
 /**
@@ -55,7 +55,7 @@ public class KamiOfTatteredShoji extends CardImpl<KamiOfTatteredShoji> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(5);
         // Whenever you cast a Spirit or Arcane spell, Kami of Tattered Shoji gains flying until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter, false));
     }
 
     public KamiOfTatteredShoji(final KamiOfTatteredShoji card) {

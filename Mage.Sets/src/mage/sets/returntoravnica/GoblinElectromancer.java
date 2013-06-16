@@ -28,13 +28,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,7 +66,7 @@ public class GoblinElectromancer extends CardImpl<GoblinElectromancer> {
         this.toughness = new MageInt(2);
 
         // Instant and sorcery spells you cast cost {1} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SpellsCostReductionEffect(filter, 1)));
     }
 
     public GoblinElectromancer(final GoblinElectromancer card) {

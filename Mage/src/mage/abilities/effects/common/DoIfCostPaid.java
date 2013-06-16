@@ -1,11 +1,11 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -15,7 +15,7 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
     private Cost cost;
 
     public DoIfCostPaid(OneShotEffect effect, Cost cost) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.executingEffect = effect;
         this.cost = cost;
     }

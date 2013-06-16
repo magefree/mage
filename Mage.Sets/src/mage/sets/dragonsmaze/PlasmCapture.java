@@ -28,11 +28,11 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.AtTheBeginOfPreCombatMainPhaseTriggeredAbility;
@@ -133,7 +133,7 @@ class PlasmCaptureManaEffect extends ManaEffect<PlasmCaptureManaEffect> {
             Mana mana = new Mana();
             for(int i = 0; i < amountOfMana; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Constants.Outcome.Benefit, choiceColor, game)) {
+                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
                     game.debugMessage("player canceled choosing color. retrying.");
                 }
 

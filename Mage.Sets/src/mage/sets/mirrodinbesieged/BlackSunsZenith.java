@@ -30,13 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ShuffleSpellEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +68,7 @@ public class BlackSunsZenith extends CardImpl<BlackSunsZenith> {
 
 class BlackSunsZenithEffect extends OneShotEffect<BlackSunsZenithEffect> {
     BlackSunsZenithEffect() {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         staticText = "Put X -1/-1 counters on each creature";
     }
 

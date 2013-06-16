@@ -29,9 +29,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -59,8 +59,8 @@ public class FlameKinZealot extends CardImpl<FlameKinZealot> {
         this.toughness = new MageInt(2);
 
         // When Flame-Kin Zealot enters the battlefield, creatures you control get +1/+1 and gain haste until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 1, Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityControlledEffect(HasteAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(ability);
     }
 

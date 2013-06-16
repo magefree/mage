@@ -28,9 +28,9 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -57,7 +58,7 @@ public class OrcishArtillery extends CardImpl<OrcishArtillery> {
         this.toughness = new MageInt(3);
 
         // {tap}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         ability.addEffect(new DamageControllerEffect(3));
         this.addAbility(ability);

@@ -1,7 +1,8 @@
 package org.mage.test.cards.single.roe;
 
-import mage.Constants;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -17,18 +18,18 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
      */
     @Test
     public void testCastWithRebound() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
         /*
          * Instant and sorcery spells you control have rebound. (Exile the spell as
          * it resolves if you cast it from your hand. At the beginning of your next
          * upkeep, you may cast that card from exile without paying its mana cost.)
          *
          */
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cast Through Time");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Cast Through Time");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 14);
@@ -40,12 +41,12 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
      */
     @Test
     public void testCastWithDoubleRebound() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cast Through Time", 2);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Cast Through Time", 2);
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 14);
@@ -56,10 +57,10 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
      */
     @Test
     public void testReboundTooltipExists() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cast Through Time");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Cast Through Time");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         boolean found = false;
@@ -81,15 +82,15 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
      */
     @Test
     public void testCastWithoutRebound() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cast Through Time");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.HAND, playerA, "Naturalize");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Cast Through Time");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.HAND, playerA, "Naturalize");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Naturalize", "Cast Through Time");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Naturalize", "Cast Through Time");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 17);
@@ -100,12 +101,12 @@ public class CastThroughTimeTest extends CardTestPlayerBase {
      */
     @Test
     public void testInAnotherZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Cast Through Time");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.GRAVEYARD, playerA, "Cast Through Time");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerB, 17);

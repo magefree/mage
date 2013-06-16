@@ -28,16 +28,17 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.ExileFromZoneTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +65,7 @@ public class CurseOfOblivion extends CardImpl<CurseOfOblivion> {
         // Enchant player
         TargetPlayer target = new TargetPlayer();
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(target.getTargetName());
         this.addAbility(ability);
 

@@ -30,15 +30,15 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,7 +49,7 @@ public class TowerOfEons extends CardImpl<TowerOfEons> {
     public TowerOfEons (UUID ownerId) {
         super(ownerId, 266, "Tower of Eons", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "MRD";
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(10), new GenericManaCost(8));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

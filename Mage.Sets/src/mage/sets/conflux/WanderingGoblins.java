@@ -29,9 +29,8 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -39,6 +38,8 @@ import mage.abilities.dynamicvalue.common.DomainValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -57,7 +58,7 @@ public class WanderingGoblins extends CardImpl<WanderingGoblins> {
         this.toughness = new MageInt(3);
 
         // Domain - {3}: Wandering Goblins gets +1/+0 until end of turn for each basic land type among lands you control.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Constants.Duration.EndOfTurn), new GenericManaCost(3)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(new DomainValue(), new StaticValue(0), Duration.EndOfTurn), new GenericManaCost(3)));
     }
 
     public WanderingGoblins(final WanderingGoblins card) {

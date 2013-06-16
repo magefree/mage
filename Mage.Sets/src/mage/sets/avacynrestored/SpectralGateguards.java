@@ -27,15 +27,15 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ public class SpectralGateguards extends CardImpl<SpectralGateguards> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Spectral Gateguards is paired with another creature, both creatures have vigilance.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(VigilanceAbility.getInstance(), ruleText)));
     }
 
     public SpectralGateguards(final SpectralGateguards card) {

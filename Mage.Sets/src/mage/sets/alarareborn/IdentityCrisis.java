@@ -30,13 +30,13 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -69,7 +69,7 @@ public class IdentityCrisis extends CardImpl<IdentityCrisis> {
 
 class IdentityCrisisEffect extends OneShotEffect<IdentityCrisisEffect> {
     IdentityCrisisEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "Exile all cards from target player's hand and graveyard";
     }
 

@@ -29,7 +29,7 @@
 package mage.abilities.costs.common;
 
 import java.util.UUID;
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.filter.FilterPermanent;

@@ -28,10 +28,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.*;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 

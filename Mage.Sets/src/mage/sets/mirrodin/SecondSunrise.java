@@ -29,9 +29,8 @@ package mage.sets.mirrodin;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -71,7 +70,7 @@ public class SecondSunrise extends CardImpl<SecondSunrise> {
 class SecondSunriseEffect extends OneShotEffect<SecondSunriseEffect> {
 
     SecondSunriseEffect() {
-        super(Constants.Outcome.PutCardInPlay);
+        super(Outcome.PutCardInPlay);
         staticText = "Each player returns to the battlefield all artifact, creature, enchantment, and land cards in his or her graveyard that were put there from the battlefield this turn";
     }
 
@@ -85,10 +84,10 @@ class SecondSunriseEffect extends OneShotEffect<SecondSunriseEffect> {
         if (watcher != null) {
             for (UUID id : watcher.cards) {
                 Card c = game.getCard(id);
-                if (c != null && game.getState().getZone(id) == Constants.Zone.GRAVEYARD) {
+                if (c != null && game.getState().getZone(id) == Zone.GRAVEYARD) {
                     if (c.getCardType().contains(CardType.ARTIFACT) || c.getCardType().contains(CardType.CREATURE) ||
                         c.getCardType().contains(CardType.ENCHANTMENT) || c.getCardType().contains(CardType.LAND))
-                    c.moveToZone(Constants.Zone.BATTLEFIELD, source.getSourceId(), game, false);
+                    c.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, false);
                 }
             }
             return true;
@@ -106,7 +105,7 @@ class SecondSunriseWatcher extends WatcherImpl<SecondSunriseWatcher> {
     ArrayList<UUID> cards = new ArrayList<UUID>();
 
     public SecondSunriseWatcher() {
-        super("SecondSunriseWatcher", Constants.WatcherScope.GAME);
+        super("SecondSunriseWatcher", WatcherScope.GAME);
     }
 
     public SecondSunriseWatcher(final SecondSunriseWatcher watcher) {

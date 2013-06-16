@@ -1,7 +1,8 @@
 package org.mage.test.cards.abilities.lose;
 
-import mage.Constants;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,19 +19,19 @@ public class LoseAbilityByEquipmentTest extends CardTestPlayerBase {
      */
     @Test
     public void testGainVsLoseByEquipmentAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
-        addCard(Constants.Zone.HAND, playerA, "Magebane Armor"); // loses Flying
-        addCard(Constants.Zone.HAND, playerA, "Cobbled Wings"); // gives Flying
+        addCard(Zone.HAND, playerA, "Magebane Armor"); // loses Flying
+        addCard(Zone.HAND, playerA, "Cobbled Wings"); // gives Flying
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Magebane Armor");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Cobbled Wings");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion"); // give Flying
-        activateAbility(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip {2}", "Silvercoat Lion"); // lose Flying
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Magebane Armor");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Cobbled Wings");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", "Silvercoat Lion"); // give Flying
+        activateAbility(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Equip {2}", "Silvercoat Lion"); // lose Flying
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

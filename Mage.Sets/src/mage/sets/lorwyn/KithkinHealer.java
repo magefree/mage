@@ -27,15 +27,16 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -54,7 +55,7 @@ public class KithkinHealer extends CardImpl<KithkinHealer> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

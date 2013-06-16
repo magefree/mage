@@ -28,11 +28,11 @@
 
 package mage.abilities.costs.common;
 
-import mage.Constants;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -77,7 +77,7 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
                 if (card == null) {
                     return false;
                 }
-                paid |= card.moveToZone(Constants.Zone.EXILED, sourceId, game, false);
+                paid |= card.moveToZone(Zone.EXILED, sourceId, game, false);
             }
         }
         return paid;

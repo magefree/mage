@@ -29,7 +29,7 @@
 package mage.players;
 
 import mage.ConditionalMana;
-import mage.Constants.ManaType;
+import mage.constants.ManaType;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.filter.Filter;

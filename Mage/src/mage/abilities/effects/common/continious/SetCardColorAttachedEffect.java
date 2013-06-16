@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -40,10 +40,10 @@ import mage.game.permanent.Permanent;
 public class SetCardColorAttachedEffect extends ContinuousEffectImpl<SetCardColorAttachedEffect> {
 
     private ObjectColor setColor;
-    private Constants.AttachmentType attachmentType;
+    private AttachmentType attachmentType;
 
-    public SetCardColorAttachedEffect(ObjectColor setColor, Constants.Duration duration, Constants.AttachmentType attachmentType) {
-        super(duration, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+    public SetCardColorAttachedEffect(ObjectColor setColor, Duration duration, AttachmentType attachmentType) {
+        super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.setColor = setColor;
         this.attachmentType = attachmentType;
         setText();
@@ -75,9 +75,9 @@ public class SetCardColorAttachedEffect extends ContinuousEffectImpl<SetCardColo
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == Constants.AttachmentType.AURA)
+        if (attachmentType == AttachmentType.AURA)
             sb.append("Enchanted");
-        else if (attachmentType == Constants.AttachmentType.EQUIPMENT)
+        else if (attachmentType == AttachmentType.EQUIPMENT)
             sb.append("Equipped");
 
         sb.append(" creature is ").append(setColor.getDescription());

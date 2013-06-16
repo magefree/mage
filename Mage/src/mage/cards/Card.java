@@ -28,8 +28,8 @@
 
 package mage.cards;
 
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;

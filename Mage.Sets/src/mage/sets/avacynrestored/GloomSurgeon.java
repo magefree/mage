@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,7 +56,7 @@ public class GloomSurgeon extends CardImpl<GloomSurgeon> {
         this.toughness = new MageInt(1);
 
         // If combat damage would be dealt to Gloom Surgeon, prevent that damage and exile that many cards from the top of your library.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GloomSurgeonEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GloomSurgeonEffect()));
     }
 
     public GloomSurgeon(final GloomSurgeon card) {
@@ -74,7 +72,7 @@ public class GloomSurgeon extends CardImpl<GloomSurgeon> {
 class GloomSurgeonEffect extends ReplacementEffectImpl<GloomSurgeonEffect> {
 
     GloomSurgeonEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If combat damage would be dealt to {this}, prevent that damage and exile that many cards from the top of your library";
     }
 

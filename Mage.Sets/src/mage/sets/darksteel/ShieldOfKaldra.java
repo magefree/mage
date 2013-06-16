@@ -28,13 +28,12 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
@@ -75,7 +74,7 @@ public class ShieldOfKaldra extends CardImpl<ShieldOfKaldra> {
         effect.setText("Equipment named Sword of Kaldra, Shield of Kaldra, and Helm of Kaldra are indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Equipped creature is indestructible.
-        effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT, Constants.Duration.WhileOnBattlefield);
+        effect = new GainAbilityAttachedEffect(IndestructibleAbility.getInstance(), AttachmentType.EQUIPMENT, Duration.WhileOnBattlefield);
         effect.setText("Equipped creature is indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
         // Equip {4}

@@ -28,14 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -78,12 +80,12 @@ class JaddiLifestriderEffect extends OneShotEffect<JaddiLifestriderEffect> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped creatures you control");
     
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(new TappedPredicate()));
     }
 
     public JaddiLifestriderEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "you may tap any number of untapped creatures you control. You gain 2 life for each creature tapped this way";
     }
 
@@ -98,7 +100,7 @@ class JaddiLifestriderEffect extends OneShotEffect<JaddiLifestriderEffect> {
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
                 UUID creature = target.getFirstTarget();
                 if (creature != null) {
                     game.getPermanent(creature).tap(game);

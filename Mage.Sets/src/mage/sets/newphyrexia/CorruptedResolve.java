@@ -29,12 +29,12 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -70,7 +70,7 @@ public class CorruptedResolve extends CardImpl<CorruptedResolve> {
 
 class CorruptedResolveEffect extends OneShotEffect<CorruptedResolveEffect> {
     CorruptedResolveEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Counter target spell if its controller is poisoned";
     }
 

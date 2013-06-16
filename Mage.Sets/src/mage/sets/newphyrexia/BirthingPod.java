@@ -29,9 +29,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -41,6 +40,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,7 +64,7 @@ public class BirthingPod extends CardImpl<BirthingPod> {
         this.color.setGreen(true);
 
         // {1}{GP}, {tap}, Sacrifice a creature: Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{GP}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new BirthingPodEffect(), new ManaCostsImpl("{1}{GP}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         this.addAbility(ability);
@@ -81,7 +82,7 @@ public class BirthingPod extends CardImpl<BirthingPod> {
 
 class BirthingPodEffect extends OneShotEffect<BirthingPodEffect> {
     BirthingPodEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Search your library for a creature card with converted mana cost equal to 1 plus the sacrificed creature's converted mana cost, put that card onto the battlefield, then shuffle your library";
     }
 
@@ -112,7 +113,7 @@ class BirthingPodEffect extends OneShotEffect<BirthingPodEffect> {
                 for (UUID cardId : target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId());
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());
                     }
                 }
             }

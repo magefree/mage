@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.EvasionAbility;
 import mage.abilities.MageSingleton;

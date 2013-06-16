@@ -28,9 +28,9 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TenOrLessLifeCondition;
@@ -38,6 +38,7 @@ import mage.abilities.condition.common.UnlessCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 
 /**
  *
@@ -58,7 +59,7 @@ public class VampireLacerator extends CardImpl<VampireLacerator> {
             new ConditionalOneShotEffect(
                     new LoseLifeSourceEffect(1),
                     new UnlessCondition( new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT) ),
-                    "you lose 1 life unless an opponent has 10 or less life"), Constants.TargetController.YOU, false));
+                    "you lose 1 life unless an opponent has 10 or less life"), TargetController.YOU, false));
     }
 
     public VampireLacerator(final VampireLacerator card) {

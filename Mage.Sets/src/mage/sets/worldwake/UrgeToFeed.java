@@ -28,13 +28,16 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -59,7 +62,7 @@ public class UrgeToFeed extends CardImpl<UrgeToFeed> {
         this.color.setBlack(true);
 
         // Target creature gets -3/-3 until end of turn. You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-3, -3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new UrgeToFeedEffect());
     }
@@ -79,13 +82,13 @@ class UrgeToFeedEffect extends OneShotEffect<UrgeToFeedEffect> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("untapped Vampire creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(Predicates.not(new TappedPredicate()));
         filter.add(new SubtypePredicate("Vampire"));
     }
 
     public UrgeToFeedEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "You may tap any number of untapped Vampire creatures you control. If you do, put a +1/+1 counter on each of those Vampires";
     }
 
@@ -98,7 +101,7 @@ class UrgeToFeedEffect extends OneShotEffect<UrgeToFeedEffect> {
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         while (true) {
             target.clearChosen();
-            if (target.canChoose(source.getControllerId(), game) && target.choose(Constants.Outcome.Tap, source.getControllerId(), source.getId(), game)) {
+            if (target.canChoose(source.getControllerId(), game) && target.choose(Outcome.Tap, source.getControllerId(), source.getId(), game)) {
                 UUID vampire = target.getFirstTarget();
                 if (vampire != null) {
                     game.getPermanent(vampire).tap(game);

@@ -28,15 +28,16 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.LoseLifePlayersEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -65,7 +66,7 @@ public class ShepherdOfRot extends CardImpl<ShepherdOfRot> {
         this.toughness = new MageInt(1);
 
         // {tap}: Each player loses 1 life for each Zombie on the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifePlayersEffect(new PermanentsOnBattlefieldCount(filter), rule), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifePlayersEffect(new PermanentsOnBattlefieldCount(filter), rule), new TapSourceCost()));
     }
 
     public ShepherdOfRot(final ShepherdOfRot card) {

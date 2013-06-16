@@ -29,14 +29,15 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.SplitCard;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -87,7 +88,7 @@ class BeckTriggeredAbility extends DelayedTriggeredAbility<BeckTriggeredAbility>
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public BeckTriggeredAbility() {
-        super(new DrawCardControllerEffect(1), Constants.Duration.EndOfTurn, false);
+        super(new DrawCardControllerEffect(1), Duration.EndOfTurn, false);
         optional = true;
     }
 

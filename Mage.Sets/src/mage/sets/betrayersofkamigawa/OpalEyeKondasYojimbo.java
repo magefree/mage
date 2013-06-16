@@ -28,11 +28,11 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,6 +44,7 @@ import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.BushidoAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -95,7 +96,7 @@ public class OpalEyeKondasYojimbo extends CardImpl<OpalEyeKondasYojimbo> {
 class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl<OpalEyeKondasYojimboRedirectionEffect> {
 
     OpalEyeKondasYojimboRedirectionEffect() {
-        super(Constants.Duration.EndOfTurn, Outcome.RedirectDamage);
+        super(Duration.EndOfTurn, Outcome.RedirectDamage);
         staticText = "The next time a source of your choice would deal damage this turn, that damage is dealt to {this} instead";
     }
 
@@ -168,7 +169,7 @@ class OpalEyeKondasYojimboRedirectionEffect extends ReplacementEffectImpl<OpalEy
 class OpalEyeKondasYojimboPreventEffect extends PreventionEffectImpl<OpalEyeKondasYojimboPreventEffect> {
 
     public OpalEyeKondasYojimboPreventEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         staticText = "Prevent the next 1 damage that would be dealt to {this} this turn";
     }
 

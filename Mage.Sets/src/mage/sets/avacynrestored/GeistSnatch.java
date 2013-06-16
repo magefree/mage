@@ -27,14 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -79,7 +79,7 @@ public class GeistSnatch extends CardImpl<GeistSnatch> {
 class GeistSnatchCounterTargetEffect extends OneShotEffect<GeistSnatchCounterTargetEffect> {
 
     public GeistSnatchCounterTargetEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Counter target creature spell. Put a 1/1 blue Spirit creature token with flying onto the battlefield";
     }
 
@@ -105,7 +105,7 @@ class SpiritBlueToken extends Token {
 
     public SpiritBlueToken() {
         super("Spirit", "1/1 blue Spirit creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         subtype.add("Spirit");
         color.setBlue(true);
         power = new MageInt(1);

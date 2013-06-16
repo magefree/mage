@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;

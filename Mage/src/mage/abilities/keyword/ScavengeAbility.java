@@ -28,9 +28,9 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.ExileSourceFromGraveCost;
@@ -85,7 +85,7 @@ public class ScavengeAbility extends ActivatedAbilityImpl<ScavengeAbility> {
 
 class ScavengeEffect extends OneShotEffect<ScavengeEffect> {
     ScavengeEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
     }
 
     ScavengeEffect(final ScavengeEffect effect) {

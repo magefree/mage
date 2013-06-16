@@ -28,7 +28,7 @@
 
 package mage.target;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.filter.FilterCard;

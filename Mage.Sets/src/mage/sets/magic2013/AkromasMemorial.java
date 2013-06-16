@@ -27,15 +27,16 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.CompoundAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -64,7 +65,7 @@ public class AkromasMemorial extends CardImpl<AkromasMemorial> {
     public void build() {
         // Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
         CompoundAbility abilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance(), HasteAbility.getInstance(), new ProtectionAbility(filterBlack), new ProtectionAbility(filterRed));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(abilities, Constants.Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(abilities, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
     }
 
     public AkromasMemorial(final AkromasMemorial card) {

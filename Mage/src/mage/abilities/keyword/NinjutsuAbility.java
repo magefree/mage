@@ -29,8 +29,8 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Zone;
+
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.UnblockedPredicate;
 import mage.game.Game;
@@ -101,7 +102,7 @@ public class NinjutsuAbility extends ActivatedAbilityImpl<NinjutsuAbility> {
 class NinjutsuEffect extends OneShotEffect<NinjutsuEffect> {
 
     public NinjutsuEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put this card onto the battlefield from your hand tapped and attacking";
     }
 
@@ -118,7 +119,7 @@ class NinjutsuEffect extends OneShotEffect<NinjutsuEffect> {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
-            card.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent != null) {
                 UUID defendingPlayerId = null;
@@ -154,7 +155,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl<ReturnAttackerToHandTarget
 
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Constants.Outcome.ReturnToHand, controllerId, sourceId, game)) {
+        if (targets.choose(Outcome.ReturnToHand, controllerId, sourceId, game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {

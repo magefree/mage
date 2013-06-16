@@ -28,10 +28,10 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 
 /**
@@ -55,7 +56,7 @@ public class SecondChance extends CardImpl<SecondChance> {
         this.color.setBlue(true);
 
         // At the beginning of your upkeep, if you have 5 or less life, sacrifice Second Chance and take an extra turn after this one.
-        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), Constants.TargetController.YOU, false);
+        TriggeredAbility ability  = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new SacrificeSourceEffect(), TargetController.YOU, false);
         ability.addEffect(new AddExtraTurnControllerEffect());
         this.addAbility(new ConditionalTriggeredAbility(ability, new FiveOrLessLifeCondition(), "At the beginning of your upkeep, if you have 5 or less life, sacrifice {this} and take an extra turn after this one"));
         

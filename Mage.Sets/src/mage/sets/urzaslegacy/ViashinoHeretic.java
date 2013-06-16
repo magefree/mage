@@ -28,9 +28,9 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +62,7 @@ public class ViashinoHeretic extends CardImpl<ViashinoHeretic> {
         this.toughness = new MageInt(3);
 
         // {1}{R}, {tap}: Destroy target artifact. Viashino Heretic deals damage to that artifact's controller equal to the artifact's converted mana cost.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ViashinoHereticEffect(), new ManaCostsImpl("{1}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ViashinoHereticEffect(), new ManaCostsImpl("{1}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent());
         this.addAbility(ability);
@@ -80,7 +82,7 @@ class ViashinoHereticEffect extends OneShotEffect<ViashinoHereticEffect> {
 
     
     public ViashinoHereticEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
     }
 
     public ViashinoHereticEffect(final ViashinoHereticEffect effect) {

@@ -27,14 +27,14 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Duration;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Duration;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,7 +50,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
 
     static {
         vampires.add(new SubtypePredicate("Vampire"));
-        vampires.add(new ControllerPredicate(Constants.TargetController.YOU));
+        vampires.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public VampiricFury(UUID ownerId) {
@@ -60,7 +60,7 @@ public class VampiricFury extends CardImpl<VampiricFury> {
         this.color.setRed(true);
 
         // Vampire creatures you control get +2/+0 and gain first strike until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Constants.Duration.EndOfTurn, vampires));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(2, 0, Duration.EndOfTurn, vampires));
         this.getSpellAbility().addEffect(new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, vampires));
     }
 

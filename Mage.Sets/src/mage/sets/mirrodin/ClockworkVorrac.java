@@ -29,9 +29,8 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -44,6 +43,8 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -64,7 +65,7 @@ public class ClockworkVorrac extends CardImpl<ClockworkVorrac> {
         this.addAbility(TrampleAbility.getInstance());
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(4)), "{this} enters the battlefield with four +1/+1 counters on it"));
         this.addAbility(new AttacksOrBlocksTriggeredAbility(new ClockworkVorracEffect(), false));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new TapSourceCost()));
     }
 
     public ClockworkVorrac(final ClockworkVorrac card) {
@@ -79,7 +80,7 @@ public class ClockworkVorrac extends CardImpl<ClockworkVorrac> {
 
 class ClockworkVorracEffect extends OneShotEffect<ClockworkVorracEffect> {
     ClockworkVorracEffect() {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 

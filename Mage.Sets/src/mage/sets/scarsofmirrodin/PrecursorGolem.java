@@ -27,9 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -39,6 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -94,7 +95,7 @@ class PrecursorGolemCopyTriggeredAbility extends TriggeredAbilityImpl<PrecursorG
     }
 
     PrecursorGolemCopyTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);
+        super(Zone.BATTLEFIELD, new PrecursorGolemCopySpellEffect(), false);
     }
 
     PrecursorGolemCopyTriggeredAbility(final PrecursorGolemCopyTriggeredAbility ability) {
@@ -162,7 +163,7 @@ class PrecursorGolemCopySpellEffect extends OneShotEffect<PrecursorGolemCopySpel
     }
 
     public PrecursorGolemCopySpellEffect() {
-        super(Constants.Outcome.Copy);
+        super(Outcome.Copy);
     }
 
     public PrecursorGolemCopySpellEffect(final PrecursorGolemCopySpellEffect effect) {

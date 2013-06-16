@@ -29,14 +29,15 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -53,7 +54,7 @@ public class JoinerAdept extends CardImpl<JoinerAdept> {
         this.color.setGreen(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Constants.Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(), false)));
     }
 
     public JoinerAdept(final JoinerAdept card) {

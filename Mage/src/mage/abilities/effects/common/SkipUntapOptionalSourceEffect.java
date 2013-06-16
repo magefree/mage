@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -60,7 +60,7 @@ public class SkipUntapOptionalSourceEffect extends RestrictionEffect<SkipUntapOp
     @Override
     public boolean canBeUntapped(Permanent permanent, Game game) {
         Player player = game.getPlayer(permanent.getControllerId());
-        return player != null && player.chooseUse(Constants.Outcome.Benefit, "Untap " + permanent.getName() + "?", game);
+        return player != null && player.chooseUse(Outcome.Benefit, "Untap " + permanent.getName() + "?", game);
     }
 
     @Override

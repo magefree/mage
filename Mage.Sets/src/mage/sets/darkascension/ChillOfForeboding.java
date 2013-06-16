@@ -28,17 +28,18 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -57,7 +58,7 @@ public class ChillOfForeboding extends CardImpl<ChillOfForeboding> {
         // Each player puts the top five cards of his or her library into his or her graveyard.
         this.getSpellAbility().addEffect(new ChillOfForebodingEffect());
         // Flashback {7}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{U}"), TimingRule.SORCERY));
     }
 
     public ChillOfForeboding(final ChillOfForeboding card) {

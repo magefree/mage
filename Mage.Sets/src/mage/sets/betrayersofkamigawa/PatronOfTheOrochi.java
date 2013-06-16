@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateOncePerTurnActivatedAbility;
@@ -39,6 +39,8 @@ import mage.ObjectColor;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.keyword.OfferingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -67,7 +69,7 @@ public class PatronOfTheOrochi extends CardImpl<PatronOfTheOrochi> {
         this.addAbility(new OfferingAbility("Snake"));
 
         // {T}: Untap all Forests and all green creatures. Activate this ability only once each turn.
-        this.addAbility(new ActivateOncePerTurnActivatedAbility(Constants.Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
+        this.addAbility(new ActivateOncePerTurnActivatedAbility(Zone.BATTLEFIELD, new PatronOfTheOrochiEffect(), new TapSourceCost()));
         
     }
 
@@ -92,7 +94,7 @@ class PatronOfTheOrochiEffect extends OneShotEffect<PatronOfTheOrochiEffect> {
     }
 
     public PatronOfTheOrochiEffect() {
-        super(Constants.Outcome.Untap);
+        super(Outcome.Untap);
         staticText = "Untap all Forests and all green creatures";
     }
 

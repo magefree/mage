@@ -29,9 +29,8 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
@@ -39,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -78,7 +78,7 @@ public class DrogskolReaver extends CardImpl<DrogskolReaver> {
 class DrogskolReaverAbility extends TriggeredAbilityImpl<DrogskolReaverAbility> {
 
     public DrogskolReaverAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), false);
+        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), false);
     }
 
     public DrogskolReaverAbility(final DrogskolReaverAbility ability) {

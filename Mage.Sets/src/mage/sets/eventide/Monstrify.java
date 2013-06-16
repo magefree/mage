@@ -28,13 +28,15 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -50,10 +52,10 @@ public class Monstrify extends CardImpl<Monstrify> {
         this.color.setGreen(true);
 
         // Target creature gets +4/+4 until end of turn.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }
 
     public Monstrify(final Monstrify card) {

@@ -28,16 +28,17 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AttackingPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -50,7 +51,7 @@ public class GruulWarChant extends CardImpl<GruulWarChant> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking creature you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AttackingPredicate());
     }
 

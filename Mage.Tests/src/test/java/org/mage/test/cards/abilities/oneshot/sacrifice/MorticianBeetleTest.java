@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.oneshot.sacrifice;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,19 +15,19 @@ public class MorticianBeetleTest extends CardTestPlayerBase {
      */
     @Test
     public void testSacrifice() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 4);
-        addCard(Constants.Zone.HAND, playerA, "Cruel Edict");
-        addCard(Constants.Zone.HAND, playerA, "Geth's Verdict");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mortician Beetle");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 4);
+        addCard(Zone.HAND, playerA, "Cruel Edict");
+        addCard(Zone.HAND, playerA, "Geth's Verdict");
+        addCard(Zone.BATTLEFIELD, playerA, "Mortician Beetle");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Savannah Lions");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sigiled Paladin");
+        addCard(Zone.BATTLEFIELD, playerB, "Savannah Lions");
+        addCard(Zone.BATTLEFIELD, playerB, "Sigiled Paladin");
 
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Cruel Edict");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Geth's Verdict");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cruel Edict");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Geth's Verdict");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerB, 0);

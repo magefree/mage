@@ -29,11 +29,11 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -77,7 +77,7 @@ public class SmeltWardGatekeepers extends CardImpl<SmeltWardGatekeepers> {
 
         // When Smelt-Ward Gatekeepers enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.
         Ability ability = new ConditionalTriggeredAbility(
-                new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.EndOfTurn)),
+                new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn)),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 1),
                 "When {this} enters the battlefield, if you control two or more Gates, gain control of target creature an opponent controls until end of turn. Untap that creature. That creature gains haste until end of turn.");
         ability.addEffect(new UntapTargetEffect());

@@ -29,9 +29,8 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksOrBlocksTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -73,7 +73,7 @@ public class ClockworkBeetle extends CardImpl<ClockworkBeetle> {
 
 class ClockworkBeetleEffect extends OneShotEffect<ClockworkBeetleEffect> {
     ClockworkBeetleEffect() {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         staticText = "remove a +1/+1 counter from {this} at end of combat";
     }
 

@@ -28,13 +28,14 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetOpponent;
@@ -71,7 +72,7 @@ public class RecurringInsight extends CardImpl<RecurringInsight> {
 class RecurringInsightEffect extends OneShotEffect<RecurringInsightEffect> {
 
     public RecurringInsightEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Draw cards equal to the number of cards in target opponent's hand";
     }
 
@@ -84,7 +85,7 @@ class RecurringInsightEffect extends OneShotEffect<RecurringInsightEffect> {
         TargetOpponent target = new TargetOpponent();
         Player you = game.getPlayer(source.getControllerId());
         if (target.canChoose(source.getSourceId(), source.getControllerId(), game)) {
-            you.chooseTarget(Constants.Outcome.DrawCard, target, source, game);
+            you.chooseTarget(Outcome.DrawCard, target, source, game);
             Player opponent = game.getPlayer(target.getFirstTarget());
             if (opponent != null) {
                 you.drawCards(opponent.getHand().size(), game);

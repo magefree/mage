@@ -29,12 +29,12 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +48,7 @@ public class DoubleCleave extends CardImpl<DoubleCleave> {
         this.expansionSetCode = "EVE";
         this.color.setRed(true);
         this.color.setWhite(true);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 

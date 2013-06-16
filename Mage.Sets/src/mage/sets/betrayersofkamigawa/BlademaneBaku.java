@@ -29,10 +29,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.game.Game;
@@ -84,7 +86,7 @@ public class BlademaneBaku extends CardImpl<BlademaneBaku> {
     class BlademaneBakuBoostEffect extends OneShotEffect<BlademaneBakuBoostEffect> {
 
         public BlademaneBakuBoostEffect() {
-            super(Constants.Outcome.UnboostCreature);
+            super(Outcome.UnboostCreature);
             staticText = "For each counter removed, {this} gets +2/+0 until end of turn";
         }
 
@@ -101,7 +103,7 @@ public class BlademaneBaku extends CardImpl<BlademaneBaku> {
                 }
             }
             if (numberToBoost >= 0) {
-                game.addEffect(new BoostSourceEffect(numberToBoost, 0, Constants.Duration.EndOfTurn), source);
+                game.addEffect(new BoostSourceEffect(numberToBoost, 0, Duration.EndOfTurn), source);
                 return true;
             }
             return false;

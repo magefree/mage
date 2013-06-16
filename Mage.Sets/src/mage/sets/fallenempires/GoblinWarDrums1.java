@@ -28,13 +28,14 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -46,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public GoblinWarDrums1(UUID ownerId) {

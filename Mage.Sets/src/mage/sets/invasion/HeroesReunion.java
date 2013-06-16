@@ -27,8 +27,8 @@
  */
 package mage.sets.invasion;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.TargetPlayer;

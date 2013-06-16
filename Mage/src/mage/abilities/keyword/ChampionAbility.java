@@ -29,9 +29,9 @@ package mage.abilities.keyword;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -107,7 +107,7 @@ public class ChampionAbility extends StaticAbility<ChampionAbility> {
         card.addAbility(ability1);
 
         // When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Constants.Zone.BATTLEFIELD), false);
+        Ability ability2 = new LeavesBattlefieldTriggeredAbility(new ReturnFromExileForSourceEffect(Zone.BATTLEFIELD), false);
         ability2.setRuleVisible(false);
         card.addAbility(ability2);
     }

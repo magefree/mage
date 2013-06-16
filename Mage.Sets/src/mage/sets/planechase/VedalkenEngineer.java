@@ -29,9 +29,8 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -44,6 +43,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -113,7 +113,7 @@ class VedalkenEngineerManaCondition implements Condition {
 class VedalkenEngineerAbility extends ManaAbility<VedalkenEngineerAbility> {
 
     public VedalkenEngineerAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder) {
-        super(Constants.Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
+        super(Zone.BATTLEFIELD, new VedalkenEngineerEffect(amount, manaBuilder), cost);
         this.addChoice(new ChoiceColor());
         this.netMana.setAny(amount);
     }

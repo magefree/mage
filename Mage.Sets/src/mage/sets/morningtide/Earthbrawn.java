@@ -29,13 +29,13 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.ReinforceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -48,7 +48,7 @@ public class Earthbrawn extends CardImpl<Earthbrawn> {
         super(ownerId, 119, "Earthbrawn", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "MOR";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.addAbility(new ReinforceAbility(1, new ManaCostsImpl("{1}{G}")));
     }

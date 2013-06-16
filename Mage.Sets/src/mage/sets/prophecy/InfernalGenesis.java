@@ -28,9 +28,8 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -55,7 +54,7 @@ public class InfernalGenesis extends CardImpl<InfernalGenesis> {
         this.color.setBlack(true);
 
         // At the beginning of each player's upkeep, that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new InfernalGenesisEffect(), TargetController.ANY, false));
     }
 
     public InfernalGenesis(final InfernalGenesis card) {
@@ -71,7 +70,7 @@ public class InfernalGenesis extends CardImpl<InfernalGenesis> {
 class InfernalGenesisEffect extends OneShotEffect<InfernalGenesisEffect> {
 
     InfernalGenesisEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "that player puts the top card of his or her library into his or her graveyard. Then he or she puts X 1/1 black Minion creature tokens onto the battlefield, where X is that card's converted mana cost";
     }
 
@@ -85,7 +84,7 @@ class InfernalGenesisEffect extends OneShotEffect<InfernalGenesisEffect> {
         if (player != null) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                if (card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false)) {
+                if (card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false)) {
                     int cmc = card.getManaCost().convertedManaCost();
                     MinionToken token = new MinionToken();
                     token.putOntoBattlefield(cmc, game, id, player.getId());

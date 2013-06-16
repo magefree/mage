@@ -1,6 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardSourceCost;
@@ -9,6 +8,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
@@ -23,7 +24,7 @@ import java.util.UUID;
  */
 public class TransmuteAbility extends SimpleActivatedAbility {
     public TransmuteAbility(String manaCost) {
-        super(Constants.Zone.HAND, new TransmuteEffect(), new ManaCostsImpl(manaCost));
+        super(Zone.HAND, new TransmuteEffect(), new ManaCostsImpl(manaCost));
         this.addCost(new DiscardSourceCost());
     }
 
@@ -46,7 +47,7 @@ public class TransmuteAbility extends SimpleActivatedAbility {
 
 class TransmuteEffect extends OneShotEffect<TransmuteEffect> {
     TransmuteEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Transmute";
     }
 
@@ -69,7 +70,7 @@ class TransmuteEffect extends OneShotEffect<TransmuteEffect> {
                     for (UUID cardId : target.getTargets()) {
                         Card card = player.getLibrary().remove(cardId, game);
                         if (card != null) {
-                            card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                            card.moveToZone(Zone.HAND, source.getId(), game, false);
                             revealed.add(card);
                         }
                     }

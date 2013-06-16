@@ -1,6 +1,7 @@
 package org.mage.test.cards.asthough;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,16 +15,16 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
 
     @Test
     public void testCastAsThoughHasFlash() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Elite Vanguard");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -36,15 +37,15 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
      */
     @Test
     public void testNoCastPossibleOnOpponentsTurn() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Elite Vanguard");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -59,16 +60,16 @@ public class AlchemistsRefugeTest extends CardTestPlayerBase {
      */
     @Test
     public void testEffectOnlyForOneTurn() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Alchemist's Refuge");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Elite Vanguard");
 
-        activateAbility(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
-        castSpell(4, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
+        activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{G}{U}, {T}:");
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerA, "Elite Vanguard");
 
-        setStopAt(4, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

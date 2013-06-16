@@ -28,11 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.SubLayer;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
@@ -82,7 +78,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                                 }
                             }
                             if (token.getCardType().size() > 0) {
-                                for (Constants.CardType t : token.getCardType()) {
+                                for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
                                     }

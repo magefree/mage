@@ -28,7 +28,7 @@
 
 package mage.abilities.condition.common;
 
-import mage.Constants.ManaType;
+import mage.constants.ManaType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;

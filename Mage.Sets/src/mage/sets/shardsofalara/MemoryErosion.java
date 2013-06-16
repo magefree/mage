@@ -28,12 +28,13 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -69,7 +70,7 @@ public class MemoryErosion extends CardImpl<MemoryErosion> {
 class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
 
     public SpellCastTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), false);
+        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), false);
     }
 
 

@@ -28,9 +28,9 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -59,7 +60,7 @@ public class SimianSpiritGuide extends CardImpl<SimianSpiritGuide> {
         this.toughness = new MageInt(2);
 
         // Exile Simian Spirit Guide from your hand: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.HAND, new BasicManaEffect(Mana.RedMana), new ExileSourceFromHandCost()));
+        this.addAbility(new SimpleManaAbility(Zone.HAND, new BasicManaEffect(Mana.RedMana), new ExileSourceFromHandCost()));
     }
 
     public SimianSpiritGuide(final SimianSpiritGuide card) {

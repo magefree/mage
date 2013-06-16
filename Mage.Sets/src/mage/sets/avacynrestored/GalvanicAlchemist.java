@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -63,8 +63,8 @@ public class GalvanicAlchemist extends CardImpl<GalvanicAlchemist> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Galvanic Alchemist is paired with another creature, each of those creatures has "{2}{U}: Untap this creature."
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}"));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), new ManaCostsImpl("{2}{U}"));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));
     }
 
     public GalvanicAlchemist(final GalvanicAlchemist card) {

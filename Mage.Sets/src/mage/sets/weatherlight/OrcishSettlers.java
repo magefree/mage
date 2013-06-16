@@ -29,9 +29,9 @@ package mage.sets.weatherlight;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +41,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -63,7 +65,7 @@ public class OrcishSettlers extends CardImpl<OrcishSettlers> {
         this.toughness = new MageInt(1);
 
         // {X}{X}{R}, {tap}, Sacrifice Orcish Settlers: Destroy X target lands.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl("{X}{X}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new OrcishSettlersEffect(), new ManaCostsImpl("{X}{X}{R}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -82,7 +84,7 @@ public class OrcishSettlers extends CardImpl<OrcishSettlers> {
 class OrcishSettlersEffect extends OneShotEffect<OrcishSettlersEffect> {
 
     public OrcishSettlersEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         this.staticText = "Destroy X target lands";
     }
 
@@ -105,7 +107,7 @@ class OrcishSettlersEffect extends OneShotEffect<OrcishSettlersEffect> {
             return false;
         }
 
-        if (player.choose(Constants.Outcome.DestroyPermanent, target, id, game)) {
+        if (player.choose(Outcome.DestroyPermanent, target, id, game)) {
             List<UUID> targets = target.getTargets();
             for (UUID landId : targets) {
                 Permanent land = game.getPermanent(landId);

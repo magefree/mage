@@ -27,15 +27,16 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -56,7 +57,7 @@ public class WildDefiance extends CardImpl<WildDefiance> {
         this.color.setGreen(true);
 
         // Whenever a creature you control becomes the target of an instant or sorcery spell, that creature gets +3/+3 until end of turn.
-        this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Constants.Duration.EndOfTurn)));
+        this.addAbility(new CreaturesYouControlBecomesTargetTriggeredAbility(new BoostTargetEffect(3, 3, Duration.EndOfTurn)));
     }
 
     public WildDefiance(final WildDefiance card) {
@@ -72,7 +73,7 @@ public class WildDefiance extends CardImpl<WildDefiance> {
 class CreaturesYouControlBecomesTargetTriggeredAbility extends TriggeredAbilityImpl<CreaturesYouControlBecomesTargetTriggeredAbility> {
 
     public CreaturesYouControlBecomesTargetTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
 
     public CreaturesYouControlBecomesTargetTriggeredAbility(final CreaturesYouControlBecomesTargetTriggeredAbility ability) {

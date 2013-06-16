@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +42,7 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterLandCard;
@@ -74,21 +75,21 @@ public class DeathriteShaman extends CardImpl<DeathriteShaman> {
         this.toughness = new MageInt(2);
 
         // {T}: Exile target land card from a graveyard. Add one mana of any color to your mana pool.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapSourceCost());
         ability.addEffect(new AddManaOfAnyColorEffect());
         ability.addChoice(new ChoiceColor());
         ability.addTarget(new TargetCardInGraveyard(new FilterLandCard("land card from a graveyard")));
         this.addAbility(ability);
 
         // {B}, {T}: Exile target instant or sorcery card from a graveyard. Each opponent loses 2 life.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new LoseLifeOpponentsEffect(2));
         ability.addTarget(new TargetCardInGraveyard(filter));
         this.addAbility(ability);
 
         // {G}, {T}: Exile target creature card from a graveyard. You gain 2 life.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{G}"));
         ability.addCost(new TapSourceCost());
         ability.addEffect(new GainLifeEffect(2));
         ability.addTarget(new TargetCardInGraveyard(new FilterCreatureCard("creature card from a graveyard")));

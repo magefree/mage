@@ -27,12 +27,12 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.Card;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -45,7 +45,7 @@ public class TransformAbility extends SimpleStaticAbility {
     public static final String TWO_OR_MORE_SPELLS_TRANSFORM_RULE = "At the beginning of each upkeep, if a player cast two or more spells last turn, transform {this}.";
 
     public TransformAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformEffect());
+        super(Zone.BATTLEFIELD, new TransformEffect());
     }
 
     public TransformAbility(final TransformAbility ability) {
@@ -73,7 +73,7 @@ public class TransformAbility extends SimpleStaticAbility {
         permanent.getManaCost().clear();
         permanent.getManaCost().add(sourceCard.getManaCost());
         permanent.getCardType().clear();
-        for (Constants.CardType type : sourceCard.getCardType()) {
+        for (CardType type : sourceCard.getCardType()) {
             permanent.getCardType().add(type);
         }
         permanent.getSubtype().clear();
@@ -97,7 +97,7 @@ public class TransformAbility extends SimpleStaticAbility {
 class TransformEffect extends ContinuousEffectImpl<TransformEffect> {
 
     public TransformEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         staticText = "";
     }
 

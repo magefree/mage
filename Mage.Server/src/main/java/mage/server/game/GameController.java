@@ -28,7 +28,7 @@
 
 package mage.server.game;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;

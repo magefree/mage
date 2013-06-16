@@ -28,11 +28,11 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -59,7 +59,7 @@ public class WildheartInvoker extends CardImpl<WildheartInvoker> {
         this.toughness = new MageInt(3);
 
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(5, 5, Duration.EndOfTurn), new ManaCostsImpl("{8}"));
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

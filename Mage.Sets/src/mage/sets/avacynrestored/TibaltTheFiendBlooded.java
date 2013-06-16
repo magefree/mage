@@ -29,12 +29,12 @@ package mage.sets.avacynrestored;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;

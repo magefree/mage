@@ -28,9 +28,9 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -54,7 +56,7 @@ public class ScorchedRusalka extends CardImpl<ScorchedRusalka> {
         this.color.setRed(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ColoredManaCost(ColoredManaSymbol.R));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

@@ -28,12 +28,13 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -76,7 +77,7 @@ class SunburstEffect extends OneShotEffect<SunburstEffect> {
 
 
     public SunburstEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Sunburst";
     }
 
@@ -89,7 +90,7 @@ class SunburstEffect extends OneShotEffect<SunburstEffect> {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
             Counter counter;
-            if(permanent.getCardType().contains(Constants.CardType.CREATURE)){
+            if(permanent.getCardType().contains(CardType.CREATURE)){
                 counter = CounterType.P1P1.createInstance(amount.calculate(game, source)); 
             }
             else{

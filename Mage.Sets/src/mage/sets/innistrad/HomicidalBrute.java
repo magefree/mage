@@ -27,14 +27,14 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -78,7 +78,7 @@ public class HomicidalBrute extends CardImpl<HomicidalBrute> {
 class HomicidalBruteTriggeredAbility extends TriggeredAbilityImpl<HomicidalBruteTriggeredAbility> {
 
     public HomicidalBruteTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TapSourceEffect(), false);
+        super(Zone.BATTLEFIELD, new TapSourceEffect(), false);
         addEffect(new TransformSourceEffect(false));
     }
 

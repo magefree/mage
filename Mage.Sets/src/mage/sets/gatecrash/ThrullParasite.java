@@ -30,10 +30,10 @@ package mage.sets.gatecrash;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.abilities.keyword.ExtortAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -69,7 +70,7 @@ public class ThrullParasite extends CardImpl<ThrullParasite> {
        // Extort
        this.addAbility(new ExtortAbility());
        // {tap}, Pay 2 life: Remove a counter from target nonland permanent.
-       Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RemoveCounterTargetEffect(),new TapSourceCost());
+       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RemoveCounterTargetEffect(),new TapSourceCost());
        ability.addTarget(new TargetNonlandPermanent());
        ability.addCost(new PayLifeCost(2));
        this.addAbility(ability);

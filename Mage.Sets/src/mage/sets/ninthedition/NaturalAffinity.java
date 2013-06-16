@@ -28,12 +28,16 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -68,7 +72,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEf
 
   
     public BecomesCreatureAllEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BecomeCreature);
         staticText = "All lands become 2/2 creatures until end of turn. They're still lands";
     }
 
@@ -91,10 +95,10 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEf
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         switch (layer) {
             case TypeChangingEffects_4:
-                if (sublayer == Constants.SubLayer.NA) {
+                if (sublayer == SubLayer.NA) {
                     for(UUID uuid : objects){
                         Permanent permanent = game.getPermanent(uuid);
                         if(permanent != null){
@@ -105,7 +109,7 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEf
                 break;
 
             case PTChangingEffects_7:
-                if (sublayer == Constants.SubLayer.SetPT_7b) {
+                if (sublayer == SubLayer.SetPT_7b) {
                     for(UUID uuid : objects){
                         Permanent permanent = game.getPermanent(uuid);
                         if(permanent != null){
@@ -125,8 +129,8 @@ class BecomesCreatureAllEffect extends ContinuousEffectImpl<BecomesCreatureAllEf
 
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.PTChangingEffects_7 || layer == Constants.Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.ColorChangingEffects_5 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.PTChangingEffects_7 || layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

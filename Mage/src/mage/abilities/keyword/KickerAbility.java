@@ -31,8 +31,8 @@ package mage.abilities.keyword;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import mage.Constants;
-import mage.Constants.Zone;
+
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -42,6 +42,7 @@ import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -172,7 +173,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                             times = Integer.toString(activated + 1) + (activated == 0 ? " time ":" times ");
                         }
                         if (kickerCost.canPay(sourceId, controllerId, game) &&
-                                player.chooseUse(Constants.Outcome.Benefit, new StringBuilder("Pay ").append(times).append(kickerCost.getText(false)).append(" ?").toString(), game)) {
+                                player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(kickerCost.getText(false)).append(" ?").toString(), game)) {
                             kickerCost.activate();
                             for (Iterator it = ((Costs) kickerCost).iterator(); it.hasNext();) {
                                 Cost cost = (Cost) it.next();

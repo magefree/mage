@@ -27,13 +27,13 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCreatureOrPlayer;
 
 import java.util.UUID;
@@ -54,7 +54,7 @@ public class Geistflame extends CardImpl<Geistflame> {
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
 
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
 
     public Geistflame(final Geistflame card) {

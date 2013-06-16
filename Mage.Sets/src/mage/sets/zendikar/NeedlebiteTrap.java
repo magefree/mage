@@ -28,15 +28,16 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.game.Game;
 import mage.target.TargetPlayer;
 import mage.watchers.common.PlayerGainedLifeWatcher;
@@ -79,7 +80,7 @@ class NeedlebiteTrapAlternativeCost extends AlternativeCostImpl<NeedlebiteTrapAl
 
     public NeedlebiteTrapAlternativeCost() {
         super("If an opponent gained life this turn, you may pay {B} rather than pay {this}'s mana cost");
-        this.add(new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        this.add(new ColoredManaCost(ColoredManaSymbol.B));
     }
 
     public NeedlebiteTrapAlternativeCost(final NeedlebiteTrapAlternativeCost cost) {

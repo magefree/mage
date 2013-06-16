@@ -28,10 +28,8 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
@@ -50,7 +48,7 @@ public class TimeOfHeroes extends CardImpl<TimeOfHeroes> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Each creature you control with a level counter");
     
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterPredicate(CounterType.LEVEL));
     }
 
@@ -62,7 +60,7 @@ public class TimeOfHeroes extends CardImpl<TimeOfHeroes> {
 
         // Each creature you control with a level counter on it gets +2/+2.
         ContinuousEffect boost = new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, boost));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boost));
     }
 
     public TimeOfHeroes(final TimeOfHeroes card) {

@@ -28,14 +28,16 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -70,7 +72,7 @@ public class Rebuild extends CardImpl<Rebuild> {
 
 class RebuildEffect extends OneShotEffect<RebuildEffect> {
     public RebuildEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return all artifacts to their owner's hand.";
     }
 
@@ -81,7 +83,7 @@ class RebuildEffect extends OneShotEffect<RebuildEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterArtifactPermanent(), source.getControllerId(), source.getSourceId(), game)) {
-            creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

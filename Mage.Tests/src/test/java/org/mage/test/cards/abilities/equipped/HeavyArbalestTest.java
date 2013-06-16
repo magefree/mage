@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.equipped;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,15 +18,15 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
      */
     @Test
     public void testNotUntapping() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -41,16 +42,16 @@ public class HeavyArbalestTest extends CardTestPlayerBase {
      */
     @Test
     public void testUntapsLater() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.BATTLEFIELD, playerA, "Heavy Arbalest");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Llanowar Elves");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Elite Vanguard");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: {source} deals 2 damage", playerB);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {4}", "Llanowar Elves");
 
-        setStopAt(5, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

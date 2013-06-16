@@ -28,15 +28,16 @@
 package mage.sets.mercadianmasques;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
@@ -75,7 +76,7 @@ public class PiousWarrior extends CardImpl<PiousWarrior> {
 class PiousWarriorTriggeredAbility extends TriggeredAbilityImpl<PiousWarriorTriggeredAbility> {
 
     public PiousWarriorTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
+        super(Zone.BATTLEFIELD, new PiousWarriorGainLifeEffect());
     }
 
     public PiousWarriorTriggeredAbility(final PiousWarriorTriggeredAbility effect) {

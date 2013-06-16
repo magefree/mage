@@ -29,9 +29,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -39,6 +38,8 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -59,8 +60,8 @@ public class OathswornGiant extends CardImpl<OathswornGiant> {
 
         this.addAbility(VigilanceAbility.getInstance());
         // Other creatures you control get +0/+2 and have vigilance.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
-        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
+        ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true));
         this.addAbility(ability);
     }
 

@@ -29,14 +29,14 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -66,8 +66,8 @@ public class AgrusKosWojekVeteran extends CardImpl<AgrusKosWojekVeteran> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         // Whenever Agrus Kos, Wojek Veteran attacks, attacking red creatures get +2/+0 and attacking white creatures get +0/+2 until end of turn.
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Constants.Duration.EndOfTurn, filterRed, false), false));
-        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(0, 2, Constants.Duration.EndOfTurn, filterWhite, false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(2, 0, Duration.EndOfTurn, filterRed, false), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostAllEffect(0, 2, Duration.EndOfTurn, filterWhite, false), false));
     }
 
     public AgrusKosWojekVeteran(final AgrusKosWojekVeteran card) {

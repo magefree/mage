@@ -29,10 +29,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +42,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -87,7 +88,7 @@ public class SoratamiSeer extends CardImpl<SoratamiSeer> {
 class SoratamiSeerEffect extends OneShotEffect<SoratamiSeerEffect> {
 
     public SoratamiSeerEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Discard all the cards in your hand, then draw that many cards";
     }
 

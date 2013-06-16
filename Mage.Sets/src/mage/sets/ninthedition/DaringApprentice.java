@@ -28,9 +28,9 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetSpell;
 
 /**
@@ -57,7 +58,7 @@ public class DaringApprentice extends CardImpl<DaringApprentice> {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice Daring Apprentice: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);

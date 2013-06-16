@@ -29,9 +29,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -58,7 +57,7 @@ public class SphereOfSafety extends CardImpl<SphereOfSafety> {
         this.color.setWhite(true);
 
         // Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SphereOfSafetyReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SphereOfSafetyReplacementEffect()));
 
     }
 
@@ -78,13 +77,13 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl<SphereOfSafe
     private static final String effectText = "Creatures can't attack you or a planeswalker you control unless their controller pays {X} for each of those creatures, where X is the number of enchantments you control";
     private static final FilterEnchantment filter = new FilterEnchantment("enchantment you control");
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     private PermanentsOnBattlefieldCount countEnchantments = new PermanentsOnBattlefieldCount(filter);
 
     
     SphereOfSafetyReplacementEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -105,7 +104,7 @@ class SphereOfSafetyReplacementEffect extends ReplacementEffectImpl<SphereOfSafe
                 int ce = countEnchantments.calculate(game, source);
                 ManaCostsImpl safetyCosts = new ManaCostsImpl("{"+ ce +"}");
                 if ( safetyCosts.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Constants.Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) )
+                     player.chooseUse(Outcome.Benefit, "Pay {"+ ce +"} to declare attacker?", game) )
                 {
                     if (safetyCosts.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;

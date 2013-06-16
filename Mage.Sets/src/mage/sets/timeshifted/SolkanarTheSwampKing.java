@@ -29,14 +29,14 @@ package mage.sets.timeshifted;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -78,7 +78,7 @@ public class SolkanarTheSwampKing extends CardImpl<SolkanarTheSwampKing> {
 class SolkanarTheSwampKingAbility extends TriggeredAbilityImpl<SolkanarTheSwampKingAbility> {
 
     public SolkanarTheSwampKingAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(1), false);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(1), false);
     }
 
     public SolkanarTheSwampKingAbility(final SolkanarTheSwampKingAbility ability) {

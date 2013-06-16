@@ -29,9 +29,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -62,10 +64,10 @@ public class SunhomeGuildmage extends CardImpl<SunhomeGuildmage> {
 
         
         //{1}{R}{W}: Creatures you control get +1/+0 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}{W}")));
         
         //{2}{R}{W}: Put a 1/1 red and white Soldier creature token with haste onto the battlefield.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{2}{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new SoldierToken()), new ManaCostsImpl("{2}{R}{W}")));
         
     }
 

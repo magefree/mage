@@ -29,9 +29,7 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -54,7 +52,7 @@ public class MoongloveChangeling extends CardImpl<MoongloveChangeling> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ChangelingAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B)));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B)));
     }
 
     public MoongloveChangeling(final MoongloveChangeling card) {

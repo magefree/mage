@@ -28,9 +28,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -39,6 +39,7 @@ import mage.abilities.costs.common.ExileFromGraveCost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterControlledArtifactPermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -70,7 +71,7 @@ public class SalvageTitan extends CardImpl<SalvageTitan> {
         Cost cost = new SacrificeTargetCost(new TargetControlledPermanent(3, 3, new FilterControlledArtifactPermanent(), true));
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("You may sacrifice three artifacts rather than pay {this}'s mana cost", cost));
         // Exile three artifact cards from your graveyard: Return Salvage Titan from your graveyard to your hand.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToHandEffect(), new ExileFromGraveCost(new TargetCardInYourGraveyard(3, new FilterArtifactCard()))));
     }
 
     public SalvageTitan(final SalvageTitan card) {

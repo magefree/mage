@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -51,11 +49,11 @@ public class MaskOfAvacyn extends CardImpl<MaskOfAvacyn> {
         this.subtype.add("Equipment");
 
         // Equip {3}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 
         // Equipped creature gets +1/+2 and has hexproof.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.EQUIPMENT)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.EQUIPMENT)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 2)));
     }
 
     public MaskOfAvacyn(final MaskOfAvacyn card) {

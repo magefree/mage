@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.variable;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,12 +16,12 @@ public class MikaeusTheLunarchTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Constants.Zone.HAND, playerA, "Mikaeus, the Lunarch");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.HAND, playerA, "Mikaeus, the Lunarch");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mikaeus, the Lunarch");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mikaeus, the Lunarch");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Mikaeus, the Lunarch", 1);

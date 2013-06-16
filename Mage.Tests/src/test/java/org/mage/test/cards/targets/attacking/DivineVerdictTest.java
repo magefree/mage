@@ -1,7 +1,7 @@
 package org.mage.test.cards.targets.attacking;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,11 +12,11 @@ public class DivineVerdictTest extends CardTestPlayerBase {
 
     @Test
     public void testAfterAttack() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 4);
-        addCard(Constants.Zone.HAND, playerA, "Divine Verdict");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 4);
+        addCard(Zone.HAND, playerA, "Divine Verdict");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains");
+        addCard(Zone.BATTLEFIELD, playerB, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains");
 
         attack(2, playerB, "Sejiri Merfolk");
         castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerA, "Divine Verdict", "Sejiri Merfolk");

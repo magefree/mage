@@ -27,13 +27,14 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.LifeTotalCantChangeControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -52,7 +53,7 @@ public class PlatinumEmperion extends CardImpl<PlatinumEmperion> {
         this.toughness = new MageInt(8);
 
         // Your life total can't change.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LifeTotalCantChangeControllerEffect(Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LifeTotalCantChangeControllerEffect(Duration.WhileOnBattlefield)));
     }
 
     public PlatinumEmperion(final PlatinumEmperion card) {

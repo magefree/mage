@@ -28,15 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlashAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -77,7 +78,7 @@ public class HazeFrog extends CardImpl<HazeFrog> {
 class HazeFrogEffect extends PreventionEffectImpl<HazeFrogEffect> {
 
     public HazeFrogEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         this.staticText = "prevent all combat damage that other creatures would deal this turn";
     }
 

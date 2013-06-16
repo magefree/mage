@@ -28,15 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AttachmentType;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.Zone;
+
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -72,7 +72,7 @@ public class AlphaAuthority extends CardImpl<AlphaAuthority> {
         this.addAbility(ability);
 
         // Enchanted creature has hexproof and can't be blocked by more than one creature.
-        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), Constants.AttachmentType.AURA, Duration.WhileOnBattlefield));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(HexproofAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         ability.addEffect(new CantBeBlockedByMoreThanOneAttachedEffect(AttachmentType.AURA,1));
         this.addAbility(ability);
     }

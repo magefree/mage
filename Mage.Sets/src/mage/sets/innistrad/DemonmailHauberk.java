@@ -29,14 +29,15 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -51,10 +52,10 @@ public class DemonmailHauberk extends CardImpl<DemonmailHauberk> {
         this.subtype.add("Equipment");
 
         // Equip - Sacrifice a creature.
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledCreaturePermanent())));
 
         // Equipped creature gets +4/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(4, 2)));
     }
 
     public DemonmailHauberk(final DemonmailHauberk card) {

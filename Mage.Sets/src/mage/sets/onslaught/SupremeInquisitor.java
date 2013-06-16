@@ -29,9 +29,9 @@ package mage.sets.onslaught;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +41,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
@@ -76,7 +78,7 @@ public class SupremeInquisitor extends CardImpl<SupremeInquisitor> {
         this.toughness = new MageInt(3);
 
         // Tap five untapped Wizards you control: Search target player's library for up to five cards and exile them. Then that player shuffles his or her library.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SupremeInquisitorEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SupremeInquisitorEffect(), new TapTargetCost(new TargetControlledPermanent(5, 5, filter, true)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }
@@ -96,7 +98,7 @@ class SupremeInquisitorEffect extends OneShotEffect<SupremeInquisitorEffect> {
     private static final FilterCard filter = new FilterCard();
 
     public SupremeInquisitorEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "Search target player's library for up to five cards and exile them. Then that player shuffles his or her library";
     }
 
@@ -117,7 +119,7 @@ class SupremeInquisitorEffect extends OneShotEffect<SupremeInquisitorEffect> {
             Cards targetLibrary = new CardsImpl();
             targetLibrary.addAll(targetPlayer.getLibrary().getCardList());
             TargetCardInLibrary target = new TargetCardInLibrary(0, 5, filter);
-            if (player.choose(Constants.Outcome.Benefit, targetLibrary, target, game)) {
+            if (player.choose(Outcome.Benefit, targetLibrary, target, game)) {
                 List<UUID> targetId = target.getTargets();
                 for (UUID targetCard : targetId) {
                     Card card = targetPlayer.getLibrary().remove(targetCard, game);

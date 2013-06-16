@@ -28,14 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.common.AttacksOrBlocksEnchantedTriggeredAbility;
@@ -56,12 +58,12 @@ public class LuminousWake extends CardImpl<LuminousWake> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
         // Whenever enchanted creature attacks or blocks, you gain 4 life.
-        Ability ability2 = new AttacksOrBlocksEnchantedTriggeredAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(4));
+        Ability ability2 = new AttacksOrBlocksEnchantedTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(4));
         this.addAbility(ability2);
     }
 

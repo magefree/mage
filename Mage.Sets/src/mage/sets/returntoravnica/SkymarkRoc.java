@@ -29,14 +29,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ToughnessPredicate;
@@ -81,7 +82,7 @@ public class SkymarkRoc extends CardImpl<SkymarkRoc> {
 class SkymarkRocAbility extends TriggeredAbilityImpl<SkymarkRocAbility> {
 
     public SkymarkRocAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), true);
     }
 
     public SkymarkRocAbility(final SkymarkRocAbility ability) {

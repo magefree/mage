@@ -30,9 +30,8 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -56,7 +56,7 @@ public class BloodriteInvoker extends CardImpl<BloodriteInvoker> {
         this.color.setBlack(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new GenericManaCost(8));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new GenericManaCost(8));
         ability.addEffect(new GainLifeEffect(3));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

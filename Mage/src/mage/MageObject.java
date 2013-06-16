@@ -1,6 +1,6 @@
 package mage;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;

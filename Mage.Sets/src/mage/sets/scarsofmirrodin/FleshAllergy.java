@@ -30,11 +30,11 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.SacrificeTargetCost;

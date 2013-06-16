@@ -28,8 +28,8 @@
 
 package mage.game.permanent.token;
 
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;

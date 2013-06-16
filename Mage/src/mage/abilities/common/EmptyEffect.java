@@ -27,9 +27,9 @@
 */
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -41,7 +41,7 @@ import mage.game.Game;
 public class EmptyEffect extends OneShotEffect<EmptyEffect> {
 
     public EmptyEffect(String rule) {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = rule;
     }
 

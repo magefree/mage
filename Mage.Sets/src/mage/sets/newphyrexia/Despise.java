@@ -29,13 +29,14 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -82,7 +83,7 @@ class DespiseEffect extends OneShotEffect<DespiseEffect> {
     }
 
     public DespiseEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card";
     }
 
@@ -97,9 +98,9 @@ class DespiseEffect extends OneShotEffect<DespiseEffect> {
             player.revealCards("Despise", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.PICK, filter);
                 target.setRequired(true);
-                if (you.choose(Constants.Outcome.Benefit, player.getHand(), target, game)) {
+                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         return player.discard(card, source, game);

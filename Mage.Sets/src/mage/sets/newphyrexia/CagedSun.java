@@ -28,11 +28,11 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -44,6 +44,9 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.TriggeredManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -64,7 +67,7 @@ public class CagedSun extends CardImpl<CagedSun> {
         this.addAbility(new AsEntersBattlefieldAbility(new CagedSunEffect1()));
 
         // Creatures you control of the chosen color get +1/+1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CagedSunEffect2()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CagedSunEffect2()));
 
         // Whenever a land's ability adds one or more mana of the chosen color to your mana pool, add one additional mana of that color to your mana pool.
         this.addAbility(new CagedSunTriggeredAbility());
@@ -83,7 +86,7 @@ public class CagedSun extends CardImpl<CagedSun> {
 class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
 
     public CagedSunEffect1() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose a color";
     }
 
@@ -97,7 +100,7 @@ class CagedSunEffect1 extends OneShotEffect<CagedSunEffect1> {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.BoostCreature, colorChoice, game)) {
+            if (player.choose(Outcome.BoostCreature, colorChoice, game)) {
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_color", colorChoice.getColor());
             }
@@ -117,7 +120,7 @@ class CagedSunEffect2 extends ContinuousEffectImpl<CagedSunEffect2> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public CagedSunEffect2() {
-        super(Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Creatures you control of the chosen color get +1/+1";
     }
 

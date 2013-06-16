@@ -27,14 +27,14 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -80,7 +80,7 @@ class ElderCatharAddCountersTargetEffect extends OneShotEffect<ElderCatharAddCou
     private Counter counter2;
 
     public ElderCatharAddCountersTargetEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         counter = CounterType.P1P1.createInstance(1);
         counter2 = CounterType.P1P1.createInstance(2);
         staticText = "put a +1/+1 counter on target creature you control. If that creature is a Human, put two +1/+1 counters on it instead";

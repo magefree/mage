@@ -27,14 +27,15 @@
  */
 package mage.sets.torment;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.continious.SwitchPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -56,7 +57,7 @@ public class Aquamoeba extends CardImpl<Aquamoeba> {
         this.toughness = new MageInt(3);
 
         // Discard a card: Switch Aquamoeba's power and toughness until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Constants.Duration.EndOfTurn), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), new DiscardCardCost()));
     }
 
     public Aquamoeba(final Aquamoeba card) {

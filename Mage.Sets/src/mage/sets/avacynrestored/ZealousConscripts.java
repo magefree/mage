@@ -29,9 +29,8 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.TargetPermanent;
 
 /**
@@ -60,10 +60,10 @@ public class ZealousConscripts extends CardImpl<ZealousConscripts> {
 
         this.addAbility(HasteAbility.getInstance());
         // When Zealous Conscripts enters the battlefield, gain control of target permanent until end of turn. Untap that permanent. It gains haste until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetPermanent());
         ability.addEffect(new UntapTargetEffect());
-        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn, "It gains haste until end of turn"));
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn, "It gains haste until end of turn"));
         this.addAbility(ability);
     }
 

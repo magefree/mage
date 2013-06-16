@@ -28,10 +28,10 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -86,7 +87,7 @@ public class SoulSeizer extends CardImpl<SoulSeizer> {
 class SoulSeizerTriggeredAbility extends TriggeredAbilityImpl<SoulSeizerTriggeredAbility> {
 
     public SoulSeizerTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SoulSeizerEffect(), true);
+        super(Zone.BATTLEFIELD, new SoulSeizerEffect(), true);
     }
 
     public SoulSeizerTriggeredAbility(SoulSeizerTriggeredAbility ability) {

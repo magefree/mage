@@ -1,8 +1,9 @@
 package mage.interfaces.rate;
 
 import java.util.List;
-import mage.Constants;
+
 import mage.cards.Card;
+import mage.constants.ColoredManaSymbol;
 
 /**
  * Interface for the class responsible for rating cards.
@@ -11,5 +12,5 @@ import mage.cards.Card;
  */
 public interface RateCallback {
     int rateCard(Card card);
-    Card getBestBasicLand(Constants.ColoredManaSymbol color, List<String> setsToUse);
+    Card getBestBasicLand(ColoredManaSymbol color, List<String> setsToUse);
 }

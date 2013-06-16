@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -56,7 +55,7 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
         filter.add(Predicates.or(
                 new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY)));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public IncreasingVengeance(UUID ownerId) {
@@ -70,7 +69,7 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
         // Flashback {3}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}{R}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}{R}"), TimingRule.INSTANT));
     }
 
     public IncreasingVengeance(final IncreasingVengeance card) {
@@ -86,7 +85,7 @@ public class IncreasingVengeance extends CardImpl<IncreasingVengeance> {
 class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect> {
 
     public IncreasingVengeanceEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "Copy target instant or sorcery spell you control. If Increasing Vengeance was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies";
     }
 
@@ -105,7 +104,7 @@ class IncreasingVengeanceEffect extends OneShotEffect<IncreasingVengeanceEffect>
             copy.chooseNewTargets(game, source.getControllerId());
             Spell sourceSpell = (Spell) game.getStack().getStackObject(source.getSourceId());
             if (sourceSpell != null) {
-                if (sourceSpell.getFromZone() == Constants.Zone.GRAVEYARD) {
+                if (sourceSpell.getFromZone() == Zone.GRAVEYARD) {
                     copy = spell.copySpell();
                     copy.setControllerId(source.getControllerId());
                     copy.setCopiedSpell(true);

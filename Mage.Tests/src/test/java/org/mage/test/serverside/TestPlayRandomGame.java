@@ -1,9 +1,10 @@
 package org.mage.test.serverside;
 
-import mage.Constants;
-import mage.Constants.ColoredManaSymbol;
+import mage.constants.ColoredManaSymbol;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
@@ -38,7 +39,7 @@ public class TestPlayRandomGame extends MageTestBase {
     }
 
     private void playOneGame() throws GameException, FileNotFoundException, IllegalArgumentException {
-        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0);
 
         Player computerA = createRandomPlayer("ComputerA");
         Deck deck = generateRandomDeck();

@@ -27,15 +27,15 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -81,7 +81,7 @@ public class ThrabenSentry extends CardImpl<ThrabenSentry> {
 class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl<ThrabenSentryTriggeredAbility> {
 
     public ThrabenSentryTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), true);
     }
 
     public ThrabenSentryTriggeredAbility(ThrabenSentryTriggeredAbility ability) {
@@ -106,8 +106,8 @@ class ThrabenSentryTriggeredAbility extends TriggeredAbilityImpl<ThrabenSentryTr
             Permanent permanent = zEvent.getTarget();
 
             if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) &&
-                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
+                    zEvent.getToZone() == Zone.GRAVEYARD &&
+                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
                     permanent.getControllerId().equals(this.getControllerId()) &&
                     !source.isTransformed()) {
                 return true;

@@ -30,14 +30,14 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -76,7 +76,7 @@ class GlimmerpostEffect extends OneShotEffect<GlimmerpostEffect> {
     }
 
     public GlimmerpostEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "you gain 1 life for each Locus on the battlefield";
     }
 

@@ -30,14 +30,15 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,8 +50,8 @@ public class KiteShield extends CardImpl<KiteShield> {
         super(ownerId, 210, "Kite Shield", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
         this.expansionSetCode = "M12";
         this.subtype.add("Equipment");
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(3)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(0, 3)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(3)));
 
     }
 

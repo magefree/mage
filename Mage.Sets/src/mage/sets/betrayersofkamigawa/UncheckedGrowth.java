@@ -28,14 +28,18 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -53,7 +57,7 @@ public class UncheckedGrowth extends CardImpl<UncheckedGrowth> {
         this.color.setGreen(true);
         
         // Target creature gets +4/+4 until end of turn. 
-        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn));
         // If it's a Spirit, it gains trample until end of turn.
         this.getSpellAbility().addEffect(new UncheckedGrowthTrampleEffect());
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
@@ -71,7 +75,7 @@ public class UncheckedGrowth extends CardImpl<UncheckedGrowth> {
     private class UncheckedGrowthTrampleEffect extends ContinuousEffectImpl<UncheckedGrowthTrampleEffect> {
 
         public UncheckedGrowthTrampleEffect() {
-            super(Constants.Duration.EndOfTurn, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+            super(Duration.EndOfTurn, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
             staticText = "If it's a Spirit, it gains trample until end of turn";
         }
 

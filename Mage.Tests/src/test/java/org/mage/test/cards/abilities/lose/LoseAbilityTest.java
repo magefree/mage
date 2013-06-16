@@ -1,7 +1,8 @@
 package org.mage.test.cards.abilities.lose;
 
-import mage.Constants;
 import mage.abilities.keyword.FlyingAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,16 +16,16 @@ public class LoseAbilityTest extends CardTestPlayerBase {
 
     @Test
     public void testLoseFlyingByEnchantCreature() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Grounded", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Grounded", 2);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Elite Vanguard");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -45,16 +46,16 @@ public class LoseAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testLoseVsGainAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerA, "Grounded");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 6);
-        addCard(Constants.Zone.HAND, playerA, "Drake Umbra");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Grounded");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 6);
+        addCard(Zone.HAND, playerA, "Drake Umbra");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -73,17 +74,17 @@ public class LoseAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiGainVsLoseAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 10);
-        addCard(Constants.Zone.HAND, playerA, "Grounded");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 10);
-        addCard(Constants.Zone.HAND, playerA, "Drake Umbra", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 10);
+        addCard(Zone.HAND, playerA, "Grounded");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 10);
+        addCard(Zone.HAND, playerA, "Drake Umbra", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Drake Umbra", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Grounded", "Air Elemental");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -101,17 +102,17 @@ public class LoseAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiGainTriggeredVsLoseAbility() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sublime Archangel",2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Constants.Zone.HAND, playerA, "Turn to Frog");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Sublime Archangel",2);
+        addCard(Zone.BATTLEFIELD, playerA, "Silvercoat Lion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Turn to Frog");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 5);
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Sublime Archangel");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Turn to Frog", "Sublime Archangel");
         attack(3, playerA, "Silvercoat Lion");
 
-        setStopAt(3, Constants.PhaseStep.END_COMBAT);
+        setStopAt(3, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);

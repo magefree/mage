@@ -28,13 +28,14 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 
@@ -68,7 +69,7 @@ public class Meditate extends CardImpl<Meditate> {
 class SpipTurnEffect extends OneShotEffect<SpipTurnEffect> {
 
     public SpipTurnEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "You skip your next turn";
     }
 

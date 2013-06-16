@@ -29,14 +29,14 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -67,7 +67,7 @@ public class MindsEye extends CardImpl<MindsEye> {
 class MindsEyeTriggeredAbility extends TriggeredAbilityImpl<MindsEyeTriggeredAbility> {
 
     MindsEyeTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), false);
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new DrawCardControllerEffect(1), new GenericManaCost(1)), false);
     }
 
     MindsEyeTriggeredAbility(final MindsEyeTriggeredAbility ability) {

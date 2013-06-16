@@ -29,15 +29,16 @@ package mage.sets.returntoravnica;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -88,7 +89,7 @@ public class RakdosCharm extends CardImpl<RakdosCharm> {
     private class RakdosCharmDamageEffect extends OneShotEffect<RakdosCharmDamageEffect> {
 
     public RakdosCharmDamageEffect() {
-            super(Constants.Outcome.Detriment);
+            super(Outcome.Detriment);
             staticText = "each creature deals 1 damage to its controller";
         }
 
@@ -122,7 +123,7 @@ public class RakdosCharm extends CardImpl<RakdosCharm> {
     class RakdosCharmExileEffect extends OneShotEffect<RakdosCharmExileEffect> {
 
         public RakdosCharmExileEffect() {
-            super(Constants.Outcome.Exile);
+            super(Outcome.Exile);
             staticText = "Exile all cards from target player's graveyard";
         }
 

@@ -28,10 +28,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -39,6 +39,7 @@ import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -111,7 +112,7 @@ class DevouringRageEffect extends OneShotEffect<DevouringRageEffect> {
         int amount = 3 + (numberSpirits * 3);
         Permanent targetCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         if (targetCreature != null) {
-            ContinuousEffect effect = new BoostTargetEffect(amount, 0, Constants.Duration.EndOfTurn);
+            ContinuousEffect effect = new BoostTargetEffect(amount, 0, Duration.EndOfTurn);
             effect.setTargetPointer(new FixedTarget(targetCreature.getId()));
             game.addEffect(effect, source);
             return true;

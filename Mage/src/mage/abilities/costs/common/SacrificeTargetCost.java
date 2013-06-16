@@ -28,7 +28,7 @@
 
 package mage.abilities.costs.common;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;

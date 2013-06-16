@@ -29,14 +29,16 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -83,7 +85,7 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
     private class TerashisGraspEffect extends OneShotEffect<TerashisGraspEffect> {
 
                 public TerashisGraspEffect() {
-                        super(Constants.Outcome.DestroyPermanent);
+                        super(Outcome.DestroyPermanent);
                         staticText = "You gain life equal to its converted mana cost";
                 }
 
@@ -93,7 +95,7 @@ public class TerashisGrasp extends CardImpl<TerashisGrasp> {
 
                 @Override
                 public boolean apply(Game game, Ability source) {
-                        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+                        MageObject card = game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
                         if (card != null) {
                             int cost = card.getManaCost().get(0).convertedManaCost();
                                 Player player = game.getPlayer(source.getControllerId());

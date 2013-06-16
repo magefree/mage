@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -96,7 +97,7 @@ class CoercedConfessionMillEffect extends OneShotEffect<CoercedConfessionMillEff
                     if (card.getCardType().contains(CardType.CREATURE)) {
                         ++foundCreatures;
                     }
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                 }
             }
             if (foundCreatures > 0) {

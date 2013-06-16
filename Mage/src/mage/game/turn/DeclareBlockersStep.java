@@ -28,7 +28,7 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 

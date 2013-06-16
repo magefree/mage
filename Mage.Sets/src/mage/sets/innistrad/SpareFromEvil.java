@@ -27,12 +27,12 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -58,7 +58,7 @@ public class SpareFromEvil extends CardImpl<SpareFromEvil> {
         this.color.setWhite(true);
 
         // Creatures you control gain protection from non-Human creatures until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ProtectionAbility(filterNonHuman), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 
     public SpareFromEvil(final SpareFromEvil card) {

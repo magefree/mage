@@ -29,9 +29,8 @@ package mage.sets.worldwake;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -82,11 +81,11 @@ class MiresTollEffect extends OneShotEffect<MiresTollEffect> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MiresTollEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Target player reveals a number of cards from his or her hand equal to the number of Swamps you control. You choose one of them. That player discards that card";
     }
 
@@ -104,13 +103,13 @@ class MiresTollEffect extends OneShotEffect<MiresTollEffect> {
         int swamps = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game);
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (swamps > 0 && targetPlayer != null) {
-            Cards revealedCards = new CardsImpl(Constants.Zone.PICK);
+            Cards revealedCards = new CardsImpl(Zone.PICK);
             int amount = Math.min(targetPlayer.getHand().size(), swamps);
             FilterCard filter = new FilterCard("card in target player's hand");
             TargetCardInHand chosenCards = new TargetCardInHand(amount, amount, filter);
             chosenCards.setRequired(true);
             chosenCards.setNotTarget(true);
-            if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Constants.Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
+            if (chosenCards.canChoose(targetPlayer.getId(), game) && targetPlayer.choose(Outcome.Discard, targetPlayer.getHand(), chosenCards, game)) {
                 if (!chosenCards.getTargets().isEmpty()) {
                     List<UUID> targets = chosenCards.getTargets();
                     for (UUID targetid : targets) {
@@ -127,10 +126,10 @@ class MiresTollEffect extends OneShotEffect<MiresTollEffect> {
             Player you = game.getPlayer(source.getControllerId());
 
             if (you != null) {
-                TargetCard yourChoice = new TargetCard(Constants.Zone.PICK, new FilterCard());
+                TargetCard yourChoice = new TargetCard(Zone.PICK, new FilterCard());
                 yourChoice.setRequired(true);
                 yourChoice.setNotTarget(true);
-                if (you.choose(Constants.Outcome.Benefit, revealedCards, yourChoice, game)) {
+                if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
                     Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
                     if (card != null) {
                         return targetPlayer.discard(card, source, game);

@@ -28,15 +28,16 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -67,7 +68,7 @@ public class CatapultMaster extends CardImpl<CatapultMaster> {
         this.toughness = new MageInt(3);
 
         // Tap five untapped Soldiers you control: Exile target creature.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new TapTargetCost(new TargetControlledPermanent(5,5,filter,false)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new TapTargetCost(new TargetControlledPermanent(5,5,filter,false)));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

@@ -30,9 +30,8 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.BushidoAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 
 /**
  *
@@ -57,7 +58,7 @@ public class NumaiOutcast extends CardImpl<NumaiOutcast> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         this.addAbility(new BushidoAbility(2));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new PayLifeCost(5));
         this.addAbility(ability);
     }

@@ -29,7 +29,7 @@
 package mage.abilities.effects;
 
 import java.util.UUID;
-import mage.Constants.AsThoughEffectType;
+import mage.constants.AsThoughEffectType;
 import mage.abilities.Ability;
 import mage.game.Game;
 

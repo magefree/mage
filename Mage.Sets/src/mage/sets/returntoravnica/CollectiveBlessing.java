@@ -28,13 +28,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -50,7 +51,7 @@ public class CollectiveBlessing extends CardImpl<CollectiveBlessing> {
         this.color.setWhite(true);
 
         // Creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Duration.WhileOnBattlefield)));
     }
 
     public CollectiveBlessing(final CollectiveBlessing card) {

@@ -28,13 +28,15 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -72,7 +74,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredA
 
 
     public SpellCastTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new StandstillEffect(), false);
+        super(Zone.BATTLEFIELD, new StandstillEffect(), false);
     }
 
     public SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
@@ -103,7 +105,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredA
 class StandstillEffect extends OneShotEffect<StandstillEffect> {
 
     public StandstillEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         staticText = "sacrifice {this}";
     }
 

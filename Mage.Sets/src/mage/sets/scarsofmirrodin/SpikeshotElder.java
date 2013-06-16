@@ -30,16 +30,16 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,7 +76,7 @@ public class SpikeshotElder extends CardImpl<SpikeshotElder> {
 
 class SpikeshotElderEffect extends OneShotEffect<SpikeshotElderEffect> {
     public SpikeshotElderEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals damage equal to its power to target creature or player";
     }
 
@@ -88,7 +88,7 @@ class SpikeshotElderEffect extends OneShotEffect<SpikeshotElderEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent sourcePermanent = game.getPermanent(source.getSourceId());
         if (sourcePermanent == null) {
-            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+            sourcePermanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (sourcePermanent == null) {
             return false;

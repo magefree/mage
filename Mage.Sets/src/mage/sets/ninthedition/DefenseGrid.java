@@ -27,9 +27,7 @@
  */
 package mage.sets.ninthedition;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -53,7 +51,7 @@ public class DefenseGrid extends CardImpl<DefenseGrid> {
         this.expansionSetCode = "9ED";
 
         // Each spell costs {3} more to cast except during its controller's turn.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DefenseGridCostModificationEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DefenseGridCostModificationEffect()));
 
     }
 
@@ -70,7 +68,7 @@ public class DefenseGrid extends CardImpl<DefenseGrid> {
 class DefenseGridCostModificationEffect extends CostModificationEffectImpl<DefenseGridCostModificationEffect> {
 
     DefenseGridCostModificationEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each spell costs {3} more to cast except during its controller's turn";
     }
 

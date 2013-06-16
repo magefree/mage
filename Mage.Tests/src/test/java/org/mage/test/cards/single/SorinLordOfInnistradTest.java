@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import org.junit.Test;
@@ -16,10 +17,10 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
+        addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Put a a 1/1 black Vampire creature token with lifelink onto the battlefield. ");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "+1: Put a a 1/1 black Vampire creature token with lifelink onto the battlefield. ");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -31,13 +32,13 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
+        addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
+        addCard(Zone.BATTLEFIELD, playerA, "Sejiri Merfolk");
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 1);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "-2: You get an emblem with ");
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -49,13 +50,13 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
 
     @Test
     public void testCard3() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Angel of Mercy");
+        addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Angel of Mercy");
 
-        addCounters(1, Constants.PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 3);
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "-6: ", "Craw Wurm^Angel of Mercy");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        addCounters(1, PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 3);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "-6: ", "Craw Wurm^Angel of Mercy");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Craw Wurm", 1);

@@ -28,9 +28,9 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -58,7 +59,7 @@ public class CatBurglar extends CardImpl<CatBurglar> {
         this.toughness = new MageInt(2);
 
         // {2}{B}, {tap}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);

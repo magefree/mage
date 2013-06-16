@@ -28,11 +28,12 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -46,19 +47,19 @@ public class LoseLifePlayersEffect extends OneShotEffect<LoseLifePlayersEffect> 
     String text;
 
     public LoseLifePlayersEffect(int amount) {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.amount = new StaticValue(amount);
         staticText = "each player loses " + amount + " life";
     }
     
     public LoseLifePlayersEffect(DynamicValue amount) {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.amount = amount;
         staticText = "each player loses " + amount + " life";
     }
     
     public LoseLifePlayersEffect(DynamicValue amount, String text) {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.amount = amount;
         staticText = text;
     }

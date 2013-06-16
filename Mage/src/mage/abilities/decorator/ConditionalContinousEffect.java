@@ -1,13 +1,14 @@
 package mage.abilities.decorator;
 
-import mage.Constants;
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FixedCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.game.Game;
 
 /**
@@ -69,7 +70,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (lockedInCondition && !(condition instanceof FixedCondition)) {
             condition = new FixedCondition(condition.apply(game, source));
         }
@@ -113,7 +114,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
+    public boolean hasLayer(Layer layer) {
         return effect.hasLayer(layer);
     }
 

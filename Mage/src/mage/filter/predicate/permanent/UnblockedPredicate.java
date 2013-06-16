@@ -27,7 +27,7 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;

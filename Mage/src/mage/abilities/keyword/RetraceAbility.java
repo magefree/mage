@@ -27,13 +27,15 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -47,8 +49,8 @@ import mage.target.common.TargetCardInHand;
  */
 public class RetraceAbility extends ActivatedAbilityImpl<RetraceAbility> {
 
-    public RetraceAbility(Cost cost, Constants.TimingRule timingRule) {
-        super(Constants.Zone.GRAVEYARD, new RetraceEffect(), cost);
+    public RetraceAbility(Cost cost, TimingRule timingRule) {
+        super(Zone.GRAVEYARD, new RetraceEffect(), cost);
         super.addCost(new DiscardTargetCost(new TargetCardInHand(new FilterLandCard())));
         this.timing = timingRule;
         this.usesStack = false;
@@ -73,7 +75,7 @@ public class RetraceAbility extends ActivatedAbilityImpl<RetraceAbility> {
 class RetraceEffect extends OneShotEffect<RetraceEffect> {
 
     public RetraceEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "";
     }
 

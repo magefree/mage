@@ -29,15 +29,15 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -55,7 +55,7 @@ public class SearingMeditation extends CardImpl<SearingMeditation> {
         this.color.setWhite(true);
 
         // Whenever you gain life, you may pay {2}. If you do, Searing Meditation deals 2 damage to target creature or player.
-        Ability ability = new SimpleTriggeredAbility(Constants.Zone.BATTLEFIELD, GameEvent.EventType.GAINED_LIFE, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), "Whenever you gain life, ", true);
+        Ability ability = new SimpleTriggeredAbility(Zone.BATTLEFIELD, GameEvent.EventType.GAINED_LIFE, new DoIfCostPaid(new DamageTargetEffect(2), new GenericManaCost(2)), "Whenever you gain life, ", true);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

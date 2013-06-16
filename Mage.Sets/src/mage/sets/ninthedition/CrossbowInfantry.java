@@ -28,15 +28,16 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -57,7 +58,7 @@ public class CrossbowInfantry extends CardImpl<CrossbowInfantry> {
         this.toughness = new MageInt(1);
 
         // {tap}: Crossbow Infantry deals 1 damage to target attacking or blocking creature.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetAttackingOrBlockingCreature());
         this.addAbility(ability);
     }

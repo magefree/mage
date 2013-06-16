@@ -27,7 +27,7 @@
  */
 package mage.abilities.dynamicvalue.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;

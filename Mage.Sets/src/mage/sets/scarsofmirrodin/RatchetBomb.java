@@ -30,10 +30,9 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -41,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,7 +72,7 @@ public class RatchetBomb extends CardImpl<RatchetBomb> {
     class RatchetBombEffect extends OneShotEffect<RatchetBombEffect> {
 
         public RatchetBombEffect() {
-            super(Constants.Outcome.DestroyPermanent);
+            super(Outcome.DestroyPermanent);
             staticText = "Destroy each nonland permanent with converted mana cost equal to the number of charge counters on {this}";
         }
 

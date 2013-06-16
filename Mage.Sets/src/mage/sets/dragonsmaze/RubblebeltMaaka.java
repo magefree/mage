@@ -29,13 +29,14 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -54,7 +55,7 @@ public class RubblebeltMaaka extends CardImpl<RubblebeltMaaka> {
         this.toughness = new MageInt(3);
 
         // Bloodrush — {R}, Discard Rubblebelt Maaka: Target attacking creature gets +3/+3 until end of turn.
-        this.addAbility(new BloodrushAbility("{R}", new BoostTargetEffect(3,3,Constants.Duration.EndOfTurn)));
+        this.addAbility(new BloodrushAbility("{R}", new BoostTargetEffect(3,3, Duration.EndOfTurn)));
 
     }
 

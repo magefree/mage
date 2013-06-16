@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers.events;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -18,13 +19,13 @@ public class SearchShuffleTest extends CardTestPlayerBase {
      */
     @Test
     public void testEvent() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Cosi's Trickster");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Leonin Arbiter");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arid Mesa");
+        addCard(Zone.BATTLEFIELD, playerA, "Cosi's Trickster");
+        addCard(Zone.BATTLEFIELD, playerA, "Leonin Arbiter");
+        addCard(Zone.BATTLEFIELD, playerA, "Arid Mesa");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Pay 1 life");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 19);

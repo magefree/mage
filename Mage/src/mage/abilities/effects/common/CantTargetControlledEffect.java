@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.TargetController;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.filter.FilterPermanent;

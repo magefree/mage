@@ -28,9 +28,9 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
@@ -65,7 +66,7 @@ public class SpittingSpider extends CardImpl<SpittingSpider> {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // Sacrifice a land: Spitting Spider deals 1 damage to each creature with flying.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageAllEffect(1, filter), new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledLandPermanent()))));
     }
 
     public SpittingSpider(final SpittingSpider card) {

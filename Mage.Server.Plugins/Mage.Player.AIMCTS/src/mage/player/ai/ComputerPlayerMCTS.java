@@ -27,9 +27,9 @@
  */
 package mage.player.ai;
 
-import mage.Constants.PhaseStep;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.common.PassAbility;

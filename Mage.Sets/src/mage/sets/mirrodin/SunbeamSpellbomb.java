@@ -29,9 +29,8 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 
 /**
  *
@@ -50,10 +51,10 @@ public class SunbeamSpellbomb extends CardImpl<SunbeamSpellbomb> {
     public SunbeamSpellbomb(UUID ownerId) {
         super(ownerId, 250, "Sunbeam Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(5), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(5), new ColoredManaCost(ColoredManaSymbol.W));
         firstAbility.addCost(new SacrificeSourceCost());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

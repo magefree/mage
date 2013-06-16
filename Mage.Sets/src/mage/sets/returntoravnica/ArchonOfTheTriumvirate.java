@@ -28,15 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetNonlandPermanent;
@@ -50,7 +51,7 @@ public class ArchonOfTheTriumvirate extends CardImpl<ArchonOfTheTriumvirate> {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("nonland permanents your opponents control");
  
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
     
     public ArchonOfTheTriumvirate(UUID ownerId) {

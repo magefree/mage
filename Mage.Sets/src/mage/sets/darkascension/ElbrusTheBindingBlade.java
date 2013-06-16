@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -60,11 +62,11 @@ public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
         this.addAbility(new TransformAbility());
 
         // Equipped creature gets +1/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
          this.addAbility(new DealsCombatDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
        // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     public ElbrusTheBindingBlade(final ElbrusTheBindingBlade card) {
@@ -79,7 +81,7 @@ public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
 
 class ElbrusTheBindingBladeEffect extends OneShotEffect<ElbrusTheBindingBladeEffect> {
     public ElbrusTheBindingBladeEffect() {
-        super(Constants.Outcome.BecomeCreature);
+        super(Outcome.BecomeCreature);
         staticText = "unattach {this}, then transform it";
     }
 

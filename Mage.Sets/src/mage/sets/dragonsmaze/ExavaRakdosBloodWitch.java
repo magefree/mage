@@ -28,11 +28,11 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
@@ -40,6 +40,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.UnleashAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -56,7 +57,7 @@ public class ExavaRakdosBloodWitch extends CardImpl<ExavaRakdosBloodWitch> {
     private static final FilterPermanent filter = new FilterPermanent();
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new CounterPredicate(CounterType.P1P1));
         filter.add(new AnotherPredicate());
     }

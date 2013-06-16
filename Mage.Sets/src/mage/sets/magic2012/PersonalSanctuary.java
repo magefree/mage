@@ -29,13 +29,14 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -52,7 +53,7 @@ public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
         this.color.setWhite(true);
 
         // During your turn, prevent all damage that would be dealt to you.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PersonalSanctuaryEffect()));
     }
 
     public PersonalSanctuary(final PersonalSanctuary card) {
@@ -68,7 +69,7 @@ public class PersonalSanctuary extends CardImpl<PersonalSanctuary> {
 class PersonalSanctuaryEffect extends PreventionEffectImpl<PersonalSanctuaryEffect> {
 
     public PersonalSanctuaryEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "During your turn, prevent all damage that would be dealt to you";
     }
 

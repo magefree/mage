@@ -28,8 +28,8 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
-import mage.Constants.Zone;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.game.Game;

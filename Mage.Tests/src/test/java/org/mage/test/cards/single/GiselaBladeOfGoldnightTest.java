@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,25 +16,25 @@ public class GiselaBladeOfGoldnightTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Devout Chaplain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Corpse Traders");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 4);
-        addCard(Constants.Zone.HAND, playerA, "Shock");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Gisela, Blade of Goldnight");
+        addCard(Zone.BATTLEFIELD, playerA, "Devout Chaplain");
+        addCard(Zone.BATTLEFIELD, playerA, "Corpse Traders");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 4);
+        addCard(Zone.HAND, playerA, "Shock");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Air Elemental");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Devout Chaplain");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Llanowar Elves");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Devout Chaplain");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Llanowar Elves");
 
         attack(2, playerB, "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         // 1 from Lightning Bolt + 1 from Elite Vanguard

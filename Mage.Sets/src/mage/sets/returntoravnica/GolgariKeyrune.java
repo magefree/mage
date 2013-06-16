@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -39,6 +39,8 @@ import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.mana.BlackManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -55,7 +57,7 @@ public class GolgariKeyrune extends CardImpl<GolgariKeyrune> {
         this.addAbility(new GreenManaAbility());
 
         // {B}{G}: Golgari Keyrune becomes a 2/2 black and green Insect artifact creature with deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GolgariKeyruneToken(), "", Constants.Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureSourceEffect(new GolgariKeyruneToken(), "", Duration.EndOfTurn), new ManaCostsImpl("{B}{G}")));
     }
 
     public GolgariKeyrune(final GolgariKeyrune card) {

@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -60,7 +58,7 @@ public class DescentIntoMadness extends CardImpl<DescentIntoMadness> {
         this.color.setBlack(true);
 
         // At the beginning of your upkeep, put a despair counter on Descent into Madness, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on Descent into Madness.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DescentIntoMadnessEffect(), TargetController.YOU, false));
     }
 
     public DescentIntoMadness(final DescentIntoMadness card) {
@@ -79,7 +77,7 @@ class DescentIntoMadnessEffect extends OneShotEffect<DescentIntoMadnessEffect> {
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     public DescentIntoMadnessEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         this.staticText = "put a despair counter on {this}, then each player exiles X permanents he or she controls and/or cards from his or her hand, where X is the number of despair counters on {this}";
     }
 
@@ -120,7 +118,7 @@ class DescentIntoMadnessEffect extends OneShotEffect<DescentIntoMadnessEffect> {
         while (amount > 0) {
             Target target = new TargetControlledPermanent(0, 1, filter, true);
             if (target.canChoose(player.getId(), game)
-                    && player.choose(Constants.Outcome.Exile, target, source.getSourceId(), game)) {
+                    && player.choose(Outcome.Exile, target, source.getSourceId(), game)) {
 
                 for (UUID targetId : target.getTargets()) {
                     Permanent chosen = game.getPermanent(targetId);
@@ -132,9 +130,9 @@ class DescentIntoMadnessEffect extends OneShotEffect<DescentIntoMadnessEffect> {
             }
 
             if (amount > 0) {
-                TargetCard targetInHand = new TargetCard(Constants.Zone.HAND, filterInHand);
+                TargetCard targetInHand = new TargetCard(Zone.HAND, filterInHand);
                 if (targetInHand.canChoose(player.getId(), game) &&
-                        player.choose(Constants.Outcome.Exile, player.getHand(), targetInHand, game)) {
+                        player.choose(Outcome.Exile, player.getHand(), targetInHand, game)) {
 
                     Card card = player.getHand().get(targetInHand.getFirstTarget(), game);
                     if (card != null) {

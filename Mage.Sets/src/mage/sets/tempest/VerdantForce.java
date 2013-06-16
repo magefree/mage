@@ -29,13 +29,13 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -51,7 +51,7 @@ public class VerdantForce extends CardImpl<VerdantForce> {
         this.color.setGreen(true);
         this.power = new MageInt(7);
         this.toughness = new MageInt(7);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), Constants.TargetController.ANY, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SaprolingToken()), TargetController.ANY, false));
     }
 
     public VerdantForce(final VerdantForce card) {

@@ -28,9 +28,8 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,7 +59,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
         // As Engineered Plague enters the battlefield, choose a creature type.
         this.addAbility(new AsEntersBattlefieldAbility(new EngineeredPlagueEntersBattlefieldEffect(), "choose a creature type"));
         // All creatures of the chosen type get -1/-1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Constants.Duration.WhileOnBattlefield, new FilterEngineeredPlague(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(-1, -1, Duration.WhileOnBattlefield, new FilterEngineeredPlague(), false)));
     }
 
     public EngineeredPlague(final EngineeredPlague card) {
@@ -75,7 +74,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
     class EngineeredPlagueEntersBattlefieldEffect extends OneShotEffect<EngineeredPlagueEntersBattlefieldEffect> {
 
         public EngineeredPlagueEntersBattlefieldEffect() {
-            super(Constants.Outcome.Benefit);
+            super(Outcome.Benefit);
             staticText = "As {this} enters the battlefield, choose a creature type";
         }
 
@@ -91,7 +90,7 @@ public class EngineeredPlague extends CardImpl<EngineeredPlague> {
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose creature type");
                 typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-                while (!player.choose(Constants.Outcome.Detriment, typeChoice, game)) {
+                while (!player.choose(Outcome.Detriment, typeChoice, game)) {
                     game.debugMessage("player canceled choosing type. retrying.");
                 }
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());

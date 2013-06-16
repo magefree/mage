@@ -30,13 +30,13 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -67,7 +67,7 @@ public class PhyrexianRebirth extends CardImpl<PhyrexianRebirth> {
     class PhyrexianRebirthEffect extends OneShotEffect<PhyrexianRebirthEffect> {
 
         public PhyrexianRebirthEffect() {
-            super(Constants.Outcome.DestroyPermanent);
+            super(Outcome.DestroyPermanent);
             staticText = "Destroy all creatures, then put an X/X colorless Horror artifact creature token onto the battlefield, where X is the number of creatures destroyed this way";
         }
 

@@ -28,9 +28,9 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.PayLifeCost;
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -60,7 +61,7 @@ public class HorizonCanopy extends CardImpl<HorizonCanopy> {
         ability2.addCost(new PayLifeCost(1));
         this.addAbility(ability2);
         // {1}, {tap}, Sacrifice Horizon Canopy: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);

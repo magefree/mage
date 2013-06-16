@@ -43,7 +43,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
-import mage.Constants.CardType;
+import mage.constants.CardType;
 
 /**
  *

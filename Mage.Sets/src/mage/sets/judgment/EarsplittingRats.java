@@ -28,9 +28,9 @@
 package mage.sets.judgment;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -57,7 +58,7 @@ public class EarsplittingRats extends CardImpl<EarsplittingRats> {
         // When Earsplitting Rats enters the battlefield, each player discards a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DiscardEachPlayerEffect()));
         // Discard a card: Regenerate Earsplitting Rats.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardCardCost()));
     }
 
     public EarsplittingRats(final EarsplittingRats card) {

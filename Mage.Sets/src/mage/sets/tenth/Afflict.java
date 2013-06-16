@@ -29,12 +29,12 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -47,7 +47,7 @@ public class Afflict extends CardImpl<Afflict> {
         super(ownerId, 125, "Afflict", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}");
         this.expansionSetCode = "10E";
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(-1, -1, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }

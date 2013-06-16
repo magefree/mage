@@ -27,10 +27,10 @@
  */
 package mage.util.functions;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.CardType;
 import mage.game.permanent.PermanentCard;
 import mage.game.permanent.PermanentToken;
 import mage.game.permanent.token.Token;
@@ -68,7 +68,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         target.getManaCost().clear();
         target.getManaCost().add(sourceObj.getManaCost());
         target.getCardType().clear();
-        for (Constants.CardType type : sourceObj.getCardType()) {
+        for (CardType type : sourceObj.getCardType()) {
             target.getCardType().add(type);
         }
         target.getSubtype().clear();

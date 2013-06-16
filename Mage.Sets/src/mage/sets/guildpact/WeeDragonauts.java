@@ -28,14 +28,15 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -63,7 +64,7 @@ public class WeeDragonauts extends CardImpl<WeeDragonauts> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(2, 0, Constants.Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(2, 0, Duration.EndOfTurn), filter, false));
     }
 
     public WeeDragonauts(final WeeDragonauts card) {

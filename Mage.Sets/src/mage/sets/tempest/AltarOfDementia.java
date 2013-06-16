@@ -28,9 +28,9 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
@@ -38,6 +38,8 @@ import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -62,7 +64,7 @@ public class AltarOfDementia extends CardImpl<AltarOfDementia> {
         this.expansionSetCode = "TMP";
 
         // Sacrifice a creature: Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AltarOfDementiaEffect(), new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
@@ -81,7 +83,7 @@ public class AltarOfDementia extends CardImpl<AltarOfDementia> {
 class AltarOfDementiaEffect extends OneShotEffect<AltarOfDementiaEffect> {
     
     public AltarOfDementiaEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Target player puts a number of cards equal to the sacrificed creature's power from the top of his or her library into his or her graveyard";
     }
 
@@ -105,7 +107,7 @@ class AltarOfDementiaEffect extends OneShotEffect<AltarOfDementiaEffect> {
                     if (!player.getLibrary().getCardList().isEmpty()) {
                         Card card = player.getLibrary().removeFromTop(game);
                         if (card != null) {
-                            card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                            card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                         }  
                     }
                 }

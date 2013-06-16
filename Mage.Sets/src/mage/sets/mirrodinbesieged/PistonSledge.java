@@ -30,11 +30,10 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -64,7 +63,7 @@ public class PistonSledge extends CardImpl<PistonSledge> {
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 1)));
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public PistonSledge (final PistonSledge card) {

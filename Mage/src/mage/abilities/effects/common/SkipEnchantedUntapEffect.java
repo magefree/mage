@@ -1,8 +1,10 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -13,7 +15,7 @@ import mage.game.permanent.Permanent;
 public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchantedUntapEffect> {
 
     public SkipEnchantedUntapEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Enchanted permanent doesn't untap during its controller's untap step";
     }
 
@@ -38,7 +40,7 @@ public class SkipEnchantedUntapEffect extends ReplacementEffectImpl<SkipEnchante
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP) {
             Permanent enchantment = game.getPermanent(source.getSourceId());
             if (enchantment != null && enchantment.getAttachedTo() != null) {
                 Permanent permanent = game.getPermanent(enchantment.getAttachedTo());

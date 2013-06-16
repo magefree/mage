@@ -27,9 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -37,6 +36,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -57,7 +57,7 @@ public class SearchlightGeist extends CardImpl<SearchlightGeist> {
         this.addAbility(FlyingAbility.getInstance());
 
         // {3}{B}: Searchlight Geist gains deathtouch until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
                 new ManaCostsImpl("{3}{B}")));
     }

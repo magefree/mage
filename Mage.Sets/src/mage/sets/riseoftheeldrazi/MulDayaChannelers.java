@@ -28,10 +28,10 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
@@ -48,6 +48,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Duration;
 import mage.game.Game;
 
 /**
@@ -73,13 +74,13 @@ public class MulDayaChannelers extends CardImpl<MulDayaChannelers> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // As long as the top card of your library is a creature card, Mul Daya Channelers gets +3/+3.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Constants.Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.CREATURE), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect));
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new BoostSourceEffect(3, 3, Duration.WhileOnBattlefield), new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.CREATURE), rule1);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // As long as the top card of your library is a land card, Mul Daya Channelers has "T: Add two mana of any one color to your mana pool."
         SimpleManaAbility manaAbility = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(2), new TapSourceCost());
         manaAbility.addChoice(new ChoiceColor());
-        effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(manaAbility, Constants.Duration.WhileOnBattlefield),
+        effect = new ConditionalContinousEffect(new GainAbilitySourceEffect(manaAbility, Duration.WhileOnBattlefield),
                 new TopLibraryCardTypeCondition(TopLibraryCardTypeCondition.CheckType.LAND),
                 "As long as the top card of your library is a land card, Mul Daya Channelers has \"{T}: Add two mana of any one color to your mana pool.\"");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));

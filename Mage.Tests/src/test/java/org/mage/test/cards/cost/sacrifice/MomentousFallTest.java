@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.sacrifice;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,14 +13,14 @@ public class MomentousFallTest extends CardTestPlayerBase {
 
     @Test
     public void testSacrificeCostAndLKI() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Momentous Fall");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Geralf's Messenger", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Glorious Anthem", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Momentous Fall");
+        addCard(Zone.BATTLEFIELD, playerA, "Geralf's Messenger", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Glorious Anthem", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Momentous Fall");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Momentous Fall");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Geralf's Messenger", 1);
@@ -30,13 +31,13 @@ public class MomentousFallTest extends CardTestPlayerBase {
 
     @Test
     public void testSacrificeCostForProGreen() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.HAND, playerA, "Momentous Fall");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mirran Crusader");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.HAND, playerA, "Momentous Fall");
+        addCard(Zone.BATTLEFIELD, playerA, "Mirran Crusader");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Momentous Fall");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Momentous Fall");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Mirran Crusader", 0);

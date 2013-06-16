@@ -29,12 +29,13 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -70,7 +71,7 @@ public class DeathsPresence extends CardImpl<DeathsPresence> {
 class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl<DeathsPresenceTriggeredAbility> {
 
     public DeathsPresenceTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null);
     }
 
     public DeathsPresenceTriggeredAbility(final DeathsPresenceTriggeredAbility ability) {
@@ -85,9 +86,9 @@ class DeathsPresenceTriggeredAbility extends TriggeredAbilityImpl<DeathsPresence
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
                 this.getTargets().clear();
                 this.addTarget(new TargetControlledCreaturePermanent());

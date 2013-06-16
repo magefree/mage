@@ -28,15 +28,16 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -87,7 +88,7 @@ public class Skullsnatcher extends CardImpl<Skullsnatcher> {
 class SkullsnatcherTriggeredAbility extends TriggeredAbilityImpl<SkullsnatcherTriggeredAbility> {
 
     SkullsnatcherTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), false);
+        super(Zone.BATTLEFIELD, new ExileTargetEffect(), false);
     }
 
     SkullsnatcherTriggeredAbility(final SkullsnatcherTriggeredAbility ability) {

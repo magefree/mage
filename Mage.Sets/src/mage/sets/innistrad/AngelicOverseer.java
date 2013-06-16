@@ -28,9 +28,9 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
@@ -38,6 +38,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -68,9 +69,9 @@ public class AngelicOverseer extends CardImpl<AngelicOverseer> {
 
         // As long as you control a Human, Angelic Overseer has hexproof and is indestructible.
         ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new GainAbilitySourceEffect(HexproofAbility.getInstance()), new ControlsPermanentCondition(filter), rule1);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect1));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IndestructibleAbility.getInstance()), new ControlsPermanentCondition(filter), rule2);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, effect2));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }
 

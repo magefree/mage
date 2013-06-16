@@ -28,9 +28,8 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -54,7 +53,7 @@ public class PlaguedRusalka extends CardImpl<PlaguedRusalka> {
         this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Constants.Duration.EndOfTurn), new ColoredManaCost(Constants.ColoredManaSymbol.B));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-1, -1, Duration.EndOfTurn), new ColoredManaCost(ColoredManaSymbol.B));
         ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent()));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

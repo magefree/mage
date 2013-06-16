@@ -28,21 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffect;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
-import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.SecondTargetPointer;
 
 /**

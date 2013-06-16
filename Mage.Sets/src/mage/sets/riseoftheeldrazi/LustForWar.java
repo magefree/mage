@@ -28,9 +28,8 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
 import mage.abilities.common.BecomesTappedTriggeredAbility;
@@ -59,16 +58,16 @@ public class LustForWar extends CardImpl<LustForWar> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         // Whenever enchanted creature becomes tapped, Lust for War deals 3 damage to that creature's controller.
         Ability attachedAbility = new BecomesTappedTriggeredAbility(new DamageControllerEffect(3));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(attachedAbility, Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(attachedAbility, AttachmentType.AURA)));
 
         // Enchanted creature attacks each turn if able.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(new AttacksEachTurnStaticAbility(), AttachmentType.AURA)));
     }
 
     public LustForWar(final LustForWar card) {

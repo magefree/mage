@@ -29,12 +29,13 @@ package mage.sets.innistrad;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -82,7 +83,7 @@ public class BlasphemousAct extends CardImpl<BlasphemousAct> {
 class BlasphemousActEffect extends OneShotEffect<BlasphemousActEffect> {
 
     public BlasphemousActEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} costs {1} less to cast for each creature on the battlefield.\n {this} deals 13 damage to each creature";
     }
 

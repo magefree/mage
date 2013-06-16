@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
@@ -58,13 +56,13 @@ public class Ghoulflesh extends CardImpl<Ghoulflesh> {
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.UnboostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted creature gets -1/-1 and is a black Zombie in addition to its other colors and types.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Constants.Duration.WhileOnBattlefield)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Zombie", Constants.Duration.WhileOnBattlefield, Constants.AttachmentType.AURA)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.BLACK, Constants.Duration.WhileOnBattlefield, Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-1, -1, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAttachedEffect("Zombie", Duration.WhileOnBattlefield, AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardColorAttachedEffect(ObjectColor.BLACK, Duration.WhileOnBattlefield, AttachmentType.AURA)));
     }
 
     public Ghoulflesh(final Ghoulflesh card) {

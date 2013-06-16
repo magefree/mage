@@ -28,11 +28,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.*;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -108,7 +108,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl<VraskaTheUns
     protected Ability ability;
 
     public VraskaTheUnseenGainAbilityEffect(Ability ability) {
-        super(Duration.Custom, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "Until your next turn, whenever a creature deals combat damage to Vraska the Unseen, destroy that creature";
     }
@@ -135,7 +135,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl<VraskaTheUns
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 return true;
@@ -148,7 +148,7 @@ class VraskaTheUnseenGainAbilityEffect extends ContinuousEffectImpl<VraskaTheUns
 class AssassinToken extends Token {
     AssassinToken() {
         super("Assassin", "1/1 black Assassin creature tokens with \"Whenever this creature deals combat damage to a player, that player loses the game.\"");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Assassin");
         power = new MageInt(1);
@@ -160,7 +160,7 @@ class AssassinToken extends Token {
 class VraskaTheUnseenLoseGameEffect extends OneShotEffect<VraskaTheUnseenLoseGameEffect> {
 
     public VraskaTheUnseenLoseGameEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.staticText = "that player loses the game";
     }
 

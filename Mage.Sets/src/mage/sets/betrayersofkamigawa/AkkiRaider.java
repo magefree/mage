@@ -28,11 +28,11 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -74,7 +74,7 @@ public class AkkiRaider extends CardImpl<AkkiRaider> {
 private class AkkiRaiderTriggeredAbility extends TriggeredAbilityImpl<AkkiRaiderTriggeredAbility> {
 
     public AkkiRaiderTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect, false);
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     public AkkiRaiderTriggeredAbility(final AkkiRaiderTriggeredAbility ability) {
@@ -84,8 +84,8 @@ private class AkkiRaiderTriggeredAbility extends TriggeredAbilityImpl<AkkiRaider
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE 
-                && ((ZoneChangeEvent)event).getToZone() == Constants.Zone.GRAVEYARD
-                && ((ZoneChangeEvent)event).getFromZone() == Constants.Zone.BATTLEFIELD) {
+                && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent == null) {
                 permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);

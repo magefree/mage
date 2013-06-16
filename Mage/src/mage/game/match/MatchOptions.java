@@ -31,8 +31,8 @@ package mage.game.match;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 
 /**
  *

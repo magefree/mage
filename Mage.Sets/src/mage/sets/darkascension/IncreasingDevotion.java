@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -55,7 +54,7 @@ public class IncreasingDevotion extends CardImpl<IncreasingDevotion> {
         this.getSpellAbility().addEffect(new IncreasingDevotionEffect());
 
         // Flashback {7}{W}{W}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{W}{W}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{7}{W}{W}"), TimingRule.SORCERY));
     }
 
     public IncreasingDevotion(final IncreasingDevotion card) {
@@ -73,7 +72,7 @@ class IncreasingDevotionEffect extends OneShotEffect<IncreasingDevotionEffect> {
     private static HumanToken token = new HumanToken();
 
     public IncreasingDevotionEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Put five 1/1 white Human creature tokens onto the battlefield. If Increasing Devotion was cast from a graveyard, put ten of those tokens onto the battlefield instead";
     }
 
@@ -86,7 +85,7 @@ class IncreasingDevotionEffect extends OneShotEffect<IncreasingDevotionEffect> {
         int amount = 5;
         Spell spell = (Spell) game.getStack().getStackObject(source.getSourceId());
         if (spell != null) {
-            if (spell.getFromZone() == Constants.Zone.GRAVEYARD) {
+            if (spell.getFromZone() == Zone.GRAVEYARD) {
                 amount = 10;
             }
             token.putOntoBattlefield(amount, game, source.getSourceId(), source.getControllerId());

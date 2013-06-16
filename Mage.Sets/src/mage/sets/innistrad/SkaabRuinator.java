@@ -29,11 +29,11 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TimingRule;
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -87,8 +87,8 @@ public class SkaabRuinator extends CardImpl<SkaabRuinator> {
 
 class SkaabRuinatorAbility extends ActivatedAbilityImpl<SkaabRuinatorAbility> {
 
-    public SkaabRuinatorAbility(ManaCosts costs, Constants.TimingRule timingRule) {
-        super(Constants.Zone.GRAVEYARD, new SkaabRuinatorEffect(), costs);
+    public SkaabRuinatorAbility(ManaCosts costs, TimingRule timingRule) {
+        super(Zone.GRAVEYARD, new SkaabRuinatorEffect(), costs);
         this.timing = TimingRule.SORCERY;
         this.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(3, 3, new FilterCreatureCard("creature card from your graveyard"))));
         this.usesStack = false;
@@ -122,7 +122,7 @@ class SkaabRuinatorAbility extends ActivatedAbilityImpl<SkaabRuinatorAbility> {
 class SkaabRuinatorEffect extends OneShotEffect<SkaabRuinatorEffect> {
 
     public SkaabRuinatorEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "";
     }
 

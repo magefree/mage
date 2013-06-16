@@ -27,12 +27,12 @@
 */
 package mage.abilities.mana;
 
-import mage.Constants;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddConditionalManaOfAnyColorEffect;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.choices.ChoiceColor;
+import mage.constants.Zone;
 
 /**
  * For cards like:
@@ -51,7 +51,7 @@ public class ConditionalAnyColorManaAbility extends ManaAbility<ConditionalAnyCo
     }
 
     public ConditionalAnyColorManaAbility(Cost cost, int amount, ConditionalManaBuilder manaBuilder, boolean oneChoice) {
-        super(Constants.Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(oneChoice ? 1 :amount, manaBuilder), cost);
+        super(Zone.BATTLEFIELD, new AddConditionalManaOfAnyColorEffect(oneChoice ? 1 :amount, manaBuilder), cost);
         int choices = amount;
         if (oneChoice) {
             for (int i = 1; i < amount; i++) {

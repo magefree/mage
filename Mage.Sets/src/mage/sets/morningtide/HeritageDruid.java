@@ -29,14 +29,14 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -64,7 +64,7 @@ public class HeritageDruid extends CardImpl<HeritageDruid> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, false))));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 3, 0, 0, 0, 0, 0), new TapTargetCost(new TargetControlledCreaturePermanent(3, 3, filter, false))));
     }
 
     public HeritageDruid(final HeritageDruid card) {

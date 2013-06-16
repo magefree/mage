@@ -27,9 +27,8 @@
  */
 package mage.sets.torment;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,6 +36,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MadnessAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -77,7 +77,7 @@ public class CircularLogic extends CardImpl<CircularLogic> {
 class CircularLogicCounterUnlessPaysEffect extends OneShotEffect<CircularLogicCounterUnlessPaysEffect> {
 
     public CircularLogicCounterUnlessPaysEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public CircularLogicCounterUnlessPaysEffect(final CircularLogicCounterUnlessPaysEffect effect) {

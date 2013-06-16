@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.TableState;
+import mage.constants.TableState;
 import mage.game.Game;
 import mage.game.Seat;
 import mage.game.Table;

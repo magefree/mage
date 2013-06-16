@@ -28,14 +28,15 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -75,7 +76,7 @@ class HushEffect extends OneShotEffect<HushEffect> {
     }
 
     public HushEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy all enchantments";
     }
 

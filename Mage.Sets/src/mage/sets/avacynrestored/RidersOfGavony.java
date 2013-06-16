@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -72,7 +70,7 @@ public class RidersOfGavony extends CardImpl<RidersOfGavony> {
         this.addAbility(new AsEntersBattlefieldAbility(new RidersOfGavonyEffect()));
 
         // Human creatures you control have protection from creatures of the chosen type.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RidersOfGavonyGainAbilityControlledEffect()));
     }
 
     public RidersOfGavony(final RidersOfGavony card) {
@@ -88,7 +86,7 @@ public class RidersOfGavony extends CardImpl<RidersOfGavony> {
 class RidersOfGavonyEffect extends OneShotEffect<RidersOfGavonyEffect> {
 
     public RidersOfGavonyEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose a creature type";
     }
 
@@ -104,7 +102,7 @@ class RidersOfGavonyEffect extends OneShotEffect<RidersOfGavonyEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Constants.Outcome.BoostCreature, typeChoice, game)) {
+            while (!player.choose(Outcome.BoostCreature, typeChoice, game)) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
@@ -131,7 +129,7 @@ class RidersOfGavonyGainAbilityControlledEffect extends ContinuousEffectImpl<Rid
     protected FilterPermanent protectionFilter;
 
     public RidersOfGavonyGainAbilityControlledEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Human creatures you control have protection from creatures of the chosen type";
     }
 

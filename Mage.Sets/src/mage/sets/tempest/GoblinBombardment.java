@@ -29,14 +29,14 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -50,7 +50,7 @@ public class GoblinBombardment extends CardImpl<GoblinBombardment> {
         super(ownerId, 179, "Goblin Bombardment", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
         this.expansionSetCode = "TMP";
         this.color.setRed(true);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

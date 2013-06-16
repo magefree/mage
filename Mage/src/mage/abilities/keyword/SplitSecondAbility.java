@@ -1,11 +1,13 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.ManaAbility;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -23,7 +25,7 @@ public class SplitSecondAbility extends SimpleStaticAbility implements MageSingl
     }
 
     private SplitSecondAbility() {
-        super(Constants.Zone.STACK, new SplitSecondEffect());
+        super(Zone.STACK, new SplitSecondEffect());
         this.setRuleAtTheTop(true);
     }
 
@@ -40,7 +42,7 @@ public class SplitSecondAbility extends SimpleStaticAbility implements MageSingl
 
 class SplitSecondEffect extends ReplacementEffectImpl<SplitSecondEffect> implements MageSingleton {
     SplitSecondEffect() {
-        super(Constants.Duration.WhileOnStack, Constants.Outcome.Detriment);
+        super(Duration.WhileOnStack, Outcome.Detriment);
     }
 
     SplitSecondEffect(final SplitSecondEffect effect) {

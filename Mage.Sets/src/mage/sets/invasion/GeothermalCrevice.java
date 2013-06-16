@@ -28,9 +28,9 @@
 package mage.sets.invasion;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -56,7 +57,7 @@ public class GeothermalCrevice extends CardImpl<GeothermalCrevice> {
         // {tap}: Add {R} to your mana pool.
         this.addAbility(new RedManaAbility());
         // {tap}, Sacrifice Geothermal Crevice: Add {B}{G} to your mana pool.
-        Ability ability = new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new TapSourceCost());
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 1, 0, 0, 1, 0, 0)), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

@@ -28,8 +28,8 @@
 
 package mage.target;
 
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.Filter;
 import mage.game.Game;

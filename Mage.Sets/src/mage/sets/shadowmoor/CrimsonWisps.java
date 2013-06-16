@@ -30,15 +30,15 @@ package mage.sets.shadowmoor;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,8 +53,8 @@ public class CrimsonWisps extends CardImpl<CrimsonWisps> {
         this.color.setRed(true);
         // Target creature becomes red and gains haste until end of turn.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Constants.Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
 
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));

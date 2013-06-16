@@ -28,14 +28,16 @@
 package mage.sets.ninthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -53,7 +55,7 @@ public class BeastOfBurden extends CardImpl<BeastOfBurden> {
         this.toughness = new MageInt(0);
 
         // Beast of Burden's power and toughness are each equal to the number of creatures on the battlefield.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures on the battlefield")), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("creatures on the battlefield")), Duration.EndOfGame)));
         
     }
 

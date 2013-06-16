@@ -28,11 +28,11 @@
 package mage.abilities.mana;
 
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ManaEffect;
+import mage.constants.Duration;
 
 /**
  * @author Plopman
@@ -47,7 +47,7 @@ public abstract class DelayedTriggeredManaAbility<T extends DelayedTriggeredMana
         super(ability);
     }
     
-    public DelayedTriggeredManaAbility(Effect effect, Constants.Duration duration, Boolean triggerOnlyOnce) {
+    public DelayedTriggeredManaAbility(Effect effect, Duration duration, Boolean triggerOnlyOnce) {
         super(effect, duration, triggerOnlyOnce);
     }
 }

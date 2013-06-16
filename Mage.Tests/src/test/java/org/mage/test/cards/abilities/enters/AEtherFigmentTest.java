@@ -1,7 +1,8 @@
 package org.mage.test.cards.abilities.enters;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -14,12 +15,12 @@ public class AEtherFigmentTest extends CardTestPlayerBase {
 
     @Test
     public void testEnteringWithCounters() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
-        addCard(Constants.Zone.HAND, playerA, "AEther Figment");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "AEther Figment");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "AEther Figment");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "AEther Figment");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

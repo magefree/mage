@@ -29,10 +29,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
@@ -92,7 +93,7 @@ public class QuillmaneBaku extends CardImpl<QuillmaneBaku> {
     class QuillmaneBakuReturnEffect extends OneShotEffect<QuillmaneBakuReturnEffect> {
 
         public QuillmaneBakuReturnEffect() {
-            super(Constants.Outcome.ReturnToHand);
+            super(Outcome.ReturnToHand);
             this.staticText = "Return target creature with converted mana cost X or less to its owner's hand";
         }
 

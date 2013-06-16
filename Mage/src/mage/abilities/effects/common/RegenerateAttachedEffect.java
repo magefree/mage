@@ -29,10 +29,10 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.AttachmentType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+
+import mage.constants.AttachmentType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.game.Game;
@@ -100,9 +100,9 @@ public class RegenerateAttachedEffect extends ReplacementEffectImpl<RegenerateAt
     }
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == Constants.AttachmentType.AURA) {
+        if (attachmentType == AttachmentType.AURA) {
             sb.append("Regenerate enchanted creature");
-        } else if (attachmentType == Constants.AttachmentType.EQUIPMENT) {
+        } else if (attachmentType == AttachmentType.EQUIPMENT) {
             sb.append("Regenerate equipped creature");
         }
         staticText = sb.toString();

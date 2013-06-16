@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -13,14 +14,14 @@ public class AlphaBrawlTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        addCard(Constants.Zone.HAND, playerA, "Alpha Brawl");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.HAND, playerA, "Alpha Brawl");
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Horned Turtle", 4);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Brawl", "Air Elemental");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Brawl", "Air Elemental");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -32,14 +33,14 @@ public class AlphaBrawlTest extends CardTestPlayerBase {
 
     @Test
     public void testCardWithInfect() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 8);
-        addCard(Constants.Zone.HAND, playerA, "Alpha Brawl");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Blackcleave Goblin", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Air Elemental", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 8);
+        addCard(Zone.HAND, playerA, "Alpha Brawl");
+        addCard(Zone.BATTLEFIELD, playerB, "Blackcleave Goblin", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Air Elemental", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Brawl", "Blackcleave Goblin");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Alpha Brawl", "Blackcleave Goblin");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

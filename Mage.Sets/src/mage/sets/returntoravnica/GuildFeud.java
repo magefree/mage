@@ -28,11 +28,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +66,7 @@ public class GuildFeud extends CardImpl<GuildFeud> {
         // then puts the rest into his or her graveyard. You do the same with the top three
         // cards of your library. If two creatures are put onto the battlefield this way,
         // those creatures fight each other.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), Constants.TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new GuildFeudEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }

@@ -27,7 +27,7 @@
  */
 package mage.watchers.common;
 
-import mage.Constants.WatcherScope;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;

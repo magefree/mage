@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CipherEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -70,7 +71,7 @@ public class WhisperingMadness extends CardImpl<WhisperingMadness> {
 
 class WhisperingMadnessEffect extends OneShotEffect<WhisperingMadnessEffect> {
     WhisperingMadnessEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 

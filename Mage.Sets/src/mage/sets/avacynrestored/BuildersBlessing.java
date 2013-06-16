@@ -27,12 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterUntappedCreature;
 
 import java.util.UUID;
@@ -49,7 +50,7 @@ public class BuildersBlessing extends CardImpl<BuildersBlessing> {
         this.color.setWhite(true);
 
         // Untapped creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Constants.Duration.WhileOnBattlefield, new FilterUntappedCreature())));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));
     }
 
     public BuildersBlessing(final BuildersBlessing card) {

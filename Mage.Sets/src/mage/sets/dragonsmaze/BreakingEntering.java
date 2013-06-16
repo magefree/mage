@@ -29,11 +29,11 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -42,6 +42,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -119,7 +120,7 @@ class EnteringReturnFromGraveyardToBattlefieldEffect extends OneShotEffect<Enter
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
                     if (card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId())) {
-                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Constants.Duration.EndOfTurn);
+                        ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn);
                         effect.setTargetPointer(new FixedTarget(card.getId()));
                         game.addEffect(effect, source);
                         return true;

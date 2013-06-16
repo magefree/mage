@@ -1,8 +1,8 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -11,7 +11,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl<CopyTokenEffect> {
     protected Token token;
 
     public CopyTokenEffect(Token token) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.BecomeCreature);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.BecomeCreature);
         this.token = token.copy();
         staticText = "You may have {this} enter the battlefield as a copy of " + token.getDescription() + " on the battlefield";
     }
@@ -27,7 +27,7 @@ public class CopyTokenEffect extends ContinuousEffectImpl<CopyTokenEffect> {
         permanent.setName(token.getName());
         permanent.getColor().setColor(token.getColor());
         permanent.getCardType().clear();
-        for (Constants.CardType type: token.getCardType()) {
+        for (CardType type: token.getCardType()) {
             permanent.getCardType().add(type);
         }
         permanent.getSubtype().clear();

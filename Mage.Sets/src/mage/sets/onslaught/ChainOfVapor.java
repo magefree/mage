@@ -28,14 +28,15 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,7 +75,7 @@ public class ChainOfVapor extends CardImpl<ChainOfVapor> {
 class ChainOfVaporEffect extends OneShotEffect<ChainOfVaporEffect> {
 
     public ChainOfVaporEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
     }
 
     public ChainOfVaporEffect(final ChainOfVaporEffect effect) {
@@ -90,7 +91,7 @@ class ChainOfVaporEffect extends OneShotEffect<ChainOfVaporEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            if(!permanent.moveToZone(Constants.Zone.HAND, source.getId(), game, false)){
+            if(!permanent.moveToZone(Zone.HAND, source.getId(), game, false)){
                 return false;
             }
             

@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +38,8 @@ import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,7 +60,7 @@ public class TavernSwindler extends CardImpl<TavernSwindler> {
         this.toughness = new MageInt(2);
 
         // {T}, Pay 3 life: Flip a coin. If you win the flip, you gain 6 life.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new TavernSwindlerEffect(),new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new TavernSwindlerEffect(),new TapSourceCost());
         ability.addCost(new PayLifeCost(3));
         this.addAbility(ability);
     }
@@ -76,7 +78,7 @@ public class TavernSwindler extends CardImpl<TavernSwindler> {
 class TavernSwindlerEffect extends OneShotEffect<TavernSwindlerEffect> {
 
     public TavernSwindlerEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Flip a coin. If you win the flip, you gain 6 life";
     }
 

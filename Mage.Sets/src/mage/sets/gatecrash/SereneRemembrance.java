@@ -28,14 +28,15 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -96,13 +97,13 @@ class SereneRemembranceEffect extends OneShotEffect<SereneRemembranceEffect> {
                     if (player.getGraveyard().contains(card.getId())) {
                         graveyardPlayer = player;
                         player.getGraveyard().remove(card);
-                        result |= card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                        result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                     }
                 }
             }            
         }
         Card card = game.getCard(source.getSourceId());
-        result |= card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+        result |= card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
         Player player = game.getPlayer(card.getOwnerId());
         if (player != null){
             player.shuffleLibrary(game);
@@ -117,7 +118,7 @@ class SereneRemembranceEffect extends OneShotEffect<SereneRemembranceEffect> {
 class SereneRemembranceTargetCardsInGraveyard extends TargetCard<SereneRemembranceTargetCardsInGraveyard> {
 
     public SereneRemembranceTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Constants.Zone.GRAVEYARD, filter);
+        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
         this.targetName = "up to three target cards from a single graveyard";
     }
 

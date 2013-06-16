@@ -28,14 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Library;
@@ -72,7 +74,7 @@ public class ExplosiveRevelation extends CardImpl<ExplosiveRevelation> {
 class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect> {
 
     public ExplosiveRevelationEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "Choose target creature or player. Reveal cards from the top of your library until you reveal a nonland card, {this} deals damage equal to that card's converted mana cost to that creature or player. Put the nonland card into your hand and the rest on the bottom of your library in any order";
     }
 
@@ -118,7 +120,7 @@ class ExplosiveRevelationEffect extends OneShotEffect<ExplosiveRevelationEffect>
                 }
             }
             // move nonland card to hand
-            card.moveToZone(Constants.Zone.HAND, id, game, true);
+            card.moveToZone(Zone.HAND, id, game, true);
             // remove nonland card from revealed card list
             cards.remove(card);
             // put the rest of the cards on the bottom of the library in any order

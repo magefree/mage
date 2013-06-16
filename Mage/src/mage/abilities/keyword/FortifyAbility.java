@@ -28,9 +28,9 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.TargetController;
-import mage.Constants.TimingRule;
-import mage.Constants.Zone;
+import mage.constants.TargetController;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;

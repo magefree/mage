@@ -28,9 +28,9 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.Effect;
@@ -38,6 +38,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -71,7 +72,7 @@ public class UndiscoveredParadise extends CardImpl<UndiscoveredParadise> {
 class UndiscoveredParadiseEffect extends OneShotEffect<UndiscoveredParadiseEffect> {
 
     public UndiscoveredParadiseEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "During your next untap step, as you untap your permanents, return {this} to its owner's hand";
     }
 

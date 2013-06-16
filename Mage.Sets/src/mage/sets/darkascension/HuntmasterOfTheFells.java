@@ -27,9 +27,7 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -88,7 +86,7 @@ public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Huntmaster of the Fells.
         this.addAbility(new TransformAbility());
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(true), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, NoSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.NO_SPELLS_TRANSFORM_RULE));
     }
 
@@ -105,7 +103,7 @@ public class HuntmasterOfTheFells extends CardImpl<HuntmasterOfTheFells> {
 class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFellsAbility> {
 
     public HuntmasterOfTheFellsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), false);
+        super(Zone.BATTLEFIELD, new CreateTokenEffect(new WolfToken(Token.Type.SECOND)), false);
         this.addEffect(new GainLifeEffect(2));
     }
 
@@ -142,7 +140,7 @@ class HuntmasterOfTheFellsAbility extends TriggeredAbilityImpl<HuntmasterOfTheFe
 class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbility> {
 
     public RavagerOfTheFellsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
+        super(Zone.BATTLEFIELD, new RavagerOfTheFellsEffect(), false);
         Target target1 = new TargetOpponent();
         target1.setRequired(true);
         this.addTarget(target1);
@@ -181,7 +179,7 @@ class RavagerOfTheFellsAbility extends TriggeredAbilityImpl<RavagerOfTheFellsAbi
 class RavagerOfTheFellsEffect extends OneShotEffect<RavagerOfTheFellsEffect> {
 
     public RavagerOfTheFellsEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
 
     public RavagerOfTheFellsEffect(final RavagerOfTheFellsEffect effect) {

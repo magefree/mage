@@ -28,9 +28,9 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TimingRule;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;

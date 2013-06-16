@@ -27,14 +27,14 @@
  */
 package mage.abilities.keyword;
  
-import mage.Constants;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -58,7 +58,7 @@ import mage.players.Player;
  public class UnleashAbility extends SimpleStaticAbility {
  
     public UnleashAbility() {
-        super(Constants.Zone.ALL, new UnleashReplacementEffect());
+        super(Zone.ALL, new UnleashReplacementEffect());
         this.addEffect(new UnleashRestrictionEffect());
     }
  
@@ -80,7 +80,7 @@ import mage.players.Player;
 class UnleashReplacementEffect extends ReplacementEffectImpl<UnleashReplacementEffect> {
  
     public UnleashReplacementEffect() {
-        super(Constants.Duration.EndOfGame, Outcome.Detriment);
+        super(Duration.EndOfGame, Outcome.Detriment);
     }
  
     public UnleashReplacementEffect(UnleashReplacementEffect effect) {

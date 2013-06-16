@@ -30,15 +30,16 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.SetPowerToughnessTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -55,7 +56,7 @@ public class Gigantomancer extends CardImpl<Gigantomancer> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(7, 7, Constants.Duration.EndOfTurn), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SetPowerToughnessTargetEffect(7, 7, Duration.EndOfTurn), new GenericManaCost(1));
         ability.addTarget(new TargetControlledCreaturePermanent());
         this.addAbility(ability);
     }

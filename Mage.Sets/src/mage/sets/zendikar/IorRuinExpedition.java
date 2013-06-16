@@ -27,9 +27,8 @@
  */
 package mage.sets.zendikar;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -38,6 +37,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 import java.util.UUID;
@@ -55,7 +55,7 @@ public class IorRuinExpedition extends CardImpl<IorRuinExpedition> {
         this.color.setBlue(true);
 
         this.addAbility(new LandfallAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), true));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(3), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(3)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

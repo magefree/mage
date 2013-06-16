@@ -29,9 +29,8 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.PhyrexianManaCost;
@@ -39,6 +38,7 @@ import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.target.common.TargetCreatureOrPlayer;
@@ -69,7 +69,7 @@ public class RageExtractor extends CardImpl<RageExtractor> {
 
 class RageExtractorTriggeredAbility extends TriggeredAbilityImpl<RageExtractorTriggeredAbility> {
     RageExtractorTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(0));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(0));
         this.addTarget(new TargetCreatureOrPlayer());
     }
 

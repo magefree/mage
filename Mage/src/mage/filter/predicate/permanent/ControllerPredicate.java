@@ -27,7 +27,7 @@
  */
 package mage.filter.predicate.permanent;
 
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.game.Controllable;

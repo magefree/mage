@@ -1,7 +1,7 @@
 package mage.game.permanent.token;
 
-import mage.Constants;
 import mage.MageInt;
+import mage.constants.CardType;
 
 /**
  *
@@ -11,7 +11,7 @@ public class KithkinToken extends Token{
 
     public KithkinToken() {
         super("Kithkin", "1/1 white Kithkin Soldier creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Kithkin");
         subtype.add("Soldier");

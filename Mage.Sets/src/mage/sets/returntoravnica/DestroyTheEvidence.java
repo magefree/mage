@@ -28,15 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -76,7 +77,7 @@ public class DestroyTheEvidence extends CardImpl<DestroyTheEvidence> {
 class DestroyTheEvidenceEffect extends OneShotEffect<DestroyTheEvidenceEffect> {
 
     public DestroyTheEvidenceEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "Its controller reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard";
     }
 
@@ -104,7 +105,7 @@ class DestroyTheEvidenceEffect extends OneShotEffect<DestroyTheEvidenceEffect> {
             while (player.getLibrary().size() > 0 && !landFound) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                     if (card.getCardType().contains(CardType.LAND)) {
                         landFound = true;
                     }

@@ -27,13 +27,14 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -81,7 +82,7 @@ public class GhostlyFlicker extends CardImpl<GhostlyFlicker> {
 class GhostlyFlickerEffect extends OneShotEffect<GhostlyFlickerEffect> {
 
     public GhostlyFlickerEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile two target artifacts, creatures, and/or lands you control, then return those cards to the battlefield under your control";
     }
 
@@ -103,7 +104,7 @@ class GhostlyFlickerEffect extends OneShotEffect<GhostlyFlickerEffect> {
                 target.moveToExile(exileId, "Ghostly Flicker", source.getId(), game);
                 Card card = game.getCard(target.getId());
                 if (card != null) {
-                    Constants.Zone currentZone = game.getState().getZone(card.getId());
+                    Zone currentZone = game.getState().getZone(card.getId());
                     card.putOntoBattlefield(game, currentZone, source.getId(), source.getControllerId());
                 }
             }

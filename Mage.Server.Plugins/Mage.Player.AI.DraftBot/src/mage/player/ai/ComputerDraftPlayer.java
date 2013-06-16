@@ -28,7 +28,7 @@
 
 package mage.player.ai;
 
-import mage.Constants.RangeOfInfluence;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.players.Player;
 

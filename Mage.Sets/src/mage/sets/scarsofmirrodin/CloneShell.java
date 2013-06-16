@@ -27,9 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -39,6 +38,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -84,7 +85,7 @@ class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
     protected static FilterCard filter2 = new FilterCard("card to put on the bottom of your library");
 
     public CloneShellEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library in any order";
     }
 
@@ -95,20 +96,20 @@ class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(Constants.Zone.PICK);
+        Cards cards = new CardsImpl(Zone.PICK);
         int count = Math.min(player.getLibrary().size(), 4);
         for (int i = 0; i < count; i++) {
             Card card = player.getLibrary().removeFromTop(game);
             cards.add(card);
-            game.setZone(card.getId(), Constants.Zone.PICK);
+            game.setZone(card.getId(), Zone.PICK);
         }
 
         if (cards.size() == 0) {
             return false;
 
         }
-        TargetCard target1 = new TargetCard(Constants.Zone.PICK, filter1);
-        if (player.choose(Constants.Outcome.Detriment, cards, target1, game)) {
+        TargetCard target1 = new TargetCard(Zone.PICK, filter1);
+        if (player.choose(Outcome.Detriment, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
@@ -123,19 +124,19 @@ class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
         }
 
         if (cards.size() > 0) {
-            TargetCard target2 = new TargetCard(Constants.Zone.PICK, filter2);
+            TargetCard target2 = new TargetCard(Zone.PICK, filter2);
             target2.setRequired(true);
             while (cards.size() > 1) {
-                player.choose(Constants.Outcome.Benefit, cards, target2, game);
+                player.choose(Outcome.Benefit, cards, target2, game);
                 Card card = cards.get(target2.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
                 target2.clearChosen();
             }
             Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
         }
 
         return true;
@@ -151,7 +152,7 @@ class CloneShellEffect extends OneShotEffect<CloneShellEffect> {
 class CloneShellDiesEffect extends OneShotEffect<CloneShellDiesEffect> {
 
     public CloneShellDiesEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "turn the exiled card face up. If it's a creature card, put it onto the battlefield under your control";
     }
 
@@ -161,14 +162,14 @@ class CloneShellDiesEffect extends OneShotEffect<CloneShellDiesEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         if (permanent != null) {
             List<UUID> imprinted = permanent.getImprinted();
             if (imprinted.size() > 0) {
                 Card imprintedCard = game.getCard(imprinted.get(0));
                 imprintedCard.setFaceDown(false);
                 if (imprintedCard.getCardType().contains(CardType.CREATURE)) {
-                    imprintedCard.putOntoBattlefield(game, Constants.Zone.EXILED, source.getSourceId(), source.getControllerId());
+                    imprintedCard.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), source.getControllerId());
                 }
             }
         }

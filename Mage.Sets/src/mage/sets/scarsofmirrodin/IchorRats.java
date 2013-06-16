@@ -30,15 +30,15 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +73,7 @@ public class IchorRats extends CardImpl<IchorRats> {
 
 class IchorRatsEffect extends OneShotEffect<IchorRatsEffect> {
     public IchorRatsEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each player gets a poison counter";
     }
 

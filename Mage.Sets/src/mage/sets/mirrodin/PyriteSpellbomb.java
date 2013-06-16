@@ -29,9 +29,8 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -40,6 +39,8 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -51,11 +52,11 @@ public class PyriteSpellbomb extends CardImpl<PyriteSpellbomb> {
     public PyriteSpellbomb(UUID ownerId) {
         super(ownerId, 232, "Pyrite Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "MRD";
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ColoredManaCost(ColoredManaSymbol.R));
         firstAbility.addCost(new SacrificeSourceCost());
         firstAbility.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeSourceCost());
         this.addAbility(secondAbility);
     }

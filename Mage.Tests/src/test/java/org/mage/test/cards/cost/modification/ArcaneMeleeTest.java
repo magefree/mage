@@ -1,7 +1,8 @@
 package org.mage.test.cards.cost.modification;
 
-import mage.Constants;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -23,13 +24,13 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
      */
     @Test
     public void testOnBattlefield() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arcane Melee", 1);
-        addCard(Constants.Zone.HAND, playerA, "Flow of Ideas", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Arcane Melee", 1);
+        addCard(Zone.HAND, playerA, "Flow of Ideas", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -45,13 +46,13 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
      */
     @Test
     public void testInHand() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.HAND, playerA, "Arcane Melee", 1);
-        addCard(Constants.Zone.HAND, playerA, "Flow of Ideas", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Arcane Melee", 1);
+        addCard(Zone.HAND, playerA, "Flow of Ideas", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -66,13 +67,13 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiArcaneMelee() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arcane Melee", 3);
-        addCard(Constants.Zone.HAND, playerA, "Flow of Ideas", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Arcane Melee", 3);
+        addCard(Zone.HAND, playerA, "Flow of Ideas", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Flow of Ideas");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -98,13 +99,13 @@ public class ArcaneMeleeTest extends CardTestPlayerBase {
      */
     @Test
     public void testNonInstantAndSorcery() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Arcane Melee", 1);
-        addCard(Constants.Zone.HAND, playerA, "Merfolk Looter", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Arcane Melee", 1);
+        addCard(Zone.HAND, playerA, "Merfolk Looter", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Looter");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Merfolk Looter");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

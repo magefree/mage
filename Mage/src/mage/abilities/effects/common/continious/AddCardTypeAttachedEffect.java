@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,11 +38,11 @@ import mage.game.permanent.Permanent;
  * @author nantuko
  */
 public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeAttachedEffect> {
-    private Constants.CardType addedCardType;
-    private Constants.AttachmentType attachmentType;
+    private CardType addedCardType;
+    private AttachmentType attachmentType;
 
-    public AddCardTypeAttachedEffect(Constants.CardType addedCardType, Constants.Duration duration, Constants.AttachmentType attachmentType) {
-        super(duration, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+    public AddCardTypeAttachedEffect(CardType addedCardType, Duration duration, AttachmentType attachmentType) {
+        super(duration, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         this.addedCardType = addedCardType;
         this.attachmentType = attachmentType;
         setText();
@@ -72,9 +72,9 @@ public class AddCardTypeAttachedEffect extends ContinuousEffectImpl<AddCardTypeA
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        if (attachmentType == Constants.AttachmentType.AURA)
+        if (attachmentType == AttachmentType.AURA)
             sb.append("Enchanted");
-        else if (attachmentType == Constants.AttachmentType.EQUIPMENT)
+        else if (attachmentType == AttachmentType.EQUIPMENT)
             sb.append("Equipped");
 
         sb.append(" creature becomes ").append(addedCardType.toString()).append(" in addition to its other types"); //TODO add attacked card type detection

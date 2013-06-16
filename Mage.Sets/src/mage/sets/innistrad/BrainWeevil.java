@@ -29,9 +29,8 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -58,7 +58,7 @@ public class BrainWeevil extends CardImpl<BrainWeevil> {
 
         this.addAbility(IntimidateAbility.getInstance());
         // Sacrifice Brain Weevil: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeSourceCost());
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

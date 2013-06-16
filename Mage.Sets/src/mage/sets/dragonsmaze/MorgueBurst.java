@@ -28,14 +28,16 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -75,7 +77,7 @@ public class MorgueBurst extends CardImpl<MorgueBurst> {
 class MorgueBurstEffect extends OneShotEffect<MorgueBurstEffect> {
 
     public MorgueBurstEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
     }
 
     public MorgueBurstEffect(final MorgueBurstEffect effect) {
@@ -93,7 +95,7 @@ class MorgueBurstEffect extends OneShotEffect<MorgueBurstEffect> {
         if (card != null) {
             Player player = game.getPlayer(card.getOwnerId());
             if (player != null) {
-                card.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, false);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 int damage = card.getPower().getValue();
                 Permanent creature = game.getPermanent(source.getTargets().get(1).getTargets().get(0));
                 if (creature != null) {

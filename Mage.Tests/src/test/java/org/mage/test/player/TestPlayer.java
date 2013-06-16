@@ -28,12 +28,13 @@
 
 package org.mage.test.player;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.choices.Choice;
+import mage.constants.RangeOfInfluence;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterAttackingCreature;
@@ -65,7 +66,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     private List<String> choices = new ArrayList<String>();
     private List<String> targets = new ArrayList<String>();
 
-    public TestPlayer(String name, Constants.RangeOfInfluence range) {
+    public TestPlayer(String name, RangeOfInfluence range) {
         super(name, range);
         human = false;
     }
@@ -169,7 +170,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
-    public boolean choose(Constants.Outcome outcome, Choice choice, Game game) {
+    public boolean choose(Outcome outcome, Choice choice, Game game) {
         if (!choices.isEmpty()) {
             for (String choose2: choices) {
                 for (String choose1: choice.getChoices()) {
@@ -185,7 +186,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
-    public boolean choose(Constants.Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
+    public boolean choose(Outcome outcome, Target target, UUID sourceId, Game game, Map<String, Serializable> options) {
         if (!choices.isEmpty()) {
             if (target instanceof TargetPermanent) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
@@ -211,7 +212,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
     @Override
-    public boolean chooseTarget(Constants.Outcome outcome, Target target, Ability source, Game game) {
+    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         if (!targets.isEmpty()) {
             if (target instanceof TargetPermanent) {
                 for (Permanent permanent : game.getBattlefield().getAllActivePermanents((FilterPermanent)target.getFilter(), game)) {
@@ -237,7 +238,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
     }
 
         @Override
-    public boolean chooseUse(Constants.Outcome outcome, String message, Game game) {
+    public boolean chooseUse(Outcome outcome, String message, Game game) {
         if (!choices.isEmpty()) {
             if (choices.get(0).equals("No")) {
                 choices.remove(0);

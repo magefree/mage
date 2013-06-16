@@ -28,15 +28,16 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,7 +56,7 @@ public class CityOfTraitors extends CardImpl<CityOfTraitors> {
         this.addAbility(new CityOfTraitorsTriggeredAbility());
 
         // {tap}: Add {2} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(2), new TapSourceCost()));
     }
 
     public CityOfTraitors(final CityOfTraitors card) {
@@ -71,7 +72,7 @@ public class CityOfTraitors extends CardImpl<CityOfTraitors> {
 class CityOfTraitorsTriggeredAbility extends TriggeredAbilityImpl<CityOfTraitorsTriggeredAbility> {
 
     CityOfTraitorsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     CityOfTraitorsTriggeredAbility(CityOfTraitorsTriggeredAbility ability) {

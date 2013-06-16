@@ -28,9 +28,9 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.common.CantBlockAbility;
@@ -38,6 +38,8 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.decorator.ConditionalGainActivatedAbility;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -67,9 +69,9 @@ public class VillainousOgre extends CardImpl<VillainousOgre> {
 
         // As long as you control a Demon, Villainous Ogre has "{B}: Regenerate Villainous Ogre.
         this.addAbility( new ConditionalGainActivatedAbility(
-                Constants.Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 new RegenerateSourceEffect(), 
-                new ColoredManaCost(Constants.ColoredManaSymbol.B), 
+                new ColoredManaCost(ColoredManaSymbol.B),
                 new ControlsPermanentCondition(filter), 
                 rule));        
     }

@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class Planeshift extends ExpansionSet {
     }
 
     private Planeshift() {
-        super("Planeshift", "PLS", "", "mage.sets.planeshift", new GregorianCalendar(2001, 1, 5).getTime(), SetType.EXPANSION);
+        super("Planeshift", "PLS", "mage.sets.planeshift", new GregorianCalendar(2001, 1, 5).getTime(), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.parentSet = Invasion.getInstance();
         this.hasBasicLands = false;

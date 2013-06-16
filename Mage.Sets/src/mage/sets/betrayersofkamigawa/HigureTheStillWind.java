@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +41,7 @@ import mage.abilities.effects.common.UnblockableTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.NinjutsuAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -77,7 +78,7 @@ public class HigureTheStillWind extends CardImpl<HigureTheStillWind> {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filter)), true));
 
         // {2}: Target Ninja creature is unblockable this turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new GenericManaCost(2));
         ability.addTarget(new TargetCreaturePermanent(filterCreature));
         this.addAbility(ability);
 

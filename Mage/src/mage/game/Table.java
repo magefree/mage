@@ -32,7 +32,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.TableState;
+import mage.constants.TableState;
 import mage.cards.decks.DeckValidator;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;

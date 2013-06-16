@@ -29,9 +29,7 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -56,7 +54,7 @@ public class SplitTailMiko extends CardImpl<SplitTailMiko> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         // {W}, {tap}: Prevent the next 2 damage that would be dealt to target creature or player this turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 2), new ColoredManaCost(Constants.ColoredManaSymbol.W));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PreventDamageTargetEffect(Duration.EndOfTurn, 2), new ColoredManaCost(ColoredManaSymbol.W));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);

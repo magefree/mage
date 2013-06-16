@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class TimeSpiralTimeshifted extends ExpansionSet {
     }
 
     private TimeSpiralTimeshifted() {
-        super("Time Spiral \"Timeshifted\"", "TSB", "", "mage.sets.timeshifted", new GregorianCalendar(2006, 9, 9).getTime(), SetType.EXPANSION);
+        super("Time Spiral \"Timeshifted\"", "TSB", "mage.sets.timeshifted", new GregorianCalendar(2006, 9, 9).getTime(), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;

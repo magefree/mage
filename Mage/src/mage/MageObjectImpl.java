@@ -28,7 +28,7 @@
 
 package mage;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;

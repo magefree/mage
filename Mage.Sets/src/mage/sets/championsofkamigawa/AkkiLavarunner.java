@@ -1,6 +1,5 @@
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -15,6 +14,7 @@ import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
@@ -30,7 +30,7 @@ import java.util.UUID;
 public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
 
     public AkkiLavarunner(UUID ownerId) {
-        super(ownerId, 153, "Akki Lavarunner", Constants.Rarity.RARE, new Constants.CardType[]{Constants.CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 153, "Akki Lavarunner", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Goblin");
         this.subtype.add("Warrior");
@@ -41,7 +41,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
         this.flipCardName = "Tok-Tok, Volcano Born";
         this.addAbility(HasteAbility.getInstance());
         this.addAbility(new AkkiLavarunnerAbility());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TokTokVolcanoBorn()), FlippedCondition.getInstance(), "")));
     }
 
     public AkkiLavarunner(final AkkiLavarunner card) {
@@ -57,7 +57,7 @@ public class AkkiLavarunner extends CardImpl<AkkiLavarunner> {
 class AkkiLavarunnerAbility extends TriggeredAbilityImpl<AkkiLavarunnerAbility> {
 
     public AkkiLavarunnerAbility() {
-        super(Constants.Zone.BATTLEFIELD, new FlipSourceEffect());
+        super(Zone.BATTLEFIELD, new FlipSourceEffect());
     }
 
     public AkkiLavarunnerAbility(final AkkiLavarunnerAbility ability) {
@@ -97,21 +97,21 @@ class TokTokVolcanoBorn extends Token {
     TokTokVolcanoBorn() {
         super("Tok-Tok, Volcano Born", "");
         supertype.add("Legendary");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Goblin");
         subtype.add("Shaman");
         power = new MageInt(2);
         toughness = new MageInt(2);
         this.addAbility(new ProtectionAbility(filter));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TokTokVolcanoBornEffect()));
     }
 }
 
 class TokTokVolcanoBornEffect extends ReplacementEffectImpl<TokTokVolcanoBornEffect> {
 
     TokTokVolcanoBornEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead";
     }
 

@@ -29,11 +29,11 @@ package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -47,7 +47,7 @@ public class MendingHands extends CardImpl<MendingHands> {
         this.expansionSetCode = "BOK";
         this.color.setWhite(true);
         // Prevent the next 4 damage that would be dealt to target creature or player this turn.
-        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 4));
+        this.getSpellAbility().addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, 4));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
 

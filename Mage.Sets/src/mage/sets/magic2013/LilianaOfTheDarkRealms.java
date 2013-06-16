@@ -28,14 +28,14 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;

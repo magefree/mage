@@ -27,15 +27,15 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityPairedEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.SoulbondAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 import java.util.UUID;
 
@@ -60,7 +60,7 @@ public class GeistTrappers extends CardImpl<GeistTrappers> {
         this.addAbility(SoulbondAbility.getInstance());
 
         // As long as Geist Trappers is paired with another creature, both creatures have reach.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityPairedEffect(ReachAbility.getInstance(), ruleText)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ReachAbility.getInstance(), ruleText)));
     }
 
     public GeistTrappers(final GeistTrappers card) {

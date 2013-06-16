@@ -29,11 +29,14 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.turn.Step;
@@ -58,11 +61,11 @@ import mage.util.CardUtil;
 public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
 
     public DetainTargetEffect() {
-        super(Constants.Outcome.LoseAbility);
+        super(Outcome.LoseAbility);
     }
 
     public DetainTargetEffect(String ruleText) {
-        super(Constants.Outcome.LoseAbility);
+        super(Outcome.LoseAbility);
         staticText = ruleText;
     }
 
@@ -126,7 +129,7 @@ public class DetainTargetEffect extends OneShotEffect<DetainTargetEffect> {
 class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect> {
  
     public DetainRestrictionEffect() {
-        super(Constants.Duration.Custom);
+        super(Duration.Custom);
         staticText = "";
     }
  
@@ -147,7 +150,7 @@ class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect>
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {

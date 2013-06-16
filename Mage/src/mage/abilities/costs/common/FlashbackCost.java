@@ -28,10 +28,10 @@
 
 package mage.abilities.costs.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ManaCost;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -53,9 +53,9 @@ public class FlashbackCost extends AlternativeCostImpl<FlashbackCost> {
 
     @Override
     public boolean isAvailable(Game game, Ability source) {
-        Constants.Zone zone = game.getState().getZone(source.getSourceId());
+        Zone zone = game.getState().getZone(source.getSourceId());
         if (zone != null) {
-            return zone.equals(Constants.Zone.GRAVEYARD);
+            return zone.equals(Zone.GRAVEYARD);
         }
         return false;
     }

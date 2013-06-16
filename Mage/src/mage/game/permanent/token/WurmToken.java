@@ -27,9 +27,9 @@
  */
 package mage.game.permanent.token;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.ObjectColor;
+import mage.constants.CardType;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -38,7 +38,7 @@ public class WurmToken extends Token {
 
     public WurmToken() {
         super("Wurm", "a 6/6 green Wurm creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color = ObjectColor.GREEN;
         subtype.add("Wurm");
         power = new MageInt(6);

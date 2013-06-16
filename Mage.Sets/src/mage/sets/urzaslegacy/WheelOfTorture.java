@@ -28,14 +28,16 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -50,7 +52,7 @@ public class WheelOfTorture extends CardImpl<WheelOfTorture> {
         this.expansionSetCode = "ULG";
 
         // At the beginning of each opponent's upkeep, Wheel of Torture deals X damage to that player, where X is 3 minus the number of cards in his or her hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), Constants.TargetController.OPPONENT, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new WheelOfTortureEffect(), TargetController.OPPONENT, false);
         this.addAbility(ability);
     }
 
@@ -72,7 +74,7 @@ class WheelOfTortureEffect extends OneShotEffect<WheelOfTortureEffect> {
     }
 
     public WheelOfTortureEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
 
     @Override

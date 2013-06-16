@@ -30,11 +30,12 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Outcome;
+
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -89,7 +90,7 @@ public class DevourEffect extends ReplacementEffectImpl<DevourEffect> {
     }
 
     public DevourEffect(DevourFactor devourFactor) {
-        super(Constants.Duration.EndOfGame, Outcome.Detriment);
+        super(Duration.EndOfGame, Outcome.Detriment);
         this.devourFactor = devourFactor;
     }
 

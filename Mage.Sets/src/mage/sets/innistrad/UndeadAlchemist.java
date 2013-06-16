@@ -28,10 +28,10 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -41,6 +41,8 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.GameEvent;
@@ -85,7 +87,7 @@ public class UndeadAlchemist extends CardImpl<UndeadAlchemist> {
 class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl<UndeadAlchemistTriggeredAbility> {
 
     public UndeadAlchemistTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new ExileTargetEffect(), true);
         this.addEffect(new CreateTokenEffect(new ZombieToken()));
     }
 
@@ -102,7 +104,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl<UndeadAlchemi
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Constants.Zone.LIBRARY && zEvent.getToZone() == Constants.Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
+            if (zEvent.getFromZone() == Zone.LIBRARY && zEvent.getToZone() == Zone.GRAVEYARD && game.getOpponents(this.getControllerId()).contains(zEvent.getPlayerId())) {
                 Card card = game.getCard(event.getTargetId());
                 if (card != null && card.getCardType().contains(CardType.CREATURE)) {
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(card.getId()));
@@ -122,7 +124,7 @@ class UndeadAlchemistTriggeredAbility extends TriggeredAbilityImpl<UndeadAlchemi
 class UndeadAlchemistEffect extends ReplacementEffectImpl<UndeadAlchemistEffect> {
 
     UndeadAlchemistEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.RedirectDamage);
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "If a Zombie you control would deal combat damage to a player, instead that player puts that many cards from the top of his or her library into his or her graveyard";
     }
 

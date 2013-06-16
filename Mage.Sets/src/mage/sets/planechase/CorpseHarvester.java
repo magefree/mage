@@ -28,10 +28,10 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +43,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -94,7 +95,7 @@ public class CorpseHarvester extends CardImpl<CorpseHarvester> {
 class CorpseHarvesterEffect extends OneShotEffect<CorpseHarvesterEffect> {
     
     CorpseHarvesterEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Search your library for a Zombie card and a Swamp card, reveal them, and put them into your hand. Then shuffle your library";
     }
 
@@ -123,7 +124,7 @@ class CorpseHarvesterEffect extends OneShotEffect<CorpseHarvesterEffect> {
         if (player.searchLibrary(target, game)) {
             Card card = player.getLibrary().remove(target.getFirstTarget(), game);
             if (card != null) {
-                card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
                 cards.add(card);
             }
         }

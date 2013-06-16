@@ -29,14 +29,16 @@ package mage.sets.zendikar;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -113,7 +115,7 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl<RavenousTrapAltern
 class RavenousTrapEffect extends OneShotEffect<RavenousTrapEffect> {
 
     public RavenousTrapEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "Exile all cards from target player's graveyard";
     }
 
@@ -128,7 +130,7 @@ class RavenousTrapEffect extends OneShotEffect<RavenousTrapEffect> {
         if (targetPlayer != null) {
             ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
             for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Constants.Zone.EXILED, cardId, game, false);
+                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
             }
             return true;
         }

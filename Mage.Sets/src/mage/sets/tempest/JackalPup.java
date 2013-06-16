@@ -28,14 +28,16 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -74,7 +76,7 @@ public class JackalPup extends CardImpl<JackalPup> {
 class JackalPupTriggeredAbility extends TriggeredAbilityImpl<JackalPupTriggeredAbility> {
 
     public JackalPupTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new JackalPupEffect());
+        super(Zone.BATTLEFIELD, new JackalPupEffect());
     }
 
     public JackalPupTriggeredAbility(final JackalPupTriggeredAbility effect) {
@@ -105,7 +107,7 @@ class JackalPupTriggeredAbility extends TriggeredAbilityImpl<JackalPupTriggeredA
 class JackalPupEffect extends OneShotEffect<JackalPupEffect> {
 
         public JackalPupEffect() {
-            super(Constants.Outcome.Damage);
+            super(Outcome.Damage);
             staticText = "it deals that much damage to you";
         }
 

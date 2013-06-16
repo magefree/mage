@@ -1,9 +1,9 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -13,7 +13,7 @@ import mage.players.Player;
  */
 public class MayTapOrUntapTargetEffect extends OneShotEffect<MayTapOrUntapTargetEffect> {
     public MayTapOrUntapTargetEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
     }
 
     public MayTapOrUntapTargetEffect(final MayTapOrUntapTargetEffect effect) {
@@ -26,11 +26,11 @@ public class MayTapOrUntapTargetEffect extends OneShotEffect<MayTapOrUntapTarget
         Player player = game.getPlayer(source.getControllerId());
         if (target != null && player != null) {
             if (target.isTapped()) {
-                if (player.chooseUse(Constants.Outcome.Untap, "Untap that permanent?", game)) {
+                if (player.chooseUse(Outcome.Untap, "Untap that permanent?", game)) {
                     target.untap(game);
                 }
             } else {
-                if (player.chooseUse(Constants.Outcome.Tap, "Tap that permanent?", game)) {
+                if (player.chooseUse(Outcome.Tap, "Tap that permanent?", game)) {
                     target.tap(game);
                 }
             }

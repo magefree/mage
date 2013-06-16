@@ -26,15 +26,16 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 package mage.sets.innistrad;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
@@ -77,7 +78,7 @@ public class CreepyDoll extends CardImpl<CreepyDoll> {
 class CreepyDollTriggeredAbility extends TriggeredAbilityImpl<CreepyDollTriggeredAbility> {
 
     CreepyDollTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CreepyDollEffect());
+        super(Zone.BATTLEFIELD, new CreepyDollEffect());
     }
 
     CreepyDollTriggeredAbility(final CreepyDollTriggeredAbility ability) {
@@ -109,7 +110,7 @@ class CreepyDollTriggeredAbility extends TriggeredAbilityImpl<CreepyDollTriggere
 class CreepyDollEffect extends OneShotEffect<CreepyDollEffect> {
 
     CreepyDollEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "";
     }
 

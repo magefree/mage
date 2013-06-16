@@ -29,14 +29,14 @@ package mage.sets.apocalypse;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 
 /**
  *
@@ -48,7 +48,7 @@ public class PhyrexianArena extends CardImpl<PhyrexianArena> {
         super(ownerId, 47, "Phyrexian Arena", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
         this.expansionSetCode = "APC";
         this.color.setBlack(true);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DrawCardControllerEffect(1), TargetController.YOU, false);
         ability.addEffect(new LoseLifeSourceEffect(1));
         this.addAbility(ability);
     }

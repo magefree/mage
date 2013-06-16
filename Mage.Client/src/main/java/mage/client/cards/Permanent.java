@@ -51,7 +51,7 @@ import java.util.UUID;
 
 import javax.swing.PopupFactory;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.cards.CardDimensions;
 import mage.cards.MagePermanent;
 import mage.client.util.Config;

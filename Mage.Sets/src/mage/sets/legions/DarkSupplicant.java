@@ -29,9 +29,9 @@ package mage.sets.legions;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +41,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -73,7 +75,7 @@ public class DarkSupplicant extends CardImpl<DarkSupplicant> {
         this.toughness = new MageInt(1);
 
         // {tap}, Sacrifice three Clerics: Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle it.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DarkSupplicantEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DarkSupplicantEffect(), new TapSourceCost());
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(3, 3, filter, true)));
         this.addAbility(ability);
     }
@@ -91,7 +93,7 @@ public class DarkSupplicant extends CardImpl<DarkSupplicant> {
 class DarkSupplicantEffect extends OneShotEffect<DarkSupplicantEffect> {
 
     public DarkSupplicantEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "Search your graveyard, hand, and/or library for a card named Scion of Darkness and put it onto the battlefield. If you search your library this way, shuffle it";
     }
 
@@ -114,13 +116,13 @@ class DarkSupplicantEffect extends OneShotEffect<DarkSupplicantEffect> {
             return false;
         }
         // Library check
-        if (player.chooseUse(Constants.Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your library for Scion of Darkness?", game)) {
             if (player.searchLibrary(target, game)) {
                 if (target.getTargets().size() > 0) {
                     for (UUID cardId : (List<UUID>) target.getTargets()) {
                         Card card = player.getLibrary().getCard(cardId, game);
                         if (card != null) {
-                            if (card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId())) {
+                            if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
                                 return true;
                             }
                         }
@@ -130,23 +132,23 @@ class DarkSupplicantEffect extends OneShotEffect<DarkSupplicantEffect> {
             player.shuffleLibrary(game);
         }
         // Graveyard check
-        if (player.chooseUse(Constants.Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your graveyard for Scion of Darkness?", game)) {
             Cards graveyard = player.getGraveyard().copy();
             for (UUID card : graveyard) {
                 Card checkCard = game.getCard(card);
                 if (checkCard.getName().equals("Scion of Darkness")) {
-                    checkCard.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId());
+                    checkCard.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
                     return true;
                 }
             }
         }
         // Hand check
-        if (player.chooseUse(Constants.Outcome.Benefit, "Do you want to search your hand for Scion of Darkness?", game)) {
+        if (player.chooseUse(Outcome.Benefit, "Do you want to search your hand for Scion of Darkness?", game)) {
             Cards hand = player.getHand().copy();
             for (UUID card : hand) {
                 Card checkCard = game.getCard(card);
                 if (checkCard.getName().equals("Scion of Darkness")) {
-                    checkCard.putOntoBattlefield(game, Constants.Zone.HAND, source.getId(), source.getControllerId());
+                    checkCard.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
                     return true;
                 }
             }

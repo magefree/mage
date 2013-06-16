@@ -28,11 +28,11 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -42,6 +42,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -65,7 +66,7 @@ public class DuskmantleSeer extends CardImpl<DuskmantleSeer> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // At the beginning of your upkeep, each player reveals the top card of his or her library, loses life equal to that card's converted mana cost, then puts it into his or her hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new DuskmantleSeerEffect(), Constants.TargetController.YOU, false, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DuskmantleSeerEffect(), TargetController.YOU, false, false));
 
     }
 

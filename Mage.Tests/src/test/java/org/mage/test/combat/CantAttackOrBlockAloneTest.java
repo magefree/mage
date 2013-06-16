@@ -1,7 +1,8 @@
 package org.mage.test.combat;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -16,12 +17,12 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantAttackAlone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mogg Flunkies");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Mogg Flunkies");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Mogg Flunkies");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -35,13 +36,13 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantAttackAlone2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mogg Flunkies");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerB, "Mogg Flunkies");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Mogg Flunkies");
         attack(2, playerB, "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 15);
@@ -52,13 +53,13 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantBlockAlone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mogg Flunkies");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Mogg Flunkies");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Mogg Flunkies", "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 18);
@@ -69,15 +70,15 @@ public class CantAttackOrBlockAloneTest extends CardTestPlayerBase {
      */
     @Test
     public void testCantBlockAlone2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mogg Flunkies");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Mogg Flunkies");
+        addCard(Zone.BATTLEFIELD, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard");
 
         attack(2, playerB, "Elite Vanguard");
         block(2, playerA, "Mogg Flunkies", "Elite Vanguard");
         block(2, playerA, "Llanowar Elves", "Elite Vanguard");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

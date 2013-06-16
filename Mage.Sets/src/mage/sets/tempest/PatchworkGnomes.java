@@ -29,14 +29,14 @@ package mage.sets.tempest;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.target.common.TargetCardInHand;
 
@@ -55,7 +55,7 @@ public class PatchworkGnomes extends CardImpl<PatchworkGnomes> {
         this.toughness = new MageInt(1);
 
         // Discard a card: Regenerate Patchwork Gnomes.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new DiscardTargetCost(new TargetCardInHand(new FilterCard("a card")))));
     }
 
     public PatchworkGnomes(final PatchworkGnomes card) {

@@ -28,13 +28,14 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.DealtDamageToSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 
 /**
@@ -54,7 +55,7 @@ public class Fungusaur extends CardImpl<Fungusaur> {
         this.toughness = new MageInt(2);
 
         // Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.
-        this.addAbility(new DealtDamageToSourceTriggeredAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
+        this.addAbility(new DealtDamageToSourceTriggeredAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), false));
     }
 
     public Fungusaur(final Fungusaur card) {

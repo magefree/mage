@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class Magic2013 extends ExpansionSet {
     }
 
     private Magic2013() {
-        super("Magic 2013", "M13", "seticon_M13", "mage.sets.magic2013", new GregorianCalendar(2012, 6, 7).getTime(), SetType.CORE);
+        super("Magic 2013", "M13", "mage.sets.magic2013", new GregorianCalendar(2012, 6, 7).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;

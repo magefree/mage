@@ -27,9 +27,8 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -66,7 +67,7 @@ public class MimicVat extends CardImpl<MimicVat> {
         this.addAbility(new MimicVatTriggeredAbility());
 
         // {3}, {tap}: Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MimicVatCreateTokenEffect(), new GenericManaCost(3));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -84,7 +85,7 @@ public class MimicVat extends CardImpl<MimicVat> {
 class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbility> {
 
     MimicVatTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new MimicVatEffect(), true);
+        super(Zone.BATTLEFIELD, new MimicVatEffect(), true);
     }
 
     MimicVatTriggeredAbility(MimicVatTriggeredAbility ability) {
@@ -104,7 +105,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbi
             UUID sourceCardId = getSourceId();
             if (game.getPermanent(sourceCardId) == null) {
                 // or it is being removed
-                if (game.getLastKnownInformation(sourceCardId, Constants.Zone.BATTLEFIELD) == null) {
+                if (game.getLastKnownInformation(sourceCardId, Zone.BATTLEFIELD) == null) {
                     return false;
                 }
             }
@@ -113,8 +114,8 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbi
             Permanent permanent = zEvent.getTarget();
 
             if (permanent != null &&
-                    zEvent.getToZone() == Constants.Zone.GRAVEYARD &&
-                    zEvent.getFromZone() == Constants.Zone.BATTLEFIELD &&
+                    zEvent.getToZone() == Zone.GRAVEYARD &&
+                    zEvent.getFromZone() == Zone.BATTLEFIELD &&
                     !(permanent instanceof PermanentToken) &&
                     permanent.getCardType().contains(CardType.CREATURE)) {
 
@@ -134,7 +135,7 @@ class MimicVatTriggeredAbility extends TriggeredAbilityImpl<MimicVatTriggeredAbi
 class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
 
     public MimicVatEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile that card";
     }
 
@@ -150,7 +151,7 @@ class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
         // return older cards to graveyard
         for (UUID imprinted : permanent.getImprinted()) {
             Card card = game.getCard(imprinted);
-            card.moveToZone(Constants.Zone.GRAVEYARD, source.getSourceId(), game, false);
+            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
         }
         permanent.clearImprinted(game);
 
@@ -175,7 +176,7 @@ class MimicVatEffect extends OneShotEffect<MimicVatEffect> {
 class MimicVatCreateTokenEffect extends OneShotEffect<MimicVatCreateTokenEffect> {
 
     public MimicVatCreateTokenEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step";
     }
 

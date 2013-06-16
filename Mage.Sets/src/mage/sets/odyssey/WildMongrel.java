@@ -27,9 +27,7 @@
  */
 package mage.sets.odyssey;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -63,7 +61,7 @@ public class WildMongrel extends CardImpl<WildMongrel> {
         this.toughness = new MageInt(2);
 
         // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand()));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand()));
         ability.addEffect(new ChangeColorEffect());
         this.addAbility(ability);
     }
@@ -81,7 +79,7 @@ public class WildMongrel extends CardImpl<WildMongrel> {
 class ChangeColorEffect extends OneShotEffect<ChangeColorEffect> {
 
     public ChangeColorEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "becomes the color of your choice until end of turn";
     }
 
@@ -95,9 +93,9 @@ class ChangeColorEffect extends OneShotEffect<ChangeColorEffect> {
         Permanent wildMongrel = game.getPermanent(source.getSourceId());
         if (player != null && wildMongrel != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.Neutral, colorChoice, game)) {
+            if (player.choose(Outcome.Neutral, colorChoice, game)) {
                 game.informPlayers(wildMongrel.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
-                ContinuousEffect effect = new SetCardColorTargetEffect(colorChoice.getColor(), Constants.Duration.EndOfTurn, "is " + colorChoice.getChoice());
+                ContinuousEffect effect = new SetCardColorTargetEffect(colorChoice.getColor(), Duration.EndOfTurn, "is " + colorChoice.getChoice());
                 effect.setTargetPointer(new FixedTarget(source.getSourceId()));
                 game.addEffect(effect, source);
                 return true;

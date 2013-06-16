@@ -29,13 +29,14 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Zone;
+
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -85,7 +86,7 @@ public class ExtortAbility extends TriggeredAbilityImpl<ExtortAbility> {
 
 class ExtortEffect extends OneShotEffect<ExtortEffect> {
     public ExtortEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each opponent loses 1 life and you gain that much life";
     }
 
@@ -98,7 +99,7 @@ class ExtortEffect extends OneShotEffect<ExtortEffect> {
         Player player = game.getPlayer(source.getControllerId());
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (player != null && permanent != null) {
-            if (player.chooseUse(Constants.Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(")").toString(), game)) {
+            if (player.chooseUse(Outcome.Damage, new StringBuilder("Extort opponents? (").append(permanent.getName()).append(")").toString(), game)) {
                 Cost cost = new ManaCostsImpl("{W/B}");
                 if (cost.pay(source, game, source.getSourceId(), player.getId(), false)) {
                     int loseLife = 0;

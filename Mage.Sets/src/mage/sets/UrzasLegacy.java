@@ -28,7 +28,7 @@
 
 package mage.sets;
 
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 import java.util.GregorianCalendar;
@@ -46,7 +46,7 @@ public class UrzasLegacy extends ExpansionSet {
     }
 
     private UrzasLegacy() {
-        super("Urza's Legacy", "ULG", "exp_symbol_mtgulg", "mage.sets.urzaslegacy", new GregorianCalendar(1999, 2, 6).getTime(), SetType.EXPANSION);
+        super("Urza's Legacy", "ULG", "mage.sets.urzaslegacy", new GregorianCalendar(1999, 2, 6).getTime(), SetType.EXPANSION);
         this.blockName = "Urza";
         this.parentSet = UrzasSaga.getInstance();
         this.hasBasicLands = false;

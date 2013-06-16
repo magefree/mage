@@ -28,15 +28,16 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetCardInGraveyard;
 
 /**
@@ -56,7 +57,7 @@ public class WitheredWretch extends CardImpl<WitheredWretch> {
         this.toughness = new MageInt(2);
 
         // {1}: Exile target card from a graveyard.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new GenericManaCost(1));
         ability.addTarget(new TargetCardInGraveyard());
         this.addAbility(ability);
     }

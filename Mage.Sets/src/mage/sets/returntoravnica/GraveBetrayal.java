@@ -29,11 +29,11 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -44,6 +44,9 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -82,7 +85,7 @@ public class GraveBetrayal extends CardImpl<GraveBetrayal> {
 class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl<GraveBetrayalTriggeredAbility> {
 
     public GraveBetrayalTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null);
     }
 
     public GraveBetrayalTriggeredAbility(final GraveBetrayalTriggeredAbility ability) {
@@ -97,9 +100,9 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl<GraveBetrayalTr
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
-                && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD
-                && ((ZoneChangeEvent) event).getFromZone() == Constants.Zone.BATTLEFIELD) {
-            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+                && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD
+                && ((ZoneChangeEvent) event).getFromZone() == Zone.BATTLEFIELD) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (permanent != null && !permanent.getControllerId().equals(this.getControllerId()) && permanent.getCardType().contains(CardType.CREATURE)) {
                 Card card = (Card)game.getObject(permanent.getId());
                 if (card != null) {
@@ -128,7 +131,7 @@ class GraveBetrayalTriggeredAbility extends TriggeredAbilityImpl<GraveBetrayalTr
 class GraveBetrayalEffect extends OneShotEffect<GraveBetrayalEffect> {
 
     public GraveBetrayalEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = " return the creature to the battlefield under your control with an additional +1/+1 counter. That creature is a black Zombie in addition to its other colors and types";
     }
 
@@ -166,7 +169,7 @@ class GraveBetrayalEffect extends OneShotEffect<GraveBetrayalEffect> {
 class GraveBetrayalContiniousEffect extends ContinuousEffectImpl<GraveBetrayalContiniousEffect> {
 
     public GraveBetrayalContiniousEffect() {
-        super(Duration.Custom, Constants.Outcome.Neutral);
+        super(Duration.Custom, Outcome.Neutral);
         staticText = "That creature is a black Zombie in addition to its other colors and types";
     }
 
@@ -180,17 +183,17 @@ class GraveBetrayalContiniousEffect extends ContinuousEffectImpl<GraveBetrayalCo
     }
 
     @Override
-    public boolean apply(Constants.Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent creature = game.getPermanent(targetPointer.getFirst(game, source));
         if (creature != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (sublayer == Constants.SubLayer.NA) {
+                    if (sublayer == SubLayer.NA) {
                         creature.getSubtype().add("Zombie");
                     }
                     break;
                 case ColorChangingEffects_5:
-                    if (sublayer == Constants.SubLayer.NA) {
+                    if (sublayer == SubLayer.NA) {
                         creature.getColor().setBlack(true);
                     }
                     break;
@@ -208,8 +211,8 @@ class GraveBetrayalContiniousEffect extends ContinuousEffectImpl<GraveBetrayalCo
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Constants.Layer.ColorChangingEffects_5 || layer == Constants.Layer.TypeChangingEffects_4;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.ColorChangingEffects_5 || layer == Layer.TypeChangingEffects_4;
     }
 
 }

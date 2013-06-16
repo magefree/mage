@@ -28,9 +28,8 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -53,8 +52,8 @@ public class UrborgTombOfYawgmoth extends CardImpl<UrborgTombOfYawgmoth> {
         this.supertype.add("Legendary");
 
         // Each land is a Swamp in addition to its other land types.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Constants.Duration.WhileOnBattlefield, new FilterLandPermanent(),"")));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new AddCardSubtypeAllEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(new BlackManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent(),"")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new AddCardSubtypeAllEffect()));
         
     }
 
@@ -74,7 +73,7 @@ class AddCardSubtypeAllEffect extends ContinuousEffectImpl<AddCardSubtypeAllEffe
     private static final FilterLandPermanent filter = new FilterLandPermanent();
     private static final String addedSubtype = "Swamp";
     public AddCardSubtypeAllEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.TypeChangingEffects_4, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Layer.TypeChangingEffects_4, SubLayer.NA, Outcome.Benefit);
         staticText = "Each land is a Swamp in addition to its other land types";
     }
 

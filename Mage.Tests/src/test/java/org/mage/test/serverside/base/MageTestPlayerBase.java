@@ -1,10 +1,11 @@
 package org.mage.test.serverside.base;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.match.MatchType;
 import mage.game.permanent.PermanentCard;
@@ -47,7 +48,7 @@ public abstract class MageTestPlayerBase {
     protected Map<TestPlayer, List<Card>> graveyardCards = new HashMap<TestPlayer, List<Card>>();
     protected Map<TestPlayer, List<Card>> libraryCards = new HashMap<TestPlayer, List<Card>>();
 
-    protected Map<TestPlayer, Map<Constants.Zone, String>> commands = new HashMap<TestPlayer, Map<Constants.Zone, String>>();
+    protected Map<TestPlayer, Map<Zone, String>> commands = new HashMap<TestPlayer, Map<Zone, String>>();
 
     protected TestPlayer playerA;
     protected TestPlayer playerB;
@@ -200,23 +201,23 @@ public abstract class MageTestPlayerBase {
             if (nickname.startsWith("Computer")) {
                 List<Card> cards = null;
                 List<PermanentCard> perms = null;
-                Constants.Zone gameZone;
+                Zone gameZone;
                 if ("hand".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.HAND;
+                    gameZone = Zone.HAND;
                     cards = getHandCards(getPlayer(nickname));
                 } else if ("battlefield".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.BATTLEFIELD;
+                    gameZone = Zone.BATTLEFIELD;
                     perms = getBattlefieldCards(getPlayer(nickname));
                 } else if ("graveyard".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.GRAVEYARD;
+                    gameZone = Zone.GRAVEYARD;
                     cards = getGraveCards(getPlayer(nickname));
                 } else if ("library".equalsIgnoreCase(zone)) {
-                    gameZone = Constants.Zone.LIBRARY;
+                    gameZone = Zone.LIBRARY;
                     cards = getLibraryCards(getPlayer(nickname));
                 } else if ("player".equalsIgnoreCase(zone)) {
                     String command = m.group(3);
                     if ("life".equals(command)) {
-                        getCommands(getPlayer(nickname)).put(Constants.Zone.OUTSIDE, "life:" + m.group(4));
+                        getCommands(getPlayer(nickname)).put(Zone.OUTSIDE, "life:" + m.group(4));
                     }
                     return;
                 } else {
@@ -234,7 +235,7 @@ public abstract class MageTestPlayerBase {
                         CardInfo cardInfo = CardRepository.instance.findCard(cardName);
                         Card card = cardInfo != null ? cardInfo.getCard() : null;
                         if (card != null) {
-                            if (gameZone.equals(Constants.Zone.BATTLEFIELD)) {
+                            if (gameZone.equals(Zone.BATTLEFIELD)) {
                                 PermanentCard p = new PermanentCard(card, null);
                                 p.setTapped(tapped);
                                 perms.add(p);
@@ -304,11 +305,11 @@ public abstract class MageTestPlayerBase {
         return battlefield;
     }
 
-    protected Map<Constants.Zone, String> getCommands(TestPlayer player) {
+    protected Map<Zone, String> getCommands(TestPlayer player) {
         if (commands.containsKey(player)) {
             return commands.get(player);
         }
-        Map<Constants.Zone, String> command = new HashMap<Constants.Zone, String>();
+        Map<Zone, String> command = new HashMap<Zone, String>();
         commands.put(player, command);
         return command;
     }
@@ -335,6 +336,6 @@ public abstract class MageTestPlayerBase {
     }
 
     protected TestPlayer createPlayer(String name) {
-        return new TestPlayer(name, Constants.RangeOfInfluence.ONE);
+        return new TestPlayer(name, RangeOfInfluence.ONE);
     }
 }

@@ -28,15 +28,16 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -73,7 +74,7 @@ public class ThirstForKnowledge extends CardImpl<ThirstForKnowledge> {
 class ThirstforKnowledgeEffect extends OneShotEffect<ThirstforKnowledgeEffect> {
 
     public ThirstforKnowledgeEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Then discard two cards unless you discard an artifact card";
     }
 
@@ -93,7 +94,7 @@ class ThirstforKnowledgeEffect extends OneShotEffect<ThirstforKnowledgeEffect> {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         if (you != null
                 && you.getHand().count(filter, game) > 0
-                && you.chooseUse(Constants.Outcome.Discard, "Do you want to discard an artifact?  If you do not, you must discard 2 cards", game)) {
+                && you.chooseUse(Outcome.Discard, "Do you want to discard an artifact?  If you do not, you must discard 2 cards", game)) {
             Cost cost = new DiscardTargetCost(new TargetCardInHand(filter));
             if (cost.canPay(you.getId(), you.getId(), game)) {
                 if (!cost.pay(source, game, you.getId(), you.getId(), false)) {

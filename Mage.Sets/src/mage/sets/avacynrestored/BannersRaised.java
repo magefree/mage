@@ -29,11 +29,11 @@ package mage.sets.avacynrestored;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -48,7 +48,7 @@ public class BannersRaised extends CardImpl<BannersRaised> {
         this.color.setRed(true);
 
         // Creatures you control get +1/+0 until end of turn.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 0, Duration.EndOfTurn));
     }
 
     public BannersRaised(final BannersRaised card) {

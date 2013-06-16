@@ -28,12 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -71,9 +72,9 @@ public class GlaringSpotlight extends CardImpl<GlaringSpotlight> {
 
         // {3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and are unblockable this turn.
         Ability ability = new SimpleActivatedAbility(
-                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent(),false),
+                Zone.BATTLEFIELD, new GainAbilityControlledEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(),false),
                 new GenericManaCost(3));
-        ability.addEffect(new UnblockableAllEffect(new FilterControlledCreaturePermanent(), Constants.Duration.EndOfTurn));
+        ability.addEffect(new UnblockableAllEffect(new FilterControlledCreaturePermanent(), Duration.EndOfTurn));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
@@ -91,7 +92,7 @@ public class GlaringSpotlight extends CardImpl<GlaringSpotlight> {
 class GlaringSpotlightEffect extends AsThoughEffectImpl<GlaringSpotlightEffect> {
 
     public GlaringSpotlightEffect() {
-        super(Constants.AsThoughEffectType.HEXPROOF, Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(AsThoughEffectType.HEXPROOF, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof";
     }
 

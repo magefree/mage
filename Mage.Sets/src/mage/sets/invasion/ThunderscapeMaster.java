@@ -29,9 +29,8 @@ package mage.sets.invasion;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +40,8 @@ import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -60,13 +61,13 @@ public class ThunderscapeMaster extends CardImpl<ThunderscapeMaster> {
         this.toughness = new MageInt(2);
 
         // {B}{B}, {tap}: Target player loses 2 life and you gain 2 life.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2), new ManaCostsImpl("{B}{B}"));
         ability.addEffect(new GainLifeEffect(2));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         // {G}{G}, {tap}: Creatures you control get +2/+2 until end of turn.
-        ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Constants.Duration.EndOfTurn), new ManaCostsImpl("{G}{G}"));
+        ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{G}{G}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

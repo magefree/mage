@@ -28,15 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -57,7 +58,7 @@ public class ArmoredTransport extends CardImpl<ArmoredTransport> {
         this.toughness = new MageInt(1);
 
         // Prevent all combat damage that would be dealt to Armored Transport by creatures blocking it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ArmoredTransportPreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArmoredTransportPreventCombatDamageSourceEffect(Duration.WhileOnBattlefield)));
 
     }
 

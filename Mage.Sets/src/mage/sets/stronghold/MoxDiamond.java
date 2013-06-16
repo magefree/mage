@@ -28,17 +28,18 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -74,7 +75,7 @@ public class MoxDiamond extends CardImpl<MoxDiamond> {
 class MoxDiamondReplacementEffect extends ReplacementEffectImpl<MoxDiamondReplacementEffect> {
 
     public MoxDiamondReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If Mox Diamond would enter the battlefield, you may discard a land card instead. If you do, put Mox Diamond onto the battlefield. If you don't, put it into its owner's graveyard";
     }
 

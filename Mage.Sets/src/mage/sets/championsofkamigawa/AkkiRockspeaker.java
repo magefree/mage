@@ -29,14 +29,14 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.BasicManaEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 
 /**
  * @author Loki, North
@@ -53,7 +53,7 @@ public class AkkiRockspeaker extends CardImpl<AkkiRockspeaker> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(Constants.ColoredManaSymbol.R))));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new BasicManaEffect(new Mana(ColoredManaSymbol.R))));
     }
 
     public AkkiRockspeaker(final AkkiRockspeaker card) {

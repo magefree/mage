@@ -28,9 +28,9 @@
 package mage.sets.antiquities;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.AdjustingSourceCosts;
@@ -38,6 +38,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.target.common.TargetLandPermanent;
@@ -71,7 +72,7 @@ public class CandelabraOfTawnos extends CardImpl<CandelabraOfTawnos> {
 
 class CandelabraOfTawnosAbility extends ActivatedAbilityImpl<CandelabraOfTawnosAbility> implements AdjustingSourceCosts{
     public CandelabraOfTawnosAbility(){
-        super(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        super(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
         addTarget(new TargetLandPermanent(0, Integer.MAX_VALUE, new FilterLandPermanent(), false));
     }
 

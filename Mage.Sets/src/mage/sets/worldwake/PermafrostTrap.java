@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -81,7 +82,7 @@ public class PermafrostTrap extends CardImpl<PermafrostTrap> {
 class PermafrostTrapWatcher extends WatcherImpl<PermafrostTrapWatcher> {
 
     public PermafrostTrapWatcher() {
-        super("PermafrostTrapWatcher", Constants.WatcherScope.GAME);
+        super("PermafrostTrapWatcher", WatcherScope.GAME);
     }
 
     public PermafrostTrapWatcher(final PermafrostTrapWatcher watcher) {
@@ -117,7 +118,7 @@ class PermafrostTrapAlternativeCost extends AlternativeCostImpl<PermafrostTrapAl
 
     public PermafrostTrapAlternativeCost() {
         super("you may pay {U} rather than pay Permafrost Trap's mana cost");
-        this.add(new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        this.add(new ColoredManaCost(ColoredManaSymbol.U));
     }
 
     public PermafrostTrapAlternativeCost(final PermafrostTrapAlternativeCost cost) {
@@ -147,7 +148,7 @@ class PermafrostTrapAlternativeCost extends AlternativeCostImpl<PermafrostTrapAl
 class PermafrostTrapEffect extends OneShotEffect<PermafrostTrapEffect> {
 
     public PermafrostTrapEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Tap up to two target creatures. Those creatures don't untap during their controller's next untap step";
     }
 
@@ -178,7 +179,7 @@ class PermafrostEffect2 extends ReplacementEffectImpl<PermafrostEffect2> {
     protected UUID creatureId;
 
     public PermafrostEffect2(UUID creatureId) {
-        super(Constants.Duration.OneUse, Constants.Outcome.Detriment);
+        super(Duration.OneUse, Outcome.Detriment);
         this.creatureId = creatureId;
     }
 
@@ -205,7 +206,7 @@ class PermafrostEffect2 extends ReplacementEffectImpl<PermafrostEffect2> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP
                 && event.getType() == GameEvent.EventType.UNTAP
                 && event.getTargetId().equals(creatureId)) {
             return true;

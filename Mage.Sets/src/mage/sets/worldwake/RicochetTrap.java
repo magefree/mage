@@ -28,15 +28,17 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Outcome;
+import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
 import mage.game.Game;
@@ -126,7 +128,7 @@ class RicochetTrapAlternativeCost extends AlternativeCostImpl<RicochetTrapAltern
 
     public RicochetTrapAlternativeCost() {
         super("You may pay {R} rather than pay Ricochet Trap's mana cost");
-        this.add(new ColoredManaCost(Constants.ColoredManaSymbol.R));
+        this.add(new ColoredManaCost(ColoredManaSymbol.R));
     }
 
     public RicochetTrapAlternativeCost(final RicochetTrapAlternativeCost cost) {
@@ -156,7 +158,7 @@ class RicochetTrapAlternativeCost extends AlternativeCostImpl<RicochetTrapAltern
 class RicochetTrapEffect extends OneShotEffect<RicochetTrapEffect> {
 
     public RicochetTrapEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "Change the target of target spell with a single target";
     }
 

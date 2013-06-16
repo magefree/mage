@@ -28,8 +28,8 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.CardImpl;
@@ -37,9 +37,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.Ability;
 import mage.target.common.TargetCreaturePermanent;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.effects.OneShotEffect;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.game.permanent.Permanent;
 import mage.game.Game;
 

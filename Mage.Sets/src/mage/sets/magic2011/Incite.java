@@ -29,10 +29,10 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
@@ -52,7 +52,7 @@ public class Incite extends CardImpl<Incite> {
 
         // Target creature becomes red until end of turn and attacks this turn if able.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Constants.Duration.EndOfTurn, "Target creature becomes red until end of turn"));
+        this.getSpellAbility().addEffect(new SetCardColorTargetEffect(ObjectColor.RED, Duration.EndOfTurn, "Target creature becomes red until end of turn"));
         this.getSpellAbility().addEffect(new AttacksIfAbleTargetEffect(Duration.EndOfTurn));
     }
 

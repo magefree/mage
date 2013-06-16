@@ -27,12 +27,13 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.effects.common.AffinityEffect;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -45,11 +46,11 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
     private static final FilterControlledPermanent filter = new FilterControlledPermanent();
 
     static {
-        filter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     public AffinityForArtifactsAbility() {
-        super(Constants.Zone.OUTSIDE, new AffinityEffect(filter));
+        super(Zone.OUTSIDE, new AffinityEffect(filter));
         setRuleAtTheTop(true);
     }
 

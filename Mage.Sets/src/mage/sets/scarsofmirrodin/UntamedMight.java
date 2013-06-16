@@ -28,12 +28,12 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
@@ -48,7 +48,7 @@ public class UntamedMight extends CardImpl<UntamedMight> {
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
-        this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(new ManacostVariableValue(), new ManacostVariableValue(), Duration.EndOfTurn));
     }
 
     public UntamedMight(final UntamedMight card) {

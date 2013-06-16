@@ -28,13 +28,14 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -79,7 +80,7 @@ public class AshesToAshes extends CardImpl<AshesToAshes> {
 class AshesToAshesEffect extends OneShotEffect<AshesToAshesEffect> {
 
     public AshesToAshesEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Exile two target nonartifact creatures";
     }
 

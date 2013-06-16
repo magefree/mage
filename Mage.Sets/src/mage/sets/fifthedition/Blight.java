@@ -28,9 +28,9 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -61,7 +63,7 @@ public class Blight extends CardImpl<Blight> {
         // Enchant land
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
@@ -81,7 +83,7 @@ public class Blight extends CardImpl<Blight> {
 
 class BlightTriggeredAbility extends TriggeredAbilityImpl<BlightTriggeredAbility> {
     BlightTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect());
+        super(Zone.BATTLEFIELD, new DestroyTargetEffect());
     }
 
     BlightTriggeredAbility(final BlightTriggeredAbility ability) {

@@ -30,12 +30,15 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
@@ -51,14 +54,14 @@ public class SetCardColorSourceEffect extends ContinuousEffectImpl<SetCardColorS
 
     private ObjectColor setColor;
 
-    public SetCardColorSourceEffect(ObjectColor setColor, Constants.Duration duration, String text) {
-        super(duration, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+    public SetCardColorSourceEffect(ObjectColor setColor, Duration duration, String text) {
+        super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.setColor = setColor;
         staticText = text;
     }
 
-    public SetCardColorSourceEffect(ObjectColor setColor, Constants.Duration duration) {
-        super(duration, Constants.Layer.ColorChangingEffects_5, Constants.SubLayer.NA, Constants.Outcome.Benefit);
+    public SetCardColorSourceEffect(ObjectColor setColor, Duration duration) {
+        super(duration, Layer.ColorChangingEffects_5, SubLayer.NA, Outcome.Benefit);
         this.setColor = setColor;
     }
 

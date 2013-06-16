@@ -28,7 +28,6 @@
 
 package mage.client.deckeditor.table;
 
-import mage.Constants;
 import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.cards.CardEventSource;
@@ -40,6 +39,7 @@ import mage.client.util.Event;
 import mage.client.util.ImageHelper;
 import mage.client.util.Listener;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.constants.CardType;
 import mage.view.CardView;
 import mage.view.CardsView;
 import org.apache.log4j.Logger;
@@ -93,9 +93,9 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
                 addCard(card, bigCard, gameId);
             }
             if (updateCountsCallback != null) {
-                if (card.getCardTypes().contains(Constants.CardType.LAND))
+                if (card.getCardTypes().contains(CardType.LAND))
                     landCount++;
-                if (card.getCardTypes().contains(Constants.CardType.CREATURE))
+                if (card.getCardTypes().contains(CardType.CREATURE))
                     creatureCount++;
             }
         }

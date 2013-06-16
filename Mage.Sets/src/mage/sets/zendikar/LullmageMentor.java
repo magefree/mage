@@ -30,10 +30,10 @@ package mage.sets.zendikar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,6 +42,7 @@ import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.CounterTargetEffect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.WatcherScope;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -81,7 +82,7 @@ public class LullmageMentor extends CardImpl<LullmageMentor> {
         this.addAbility(new LullmageMentorTriggeredAbility());
         this.addWatcher(new CastedSpellsWithSpellTarget());
         // Tap seven untapped Merfolk you control: Counter target spell.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, filter, true)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CounterTargetEffect(), new TapTargetCost(new TargetControlledCreaturePermanent(7, 7, filter, true)));
         ability.addTarget(new TargetSpell());
         this.addAbility(ability);
 
@@ -134,7 +135,7 @@ class MerfolkToken extends Token {
 
     public MerfolkToken() {
         super("Merfolk", "1/1 blue Merfolk creature token");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setBlue(true);
         subtype.add("Merfolk");
         power = new MageInt(1);
@@ -148,7 +149,7 @@ class CastedSpellsWithSpellTarget extends WatcherImpl<CastedSpellsWithSpellTarge
     private Map<String, UUID> casted = new HashMap<String, UUID>();
 
     public CastedSpellsWithSpellTarget() {
-        super("CastedSpellsWithSpellTarget", Constants.WatcherScope.GAME);
+        super("CastedSpellsWithSpellTarget", WatcherScope.GAME);
     }
 
     public CastedSpellsWithSpellTarget(final CastedSpellsWithSpellTarget watcher) {

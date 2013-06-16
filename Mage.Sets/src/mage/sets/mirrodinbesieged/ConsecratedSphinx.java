@@ -30,14 +30,14 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -71,7 +71,7 @@ public class ConsecratedSphinx extends CardImpl<ConsecratedSphinx> {
 
 class ConsecratedSphinxTriggeredAbility extends TriggeredAbilityImpl<ConsecratedSphinxTriggeredAbility> {
     ConsecratedSphinxTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(2), true);
+        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(2), true);
     }
 
     ConsecratedSphinxTriggeredAbility(final ConsecratedSphinxTriggeredAbility ability) {

@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,14 +16,14 @@ public class ClingingMistsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Clinging Mists");
+        addCard(Zone.BATTLEFIELD, playerA, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Clinging Mists");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Clinging Mists");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Clinging Mists");
         attack(1, playerA, "White Knight");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -32,14 +33,14 @@ public class ClingingMistsTest extends CardTestPlayerBase {
     @Test
     public void testCardExile1() {
         setLife(playerA, 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Abbey Griffin");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Clinging Mists");
+        addCard(Zone.BATTLEFIELD, playerA, "Abbey Griffin");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Clinging Mists");
 
         attack(1, playerA, "Abbey Griffin");
-        castSpell(1, Constants.PhaseStep.DECLARE_BLOCKERS, playerA, "Clinging Mists");
+        castSpell(1, PhaseStep.DECLARE_BLOCKERS, playerA, "Clinging Mists");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 5);
@@ -50,17 +51,17 @@ public class ClingingMistsTest extends CardTestPlayerBase {
     @Test
     public void testCardExile2() {
         setLife(playerA, 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.HAND, playerA, "Clinging Mists");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Abbey Griffin");
-        addCard(Constants.Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.HAND, playerA, "Clinging Mists");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerB, "Abbey Griffin");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         attack(2, playerB, "Abbey Griffin");
-        castSpell(2, Constants.PhaseStep.DECLARE_BLOCKERS, playerA, "Clinging Mists");
-        castSpell(2, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        castSpell(2, PhaseStep.DECLARE_BLOCKERS, playerA, "Clinging Mists");
+        castSpell(2, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
 
-        setStopAt(6, Constants.PhaseStep.DRAW);
+        setStopAt(6, PhaseStep.DRAW);
         execute();
 
         assertLife(playerA, 2);

@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.BecomesTappedCreatureControlledTriggeredAbility;
 import mage.abilities.common.BeginningOfUntapTriggeredAbility;
 import mage.abilities.condition.common.HasCounterCondition;
@@ -38,6 +38,8 @@ import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 
@@ -60,7 +62,7 @@ public class QuestForRenewal extends CardImpl<QuestForRenewal> {
         
         // As long as there are four or more quest counters on Quest for Renewal, untap all creatures you control during each other player's untap step.
         ConditionalOneShotEffect effect = new ConditionalOneShotEffect(new UntapAllControllerEffect(filter, ""), new HasCounterCondition(CounterType.QUEST, 4), "as long as there are four or more quest counters on <this>, untap all creatures you control");
-        this.addAbility(new BeginningOfUntapTriggeredAbility(Constants.Zone.BATTLEFIELD, effect, Constants.TargetController.OPPONENT, false));
+        this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.OPPONENT, false));
         
     }
 

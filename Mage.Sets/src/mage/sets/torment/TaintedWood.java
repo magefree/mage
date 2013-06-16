@@ -28,9 +28,9 @@
 package mage.sets.torment;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.BasicManaEffect;
 import mage.abilities.mana.ActivateIfConditionManaAbility;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -61,12 +62,12 @@ public class TaintedWood extends CardImpl<TaintedWood> {
 
         // {tap}: Add {B} or {G} to your mana pool. Activate this ability only if you control a Swamp.
         this.addAbility(new ActivateIfConditionManaAbility(
-                Constants.Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.BlackMana),
                 new TapSourceCost(),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0)));
         this.addAbility(new ActivateIfConditionManaAbility(
-                Constants.Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD,
                 new BasicManaEffect(Mana.GreenMana),
                 new TapSourceCost(),
                 new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0)));

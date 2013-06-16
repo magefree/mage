@@ -28,9 +28,9 @@
 package mage.sets.morningtide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
@@ -66,7 +67,7 @@ public class InspiredSprite extends CardImpl<InspiredSprite> {
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 
     public InspiredSprite(final InspiredSprite card) {

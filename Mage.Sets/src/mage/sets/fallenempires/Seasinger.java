@@ -28,10 +28,8 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
@@ -81,7 +79,7 @@ public class Seasinger extends CardImpl<Seasinger> {
         this.toughness = new MageInt(1);
 
         FilterPermanent seasinger = new FilterPermanent();
-        seasinger.add(new ControllerPredicate(Constants.TargetController.YOU));
+        seasinger.add(new ControllerPredicate(TargetController.YOU));
         seasinger.add(new CardIdPredicate(this.getId()));
 
         // When you control no Islands, sacrifice Seasinger.
@@ -91,8 +89,8 @@ public class Seasinger extends CardImpl<Seasinger> {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Constants.Duration.Custom), new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, TappedCondition.getInstance()), rule);
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, TappedCondition.getInstance()), rule);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));
         this.addAbility(ability);
@@ -128,7 +126,7 @@ class ControllerControlsIslandPredicate implements Predicate<Permanent> {
 class SeasingerTriggeredAbility extends StateTriggeredAbility<SeasingerTriggeredAbility> {
 
     public SeasingerTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     public SeasingerTriggeredAbility(final SeasingerTriggeredAbility ability) {

@@ -28,12 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -69,7 +70,7 @@ public class ForkedBolt extends CardImpl<ForkedBolt> {
 class ForkedBoltEffect extends OneShotEffect<ForkedBoltEffect> {
 
     public ForkedBoltEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals 2 damage divided as you choose among one or two target creatures and/or players";
     }
 

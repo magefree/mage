@@ -29,9 +29,8 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -73,8 +72,8 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterWhite, true)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterBlack, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
         Ability ability = new SpellCastTriggeredAbility(new TapTargetEffect(), filterWhiteSpellCard, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -96,7 +95,7 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
 
 class DeathbringerLiegeEffect extends OneShotEffect<DeathbringerLiegeEffect> {
     DeathbringerLiegeEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "destroy target creature if it's tapped";
     }
 

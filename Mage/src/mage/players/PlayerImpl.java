@@ -28,10 +28,8 @@
 
 package mage.players;
 
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.Outcome;
-import mage.Constants.RangeOfInfluence;
-import mage.Constants.Zone;
+import mage.constants.*;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -73,8 +71,7 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.Constants;
-import mage.Constants.SpellAbilityType;
+
 import mage.cards.SplitCard;
 import mage.filter.FilterCard;
 import mage.game.stack.Spell;
@@ -614,24 +611,24 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 for (UUID cardId : cards) {
                     Card card =game.getCard(cardId);
                     if (card != null) {
-                        card.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                        card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     }
                 }
             } else {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+                TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
                 target.setRequired(true);
                 while (cards.size() > 1) {
-                    this.choose(Constants.Outcome.Neutral, cards, target, game);
+                    this.choose(Outcome.Neutral, cards, target, game);
                     Card chosenCard = cards.get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
                         cards.remove(chosenCard);
-                        chosenCard.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                        chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     }
                     target.clearChosen();
                 }
                 if (cards.size() == 1) {
                     Card chosenCard = cards.get(cards.iterator().next(), game);
-                    chosenCard.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                    chosenCard.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                 }
             }
         }
@@ -877,22 +874,22 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     Card card = game.getCard(ability.getSourceId());
                     if (card.isSplitCard() && ability instanceof FlashbackAbility) {
                         FlashbackAbility flashbackAbility;
-                        if (card.getCardType().contains(Constants.CardType.INSTANT)) {
-                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
+                        if (card.getCardType().contains(CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.INSTANT);
                         }
                         else {
-                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getLeftHalfCard().getManaCost(), TimingRule.SORCERY);
                         }
                         flashbackAbility.setSourceId(card.getId());
                         flashbackAbility.setControllerId(card.getOwnerId());
                         flashbackAbility.setSpellAbilityType(SpellAbilityType.SPLIT_LEFT);
                         flashbackAbility.setAbilityName(((SplitCard) card).getLeftHalfCard().getName());
                         useable.put(flashbackAbility.getId(), flashbackAbility);
-                        if (card.getCardType().contains(Constants.CardType.INSTANT)) {
-                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.INSTANT);
+                        if (card.getCardType().contains(CardType.INSTANT)) {
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.INSTANT);
                         }
                         else {
-                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), Constants.TimingRule.SORCERY);
+                            flashbackAbility = new FlashbackAbility(((SplitCard) card).getRightHalfCard().getManaCost(), TimingRule.SORCERY);
                         }
                         flashbackAbility.setSourceId(card.getId());
                         flashbackAbility.setControllerId(card.getOwnerId());

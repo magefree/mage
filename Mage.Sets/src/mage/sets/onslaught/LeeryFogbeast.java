@@ -28,13 +28,14 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.PreventAllDamageEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -52,7 +53,7 @@ public class LeeryFogbeast extends CardImpl<LeeryFogbeast> {
         this.toughness = new MageInt(2);
 
         // Whenever Leery Fogbeast becomes blocked, prevent all combat damage that would be dealt this turn.
-        this.addAbility(new BecomesBlockedTriggeredAbility(new PreventAllDamageEffect(Constants.Duration.EndOfTurn, true), false));
+        this.addAbility(new BecomesBlockedTriggeredAbility(new PreventAllDamageEffect(Duration.EndOfTurn, true), false));
     }
 
     public LeeryFogbeast(final LeeryFogbeast card) {

@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -38,6 +38,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -82,7 +83,7 @@ public class WithengarUnbound extends CardImpl<WithengarUnbound> {
 class WithengarUnboundTriggeredAbility extends TriggeredAbilityImpl<WithengarUnboundTriggeredAbility> {
 
     public WithengarUnboundTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
+        super(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(13)), false);
     }
 
     public WithengarUnboundTriggeredAbility(final WithengarUnboundTriggeredAbility ability) {

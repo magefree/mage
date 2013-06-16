@@ -28,10 +28,10 @@
 package mage.sets.darksteel;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EquippedCondition;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -59,7 +60,7 @@ public class AuriokGlaivemaster extends CardImpl<AuriokGlaivemaster> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Constants.Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(1, 1, Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
         ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), EquippedCondition.getInstance(), rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));

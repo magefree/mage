@@ -29,11 +29,11 @@ package mage.sets.shardsofalara;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -70,7 +70,7 @@ public class JundCharm extends CardImpl<JundCharm> {
         this.getSpellAbility().addMode(mode);
         // or put two +1/+1 counters on target creature.
         mode = new Mode();
-        mode.getEffects().add(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2), Constants.Outcome.BoostCreature));
+        mode.getEffects().add(new AddCountersTargetEffect(CounterType.P1P1.createInstance(2), Outcome.BoostCreature));
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

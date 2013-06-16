@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -85,12 +83,12 @@ public class GarrukTheVeilCursed extends CardImpl<GarrukTheVeilCursed> {
 
         // -3 : Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
         Effects effects1 = new Effects();
-        BoostControlledEffect effect = new BoostControlledEffect(new GarrukTheVeilCursedValue(), new GarrukTheVeilCursedValue(), Constants.Duration.EndOfTurn);
+        BoostControlledEffect effect = new BoostControlledEffect(new GarrukTheVeilCursedValue(), new GarrukTheVeilCursedValue(), Duration.EndOfTurn);
         // +X/+X should be counted only once
         effect.setLockedIn(true);
         effect.setRule("Creatures you control get +X/+X until end of turn, where X is the number of creature cards in your graveyard");
         effects1.add(effect);
-        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterCreaturePermanent()));
+        effects1.add(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
         this.addAbility(new LoyaltyAbility(effects1, -3));
     }
 
@@ -137,11 +135,11 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
 
     static {
         filterCreature.add(new CardTypePredicate(CardType.CREATURE));
-        filterCreature.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filterCreature.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public GarrukTheVeilCursedEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle your library";
     }
 
@@ -162,7 +160,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
         boolean sacrificed = false;
         if (target.canChoose(player.getId(), game)) {
             while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
             for (int idx = 0; idx < target.getTargets().size(); idx++) {
@@ -182,7 +180,7 @@ class GarrukTheVeilCursedEffect extends OneShotEffect<GarrukTheVeilCursedEffect>
                 for (UUID cardId : targetInLibrary.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null) {
-                        card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                        card.moveToZone(Zone.HAND, source.getId(), game, false);
                         cards.add(card);
                     }
                 }

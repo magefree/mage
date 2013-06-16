@@ -30,13 +30,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
 
 /**
  *
@@ -52,7 +52,7 @@ public class OrochiLeafcaller extends CardImpl<OrochiLeafcaller> {
         this.color.setGreen(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(new AnyColorManaAbility(new ColoredManaCost(Constants.ColoredManaSymbol.G)));
+        this.addAbility(new AnyColorManaAbility(new ColoredManaCost(ColoredManaSymbol.G)));
     }
 
     public OrochiLeafcaller (final OrochiLeafcaller card) {

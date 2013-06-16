@@ -28,13 +28,14 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -70,7 +71,7 @@ public class ThranQuarry extends CardImpl<ThranQuarry> {
 class ThranQuarryTriggeredAbility extends TriggeredAbilityImpl<ThranQuarryTriggeredAbility> {
 
     ThranQuarryTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
     }
 
     ThranQuarryTriggeredAbility(final ThranQuarryTriggeredAbility ability) {

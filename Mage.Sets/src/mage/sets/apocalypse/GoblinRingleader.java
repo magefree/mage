@@ -28,9 +28,9 @@
 package mage.sets.apocalypse;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -85,7 +87,7 @@ class GoblinRingleaderEffect extends OneShotEffect<GoblinRingleaderEffect> {
     }
     
     public GoblinRingleaderEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "reveal the top four cards of your library. Put all Goblin cards revealed this way into your hand and the rest on the bottom of your library in any order";
     }
 
@@ -102,16 +104,16 @@ class GoblinRingleaderEffect extends OneShotEffect<GoblinRingleaderEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            Cards cards = new CardsImpl(Constants.Zone.PICK);
-            Cards cards2 = new CardsImpl(Constants.Zone.PICK);
+            Cards cards = new CardsImpl(Zone.PICK);
+            Cards cards2 = new CardsImpl(Zone.PICK);
             int count = Math.min(player.getLibrary().size(), 4);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Constants.Zone.PICK);
+                    game.setZone(card.getId(), Zone.PICK);
                     if (filter.match(card, game)) {
-                        card.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
+                        card.moveToZone(Zone.HAND, source.getId(), game, true);
                     } else {
                         cards2.add(card);
                     }
@@ -122,13 +124,13 @@ class GoblinRingleaderEffect extends OneShotEffect<GoblinRingleaderEffect> {
             if (!cards.isEmpty() && sourceCard != null) {
                 player.revealCards(sourceCard.getName(), cards, game);
             }
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
-            while (cards2.size() > 0 && player.choose(Constants.Outcome.Detriment, cards2, target, game)) {
+            while (cards2.size() > 0 && player.choose(Outcome.Detriment, cards2, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards2.remove(card);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
                 target.clearChosen();
             }

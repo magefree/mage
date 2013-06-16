@@ -28,15 +28,16 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -50,7 +51,7 @@ public class DisruptingScepter extends CardImpl<DisruptingScepter> {
         this.expansionSetCode = "7ED";
 
         // {3}, {tap}: Target player discards a card. Activate this ability only during your turn.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}"));
         ability.addTarget(new TargetPlayer());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

@@ -28,10 +28,8 @@
 package mage.sets.legends;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -58,8 +56,8 @@ public class TheTabernacleAtPendrellVale extends CardImpl<TheTabernacleAtPendrel
         this.supertype.add("Legendary");
 
         // All creatures have "At the beginning of your upkeep, destroy this creature unless you pay {1}."
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), Constants.TargetController.YOU, false);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Constants.Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DestroySourceUnlessPaysEffect(new ManaCostsImpl("{1}")), TargetController.YOU, false);
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent())));
     }
 
     public TheTabernacleAtPendrellVale(final TheTabernacleAtPendrellVale card) {

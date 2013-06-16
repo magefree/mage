@@ -28,12 +28,13 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -103,7 +104,7 @@ class TargetCreaturePermanentSameController extends TargetCreaturePermanent {
 class MoveCounterFromTargetToTargetEffect extends OneShotEffect<MoveCounterFromTargetToTargetEffect> {
 
     public MoveCounterFromTargetToTargetEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "Move any number of +1/+1 counters from target creature onto another target creature with the same controller";
     }
 

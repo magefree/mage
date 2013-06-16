@@ -29,7 +29,7 @@
 package mage.game.permanent;
 
 import java.util.ArrayList;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.cards.Card;
 import mage.cards.LevelerCard;
 import mage.game.Game;

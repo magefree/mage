@@ -30,9 +30,7 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -55,7 +53,7 @@ public class ShimmerMyr extends CardImpl<ShimmerMyr> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(FlashAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ShimmerMyrEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShimmerMyrEffect()));
     }
 
     public ShimmerMyr (final ShimmerMyr card) {
@@ -72,7 +70,7 @@ public class ShimmerMyr extends CardImpl<ShimmerMyr> {
 class ShimmerMyrEffect extends AsThoughEffectImpl<ShimmerMyrEffect> {
 
     public ShimmerMyrEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "You may cast artifact cards as though they had flash";
     }
 

@@ -28,10 +28,10 @@
 package mage.sets.legions;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -41,6 +41,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.CyclingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.other.OwnerIdPredicate;
@@ -87,7 +88,7 @@ public class ScionOfDarkness extends CardImpl<ScionOfDarkness> {
 class ScionOfDarknessEffect extends OneShotEffect<ScionOfDarknessEffect> {
 
     public ScionOfDarknessEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "you may put target creature card from that player's graveyard onto the battlefield under your control";
     }
 
@@ -112,7 +113,7 @@ class ScionOfDarknessEffect extends OneShotEffect<ScionOfDarknessEffect> {
             if (you.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, id, you.getId());
+                    card.putOntoBattlefield(game, Zone.GRAVEYARD, id, you.getId());
                     return true;
                 }
             }

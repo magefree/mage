@@ -28,15 +28,15 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.cards.CardImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.abilities.effects.OneShotEffect;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.cards.Card;
 import mage.cards.Cards;

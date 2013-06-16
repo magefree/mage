@@ -30,10 +30,9 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterArtifactCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -86,7 +86,7 @@ public class RazorHippogriff extends CardImpl<RazorHippogriff> {
     public class RazorHippogriffGainLifeEffect extends OneShotEffect<RazorHippogriffGainLifeEffect> {
 
         public RazorHippogriffGainLifeEffect() {
-            super(Constants.Outcome.GainLife);
+            super(Outcome.GainLife);
             staticText = "you gain life equal to that card's converted mana cost.";
         }
 
