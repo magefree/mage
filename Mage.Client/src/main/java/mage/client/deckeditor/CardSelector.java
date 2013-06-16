@@ -89,7 +89,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         cardGrid = new CardGrid();
         makeTransparent();
         initListViewComponents();
-        currentView = mainModel; // by default we use List View
+        currentView = mainModel; // by default we use List View        
     }
 
     public void makeTransparent() {
@@ -143,6 +143,20 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             }
         });
     }
+    
+    public void switchToGrid(){
+        jToggleListView.setSelected(false);
+        jToggleCardView.setSelected(true);
+        currentView = cardGrid;
+        jScrollPane1.setViewportView(cardGrid);
+        cbSortBy.setEnabled(true);
+        chkPiles.setEnabled(true);
+        jButtonAddToMain.setEnabled(false);
+        jButtonAddToSideboard.setEnabled(false);
+        filterCards();
+        chkPiles.setSelected(true);
+        this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+    }
 
     public void loadSideboard(List<Card> sideboard, BigCard bigCard) {
         this.bigCard = bigCard;
@@ -154,7 +168,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         for (Card card: sideboard) {
             this.cards.add(card);
         }
-
+        switchToGrid();
         filterCards();
     }
 
