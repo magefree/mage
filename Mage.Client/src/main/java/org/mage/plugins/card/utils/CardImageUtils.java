@@ -4,12 +4,12 @@ import de.schlichtherle.truezip.file.TFile;
 import java.util.HashMap;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
-import org.mage.plugins.card.images.CardInfo;
+import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
-    private static HashMap<CardInfo, String> pathCache = new HashMap<CardInfo, String>();
+    private static HashMap<CardDownloadData, String> pathCache = new HashMap<CardDownloadData, String>();
 
     /**
      * Get path to image for specific card.
@@ -18,7 +18,7 @@ public class CardImageUtils {
      *            card to get path for
      * @return String if image exists, else null
      */
-    public static String getImagePath(CardInfo card) {
+    public static String getImagePath(CardDownloadData card) {
         String filePath;
 
         TFile file;
@@ -51,19 +51,19 @@ public class CardImageUtils {
         }
     }
 
-    private static String getTokenImagePath(CardInfo card) {
+    private static String getTokenImagePath(CardDownloadData card) {
         String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
         String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
         String filename = getImagePath(card, path);
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
-            CardInfo updated = new CardInfo(card);
+            CardDownloadData updated = new CardDownloadData(card);
             updated.setName(card.getName() + " 1");
             filename = getImagePath(updated, path);
             file = new TFile(filename);
             if (!file.exists()) {
-                updated = new CardInfo(card);
+                updated = new CardDownloadData(card);
                 updated.setName(card.getName() + " 2");
                 filename = getImagePath(updated, path);
             }
@@ -72,10 +72,10 @@ public class CardImageUtils {
         return filename;
     }
 
-    private static String searchForCardImage(CardInfo card) {
+    private static String searchForCardImage(CardDownloadData card) {
         TFile file;
         String path;
-        CardInfo c = new CardInfo(card);
+        CardDownloadData c = new CardDownloadData(card);
 
         for (String set : SettingsManager.getIntance().getTokenLookupOrder()) {
             c.setSet(set);
@@ -100,7 +100,7 @@ public class CardImageUtils {
         return set;
     }
 
-    private static String getImageDir(CardInfo card, String imagesPath) {
+    private static String getImageDir(CardDownloadData card, String imagesPath) {
         if (card.getSet() == null) {
             return "";
         }
@@ -129,7 +129,7 @@ public class CardImageUtils {
         }
     }
 
-    public static String getImagePath(CardInfo card, String imagesPath) {
+    public static String getImagePath(CardDownloadData card, String imagesPath) {
         String imageDir = getImageDir(card, imagesPath);
         String imageName;
 

@@ -71,7 +71,7 @@ public class ImageCache {
                         Integer type = Integer.parseInt(m.group(3));
                         Integer collectorId = Integer.parseInt(m.group(4));
 
-                        CardInfo info = new CardInfo(name, set, collectorId, usesVariousArt, type);
+                        CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type);
 
                         if (collectorId == 0) {
                             info.setToken(true);
