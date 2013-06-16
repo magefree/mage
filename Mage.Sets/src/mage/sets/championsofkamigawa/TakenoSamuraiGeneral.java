@@ -28,9 +28,7 @@
 
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -59,7 +57,7 @@ public class TakenoSamuraiGeneral extends CardImpl<TakenoSamuraiGeneral> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(new BushidoAbility(2));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TakenoSamuraiGeneralEffect()));
     }
 
     public TakenoSamuraiGeneral(final TakenoSamuraiGeneral card) {
@@ -81,7 +79,7 @@ class TakenoSamuraiGeneralEffect extends ContinuousEffectImpl<TakenoSamuraiGener
     }
 
     public TakenoSamuraiGeneralEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Each other Samurai creature you control gets +1/+1 for each point of bushido it has";
     }
 

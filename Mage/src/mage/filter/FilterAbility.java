@@ -27,8 +27,8 @@
  */
 package mage.filter;
 
-import mage.Constants.AbilityType;
-import mage.Constants.Zone;
+import mage.constants.AbilityType;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

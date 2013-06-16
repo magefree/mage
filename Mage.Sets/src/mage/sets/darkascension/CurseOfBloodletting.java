@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -61,11 +60,11 @@ public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Damage));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // If a source would deal damage to enchanted player, it deals double that damage to that player instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfBloodlettingEffect()));
     }
 
     public CurseOfBloodletting(final CurseOfBloodletting card) {
@@ -81,7 +80,7 @@ public class CurseOfBloodletting extends CardImpl<CurseOfBloodletting> {
 class CurseOfBloodlettingEffect extends ReplacementEffectImpl<CurseOfBloodlettingEffect> {
 
     public CurseOfBloodlettingEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to enchanted player, it deals double that damage to that player instead";
     }
 

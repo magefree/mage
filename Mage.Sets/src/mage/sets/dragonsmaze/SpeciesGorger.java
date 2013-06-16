@@ -28,10 +28,8 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -60,7 +58,7 @@ public class SpeciesGorger extends CardImpl<SpeciesGorger> {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandChooseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChooseEffect(), TargetController.YOU, false));
         
     }
 
@@ -77,7 +75,7 @@ public class SpeciesGorger extends CardImpl<SpeciesGorger> {
 class ReturnToHandChooseEffect extends OneShotEffect<ReturnToHandChooseEffect> {
 
     public ReturnToHandChooseEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.staticText = "return a creature you control to its owner's hand";
     }
 
@@ -99,7 +97,7 @@ class ReturnToHandChooseEffect extends OneShotEffect<ReturnToHandChooseEffect> {
             if (player.choose(this.outcome, target, source.getSourceId(), game)) {
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
                 if (permanent != null) {
-                    return permanent.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
             }
             return true;

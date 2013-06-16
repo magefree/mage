@@ -30,14 +30,14 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPermanent;
@@ -61,7 +61,7 @@ public class MasterThief extends CardImpl<MasterThief> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Constants.Duration.WhileOnBattlefield), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield), false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }

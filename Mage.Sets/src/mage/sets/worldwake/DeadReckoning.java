@@ -28,13 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -72,7 +74,7 @@ public class DeadReckoning extends CardImpl<DeadReckoning> {
 class DeadReckoningEffect extends OneShotEffect<DeadReckoningEffect> {
 
     public DeadReckoningEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.staticText = "You may put target creature card from your graveyard on top of your library. If you do, {this} deals damage equal to that card's power to target creature";
     }
 
@@ -93,12 +95,12 @@ class DeadReckoningEffect extends OneShotEffect<DeadReckoningEffect> {
 
         if (you != null) {
             if (target1.canChoose(source.getControllerId(), game)
-                    && you.choose(Constants.Outcome.Benefit, target1, source.getSourceId(), game)
+                    && you.choose(Outcome.Benefit, target1, source.getSourceId(), game)
                     && target2.canChoose(source.getControllerId(), game)
-                    && you.choose(Constants.Outcome.Damage, target2, source.getSourceId(), game)) {
+                    && you.choose(Outcome.Damage, target2, source.getSourceId(), game)) {
                 Card creatureInGraveyard = game.getCard(target1.getFirstTarget());
                 if (creatureInGraveyard != null) {
-                    if (creatureInGraveyard.moveToZone(Constants.Zone.LIBRARY, id, game, true)) {
+                    if (creatureInGraveyard.moveToZone(Zone.LIBRARY, id, game, true)) {
                         int power = creatureInGraveyard.getPower().getValue();
                         Permanent creature = game.getPermanent(target2.getFirstTarget());
                         if (creature != null) {

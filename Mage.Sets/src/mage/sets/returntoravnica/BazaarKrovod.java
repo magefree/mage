@@ -28,15 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -83,7 +85,7 @@ public class BazaarKrovod extends CardImpl<BazaarKrovod> {
 class BazaarKrovodEffect extends OneShotEffect<BazaarKrovodEffect> {
 
     public BazaarKrovodEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "another target attacking creature gets +0/+2 until end of turn. Untap that creature";
     }
 
@@ -95,7 +97,7 @@ class BazaarKrovodEffect extends OneShotEffect<BazaarKrovodEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
         if (permanent != null) {
-            game.addEffect(new BoostTargetEffect(0, 2, Constants.Duration.EndOfTurn), source);
+            game.addEffect(new BoostTargetEffect(0, 2, Duration.EndOfTurn), source);
             permanent.untap(game);
             return true;
         }

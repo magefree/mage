@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -66,7 +64,7 @@ public class ElderscaleWurm extends CardImpl<ElderscaleWurm> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new ElderscaleWurmSetLifeEffect(), false));
 
         // As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ElderscaleWurmReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ElderscaleWurmReplacementEffect()));
     }
 
     public ElderscaleWurm(final ElderscaleWurm card) {
@@ -82,7 +80,7 @@ public class ElderscaleWurm extends CardImpl<ElderscaleWurm> {
 class ElderscaleWurmSetLifeEffect extends OneShotEffect<ElderscaleWurmSetLifeEffect> {
 
     public ElderscaleWurmSetLifeEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         this.staticText = "if your life total is less than 7, your life total becomes 7";
     }
 
@@ -111,7 +109,7 @@ class ElderscaleWurmSetLifeEffect extends OneShotEffect<ElderscaleWurmSetLifeEff
 class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl<ElderscaleWurmReplacementEffect> {
 
     public ElderscaleWurmReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead";
     }
 
@@ -129,7 +127,7 @@ class ElderscaleWurmReplacementEffect extends ReplacementEffectImpl<ElderscaleWu
         if (event.getType().equals(GameEvent.EventType.DAMAGE_CAUSES_LIFE_LOSS)) {
             Permanent permanent = game.getPermanent(source.getSourceId());
             if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Constants.Zone.BATTLEFIELD);
+                permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
             }
             if (permanent != null) {
                 Player controller = game.getPlayer(permanent.getControllerId());

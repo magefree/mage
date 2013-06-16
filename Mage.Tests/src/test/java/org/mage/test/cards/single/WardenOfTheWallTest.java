@@ -1,7 +1,8 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
-import mage.Constants.CardType;
+import mage.constants.CardType;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -14,9 +15,9 @@ public class WardenOfTheWallTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warden of the Wall");
+        addCard(Zone.BATTLEFIELD, playerA, "Warden of the Wall");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -26,9 +27,9 @@ public class WardenOfTheWallTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Warden of the Wall");
+        addCard(Zone.BATTLEFIELD, playerA, "Warden of the Wall");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

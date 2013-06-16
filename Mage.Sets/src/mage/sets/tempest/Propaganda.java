@@ -29,16 +29,17 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -71,7 +72,7 @@ class PropagandaReplacementEffect extends ReplacementEffectImpl<PropagandaReplac
     private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
     PropagandaReplacementEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Neutral);
+        super(Duration.WhileOnBattlefield, Outcome.Neutral);
         staticText = effectText;
     }
 

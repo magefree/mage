@@ -29,9 +29,8 @@ package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -68,10 +68,10 @@ public class Pentavus extends CardImpl<Pentavus> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(5))));
-        Ability firstAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
+        Ability firstAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new PentaviteToken(), 1), new GenericManaCost(1));
         firstAbility.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(1)));
         this.addAbility(firstAbility);
-        Ability secondAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
+        Ability secondAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.P1P1.createInstance(1)), new GenericManaCost(1));
         secondAbility.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(secondAbility);
     }
@@ -89,8 +89,8 @@ public class Pentavus extends CardImpl<Pentavus> {
 class PentaviteToken extends Token {
     public PentaviteToken() {
         super("Pentavite", "1/1 colorless Pentavite artifact creature token with flying");
-        cardType.add(Constants.CardType.ARTIFACT);
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
         subtype.add("Pentavite");
         power = new MageInt(1);
         toughness = new MageInt(1);

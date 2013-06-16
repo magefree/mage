@@ -1,6 +1,7 @@
 package org.mage.test.cards.triggers;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -21,13 +22,13 @@ public class FathomMageTest extends CardTestPlayerBase {
     public void testDrawCardsAddedCounters() {
          // card draw triggered ability will trigger once for each of those counters from Blessings of Nature.
 
-        addCard(Constants.Zone.HAND, playerA, "Blessings of Nature");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fathom Mage", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 5);
+        addCard(Zone.HAND, playerA, "Blessings of Nature");
+        addCard(Zone.BATTLEFIELD, playerA, "Fathom Mage", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 5);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Blessings of Nature", "Fathom Mage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Blessings of Nature", "Fathom Mage");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Fathom Mage", 1);
@@ -39,14 +40,14 @@ public class FathomMageTest extends CardTestPlayerBase {
     public void testDrawCardsEntersTheBattlefield() {
          // card draw triggered ability will trigger once for each of those counters from Master Biomancer.
 
-        addCard(Constants.Zone.HAND, playerA, "Fathom Mage");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 4);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Fathom Mage");
+        addCard(Zone.BATTLEFIELD, playerA, "Master Biomancer", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Fathom Mage");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Fathom Mage");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Fathom Mage", 1);

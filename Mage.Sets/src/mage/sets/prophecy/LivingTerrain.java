@@ -28,10 +28,8 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -65,7 +63,7 @@ public class LivingTerrain extends CardImpl<LivingTerrain> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted land is a 5/6 green Treefolk creature that's still a land.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Constants.Duration.EndOfTurn)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Duration.EndOfTurn)));
     }
 
     public LivingTerrain(final LivingTerrain card) {

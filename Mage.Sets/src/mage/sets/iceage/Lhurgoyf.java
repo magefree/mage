@@ -28,9 +28,8 @@
 package mage.sets.iceage;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -57,7 +56,7 @@ public class Lhurgoyf extends CardImpl<Lhurgoyf> {
         this.toughness = new MageInt(0);
 
         // Lhurgoyf's power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new LhurgoyfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LhurgoyfEffect()));
     }
 
     public Lhurgoyf(final Lhurgoyf card) {
@@ -76,7 +75,7 @@ class LhurgoyfEffect extends ContinuousEffectImpl<LhurgoyfEffect> {
 
 
     public LhurgoyfEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.SetPT_7b, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.SetPT_7b, Outcome.BoostCreature);
         staticText = "{this}'s power is equal to the number of creature cards in all graveyards and its toughness is equal to that number plus 1";
     }
 

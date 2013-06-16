@@ -28,10 +28,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -41,6 +41,10 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.common.continious.PlayWithTheTopCardRevealedEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -102,7 +106,7 @@ class SkillBorrowerAbility extends StaticAbility<SkillBorrowerAbility> {
 class SkillBorrowerEffect extends ContinuousEffectImpl<SkillBorrowerEffect> {
 
     public SkillBorrowerEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "As long as the top card of your library is an artifact or creature card, Skill Borrower has all activated abilities of that card";
     }
 

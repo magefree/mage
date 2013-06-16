@@ -28,10 +28,10 @@
 
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.effects.Effect;
 import mage.abilities.keyword.CyclingAbility;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.StackObject;
@@ -43,7 +43,7 @@ import mage.game.stack.StackObject;
 public class CycleTriggeredAbility extends ZoneChangeTriggeredAbility<CycleTriggeredAbility> {
 
     public CycleTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.ALL, effect, "When you cycle {this}, ", optional);
+        super(Zone.ALL, effect, "When you cycle {this}, ", optional);
     }
 
     public CycleTriggeredAbility(Effect effect) {

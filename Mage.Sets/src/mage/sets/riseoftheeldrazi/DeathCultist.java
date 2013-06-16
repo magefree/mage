@@ -28,15 +28,16 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -55,7 +56,7 @@ public class DeathCultist extends CardImpl<DeathCultist> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new LoseLifeTargetEffect(1),
                 new SacrificeSourceCost());
         ability.addEffect(new GainLifeEffect(1));

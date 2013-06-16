@@ -28,9 +28,9 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.ManaType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.ManaType;
+import mage.constants.Rarity;
 import mage.abilities.condition.common.ManaWasSpentCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DamageAllEffect;

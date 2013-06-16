@@ -28,9 +28,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -46,7 +47,7 @@ public class ReturnToHandAllEffect extends OneShotEffect<ReturnToHandAllEffect> 
     private FilterPermanent filter;
     
     public ReturnToHandAllEffect(FilterPermanent filter) {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         this.filter = filter;
         staticText = "Return all " + filter.getMessage() + " to their owners' hands";
     }
@@ -59,7 +60,7 @@ public class ReturnToHandAllEffect extends OneShotEffect<ReturnToHandAllEffect> 
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            permanent.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -76,11 +75,11 @@ public class FiendOfTheShadows extends CardImpl<FiendOfTheShadows> {
 
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Fiend of the Shadows deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Constants.Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new ExileFromZoneTargetEffect(Zone.HAND, exileId, "Fiend of the Shadows", new FilterCard()), false, true));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new FiendOfTheShadowsEffect(exileId)));
 
         // Sacrifice a Human: Regenerate Fiend of the Shadows.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RegenerateSourceEffect(), new SacrificeTargetCost(new TargetControlledCreaturePermanent(1, 1, filter, false))));
     }
 
     public FiendOfTheShadows(final FiendOfTheShadows card) {
@@ -98,7 +97,7 @@ class FiendOfTheShadowsEffect extends AsThoughEffectImpl<FiendOfTheShadowsEffect
     private UUID exileId;
 
     public FiendOfTheShadowsEffect(UUID exileId) {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
         this.exileId = exileId;
         staticText = "You may play that card for as long as it remains exiled";
     }

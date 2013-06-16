@@ -1,6 +1,6 @@
 package org.mage.card.arcane;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.cards.MagePermanent;
 import mage.cards.TextPopup;
 import mage.cards.action.ActionCallback;
@@ -751,7 +751,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
             sbType.append(superType).append(" ");
         }
 
-        for (mage.Constants.CardType cardType : card.getCardTypes()) {
+        for (CardType cardType : card.getCardTypes()) {
             sbType.append(cardType.toString()).append(" ");
         }
 

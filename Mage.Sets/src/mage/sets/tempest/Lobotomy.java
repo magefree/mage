@@ -28,15 +28,17 @@
 package mage.sets.tempest;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -82,7 +84,7 @@ class LobotomyEffect extends OneShotEffect<LobotomyEffect> {
     }
 
     public LobotomyEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Target player reveals his or her hand, then you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library for all cards with the same name as the chosen card and exile them. Then that player shuffles his or her library";
     }
 
@@ -97,25 +99,25 @@ class LobotomyEffect extends OneShotEffect<LobotomyEffect> {
         if (targetPlayer != null) {
             targetPlayer.revealCards("Lobotomy", targetPlayer.getHand(), game);
             if (you != null) {
-                TargetCard target = new TargetCard(Constants.Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.PICK, filter);
                 target.setRequired(true);
                 target.setNotTarget(true);
-                if (you.choose(Constants.Outcome.Benefit, targetPlayer.getHand(), target, game)) {
+                if (you.choose(Outcome.Benefit, targetPlayer.getHand(), target, game)) {
                     Card chosenCard = targetPlayer.getHand().get(target.getFirstTarget(), game);
                     if (chosenCard != null) {
                         if (targetPlayer != null) {
 
                             //cards in Library
-                            Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
+                            Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
                             cardsInLibrary.addAll(targetPlayer.getLibrary().getCards(game));
                             you.lookAtCards("Lobotomy search of Library", cardsInLibrary, game);
 
                             // cards in Graveyard
-                            Cards cardsInGraveyard = new CardsImpl(Constants.Zone.GRAVEYARD);
+                            Cards cardsInGraveyard = new CardsImpl(Zone.GRAVEYARD);
                             cardsInGraveyard.addAll(targetPlayer.getGraveyard());
 
                             // cards in Hand
-                            Cards cardsInHand = new CardsImpl(Constants.Zone.HAND);
+                            Cards cardsInHand = new CardsImpl(Zone.HAND);
                             cardsInHand.addAll(targetPlayer.getHand());
                             you.lookAtCards("Lobotomy search of Hand", cardsInHand, game);
 

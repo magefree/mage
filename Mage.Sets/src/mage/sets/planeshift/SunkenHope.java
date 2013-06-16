@@ -28,12 +28,12 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -59,7 +59,7 @@ public class SunkenHope extends CardImpl<SunkenHope> {
         this.color.setBlue(true);
 
         // At the beginning of each player's upkeep, that player returns a creature he or she controls to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new ReturnToHandEffect(), TargetController.ANY, false, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandEffect(), TargetController.ANY, false, true));
     }
 
     public SunkenHope(final SunkenHope card) {
@@ -98,7 +98,7 @@ class ReturnToHandEffect extends OneShotEffect<ReturnToHandEffect> {
         }
 
         FilterCreaturePermanent filter = new FilterCreaturePermanent();
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
         Target target = new TargetControlledPermanent(1, 1, filter, true);
         target.setRequired(true);
 

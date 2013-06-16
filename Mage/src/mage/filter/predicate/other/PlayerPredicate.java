@@ -28,7 +28,7 @@
 package mage.filter.predicate.other;
 
 import java.util.UUID;
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
 import mage.game.Game;

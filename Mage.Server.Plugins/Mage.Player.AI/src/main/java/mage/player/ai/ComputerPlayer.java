@@ -28,7 +28,6 @@
 
 package mage.player.ai;
 
-import mage.Constants.*;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -50,6 +49,7 @@ import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
+import mage.constants.*;
 import mage.filter.FilterPermanent;
 import mage.filter.common.*;
 import mage.game.Game;
@@ -80,10 +80,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
-import static mage.Constants.SpellAbilityType.SPLIT;
-import static mage.Constants.SpellAbilityType.SPLIT_FUSED;
-
-
 
 
 /**

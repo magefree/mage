@@ -28,14 +28,15 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TimingRule;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -49,7 +50,7 @@ public class SavingGrasp extends CardImpl<SavingGrasp> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you own");
 
     static {
-        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
 
     public SavingGrasp(UUID ownerId) {

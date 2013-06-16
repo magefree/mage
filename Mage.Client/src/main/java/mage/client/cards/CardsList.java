@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.UUID;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.cards.MageCard;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;

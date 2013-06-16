@@ -29,16 +29,17 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -101,7 +102,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect<FiremindsForesightSe
         }
         int cardsCount;
         Cards cardToReveal = new CardsImpl();
-        Cards cardsInLibrary = new CardsImpl(Constants.Zone.LIBRARY);
+        Cards cardsInLibrary = new CardsImpl(Zone.LIBRARY);
         cardsInLibrary.addAll(player.getLibrary().getCards(game));
 
         for (int cmc=3; cmc > 0; cmc--) {
@@ -117,7 +118,7 @@ class FiremindsForesightSearchEffect extends  OneShotEffect<FiremindsForesightSe
                     for (UUID cardId: (List<UUID>)target.getTargets()) {
                         Card card = player.getLibrary().remove(cardId, game);
                         if (card != null){
-                            card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                            card.moveToZone(Zone.HAND, source.getId(), game, false);
                             game.informPlayers(sourceCard.getName()+": " + player.getName() + " chose " + card.getName() );
                             cardsInLibrary.remove(card);
                             cardToReveal.add(card);

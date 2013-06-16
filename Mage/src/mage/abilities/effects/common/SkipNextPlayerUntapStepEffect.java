@@ -29,8 +29,8 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -49,7 +49,7 @@ public class SkipNextPlayerUntapStepEffect extends OneShotEffect<SkipNextPlayerU
     }
 
     public SkipNextPlayerUntapStepEffect(String text) {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = text;
     }
 

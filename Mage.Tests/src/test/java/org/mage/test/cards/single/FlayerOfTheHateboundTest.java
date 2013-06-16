@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -15,13 +16,13 @@ public class FlayerOfTheHateboundTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);        
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 1);        
+        addCard(Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Flayer of the Hatebound");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Flayer of the Hatebound");
 
-        setStopAt(2, Constants.PhaseStep.DRAW);
+        setStopAt(2, PhaseStep.DRAW);
         execute();
 
         assertLife(playerA, 20);
@@ -32,12 +33,12 @@ public class FlayerOfTheHateboundTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 2);        
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Reassembling Skeleton", 1);        
+        addCard(Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
+        addCard(Zone.GRAVEYARD, playerA, "Reassembling Skeleton", 1);
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}:");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{1}{B}:");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -49,12 +50,12 @@ public class FlayerOfTheHateboundTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 2);        
-        addCard(Constants.Zone.GRAVEYARD, playerB, "Reassembling Skeleton", 1);        
+        addCard(Zone.BATTLEFIELD, playerA, "Flayer of the Hatebound");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 2);
+        addCard(Zone.GRAVEYARD, playerB, "Reassembling Skeleton", 1);
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}:");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerB, "{1}{B}:");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

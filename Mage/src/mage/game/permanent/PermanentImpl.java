@@ -28,10 +28,9 @@
 
 package mage.game.permanent;
 
-import mage.Constants;
-import mage.Constants.AsThoughEffectType;
-import mage.Constants.CardType;
-import mage.Constants.Zone;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
@@ -39,6 +38,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.*;
 import mage.cards.CardImpl;
+import mage.constants.EffectType;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
@@ -575,7 +575,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
          */
         for (Iterator<Ability> it = this.getAbilities().iterator(); it.hasNext();) {
             Ability ability = it.next();
-            for (Iterator<Effect> ite = ability.getEffects(game, Constants.EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
+            for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setUniqueTimesstamp(effect);
                 // It's important is to update timestamp of the copied effect in ContinuousEffects because it does the action

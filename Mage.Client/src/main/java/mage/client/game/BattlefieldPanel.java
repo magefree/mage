@@ -34,13 +34,13 @@
 
 package mage.client.game;
 
-import mage.Constants;
 import mage.cards.MagePermanent;
 import mage.client.cards.BigCard;
 import mage.client.cards.Permanent;
 import mage.client.plugins.impl.Plugins;
 import mage.client.util.AudioManager;
 import mage.client.util.Config;
+import mage.constants.CardType;
 import mage.view.PermanentView;
 
 import javax.swing.*;
@@ -209,9 +209,9 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
             }*/
         }
 
-        if (permanent.getCardTypes().contains(Constants.CardType.ARTIFACT)) {
+        if (permanent.getCardTypes().contains(CardType.ARTIFACT)) {
             addedArtifact = true;
-        } else if (permanent.getCardTypes().contains(Constants.CardType.CREATURE)) {
+        } else if (permanent.getCardTypes().contains(CardType.CREATURE)) {
             addedCreature = true;
         } else {
             addedPermanent = true;
@@ -274,7 +274,7 @@ public class BattlefieldPanel extends javax.swing.JLayeredPane {
                     });
                     t.start();
                 }
-                if (((MagePermanent)comp).getOriginal().getCardTypes().contains(Constants.CardType.CREATURE)) {
+                if (((MagePermanent)comp).getOriginal().getCardTypes().contains(CardType.CREATURE)) {
                     removedCreature = true;
                 }
             }

@@ -28,13 +28,14 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -47,7 +48,7 @@ public class ThranDynamo extends CardImpl<ThranDynamo> {
         this.expansionSetCode = "UDS";
 
         // {tap}: Add {3} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana(3), new TapSourceCost()));
         
     }
 

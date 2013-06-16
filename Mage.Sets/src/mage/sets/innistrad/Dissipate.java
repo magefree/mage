@@ -27,11 +27,11 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.CounterTargetWithReplacementEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -48,7 +48,7 @@ public class Dissipate extends CardImpl<Dissipate> {
         this.color.setBlue(true);
 
         // Counter target spell. If that spell is countered this way, exile it instead of putting it into its owner's graveyard.
-        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Constants.Zone.EXILED));
+        this.getSpellAbility().addEffect(new CounterTargetWithReplacementEffect(Zone.EXILED));
         this.getSpellAbility().addTarget(new TargetSpell());
     }
 

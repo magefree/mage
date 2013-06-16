@@ -28,12 +28,12 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -44,6 +44,7 @@ import mage.abilities.effects.common.continious.LoseAbilityAttachedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -82,7 +83,7 @@ class MagebaneArmorAbility extends StaticAbility<MagebaneArmorAbility> {
 
     public MagebaneArmorAbility() {
         super(Zone.BATTLEFIELD, new BoostEquippedEffect(2, 4));
-        this.addEffect(new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.EQUIPMENT));
+        this.addEffect(new LoseAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.EQUIPMENT));
     }
 
     public MagebaneArmorAbility(MagebaneArmorAbility ability) {

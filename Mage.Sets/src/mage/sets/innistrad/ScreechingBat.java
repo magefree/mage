@@ -27,9 +27,8 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -84,7 +85,7 @@ public class ScreechingBat extends CardImpl<ScreechingBat> {
 class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImpl<ScreechingBatBeginningOfUpkeepTriggeredAbility> {
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect());
+        super(Zone.BATTLEFIELD, new ScreechingBatTransformSourceEffect());
     }
 
     public ScreechingBatBeginningOfUpkeepTriggeredAbility(final ScreechingBatBeginningOfUpkeepTriggeredAbility ability) {
@@ -113,7 +114,7 @@ class ScreechingBatBeginningOfUpkeepTriggeredAbility extends TriggeredAbilityImp
 class ScreechingBatTransformSourceEffect extends OneShotEffect<ScreechingBatTransformSourceEffect> {
 
     public ScreechingBatTransformSourceEffect() {
-        super(Constants.Outcome.Transform);
+        super(Outcome.Transform);
         staticText = "transform {this}";
     }
 

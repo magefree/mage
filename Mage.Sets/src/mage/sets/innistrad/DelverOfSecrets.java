@@ -28,10 +28,9 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.TransformSourceEffect;
@@ -40,6 +39,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -81,7 +81,7 @@ public class DelverOfSecrets extends CardImpl<DelverOfSecrets> {
 class DelverOfSecretsAbility extends TriggeredAbilityImpl<DelverOfSecretsAbility> {
 
     public DelverOfSecretsAbility() {
-        super(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
+        super(Zone.BATTLEFIELD, new TransformSourceEffect(true), false);
     }
 
     public DelverOfSecretsAbility(DelverOfSecretsAbility ability) {

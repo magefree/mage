@@ -29,10 +29,7 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.PreventionEffectImpl;
@@ -63,15 +60,15 @@ public class GhostlyPossession extends CardImpl<GhostlyPossession> {
 
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
         //Enchanted creature has flying
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), Constants.AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA)));
 
         //Prevent all combat damage that would be dealt to and dealt by enchanted creature
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GhostlyPossessionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GhostlyPossessionEffect()));
     }
 
     public GhostlyPossession(final GhostlyPossession card) {

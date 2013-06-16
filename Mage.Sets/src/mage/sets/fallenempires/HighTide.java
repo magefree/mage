@@ -28,9 +28,9 @@
 package mage.sets.fallenempires;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.DelayedTriggeredManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -81,7 +82,7 @@ class HighTideTriggeredAbility extends DelayedTriggeredManaAbility<HighTideTrigg
     }
 
     public HighTideTriggeredAbility() {
-        super(new AddBlueToTargetEffect(), Constants.Duration.EndOfTurn, false);
+        super(new AddBlueToTargetEffect(), Duration.EndOfTurn, false);
         this.usesStack = false;
     }
 

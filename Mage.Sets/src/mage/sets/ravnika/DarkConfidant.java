@@ -28,10 +28,10 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -60,7 +62,7 @@ public class DarkConfidant extends CardImpl<DarkConfidant> {
         this.toughness = new MageInt(1);
 
         // At the beginning of your upkeep, reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DarkConfidantEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DarkConfidantEffect(), TargetController.YOU, false));
     }
 
     public DarkConfidant(final DarkConfidant card) {
@@ -75,7 +77,7 @@ public class DarkConfidant extends CardImpl<DarkConfidant> {
 
 class DarkConfidantEffect extends OneShotEffect<DarkConfidantEffect> {
     DarkConfidantEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         this.staticText = "reveal the top card of your library and put that card into your hand. You lose life equal to its converted mana cost";
     }
 

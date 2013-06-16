@@ -1,11 +1,13 @@
 package org.mage.test.load;
 
-import mage.Constants;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
 import mage.player.ai.ComputerPlayer;
 import mage.remote.Connection;
@@ -271,8 +273,8 @@ public class LoadTest {
 
         options.setDeckType(session.getDeckTypes()[0]);
         options.setLimited(false);
-        options.setAttackOption(Constants.MultiplayerAttackOption.MULTIPLE);
-        options.setRange(Constants.RangeOfInfluence.ALL);
+        options.setAttackOption(MultiplayerAttackOption.MULTIPLE);
+        options.setRange(RangeOfInfluence.ALL);
         options.setWinsNeeded(1);
         return options;
     }
@@ -285,11 +287,11 @@ public class LoadTest {
      */
     private Deck generateRandomDeck() {
         String selectedColors = "BR";
-        List<Constants.ColoredManaSymbol> allowedColors = new ArrayList<Constants.ColoredManaSymbol>();
+        List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
         log.info("Building deck with colors: " + selectedColors);
         for (int i = 0; i < selectedColors.length(); i++) {
             char c = selectedColors.charAt(i);
-            allowedColors.add(Constants.ColoredManaSymbol.lookup(c));
+            allowedColors.add(ColoredManaSymbol.lookup(c));
         }
         List<Card> cardPool = Sets.generateRandomCardPool(45, allowedColors);
         return ComputerPlayer.buildDeck(cardPool, allowedColors);

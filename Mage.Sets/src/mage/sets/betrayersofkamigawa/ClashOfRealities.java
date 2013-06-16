@@ -28,9 +28,9 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -38,6 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -65,12 +67,12 @@ public class ClashOfRealities extends CardImpl<ClashOfRealities> {
         // All Spirits have "When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature."
         Ability ability1 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this permanent enters the battlefield, ");
         ability1.addTarget(new TargetCreaturePermanent(filterNotSpirit));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(ability1, Constants.Duration.WhileOnBattlefield, filterSpirit, "All Spirits have \"When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.\"")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability1, Duration.WhileOnBattlefield, filterSpirit, "All Spirits have \"When this permanent enters the battlefield, you may have it deal 3 damage to target non-Spirit creature.\"")));
 
         // Non-Spirit creatures have "When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature."
         Ability ability2 = new ClashOfRealitiesTriggeredAbility(new DamageTargetEffect(3), "When this creature enters the battlefield, ");
         ability2.addTarget(new TargetCreaturePermanent(filterSpirit));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(ability2, Constants.Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability2, Duration.WhileOnBattlefield, filterNotSpirit, "Non-Spirit creatures have \"When this creature enters the battlefield, you may have it deal 3 damage to target Spirit creature.\"")));
     }
 
     public ClashOfRealities(final ClashOfRealities card) {
@@ -85,7 +87,7 @@ public class ClashOfRealities extends CardImpl<ClashOfRealities> {
     private class ClashOfRealitiesTriggeredAbility extends ZoneChangeTriggeredAbility<ClashOfRealitiesTriggeredAbility> {
 
         public ClashOfRealitiesTriggeredAbility(Effect effect, String rule) {
-            super(Constants.Zone.BATTLEFIELD, effect, rule, true);
+            super(Zone.BATTLEFIELD, effect, rule, true);
         }
 
         public ClashOfRealitiesTriggeredAbility(ClashOfRealitiesTriggeredAbility ability) {

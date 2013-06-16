@@ -28,9 +28,9 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -73,7 +75,7 @@ public class BoshIronGolem extends CardImpl<BoshIronGolem> {
         this.addAbility(TrampleAbility.getInstance());
         
         // {3}{R}, Sacrifice an artifact: Bosh, Iron Golem deals damage equal to the sacrificed artifact's converted mana cost to target creature or player.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoshIronGolemEffect(), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoshIronGolemEffect(), new ManaCostsImpl("{3}{R}"));
         ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(filter)));
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
@@ -92,7 +94,7 @@ public class BoshIronGolem extends CardImpl<BoshIronGolem> {
 class BoshIronGolemEffect extends OneShotEffect<BoshIronGolemEffect> {
 
     public BoshIronGolemEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "{this} deals damage equal to the sacrificed artifact's converted mana cost to target creature or player";
     }
 

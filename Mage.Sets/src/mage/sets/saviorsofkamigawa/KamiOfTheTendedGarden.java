@@ -28,15 +28,17 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.SacrificeSourceUnlessPaysEffect;
 import mage.abilities.keyword.SoulshiftAbility;
 import mage.cards.CardImpl;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.TargetController;
 
 /**
  *
@@ -53,7 +55,7 @@ public class KamiOfTheTendedGarden extends CardImpl<KamiOfTheTendedGarden> {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, sacrifice Kami of the Tended Garden unless you pay {G}.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(Constants.ColoredManaSymbol.G)), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new SacrificeSourceUnlessPaysEffect(new ColoredManaCost(ColoredManaSymbol.G)), TargetController.YOU, false));
         this.addAbility(new SoulshiftAbility(3));
     }
 

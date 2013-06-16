@@ -28,12 +28,15 @@ package mage.sets.championsofkamigawa;
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-import mage.Constants;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.target.common.TargetCardInLibrary;
 
@@ -47,7 +50,7 @@ public class SakuraTribeElder extends CardImpl<SakuraTribeElder> {
     final static FilterBasicLandCard filterLands = new FilterBasicLandCard();
 
     public SakuraTribeElder(UUID ownerId) {
-        super(ownerId, 239, "Sakura-Tribe Elder", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{G}");
+        super(ownerId, 239, "Sakura-Tribe Elder", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Snake");
         this.subtype.add("Shaman");
@@ -55,7 +58,7 @@ public class SakuraTribeElder extends CardImpl<SakuraTribeElder> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
         TargetCardInLibrary target = new TargetCardInLibrary(filterLands);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Constants.Outcome.PutLandInPlay), new SacrificeSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new SearchLibraryPutInPlayEffect(target, true, Outcome.PutLandInPlay), new SacrificeSourceCost()));
     }
 
     public SakuraTribeElder(final SakuraTribeElder card) {

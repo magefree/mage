@@ -28,9 +28,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 
 /**
@@ -60,7 +61,7 @@ public class DawnrayArcher extends CardImpl<DawnrayArcher> {
         // Exalted
         this.addAbility(new ExaltedAbility());
         // {W}, {tap}: Dawnray Archer deals 1 damage to target attacking or blocking creature.
-       Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{W}"));
+       Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{W}"));
        ability.addTarget(new TargetAttackingOrBlockingCreature());
        ability.addCost(new TapSourceCost());
        this.addAbility(ability);

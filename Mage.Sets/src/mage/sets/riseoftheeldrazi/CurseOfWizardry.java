@@ -27,9 +27,8 @@
  */
 package mage.sets.riseoftheeldrazi;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +37,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -79,7 +80,7 @@ public class CurseOfWizardry extends CardImpl<CurseOfWizardry> {
 class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChooseColorEffect> {
 
     public CurseOfWizardryChooseColorEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "choose a color";
     }
 
@@ -93,7 +94,7 @@ class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChoo
         Permanent curseOfWizardry = game.getPermanent(source.getSourceId());
         if (player != null && curseOfWizardry != null) {
             ChoiceColor colorChoice = new ChoiceColor();
-            if (player.choose(Constants.Outcome.Detriment, colorChoice, game)) {
+            if (player.choose(Outcome.Detriment, colorChoice, game)) {
                 game.informPlayers(curseOfWizardry.getName() + ": " + player.getName() + " has chosen " + colorChoice.getChoice());
                 game.getState().setValue(curseOfWizardry.getId() + "_color", colorChoice.getColor());
             }
@@ -110,7 +111,7 @@ class CurseOfWizardryChooseColorEffect extends OneShotEffect<CurseOfWizardryChoo
 class CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility extends TriggeredAbilityImpl<CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility> {
 
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1), false);
     }
 
     public CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility(final CurseOfWizardryPlayerCastsSpellChosenColorTriggeredAbility ability) {

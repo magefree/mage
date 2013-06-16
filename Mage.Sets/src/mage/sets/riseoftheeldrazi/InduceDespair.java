@@ -28,9 +28,8 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.RevealTargetFromHandCost;
@@ -77,7 +76,7 @@ public class InduceDespair extends CardImpl<InduceDespair> {
 class InduceDespairEffect extends OneShotEffect<InduceDespairEffect> {
 
     public InduceDespairEffect() {
-        super(Constants.Outcome.UnboostCreature);
+        super(Outcome.UnboostCreature);
         staticText = "Target creature gets -X/-X until end of turn, where X is the revealed card's converted mana cost";
     }
 
@@ -92,7 +91,7 @@ class InduceDespairEffect extends OneShotEffect<InduceDespairEffect> {
         if (cost != null) {
             int CMC = -1 * cost.convertedManaCosts;
             if (creature != null) {
-                creature.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(CMC, CMC, Constants.Duration.EndOfTurn)), game);
+                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(CMC, CMC, Duration.EndOfTurn)), game);
             }
         }
         return true;

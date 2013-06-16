@@ -28,10 +28,10 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -77,7 +78,7 @@ public class DarkRevenant extends CardImpl<DarkRevenant> {
 class DarkRevenantEffect extends OneShotEffect<DarkRevenantEffect> {
 
     public DarkRevenantEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "put it on top of its owner's library";
     }
 
@@ -96,7 +97,7 @@ class DarkRevenantEffect extends OneShotEffect<DarkRevenantEffect> {
         if (card != null && game.getState().getZone(source.getSourceId()) == Zone.GRAVEYARD) {
             Player owner = game.getPlayer(card.getOwnerId());
             owner.getGraveyard().remove(card);
-            return card.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, true);
+            return card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
         }
         return true;
     }

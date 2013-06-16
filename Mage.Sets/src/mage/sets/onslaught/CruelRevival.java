@@ -28,13 +28,15 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
@@ -85,7 +87,7 @@ public class CruelRevival extends CardImpl<CruelRevival> {
 class CruelRevivalEffect extends OneShotEffect<CruelRevivalEffect> {
 
     public CruelRevivalEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         staticText = "Destroy target non-Zombie creature. It can't be regenerated. Return up to one target Zombie card from your graveyard to your hand";
     }
 
@@ -101,7 +103,7 @@ class CruelRevivalEffect extends OneShotEffect<CruelRevivalEffect> {
             targetDestroy.destroy(source.getId(), game, true);
         }
         if (targetRetrieve != null) {
-            targetRetrieve.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
+            targetRetrieve.moveToZone(Zone.HAND, source.getId(), game, true);
         }
         return true;
     }

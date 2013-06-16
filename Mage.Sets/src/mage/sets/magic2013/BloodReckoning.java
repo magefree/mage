@@ -28,12 +28,13 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -69,7 +70,7 @@ public class BloodReckoning extends CardImpl<BloodReckoning> {
 class BloodReckoningTriggeredAbility extends TriggeredAbilityImpl<BloodReckoningTriggeredAbility> {
 
     public BloodReckoningTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
     }
 
     public BloodReckoningTriggeredAbility(final BloodReckoningTriggeredAbility ability) {

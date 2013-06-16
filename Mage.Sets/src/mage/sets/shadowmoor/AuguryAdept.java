@@ -28,10 +28,10 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -100,7 +101,7 @@ class AuguryAdeptEffect extends OneShotEffect<AuguryAdeptEffect> {
         Cards cards = new CardsImpl();
         Card card = player.getLibrary().removeFromTop(game);
         if (card != null) {
-            card.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
 
             int cmc = card.getManaCost().convertedManaCost();
             if (cmc > 0) {

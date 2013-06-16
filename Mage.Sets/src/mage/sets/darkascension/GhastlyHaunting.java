@@ -28,12 +28,13 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.ControlEnchantedEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,7 +58,7 @@ public class GhastlyHaunting extends CardImpl<GhastlyHaunting> {
         this.getSpellAbility().addTarget(auraTarget);
 
         // You control enchanted creature.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ControlEnchantedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ControlEnchantedEffect()));
     }
 
     public GhastlyHaunting(final GhastlyHaunting card) {

@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,12 +13,12 @@ public class GravecrawlerTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Gravecrawler");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Black Cat");        
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.GRAVEYARD, playerA, "Gravecrawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Black Cat");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Gravecrawler");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gravecrawler");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -28,11 +29,11 @@ public class GravecrawlerTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Gravecrawler");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp");
+        addCard(Zone.GRAVEYARD, playerA, "Gravecrawler");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Gravecrawler");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gravecrawler");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -43,23 +44,23 @@ public class GravecrawlerTest extends CardTestPlayerBase {
 
     @Test
     public void testCopiedCantBlockAbilityWorks() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
-        addCard(Constants.Zone.HAND, playerA, "Cryptoplasm");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Cryptoplasm");
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Gravecrawler");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Gravecrawler");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
         addTarget(playerA, "Gravecrawler");
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptoplasm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Cryptoplasm");
         attack(3, playerA, "Elite Vanguard");
         block(3, playerB, "Gravecrawler", "Elite Vanguard");
 
         attack(4, playerB, "Llanowar Elves");
         block(4, playerA, "Gravecrawler", "Llanowar Elves");
 
-        setStopAt(4, Constants.PhaseStep.END_TURN);
+        setStopAt(4, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerA, "Gravecrawler", 1);
@@ -70,22 +71,22 @@ public class GravecrawlerTest extends CardTestPlayerBase {
 
     @Test
     public void testCantBlockAbilityAfterChangeZone() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fervor");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Fervor");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Swamp", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Gravecrawler");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Walking Corpse");
+        addCard(Zone.BATTLEFIELD, playerB, "Swamp", 1);
+        addCard(Zone.BATTLEFIELD, playerB, "Gravecrawler");
+        addCard(Zone.BATTLEFIELD, playerB, "Walking Corpse");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Gravecrawler");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Gravecrawler");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Gravecrawler");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Gravecrawler");
 
         attack(3, playerA, "Elite Vanguard");
         block(3, playerB, "Gravecrawler", "Elite Vanguard");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertPermanentCount(playerB, "Gravecrawler", 1);

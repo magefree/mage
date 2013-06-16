@@ -28,10 +28,10 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Outcome;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -42,6 +42,7 @@ import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.counters.CounterType;
 import mage.game.events.GameEvent;
@@ -61,7 +62,7 @@ public class AngelheartVial extends CardImpl<AngelheartVial> {
         this.addAbility(new AngelheartVialTriggeredAbility());
 
         // {2}, {tap}, Remove four charge counters from Angelheart Vial: You gain 2 life and draw a card.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainLifeEffect(2), new GenericManaCost(2));
         ability.addCost(new TapSourceCost());
         ability.addCost(new RemoveCountersSourceCost(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(4))));
         ability.addEffect(new DrawCardControllerEffect(1));
@@ -81,7 +82,7 @@ public class AngelheartVial extends CardImpl<AngelheartVial> {
 class AngelheartVialTriggeredAbility extends TriggeredAbilityImpl<AngelheartVialTriggeredAbility> {
 
     public AngelheartVialTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
+        super(Zone.BATTLEFIELD, new AngelheartVialEffect(), true);
     }
 
     public AngelheartVialTriggeredAbility(final AngelheartVialTriggeredAbility ability) {

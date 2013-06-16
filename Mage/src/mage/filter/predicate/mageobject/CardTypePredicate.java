@@ -27,7 +27,7 @@
  */
 package mage.filter.predicate.mageobject;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;

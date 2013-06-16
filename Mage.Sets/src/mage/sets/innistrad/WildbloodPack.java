@@ -27,9 +27,7 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -66,10 +64,10 @@ public class WildbloodPack extends CardImpl<WildbloodPack> {
         this.addAbility(TrampleAbility.getInstance());
 
         // Attacking creatures you control get +3/+0.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(3, 0, Constants.Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature(), false)));
 
         // At the beginning of each upkeep, if a player cast two or more spells last turn, transform Wildblood Pack.
-        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), Constants.TargetController.ANY, false);
+        TriggeredAbility ability = new BeginningOfUpkeepTriggeredAbility(new TransformSourceEffect(false), TargetController.ANY, false);
         this.addAbility(new ConditionalTriggeredAbility(ability, TwoOrMoreSpellsWereCastLastTurnCondition.getInstance(), TransformAbility.TWO_OR_MORE_SPELLS_TRANSFORM_RULE));
 
     }

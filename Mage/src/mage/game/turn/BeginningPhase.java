@@ -29,7 +29,7 @@
 package mage.game.turn;
 
 import java.util.UUID;
-import mage.Constants.TurnPhase;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 

@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.keywords;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class ExaltedTest extends CardTestPlayerBase {
      */
     @Test
     public void testBeingBlocked() {
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Sublime Archangel");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Elite Vanguard", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Sublime Archangel");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerB, "Elite Vanguard", 2);
 
         attack(2, playerB, "Llanowar Elves");
 
-        setStopAt(2, Constants.PhaseStep.END_COMBAT);
+        setStopAt(2, PhaseStep.END_COMBAT);
         execute();
 
         // 1/1 and +4/+4

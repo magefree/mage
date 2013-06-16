@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.costs.Cost;

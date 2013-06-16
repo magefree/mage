@@ -29,10 +29,10 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -85,7 +86,7 @@ public class KikuNightsFlower extends CardImpl<KikuNightsFlower> {
 class KikuNightsFlowerEffect extends OneShotEffect<KikuNightsFlowerEffect> {
 
         public KikuNightsFlowerEffect() {
-            super(Constants.Outcome.Damage);
+            super(Outcome.Damage);
             this.staticText = "Target creature deals damage to itself equal to its power";        
         }
 

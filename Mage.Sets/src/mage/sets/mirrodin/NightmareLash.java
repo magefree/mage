@@ -29,9 +29,7 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -51,7 +49,7 @@ public class NightmareLash extends CardImpl<NightmareLash> {
 
     static {
         filter.add(new SubtypePredicate("Swamp"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public NightmareLash(UUID ownerId) {
@@ -61,9 +59,9 @@ public class NightmareLash extends CardImpl<NightmareLash> {
 
         // Equipped creature gets +1/+1 for each Swamp you control.
         PermanentsOnBattlefieldCount value = new PermanentsOnBattlefieldCount(filter);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(value, value)));
         // Equip-Pay 3 life.
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new PayLifeCost(3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new PayLifeCost(3)));
     }
 
     public NightmareLash(final NightmareLash card) {

@@ -28,7 +28,7 @@
 
 package mage.abilities.costs.mana;
 
-import mage.Constants.ColoredManaSymbol;
+import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.game.Game;

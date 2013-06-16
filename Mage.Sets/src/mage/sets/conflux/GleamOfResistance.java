@@ -27,15 +27,16 @@
  */
 package mage.sets.conflux;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.keyword.BasicLandcyclingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -55,7 +56,7 @@ public class GleamOfResistance extends CardImpl<GleamOfResistance> {
         this.color.setWhite(true);
 
         // Creatures you control get +1/+2 until end of turn. Untap those creatures.
-        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostControlledEffect(1, 2, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GleamOfResistanceEffect());
         this.addAbility(new BasicLandcyclingAbility(new ManaCostsImpl("{1}{W}")));
     }
@@ -72,7 +73,7 @@ public class GleamOfResistance extends CardImpl<GleamOfResistance> {
 
 class GleamOfResistanceEffect extends OneShotEffect<GleamOfResistanceEffect> {
     GleamOfResistanceEffect() {
-        super(Constants.Outcome.Untap);
+        super(Outcome.Untap);
         staticText = "Untap those creatures";
     }
 

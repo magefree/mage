@@ -28,10 +28,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +40,7 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -81,7 +82,7 @@ public class PrinceOfThralls extends CardImpl<PrinceOfThralls> {
 class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl<PrinceOfThrallsTriggeredAbility> {
 
     PrinceOfThrallsTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect, false);
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     PrinceOfThrallsTriggeredAbility(final PrinceOfThrallsTriggeredAbility ability) {
@@ -99,7 +100,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl<PrinceOfThral
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
             if (zEvent.getToZone() == Zone.GRAVEYARD) {
                 if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                    Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+                    Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                     if (game.getOpponents(this.getControllerId()).contains(permanent.getControllerId())) {
                         for (Effect effect : getEffects()) {
                             effect.setTargetPointer(new FixedTarget(event.getTargetId()));
@@ -121,7 +122,7 @@ class PrinceOfThrallsTriggeredAbility extends TriggeredAbilityImpl<PrinceOfThral
 class PrinceOfThrallsEffect extends OneShotEffect<PrinceOfThrallsEffect> {
 
     public PrinceOfThrallsEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "put that card onto the battlefield under your control unless that opponent pays 3 life";
     }
 
@@ -137,11 +138,11 @@ class PrinceOfThrallsEffect extends OneShotEffect<PrinceOfThrallsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(targetPointer.getFirst(game, source));
-        Permanent permanent = (Permanent) game.getLastKnownInformation(card.getId(), Constants.Zone.BATTLEFIELD);
+        Permanent permanent = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
         Player opponent = game.getPlayer(permanent.getControllerId());
         if (opponent != null && card != null && permanent != null && source.getControllerId() != null) {
             PayLifeCost cost = new PayLifeCost(3);
-            if (opponent.chooseUse(Constants.Outcome.Neutral, cost.getText() + " or " + permanent.getName() + " comes back into the battlefield under opponents control", game)) {
+            if (opponent.chooseUse(Outcome.Neutral, cost.getText() + " or " + permanent.getName() + " comes back into the battlefield under opponents control", game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), opponent.getId(), true)) {
                     return true;

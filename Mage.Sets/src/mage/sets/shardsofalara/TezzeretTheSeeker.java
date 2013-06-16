@@ -27,7 +27,6 @@
  */
 package mage.sets.shardsofalara;
 
-import mage.Constants.*;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -39,6 +38,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter.ComparisonType;
 import mage.filter.common.FilterArtifactCard;

@@ -1,7 +1,8 @@
 package org.mage.test.cards.conditional.twofaced;
 
 import junit.framework.Assert;
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
@@ -17,11 +18,11 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testEffectTurnedOffOnTransform() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mayor of Avabruck");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Wolfir Avenger");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Inquisitor");
+        addCard(Zone.BATTLEFIELD, playerA, "Mayor of Avabruck");
+        addCard(Zone.BATTLEFIELD, playerA, "Wolfir Avenger");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Inquisitor");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // check was transformed
@@ -41,16 +42,16 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyCardWithTransform() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerA, "Mayor of Avabruck");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 4);
-        addCard(Constants.Zone.HAND, playerB, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Mayor of Avabruck");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertHandCount(playerA, 0);
@@ -65,16 +66,16 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyCantTransform() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerA, "Mayor of Avabruck");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 4);
-        addCard(Constants.Zone.HAND, playerB, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Mayor of Avabruck");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mayor of Avabruck");
 
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
 
-        setStopAt(5, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(5, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertHandCount(playerA, 2);
@@ -91,14 +92,14 @@ public class TwoFacedCardEffectsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCopyAlreadyTransformedCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mayor of Avabruck");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Island", 4);
-        addCard(Constants.Zone.HAND, playerB, "Clone");
+        addCard(Zone.BATTLEFIELD, playerA, "Mayor of Avabruck");
+        addCard(Zone.BATTLEFIELD, playerB, "Island", 4);
+        addCard(Zone.HAND, playerB, "Clone");
 
         // copy already transformed
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clone");
 
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertHandCount(playerA, 0);

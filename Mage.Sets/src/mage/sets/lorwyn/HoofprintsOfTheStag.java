@@ -27,9 +27,8 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 
@@ -59,7 +59,7 @@ public class HoofprintsOfTheStag extends CardImpl<HoofprintsOfTheStag> {
         this.subtype.add("Elemental");
         this.color.setWhite(true);
         this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"));
         ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));
         ability.addCost(new OnlyDuringYourTurnCost());
         this.addAbility(ability);

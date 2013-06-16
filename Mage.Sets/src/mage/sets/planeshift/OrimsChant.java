@@ -29,14 +29,16 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -78,7 +80,7 @@ public class OrimsChant extends CardImpl<OrimsChant> {
 class OrimsChantCantCastEffect extends ReplacementEffectImpl<OrimsChantCantCastEffect> {
 
     public OrimsChantCantCastEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Target player can't cast spells this turn";
     }
 
@@ -118,7 +120,7 @@ class OrimsChantCantAttackEffect extends ReplacementEffectImpl<OrimsChantCantAtt
     private static final String effectText = "If Orim's Chant was kicked, creatures can't attack this turn";
 
     OrimsChantCantAttackEffect ( ) {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = effectText;
     }
 

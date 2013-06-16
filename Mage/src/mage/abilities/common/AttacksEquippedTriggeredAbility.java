@@ -1,19 +1,19 @@
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 public class AttacksEquippedTriggeredAbility extends TriggeredAbilityImpl<AttacksEquippedTriggeredAbility> {
     public AttacksEquippedTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
 
     public AttacksEquippedTriggeredAbility(Effect effect, boolean optional) {
-        super(Constants.Zone.BATTLEFIELD, effect, optional);
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public AttacksEquippedTriggeredAbility(final AttacksEquippedTriggeredAbility abiltity) {

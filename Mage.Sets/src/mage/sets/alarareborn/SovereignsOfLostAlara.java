@@ -28,10 +28,10 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.other.AuraCardCanAttachToPermanentId;
@@ -120,7 +121,7 @@ class CreatureControlledAttacksAloneTriggeredAbility extends TriggeredAbilityImp
 class SovereignsOfLostAlaraEffect extends OneShotEffect<SovereignsOfLostAlaraEffect> {
 
     public SovereignsOfLostAlaraEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "you may search your library for an Aura card that could enchant that creature, put it onto the battlefield attached to that creature, then shuffle your library";
     }
 
@@ -136,14 +137,14 @@ class SovereignsOfLostAlaraEffect extends OneShotEffect<SovereignsOfLostAlaraEff
             FilterCard filter = new FilterCard("aura that could enchant the lone attacking creature");
             filter.add(new SubtypePredicate("Aura"));
             filter.add(new AuraCardCanAttachToPermanentId(attackingCreature.getId()));
-            if (you.chooseUse(Constants.Outcome.Benefit, "Do you want to search your library?", game)) {
+            if (you.chooseUse(Outcome.Benefit, "Do you want to search your library?", game)) {
                 TargetCardInLibrary target = new TargetCardInLibrary(filter);
                 target.setNotTarget(true);
                 if (you.searchLibrary(target, game)) {
                     if (target.getFirstTarget() != null) {
                         Card aura = game.getCard(target.getFirstTarget());
                         game.getState().setValue("attachTo:" + aura.getId(), attackingCreature);
-                        aura.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), you.getId());
+                        aura.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), you.getId());
                         return attackingCreature.addAttachment(aura.getId(), game);
                     }
                 }

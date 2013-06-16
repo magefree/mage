@@ -29,9 +29,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
@@ -41,6 +41,7 @@ import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -67,8 +68,8 @@ public class LegionLoyalist extends CardImpl<LegionLoyalist> {
         this.addAbility(HasteAbility.getInstance());
         //Battalion - Whenever Legion Loyalist and at least two other creatures attack, 
         //creatures you control gain first strike and trample until end of turn and can't be blocked by tokens this turn.
-        Ability ability = new BattalionAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
-        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
+        Ability ability = new BattalionAbility(new GainAbilityAllEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
+        ability.addEffect(new GainAbilityAllEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent()));
         ability.addEffect(new CantBeBlockedByTokenEffect());
         this.addAbility(ability);
     }
@@ -86,7 +87,7 @@ public class LegionLoyalist extends CardImpl<LegionLoyalist> {
 class CantBeBlockedByTokenEffect extends RestrictionEffect<CantBeBlockedByTokenEffect> {
 
     public CantBeBlockedByTokenEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         staticText = "Creatures you control can't be blocked by tokens this turn";
     }
 

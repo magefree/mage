@@ -28,9 +28,9 @@
 package mage.sets.dissension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardEachPlayerEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,7 +54,7 @@ public class RixMaadiDungeonPalace extends CardImpl<RixMaadiDungeonPalace> {
         this.addAbility(new ColorlessManaAbility());
 
         // {1}{B}{R}, {tap}: Each player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardEachPlayerEffect(), new ManaCostsImpl("{1}{B}{R}"));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardEachPlayerEffect(), new ManaCostsImpl("{1}{B}{R}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }

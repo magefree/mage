@@ -29,9 +29,7 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -55,7 +53,7 @@ public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
     static {
         filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));
         filterBoosted.add(new CardTypePredicate(CardType.ARTIFACT));
-        filterBoosted.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filterBoosted.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public MasterOfEtherium(UUID ownerId) {
@@ -66,8 +64,8 @@ public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
         this.color.setBlue(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterCounted), Constants.Duration.EndOfGame)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Constants.Duration.WhileOnBattlefield, filterBoosted, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filterCounted), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBoosted, true)));
     }
 
     public MasterOfEtherium(final MasterOfEtherium card) {

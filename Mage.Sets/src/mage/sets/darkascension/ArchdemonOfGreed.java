@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
@@ -38,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -57,7 +59,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
 
     static {
         filter.add(new SubtypePredicate("Human"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public ArchdemonOfGreed(UUID ownerId) {
@@ -89,7 +91,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
     class ArchdemonOfGreedEffect extends OneShotEffect<ArchdemonOfGreedEffect> {
 
         public ArchdemonOfGreedEffect() {
-            super(Constants.Outcome.Damage);
+            super(Outcome.Damage);
             this.staticText = "Sacrifice a Human. If you can't, tap Archdemon of Greed and it deals 9 damage to you.";
         }
 
@@ -114,7 +116,7 @@ public class ArchdemonOfGreed extends CardImpl<ArchdemonOfGreed> {
                     // if they can pay the cost, then they must pay
                     if (target.canChoose(player.getId(), game)) {
                         while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                            player.choose(Constants.Outcome.Sacrifice, target, source.getSourceId(), game);
+                            player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                         }
                         Permanent humanSacrifice = game.getPermanent(target.getFirstTarget());
                         if (permanent != null) {

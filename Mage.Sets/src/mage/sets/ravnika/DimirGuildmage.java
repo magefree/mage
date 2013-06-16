@@ -29,9 +29,8 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -59,11 +59,11 @@ public class DimirGuildmage extends CardImpl<DimirGuildmage> {
         this.toughness = new MageInt(2);
 
         // {3}{U}: Target player draws a card. Activate this ability only any time you could cast a sorcery.
-        Ability firstAbility = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{3}{U}"));
+        Ability firstAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), new ManaCostsImpl("{3}{U}"));
         firstAbility.addTarget(new TargetPlayer());
         this.addAbility(firstAbility);
         // {3}{B}: Target player discards a card. Activate this ability only any time you could cast a sorcery.
-        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}{B}"));
+        Ability secondAbility = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(1), new ManaCostsImpl("{3}{B}"));
         secondAbility.addTarget(new TargetPlayer());
         this.addAbility(secondAbility);
     }

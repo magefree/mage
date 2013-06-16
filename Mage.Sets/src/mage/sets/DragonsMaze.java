@@ -31,13 +31,14 @@ package mage.sets;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.cards.ExpansionSet;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.SetType;
 
 /**
  *
@@ -54,7 +55,7 @@ public class DragonsMaze extends ExpansionSet {
     }
 
     private DragonsMaze() {
-        super("Dragon's Maze", "DGM", "seticon_mtggtc", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), Constants.SetType.EXPANSION);
+        super("Dragon's Maze", "DGM", "mage.sets.dragonsmaze", new GregorianCalendar(2013, 5, 03).getTime(), SetType.EXPANSION);
         this.blockName = "Return to Ravnica";
         this.hasBoosters = true;
         this.numBoosterSpecial = 1;
@@ -121,7 +122,7 @@ public class DragonsMaze extends ExpansionSet {
     @Override
     public List<CardInfo> getSpecialMythic() {
         CardCriteria criteria = new CardCriteria();
-        criteria.rarities(Rarity.MYTHIC).setCodes(this.code).types(Constants.CardType.LAND);
+        criteria.rarities(Rarity.MYTHIC).setCodes(this.code).types(CardType.LAND);
         return CardRepository.instance.findCards(criteria);
     }    
       

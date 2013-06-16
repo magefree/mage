@@ -1,6 +1,7 @@
 package org.mage.test.cards.replacement.prevent;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -18,18 +19,18 @@ public class MalignusNoPreventDamageTest extends CardTestPlayerBase {
      */
     @Test
     public void testBlockByCreatureWithProRed() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Vedalken Outlander");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Outlander");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Malignus");
+        addCard(Zone.BATTLEFIELD, playerB, "Malignus");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerA);
 
         attack(2, playerB, "Malignus");
         block(2, playerA, "Vedalken Outlander", "Malignus");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 17);
@@ -46,14 +47,14 @@ public class MalignusNoPreventDamageTest extends CardTestPlayerBase {
      */
     @Test
     public void testBlockAnotherWithProRed() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Vedalken Outlander");
+        addCard(Zone.BATTLEFIELD, playerA, "Vedalken Outlander");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ogre Resister");
+        addCard(Zone.BATTLEFIELD, playerB, "Ogre Resister");
 
         attack(2, playerB, "Ogre Resister");
         block(2, playerA, "Vedalken Outlander", "Ogre Resister");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

@@ -29,9 +29,7 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -64,7 +62,7 @@ public class EmpyrialArchangel extends CardImpl<EmpyrialArchangel> {
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(ShroudAbility.getInstance());
         // All damage that would be dealt to you is dealt to Empyrial Archangel instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EmpyrialArchangelEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EmpyrialArchangelEffect()));
     }
 
     public EmpyrialArchangel(final EmpyrialArchangel card) {
@@ -79,7 +77,7 @@ public class EmpyrialArchangel extends CardImpl<EmpyrialArchangel> {
 
 class EmpyrialArchangelEffect extends ReplacementEffectImpl<EmpyrialArchangelEffect> {
     EmpyrialArchangelEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.RedirectDamage);
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to you is dealt to {this} instead";
     }
 

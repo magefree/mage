@@ -6,8 +6,7 @@ package mage.abilities.decorator;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
@@ -15,6 +14,7 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
+import mage.constants.EffectType;
 import mage.game.Game;
 
 /**
@@ -53,7 +53,7 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl<Conditiona
     }
 
         @Override
-    public Effects getEffects(Game game, Constants.EffectType effectType) {
+    public Effects getEffects(Game game, EffectType effectType) {
         if (!condition.apply(game, this)) {
             return emptyEffects;
         }

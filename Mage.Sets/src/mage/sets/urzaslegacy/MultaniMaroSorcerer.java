@@ -28,9 +28,9 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -38,6 +38,8 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -60,7 +62,7 @@ public class MultaniMaroSorcerer extends CardImpl<MultaniMaroSorcerer> {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Multani, Maro-Sorcerer's power and toughness are each equal to the total number of cards in all players' hands.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInHandCount(), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInHandCount(), Duration.EndOfGame)));
     }
 
     public MultaniMaroSorcerer(final MultaniMaroSorcerer card) {

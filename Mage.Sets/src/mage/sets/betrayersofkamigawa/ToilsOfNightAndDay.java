@@ -28,10 +28,10 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -90,9 +90,9 @@ public class ToilsOfNightAndDay extends CardImpl<ToilsOfNightAndDay> {
                 for (UUID targetId : source.getTargets().get(0).getTargets()) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {
-                        if (player.chooseUse(Constants.Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), game)) {
+                        if (player.chooseUse(Outcome.Tap, new StringBuilder("Tap ").append(permanent.getName()).append("?").toString(), game)) {
                             permanent.tap(game);
-                        } else if (player.chooseUse(Constants.Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), game)) {
+                        } else if (player.chooseUse(Outcome.Untap, new StringBuilder("Untap ").append(permanent.getName()).append("?").toString(), game)) {
                             permanent.untap(game);
                         }
                     }

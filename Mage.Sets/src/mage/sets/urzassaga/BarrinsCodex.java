@@ -29,10 +29,9 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -56,7 +56,7 @@ public class BarrinsCodex extends CardImpl<BarrinsCodex> {
         this.expansionSetCode = "USG";
 
         //At the beginning of your upkeep, you may put a page counter on Barrin's Codex.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PAGE.createInstance()), Constants.TargetController.YOU, true));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.PAGE.createInstance()), TargetController.YOU, true));
 
         //{4}, {T}, Sacrifice Barrin's Codex: Draw X cards, where X is the number of page counters on Barrin's Codex.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(new CountersCount(CounterType.PAGE)), new ManaCostsImpl("{4}"));

@@ -28,15 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -54,11 +55,11 @@ public class SimicCharm extends CardImpl<SimicCharm> {
         this.color.setBlue(true);
 
         //Choose one - Target creature gets +3/+3 until end of turn
-        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostTargetEffect(3, 3, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         //permanents you control gain hexproof until end of turn
         Mode mode = new Mode();
-        mode.getEffects().add(new GainAbilityAllEffect(HexproofAbility.getInstance(), Constants.Duration.EndOfTurn, new FilterControlledPermanent()));
+        mode.getEffects().add(new GainAbilityAllEffect(HexproofAbility.getInstance(), Duration.EndOfTurn, new FilterControlledPermanent()));
         this.getSpellAbility().addMode(mode);
         //return target creature to its owner's hand.
         Mode mode2 = new Mode();

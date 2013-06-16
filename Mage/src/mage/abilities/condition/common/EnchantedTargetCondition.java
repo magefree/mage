@@ -2,9 +2,10 @@
 package mage.abilities.condition.common;
 
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -29,7 +30,7 @@ public class EnchantedTargetCondition implements Condition {
                 if (targetPermanent != null) {
                     for (UUID uuid : targetPermanent.getAttachments()) {
                         Permanent attached = game.getBattlefield().getPermanent(uuid);
-                        if (attached != null && attached.getCardType().contains(Constants.CardType.ENCHANTMENT)) {
+                        if (attached != null && attached.getCardType().contains(CardType.ENCHANTMENT)) {
                             return true;
                         }
                     }

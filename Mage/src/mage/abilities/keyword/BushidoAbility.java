@@ -27,7 +27,7 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.common.BlocksOrBecomesBlockedTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 

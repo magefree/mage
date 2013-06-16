@@ -29,9 +29,7 @@ package mage.sets.urzassaga;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
@@ -60,7 +58,7 @@ public class SerraAvatar extends CardImpl<SerraAvatar> {
         this.toughness = new MageInt(0);
 
         // Serra Avatar's power and toughness are each equal to your life total.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new ControllerLifeCount(), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new ControllerLifeCount(), Duration.EndOfGame)));
         // When Serra Avatar is put into a graveyard from anywhere, shuffle it into its owner's library.
         this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new SerraAvatarEffect()));
     }
@@ -77,7 +75,7 @@ public class SerraAvatar extends CardImpl<SerraAvatar> {
 
 class SerraAvatarEffect extends OneShotEffect<SerraAvatarEffect> {
     SerraAvatarEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "shuffle it into its owner's library";
     }
 

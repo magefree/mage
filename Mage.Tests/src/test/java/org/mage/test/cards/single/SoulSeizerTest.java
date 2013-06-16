@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import org.junit.Ignore;
@@ -16,11 +17,11 @@ public class SoulSeizerTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Soul Seizer");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");        
+        addCard(Zone.BATTLEFIELD, playerA, "Soul Seizer");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
         attack(1, playerA, "Soul Seizer");
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -32,15 +33,15 @@ public class SoulSeizerTest extends CardTestPlayerBase {
 
     @Test
     public void testCard1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Soul Seizer");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Plains", 2);
-        addCard(Constants.Zone.HAND, playerB, "Clear");
+        addCard(Zone.BATTLEFIELD, playerA, "Soul Seizer");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerB, "Plains", 2);
+        addCard(Zone.HAND, playerB, "Clear");
 
 
         attack(1, playerA, "Soul Seizer");
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Clear", "Ghastly Haunting");
-        setStopAt(2, Constants.PhaseStep.BEGIN_COMBAT);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerB, "Clear", "Ghastly Haunting");
+        setStopAt(2, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -53,14 +54,14 @@ public class SoulSeizerTest extends CardTestPlayerBase {
 
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Soul Seizer");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 2);
-        addCard(Constants.Zone.HAND, playerA, "Battlegrowth");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        addCard(Zone.BATTLEFIELD, playerA, "Soul Seizer");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 2);
+        addCard(Zone.HAND, playerA, "Battlegrowth");
+        addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth", "Soul Seizer");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Battlegrowth", "Soul Seizer");
         attack(1, playerA, "Soul Seizer");
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertLife(playerA, 20);

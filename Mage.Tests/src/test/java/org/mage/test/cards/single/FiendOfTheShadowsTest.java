@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -15,15 +16,15 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "White Knight");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain");
-        addCard(Constants.Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "White Knight");
+        addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a human: Regenerate {this}. ");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Fiend of the Shadows");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a human: Regenerate {this}. ");
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Fiend of the Shadows");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -34,14 +35,14 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCardExile1() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
+        addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
         removeAllCardsFromHand(playerB);
-        addCard(Constants.Zone.HAND, playerB, "Swamp");
+        addCard(Zone.HAND, playerB, "Swamp");
 
         attack(1, playerA, "Fiend of the Shadows");
-        playLand(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp");
+        playLand(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Swamp");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -53,15 +54,15 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
 
     @Test
     public void testCardExile2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Fiend of the Shadows");
         removeAllCardsFromHand(playerB);
-        addCard(Constants.Zone.HAND, playerB, "Lightning Bolt");
+        addCard(Zone.HAND, playerB, "Lightning Bolt");
 
         attack(1, playerA, "Fiend of the Shadows");
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

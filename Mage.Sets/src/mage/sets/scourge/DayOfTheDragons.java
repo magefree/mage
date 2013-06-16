@@ -28,10 +28,8 @@
 package mage.sets.scourge;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -89,7 +87,7 @@ class DayOfTheDragonsEntersEffect extends OneShotEffect<DayOfTheDragonsEntersEff
     }
 
     public DayOfTheDragonsEntersEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile all creatures you control. Then put that many 5/5 red Dragon creature tokens with flying onto the battlefield";
     }
 
@@ -132,7 +130,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect<DayOfTheDragonsLeavesEff
     }
 
     public DayOfTheDragonsLeavesEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "sacrifice all Dragons you control. Then return the exiled cards to the battlefield under your control";
     }
 
@@ -153,7 +151,7 @@ class DayOfTheDragonsLeavesEffect extends OneShotEffect<DayOfTheDragonsLeavesEff
             exile = exile.copy();
             for (UUID cardId : exile) {
                 Card card = game.getCard(cardId);
-                card.putOntoBattlefield(game, Constants.Zone.EXILED, source.getId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.EXILED, source.getId(), source.getControllerId());
             }
             game.getExile().getExileZone(exileId).clear();
             return true;

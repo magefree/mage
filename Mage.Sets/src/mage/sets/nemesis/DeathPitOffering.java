@@ -28,9 +28,8 @@
 package mage.sets.nemesis;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SacrificeAllEffect;
@@ -49,7 +48,7 @@ public class DeathPitOffering extends CardImpl<DeathPitOffering> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
     
     static{
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
     
     public DeathPitOffering(UUID ownerId) {
@@ -61,7 +60,7 @@ public class DeathPitOffering extends CardImpl<DeathPitOffering> {
         // When Death Pit Offering enters the battlefield, sacrifice all creatures you control.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SacrificeAllEffect(new FilterControlledCreaturePermanent())));
         // Creatures you control get +2/+2.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Constants.Duration.WhileOnBattlefield, filter, false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(2, 2, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public DeathPitOffering(final DeathPitOffering card) {

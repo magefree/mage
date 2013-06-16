@@ -29,8 +29,7 @@
  */
 package mage.sets.championsofkamigawa;
 
-import mage.Constants;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.common.CopyTokenEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.FlipSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.WasDealtDamageThisTurnPredicate;
 import mage.game.permanent.token.Token;
@@ -62,7 +63,7 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
     }
 
     public InitiateOfBlood(UUID ownerId) {
-        super(ownerId, 173, "Initiate of Blood", Constants.Rarity.UNCOMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{3}{R}");
+        super(ownerId, 173, "Initiate of Blood", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Ogre");
         this.subtype.add("Shaman");
@@ -79,7 +80,7 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new GokaTheUnjust()), FlippedCondition.getInstance(), "")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new GokaTheUnjust()), FlippedCondition.getInstance(), "")));
 
 
     }
@@ -105,7 +106,7 @@ class GokaTheUnjust extends Token {
     GokaTheUnjust() {
         super("Goka the Unjust", "");
         supertype.add("Legendary");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setRed(true);
         subtype.add("Ogre");
         subtype.add("Shaman");

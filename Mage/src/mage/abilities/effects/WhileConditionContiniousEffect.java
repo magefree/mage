@@ -1,14 +1,17 @@
 package mage.abilities.effects;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 
 public abstract class WhileConditionContiniousEffect<T extends WhileConditionContiniousEffect<T>> extends ContinuousEffectImpl<T> {
     protected Condition condition;
 
-    public WhileConditionContiniousEffect(Constants.Duration duration, Constants.Layer layer, Constants.SubLayer sublayer, Condition condition, Constants.Outcome outcome) {
+    public WhileConditionContiniousEffect(Duration duration, Layer layer, SubLayer sublayer, Condition condition, Outcome outcome) {
         super(duration, outcome);
         this.condition = condition;
         this.layer = layer;

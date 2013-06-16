@@ -28,10 +28,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.SkipEnchantedUntapEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.PowerPredicate;
@@ -69,7 +70,7 @@ public class RunnersBane extends CardImpl<RunnersBane> {
         // Enchant creature with power 3 or less
         TargetPermanent auraTarget = new TargetCreaturePermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.UnboostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.UnboostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
@@ -91,7 +92,7 @@ public class RunnersBane extends CardImpl<RunnersBane> {
 
 class RunnersBaneEffect extends OneShotEffect<RunnersBaneEffect> {
     RunnersBaneEffect() {
-        super(Constants.Outcome.Tap);
+        super(Outcome.Tap);
         staticText = "tap enchanted creature";
     }
 

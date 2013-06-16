@@ -3,7 +3,8 @@ package mage.server.challenge;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import mage.Constants;
+
+import mage.constants.Zone;
 import mage.game.match.Match;
 
 /**
@@ -19,8 +20,8 @@ public class ChallengeManager {
     }
 
     public void prepareChallenge(UUID playerId, Match match) {
-        Map<Constants.Zone, String> commands = new HashMap<Constants.Zone, String>();
-        commands.put(Constants.Zone.OUTSIDE, "life:3");
+        Map<Zone, String> commands = new HashMap<Zone, String>();
+        commands.put(Zone.OUTSIDE, "life:3");
         match.getGame().cheat(playerId, commands);
     }
 }

@@ -29,13 +29,15 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -51,7 +53,7 @@ public class Bedlam extends CardImpl<Bedlam> {
         this.color.setRed(true);
 
         // Creatures can't block.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BedlamEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BedlamEffect()));
     }
 
     public Bedlam(final Bedlam card) {
@@ -67,7 +69,7 @@ public class Bedlam extends CardImpl<Bedlam> {
 class BedlamEffect extends RestrictionEffect<BedlamEffect> {
 
     BedlamEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Creatures can't block";
     }
 

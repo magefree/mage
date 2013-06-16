@@ -28,8 +28,8 @@
 
 package mage;
 
-import mage.Constants.ColoredManaSymbol;
-import mage.Constants.ManaType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.ManaType;
 import mage.filter.FilterMana;
 import mage.util.Copyable;
 

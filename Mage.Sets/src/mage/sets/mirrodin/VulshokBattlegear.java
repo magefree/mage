@@ -30,14 +30,15 @@ package mage.sets.mirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 
 /**
  *
@@ -49,8 +50,8 @@ public class VulshokBattlegear extends CardImpl<VulshokBattlegear> {
         super(ownerId, 272, "Vulshok Battlegear", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "MRD";
         this.subtype.add("Equipment");
-        this.addAbility(new EquipAbility(Constants.Outcome.BoostCreature, new GenericManaCost(3)));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
+        this.addAbility(new EquipAbility(Outcome.BoostCreature, new GenericManaCost(3)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(3, 3)));
     }
 
     public VulshokBattlegear (final VulshokBattlegear card) {

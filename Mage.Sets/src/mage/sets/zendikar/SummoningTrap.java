@@ -29,12 +29,11 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -185,12 +184,12 @@ class SummoningTrapEffect extends OneShotEffect<SummoningTrapEffect> {
                 }
             }
             if (cards.size() > 0) {
-                TargetCard target2 = new TargetCard(Constants.Zone.PICK,
+                TargetCard target2 = new TargetCard(Zone.PICK,
                         new FilterCard(
                         "card to put on the bottom of your library"));
                 target2.setRequired(true);
                 while (cards.size() > 1) {
-                    player.choose(Constants.Outcome.Benefit, cards, target2,
+                    player.choose(Outcome.Benefit, cards, target2,
                             game);
                     Card card = cards.get(target2.getFirstTarget(), game);
                     if (card != null) {

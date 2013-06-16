@@ -30,7 +30,7 @@ package mage.game.events;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.game.permanent.Permanent;
 
 /**

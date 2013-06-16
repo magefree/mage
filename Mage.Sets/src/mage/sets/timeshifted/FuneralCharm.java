@@ -29,15 +29,15 @@ package mage.sets.timeshifted;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.SwampwalkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,11 +57,11 @@ public class FuneralCharm extends CardImpl<FuneralCharm> {
         this.getSpellAbility().addEffect(new DiscardTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(2, -1, Constants.Duration.EndOfTurn));
+        mode.getEffects().add(new BoostTargetEffect(2, -1, Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
         mode = new Mode();
-        mode.getEffects().add(new GainAbilityTargetEffect(new SwampwalkAbility(), Constants.Duration.EndOfTurn));
+        mode.getEffects().add(new GainAbilityTargetEffect(new SwampwalkAbility(), Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         this.getSpellAbility().addMode(mode);
     }

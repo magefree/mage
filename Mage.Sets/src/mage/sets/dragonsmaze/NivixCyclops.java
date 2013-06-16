@@ -27,13 +27,12 @@
  */
 package mage.sets.dragonsmaze;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -41,6 +40,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -94,7 +94,7 @@ public class NivixCyclops extends CardImpl<NivixCyclops> {
 class AsThoughNoDefenderEffect extends AsThoughEffectImpl<AsThoughNoDefenderEffect> {
 
     public AsThoughNoDefenderEffect() {
-        super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.ATTACK, Duration.EndOfTurn, Outcome.Benefit);
         staticText ="and it can attack as though it didn't have defender";
     }
 

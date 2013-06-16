@@ -30,9 +30,7 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -67,7 +65,7 @@ public class HoardSmelterDragon extends CardImpl<HoardSmelterDragon> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{3}{R}"));
         ability.addTarget(new TargetPermanent(filter));
         ability.addEffect(new HoardSmelterEffect());
         this.addAbility(ability);
@@ -87,7 +85,7 @@ class HoardSmelterEffect extends ContinuousEffectImpl<HoardSmelterEffect> {
     private int costValue = 0;
 
     HoardSmelterEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+        super(Duration.EndOfTurn, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "{this} gets +X/+0 until end of turn, where X is that artifact's converted mana cost";
     }
 

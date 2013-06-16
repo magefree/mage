@@ -28,13 +28,13 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.keyword.SplitSecondAbility;
@@ -103,7 +103,7 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean apply(Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
         if (player != null) {
             for (Permanent permanent : game.getState().getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
@@ -131,8 +131,8 @@ class SuddenSpoilingEffect extends ContinuousEffectImpl {
     }
 
     @Override
-    public boolean hasLayer(Constants.Layer layer) {
-        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Constants.Layer.PTChangingEffects_7;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.AbilityAddingRemovingEffects_6 || layer == Layer.PTChangingEffects_7;
     }
 
 }

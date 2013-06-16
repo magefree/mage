@@ -27,9 +27,9 @@
 */
 package mage.abilities.effects.common.turn;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
 
@@ -39,7 +39,7 @@ import mage.game.turn.TurnMod;
 public class AddExtraTurnTargetEffect extends OneShotEffect<AddExtraTurnTargetEffect> {
 
     public AddExtraTurnTargetEffect() {
-        super(Constants.Outcome.ExtraTurn);
+        super(Outcome.ExtraTurn);
         staticText = "Target player takes an extra turn after this one";
     }
 

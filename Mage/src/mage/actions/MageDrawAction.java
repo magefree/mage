@@ -1,10 +1,11 @@
 package mage.actions;
 
 import java.util.ArrayList;
-import mage.Constants;
+
 import mage.actions.impl.MageAction;
 import mage.actions.score.ArtificialScoringSystem;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -75,7 +76,7 @@ public class MageDrawAction extends MageAction {
         if (!game.replaceEvent(event)) {
             Card card = player.getLibrary().removeFromTop(game);
             if (card != null) {
-                card.moveToZone(Constants.Zone.HAND, null, game, false);
+                card.moveToZone(Zone.HAND, null, game, false);
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DREW_CARD, card.getId(), player.getId()));
                 return ArtificialScoringSystem.inst.getCardScore(card);
             }

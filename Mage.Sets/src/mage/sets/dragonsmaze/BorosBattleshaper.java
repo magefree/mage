@@ -29,14 +29,13 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
-import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -49,10 +48,8 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.BlocksThisTurnMarkerAbility;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -77,7 +74,7 @@ public class BorosBattleshaper extends CardImpl<BorosBattleshaper> {
         this.toughness = new MageInt(5);
 
         // At the beginning of each combat, up to one target creature attacks or blocks this combat if able and up to one target creature can't attack or block this combat.
-        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new BorosBattleshaperEffect(), Constants.TargetController.ANY, false, false);
+        Ability ability = new BeginningOfCombatTriggeredAbility(Zone.BATTLEFIELD, new BorosBattleshaperEffect(), TargetController.ANY, false, false);
         ability.addTarget(new TargetCreaturePermanent(0,1,new FilterCreaturePermanent("creature that attacks or blocks if able"),false));
         ability.addTarget(new TargetCreaturePermanent(0,1,new FilterCreaturePermanent("creature that can't attack or block"),false));
         this.addAbility(ability);

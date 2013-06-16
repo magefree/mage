@@ -29,9 +29,7 @@ package mage.sets.urzaslegacy;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -60,11 +58,11 @@ public class Cessation extends CardImpl<Cessation> {
         //Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         //Enchanted creature can't attack.
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CessationEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CessationEffect()));
         //When Cessation is put into a graveyard from the battlefield, return Cessation to its owner's hand.
         this.addAbility(new PutIntoGraveFromBattlefieldTriggeredAbility(new ReturnToHandSourceEffect()));
     }
@@ -82,7 +80,7 @@ public class Cessation extends CardImpl<Cessation> {
 class CessationEffect extends RestrictionEffect<CessationEffect> {
 
     public CessationEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Enchanted creature can't attack";
     }
 

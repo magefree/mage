@@ -29,14 +29,14 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.target.Target;
 import mage.target.common.TargetControlledPermanent;
 
@@ -54,7 +54,7 @@ public class CacheRaiders extends CardImpl<CacheRaiders> {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
         Target target = new TargetControlledPermanent();
         target.setRequired(true);
         ability.addTarget(target);

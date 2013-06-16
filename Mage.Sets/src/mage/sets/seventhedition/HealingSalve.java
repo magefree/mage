@@ -28,13 +28,14 @@
 package mage.sets.seventhedition;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Mode;
 import mage.abilities.effects.common.GainLifeTargetEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreatureOrPlayer;
 
@@ -55,7 +56,7 @@ public class HealingSalve extends CardImpl<HealingSalve> {
         this.getSpellAbility().addTarget(new TargetPlayer());
         
         Mode mode = new Mode();
-        mode.getEffects().add(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, 3));
+        mode.getEffects().add(new PreventDamageTargetEffect(Duration.EndOfTurn, 3));
         mode.getTargets().add(new TargetCreatureOrPlayer());
         
         this.getSpellAbility().addMode(mode);

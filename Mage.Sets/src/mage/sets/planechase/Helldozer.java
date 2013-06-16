@@ -28,10 +28,10 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetLandPermanent;
@@ -60,7 +61,7 @@ public class Helldozer extends CardImpl<Helldozer> {
         this.toughness = new MageInt(5);
 
         // {B}{B}{B}, {tap}: Destroy target land. If that land was nonbasic, untap Helldozer.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new HelldozerEffect(), new ManaCostsImpl("{B}{B}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelldozerEffect(), new ManaCostsImpl("{B}{B}{B}"));
         ability.addTarget(new TargetLandPermanent());
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
@@ -80,7 +81,7 @@ public class Helldozer extends CardImpl<Helldozer> {
 class HelldozerEffect extends OneShotEffect<HelldozerEffect> {
 
     public HelldozerEffect() {
-        super(Constants.Outcome.DestroyPermanent);
+        super(Outcome.DestroyPermanent);
         this.staticText = "Destroy target land. If that land was nonbasic, untap Helldozer";
     }
 

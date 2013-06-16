@@ -28,9 +28,9 @@
 package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -39,6 +39,7 @@ import mage.abilities.MageSingleton;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -108,7 +109,7 @@ class AmrouSeekersRestrictionEffect extends RestrictionEffect<AmrouSeekersRestri
     }
 
     public AmrouSeekersRestrictionEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
     }
 
     public AmrouSeekersRestrictionEffect(final AmrouSeekersRestrictionEffect effect) {

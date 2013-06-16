@@ -28,15 +28,16 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.BattalionAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -55,7 +56,7 @@ public class NavSquadCommandos extends CardImpl<NavSquadCommandos> {
         this.toughness = new MageInt(5);
 
         // Battalion — Whenever Nav Squad Commandos and at least two other creatures attack, Nav Squad Commandos gets +1/+1 until end of turn. Untap it.
-        Ability ability = new BattalionAbility(new BoostSourceEffect(1,1, Constants.Duration.EndOfTurn));
+        Ability ability = new BattalionAbility(new BoostSourceEffect(1,1, Duration.EndOfTurn));
         ability.addEffect(new UntapSourceEffect());
         this.addAbility(ability);
     }

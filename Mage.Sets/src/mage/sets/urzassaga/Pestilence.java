@@ -28,9 +28,9 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +40,7 @@ import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DamageEverythingEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.events.GameEvent;
 
 /**
@@ -60,7 +61,7 @@ public class Pestilence extends CardImpl<Pestilence> {
         this.addAbility(new ConditionalTriggeredAbility(triggered, new NoCreatureCondition(), ruleText));
 
         // {B}: Pestilence deals 1 damage to each creature and each player.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageEverythingEffect(1), new ManaCostsImpl("{B}")));
     }
 
     public Pestilence(final Pestilence card) {

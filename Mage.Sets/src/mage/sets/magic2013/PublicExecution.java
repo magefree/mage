@@ -28,10 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -84,7 +82,7 @@ public class PublicExecution extends CardImpl<PublicExecution> {
 class PublicExecutionEffect extends OneShotEffect<PublicExecutionEffect> {
     
     public PublicExecutionEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "Each other creature that player controls gets -2/-0 until end of turn";
     }
 
@@ -94,14 +92,14 @@ class PublicExecutionEffect extends OneShotEffect<PublicExecutionEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Constants.Zone.BATTLEFIELD);
+        Permanent target = (Permanent) game.getLastKnownInformation(source.getFirstTarget(), Zone.BATTLEFIELD);
         if (target != null) {
             UUID opponent = target.getControllerId();
             if (opponent != null) {
                 FilterCreaturePermanent filter = new FilterCreaturePermanent("each other creature that player controls");
                 filter.add(new ControllerIdPredicate(opponent));
                 filter.add(Predicates.not(new PermanentIdPredicate(target.getId())));
-                ContinuousEffect effect = new BoostAllEffect(-2,0, Constants.Duration.EndOfTurn, filter, false);
+                ContinuousEffect effect = new BoostAllEffect(-2,0, Duration.EndOfTurn, filter, false);
                 game.addEffect(effect, source);
                 return true;
             }

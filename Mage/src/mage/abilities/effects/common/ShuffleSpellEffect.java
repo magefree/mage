@@ -28,7 +28,7 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
 import mage.abilities.effects.PostResolveEffect;

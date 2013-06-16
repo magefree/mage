@@ -27,9 +27,8 @@
  */
 package mage.sets.iceage;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -41,6 +40,8 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
@@ -72,11 +73,11 @@ public class TinderWall extends CardImpl<TinderWall> {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Sacrifice Tinder Wall: Add {R}{R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(2)), new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new BasicManaEffect(Mana.RedMana(2)), new SacrificeSourceCost()));
         // {R}, Sacrifice Tinder Wall: Tinder Wall deals 2 damage to target creature it's blocking.
         FilterAttackingCreature filter = new FilterAttackingCreature("creature it's blocking");
         filter.add(new BlockingByPredicate(this.getId()));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{R}"));
         ability.addTarget(new TargetCreaturePermanent(filter));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
@@ -101,7 +102,7 @@ class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
     public List<UUID> blockedByWatcher = new ArrayList<UUID>();
 
     public BlockedByWatcher() {
-        super("BlockedByWatcher", Constants.WatcherScope.CARD);
+        super("BlockedByWatcher", WatcherScope.CARD);
     }
 
     public BlockedByWatcher(final BlockedByWatcher watcher) {

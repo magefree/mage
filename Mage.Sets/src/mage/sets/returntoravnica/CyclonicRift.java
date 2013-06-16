@@ -28,10 +28,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -86,7 +84,7 @@ class CyclonicRiftEffect extends OneShotEffect<CyclonicRiftEffect> {
     private static final FilterNonlandPermanent filter = new FilterNonlandPermanent();
 
     public CyclonicRiftEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return each nonland permanent you don't control to its owner's hand";
     }
 
@@ -98,7 +96,7 @@ class CyclonicRiftEffect extends OneShotEffect<CyclonicRiftEffect> {
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
             if (!creature.getControllerId().equals(source.getControllerId())) {
-                creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+                creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
             
         }

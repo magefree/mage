@@ -28,10 +28,10 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.keyword.FlashAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -91,7 +92,7 @@ public class RestorationAngel extends CardImpl<RestorationAngel> {
 class RestorationAngelEffect extends OneShotEffect<RestorationAngelEffect> {
 
     public RestorationAngelEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "you may exile target non-Angel creature you control, then return that card to the battlefield under your control";
     }
 
@@ -116,7 +117,7 @@ class RestorationAngelEffect extends OneShotEffect<RestorationAngelEffect> {
             permanent.moveToExile(source.getSourceId(), sourcePermanent.getName(), source.getSourceId(), game);
             Card card = game.getCard(targetPointer.getFirst(game, source));
             if (card != null) {
-                Constants.Zone currentZone = game.getState().getZone(card.getId());
+                Zone currentZone = game.getState().getZone(card.getId());
                 return card.putOntoBattlefield(game, currentZone, source.getSourceId(), source.getControllerId());
             }
         }

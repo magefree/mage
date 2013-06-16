@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.custom;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -16,15 +17,15 @@ public class SerraAvengerTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 2);
-        addCard(Constants.Zone.HAND, playerA, "Serra Avenger", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
+        addCard(Zone.HAND, playerA, "Serra Avenger", 4);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
-        castSpell(5, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
-        castSpell(7, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        castSpell(5, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        castSpell(7, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
 
-        setStopAt(7, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(7, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Serra Avenger", 1); // only the one that was cast on 4th turn
@@ -35,17 +36,17 @@ public class SerraAvengerTest extends CardTestPlayerBase {
      */
     @Test
     public void testWithExtraTurns() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 5);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Time Warp", 3);
-        addCard(Constants.Zone.HAND, playerA, "Serra Avenger", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Time Warp", 3);
+        addCard(Zone.HAND, playerA, "Serra Avenger", 1);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
-        castSpell(2, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
-        castSpell(4, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
+        castSpell(2, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Time Warp", playerA);
+        castSpell(4, PhaseStep.PRECOMBAT_MAIN, playerA, "Serra Avenger");
 
-        setStopAt(4, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(4, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertGraveyardCount(playerA, "Time Warp", 3);

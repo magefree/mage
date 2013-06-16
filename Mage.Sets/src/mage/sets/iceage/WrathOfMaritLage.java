@@ -29,10 +29,8 @@ package mage.sets.iceage;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -64,7 +62,7 @@ public class WrathOfMaritLage extends CardImpl<WrathOfMaritLage> {
         // When Wrath of Marit Lage enters the battlefield, tap all red creatures.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new TapAllEffect()));
         // Red creatures don't untap during their controllers' untap steps.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new DontUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DontUntapEffect()));
     }
 
     public WrathOfMaritLage(final WrathOfMaritLage card) {
@@ -114,7 +112,7 @@ class DontUntapEffect extends ReplacementEffectImpl<DontUntapEffect> {
 
 
     public DontUntapEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
     }
 
     public DontUntapEffect(final DontUntapEffect effect) {
@@ -140,7 +138,7 @@ class DontUntapEffect extends ReplacementEffectImpl<DontUntapEffect> {
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         Permanent creature = game.getPermanent(event.getTargetId());
-        if (game.getTurn().getStepType() == Constants.PhaseStep.UNTAP &&  event.getType() == GameEvent.EventType.UNTAP
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&  event.getType() == GameEvent.EventType.UNTAP
                 && creature != null && creature.getCardType().contains(CardType.CREATURE) && creature.getColor().isRed() && creature.getControllerId() == event.getPlayerId()) {
             return true;
         }

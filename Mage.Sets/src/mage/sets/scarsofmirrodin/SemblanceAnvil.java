@@ -27,9 +27,7 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -64,7 +62,7 @@ public class SemblanceAnvil extends CardImpl<SemblanceAnvil> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new SemblanceAnvilEffect(), true));
 
         // Spells you cast that share a card type with the exiled card cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SemblanceAnvilCostReductionEffect()));
     }
 
     public SemblanceAnvil(final SemblanceAnvil card) {
@@ -82,7 +80,7 @@ class SemblanceAnvilEffect extends OneShotEffect<SemblanceAnvilEffect> {
     private static FilterCard filter = new FilterNonlandCard();
 
     public SemblanceAnvilEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = "exile a nonland card from your hand";
     }
 
@@ -94,8 +92,8 @@ class SemblanceAnvilEffect extends OneShotEffect<SemblanceAnvilEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player.getHand().size() > 0) {
-            TargetCard target = new TargetCard(Constants.Zone.HAND, filter);
-            player.choose(Constants.Outcome.Benefit, player.getHand(), target, game);
+            TargetCard target = new TargetCard(Zone.HAND, filter);
+            player.choose(Outcome.Benefit, player.getHand(), target, game);
             Card card = player.getHand().get(target.getFirstTarget(), game);
             if (card != null) {
                 card.moveToExile(getId(), "Semblance Anvil (Imprint)", source.getSourceId(), game);
@@ -121,7 +119,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl<Sembl
     private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
 
     SemblanceAnvilCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 

@@ -28,14 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -58,7 +60,7 @@ public class SteelcladSerpent extends CardImpl<SteelcladSerpent> {
         this.toughness = new MageInt(5);
 
         // Steelclad Serpent can't attack unless you control another artifact.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SteelcladSerpentEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SteelcladSerpentEffect()));
     }
 
     public SteelcladSerpent(final SteelcladSerpent card) {
@@ -81,7 +83,7 @@ class SteelcladSerpentEffect extends RestrictionEffect<SteelcladSerpentEffect> {
     }
 
     public SteelcladSerpentEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "{this} can't attack unless you control another artifact";
     }
 

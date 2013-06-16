@@ -29,16 +29,17 @@ package mage.sets.onslaught;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -76,7 +77,7 @@ public class WordsOfWind extends CardImpl<WordsOfWind> {
 class WordsOfWindEffect extends ReplacementEffectImpl<WordsOfWindEffect> {
 
     public WordsOfWindEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.ReturnToHand);
+        super(Duration.EndOfTurn, Outcome.ReturnToHand);
         staticText = "The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead";
     }
 

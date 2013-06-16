@@ -1,8 +1,8 @@
 package mage.abilities.condition.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.CardType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -17,7 +17,7 @@ public class MetalcraftCondition implements Condition {
     private static final FilterPermanent filter = new FilterPermanent("artifact");
 
     static {
-        filter.add(new CardTypePredicate(Constants.CardType.ARTIFACT));
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
 
     private static MetalcraftCondition fInstance = new MetalcraftCondition();

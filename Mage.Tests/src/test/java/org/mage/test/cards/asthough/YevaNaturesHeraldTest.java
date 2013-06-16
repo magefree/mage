@@ -1,6 +1,7 @@
 package org.mage.test.cards.asthough;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,13 +15,13 @@ public class YevaNaturesHeraldTest extends CardTestPlayerBase {
 
     @Test
     public void testOnBattlefield() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.HAND, playerA, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Llanowar Elves");
 
-        castSpell(1, Constants.PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Llanowar Elves", 1);
@@ -28,13 +29,13 @@ public class YevaNaturesHeraldTest extends CardTestPlayerBase {
 
     @Test
     public void testNonGreen() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Elite Vanguard");
 
-        castSpell(1, Constants.PhaseStep.BEGIN_COMBAT, playerA, "Elite Vanguard");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Elite Vanguard", 0);
@@ -42,15 +43,15 @@ public class YevaNaturesHeraldTest extends CardTestPlayerBase {
 
     @Test
     public void testOtherZones() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.LIBRARY, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.HAND, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.HAND, playerA, "Llanowar Elves");
+        addCard(Zone.GRAVEYARD, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.LIBRARY, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.HAND, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.HAND, playerA, "Llanowar Elves");
 
-        castSpell(1, Constants.PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Llanowar Elves", 0);
@@ -58,16 +59,16 @@ public class YevaNaturesHeraldTest extends CardTestPlayerBase {
 
     @Test
     public void testEffectGetRemovedOnExile() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains");
-        addCard(Constants.Zone.HAND, playerA, "Llanowar Elves");
-        addCard(Constants.Zone.HAND, playerA, "Path to Exile");
+        addCard(Zone.BATTLEFIELD, playerA, "Yeva, Nature's Herald");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains");
+        addCard(Zone.HAND, playerA, "Llanowar Elves");
+        addCard(Zone.HAND, playerA, "Path to Exile");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Path to Exile", "Yeva, Nature's Herald");
-        castSpell(1, Constants.PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Path to Exile", "Yeva, Nature's Herald");
+        castSpell(1, PhaseStep.BEGIN_COMBAT, playerA, "Llanowar Elves");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Llanowar Elves", 0);

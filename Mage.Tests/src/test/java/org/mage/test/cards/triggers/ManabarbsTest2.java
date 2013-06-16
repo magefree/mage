@@ -1,7 +1,7 @@
 package org.mage.test.cards.triggers;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -22,17 +22,17 @@ public class ManabarbsTest2 extends CardTestPlayerBase {
      */
     @Test
     public void testMultiTriggers() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Manabarbs");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 7);
-        addCard(Constants.Zone.HAND, playerA, "Lightning Elemental");
-        addCard(Constants.Zone.HAND, playerA, "Ball Lightning");
+        addCard(Zone.BATTLEFIELD, playerA, "Manabarbs");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 7);
+        addCard(Zone.HAND, playerA, "Lightning Elemental");
+        addCard(Zone.HAND, playerA, "Ball Lightning");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Ball Lightning");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Elemental");
         attack(1, playerA, "Ball Lightning");
         attack(1, playerA, "Lightning Elemental");
 
-        setStopAt(2, Constants.PhaseStep.UNTAP);
+        setStopAt(2, PhaseStep.UNTAP);
         execute();
 
         assertLife(playerA, 13); // burns from Manabarbs

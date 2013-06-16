@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.target.common.TargetControlledCreaturePermanent;
@@ -69,7 +70,7 @@ public class CorpseBlockade extends CardImpl<CorpseBlockade> {
         // Sacrifice another creature: Corpse Blockade gains deathtouch until end of turn.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn),
+                new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledCreaturePermanent(1,1,filter, true))));
     }
 

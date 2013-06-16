@@ -30,10 +30,12 @@ package mage.sets.gatecrash;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfCombatTriggeredAbility;
@@ -97,7 +99,7 @@ public class AngelicSkirmisher extends CardImpl<AngelicSkirmisher> {
 
 class AngelicSkirmisherEffect extends OneShotEffect<AngelicSkirmisherEffect> {
     AngelicSkirmisherEffect() {
-        super(Constants.Outcome.AddAbility);
+        super(Outcome.AddAbility);
         staticText = "choose first strike, vigilance or lifelink. Creatures you control gain that ability until end of turn";
     }
 
@@ -120,7 +122,7 @@ class AngelicSkirmisherEffect extends OneShotEffect<AngelicSkirmisherEffect> {
                 ability = LifelinkAbility.getInstance();
             }
             if (ability != null) {
-                GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Constants.Duration.EndOfTurn, new FilterControlledCreaturePermanent());
+                GainAbilityControlledEffect effect = new GainAbilityControlledEffect(ability, Duration.EndOfTurn, new FilterControlledCreaturePermanent());
                 game.addEffect(effect, source);
                 game.informPlayers(new StringBuilder(sourcePermanent.getName())
                         .append(": ")

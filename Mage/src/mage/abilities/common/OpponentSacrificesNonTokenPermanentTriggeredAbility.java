@@ -27,10 +27,10 @@
  */
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -40,7 +40,7 @@ import mage.game.permanent.PermanentToken;
 public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends TriggeredAbilityImpl<OpponentSacrificesNonTokenPermanentTriggeredAbility> {
 
     public OpponentSacrificesNonTokenPermanentTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect, false);
+        super(Zone.BATTLEFIELD, effect, false);
     }
 
     public OpponentSacrificesNonTokenPermanentTriggeredAbility(final OpponentSacrificesNonTokenPermanentTriggeredAbility ability) {
@@ -50,7 +50,7 @@ public class OpponentSacrificesNonTokenPermanentTriggeredAbility extends Trigger
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
     if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            MageObject object = game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+            MageObject object = game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
             if (object instanceof Permanent && !(object instanceof PermanentToken) ) {
                 for (Effect effect : getEffects()) {
                     effect.setTargetPointer(new FixedTarget(event.getTargetId()));

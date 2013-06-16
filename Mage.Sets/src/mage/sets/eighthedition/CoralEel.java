@@ -27,9 +27,10 @@
  */
 package mage.sets.eighthedition;
 
-import mage.Constants;
 import mage.MageInt;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 
 import java.util.UUID;
 
@@ -40,7 +41,7 @@ import java.util.UUID;
 public class CoralEel extends CardImpl<CoralEel> {
 
     public CoralEel(UUID ownerId) {
-        super(ownerId, 70, "Coral Eel", Constants.Rarity.COMMON, new Constants.CardType[]{Constants.CardType.CREATURE}, "{1}{U}");
+        super(ownerId, 70, "Coral Eel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
         this.expansionSetCode = "8ED";
         this.subtype.add("Fish");
 

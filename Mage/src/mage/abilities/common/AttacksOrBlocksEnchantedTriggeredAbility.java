@@ -2,16 +2,16 @@
 
 package mage.abilities.common;
 
-import mage.Constants;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 public class AttacksOrBlocksEnchantedTriggeredAbility extends TriggeredAbilityImpl<AttacksOrBlocksEnchantedTriggeredAbility> {
 
-    public AttacksOrBlocksEnchantedTriggeredAbility(Constants.Zone zone, Effect effect) {
+    public AttacksOrBlocksEnchantedTriggeredAbility(Zone zone, Effect effect) {
         super(zone, effect);
     }
 

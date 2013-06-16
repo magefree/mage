@@ -28,15 +28,16 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -65,14 +66,14 @@ public class CaterwaulingBoggart extends CardImpl<CaterwaulingBoggart> {
         this.toughness = new MageInt(2);
 
         // Each Goblin you control can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
                 Duration.WhileOnBattlefield, filterGoblin,
                 "Each Goblin you control can't be blocked except by two or more creatures")));
 
         // Each Elemental you control can't be blocked except by two or more creatures.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(
-                new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(
+                new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)),
                 Duration.WhileOnBattlefield, filterGoblin,
                 "Each Elemental you control can't be blocked except by two or more creatures")));
     }

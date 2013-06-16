@@ -1,9 +1,10 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -19,11 +20,11 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
      */
     @Test
     public void testNoSingleCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -38,11 +39,11 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
      */
     @Test
     public void testSingleCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
+        addCard(Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -60,10 +61,10 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
      */
     @Test
     public void testMultiInstances() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Homicidal Seclusion", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Homicidal Seclusion", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Horned Turtle", 1);
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -77,15 +78,15 @@ public class HomicidalSeclusionTest extends CardTestPlayerBase {
      */
     @Test
     public void testApplyInProgress() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Elite Vanguard");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Air Elemental");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Homicidal Seclusion");
+        addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
+        addCard(Zone.BATTLEFIELD, playerA, "Air Elemental");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", "Elite Vanguard");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

@@ -29,9 +29,8 @@ package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +42,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -63,8 +64,8 @@ public class DranaKalastriaBloodchief extends CardImpl<DranaKalastriaBloodchief>
         this.toughness = new MageInt(4);
 
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(new StaticValue(0), new SignInversionDynamicValue(new ManacostVariableValue()), Constants.Duration.EndOfTurn), new ManaCostsImpl("{X}{B}{B}"));
-        ability.addEffect(new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Constants.Duration.EndOfTurn));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new StaticValue(0), new SignInversionDynamicValue(new ManacostVariableValue()), Duration.EndOfTurn), new ManaCostsImpl("{X}{B}{B}"));
+        ability.addEffect(new BoostSourceEffect(new ManacostVariableValue(), new StaticValue(0), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

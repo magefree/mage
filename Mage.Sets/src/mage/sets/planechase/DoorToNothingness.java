@@ -28,9 +28,9 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -57,7 +59,7 @@ public class DoorToNothingness extends CardImpl<DoorToNothingness> {
         this.addAbility(new EntersBattlefieldTappedAbility());
         
         // {W}{W}{U}{U}{B}{B}{R}{R}{G}{G}, {tap}, Sacrifice Door to Nothingness: Target player loses the game.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DoorToNothingnessEffect(), new ManaCostsImpl("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DoorToNothingnessEffect(), new ManaCostsImpl("{W}{W}{U}{U}{B}{B}{R}{R}{G}{G}"));
         ability.addCost(new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
@@ -77,7 +79,7 @@ public class DoorToNothingness extends CardImpl<DoorToNothingness> {
 class DoorToNothingnessEffect extends OneShotEffect<DoorToNothingnessEffect> {
 
     public DoorToNothingnessEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.staticText = "Target player loses the game";
     }
 

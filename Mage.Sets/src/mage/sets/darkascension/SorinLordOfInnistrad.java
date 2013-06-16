@@ -27,11 +27,10 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -45,6 +44,7 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
@@ -107,7 +107,7 @@ public class SorinLordOfInnistrad extends CardImpl<SorinLordOfInnistrad> {
 class VampireToken extends Token {
     VampireToken() {
         super("Vampire", "a 1/1 black Vampire creature token with lifelink");
-        cardType.add(Constants.CardType.CREATURE);
+        cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Vampire");
         power = new MageInt(1);
@@ -128,7 +128,7 @@ class SorinEmblem extends Emblem {
 class SorinLordOfInnistradEffect extends OneShotEffect<SorinLordOfInnistradEffect> {
 
     public SorinLordOfInnistradEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
         this.staticText = "Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control";
     }
 

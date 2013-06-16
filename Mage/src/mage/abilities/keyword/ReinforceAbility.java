@@ -1,11 +1,11 @@
 package mage.abilities.keyword;
 
 
-import mage.Constants;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.DiscardSourceCost;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -14,7 +14,7 @@ public class ReinforceAbility extends SimpleActivatedAbility {
     private Cost cost;
 
     public ReinforceAbility(int count, Cost cost) {
-        super(Constants.Zone.HAND, new AddCountersTargetEffect(CounterType.P1P1.createInstance(count)), cost);
+        super(Zone.HAND, new AddCountersTargetEffect(CounterType.P1P1.createInstance(count)), cost);
         this.addCost(new DiscardSourceCost());
         this.addTarget(new TargetCreaturePermanent());
         this.cost = cost.copy();

@@ -1,10 +1,11 @@
 package org.mage.test.serverside.base;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporterUtil;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 import mage.filter.Filter;
 import mage.game.Game;
 import mage.game.GameException;
@@ -53,7 +54,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ONE, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ONE, 0);
 
         playerA = createNewPlayer("PlayerA");
         playerA.setTestMode(true);
@@ -108,7 +109,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
             System.gc();
         }
 
-        Game game = new TwoPlayerDuel(Constants.MultiplayerAttackOption.LEFT, Constants.RangeOfInfluence.ALL, 0);
+        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, 0);
 
         playerA = createNewPlayer("ComputerA");
         playerA.setTestMode(true);

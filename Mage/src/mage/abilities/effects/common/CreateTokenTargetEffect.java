@@ -1,11 +1,11 @@
 package mage.abilities.effects.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.token.Token;
 
@@ -25,7 +25,7 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
     }

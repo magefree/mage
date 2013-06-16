@@ -29,11 +29,11 @@ package mage.sets.returntoravnica;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -42,6 +42,7 @@ import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.PhaseStep;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -118,7 +119,7 @@ class VolatileRigTriggeredAbility extends TriggeredAbilityImpl<VolatileRigTrigge
         }
 
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getTargetId().equals(this.sourceId)) {
-            if (game.getPhase().getStep().getType() == Constants.PhaseStep.COMBAT_DAMAGE) {
+            if (game.getPhase().getStep().getType() == PhaseStep.COMBAT_DAMAGE) {
                 if (triggerdThisCombatStep) {
                     return false;
                 } else {

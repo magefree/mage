@@ -28,13 +28,14 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainProtectionFromColorTargetEffect;
 import mage.abilities.keyword.ReboundAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.Duration;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -50,7 +51,7 @@ public class EmergeUnscathed extends CardImpl<EmergeUnscathed> {
         this.color.setWhite(true);
 
         // Target creature you control gains protection from the color of your choice until end of turn.
-        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainProtectionFromColorTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent());
         this.getSpellAbility().addChoice(new ChoiceColor());
         

@@ -28,10 +28,8 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfEndStepTriggeredAbility;
@@ -66,7 +64,7 @@ public class BlitzHellion extends CardImpl<BlitzHellion> {
         this.addAbility(HasteAbility.getInstance());
 
         // At the beginning of the end step, Blitz Hellion's owner shuffles it into his or her library.
-        this.addAbility(new BeginningOfEndStepTriggeredAbility(Constants.Zone.BATTLEFIELD, new ShuffleSourceEffect(), TargetController.ANY, null, false));
+        this.addAbility(new BeginningOfEndStepTriggeredAbility(Zone.BATTLEFIELD, new ShuffleSourceEffect(), TargetController.ANY, null, false));
     }
 
     public BlitzHellion(final BlitzHellion card) {
@@ -82,7 +80,7 @@ public class BlitzHellion extends CardImpl<BlitzHellion> {
 class ShuffleSourceEffect extends OneShotEffect<ShuffleSourceEffect> {
 
     ShuffleSourceEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "{this}'s owner shuffles it into his or her library";
     }
 
@@ -98,7 +96,7 @@ class ShuffleSourceEffect extends OneShotEffect<ShuffleSourceEffect> {
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.moveToZone(Constants.Zone.LIBRARY, id, game, false);
+            permanent.moveToZone(Zone.LIBRARY, id, game, false);
             player.shuffleLibrary(game);
             return true;
         }

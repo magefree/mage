@@ -29,14 +29,15 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -55,8 +56,8 @@ public class HecklingFiends extends CardImpl<HecklingFiends> {
         this.toughness = new MageInt(2);
 
         // {2}{R}: Target creature attacks this turn if able.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
-                new AttacksIfAbleTargetEffect(Constants.Duration.EndOfTurn),
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AttacksIfAbleTargetEffect(Duration.EndOfTurn),
                 new ManaCostsImpl("{2}{R}"));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -28,9 +28,9 @@
 package mage.sets.thedark;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.PreventDamageFromTargetEffect;
 import mage.abilities.effects.common.PreventDamageTargetEffect;
 import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetAttackingCreature;
 
 /**
@@ -51,9 +53,9 @@ public class MazeOfIth extends CardImpl<MazeOfIth> {
         this.expansionSetCode = "DRK";
 
         // {tap}: Untap target attacking creature. Prevent all combat damage that would be dealt to and dealt by that creature this turn.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
-        ability.addEffect(new PreventDamageFromTargetEffect(Constants.Duration.EndOfTurn, true));
-        ability.addEffect(new PreventDamageTargetEffect(Constants.Duration.EndOfTurn, Integer.MAX_VALUE));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        ability.addEffect(new PreventDamageFromTargetEffect(Duration.EndOfTurn, true));
+        ability.addEffect(new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE));
         ability.addTarget(new TargetAttackingCreature());
         this.addAbility(ability);
     }

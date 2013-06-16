@@ -28,9 +28,8 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -56,7 +55,7 @@ public class RuneOfProtectionGreen extends CardImpl<RuneOfProtectionGreen> {
         this.color.setWhite(true);
 
 		// {W}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new RuneOfProtectionGreenEffect() , new ManaCostsImpl("W")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new RuneOfProtectionGreenEffect() , new ManaCostsImpl("W")));
 		// Cycling {2} ({2}, Discard this card: Draw a card.)
 		this.addAbility(new CyclingAbility(new ManaCostsImpl("{2}")));
     }
@@ -82,7 +81,7 @@ class RuneOfProtectionGreenEffect extends PreventionEffectImpl<RuneOfProtectionG
     private TargetSource target;
 
     public RuneOfProtectionGreenEffect() {
-        super(Constants.Duration.EndOfTurn);
+        super(Duration.EndOfTurn);
         target = new TargetSource(filter);
         
         staticText = "The next time a green source of your choice would deal damage to you this turn, prevent that damage";
@@ -105,7 +104,7 @@ class RuneOfProtectionGreenEffect extends PreventionEffectImpl<RuneOfProtectionG
 
     @Override
     public void init(Ability source, Game game) {
-        this.target.choose(Constants.Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
+        this.target.choose(Outcome.PreventDamage, source.getControllerId(), source.getSourceId(), game);
     }
 
     @Override

@@ -29,9 +29,7 @@ package mage.sets.shardsofalara;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -62,7 +60,7 @@ public class SedrisTheTraitorKing extends CardImpl<SedrisTheTraitorKing> {
         this.toughness = new MageInt(5);
 
         // Each creature card in your graveyard has unearth {2}{B}.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SedrisTheTraitorKingEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SedrisTheTraitorKingEffect()));
     }
 
     public SedrisTheTraitorKing(final SedrisTheTraitorKing card) {
@@ -77,7 +75,7 @@ public class SedrisTheTraitorKing extends CardImpl<SedrisTheTraitorKing> {
 
 class SedrisTheTraitorKingEffect extends ContinuousEffectImpl<SedrisTheTraitorKingEffect> {
     SedrisTheTraitorKingEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Each creature card in your graveyard has unearth {2}{B}";
     }
 

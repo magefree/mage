@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,10 +13,10 @@ public class FeedThePackTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Feed the Pack");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Craw Wurm");        
+        addCard(Zone.BATTLEFIELD, playerA, "Feed the Pack");
+        addCard(Zone.BATTLEFIELD, playerA, "Craw Wurm");
 
-        setStopAt(2, Constants.PhaseStep.DRAW);
+        setStopAt(2, PhaseStep.DRAW);
         execute();
 
         assertLife(playerA, 20);

@@ -28,9 +28,8 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -70,7 +69,7 @@ public class EntropicSpecter extends CardImpl<EntropicSpecter> {
         this.addAbility(new AsEntersBattlefieldAbility(new ChooseOpponent()));
         
         // Entropic Specter's power and toughness are each equal to the number of cards in the chosen player's hand.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInTargetPlayerHandCount(), Duration.WhileOnBattlefield)));
         
         // Whenever Entropic Specter deals damage to a player, that player discards a card.
         this.addAbility(new DealsDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1, false), false, true));
@@ -89,7 +88,7 @@ public class EntropicSpecter extends CardImpl<EntropicSpecter> {
 class ChooseOpponent extends OneShotEffect<ChooseOpponent> {
 
     public ChooseOpponent() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "choose an opponent";
     }
 

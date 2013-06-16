@@ -30,7 +30,7 @@ package mage.game.stack;
 
 import java.util.ArrayDeque;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 

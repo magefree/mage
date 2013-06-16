@@ -28,11 +28,11 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -69,7 +69,7 @@ public class VastwoodAnimist extends CardImpl<VastwoodAnimist> {
         this.toughness = new MageInt(1);
 
         // {tap}: Target land you control becomes an X/X Elemental creature until end of turn, where X is the number of Allies you control. It's still a land.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new ElementalLandToken(), "land", Constants.Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BecomesCreatureTargetEffect(new ElementalLandToken(), "land", Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetControlledPermanent(filter));
         this.addAbility(ability);
     }

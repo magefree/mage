@@ -28,15 +28,16 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -98,7 +99,7 @@ class DiabolicRevelationEffect extends OneShotEffect<DiabolicRevelationEffect> {
             for (UUID cardId : target.getTargets()) {
                 Card card = player.getLibrary().remove(cardId, game);
                 if (card != null) {
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
             }
         }

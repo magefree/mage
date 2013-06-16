@@ -28,10 +28,10 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
@@ -63,7 +63,7 @@ public class AvacynAngelOfHope extends CardImpl<AvacynAngelOfHope> {
 
         // Avacyn, Angel of Hope and other permanents you control are indestructible.
         FilterControlledPermanent filter = new FilterControlledPermanent("Avacyn, Angel of Hope and other permanents you control");
-        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false);
+        Effect effect = new GainAbilityAllEffect(IndestructibleAbility.getInstance(), Duration.WhileOnBattlefield, filter, false);
         effect.setText("{this} and other permanents you control are indestructible");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }

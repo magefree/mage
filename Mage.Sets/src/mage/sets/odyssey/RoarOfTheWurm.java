@@ -27,13 +27,13 @@
  */
 package mage.sets.odyssey;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.WurmToken;
 
 import java.util.UUID;
@@ -54,7 +54,7 @@ public class RoarOfTheWurm extends CardImpl<RoarOfTheWurm> {
         this.getSpellAbility().addEffect(new CreateTokenEffect(new WurmToken()));
 
         // Flashback {3}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{G}"), TimingRule.SORCERY));
     }
 
     public RoarOfTheWurm(final RoarOfTheWurm card) {

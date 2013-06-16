@@ -28,11 +28,13 @@
 package mage.sets.commander;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.TurnPhase;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TurnPhase;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -72,8 +74,8 @@ public class BasandraBattleSeraph extends CardImpl<BasandraBattleSeraph> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BasandraBattleSeraphEffect()));
 
         // {R}: Target creature attacks this turn if able.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Constants.Duration.EndOfTurn), new ManaCostsImpl("{R}"));
-        ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Constants.Duration.EndOfTurn, null));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AttacksIfAbleTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{R}"));
+        ability.addEffect(new GainAbilityTargetEffect(AttacksThisTurnMarkerAbility.getInstance(), Duration.EndOfTurn, null));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
 
@@ -92,7 +94,7 @@ public class BasandraBattleSeraph extends CardImpl<BasandraBattleSeraph> {
 class BasandraBattleSeraphEffect extends ReplacementEffectImpl<BasandraBattleSeraphEffect> {
 
     public BasandraBattleSeraphEffect() {
-        super(Constants.Duration.EndOfTurn, Constants.Outcome.Neutral);
+        super(Duration.EndOfTurn, Outcome.Neutral);
         staticText = "Players can't cast spells during combat";
     }
 

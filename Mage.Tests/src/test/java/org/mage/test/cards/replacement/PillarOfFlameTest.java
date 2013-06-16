@@ -1,6 +1,7 @@
 package org.mage.test.cards.replacement;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -17,23 +18,23 @@ public class PillarOfFlameTest extends CardTestPlayerBase {
      */
     @Test
     public void testNotTriggeringExileItInstead() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lightning Mauler");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Rakdos Cackler");
+        addCard(Zone.BATTLEFIELD, playerA, "Lightning Mauler");
+        addCard(Zone.BATTLEFIELD, playerA, "Rakdos Cackler");
 
-        addCard(Constants.Zone.HAND, playerA, "Pillar of Flame");
-        addCard(Constants.Zone.HAND, playerA, "Stonewright");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.HAND, playerA, "Pillar of Flame");
+        addCard(Zone.HAND, playerA, "Stonewright");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Dutiful Thrull");
+        addCard(Zone.BATTLEFIELD, playerB, "Dutiful Thrull");
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Pillar of Flame", playerB);
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Stonewright");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Pillar of Flame", playerB);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Stonewright");
 
         attack(3, playerA, "Rakdos Cackler");
         attack(3, playerA, "Lightning Mauler");
         block(3, playerB, "Dutiful Thrull", "Lightning Mauler");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -52,19 +53,19 @@ public class PillarOfFlameTest extends CardTestPlayerBase {
      */
     @Test
     public void testTriggeringExileItInstead() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Lightning Mauler");
+        addCard(Zone.BATTLEFIELD, playerA, "Lightning Mauler");
 
-        addCard(Constants.Zone.HAND, playerA, "Pillar of Flame");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.HAND, playerA, "Pillar of Flame");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Warmind Infantry");
+        addCard(Zone.BATTLEFIELD, playerB, "Warmind Infantry");
 
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Pillar of Flame", "Warmind Infantry");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Pillar of Flame", "Warmind Infantry");
 
         attack(3, playerA, "Lightning Mauler");
         block(3, playerB, "Warmind Infantry", "Lightning Mauler");
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

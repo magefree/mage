@@ -29,11 +29,10 @@ package mage.sets.zendikar;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
@@ -75,7 +74,7 @@ public class QuestForTheHolyRelic extends CardImpl<QuestForTheHolyRelic> {
         // Whenever you cast a creature spell, you may put a quest counter on Quest for the Holy Relic.
         this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.QUEST.createInstance()), filter, true));
         // Remove five quest counters from Quest for the Holy Relic and sacrifice it: Search your library for an Equipment card, put it onto the battlefield, and attach it to a creature you control. Then shuffle your library.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new QuestForTheHolyRelicEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(5)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new QuestForTheHolyRelicEffect(), new RemoveCountersSourceCost(CounterType.QUEST.createInstance(5)));
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }

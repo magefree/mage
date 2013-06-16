@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
@@ -38,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -66,7 +68,7 @@ public class CurseOfEchoes extends CardImpl<CurseOfEchoes> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Damage));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Damage));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
@@ -94,7 +96,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
     }
 
     public CurseOfEchoesCopyTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
+        super(Zone.BATTLEFIELD, new CurseOfEchoesEffect(), false);
         this.addTarget(new TargetSpell(filter));
     }
 
@@ -134,7 +136,7 @@ class CurseOfEchoesCopyTriggeredAbility extends TriggeredAbilityImpl<CurseOfEcho
 class CurseOfEchoesEffect extends OneShotEffect<CurseOfEchoesEffect> {
 
     public CurseOfEchoesEffect() {
-        super(Constants.Outcome.Copy);
+        super(Outcome.Copy);
     }
 
     public CurseOfEchoesEffect(final CurseOfEchoesEffect effect) {
@@ -149,7 +151,7 @@ class CurseOfEchoesEffect extends OneShotEffect<CurseOfEchoesEffect> {
             for (UUID playerId: game.getPlayerList()) {
                 if (!playerId.equals(spell.getControllerId())) {
                     Player player = game.getPlayer(playerId);
-                    if (player.chooseUse(Constants.Outcome.Copy, chooseMessage, game)) {
+                    if (player.chooseUse(Outcome.Copy, chooseMessage, game)) {
                         Spell copy = spell.copySpell();
                         copy.setControllerId(playerId);
                         copy.setCopiedSpell(true);

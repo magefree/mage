@@ -19,8 +19,8 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mage.Constants.MultiplayerAttackOption;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
 
 /**

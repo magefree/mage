@@ -28,15 +28,16 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.TransformSourceEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -66,7 +67,7 @@ public class RavenousDemon extends CardImpl<RavenousDemon> {
 
         // Sacrifice a Human: Transform Ravenous Demon. Activate this ability only any time you could cast a sorcery.
         this.addAbility(new TransformAbility());
-        this.addAbility(new ActivateAsSorceryActivatedAbility(Constants.Zone.BATTLEFIELD, new TransformSourceEffect(true), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
+        this.addAbility(new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new TransformSourceEffect(true), new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 
     public RavenousDemon(final RavenousDemon card) {

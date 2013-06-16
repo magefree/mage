@@ -28,9 +28,9 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -60,12 +62,12 @@ public class ScribNibblers extends CardImpl<ScribNibblers> {
         this.toughness = new MageInt(1);
 
         // {tap}: Exile the top card of target player's library. If it's a land card, you gain 1 life.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ScribNibblersEffect(), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
 
         // Landfall - Whenever a land enters the battlefield under your control, you may untap Scrib Nibblers.
-        this.addAbility(new LandfallAbility(Constants.Zone.BATTLEFIELD, new UntapSourceEffect(), true));
+        this.addAbility(new LandfallAbility(Zone.BATTLEFIELD, new UntapSourceEffect(), true));
     }
 
     public ScribNibblers(final ScribNibblers card) {
@@ -81,7 +83,7 @@ public class ScribNibblers extends CardImpl<ScribNibblers> {
 class ScribNibblersEffect extends OneShotEffect<ScribNibblersEffect> {
 
     public ScribNibblersEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "Exile the top card of target player's library. If it's a land card, you gain 1 life";
     }
 

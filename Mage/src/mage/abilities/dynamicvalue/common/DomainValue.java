@@ -1,8 +1,8 @@
 package mage.abilities.dynamicvalue.common;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.constants.CardType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -32,7 +32,7 @@ public class DomainValue implements DynamicValue {
         int haveSwamps = 0;
         int haveForests = 0;
         for (Permanent p : game.getBattlefield().getAllActivePermanents(sourceAbility.getControllerId())) {
-            if (p.getCardType().contains(Constants.CardType.LAND)) {
+            if (p.getCardType().contains(CardType.LAND)) {
                 if (havePlains == 0 && p.getSubtype().contains("Plains")) {
                     havePlains = 1;
                 }

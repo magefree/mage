@@ -28,12 +28,13 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -67,7 +68,7 @@ public class DissipationField extends CardImpl<DissipationField> {
 class DissipationFieldAbility extends TriggeredAbilityImpl<DissipationFieldAbility> {
 
     public DissipationFieldAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
+        super(Zone.BATTLEFIELD, new ReturnToHandTargetEffect());
     }
 
     public DissipationFieldAbility(DissipationFieldAbility effect) {

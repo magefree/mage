@@ -29,14 +29,14 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -55,7 +55,7 @@ public class DevilsPlay extends CardImpl<DevilsPlay> {
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Flashback {X}{R}{R}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{R}{R}{R}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{X}{R}{R}{R}"), TimingRule.SORCERY));
     }
 
     public DevilsPlay(final DevilsPlay card) {

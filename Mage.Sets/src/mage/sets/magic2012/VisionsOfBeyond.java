@@ -29,12 +29,12 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -67,7 +67,7 @@ public class VisionsOfBeyond extends CardImpl<VisionsOfBeyond> {
 class VisionsOfBeyondEffect extends OneShotEffect<VisionsOfBeyondEffect> {
 
     public VisionsOfBeyondEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Draw a card. If a graveyard has twenty or more cards in it, draw three cards instead";
     }
 

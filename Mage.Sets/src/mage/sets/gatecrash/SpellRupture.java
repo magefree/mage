@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -38,6 +38,7 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -75,7 +76,7 @@ public class SpellRupture extends CardImpl<SpellRupture> {
 class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect<SpellRuptureCounterUnlessPaysEffect> {
 
     public SpellRuptureCounterUnlessPaysEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public SpellRuptureCounterUnlessPaysEffect(final SpellRuptureCounterUnlessPaysEffect effect) {
@@ -98,7 +99,7 @@ class SpellRuptureCounterUnlessPaysEffect extends OneShotEffect<SpellRuptureCoun
                 int amount = new greatestPowerCountCreatureYouControl().calculate(game, source);
                 GenericManaCost cost = new GenericManaCost(amount);
                 StringBuilder sb = new StringBuilder("Pay {").append(amount).append("}? (otherwise ").append(spell.getName()).append(" will be countered)");
-                if (player.chooseUse(Constants.Outcome.Benefit, sb.toString(), game)) {
+                if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                     cost.pay(source, game, source.getSourceId(), player.getId(), false);
                 }
                 if (!cost.isPaid()) {

@@ -31,10 +31,11 @@ package mage.abilities.costs.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
+
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -61,7 +62,7 @@ public class ExileFromHandCost extends CostImpl<ExileFromHandCost> {
  
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
-        if (targets.choose(Constants.Outcome.Exile, controllerId, sourceId, game)) {
+        if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             Player player = game.getPlayer(controllerId);
             for (UUID targetId: targets.get(0).getTargets()) {
                 Card card = player.getHand().get(targetId, game);

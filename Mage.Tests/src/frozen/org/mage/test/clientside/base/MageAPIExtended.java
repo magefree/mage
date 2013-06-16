@@ -1,6 +1,6 @@
 package org.mage.test.clientside.base;
 
-import mage.Constants;
+import mage.constants.Zone;
 import org.mage.test.clientside.bdd.and.And;
 import org.mage.test.clientside.bdd.given.Given;
 import org.mage.test.clientside.bdd.then.Then;
@@ -13,7 +13,7 @@ import static org.mage.test.clientside.base.MageAPI.Owner.mine;
  */
 public class MageAPIExtended extends  MageAPI {
 
-    public void addCard(String cardName, Constants.Zone zone) throws Exception {
+    public void addCard(String cardName, Zone zone) throws Exception {
         Given.I.have.a.card("Mountain");
     }
 

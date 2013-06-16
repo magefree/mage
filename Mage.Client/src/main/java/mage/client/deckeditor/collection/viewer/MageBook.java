@@ -45,6 +45,7 @@ import mage.client.util.Config;
 import mage.client.util.ImageHelper;
 import mage.client.util.sets.ConstructedFormats;
 import mage.components.ImagePanel;
+import mage.constants.Rarity;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.GlowText;
@@ -254,7 +255,7 @@ public class MageBook extends JComponent {
         cardImg.update(card);
         cardImg.setCardBounds(rectangle.x, rectangle.y, cardDimensions.frameWidth, cardDimensions.frameHeight);
 
-        boolean implemented = !card.getRarity().equals(mage.Constants.Rarity.NA);
+        boolean implemented = !card.getRarity().equals(Rarity.NA);
 
         GlowText label = new GlowText();
         label.setGlow(implemented ? Color.green : NOT_IMPLEMENTED, 12, 0.0f);

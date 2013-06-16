@@ -28,9 +28,8 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -58,7 +57,7 @@ public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
         this.addAbility(FlyingAbility.getInstance());
 
         // You may cast Misthollow Griffin from exile.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.EXILED, new MisthollowGriffinPlayEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.EXILED, new MisthollowGriffinPlayEffect()));
     }
 
     public MisthollowGriffin(final MisthollowGriffin card) {
@@ -74,7 +73,7 @@ public class MisthollowGriffin extends CardImpl<MisthollowGriffin> {
 class MisthollowGriffinPlayEffect extends AsThoughEffectImpl<MisthollowGriffinPlayEffect> {
 
     public MisthollowGriffinPlayEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfGame, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfGame, Outcome.Benefit);
         staticText = "You may cast Misthollow Griffin from exile";
     }
 
@@ -96,7 +95,7 @@ class MisthollowGriffinPlayEffect extends AsThoughEffectImpl<MisthollowGriffinPl
     public boolean applies(UUID sourceId, Ability source, Game game) {
             if (sourceId.equals(source.getSourceId())) {
                 Card card = game.getCard(source.getSourceId());
-                if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Constants.Zone.EXILED) {
+                if (card != null && card.getOwnerId().equals(source.getControllerId()) && game.getState().getZone(source.getSourceId()) == Zone.EXILED) {
                     return true;
                 }
             }

@@ -28,11 +28,8 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -54,7 +51,7 @@ public class EnsnaringBridge extends CardImpl<EnsnaringBridge> {
         this.expansionSetCode = "STH";
 
         // Creatures with power greater than the number of cards in your hand can't attack.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EnsnaringBridgeEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EnsnaringBridgeEffect()));
     }
 
     public EnsnaringBridge(final EnsnaringBridge card) {

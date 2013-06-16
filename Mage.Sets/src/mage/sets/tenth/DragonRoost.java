@@ -29,9 +29,8 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +38,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.permanent.token.Token;
 
 /**
@@ -51,7 +51,7 @@ public class DragonRoost extends CardImpl<DragonRoost> {
         super(ownerId, 197, "Dragon Roost", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{4}{R}{R}");
         this.expansionSetCode = "10E";
         this.color.setRed(true);
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new DragonToken2(), 1), new ManaCostsImpl("{5}{R}{R}")));
     }
 
     public DragonRoost(final DragonRoost card) {

@@ -28,9 +28,9 @@
 package mage.sets.lorwyn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -59,7 +60,7 @@ public class Glarewielder extends CardImpl<Glarewielder> {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // When Glarewielder enters the battlefield, up to two target creatures can't block this turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Constants.Duration.EndOfTurn));
+        Ability ability = new EntersBattlefieldTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(0, 2));
         this.addAbility(ability);
         // Evoke {1}{R}

@@ -28,11 +28,8 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -65,7 +62,7 @@ public class JinGitaxiasCoreAugur extends CardImpl<JinGitaxiasCoreAugur> {
         this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new DrawCardControllerEffect(7), false));
 
         // Each opponent's maximum hand size is reduced by seven.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new MaximumHandSizeControllerEffect(7, Duration.WhileOnBattlefield, HandSizeModification.REDUCE, TargetController.OPPONENT)));
     }
 

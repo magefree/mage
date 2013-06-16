@@ -28,14 +28,15 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 
 /**
  *
@@ -53,7 +54,7 @@ public class SkirkProspector extends CardImpl<SkirkProspector> {
         this.toughness = new MageInt(1);
 
         // Sacrifice a Goblin: Add {R} to your mana pool.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, Mana.RedMana, new SacrificeSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.RedMana, new SacrificeSourceCost()));
     }
 
     public SkirkProspector(final SkirkProspector card) {

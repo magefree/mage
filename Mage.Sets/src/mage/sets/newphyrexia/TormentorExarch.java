@@ -29,15 +29,15 @@ package mage.sets.newphyrexia;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,10 +54,10 @@ public class TormentorExarch extends CardImpl<TormentorExarch> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Constants.Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         Mode mode = new Mode();
-        mode.getEffects().add(new BoostTargetEffect(0, -2, Constants.Duration.EndOfTurn));
+        mode.getEffects().add(new BoostTargetEffect(0, -2, Duration.EndOfTurn));
         mode.getTargets().add(new TargetCreaturePermanent());
         ability.addMode(mode);
         this.addAbility(ability);

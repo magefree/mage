@@ -29,15 +29,16 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -80,7 +81,7 @@ class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
     }
 
     public InameDeathAspectEffect() {
-        super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Constants.Outcome.Neutral);
+        super(new TargetCardInLibrary(0, Integer.MAX_VALUE, filter), Outcome.Neutral);
         staticText = "search your library for any number of Spirit cards and put them into your graveyard. If you do, shuffle your library";
     }
 
@@ -101,7 +102,7 @@ class InameDeathAspectEffect extends SearchEffect<InameDeathAspectEffect> {
                 for (UUID cardId: target.getTargets()) {
                     Card card = player.getLibrary().remove(cardId, game);
                     if (card != null){
-                        card.moveToZone(Constants.Zone.GRAVEYARD, source.getId(), game, false);
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
                     }
                 }
             }

@@ -28,10 +28,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +43,10 @@ import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -93,7 +97,7 @@ public class VarolzTheScarStriped extends CardImpl<VarolzTheScarStriped> {
 class VarolzTheScarStripedEffect extends ContinuousEffectImpl<VarolzTheScarStripedEffect> {
 
     VarolzTheScarStripedEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.AbilityAddingRemovingEffects_6, Constants.SubLayer.NA, Constants.Outcome.AddAbility);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "Each creature card in your graveyard has scavenge. The scavenge cost is equal to its mana cost";
     }
 

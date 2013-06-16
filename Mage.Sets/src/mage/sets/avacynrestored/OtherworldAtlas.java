@@ -27,15 +27,16 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -53,10 +54,10 @@ public class OtherworldAtlas extends CardImpl<OtherworldAtlas> {
         this.expansionSetCode = "AVR";
 
         // {tap}: Put a charge counter on Otherworld Atlas.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), new TapSourceCost()));
 
         // {tap}: Each player draws a card for each charge counter on Otherworld Atlas.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new OtherworldAtlasDrawEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new OtherworldAtlasDrawEffect(), new TapSourceCost()));
     }
 
     public OtherworldAtlas(final OtherworldAtlas card) {
@@ -72,7 +73,7 @@ public class OtherworldAtlas extends CardImpl<OtherworldAtlas> {
 class OtherworldAtlasDrawEffect extends OneShotEffect<OtherworldAtlasDrawEffect> {
 
     public OtherworldAtlasDrawEffect() {
-        super(Constants.Outcome.DrawCard);
+        super(Outcome.DrawCard);
         staticText = "Each player draws a card for each charge counter on {this}";
     }
 

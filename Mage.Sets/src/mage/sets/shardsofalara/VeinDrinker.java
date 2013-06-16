@@ -28,9 +28,9 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -42,6 +42,8 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -65,7 +67,7 @@ public class VeinDrinker extends CardImpl<VeinDrinker> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // {R}, {tap}: Vein Drinker deals damage equal to its power to target creature. That creature deals damage equal to its power to Vein Drinker.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new VeinDrinkerEffect(), new ManaCostsImpl("{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VeinDrinkerEffect(), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
@@ -86,7 +88,7 @@ public class VeinDrinker extends CardImpl<VeinDrinker> {
 class VeinDrinkerEffect extends OneShotEffect<VeinDrinkerEffect> {
 
     public VeinDrinkerEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
     }
 
     public VeinDrinkerEffect(final VeinDrinkerEffect effect) {

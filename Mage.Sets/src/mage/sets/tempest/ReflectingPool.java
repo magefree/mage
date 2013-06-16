@@ -29,9 +29,9 @@ package mage.sets.tempest;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
@@ -42,6 +42,7 @@ import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
@@ -59,7 +60,7 @@ public class ReflectingPool extends CardImpl<ReflectingPool> {
         this.expansionSetCode = "TMP";
 
         // {T}: Add to your mana pool one mana of any type that a land you control could produce.
-        this.addAbility(new SimpleManaAbility(Constants.Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new ReflectingPoolEffect(), new TapSourceCost()));
     }
 
     public ReflectingPool(final ReflectingPool card) {
@@ -90,7 +91,7 @@ class ReflectingPoolEffect extends ManaEffect<ReflectingPoolEffect> {
         List<Permanent> lands = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
         Mana types = new Mana();
         for (Permanent land : lands) {
-            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Constants.Zone.BATTLEFIELD);
+            Abilities<ManaAbility> mana = land.getAbilities().getManaAbilities(Zone.BATTLEFIELD);
             for (ManaAbility ability : mana) {
                 types.add(ability.getNetMana(game));
             }

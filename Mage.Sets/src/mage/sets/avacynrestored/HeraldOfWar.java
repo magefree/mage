@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -69,7 +67,7 @@ public class HeraldOfWar extends CardImpl<HeraldOfWar> {
         this.addAbility(new AttacksTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
 
         // Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new HeraldOfWarCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HeraldOfWarCostReductionEffect()));
     }
 
     public HeraldOfWar(final HeraldOfWar card) {
@@ -85,7 +83,7 @@ public class HeraldOfWar extends CardImpl<HeraldOfWar> {
 class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl<HeraldOfWarCostReductionEffect> {
 
     HeraldOfWarCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War";
     }
 

@@ -27,14 +27,15 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -52,7 +53,7 @@ public class BowerPassage extends CardImpl<BowerPassage> {
         this.color.setGreen(true);
 
         // Creatures with flying can't block creatures you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new BowerPassageEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BowerPassageEffect()));
     }
 
     public BowerPassage(final BowerPassage card) {
@@ -68,7 +69,7 @@ public class BowerPassage extends CardImpl<BowerPassage> {
 class BowerPassageEffect extends RestrictionEffect<BowerPassageEffect> {
 
     BowerPassageEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "Creatures with flying can't block creatures you control";
     }
 

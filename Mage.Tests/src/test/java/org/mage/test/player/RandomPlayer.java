@@ -27,8 +27,8 @@
  */
 package org.mage.test.player;
 
-import mage.Constants.Outcome;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
 import mage.abilities.*;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;

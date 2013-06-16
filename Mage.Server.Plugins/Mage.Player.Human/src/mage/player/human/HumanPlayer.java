@@ -30,11 +30,9 @@ package mage.player.human;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.Constants.Outcome;
-import mage.Constants.RangeOfInfluence;
-import static mage.Constants.SpellAbilityType.SPLIT;
-import static mage.Constants.SpellAbilityType.SPLIT_FUSED;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.common.SacrificeSourceCost;

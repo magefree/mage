@@ -29,15 +29,15 @@ package mage.sets.magic2012;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.CountersCount;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 
 /**
@@ -53,7 +53,7 @@ public class MindUnbound extends CardImpl<MindUnbound> {
         this.color.setBlue(true);
 
         // At the beginning of your upkeep, put a lore counter on Mind Unbound, then draw a card for each lore counter on Mind Unbound.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.LORE.createInstance()), TargetController.YOU, false);
         ability.addEffect(new DrawCardControllerEffect(new CountersCount(CounterType.LORE)));
         this.addAbility(ability);
     }

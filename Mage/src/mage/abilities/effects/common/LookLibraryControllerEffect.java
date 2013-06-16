@@ -27,9 +27,8 @@
  */
 package mage.abilities.effects.common;
 
-import mage.Constants;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.SpellAbility;
@@ -196,7 +195,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
      * @param game
      */
     protected void mayShuffle(Player player, Game game) {
-        if (this.mayShuffleAfter && player.chooseUse(Constants.Outcome.Benefit, "Shuffle you library?", game)) {
+        if (this.mayShuffleAfter && player.chooseUse(Outcome.Benefit, "Shuffle you library?", game)) {
             player.shuffleLibrary(game);
         }
     }

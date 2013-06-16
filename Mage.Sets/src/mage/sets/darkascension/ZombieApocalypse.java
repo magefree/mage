@@ -28,13 +28,15 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -79,7 +81,7 @@ class ZombieApocalypseEffect extends OneShotEffect<ZombieApocalypseEffect> {
     }
 
     public ZombieApocalypseEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.staticText = "Return all Zombie creature cards from your graveyard to the battlefield tapped, then destroy all Humans.";
     }
 
@@ -98,7 +100,7 @@ class ZombieApocalypseEffect extends OneShotEffect<ZombieApocalypseEffect> {
         Player player = game.getPlayer(source.getControllerId());
 
         for (Card card : player.getGraveyard().getCards(filterZombie, game)) {
-            card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), source.getControllerId());
             Permanent permanent = game.getPermanent(card.getId());
             if (permanent != null) {
                 permanent.setTapped(true);

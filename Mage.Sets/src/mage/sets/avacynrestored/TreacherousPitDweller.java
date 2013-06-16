@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
@@ -78,8 +76,8 @@ class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility<T
     private static final String ruleText = "When {this} enters the battlefield from a graveyard, ";
 
     public TreacherousPitDwellerTriggeredAbility() {
-        super(Constants.Zone.GRAVEYARD, Constants.Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), ruleText, false);
-        zone = Constants.Zone.BATTLEFIELD;
+        super(Zone.GRAVEYARD, Zone.BATTLEFIELD, new TreacherousPitDwellerEffect(), ruleText, false);
+        zone = Zone.BATTLEFIELD;
         addTarget(new TargetOpponent(true));
     }
 
@@ -96,7 +94,7 @@ class TreacherousPitDwellerTriggeredAbility extends ZoneChangeTriggeredAbility<T
 class TreacherousPitDwellerEffect extends ContinuousEffectImpl<TreacherousPitDwellerEffect> {
 
     public TreacherousPitDwellerEffect() {
-        super(Constants.Duration.Custom, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+        super(Duration.Custom, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         staticText = "Target opponent gains control of {this}";
     }
 

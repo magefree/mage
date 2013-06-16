@@ -1,7 +1,7 @@
 package org.mage.plugins.card.info;
 
-import mage.Constants;
 import mage.components.CardInfoPane;
+import mage.constants.CardType;
 import mage.utils.CardUtil;
 import mage.utils.ThreadUtils;
 import mage.view.CardView;
@@ -14,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import mage.abilities.SpellAbility;
 
 /**
  * Card info pane for displaying card rules.
@@ -263,7 +262,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
         for (String superType : card.getSuperTypes()) {
             types += superType + " ";
         }
-        for (Constants.CardType cardType : card.getCardTypes()) {
+        for (CardType cardType : card.getCardTypes()) {
             types += cardType.toString() + " ";
         }
         if (card.getSubTypes().size() > 0) {

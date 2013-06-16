@@ -27,7 +27,7 @@
  */
 package mage.sets.lorwyn;
 
-import mage.Constants.Rarity;
+import mage.constants.Rarity;
 
 import java.util.UUID;
 

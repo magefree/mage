@@ -28,10 +28,10 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
@@ -122,7 +122,7 @@ class QuestForTheNihilStoneTriggeredAbility2 extends TriggeredAbilityImpl<QuestF
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent quest = game.getPermanent(super.getSourceId());
         if (quest == null) {
-            Permanent questLKI = (Permanent) game.getLastKnownInformation(super.getSourceId(), Constants.Zone.BATTLEFIELD);
+            Permanent questLKI = (Permanent) game.getLastKnownInformation(super.getSourceId(), Zone.BATTLEFIELD);
             quest = questLKI;
         }
         if (event.getType() == GameEvent.EventType.UPKEEP_STEP_PRE && game.getOpponents(controllerId).contains(event.getPlayerId())) {

@@ -29,9 +29,7 @@ package mage.sets.planechase;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -53,7 +51,7 @@ public class FiresOfYavimaya extends CardImpl<FiresOfYavimaya> {
     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public FiresOfYavimaya(UUID ownerId) {
@@ -61,8 +59,8 @@ public class FiresOfYavimaya extends CardImpl<FiresOfYavimaya> {
         this.expansionSetCode = "HOP";
         this.color.setRed(true);
         this.color.setGreen(true);
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield, filter, false)));
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Constants.Duration.EndOfTurn), new SacrificeSourceCost());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield, filter, false)));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 2, Duration.EndOfTurn), new SacrificeSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

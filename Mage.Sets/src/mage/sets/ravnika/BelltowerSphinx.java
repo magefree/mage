@@ -27,15 +27,15 @@
  */
 package mage.sets.ravnika;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -75,7 +75,7 @@ public class BelltowerSphinx extends CardImpl<BelltowerSphinx> {
 class BelltowerSphinxEffect extends TriggeredAbilityImpl<BelltowerSphinxEffect> {
 
     public BelltowerSphinxEffect() {
-        super(Constants.Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));
+        super(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(0));
     }
 
     public BelltowerSphinxEffect(BelltowerSphinxEffect effect) {

@@ -28,9 +28,9 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
@@ -40,6 +40,8 @@ import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -73,7 +75,7 @@ public class SpoilsOfTheVault extends CardImpl<SpoilsOfTheVault> {
 class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
 
     public SpoilsOfTheVaultEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         this.staticText = "Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
     }
 
@@ -97,7 +99,7 @@ class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
             Choice cardChoice = new ChoiceImpl();
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
-            while (!controller.choose(Constants.Outcome.Detriment, cardChoice, game)) {
+            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
             cardName = cardChoice.getChoice();
@@ -109,13 +111,13 @@ class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
             return false;
         }
         
-        Cards cards = new CardsImpl(Constants.Zone.PICK);
+        Cards cards = new CardsImpl(Zone.PICK);
         while (controller.getLibrary().size() > 0) {
             Card card = controller.getLibrary().removeFromTop(game);
             if (card != null) {
                 cards.add(card);
                 if(card.getName().equals(cardName)){
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                     break;
                 }
                 else{

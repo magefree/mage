@@ -28,11 +28,11 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -127,7 +128,7 @@ class TalusPaladinTriggeredAbility extends TriggeredAbilityImpl<TalusPaladinTrig
 class TalusPaladinEffect extends OneShotEffect<TalusPaladinEffect> {
     
     public TalusPaladinEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
     }
     
     public TalusPaladinEffect(final TalusPaladinEffect effect) {
@@ -141,7 +142,7 @@ class TalusPaladinEffect extends OneShotEffect<TalusPaladinEffect> {
         if (taluspPaladin != null) {
             StringBuilder sb = new StringBuilder();
             sb.append("Put a +1/+1 counter on Talus Paladin?");
-            if (!player.chooseUse(Constants.Outcome.Benefit, sb.toString(), game)) {
+            if (!player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                 return false;
             }
             taluspPaladin.addCounters(CounterType.P1P1.createInstance(), game);

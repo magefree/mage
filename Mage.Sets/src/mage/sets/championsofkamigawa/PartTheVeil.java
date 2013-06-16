@@ -30,12 +30,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -66,7 +67,7 @@ public class PartTheVeil extends CardImpl<PartTheVeil> {
 
 class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
     public PartTheVeilEffect() {
-        super(Constants.Outcome.ReturnToHand);
+        super(Outcome.ReturnToHand);
         staticText = "Return all creatures you control to their owner's hand.";
     }
 
@@ -77,7 +78,7 @@ class PartTheVeilEffect extends OneShotEffect<PartTheVeilEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent creature : game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-            creature.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+            creature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
         }
         return true;
     }

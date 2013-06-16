@@ -28,14 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -84,7 +85,7 @@ class SlaveringNullsTriggeredAbility extends TriggeredAbilityImpl<SlaveringNulls
     }
 
     public SlaveringNullsTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DiscardTargetEffect(1), true);
+        super(Zone.BATTLEFIELD, new DiscardTargetEffect(1), true);
     }
 
     public SlaveringNullsTriggeredAbility(final SlaveringNullsTriggeredAbility ability) {

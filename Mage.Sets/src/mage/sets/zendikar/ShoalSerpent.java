@@ -29,13 +29,8 @@ package mage.sets.zendikar;
 
 import java.util.Iterator;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Layer;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.SubLayer;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LandfallAbility;
@@ -64,7 +59,7 @@ public class ShoalSerpent extends CardImpl<ShoalSerpent> {
         this.addAbility(DefenderAbility.getInstance());
         
         // Landfall - Whenever a land enters the battlefield under your control, Shoal Serpent loses defender until end of turn.
-        Ability ability = new LandfallAbility(Constants.Zone.BATTLEFIELD, new ShoalSerpentEffect(), false);
+        Ability ability = new LandfallAbility(Zone.BATTLEFIELD, new ShoalSerpentEffect(), false);
         this.addAbility(ability);
     }
 

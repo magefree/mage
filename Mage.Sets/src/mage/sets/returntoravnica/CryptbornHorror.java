@@ -28,9 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
@@ -38,6 +38,7 @@ import mage.abilities.dynamicvalue.common.OpponentsLostLifeCount;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -77,7 +78,7 @@ public class CryptbornHorror extends CardImpl<CryptbornHorror> {
 }
 class CryptbornHorrorEffect extends OneShotEffect<CryptbornHorrorEffect> {
     CryptbornHorrorEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
     }
 
     CryptbornHorrorEffect(final CryptbornHorrorEffect effect) {

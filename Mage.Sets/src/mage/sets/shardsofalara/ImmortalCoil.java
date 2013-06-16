@@ -28,9 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -62,11 +61,11 @@ public class ImmortalCoil extends CardImpl<ImmortalCoil> {
         this.color.setBlack(true);
 
         // {tap}, Exile two cards from your graveyard: Draw a card.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), new TapSourceCost());
         ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2, new FilterCard("cards from your graveyard"))));
         this.addAbility(ability);
         // If damage would be dealt to you, prevent that damage. Exile a card from your graveyard for each 1 damage prevented this way.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect()));        
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PreventAllDamageToControllerEffect()));
         // When there are no cards in your graveyard, you lose the game.
         this.addAbility(new ImmortalCoilAbility());
     }
@@ -84,7 +83,7 @@ public class ImmortalCoil extends CardImpl<ImmortalCoil> {
 class ImmortalCoilAbility extends StateTriggeredAbility<ImmortalCoilAbility> {
 
     public ImmortalCoilAbility() {
-        super(Constants.Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
         this.addEffect(new LoseGameEffect());
     }
 
@@ -116,7 +115,7 @@ class ImmortalCoilAbility extends StateTriggeredAbility<ImmortalCoilAbility> {
 class LoseGameEffect extends OneShotEffect<LoseGameEffect> {
 
     public LoseGameEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "you lose the game";
     }
 
@@ -144,7 +143,7 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAll
 
 
     public PreventAllDamageToControllerEffect() {
-        super(Constants.Duration.WhileOnBattlefield);
+        super(Duration.WhileOnBattlefield);
         staticText = "If damage would be dealt to you, prevent that damage. Exile a card from your graveyard for each 1 damage prevented this way";
     }
 
@@ -171,11 +170,11 @@ class PreventAllDamageToControllerEffect extends PreventionEffectImpl<PreventAll
             if(player != null){
                 TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(Math.min(damage, player.getGraveyard().size()), new FilterCard()); 
                 target.setRequired(true);
-                if (target.choose(Constants.Outcome.Exile, source.getControllerId(), source.getId(), game)) {
+                if (target.choose(Outcome.Exile, source.getControllerId(), source.getId(), game)) {
                     for (UUID targetId: target.getTargets()) {
                         Card card = player.getGraveyard().get(targetId, game);
                         if (card != null) {
-                            card.moveToZone(Constants.Zone.EXILED, source.getSourceId(), game, false);
+                            card.moveToZone(Zone.EXILED, source.getSourceId(), game, false);
                         }
                     }
                 }

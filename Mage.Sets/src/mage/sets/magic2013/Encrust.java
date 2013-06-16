@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -56,8 +55,8 @@ public class Encrust extends CardImpl<Encrust> {
     
     static {
         filter.add(Predicates.or(
-        new CardTypePredicate(Constants.CardType.CREATURE),
-        new CardTypePredicate(Constants.CardType.ARTIFACT)));
+        new CardTypePredicate(CardType.CREATURE),
+        new CardTypePredicate(CardType.ARTIFACT)));
     }
 
     public Encrust(UUID ownerId) {
@@ -70,13 +69,13 @@ public class Encrust extends CardImpl<Encrust> {
         // Enchant artifact or creature
         TargetPermanent auraTarget = new TargetPermanent(filter);
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
         // Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EncrustEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SkipEnchantedUntapEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EncrustEffect()));
     }
 
     public Encrust(final Encrust card) {
@@ -92,7 +91,7 @@ public class Encrust extends CardImpl<Encrust> {
 class EncrustEffect extends ReplacementEffectImpl<EncrustEffect> {
 
     public EncrustEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Its activated abilities can't be activated";
     }
 

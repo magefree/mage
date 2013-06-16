@@ -28,7 +28,7 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.Mode;

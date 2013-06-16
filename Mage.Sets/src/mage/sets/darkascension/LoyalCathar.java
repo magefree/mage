@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.abilities.keyword.TransformAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -84,7 +86,7 @@ class LoyalCatharEffect extends OneShotEffect<LoyalCatharEffect> {
     private static final String effectText = "return it to the battlefield transformed under your control at the beginning of the next end step";
 
     LoyalCatharEffect ( ) {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -114,7 +116,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect<ReturnLoyalCatharEffect> {
     private UUID cardId;
 
     public ReturnLoyalCatharEffect(UUID cardId) {
-        super(Constants.Outcome.PutCardInPlay);
+        super(Outcome.PutCardInPlay);
         this.cardId = cardId;
         this.staticText = "return it to the battlefield transformed under your control";
     }
@@ -133,7 +135,7 @@ class ReturnLoyalCatharEffect extends OneShotEffect<ReturnLoyalCatharEffect> {
     public boolean apply(Game game, Ability source) {
         Card card = game.getCard(cardId);
         if (card != null) {
-            card.putOntoBattlefield(game, Constants.Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+            card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
             Permanent perm = game.getPermanent(cardId);
             if (perm != null && perm.canTransform()) {
                 perm.transform(game);

@@ -28,10 +28,10 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -117,8 +117,8 @@ class ShardingSphinxTriggeredAbility extends TriggeredAbilityImpl<ShardingSphinx
 class ThopterToken extends Token {
     ThopterToken() {
         super("Thopter", "a 1/1 blue Thopter artifact creature token with flying");
-        cardType.add(Constants.CardType.CREATURE);
-        cardType.add(Constants.CardType.ARTIFACT);
+        cardType.add(CardType.CREATURE);
+        cardType.add(CardType.ARTIFACT);
         subtype.add("Thopter");
         power = new MageInt(1);
         toughness = new MageInt(1);

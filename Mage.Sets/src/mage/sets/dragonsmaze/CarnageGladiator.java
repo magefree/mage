@@ -29,10 +29,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,7 +43,6 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -88,7 +87,7 @@ public class CarnageGladiator extends CardImpl<CarnageGladiator> {
 class CarnageGladiatorTriggeredAbility extends TriggeredAbilityImpl<CarnageGladiatorTriggeredAbility> {
 
     public CarnageGladiatorTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(1));
     }
 
     public CarnageGladiatorTriggeredAbility(final CarnageGladiatorTriggeredAbility ability) {

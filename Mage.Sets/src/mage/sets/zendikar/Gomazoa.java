@@ -27,11 +27,10 @@
  */
 package mage.sets.zendikar;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,6 +39,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -138,7 +138,7 @@ class BlockedByWatcher extends WatcherImpl<BlockedByWatcher> {
     public List<UUID> blockedByWatcher = new ArrayList<UUID>();
 
     public BlockedByWatcher() {
-        super("BlockedByWatcher", Constants.WatcherScope.CARD);
+        super("BlockedByWatcher", WatcherScope.CARD);
     }
 
     public BlockedByWatcher(final BlockedByWatcher watcher) {

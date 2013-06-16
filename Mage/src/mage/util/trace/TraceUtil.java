@@ -1,6 +1,5 @@
 package mage.util.trace;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -9,6 +8,7 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.abilities.keyword.UnblockableAbility;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
@@ -139,14 +139,14 @@ public class TraceUtil {
                     log.error(uuid+"        instanceof: " + (ability instanceof StaticAbility) + ", ability=" + ability);
                     log.error(uuid+"        usable: " + usable + ", ability=" + ability);
                     if (!usable) {
-                        Constants.Zone zone = ability.getZone();
+                        Zone zone = ability.getZone();
                         log.error(uuid+"        zone: " + zone);
                         MageObject object = game.getObject(ability.getSourceId());
                         log.error(uuid+"        object: " + object);
                         if (object != null) {
                             log.error(uuid + "        contains:" + object.getAbilities().contains(ability));
                         }
-                        Constants.Zone test = game.getState().getZone(ability.getSourceId());
+                        Zone test = game.getState().getZone(ability.getSourceId());
                         log.error(uuid+"        test_zone: " + test);
                     }
                 }

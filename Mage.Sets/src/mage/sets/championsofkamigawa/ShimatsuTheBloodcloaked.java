@@ -28,10 +28,8 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -64,7 +62,7 @@ public class ShimatsuTheBloodcloaked extends CardImpl<ShimatsuTheBloodcloaked> {
         this.toughness = new MageInt(0);
 
         // As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ShimatsuTheBloodcloakedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShimatsuTheBloodcloakedEffect()));
     }
 
     public ShimatsuTheBloodcloaked(final ShimatsuTheBloodcloaked card) {
@@ -80,7 +78,7 @@ public class ShimatsuTheBloodcloaked extends CardImpl<ShimatsuTheBloodcloaked> {
 class ShimatsuTheBloodcloakedEffect extends ReplacementEffectImpl<ShimatsuTheBloodcloakedEffect> {
     
     public ShimatsuTheBloodcloakedEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         this.staticText = "As Shimatsu the Bloodcloaked enters the battlefield, sacrifice any number of permanents. Shimatsu enters the battlefield with that many +1/+1 counters on it";
     }
     

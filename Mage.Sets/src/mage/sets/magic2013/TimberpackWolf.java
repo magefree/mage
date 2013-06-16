@@ -28,14 +28,15 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -52,7 +53,7 @@ public class TimberpackWolf extends CardImpl<TimberpackWolf> {
 
     static {
         filter.add(new NamePredicate("Timberpack Wolf"));
-        filter.add(new ControllerPredicate(Constants.TargetController.YOU));
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     public TimberpackWolf(UUID ownerId) {
@@ -65,7 +66,7 @@ public class TimberpackWolf extends CardImpl<TimberpackWolf> {
         this.toughness = new MageInt(2);
 
         // Timberpack Wolf gets +1/+1 for each other creature you control named Timberpack Wolf.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new TimberpackWolfEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TimberpackWolfEffect()));
     }
 
     public TimberpackWolf(final TimberpackWolf card) {
@@ -81,7 +82,7 @@ public class TimberpackWolf extends CardImpl<TimberpackWolf> {
     class TimberpackWolfEffect extends ContinuousEffectImpl<TimberpackWolfEffect> {
 
         public TimberpackWolfEffect() {
-            super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+            super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
             staticText = "{this} gets +1/+1 for each other creature you control named Timberpack Wolf";
         }
 

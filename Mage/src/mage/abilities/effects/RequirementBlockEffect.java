@@ -28,8 +28,8 @@
 
 package mage.abilities.effects;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.GameEvent;

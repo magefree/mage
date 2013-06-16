@@ -29,14 +29,15 @@ package mage.sets.morningtide;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
@@ -111,7 +112,7 @@ class ScapeshiftEffect extends OneShotEffect<ScapeshiftEffect> {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        if (card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getId(), source.getControllerId())) {
+                        if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId())) {
                             Permanent permanent = game.getPermanent(card.getId());
                             if (permanent != null)
                                 permanent.setTapped(true);

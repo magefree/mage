@@ -29,11 +29,11 @@ package mage.sets.darkascension;
 
 import java.util.Random;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -100,7 +100,7 @@ class HauntedFengrafEffect extends OneShotEffect<HauntedFengrafEffect> {
             if (cards.length > 0) {
                 Random rnd = new Random();
                 Card card = cards[rnd.nextInt(cards.length)];
-                card.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
+                card.moveToZone(Zone.HAND, source.getId(), game, true);
                 game.informPlayers(card.getName() + " returned to the hand of " + player.getName());
                 return true;
             }

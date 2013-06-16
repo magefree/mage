@@ -1,8 +1,8 @@
 package org.mage.test.serverside.base;
 
-import mage.Constants;
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.players.Player;
 import org.mage.test.player.TestPlayer;
@@ -41,33 +41,33 @@ public interface CardTestAPI {
     /**
      * Add a card to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      */
-    void addCard(Constants.Zone gameZone, TestPlayer player, String cardName);
+    void addCard(Zone gameZone, TestPlayer player, String cardName);
 
     /**
      * Add any amount of cards to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      */
-    void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count);
+    void addCard(Zone gameZone, TestPlayer player, String cardName, int count);
 
     /**
      * Add any amount of cards to specified zone of specified player.
      *
-     * @param gameZone {@link Constants.Zone} to add cards to.
+     * @param gameZone {@link mage.constants.Zone} to add cards to.
      * @param player   {@link Player} to add cards for. Use either playerA or playerB.
      * @param cardName Card name in string format.
      * @param count    Amount of cards to be added.
      * @param tapped   In case gameZone is Battlefield, determines whether permanent should be tapped.
      *                 In case gameZone is other than Battlefield, {@link IllegalArgumentException} is thrown
      */
-    void addCard(Constants.Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped);
+    void addCard(Zone gameZone, TestPlayer player, String cardName, int count, boolean tapped);
 
     /**
      * Set player's initial life count.

@@ -27,9 +27,7 @@
  */
 package mage.sets.darkascension;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -65,7 +63,7 @@ public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Noncreature spells cost {1} more to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ThaliaGuardianOfThrabenCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ThaliaGuardianOfThrabenCostReductionEffect()));
 
     }
 
@@ -82,7 +80,7 @@ public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
 class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl<ThaliaGuardianOfThrabenCostReductionEffect> {
 
     ThaliaGuardianOfThrabenCostReductionEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Noncreature spells cost {1} more to cast";
     }
 

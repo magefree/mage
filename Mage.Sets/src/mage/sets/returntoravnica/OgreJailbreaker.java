@@ -28,9 +28,8 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,7 +60,7 @@ public class OgreJailbreaker extends CardImpl<OgreJailbreaker> {
         // Defender
         this.addAbility(DefenderAbility.getInstance());
         // Ogre Jailbreaker can attack as though it didn't have defender as long as you control a Gate.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new OgreJailbreakerEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OgreJailbreakerEffect()));
 
     }
 
@@ -84,7 +83,7 @@ class OgreJailbreakerEffect extends AsThoughEffectImpl<OgreJailbreakerEffect> {
     }
 
     public OgreJailbreakerEffect() {
-        super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "{this} can attack as though it didn't have defender as long as you control a Gate";
         gateCondition = new ControlsPermanentCondition(filter);
     }

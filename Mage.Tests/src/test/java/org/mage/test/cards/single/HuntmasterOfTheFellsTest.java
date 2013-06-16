@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,13 +13,13 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.HAND, playerA, "Huntmaster of the Fells");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ornithopter");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
+        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        setStopAt(3, Constants.PhaseStep.DRAW);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        setStopAt(3, PhaseStep.DRAW);
         execute();
 
         assertLife(playerA, 22);
@@ -34,18 +35,18 @@ public class HuntmasterOfTheFellsTest extends CardTestPlayerBase {
      */
     @Test
     public void testCard2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.HAND, playerA, "Huntmaster of the Fells");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Ornithopter");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.HAND, playerA, "Huntmaster of the Fells");
+        addCard(Zone.BATTLEFIELD, playerB, "Ornithopter");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain", 2);
-        addCard(Constants.Zone.HAND, playerB, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain", 2);
+        addCard(Zone.HAND, playerB, "Lightning Bolt", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
-        setStopAt(4, Constants.PhaseStep.DRAW);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Huntmaster of the Fells");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerB, "Lightning Bolt", playerA);
+        setStopAt(4, PhaseStep.DRAW);
         execute();
 
         assertLife(playerA, 18); // -6 damage, +4 life

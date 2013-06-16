@@ -27,14 +27,13 @@
  */
 package mage.sets.newphyrexia;
 
-import mage.Constants;
-import mage.Constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ZoneChangeTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -108,7 +107,7 @@ class CathedralMembraneAbility extends ZoneChangeTriggeredAbility<CathedralMembr
 class CathedralMembraneEffect extends OneShotEffect<CathedralMembraneEffect> {
 
     public CathedralMembraneEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "it deals 6 damage to each creature it blocked this combat";
     }
 

@@ -28,13 +28,14 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
@@ -69,7 +70,7 @@ public class SyphonMind extends CardImpl<SyphonMind> {
 class SyphonMindEffect extends OneShotEffect<SyphonMindEffect> {
 
     public SyphonMindEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         this.staticText = "Each other player discards a card. You draw a card for each card discarded this way";
     }
 
@@ -92,7 +93,7 @@ class SyphonMindEffect extends OneShotEffect<SyphonMindEffect> {
                 Player otherPlayer = game.getPlayer(playerId);
                 if (otherPlayer != null && otherPlayer.getHand().size() > 0) {
                     TargetCardInHand target = new TargetCardInHand();
-                    if (otherPlayer.choose(Constants.Outcome.Discard, target, source.getSourceId(), game)) {
+                    if (otherPlayer.choose(Outcome.Discard, target, source.getSourceId(), game)) {
                         Card card = game.getCard(target.getFirstTarget());
                         if (card != null) {
                             if (otherPlayer.discard(card, source, game)) {

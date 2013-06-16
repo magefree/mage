@@ -27,9 +27,9 @@
  */
 package mage.abilities.keyword;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;

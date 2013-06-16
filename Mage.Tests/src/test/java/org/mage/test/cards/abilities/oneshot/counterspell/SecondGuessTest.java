@@ -1,6 +1,7 @@
 package org.mage.test.cards.abilities.oneshot.counterspell;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,15 +13,15 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
     @Test
     public void testCounterFirstSpell() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Second Guess");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Second Guess");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -31,17 +32,17 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
     @Test
     public void testCounterSecondSpell() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 1);
-        addCard(Constants.Zone.HAND, playerA, "Shock", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 2);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Second Guess");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 1);
+        addCard(Zone.HAND, playerA, "Shock", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Second Guess");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Lightning Bolt");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -53,18 +54,18 @@ public class SecondGuessTest extends CardTestPlayerBase {
 
     @Test
     public void testCounterThirdSpell() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 2);
-        addCard(Constants.Zone.HAND, playerA, "Shock", 1);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 3);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Second Guess");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.HAND, playerA, "Shock", 1);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Second Guess");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Shock", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Second Guess", "Shock");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);
@@ -79,19 +80,19 @@ public class SecondGuessTest extends CardTestPlayerBase {
      */
     @Test
     public void testOverallCount() {
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 2);
-        addCard(Constants.Zone.HAND, playerA, "Second Guess");
+        addCard(Zone.HAND, playerA, "Lightning Bolt");
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
+        addCard(Zone.HAND, playerA, "Second Guess");
 
-        addCard(Constants.Zone.HAND, playerB, "Shock");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Mountain");
+        addCard(Zone.HAND, playerB, "Shock");
+        addCard(Zone.BATTLEFIELD, playerB, "Mountain");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerB, "Shock", playerA);
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Second Guess", "Shock");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Shock", playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Second Guess", "Shock");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertLife(playerA, 20);

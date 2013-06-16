@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2013;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -78,7 +76,7 @@ public class OdricMasterTactician extends CardImpl<OdricMasterTactician> {
 class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl<OdricMasterTacticianTriggeredAbility> {
 
     public OdricMasterTacticianTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new OdricMasterTacticianEffect());
+        super(Zone.BATTLEFIELD, new OdricMasterTacticianEffect());
     }
 
     public OdricMasterTacticianTriggeredAbility(final OdricMasterTacticianTriggeredAbility ability) {
@@ -125,7 +123,7 @@ class OdricMasterTacticianTriggeredAbility extends TriggeredAbilityImpl<OdricMas
 class OdricMasterTacticianEffect extends ReplacementEffectImpl<OdricMasterTacticianEffect> {
 
     public OdricMasterTacticianEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
     }
 
     public OdricMasterTacticianEffect(final OdricMasterTacticianEffect effect) {

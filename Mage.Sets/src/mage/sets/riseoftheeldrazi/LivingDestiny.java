@@ -28,12 +28,13 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -73,7 +74,7 @@ public class LivingDestiny extends CardImpl<LivingDestiny> {
 class LivingDestinyEffect extends OneShotEffect<LivingDestinyEffect> {
 
     public LivingDestinyEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain life equal to its converted mana cost";
     }
 

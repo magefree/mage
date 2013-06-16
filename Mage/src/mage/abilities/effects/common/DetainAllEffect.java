@@ -31,11 +31,13 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.Outcome;
+
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
+import mage.constants.PhaseStep;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -87,7 +89,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
     private List<FixedTarget> detainedObjects;
 
     public DetainAllRestrictionEffect(List<FixedTarget> detainedObjects) {
-        super(Constants.Duration.Custom);
+        super(Duration.Custom);
         this.detainedObjects = detainedObjects;
         staticText = "";
     }
@@ -110,7 +112,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
 
     @Override
     public boolean isInactive(Ability source, Game game) {
-        if (game.getPhase().getStep().getType() == Constants.PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
             if (game.getActivePlayerId().equals(source.getControllerId())) {
                 for(FixedTarget fixedTarget :this.detainedObjects) {

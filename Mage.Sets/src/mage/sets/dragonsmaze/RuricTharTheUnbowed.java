@@ -28,9 +28,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.AttacksEachTurnStaticAbility;
@@ -39,6 +39,7 @@ import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -88,7 +89,7 @@ public class RuricTharTheUnbowed extends CardImpl<RuricTharTheUnbowed> {
 class RuricTharTheUnbowedAbility extends TriggeredAbilityImpl<RuricTharTheUnbowedAbility> {
 
     public RuricTharTheUnbowedAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(6), false);
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(6), false);
     }
 
     public RuricTharTheUnbowedAbility(final RuricTharTheUnbowedAbility ability) {

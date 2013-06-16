@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common;
 
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.PhaseStep;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;

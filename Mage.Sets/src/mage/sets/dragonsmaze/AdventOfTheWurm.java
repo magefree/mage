@@ -29,9 +29,9 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -70,7 +70,7 @@ public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
 
         private WurmToken() {
             super("Wurm", "5/5 green Wurm creature token with trample");
-            cardType.add(Constants.CardType.CREATURE);
+            cardType.add(CardType.CREATURE);
             color = ObjectColor.GREEN;
             subtype.add("Wurm");
             power = new MageInt(5);

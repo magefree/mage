@@ -27,13 +27,13 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -55,7 +55,7 @@ public class DivineDeflection extends CardImpl<DivineDeflection> {
         this.color.setWhite(true);
 
         // Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, Divine Deflection deals that much damage to target creature or player.
-        this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new DivineDeflectionPreventDamageTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetSource());
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
     }
@@ -74,7 +74,7 @@ class DivineDeflectionPreventDamageTargetEffect extends PreventionEffectImpl<Div
 
     private int amount = -1;
 
-    public DivineDeflectionPreventDamageTargetEffect(Constants.Duration duration) {
+    public DivineDeflectionPreventDamageTargetEffect(Duration duration) {
         super(duration);
         staticText = "Prevent the next X damage that would be dealt to you and/or permanents you control this turn. If damage is prevented this way, {this} deals that much damage to target creature or player";
     }

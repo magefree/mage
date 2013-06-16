@@ -28,13 +28,14 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DetainTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.common.TargetCreaturePermanent;
@@ -47,7 +48,7 @@ public class MartialLaw extends CardImpl<MartialLaw> {
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
  
     static {
-        filter.add(new ControllerPredicate(Constants.TargetController.OPPONENT));
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
     public MartialLaw(UUID ownerId) {
@@ -58,7 +59,7 @@ public class MartialLaw extends CardImpl<MartialLaw> {
 
         // At the beginning of your upkeep, detain target creature an opponent controls. 
         // (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DetainTargetEffect(), Constants.TargetController.YOU, false);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new DetainTargetEffect(), TargetController.YOU, false);
         TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);

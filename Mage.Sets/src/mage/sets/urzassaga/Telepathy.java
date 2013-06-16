@@ -27,9 +27,7 @@
  */
 package mage.sets.urzassaga;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -52,7 +50,7 @@ public class Telepathy extends CardImpl<Telepathy> {
         this.color.setBlue(true);
 
         // Your opponents play with their hands revealed.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new OpponentsPlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new OpponentsPlayWithTheTopCardRevealedEffect()));
     }
 
     public Telepathy(final Telepathy card) {
@@ -68,7 +66,7 @@ public class Telepathy extends CardImpl<Telepathy> {
 class OpponentsPlayWithTheTopCardRevealedEffect extends ContinuousEffectImpl<OpponentsPlayWithTheTopCardRevealedEffect> {
 
     public OpponentsPlayWithTheTopCardRevealedEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.PlayerEffects, Constants.SubLayer.NA, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Detriment);
         staticText = "Your opponents play with their hands revealed";
     }
 

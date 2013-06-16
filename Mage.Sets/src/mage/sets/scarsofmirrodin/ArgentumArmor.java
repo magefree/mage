@@ -30,10 +30,9 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksEquippedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +41,7 @@ import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EquipAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.target.TargetPermanent;
 
 /**
@@ -58,7 +58,7 @@ public class ArgentumArmor extends CardImpl<ArgentumArmor> {
         Ability ability = new AttacksEquippedTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(6)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
     }
 
     public ArgentumArmor (final ArgentumArmor card) {

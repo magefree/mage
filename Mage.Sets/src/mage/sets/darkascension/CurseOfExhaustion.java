@@ -28,9 +28,8 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -63,11 +62,11 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Enchanted player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CurseOfExhaustionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CurseOfExhaustionEffect()));
     }
 
     public CurseOfExhaustion(final CurseOfExhaustion card) {
@@ -83,7 +82,7 @@ public class CurseOfExhaustion extends CardImpl<CurseOfExhaustion> {
 class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
 
     public CurseOfExhaustionWatcher() {
-        super("SpellCast", Constants.WatcherScope.PLAYER);
+        super("SpellCast", WatcherScope.PLAYER);
     }
 
     public CurseOfExhaustionWatcher(final CurseOfExhaustionWatcher watcher) {
@@ -116,7 +115,7 @@ class CurseOfExhaustionWatcher extends WatcherImpl<CurseOfExhaustionWatcher> {
 class CurseOfExhaustionEffect extends ReplacementEffectImpl<CurseOfExhaustionEffect> {
 
     public CurseOfExhaustionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Enchanted player can't cast more than one spell each turn";
     }
 

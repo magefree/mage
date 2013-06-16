@@ -28,7 +28,7 @@
 package mage.target.common;
 
 import java.util.UUID;
-import mage.Constants.TargetController;
+import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.other.PlayerPredicate;

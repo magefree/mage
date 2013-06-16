@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -57,8 +58,8 @@ public class WastelandViper extends CardImpl<WastelandViper> {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Bloodrush - {G}, Discard Wasteland Viper: Target attacking creature gets +1/+2 and gains deathtouch until end of turn.
-        Ability ability = new BloodrushAbility("{G}", new BoostTargetEffect(1, 2, Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Constants.Duration.EndOfTurn));
+        Ability ability = new BloodrushAbility("{G}", new BoostTargetEffect(1, 2, Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
     }
 

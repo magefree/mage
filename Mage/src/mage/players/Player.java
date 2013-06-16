@@ -28,8 +28,8 @@
 
 package mage.players;
 
-import mage.Constants.Outcome;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.*;

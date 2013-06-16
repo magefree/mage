@@ -28,10 +28,10 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.TriggeredAbilityImpl;
@@ -76,7 +76,7 @@ public class MycoidShepherd extends CardImpl<MycoidShepherd> {
 class MycoidShepherdTriggeredAbility extends TriggeredAbilityImpl<MycoidShepherdTriggeredAbility> {
 
     public MycoidShepherdTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new GainLifeEffect(5), true);
+        super(Zone.BATTLEFIELD, new GainLifeEffect(5), true);
     }
 
     public MycoidShepherdTriggeredAbility(final MycoidShepherdTriggeredAbility ability) {

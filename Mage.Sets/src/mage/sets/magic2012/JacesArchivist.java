@@ -27,9 +27,7 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -58,7 +56,7 @@ public class JacesArchivist extends CardImpl<JacesArchivist> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new JacesArchivistEffect(), new ColoredManaCost(Constants.ColoredManaSymbol.U));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new JacesArchivistEffect(), new ColoredManaCost(ColoredManaSymbol.U));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);
     }
@@ -75,7 +73,7 @@ public class JacesArchivist extends CardImpl<JacesArchivist> {
 
 class JacesArchivistEffect extends OneShotEffect<JacesArchivistEffect> {
     JacesArchivistEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way";
     }
 

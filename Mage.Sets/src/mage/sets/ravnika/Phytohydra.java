@@ -29,9 +29,7 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -61,7 +59,7 @@ public class Phytohydra extends CardImpl<Phytohydra> {
         this.toughness = new MageInt(1);
 
         // If damage would be dealt to Phytohydra, put that many +1/+1 counters on it instead.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PhytohydraEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PhytohydraEffect()));
     }
 
     public Phytohydra(final Phytohydra card) {
@@ -76,7 +74,7 @@ public class Phytohydra extends CardImpl<Phytohydra> {
 
 class PhytohydraEffect extends ReplacementEffectImpl<PhytohydraEffect> {
     PhytohydraEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Outcome.BoostCreature);
         staticText = "If damage would be dealt to {this}, put that many +1/+1 counters on it instead";
     }
 

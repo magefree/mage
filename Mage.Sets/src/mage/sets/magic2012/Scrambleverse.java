@@ -27,15 +27,18 @@
  */
 package mage.sets.magic2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterNonlandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -74,7 +77,7 @@ public class Scrambleverse extends CardImpl<Scrambleverse> {
 class ScrambleverseEffect extends OneShotEffect<ScrambleverseEffect> {
 
     public ScrambleverseEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "For each nonland permanent, choose a player at random. Then each player gains control of each permanent for which he or she was chosen. Untap those permanents";
     }
 
@@ -109,7 +112,7 @@ class ScrambleverseControlEffect extends ContinuousEffectImpl<ScrambleverseContr
     private UUID controllerId;
 
     public ScrambleverseControlEffect(UUID controllerId) {
-        super(Constants.Duration.EndOfGame, Constants.Layer.ControlChangingEffects_2, Constants.SubLayer.NA, Constants.Outcome.GainControl);
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllerId = controllerId;
     }
 

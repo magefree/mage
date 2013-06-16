@@ -28,11 +28,11 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.PutTopCardOfYourLibraryIntoGraveEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -62,7 +63,7 @@ public class DeadbridgeChant extends CardImpl<DeadbridgeChant> {
         this.addAbility(new EntersBattlefieldTriggeredAbility(new PutTopCardOfYourLibraryIntoGraveEffect(10)));
 
         // At the beginning of your upkeep, choose a card at random in your graveyard. If it's a creature card, put it onto the battlefield. Otherwise, put it into your hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DeadbridgeChantEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DeadbridgeChantEffect(), TargetController.YOU, false));
     }
 
     public DeadbridgeChant(final DeadbridgeChant card) {

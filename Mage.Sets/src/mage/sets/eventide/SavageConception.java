@@ -28,13 +28,14 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.BeastToken;
 
 /**
@@ -52,7 +53,7 @@ public class SavageConception extends CardImpl<SavageConception> {
         // Put a 3/3 green Beast creature token onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new BeastToken()));
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{G}{G}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{3}{G}{G}"), TimingRule.SORCERY));
     }
 
     public SavageConception(final SavageConception card) {

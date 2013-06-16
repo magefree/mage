@@ -28,8 +28,8 @@
 
 package mage.player.ai;
 
-import mage.Constants;
-import mage.Constants.RangeOfInfluence;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
 import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.combat.Combat;
@@ -306,7 +306,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
             logger.debug("interrupted");
             return GameStateEvaluator2.evaluate(playerId, game);
         }
-        if (game.getTurn().getStepType() != Constants.PhaseStep.DECLARE_BLOCKERS) {
+        if (game.getTurn().getStepType() != PhaseStep.DECLARE_BLOCKERS) {
             game.getTurn().setPhase(new CombatPhase());
             if (game.getPhase().beginPhase(game, game.getActivePlayerId())) {
                 simulateStep(game, new BeginCombatStep());

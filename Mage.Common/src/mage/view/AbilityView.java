@@ -29,7 +29,7 @@
 package mage.view;
 
 import java.util.ArrayList;
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 

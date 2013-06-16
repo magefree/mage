@@ -28,7 +28,7 @@
 
 package mage.abilities.condition.common;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.keyword.SuspendAbility;

@@ -28,15 +28,17 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetControlledPermanent;
@@ -63,8 +65,8 @@ public class Gnathosaur extends CardImpl<Gnathosaur> {
         this.toughness = new MageInt(4);
 
         this.addAbility(new SimpleActivatedAbility(
-                Constants.Zone.BATTLEFIELD,
-                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn),
+                Zone.BATTLEFIELD,
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.EndOfTurn),
                 new SacrificeTargetCost(new TargetControlledPermanent(filter))));
     }
 

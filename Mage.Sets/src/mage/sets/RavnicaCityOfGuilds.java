@@ -28,7 +28,7 @@
 
 package mage.sets;
 
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 import java.util.GregorianCalendar;
@@ -45,7 +45,7 @@ public class RavnicaCityOfGuilds extends ExpansionSet {
     }
 
     private RavnicaCityOfGuilds() {
-        super("Ravnica: City of Guilds", "RAV", "seticon_RAV", "mage.sets.ravnika", new GregorianCalendar(2005, 9, 24).getTime(), SetType.EXPANSION);
+        super("Ravnica: City of Guilds", "RAV", "mage.sets.ravnika", new GregorianCalendar(2005, 9, 24).getTime(), SetType.EXPANSION);
         this.blockName = "Ravnika";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

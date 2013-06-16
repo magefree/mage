@@ -1,16 +1,17 @@
 package mage.abilities.keyword;
 
-import mage.Constants;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
     public VanishingUpkeepAbility() {
-        super(new VanishingEffect(), Constants.TargetController.YOU, false);
+        super(new VanishingEffect(), TargetController.YOU, false);
     }
 
     public VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
@@ -30,7 +31,7 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
 class VanishingEffect extends OneShotEffect<VanishingEffect> {
     VanishingEffect() {
-        super(Constants.Outcome.Sacrifice);
+        super(Outcome.Sacrifice);
     }
 
     VanishingEffect(final VanishingEffect effect) {

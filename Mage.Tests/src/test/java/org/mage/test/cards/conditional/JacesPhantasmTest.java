@@ -1,6 +1,7 @@
 package org.mage.test.cards.conditional;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -11,12 +12,12 @@ public class JacesPhantasmTest extends CardTestPlayerBase {
 
     @Test
     public void testNoBoost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island");
-        addCard(Constants.Zone.HAND, playerA, "Jace's Phantasm");
+        addCard(Zone.BATTLEFIELD, playerA, "Island");
+        addCard(Zone.HAND, playerA, "Jace's Phantasm");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Phantasm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Phantasm");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertPowerToughness(playerA, "Jace's Phantasm", 1, 1);
@@ -24,16 +25,16 @@ public class JacesPhantasmTest extends CardTestPlayerBase {
 
     @Test
     public void testWithBoost() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 7);
-        addCard(Constants.Zone.HAND, playerA, "Jace's Phantasm");
-        addCard(Constants.Zone.HAND, playerA, "Mind Sculpt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Jace's Phantasm");
+        addCard(Zone.HAND, playerA, "Mind Sculpt", 3);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
-        castSpell(1, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Jace's Phantasm");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
+        castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Jace's Phantasm");
 
-        setStopAt(1, Constants.PhaseStep.END_TURN);
+        setStopAt(1, PhaseStep.END_TURN);
         execute();
 
         assertPowerToughness(playerA, "Jace's Phantasm", 5, 5);
@@ -41,16 +42,16 @@ public class JacesPhantasmTest extends CardTestPlayerBase {
 
     @Test
     public void testWithBoost2() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 7);
-        addCard(Constants.Zone.HAND, playerA, "Jace's Phantasm");
-        addCard(Constants.Zone.HAND, playerA, "Mind Sculpt", 3);
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 7);
+        addCard(Zone.HAND, playerA, "Jace's Phantasm");
+        addCard(Zone.HAND, playerA, "Mind Sculpt", 3);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Phantasm");
-        castSpell(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
-        castSpell(3, Constants.PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace's Phantasm");
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerB);
+        castSpell(3, PhaseStep.POSTCOMBAT_MAIN, playerA, "Mind Sculpt", playerA);
 
-        setStopAt(3, Constants.PhaseStep.END_TURN);
+        setStopAt(3, PhaseStep.END_TURN);
         execute();
 
         assertGraveyardCount(playerB, 14);

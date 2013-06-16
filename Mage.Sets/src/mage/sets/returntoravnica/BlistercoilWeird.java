@@ -28,15 +28,16 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -65,7 +66,7 @@ public class BlistercoilWeird extends CardImpl<BlistercoilWeird> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, Blistercoil Weird gets +1/+1 until end of turn. Untap it.
-        Ability ability = new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Constants.Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), filter, false);
         ability.addEffect(new UntapSourceEffect());
         this.addAbility(ability);
 

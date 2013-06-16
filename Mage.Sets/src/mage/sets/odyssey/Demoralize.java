@@ -28,15 +28,16 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.CantBlockAllEffect;
 import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;
 
 
@@ -53,12 +54,12 @@ public class Demoralize extends CardImpl<Demoralize> {
         this.color.setRed(true);
 
         // Each creature can't be blocked this turn except by two or more creatures.
-        this.getSpellAbility().addEffect(new CantBeBlockedByOneAllEffect(2, new FilterCreaturePermanent(), Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new CantBeBlockedByOneAllEffect(2, new FilterCreaturePermanent(), Duration.EndOfTurn));
 
         // Threshold — If seven or more cards are in your graveyard, creatures can't block this turn.
         this.getSpellAbility().addEffect(
                 new ConditionalOneShotEffect(
-                    new AddContinuousEffectToGame(new CantBlockAllEffect(new FilterCreaturePermanent(), Constants.Duration.EndOfTurn)),
+                    new AddContinuousEffectToGame(new CantBlockAllEffect(new FilterCreaturePermanent(), Duration.EndOfTurn)),
                     new CardsInControllerGraveCondition(7),
                     "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, creatures can't block this turn"
                 ));

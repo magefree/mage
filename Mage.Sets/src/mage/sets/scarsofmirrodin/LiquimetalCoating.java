@@ -30,14 +30,15 @@ package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.continious.AddCardTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 
 /**
@@ -49,7 +50,7 @@ public class LiquimetalCoating extends CardImpl<LiquimetalCoating> {
     public LiquimetalCoating (UUID ownerId) {
         super(ownerId, 171, "Liquimetal Coating", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "SOM";
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCardTypeTargetEffect(CardType.ARTIFACT, Constants.Duration.EndOfTurn), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
     }

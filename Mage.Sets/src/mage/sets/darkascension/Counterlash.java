@@ -29,14 +29,15 @@ package mage.sets.darkascension;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -77,7 +78,7 @@ public class Counterlash extends CardImpl<Counterlash> {
 class CounterlashEffect extends OneShotEffect<CounterlashEffect> {
 
     public CounterlashEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         this.staticText = "Counter target spell. You may cast a nonland card in your hand that shares a card type with that spell without paying its mana cost";
     }
 
@@ -96,7 +97,7 @@ class CounterlashEffect extends OneShotEffect<CounterlashEffect> {
         Player player = game.getPlayer(source.getControllerId());
         if (stackObject != null && player != null) {
             game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game);
-            if (player.chooseUse(Constants.Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", game)) {
+            if (player.chooseUse(Outcome.PutCardInPlay, "Cast a nonland card in your hand that shares a card type with that spell without paying its mana cost?", game)) {
                 FilterCard filter = new FilterCard();
                 ArrayList<Predicate<MageObject>> types = new ArrayList<Predicate<MageObject>>();
                 for (CardType type: stackObject.getCardType()) {
@@ -106,7 +107,7 @@ class CounterlashEffect extends OneShotEffect<CounterlashEffect> {
                 }
                 filter.add(Predicates.or(types));
                 TargetCardInHand target = new TargetCardInHand(filter);
-                if (player.choose(Constants.Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
+                if (player.choose(Outcome.PutCardInPlay, target, source.getSourceId(), game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);
                     if (card != null) {
                         player.cast(card.getSpellAbility(), game, true);

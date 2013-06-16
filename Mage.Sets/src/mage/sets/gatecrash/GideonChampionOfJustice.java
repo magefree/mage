@@ -28,9 +28,8 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
@@ -73,8 +72,8 @@ public class GideonChampionOfJustice extends CardImpl<GideonChampionOfJustice> {
         this.addAbility(ability1);
 
         // 0: Until end of turn, Gideon becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonChampionOfJusticeToken(), "planeswalker", Constants.Duration.EndOfTurn), 0);
-        ability2.addEffect(new PreventAllDamageSourceEffect(Constants.Duration.EndOfTurn));
+        LoyaltyAbility ability2 = new LoyaltyAbility(new BecomesCreatureSourceEffect(new GideonChampionOfJusticeToken(), "planeswalker", Duration.EndOfTurn), 0);
+        ability2.addEffect(new PreventAllDamageSourceEffect(Duration.EndOfTurn));
         this.addAbility(ability2);
 
         // -15: Exile all other permanents.
@@ -128,7 +127,7 @@ class PermanentsTargetOpponentControlsCount implements DynamicValue {
 class GideonExileAllOtherPermanentsEffect extends OneShotEffect<GideonExileAllOtherPermanentsEffect> {
 
     public GideonExileAllOtherPermanentsEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
         staticText = "Exile all other permanents";
     }
 
@@ -163,7 +162,7 @@ class GideonChampionOfJusticeToken extends Token {
         toughness = new MageInt(0);
 
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.LOYALTY), Constants.Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CountersCount(CounterType.LOYALTY), Duration.WhileOnBattlefield)));
     }
 
 }

@@ -28,7 +28,7 @@
 
 package mage.abilities.keyword;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.MageSingleton;
 import mage.abilities.StaticAbility;
 

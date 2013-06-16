@@ -30,15 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapTargetCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SupertypePredicate;
@@ -62,7 +62,7 @@ public class HonorWornShaku extends CardImpl<HonorWornShaku> {
         this.expansionSetCode = "CHK";
         this.addAbility(new ColorlessManaAbility());
         Ability ability = new SimpleActivatedAbility(
-                Constants.Zone.BATTLEFIELD, 
+                Zone.BATTLEFIELD,
                 new UntapSourceEffect(), 
                 new TapTargetCost(new TargetControlledPermanent(filter)));
         this.addAbility(ability);

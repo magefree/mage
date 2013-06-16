@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.CompositeCost;
@@ -59,7 +57,7 @@ public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddContinuousEffectToGame(new AlchemistsRefugeEffect()), new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddContinuousEffectToGame(new AlchemistsRefugeEffect()), new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
     public AlchemistsRefuge(final AlchemistsRefuge card) {
@@ -75,7 +73,7 @@ public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
 class AlchemistsRefugeEffect extends AsThoughEffectImpl<AlchemistsRefugeEffect> {
 
     public AlchemistsRefugeEffect() {
-        super(Constants.AsThoughEffectType.CAST, Constants.Duration.EndOfTurn, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
         staticText = "You may cast nonland cards this turn as though they had flash";
     }
 

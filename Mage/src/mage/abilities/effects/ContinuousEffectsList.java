@@ -31,7 +31,7 @@ import mage.abilities.Ability;
 import mage.game.Game;
 
 import java.util.*;
-import mage.Constants.Duration;
+import mage.constants.Duration;
 
 /**
  *

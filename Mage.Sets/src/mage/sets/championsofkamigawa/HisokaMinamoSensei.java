@@ -30,10 +30,9 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -42,6 +41,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -65,7 +65,7 @@ public class HisokaMinamoSensei extends CardImpl<HisokaMinamoSensei> {
         this.toughness = new MageInt(3);
 
         // {2}{U}, Discard a card: Counter target spell if it has the same converted mana cost as the discarded card.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new HisokaMinamoSenseiCounterEffect(), new ManaCostsImpl("{2}{U}"));
         ability.addTarget(new TargetSpell());
         TargetCardInHand targetCard = new TargetCardInHand(new FilterCard("a card"));
         ability.addCost(new HisokaMinamoSenseiDiscardTargetCost(targetCard));
@@ -131,7 +131,7 @@ class HisokaMinamoSenseiDiscardTargetCost extends CostImpl<HisokaMinamoSenseiDis
 
 class HisokaMinamoSenseiCounterEffect extends OneShotEffect<HisokaMinamoSenseiCounterEffect> {
     HisokaMinamoSenseiCounterEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Counter target spell if it has the same converted mana cost as the discarded card";
     }
 

@@ -28,9 +28,9 @@
 package mage.sets.shadowmoor;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -40,6 +40,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.common.TargetCardInGraveyard;
@@ -63,7 +65,7 @@ public class FaerieMacabre extends CardImpl<FaerieMacabre> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard Faerie Macabre: Exile up to two target cards from graveyards.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.HAND, new ExileTargetEffect(), new DiscardSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.HAND, new ExileTargetEffect(), new DiscardSourceCost());
         ability.addTarget(new TargetCardInGraveyard(0, 2, new FilterCard("cards from graveyards")));
         this.addAbility(ability);
     }
@@ -81,7 +83,7 @@ public class FaerieMacabre extends CardImpl<FaerieMacabre> {
 class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
 
     public ExileTargetEffect() {
-        super(Constants.Outcome.Exile);
+        super(Outcome.Exile);
     }
 
     public ExileTargetEffect(final ExileTargetEffect effect) {

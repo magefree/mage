@@ -1,6 +1,7 @@
 package org.mage.test.sba;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -14,14 +15,14 @@ public class PlaneswalkerRuleTest extends CardTestPlayerBase {
      */
     @Test
     public void testDestroySamePlaneswalkers() {
-        addCard(Constants.Zone.HAND, playerA, "Jace, Memory Adept");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 5);
+        addCard(Zone.HAND, playerA, "Jace, Memory Adept");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 5);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Jace, Memory Adept");
+        addCard(Zone.BATTLEFIELD, playerB, "Jace, Memory Adept");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Jace, Memory Adept");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace, Memory Adept");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Jace, Memory Adept", 0);
@@ -33,14 +34,14 @@ public class PlaneswalkerRuleTest extends CardTestPlayerBase {
      */
     @Test
     public void testDestroySameSubtype() {
-        addCard(Constants.Zone.HAND, playerA, "Jace Beleren");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 3);
+        addCard(Zone.HAND, playerA, "Jace Beleren");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 3);
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Jace, Memory Adept");
+        addCard(Zone.BATTLEFIELD, playerB, "Jace, Memory Adept");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Jace Beleren");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Jace Beleren");
 
-        setStopAt(1, Constants.PhaseStep.END_COMBAT);
+        setStopAt(1, PhaseStep.END_COMBAT);
         execute();
 
         assertPermanentCount(playerA, "Jace Beleren", 0);

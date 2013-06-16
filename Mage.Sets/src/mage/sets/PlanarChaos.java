@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -44,7 +44,7 @@ public class PlanarChaos extends ExpansionSet {
     }
 
     private PlanarChaos() {
-        super("Planar Chaos", "PLC", "", "mage.sets.planarchaos", new GregorianCalendar(2007, 1, 2).getTime(), SetType.EXPANSION);
+        super("Planar Chaos", "PLC", "mage.sets.planarchaos", new GregorianCalendar(2007, 1, 2).getTime(), SetType.EXPANSION);
         this.blockName = "Time Spiral";
         this.parentSet = TimeSpiral.getInstance();
         this.hasBasicLands = false;

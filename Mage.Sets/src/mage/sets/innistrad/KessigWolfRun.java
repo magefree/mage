@@ -27,8 +27,8 @@
  */
 package mage.sets.innistrad;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
@@ -43,8 +43,8 @@ import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
-import mage.Constants.Duration;
-import mage.Constants.Zone;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  * @author nantuko

@@ -28,13 +28,14 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**
@@ -53,7 +54,7 @@ public class RavensCrime extends CardImpl<RavensCrime> {
         this.getSpellAbility().getEffects().add(new DiscardTargetEffect(1));
         this.getSpellAbility().getTargets().add(new TargetPlayer());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{B}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{B}"), TimingRule.SORCERY));
     }
 
     public RavensCrime(final RavensCrime card) {

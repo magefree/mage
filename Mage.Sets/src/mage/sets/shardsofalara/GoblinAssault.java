@@ -28,11 +28,8 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.TargetController;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -63,7 +60,7 @@ public class GoblinAssault extends CardImpl<GoblinAssault> {
         // At the beginning of your upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new GoblinAssaultToken()), TargetController.YOU, false));
         // Goblin creatures attack each turn if able.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GoblinAssaultEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GoblinAssaultEffect()));
     }
 
     public GoblinAssault(final GoblinAssault card) {

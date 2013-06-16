@@ -28,14 +28,16 @@
 package mage.sets.ravnika;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ConvokeAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -76,7 +78,7 @@ public class ChordOfCalling extends CardImpl<ChordOfCalling> {
 class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffect> {
 
     ChordofCallingSearchEffect() {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         staticText = "Search your library for a creature card with converted mana cost X or less, put it onto the battlefield, then shuffle your library";
     }
 
@@ -102,7 +104,7 @@ class ChordofCallingSearchEffect extends OneShotEffect<ChordofCallingSearchEffec
                 Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                 if (card != null) {
                     game.informPlayers(new StringBuilder(sourceCard.getName()).append(": Put ").append(card.getName()).append(" onto the battlefield").toString());
-                    card.putOntoBattlefield(game, Constants.Zone.LIBRARY, source.getSourceId(), source.getControllerId());
+                    card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId());
                 }
             }
             player.shuffleLibrary(game);

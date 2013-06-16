@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Homelands extends ExpansionSet {
     }
 
     private Homelands() {
-        super("Homelands", "HML", "", "mage.sets.homelands", new GregorianCalendar(1995, 9, 1).getTime(), Constants.SetType.EXPANSION);
+        super("Homelands", "HML", "mage.sets.homelands", new GregorianCalendar(1995, 9, 1).getTime(), SetType.EXPANSION);
         this.hasBasicLands = false;
         this.hasBoosters = true;
         this.numBoosterLands = 1;

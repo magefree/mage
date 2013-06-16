@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -68,11 +67,11 @@ public class XathridGorgon extends CardImpl<XathridGorgon> {
         this.addAbility(DeathtouchAbility.getInstance());
         
         // {2}{B}, {tap}: Put a petrification counter on target creature. It gains defender and becomes a colorless artifact in addition to its other types. Its activated abilities can't be activated.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.PETRIFICATION.createInstance()), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
-        ability.addEffect(new GainAbilityTargetEffect(DefenderAbility.getInstance(), Constants.Duration.EndOfGame));
-        ability.addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Constants.Duration.EndOfGame));
+        ability.addEffect(new GainAbilityTargetEffect(DefenderAbility.getInstance(), Duration.EndOfGame));
+        ability.addEffect(new AddCardTypeTargetEffect(CardType.ARTIFACT, Duration.EndOfGame));
         ability.addEffect(new XathridGorgonEffect());
         this.addAbility(ability);
         
@@ -91,7 +90,7 @@ public class XathridGorgon extends CardImpl<XathridGorgon> {
 class XathridGorgonEffect extends ReplacementEffectImpl<XathridGorgonEffect> {
 
     public XathridGorgonEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Its activated abilities can't be activated";
     }
 

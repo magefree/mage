@@ -28,14 +28,16 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -62,7 +64,7 @@ public class UnbenderTine extends CardImpl<UnbenderTine> {
         this.color.setWhite(true);
 
         // {tap}: Untap another target permanent.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new UnbenderTineEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnbenderTineEffect(), new TapSourceCost());
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
@@ -80,7 +82,7 @@ public class UnbenderTine extends CardImpl<UnbenderTine> {
 class UnbenderTineEffect extends OneShotEffect<UnbenderTineEffect> {
 
     public UnbenderTineEffect() {
-        super(Constants.Outcome.Untap);
+        super(Outcome.Untap);
         this.staticText = "Untap another target permanent";
     }
 

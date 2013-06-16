@@ -28,9 +28,8 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -55,7 +54,7 @@ public class RuleOfLaw extends CardImpl<RuleOfLaw> {
         this.color.setWhite(true);
 
         // Each player can't cast more than one spell each turn.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new RuleOfLawEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RuleOfLawEffect()));
         this.addWatcher(new RuleOfLawWatcher());
 
     }
@@ -73,7 +72,7 @@ public class RuleOfLaw extends CardImpl<RuleOfLaw> {
 class RuleOfLawWatcher extends WatcherImpl<RuleOfLawWatcher> {
 
     public RuleOfLawWatcher() {
-        super("SpellCast", Constants.WatcherScope.PLAYER);
+        super("SpellCast", WatcherScope.PLAYER);
     }
 
     public RuleOfLawWatcher(final RuleOfLawWatcher watcher) {
@@ -106,7 +105,7 @@ class RuleOfLawWatcher extends WatcherImpl<RuleOfLawWatcher> {
 class RuleOfLawEffect extends ReplacementEffectImpl<RuleOfLawEffect> {
 
     public RuleOfLawEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Each player can't cast more than one spell each turn";
     }
 

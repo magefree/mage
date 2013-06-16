@@ -28,7 +28,7 @@
 
 package mage.client.deckeditor.table;
 
-import mage.Constants.CardType;
+import mage.constants.CardType;
 import mage.cards.MageCard;
 import mage.view.CardView;
 

@@ -28,11 +28,12 @@
 package mage.sets.prophecy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -44,7 +45,7 @@ public class PlagueWind extends CardImpl<PlagueWind> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creatures you don't control");
     static{
-        filter.add(new ControllerPredicate(Constants.TargetController.NOT_YOU));
+        filter.add(new ControllerPredicate(TargetController.NOT_YOU));
     }
     
     public PlagueWind(UUID ownerId) {

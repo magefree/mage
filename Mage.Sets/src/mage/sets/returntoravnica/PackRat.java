@@ -28,10 +28,10 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -43,6 +43,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -86,9 +88,9 @@ public class PackRat extends CardImpl<PackRat> {
         this.toughness = new MageInt(0);
 
         // Pack Rat's power and toughness are each equal to the number of Rats you control.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(filter), Duration.EndOfGame)));
         // {2}{B}, Discard a card: Put a token onto the battlefield that's a copy of Pack Rat.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new PackRatEffect(this), new ManaCostsImpl("{2}{B}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PackRatEffect(this), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new DiscardCardCost());
         this.addAbility(ability);
     }
@@ -108,7 +110,7 @@ class PackRatEffect extends OneShotEffect<PackRatEffect> {
     private Card card;
 
     public PackRatEffect(Card card) {
-        super(Constants.Outcome.PutCreatureInPlay);
+        super(Outcome.PutCreatureInPlay);
         this.card = card;
         staticText = "Put a token onto the battlefield that's a copy of Pack Rat";
     }

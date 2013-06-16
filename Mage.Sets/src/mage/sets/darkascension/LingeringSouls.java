@@ -29,13 +29,13 @@ package mage.sets.darkascension;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.game.permanent.token.SpiritWhiteToken;
 
 /**
@@ -53,7 +53,7 @@ public class LingeringSouls extends CardImpl<LingeringSouls> {
         // Put two 1/1 white Spirit creature tokens with flying onto the battlefield.
         this.getSpellAbility().addEffect(new CreateTokenEffect(new SpiritWhiteToken(), 2));
         // Flashback {1}{B}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{B}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{1}{B}"), TimingRule.SORCERY));
     }
 
     public LingeringSouls(final LingeringSouls card) {

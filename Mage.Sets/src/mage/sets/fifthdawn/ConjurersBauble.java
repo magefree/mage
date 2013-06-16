@@ -28,10 +28,10 @@
 package mage.sets.fifthdawn;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -39,6 +39,7 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.PutOnLibraryTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.FilterCard;
 import mage.filter.predicate.other.OwnerPredicate;
 import mage.target.common.TargetCardInYourGraveyard;
@@ -52,7 +53,7 @@ public class ConjurersBauble extends CardImpl<ConjurersBauble> {
     private static final FilterCard filter = new FilterCard("card from your graveyard");
     
     static {
-        filter.add(new OwnerPredicate(Constants.TargetController.YOU));
+        filter.add(new OwnerPredicate(TargetController.YOU));
     }
     
     static final String rule = "Put up to one target card from your graveyard on the bottom of your library";

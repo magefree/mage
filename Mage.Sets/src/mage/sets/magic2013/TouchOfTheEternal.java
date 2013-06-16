@@ -28,9 +28,8 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
@@ -52,7 +51,7 @@ public class TouchOfTheEternal extends CardImpl<TouchOfTheEternal> {
         this.color.setWhite(true);
 
         // At the beginning of your upkeep, count the number of permanents you control. Your life total becomes that number.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Constants.Zone.BATTLEFIELD, new TouchOfTheEternalEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new TouchOfTheEternalEffect(), TargetController.YOU, false));
     }
 
     public TouchOfTheEternal(final TouchOfTheEternal card) {
@@ -68,7 +67,7 @@ public class TouchOfTheEternal extends CardImpl<TouchOfTheEternal> {
 class TouchOfTheEternalEffect extends OneShotEffect<TouchOfTheEternalEffect> {
 
     public TouchOfTheEternalEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.staticText = "count the number of permanents you control. Your life total becomes that number";
     }
 

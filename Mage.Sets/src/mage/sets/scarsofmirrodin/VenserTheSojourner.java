@@ -29,11 +29,11 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.TriggeredAbilityImpl;
@@ -47,6 +47,7 @@ import mage.abilities.effects.common.ReturnFromExileEffect;
 import mage.abilities.effects.common.UnblockableAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterCreaturePermanent;
@@ -102,7 +103,7 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
     private static final String effectText = "Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step";
 
     VenserTheSojournerEffect() {
-        super(Constants.Outcome.Benefit);
+        super(Outcome.Benefit);
         staticText = effectText;
     }
 

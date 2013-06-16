@@ -30,7 +30,7 @@ package mage.abilities.effects.common.counter;
 
 import java.util.UUID;
 
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.Counter;

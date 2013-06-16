@@ -28,15 +28,16 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.CardsInAllGraveyardsCount;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterArtifactCard;
 
 /**
@@ -54,7 +55,7 @@ public class SlagFiend extends CardImpl<SlagFiend> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterArtifactCard("artifacts")), Constants.Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new CardsInAllGraveyardsCount(new FilterArtifactCard("artifacts")), Duration.EndOfGame)));
     }
 
     public SlagFiend(final SlagFiend card) {

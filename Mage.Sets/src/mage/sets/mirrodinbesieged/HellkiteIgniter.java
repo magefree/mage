@@ -30,9 +30,8 @@ package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,6 +41,8 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -59,11 +60,11 @@ public class HellkiteIgniter extends CardImpl<HellkiteIgniter> {
         this.toughness = new MageInt(5);
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD,
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(
                         new PermanentsOnBattlefieldCount(new FilterArtifactPermanent()),
                         new StaticValue(0),
-                        Constants.Duration.EndOfTurn),
+                        Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{R}")));
     }
 

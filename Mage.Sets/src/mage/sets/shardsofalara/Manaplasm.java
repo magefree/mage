@@ -28,14 +28,16 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.EmptyEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
@@ -75,7 +77,7 @@ public class Manaplasm extends CardImpl<Manaplasm> {
 class ManaplasmAbility extends TriggeredAbilityImpl<ManaplasmAbility> {
 
     public ManaplasmAbility() {
-        super(Constants.Zone.BATTLEFIELD, new EmptyEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);
+        super(Zone.BATTLEFIELD, new EmptyEffect("{this} gets +X/+X until end of turn, where X is that spell's converted mana cost"), false);
     }
 
 
@@ -90,7 +92,7 @@ class ManaplasmAbility extends TriggeredAbilityImpl<ManaplasmAbility> {
             Spell spell = game.getStack().getSpell(event.getTargetId());   
             if (spell != null && spell.getControllerId().equals(controllerId)) {
                 this.getEffects().remove(0);
-                this.addEffect(new BoostSourceEffect(spell.getManaCost().convertedManaCost(), spell.getManaCost().convertedManaCost(), Constants.Duration.EndOfTurn));
+                this.addEffect(new BoostSourceEffect(spell.getManaCost().convertedManaCost(), spell.getManaCost().convertedManaCost(), Duration.EndOfTurn));
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }

@@ -27,10 +27,10 @@
  */
 package mage.abilities.effects;
 
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.cards.Card;

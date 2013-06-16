@@ -28,8 +28,8 @@
 
 package mage.abilities.effects.common.counter;
 
-import mage.Constants.Outcome;
-import mage.Constants.Zone;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.counters.common.PlusOneCounter;

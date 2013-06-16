@@ -29,15 +29,17 @@ package mage.sets.gatecrash;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -74,7 +76,7 @@ class SignalTheClansEffect extends SearchEffect<SignalTheClansEffect> {
 
 
     public SignalTheClansEffect() {
-        super(new TargetCardInLibrary(3, new FilterCreatureCard()), Constants.Outcome.DrawCard);
+        super(new TargetCardInLibrary(3, new FilterCreatureCard()), Outcome.DrawCard);
         staticText = "Search your library for three creature cards and reveal them. If you reveal three cards with different names, choose one of them at random and put that card into your hand. Shuffle the rest into your library";
     }
 
@@ -110,12 +112,12 @@ class SignalTheClansEffect extends SearchEffect<SignalTheClansEffect> {
                 if(cardsArray.length == 3 && !cardsArray[0].getName().equals(cardsArray[1]) && !cardsArray[0].getName().equals(cardsArray[2]) && !cardsArray[1].getName().equals(cardsArray[2])){
                     //Choose one of them at random and put that card into your hand
                     Card randomCard = cards.getRandom(game);
-                    randomCard.moveToZone(Constants.Zone.HAND, source.getId(), game, true);
+                    randomCard.moveToZone(Zone.HAND, source.getId(), game, true);
                     cards.remove(randomCard);
                 }
                 //Shuffle the rest into your library
                 for(Card card : cards.getCards(game)){
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                 }
             }
             player.shuffleLibrary(game);

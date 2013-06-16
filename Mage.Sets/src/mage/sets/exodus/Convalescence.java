@@ -28,13 +28,15 @@
 package mage.sets.exodus;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -51,7 +53,7 @@ public class Convalescence extends CardImpl<Convalescence> {
         this.color.setWhite(true);
 
         // At the beginning of your upkeep, if you have 10 or less life, you gain 1 life.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect(), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ConvalescenceEffect(), TargetController.YOU, false));
     }
 
     public Convalescence(final Convalescence card) {
@@ -67,7 +69,7 @@ public class Convalescence extends CardImpl<Convalescence> {
 class ConvalescenceEffect extends OneShotEffect<ConvalescenceEffect> {
 
     public ConvalescenceEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "if you have 10 or less life, you gain 1 life";
     }
 

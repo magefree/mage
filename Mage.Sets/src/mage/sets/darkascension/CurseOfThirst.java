@@ -28,9 +28,9 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -38,6 +38,8 @@ import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -62,7 +64,7 @@ public class CurseOfThirst extends CardImpl<CurseOfThirst> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.Detriment));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // At the beginning of enchanted player's upkeep, Curse of Thirst deals damage to that player equal to the number of Curses attached to him or her.
@@ -83,7 +85,7 @@ public class CurseOfThirst extends CardImpl<CurseOfThirst> {
 class CurseOfThirstAbility extends TriggeredAbilityImpl<CurseOfThirstAbility> {
 
     public CurseOfThirstAbility() {
-        super(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(new CursesAttachedCount()));
+        super(Zone.BATTLEFIELD, new DamageTargetEffect(new CursesAttachedCount()));
     }
 
     public CurseOfThirstAbility(final CurseOfThirstAbility ability) {

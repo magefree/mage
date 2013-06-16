@@ -28,11 +28,12 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -42,6 +43,7 @@ import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -81,7 +83,7 @@ public class SpireSerpent extends CardImpl<SpireSerpent> {
 class SpireSerpentEffect extends AsThoughEffectImpl<SpireSerpentEffect> {
 
     public SpireSerpentEffect() {
-        super(Constants.AsThoughEffectType.ATTACK, Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(AsThoughEffectType.ATTACK, Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "{this} can attack as though it didn't have defender";
     }
 

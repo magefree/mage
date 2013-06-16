@@ -1,7 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants.PhaseStep;
-import mage.Constants.Zone;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;

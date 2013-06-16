@@ -28,9 +28,9 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -38,6 +38,7 @@ import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -58,8 +59,8 @@ public class GhorClanRampager extends CardImpl<GhorClanRampager> {
         // Trample
         this.addAbility(TrampleAbility.getInstance());
         // Bloodrush - {R}{G}, Discard Ghor-Clan Rampager: Target attacking creature gets +4/+4 and gains trample until end of turn.
-        Ability ability = new BloodrushAbility("{R}{G}",new BoostTargetEffect(4,4, Constants.Duration.EndOfTurn));
-        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Constants.Duration.EndOfTurn));
+        Ability ability = new BloodrushAbility("{R}{G}",new BoostTargetEffect(4,4, Duration.EndOfTurn));
+        ability.addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
         this.addAbility(ability);
     }
 

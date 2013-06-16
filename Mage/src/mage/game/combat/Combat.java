@@ -30,7 +30,7 @@ package mage.game.combat;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;

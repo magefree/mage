@@ -28,11 +28,11 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -57,7 +57,7 @@ public class BladeOfTheBloodchief extends CardImpl<BladeOfTheBloodchief> {
         this.expansionSetCode = "ZEN";
         this.getSubtype().add("Equipment");
 
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
         this.addAbility(new BladeOfTheBloodChiefTriggeredAbility());
     }
 
@@ -89,7 +89,7 @@ class BladeOfTheBloodChiefTriggeredAbility extends TriggeredAbilityImpl<BladeOfT
         if ( event.getType() == EventType.ZONE_CHANGE ) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if ( zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD ) {
-                Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Constants.Zone.BATTLEFIELD);
+                Permanent p = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (p != null && p.getCardType().contains(CardType.CREATURE)) {
                     Permanent enchantment = game.getPermanent(getSourceId());
                     if (enchantment != null && enchantment.getAttachedTo() != null) {

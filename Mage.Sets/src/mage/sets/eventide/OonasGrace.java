@@ -28,13 +28,14 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.TargetPlayer;
 
 /**
@@ -53,7 +54,7 @@ public class OonasGrace extends CardImpl<OonasGrace> {
         this.getSpellAbility().addEffect(new DrawCardTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetPlayer());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{2}{U}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{2}{U}"), TimingRule.INSTANT));
     }
 
     public OonasGrace(final OonasGrace card) {

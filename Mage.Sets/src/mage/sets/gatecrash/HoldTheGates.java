@@ -28,10 +28,10 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Duration;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterControlledPermanent;
@@ -64,7 +65,7 @@ public class HoldTheGates extends CardImpl<HoldTheGates> {
         this.color.setWhite(true);
 
         // Creatures you control get +0/+1 for each Gate you control and have vigilance.
-        Ability ability = new SimpleStaticAbility(Constants.Zone.BATTLEFIELD,
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD,
                 new BoostControlledEffect(new StaticValue(0),new PermanentsOnBattlefieldCount(filter), Duration.WhileOnBattlefield));
         ability.addEffect(new GainAbilityControlledEffect(VigilanceAbility.getInstance(), Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures")));
         this.addAbility(ability);

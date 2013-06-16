@@ -27,11 +27,11 @@
 */
 package mage.abilities.mana;
 
-import mage.Constants;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AddManaOfAnyColorEffect;
 import mage.choices.ChoiceColor;
+import mage.constants.Zone;
 
 public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
     public AnyColorManaAbility() {
@@ -39,7 +39,7 @@ public class AnyColorManaAbility extends ManaAbility<AnyColorManaAbility> {
     }
 
     public AnyColorManaAbility(Cost cost) {
-        super(Constants.Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
+        super(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(), cost);
         this.addChoice(new ChoiceColor());
         this.netMana.setAny(1);
     }

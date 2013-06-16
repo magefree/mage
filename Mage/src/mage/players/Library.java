@@ -28,7 +28,7 @@
 
 package mage.players;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.cards.Card;
 import mage.filter.FilterCard;
 import mage.game.Game;

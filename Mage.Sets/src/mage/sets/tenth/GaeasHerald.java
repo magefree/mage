@@ -29,9 +29,8 @@ package mage.sets.tenth;
 
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -57,7 +56,7 @@ public class GaeasHerald extends CardImpl<GaeasHerald> {
         this.toughness = new MageInt(1);
 
         // Creature spells can't be countered.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new CantCounterEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantCounterEffect()));
     }
 
     public GaeasHerald(final GaeasHerald card) {
@@ -75,7 +74,7 @@ class CantCounterEffect extends ReplacementEffectImpl<CantCounterEffect> {
 
 
     public CantCounterEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Creature spells can't be countered";
     }
 

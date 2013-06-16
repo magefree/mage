@@ -28,8 +28,8 @@
 
 package mage.game.turn;
 
-import mage.Constants.PhaseStep;
-import mage.Constants.TurnPhase;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
 
 import java.util.ArrayList;
 import java.util.ListIterator;

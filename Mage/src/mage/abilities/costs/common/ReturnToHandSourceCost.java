@@ -30,7 +30,7 @@ package mage.abilities.costs.common;
 
 import java.util.UUID;
 
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.game.Game;

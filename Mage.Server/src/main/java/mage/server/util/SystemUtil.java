@@ -1,9 +1,9 @@
 package mage.server.util;
 
-import mage.Constants;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -70,15 +70,15 @@ public class SystemUtil {
                         continue;
                     }
 
-                    Constants.Zone gameZone;
+                    Zone gameZone;
                     if ("hand".equalsIgnoreCase(zone)) {
-                        gameZone = Constants.Zone.HAND;
+                        gameZone = Zone.HAND;
                     } else if ("battlefield".equalsIgnoreCase(zone)) {
-                        gameZone = Constants.Zone.BATTLEFIELD;
+                        gameZone = Zone.BATTLEFIELD;
                     } else if ("graveyard".equalsIgnoreCase(zone)) {
-                        gameZone = Constants.Zone.GRAVEYARD;
+                        gameZone = Zone.GRAVEYARD;
                     } else if ("library".equalsIgnoreCase(zone)) {
-                        gameZone = Constants.Zone.LIBRARY;
+                        gameZone = Zone.LIBRARY;
                     } else {
                         continue; // go parse next line
                     }
@@ -121,11 +121,11 @@ public class SystemUtil {
      * @param game
      * @param card Card to put to player's hand
      */
-    private static void swapWithAnyCard(Game game, Player player, Card card, Constants.Zone zone) {
-        if (zone.equals(Constants.Zone.BATTLEFIELD)) {
-            card.putOntoBattlefield(game, Constants.Zone.OUTSIDE, null, player.getId());
-        } else if (zone.equals(Constants.Zone.LIBRARY)) {
-            game.setZone(card.getId(), Constants.Zone.LIBRARY);
+    private static void swapWithAnyCard(Game game, Player player, Card card, Zone zone) {
+        if (zone.equals(Zone.BATTLEFIELD)) {
+            card.putOntoBattlefield(game, Zone.OUTSIDE, null, player.getId());
+        } else if (zone.equals(Zone.LIBRARY)) {
+            game.setZone(card.getId(), Zone.LIBRARY);
             player.getLibrary().putOnTop(card, game);
         } else {
             card.moveToZone(zone, null, game, false);

@@ -1,6 +1,7 @@
 package org.mage.test.cards.single;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -17,14 +18,14 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
     public void testIncreasingAmbition() {
         removeAllCardsFromHand(playerA);
         removeAllCardsFromLibrary(playerA);
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 8);
-        addCard(Constants.Zone.HAND, playerA, "Increasing Ambition");
-        addCard(Constants.Zone.LIBRARY, playerA, "Swamp", 4);
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 8);
+        addCard(Zone.HAND, playerA, "Increasing Ambition");
+        addCard(Zone.LIBRARY, playerA, "Swamp", 4);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Ambition");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {7}{B}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Ambition");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {7}{B}");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -37,13 +38,13 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testIncreasingConfusion() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Island", 4);
-        addCard(Constants.Zone.HAND, playerA, "Increasing Confusion");
+        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
+        addCard(Zone.HAND, playerA, "Increasing Confusion");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Confusion");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {X}{U}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Confusion");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {X}{U}");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -56,13 +57,13 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testIncreasingDevotion() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 9);
-        addCard(Constants.Zone.HAND, playerA, "Increasing Devotion");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 9);
+        addCard(Zone.HAND, playerA, "Increasing Devotion");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Devotion");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {7}{W}{W}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Devotion");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {7}{W}{W}");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -75,14 +76,14 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testIncreasingSavagery() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Forest", 7);
-        addCard(Constants.Zone.HAND, playerA, "Increasing Savagery");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Ornithopter");
+        addCard(Zone.BATTLEFIELD, playerA, "Forest", 7);
+        addCard(Zone.HAND, playerA, "Increasing Savagery");
+        addCard(Zone.BATTLEFIELD, playerA, "Ornithopter");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Savagery");
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {5}{G}{G}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Savagery");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {5}{G}{G}");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);
@@ -95,16 +96,16 @@ public class IncreasingCardsTest extends CardTestPlayerBase {
 
     @Test
     public void testIncreasingVengeance() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Mountain", 6);
-        addCard(Constants.Zone.HAND, playerA, "Increasing Vengeance");
-        addCard(Constants.Zone.HAND, playerA, "Lightning Bolt", 2);
+        addCard(Zone.BATTLEFIELD, playerA, "Mountain", 6);
+        addCard(Zone.HAND, playerA, "Increasing Vengeance");
+        addCard(Zone.HAND, playerA, "Lightning Bolt", 2);
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Vengeance", "Lightning Bolt");
-        castSpell(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
-        activateAbility(3, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {3}{R}{R}");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Increasing Vengeance", "Lightning Bolt");
+        castSpell(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Lightning Bolt", playerB);
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "Flashback {3}{R}{R}");
 
-        setStopAt(3, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(3, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

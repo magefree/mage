@@ -28,14 +28,15 @@
 package mage.sets.worldwake;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -78,10 +79,10 @@ public class FeralContest extends CardImpl<FeralContest> {
 class FeralContestEffect extends RequirementEffect<FeralContestEffect> {
 
     public FeralContestEffect() {
-        this(Constants.Duration.EndOfTurn);
+        this(Duration.EndOfTurn);
     }
 
-    public FeralContestEffect(Constants.Duration duration) {
+    public FeralContestEffect(Duration duration) {
         super(duration);
         staticText = "Another target creature blocks it this turn if able";
     }

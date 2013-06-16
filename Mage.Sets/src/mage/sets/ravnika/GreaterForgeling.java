@@ -29,14 +29,15 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 
 /**
  *
@@ -54,7 +55,7 @@ public class GreaterForgeling extends CardImpl<GreaterForgeling> {
         this.toughness = new MageInt(4);
 
         // {1}{R}: Greater Forgeling gets +3/-3 until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new BoostSourceEffect(3, -3, Constants.Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(3, -3, Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
     }
 
     public GreaterForgeling(final GreaterForgeling card) {

@@ -30,15 +30,15 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 
 /**
@@ -72,7 +72,7 @@ public class KokushoTheEveningStar extends CardImpl<KokushoTheEveningStar> {
 
 class KokushoTheEveningStarEffect extends OneShotEffect<KokushoTheEveningStarEffect> {
     public KokushoTheEveningStarEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "each opponent loses 5 life. You gain life equal to the life lost this way";
     }
 

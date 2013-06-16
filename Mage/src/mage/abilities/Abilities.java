@@ -31,7 +31,7 @@ package mage.abilities;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.game.Game;
@@ -105,7 +105,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @see mage.abilities.effects.ContinuousEffects#getApplicableRequirementEffects(mage.game.permanent.Permanent, mage.game.Game)
      * @see mage.abilities.effects.ContinuousEffects#getApplicableRestrictionEffects(mage.game.permanent.Permanent, mage.game.Game)
      * @see mage.abilities.effects.ContinuousEffects#getApplicableReplacementEffects(mage.game.events.GameEvent, mage.game.Game)
-     * @see mage.abilities.effects.ContinuousEffects#asThough(java.util.UUID, mage.Constants.AsThoughEffectType, mage.game.Game)
+     * @see mage.abilities.effects.ContinuousEffects#asThough(java.util.UUID, mage.constants.AsThoughEffectType, mage.game.Game)
      * @see mage.abilities.effects.ContinuousEffects#costModification(mage.abilities.Ability, mage.game.Game)
      */
     Abilities<StaticAbility> getStaticAbilities(Zone zone);
@@ -124,7 +124,7 @@ public interface Abilities<T extends Ability> extends List<T>, Serializable {
      * @param zone The {@link Zone} to search for {@link TriggeredAbility triggered abilities}
      * @return All found {@link TriggeredAbility triggered abilities}.
      * 
-     * @see mage.cards.CardImpl#checkTriggers(mage.Constants.Zone, mage.game.events.GameEvent, mage.game.Game)
+     * @see mage.cards.CardImpl#checkTriggers(mage.constants.Zone, mage.game.events.GameEvent, mage.game.Game)
      * @see mage.game.permanent.PermanentImpl#checkTriggers(mage.game.events.GameEvent, mage.game.Game)
      * @see mage.game.permanent.PermanentCard#checkPermanentOnlyTriggers(mage.game.events.ZoneChangeEvent, mage.game.Game)
      */

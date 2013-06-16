@@ -1,6 +1,7 @@
 package org.mage.test.cards.cost.kicker;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,13 +13,13 @@ public class GatekeeperOfMalakirTest extends CardTestPlayerBase {
 
     @Test
     public void testCard() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Swamp", 3);
-        addCard(Constants.Zone.HAND, playerA, "Gatekeeper of Malakir");
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Llanowar Elves");
+        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        addCard(Zone.HAND, playerA, "Gatekeeper of Malakir");
+        addCard(Zone.BATTLEFIELD, playerB, "Llanowar Elves");
 
-        castSpell(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
+        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Gatekeeper of Malakir");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         assertLife(playerA, 20);

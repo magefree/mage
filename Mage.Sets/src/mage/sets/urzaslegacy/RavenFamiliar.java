@@ -28,9 +28,9 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +41,8 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -82,7 +84,7 @@ public class RavenFamiliar extends CardImpl<RavenFamiliar> {
     class RavenFamiliarEffect extends OneShotEffect<RavenFamiliarEffect> {
 
         public RavenFamiliarEffect() {
-            super(Constants.Outcome.DrawCard);
+            super(Outcome.DrawCard);
             this.staticText = "look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order";
         }
 
@@ -98,40 +100,40 @@ public class RavenFamiliar extends CardImpl<RavenFamiliar> {
         @Override
         public boolean apply(Game game, Ability source) {
             Player player = game.getPlayer(source.getControllerId());
-            Cards cards = new CardsImpl(Constants.Zone.PICK);
+            Cards cards = new CardsImpl(Zone.PICK);
             int count = Math.min(player.getLibrary().size(), 3);
             for (int i = 0; i < count; i++) {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    game.setZone(card.getId(), Constants.Zone.PICK);
+                    game.setZone(card.getId(), Zone.PICK);
                 }
             }
             player.lookAtCards("Raven Familiar", cards, game);
 
-            TargetCard target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put into your hand"));
-            if (player.choose(Constants.Outcome.DrawCard, cards, target, game)) {
+            TargetCard target = new TargetCard(Zone.PICK, new FilterCard("card to put into your hand"));
+            if (player.choose(Outcome.DrawCard, cards, target, game)) {
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getId(), game, false);
                 }
             }
 
-            target = new TargetCard(Constants.Zone.PICK, new FilterCard("card to put on the bottom of your library"));
+            target = new TargetCard(Zone.PICK, new FilterCard("card to put on the bottom of your library"));
             target.setRequired(true);
             while (cards.size() > 1) {
-                player.choose(Constants.Outcome.Neutral, cards, target, game);
+                player.choose(Outcome.Neutral, cards, target, game);
                 Card card = cards.get(target.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
                 target.clearChosen();
             }
             if (cards.size() == 1) {
                 Card card = cards.get(cards.iterator().next(), game);
-                card.moveToZone(Constants.Zone.LIBRARY, source.getId(), game, false);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
             }
 
             return true;

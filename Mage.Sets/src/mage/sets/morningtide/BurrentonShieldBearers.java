@@ -29,14 +29,14 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -53,7 +53,7 @@ public class BurrentonShieldBearers extends CardImpl<BurrentonShieldBearers> {
         this.color.setWhite(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(0, 3, Constants.Duration.EndOfTurn), false);
+        Ability ability = new AttacksTriggeredAbility(new BoostTargetEffect(0, 3, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

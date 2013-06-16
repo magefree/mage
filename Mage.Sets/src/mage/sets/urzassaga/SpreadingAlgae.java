@@ -28,9 +28,9 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
@@ -40,6 +40,8 @@ import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -70,7 +72,7 @@ public class SpreadingAlgae extends CardImpl<SpreadingAlgae> {
         
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Constants.Outcome.AddAbility));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // When enchanted land becomes tapped, destroy it.
@@ -95,7 +97,7 @@ public class SpreadingAlgae extends CardImpl<SpreadingAlgae> {
 class SpreadingAlgaeTriggeredAbility extends TriggeredAbilityImpl<SpreadingAlgaeTriggeredAbility> {
 
     public SpreadingAlgaeTriggeredAbility(Effect effect) {
-        super(Constants.Zone.BATTLEFIELD, effect);
+        super(Zone.BATTLEFIELD, effect);
     }
 
     public SpreadingAlgaeTriggeredAbility(final SpreadingAlgaeTriggeredAbility ability) {

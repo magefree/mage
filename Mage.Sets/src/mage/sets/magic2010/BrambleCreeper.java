@@ -29,13 +29,13 @@ package mage.sets.magic2010;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -50,7 +50,7 @@ public class BrambleCreeper extends CardImpl<BrambleCreeper> {
         this.color.setGreen(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(3);
-        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Constants.Duration.EndOfTurn), false));
+        this.addAbility(new AttacksTriggeredAbility(new BoostSourceEffect(5, 0, Duration.EndOfTurn), false));
     }
 
     public BrambleCreeper(final BrambleCreeper card) {

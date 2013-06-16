@@ -29,10 +29,10 @@ package mage.sets.urzaslegacy;
 
 import java.util.Iterator;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -64,7 +65,7 @@ public class MemoryJar extends CardImpl<MemoryJar> {
         // {tap}, Sacrifice Memory Jar: Each player exiles all cards from his or her hand face down and draws seven cards.
         // At the beginning of the next end step, each player discards his or her hand and returns to his or her hand each
         //card he or she exiled this way.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MemoryJarEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
         
@@ -171,7 +172,7 @@ class MemoryJarDelayedEffect extends OneShotEffect<MemoryJarDelayedEffect> {
             //Return to hand
             for (Iterator<Card> it = cards.getCards(game).iterator(); it.hasNext();) {
                 Card card = it.next();
-                card.moveToZone(Constants.Zone.HAND, source.getSourceId(), game, true);
+                card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
             }
             return true;
         }

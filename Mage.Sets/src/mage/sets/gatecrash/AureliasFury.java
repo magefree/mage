@@ -27,11 +27,11 @@
  */
 package mage.sets.gatecrash;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.WatcherScope;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Duration;
+import mage.constants.WatcherScope;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
@@ -150,7 +150,7 @@ class AureliasFuryEffect extends OneShotEffect<AureliasFuryEffect> {
 class AureliasFuryCantCastEffect extends ReplacementEffectImpl<AureliasFuryCantCastEffect> {
 
     public AureliasFuryCantCastEffect() {
-        super(Constants.Duration.EndOfTurn, Outcome.Benefit);
+        super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = "Players dealt damage this way can't cast noncreature spells this turn";
     }
 

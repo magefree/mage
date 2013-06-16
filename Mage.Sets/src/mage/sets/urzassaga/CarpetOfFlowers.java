@@ -29,10 +29,10 @@ package mage.sets.urzassaga;
 
 import java.util.LinkedHashSet;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -40,6 +40,7 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
 import mage.choices.ChoiceImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -80,7 +81,7 @@ class CarpetOfFlowersTriggeredAbility extends TriggeredAbilityImpl<CarpetOfFlowe
 
 
     public CarpetOfFlowersTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
+        super(Zone.BATTLEFIELD, new CarpetOfFlowersEffect(), true);
         this.addChoice(new ChoiceColor());
         this.addTarget(new TargetOpponent());
         

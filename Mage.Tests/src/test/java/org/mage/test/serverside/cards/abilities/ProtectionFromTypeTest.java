@@ -1,6 +1,7 @@
 package org.mage.test.serverside.cards.abilities;
 
-import mage.Constants;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -12,12 +13,12 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
     @Test
     public void testProtectionFromArtifacts() {
         useRedDefault();
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
+        addCard(Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Tel-Jilad Fallen");
+        addCard(Zone.BATTLEFIELD, playerB, "Tel-Jilad Fallen");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: put a -1/-1 counter on target creature. ", "Tel-Jilad Fallen");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: put a -1/-1 counter on target creature. ", "Tel-Jilad Fallen");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // no one should be destroyed
@@ -27,12 +28,12 @@ public class ProtectionFromTypeTest extends CardTestPlayerBase {
     @Test
     public void testNoProtection() {
         useRedDefault();
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
+        addCard(Zone.BATTLEFIELD, playerA, "Trigon of Corruption");
 
-        addCard(Constants.Zone.BATTLEFIELD, playerB, "Coral Merfolk");
+        addCard(Zone.BATTLEFIELD, playerB, "Coral Merfolk");
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: Put a -1/-1 counter on target creature. ", "Coral Merfolk");
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2},Remove a Charge counter from {this}, {T}: Put a -1/-1 counter on target creature. ", "Coral Merfolk");
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         // Coral Merfolk should be destroyed

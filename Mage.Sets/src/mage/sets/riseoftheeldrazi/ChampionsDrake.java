@@ -28,10 +28,10 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
-import mage.Constants.Duration;
+import mage.constants.Duration;
 import mage.abilities.condition.common.PermanentHasCounterCondition;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -40,7 +40,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 
 
 /**

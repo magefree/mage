@@ -29,15 +29,15 @@ package mage.sets.innistrad;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.filter.common.FilterCreatureCard;
 
 /**
@@ -57,7 +57,7 @@ public class GnawToTheBone extends CardImpl<GnawToTheBone> {
         this.getSpellAbility().addEffect(new GainLifeEffect(value));
 
         // Flashback {2}{G}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{G}"), TimingRule.INSTANT));
     }
 
     public GnawToTheBone(final GnawToTheBone card) {

@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
@@ -56,7 +54,7 @@ public class ArcaneMelee extends CardImpl<ArcaneMelee> {
         this.color.setBlue(true);
 
         // Instant and sorcery spells cost {2} less to cast.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new ArcaneMeleeCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ArcaneMeleeCostReductionEffect()));
     }
 
     public ArcaneMelee(final ArcaneMelee card) {
@@ -72,7 +70,7 @@ public class ArcaneMelee extends CardImpl<ArcaneMelee> {
 class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl<ArcaneMeleeCostReductionEffect> {
 
     ArcaneMeleeCostReductionEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Instant and sorcery spells cost {2} less to cast";
     }
 

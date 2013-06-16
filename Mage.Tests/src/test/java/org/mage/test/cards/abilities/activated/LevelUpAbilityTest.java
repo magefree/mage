@@ -1,9 +1,10 @@
 package org.mage.test.cards.abilities.activated;
 
 import junit.framework.Assert;
-import mage.Constants;
 import mage.abilities.keyword.IndestructibleAbility;
 import mage.abilities.keyword.LifelinkAbility;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.permanent.Permanent;
 import org.junit.Test;
@@ -19,10 +20,10 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testFirstLevel() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 15);
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
@@ -39,12 +40,12 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testFirstLevelWithOneCounter() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 15);
 
-        activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
@@ -61,14 +62,14 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testSecondLevel() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 15);
 
         for (int i = 0; i < 6; i++) {
-            activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
         }
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
@@ -87,14 +88,14 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testThirdLevel() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 15);
 
         for (int i = 0; i < 12; i++) {
-            activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
         }
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());
@@ -111,14 +112,14 @@ public class LevelUpAbilityTest extends CardTestPlayerBase {
      */
     @Test
     public void testExtraCounters() {
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Transcendent Master");
-        addCard(Constants.Zone.BATTLEFIELD, playerA, "Plains", 15);
+        addCard(Zone.BATTLEFIELD, playerA, "Transcendent Master");
+        addCard(Zone.BATTLEFIELD, playerA, "Plains", 15);
 
         for (int i = 0; i < 15; i++) {
-            activateAbility(1, Constants.PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
+            activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Level up {1}");
         }
 
-        setStopAt(2, Constants.PhaseStep.END_TURN);
+        setStopAt(2, PhaseStep.END_TURN);
         execute();
 
         Permanent master = getPermanent("Transcendent Master", playerA.getId());

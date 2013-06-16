@@ -28,7 +28,7 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants.SetType;
+import mage.constants.SetType;
 import mage.cards.ExpansionSet;
 
 /**
@@ -43,7 +43,7 @@ public class Invasion extends ExpansionSet {
     }
 
     private Invasion() {
-        super("Invasion", "INV", "", "mage.sets.invasion", new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);
+        super("Invasion", "INV", "mage.sets.invasion", new GregorianCalendar(2000, 9, 2).getTime(), SetType.EXPANSION);
         this.blockName = "Invasion";
         this.hasBoosters = true;
         this.numBoosterLands = 1;

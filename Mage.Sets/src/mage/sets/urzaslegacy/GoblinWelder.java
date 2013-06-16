@@ -28,9 +28,9 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
@@ -39,6 +39,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactCard;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.game.Game;
@@ -65,7 +67,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
         this.toughness = new MageInt(1);
 
         // {tap}: Choose target artifact a player controls and target artifact card in that player's graveyard. If both targets are still legal as this ability resolves, that player simultaneously sacrifices the artifact and returns the artifact card to the battlefield.
-        Ability ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new GoblinWelderEffect(), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinWelderEffect(), new TapSourceCost());
         ability.addTarget(new TargetArtifactPermanent(new FilterArtifactPermanent("artifact a player controls")));
         ability.addTarget(new GoblinWelderTarget());
         this.addAbility(ability);
@@ -85,7 +87,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
     public class GoblinWelderEffect extends OneShotEffect<GoblinWelderEffect> {
 
         public GoblinWelderEffect() {
-            super(Constants.Outcome.PutCardInPlay);
+            super(Outcome.PutCardInPlay);
         }
 
         public GoblinWelderEffect(final GoblinWelderEffect effect) {
@@ -99,8 +101,8 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
             
             if (artifact != null && card != null) {
                 
-                Constants.Zone currentZone = game.getState().getZone(card.getId());
-                if(artifact.getCardType().contains(CardType.ARTIFACT) && card.getCardType().contains(CardType.ARTIFACT) && currentZone == Constants.Zone.GRAVEYARD && card.getOwnerId().equals(artifact.getControllerId()))
+                Zone currentZone = game.getState().getZone(card.getId());
+                if(artifact.getCardType().contains(CardType.ARTIFACT) && card.getCardType().contains(CardType.ARTIFACT) && currentZone == Zone.GRAVEYARD && card.getOwnerId().equals(artifact.getControllerId()))
                 {
                     boolean sacrifice = artifact.sacrifice(source.getId(), game);
                     boolean putOnBF = card.putOntoBattlefield(game, currentZone, source.getId(), card.getOwnerId());
@@ -127,7 +129,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
     class GoblinWelderTarget extends TargetCard<TargetCardInYourGraveyard> {
 
         public GoblinWelderTarget() {
-            super(1, 1, Constants.Zone.GRAVEYARD, new FilterArtifactCard());
+            super(1, 1, Zone.GRAVEYARD, new FilterArtifactCard());
             targetName = "target artifact card in that player's graveyard";
         }
 
@@ -142,7 +144,7 @@ public class GoblinWelder extends CardImpl<GoblinWelder> {
             Player player = game.getPlayer(artifact.getControllerId());
 
             Card card = game.getCard(id);
-            if (card != null && player != null && game.getState().getZone(card.getId()) == Constants.Zone.GRAVEYARD)
+            if (card != null && player != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD)
             {
                 if (player.getGraveyard().contains(id))
                 {

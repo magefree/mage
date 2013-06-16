@@ -27,10 +27,9 @@
  */
 package mage.sets.planechase2012;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
@@ -41,6 +40,8 @@ import mage.abilities.keyword.LifelinkAbility;
 import mage.abilities.keyword.RetraceAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -88,7 +89,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<Elder
     private static final String effectText = "Spells you cast that target {this} cost {2} less to cast";
 
     ElderwoodScionCostReductionEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -131,7 +132,7 @@ class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl<Elde
     private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
 
     ElderwoodScionCostReductionEffect2() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 

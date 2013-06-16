@@ -27,12 +27,12 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 
@@ -67,7 +67,7 @@ public class ExquisiteBlood extends CardImpl<ExquisiteBlood> {
 class ExquisiteBloodTriggeredAbility extends TriggeredAbilityImpl<ExquisiteBloodTriggeredAbility> {
 
     public ExquisiteBloodTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null);
     }
 
     public ExquisiteBloodTriggeredAbility(final ExquisiteBloodTriggeredAbility ability) {

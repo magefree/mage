@@ -29,9 +29,7 @@ package mage.sets.tenth;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -57,7 +55,7 @@ public class WindbornMuse extends CardImpl<WindbornMuse> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new WindbornMuseReplacementEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new WindbornMuseReplacementEffect()));
         // Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you.
     }
 
@@ -76,7 +74,7 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
     private static final String effectText = "Creatures can't attack you unless their controller pays {2} for each creature he or she controls that's attacking you";
 
     WindbornMuseReplacementEffect ( ) {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = effectText;
     }
 
@@ -96,7 +94,7 @@ class WindbornMuseReplacementEffect extends ReplacementEffectImpl<WindbornMuseRe
             if ( player != null && event.getTargetId().equals(source.getControllerId())) {
                 ManaCostsImpl propagandaTax = new ManaCostsImpl("{2}");
                 if ( propagandaTax.canPay(source.getSourceId(), event.getPlayerId(), game) &&
-                     player.chooseUse(Constants.Outcome.Benefit, "Pay {2} to declare attacker?", game) )
+                     player.chooseUse(Outcome.Benefit, "Pay {2} to declare attacker?", game) )
                 {
                     if (propagandaTax.payOrRollback(source, game, this.getId(), event.getPlayerId())) {
                         return false;

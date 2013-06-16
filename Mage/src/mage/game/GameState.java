@@ -30,7 +30,7 @@ package mage.game;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.Constants.Zone;
+import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.effects.ContinuousEffect;

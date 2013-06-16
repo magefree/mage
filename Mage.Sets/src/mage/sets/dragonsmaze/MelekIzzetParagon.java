@@ -28,10 +28,10 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
@@ -76,10 +76,10 @@ public class MelekIzzetParagon extends CardImpl<MelekIzzetParagon> {
         this.toughness = new MageInt(4);
 
         // Play with the top card of your library revealed.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayWithTheTopCardRevealedEffect()));
 
         // You may cast the top card of your library if it's an instant or sorcery card.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new PlayTheTopCardEffect(filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayTheTopCardEffect(filter)));
 
         // Whenever you cast an instant or sorcery spell from your library, copy it. You may choose new targets for the copy.
         this.addAbility(new MelekIzzetParagonTriggeredAbility());

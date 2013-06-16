@@ -28,16 +28,17 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
@@ -94,7 +95,7 @@ public class PalisadeGiant extends CardImpl<PalisadeGiant> {
 class PalisadeGiantReplacementEffect extends ReplacementEffectImpl<PalisadeGiantReplacementEffect> {
 
     PalisadeGiantReplacementEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Outcome.RedirectDamage);
+        super(Duration.WhileOnBattlefield, Outcome.RedirectDamage);
         staticText = "All damage that would be dealt to you or another permanent you control is dealt to Palisade Giant instead";
     }
 

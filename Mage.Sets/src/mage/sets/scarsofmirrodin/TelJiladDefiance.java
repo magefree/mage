@@ -28,12 +28,12 @@
 
 package mage.sets.scarsofmirrodin;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.continious.GainProtectionFromTypeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.filter.common.FilterArtifactCard;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -48,7 +48,7 @@ public class TelJiladDefiance extends CardImpl<TelJiladDefiance> {
         super(ownerId, 129, "Tel-Jilad Defiance", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{G}");
         this.expansionSetCode = "SOM";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Constants.Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
+        this.getSpellAbility().addEffect(new GainProtectionFromTypeTargetEffect(Duration.EndOfTurn, new FilterArtifactCard("artifacts")));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
     }

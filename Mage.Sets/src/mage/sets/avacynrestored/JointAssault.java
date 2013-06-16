@@ -27,12 +27,15 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -51,7 +54,7 @@ public class JointAssault extends CardImpl<JointAssault> {
         this.color.setGreen(true);
 
         // Target creature gets +2/+2 until end of turn. If it's paired with a creature, that creature also gets +2/+2 until end of turn.
-        this.getSpellAbility().addEffect(new JointAssaultBoostTargetEffect(2, 2, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new JointAssaultBoostTargetEffect(2, 2, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
     }
 
@@ -71,8 +74,8 @@ class JointAssaultBoostTargetEffect extends ContinuousEffectImpl<JointAssaultBoo
     private int toughness;
     private UUID paired;
 
-    public JointAssaultBoostTargetEffect(int power, int toughness, Constants.Duration duration) {
-        super(duration, Constants.Layer.PTChangingEffects_7, Constants.SubLayer.ModifyPT_7c, Constants.Outcome.BoostCreature);
+    public JointAssaultBoostTargetEffect(int power, int toughness, Duration duration) {
+        super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         this.power = power;
         this.toughness = toughness;
         staticText = "Target creature gets +2/+2 until end of turn. If it's paired with a creature, that creature also gets +2/+2 until end of turn";

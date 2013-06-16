@@ -37,8 +37,7 @@ import mage.game.Game;
 
 import java.util.List;
 import java.util.UUID;
-import mage.Constants.Zone;
-import mage.abilities.ActivatedAbility;
+import mage.constants.Zone;
 
 public interface Permanent extends Card, Controllable {
 

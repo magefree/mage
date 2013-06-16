@@ -29,9 +29,8 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.SimpleStaticAbility;
@@ -41,6 +40,8 @@ import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -71,16 +72,16 @@ public class CliffrunnerBehemoth extends CardImpl<CliffrunnerBehemoth> {
         // Cliffrunner Behemoth has haste as long as you control a red permanent.
         this.addAbility(
             new SimpleStaticAbility(
-                Constants.Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
-                    new GainAbilitySourceEffect(HasteAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+                    new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield),
                     new ControlsPermanentCondition(redPermanentFilter), "{this} has haste as long as you control a red permanent")));
         // Cliffrunner Behemoth has lifelink as long as you control a white permanent.
         this.addAbility(
             new SimpleStaticAbility(
-                Constants.Zone.BATTLEFIELD,
+                Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
-                    new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Constants.Duration.WhileOnBattlefield),
+                    new GainAbilitySourceEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield),
                     new ControlsPermanentCondition(whitePermanentFilter), "{this} has lifelink as long as you control a white permanent")));
     }
 

@@ -28,16 +28,17 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -52,7 +53,7 @@ public class Whetstone extends CardImpl<Whetstone> {
         this.expansionSetCode = "USG";
 
         //{3}: Each player puts the top two cards of his or her library into his or her graveyard.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new WhetstoneEffect(), new ManaCostsImpl("{3}"));
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new WhetstoneEffect(), new ManaCostsImpl("{3}"));
         this.addAbility(ability);
     }
 
@@ -69,7 +70,7 @@ public class Whetstone extends CardImpl<Whetstone> {
 class WhetstoneEffect extends OneShotEffect<WhetstoneEffect> {
 
     WhetstoneEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
         staticText = "Each player puts the top two cards of his or her library into his or her graveyard";
     }
 

@@ -28,10 +28,8 @@
 package mage.sets.scarsofmirrodin;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Layer;
-import mage.Constants.Rarity;
+
+import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -53,10 +51,10 @@ public class EchoCirclet extends CardImpl<EchoCirclet> {
         this.subtype.add("Equipment");
 
         // Equipped creature can block an additional creature. (static abilit of equipment, no ability that will be gained to equiped creature!)
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new EchoCircletEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EchoCircletEffect()));
 
         // Equip {1}
-        this.addAbility(new EquipAbility(Constants.Outcome.AddAbility, new GenericManaCost(1)));
+        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 
     public EchoCirclet(final EchoCirclet card) {
@@ -72,7 +70,7 @@ public class EchoCirclet extends CardImpl<EchoCirclet> {
 class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
 
     public EchoCircletEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "Equipped creature can block an additional creature";
     }
 
@@ -86,7 +84,7 @@ class EchoCircletEffect extends ContinuousEffectImpl<EchoCircletEffect> {
     }
 
     @Override
-    public boolean apply(Layer layer, Constants.SubLayer sublayer, Ability source, Game game) {
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent perm = game.getPermanent(source.getSourceId());
         if (perm != null && perm.getAttachedTo() != null) {
             Permanent equipped = game.getPermanent(perm.getAttachedTo());

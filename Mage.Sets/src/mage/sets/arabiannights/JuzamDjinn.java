@@ -29,13 +29,13 @@ package mage.sets.arabiannights;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.common.DamageControllerEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 
 /**
  *
@@ -53,7 +53,7 @@ public class JuzamDjinn extends CardImpl<JuzamDjinn> {
         this.toughness = new MageInt(5);
 
         // At the beginning of your upkeep, Juzam Djinn deals 1 damage to you.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new DamageControllerEffect(1), TargetController.YOU, false));
     }
 
     public JuzamDjinn(final JuzamDjinn card) {

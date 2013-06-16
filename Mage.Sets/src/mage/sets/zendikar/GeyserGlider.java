@@ -28,14 +28,15 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -53,7 +54,7 @@ public class GeyserGlider extends CardImpl<GeyserGlider> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
-        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Constants.Duration.EndOfTurn), false));
+        this.addAbility(new LandfallAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false));
     }
 
     public GeyserGlider(final GeyserGlider card) {

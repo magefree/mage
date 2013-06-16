@@ -27,8 +27,8 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksCreatureYourControlTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;

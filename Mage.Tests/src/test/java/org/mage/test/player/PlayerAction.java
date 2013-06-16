@@ -28,7 +28,7 @@
 
 package org.mage.test.player;
 
-import mage.Constants.PhaseStep;
+import mage.constants.PhaseStep;
 
 /**
  *

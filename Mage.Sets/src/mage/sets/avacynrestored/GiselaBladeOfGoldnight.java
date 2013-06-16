@@ -27,9 +27,7 @@
  */
 package mage.sets.avacynrestored;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
@@ -65,7 +63,7 @@ public class GiselaBladeOfGoldnight extends CardImpl<GiselaBladeOfGoldnight> {
 
         // If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.
         // If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GiselaBladeOfGoldnightDoubleDamageEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GiselaBladeOfGoldnightDoubleDamageEffect()));
     }
 
     public GiselaBladeOfGoldnight(final GiselaBladeOfGoldnight card) {
@@ -81,7 +79,7 @@ public class GiselaBladeOfGoldnight extends CardImpl<GiselaBladeOfGoldnight> {
 class GiselaBladeOfGoldnightDoubleDamageEffect extends ReplacementEffectImpl<GiselaBladeOfGoldnightDoubleDamageEffect> {
 
     public GiselaBladeOfGoldnightDoubleDamageEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Outcome.Damage);
+        super(Duration.WhileOnBattlefield, Outcome.Damage);
         staticText = "If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead."
             + "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up";
     }

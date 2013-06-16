@@ -28,13 +28,15 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 
 /**
@@ -47,7 +49,7 @@ public class ChromaticLantern extends CardImpl<ChromaticLantern> {
         this.expansionSetCode = "RTR";
 
         // Lands you control have "{T}: Add one mana of any color to your mana pool."
-        this.addAbility(new SimpleStaticAbility(Constants.Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Constants.Duration.WhileOnBattlefield, new FilterLandPermanent("Lands"), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(new AnyColorManaAbility(), Duration.WhileOnBattlefield, new FilterLandPermanent("Lands"), false)));
 
 
         // {T}: Add one mana of any color to your mana pool.

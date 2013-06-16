@@ -29,9 +29,8 @@ package mage.sets.morningtide;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
@@ -41,6 +40,8 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -86,7 +87,7 @@ public class VendilionClique extends CardImpl<VendilionClique> {
 
 class VendilionCliqueEffect extends OneShotEffect<VendilionCliqueEffect> {
     VendilionCliqueEffect() {
-        super(Constants.Outcome.Discard);
+        super(Outcome.Discard);
         staticText = "look at target player's hand. You may choose a nonland card from it. If you do, that player reveals the chosen card, puts it on the bottom of his or her library, then draws a card";
     }
 
@@ -99,14 +100,14 @@ class VendilionCliqueEffect extends OneShotEffect<VendilionCliqueEffect> {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         Player sourcePlayer = game.getPlayer(source.getControllerId());
         if (player != null && sourcePlayer != null) {
-            TargetCard targetCard = new TargetCard(Constants.Zone.ALL, new FilterNonlandCard());
-            if (sourcePlayer.choose(Constants.Outcome.Discard, player.getHand(), targetCard, game)) {
+            TargetCard targetCard = new TargetCard(Zone.ALL, new FilterNonlandCard());
+            if (sourcePlayer.choose(Outcome.Discard, player.getHand(), targetCard, game)) {
                 Card c = game.getCard(targetCard.getFirstTarget());
                 if (c != null) {
                     CardsImpl cards = new CardsImpl();
                     cards.add(c);
                     player.revealCards("Vendilion Clique effect", cards, game);
-                    c.moveToZone(Constants.Zone.LIBRARY, source.getSourceId(), game, false);
+                    c.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
                     player.drawCards(1, game);
                 }
             }

@@ -27,9 +27,9 @@
  */
 package mage.sets.magic2010;
 
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
-import mage.Constants.Zone;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.effects.common.PutCreatureOnBattlefieldEffect;
 import mage.abilities.common.SimpleActivatedAbility;

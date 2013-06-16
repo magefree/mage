@@ -28,15 +28,17 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -57,7 +59,7 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
 
 
         // {tap}: You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life.
-        this.addAbility(new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new ChaliceOfLifeEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ChaliceOfLifeEffect(), new TapSourceCost()));
     }
 
     public ChaliceOfLife(final ChaliceOfLife card) {
@@ -73,7 +75,7 @@ public class ChaliceOfLife extends CardImpl<ChaliceOfLife> {
 class ChaliceOfLifeEffect extends OneShotEffect<ChaliceOfLifeEffect> {
 
     public ChaliceOfLifeEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
         staticText = "You gain 1 life. Then if you have at least 10 life more than your starting life total, transform Chalice of Life";
     }
 

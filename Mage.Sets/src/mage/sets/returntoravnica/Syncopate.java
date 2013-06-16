@@ -27,10 +27,11 @@
  */
 package mage.sets.returntoravnica;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.target.TargetSpell;
 
 import java.util.UUID;
@@ -75,7 +76,7 @@ public class Syncopate extends CardImpl<Syncopate> {
 class SyncopateCounterUnlessPaysEffect extends OneShotEffect<SyncopateCounterUnlessPaysEffect> {
 
     public SyncopateCounterUnlessPaysEffect() {
-        super(Constants.Outcome.Detriment);
+        super(Outcome.Detriment);
     }
 
     public SyncopateCounterUnlessPaysEffect(final SyncopateCounterUnlessPaysEffect effect) {
@@ -104,12 +105,12 @@ class SyncopateCounterUnlessPaysEffect extends OneShotEffect<SyncopateCounterUnl
                         if (stackObject != null && !game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.COUNTER, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()))) {
                             game.informPlayers("Syncopate: cost wasn't payed - countering " + stackObject.getName());
                             if (stackObject instanceof Spell) {
-                                game.rememberLKI(source.getFirstTarget(), Constants.Zone.STACK, (Spell) stackObject);
+                                game.rememberLKI(source.getFirstTarget(), Zone.STACK, (Spell) stackObject);
                             }
                             game.getStack().remove(stackObject);
                             MageObject card = game.getObject(stackObject.getSourceId());
                             if (card instanceof Card) {
-                                ((Card) card).moveToZone(Constants.Zone.EXILED, source.getSourceId(), game, false);
+                                ((Card) card).moveToZone(Zone.EXILED, source.getSourceId(), game, false);
                             }
                             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.COUNTERED, source.getFirstTarget(), source.getSourceId(), stackObject.getControllerId()));
                             return true;

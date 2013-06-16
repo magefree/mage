@@ -32,8 +32,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.WatcherScope;
+
+import mage.constants.WatcherScope;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -68,7 +69,7 @@ public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGravey
         if (event.getType() == GameEvent.EventType.UNTAP_STEP_PRE) {
             reset();
         }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Constants.Zone.GRAVEYARD) {
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             UUID playerId = event.getPlayerId();
             if (playerId != null) {
                 Integer amount = amountOfCardsThisTurn.get(playerId);

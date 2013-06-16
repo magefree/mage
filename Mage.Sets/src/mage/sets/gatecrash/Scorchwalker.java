@@ -28,13 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.BloodrushAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Scorchwalker extends CardImpl<Scorchwalker> {
         this.toughness = new MageInt(1);
 
         // Bloodrush - {1}{R}{R}, Discard Scorchwalker: Target attacking creature gets +5/+1 until end of turn.
-        this.addAbility(new BloodrushAbility("{1}{R}{R}", new BoostTargetEffect(5, 1, Constants.Duration.EndOfTurn)));
+        this.addAbility(new BloodrushAbility("{1}{R}{R}", new BoostTargetEffect(5, 1, Duration.EndOfTurn)));
     }
 
     public Scorchwalker(final Scorchwalker card) {

@@ -28,13 +28,14 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.RetraceAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,7 +54,7 @@ public class FlameJab extends CardImpl<FlameJab> {
         this.getSpellAbility().addEffect(new DamageTargetEffect(1));
         this.getSpellAbility().addTarget(new TargetCreatureOrPlayer());
         // Retrace
-        this.addAbility(new RetraceAbility(new ManaCostsImpl("{R}"), Constants.TimingRule.SORCERY));
+        this.addAbility(new RetraceAbility(new ManaCostsImpl("{R}"), TimingRule.SORCERY));
     }
 
     public FlameJab(final FlameJab card) {

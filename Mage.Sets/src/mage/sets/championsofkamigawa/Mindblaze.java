@@ -31,9 +31,8 @@ package mage.sets.championsofkamigawa;
 import java.util.HashSet;
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
@@ -42,6 +41,7 @@ import mage.cards.CardsImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
@@ -81,7 +81,7 @@ public class Mindblaze extends CardImpl<Mindblaze> {
 
 class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
     MindblazeEffect() {
-        super(Constants.Outcome.Damage);
+        super(Outcome.Damage);
         staticText = "Name a nonland card and choose a number greater than 0. Target player reveals his or her library. If that library contains exactly the chosen number of the named card, {this} deals 8 damage to that player. Then that player shuffles his or her library";
     }
 
@@ -105,11 +105,11 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
             }
             numberChoice.setChoices(numbers);
 
-            while (!playerControls.choose(Constants.Outcome.Neutral, cardChoice, game)) {
+            while (!playerControls.choose(Outcome.Neutral, cardChoice, game)) {
                 game.debugMessage("player canceled choosing name. retrying.");
             }
 
-            while (!playerControls.choose(Constants.Outcome.Neutral, numberChoice, game)) {
+            while (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
                 game.debugMessage("player canceled choosing number. retrying.");
             }
 

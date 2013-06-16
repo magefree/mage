@@ -29,9 +29,8 @@ package mage.sets.worldwake;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
@@ -39,6 +38,8 @@ import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -76,7 +77,7 @@ public class ArchonOfRedemption extends CardImpl<ArchonOfRedemption> {
 
 class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl<ArchonOfRedemptionTriggeredAbility> {
     ArchonOfRedemptionTriggeredAbility() {
-        super(Constants.Zone.BATTLEFIELD, new ArchonOfRedemptionEffect(), true);
+        super(Zone.BATTLEFIELD, new ArchonOfRedemptionEffect(), true);
     }
 
     ArchonOfRedemptionTriggeredAbility(final ArchonOfRedemptionTriggeredAbility ability) {
@@ -114,7 +115,7 @@ class ArchonOfRedemptionTriggeredAbility extends TriggeredAbilityImpl<ArchonOfRe
 
 class ArchonOfRedemptionEffect extends OneShotEffect<ArchonOfRedemptionEffect> {
     ArchonOfRedemptionEffect() {
-        super(Constants.Outcome.GainLife);
+        super(Outcome.GainLife);
     }
 
     ArchonOfRedemptionEffect(final ArchonOfRedemptionEffect effect) {
@@ -126,7 +127,7 @@ class ArchonOfRedemptionEffect extends OneShotEffect<ArchonOfRedemptionEffect> {
         Permanent p = game.getPermanent(targetPointer.getFirst(game, source));
         Player player = game.getPlayer(source.getControllerId());
         if (p == null) {
-            p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Constants.Zone.BATTLEFIELD);
+            p = (Permanent) game.getLastKnownInformation(targetPointer.getFirst(game, source), Zone.BATTLEFIELD);
         }
         if (p != null && player != null) {
             player.gainLife(p.getPower().getValue(), game);

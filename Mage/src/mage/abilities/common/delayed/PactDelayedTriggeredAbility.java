@@ -27,8 +27,7 @@
  */
 package mage.abilities.common.delayed;
 
-import mage.Constants;
-import mage.Constants.Outcome;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.costs.mana.ManaCosts;
@@ -76,7 +75,7 @@ class PactEffect extends OneShotEffect<PactEffect> {
 
 
     public PactEffect(ManaCosts cost) {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         this.cost = cost;
         staticText = "pay " + cost.getText() + ". If you don't, you lose the game";
     }

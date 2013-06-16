@@ -29,15 +29,15 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -57,7 +57,7 @@ public class KeeningBanshee extends CardImpl<KeeningBanshee> {
 
         this.addAbility(FlyingAbility.getInstance());
         // When Keening Banshee enters the battlefield, target creature gets -2/-2 until end of turn.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Constants.Duration.EndOfTurn), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new BoostTargetEffect(-2, -2, Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

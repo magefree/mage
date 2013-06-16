@@ -1,7 +1,7 @@
 package mage.utils;
 
-import mage.Constants;
-import mage.Constants.ColoredManaSymbol;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
@@ -210,13 +210,13 @@ public class DeckBuilder {
             this.card = card;
 
             int type = 0;
-            if (card.getCardType().contains(Constants.CardType.CREATURE)) {
+            if (card.getCardType().contains(CardType.CREATURE)) {
                 type = 10;
             } else if (card.getSubtype().contains("Equipment")) {
                 type = 8;
             } else if (card.getSubtype().contains("Aura")) {
                 type = 5;
-            } else if (card.getCardType().contains(Constants.CardType.INSTANT)) {
+            } else if (card.getCardType().contains(CardType.INSTANT)) {
                 type = 7;
             } else {
                 type = 6;

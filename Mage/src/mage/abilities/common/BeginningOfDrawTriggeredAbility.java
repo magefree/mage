@@ -1,7 +1,7 @@
 package mage.abilities.common;
 
-import mage.Constants.TargetController;
-import mage.Constants.Zone;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.game.Game;

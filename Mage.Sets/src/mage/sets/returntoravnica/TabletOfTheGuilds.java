@@ -28,10 +28,10 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Outcome;
-import mage.Constants.Rarity;
+
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
@@ -75,7 +75,7 @@ public class TabletOfTheGuilds extends CardImpl<TabletOfTheGuilds> {
 class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect<TabletOfTheGuildsEntersBattlefieldEffect> {
 
     public TabletOfTheGuildsEntersBattlefieldEffect() {
-        super(Constants.Outcome.BoostCreature);
+        super(Outcome.BoostCreature);
         staticText = "choose two colors";
     }
 
@@ -119,7 +119,7 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect<TabletOfThe
 class TabletOfTheGuildsGainLifeEffect extends OneShotEffect<TabletOfTheGuildsGainLifeEffect> {
 
     public TabletOfTheGuildsGainLifeEffect() {
-        super(Constants.Outcome.Neutral);
+        super(Outcome.Neutral);
         staticText = "if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is";
     }
 

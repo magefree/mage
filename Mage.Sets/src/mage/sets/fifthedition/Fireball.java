@@ -28,7 +28,7 @@
 package mage.sets.fifthedition;
 
 import java.util.UUID;
-import mage.Constants.Rarity;
+import mage.constants.Rarity;
 
 /**
  *

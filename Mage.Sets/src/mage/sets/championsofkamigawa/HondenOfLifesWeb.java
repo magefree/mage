@@ -30,13 +30,13 @@ package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.SpiritToken;
@@ -58,7 +58,7 @@ public class HondenOfLifesWeb extends CardImpl<HondenOfLifesWeb> {
         this.supertype.add("Legendary");
         this.subtype.add("Shrine");
         this.color.setGreen(true);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new PermanentsOnBattlefieldCount(filter)), Constants.TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new SpiritToken(), new PermanentsOnBattlefieldCount(filter)), TargetController.YOU, false));
     }
 
     public HondenOfLifesWeb(final HondenOfLifesWeb card) {

@@ -29,15 +29,16 @@ package mage.sets.ravnika;
 
 import java.util.UUID;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
+import mage.constants.Zone;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -53,9 +54,9 @@ public class FlameFusillade extends CardImpl<FlameFusillade> {
         this.color.setRed(true);
 
         // Until end of turn, permanents you control gain "{tap}: This permanent deals 1 damage to target creature or player."
-        Ability gainedAbility = new SimpleActivatedAbility(Constants.Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         gainedAbility.addTarget(new TargetCreatureOrPlayer());
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(gainedAbility, Constants.Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(gainedAbility, Duration.EndOfTurn));
     }
 
     public FlameFusillade(final FlameFusillade card) {

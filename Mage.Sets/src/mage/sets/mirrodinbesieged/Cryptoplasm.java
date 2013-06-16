@@ -28,14 +28,14 @@
 
 package mage.sets.mirrodinbesieged;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
@@ -64,7 +64,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
         this.toughness = new MageInt(2);
 
         // At the beginning of your upkeep, you may have Cryptoplasm become a copy of another target creature. If you do, Cryptoplasm gains this ability.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), TargetController.YOU, true);
         ability.addTarget(new TargetCreaturePermanent(filter));
         this.addAbility(ability);
     }
@@ -83,7 +83,7 @@ public class Cryptoplasm extends CardImpl<Cryptoplasm> {
 class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransformEffect> {
 
     CryptoplasmTransformEffect() {
-        super(Constants.Duration.WhileOnBattlefield, Constants.Layer.CopyEffects_1, Constants.SubLayer.NA, Constants.Outcome.Copy);
+        super(Duration.WhileOnBattlefield, Layer.CopyEffects_1, SubLayer.NA, Outcome.Copy);
         staticText = "you may have {this} become a copy of another target creature. If you do, {this} gains this ability";
     }
 
@@ -103,7 +103,7 @@ class CryptoplasmTransformEffect extends ContinuousEffectImpl<CryptoplasmTransfo
         game.copyPermanent(creature, permanent, source, new ApplyToPermanent() {
             @Override
             public Boolean apply(Game game, Permanent permanent) {
-                Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), Constants.TargetController.YOU, true);
+                Ability upkeepAbility = new BeginningOfUpkeepTriggeredAbility(new CryptoplasmTransformEffect(), TargetController.YOU, true);
                 upkeepAbility.addTarget(new TargetCreaturePermanent());
                 permanent.addAbility(upkeepAbility, source.getSourceId(), game);
                 return true;

@@ -1,9 +1,10 @@
 package mage.abilities.keyword;
 
 import java.io.ObjectStreamException;
-import mage.Constants;
+
 import mage.abilities.MageSingleton;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.constants.Zone;
 
 /**
  * Hexproof
@@ -28,7 +29,7 @@ public class HexproofAbility extends SimpleStaticAbility implements MageSingleto
     }
 
     private HexproofAbility() {
-        super(Constants.Zone.BATTLEFIELD, null);
+        super(Zone.BATTLEFIELD, null);
     }
 
     @Override

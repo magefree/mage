@@ -28,8 +28,9 @@
 package mage.sets;
 
 import java.util.GregorianCalendar;
-import mage.Constants;
+
 import mage.cards.ExpansionSet;
+import mage.constants.SetType;
 
 /**
  *
@@ -44,7 +45,7 @@ public class Exodus extends ExpansionSet {
     }
 
     private Exodus() {
-        super("Exodus", "EXO", "", "mage.sets.exodus", new GregorianCalendar(1998, 5, 6).getTime(), Constants.SetType.EXPANSION);
+        super("Exodus", "EXO", "mage.sets.exodus", new GregorianCalendar(1998, 5, 6).getTime(), SetType.EXPANSION);
         this.blockName = "Tempest";
         this.parentSet = Tempest.getInstance();
         this.hasBasicLands = false;

@@ -27,14 +27,14 @@
  */
 package mage.sets.timespiral;
 
-import mage.Constants;
-import mage.Constants.CardType;
-import mage.Constants.Rarity;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderYourControlTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
+import mage.constants.TimingRule;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
@@ -56,7 +56,7 @@ public class MomentaryBlink extends CardImpl<MomentaryBlink> {
         this.getSpellAbility().addEffect(new ReturnToBattlefieldUnderYourControlTargetEffect());
 
         // Flashback {3}{U}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{U}"), Constants.TimingRule.INSTANT));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{U}"), TimingRule.INSTANT));
     }
 
     public MomentaryBlink(final MomentaryBlink card) {

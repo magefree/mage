@@ -1,7 +1,8 @@
 package org.mage.test.cards.rules;
 
-import mage.Constants;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
@@ -14,9 +15,9 @@ public class AdditionalCostRuleTest extends CardTestPlayerBase {
 
     @Test
     public void testAdditionalCostDisplayed() {
-        addCard(Constants.Zone.GRAVEYARD, playerA, "Silvergill Adept");
+        addCard(Zone.GRAVEYARD, playerA, "Silvergill Adept");
 
-        setStopAt(1, Constants.PhaseStep.BEGIN_COMBAT);
+        setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
         Card firewildBorderpost = playerA.getGraveyard().getCards(currentGame).iterator().next();
