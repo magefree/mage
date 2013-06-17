@@ -86,8 +86,9 @@ public class PutLibraryIntoGraveTargetEffect extends OneShotEffect<PutLibraryInt
                     break;
                 }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
