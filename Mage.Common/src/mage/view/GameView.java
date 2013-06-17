@@ -28,11 +28,16 @@
 
 package mage.view;
 
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.Cost;
 import mage.cards.Card;
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -46,11 +51,6 @@ import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.Player;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -131,14 +131,16 @@ public class GameView implements Serializable {
         this.phase = state.getTurn().getPhaseType();
         this.step = state.getTurn().getStepType();
         this.turn = state.getTurnNum();
-        if (state.getActivePlayerId() != null)
+        if (state.getActivePlayerId() != null) {
             this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();
-        else
+        } else {
             this.activePlayerName = "";
-        if (state.getPriorityPlayerId() != null)
+        }
+        if (state.getPriorityPlayerId() != null) {
             this.priorityPlayerName = state.getPlayer(state.getPriorityPlayerId()).getName();
-        else
+        } else {
             this.priorityPlayerName = "";
+        }
         for (CombatGroup combatGroup: state.getCombat().getGroups()) {
             combat.add(new CombatGroupView(combatGroup, game));
         }

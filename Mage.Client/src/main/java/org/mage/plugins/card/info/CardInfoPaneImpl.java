@@ -154,12 +154,15 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                     } else if (CardUtil.isPlaneswalker(card)) {
                         pt = card.getLoyalty().toString();
                     }
-                    if (pt.length() > 0) {
-                        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td>");
-                        buffer.append("<b>");
-                        buffer.append(pt);
-                        buffer.append("</b>");
-                        buffer.append("</td></tr></table>");
+
+                    if (pt.length() > 0 || card.isToken()) {
+                        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
+                        buffer.append(pt).append("</b></td>");
+                        if (card.isToken()) {
+                            buffer.append("<td align='right'>Token</td>");
+                        }
+                        
+                        buffer.append("</tr></table>");
                     }
 
                     StringBuilder rule = new StringBuilder("<br/>");

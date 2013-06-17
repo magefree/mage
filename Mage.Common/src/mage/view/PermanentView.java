@@ -50,7 +50,6 @@ public class PermanentView extends CardView {
     private boolean summoningSickness;
     private int damage;
     private List<UUID> attachments;
-    private List<CounterView> counters;
     private CardView original;
 
     public PermanentView(Permanent permanent, Card card) {
@@ -66,13 +65,7 @@ public class PermanentView extends CardView {
             attachments = new ArrayList<UUID>();
             attachments.addAll(permanent.getAttachments());
         }
-        if (permanent.getCounters().size() > 0) {
-            counters = new ArrayList<CounterView>();
-            for (Counter counter: permanent.getCounters().values()) {
-                counters.add(new CounterView(counter));
-            }
-        }
-        if (permanent instanceof PermanentToken) {
+        if (isToken()) {
             original = new CardView(((PermanentToken)permanent).getToken());
             original.expansionSetCode = permanent.getExpansionSetCode();
         }
@@ -108,10 +101,6 @@ public class PermanentView extends CardView {
 
     public List<UUID> getAttachments() {
         return attachments;
-    }
-
-    public List<CounterView> getCounters() {
-        return counters;
     }
 
     public CardView getOriginal() {
