@@ -308,10 +308,6 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
-    //private void setTimeout(String text) {
-    //    this.txtTimeRemaining.setText(text);
-    //}
-    
     private void setTimeout(int s){
         int minute = s/60;
         int second = s - (minute*60);

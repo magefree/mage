@@ -78,11 +78,9 @@ public class DraftPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (--timeout > 0) {
-                        //setTimeout(Integer.toString(timeout));
                         setTimeout(timeout);
                     }
                     else {
-                        //setTimeout("0");
                         setTimeout(0);
                         countdown.stop();
                     }
@@ -121,7 +119,6 @@ public class DraftPanel extends javax.swing.JPanel {
                         SimpleCardView source = (SimpleCardView) event.getSource();
                         DraftPickView view = session.sendCardPick(draftId, source.getId());
                         if (view != null) {
-                            //draftBooster.loadBooster(view.getBooster(), bigCard);
                             draftBooster.loadBooster(emptyView, bigCard);
                             draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
                             Plugins.getInstance().getActionCallback().hidePopup();
@@ -134,16 +131,11 @@ public class DraftPanel extends javax.swing.JPanel {
         setMessage("Pick a card");
         countdown.stop();
         this.timeout = draftPickView.getTimeout();
-        //setTimeout(Integer.toString(timeout));
         setTimeout(timeout);
         if (timeout != 0) {
             countdown.start();
         }
     }
-
-//    private void setTimeout(String text) {
-//        this.txtTimeRemaining.setText(text);
-//    }
     
     private void setTimeout(int s){
         int minute = s/60;
