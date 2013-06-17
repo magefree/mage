@@ -180,8 +180,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
             
         @Override
         public String getDescription() {
-            if(extend.equals(".png") || extend.equals(".bmp")) 
-                return "Image File(*.png, *.bmp)";
+            if(extend.equals(".png")) 
+                return "Image File(*.png)";
+            if(extend.equals(".bmp"))
+                return "Image File(*.bmp)";
             if(extend.equals(".jpg") || extend.equals(".jpg")) 
                 return "JEGP file(*.jpg,*.jepg)";
             return "";
