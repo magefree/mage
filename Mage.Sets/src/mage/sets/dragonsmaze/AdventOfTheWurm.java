@@ -75,6 +75,8 @@ public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
             subtype.add("Wurm");
             power = new MageInt(5);
             toughness = new MageInt(5);
+            expansionSetCode = "RTR";
+
             addAbility(TrampleAbility.getInstance());
         }
 

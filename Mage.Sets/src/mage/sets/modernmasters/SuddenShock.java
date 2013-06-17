@@ -28,54 +28,25 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.ControlEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.SplitSecondAbility;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class TakePossession extends CardImpl<TakePossession> {
+public class SuddenShock extends mage.sets.timespiral.SuddenShock {
 
-    public TakePossession(UUID ownerId) {
-        super(ownerId, 66, "Take Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
+    public SuddenShock(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 133;
         this.expansionSetCode = "MMA";
-        this.subtype.add("Aura");
-
-        this.color.setBlue(true);
-
-        // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
-        // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // You control enchanted permanent.
-        Effect effect = new ControlEnchantedEffect();
-        effect.setText("You control enchanted permanent");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
     }
 
-    public TakePossession(final TakePossession card) {
+    public SuddenShock(final SuddenShock card) {
         super(card);
     }
 
     @Override
-    public TakePossession copy() {
-        return new TakePossession(this);
+    public SuddenShock copy() {
+        return new SuddenShock(this);
     }
 }

@@ -79,7 +79,8 @@ public class CopyTokenFunction implements Function<Token, Card> {
         for (String type : sourceObj.getSupertype()) {
             target.getSupertype().add(type);
         }
-        //target.setExpansionSetCode(source.getExpansionSetCode());
+        target.setOriginalExpansionSetCode(source.getExpansionSetCode());
+        target.setOriginalCardNumber(source.getCardNumber());
         target.getAbilities().clear();
 
         for (Ability ability0 : sourceObj.getAbilities()) {

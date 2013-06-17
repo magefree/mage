@@ -25,57 +25,60 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.sets.planarchaos;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.ControlEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
-import mage.abilities.keyword.SplitSecondAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.keyword.EchoAbility;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.target.Target;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class TakePossession extends CardImpl<TakePossession> {
+public class HammerheimDeadeye extends CardImpl<HammerheimDeadeye> {
 
-    public TakePossession(UUID ownerId) {
-        super(ownerId, 66, "Take Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
-        this.expansionSetCode = "MMA";
-        this.subtype.add("Aura");
-
-        this.color.setBlue(true);
-
-        // Split second
-        this.addAbility(SplitSecondAbility.getInstance());
-        // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // You control enchanted permanent.
-        Effect effect = new ControlEnchantedEffect();
-        effect.setText("You control enchanted permanent");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    static {
+        filter.add(new AbilityPredicate(FlyingAbility.class));
     }
 
-    public TakePossession(final TakePossession card) {
+    public HammerheimDeadeye(UUID ownerId) {
+        super(ownerId, 101, "Hammerheim Deadeye", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{R}");
+        this.expansionSetCode = "PLC";
+        this.subtype.add("Giant");
+        this.subtype.add("Warrior");
+
+        this.color.setRed(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // Echo {5}{R}
+        this.addAbility(new EchoAbility("{5}{R}"));
+        // When Hammerheim Deadeye enters the battlefield, destroy target creature with flying.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+    }
+
+    public HammerheimDeadeye(final HammerheimDeadeye card) {
         super(card);
     }
 
     @Override
-    public TakePossession copy() {
-        return new TakePossession(this);
+    public HammerheimDeadeye copy() {
+        return new HammerheimDeadeye(this);
     }
 }

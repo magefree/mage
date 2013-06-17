@@ -11,6 +11,8 @@ public interface ImageManager {
     Image getSicknessImage();
     Image getDayImage();
     Image getNightImage();
+    
+    Image getTokenIconImage();
 
     Image getDlgAcceptButtonImage();
     Image getDlgActiveAcceptButtonImage();

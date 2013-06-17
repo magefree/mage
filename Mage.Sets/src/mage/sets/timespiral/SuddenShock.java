@@ -25,57 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.modernmasters;
+package mage.sets.timespiral;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.ControlEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.SplitSecondAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.target.TargetPermanent;
+import mage.target.common.TargetCreatureOrPlayer;
 
 /**
  *
  * @author LevelX2
  */
-public class TakePossession extends CardImpl<TakePossession> {
+public class SuddenShock extends CardImpl<SuddenShock> {
 
-    public TakePossession(UUID ownerId) {
-        super(ownerId, 66, "Take Possession", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{5}{U}{U}");
-        this.expansionSetCode = "MMA";
-        this.subtype.add("Aura");
+    public SuddenShock(UUID ownerId) {
+        super(ownerId, 179, "Sudden Shock", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{R}");
+        this.expansionSetCode = "TSP";
 
-        this.color.setBlue(true);
+        this.color.setRed(true);
 
         // Split second
         this.addAbility(SplitSecondAbility.getInstance());
-        // Enchant permanent
-        TargetPermanent auraTarget = new TargetPermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.GainControl));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        // You control enchanted permanent.
-        Effect effect = new ControlEnchantedEffect();
-        effect.setText("You control enchanted permanent");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-
+        // Sudden Shock deals 2 damage to target creature or player.
+        this.getSpellAbility().addEffect(new DamageTargetEffect(2, true));
+        this.getSpellAbility().addTarget(new TargetCreatureOrPlayer(true));
     }
 
-    public TakePossession(final TakePossession card) {
+    public SuddenShock(final SuddenShock card) {
         super(card);
     }
 
     @Override
-    public TakePossession copy() {
-        return new TakePossession(this);
+    public SuddenShock copy() {
+        return new SuddenShock(this);
     }
 }

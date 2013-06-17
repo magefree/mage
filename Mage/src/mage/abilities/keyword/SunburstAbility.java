@@ -65,7 +65,7 @@ public class SunburstAbility extends EntersBattlefieldAbility{
 
     @Override
     public String getRule() {
-        return "Sunburst";
+        return "Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
     }
     
     

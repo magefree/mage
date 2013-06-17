@@ -25,72 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.gatecrash;
+package mage.sets.timespiral;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.SuspendAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.PutLibraryIntoGraveTargetEffect;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPermanent;
-import mage.target.targetpointer.FixedTarget;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class GrislySpectacle extends CardImpl<GrislySpectacle> {
+public class Phthisis extends CardImpl<Phthisis> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonartifact creature");
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.ARTIFACT)));
-    }
-
-    public GrislySpectacle (UUID ownerId) {
-        super(ownerId, 66, "Grisly Spectacle", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{2}{B}{B}");
-        this.expansionSetCode = "GTC";
+    public Phthisis(UUID ownerId) {
+        super(ownerId, 122, "Phthisis", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}{B}{B}");
+        this.expansionSetCode = "TSP";
 
         this.color.setBlack(true);
 
-        // Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard.
-        this.getSpellAbility().addEffect(new GrislySpectacleEffect());
-        this.getSpellAbility().addTarget(new TargetPermanent(filter));
+        // Destroy target creature. Its controller loses life equal to its power plus its toughness.
+        this.getSpellAbility().addEffect(new PhthisisEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+
+        // Suspend 5-{1}{B}
+        this.addAbility(new SuspendAbility(5, new ManaCostsImpl("{1}{B}"), this));
     }
 
-    public GrislySpectacle(final GrislySpectacle card) {
+    public Phthisis(final Phthisis card) {
         super(card);
     }
 
     @Override
-    public GrislySpectacle  copy() {
-        return new GrislySpectacle(this);
+    public Phthisis copy() {
+        return new Phthisis(this);
     }
 }
 
-class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
+class PhthisisEffect extends OneShotEffect<PhthisisEffect> {
 
-    public GrislySpectacleEffect() {
+    public PhthisisEffect() {
         super(Outcome.DestroyPermanent);
-        this.staticText = "Destroy target nonartifact creature. Its controller puts a number of cards equal to that creature's power from the top of his or her library into his or her graveyard";
+        this.staticText = "Destroy target creature. Its controller loses life equal to its power plus its toughness";
     }
 
-    public GrislySpectacleEffect(final GrislySpectacleEffect effect) {
+    public PhthisisEffect(final PhthisisEffect effect) {
         super(effect);
     }
 
     @Override
-    public GrislySpectacleEffect copy() {
-        return new GrislySpectacleEffect(this);
+    public PhthisisEffect copy() {
+        return new PhthisisEffect(this);
     }
 
     @Override
@@ -99,12 +93,11 @@ class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
         if (creature != null) {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
-                int power = creature.getPower().getValue();
+                int lifeLoss = creature.getPower().getValue() + creature.getToughness().getValue();
                 creature.destroy(source.getSourceId(), game, false);
-                // the mill effect works also if creature is indestructible or regenerated
-                Effect effect = new PutLibraryIntoGraveTargetEffect(power);
-                effect.setTargetPointer(new FixedTarget(controller.getId()));
-                return effect.apply(game, source);
+                // the life loss happens also if the creature is indestructible or regenerated (legal targets)
+                controller.loseLife(lifeLoss, game);
+                return true;
             }
         }
         return false;

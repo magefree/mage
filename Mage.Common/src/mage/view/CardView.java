@@ -82,6 +82,7 @@ public class CardView extends SimpleCardView {
     protected boolean transformed;
 
     protected boolean isSplitCard;
+    protected boolean isToken;
     protected String leftSplitName;
     protected ManaCosts leftSplitCosts;
     protected List<String> leftSplitRules;
@@ -152,12 +153,23 @@ public class CardView extends SimpleCardView {
 
 
         if (card instanceof PermanentToken) {
+            this.isToken = true;
             this.rarity = Rarity.COMMON;
-            this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+            if (((PermanentToken) card).getToken().getOriginalCardNumber() > 0) {
+                // a token copied from permanent
+                this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
+                this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
+            } else {
+                // a created token
+                this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+            }
+            //
+            // set code und card number for token copies to get the image
             this.rules = ((PermanentToken) card).getRules();
             this.type = ((PermanentToken)card).getToken().getTokenType();
         } else {
             this.rarity = card.getRarity();
+            this.isToken = false;
         }
         if (card.getCounters() != null && !card.getCounters().isEmpty()) {
             counters = new ArrayList<CounterView>();
@@ -451,6 +463,10 @@ public class CardView extends SimpleCardView {
 
     public CardView getSecondCardFace() {
         return this.secondCardFace;
+    }
+
+    public boolean isToken() {
+        return this.isToken;
     }
 
     public void setTransformed(boolean transformed) {
