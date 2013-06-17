@@ -49,6 +49,8 @@ public class Token extends MageObjectImpl<Token> {
     protected String description;
     private UUID lastAddedTokenId;
     private int tokenType;
+    private int originalCardNumber;
+    private String originalExpansionSetCode;
     
     public enum Type {
         FIRST(1),
@@ -146,4 +148,21 @@ public class Token extends MageObjectImpl<Token> {
     public void setTokenType(int tokenType) {
         this.tokenType = tokenType;
     }
+
+    public int getOriginalCardNumber() {
+        return originalCardNumber;
+    }
+
+    public void setOriginalCardNumber(int originalCardNumber) {
+        this.originalCardNumber = originalCardNumber;
+    }
+
+    public String getOriginalExpansionSetCode() {
+        return originalExpansionSetCode;
+    }
+
+    public void setOriginalExpansionSetCode(String originalExpansionSetCode) {
+        this.originalExpansionSetCode = originalExpansionSetCode;
+    }
+    
 }

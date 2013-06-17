@@ -153,11 +153,20 @@ public class CardView extends SimpleCardView {
 
 
         if (card instanceof PermanentToken) {
+            this.isToken = true;
             this.rarity = Rarity.COMMON;
-            this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+            if (((PermanentToken) card).getToken().getOriginalCardNumber() > 0) {
+                // a token copied from permanent
+                this.expansionSetCode = ((PermanentToken) card).getToken().getOriginalExpansionSetCode();
+                this.cardNumber = ((PermanentToken) card).getToken().getOriginalCardNumber();
+            } else {
+                // a created token
+                this.expansionSetCode = ((PermanentToken) card).getExpansionSetCode();
+            }
+            //
+            // set code und card number for token copies to get the image
             this.rules = ((PermanentToken) card).getRules();
             this.type = ((PermanentToken)card).getToken().getTokenType();
-            this.isToken = true;
         } else {
             this.rarity = card.getRarity();
             this.isToken = false;
