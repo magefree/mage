@@ -28,15 +28,14 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
-
-import java.util.UUID;
 import mage.target.targetpointer.FirstTargetPointer;
 
 /**
@@ -105,12 +104,14 @@ public class DestroyTargetEffect extends OneShotEffect<DestroyTargetEffect> {
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() == 0) {
             sb.append("destroy that creature"); //TODO add possibility to specify text with targetPointer usage
-        } else if (mode.getTargets().get(0).getNumberOfTargets() == 1)
+        } else if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
             sb.append("Destroy target ").append(mode.getTargets().get(0).getTargetName());
-        else
+        } else {
             sb.append("Destroy ").append(mode.getTargets().get(0).getNumberOfTargets()).append(" target ").append(mode.getTargets().get(0).getTargetName());
-        if (noRegen)
+        }
+        if (noRegen) {
             sb.append(". It can't be regenerated");
+        }
         return sb.toString();
     }
 
