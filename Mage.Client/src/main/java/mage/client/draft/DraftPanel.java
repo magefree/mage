@@ -78,10 +78,10 @@ public class DraftPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (--timeout > 0) {
-                        setTimeout(Integer.toString(timeout));
+                        setTimeout(timeout);
                     }
                     else {
-                        setTimeout("0");
+                        setTimeout(0);
                         countdown.stop();
                     }
                 }
@@ -119,7 +119,6 @@ public class DraftPanel extends javax.swing.JPanel {
                         SimpleCardView source = (SimpleCardView) event.getSource();
                         DraftPickView view = session.sendCardPick(draftId, source.getId());
                         if (view != null) {
-                            //draftBooster.loadBooster(view.getBooster(), bigCard);
                             draftBooster.loadBooster(emptyView, bigCard);
                             draftPicks.loadCards(CardsViewUtil.convertSimple(view.getPicks()), bigCard, null);
                             Plugins.getInstance().getActionCallback().hidePopup();
@@ -132,13 +131,26 @@ public class DraftPanel extends javax.swing.JPanel {
         setMessage("Pick a card");
         countdown.stop();
         this.timeout = draftPickView.getTimeout();
-        setTimeout(Integer.toString(timeout));
+        setTimeout(timeout);
         if (timeout != 0) {
             countdown.start();
         }
     }
-
-    private void setTimeout(String text) {
+    
+    private void setTimeout(int s){
+        int minute = s/60;
+        int second = s - (minute*60);
+        String text;
+        if(minute < 10){
+            text = "0" + Integer.toString(minute) + ":";
+        }else{
+            text = Integer.toString(minute) + ":";
+        }
+        if(second < 10){
+            text = text + "0" + Integer.toString(second);
+        }else{
+            text = text + Integer.toString(second);
+        }
         this.txtTimeRemaining.setText(text);
     }
 
