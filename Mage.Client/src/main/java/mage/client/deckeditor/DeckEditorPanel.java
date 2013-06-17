@@ -102,12 +102,12 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (--timeout > 0) {
-                        setTimeout(Integer.toString(timeout));
+                        setTimeout(timeout);
                     }
                     else {
                         if (updateDeckTask != null)
                             updateDeckTask.cancel(true);
-                        setTimeout("0");
+                        setTimeout(0);
                         countdown.stop();
                         hideDeckEditor();
                     }
@@ -136,7 +136,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.deckArea.showSideboard(false);
                 countdown.stop();
                 this.timeout = time;
-                setTimeout(Integer.toString(timeout));
+                setTimeout(timeout);
                 if (timeout != 0) {
                     countdown.start();
                     if (updateDeckTask == null || updateDeckTask.isDone()) {
@@ -308,7 +308,24 @@ public class DeckEditorPanel extends javax.swing.JPanel {
         }
     }
 
-    private void setTimeout(String text) {
+    //private void setTimeout(String text) {
+    //    this.txtTimeRemaining.setText(text);
+    //}
+    
+    private void setTimeout(int s){
+        int minute = s/60;
+        int second = s - (minute*60);
+        String text;
+        if(minute < 10){
+            text = "0" + Integer.toString(minute) + ":";
+        }else{
+            text = Integer.toString(minute) + ":";
+        }
+        if(second < 10){
+            text = text + "0" + Integer.toString(second);
+        }else{
+            text = text + Integer.toString(second);
+        }
         this.txtTimeRemaining.setText(text);
     }
 
