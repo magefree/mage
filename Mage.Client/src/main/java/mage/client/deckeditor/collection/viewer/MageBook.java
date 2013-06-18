@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.plugins.impl.Plugins;
@@ -301,7 +302,7 @@ public class MageBook extends JComponent {
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(format);
         if (this.setsToDisplay.isEmpty()) {
             // display all
-            this.setsToDisplay = CardRepository.instance.getSetCodes();
+            this.setsToDisplay = ExpansionRepository.instance.getSetCodes();
         }
         addSetTabs();
         tabs.get(0).execute();

@@ -4,10 +4,12 @@ import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.Mana;
 import mage.cards.Card;
+import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.sets.ConstructedFormats;
@@ -27,8 +29,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
-import mage.cards.ExpansionSet;
 
 /**
  * Generates random card pool and builds a deck.
@@ -140,7 +140,7 @@ public class DeckGenerator {
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
         if (setsToUse.isEmpty()) {
             // use all
-            setsToUse = CardRepository.instance.getSetCodes();
+            setsToUse = ExpansionRepository.instance.getSetCodes();
         }
 
         if (selectedColors.contains("X")) {

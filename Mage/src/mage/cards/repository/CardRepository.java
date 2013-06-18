@@ -32,7 +32,6 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
-import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import java.io.File;
@@ -54,7 +53,8 @@ public enum CardRepository {
     instance;
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
-    private static final long DB_VERSION = 7;
+    private static final String VERSION_ENTITY_NAME = "card";
+    private static final long CARD_DB_VERSION = 7;
 
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -67,16 +67,10 @@ public enum CardRepository {
         }
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(JDBC_URL);
-            TableUtils.createTableIfNotExists(connectionSource, DatabaseVersion.class);
-            Dao<DatabaseVersion, Object> dbVersionDao = DaoManager.createDao(connectionSource, DatabaseVersion.class);
-            List<DatabaseVersion> dbVersions = dbVersionDao.queryForAll();
-            if (dbVersions.isEmpty() || dbVersions.get(0).getVersion() != DB_VERSION) {
+            boolean obsolete = RepositoryUtil.isDatabaseObsolete(connectionSource, VERSION_ENTITY_NAME, CARD_DB_VERSION);
+
+            if (obsolete) {
                 TableUtils.dropTable(connectionSource, CardInfo.class, true);
-                if (dbVersions.isEmpty()) {
-                    DatabaseVersion dbVersion = new DatabaseVersion();
-                    dbVersion.setVersion(DB_VERSION);
-                    dbVersionDao.create(dbVersion);
-                }
             }
 
             TableUtils.createTableIfNotExists(connectionSource, CardInfo.class);
@@ -121,20 +115,6 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return false;
-    }
-
-    public List<String> getSetCodes() {
-        List<String> setCodes = new ArrayList<String>();
-        try {
-            QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
-            qb.distinct().selectColumns("setCode");
-            List<CardInfo> results = cardDao.query(qb.prepare());
-            for (CardInfo card : results) {
-                setCodes.add(card.getSetCode());
-            }
-        } catch (SQLException ex) {
-        }
-        return setCodes;
     }
 
     public Set<String> getNames() {
@@ -183,14 +163,16 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
-            Where where = qb.where();
-            where.and(where.not().like("types", '%' + CardType.CREATURE.name() +'%'),where.not().like("types", '%' + CardType.LAND.name() + '%'));
+            qb.where()
+                    .not().like("types", '%' + CardType.CREATURE.name() + '%')
+                    .and()
+                    .not().like("types", '%' + CardType.LAND.name() + '%');
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
                 if (result > 0) {
                     names.add(card.getName().substring(0, result));
-                    names.add(card.getName().substring(result+4));
+                    names.add(card.getName().substring(result + 4));
                 } else {
                     names.add(card.getName());
                 }
@@ -265,9 +247,7 @@ public enum CardRepository {
 
     public List<CardInfo> getAllCards() {
         try {
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-
-            return cardDao.query(queryBuilder.prepare());
+            return cardDao.queryForAll();
         } catch (SQLException ex) {
         }
         return new ArrayList<CardInfo>();
