@@ -47,6 +47,7 @@ public class ChainReaction extends CardImpl<ChainReaction> {
 
         this.color.setRed(true);
 
+        // Chain Reaction deals X damage to each creature, where X is the number of creatures on the battlefield.
         this.getSpellAbility().addEffect(new DamageAllEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent()), new FilterCreaturePermanent()));
     }
 
