@@ -1005,7 +1005,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CardScanner.scan();
                 for (String arg : args) {
                     if (arg.startsWith(liteModeArg)) {
                         liteMode = true;
