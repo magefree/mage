@@ -53,6 +53,7 @@ public class CardScanner {
         List<String> packages = new ArrayList<String>();
         for (ExpansionSet set : Sets.getInstance().values()) {
             packages.add(set.getPackageName());
+            ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
 
         for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
