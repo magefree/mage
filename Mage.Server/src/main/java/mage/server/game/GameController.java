@@ -28,7 +28,6 @@
 
 package mage.server.game;
 
-import mage.constants.Zone;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -37,6 +36,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.events.Listener;
@@ -45,14 +45,12 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.server.*;
+import mage.server.game.timer.PriorityTimer;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
-import mage.view.AbilityPickerView;
-import mage.view.CardsView;
+import mage.view.*;
 import mage.view.ChatMessage.MessageColor;
-import mage.view.GameView;
-import mage.view.PermanentView;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -75,6 +73,13 @@ public class GameController implements GameCallback {
 
     private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
     private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
+    private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<UUID, PriorityTimer>();
+
+    /**
+     * Time each player has during the game to play using his\her priority.
+     */
+    private static final int PRIORITY_TIME_SEC = 62;
+    
     private ConcurrentHashMap<UUID, UUID> userPlayerMap;
     private UUID gameSessionId;
     private Game game;
@@ -106,6 +111,8 @@ public class GameController implements GameCallback {
                 @Override
                 public void event(TableEvent event) {
                     try {
+                        PriorityTimer timer;
+                        UUID playerId;
                         switch (event.getEventType()) {
                             case UPDATE:
                                 updateGame();
@@ -123,6 +130,43 @@ public class GameController implements GameCallback {
                                 break;
                             case ERROR:
                                 error(event.getMessage(), event.getException());
+                                break;
+                            case INIT_TIMER:
+                                final UUID initPlayerId = event.getPlayerId();
+                                if (initPlayerId == null) {
+                                    throw new IllegalStateException("INIT_TIMER: playerId can't be null");
+                                }
+                                long delay = 250L; // run each 250 ms
+                                timer = new PriorityTimer(PRIORITY_TIME_SEC, delay, new Runnable() {
+                                    public void run() {
+                                        game.concede(initPlayerId);
+                                        logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
+                                    }
+                                });
+                                timers.put(initPlayerId, timer);
+                                timer.init();
+                                break;
+                            case RESUME_TIMER:
+                                playerId = event.getPlayerId();
+                                if (playerId == null) {
+                                    throw new IllegalStateException("RESUME_TIMER: playerId can't be null");
+                                }
+                                timer = timers.get(playerId);
+                                if (timer == null) {
+                                    throw new IllegalStateException("RESUME_TIMER: couldn't find timer for player: " + playerId);
+                                }
+                                timer.resume();
+                                break;
+                            case PAUSE_TIMER:
+                                playerId = event.getPlayerId();
+                                if (playerId == null) {
+                                    throw new IllegalStateException("PAUSE_TIMER: playerId can't be null");
+                                }
+                                timer = timers.get(playerId);
+                                if (timer == null) {
+                                    throw new IllegalStateException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
+                                }
+                                timer.pause();
                                 break;
                         }
                     } catch (MageException ex) {
@@ -388,6 +432,12 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void updateGame() {
+        for (Player player: game.getState().getPlayers().values()) {
+            PriorityTimer timer = timers.get(player.getId());
+            if (timer != null) {
+                player.setPriorityTimeLeft(timer.getCount());
+            }
+        }
         for (final GameSession gameSession: gameSessions.values()) {
             gameSession.update();
         }

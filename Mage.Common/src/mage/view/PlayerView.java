@@ -63,6 +63,7 @@ public class PlayerView implements Serializable {
     private List<EmblemView> emblemList = new ArrayList<EmblemView>();
     private List<UUID> attachments = new ArrayList<UUID>();
     private int statesSavedSize;
+    private int priorityTimeLeft;
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();
@@ -108,6 +109,7 @@ public class PlayerView implements Serializable {
         }
 
         this.statesSavedSize = player.getStoredBookmark();
+        this.priorityTimeLeft = player.getPriorityTimeLeft();
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -190,5 +192,9 @@ public class PlayerView implements Serializable {
 
     public int getStatesSavedSize() {
         return statesSavedSize;
+    }
+
+    public int getPriorityTimeLeft() {
+        return priorityTimeLeft;
     }
 }
