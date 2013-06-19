@@ -4,7 +4,7 @@ package org.mage.plugins.card.images;
  *
  * @author North
  */
-public class CardInfo {
+public class CardDownloadData {
 
     private String name;
     private String downloadName;
@@ -19,15 +19,15 @@ public class CardInfo {
     private boolean splitCard;
     private boolean usesVariousArt;
 
-    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
         this(name, set, collectorId, usesVariousArt, type, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token) {
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token) {
         this(name, set, collectorId, usesVariousArt, type, token, false, false);
     }
 
-    public CardInfo(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
+    public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type, boolean token, boolean twoFacedCard, boolean secondSide) {
         this.name = name;
         this.set = set;
         this.collectorId = collectorId;
@@ -38,7 +38,7 @@ public class CardInfo {
         this.secondSide = secondSide;
     }
 
-    public CardInfo(final CardInfo card) {
+    public CardDownloadData(final CardDownloadData card) {
         this.name = card.name;
         this.set = card.set;
         this.collectorId = card.collectorId;
@@ -57,7 +57,7 @@ public class CardInfo {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CardInfo other = (CardInfo) obj;
+        final CardDownloadData other = (CardDownloadData) obj;
         if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
             return false;
         }
@@ -94,10 +94,6 @@ public class CardInfo {
 
     public Integer getCollectorId() {
         return collectorId;
-    }
-
-    public void setCollectorId(Integer collectorId) {
-        this.collectorId = collectorId;
     }
 
     public String getName() {
@@ -158,10 +154,6 @@ public class CardInfo {
 
     public Integer getType() {
         return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public boolean getUsesVariousArt() {

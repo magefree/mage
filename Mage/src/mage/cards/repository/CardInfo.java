@@ -30,9 +30,11 @@ package mage.cards.repository;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
@@ -84,7 +86,17 @@ public class CardInfo {
     @DatabaseField
     protected boolean white;
     @DatabaseField
+    protected boolean splitCard;
+    @DatabaseField
+    protected boolean flipCard;
+    @DatabaseField
     protected boolean doubleFaced;
+    @DatabaseField
+    protected boolean nightCard;
+    @DatabaseField
+    protected String flipCardName;
+    @DatabaseField
+    protected String secondSideName;
 
     public CardInfo() {
     }
@@ -98,7 +110,17 @@ public class CardInfo {
         this.toughness = card.getToughness().toString();
         this.convertedManaCost = card.getManaCost().convertedManaCost();
         this.rarity = card.getRarity();
+        this.splitCard = card.isSplitCard();
+
+        this.flipCard = card.isFlipCard();
+        this.flipCardName = card.getFlipCardName();
+
         this.doubleFaced = card.canTransform();
+        this.nightCard = card.isNightCard();
+        Card secondSide = card.getSecondCardFace();
+        if (secondSide != null) {
+            this.secondSideName = secondSide.getName();
+        }
 
         this.blue = card.getColor().isBlue();
         this.black = card.getColor().isBlack();
@@ -144,7 +166,7 @@ public class CardInfo {
         for (String type : this.types.split(SEPARATOR)) {
             try {
                 list.add(CardType.valueOf(type));
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
             }
         }
         return list;
@@ -216,5 +238,33 @@ public class CardInfo {
 
     public String getClassName() {
         return className;
+    }
+
+    public int getCardNumber() {
+        return cardNumber;
+    }
+
+    public boolean isSplitCard() {
+        return splitCard;
+    }
+
+    public boolean isFlipCard() {
+        return flipCard;
+    }
+
+    public String getFlipCardName() {
+        return flipCardName;
+    }
+
+    public boolean isDoubleFaced() {
+        return doubleFaced;
+    }
+
+    public boolean isNightCard() {
+        return nightCard;
+    }
+
+    public String getSecondSideName() {
+        return secondSideName;
     }
 }
