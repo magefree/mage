@@ -52,7 +52,7 @@ public class DeckUtil {
         Deck deck = new Deck();
         for (SimpleCardView cardView : view.getCards().values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            Card card = cardInfo != null ? cardInfo.getMockCard() : null;
             if (card != null) {
                 deck.getCards().add(card);
             } else {
@@ -61,7 +61,7 @@ public class DeckUtil {
         }
         for (SimpleCardView cardView : view.getSideboard().values()) {
             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
-            Card card = cardInfo != null ? cardInfo.getCard() : null;
+            Card card = cardInfo != null ? cardInfo.getMockCard() : null;
             if (card != null) {
                 deck.getSideboard().add(card);
             } else {

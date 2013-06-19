@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import mage.cards.MockCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
@@ -137,6 +138,10 @@ public class CardInfo {
 
     public Card getCard() {
         return CardImpl.createCard(className);
+    }
+
+    public Card getMockCard() {
+        return new MockCard(this);
     }
 
     public ObjectColor getColor() {

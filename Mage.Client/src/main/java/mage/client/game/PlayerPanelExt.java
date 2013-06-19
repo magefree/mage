@@ -249,7 +249,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         // Avatar
         Image image = ImageHelper.getImageFromResources(DEFAULT_AVATAR_PATH);
 
-        topCardPanel = Plugins.getInstance().getMageCard(new CardView(CardRepository.instance.findCard("Forest").getCard()), bigCard, topCardDimension, gameId, true);
+        topCardPanel = Plugins.getInstance().getMageCard(new CardView(CardRepository.instance.findCard("Forest").getMockCard()), bigCard, topCardDimension, gameId, true);
         topCardPanel.setVisible(false);
         panelBackground.add(topCardPanel);
 

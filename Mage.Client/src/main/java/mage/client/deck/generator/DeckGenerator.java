@@ -226,7 +226,7 @@ public class DeckGenerator {
             int tries = 0;
             int count = 0;
             while (count < cardsCount) {
-                Card card = cardPool.get(random.nextInt(cardPoolCount)).getCard();
+                Card card = cardPool.get(random.nextInt(cardPoolCount)).getMockCard();
                 if (cardFitsChosenColors(card, allowedColors)) {
                     spellCardPool.add(card);
                     count++;
@@ -291,7 +291,7 @@ public class DeckGenerator {
             int tries = 0;
             int count = 0;
             while (count < landsCount) {
-                Card card = landCards.get(random.nextInt(allCount)).getCard();
+                Card card = landCards.get(random.nextInt(allCount)).getMockCard();
                 if (cardCardProduceChosenColors(card, allowedColors)) {
                     nonBasicLandCardPool.add(card);
                     count++;
@@ -378,7 +378,7 @@ public class DeckGenerator {
         }
 
         int randomInt = new Random().nextInt(cards.size());
-        return cards.get(randomInt).getCard();
+        return cards.get(randomInt).getMockCard();
 
     }
 
