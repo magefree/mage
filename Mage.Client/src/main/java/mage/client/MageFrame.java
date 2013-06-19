@@ -40,7 +40,6 @@ import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.CardScanner;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
@@ -67,7 +66,6 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.MusicPlayer;
 import mage.components.ImagePanel;
-import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -75,7 +73,6 @@ import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.server.Main;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
@@ -205,12 +202,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new SessionImpl(this);
-        session.setEmbeddedMageServerAction(new Action() {
-            @Override
-            public void execute() {
-                Main.main(new String[]{});
-            }
-        });
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
