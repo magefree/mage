@@ -28,12 +28,6 @@
 
 package mage.sets.scarsofmirrodin;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.*;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
@@ -51,6 +45,7 @@ import mage.abilities.effects.common.UntapTargetEffect;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -61,6 +56,8 @@ import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetLandPermanent;
+
+import java.util.UUID;
 
 /**
  *
@@ -95,7 +92,7 @@ public class KothOfTheHammer extends CardImpl<KothOfTheHammer> {
         // -2: Add {R} to your mana pool for each Mountain you control.
         this.addAbility(new LoyaltyAbility(new DynamicManaEffect(Mana.RedMana, new PermanentsOnBattlefieldCount(filterCount)), -2));
 
-        // -5: You get an emblem with "Mountains you control have ‘{T}: This land deals 1 damage to target creature or player.'
+        // -5: You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player.'
         this.addAbility(new LoyaltyAbility(new GetEmblemEffect(new KothOfTheHammerEmblem()), -5));
     }
 
