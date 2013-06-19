@@ -36,6 +36,7 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.constants.Constants;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -43,14 +44,18 @@ import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
+import mage.interfaces.Action;
 import mage.players.Player;
 import mage.server.*;
-import mage.server.game.timer.PriorityTimer;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
-import mage.view.*;
+import mage.utils.timer.PriorityTimer;
+import mage.view.AbilityPickerView;
+import mage.view.CardsView;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.GameView;
+import mage.view.PermanentView;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -74,11 +79,6 @@ public class GameController implements GameCallback {
     private ConcurrentHashMap<UUID, GameSession> gameSessions = new ConcurrentHashMap<UUID, GameSession>();
     private ConcurrentHashMap<UUID, GameWatcher> watchers = new ConcurrentHashMap<UUID, GameWatcher>();
     private ConcurrentHashMap<UUID, PriorityTimer> timers = new ConcurrentHashMap<UUID, PriorityTimer>();
-
-    /**
-     * Time each player has during the game to play using his\her priority.
-     */
-    private static final int PRIORITY_TIME_SEC = 62;
     
     private ConcurrentHashMap<UUID, UUID> userPlayerMap;
     private UUID gameSessionId;
@@ -137,8 +137,9 @@ public class GameController implements GameCallback {
                                     throw new IllegalStateException("INIT_TIMER: playerId can't be null");
                                 }
                                 long delay = 250L; // run each 250 ms
-                                timer = new PriorityTimer(PRIORITY_TIME_SEC, delay, new Runnable() {
-                                    public void run() {
+                                timer = new PriorityTimer(Constants.PRIORITY_TIME_SEC, delay, new Action() {
+                                    @Override
+                                    public void execute() throws MageException {
                                         game.concede(initPlayerId);
                                         logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
                                     }

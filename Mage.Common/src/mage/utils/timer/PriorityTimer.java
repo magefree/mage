@@ -1,5 +1,7 @@
-package mage.server.game.timer;
+package mage.utils.timer;
 
+import mage.MageException;
+import mage.interfaces.Action;
 import org.apache.log4j.Logger;
 
 import java.util.Timer;
@@ -16,7 +18,9 @@ public class PriorityTimer extends TimerTask {
 
     private long delay;
 
-    private Runnable taskOnTimeout;
+    private Action taskOnTimeout;
+
+    private Action taskOnTick;
 
     private States state = States.NONE;
 
@@ -28,7 +32,7 @@ public class PriorityTimer extends TimerTask {
         FINISHED
     }
 
-    public PriorityTimer(int count, long delay, Runnable taskOnTimeout) {
+    public PriorityTimer(int count, long delay, Action taskOnTimeout) {
         this.count = count;
         this.delay = delay;
         this.taskOnTimeout = taskOnTimeout;
@@ -71,24 +75,44 @@ public class PriorityTimer extends TimerTask {
         return count;
     }
 
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setTaskOnTick(Action taskOnTick) {
+        this.taskOnTick = taskOnTick;
+    }
+
     @Override
     public void run() {
         if (state == States.RUNNING) {
             count--;
+            if (taskOnTick != null) {
+                try {
+                    taskOnTick.execute();
+                } catch (MageException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         if (logger.isDebugEnabled()) logger.debug("Count is: " + count);
         //System.out.println("Count is: " + count);
         if (count <= 0) {
             cancel();
-            taskOnTimeout.run();
+            try {
+                taskOnTimeout.execute();
+            } catch (MageException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     public static void main(String[] args) throws Exception {
         long delay = 250L;
         int count = 5;
-        PriorityTimer timer = new PriorityTimer(count, delay, new Runnable() {
-            public void run() {
+        PriorityTimer timer = new PriorityTimer(count, delay, new Action() {
+            @Override
+            public void execute() throws MageException {
                 System.out.println("Exit");
                 System.exit(0);
             }

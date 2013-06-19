@@ -68,6 +68,11 @@ public final class Constants {
 
     public static final double SCALE_FACTOR = 0.5;
 
+    /**
+     * Time each player has during the game to play using his\her priority.
+     */
+    public static final int PRIORITY_TIME_SEC = 1200;
+
     public enum SessionState {
         DISCONNECTED, CONNECTED, CONNECTING, DISCONNECTING, SERVER_UNAVAILABLE, SERVER_STARTING;
     }
