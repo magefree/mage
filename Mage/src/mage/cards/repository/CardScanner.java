@@ -59,7 +59,7 @@ public class CardScanner {
         for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
             if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
                 Card card = CardImpl.createCard(c);
-                if (card != null && !card.isNightCard()) {
+                if (card != null) {
                     cardsToAdd.add(new CardInfo(card));
                 }
             }
