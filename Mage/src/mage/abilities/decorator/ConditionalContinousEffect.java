@@ -1,12 +1,12 @@
 package mage.abilities.decorator;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.FixedCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.game.Game;
@@ -83,6 +83,9 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
         }
         if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
             used = true;
+        }
+        if (!condition.apply(game, source) && effect.getDuration() == Duration.Custom) {
+            this.discard();
         }
         return false;
     }
