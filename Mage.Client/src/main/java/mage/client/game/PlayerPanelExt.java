@@ -182,6 +182,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
         this.avatar.setText(player.getName());
+        String priorityTimeValue = getPriorityTimeLeftString(player);
+        this.avatar.setTopText(priorityTimeValue);
         this.btnPlayer.setText(player.getName());
         if (player.isActive()) {
             this.avatar.setBorder(greenBorder);
@@ -214,6 +216,11 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
 
         update(player.getManaPool());
+    }
+
+    private String getPriorityTimeLeftString(PlayerView player) {
+        int priorityTimeLeft = player.getPriorityTimeLeft();
+        return priorityTimeLeft / 3600 + ":" + (priorityTimeLeft % 3600) / 60 + ":" + priorityTimeLeft % 60;
     }
 
     protected void update(ManaPoolView pool) {

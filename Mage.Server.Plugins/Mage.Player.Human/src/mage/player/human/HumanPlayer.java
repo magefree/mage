@@ -28,11 +28,6 @@
 
 package mage.player.human;
 
-import java.io.Serializable;
-import java.util.*;
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.*;
 import mage.abilities.costs.common.SacrificeSourceCost;
@@ -46,6 +41,9 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
@@ -66,6 +64,9 @@ import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetDefender;
 import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
+
+import java.io.Serializable;
+import java.util.*;
 
 
 /**
@@ -98,40 +99,43 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         super(player);
     }
 
-    protected void waitForResponse() {
+    protected void waitForResponse(Game game) {
         response.clear();
         log.debug("Waiting response from player: " + getId());
+        game.resumeTimer(playerId);
         synchronized(response) {
             try {
                 response.wait();
                 log.debug("Got response from player: " + getId());
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
+            } finally {
+                game.pauseTimer(playerId);
             }
         }
     }
 
-    protected void waitForBooleanResponse() {
+    protected void waitForBooleanResponse(Game game) {
         do {
-            waitForResponse();
+            waitForResponse(game);
         } while (response.getBoolean() == null && !abort);
     }
 
-    protected void waitForUUIDResponse() {
+    protected void waitForUUIDResponse(Game game) {
         do {
-            waitForResponse();
+            waitForResponse(game);
         } while (response.getUUID() == null && !abort);
     }
 
-    protected void waitForStringResponse() {
+    protected void waitForStringResponse(Game game) {
         do {
-            waitForResponse();
+            waitForResponse(game);
         } while (response.getString() == null && !abort);
     }
 
-    protected void waitForIntegerResponse() {
+    protected void waitForIntegerResponse(Game game) {
         do {
-            waitForResponse();
+            waitForResponse(game);
         } while (response.getInteger() == null && !abort);
     }
 
@@ -143,7 +147,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 .append(getHand().size() > nextHandSize?"down to ":"for free, draw ")
                 .append(nextHandSize)
                 .append(nextHandSize == 1?" card?":" cards?").toString());
-        waitForBooleanResponse();
+        waitForBooleanResponse(game);
         if (!abort) {
             return response.getBoolean();
         }
@@ -154,7 +158,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public boolean chooseUse(Outcome outcome, String message, Game game) {
         updateGameStatePriority("chooseUse", game);
         game.fireAskPlayerEvent(playerId, message);
-        waitForBooleanResponse();
+        waitForBooleanResponse(game);
         if (!abort) {
             return response.getBoolean();
         }
@@ -175,7 +179,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         }
         while (!abort) {
             game.fireChooseEvent(playerId, replacementEffectChoice);
-            waitForResponse();
+            waitForResponse(game);
             log.debug("Choose effect: " + response.getString());
             if (response.getString() != null) {
                 replacementEffectChoice.setChoice(response.getString());
@@ -196,7 +200,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("choose(3)", game);
         while (!abort) {
             game.fireChooseEvent(playerId, choice);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getString() != null) {
                 choice.setChoice(response.getString());
                 return true;
@@ -218,7 +222,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         while (!abort) {
             Set<UUID> cards = target.possibleTargets(null, playerId, game);
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), options);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target instanceof TargetPermanent) {
                     if (((TargetPermanent)target).canTarget(playerId, response.getUUID(), sourceId, game, false)) {
@@ -267,7 +271,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             Set<UUID> possibleTargets = target.possibleTargets(source==null?null:source.getSourceId(), playerId, game);
             boolean required = possibleTargets.isEmpty() ? false : target.isRequired();
             game.fireSelectTargetEvent(playerId, target.getMessage(), possibleTargets, required, getOptions(target));
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 if (possibleTargets.contains(response.getUUID())) {
                     if (target instanceof TargetPermanent) {
@@ -323,7 +327,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 options.put("chosen", (Serializable)chosen);
             }
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, required, options);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
                     target.add(response.getUUID(), game);
@@ -358,7 +362,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 }
             }
             game.fireSelectTargetEvent(playerId, target.getMessage(), cards, target.isRequired(), null);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), cards, game)) {
                     target.addTarget(response.getUUID(), source, game);
@@ -383,7 +387,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseTargetAmount", game);
         while (!abort) {
             game.fireSelectTargetEvent(playerId, target.getMessage() + "\n Amount remaining:" + target.getAmountRemaining(), target.possibleTargets(source==null?null:source.getId(), playerId, game), target.isRequired(), null);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 if (target.canTarget(response.getUUID(), source, game)) {
                     UUID targetId = response.getUUID();
@@ -412,7 +416,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             }
             updateGameStatePriority("priority", game);
             game.firePriorityEvent(playerId);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getBoolean() != null) {
                 pass(game);
                 return false;
@@ -450,7 +454,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseTriggeredAbility", game);
         while (!abort) {
             game.fireSelectTargetEvent(playerId, "Pick triggered ability (goes to the stack first)", abilities);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 for (TriggeredAbility ability: abilities) {
                     if (ability.getId().equals(response.getUUID())) {
@@ -466,7 +470,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public boolean playMana(ManaCost unpaid, Game game) {
         updateGameStatePriority("playMana", game);
         game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
-        waitForResponse();
+        waitForResponse(game);
         if (response.getBoolean() != null) {
             return false;
         } else if (response.getUUID() != null) {
@@ -500,7 +504,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         updateGameStatePriority("announceXMana", game);
         game.fireGetAmountEvent(playerId, message, min, max);
-        waitForIntegerResponse();
+        waitForIntegerResponse(game);
         return response.getInteger();
     }
 
@@ -530,7 +534,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 return;
             }
             game.fireSelectEvent(playerId, "Select attackers");
-            waitForResponse();
+            waitForResponse(game);
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
@@ -593,7 +597,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         while (!abort) {
             game.fireSelectEvent(playerId, "Select blockers");
-            waitForResponse();
+            waitForResponse(game);
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
@@ -622,7 +626,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseAttackerOrder", game);
         while (!abort) {
             game.fireSelectTargetEvent(playerId, "Pick attacker", attackers, true);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 for (Permanent perm: attackers) {
                     if (perm.getId().equals(response.getUUID())) {
@@ -640,7 +644,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("chooseBlockerOrder", game);
         while (!abort) {
             game.fireSelectTargetEvent(playerId, "Pick blocker", blockers, true);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 for (Permanent perm: blockers) {
                     if (perm.getId().equals(response.getUUID())) {
@@ -656,7 +660,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
         game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
-        waitForResponse();
+        waitForResponse(game);
         if (response.getBoolean() != null) {
             // do nothing
         } else if (response.getUUID() != null) {
@@ -696,7 +700,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public int getAmount(int min, int max, String message, Game game) {
         updateGameStatePriority("getAmount", game);
         game.fireGetAmountEvent(playerId, message, min, max);
-        waitForIntegerResponse();
+        waitForIntegerResponse(game);
         return response.getInteger();
     }
 
@@ -719,7 +723,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("specialAction", game);
         LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
         game.fireGetChoiceEvent(playerId, name, new ArrayList<SpecialAction>(specialActions.values()));
-        waitForResponse();
+        waitForResponse(game);
         if (response.getUUID() != null) {
             if (specialActions.containsKey(response.getUUID())) {
                 activateAbility(specialActions.get(response.getUUID()), game);
@@ -737,7 +741,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             }
         }
         game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(abilities.values()));
-        waitForResponse();
+        waitForResponse(game);
         if (response.getUUID() != null) {
             if (abilities.containsKey(response.getUUID())) {
                 activateAbility(abilities.get(response.getUUID()), game);
@@ -757,7 +761,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     } else if (useableAbilities != null && useableAbilities.size() > 0) {
                         game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(useableAbilities.values()));
-                        waitForResponse();
+                        waitForResponse(game);
                         if (response.getUUID() != null) {
                             if (useableAbilities.containsKey(response.getUUID())) {
                                 return (SpellAbility) useableAbilities.get(response.getUUID());
@@ -785,7 +789,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 modeMap.put(mode.getId(), modeText);
             }
             game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
-            waitForResponse();
+            waitForResponse(game);
             if (response.getUUID() != null) {
                 for (Mode mode: modes.values()) {
                     if (mode.getId().equals(response.getUUID())) {
@@ -802,7 +806,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1, List<? extends Card> pile2, Game game) {
         updateGameStatePriority("choosePile", game);
         game.fireChoosePileEvent(playerId, message, pile1, pile2);
-        waitForBooleanResponse();
+        waitForBooleanResponse(game);
         if (!abort) {
             return response.getBoolean();
         }

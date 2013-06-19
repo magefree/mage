@@ -26,7 +26,10 @@ public class HoverButton extends JPanel implements MouseListener {
     private int textOffsetY = 0;
     private int textOffsetButtonY = 2;
     private int textOffsetX = -1;
+    private int topTextOffsetX = -1;
     private Dimension overlayImageSize;
+
+    private String topText;
 
     private boolean isHovered = false;
     private boolean isSelected = false;
@@ -36,6 +39,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Command observer = null;
     private Command onHover = null;
     private Color textColor = Color.white;
+    private Color textBGColor = Color.black;
 
     static final Font textFont = new Font("Arial", Font.PLAIN, 12);
     static final Font textFontMini = new Font("Arial", Font.PLAIN, 11);
@@ -100,6 +104,18 @@ public class HoverButton extends JPanel implements MouseListener {
         } else {
             g.drawImage(disabledImage, 0, 0, imageSize.width, imageSize.height, this);
         }
+        if (topText != null) {
+            if (useMiniFont) {
+                g2d.setFont(textFontMini);
+            } else {
+                g2d.setFont(textFont);
+            }
+            topTextOffsetX = calculateOffsetForTop(g2d, topText);
+            g2d.setColor(textBGColor);
+            g2d.drawString(topText, topTextOffsetX+1, 13);
+            g2d.setColor(textColor);
+            g2d.drawString(topText, topTextOffsetX, 12);
+        }
         if (overlayImage != null) {
             g.drawImage(overlayImage, (imageSize.width - overlayImageSize.width) / 2, 10, this);
         } else if (set != null) {
@@ -134,6 +150,15 @@ public class HoverButton extends JPanel implements MouseListener {
             textOffsetX = (imageSize.width - textWidth) / 2;
         }
         return textOffsetX;
+    }
+
+    private int calculateOffsetForTop(Graphics2D g2d, String text) {
+        if (topTextOffsetX == -1) { // calculate once
+            FontRenderContext frc = g2d.getFontRenderContext();
+            int textWidth = (int) textFont.getStringBounds(text, frc).getWidth();
+            topTextOffsetX = (imageSize.width - textWidth) / 2;
+        }
+        return topTextOffsetX;
     }
 
     public void setTextColor(Color textColor) {
@@ -241,5 +266,9 @@ public class HoverButton extends JPanel implements MouseListener {
         if (isEnabled() && observer != null) {
             observer.execute();
         }
+    }
+
+    public void setTopText(String topText) {
+        this.topText = topText;
     }
 }
