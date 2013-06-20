@@ -224,10 +224,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
         
         if (player.hasPriority()) {
-            System.out.println("resume: " + player.getName());
             this.timer.resume();
         } else {
-            System.out.println("pause: " + player.getName());
             this.timer.pause();
         }
 
