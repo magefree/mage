@@ -1,8 +1,5 @@
 package mage.abilities.keyword;
 
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
@@ -11,6 +8,9 @@ import mage.abilities.effects.EntersBattlefieldEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -42,17 +42,30 @@ public class ModularAbility extends DiesTriggeredAbility {
         filter.add(new CardTypePredicate(CardType.CREATURE));
     }
     private int amount;
+    private boolean sunburst;
 
     public ModularAbility(Card card, int amount) {
+        this(card, amount, false);
+    }
+
+    public ModularAbility(Card card, int amount, boolean sunburst) {
         super(new ModularDistributeCounterEffect(), true);
         this.addTarget(new TargetArtifactPermanent(filter));
         this.amount = amount;
-        card.addAbility(new ModularStaticAbility(amount));
+        this.sunburst = sunburst;
+        if (sunburst) {
+            Ability ability = new SunburstAbility(card);
+            ability.setRuleVisible(false);
+            card.addAbility(ability);
+        } else {
+            card.addAbility(new ModularStaticAbility(amount));
+        }
     }
 
     public ModularAbility(ModularAbility ability) {
         super(ability);
         this.amount = ability.amount;
+        this.sunburst = ability.sunburst;
     }
 
     @Override
@@ -71,19 +84,31 @@ public class ModularAbility extends DiesTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Modular " + amount + " <i>(This enters the battlefield with " + amount + " +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>";
+        StringBuilder sb = new StringBuilder("Modular");
+        if (sunburst) {
+            sb.append("-Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
+        } else {
+            sb.append(" ").append(amount).append(" <i>(This enters the battlefield with ")
+                          .append(amount).append(" +1/+1 counter on it. When it dies, you may put its +1/+1 counters on target artifact creature.)</i>");
+        }
+        return sb.toString();
     }
 
 }
 
 class ModularStaticAbility extends StaticAbility<ModularStaticAbility> {
 
+    private String ruleText;
+
     public ModularStaticAbility(int amount) {
         super(Zone.BATTLEFIELD, new EntersBattlefieldEffect(new AddCountersSourceEffect(CounterType.P1P1.createInstance(amount))));
+        ruleText = new StringBuilder("This enters the battlefield with ").append(amount).append(" +1/+1 counter on it.").toString();
+        this.setRuleVisible(false);
     }
 
     public ModularStaticAbility(final ModularStaticAbility ability) {
         super(ability);
+        this.ruleText = ability.ruleText;
     }
 
     @Override
@@ -93,7 +118,7 @@ class ModularStaticAbility extends StaticAbility<ModularStaticAbility> {
 
     @Override
     public String getRule() {
-        return "";
+        return ruleText;
     }
 }
 
