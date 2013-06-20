@@ -174,7 +174,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             
         @Override
         public String getDescription() {
-              return "*.png|*.bmp|*.jpg|*.jpeg";
+              return "*.png | *.bmp |*.jpg | *.jpeg";
         } 
     }
     
