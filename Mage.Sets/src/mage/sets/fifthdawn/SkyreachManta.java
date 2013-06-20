@@ -49,7 +49,7 @@ public class SkyreachManta extends CardImpl<SkyreachManta> {
         this.toughness = new MageInt(0);
 
         // Sunburst
-        this.addAbility(new SunburstAbility());
+        this.addAbility(new SunburstAbility(this));
         // Flying
         this.addAbility(FlyingAbility.getInstance());
     }

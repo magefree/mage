@@ -48,7 +48,7 @@ public class SuntouchedMyr extends CardImpl<SuntouchedMyr> {
         this.toughness = new MageInt(0);
 
         // Sunburst
-        this.addAbility(new SunburstAbility());
+        this.addAbility(new SunburstAbility(this));
     }
 
     public SuntouchedMyr(final SuntouchedMyr card) {
