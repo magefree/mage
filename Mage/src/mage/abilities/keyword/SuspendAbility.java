@@ -42,14 +42,11 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.Card;
 import mage.counters.CounterType;
@@ -141,6 +138,15 @@ import mage.players.Player;
 public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
 
     private String ruleText;
+    private boolean gainedTemporary;
+
+    /**
+    * Gives the card the SuspendAbility
+    *
+    * @param suspend - amount of time counters
+    * @param cost - null is used for temporary gained suspend ability
+    * @param card - card that has the suspend ability
+    */
 
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
         super(Zone.HAND, new SuspendExileEffect(suspend), cost);
@@ -156,6 +162,8 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
                 .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
                 .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
                 .append(")</i>");
+        } else {
+            gainedTemporary = true;
         }
         ruleText = sb.toString();
         if (card.getManaCost().isEmpty()) {
@@ -168,19 +176,13 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
                 "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
         ability.setRuleVisible(false);
         card.addAbility(ability);
-        // add triggered ability that casts the suspended card, if all counters are removed
         card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
-        // if it's a creature card, add Haste ability
-//        if (card.getCardType().contains(CardType.CREATURE)) {
-//            ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
-//            ability.setRuleVisible(false);
-//            card.addAbility(ability);
-//        }
     }
 
     public SuspendAbility(SuspendAbility ability) {
         super(ability);
         this.ruleText = ability.getRule();
+        this.gainedTemporary = ability.gainedTemporary;
     }
 
     @Override
@@ -198,6 +200,10 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     @Override
     public String getRule() {
         return ruleText;
+    }
+
+    public boolean isGainedTemporary() {
+        return gainedTemporary;
     }
 
     @Override
@@ -257,9 +263,7 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl<SuspendPlayCardAbility
     public SuspendPlayCardAbility(boolean isCreature) {
         super(Zone.EXILED, new SuspendPlayCardEffect(isCreature));
         if (isCreature) {
-            Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
-            Effect effect = new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield);
-            this.addEffect(effect);
+            this.addEffect(new GainHasteEffect());
         }
         setRuleVisible(false);
     }
@@ -295,8 +299,7 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
 
     public SuspendPlayCardEffect(boolean isCreature) {
         super(Outcome.PutCardInPlay);
-        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";
-                       
+        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";                       
     }
 
     public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
@@ -310,9 +313,23 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
+            // remove temporary suspend ability (used e.g. for Epochrasite)
+            Ability abilityToRemove = null;
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof SuspendAbility) {
+                    if (((SuspendAbility)ability).isGainedTemporary()) {
+                        abilityToRemove = ability;
+                    }
+                }
+            }
+            if (abilityToRemove != null) {
+                card.getAbilities().remove(abilityToRemove);
+            }
+            // cast the card for free
             player.cast(card.getSpellAbility(), game, true);
         }
         return false;
@@ -323,8 +340,8 @@ class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
 
     private UUID suspendController;
 
-    public GainHasteEffect(Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    public GainHasteEffect() {
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "If you play it this way and it's a creature, it gains haste until you lose control of it";
     }
 
@@ -345,11 +362,11 @@ class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (suspendController.equals(source.getControllerId()) && !used) { // used stores if the control changed
+            if (suspendController.equals(source.getControllerId())) { 
                 permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 return true;
             } else {
-                used = true;
+                this.discard();
             }
         }
         return false;

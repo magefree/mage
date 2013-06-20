@@ -71,7 +71,7 @@ public class Epochrasite extends CardImpl<Epochrasite> {
         // When Epochrasite dies, exile it with three time counters on it and it gains suspend.
         Ability ability = new DiesTriggeredAbility(new ExileSourceEffect());
         ability.addEffect(new AddCountersSourceEffect(CounterType.TIME.createInstance(3), new StaticValue(0), false, true));
-        ability.addEffect(new GainAbilitySourceEffect(new SuspendAbility(3, null, this), Duration.Custom));
+        ability.addEffect(new GainAbilitySourceEffect(new SuspendAbility(3, null, this), Duration.OneUse, true));
         this.addAbility(ability);
     }
 
