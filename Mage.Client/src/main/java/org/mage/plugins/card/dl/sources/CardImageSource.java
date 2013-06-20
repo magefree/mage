@@ -1,12 +1,14 @@
 package org.mage.plugins.card.dl.sources;
 
+import org.mage.plugins.card.images.CardDownloadData;
+
 /**
  *
  * @author North
  */
 public interface CardImageSource {
 
-    String generateURL(Integer collectorId, String cardName, String cardSet, boolean twoFacedCard, boolean secondFace, boolean isFlipCard, boolean isSplitCard, boolean flippedView) throws Exception;
-    String generateTokenUrl(String name, String set);
+    String generateURL(CardDownloadData card) throws Exception;
+    String generateTokenUrl(CardDownloadData card);
     Float getAverageSize();
 }

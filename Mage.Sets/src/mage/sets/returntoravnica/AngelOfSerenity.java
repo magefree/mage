@@ -28,11 +28,6 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
@@ -41,6 +36,10 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
@@ -52,6 +51,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCreaturePermanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -156,7 +156,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
                     for (UUID permanentId : target.getTargets()) {
                         Permanent permanent = game.getPermanent(permanentId);
                         if (permanent != null) {
-                            result |= permanent.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
+                            result |= permanent.moveToExile(CardUtil.getCardExileZoneId(game, source), "Angel of Serenity", source.getSourceId(), game);
                         }
                     }
 
@@ -164,7 +164,7 @@ class AngelOfSerenityEnterEffect extends OneShotEffect<AngelOfSerenityEnterEffec
                     for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
-                            result |= card.moveToExile(source.getSourceId(), "Angel of Serenity", source.getId(), game);
+                            result |= card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Angel of Serenity", source.getSourceId(), game);
                         }
                     }
                 }
@@ -192,11 +192,11 @@ class AngelOfSerenityLeaveEffect extends OneShotEffect<AngelOfSerenityLeaveEffec
 
     @Override
     public boolean apply(Game game, Ability source) {
-        ExileZone exZone = game.getExile().getExileZone(source.getSourceId());
+        ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
         if (exZone != null) {
             for (Card card : exZone.getCards(game)) {
                 if (card != null) {
-                    card.moveToZone(Zone.HAND, source.getId(), game, false);
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                 }
             }
             return true;

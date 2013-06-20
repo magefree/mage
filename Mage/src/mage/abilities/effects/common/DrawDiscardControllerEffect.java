@@ -28,11 +28,12 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  *
@@ -40,13 +41,29 @@ import mage.players.Player;
  */
 public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardControllerEffect> {
 
+    private int cardsToDraw;
+    private int cardsToDiscard;
+
     public DrawDiscardControllerEffect() {
+        this(1,1);
+    }
+
+    public DrawDiscardControllerEffect(int cardsToDraw, int cardsToDiscard) {
         super(Outcome.DrawCard);
-        staticText = "Draw a card, then discard a card";
+        this.cardsToDraw = cardsToDraw;
+        this.cardsToDiscard = cardsToDiscard;
+        staticText = new StringBuilder("Draw ")
+                .append(cardsToDraw == 1?"a": CardUtil.numberToText(cardsToDraw))
+                .append(" card").append(cardsToDraw == 1?" ": "s")
+                .append(", then discard ")
+                .append(cardsToDiscard == 1?"a": CardUtil.numberToText(cardsToDiscard))
+                .append(" card").append(cardsToDiscard == 1?" ": "s").toString();
     }
 
     public DrawDiscardControllerEffect(final DrawDiscardControllerEffect effect) {
         super(effect);
+        this.cardsToDraw = effect.cardsToDraw;
+        this.cardsToDiscard = effect.cardsToDiscard;
     }
 
     @Override
@@ -58,8 +75,8 @@ public class DrawDiscardControllerEffect extends OneShotEffect<DrawDiscardContro
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.drawCards(1, game);
-            player.discard(1, source, game);
+            player.drawCards(cardsToDraw, game);
+            player.discard(cardsToDiscard, source, game);
             return true;
         }
         return false;

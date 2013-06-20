@@ -75,7 +75,7 @@ public class InfectAbility extends StaticAbility<InfectAbility> implements MageS
 
     @Override
     public String getRule() {
-        return "Infect";
+        return "Infect <i>(This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)</i>";
     }
 
     @Override

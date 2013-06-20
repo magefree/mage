@@ -299,4 +299,18 @@ public interface Player extends MageItem, Copyable<Player> {
      *
      */
     void revealFaceDownCard(Card card, Game game);
+
+    /**
+     * Set seconds left to play the game.
+     *
+     * @return
+     */
+    void setPriorityTimeLeft(int timeLeft);
+
+    /**
+     * Returns seconds left to play the game.
+     *
+     * @return
+     */
+    int getPriorityTimeLeft();
 }

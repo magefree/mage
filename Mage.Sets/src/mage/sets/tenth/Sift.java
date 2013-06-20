@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -47,8 +47,7 @@ public class Sift extends CardImpl<Sift> {
         this.color.setBlue(true);
 
         // Draw three cards, then discard a card.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(1));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(3,1));
     }
 
     public Sift(final Sift card) {

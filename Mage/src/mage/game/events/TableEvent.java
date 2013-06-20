@@ -46,7 +46,8 @@ import java.util.UUID;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
     public enum EventType {
-        UPDATE, INFO, STATUS, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR
+        UPDATE, INFO, STATUS, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR,
+        INIT_TIMER, RESUME_TIMER, PAUSE_TIMER
     }
 
     private Game game;

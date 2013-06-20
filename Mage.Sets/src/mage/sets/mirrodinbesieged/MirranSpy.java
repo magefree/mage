@@ -28,12 +28,13 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.UntapTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -53,6 +54,11 @@ public class MirranSpy extends CardImpl<MirranSpy> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(3);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+
+        // Whenever you cast an artifact spell, you may untap target creature.
         SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new UntapTargetEffect(), filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

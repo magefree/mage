@@ -32,8 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.TimingRule;
@@ -51,8 +50,7 @@ public class FaithlessLooting extends CardImpl<FaithlessLooting> {
         this.color.setRed(true);
 
         // Draw two cards, then discard two cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));
         // Flashback {2}{R}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{2}{R}"), TimingRule.SORCERY));
     }

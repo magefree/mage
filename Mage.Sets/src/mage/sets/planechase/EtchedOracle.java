@@ -56,7 +56,7 @@ public class EtchedOracle extends CardImpl<EtchedOracle> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(0);
 
-        // Sunburst
+        // Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)
         this.addAbility(new SunburstAbility());
         // {1}, Remove four +1/+1 counters from Etched Oracle: Target player draws three cards.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{1}"));

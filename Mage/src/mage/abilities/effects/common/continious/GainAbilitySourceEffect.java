@@ -28,12 +28,12 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -73,7 +73,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            permanent.addAbility(ability, game);
+            permanent.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;

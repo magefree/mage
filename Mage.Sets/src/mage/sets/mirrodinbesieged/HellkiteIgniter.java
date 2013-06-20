@@ -29,9 +29,6 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,15 +38,24 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
  * @author Loki
  */
 public class HellkiteIgniter extends CardImpl<HellkiteIgniter> {
+
+    private static final FilterArtifactPermanent filter = new FilterArtifactPermanent("artifact you control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public HellkiteIgniter (UUID ownerId) {
         super(ownerId, 65, "Hellkite Igniter", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
@@ -58,11 +64,14 @@ public class HellkiteIgniter extends CardImpl<HellkiteIgniter> {
         this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
+        // Flying, haste
         this.addAbility(FlyingAbility.getInstance());
         this.addAbility(HasteAbility.getInstance());
+        // {1}{R}: Hellkite Igniter gets +X/+0 until end of turn, where X is the number of artifacts you control.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new BoostSourceEffect(
-                        new PermanentsOnBattlefieldCount(new FilterArtifactPermanent()),
+                        new PermanentsOnBattlefieldCount(filter),
                         new StaticValue(0),
                         Duration.EndOfTurn),
                 new ManaCostsImpl("{1}{R}")));

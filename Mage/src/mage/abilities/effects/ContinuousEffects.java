@@ -156,7 +156,8 @@ public class ContinuousEffects implements Serializable {
                 case WhileInGraveyard:
                     HashSet<Ability> abilities = layeredEffects.getAbility(effect.getId());
                     for (Ability ability: abilities) {
-                        if (ability.isInUseableZone(game, null, false)) {
+                        // If e.g. triggerd abilities (non static) created the effect, the ability must not be in usable zone (e.g. Unearth giving Haste effect)
+                        if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
                             layerEffects.add(effect);
                             break;
                         }
