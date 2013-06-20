@@ -106,7 +106,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean passedTurn;
     protected int turns;
     protected int storedBookmark = -1;
-    protected int priorityTimeLeft;
+    protected int priorityTimeLeft = Integer.MAX_VALUE;
 
     /**
      * This indicates that player passed all turns until his own turn starts.

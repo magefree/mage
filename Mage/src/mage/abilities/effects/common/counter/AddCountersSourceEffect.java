@@ -33,6 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -44,8 +45,9 @@ import mage.players.Player;
 public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffect> {
 
     private Counter counter;
-    protected boolean informPlayers;
-    protected DynamicValue amount;
+    private boolean informPlayers;
+    private DynamicValue amount;
+    private boolean putOnCard;
 
     public AddCountersSourceEffect(Counter counter) {
         this(counter, false);
@@ -55,17 +57,23 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         this(counter, new StaticValue(0), informPlayers);
     }
 
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
+        this(counter, amount, informPlayers, false);
+    }
+
     /**
      * 
      * @param counter
      * @param amount this amount will be added to the counter instances
-     * @param informPlayers 
+     * @param informPlayers
+     * @param putOnCard - counters have to be put on a card instead of a permanent
      */
-    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers) {
+    public AddCountersSourceEffect(Counter counter, DynamicValue amount, boolean informPlayers, boolean putOnCard) {
         super(Outcome.Benefit);
         this.counter = counter.copy();
         this.informPlayers = informPlayers;
         this.amount = amount;
+        this.putOnCard = putOnCard;
         setText();
     }
 
@@ -76,25 +84,45 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         }
         this.informPlayers = effect.informPlayers;
         this.amount = effect.amount;
+        this.putOnCard = effect.putOnCard;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            if (counter != null) {
-                Counter newCounter = counter.copy();
-                newCounter.add(amount.calculate(game, source));
-                permanent.addCounters(newCounter, game);
-                if (informPlayers) {
-                    Player player = game.getPlayer(source.getControllerId());
-                    if (player != null) {
-                        game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
+        if (putOnCard) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                if (counter != null) {
+                    Counter newCounter = counter.copy();
+                    newCounter.add(amount.calculate(game, source));
+                    card.addCounters(newCounter, game);
+                    if (informPlayers) {
+                        Player player = game.getPlayer(source.getControllerId());
+                        if (player != null) {
+                            game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(card.getName()).toString());
+                        }
                     }
                 }
+                return true;
+            }
+        } else {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                if (counter != null) {
+                    Counter newCounter = counter.copy();
+                    newCounter.add(amount.calculate(game, source));
+                    permanent.addCounters(newCounter, game);
+                    if (informPlayers) {
+                        Player player = game.getPlayer(source.getControllerId());
+                        if (player != null) {
+                            game.informPlayers(new StringBuilder(player.getName()).append(" puts ").append(newCounter.getCount()).append(" ").append(newCounter.getName().toLowerCase()).append(" counter on ").append(permanent.getName()).toString());
+                        }
+                    }
+                }
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     private void setText() {

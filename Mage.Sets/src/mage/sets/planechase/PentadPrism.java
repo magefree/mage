@@ -47,7 +47,7 @@ public class PentadPrism extends CardImpl<PentadPrism> {
         this.expansionSetCode = "HOP";
 
         // Sunburst
-        this.addAbility(new SunburstAbility());
+        this.addAbility(new SunburstAbility(this));
         // Remove a charge counter from Pentad Prism: Add one mana of any color to your mana pool.
         this.addAbility(new AnyColorManaAbility(new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(1))));
     }

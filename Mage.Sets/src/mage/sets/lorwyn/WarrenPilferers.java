@@ -25,52 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.planechase;
+package mage.sets.lorwyn;
 
 import java.util.UUID;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.RemoveCountersSourceCost;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.DrawCardTargetEffect;
-import mage.abilities.keyword.SunburstAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.target.TargetPlayer;
-
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class EtchedOracle extends CardImpl<EtchedOracle> {
+public class WarrenPilferers extends mage.sets.modernmasters.WarrenPilferers {
 
-    public EtchedOracle(UUID ownerId) {
-        super(ownerId, 113, "Etched Oracle", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
-        this.expansionSetCode = "HOP";
-        this.subtype.add("Wizard");
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(0);
-
-        // Sunburst (This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)
-        this.addAbility(new SunburstAbility(this));
-        // {1}, Remove four +1/+1 counters from Etched Oracle: Target player draws three cards.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(3), new ManaCostsImpl("{1}"));
-        ability.addCost(new RemoveCountersSourceCost(CounterType.P1P1.createInstance(4)));
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
+    public WarrenPilferers(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 146;
+        this.expansionSetCode = "LRW";
     }
 
-    public EtchedOracle(final EtchedOracle card) {
+    public WarrenPilferers(final WarrenPilferers card) {
         super(card);
     }
 
     @Override
-    public EtchedOracle copy() {
-        return new EtchedOracle(this);
+    public WarrenPilferers copy() {
+        return new WarrenPilferers(this);
     }
 }
