@@ -47,7 +47,9 @@ import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.cards.Card;
 import mage.counters.CounterType;
@@ -143,20 +145,22 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
         super(Zone.HAND, new SuspendExileEffect(suspend), cost);
         this.usesStack = false;
-        ruleText = new StringBuilder("Suspend ").append(suspend).append(" - ").append(cost.getText())
-                                    .append(" <i>(Rather than cast this card from your hand, pay ")
-                                    .append(cost.getText())
-                                    .append(" and exile it with ")
-                                    .append(suspend == 1 ? "a time counter":suspend + " time counters")
-                                    .append(" on it.")
-                                    .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
-                                    .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
-                                    .append(")</i>")
-                                    .toString();
+        StringBuilder sb = new StringBuilder("Suspend ");
+        if (cost != null) {
+            sb.append(suspend).append(" - ").append(cost.getText())
+                .append(" <i>(Rather than cast this card from your hand, pay ")
+                .append(cost.getText())
+                .append(" and exile it with ")
+                .append(suspend == 1 ? "a time counter":suspend + " time counters")
+                .append(" on it.")
+                .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
+                .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
+                .append(")</i>");
+        }
+        ruleText = sb.toString();
         if (card.getManaCost().isEmpty()) {
             setRuleAtTheTop(true);
-        }
-        
+        }        
         // add triggered ability to remove the counter from the card
         Ability ability = new ConditionalTriggeredAbility(
                 new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
@@ -167,11 +171,11 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
         // add triggered ability that casts the suspended card, if all counters are removed
         card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
         // if it's a creature card, add Haste ability
-        if (card.getCardType().contains(CardType.CREATURE)) {
-            ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
-            ability.setRuleVisible(false);
-            card.addAbility(ability);
-        }
+//        if (card.getCardType().contains(CardType.CREATURE)) {
+//            ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
+//            ability.setRuleVisible(false);
+//            card.addAbility(ability);
+//        }
     }
 
     public SuspendAbility(SuspendAbility ability) {
@@ -252,6 +256,11 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl<SuspendPlayCardAbility
 
     public SuspendPlayCardAbility(boolean isCreature) {
         super(Zone.EXILED, new SuspendPlayCardEffect(isCreature));
+        if (isCreature) {
+            Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
+            Effect effect = new GainAbilitySourceEffect(ability, Duration.WhileOnBattlefield);
+            this.addEffect(effect);
+        }
         setRuleVisible(false);
     }
 
@@ -286,8 +295,8 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
 
     public SuspendPlayCardEffect(boolean isCreature) {
         super(Outcome.PutCardInPlay);
-        this.staticText = new StringBuilder("play it without paying its mana cost if able. If you can't, it remains removed from the game")
-                       .append(isCreature ? ". If you play it this way and it's a creature, it gains haste until you lose control of it":"").toString();
+        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";
+                       
     }
 
     public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
