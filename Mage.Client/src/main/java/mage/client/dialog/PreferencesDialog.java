@@ -154,24 +154,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private final JFileChooser fc_i = new JFileChooser();
     {
         fc_i.setAcceptAllFileFilterUsed(false);
-        fc_i.addChoosableFileFilter(new ImageFileFilter(".jpg"));
-        fc_i.addChoosableFileFilter(new ImageFileFilter(".jpeg"));
-        fc_i.addChoosableFileFilter(new ImageFileFilter(".png"));
-        fc_i.addChoosableFileFilter(new ImageFileFilter(".bmp"));
+        fc_i.addChoosableFileFilter(new ImageFileFilter());
     }
 
     private static class ImageFileFilter extends FileFilter{
-        String extend;
-        public ImageFileFilter(String extend){
-            this.extend = extend;
-        }
         
         @Override
         public boolean accept(File f) {
             String filename = f.getName();
             if(f.isDirectory()) return true;
             if(filename != null){
-                if(filename.endsWith(extend)){
+                if(filename.endsWith(".jpg") || filename.endsWith(".jpeg") ||
+                        filename.endsWith(".png") || filename.endsWith(".bmp")){
                       return true;
                 }
             }
@@ -180,15 +174,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             
         @Override
         public String getDescription() {
-            if(extend.equals(".png")) 
-                return "Image File(*.png)";
-            if(extend.equals(".bmp"))
-                return "Image File(*.bmp)";
-            if(extend.equals(".jpg") || extend.equals(".jpg")) 
-                return "JEGP file(*.jpg,*.jepg)";
-            return "";
-        }
-        
+              return "*.png|*.bmp|*.jpg|*.jpeg";
+        } 
     }
     
     
