@@ -51,8 +51,7 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     protected boolean rememberSource = false;
 
     public SpellCastTriggeredAbility(Effect effect, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
-        this.filter = spellCard;
+        this(Zone.BATTLEFIELD, effect, spellCard, optional, false);
     }
 
     public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
@@ -60,7 +59,11 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     }
 
     public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, filter, optional, rememberSource);
+    }
+
+    public SpellCastTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+        super(zone, effect, optional);
         this.filter = filter;
         this.rememberSource = rememberSource;
     }
