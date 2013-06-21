@@ -155,6 +155,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
     private boolean scopeRelevant = false;
 
+    private int priorityTime;
+
     @Override
     public abstract T copy();
 
@@ -198,6 +200,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
         this.scopeRelevant = game.scopeRelevant;
+        this.priorityTime = game.priorityTime;
     }
 
     @Override
@@ -589,7 +592,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
-            initTimer(player.getId());
+            if (priorityTime > 0) {
+                initTimer(player.getId());
+            }
         }
         if (startMessage == null || startMessage.isEmpty()) {
             startMessage = "Game has started";
@@ -1949,17 +1954,32 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void initTimer(UUID playerId) {
-        tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
+        }
     }
 
     @Override
     public void resumeTimer(UUID playerId) {
-        tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
+        }
     }
 
     @Override
     public void pauseTimer(UUID playerId) {
-        tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
+        }
     }
 
+    @Override
+    public int getPriorityTime() {
+        return priorityTime;
+    }
+
+    @Override
+    public void setPriorityTime(int priorityTime) {
+        this.priorityTime = priorityTime;
+    }
 }

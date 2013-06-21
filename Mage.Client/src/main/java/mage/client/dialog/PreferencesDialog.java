@@ -92,6 +92,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // default setting for new table dialog
     public static final String KEY_NEW_TABLE_NAME = "newTableName";
     public static final String KEY_NEW_TABLE_DECK_TYPE = "newTableDeckType";
+    public static final String KEY_NEW_TABLE_TIME_LIMIT = "newTableTimeLimit";
     public static final String KEY_NEW_TABLE_GAME_TYPE = "newTableGameType";
     public static final String KEY_NEW_TABLE_NUMBER_OF_WINS = "newTableNumberOfWins";
     public static final String KEY_NEW_TABLE_NUMBER_OF_FREE_MULLIGANS = "newTableNumberOfFreeMulligans";

@@ -52,7 +52,6 @@ import mage.client.util.Command;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
-import mage.constants.Constants;
 import mage.remote.Session;
 import mage.utils.timer.PriorityTimer;
 import mage.view.CardView;
@@ -112,7 +111,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         initComponents();
     }
 
-    public void init(UUID gameId, UUID playerId, BigCard bigCard) {
+    public void init(UUID gameId, UUID playerId, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
@@ -120,24 +119,27 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         cheat.setVisible(session.isTestMode());
         cheat.setFocusable(false);
 
-        long delay = 1000L;
-        timer = new PriorityTimer(Constants.PRIORITY_TIME_SEC, delay, new mage.interfaces.Action() {
-            @Override
-            public void execute() throws MageException {
-                // do nothing
-            }
-        });
-        final PriorityTimer pt = timer;
-        timer.setTaskOnTick(new mage.interfaces.Action() {
-            @Override
-            public void execute() throws MageException {
-                int priorityTimeValue = pt.getCount();
-                String text = getPriorityTimeLeftString(priorityTimeValue);
-                PlayerPanelExt.this.avatar.setTopText(text);
-                PlayerPanelExt.this.avatar.repaint();
-            }
-        });
-        timer.init();
+        if (priorityTime > 0) {
+            long delay = 1000L;
+
+            timer = new PriorityTimer(priorityTime, delay, new mage.interfaces.Action() {
+                @Override
+                public void execute() throws MageException {
+                    // do nothing
+                }
+            });
+            final PriorityTimer pt = timer;
+            timer.setTaskOnTick(new mage.interfaces.Action() {
+                @Override
+                public void execute() throws MageException {
+                    int priorityTimeValue = pt.getCount();
+                    String text = getPriorityTimeLeftString(priorityTimeValue);
+                    PlayerPanelExt.this.avatar.setTopText(text);
+                    PlayerPanelExt.this.avatar.repaint();
+                }
+            });
+            timer.init();
+        }
     }
 
     public void update(PlayerView player) {
@@ -206,11 +208,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
         this.avatar.setText(player.getName());
-        if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
+        if (this.timer != null) {
+            if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
             String priorityTimeValue = getPriorityTimeLeftString(player);
             this.timer.setCount(player.getPriorityTimeLeft());
             this.avatar.setTopText(priorityTimeValue);
+            }
+            if (player.hasPriority()) {
+                this.timer.resume();
+            } else {
+                this.timer.pause();
+            }
         }
+
         this.btnPlayer.setText(player.getName());
         if (player.isActive()) {
             this.avatar.setBorder(greenBorder);
@@ -223,11 +233,6 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             this.btnPlayer.setBorder(emptyBorder);
         }
         
-        if (player.hasPriority()) {
-            this.timer.resume();
-        } else {
-            this.timer.pause();
-        }
 
         synchronized (this) {
             if (player.getTopCard() != null) {

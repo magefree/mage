@@ -64,9 +64,9 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         addPopupMenu();
     }
 
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me) {
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me, int priorityTime) {
         this();
-        init(player, bigCard, gameId);
+        init(player, bigCard, gameId, priorityTime);
         update(player);
     }
 
@@ -99,8 +99,8 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         });
     }
 
-    public final void init(PlayerView player, BigCard bigCard, UUID gameId) {
-        this.playerPanel.init(gameId, player.getPlayerId(), bigCard);
+    public final void init(PlayerView player, BigCard bigCard, UUID gameId, int priorityTime) {
+        this.playerPanel.init(gameId, player.getPlayerId(), bigCard, priorityTime);
         this.battlefieldPanel.init(gameId, bigCard);
         this.gameId = gameId;
         if (MageFrame.getSession().isTestMode()) {

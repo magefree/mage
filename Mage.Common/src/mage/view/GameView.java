@@ -59,6 +59,7 @@ import mage.players.Player;
 public class GameView implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private int priorityTime;
     private List<PlayerView> players = new ArrayList<PlayerView>();
     private SimpleCardsView hand;
     private Map<String, SimpleCardsView> opponentHands;
@@ -75,7 +76,9 @@ public class GameView implements Serializable {
     private int turn;
     private boolean special = false;
 
+
     public GameView(GameState state, Game game) {
+        priorityTime = game.getPriorityTime();
         for (Player player: state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game));
         }
@@ -255,4 +258,9 @@ public class GameView implements Serializable {
     public boolean getSpecial() {
         return special;
     }
+
+    public int getPriorityTime() {
+        return priorityTime;
+    }
+
 }
