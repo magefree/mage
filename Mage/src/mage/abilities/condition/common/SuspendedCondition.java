@@ -69,11 +69,11 @@ public class SuspendedCondition implements Condition {
                     break;
                 }
             }
-        }
-        if (found) {
-            if (game.getState().getZone(card.getId()) == Zone.EXILED &&
-                    card.getCounters().getCount(CounterType.TIME) > 0) {
-                return true;
+            if (found) {
+                if (game.getState().getZone(card.getId()) == Zone.EXILED &&
+                        card.getCounters().getCount(CounterType.TIME) > 0) {
+                    return true;
+                }
             }
         }
         return false;
