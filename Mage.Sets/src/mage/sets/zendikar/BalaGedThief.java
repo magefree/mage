@@ -152,7 +152,7 @@ class BalaGedThiefEffect extends OneShotEffect<BalaGedThiefEffect> {
             Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
             if (card != null) {
                 targetPlayer.discard(card, source, game);
-                game.informPlayers(targetPlayer + "discarded " + card.getName());
+                game.informPlayers(new StringBuilder("Bala Ged Thief: ").append(targetPlayer.getName()).append(" discarded ").append(card.getName()).toString());
             }
         }
         return true;
