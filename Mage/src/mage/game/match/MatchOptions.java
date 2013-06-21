@@ -125,6 +125,9 @@ public class MatchOptions implements Serializable {
     }
 
     public int getPriorityTime() {
+        if (matchTimeLimit == null) {
+            return MatchTimeLimit.NONE.getTimeLimit();
+        }
         return matchTimeLimit.getTimeLimit();
     }
 
