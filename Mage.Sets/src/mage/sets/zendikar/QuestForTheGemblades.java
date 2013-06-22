@@ -28,9 +28,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
@@ -38,10 +35,14 @@ import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.DamagedCreatureEvent;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -94,9 +95,15 @@ class QuestForTheGembladesTriggeredAbility extends TriggeredAbilityImpl<QuestFor
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE && event.getPlayerId().equals(controllerId)) {
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             if (((DamagedCreatureEvent) event).isCombatDamage()) {
-                return true;
+                Permanent permanent = game.getPermanent(event.getSourceId());
+                if (permanent == null) {
+                    permanent = (Permanent) game.getLastKnownInformation(event.getSourceId(), Zone.BATTLEFIELD);
+                }
+                if (permanent != null && permanent.getCardType().contains(CardType.CREATURE) && permanent.getControllerId().equals(this.getControllerId())) {
+                    return true;
+                }
             }
         }
         return false;
