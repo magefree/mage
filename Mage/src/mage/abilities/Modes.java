@@ -28,7 +28,10 @@
 package mage.abilities;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import mage.game.Game;
 import mage.players.Player;
@@ -40,11 +43,18 @@ import mage.players.Player;
 public class Modes extends LinkedHashMap<UUID, Mode> {
 
     private UUID modeId;
+    private Set<UUID> selectedModes = new LinkedHashSet<UUID>();
+    private int minModes;
+    private int maxModes;
 
     public Modes() {
         Mode mode = new Mode();
         this.put(mode.getId(), mode);
         this.modeId = mode.getId();
+        this.minModes = 1;
+        this.maxModes = 1;
+        this.selectedModes.add(modeId);
+
     }
 
     public Modes(Modes modes) {
@@ -52,6 +62,9 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         for (Map.Entry<UUID, Mode> entry: modes.entrySet()) {
             this.put(entry.getKey(), entry.getValue().copy());
         }
+        this.minModes = modes.minModes;
+        this.maxModes = modes.maxModes;
+        this.selectedModes.addAll(modes.selectedModes);
     }
 
     public Modes copy() {
@@ -62,9 +75,30 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         return get(modeId);
     }
 
+    public Set<UUID> getSelectedModes() {
+        return selectedModes;
+    }
+
+    public void setMinModes(int minModes) {
+        this.minModes = minModes;
+    }
+
+    public int getMinModes() {
+        return this.minModes;
+    }
+
+    public void setMaxModes(int maxModes) {
+        this.maxModes = maxModes;
+    }
+
+    public int getMaxModes() {
+        return this.maxModes;
+    }
+
     public void setMode(Mode mode) {
         if (this.containsKey(mode.getId())) {
             this.modeId = mode.getId();
+            this.selectedModes.add(mode.getId());
         }
     }
 
@@ -74,40 +108,59 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
 
     public boolean choose(Game game, Ability source) {
         if (this.size() > 1) {
+            this.selectedModes.clear();
+
             Player player = game.getPlayer(source.getControllerId());
-            Mode choice = player.chooseMode(this, source, game);
-            if (choice == null) {
-                return false;
+            while (this.selectedModes.size() < this.getMaxModes()) {
+                Mode choice = player.chooseMode(this, source, game);
+                if (choice == null) {
+                    return this.selectedModes.size() >= this.getMinModes();
+                }
+                setMode(choice);
+                this.selectedModes.add(choice.getId());
             }
-            setMode(choice);
             return true;
         }
         this.modeId = this.values().iterator().next().getId();
+        this.selectedModes.add(modeId);
         return true;
     }
 
     public String getText() {
+        String andOr = "";
         StringBuilder sb = new StringBuilder();
         if (this.size() > 1) {
-            sb.append("Choose one - ");
+            if (this.getMinModes() == 1 && this.getMaxModes() == 3) {
+                sb.append("Choose one or more - ");
+                andOr = "; and/or ";
+            }else if (this.getMinModes() == 1 && this.getMaxModes() == 2) {
+                sb.append("Choose one or both - ");
+                andOr = "; and/or ";
+            } else if (this.getMinModes() == 2 && this.getMaxModes() == 2) {
+                sb.append("Choose two - ");
+                andOr = "; or ";
+            } else {
+                sb.append("Choose one - ");
+                andOr = "; or ";
+            }
         }
         for (Mode mode: this.values()) {
-            sb.append(mode.getEffects().getText(mode)).append("; or ");
+            sb.append(mode.getEffects().getText(mode));
+            if (this.size() > 1) {
+                if (sb.length() > 2 && sb.substring(sb.length()-2, sb.length()).equals(". ")) {
+                    sb.delete(sb.length()-2, sb.length());
+                }
+                sb.append(andOr);
+            }
         }
-        sb.delete(sb.length() - 5, sb.length());
+        if (this.size() > 1) {
+            sb.delete(sb.length() - andOr.length(), sb.length());
+        }
         return sb.toString();
     }
 
     public String getText(String sourceName) {
-        StringBuilder sb = new StringBuilder();
-        if (this.size() > 1) {
-            sb.append("Choose one - ");
-        }
-        for (Mode mode: this.values()) {
-            sb.append(mode.getEffects().getText(mode)).append("; or ");
-        }
-        sb.delete(sb.length() - 5, sb.length());
-        String text = sb.toString();
+        String text = getText();
         text = text.replace("{this}", sourceName);
         text = text.replace("{source}", sourceName);
         return text;

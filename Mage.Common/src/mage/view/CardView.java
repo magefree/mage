@@ -47,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.Mode;
+import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.SplitCard;
@@ -184,15 +185,19 @@ public class CardView extends SimpleCardView {
         if (card instanceof Spell) {
             Spell<?> spell = (Spell<?>) card;
             for (SpellAbility spellAbility: spell.getSpellAbilities()) {
-                if (spellAbility.getTargets().size() > 0) {
-                    setTargets(spellAbility.getTargets());
+                for(UUID modeId : spellAbility.getModes().getSelectedModes()) {
+                    spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                    if (spellAbility.getTargets().size() > 0) {
+                        setTargets(spellAbility.getTargets());
+                    }
                 }
             }
             // show for modal spell, which mode was choosen
             if (spell.getSpellAbility().isModal()) {
-                Mode activeMode = spell.getSpellAbility().getModes().getMode();
-                if (activeMode != null) {
-                    this.rules.add("<span color='green'><i>Chosen mode: " + activeMode.getEffects().getText(activeMode)+"</i></span>");
+                Modes modes = spell.getSpellAbility().getModes();
+                for(UUID modeId : modes.getSelectedModes()) {
+                    modes.setMode(modes.get(modeId));
+                    this.rules.add("<span color='green'><i>Chosen mode: " + spell.getSpellAbility().getEffects().getText(modes.get(modeId))+"</i></span>");
                 }
             }
         }
