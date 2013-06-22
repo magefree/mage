@@ -29,10 +29,12 @@ package mage.abilities;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
+import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -109,7 +111,25 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
     public boolean choose(Game game, Ability source) {
         if (this.size() > 1) {
             this.selectedModes.clear();
-
+            // check if mode modifying abilities exist
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                for (Ability modeModifyingAbility : card.getAbilities()) {
+                    if (modeModifyingAbility instanceof OptionalAdditionalModeSourceCosts) {
+                        ((OptionalAdditionalModeSourceCosts)modeModifyingAbility).addOptionalAdditionalModeCosts(source, game);
+                    }
+                }
+            }
+            // check if all modes can be activated automatically
+            if (this.size() == this.getMinModes()) {
+                for (Mode mode: this.values()) {
+                    if (mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) {
+                        this.selectedModes.add(mode.getId());
+                    }
+                }
+                return selectedModes.size() > 0;
+            }
+            // player chooses modes manually
             Player player = game.getPlayer(source.getControllerId());
             while (this.selectedModes.size() < this.getMaxModes()) {
                 Mode choice = player.chooseMode(this, source, game);

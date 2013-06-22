@@ -52,6 +52,7 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.EntwineAbility;
 
 
 /**
@@ -191,7 +192,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                         break;
                     }
                 }
-                if (ability instanceof OptionalAdditionalSourceCosts) {
+                if (ability instanceof OptionalAdditionalSourceCosts
+                        && !(ability instanceof EntwineAbility)) {
                     ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
                 }
             }
