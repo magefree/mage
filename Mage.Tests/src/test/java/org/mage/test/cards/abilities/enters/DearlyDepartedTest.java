@@ -16,7 +16,17 @@ public class DearlyDepartedTest extends CardTestPlayerBase {
     @Test
     public void testEnteringWithCounters() {
         addCard(Zone.BATTLEFIELD, playerA, "Plains", 5);
+        // Dearly Departed
+        // Creature — Spirit 5/5, 4WW (6)
+        // Flying
+        // As long as Dearly Departed is in your graveyard, each Human creature you control enters the battlefield with an additional +1/+1 counter on it.
         addCard(Zone.GRAVEYARD, playerA, "Dearly Departed");
+        /**
+         *  Thraben Doomsayer
+         *  Creature — Human Cleric 2/2, 1WW (3)
+         *  {T}: Put a 1/1 white Human creature token onto the battlefield.
+         *  Fateful hour — As long as you have 5 or less life, other creatures you control get +2/+2.
+         */
         addCard(Zone.BATTLEFIELD, playerA, "Thraben Doomsayer");
 
         activateAbility(2, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Put a 1/1 white Human creature token onto the battlefield.");
