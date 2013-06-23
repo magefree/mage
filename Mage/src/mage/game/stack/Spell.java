@@ -138,10 +138,13 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             result = false;
             boolean legalParts = false;
             for(SpellAbility spellAbility: this.spellAbilities) {
-                if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                    legalParts = true;
-                    updateOptionalCosts(index);
-                    result |= spellAbility.resolve(game);
+                for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
+                    spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                    if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                        legalParts = true;
+                        updateOptionalCosts(index);
+                        result |= spellAbility.resolve(game);
+                    }
                 }
                 index++;
             }
@@ -226,13 +229,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         String name = null;
                         if (object == null) {
                             Player targetPlayer = game.getPlayer(targetId);
-                            if (targetPlayer != null) name = targetPlayer.getName();
+                            if (targetPlayer != null) {
+                                name = targetPlayer.getName();
+                            }
                         } else {
                             name = object.getName();
                         }
                         if (name != null && player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game))
+                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
                                 newTarget.addTarget(targetId, spellAbility, game, false);
+                            }
                         }
                         else {
                             newTarget.addTarget(targetId, spellAbility, game, false);

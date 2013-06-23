@@ -261,6 +261,22 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     }
                 }
             }
+        } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
+            Modes modes = ((Spell) object).getSpellAbility().getModes();
+            int item = 0;
+            for (Mode mode : modes.values()) {
+                item++;
+                if (modes.getSelectedModes().contains(mode.getId())) {
+                    modes.setMode(mode);
+                    sb.append(" (mode ").append(item).append(")");
+                    if (getTargets().size() > 0) {
+                        sb.append(" targeting ");
+                        for (Target target: getTargets()) {
+                            sb.append(target.getTargetedName(game));
+                        }
+                    }
+                }
+            }
         } else {
             if (getTargets().size() > 0) {
                 sb.append(" targeting ");

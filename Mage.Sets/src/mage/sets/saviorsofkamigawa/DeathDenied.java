@@ -66,7 +66,7 @@ public class DeathDenied extends CardImpl<DeathDenied> {
         if (ability instanceof SpellAbility) {
             ability.getTargets().clear();
             int xValue = ability.getManaCostsToPay().getX();
-            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1?" creatures":"creature").toString()));
+            Target target = new TargetCardInYourGraveyard(xValue, new FilterCreatureCard(new StringBuilder(xValue).append(xValue != 1?" creature cards":"creature card").append(" from your graveyard").toString()));
             ability.addTarget(target);     
         }
     }

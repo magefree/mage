@@ -230,4 +230,6 @@ public interface Game extends MageItem, Serializable {
     void initTimer(UUID playerId);
     void resumeTimer(UUID playerId);
     void pauseTimer(UUID playerId);
+    int getPriorityTime();
+    void setPriorityTime(int priorityTime);
 }

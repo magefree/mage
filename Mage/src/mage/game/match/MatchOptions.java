@@ -31,6 +31,7 @@ package mage.game.match;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import mage.constants.MatchTimeLimit;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 
@@ -49,6 +50,10 @@ public class MatchOptions implements Serializable {
     protected String deckType;
     protected boolean limited;
     protected List<String> playerTypes = new ArrayList<String>();
+    /**
+     * Time each player has during the game to play using his\her priority.
+     */
+    protected MatchTimeLimit matchTimeLimit; // 0 = no priorityTime handling
 
     public MatchOptions(String name, String gameType) {
         this.name = name;
@@ -90,6 +95,7 @@ public class MatchOptions implements Serializable {
     public void setFreeMulligans(int freeMulligans) {
         this.freeMulligans = freeMulligans;
     }
+
     public String getGameType() {
         return gameType;
     }
@@ -117,4 +123,16 @@ public class MatchOptions implements Serializable {
     public void setLimited(boolean limited) {
         this.limited = limited;
     }
+
+    public int getPriorityTime() {
+        if (matchTimeLimit == null) {
+            return MatchTimeLimit.NONE.getTimeLimit();
+        }
+        return matchTimeLimit.getTimeLimit();
+    }
+
+    public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
+        this.matchTimeLimit = matchTimeLimit;
+    }
+
 }

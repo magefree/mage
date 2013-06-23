@@ -45,7 +45,6 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.TargetPlayer;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -61,41 +60,25 @@ public class CrypticCommand extends CardImpl<CrypticCommand> {
 
         this.color.setBlue(true);
 
-        // Choose two - Counter target spell; or return target permanent to its owner's hand; or tap all creatures your opponents control; or draw a card.
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        // Choose two -
+        this.getSpellAbility().getModes().setMinModes(2);
+        this.getSpellAbility().getModes().setMaxModes(2);
+        // Counter target spell;
+        this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
-        this.getSpellAbility().addEffect(new ReturnToHandTargetEffect());
-        this.getSpellAbility().addEffect(new CounterSecondTargetEffect());
-
-        Mode mode1 = new Mode();
-        mode1.getTargets().add(new TargetSpell());
-        mode1.getEffects().add(new CounterTargetEffect());
-        mode1.getEffects().add(new CrypticCommandEffect());
-        this.getSpellAbility().addMode(mode1);
-
-        Mode mode2 = new Mode();
-        mode2.getTargets().add(new TargetSpell());
-        mode2.getEffects().add(new CounterTargetEffect());
-        mode2.getEffects().add(new DrawCardControllerEffect(1));
-        this.getSpellAbility().addMode(mode2);
-
-        Mode mode3 = new Mode();
-        mode3.getTargets().add(new TargetCreaturePermanent());
-        mode3.getEffects().add(new ReturnToHandTargetEffect());
-        mode3.getEffects().add(new CrypticCommandEffect());
-        this.getSpellAbility().addMode(mode3);
-
-        Mode mode4 = new Mode();
-        mode4.getTargets().add(new TargetCreaturePermanent());
-        mode4.getEffects().add(new ReturnToHandTargetEffect());
-        mode4.getEffects().add(new DrawCardControllerEffect(1));
-        this.getSpellAbility().addMode(mode4);
-
-        Mode mode5 = new Mode();
-        mode5.getTargets().add(new TargetPlayer());
-        mode5.getEffects().add(new CrypticCommandEffect());
-        mode5.getEffects().add(new DrawCardControllerEffect(1));
-        this.getSpellAbility().addMode(mode5);
+        // or return target permanent to its owner's hand;
+        Mode mode = new Mode();
+        mode.getEffects().add(new ReturnToHandTargetEffect());
+        mode.getTargets().add(new TargetCreaturePermanent());
+        this.getSpellAbility().getModes().addMode(mode);
+        // or tap all creatures your opponents control;
+        mode = new Mode();
+        mode.getEffects().add(new CrypticCommandEffect());
+        this.getSpellAbility().getModes().addMode(mode);
+        // or draw a card.
+        mode = new Mode();
+        mode.getEffects().add(new DrawCardControllerEffect(1));
+        this.getSpellAbility().getModes().addMode(mode);
     }
 
     public CrypticCommand(final CrypticCommand card) {

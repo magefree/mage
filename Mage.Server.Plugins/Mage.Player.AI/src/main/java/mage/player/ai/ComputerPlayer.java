@@ -1230,7 +1230,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return modes.getMode();
         }
         //TODO: improve this;
-        return modes.values().iterator().next();
+        for (Mode mode: modes.values()) {
+            if (!modes.getSelectedModes().contains(mode.getId()) // select only modes not already selected
+                    && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+                return mode;
+            }
+        }
+        return null;
     }
 
     @Override

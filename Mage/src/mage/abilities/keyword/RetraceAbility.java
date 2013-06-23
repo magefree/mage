@@ -67,9 +67,7 @@ public class RetraceAbility extends ActivatedAbilityImpl<RetraceAbility> {
 
     @Override
     public String getRule() {
-        StringBuilder sbRule = new StringBuilder("Retrace");
-        
-        return sbRule.toString();
+        return "Retrace <i>(You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)</i>";
     }
 }
 class RetraceEffect extends OneShotEffect<RetraceEffect> {

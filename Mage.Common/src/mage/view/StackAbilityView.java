@@ -28,16 +28,16 @@
 
 package mage.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageObject;
+import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
 import mage.target.targetpointer.TargetPointer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -68,28 +68,41 @@ public class StackAbilityView extends CardView {
     }
 
     private void updateTargets(Game game, StackAbility ability) {
-        if (ability.getTargets().size() > 0) {
-            setTargets(ability.getTargets());
-        } else {
-            List<UUID> targetList = new ArrayList<UUID>();
-            for (Effect effect : ability.getEffects()) {
-                TargetPointer targetPointer = effect.getTargetPointer();
-                if (targetPointer instanceof FixedTarget) {
-                    targetList.add(((FixedTarget) targetPointer).getTarget());
-                }
-            }
-            if (targetList.size() > 0) {
-                overrideTargets(targetList);
-                List<String> names = new ArrayList<String>();
-                for (UUID uuid : targetList) {
-                    MageObject mageObject = game.getObject(uuid);
-                    if (mageObject != null) {
-                        names.add(mageObject.getName());
+        List<String> names = new ArrayList<String>();
+        for(UUID modeId : ability.getModes().getSelectedModes()) {
+            ability.getModes().setMode(ability.getModes().get(modeId));
+            if (ability.getTargets().size() > 0) {
+                setTargets(ability.getTargets());
+            } else {
+                List<UUID> targetList = new ArrayList<UUID>();
+                for (Effect effect : ability.getEffects()) {
+                    TargetPointer targetPointer = effect.getTargetPointer();
+                    if (targetPointer instanceof FixedTarget) {
+                        targetList.add(((FixedTarget) targetPointer).getTarget());
                     }
                 }
-                if (!names.isEmpty()) {
-                    getRules().add("<i>Targets: " + names.toString() + "</i>");
+                if (targetList.size() > 0) {
+                    overrideTargets(targetList);
+
+                    for (UUID uuid : targetList) {
+                        MageObject mageObject = game.getObject(uuid);
+                        if (mageObject != null) {
+                            names.add(mageObject.getName());
+                        }
+                    }
+
                 }
+            }
+        }
+        if (!names.isEmpty()) {
+            getRules().add("<i>Targets: " + names.toString() + "</i>");
+        }
+        // show for modal ability, which mode was choosen
+        if (ability.isModal()) {
+            Modes modes = ability.getModes();
+            for(UUID modeId : modes.getSelectedModes()) {
+                modes.setMode(modes.get(modeId));
+                this.rules.add("<span color='green'><i>Chosen mode: " + ability.getEffects().getText(modes.get(modeId))+"</i></span>");
             }
         }
     }

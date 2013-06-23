@@ -137,7 +137,7 @@ public class GameController implements GameCallback {
                                     throw new IllegalStateException("INIT_TIMER: playerId can't be null");
                                 }
                                 long delay = 250L; // run each 250 ms
-                                timer = new PriorityTimer(Constants.PRIORITY_TIME_SEC, delay, new Action() {
+                                timer = new PriorityTimer(game.getPriorityTime(), delay, new Action() {
                                     @Override
                                     public void execute() throws MageException {
                                         game.concede(initPlayerId);
@@ -433,10 +433,12 @@ public class GameController implements GameCallback {
     }
 
     private synchronized void updateGame() {
-        for (Player player: game.getState().getPlayers().values()) {
-            PriorityTimer timer = timers.get(player.getId());
-            if (timer != null) {
-                player.setPriorityTimeLeft(timer.getCount());
+        if (!timers.isEmpty()) {
+            for (Player player: game.getState().getPlayers().values()) {
+                PriorityTimer timer = timers.get(player.getId());
+                if (timer != null) {
+                    player.setPriorityTimeLeft(timer.getCount());
+                }
             }
         }
         for (final GameSession gameSession: gameSessions.values()) {

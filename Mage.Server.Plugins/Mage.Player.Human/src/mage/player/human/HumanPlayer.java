@@ -782,18 +782,23 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             MageObject obj = game.getObject(source.getSourceId());
             Map<UUID, String> modeMap = new LinkedHashMap<UUID, String>();
             for (Mode mode: modes.values()) {
-                String modeText = mode.getEffects().getText(mode);
-                if (obj != null) {
-                    modeText = modeText.replace("{source}", obj.getName());
+                if (!modes.getSelectedModes().contains(mode.getId()) // show only modes not already selected
+                        && mode.getTargets().canChoose(source.getSourceId(), source.getControllerId(), game)) { // and where targets are available
+                    String modeText = mode.getEffects().getText(mode);
+                    if (obj != null) {
+                        modeText = modeText.replace("{source}", obj.getName());
+                    }
+                    modeMap.put(mode.getId(), modeText);
                 }
-                modeMap.put(mode.getId(), modeText);
             }
-            game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
-            waitForResponse(game);
-            if (response.getUUID() != null) {
-                for (Mode mode: modes.values()) {
-                    if (mode.getId().equals(response.getUUID())) {
-                        return mode;
+            if (modeMap.size() > 0) {
+                game.fireGetModeEvent(playerId, "Choose Mode", modeMap);
+                waitForResponse(game);
+                if (response.getUUID() != null) {
+                    for (Mode mode: modes.values()) {
+                        if (mode.getId().equals(response.getUUID())) {
+                            return mode;
+                        }
                     }
                 }
             }
