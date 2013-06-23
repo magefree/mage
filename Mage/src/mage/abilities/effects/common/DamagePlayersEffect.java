@@ -78,7 +78,7 @@ public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
                 for (UUID playerId: game.getPlayer(source.getControllerId()).getInRange()) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+                        player.damage(amount.calculate(game, source), source.getSourceId(), game, false, true);
                     }
                 }
                 break;
@@ -86,7 +86,7 @@ public class DamagePlayersEffect extends OneShotEffect<DamagePlayersEffect> {
                 for (UUID playerId: game.getOpponents(source.getControllerId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
-                        player.damage(amount.calculate(game, source), source.getId(), game, false, true);
+                        player.damage(amount.calculate(game, source), source.getSourceId(), game, false, true);
                     }
                 }
                 break;
