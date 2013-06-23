@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.costs.OptionalAdditionalModeSourceCosts;
-import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.players.Player;
@@ -175,6 +174,7 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         }
         if (this.size() > 1) {
             sb.delete(sb.length() - andOr.length(), sb.length());
+            sb.append(".");
         }
         return sb.toString();
     }

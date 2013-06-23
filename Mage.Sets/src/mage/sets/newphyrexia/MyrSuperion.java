@@ -28,10 +28,12 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.StaticAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 
 /**
@@ -51,6 +53,7 @@ public class MyrSuperion extends CardImpl<MyrSuperion> {
         this.toughness = new MageInt(6);
 
         // Spend only mana produced by creatures to cast Myr Superion.
+        this.addAbility(new MyrSuperionStaticAbility());
         this.getSpellAbility().getManaCostsToPay().setSourceFilter(filter);
         this.getSpellAbility().getManaCosts().setSourceFilter(filter);
     }
@@ -63,4 +66,26 @@ public class MyrSuperion extends CardImpl<MyrSuperion> {
     public MyrSuperion copy() {
         return new MyrSuperion(this);
     }
+}
+
+class MyrSuperionStaticAbility extends StaticAbility<MyrSuperionStaticAbility> {
+
+    public MyrSuperionStaticAbility() {
+        super(Zone.STACK, null);
+    }
+
+    public MyrSuperionStaticAbility(MyrSuperionStaticAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public MyrSuperionStaticAbility copy() {
+        return new MyrSuperionStaticAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "Spend only mana produced by creatures to cast {this}.";
+    }
+
 }
