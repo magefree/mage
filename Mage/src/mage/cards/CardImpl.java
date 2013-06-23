@@ -402,6 +402,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case LIBRARY:
                         game.getPlayer(ownerId).removeFromLibrary(this, game);
                         break;
+                    case EXILED:
+                        game.getExile().removeCard(this, game);
+                        break;
                     default:
                         logger.warn("moveToExile, not fully implemented: from="+fromZone);
                 }
