@@ -119,6 +119,7 @@ public class NewTableDialog extends MageDialog {
         lbDeckType.setText("Deck Type:");
 
         lbTimeLimit.setText("Time Limit:");
+        lbTimeLimit.setToolTipText("The activie time a player may use to finish the match. If the time runs out, the player looses the current game.");
 
         lblGameType.setText("Game Type:");
 
@@ -129,6 +130,7 @@ public class NewTableDialog extends MageDialog {
         });
 
         lblFreeMulligans.setText("Free Mulligans:");
+        lblFreeMulligans.setToolTipText("The number of mulligans a player can use without decreasing the number of drawn cards.");
 
         lblNumPlayers.setLabelFor(spnNumPlayers);
         lblNumPlayers.setText("Players");
@@ -147,6 +149,7 @@ public class NewTableDialog extends MageDialog {
 
         lblNumWins.setLabelFor(spnNumWins);
         lblNumWins.setText("Wins");
+        lblNumWins.setToolTipText("How many games has a player to win to win the match.");
 
         spnNumWins.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -202,7 +205,7 @@ public class NewTableDialog extends MageDialog {
                                 .addComponent(spnFreeMulligans, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 9, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
@@ -297,7 +300,7 @@ public class NewTableDialog extends MageDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                .addComponent(pnlOtherPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -309,7 +312,7 @@ public class NewTableDialog extends MageDialog {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(201, 201, 201)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(244, Short.MAX_VALUE)))
+                    .addContainerGap(252, Short.MAX_VALUE)))
         );
 
         pack();
@@ -481,7 +484,7 @@ public class NewTableDialog extends MageDialog {
                 break;
             }
         }
-        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, "0"));
+        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TABLE_TIME_LIMIT, "1500"));
         for (MatchTimeLimit mtl :MatchTimeLimit.values()) {
             if (mtl.getTimeLimit() == timeLimit) {
                 this.cbTimeLimit.setSelectedItem(mtl);

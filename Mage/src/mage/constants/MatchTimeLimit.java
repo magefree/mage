@@ -1,12 +1,17 @@
 package mage.constants;
 
 /**
+ * The time per player to have activity in a match.
+ * If time runs out for a player, he looses the currently running game of a match.
  *
  * @author LevelX2
  */
 public enum MatchTimeLimit {
     NONE(0,"None"),
+    MIN__10(600, "10 Minutes"),
+    MIN__15(900, "15 Minutes"),
     MIN__20(1200, "20 Minutes"),
+    MIN__25(1500, "25 Minutes"),
     MIN__30(1800, "30 Minutes"),
     MIN__40(2400, "40 Minutes"),
     MIN__50(3000, "50 Minutes"),

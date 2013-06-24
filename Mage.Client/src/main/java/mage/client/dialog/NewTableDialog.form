@@ -49,7 +49,7 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtName" min="-2" pref="546" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
@@ -173,7 +173,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="144" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="181" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -187,7 +187,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="244" max="32767" attributes="0"/>
+                  <EmptySpace pref="252" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -214,6 +214,7 @@
     <Component class="javax.swing.JLabel" name="lbTimeLimit">
       <Properties>
         <Property name="text" type="java.lang.String" value="Time Limit:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The activie time a player may use to finish the match. If the time runs out, the player looses the current game."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbTimeLimit">
@@ -231,6 +232,7 @@
     <Component class="javax.swing.JLabel" name="lblFreeMulligans">
       <Properties>
         <Property name="text" type="java.lang.String" value="Free Mulligans:"/>
+        <Property name="toolTipText" type="java.lang.String" value="The number of mulligans a player can use without decreasing the number of drawn cards."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnFreeMulligans">
@@ -284,6 +286,7 @@
           <ComponentRef name="spnNumWins"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Wins"/>
+        <Property name="toolTipText" type="java.lang.String" value="How many games has a player to win to win the match."/>
       </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="spnNumWins">
