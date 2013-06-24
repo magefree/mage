@@ -139,6 +139,7 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
 
     private String ruleText;
     private boolean gainedTemporary;
+    private boolean shortRule;
 
     /**
     * Gives the card the SuspendAbility
@@ -147,14 +148,19 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     * @param cost - null is used for temporary gained suspend ability
     * @param card - card that has the suspend ability
     */
-
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
+        this(suspend, cost, card, false);
+    }
+
+    public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
         super(Zone.HAND, new SuspendExileEffect(suspend), cost);
         this.usesStack = false;
+        this.shortRule = shortRule;
         StringBuilder sb = new StringBuilder("Suspend ");
         if (cost != null) {
-            sb.append(suspend).append(" - ").append(cost.getText())
-                .append(" <i>(Rather than cast this card from your hand, pay ")
+            sb.append(suspend).append(" - ").append(cost.getText());
+            if (!shortRule) {
+                sb.append(" <i>(Rather than cast this card from your hand, pay ")
                 .append(cost.getText())
                 .append(" and exile it with ")
                 .append(suspend == 1 ? "a time counter":suspend + " time counters")
@@ -162,6 +168,7 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
                 .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
                 .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
                 .append(")</i>");
+            }
         } else {
             gainedTemporary = true;
         }
@@ -183,6 +190,7 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
         super(ability);
         this.ruleText = ability.getRule();
         this.gainedTemporary = ability.gainedTemporary;
+        this.shortRule = ability.shortRule;
     }
 
     @Override
