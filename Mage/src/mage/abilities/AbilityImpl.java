@@ -192,8 +192,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                         break;
                     }
                 }
-                if (ability instanceof OptionalAdditionalSourceCosts
-                        && !(ability instanceof EntwineAbility)) {
+                if (ability instanceof OptionalAdditionalSourceCosts) {
                     ((OptionalAdditionalSourceCosts)ability).addOptionalAdditionalCosts(this, game);
                 }
             }
