@@ -25,21 +25,21 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.exodus;
+package mage.sets.alarareborn;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.common.PayLifeCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -50,47 +50,54 @@ import mage.target.common.TargetCreaturePermanent;
  *
  * @author jeffwadsworth
  */
-public class ErraticPortal extends CardImpl<ErraticPortal> {
+public class VectisDominator extends CardImpl<VectisDominator> {
 
-    public ErraticPortal(UUID ownerId) {
-        super(ownerId, 132, "Erratic Portal", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{4}");
-        this.expansionSetCode = "EXO";
+    public VectisDominator(UUID ownerId) {
+        super(ownerId, 84, "Vectis Dominator", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{1}{W}{B}");
+        this.expansionSetCode = "ARB";
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
-        // {1}, {tap}: Return target creature to its owner's hand unless its controller pays {1}.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ErraticPortalEffect(new GenericManaCost(1)), new ManaCostsImpl("{1}"));
+        this.color.setBlack(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(0);
+        this.toughness = new MageInt(2);
+
+        // {tap}: Tap target creature unless its controller pays 2 life.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new VectisDominatorEffect(new PayLifeCost(2)), new ManaCostsImpl("{1}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
 
-    public ErraticPortal(final ErraticPortal card) {
+    public VectisDominator(final VectisDominator card) {
         super(card);
     }
 
     @Override
-    public ErraticPortal copy() {
-        return new ErraticPortal(this);
+    public VectisDominator copy() {
+        return new VectisDominator(this);
     }
 }
 
-class ErraticPortalEffect extends OneShotEffect<ErraticPortalEffect> {
+class VectisDominatorEffect extends OneShotEffect<VectisDominatorEffect> {
 
     protected Cost cost;
 
-    public ErraticPortalEffect(Cost cost) {
+    public VectisDominatorEffect(Cost cost) {
         super(Outcome.Detriment);
-        this.staticText = "Return target creature to its owner's hand unless its controller pays {1}";
+        this.staticText = "Tap target creature unless its controller pays 2 life";
         this.cost = cost;
     }
 
-    public ErraticPortalEffect(final ErraticPortalEffect effect) {
+    public VectisDominatorEffect(final VectisDominatorEffect effect) {
         super(effect);
         this.cost = effect.cost.copy();
     }
 
     @Override
-    public ErraticPortalEffect copy() {
-        return new ErraticPortalEffect(this);
+    public VectisDominatorEffect copy() {
+        return new VectisDominatorEffect(this);
     }
 
     @Override
@@ -100,12 +107,12 @@ class ErraticPortalEffect extends OneShotEffect<ErraticPortalEffect> {
             Player player = game.getPlayer(targetCreature.getControllerId());
             if (player != null) {
                 cost.clearPaid();
-                final StringBuilder sb = new StringBuilder("Pay {1} otherwise ").append(targetCreature.getName()).append(" will be returned to its owner's hand)");
+                final StringBuilder sb = new StringBuilder("Pay 2 life otherwise ").append(targetCreature.getName()).append(" will be tapped)");
                 if (player.chooseUse(Outcome.Benefit, sb.toString(), game)) {
                     cost.pay(source, game, targetCreature.getControllerId(), targetCreature.getControllerId(), true);
                 }
                 if (!cost.isPaid()) {
-                    return targetCreature.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    return targetCreature.tap(game);
                 }
             }
         }
