@@ -19,6 +19,7 @@ import mage.target.targetpointer.FixedTarget;
 public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksAttachedTriggeredAbility>{
     private boolean setFixedTargetPointer;
     private String attachedDescription;
+    private boolean setFixedTargetPointerToBlocked;
 
     public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
         this(effect, attachedDescription, optional, false);
@@ -28,6 +29,13 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksA
         super(Zone.BATTLEFIELD, effect, optional);
         this.setFixedTargetPointer = setFixedTargetPointer;
         this.attachedDescription = attachedDescription;
+    }
+    
+    public BlocksAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer, boolean setFixedTargetPointerToBlocked) {
+        super(Zone.BATTLEFIELD, effect, optional);
+        this.setFixedTargetPointer = setFixedTargetPointer;
+        this.attachedDescription = attachedDescription;
+        this.setFixedTargetPointerToBlocked = setFixedTargetPointerToBlocked;
     }
 
     public BlocksAttachedTriggeredAbility(final BlocksAttachedTriggeredAbility ability) {
@@ -49,6 +57,11 @@ public class BlocksAttachedTriggeredAbility extends TriggeredAbilityImpl<BlocksA
                 if (setFixedTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                }
+                if (setFixedTargetPointerToBlocked) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getTargetId()));
                     }
                 }
                 return true;
