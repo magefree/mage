@@ -1065,7 +1065,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void addTriggeredAbility(TriggeredAbility ability) {
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
-            ability.resolve(this);
+            Ability manaAbiltiy = ability.copy();
+            manaAbiltiy.activate(this, false);
+            manaAbiltiy.resolve(this);
         }
         else {
             TriggeredAbility newAbility = (TriggeredAbility) ability.copy();

@@ -142,7 +142,7 @@ class ThievingSpriteEffect extends OneShotEffect<ThievingSpriteEffect> {
             Card card = revealedCards.get(targetInHand.getFirstTarget(), game);
             if (card != null) {
                 targetPlayer.discard(card, source, game);
-                game.informPlayers(new StringBuilder("Thieving Sprite").append(targetPlayer.getName()).append("discarded ").append(card.getName()).toString());
+                game.informPlayers(new StringBuilder("Thieving Sprite: ").append(targetPlayer.getName()).append(" discarded ").append(card.getName()).toString());
             }
         }
         return true;
