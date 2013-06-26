@@ -1,22 +1,19 @@
 package mage.cards;
 
-import com.sun.deploy.util.StringUtils;
+import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
-import mage.watchers.Watcher;
 
 /**
  * @author North
  */
-public class MockCard extends CardImpl {
+public class MockCard extends CardImpl<MockCard> {
     public MockCard(CardInfo card) {
         super(null, card.getName());
         this.cardNumber = card.getCardNumber();
@@ -28,7 +25,7 @@ public class MockCard extends CardImpl {
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
 
-        this.manaCost = new ManaCostsImpl(StringUtils.join(card.getManaCosts(), ""));
+        this.manaCost = new ManaCostsImpl(join(card.getManaCosts()));
 
         this.color = card.getColor();
         this.splitCard = card.isSplitCard();
@@ -42,8 +39,8 @@ public class MockCard extends CardImpl {
 
         this.flipCardName = card.getFlipCardName();
 
-        for(String text: card.getRules()) {
-            this.addAbility(textAbilityFromString(text));
+        for(String ruleText: card.getRules()) {
+            this.addAbility(textAbilityFromString(ruleText));
         }
     }
 
@@ -65,17 +62,35 @@ public class MockCard extends CardImpl {
         }
     }
 
-    private Ability textAbilityFromString(final String text) {
-        return new AbilityImpl(AbilityType.STATIC, Zone.ALL) {
-            @Override
-            public AbilityImpl copy() {
-                return this;
-            }
+    private String join(List<String> strings) {
+        StringBuilder sb = new StringBuilder();
+        for (String string : strings) {
+            sb.append(string);
+        }
+        return sb.toString();
+    }
 
-            @Override
-            public String getRule(boolean all) {
-                return text;
-            }
-        };
+    private Ability textAbilityFromString(final String text) {
+        return new MockAbility(text);
+    }
+
+    private class MockAbility extends AbilityImpl<MockAbility> {
+
+        private final String text;
+
+        public MockAbility(String text) {
+            super(AbilityType.STATIC, Zone.ALL);
+            this.text = text;
+        }
+
+        @Override
+        public MockAbility copy() {
+            return this;
+        }
+
+        @Override
+        public String getRule(boolean all) {
+            return text;
+        }
     }
 }
