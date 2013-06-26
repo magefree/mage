@@ -14,7 +14,8 @@ public enum EffectType {
     ASTHOUGH("As Though Effect"),
     RESTRICTION("Restriction Effect"),
     REQUIREMENT("Requirement Effect"),
-    COSTMODIFICATION("Cost Modification Effect");
+    COSTMODIFICATION("Cost Modification Effect"),
+    SPLICE("Splice Card  Effect");
 
     private String text;
 

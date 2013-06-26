@@ -53,6 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.abilities.keyword.EntwineAbility;
+import mage.constants.SpellAbilityType;
 
 
 /**
@@ -162,11 +163,22 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        // 20110204 - 700.2
+        /* 20130201 - 601.2b
+         * If the spell is modal the player announces the mode choice (see rule 700.2).
+         */
         if (!modes.choose(game, this)) {
             return false;
         }
-        //20100716 - 601.2b
+
+        /* 20130201 - 601.2b
+         * If the player wishes to splice any cards onto the spell (see rule 702.45), he
+         * or she reveals those cards in his or her hand.
+         */
+        if (this.abilityType.equals(AbilityType.SPELL)) {
+            game.getContinuousEffects().applySpliceEffects(this, game);
+        }
+
+
         Card card = game.getCard(sourceId);
         if (card != null) {
             card.adjustChoices(this, game);
@@ -179,7 +191,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             }
         }
 
-        // 20121001 - 601.2b
+        // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
@@ -198,6 +210,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
             }
         }
+
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.

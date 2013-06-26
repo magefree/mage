@@ -36,7 +36,9 @@ import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.constants.SpellAbilityType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -58,6 +60,7 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
     private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
+    private ContinuousEffectsList<SpliceCardEffect> spliceCardEffects = new ContinuousEffectsList<SpliceCardEffect>();
 
     private List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<ContinuousEffectsList<?>>();
     
@@ -88,6 +91,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects = effect.restrictionEffects.copy();
         asThoughEffects = effect.asThoughEffects.copy();
         costModificationEffects = effect.costModificationEffects.copy();
+        spliceCardEffects = effect.spliceCardEffects.copy();
         for (Map.Entry<UUID, UUID> entry : effect.sources.entrySet()) {
             sources.put(entry.getKey(), entry.getValue());
         }
@@ -103,6 +107,7 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(restrictionEffects);
         allEffectsLists.add(asThoughEffects);
         allEffectsLists.add(costModificationEffects);
+        allEffectsLists.add(spliceCardEffects);
     }
 
     public ContinuousEffects copy() {
@@ -125,6 +130,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeEndOfCombatEffects();
         asThoughEffects.removeEndOfCombatEffects();
         costModificationEffects.removeEndOfCombatEffects();
+        spliceCardEffects.removeEndOfCombatEffects();
     }
 
     public void removeEndOfTurnEffects() {
@@ -135,6 +141,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeEndOfTurnEffects();
         asThoughEffects.removeEndOfTurnEffects();
         costModificationEffects.removeEndOfTurnEffects();
+        spliceCardEffects.removeEndOfTurnEffects();
     }
 
     public void removeInactiveEffects(Game game) {
@@ -145,6 +152,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeInactiveEffects(game);
         asThoughEffects.removeInactiveEffects(game);
         costModificationEffects.removeInactiveEffects(game);
+        spliceCardEffects.removeInactiveEffects(game);
     }
 
     public List<ContinuousEffect> getLayeredEffects(Game game) {
@@ -328,6 +336,29 @@ public class ContinuousEffects implements Serializable {
 
         return costEffects;
     }
+    /**
+     * Filters out splice effects that are not active.
+     *
+     * @param game
+     * @return
+     */
+    private List<SpliceCardEffect> getApplicableSpliceCardEffects(Game game) {
+        List<SpliceCardEffect> spliceEffects = new ArrayList<SpliceCardEffect>();
+
+        for (SpliceCardEffect effect: spliceCardEffects) {
+            HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                        spliceEffects.add(effect);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return spliceEffects;
+    }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(game);
@@ -389,6 +420,31 @@ public class ContinuousEffects implements Serializable {
             }
         }
     }
+
+    /**
+     * Checks all available splice effects to be applied.
+     *
+     * @param abilityToModify
+     * @param game
+     * @return
+     */
+    public void applySpliceEffects ( Ability abilityToModify, Game game ) {
+        if ( ((SpellAbility) abilityToModify).getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+            // on a spliced ability of a spell can't be spliced again
+            return;
+        }
+        List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game);
+
+        for ( SpliceCardEffect effect : spliceEffects) {
+            HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if ( effect.applies(abilityToModify, ability, game) ) {
+                    effect.apply(game, ability, abilityToModify);
+                }
+            }
+        }
+    }
+
 
     public boolean replaceEvent(GameEvent event, Game game) {
         boolean caught = false;
@@ -616,6 +672,10 @@ public class ContinuousEffects implements Serializable {
             case COSTMODIFICATION:
                 CostModificationEffect newCostModificationEffect = (CostModificationEffect)effect;
                 costModificationEffects.addEffect(newCostModificationEffect, source);
+                break;
+            case SPLICE:
+                SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect)effect;
+                spliceCardEffects.addEffect(newSpliceCardEffect, source);
                 break;
             default:
                 ContinuousEffect newEffect = (ContinuousEffect)effect;
