@@ -46,6 +46,10 @@ public abstract class DeckImporter {
     public DeckCardLists importDeck(String file) {
         File f = new File(file);
         DeckCardLists deckList = new DeckCardLists();
+        if (!f.exists()) {
+            logger.warn("Deckfile " + file + " not found.");
+            return deckList;
+        }
         lineCount = 0;
         sbMessage.setLength(0);
         try {
