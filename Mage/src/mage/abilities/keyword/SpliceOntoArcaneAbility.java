@@ -106,6 +106,7 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
 
     private static final String KEYWORD_TEXT = "Splice onto Arcane";
     private Costs spliceCosts = new CostsImpl();
+    private boolean nonManaCosts = false;
 
     public SpliceOntoArcaneAbility(String manaString) {
         super(Zone.HAND, new SpliceOntoArcaneEffect());
@@ -115,11 +116,13 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
     public SpliceOntoArcaneAbility(Cost cost) {
         super(Zone.HAND, new SpliceOntoArcaneEffect());
         spliceCosts.add(cost);
+        nonManaCosts = true;
     }
 
     public SpliceOntoArcaneAbility(final SpliceOntoArcaneAbility ability) {
         super(ability);
         this.spliceCosts = ability.spliceCosts.copy();
+        this.nonManaCosts = ability.nonManaCosts;
     }
 
     @Override
@@ -134,9 +137,9 @@ public class SpliceOntoArcaneAbility extends SimpleStaticAbility {
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder();
-        sb.append(KEYWORD_TEXT).append(" ");
-        sb.append(spliceCosts.getText());
-        sb.append(" <i>(As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>");
+        sb.append(KEYWORD_TEXT).append(nonManaCosts?"-":" ");
+        sb.append(spliceCosts.getText()).append(nonManaCosts?". ":" ");
+        sb.append("<i>(As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)</i>");
         return sb.toString();
     }
 }
@@ -165,24 +168,19 @@ class SpliceOntoArcaneEffect extends SpliceCardEffectImpl<SpliceOntoArcaneEffect
         Player controller = game.getPlayer(source.getControllerId());
         Card spliceCard = game.getCard(source.getSourceId());
         if (spliceCard != null && controller != null) {
-            if (controller.chooseUse(outcome, new StringBuilder("Splice ").append(spliceCard.getName())
-                    .append(" ").append(((SpliceOntoArcaneAbility) source).getSpliceCosts().getText()).append("?").toString(), game)) {
-                Spell spell = game.getStack().getSpell(abilityToModify.getId());
-                if (spell != null) {
-                    SpellAbility splicedAbility = spliceCard.getSpellAbility().copy();
-                    splicedAbility.setSpellAbilityType(SpellAbilityType.SPLICE);
-                    splicedAbility.setSourceId(abilityToModify.getSourceId());
-                    spell.addSpellAbility(splicedAbility);
-                    for (Iterator it = ((SpliceOntoArcaneAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
-                        Cost cost = (Cost) it.next();
-                        if (cost instanceof ManaCostsImpl) {
-                            spell.getSpellAbility().getManaCostsToPay().add((ManaCostsImpl) cost.copy());
-                        } else {
-                            spell.getSpellAbility().getCosts().add(cost.copy());
-                        }
+            Spell spell = game.getStack().getSpell(abilityToModify.getId());
+            if (spell != null) {
+                SpellAbility splicedAbility = spliceCard.getSpellAbility().copy();
+                splicedAbility.setSpellAbilityType(SpellAbilityType.SPLICE);
+                splicedAbility.setSourceId(abilityToModify.getSourceId());
+                spell.addSpellAbility(splicedAbility);
+                for (Iterator it = ((SpliceOntoArcaneAbility) source).getSpliceCosts().iterator(); it.hasNext();) {
+                    Cost cost = (Cost) it.next();
+                    if (cost instanceof ManaCostsImpl) {
+                        spell.getSpellAbility().getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                    } else {
+                        spell.getSpellAbility().getCosts().add(cost.copy());
                     }
-                    // reveal the spliced card
-                    controller.revealCards("Spliced card", new CardsImpl(spliceCard), game);
                 }
             }
             return true;

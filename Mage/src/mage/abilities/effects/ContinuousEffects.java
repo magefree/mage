@@ -38,11 +38,20 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -434,13 +443,50 @@ public class ContinuousEffects implements Serializable {
             return;
         }
         List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game);
-
-        for ( SpliceCardEffect effect : spliceEffects) {
+        // get the applyable splice abilities
+        List<SpliceOntoArcaneAbility> spliceAbilities = new ArrayList<SpliceOntoArcaneAbility>();
+        for (SpliceCardEffect effect : spliceEffects) {
             HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if ( effect.applies(abilityToModify, ability, game) ) {
-                    effect.apply(game, ability, abilityToModify);
+                if (effect.applies(abilityToModify, ability, game) ) {
+                    spliceAbilities.add((SpliceOntoArcaneAbility) ability);
                 }
+            }
+        }
+        // check if player wants to use splice
+
+        if (spliceAbilities.size() > 0) {
+            Player controller = game.getPlayer(abilityToModify.getControllerId());
+            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", game)) {
+                Cards cardsToReveal = new CardsImpl();
+                do {
+                    FilterCard filter = new FilterCard("a card to splice");
+                    ArrayList<Predicate<MageObject>> idPredicates = new ArrayList<Predicate<MageObject>>();
+                    for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+                        idPredicates.add(new CardIdPredicate((ability.getSourceId())));
+                    }
+                    filter.add(Predicates.or(idPredicates));
+                    TargetCardInHand target = new TargetCardInHand(filter);
+                    target.setRequired(true);
+                    controller.chooseTarget(Outcome.Benefit, target, abilityToModify, game);
+                    UUID cardId = target.getFirstTarget();
+                    if (cardId != null) {
+                        SpliceOntoArcaneAbility selectedAbility = null;
+                        for(SpliceOntoArcaneAbility ability :spliceAbilities) {
+                            if (ability.getSourceId().equals(cardId)) {
+                                selectedAbility = ability;
+                                break;
+                            }
+                        }
+                        if (selectedAbility != null) {
+                            SpliceCardEffect spliceEffect = (SpliceCardEffect) selectedAbility.getEffects().get(0);
+                            spliceEffect.apply(game, selectedAbility, abilityToModify);
+                            cardsToReveal.add(game.getCard(cardId));
+                            spliceAbilities.remove(selectedAbility);
+                        }
+                    }
+                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", game));
+                controller.revealCards("Spliced cards", cardsToReveal, game);
             }
         }
     }
