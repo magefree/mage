@@ -3,12 +3,9 @@ package mage.cards;
 import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.AbilityImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.AbilityType;
-import mage.constants.Zone;
 
 /**
  * @author North
@@ -72,25 +69,5 @@ public class MockCard extends CardImpl<MockCard> {
 
     private Ability textAbilityFromString(final String text) {
         return new MockAbility(text);
-    }
-
-    private class MockAbility extends AbilityImpl<MockAbility> {
-
-        private final String text;
-
-        public MockAbility(String text) {
-            super(AbilityType.STATIC, Zone.ALL);
-            this.text = text;
-        }
-
-        @Override
-        public MockAbility copy() {
-            return this;
-        }
-
-        @Override
-        public String getRule(boolean all) {
-            return text;
-        }
     }
 }
