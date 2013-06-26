@@ -41,6 +41,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.MockSplitCard;
 
 /**
  *
@@ -141,7 +142,11 @@ public class CardInfo {
     }
 
     public Card getMockCard() {
-        return new MockCard(this);
+        if (this.splitCard) {
+            return new MockSplitCard(this);
+        } else {
+            return new MockCard(this);
+        }
     }
 
     public ObjectColor getColor() {

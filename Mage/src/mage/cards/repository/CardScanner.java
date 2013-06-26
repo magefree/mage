@@ -33,6 +33,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.SplitCard;
 import mage.util.ClassScanner;
 
 /**
@@ -61,6 +62,11 @@ public class CardScanner {
                 Card card = CardImpl.createCard(c);
                 if (card != null) {
                     cardsToAdd.add(new CardInfo(card));
+                    if (card instanceof SplitCard) {
+                        SplitCard splitCard = (SplitCard) card;
+                        cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                        cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+                    }
                 }
             }
         }
