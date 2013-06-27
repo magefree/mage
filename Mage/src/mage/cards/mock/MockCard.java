@@ -1,9 +1,10 @@
-package mage.cards;
+package mage.cards.mock;
 
 import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.cards.CardImpl;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 

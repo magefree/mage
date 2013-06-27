@@ -1,4 +1,4 @@
-package mage.cards;
+package mage.cards.mock;
 
 import mage.abilities.AbilityImpl;
 import mage.constants.AbilityType;

@@ -35,13 +35,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mage.cards.MockCard;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.MockSplitCard;
+import mage.cards.mock.MockCard;
+import mage.cards.mock.MockSplitCard;
 
 /**
  *

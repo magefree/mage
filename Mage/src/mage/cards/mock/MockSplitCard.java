@@ -1,8 +1,9 @@
-package mage.cards;
+package mage.cards.mock;
 
 import java.util.List;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.cards.SplitCard;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.constants.CardType;
