@@ -31,8 +31,6 @@ package mage.abilities.keyword;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
@@ -41,8 +39,11 @@ import mage.abilities.costs.Costs;
 import mage.abilities.costs.OptionalAdditionalCost;
 import mage.abilities.costs.OptionalAdditionalCostImpl;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -88,6 +89,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
     protected String keywordText;
     protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
+    private   int xManaValue = 0;
 
     public KickerAbility(String manaString) {
        this(KICKER_KEYWORD, KICKER_REMINDER_MANA);
@@ -112,6 +114,8 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
        this.kickerCosts = ability.kickerCosts;
        this.keywordText = ability.keywordText;
        this.reminderText = ability.reminderText;
+       this.xManaValue = ability.xManaValue;
+
     }
 
     @Override
@@ -137,6 +141,10 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
         }
     }
 
+    public int getXManaValue() {
+        return xManaValue;
+    }
+    
     public int getKickedCounter() {
         int counter = 0;
         for (OptionalAdditionalCost cost: kickerCosts) {
@@ -178,7 +186,16 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                             for (Iterator it = ((Costs) kickerCost).iterator(); it.hasNext();) {
                                 Cost cost = (Cost) it.next();
                                 if (cost instanceof ManaCostsImpl) {
-                                    ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());
+                                    List<VariableManaCost> varCosts = ((ManaCostsImpl)cost).getVariableCosts();
+                                    if (varCosts != null) {
+                                        // use only first variable cost
+                                        xManaValue = game.getPlayer(this.controllerId).announceXMana(varCosts.get(0).getMinX(), Integer.MAX_VALUE, "Announce kicker value for " + varCosts.get(0).getText(), game, this);
+                                        // kicker variable X costs handled internally as multikicker with {1} cost (no multikicker on card)
+                                        game.informPlayers(new StringBuilder(game.getPlayer(this.controllerId).getName()).append(" announced a value of ").append(xManaValue).append(" for ").append(" kicker X ").toString());
+                                        ability.getManaCostsToPay().add(new GenericManaCost(xManaValue));
+                                    } else {
+                                        ability.getManaCostsToPay().add((ManaCostsImpl) cost.copy());                                        
+                                    }
                                 } else {
                                     ability.getCosts().add(cost.copy());
                                 }
