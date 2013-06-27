@@ -144,7 +144,7 @@ class KarrthusControlEffect extends ContinuousEffectImpl<KarrthusControlEffect> 
     private UUID controllerId;
 
     public KarrthusControlEffect(UUID controllerId) {
-        super(Duration.WhileOnBattlefield, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
         this.controllerId = controllerId;
     }
 
