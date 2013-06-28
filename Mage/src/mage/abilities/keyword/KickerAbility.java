@@ -187,7 +187,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                                 Cost cost = (Cost) it.next();
                                 if (cost instanceof ManaCostsImpl) {
                                     List<VariableManaCost> varCosts = ((ManaCostsImpl)cost).getVariableCosts();
-                                    if (varCosts != null) {
+                                    if (!varCosts.isEmpty()) {
                                         // use only first variable cost
                                         xManaValue = game.getPlayer(this.controllerId).announceXMana(varCosts.get(0).getMinX(), Integer.MAX_VALUE, "Announce kicker value for " + varCosts.get(0).getText(), game, this);
                                         // kicker variable X costs handled internally as multikicker with {1} cost (no multikicker on card)
