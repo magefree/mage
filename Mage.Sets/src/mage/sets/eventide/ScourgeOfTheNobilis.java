@@ -41,13 +41,12 @@ import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.abilities.keyword.LifelinkAbility;
-import mage.abilities.keyword.WitherAbility;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -74,7 +73,7 @@ public class ScourgeOfTheNobilis extends CardImpl<ScourgeOfTheNobilis> {
         this.addAbility(ability);
         // As long as enchanted creature is red, it gets +1/+1 and has "{RW}: This creature gets +1/+0 until end of turn."
         SimpleStaticAbility redAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.RED), "As long as enchanted creature is red, it gets +1/+1"));
-        redAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{RW}")), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.RED), "and has \"{RW}: This creature gets +1/+0 until end of turn.\""));
+        redAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R/W}")), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.RED), "and has \"{R/W}: This creature gets +1/+0 until end of turn.\""));
         this.addAbility(redAbility);
         // As long as enchanted creature is white, it gets +1/+1 and has lifelink.
         SimpleStaticAbility whiteAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.WHITE), "As long as enchanted creature is white, it gets +1/+1"));
