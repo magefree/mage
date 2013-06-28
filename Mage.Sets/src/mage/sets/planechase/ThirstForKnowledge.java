@@ -94,18 +94,17 @@ class ThirstforKnowledgeEffect extends OneShotEffect<ThirstforKnowledgeEffect> {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         if (you != null
                 && you.getHand().count(filter, game) > 0
-                && you.chooseUse(Outcome.Discard, "Do you want to discard an artifact?  If you do not, you must discard 2 cards", game)) {
+                && you.chooseUse(Outcome.Discard, "Do you want to discard an artifact?  If you don't, you must discard 2 cards", game)) {
             Cost cost = new DiscardTargetCost(new TargetCardInHand(filter));
-            if (cost.canPay(you.getId(), you.getId(), game)) {
-                if (!cost.pay(source, game, you.getId(), you.getId(), false)) {
-                    you.discard(2, source, game);
+            if (cost.canPay(source.getSourceId(), you.getId(), game)) {
+                if (cost.pay(source, game, source.getSourceId(), you.getId(), false)) {
+                    return true;
                 }
-                return true;
             }
         }
-        if (you != null
-                && you.getHand().count(filter, game) == 0) {
+        if (you != null) {
             you.discard(2, source, game);
+            return true;
         }
         return false;
     }
