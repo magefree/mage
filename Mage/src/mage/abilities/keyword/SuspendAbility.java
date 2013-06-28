@@ -28,6 +28,8 @@
 
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -176,13 +178,7 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
         if (card.getManaCost().isEmpty()) {
             setRuleAtTheTop(true);
         }        
-        // add triggered ability to remove the counter from the card
-        Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
-                SuspendedCondition.getInstance(),
-                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
-        ability.setRuleVisible(false);
-        card.addAbility(ability);
+        card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
         card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
     }
 
@@ -326,16 +322,26 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
             // remove temporary suspend ability (used e.g. for Epochrasite)
-            Ability abilityToRemove = null;
+            List<Ability> abilitiesToRemove = new ArrayList<Ability>();
             for (Ability ability : card.getAbilities()) {
                 if (ability instanceof SuspendAbility) {
                     if (((SuspendAbility)ability).isGainedTemporary()) {
-                        abilityToRemove = ability;
+                        abilitiesToRemove.add(ability);
                     }
                 }
             }
-            if (abilityToRemove != null) {
-                card.getAbilities().remove(abilityToRemove);
+            if (!abilitiesToRemove.isEmpty()) {
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof SuspendBeginningOfUpkeepTriggeredAbility || ability instanceof SuspendPlayCardAbility ) {
+                        abilitiesToRemove.add(ability);
+                    }
+                }
+                // remove the triggered abilities from the game
+                game.getState().resetTriggersForSourceId(card.getId());
+                // remove the continious effects from the game
+                game.getState().getContinuousEffects().removeGainedEffectsForSource(card.getId());
+                // remove the abilities from the card
+                card.getAbilities().removeAll(abilitiesToRemove);
             }
             // cast the card for free
             player.cast(card.getSpellAbility(), game, true);
@@ -380,4 +386,24 @@ class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
         return false;
     }
 
+}
+
+class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbility {
+
+    public SuspendBeginningOfUpkeepTriggeredAbility() {
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
+                SuspendedCondition.getInstance(),
+                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
+        this.setRuleVisible(false);
+
+    }
+
+    public SuspendBeginningOfUpkeepTriggeredAbility(final SuspendBeginningOfUpkeepTriggeredAbility effect) {
+        super(effect);
+    }
+
+    @Override
+    public SuspendBeginningOfUpkeepTriggeredAbility copy() {
+        return new SuspendBeginningOfUpkeepTriggeredAbility(this);
+    }
 }

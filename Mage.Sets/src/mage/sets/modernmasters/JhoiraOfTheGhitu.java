@@ -31,20 +31,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Abilities;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.ExileFromHandCost;
 import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffect;
-import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.SuspendAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -53,7 +50,6 @@ import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
-import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -136,9 +132,20 @@ class JhoiraOfTheGhituSuspendEffect extends OneShotEffect<JhoiraOfTheGhituSuspen
             if (card.moveToExile(exileId, new StringBuilder("Suspended cards of ").append(controller.getName()).toString() , source.getSourceId(), game)) {
                 card.addCounters(CounterType.TIME.createInstance(4), game);
                 if (!hasSuspend) {
-                    ContinuousEffect effect = new GainAbilityTargetEffect(new SuspendAbility(4, null, card), Duration.OneUse, null, true);
-                    effect.setTargetPointer(new FixedTarget(card.getId()));
-                    game.addEffect(effect, source);
+                    // add suspend ability
+                    // TODO: Find a better solution for giving suspend to a card.
+                    // If the exiled card leaves exile by another way, the abilites won't be removed from the card
+                    Abilities oldAbilities = card.getAbilities().copy();
+                    SuspendAbility suspendAbility = new SuspendAbility(4, null, card);
+                    card.addAbility(suspendAbility);
+
+                    for (Ability ability :card.getAbilities()) {
+                        if (!oldAbilities.contains(ability)) {
+                            ability.setControllerId(source.getControllerId());
+                            game.getState().addAbility(ability, card.getId(), card);
+                        }
+                    }
+                    
                 }
                 game.informPlayers(new StringBuilder(controller.getName()).append(" suspends (").append(4).append(") ").append(card.getName()).toString());
                 return true;
