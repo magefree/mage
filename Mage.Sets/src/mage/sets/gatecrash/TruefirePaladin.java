@@ -68,7 +68,7 @@ public class TruefirePaladin extends CardImpl<TruefirePaladin> {
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2,0, Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
 
         // {R}{W}: Truefire Paladin gets first strike until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()), new ManaCostsImpl("{R}{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{R}{W}")));
 
     }
 
