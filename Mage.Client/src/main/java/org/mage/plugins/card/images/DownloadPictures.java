@@ -236,6 +236,13 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     url.setSplitCard(card.isSplitCard());
 
                     allCardsUrls.add(url);
+                    if (card.isDoubleFaced()) {
+                        if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
+                            throw new IllegalStateException("Second side card can't have empty name.");
+                        }
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), true);
+                        allCardsUrls.add(url);
+                    }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
