@@ -48,7 +48,7 @@ public class FilterCreaturePermanent extends FilterPermanent {
         this.add(new CardTypePredicate(CardType.CREATURE));
     }    
     
-    public FilterCreaturePermanent(String name, String subtype) {
+    public FilterCreaturePermanent(String subtype, String name) {
         super(name);
         this.add(new CardTypePredicate(CardType.CREATURE));
         this.add(new SubtypePredicate(subtype));
