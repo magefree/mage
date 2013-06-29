@@ -149,6 +149,10 @@ public class CardInfo {
         }
     }
 
+    public boolean usesVariousArt() {
+        return Character.isDigit(className.charAt(className.length() - 1));
+    }
+
     public ObjectColor getColor() {
         ObjectColor color = new ObjectColor();
         color.setBlack(black);

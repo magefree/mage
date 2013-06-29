@@ -31,6 +31,8 @@ public class MockSplitCard extends SplitCard<MockSplitCard> {
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
 
+        this.usesVariousArt = card.usesVariousArt();
+
         this.color = card.getColor();
         this.splitCard = card.isSplitCard();
         this.flipCard = card.isFlipCard();

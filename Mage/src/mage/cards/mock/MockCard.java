@@ -23,6 +23,8 @@ public class MockCard extends CardImpl<MockCard> {
         this.subtype = card.getSubTypes();
         this.supertype = card.getSupertypes();
 
+        this.usesVariousArt = card.usesVariousArt();
+
         this.manaCost = new ManaCostsImpl(join(card.getManaCosts()));
 
         this.color = card.getColor();
