@@ -36,14 +36,17 @@ package mage.client.tournament;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import javafx.scene.layout.Pane;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
+import mage.client.MagePane;
 import mage.client.chat.ChatPanel;
 import mage.client.util.ButtonColumn;
 import mage.remote.Session;
@@ -66,6 +69,8 @@ public class TournamentPanel extends javax.swing.JPanel {
     private TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
+    private boolean titleSet = false;
+    private DateFormat df;
 
     /** Creates new form TournamentPanel */
     public TournamentPanel() {
@@ -73,6 +78,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         matchesModel = new TournamentMatchesTableModel();
 
         initComponents();
+
+        df = DateFormat.getDateTimeInstance();
 
         tablePlayers.createDefaultColumnsFromModel();
         tableMatches.createDefaultColumnsFromModel();
@@ -95,6 +102,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             }
         };
 
+        // replay button, don't delete this
         ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, 6);
 
     }
@@ -128,6 +136,31 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void update(TournamentView tournament) {
+
+        if (!titleSet) {
+            Component c = this.getParent();
+            while (c != null && !(c instanceof TournamentPane)) {
+                c = c.getParent();
+            }
+            if (c != null) {
+                ((TournamentPane)c).setTitle("Tournament [" + tournament.getTournamentName() +"]");
+            }
+            titleSet = true;
+        }
+
+        txtName.setText(tournament.getTournamentName());
+        txtType.setText(tournament.getTournamentType());
+
+        txtStartTime.setText(df.format(tournament.getStartTime()));
+
+        if (tournament.getEndTime() != null) {
+            txtEndTime.setText(df.format(tournament.getEndTime()));
+            btnCloseWindow.setVisible(true);
+        } else {
+            txtEndTime.setText("running...");
+            btnCloseWindow.setVisible(false);
+        }
+        
         playersModel.loadData(tournament);
         matchesModel.loadData(tournament);
         this.tablePlayers.repaint();
@@ -144,8 +177,9 @@ public class TournamentPanel extends javax.swing.JPanel {
     }
 
     public void stopTasks() {
-        if (updateTask != null)
+        if (updateTask != null) {
             updateTask.cancel(true);
+        }
     }
 
     /** This method is called from within the constructor to
@@ -157,46 +191,175 @@ public class TournamentPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        chatPanel1 = new mage.client.chat.ChatPanel();
+        actionPanel = new javax.swing.JPanel();
+        lblName = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lblType = new javax.swing.JLabel();
+        txtType = new javax.swing.JTextField();
+        lblStartTime = new javax.swing.JLabel();
+        txtStartTime = new javax.swing.JTextField();
+        lablEndTime = new javax.swing.JLabel();
+        txtEndTime = new javax.swing.JTextField();
+        btnCloseWindow = new javax.swing.JButton();
+        jSplitPane2 = new javax.swing.JSplitPane();
+        jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePlayers = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableMatches = new javax.swing.JTable();
+        chatPanel1 = new mage.client.chat.ChatPanel();
+
+        setPreferredSize(new java.awt.Dimension(908, 580));
+
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblName.setText("Name:");
+
+        txtName.setEditable(false);
+        txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtName.setText("tournament name");
+        txtName.setFocusable(false);
+        txtName.setMaximumSize(new java.awt.Dimension(50, 22));
+
+        lblType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblType.setText("Type:");
+
+        txtType.setEditable(false);
+        txtType.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtType.setText("tournament type");
+        txtType.setFocusable(false);
+
+        lblStartTime.setText("Start time:");
+
+        txtStartTime.setEditable(false);
+        txtStartTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtStartTime.setText("jTextField1");
+        txtStartTime.setFocusable(false);
+
+        lablEndTime.setText("End time:");
+
+        txtEndTime.setEditable(false);
+        txtEndTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEndTime.setText("jTextField2");
+        txtEndTime.setFocusable(false);
+
+        btnCloseWindow.setText("Close Window");
+        btnCloseWindow.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseWindowActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout actionPanelLayout = new javax.swing.GroupLayout(actionPanel);
+        actionPanel.setLayout(actionPanelLayout);
+        actionPanelLayout.setHorizontalGroup(
+            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(actionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblName)
+                    .addComponent(lblType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(txtType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addComponent(lablEndTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEndTime))
+                    .addGroup(actionPanelLayout.createSequentialGroup()
+                        .addComponent(lblStartTime)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCloseWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        actionPanelLayout.setVerticalGroup(
+            actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(actionPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblStartTime)
+                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblType)
+                    .addComponent(txtType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lablEndTime)
+                    .addComponent(txtEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCloseWindow))
+                .addGap(0, 14, Short.MAX_VALUE))
+        );
+
+        jSplitPane2.setResizeWeight(1.0);
+        jSplitPane2.setToolTipText("");
+
+        jSplitPane1.setDividerLocation(230);
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setResizeWeight(0.5);
+
+        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(400, 100));
 
         tablePlayers.setModel(this.playersModel);
         jScrollPane1.setViewportView(tablePlayers);
 
+        jSplitPane1.setTopComponent(jScrollPane1);
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(400, 100));
+
         tableMatches.setModel(matchesModel);
         jScrollPane2.setViewportView(tableMatches);
+
+        jSplitPane1.setBottomComponent(jScrollPane2);
+
+        jSplitPane2.setLeftComponent(jSplitPane1);
+        jSplitPane2.setRightComponent(chatPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE))
-                .addGap(0, 0, 0)
-                .addComponent(chatPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(actionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
-            .addComponent(chatPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCloseWindowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseWindowActionPerformed
+        hideTournament();
+    }//GEN-LAST:event_btnCloseWindowActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel actionPanel;
+    private javax.swing.JButton btnCloseWindow;
     private mage.client.chat.ChatPanel chatPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JLabel lablEndTime;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblStartTime;
+    private javax.swing.JLabel lblType;
     private javax.swing.JTable tableMatches;
     private javax.swing.JTable tablePlayers;
+    private javax.swing.JTextField txtEndTime;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtStartTime;
+    private javax.swing.JTextField txtType;
     // End of variables declaration//GEN-END:variables
 
 }
@@ -237,8 +400,9 @@ class TournamentPlayersTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -308,8 +472,9 @@ class TournamentMatchesTableModel extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         String colName = "";
 
-        if (columnIndex <= getColumnCount())
+        if (columnIndex <= getColumnCount()) {
             colName = columnNames[columnIndex];
+        }
 
         return colName;
     }
@@ -321,8 +486,9 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 6)
+        if (columnIndex != 6) {
             return false;
+        }
         return true;
     }
 
