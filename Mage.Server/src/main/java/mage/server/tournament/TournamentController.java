@@ -229,6 +229,10 @@ public class TournamentController {
     public void submitDeck(UUID playerId, Deck deck) {
         if (tournamentSessions.containsKey(playerId)) {
             tournamentSessions.get(playerId).submitDeck(deck);
+            TournamentPlayer player = tournament.getPlayer(playerId);
+            if (player != null) {
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted the deck", MessageColor.BLACK);
+            }
         }
     }
 
