@@ -357,7 +357,7 @@ public class NewTournamentDialog extends MageDialog {
         if (tournamentType.isLimited()) {
             if (tOptions.getLimitedOptions() == null) {
                 tOptions.setLimitedOptions(new LimitedOptions());
-                tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue());
+                tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
             }
             for (JComboBox pack: packs) {
                 tOptions.getLimitedOptions().getSetCodes().add(((ExpansionSet) pack.getSelectedItem()).getCode());

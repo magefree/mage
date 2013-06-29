@@ -45,7 +45,6 @@ public class SealedEliminationTournament extends TournamentSingleElimination {
 
     public SealedEliminationTournament(TournamentOptions options) {
         super(options);
-        this.getOptions().getLimitedOptions().setConstructionTime(1200);
         currentStep = TournamentStep.START;
     }
 
