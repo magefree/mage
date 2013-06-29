@@ -64,7 +64,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 if (cardName != null && !cardName.isEmpty()) {
                     if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
                         int landNumber = 1;
-                        while (setLinks.get(cardName + landNumber) != null) {
+                        while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
                             landNumber++;
                         }
                         cardName += landNumber;
@@ -102,7 +102,8 @@ public class WizardCardsImageSource implements CardImageSource {
                 .replace("\u00D6", "O").replace("\u00F6", "o")
                 .replace("\u00DB", "U").replace("\u00FB", "u")
                 .replace("\u00DC", "U").replace("\u00FC", "u")
-                .replace("\u00E9", "e").replace("&", "//");
+                .replace("\u00E9", "e").replace("&", "//")
+                .replace("Hintreland Scourge", "Hinterland Scourge");
     }
 
     @Override
