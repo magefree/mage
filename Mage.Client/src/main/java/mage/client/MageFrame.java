@@ -474,14 +474,11 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         List<CardInfo> cards = CardRepository.instance.getAllCards();
         logger.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
 
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
         beforeCall = System.currentTimeMillis();
-        if (DownloadPictures.checkForNewCards(cards, path)) {
+        if (DownloadPictures.checkForNewCards(cards)) {
             logger.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
             if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                DownloadPictures.startDownload(null, cards, path);
+                DownloadPictures.startDownload(null, cards);
             }
         }
     }
@@ -489,10 +486,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
         List<CardInfo> cards = CardRepository.instance.getAllCards();
 
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
-        DownloadPictures.startDownload(null, cards, path);
+        DownloadPictures.startDownload(null, cards);
     }
 
     public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {

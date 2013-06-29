@@ -52,7 +52,6 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private static boolean offlineMode = false;
     private JCheckBox checkBox;
     private final Object sync = new Object();
-    private String imagesPath;
 
     private static CardImageSource cardImageSource;
 
@@ -61,11 +60,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private ExecutorService executor = Executors.newFixedThreadPool(10);
 
     public static void main(String[] args) {
-        startDownload(null, null, null);
+        startDownload(null, null);
     }
 
-    public static void startDownload(JFrame frame, List<CardInfo> allCards, String imagesPath) {
-        ArrayList<CardDownloadData> cards = getNeededCards(allCards, imagesPath);
+    public static void startDownload(JFrame frame, List<CardInfo> allCards) {
+        ArrayList<CardDownloadData> cards = getNeededCards(allCards);
 
         /*
          * if (cards == null || cards.size() == 0) {
@@ -73,7 +72,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          * "All card pictures have been downloaded."); return; }
          */
 
-        DownloadPictures download = new DownloadPictures(cards, imagesPath);
+        DownloadPictures download = new DownloadPictures(cards);
         JDialog dlg = download.getDlg(frame);
         dlg.setVisible(true);
         dlg.dispose();
@@ -97,9 +96,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         this.cancel = cancel;
     }
 
-    public DownloadPictures(ArrayList<CardDownloadData> cards, String imagesPath) {
+    public DownloadPictures(ArrayList<CardDownloadData> cards) {
         this.cards = cards;
-        this.imagesPath = imagesPath;
 
         bar = new JProgressBar(this);
 
@@ -186,12 +184,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         dlg = new JOptionPane(p0, JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
     }
 
-    public static boolean checkForNewCards(List<CardInfo> allCards, String imagesPath) {
+    public static boolean checkForNewCards(List<CardInfo> allCards) {
         TFile file;
         for (CardInfo card : allCards) {
             if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()) {
-                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
-                file = new TFile(CardImageUtils.getImagePath(url, imagesPath));
+                CardDownloadData url = new CardDownloadData(card.getName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
+                file = new TFile(CardImageUtils.generateImagePath(url));
                 if (!file.exists()) {
                     return true;
                 }
@@ -200,17 +198,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         return false;
     }
 
-    private static boolean usesVariousArt(CardInfo card) {
-        String className = card.getClassName();
-        return Character.isDigit(className.charAt(className.length() - 1));
-    }
-
     private static String createDownloadName(CardInfo card) {
         String className = card.getClassName();
         return className.substring(className.lastIndexOf('.') + 1);
     }
 
-    private static ArrayList<CardDownloadData> getNeededCards(List<CardInfo> allCards, String imagesPath) {
+    private static ArrayList<CardDownloadData> getNeededCards(List<CardInfo> allCards) {
 
         ArrayList<CardDownloadData> cardsToDownload = new ArrayList<CardDownloadData>();
 
@@ -227,7 +220,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (card.getCardNumber() > 0 && !card.getSetCode().isEmpty()
                         && !ignoreUrls.contains(card.getSetCode())) {
                     String cardName = card.getName();
-                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
+                    CardDownloadData url = new CardDownloadData(cardName, card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
                     if (url.getUsesVariousArt()) {
                         url.setDownloadName(createDownloadName(card));
                     }
@@ -240,14 +233,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                         if (card.getSecondSideName() == null || card.getSecondSideName().trim().isEmpty()) {
                             throw new IllegalStateException("Second side card can't have empty name.");
                         }
-                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), true);
+                        url = new CardDownloadData(card.getSecondSideName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), true);
                         allCardsUrls.add(url);
                     }
                     if (card.isFlipCard()) {
                         if (card.getFlipCardName() == null || card.getFlipCardName().trim().isEmpty()) {
                             throw new IllegalStateException("Flipped card can't have empty name.");
                         }
-                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), usesVariousArt(card), 0, false, card.isDoubleFaced(), card.isNightCard());
+                        url = new CardDownloadData(card.getFlipCardName(), card.getSetCode(), card.getCardNumber(), card.usesVariousArt(), 0, false, card.isDoubleFaced(), card.isNightCard());
                         url.setFlipCard(true);
                         url.setFlippedSide(true);
                         allCardsUrls.add(url);
@@ -274,7 +267,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
          * check to see which cards we already have
          */
         for (CardDownloadData card : allCardsUrls) {
-            file = new TFile(CardImageUtils.getImagePath(card, imagesPath));
+            file = new TFile(CardImageUtils.generateImagePath(card));
             if (!file.exists()) {
                 cardsToDownload.add(card);
             }
@@ -363,7 +356,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     @Override
     public void run() {
 
-        File base = new File(this.imagesPath != null ? imagesPath : Constants.IO.imageBaseDir);
+        File base = new File(Constants.IO.imageBaseDir);
         if (!base.exists()) {
             base.mkdir();
         }
@@ -458,7 +451,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 filePath.append(Constants.IO.imageBaseDir).append(File.separator);
                 filePath.append(card.hashCode()).append(".").append(card.getName().replace(":", "").replace("//", "-")).append(".jpg");
                 File temporaryFile = new File(filePath.toString());
-                String imagePath = CardImageUtils.getImagePath(card, imagesPath);
+                String imagePath = CardImageUtils.generateImagePath(card);
                 TFile outputFile = new TFile(imagePath);
                 if (!outputFile.exists()) {
                     outputFile.getParentFile().mkdirs();
@@ -562,7 +555,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             Iterator<CardDownloadData> cardsIterator = DownloadPictures.this.cards.iterator();
             while (cardsIterator.hasNext()) {
                 CardDownloadData cardDownloadData = cardsIterator.next();
-                TFile file = new TFile(CardImageUtils.getImagePath(cardDownloadData, imagesPath));
+                TFile file = new TFile(CardImageUtils.generateImagePath(cardDownloadData));
                 if (file.exists()) {
                     cardsIterator.remove();
                 }
