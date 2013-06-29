@@ -351,13 +351,13 @@ public class ContinuousEffects implements Serializable {
      * @param game
      * @return
      */
-    private List<SpliceCardEffect> getApplicableSpliceCardEffects(Game game) {
+    private List<SpliceCardEffect> getApplicableSpliceCardEffects(Game game, UUID playerId) {
         List<SpliceCardEffect> spliceEffects = new ArrayList<SpliceCardEffect>();
 
         for (SpliceCardEffect effect: spliceCardEffects) {
             HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (ability.getControllerId().equals(playerId) && (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false))) {
                     if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
                         spliceEffects.add(effect);
                         break;
@@ -442,7 +442,7 @@ public class ContinuousEffects implements Serializable {
             // on a spliced ability of a spell can't be spliced again
             return;
         }
-        List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game);
+        List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game, abilityToModify.getControllerId());
         // get the applyable splice abilities
         List<SpliceOntoArcaneAbility> spliceAbilities = new ArrayList<SpliceOntoArcaneAbility>();
         for (SpliceCardEffect effect : spliceEffects) {
