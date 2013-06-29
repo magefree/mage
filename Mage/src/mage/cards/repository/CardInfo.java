@@ -38,10 +38,12 @@ import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
+import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.mock.MockCard;
 import mage.cards.mock.MockSplitCard;
+import mage.constants.SpellAbilityType;
 
 /**
  *
@@ -90,6 +92,8 @@ public class CardInfo {
     @DatabaseField
     protected boolean splitCard;
     @DatabaseField
+    protected boolean splitCardHalf;
+    @DatabaseField
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
@@ -135,6 +139,14 @@ public class CardInfo {
         this.setSuperTypes(card.getSupertype());
         this.setManaCosts(card.getManaCost().getSymbols());
         this.setRules(card.getRules());
+
+        SpellAbility spellAbility = card.getSpellAbility();
+        if (spellAbility != null) {
+            SpellAbilityType spellAbilityType = spellAbility.getSpellAbilityType();
+            if (spellAbilityType == SpellAbilityType.SPLIT_LEFT || spellAbilityType == SpellAbilityType.SPLIT_RIGHT) {
+                this.splitCardHalf = true;
+            }
+        }
     }
 
     public Card getCard() {
@@ -260,6 +272,10 @@ public class CardInfo {
 
     public boolean isSplitCard() {
         return splitCard;
+    }
+
+    public boolean isSplitCardHalf() {
+        return splitCardHalf;
     }
 
     public boolean isFlipCard() {
