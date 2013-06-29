@@ -40,6 +40,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.cards.Card;
 
 /**
  *
@@ -48,23 +49,29 @@ import java.util.UUID;
 public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTargetEffect> {
 
     protected Ability ability;
+    // shall a card gain the ability (otherwise permanent)
+    private boolean onCard;
 
     public GainAbilityTargetEffect(Ability ability, Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, 
-                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
-        this.ability = ability;
+        this(ability, duration, null);
     }
 
     public GainAbilityTargetEffect(Ability ability, Duration duration, String rule) {
+        this(ability, duration, rule, false);
+    }
+
+    public GainAbilityTargetEffect(Ability ability, Duration duration, String rule, boolean onCard) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA,
                 ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
         this.ability = ability;
         staticText = rule;
+        this.onCard = onCard;
     }
 
     public GainAbilityTargetEffect(final GainAbilityTargetEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        this.onCard = effect.onCard;
     }
 
     @Override
@@ -81,11 +88,24 @@ public class GainAbilityTargetEffect extends ContinuousEffectImpl<GainAbilityTar
     @Override
     public boolean apply(Game game, Ability source) {
         int affectedTargets = 0;
-        for (UUID permanentId : targetPointer.getTargets(game, source)) {
-            Permanent permanent = game.getPermanent(permanentId);
-            if (permanent != null) {
-                permanent.addAbility(ability, source.getSourceId(), game);
-                affectedTargets++;
+        if (onCard) {
+            for (UUID cardId : targetPointer.getTargets(game, source)) {
+                Card card = game.getCard(cardId);
+                if (card != null) {
+                    card.addAbility(ability);
+                    affectedTargets++;
+                }
+            }
+            if (duration.equals(Duration.OneUse)) {
+                discard();
+            }
+        } else {
+            for (UUID permanentId : targetPointer.getTargets(game, source)) {
+                Permanent permanent = game.getPermanent(permanentId);
+                if (permanent != null) {
+                    permanent.addAbility(ability, source.getSourceId(), game);
+                    affectedTargets++;
+                }
             }
         }
         return affectedTargets > 0;

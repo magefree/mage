@@ -112,9 +112,9 @@ class LifesFinaleEffect extends OneShotEffect {
                     }
                 }
             }
+            opponent.shuffleLibrary(game);
+            return true;
         }
-
-        opponent.shuffleLibrary(game);
-        return true;
+        return false;
     }
 }

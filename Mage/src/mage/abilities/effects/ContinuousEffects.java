@@ -36,11 +36,22 @@ import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
+import mage.abilities.keyword.SpliceOntoArcaneAbility;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.constants.Outcome;
+import mage.constants.SpellAbilityType;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicate;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -58,6 +69,7 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
     private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
+    private ContinuousEffectsList<SpliceCardEffect> spliceCardEffects = new ContinuousEffectsList<SpliceCardEffect>();
 
     private List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<ContinuousEffectsList<?>>();
     
@@ -88,6 +100,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects = effect.restrictionEffects.copy();
         asThoughEffects = effect.asThoughEffects.copy();
         costModificationEffects = effect.costModificationEffects.copy();
+        spliceCardEffects = effect.spliceCardEffects.copy();
         for (Map.Entry<UUID, UUID> entry : effect.sources.entrySet()) {
             sources.put(entry.getKey(), entry.getValue());
         }
@@ -103,6 +116,7 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(restrictionEffects);
         allEffectsLists.add(asThoughEffects);
         allEffectsLists.add(costModificationEffects);
+        allEffectsLists.add(spliceCardEffects);
     }
 
     public ContinuousEffects copy() {
@@ -125,6 +139,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeEndOfCombatEffects();
         asThoughEffects.removeEndOfCombatEffects();
         costModificationEffects.removeEndOfCombatEffects();
+        spliceCardEffects.removeEndOfCombatEffects();
     }
 
     public void removeEndOfTurnEffects() {
@@ -135,6 +150,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeEndOfTurnEffects();
         asThoughEffects.removeEndOfTurnEffects();
         costModificationEffects.removeEndOfTurnEffects();
+        spliceCardEffects.removeEndOfTurnEffects();
     }
 
     public void removeInactiveEffects(Game game) {
@@ -145,6 +161,7 @@ public class ContinuousEffects implements Serializable {
         restrictionEffects.removeInactiveEffects(game);
         asThoughEffects.removeInactiveEffects(game);
         costModificationEffects.removeInactiveEffects(game);
+        spliceCardEffects.removeInactiveEffects(game);
     }
 
     public List<ContinuousEffect> getLayeredEffects(Game game) {
@@ -328,6 +345,29 @@ public class ContinuousEffects implements Serializable {
 
         return costEffects;
     }
+    /**
+     * Filters out splice effects that are not active.
+     *
+     * @param game
+     * @return
+     */
+    private List<SpliceCardEffect> getApplicableSpliceCardEffects(Game game) {
+        List<SpliceCardEffect> spliceEffects = new ArrayList<SpliceCardEffect>();
+
+        for (SpliceCardEffect effect: spliceCardEffects) {
+            HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                        spliceEffects.add(effect);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return spliceEffects;
+    }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(game);
@@ -389,6 +429,68 @@ public class ContinuousEffects implements Serializable {
             }
         }
     }
+
+    /**
+     * Checks all available splice effects to be applied.
+     *
+     * @param abilityToModify
+     * @param game
+     * @return
+     */
+    public void applySpliceEffects ( Ability abilityToModify, Game game ) {
+        if ( ((SpellAbility) abilityToModify).getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+            // on a spliced ability of a spell can't be spliced again
+            return;
+        }
+        List<SpliceCardEffect> spliceEffects = getApplicableSpliceCardEffects(game);
+        // get the applyable splice abilities
+        List<SpliceOntoArcaneAbility> spliceAbilities = new ArrayList<SpliceOntoArcaneAbility>();
+        for (SpliceCardEffect effect : spliceEffects) {
+            HashSet<Ability> abilities = spliceCardEffects.getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if (effect.applies(abilityToModify, ability, game) ) {
+                    spliceAbilities.add((SpliceOntoArcaneAbility) ability);
+                }
+            }
+        }
+        // check if player wants to use splice
+
+        if (spliceAbilities.size() > 0) {
+            Player controller = game.getPlayer(abilityToModify.getControllerId());
+            if (controller.chooseUse(Outcome.Benefit, "Splice a card?", game)) {
+                Cards cardsToReveal = new CardsImpl();
+                do {
+                    FilterCard filter = new FilterCard("a card to splice");
+                    ArrayList<Predicate<MageObject>> idPredicates = new ArrayList<Predicate<MageObject>>();
+                    for (SpliceOntoArcaneAbility ability : spliceAbilities) {
+                        idPredicates.add(new CardIdPredicate((ability.getSourceId())));
+                    }
+                    filter.add(Predicates.or(idPredicates));
+                    TargetCardInHand target = new TargetCardInHand(filter);
+                    target.setRequired(true);
+                    controller.chooseTarget(Outcome.Benefit, target, abilityToModify, game);
+                    UUID cardId = target.getFirstTarget();
+                    if (cardId != null) {
+                        SpliceOntoArcaneAbility selectedAbility = null;
+                        for(SpliceOntoArcaneAbility ability :spliceAbilities) {
+                            if (ability.getSourceId().equals(cardId)) {
+                                selectedAbility = ability;
+                                break;
+                            }
+                        }
+                        if (selectedAbility != null) {
+                            SpliceCardEffect spliceEffect = (SpliceCardEffect) selectedAbility.getEffects().get(0);
+                            spliceEffect.apply(game, selectedAbility, abilityToModify);
+                            cardsToReveal.add(game.getCard(cardId));
+                            spliceAbilities.remove(selectedAbility);
+                        }
+                    }
+                } while (!spliceAbilities.isEmpty() && controller.chooseUse(Outcome.Benefit, "Splice another card?", game));
+                controller.revealCards("Spliced cards", cardsToReveal, game);
+            }
+        }
+    }
+
 
     public boolean replaceEvent(GameEvent event, Game game) {
         boolean caught = false;
@@ -616,6 +718,10 @@ public class ContinuousEffects implements Serializable {
             case COSTMODIFICATION:
                 CostModificationEffect newCostModificationEffect = (CostModificationEffect)effect;
                 costModificationEffects.addEffect(newCostModificationEffect, source);
+                break;
+            case SPLICE:
+                SpliceCardEffect newSpliceCardEffect = (SpliceCardEffect)effect;
+                spliceCardEffects.addEffect(newSpliceCardEffect, source);
                 break;
             default:
                 ContinuousEffect newEffect = (ContinuousEffect)effect;

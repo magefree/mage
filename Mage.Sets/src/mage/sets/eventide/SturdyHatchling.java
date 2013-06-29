@@ -28,12 +28,9 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -42,7 +39,9 @@ import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
@@ -69,9 +68,14 @@ public class SturdyHatchling extends CardImpl<SturdyHatchling> {
         this.color.setGreen(true);
         this.power = new MageInt(6);
         this.toughness = new MageInt(6);
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)), false));
+        
+        // Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        // {G/U}: Sturdy Hatchling gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G/U}")));
+        // Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.
         this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterGreenSpell, false));
+        // Whenever you cast a blue spell, remove a -1/-1 counter from Sturdy Hatchling.
         this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterBlueSpell, false));
     }
 

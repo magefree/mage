@@ -57,7 +57,7 @@ public class MultikickerCount implements DynamicValue {
     }
 
     @Override
-    public DynamicValue copy() {
+    public MultikickerCount copy() {
         return new MultikickerCount();
     }
 

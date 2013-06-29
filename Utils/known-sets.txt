@@ -13,6 +13,7 @@ Magic 2010|magic2010|
 Magic 2011|magic2011|
 Magic 2012|magic2012|
 Magic 2013|magic2013|
+Magic 2014|magic2014|
 Planechase|planechase|
 Planechase 2012 Edition|planechase2012|
 Duel Decks: Elspeth vs. Tezzeret|elspethvstezzeret|
