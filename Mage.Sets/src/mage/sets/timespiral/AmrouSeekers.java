@@ -103,7 +103,7 @@ class AmrouSeekersEvasionAbility extends EvasionAbility<AmrouSeekersEvasionAbili
 
 class AmrouSeekersRestrictionEffect extends RestrictionEffect<AmrouSeekersRestrictionEffect>  {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature an opponent controls");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures and/or white creatures");
     static {
         filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT), new ColorPredicate(ObjectColor.WHITE)));
     }
@@ -118,10 +118,7 @@ class AmrouSeekersRestrictionEffect extends RestrictionEffect<AmrouSeekersRestri
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAbilities().containsKey(IntimidateAbility.getInstance().getId())) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
