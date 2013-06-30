@@ -66,7 +66,7 @@ public class NoxiousHatchling extends CardImpl<NoxiousHatchling> {
         this.toughness = new MageInt(6);
 
         // Noxious Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)), true));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
         // Wither (This deals damage to creatures in the form of -1/-1 counters.)
         this.addAbility(WitherAbility.getInstance());
         // Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.

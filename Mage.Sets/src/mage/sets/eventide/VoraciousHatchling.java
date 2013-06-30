@@ -67,7 +67,7 @@ public class VoraciousHatchling extends CardImpl<VoraciousHatchling> {
         // Lifelink
         this.addAbility(LifelinkAbility.getInstance());
         // Voracious Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
         // Whenever you cast a white spell, remove a -1/-1 counter from Voracious Hatchling.
         this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterWhiteSpell, false));
         // Whenever you cast a black spell, remove a -1/-1 counter from Voracious Hatchling.

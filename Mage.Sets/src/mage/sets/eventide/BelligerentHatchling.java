@@ -67,7 +67,7 @@ public class BelligerentHatchling extends CardImpl<BelligerentHatchling> {
         // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
         // Belligerent Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
         // Whenever you cast a red spell, remove a -1/-1 counter from Belligerent Hatchling.
         this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance(1)), filterRedSpell, false));
         // Whenever you cast a white spell, remove a -1/-1 counter from Belligerent Hatchling.

@@ -70,7 +70,7 @@ public class SturdyHatchling extends CardImpl<SturdyHatchling> {
         this.toughness = new MageInt(6);
         
         // Sturdy Hatchling enters the battlefield with four -1/-1 counters on it.
-        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4))));
+        this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.M1M1.createInstance(4)),"with four -1/-1 counters on it"));
         // {G/U}: Sturdy Hatchling gains shroud until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(ShroudAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{G/U}")));
         // Whenever you cast a green spell, remove a -1/-1 counter from Sturdy Hatchling.
