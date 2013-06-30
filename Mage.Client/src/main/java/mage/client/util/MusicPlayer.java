@@ -21,7 +21,9 @@ public class MusicPlayer {
     
     //open file and add list
     private boolean open(){
-    	filepath = Constants.BASE_MUSICS_PATH;
+        String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MUSICS_PATH, "true");
+        filepath = path + File.separator;
+        if(path == null) filepath = Constants.BASE_MUSICS_PATH;
     	filelist.removeAll();
     	File filedir = new File(filepath);
     	File[] fileread = filedir.listFiles();
