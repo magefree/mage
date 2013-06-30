@@ -117,12 +117,10 @@ public class ProwlAbility extends StaticAbility<ProwlAbility> implements Alterna
                 throw new IllegalArgumentException("Params can't be null");
             }
             boolean canProwl = false;
-            if (prowlWatcher.getDamagingSubtypes(ability.getControllerId()) != null) {
-                for (String subtype : prowlWatcher.getDamagingSubtypes(ability.getControllerId())) {
-                    if (card.getSubtype().contains(subtype)) {
-                        canProwl = true;
-                        break;
-                    }
+            for (String subtype: card.getSubtype()) {
+                if (prowlWatcher.hasSubtypeMadeCombatDamage(ability.getControllerId(), subtype)) {
+                    canProwl = true;
+                    break;
                 }
             }
             if (canProwl) {

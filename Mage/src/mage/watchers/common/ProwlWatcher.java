@@ -28,11 +28,13 @@
 package mage.watchers.common;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.keyword.ChangelingAbility;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.DamagedPlayerEvent;
@@ -50,6 +52,7 @@ import mage.watchers.WatcherImpl;
 public class ProwlWatcher extends WatcherImpl<ProwlWatcher> {
 
     private Map<UUID, Set<String>> damagingSubtypes = new HashMap<UUID, Set<String>>();
+    private Set<UUID> allSubtypes = new HashSet<UUID>();
 
     public ProwlWatcher() {
         super("Prowl", WatcherScope.GAME);
@@ -73,13 +76,17 @@ public class ProwlWatcher extends WatcherImpl<ProwlWatcher> {
             DamagedPlayerEvent dEvent = (DamagedPlayerEvent) event;
             if (dEvent.isCombatDamage()) {
                 Permanent creature = game.getPermanent(dEvent.getSourceId());
-                if (creature != null) {
-                    Set<String> subtypes = damagingSubtypes.get(creature.getControllerId());
-                    if (subtypes == null) {
-                        subtypes = new LinkedHashSet<String>();
+                if (creature != null && !allSubtypes.contains(creature.getControllerId())) {
+                    if (creature.getAbilities().containsKey(ChangelingAbility.getInstance().getId())) {
+                        allSubtypes.add(creature.getControllerId());
+                    } else {
+                        Set<String> subtypes = damagingSubtypes.get(creature.getControllerId());
+                        if (subtypes == null) {
+                            subtypes = new LinkedHashSet<String>();
+                        }
+                        subtypes.addAll(creature.getSubtype());
+                        damagingSubtypes.put(creature.getControllerId(), subtypes);
                     }
-                    subtypes.addAll(creature.getSubtype());
-                    damagingSubtypes.put(creature.getControllerId(), subtypes);
                 }
             }
         }
@@ -89,9 +96,18 @@ public class ProwlWatcher extends WatcherImpl<ProwlWatcher> {
     public void reset() {
         super.reset();
         damagingSubtypes.clear();
+        allSubtypes.clear();
     }
 
-    public Set<String> getDamagingSubtypes(UUID playerId) {
-        return damagingSubtypes.get(playerId);
+    public boolean hasSubtypeMadeCombatDamage(UUID playerId, String subtype) {
+        if (allSubtypes.contains(playerId)) {
+            return true;
+        }
+        Set<String> subtypes = damagingSubtypes.get(playerId);
+        if (subtypes != null) {
+            return subtypes.contains(subtype);
+        }
+        return false;
     }
+
 }
