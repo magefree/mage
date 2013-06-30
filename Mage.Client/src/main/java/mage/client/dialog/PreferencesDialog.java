@@ -81,6 +81,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_SOUNDS_ON = "soundsOn";
     public static final String KEY_MUSICS_ON = "MusicsOn";
+    public static final String KEY_MUSICS_PATH = "MusicPath";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
@@ -251,6 +252,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel22 = new javax.swing.JPanel();
         jEnableSounds = new javax.swing.JCheckBox();
         jEnableMusics = new javax.swing.JCheckBox();
+        BattlefieldIBGMPath = new javax.swing.JTextField();
+        BattlefieldBGMButton = new javax.swing.JButton();
+        MusicPath = new java.awt.Label();
         jPanel6 = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -717,6 +721,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
+        BattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BattlefieldIBGMPathActionPerformed(evt);
+            }
+        });
+
+        BattlefieldBGMButton.setText("Browse...");
+        BattlefieldBGMButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BattlefieldBGMButtonActionPerformed(evt);
+            }
+        });
+
+        MusicPath.setText("BGM Path:");
+
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -724,9 +743,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jEnableSounds)
-                    .addComponent(jEnableMusics))
-                .addContainerGap(323, Short.MAX_VALUE))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addComponent(MusicPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(BattlefieldIBGMPath, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BattlefieldBGMButton)
+                        .addGap(32, 32, 32))
+                    .addGroup(jPanel22Layout.createSequentialGroup()
+                        .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jEnableSounds)
+                            .addComponent(jEnableMusics))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,7 +763,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jEnableSounds)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jEnableMusics)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BattlefieldIBGMPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BattlefieldBGMButton))
+                    .addComponent(MusicPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sounds", jPanel22);
@@ -1205,6 +1239,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // sounds
         save(prefs, dialog.jEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.jEnableMusics, KEY_MUSICS_ON, "true", "false", UPDATE_CACHE_POLICY);
+        saveSoundPath(prefs);
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
@@ -1302,6 +1337,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void jEnableMusicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableMusicsActionPerformed
         // TODO add your handling code here:
+        if(jEnableMusics.isSelected()){
+            String path = cache.get(KEY_MUSICS_PATH);
+            BattlefieldIBGMPath.setText(path);
+            BattlefieldIBGMPath.setEnabled(true);
+            BattlefieldBGMButton.setEnabled(true);
+        }else{
+            BattlefieldIBGMPath.setEnabled(false);
+            BattlefieldBGMButton.setEnabled(false);
+            BattlefieldIBGMPath.setText("");
+        }
     }//GEN-LAST:event_jEnableMusicsActionPerformed
     
     private void useDefaultBackgroundActionPerformed(java.awt.event.ActionEvent evt) {                                                     
@@ -1397,6 +1442,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void BattlefieldImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldImagePathActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BattlefieldImagePathActionPerformed
+
+    private void BattlefieldIBGMPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldIBGMPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BattlefieldIBGMPathActionPerformed
+
+    private void BattlefieldBGMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldBGMButtonActionPerformed
+        // TODO add your handling code here:
+        int returnVal = fc.showOpenDialog(PreferencesDialog.this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            BattlefieldIBGMPath.setText(file.getAbsolutePath());
+        }
+    }//GEN-LAST:event_BattlefieldBGMButtonActionPerformed
 
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
@@ -1539,11 +1597,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
             dialog.jEnableSounds.setSelected(false);
         }
         prop = prefs.get(KEY_MUSICS_ON, "true");
+        String path = prefs.get(KEY_MUSICS_PATH, "");
         if (prop.equals("true")) {
             dialog.jEnableMusics.setSelected(true);
+            dialog.BattlefieldIBGMPath.setText(path);
         } else {
             dialog.jEnableMusics.setSelected(false);
         }
+        updateCache(KEY_MUSICS_PATH, path);
     }
 
     private static void loadProxySettings(Preferences prefs) {
@@ -1604,6 +1665,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             prefs.put(KEY_BATTLEFIELD_IMAGE, path);
             updateCache(KEY_BATTLEFIELD_IMAGE, path);
         }
+    }
+    
+    private static void saveSoundPath(Preferences prefs){
+        String path = dialog.BattlefieldIBGMPath.getText();
+        prefs.put(KEY_MUSICS_PATH, path);
+        updateCache(KEY_MUSICS_PATH, path);
     }
 
     public static boolean isSaveImagesToZip() {
@@ -1754,8 +1821,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackgroundBrowseButton;
     private javax.swing.JTextField BackgroundImagePath;
+    private javax.swing.JButton BattlefieldBGMButton;
     private javax.swing.JButton BattlefieldBrowseButton;
+    private javax.swing.JTextField BattlefieldIBGMPath;
     private javax.swing.JTextField BattlefieldImagePath;
+    private java.awt.Label MusicPath;
     private javax.swing.JButton browseButton;
     private javax.swing.JComboBox cbProxyType;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
