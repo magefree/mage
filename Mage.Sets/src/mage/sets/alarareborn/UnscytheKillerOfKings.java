@@ -65,7 +65,7 @@ import mage.watchers.WatcherImpl;
 public class UnscytheKillerOfKings extends CardImpl<UnscytheKillerOfKings> {
 
     public UnscytheKillerOfKings(UUID ownerId) {
-        super(ownerId, 114, "Unscythe, Killer of Kings", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{R}");
+        super(ownerId, 114, "Unscythe, Killer of Kings", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}{B}{R}");
         this.expansionSetCode = "ARB";
         this.supertype.add("Legendary");
         this.subtype.add("Equipment");
