@@ -46,6 +46,7 @@ import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -69,6 +70,7 @@ public class BlindingBeam extends CardImpl<BlindingBeam> {
         // or creatures don't untap during target player's next untap step.
         Mode mode = new Mode();
         mode.getEffects().add(new BlindingBeamEffect());
+        mode.getTargets().add(new TargetPlayer(true));
         this.getSpellAbility().getModes().addMode(mode);
 
         // Entwine {1}
@@ -98,7 +100,7 @@ class BlindingBeamEffect extends OneShotEffect<BlindingBeamEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
             for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
                 game.addEffect(new BlindingBeamEffect2(creature.getId()), source);
