@@ -162,6 +162,7 @@ public abstract class MatchImpl implements Match {
             game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
             game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
         }
+        game.setPriorityTime(options.getPriorityTime());
     }
 
     protected void shufflePlayers() {

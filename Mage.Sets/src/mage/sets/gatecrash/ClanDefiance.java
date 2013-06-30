@@ -64,44 +64,23 @@ public class ClanDefiance extends CardImpl<ClanDefiance> {
         this.color.setRed(true);
         this.color.setGreen(true);
 
-        // Choose one or more - Clan Defiance deals X damage to target creature with flying; Clan Defiance deals X damage to target creature without flying; and/or Clan Defiance deals X damage to target player.
+        // Choose one or more - 
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(3);
+        // Clan Defiance deals X damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(new ManacostVariableValue()));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
-
+        // Clan Defiance deals X damage to target creature without flying;
         Mode mode1 = new Mode();
         mode1.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
         mode1.getTargets().add(new TargetCreaturePermanent(filter2));
         this.getSpellAbility().addMode(mode1);
-
+        // and/or Clan Defiance deals X damage to target player.
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DamageTargetEffect(new ManacostVariableValue()));
         mode2.getTargets().add(new TargetPlayer());
         this.getSpellAbility().addMode(mode2);
-
-        Mode mode3 = new Mode();
-        mode3.getEffects().add(new DamageTargetEffect(new ManacostVariableValue(), true, "target creature with flying, then deals X damage to target creature without flying"));
-        mode3.getTargets().add(new TargetCreaturePermanent(filter));
-        mode3.getTargets().add(new TargetCreaturePermanent(filter2));
-        this.getSpellAbility().addMode(mode3);
-
-        Mode mode4 = new Mode();
-        mode4.getEffects().add(new DamageTargetEffect(new ManacostVariableValue(), true, "target creature with flying, then deals X damage to target player"));
-        mode4.getTargets().add(new TargetCreaturePermanent(filter));
-        mode4.getTargets().add(new TargetPlayer());
-        this.getSpellAbility().addMode(mode4);
-
-        Mode mode5 = new Mode();
-        mode5.getEffects().add(new DamageTargetEffect(new ManacostVariableValue(), true, "target creature without flying, then deals X damage to target player"));
-        mode5.getTargets().add(new TargetCreaturePermanent(filter2));
-        mode5.getTargets().add(new TargetPlayer());
-        this.getSpellAbility().addMode(mode5);
         
-        Mode mode6 = new Mode();
-        mode6.getEffects().add(new DamageTargetEffect(new ManacostVariableValue(), true, "target creature with flying, then deals X damage to target creature without flying, then deals X damage to target player"));
-        mode6.getTargets().add(new TargetCreaturePermanent(filter));
-        mode6.getTargets().add(new TargetCreaturePermanent(filter2));
-        mode6.getTargets().add(new TargetPlayer());
-        this.getSpellAbility().addMode(mode6);
     }
 
     public ClanDefiance(final ClanDefiance card) {

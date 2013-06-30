@@ -28,6 +28,8 @@
 
 package mage.abilities.keyword;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
@@ -42,7 +44,6 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
@@ -139,44 +140,53 @@ import mage.players.Player;
 public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
 
     private String ruleText;
+    private boolean gainedTemporary;
+    private boolean shortRule;
 
+    /**
+    * Gives the card the SuspendAbility
+    *
+    * @param suspend - amount of time counters
+    * @param cost - null is used for temporary gained suspend ability
+    * @param card - card that has the suspend ability
+    */
     public SuspendAbility(int suspend, ManaCost cost, Card card) {
+        this(suspend, cost, card, false);
+    }
+
+    public SuspendAbility(int suspend, ManaCost cost, Card card, boolean shortRule) {
         super(Zone.HAND, new SuspendExileEffect(suspend), cost);
         this.usesStack = false;
-        ruleText = new StringBuilder("Suspend ").append(suspend).append(" - ").append(cost.getText())
-                                    .append(" <i>(Rather than cast this card from your hand, pay ")
-                                    .append(cost.getText())
-                                    .append(" and exile it with ")
-                                    .append(suspend == 1 ? "a time counter":suspend + " time counters")
-                                    .append(" on it.")
-                                    .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
-                                    .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
-                                    .append(")</i>")
-                                    .toString();
+        this.shortRule = shortRule;
+        StringBuilder sb = new StringBuilder("Suspend ");
+        if (cost != null) {
+            sb.append(suspend).append(" - ").append(cost.getText());
+            if (!shortRule) {
+                sb.append(" <i>(Rather than cast this card from your hand, pay ")
+                .append(cost.getText())
+                .append(" and exile it with ")
+                .append(suspend == 1 ? "a time counter":suspend + " time counters")
+                .append(" on it.")
+                .append(" At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.")
+                .append(card.getCardType().contains(CardType.CREATURE)? " If you play it this way and it's a creature, it gains haste until you lose control of it.":"")
+                .append(")</i>");
+            }
+        } else {
+            gainedTemporary = true;
+        }
+        ruleText = sb.toString();
         if (card.getManaCost().isEmpty()) {
             setRuleAtTheTop(true);
-        }
-        
-        // add triggered ability to remove the counter from the card
-        Ability ability = new ConditionalTriggeredAbility(
-                new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
-                SuspendedCondition.getInstance(),
-                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
-        ability.setRuleVisible(false);
-        card.addAbility(ability);
-        // add triggered ability that casts the suspended card, if all counters are removed
+        }        
+        card.addAbility(new SuspendBeginningOfUpkeepTriggeredAbility());
         card.addAbility(new SuspendPlayCardAbility(card.getCardType().contains(CardType.CREATURE)));
-        // if it's a creature card, add Haste ability
-        if (card.getCardType().contains(CardType.CREATURE)) {
-            ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainHasteEffect(Duration.WhileOnBattlefield));
-            ability.setRuleVisible(false);
-            card.addAbility(ability);
-        }
     }
 
     public SuspendAbility(SuspendAbility ability) {
         super(ability);
         this.ruleText = ability.getRule();
+        this.gainedTemporary = ability.gainedTemporary;
+        this.shortRule = ability.shortRule;
     }
 
     @Override
@@ -194,6 +204,10 @@ public class SuspendAbility extends  ActivatedAbilityImpl<SuspendAbility> {
     @Override
     public String getRule() {
         return ruleText;
+    }
+
+    public boolean isGainedTemporary() {
+        return gainedTemporary;
     }
 
     @Override
@@ -252,6 +266,9 @@ class SuspendPlayCardAbility extends TriggeredAbilityImpl<SuspendPlayCardAbility
 
     public SuspendPlayCardAbility(boolean isCreature) {
         super(Zone.EXILED, new SuspendPlayCardEffect(isCreature));
+        if (isCreature) {
+            this.addEffect(new GainHasteEffect());
+        }
         setRuleVisible(false);
     }
 
@@ -286,8 +303,7 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
 
     public SuspendPlayCardEffect(boolean isCreature) {
         super(Outcome.PutCardInPlay);
-        this.staticText = new StringBuilder("play it without paying its mana cost if able. If you can't, it remains removed from the game")
-                       .append(isCreature ? ". If you play it this way and it's a creature, it gains haste until you lose control of it":"").toString();
+        this.staticText = "play it without paying its mana cost if able. If you can't, it remains removed from the game";                       
     }
 
     public SuspendPlayCardEffect(final SuspendPlayCardEffect effect) {
@@ -301,9 +317,33 @@ class SuspendPlayCardEffect extends OneShotEffect<SuspendPlayCardEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+
         Player player = game.getPlayer(source.getControllerId());
         Card card = game.getCard(source.getSourceId());
         if (player != null && card != null) {
+            // remove temporary suspend ability (used e.g. for Epochrasite)
+            List<Ability> abilitiesToRemove = new ArrayList<Ability>();
+            for (Ability ability : card.getAbilities()) {
+                if (ability instanceof SuspendAbility) {
+                    if (((SuspendAbility)ability).isGainedTemporary()) {
+                        abilitiesToRemove.add(ability);
+                    }
+                }
+            }
+            if (!abilitiesToRemove.isEmpty()) {
+                for (Ability ability : card.getAbilities()) {
+                    if (ability instanceof SuspendBeginningOfUpkeepTriggeredAbility || ability instanceof SuspendPlayCardAbility ) {
+                        abilitiesToRemove.add(ability);
+                    }
+                }
+                // remove the triggered abilities from the game
+                game.getState().resetTriggersForSourceId(card.getId());
+                // remove the continious effects from the game
+                game.getState().getContinuousEffects().removeGainedEffectsForSource(card.getId());
+                // remove the abilities from the card
+                card.getAbilities().removeAll(abilitiesToRemove);
+            }
+            // cast the card for free
             player.cast(card.getSpellAbility(), game, true);
         }
         return false;
@@ -314,8 +354,8 @@ class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
 
     private UUID suspendController;
 
-    public GainHasteEffect(Duration duration) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+    public GainHasteEffect() {
+        super(Duration.Custom, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         staticText = "If you play it this way and it's a creature, it gains haste until you lose control of it";
     }
 
@@ -336,14 +376,34 @@ class GainHasteEffect extends ContinuousEffectImpl<GainHasteEffect> {
         }
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if (suspendController.equals(source.getControllerId()) && !used) { // used stores if the control changed
+            if (suspendController.equals(source.getControllerId())) { 
                 permanent.addAbility(HasteAbility.getInstance(), source.getSourceId(), game);
                 return true;
             } else {
-                used = true;
+                this.discard();
             }
         }
         return false;
     }
 
+}
+
+class SuspendBeginningOfUpkeepTriggeredAbility extends ConditionalTriggeredAbility {
+
+    public SuspendBeginningOfUpkeepTriggeredAbility() {
+        super(new BeginningOfUpkeepTriggeredAbility(Zone.EXILED, new RemoveCounterSourceEffect(CounterType.TIME.createInstance()), TargetController.YOU, false),
+                SuspendedCondition.getInstance(),
+                "At the beginning of your upkeep, if this card is suspended, remove a time counter from it.");
+        this.setRuleVisible(false);
+
+    }
+
+    public SuspendBeginningOfUpkeepTriggeredAbility(final SuspendBeginningOfUpkeepTriggeredAbility effect) {
+        super(effect);
+    }
+
+    @Override
+    public SuspendBeginningOfUpkeepTriggeredAbility copy() {
+        return new SuspendBeginningOfUpkeepTriggeredAbility(this);
+    }
 }

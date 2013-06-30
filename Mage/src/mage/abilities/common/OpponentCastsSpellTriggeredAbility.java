@@ -49,9 +49,14 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     }
 
     public OpponentCastsSpellTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
-        super(Zone.BATTLEFIELD, effect, optional);
+        this(Zone.BATTLEFIELD, effect, filter, optional);
+    }
+    
+    public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional) {
+        super(zone, effect, optional);
         this.filter = filter;
     }
+
 
     public OpponentCastsSpellTriggeredAbility(final OpponentCastsSpellTriggeredAbility ability) {
         super(ability);

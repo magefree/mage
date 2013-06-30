@@ -28,16 +28,16 @@
 
 package mage.abilities.costs.common;
 
-import mage.constants.Outcome;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
 import mage.cards.Card;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.common.TargetCardInYourGraveyard;
-
-import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  *
@@ -48,7 +48,7 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
     public ExileFromGraveCost(TargetCardInYourGraveyard target) {
         this.addTarget(target);
         if (target.getMaxNumberOfTargets() > 1) {
-            this.text = "Exile " + target.getMaxNumberOfTargets() + " " + target.getTargetName();
+            this.text = "Exile " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " " + target.getTargetName();
         }
         else {
             this.text = "Exile " + target.getTargetName();

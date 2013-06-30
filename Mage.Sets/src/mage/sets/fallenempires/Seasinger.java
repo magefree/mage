@@ -35,8 +35,8 @@ import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SkipUntapOptionalAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.SourceTappedCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
@@ -89,7 +89,7 @@ public class Seasinger extends CardImpl<Seasinger> {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, TappedCondition.getInstance()), rule);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));
@@ -146,23 +146,5 @@ class SeasingerTriggeredAbility extends StateTriggeredAbility<SeasingerTriggered
     @Override
     public String getRule() {
         return "When you control no islands, sacrifice {this}.";
-    }
-}
-
-class TappedCondition implements Condition {
-
-    private static TappedCondition fInstance = new TappedCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent seasinger = game.getBattlefield().getPermanent(source.getSourceId());
-        if (seasinger != null) {
-            return seasinger.isTapped();
-        }
-        return false;
     }
 }

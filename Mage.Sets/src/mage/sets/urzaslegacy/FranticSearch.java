@@ -28,10 +28,9 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.UntapLandsEffect;
 import mage.cards.CardImpl;
 
@@ -48,8 +47,7 @@ public class FranticSearch extends CardImpl<FranticSearch> {
         this.color.setBlue(true);
 
         // Draw two cards, then discard two cards. Untap up to three lands.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2, 2));
         this.getSpellAbility().addEffect(new UntapLandsEffect(3));
     }
 

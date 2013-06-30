@@ -62,6 +62,7 @@ public class Earthshaker extends CardImpl<Earthshaker> {
         this.color.setRed(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
+        // Whenever you cast a Spirit or Arcane spell, Earthshaker deals 2 damage to each creature without flying.
         this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), filter, false));
     }
 

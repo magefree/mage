@@ -33,6 +33,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.SunburstCount;
 import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.counters.Counter;
@@ -49,12 +50,18 @@ import mage.players.Player;
 
 public class SunburstAbility extends EntersBattlefieldAbility{
 
-    public SunburstAbility(){
+    private final static String ruleCreature ="Sunburst <i>(This enters the battlefield with a +1/+1 counter on it for each color of mana spent to cast it.)</i>";
+    private final static String ruleNonCreature ="Sunburst <i>(This enters the battlefield with a charge counter on it for each color of mana spent to cast it.)</i>";
+    private boolean isCreature;
+
+    public SunburstAbility(Card card){
         super(new SunburstEffect(),"");
+        isCreature = card.getCardType().contains(CardType.CREATURE);
     }
     
     public SunburstAbility(final SunburstAbility ability){
         super(ability);
+        this.isCreature = ability.isCreature;
     }
     
     
@@ -65,7 +72,7 @@ public class SunburstAbility extends EntersBattlefieldAbility{
 
     @Override
     public String getRule() {
-        return "Sunburst";
+        return isCreature ? ruleCreature : ruleNonCreature;
     }
     
     
@@ -113,6 +120,5 @@ class SunburstEffect extends OneShotEffect<SunburstEffect> {
     public SunburstEffect copy() {
         return new SunburstEffect(this);
     }
-
 
 }

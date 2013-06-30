@@ -65,6 +65,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     public final ScaledImagePanel imagePanel;
     public ImagePanel overlayPanel;
     public JPanel buttonPanel;
+    public JPanel iconPanel;
 
     private GlowText titleText;
     private GlowText ptText;
@@ -94,6 +95,7 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
     private boolean transformed;
     private boolean animationInProgress = false;
     private JButton dayNightButton;
+    private JButton tokenButton;
 
     private boolean displayTitleAnyway;
 
@@ -141,6 +143,23 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
                 Animation.transformCard(CardPanel.this, CardPanel.this, true);
             }
         });
+
+        // token icon
+        iconPanel = new JPanel();
+        iconPanel.setLayout(null);
+        iconPanel.setOpaque(false);
+        add(iconPanel);
+
+        tokenButton = new JButton("");
+        tokenButton.setLocation(2, 2);
+        tokenButton.setSize(25, 25);
+
+        iconPanel.setVisible(this.gameCard.isToken());
+
+        BufferedImage tokenIconImage = ImageManagerImpl.getInstance().getTokenIconImage();
+        tokenButton.setIcon(new ImageIcon(tokenIconImage));
+
+        iconPanel.add(tokenButton);
 
         setBackground(Color.black);
         setOpaque(false);
@@ -410,6 +429,9 @@ public class CardPanel extends MagePermanent implements MouseListener, MouseMoti
 
         buttonPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
         buttonPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
+
+        iconPanel.setLocation(cardXOffset + borderSize, cardYOffset + borderSize);
+        iconPanel.setSize(cardWidth - borderSize * 2, cardHeight - borderSize * 2);
 
         int fontHeight = Math.round(cardHeight * (27f / 680));
         boolean showText = (!isAnimationPanel && fontHeight < 12);

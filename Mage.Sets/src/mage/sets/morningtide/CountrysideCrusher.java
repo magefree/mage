@@ -40,6 +40,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.Outcome;
 import mage.constants.TargetController;
@@ -106,15 +107,17 @@ class CountrysideCrusherEffect extends OneShotEffect<CountrysideCrusherEffect> {
             permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
         }
         if (player != null && permanent != null) {
+            Cards cards = new CardsImpl();
             while (player.getLibrary().size() > 0) {
                 Card card = player.getLibrary().getFromTop(game);
-                player.revealCards(permanent.getName(), new CardsImpl(card), game);
+                cards.add(card);
                 if (card.getCardType().contains(CardType.LAND)) {
                     card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, true);
                 } else {
                     break;
                 }
             }
+            player.revealCards(permanent.getName(), cards, game);
             return true;
         }
         return false;

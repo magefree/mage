@@ -75,7 +75,7 @@ public class SacrificeTargetEffect extends OneShotEffect<SacrificeTargetEffect> 
 
     @Override
     public String getText(Mode mode) {
-        if ("".equals(staticText) && !mode.getTargets().isEmpty()) {
+        if (staticText.isEmpty() && !mode.getTargets().isEmpty()) {
             if (mode.getTargets().get(0).getNumberOfTargets() == 1) {
                 return "The controller of target " + mode.getTargets().get(0).getTargetName() + " sacrifices it";
             } else {

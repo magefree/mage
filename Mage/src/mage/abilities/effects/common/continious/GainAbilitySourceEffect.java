@@ -28,12 +28,13 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,6 +45,8 @@ import mage.game.permanent.Permanent;
 public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySourceEffect> {
 
     protected Ability ability;
+    // shall a card gain the ability (otherwise permanent)
+    private boolean onCard;
 
     /**
      * Add ability with Duration.WhileOnBattlefield
@@ -54,14 +57,20 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration) {
+       this(ability, duration, false);
+    }
+
+    public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
         super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         staticText = "{this} gains \"" + ability.getRule() + "\" " + duration.toString();
+        this.onCard = onCard;
     }
 
     public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        this.onCard = effect.onCard;
     }
 
     @Override
@@ -71,10 +80,20 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addAbility(ability, game);
-            return true;
+        if (onCard) {
+            Card card = game.getCard(source.getSourceId());
+            if (card != null) {
+                // add ability to card only once
+                card.addAbility(ability);
+                discard();
+                return true;
+            }
+        } else {
+            Permanent permanent = game.getPermanent(source.getSourceId());
+            if (permanent != null) {
+                permanent.addAbility(ability, source.getSourceId(), game);
+                return true;
+            }
         }
         return false;
     }

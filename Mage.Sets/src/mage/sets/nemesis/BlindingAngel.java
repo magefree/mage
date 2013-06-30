@@ -36,11 +36,13 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.turn.TurnMod;
+import mage.players.Player;
 
 /**
  *
@@ -80,15 +82,15 @@ class SkipNextCombatEffect extends OneShotEffect<SkipNextCombatEffect> {
         staticText = "that player skips his or her next combat phase";
     }
 
-    public SkipNextCombatEffect(SkipNextCombatEffect effect) {
+    public SkipNextCombatEffect(final SkipNextCombatEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID targetId = source.getFirstTarget();
-        if (targetId != null) {
-            game.getState().getTurnMods().add(new TurnMod(targetId, TurnPhase.COMBAT, null, true));
+        Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
+        if (player != null) {
+            game.getState().getTurnMods().add(new TurnMod(player.getId(), TurnPhase.COMBAT, null, true));
             return true;
         }
         return false;
@@ -96,6 +98,6 @@ class SkipNextCombatEffect extends OneShotEffect<SkipNextCombatEffect> {
 
     @Override
     public SkipNextCombatEffect copy() {
-        return new SkipNextCombatEffect();
+        return new SkipNextCombatEffect(this);
     }
 }

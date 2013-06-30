@@ -28,10 +28,9 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -47,8 +46,7 @@ public class Thoughtflare extends CardImpl<Thoughtflare> {
         this.color.setRed(true);
 
         // Draw four cards, then discard two cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(4));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(4, 2));
     }
 
     public Thoughtflare(final Thoughtflare card) {

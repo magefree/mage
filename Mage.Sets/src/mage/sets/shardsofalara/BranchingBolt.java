@@ -65,18 +65,15 @@ public class BranchingBolt extends CardImpl<BranchingBolt> {
         this.color.setRed(true);
         this.color.setGreen(true);
 
-        // Choose one or both - Branching Bolt deals 3 damage to target creature with flying;
+        // Choose one or both -
+        this.getSpellAbility().getModes().setMinModes(1);
+        this.getSpellAbility().getModes().setMaxModes(2);
+        // Branching Bolt deals 3 damage to target creature with flying;
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filterFlying));
         // or Branching Bolt deals 3 damage to target creature without flying.
         Mode mode = new Mode();
         mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetCreaturePermanent(filterNotFlying));
-        this.getSpellAbility().addMode(mode);
-        // both
-        mode = new Mode();
-        mode.getEffects().add(new DamageTargetEffect(3));
-        mode.getTargets().add(new TargetCreaturePermanent(filterFlying));
         mode.getTargets().add(new TargetCreaturePermanent(filterNotFlying));
         this.getSpellAbility().addMode(mode);
     }

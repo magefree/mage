@@ -51,7 +51,7 @@ public class ClearwaterGoblet extends CardImpl<ClearwaterGoblet> {
         this.expansionSetCode = "5DN";
 
         // Sunburst
-        this.addAbility(new SunburstAbility());
+        this.addAbility(new SunburstAbility(this));
         // At the beginning of your upkeep, you may gain life equal to the number of charge counters on Clearwater Goblet.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(new CountersCount(CounterType.CHARGE)), TargetController.YOU, true));
     }

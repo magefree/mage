@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;
@@ -53,7 +53,7 @@ public class WalkerOfTheGrove extends CardImpl<WalkerOfTheGrove> {
         this.toughness = new MageInt(7);
 
         // When Walker of the Grove leaves the battlefield, put a 4/4 green Elemental creature token onto the battlefield.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerOfTheGroveToken(),1)));
+        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new WalkerOfTheGroveToken(),1),false));
         // Evoke {4}{G}
         this.addAbility(new EvokeAbility(this, "{4}{G}"));
     }

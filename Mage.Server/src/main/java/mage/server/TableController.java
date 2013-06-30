@@ -396,6 +396,7 @@ public class TableController {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     user.tournamentStarted(tournament.getId(), entry.getValue());
                 }
+                ServerMessagesUtil.getInstance().incTournamentsStarted();
             }
         }
         catch (Exception ex) {

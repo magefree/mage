@@ -40,6 +40,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -69,7 +70,9 @@ public class MoldShambler extends CardImpl<MoldShambler> {
 
         // When Mold Shambler enters the battlefield, if it was kicked, destroy target noncreature permanent.
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), false);
-        ability.addTarget(new TargetPermanent(filter));
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
     }
 

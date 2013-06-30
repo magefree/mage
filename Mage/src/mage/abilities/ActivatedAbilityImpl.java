@@ -243,21 +243,59 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         } else {
             sb.append("unknown");
         }
-        if (object instanceof Spell && ((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
-            Spell<?> spell = (Spell<?>) object;
-            int i = 0;
-            for (SpellAbility spellAbility : spell.getSpellAbilities()) {
-                i++;
-                String half;
-                if (i == 1) {
-                    half = " left";
-                } else {
-                    half = " right";
+        if (object instanceof Spell && ((Spell) object).getSpellAbilities().size() > 1) {
+            if (((Spell) object).getSpellAbility().getSpellAbilityType().equals(SpellAbilityType.SPLIT_FUSED)) {
+                Spell<?> spell = (Spell<?>) object;
+                int i = 0;
+                for (SpellAbility spellAbility : spell.getSpellAbilities()) {
+                    i++;
+                    String half;
+                    if (i == 1) {
+                        half = " left";
+                    } else {
+                        half = " right";
+                    }
+                    if (spellAbility.getTargets().size() > 0) {
+                        sb.append(half).append(" half targeting ");
+                        for (Target target: spellAbility.getTargets()) {
+                            sb.append(target.getTargetedName(game));
+                        }
+                    }
                 }
-                if (spellAbility.getTargets().size() > 0) {
-                    sb.append(half).append(" half targeting ");
-                    for (Target target: spellAbility.getTargets()) {
-                        sb.append(target.getTargetedName(game));
+            } else {
+                Spell<?> spell = (Spell<?>) object;
+                int i = 0;
+                for (SpellAbility spellAbility : spell.getSpellAbilities()) {
+                    i++;
+                    if ( i > 1) {
+                        sb.append(" splicing ");
+                        if (spellAbility.name.length() > 5 && spellAbility.name.startsWith("Cast ")) {
+                            sb.append(spellAbility.name.substring(5));
+                        } else {
+                            sb.append(spellAbility.name);
+                        }
+                    }
+                    if (spellAbility.getTargets().size() > 0) {
+                        for (Target target: spellAbility.getTargets()) {
+                            sb.append(" targeting ");
+                            sb.append(target.getTargetedName(game));
+                        }
+                    }
+                }
+            }
+        } else if (object instanceof Spell && ((Spell) object).getSpellAbility().getModes().size() > 1) {
+            Modes spellModes = ((Spell) object).getSpellAbility().getModes();
+            int item = 0;
+            for (Mode mode : spellModes.values()) {
+                item++;
+                if (spellModes.getSelectedModes().contains(mode.getId())) {
+                    spellModes.setMode(mode);
+                    sb.append(" (mode ").append(item).append(")");
+                    if (getTargets().size() > 0) {
+                        sb.append(" targeting ");
+                        for (Target target: getTargets()) {
+                            sb.append(target.getTargetedName(game));
+                        }
                     }
                 }
             }

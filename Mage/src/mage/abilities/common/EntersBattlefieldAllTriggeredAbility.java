@@ -86,11 +86,12 @@ public class EntersBattlefieldAllTriggeredAbility extends TriggeredAbilityImpl {
         this.setTargetPointer = setTargetPointer;
     }
 
-    public EntersBattlefieldAllTriggeredAbility(EntersBattlefieldAllTriggeredAbility ability) {
+    public EntersBattlefieldAllTriggeredAbility(final EntersBattlefieldAllTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.rule = ability.rule;
         this.controlled = ability.controlled;
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override

@@ -34,6 +34,7 @@
 
 package mage.client.game;
 
+import mage.MageException;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
 import mage.cards.decks.importer.DckDeckImporter;
@@ -52,6 +53,7 @@ import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
 import mage.components.ImagePanel;
 import mage.remote.Session;
+import mage.utils.timer.PriorityTimer;
 import mage.view.CardView;
 import mage.view.ManaPoolView;
 import mage.view.PlayerView;
@@ -101,19 +103,43 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     
     private int avatarId = -1;
 
+    private PriorityTimer timer;
+
     /** Creates new form PlayerPanel */
     public PlayerPanelExt() {
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         initComponents();
     }
 
-    public void init(UUID gameId, UUID playerId, BigCard bigCard) {
+    public void init(UUID gameId, UUID playerId, BigCard bigCard, int priorityTime) {
         this.gameId = gameId;
         this.playerId = playerId;
         this.bigCard = bigCard;
         session = MageFrame.getSession();
         cheat.setVisible(session.isTestMode());
         cheat.setFocusable(false);
+
+        if (priorityTime > 0) {
+            long delay = 1000L;
+
+            timer = new PriorityTimer(priorityTime, delay, new mage.interfaces.Action() {
+                @Override
+                public void execute() throws MageException {
+                    // do nothing
+                }
+            });
+            final PriorityTimer pt = timer;
+            timer.setTaskOnTick(new mage.interfaces.Action() {
+                @Override
+                public void execute() throws MageException {
+                    int priorityTimeValue = pt.getCount();
+                    String text = getPriorityTimeLeftString(priorityTimeValue);
+                    PlayerPanelExt.this.avatar.setTopText(text);
+                    PlayerPanelExt.this.avatar.repaint();
+                }
+            });
+            timer.init();
+        }
     }
 
     public void update(PlayerView player) {
@@ -182,6 +208,19 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             }
         }
         this.avatar.setText(player.getName());
+        if (this.timer != null) {
+            if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
+            String priorityTimeValue = getPriorityTimeLeftString(player);
+            this.timer.setCount(player.getPriorityTimeLeft());
+            this.avatar.setTopText(priorityTimeValue);
+            }
+            if (player.hasPriority()) {
+                this.timer.resume();
+            } else {
+                this.timer.pause();
+            }
+        }
+
         this.btnPlayer.setText(player.getName());
         if (player.isActive()) {
             this.avatar.setBorder(greenBorder);
@@ -193,6 +232,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
             this.avatar.setBorder(emptyBorder);
             this.btnPlayer.setBorder(emptyBorder);
         }
+        
 
         synchronized (this) {
             if (player.getTopCard() != null) {
@@ -214,6 +254,18 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         }
 
         update(player.getManaPool());
+    }
+
+    private String getPriorityTimeLeftString(PlayerView player) {
+        int priorityTimeLeft = player.getPriorityTimeLeft();
+        return getPriorityTimeLeftString(priorityTimeLeft);
+    }
+
+    private String getPriorityTimeLeftString(int priorityTimeLeft) {
+        int h = priorityTimeLeft / 3600;
+        int m = (priorityTimeLeft % 3600) / 60;
+        int s = priorityTimeLeft % 60;
+        return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m  + ":" + (s < 10 ? "0" : "") + s;
     }
 
     protected void update(ManaPoolView pool) {

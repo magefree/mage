@@ -28,9 +28,6 @@
 
 package mage.game;
 
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.RangeOfInfluence;
-import mage.constants.Zone;
 import mage.MageItem;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -44,6 +41,10 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.Duration;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.game.combat.Combat;
 import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
@@ -65,7 +66,6 @@ import mage.util.functions.ApplyToPermanent;
 
 import java.io.Serializable;
 import java.util.*;
-import mage.constants.Duration;
 
 public interface Game extends MageItem, Serializable {
 
@@ -225,4 +225,11 @@ public interface Game extends MageItem, Serializable {
     // controlling the behaviour of replacement effects
     void setScopeRelevant(boolean scopeRelevant);
     public boolean getScopeRelevant();
+
+    // players' timers
+    void initTimer(UUID playerId);
+    void resumeTimer(UUID playerId);
+    void pauseTimer(UUID playerId);
+    int getPriorityTime();
+    void setPriorityTime(int priorityTime);
 }

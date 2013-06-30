@@ -110,12 +110,14 @@ class PrisonTermEffect extends OneShotEffect<PrisonTermEffect> {
         Player you = game.getPlayer(source.getControllerId());
         Permanent opponentCreature = game.getPermanent(getTargetPointer().getFirst(game, source));
         Permanent prisonTerm = game.getPermanent(source.getSourceId());
-        if (you != null
-                && opponentCreature != null
-                && prisonTerm != null
-                && opponentCreature.getCardType().contains(CardType.CREATURE)) {
-            game.getState().setValue("attachTo:" + prisonTerm.getId(), opponentCreature);
-            return opponentCreature.addAttachment(prisonTerm.getId(), game);
+        if (you != null && opponentCreature != null && prisonTerm != null) {
+            Permanent oldCreature = game.getPermanent(prisonTerm.getAttachedTo());
+            if (oldCreature == null) {
+                return false;
+            }
+            if (oldCreature.removeAttachment(prisonTerm.getId(), game)) {
+                return opponentCreature.addAttachment(prisonTerm.getId(), game);
+            }
         }
         return false;
     }

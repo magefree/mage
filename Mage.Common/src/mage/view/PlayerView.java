@@ -54,6 +54,7 @@ public class PlayerView implements Serializable {
     private int libraryCount;
     private int handCount;
     private boolean isActive;
+    private boolean hasPriority;
     private boolean hasLeft;
     private ManaPoolView manaPool;
     private SimpleCardsView graveyard = new SimpleCardsView();
@@ -63,6 +64,7 @@ public class PlayerView implements Serializable {
     private List<EmblemView> emblemList = new ArrayList<EmblemView>();
     private List<UUID> attachments = new ArrayList<UUID>();
     private int statesSavedSize;
+    private int priorityTimeLeft;
 
     public PlayerView(Player player, GameState state, Game game) {
         this.playerId = player.getId();
@@ -73,6 +75,7 @@ public class PlayerView implements Serializable {
         this.handCount = player.getHand().size();
         this.manaPool = new ManaPoolView(player.getManaPool());
         this.isActive = (player.getId().equals(state.getActivePlayerId()));
+        this.hasPriority = player.getId().equals(state.getPriorityPlayerId());
         this.hasLeft = player.hasLeft();
         for (Card card: player.getGraveyard().getCards(game)) {
             graveyard.put(card.getId(), new SimpleCardView(card.getId(), card.getExpansionSetCode(), card.getCardNumber(), card.getUsesVariousArt(), card.isFaceDown()));
@@ -108,6 +111,7 @@ public class PlayerView implements Serializable {
         }
 
         this.statesSavedSize = player.getStoredBookmark();
+        this.priorityTimeLeft = player.getPriorityTimeLeft();
     }
 
     private boolean showInBattlefield(Permanent permanent, GameState state) {
@@ -190,5 +194,13 @@ public class PlayerView implements Serializable {
 
     public int getStatesSavedSize() {
         return statesSavedSize;
+    }
+
+    public int getPriorityTimeLeft() {
+        return priorityTimeLeft;
+    }
+
+    public boolean hasPriority() {
+        return hasPriority;
     }
 }

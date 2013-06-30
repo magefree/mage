@@ -28,16 +28,17 @@
 package mage.sets.modernmasters;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.PostResolveEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
@@ -58,6 +59,7 @@ public class PetalsOfInsight extends CardImpl<PetalsOfInsight> {
 
         // Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards.
         this.getSpellAbility().addEffect(new PetalsOfInsightEffect());
+        this.getSpellAbility().addEffect(new PetalsOfInsightReturnEffect());
     }
 
     public PetalsOfInsight(final PetalsOfInsight card) {
@@ -74,7 +76,7 @@ class PetalsOfInsightEffect extends OneShotEffect<PetalsOfInsightEffect> {
 
     public PetalsOfInsightEffect() {
         super(Outcome.Benefit);
-        this.staticText = "Look at the top three cards of your library. You may put those cards on the bottom of your library in any order. If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards";
+        this.staticText = "Look at the top three cards of your library. You may put those cards on the bottom of your library in any order";
     }
 
     public PetalsOfInsightEffect(final PetalsOfInsightEffect effect) {
@@ -118,6 +120,7 @@ class PetalsOfInsightEffect extends OneShotEffect<PetalsOfInsightEffect> {
                 Card card = cards.get(cards.iterator().next(), game);
                 card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
             }
+            game.getState().setValue(source.getSourceId().toString(), Boolean.TRUE);
         } else {
             for (UUID cardId: cards) {
                 Card card = game.getCard(cardId);
@@ -125,9 +128,43 @@ class PetalsOfInsightEffect extends OneShotEffect<PetalsOfInsightEffect> {
                     card.moveToZone(Zone.LIBRARY, source.getSourceId(), game, true);
                 }
             }
-            player.drawCards(3, game, null);
-            return true;
+            game.getState().setValue(source.getSourceId().toString(), Boolean.FALSE);
         }
-        return false;
+        return true;
+    }
+}
+
+class PetalsOfInsightReturnEffect extends PostResolveEffect<PetalsOfInsightReturnEffect> {
+
+    public PetalsOfInsightReturnEffect() {
+        staticText = "If you do, return Petals of Insight to its owner's hand. Otherwise, draw three cards";
+    }
+
+    public PetalsOfInsightReturnEffect(final PetalsOfInsightReturnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public PetalsOfInsightReturnEffect copy() {
+        return new PetalsOfInsightReturnEffect(this);
+    }
+
+    @Override
+    public void postResolve(Card card, Ability source, UUID controllerId, Game game) {
+        Player controller = game.getPlayer(controllerId);
+        if (controller != null) {
+            Boolean returnToHand = (Boolean) game.getState().getValue(source.getSourceId().toString());
+            if (returnToHand == null) {
+                returnToHand = Boolean.FALSE;
+            }
+            if (returnToHand) {
+                card.moveToZone(Zone.HAND, source.getId(), game, false);
+            }
+            else {
+                card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                controller.drawCards(3, game);
+            }
+        }
+
     }
 }

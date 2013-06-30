@@ -30,6 +30,7 @@ package mage.filter.common;
 
 import mage.constants.CardType;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
@@ -44,6 +45,13 @@ public class FilterControlledCreaturePermanent extends FilterControlledPermanent
     public FilterControlledCreaturePermanent(String name) {
         super(name);
         this.add(new CardTypePredicate(CardType.CREATURE));
+    }    
+    
+
+    public FilterControlledCreaturePermanent(String subtype, String name) {
+        super(name);
+        this.add(new CardTypePredicate(CardType.CREATURE));
+        this.add(new SubtypePredicate(subtype));
     }
 
     public FilterControlledCreaturePermanent(final FilterControlledCreaturePermanent filter) {

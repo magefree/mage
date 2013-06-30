@@ -50,7 +50,6 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
 
     public BoosterDraftEliminationTournament(TournamentOptions options) {
         super(options);
-        this.getOptions().getLimitedOptions().setConstructionTime(600);
         currentStep = TournamentStep.START;
     }
 

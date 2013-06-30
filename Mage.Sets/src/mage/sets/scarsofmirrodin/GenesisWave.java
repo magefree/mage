@@ -106,7 +106,7 @@ class GenesisWaveEffect extends OneShotEffect<GenesisWaveEffect> {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
                 cards.remove(card);
-                card.putOntoBattlefield(game, Zone.HAND, source.getSourceId(), source.getControllerId());
+                card.putOntoBattlefield(game, Zone.PICK, source.getSourceId(), source.getControllerId());
             }
             target1.clearChosen();
         }

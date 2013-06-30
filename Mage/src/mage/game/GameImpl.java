@@ -29,7 +29,6 @@
 package mage.game;
 
 import mage.Constants;
-import mage.constants.CardType;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -49,12 +48,14 @@ import mage.actions.impl.MageAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.constants.*;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
@@ -89,8 +90,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
-import mage.cards.SplitCard;
-import mage.filter.common.FilterControlledCreaturePermanent;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -156,6 +155,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     // used to indicate that currently applied replacement effects have to check for scope relevance (614.12 13/01/18)
     private boolean scopeRelevant = false;
 
+    private int priorityTime;
+
     @Override
     public abstract T copy();
 
@@ -199,6 +200,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.stateCheckRequired = game.stateCheckRequired;
         this.scorePlayer = game.scorePlayer;
         this.scopeRelevant = game.scopeRelevant;
+        this.priorityTime = game.priorityTime;
     }
 
     @Override
@@ -590,6 +592,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
+            if (priorityTime > 0) {
+                initTimer(player.getId());
+            }
         }
         if (startMessage == null || startMessage.isEmpty()) {
             startMessage = "Game has started";
@@ -1060,7 +1065,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void addTriggeredAbility(TriggeredAbility ability) {
         if (ability instanceof TriggeredManaAbility || ability instanceof DelayedTriggeredManaAbility) {
             // 20110715 - 605.4
-            ability.resolve(this);
+            Ability manaAbiltiy = ability.copy();
+            manaAbiltiy.activate(this, false);
+            manaAbiltiy.resolve(this);
         }
         else {
             TriggeredAbility newAbility = (TriggeredAbility) ability.copy();
@@ -1945,5 +1952,36 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     public void setStartMessage(String startMessage) {
         this.startMessage = startMessage;
+    }
+
+    @Override
+    public void initTimer(UUID playerId) {
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.INIT_TIMER, playerId, null, this);
+        }
+    }
+
+    @Override
+    public void resumeTimer(UUID playerId) {
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.RESUME_TIMER, playerId, null, this);
+        }
+    }
+
+    @Override
+    public void pauseTimer(UUID playerId) {
+        if (priorityTime > 0) {
+            tableEventSource.fireTableEvent(EventType.PAUSE_TIMER, playerId, null, this);
+        }
+    }
+
+    @Override
+    public int getPriorityTime() {
+        return priorityTime;
+    }
+
+    @Override
+    public void setPriorityTime(int priorityTime) {
+        this.priorityTime = priorityTime;
     }
 }

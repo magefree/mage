@@ -27,13 +27,11 @@
  */
 package mage.sets.odyssey;
 
+import java.util.UUID;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.cards.CardImpl;
-
-import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -47,8 +45,7 @@ public class CarefulStudy extends CardImpl<CarefulStudy> {
         this.color.setBlue(true);
 
         // Draw two cards, then discard two cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
-        this.getSpellAbility().addEffect(new DiscardControllerEffect(2));
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,2));
     }
 
     public CarefulStudy(final CarefulStudy card) {

@@ -29,14 +29,15 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
-
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.EntersTheBattlefieldEvent;
@@ -52,18 +53,27 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
 
     protected UUID lastController;
     protected boolean echoPaid;
-    protected String manaString;
+    protected Costs echoCosts = new CostsImpl();
+    private boolean manaEcho = true;
 
     public EchoAbility(String manaString) {
         super(Zone.BATTLEFIELD, new EchoEffect(new ManaCostsImpl(manaString)), false);
         this.echoPaid = false;
-        this.manaString = manaString;
+        this.echoCosts.add(new ManaCostsImpl(manaString));
+    }
+
+    public EchoAbility(Cost echoCost) {
+        super(Zone.BATTLEFIELD, new EchoEffect(echoCost), false);
+        this.echoPaid = false;
+        this.echoCosts.add(echoCost);
+        this.manaEcho = false;
     }
 
     public EchoAbility(final EchoAbility ability) {
         super(ability);
         this.echoPaid = ability.echoPaid;
-        this.manaString = ability.manaString;
+        this.echoCosts = ability.echoCosts.copy();
+        this.manaEcho = ability.manaEcho;
     }
 
     @Override
@@ -98,7 +108,15 @@ public class EchoAbility extends TriggeredAbilityImpl<EchoAbility> {
 
     @Override
     public String getRule() {
-        return "Echo " + manaString + " <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep," + getEffects().getText(modes.getMode()) + ")</i>";
+        StringBuilder sb = new StringBuilder("Echo");
+        if (manaEcho) {
+            sb.append(" ");
+        } else {
+            sb.append("-");
+        }
+        sb.append(echoCosts.getText());
+        sb.append(" <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>");
+        return sb.toString();
     }
 }
 
@@ -137,7 +155,7 @@ class EchoEffect extends OneShotEffect<EchoEffect> {
         return new EchoEffect(this);
     }
 
-        @Override
+    @Override
     public String getText(Mode mode) {
             StringBuilder sb = new StringBuilder("sacrifice {this} unless you ");
             String costText = cost.getText();
@@ -145,8 +163,9 @@ class EchoEffect extends OneShotEffect<EchoEffect> {
                 sb.append(costText.substring(0, 1).toLowerCase());
                 sb.append(costText.substring(1));
             }
-            else
+            else {
                 sb.append("pay ").append(costText);
+            }
 
             return sb.toString();
 

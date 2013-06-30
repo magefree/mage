@@ -1,11 +1,14 @@
 package mage.client.util;
 
+import java.io.File;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
 import org.apache.log4j.Logger;
-
-import javax.sound.sampled.*;
-import java.io.File;
 
 /**
  * Manager class for playing audio files.
@@ -42,6 +45,8 @@ public class AudioManager {
             audioManager.addArtifactClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnAddArtifact.wav");
             audioManager.updateStackClip = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnStackNew.wav");
             audioManager.onHover = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnHover.wav");
+
+            audioManager.playerJoinedTable = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoinedTable.wav");
         }
         return audioManager;
     }
@@ -114,6 +119,10 @@ public class AudioManager {
         checkAndPlayClip(getManager().onHover);
     }
 
+    public static void playPlayerJoinedTable() {
+        checkAndPlayClip(getManager().playerJoinedTable);
+    }
+
     private static void checkAndPlayClip(Clip clip) {
         try {
             if (clip != null) {
@@ -175,4 +184,6 @@ public class AudioManager {
     private Clip addArtifactClip = null;
     private Clip updateStackClip = null;
     private Clip onHover = null;
+
+    private Clip playerJoinedTable = null;
 }

@@ -28,15 +28,16 @@
 package mage.sets.newphyrexia;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
@@ -52,7 +53,10 @@ public class OgreMenial extends CardImpl<OgreMenial> {
         this.color.setRed(true);
         this.power = new MageInt(0);
         this.toughness = new MageInt(4);
+        // Infect (This creature deals damage to creatures in the form of -1/-1 counters and to players in the form of poison counters.)
+        this.addAbility(InfectAbility.getInstance());
 
+        // {R}: Ogre Menial gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
     }
 

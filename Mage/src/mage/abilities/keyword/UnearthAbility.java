@@ -28,10 +28,6 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.DelayedTriggeredAbility;
@@ -39,8 +35,12 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.abilities.effects.common.ExileSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToBattlefieldEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -49,10 +49,18 @@ import mage.game.events.ZoneChangeEvent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ *
+ *
+ * 702.82. Unearth
+ *
+ * 702.82a Unearth is an activated ability that functions while the card with unearth
+ * is in a graveyard. "Unearth [cost]" means "[Cost]: Return this card from your graveyard
+ * to the battlefield. It gains haste. Exile it at the beginning of the next end step.
+ * If it would leave the battlefield, exile it instead of putting it anywhere else.
+ * Activate this ability only any time you could cast a sorcery."
+ *
  */
 public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
-
-    protected boolean unearthed;
 
     public UnearthAbility(ManaCosts costs) {
         super(Zone.GRAVEYARD, new ReturnSourceFromGraveyardToBattlefieldEffect(), costs);
@@ -64,7 +72,6 @@ public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
 
     public UnearthAbility(final UnearthAbility ability) {
         super(ability);
-        this.unearthed = ability.unearthed;
     }
 
     @Override
@@ -72,13 +79,12 @@ public class UnearthAbility extends ActivatedAbilityImpl<UnearthAbility> {
         return new UnearthAbility(this);
     }
 
-    public boolean isUnearthed() {
-        return unearthed;
-    }
-
     @Override
     public String getRule() {
-        return "Unearth " + super.getRule();
+        StringBuilder sb = new StringBuilder("Unearth ").append(this.getManaCosts().getText());
+        sb.append(" <i>(").append(this.getManaCosts().getText());
+        sb.append(": Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)");
+        return sb.toString();
     }
 
 }
@@ -133,8 +139,9 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeaves
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(source.getSourceId())) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED)
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() != Zone.EXILED) {
                 return true;
+            }
         }
         return false;
     }
@@ -149,5 +156,4 @@ class UnearthLeavesBattlefieldEffect extends ReplacementEffectImpl<UnearthLeaves
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         return apply(game, source);
     }
-
 }

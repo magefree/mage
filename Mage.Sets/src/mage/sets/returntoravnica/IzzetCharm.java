@@ -34,8 +34,7 @@ import mage.abilities.Mode;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
 import mage.abilities.effects.common.DamageTargetEffect;
-import mage.abilities.effects.common.DiscardControllerEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
@@ -73,8 +72,7 @@ public class IzzetCharm extends CardImpl<IzzetCharm> {
 
         //  or draw two cards, then discard two cards.
         mode = new Mode();
-        mode.getEffects().add(new DrawCardControllerEffect(2));
-        mode.getEffects().add(new DiscardControllerEffect(2));
+        mode.getEffects().add(new DrawDiscardControllerEffect(2, 2));
         this.getSpellAbility().addMode(mode);
     }
 

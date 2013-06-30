@@ -28,8 +28,6 @@
 
 package mage.players;
 
-import mage.constants.*;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
@@ -46,10 +44,13 @@ import mage.actions.MageDrawAction;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
+import mage.constants.*;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
+import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureForCombat;
 import mage.game.ExileZone;
 import mage.game.Game;
@@ -59,11 +60,13 @@ import mage.game.events.DamagedPlayerEvent;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.game.stack.StackObject;
 import mage.players.net.UserData;
 import mage.target.Target;
 import mage.target.TargetAmount;
+import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
@@ -71,11 +74,6 @@ import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 import java.util.*;
-
-import mage.cards.SplitCard;
-import mage.filter.FilterCard;
-import mage.game.stack.Spell;
-import mage.target.TargetCard;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -108,6 +106,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected boolean passedTurn;
     protected int turns;
     protected int storedBookmark = -1;
+    protected int priorityTimeLeft = Integer.MAX_VALUE;
 
     /**
      * This indicates that player passed all turns until his own turn starts.
@@ -1792,5 +1791,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             Cards cards = new CardsImpl(card);
             this.revealCards(name, cards, game);
         }
+    }
+
+    @Override
+    public void setPriorityTimeLeft(int timeLeft) {
+        priorityTimeLeft = timeLeft;
+    }
+
+    @Override
+    public int getPriorityTimeLeft() {
+        return priorityTimeLeft;
     }
 }

@@ -52,6 +52,8 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.EntwineAbility;
+import mage.constants.SpellAbilityType;
 
 
 /**
@@ -161,21 +163,35 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        // 20110204 - 700.2
+        /* 20130201 - 601.2b
+         * If the spell is modal the player announces the mode choice (see rule 700.2).
+         */
         if (!modes.choose(game, this)) {
             return false;
         }
-        //20100716 - 601.2b
+
+        /* 20130201 - 601.2b
+         * If the player wishes to splice any cards onto the spell (see rule 702.45), he
+         * or she reveals those cards in his or her hand.
+         */
+        if (this.abilityType.equals(AbilityType.SPELL)) {
+            game.getContinuousEffects().applySpliceEffects(this, game);
+        }
+
+
         Card card = game.getCard(sourceId);
         if (card != null) {
             card.adjustChoices(this, game);
         }
-        if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
-            logger.debug("activate failed - choice");
-            return false;
+        for (UUID modeId :this.getModes().getSelectedModes()) {
+            this.getModes().setMode(this.getModes().get(modeId));
+            if (getChoices().size() > 0 && getChoices().choose(game, this) == false) {
+                logger.debug("activate failed - choice");
+                return false;
+            }
         }
 
-        // 20121001 - 601.2b
+        // 20130201 - 601.2b
         // If the spell has alternative or additional costs that will be paid as it's being cast such
         // as buyback, kicker, or convoke costs (see rules 117.8 and 117.9), the player announces his
         // or her intentions to pay any or all of those costs (see rule 601.2e).
@@ -193,38 +209,43 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 }
             }
         }
+
         // 20121001 - 601.2b
         // If the spell has a variable cost that will be paid as it's being cast (such as an {X} in
         // its mana cost; see rule 107.3), the player announces the value of that variable.
         VariableManaCost variableManaCost = handleXCosts(game, noMana);
 
-        //20121001 - 601.2c
-        // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
-        // each target the spell requires. A spell may require some targets only if an alternative or
-        // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
-        // otherwise, the spell is cast as though it did not require those targets. If the spell has a
-        // variable number of targets, the player announces how many targets he or she will choose before
-        // he or she announces those targets. The same target can't be chosen multiple times for any one
-        // instance of the word "target" on the spell. However, if the spell uses the word "target" in
-        // multiple places, the same object, player, or zone can be chosen once for each instance of the
-        // word "target" (as long as it fits the targeting criteria). If any effects say that an object
-        // or player must be chosen as a target, the player chooses targets so that he or she obeys the
-        // maximum possible number of such effects without violating any rules or effects that say that
-        // an object or player can't be chosen as a target. The chosen players, objects, and/or zones
-        // each become a target of that spell. (Any abilities that trigger when those players, objects,
-        // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
-        // the stack until the spell has finished being cast.)
-        if (card != null) {
-            card.adjustTargets(this, game);
-        }
-        if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
-            if (variableManaCost != null) {
-                game.informPlayers(new StringBuilder(card.getName()).append(": no valid targets with this value of X").toString());
-            } else {
-                logger.debug("activate failed - target");
+        for (UUID modeId :this.getModes().getSelectedModes()) {
+            this.getModes().setMode(this.getModes().get(modeId));
+            //20121001 - 601.2c
+            // 601.2c The player announces his or her choice of an appropriate player, object, or zone for
+            // each target the spell requires. A spell may require some targets only if an alternative or
+            // additional cost (such as a buyback or kicker cost), or a particular mode, was chosen for it;
+            // otherwise, the spell is cast as though it did not require those targets. If the spell has a
+            // variable number of targets, the player announces how many targets he or she will choose before
+            // he or she announces those targets. The same target can't be chosen multiple times for any one
+            // instance of the word "target" on the spell. However, if the spell uses the word "target" in
+            // multiple places, the same object, player, or zone can be chosen once for each instance of the
+            // word "target" (as long as it fits the targeting criteria). If any effects say that an object
+            // or player must be chosen as a target, the player chooses targets so that he or she obeys the
+            // maximum possible number of such effects without violating any rules or effects that say that
+            // an object or player can't be chosen as a target. The chosen players, objects, and/or zones
+            // each become a target of that spell. (Any abilities that trigger when those players, objects,
+            // and/or zones become the target of a spell trigger at this point; they'll wait to be put on
+            // the stack until the spell has finished being cast.)
+
+            if (card != null) {
+                card.adjustTargets(this, game);
             }
-            return false;
-        }
+            if (getTargets().size() > 0 && getTargets().chooseTargets(getEffects().get(0).getOutcome(), this.controllerId, this, game) == false) {
+                if (variableManaCost != null) {
+                    game.informPlayers(new StringBuilder(card != null ? card.getName(): "").append(": no valid targets with this value of X").toString());
+                } else {
+                    logger.debug("activate failed - target");
+                }
+                return false;
+            }
+        } // end modes
 
         // TODO: Handle optionalCosts at the same time as already OptionalAdditionalSourceCosts are handled.
         for (Cost cost : optionalCosts) {

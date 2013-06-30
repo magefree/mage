@@ -78,25 +78,12 @@ public class ThemePluginImpl implements ThemePlugin {
             background = loadbuffer_default();
         }
         
-        
-        
-        /*   
-        if(loadimages()){
-            int it = (int)Math.abs(Math.random()*(flist.getItemCount()));
-            filename = BackgroundDir + flist.getItem(it);       
-            background = ImageIO.read(new File(filename));
-        }else{
-            filename = "/dragon.png";
-            InputStream is = this.getClass().getResourceAsStream(filename);
-            if (is == null)
-               throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-            background = ImageIO.read(is);
+        if (background == null) {
+             background = loadbuffer_default(); 
         }
-        */    
-            if (background == null) {
-                throw new FileNotFoundException("Couldn't find background file in resources.");
-            }
-
+        if (background == null){
+            throw new FileNotFoundException("Couldn't find in resources.");
+        }
             if (ui.containsKey("gamePanel") && ui.containsKey("jLayeredPane")) {
                 ImagePanel bgPanel = new ImagePanel(background, ImagePanel.TILED);
 
@@ -143,9 +130,13 @@ public class ThemePluginImpl implements ThemePlugin {
             BufferedImage res;
             String path = PreferencesDialog.getCachedValue(PreferencesDialog.
                     KEY_BATTLEFIELD_IMAGE, "");
-            if(path != null){
-                res = ImageIO.read(new File(path));
-                return res;
+            if(path != null && !path.equals("")){
+                try{
+                    res = ImageIO.read(new File(path));
+                    return res;
+                }catch(Exception e){
+                    res = null;
+                }
             }
             return null;
         }
@@ -176,23 +167,28 @@ public class ThemePluginImpl implements ThemePlugin {
                             if (is == null)
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
                             background = ImageIO.read(is);
-                        }else if(PreferencesDialog.getCachedValue(PreferencesDialog.
-                                KEY_BACKGROUND_IMAGE, "") != null){
+                        }else{
                             String path = PreferencesDialog.getCachedValue(PreferencesDialog.
-                                 KEY_BATTLEFIELD_IMAGE, "");
-                            if(path != null){
-                                    background = ImageIO.read(new File(path));  
-                            }else{
-                                 InputStream is = this.getClass().getResourceAsStream(filename);
-                                 if (is == null)
-                                   throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                                 background = ImageIO.read(is);
-                            }    
+                                 KEY_BACKGROUND_IMAGE, "");
+                            if(path != null && !path.equals("")){
+                                try{
+                                    File f = new File(path);
+                                    if(f != null)
+                                    background = ImageIO.read(f);
+                                }catch(Exception e){
+                                    background = null;
+                                }
+                            }
                         }
-                        
-                        if (background == null)
+                        if (background == null){
+                            InputStream is = this.getClass().getResourceAsStream(filename);
+                            if (is == null)
                             throw new FileNotFoundException("Couldn't find " + filename + " in resources.");
-                    } catch (Exception e) {
+                            background = ImageIO.read(is);
+                        }
+                        if(background == null) throw new 
+                                FileNotFoundException("Couldn't find " + filename + " in resources.");
+                    }catch (Exception e) {
                         log.error(e.getMessage(), e);
                         return null;
                     }

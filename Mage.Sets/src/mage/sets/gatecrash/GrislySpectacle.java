@@ -100,11 +100,11 @@ class GrislySpectacleEffect extends OneShotEffect<GrislySpectacleEffect> {
             Player controller = game.getPlayer(creature.getControllerId());
             if (controller != null) {
                 int power = creature.getPower().getValue();
-                if (creature.destroy(source.getSourceId(), game, false)) {
-                    Effect effect = new PutLibraryIntoGraveTargetEffect(power);
-                    effect.setTargetPointer(new FixedTarget(controller.getId()));
-                    return effect.apply(game, source);
-                }
+                creature.destroy(source.getSourceId(), game, false);
+                // the mill effect works also if creature is indestructible or regenerated
+                Effect effect = new PutLibraryIntoGraveTargetEffect(power);
+                effect.setTargetPointer(new FixedTarget(controller.getId()));
+                return effect.apply(game, source);
             }
         }
         return false;

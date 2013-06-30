@@ -118,9 +118,21 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
 
     public boolean activate(Game game, boolean noMana) {
+        if (!spellAbilities.get(0).activate(game, noMana)) {
+            return false;
+        }
+        // if there are more abilities (fused split spell) or first ability added new abilities (splice), activate the additional abilities
+        boolean ignoreAbility = true;
+        boolean payNoMana = noMana;
         for (SpellAbility spellAbility: spellAbilities) {
-            if (!spellAbility.activate(game, noMana)) {
-                return false;
+            // costs for spliced abilities were added to main spellAbility, so pay no man for spliced abilities
+            payNoMana |= spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE);
+            if (ignoreAbility) {
+                ignoreAbility = false;
+            } else {
+                if (!spellAbility.activate(game, payNoMana)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -138,10 +150,15 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             result = false;
             boolean legalParts = false;
             for(SpellAbility spellAbility: this.spellAbilities) {
-                if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
-                    legalParts = true;
-                    updateOptionalCosts(index);
-                    result |= spellAbility.resolve(game);
+                for (UUID modeId :spellAbility.getModes().getSelectedModes()) {
+                    spellAbility.getModes().setMode(spellAbility.getModes().get(modeId));
+                    if (spellAbility.getTargets().stillLegal(spellAbility, game)) {
+                        legalParts = true;
+                        if (!spellAbility.getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
+                            updateOptionalCosts(index);
+                        }
+                        result |= spellAbility.resolve(game);
+                    }
                 }
                 index++;
             }
@@ -226,13 +243,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         String name = null;
                         if (object == null) {
                             Player targetPlayer = game.getPlayer(targetId);
-                            if (targetPlayer != null) name = targetPlayer.getName();
+                            if (targetPlayer != null) {
+                                name = targetPlayer.getName();
+                            }
                         } else {
                             name = object.getName();
                         }
                         if (name != null && player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game))
+                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
                                 newTarget.addTarget(targetId, spellAbility, game, false);
+                            }
                         }
                         else {
                             newTarget.addTarget(targetId, spellAbility, game, false);
@@ -343,6 +363,10 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public UUID getOwnerId() {
         return card.getOwnerId();
+    }
+
+    public void addSpellAbility(SpellAbility spellAbility) {
+        spellAbilities.add(spellAbility);
     }
 
     @Override

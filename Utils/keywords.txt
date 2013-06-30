@@ -3,6 +3,7 @@ Bloodthirst|number|
 Bushido|number|
 Dredge|number|
 Evoke|card, manaString|
+Entwine|manaString|
 Soulshift|number|
 Basic landcycling|cost|
 Forestcycling|cost|

@@ -65,6 +65,7 @@ public class ServerMessagesUtil {
 
     private static long startDate;
     private static AtomicInteger gamesStarted = new AtomicInteger(0);
+    private static AtomicInteger tournamentsStarted = new AtomicInteger(0);
 
     static {
         pathToExternalMessages = System.getProperty("messagesPath");
@@ -170,6 +171,8 @@ public class ServerMessagesUtil {
         statistics.append(hours);
         statistics.append(" hour(s), games played: ");
         statistics.append(gamesStarted.get());
+        statistics.append(" tournaments started: ");
+        statistics.append(tournamentsStarted.get());
         return statistics.toString();
     }
 
@@ -189,4 +192,13 @@ public class ServerMessagesUtil {
             value = gamesStarted.get();
         } while (!gamesStarted.compareAndSet(value, value + 1));
     }
+
+    public void incTournamentsStarted() {
+        int value;
+        do {
+            value = tournamentsStarted.get();
+        } while (!tournamentsStarted.compareAndSet(value, value + 1));
+    }
+
+
 }

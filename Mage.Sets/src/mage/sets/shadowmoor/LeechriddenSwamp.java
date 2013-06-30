@@ -69,6 +69,7 @@ public class LeechriddenSwamp extends CardImpl<LeechriddenSwamp> {
 
         // {B}, {tap}: Each opponent loses 1 life. Activate this ability only if you control two or more black permanents.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LeechriddenSwampLoseLifeEffect(), new ManaCostsImpl("{B}"));
+        ability.addCost(new TapSourceCost());
         ability.addCost(new ControlTwoOrMoreBlackPermanentsCost());
         this.addAbility(ability);
     }

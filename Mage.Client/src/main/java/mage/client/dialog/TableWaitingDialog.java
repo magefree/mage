@@ -49,6 +49,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
+import mage.client.util.AudioManager;
 
 /**
  *
@@ -392,6 +393,7 @@ class UpdateSeatsTask extends SwingWorker<Void, TableView> {
                 if (count > 0) {
                     if (current > count) {
                         MageTray.getInstance().displayMessage("New player joined your game.");
+                        AudioManager.playPlayerJoinedTable();
                     } else {
                         MageTray.getInstance().displayMessage("A player left your game.");
                     }

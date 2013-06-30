@@ -33,6 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 import mage.players.Player;
@@ -49,7 +50,7 @@ public class Catalog extends CardImpl<Catalog> {
         this.color.setBlue(true);
 
         // Draw two cards, then discard a card.
-        this.getSpellAbility().addEffect(new CatalogEffect());
+        this.getSpellAbility().addEffect(new DrawDiscardControllerEffect(2,1));
     }
 
     public Catalog(final Catalog card) {
@@ -59,33 +60,5 @@ public class Catalog extends CardImpl<Catalog> {
     @Override
     public Catalog copy() {
         return new Catalog(this);
-    }
-}
-
-class CatalogEffect extends OneShotEffect<CatalogEffect> {
-
-    public CatalogEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Draw two cards, then discard a card";
-    }
-
-    public CatalogEffect(final CatalogEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CatalogEffect copy() {
-        return new CatalogEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            player.drawCards(2, game);
-            player.discard(1, source, game);
-            return true;
-        }
-        return false;
     }
 }

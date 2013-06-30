@@ -98,6 +98,15 @@ public class ImageManagerImpl implements ImageManager {
     }
 
     @Override
+    public BufferedImage getTokenIconImage() {
+        if (imageTokenIcon == null) {
+            Image image = getImageFromResourceTransparent("/card/token.png", Color.WHITE, new Rectangle(20, 20));
+            imageTokenIcon = BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB);
+        }
+        return imageTokenIcon;
+    }
+
+    @Override
     public Image getDlgCancelButtonImage() {
         if (imageDlgCancelButton == null) {
             imageDlgCancelButton = getBufferedImageFromResource("/dlg/dlg.cancel.png");
@@ -215,6 +224,8 @@ public class ImageManagerImpl implements ImageManager {
     private static BufferedImage imageSickness;
     private static BufferedImage imageDay;
     private static BufferedImage imageNight;
+
+    private static BufferedImage imageTokenIcon;
 
     private static BufferedImage imageDlgAcceptButton;
     private static BufferedImage imageDlgActiveAcceptButton;

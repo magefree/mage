@@ -29,6 +29,7 @@
 package mage.util;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 import mage.Mana;
 import mage.abilities.Ability;
@@ -43,6 +44,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.game.Game;
 import mage.game.permanent.token.Token;
 import mage.util.functions.CopyFunction;
 import mage.util.functions.CopyTokenFunction;
@@ -364,5 +366,26 @@ public class CardUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * Creates and saves a (card + zoneChangeCounter) specific exileId.
+     *
+     *
+     * @param game
+     * @param source - source ability
+     * @return - the specific UUID
+     */
+    public static UUID getCardExileZoneId(Game game, Ability source) {
+        UUID exileId = null;
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            exileId = (UUID) game.getState().getValue(new StringBuilder("SourceExileZone").append(source.getSourceId()).append(card.getZoneChangeCounter()).toString());
+            if (exileId == null) {
+                exileId = UUID.randomUUID();
+                game.getState().setValue(new StringBuilder("SourceExileZone").append(source.getSourceId()).append(card.getZoneChangeCounter()).toString(), exileId);
+            }
+        }
+        return exileId;
     }
 }

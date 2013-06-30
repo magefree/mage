@@ -49,7 +49,7 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
 /**
  *
  * @param effect effect that happens when the permanent enters the battlefield
- * @param showRule show a rule for this ability
+ * @param showRule show the rule for this ability
  */
     public EntersBattlefieldAbility(Effect effect, Boolean showRule) {
         this(effect, null, showRule, null, null);
