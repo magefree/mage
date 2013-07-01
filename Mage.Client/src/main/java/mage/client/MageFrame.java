@@ -25,19 +25,13 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * MageFrame.java
- *
- * Created on 15-Dec-2009, 9:11:37 PM
- */
-
 package mage.client;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.client.cards.BigCard;
@@ -91,8 +85,10 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -471,7 +467,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void checkForNewImages() {
         long beforeCall = System.currentTimeMillis();
-        List<CardInfo> cards = CardRepository.instance.getAllCards();
+        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
         logger.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
 
         beforeCall = System.currentTimeMillis();
@@ -484,7 +480,7 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        List<CardInfo> cards = CardRepository.instance.getAllCards();
+        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
 
         DownloadPictures.startDownload(null, cards);
     }

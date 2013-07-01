@@ -244,15 +244,4 @@ public enum CardRepository {
         }
         return new ArrayList<CardInfo>();
     }
-
-    public List<CardInfo> getAllCards() {
-        try {
-            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
-            queryBuilder.where().eq("nightCard", false).and().eq("splitCardHalf", false);
-
-            return cardDao.query(queryBuilder.prepare());
-        } catch (SQLException ex) {
-        }
-        return new ArrayList<CardInfo>();
-    }
 }
