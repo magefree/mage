@@ -30,6 +30,7 @@ package mage.game.tournament;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.constants.TournamentPlayerState;
 import mage.players.Player;
 
 /**
@@ -40,6 +41,8 @@ public class TournamentPlayer {
 
     protected int points;
     protected String playerType;
+    protected TournamentPlayerState state;
+    protected String stateInfo = "";
     protected Player player;
     protected Deck deck;
     protected String results = "";
@@ -50,6 +53,7 @@ public class TournamentPlayer {
     public TournamentPlayer(Player player, String playerType) {
         this.player = player;
         this.playerType = playerType;
+        this.state = TournamentPlayerState.JOINED;
     }
 
     public Player getPlayer() {
@@ -77,6 +81,7 @@ public class TournamentPlayer {
     }
 
     public void setEliminated() {
+        this.setState(TournamentPlayerState.ELIMINATED);
         this.eliminated = true;
     }
 
@@ -89,12 +94,14 @@ public class TournamentPlayer {
     }
 
     public void setConstructing() {
+        this.setState(TournamentPlayerState.CONSTRUCTING);
         this.doneConstructing = false;
     }
 
     public void submitDeck(Deck deck) {
         this.deck = deck;
         this.doneConstructing = true;
+        this.setState(TournamentPlayerState.WAITING);
     }
 
     public void updateDeck(Deck deck) {
@@ -126,4 +133,21 @@ public class TournamentPlayer {
     public void setResults(String results) {
         this.results = results;
     }
+
+    public TournamentPlayerState getState() {
+        return state;
+    }
+
+    public void setState(TournamentPlayerState state) {
+        this.state = state;
+    }
+
+    public String getStateInfo() {
+        return stateInfo;
+    }
+
+    public void setStateInfo(String stateInfo) {
+        this.stateInfo = stateInfo;
+    }
 }
+

@@ -39,17 +39,27 @@ public class TournamentPlayerView implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String name;
+    private String state;
     private String results;
     private int points;
 
     TournamentPlayerView(TournamentPlayer player) {
         this.name = player.getPlayer().getName();
+        StringBuilder sb  = new StringBuilder(player.getState().toString());
+        if (!player.getStateInfo().isEmpty()) {
+            sb.append(" (").append(player.getStateInfo()).append(")");
+        }
+        this.state = sb.toString();
         this.points = player.getPoints();
         this.results = player.getResults();
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public int getPoints() {

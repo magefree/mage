@@ -28,6 +28,7 @@
 
 package mage.tournament;
 
+import mage.constants.TournamentPlayerState;
 import mage.game.draft.BoosterDraft;
 import mage.game.draft.Draft;
 import mage.game.draft.DraftOptions;
@@ -57,6 +58,7 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
         Draft draft = new BoosterDraft((DraftOptions) options.getLimitedOptions(), getSets());
         for (TournamentPlayer player: players.values()) {
             draft.addPlayer(player.getPlayer());
+            player.setState(TournamentPlayerState.DRAFTING);
         }
         tableEventSource.fireTableEvent(EventType.START_DRAFT, null, draft);
     }

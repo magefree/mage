@@ -363,7 +363,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 }
 
 class TournamentPlayersTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Player Name", "Points", "Results"};
+    private String[] columnNames = new String[]{"Player Name", "State",  "Points", "Results"};
     private TournamentPlayerView[] players = new TournamentPlayerView[0];
 
     public void loadData(TournamentView tournament) {
@@ -387,8 +387,10 @@ class TournamentPlayersTableModel extends AbstractTableModel {
             case 0:
                 return players[arg0].getName();
             case 1:
-                return Integer.toString(players[arg0].getPoints());
+                return players[arg0].getState();
             case 2:
+                return Integer.toString(players[arg0].getPoints());
+            case 3:
                 return players[arg0].getResults();
         }
         return "";

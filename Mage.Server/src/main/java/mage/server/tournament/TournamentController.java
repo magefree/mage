@@ -33,6 +33,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import mage.MageException;
 import mage.cards.decks.Deck;
+import mage.constants.TournamentPlayerState;
 import mage.game.GameException;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -201,6 +202,8 @@ public class TournamentController {
             tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
             tableManager.startMatch(null, table.getId());
             pair.setMatch(tableManager.getMatch(table.getId()));
+            player1.setState(TournamentPlayerState.DUELING);
+            player2.setState(TournamentPlayerState.DUELING);
         } catch (GameException ex) {
             logger.fatal("TournamentController startMatch error", ex);
         }
@@ -223,16 +226,18 @@ public class TournamentController {
             TournamentSession tournamentSession = tournamentSessions.get(playerId);
             tournamentSession.construct(timeout);
             UserManager.getInstance().getUser(getPlayerSessionId(playerId)).addConstructing(playerId, tournamentSession);
+            TournamentPlayer player = tournament.getPlayer(playerId);
+            player.setState(TournamentPlayerState.CONSTRUCTING);
         }
     }
 
     public void submitDeck(UUID playerId, Deck deck) {
         if (tournamentSessions.containsKey(playerId)) {
-            tournamentSessions.get(playerId).submitDeck(deck);
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null) {
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted the deck", MessageColor.BLACK);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK);
             }
+            tournamentSessions.get(playerId).submitDeck(deck);
         }
     }
 
