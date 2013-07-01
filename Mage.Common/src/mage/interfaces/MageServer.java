@@ -30,6 +30,7 @@ package mage.interfaces;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.ExpansionInfo;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -49,6 +50,9 @@ public interface MageServer {
     boolean registerClient(String userName, String sessionId, MageVersion version) throws MageException;
     boolean registerAdmin(String password, String sessionId, MageVersion version) throws MageException;
     void deregisterClient(String sessionId) throws MageException;
+
+    // update methods
+    List<ExpansionInfo> getMissingExpansionData(List<String> codes);
 
     // user methods
     boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;

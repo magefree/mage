@@ -30,6 +30,8 @@ package mage.server;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
@@ -58,9 +60,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-
-
-//import mage.interfaces.Server;
 
 /**
  *
@@ -913,5 +912,16 @@ public class MageServerImpl implements MageServer {
             LogServiceImpl.instance.log(LogKeys.KEY_NOT_VALID_SESSION, actionName, sessionId);
         }
         return action.negativeResult();
+    }
+
+    @Override
+    public List<ExpansionInfo> getMissingExpansionData(List<String> codes) {
+        List<ExpansionInfo> result = new ArrayList<ExpansionInfo>();
+        for (ExpansionInfo expansionInfo : ExpansionRepository.instance.getAll()) {
+            if (!codes.contains(expansionInfo.getCode())) {
+                result .add(expansionInfo);
+            }
+        }
+        return result;
     }
 }
