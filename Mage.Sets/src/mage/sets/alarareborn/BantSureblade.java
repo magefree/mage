@@ -74,11 +74,11 @@ public class BantSureblade extends CardImpl<BantSureblade> {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter),
-                "As long as you control another multicolored permanent, Bant Sureblade gets +1/+1 and has first strike"));
+                "As long as you control another multicolored permanent, {this} gets +1/+1"));
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(FirstStrikeAbility.getInstance()),
                 new ControlsPermanentCondition(filter),
-                null));
+                "As long as you control another multicolored permanent, {this} has first strike"));
         this.addAbility(ability);
         this.addAbility(ability2);
     }

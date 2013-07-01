@@ -74,11 +74,11 @@ public class GrixisGrimblade extends CardImpl<GrixisGrimblade> {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter),
-                "As long as you control another multicolored permanent, Grixis Grimblade gets +1/+1 and has deathtouch"));
+                "As long as you control another multicolored permanent, {this} gets +1/+1"));
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(DeathtouchAbility.getInstance()),
                 new ControlsPermanentCondition(filter),
-                null));
+                "As long as you control another multicolored permanent, {this} has deathtouch"));
         this.addAbility(ability);
         this.addAbility(ability2);
         
