@@ -29,14 +29,13 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -66,6 +65,7 @@ public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
     public AdventOfTheWurm copy() {
         return new AdventOfTheWurm(this);
     }
+    
     private class WurmToken extends Token {
 
         private WurmToken() {
@@ -75,7 +75,6 @@ public class AdventOfTheWurm extends CardImpl<AdventOfTheWurm> {
             subtype.add("Wurm");
             power = new MageInt(5);
             toughness = new MageInt(5);
-            expansionSetCode = "RTR";
 
             addAbility(TrampleAbility.getInstance());
         }
