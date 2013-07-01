@@ -35,7 +35,6 @@ import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
@@ -71,18 +70,12 @@ public class SessionImpl implements Session {
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
 
-    private Action embeddedMageServerAction;
-
     private static boolean debugMode = false;
-    private static boolean standalone = true;
 
     private boolean canceled = false;
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
-        if (System.getProperty("skip.standalone") != null) {
-            standalone = false;
-        }
     }
 
     public SessionImpl(MageClient client) {
@@ -107,11 +100,6 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean connect() {
-
-        /*if (standalone && connection.getHost().equals("localhost")) {
-            runEmbeddedMageServer();
-        }*/
-
         sessionState = SessionState.CONNECTING;
         try {
             System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -203,16 +191,6 @@ public class SessionImpl implements Session {
             }
         }
         return false;
-    }
-
-    private void runEmbeddedMageServer() {
-        if (embeddedMageServerAction != null) {
-            try {
-                embeddedMageServerAction.execute();
-            } catch (MageException e) {
-                logger.error(e);
-            }
-        }
     }
 
     private void handleCannotConnectException(CannotConnectException ex) {
@@ -1178,11 +1156,6 @@ public class SessionImpl implements Session {
             handleThrowable(t);
         }
         return false;
-    }
-
-    @Override
-    public void setEmbeddedMageServerAction(Action embeddedMageServerAction) {
-        this.embeddedMageServerAction = embeddedMageServerAction;
     }
 
     @Override
