@@ -53,6 +53,12 @@ public class GainLifeEffect extends OneShotEffect<GainLifeEffect> {
         this.life = life;
         setText();
     }
+    
+    public GainLifeEffect(DynamicValue life, String rule) {
+        super(Outcome.GainLife);
+        this.life = life;
+        staticText = rule;
+    }
 
     public GainLifeEffect(final GainLifeEffect effect) {
         super(effect);
