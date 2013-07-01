@@ -70,9 +70,11 @@ public class AffinityForArtifactsAbility extends SimpleStaticAbility implements 
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        int count = game.getBattlefield().getAllActivePermanents(filter, ability.getControllerId(), game).size();
-        if (count > 0) {
-            CardUtil.adjustCost((SpellAbility)ability, count);
+        if (ability instanceof SpellAbility) {
+            int count = game.getBattlefield().getAllActivePermanents(filter, ability.getControllerId(), game).size();
+            if (count > 0) {
+                CardUtil.adjustCost((SpellAbility)ability, count);
+            }
         }
     }
 }
