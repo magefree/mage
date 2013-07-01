@@ -33,17 +33,10 @@
  */
 package mage.client.dialog;
 
-import mage.client.MageFrame;
-import mage.client.util.Config;
-import mage.client.util.ImageHelper;
-import mage.client.util.gui.BufferedImageBuilder;
-import mage.remote.Connection;
-import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.filechooser.FileFilter;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -54,8 +47,25 @@ import java.util.Map;
 import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-
-import static mage.client.util.PhaseManager.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.filechooser.FileFilter;
+import mage.client.MageFrame;
+import mage.client.util.Config;
+import mage.client.util.ImageHelper;
+import mage.client.util.PhaseManager;
+import mage.client.util.gui.BufferedImageBuilder;
+import mage.remote.Connection;
+import org.apache.log4j.Logger;
 
 /**
  * Preferences dialog.
@@ -80,8 +90,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_BATTLEFIELD_IMAGE_DEFAULT = "battlefieldImageDefault"; 
 
     public static final String KEY_SOUNDS_ON = "soundsOn";
-    public static final String KEY_MUSICS_ON = "MusicsOn";
-    public static final String KEY_MUSICS_PATH = "MusicPath";
+    public static final String KEY_SOUNDS_MATCH_MUSIC_ON = "soundsMatchMusicOn";
+    public static final String KEY_SOUNDS_MATCH_MUSIC_PATH = "soundsMatchMusicPath";
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
@@ -124,27 +134,27 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static final transient Logger log = Logger.getLogger(PreferencesDialog.class);
 
     public static final int DEFAULT_AVATAR_ID = 51;
-    private static int selectedId = DEFAULT_AVATAR_ID;
-    private static Set<Integer> availableAvatars = new HashSet<Integer>();
+    private static int selectedAvatarId = DEFAULT_AVATAR_ID;
+    private static final Set<Integer> available_avatars = new HashSet<Integer>();
     private static Map<Integer, JPanel> panels = new HashMap<Integer, JPanel>();
 
     private static final Border GREEN_BORDER = BorderFactory.createLineBorder(Color.GREEN, 3);
     private static final Border BLACK_BORDER = BorderFactory.createLineBorder(Color.BLACK, 3);
 
     static {
-        availableAvatars.add(51);
-        availableAvatars.add(13);
-        availableAvatars.add(9);
-        availableAvatars.add(53);
-        availableAvatars.add(10);
-        availableAvatars.add(39);
-        availableAvatars.add(19);
-        availableAvatars.add(30);
-        availableAvatars.add(25);
+        available_avatars.add(51);
+        available_avatars.add(13);
+        available_avatars.add(9);
+        available_avatars.add(53);
+        available_avatars.add(10);
+        available_avatars.add(39);
+        available_avatars.add(19);
+        available_avatars.add(30);
+        available_avatars.add(25);
 
-        availableAvatars.add(22);
-        availableAvatars.add(77);
-        availableAvatars.add(62);
+        available_avatars.add(22);
+        available_avatars.add(77);
+        available_avatars.add(62);
     }
 
     private final JFileChooser fc = new JFileChooser();
@@ -164,7 +174,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         @Override
         public boolean accept(File f) {
             String filename = f.getName();
-            if(f.isDirectory()) return true;
+            if(f.isDirectory()){
+                return true;
+            }
             if(filename != null){
                 if(filename.endsWith(".jpg") || filename.endsWith(".jpeg") ||
                         filename.endsWith(".png") || filename.endsWith(".bmp")){
@@ -186,7 +198,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public PreferencesDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        imageFolderPath.setEditable(false);
+        txtImageFolderPath.setEditable(false);
         cbProxyType.setModel(new DefaultComboBoxModel(Connection.ProxyType.values()));
         addAvatars();
     }
@@ -234,28 +246,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
         checkBoxEndTurnOthers = new javax.swing.JCheckBox();
         tabImages = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        useDefaultImageFolder = new javax.swing.JCheckBox();
-        imageFolderPath = new javax.swing.JTextField();
-        browseButton = new javax.swing.JButton();
-        checkForNewImages = new javax.swing.JCheckBox();
-        saveToZipFiles = new javax.swing.JCheckBox();
+        cbUseDefaultImageFolder = new javax.swing.JCheckBox();
+        txtImageFolderPath = new javax.swing.JTextField();
+        btnBrowseImageLocation = new javax.swing.JButton();
+        cbCheckForNewImages = new javax.swing.JCheckBox();
+        cbSaveToZipFiles = new javax.swing.JCheckBox();
         jPanel23 = new javax.swing.JPanel();
-        useDefaultBackground = new javax.swing.JCheckBox();
-        BackgroundImagePath = new javax.swing.JTextField();
-        BackgroundBrowseButton = new javax.swing.JButton();
-        BattlefieldImagePath = new javax.swing.JTextField();
-        BattlefieldBrowseButton = new javax.swing.JButton();
-        useDefaultBattleImage = new javax.swing.JCheckBox();
-        useRandomBattleImage = new javax.swing.JCheckBox();
+        cbUseDefaultBackground = new javax.swing.JCheckBox();
+        txtBackgroundImagePath = new javax.swing.JTextField();
+        btnBrowseBackgroundImage = new javax.swing.JButton();
+        txtBattlefieldImagePath = new javax.swing.JTextField();
+        btnBrowseBattlefieldImage = new javax.swing.JButton();
+        cbUseDefaultBattleImage = new javax.swing.JCheckBox();
+        cbUseRandomBattleImage = new javax.swing.JCheckBox();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         tabSounds = new javax.swing.JPanel();
         sounds_clips = new javax.swing.JPanel();
-        jEnableSounds = new javax.swing.JCheckBox();
+        cbEnableSounds = new javax.swing.JCheckBox();
         sounds_backgroundMusic = new javax.swing.JPanel();
-        jEnableMusics = new javax.swing.JCheckBox();
-        BattlefieldBGMButton = new javax.swing.JButton();
-        BattlefieldIBGMPath = new javax.swing.JTextField();
+        cbEnableBattlefieldBGM = new javax.swing.JCheckBox();
+        btnBattlefieldBGMBrowse = new javax.swing.JButton();
+        txtBattlefieldIBGMPath = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         tabConnection = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
@@ -321,7 +333,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(main_handLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(showToolTipsInAnyZone)
                     .addComponent(displayBigCardsInHand))
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         main_handLayout.setVerticalGroup(
             main_handLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -378,7 +390,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(main_hand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(main_battlefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Main", tabMain);
@@ -451,7 +463,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(tabPhasesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
         tabPhasesLayout.setVerticalGroup(
             tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -506,38 +518,38 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnYou)
                     .addComponent(jLabel8)
                     .addComponent(checkBoxEndTurnOthers))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images location:"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card images:"));
 
-        useDefaultImageFolder.setText("use default");
-        useDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
+        cbUseDefaultImageFolder.setText("Use default location to save images");
+        cbUseDefaultImageFolder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useDefaultImageFolderActionPerformed(evt);
+                cbUseDefaultImageFolderActionPerformed(evt);
             }
         });
 
-        browseButton.setText("Browse...");
-        browseButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBrowseImageLocation.setText("Browse...");
+        btnBrowseImageLocation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                browseButtonActionPerformed(evt);
+                btnBrowseImageLocationActionPerformed(evt);
             }
         });
 
-        checkForNewImages.setText("check for new images on startup");
-        checkForNewImages.addActionListener(new java.awt.event.ActionListener() {
+        cbCheckForNewImages.setText("Check for new images on startup");
+        cbCheckForNewImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                checkForNewImagesActionPerformed(evt);
+                cbCheckForNewImagesActionPerformed(evt);
             }
         });
 
-        saveToZipFiles.setText("store in zip files");
-        saveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
+        cbSaveToZipFiles.setText("Store images in zip files");
+        cbSaveToZipFiles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveToZipFilesActionPerformed(evt);
+                cbSaveToZipFilesActionPerformed(evt);
             }
         });
 
@@ -550,77 +562,77 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(useDefaultImageFolder)
-                            .addComponent(checkForNewImages)
-                            .addComponent(saveToZipFiles))
-                        .addContainerGap(242, Short.MAX_VALUE))
+                            .addComponent(cbUseDefaultImageFolder)
+                            .addComponent(cbCheckForNewImages)
+                            .addComponent(cbSaveToZipFiles))
+                        .addContainerGap(268, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(imageFolderPath)
+                        .addComponent(txtImageFolderPath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(browseButton))))
+                        .addComponent(btnBrowseImageLocation))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(useDefaultImageFolder)
+                .addComponent(cbUseDefaultImageFolder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(imageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(browseButton))
+                    .addComponent(txtImageFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBrowseImageLocation))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(checkForNewImages)
+                .addComponent(cbCheckForNewImages)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveToZipFiles)
+                .addComponent(cbSaveToZipFiles)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background images setting:"));
 
-        useDefaultBackground.setText("use default image");
-        useDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
+        cbUseDefaultBackground.setText("Use default image");
+        cbUseDefaultBackground.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useDefaultBackgroundActionPerformed(evt);
+                cbUseDefaultBackgroundActionPerformed(evt);
             }
         });
 
-        BackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
+        txtBackgroundImagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackgroundImagePathActionPerformed(evt);
+                txtBackgroundImagePathActionPerformed(evt);
             }
         });
 
-        BackgroundBrowseButton.setText("Browse...");
-        BackgroundBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBrowseBackgroundImage.setText("Browse...");
+        btnBrowseBackgroundImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackgroundBrowseButtonActionPerformed(evt);
+                btnBrowseBackgroundImageActionPerformed(evt);
             }
         });
 
-        BattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
+        txtBattlefieldImagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BattlefieldImagePathActionPerformed(evt);
+                txtBattlefieldImagePathActionPerformed(evt);
             }
         });
 
-        BattlefieldBrowseButton.setText("Browse...");
-        BattlefieldBrowseButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBrowseBattlefieldImage.setText("Browse...");
+        btnBrowseBattlefieldImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BattlefieldBrowseButtonActionPerformed(evt);
+                btnBrowseBattlefieldImageActionPerformed(evt);
             }
         });
 
-        useDefaultBattleImage.setText("default battlefield image");
-        useDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
+        cbUseDefaultBattleImage.setText("Use default battlefield image");
+        cbUseDefaultBattleImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useDefaultBattleImageActionPerformed(evt);
+                cbUseDefaultBattleImageActionPerformed(evt);
             }
         });
 
-        useRandomBattleImage.setText("random battlefield image");
-        useRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
+        cbUseRandomBattleImage.setText("Select random battlefield image");
+        cbUseRandomBattleImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useRandomBattleImageActionPerformed(evt);
+                cbUseRandomBattleImageActionPerformed(evt);
             }
         });
 
@@ -636,44 +648,44 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(useDefaultBackground)
+                        .addComponent(cbUseDefaultBackground)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addGap(18, 18, 18)
-                        .addComponent(BattlefieldImagePath)
+                        .addComponent(txtBattlefieldImagePath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BattlefieldBrowseButton))
+                        .addComponent(btnBrowseBattlefieldImage))
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(useDefaultBattleImage)
-                            .addComponent(useRandomBattleImage))
+                            .addComponent(cbUseDefaultBattleImage)
+                            .addComponent(cbUseRandomBattleImage))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BackgroundImagePath)
+                        .addComponent(txtBackgroundImagePath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BackgroundBrowseButton))))
+                        .addComponent(btnBrowseBackgroundImage))))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(useDefaultBackground)
+                .addComponent(cbUseDefaultBackground)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BackgroundBrowseButton)
+                    .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBrowseBackgroundImage)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(useDefaultBattleImage)
+                .addComponent(cbUseDefaultBattleImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(useRandomBattleImage)
+                .addComponent(cbUseRandomBattleImage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BattlefieldBrowseButton)
+                    .addComponent(txtBattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBrowseBattlefieldImage)
                     .addComponent(jLabel15)))
         );
 
@@ -695,17 +707,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
 
         sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Clips"));
 
-        jEnableSounds.setLabel("Enable");
-        jEnableSounds.addActionListener(new java.awt.event.ActionListener() {
+        cbEnableSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.)");
+        cbEnableSounds.setLabel("Enable");
+        cbEnableSounds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEnableSoundsActionPerformed(evt);
+                cbEnableSoundsActionPerformed(evt);
             }
         });
 
@@ -715,35 +728,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
             sounds_clipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sounds_clipsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jEnableSounds)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cbEnableSounds)
+                .addContainerGap(410, Short.MAX_VALUE))
         );
         sounds_clipsLayout.setVerticalGroup(
             sounds_clipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jEnableSounds)
+            .addComponent(cbEnableSounds)
         );
 
-        sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Background music during matches"));
+        sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
 
-        jEnableMusics.setToolTipText("");
-        jEnableMusics.setActionCommand("Play automatically during matches");
-        jEnableMusics.setLabel("Enable");
-        jEnableMusics.addActionListener(new java.awt.event.ActionListener() {
+        cbEnableBattlefieldBGM.setText("Play music during match");
+        cbEnableBattlefieldBGM.setToolTipText("During your matches music will be played from the seleced folder.");
+        cbEnableBattlefieldBGM.setActionCommand("Play automatically during matches");
+        cbEnableBattlefieldBGM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEnableMusicsActionPerformed(evt);
+                cbEnableBattlefieldBGMActionPerformed(evt);
             }
         });
 
-        BattlefieldBGMButton.setText("Browse...");
-        BattlefieldBGMButton.addActionListener(new java.awt.event.ActionListener() {
+        btnBattlefieldBGMBrowse.setText("Browse...");
+        btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BattlefieldBGMButtonActionPerformed(evt);
+                btnBattlefieldBGMBrowseActionPerformed(evt);
             }
         });
 
-        BattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
+        txtBattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BattlefieldIBGMPathActionPerformed(evt);
+                txtBattlefieldIBGMPathActionPerformed(evt);
             }
         });
 
@@ -760,25 +773,23 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                        .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BattlefieldBGMButton))
+                        .addComponent(btnBattlefieldBGMBrowse))
                     .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                        .addComponent(jEnableMusics)
+                        .addComponent(cbEnableBattlefieldBGM)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         sounds_backgroundMusicLayout.setVerticalGroup(
             sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                .addComponent(jEnableMusics)
+                .addComponent(cbEnableBattlefieldBGM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BattlefieldIBGMPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BattlefieldBGMButton)
+                    .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBattlefieldBGMBrowse)
                     .addComponent(jLabel16)))
         );
-
-        jLabel16.getAccessibleContext().setAccessibleName("Playing from folder:");
 
         javax.swing.GroupLayout tabSoundsLayout = new javax.swing.GroupLayout(tabSounds);
         tabSounds.setLayout(tabSoundsLayout);
@@ -798,10 +809,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
-        sounds_clips.getAccessibleContext().setAccessibleName("Clips");
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
 
         tabsPanel.addTab("Sounds", tabSounds);
@@ -869,7 +879,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -939,7 +949,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1145,7 +1155,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1188,7 +1198,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1242,36 +1252,37 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
-        save(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-        save(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-        save(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-        save(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-        save(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-        save(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-        save(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
+        save(prefs, dialog.checkBoxUpkeepYou, PhaseManager.UPKEEP_YOU);
+        save(prefs, dialog.checkBoxDrawYou, PhaseManager.DRAW_YOU);
+        save(prefs, dialog.checkBoxMainYou, PhaseManager.MAIN_YOU);
+        save(prefs, dialog.checkBoxBeforeCYou, PhaseManager.BEFORE_COMBAT_YOU);
+        save(prefs, dialog.checkBoxEndOfCYou, PhaseManager.END_OF_COMBAT_YOU);
+        save(prefs, dialog.checkBoxMain2You, PhaseManager.MAIN_2_YOU);
+        save(prefs, dialog.checkBoxEndTurnYou, PhaseManager.END_OF_TURN_YOU);
 
-        save(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-        save(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-        save(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-        save(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-        save(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-        save(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+        save(prefs, dialog.checkBoxUpkeepOthers, PhaseManager.UPKEEP_OTHERS);
+        save(prefs, dialog.checkBoxDrawOthers, PhaseManager.DRAW_OTHERS);
+        save(prefs, dialog.checkBoxMainOthers, PhaseManager.MAIN_OTHERS);
+        save(prefs, dialog.checkBoxBeforeCOthers, PhaseManager.BEFORE_COMBAT_OTHERS);
+        save(prefs, dialog.checkBoxEndOfCOthers, PhaseManager.END_OF_COMBAT_OTHERS);
+        save(prefs, dialog.checkBoxMain2Others, PhaseManager.MAIN_2_OTHERS);
+        save(prefs, dialog.checkBoxEndTurnOthers, PhaseManager.END_OF_TURN_OTHERS);
 
         // images
-        save(prefs, dialog.useDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbUseDefaultImageFolder, KEY_CARD_IMAGES_USE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
         saveImagesPath(prefs);
-        save(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true", "false", UPDATE_CACHE_POLICY);
         
-        save(prefs, dialog.useDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.useDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.useRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbUseDefaultBackground, KEY_BACKGROUND_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbUseDefaultBattleImage, KEY_BATTLEFIELD_IMAGE_DEFAULT, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbUseRandomBattleImage, KEY_BATTLEFIELD_IMAGE_RANDOM, "true", "false", UPDATE_CACHE_POLICY);
 
         // sounds
-        save(prefs, dialog.jEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
-        save(prefs, dialog.jEnableMusics, KEY_MUSICS_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableSounds, KEY_SOUNDS_ON, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbEnableBattlefieldBGM, KEY_SOUNDS_MATCH_MUSIC_ON, "true", "false", UPDATE_CACHE_POLICY);
         saveSoundPath(prefs);
+        
         // connection
         save(prefs, dialog.cbProxyType, KEY_PROXY_TYPE);
         save(prefs, dialog.txtProxyServer, KEY_PROXY_ADDRESS);
@@ -1284,9 +1295,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
 
         // Avatar
-        if (availableAvatars.contains(selectedId)) {
-            prefs.put(KEY_AVATAR, String.valueOf(selectedId));
-            updateCache(KEY_AVATAR, String.valueOf(selectedId));
+        if (available_avatars.contains(selectedAvatarId)) {
+            prefs.put(KEY_AVATAR, String.valueOf(selectedAvatarId));
+            updateCache(KEY_AVATAR, String.valueOf(selectedAvatarId));
         }
 
         try {
@@ -1309,35 +1320,35 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
     }//GEN-LAST:event_displayBigCardsInHandActionPerformed
 
-    private void useDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useDefaultImageFolderActionPerformed
-        if (useDefaultImageFolder.isSelected()) {
+    private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
+        if (cbUseDefaultImageFolder.isSelected()) {
             useDefaultPath();
         } else {
             useConfigurablePath();
         }
-    }//GEN-LAST:event_useDefaultImageFolderActionPerformed
+    }//GEN-LAST:event_cbUseDefaultImageFolderActionPerformed
 
     private void useDefaultPath() {
-        imageFolderPath.setText("./plugins/images/");
-        imageFolderPath.setEnabled(false);
-        browseButton.setEnabled(false);
+        txtImageFolderPath.setText("./plugins/images/");
+        txtImageFolderPath.setEnabled(false);
+        btnBrowseImageLocation.setEnabled(false);
     }
 
     private void useConfigurablePath() {
         String path = cache.get(KEY_CARD_IMAGES_PATH);
-        dialog.imageFolderPath.setText(path);
-        imageFolderPath.setEnabled(true);
-        browseButton.setEnabled(true);
+        dialog.txtImageFolderPath.setText(path);
+        txtImageFolderPath.setEnabled(true);
+        btnBrowseImageLocation.setEnabled(true);
     }
 
-    private void browseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseButtonActionPerformed
+    private void btnBrowseImageLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseImageLocationActionPerformed
         int returnVal = fc.showOpenDialog(PreferencesDialog.this);
         
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            imageFolderPath.setText(file.getAbsolutePath());
+            txtImageFolderPath.setText(file.getAbsolutePath());
         }
-    }//GEN-LAST:event_browseButtonActionPerformed
+    }//GEN-LAST:event_btnBrowseImageLocationActionPerformed
 
     private void cbProxyTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProxyTypeActionPerformed
         this.showProxySettings();
@@ -1355,55 +1366,51 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
 
-    private void saveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveToZipFilesActionPerformed
+    private void cbSaveToZipFilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSaveToZipFilesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_saveToZipFilesActionPerformed
+    }//GEN-LAST:event_cbSaveToZipFilesActionPerformed
 
-    private void checkForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkForNewImagesActionPerformed
+    private void cbCheckForNewImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCheckForNewImagesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_checkForNewImagesActionPerformed
+    }//GEN-LAST:event_cbCheckForNewImagesActionPerformed
 
-    private void jEnableSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableSoundsActionPerformed
+    private void cbEnableSoundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableSoundsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jEnableSoundsActionPerformed
+    }//GEN-LAST:event_cbEnableSoundsActionPerformed
 
-    private void jEnableMusicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnableMusicsActionPerformed
-        // TODO add your handling code here:
-        if(jEnableMusics.isSelected()){
-            String path = cache.get(KEY_MUSICS_PATH);
-            BattlefieldIBGMPath.setText(path);
-            BattlefieldIBGMPath.setEnabled(true);
-            BattlefieldBGMButton.setEnabled(true);
+    private void cbEnableBattlefieldBGMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnableBattlefieldBGMActionPerformed
+        if(cbEnableBattlefieldBGM.isSelected()){
+            txtBattlefieldIBGMPath.setEnabled(true);
+            btnBattlefieldBGMBrowse.setEnabled(true);
         }else{
-            BattlefieldIBGMPath.setEnabled(false);
-            BattlefieldBGMButton.setEnabled(false);
-            BattlefieldIBGMPath.setText("");
+            txtBattlefieldIBGMPath.setEnabled(false);
+            btnBattlefieldBGMBrowse.setEnabled(false);
         }
-    }//GEN-LAST:event_jEnableMusicsActionPerformed
+    }//GEN-LAST:event_cbEnableBattlefieldBGMActionPerformed
     
-    private void useDefaultBackgroundActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        if(useDefaultBackground.isSelected()){
-            useDefualtBackgroundImage();
+    private void cbUseDefaultBackgroundActionPerformed(java.awt.event.ActionEvent evt) {
+        if(cbUseDefaultBackground.isSelected()){
+            useDefaultBackgroundImage();
         }else{
             useSelectBackgroundImage();
         }
     }                                                    
 
-    private void useDefualtBackgroundImage(){
-        BackgroundImagePath.setEnabled(false);
-        BackgroundBrowseButton.setEnabled(false);
-        BackgroundImagePath.setText("");
+    private void useDefaultBackgroundImage(){
+        txtBackgroundImagePath.setEnabled(false);
+        btnBrowseBackgroundImage.setEnabled(false);
+        txtBackgroundImagePath.setText("");
     }
     
     private void useSelectBackgroundImage(){
         String path = cache.get(KEY_BACKGROUND_IMAGE);
-        dialog.BackgroundImagePath.setText(path);
-        BackgroundImagePath.setEnabled(true);
-        BackgroundBrowseButton.setEnabled(true);
+        dialog.txtBackgroundImagePath.setText(path);
+        txtBackgroundImagePath.setEnabled(true);
+        btnBrowseBackgroundImage.setEnabled(true);
     }
     
-    private void useDefaultBattleImageActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        if(useDefaultBattleImage.isSelected()){
+    private void cbUseDefaultBattleImageActionPerformed(java.awt.event.ActionEvent evt) {
+        if(cbUseDefaultBattleImage.isSelected()){
             useDefaultBattlefield();
         }else{
             useSelectedOrRandom();
@@ -1411,30 +1418,30 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }                                                     
     
     private void useDefaultBattlefield(){
-        useRandomBattleImage.setEnabled(false);
-        BattlefieldImagePath.setEnabled(false);
-        BattlefieldBrowseButton.setEnabled(false);
+        cbUseRandomBattleImage.setEnabled(false);
+        txtBattlefieldImagePath.setEnabled(false);
+        btnBrowseBattlefieldImage.setEnabled(false);
     }
     
     private void useSelectedOrRandom(){
-        useRandomBattleImage.setEnabled(true);     
+        cbUseRandomBattleImage.setEnabled(true);
         String temp = cache.get(KEY_BATTLEFIELD_IMAGE_RANDOM);
         if(temp != null){
             if(temp.equals("true")){
                 useRandomBattleField();
-                useRandomBattleImage.setSelected(true);
+                cbUseRandomBattleImage.setSelected(true);
             }else{
                 useSelectedBattleField();
-                useRandomBattleImage.setSelected(false);
+                cbUseRandomBattleImage.setSelected(false);
             }
         }else{
              useSelectedBattleField();
-             useRandomBattleImage.setSelected(false);
+             cbUseRandomBattleImage.setSelected(false);
         }
     }
     
-    private void useRandomBattleImageActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        if(useRandomBattleImage.isSelected()){
+    private void cbUseRandomBattleImageActionPerformed(java.awt.event.ActionEvent evt) {
+        if(cbUseRandomBattleImage.isSelected()){
             useRandomBattleField();
         }else{
             useSelectedBattleField();
@@ -1442,51 +1449,51 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }                                                    
 
     private void useRandomBattleField(){
-        BattlefieldImagePath.setEnabled(false);
-        BattlefieldBrowseButton.setEnabled(false);
+        txtBattlefieldImagePath.setEnabled(false);
+        btnBrowseBattlefieldImage.setEnabled(false);
     }
     
     private void useSelectedBattleField(){
-        BattlefieldImagePath.setEnabled(true);
-        BattlefieldBrowseButton.setEnabled(true);
+        txtBattlefieldImagePath.setEnabled(true);
+        btnBrowseBattlefieldImage.setEnabled(true);
     }
     
-    private void BackgroundBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    private void btnBrowseBackgroundImageActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);     
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc_i.getSelectedFile();
-            BackgroundImagePath.setText(file.getAbsolutePath());
+            txtBackgroundImagePath.setText(file.getAbsolutePath());
         }
     }                                                      
 
-    private void BattlefieldBrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void btnBrowseBattlefieldImageActionPerformed(java.awt.event.ActionEvent evt) {
         int returnVal = fc_i.showOpenDialog(PreferencesDialog.this);     
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc_i.getSelectedFile();
-            BattlefieldImagePath.setText(file.getAbsolutePath());
+            txtBattlefieldImagePath.setText(file.getAbsolutePath());
         }
     }  
     
-    private void BackgroundImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackgroundImagePathActionPerformed
+    private void txtBackgroundImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBackgroundImagePathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BackgroundImagePathActionPerformed
+    }//GEN-LAST:event_txtBackgroundImagePathActionPerformed
 
-    private void BattlefieldImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldImagePathActionPerformed
+    private void txtBattlefieldImagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBattlefieldImagePathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BattlefieldImagePathActionPerformed
+    }//GEN-LAST:event_txtBattlefieldImagePathActionPerformed
 
-    private void BattlefieldIBGMPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldIBGMPathActionPerformed
+    private void txtBattlefieldIBGMPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBattlefieldIBGMPathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BattlefieldIBGMPathActionPerformed
+    }//GEN-LAST:event_txtBattlefieldIBGMPathActionPerformed
 
-    private void BattlefieldBGMButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BattlefieldBGMButtonActionPerformed
+    private void btnBattlefieldBGMBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBattlefieldBGMBrowseActionPerformed
         // TODO add your handling code here:
         int returnVal = fc.showOpenDialog(PreferencesDialog.this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            BattlefieldIBGMPath.setText(file.getAbsolutePath());
+            txtBattlefieldIBGMPath.setText(file.getAbsolutePath());
         }
-    }//GEN-LAST:event_BattlefieldBGMButtonActionPerformed
+    }//GEN-LAST:event_btnBattlefieldBGMBrowseActionPerformed
 
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
@@ -1525,17 +1532,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     // Phases
                     loadPhases(prefs);
 
+                    // Images
+                    loadImagesSettings(prefs);
+
+                    // Sounds
+                    loadSoundSettings(prefs);
+
                     // Connection
                     loadProxySettings(prefs);
 
                     // Selected avatar
                     loadSelectedAvatar(prefs);
-
-                    // Images
-                    loadImagesSettings(prefs);
-
-                    // Images
-                    loadSoundSettings(prefs);
 
                     // open specified tab before displaying
                     openTab(openedTab);
@@ -1552,21 +1559,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void loadPhases(Preferences prefs) {
-        load(prefs, dialog.checkBoxUpkeepYou, UPKEEP_YOU);
-        load(prefs, dialog.checkBoxDrawYou, DRAW_YOU);
-        load(prefs, dialog.checkBoxMainYou, MAIN_YOU);
-        load(prefs, dialog.checkBoxBeforeCYou, BEFORE_COMBAT_YOU);
-        load(prefs, dialog.checkBoxEndOfCYou, END_OF_COMBAT_YOU);
-        load(prefs, dialog.checkBoxMain2You, MAIN_2_YOU);
-        load(prefs, dialog.checkBoxEndTurnYou, END_OF_TURN_YOU);
+        load(prefs, dialog.checkBoxUpkeepYou, PhaseManager.UPKEEP_YOU);
+        load(prefs, dialog.checkBoxDrawYou, PhaseManager.DRAW_YOU);
+        load(prefs, dialog.checkBoxMainYou, PhaseManager.MAIN_YOU);
+        load(prefs, dialog.checkBoxBeforeCYou, PhaseManager.BEFORE_COMBAT_YOU);
+        load(prefs, dialog.checkBoxEndOfCYou, PhaseManager.END_OF_COMBAT_YOU);
+        load(prefs, dialog.checkBoxMain2You, PhaseManager.MAIN_2_YOU);
+        load(prefs, dialog.checkBoxEndTurnYou, PhaseManager.END_OF_TURN_YOU);
 
-        load(prefs, dialog.checkBoxUpkeepOthers, UPKEEP_OTHERS);
-        load(prefs, dialog.checkBoxDrawOthers, DRAW_OTHERS);
-        load(prefs, dialog.checkBoxMainOthers, MAIN_OTHERS);
-        load(prefs, dialog.checkBoxBeforeCOthers, BEFORE_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxEndOfCOthers, END_OF_COMBAT_OTHERS);
-        load(prefs, dialog.checkBoxMain2Others, MAIN_2_OTHERS);
-        load(prefs, dialog.checkBoxEndTurnOthers, END_OF_TURN_OTHERS);
+        load(prefs, dialog.checkBoxUpkeepOthers, PhaseManager.UPKEEP_OTHERS);
+        load(prefs, dialog.checkBoxDrawOthers, PhaseManager.DRAW_OTHERS);
+        load(prefs, dialog.checkBoxMainOthers, PhaseManager.MAIN_OTHERS);
+        load(prefs, dialog.checkBoxBeforeCOthers, PhaseManager.BEFORE_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxEndOfCOthers, PhaseManager.END_OF_COMBAT_OTHERS);
+        load(prefs, dialog.checkBoxMain2Others, PhaseManager.MAIN_2_OTHERS);
+        load(prefs, dialog.checkBoxEndTurnOthers, PhaseManager.END_OF_TURN_OTHERS);
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
@@ -1575,48 +1582,48 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadImagesSettings(Preferences prefs) {
         String prop = prefs.get(KEY_CARD_IMAGES_USE_DEFAULT, "true");
         if (prop.equals("true")) {
-            dialog.useDefaultImageFolder.setSelected(true);
+            dialog.cbUseDefaultImageFolder.setSelected(true);
             dialog.useDefaultPath();
         } else {
-            dialog.useDefaultImageFolder.setSelected(false);
+            dialog.cbUseDefaultImageFolder.setSelected(false);
             dialog.useConfigurablePath();
             String path = prefs.get(KEY_CARD_IMAGES_PATH, "");
-            dialog.imageFolderPath.setText(path);
+            dialog.txtImageFolderPath.setText(path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
-        load(prefs, dialog.checkForNewImages, KEY_CARD_IMAGES_CHECK, "true");
-        load(prefs, dialog.saveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
+        load(prefs, dialog.cbCheckForNewImages, KEY_CARD_IMAGES_CHECK, "true");
+        load(prefs, dialog.cbSaveToZipFiles, KEY_CARD_IMAGES_SAVE_TO_ZIP, "true");
         //add background load precedure 
         prop = prefs.get(KEY_BACKGROUND_IMAGE_DEFAULT, "true");
         if(prop.equals("true")){
-            dialog.useDefaultBackground.setSelected(true);
-            dialog.useDefualtBackgroundImage();
+            dialog.cbUseDefaultBackground.setSelected(true);
+            dialog.useDefaultBackgroundImage();
         }else{
-            dialog.useDefaultBackground.setSelected(false);
+            dialog.cbUseDefaultBackground.setSelected(false);
             dialog.useSelectBackgroundImage();
             String path = prefs.get(KEY_BACKGROUND_IMAGE, "");
-            dialog.BackgroundImagePath.setText(path);
+            dialog.txtBackgroundImagePath.setText(path);
             updateCache(KEY_BACKGROUND_IMAGE, path);
         }
         prop = prefs.get(KEY_BATTLEFIELD_IMAGE_DEFAULT, "true");
         if(prop.equals("true")){
-            dialog.useDefaultBattleImage.setSelected(true);
+            dialog.cbUseDefaultBattleImage.setSelected(true);
             dialog.useDefaultBattlefield();        
         }else{
-            dialog.useDefaultBattleImage.setSelected(false);
+            dialog.cbUseDefaultBattleImage.setSelected(false);
             dialog.useSelectedOrRandom();
         }
         prop = prefs.get(KEY_BATTLEFIELD_IMAGE_RANDOM, "true");
         
-        if(dialog.useRandomBattleImage.isEnabled())
+        if(dialog.cbUseRandomBattleImage.isEnabled())
         if(prop.equals("true")){
-            dialog.useRandomBattleImage.setSelected(true);
+            dialog.cbUseRandomBattleImage.setSelected(true);
             dialog.useRandomBattleField();        
         }else{
-            dialog.useRandomBattleImage.setSelected(false);
+            dialog.cbUseRandomBattleImage.setSelected(false);
             dialog.useSelectedBattleField();
             String path = prefs.get(KEY_BATTLEFIELD_IMAGE, "");
-            dialog.BattlefieldImagePath.setText(path);
+            dialog.txtBattlefieldImagePath.setText(path);
             updateCache(KEY_BATTLEFIELD_IMAGE, path);
         }   
     }
@@ -1624,19 +1631,25 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private static void loadSoundSettings(Preferences prefs) {
         String prop = prefs.get(KEY_SOUNDS_ON, "true");
         if (prop.equals("true")) {
-            dialog.jEnableSounds.setSelected(true);
+            dialog.cbEnableSounds.setSelected(true);
         } else {
-            dialog.jEnableSounds.setSelected(false);
+            dialog.cbEnableSounds.setSelected(false);
         }
-        prop = prefs.get(KEY_MUSICS_ON, "true");
-        String path = prefs.get(KEY_MUSICS_PATH, "");
+
+        // Match music
+        prop = prefs.get(KEY_SOUNDS_MATCH_MUSIC_ON, "true");
         if (prop.equals("true")) {
-            dialog.jEnableMusics.setSelected(true);
-            dialog.BattlefieldIBGMPath.setText(path);
+            dialog.cbEnableBattlefieldBGM.setSelected(true);
         } else {
-            dialog.jEnableMusics.setSelected(false);
+            dialog.cbEnableBattlefieldBGM.setSelected(false);
         }
-        updateCache(KEY_MUSICS_PATH, path);
+        dialog.txtBattlefieldIBGMPath.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
+        dialog.btnBattlefieldBGMBrowse.setEnabled(dialog.cbEnableBattlefieldBGM.isSelected());
+        // load and save the path always, so you can reactivate music without selecting path again
+        String path = prefs.get(KEY_SOUNDS_MATCH_MUSIC_PATH, "");
+        dialog.txtBattlefieldIBGMPath.setText(path);
+
+        updateCache(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
     }
 
     private static void loadProxySettings(Preferences prefs) {
@@ -1653,20 +1666,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private static void loadSelectedAvatar(Preferences prefs) {
         getSelectedAvatar();
-        dialog.setSelectedId(selectedId);
+        dialog.setSelectedId(selectedAvatarId);
     }
 
     public static int getSelectedAvatar() {
         try {
-            selectedId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
+            selectedAvatarId = Integer.valueOf(MageFrame.getPreferences().get(KEY_AVATAR, String.valueOf(DEFAULT_AVATAR_ID)));
         } catch (NumberFormatException n) {
-            selectedId = DEFAULT_AVATAR_ID;
+            selectedAvatarId = DEFAULT_AVATAR_ID;
         } finally {
-            if (!availableAvatars.contains(selectedId)) {
-                selectedId = DEFAULT_AVATAR_ID;
+            if (!available_avatars.contains(selectedAvatarId)) {
+                selectedAvatarId = DEFAULT_AVATAR_ID;
             }
         }
-        return selectedId;
+        return selectedAvatarId;
     }
 
     private static void openTab(int index) {
@@ -1681,28 +1694,28 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
 
     private static void saveImagesPath(Preferences prefs) {
-        if (!dialog.useDefaultImageFolder.isSelected()) {
-            String path = dialog.imageFolderPath.getText();
+        if (!dialog.cbUseDefaultImageFolder.isSelected()) {
+            String path = dialog.txtImageFolderPath.getText();
             prefs.put(KEY_CARD_IMAGES_PATH, path);
             updateCache(KEY_CARD_IMAGES_PATH, path);
         }
         // background path save precedure
-        if(!dialog.useDefaultBackground.isSelected()){
-            String path = dialog.BackgroundImagePath.getText();
+        if(!dialog.cbUseDefaultBackground.isSelected()){
+            String path = dialog.txtBackgroundImagePath.getText();
             prefs.put(KEY_BACKGROUND_IMAGE, path);
             updateCache(KEY_BACKGROUND_IMAGE, path);
         }
-        if(!dialog.useDefaultBattleImage.isSelected() && !dialog.useRandomBattleImage.isSelected()){
-            String path = dialog.BattlefieldImagePath.getText();
+        if(!dialog.cbUseDefaultBattleImage.isSelected() && !dialog.cbUseRandomBattleImage.isSelected()){
+            String path = dialog.txtBattlefieldImagePath.getText();
             prefs.put(KEY_BATTLEFIELD_IMAGE, path);
             updateCache(KEY_BATTLEFIELD_IMAGE, path);
         }
     }
     
     private static void saveSoundPath(Preferences prefs){
-        String path = dialog.BattlefieldIBGMPath.getText();
-        prefs.put(KEY_MUSICS_PATH, path);
-        updateCache(KEY_MUSICS_PATH, path);
+        String path = dialog.txtBattlefieldIBGMPath.getText();
+        prefs.put(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
+        updateCache(KEY_SOUNDS_MATCH_MUSIC_PATH, path);
     }
 
     public static boolean isSaveImagesToZip() {
@@ -1730,11 +1743,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     private static void load(Preferences prefs, JCheckBox checkBox, String propName) {
-        load(prefs, checkBox, propName, PHASE_ON);
+        load(prefs, checkBox, propName, PhaseManager.PHASE_ON);
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName) {
-        save(prefs, checkBox, propName, PHASE_ON, PHASE_OFF, false);
+        save(prefs, checkBox, propName, PhaseManager.PHASE_ON, PhaseManager.PHASE_OFF, false);
     }
 
     private static void save(Preferences prefs, JCheckBox checkBox, String propName, String yesValue, String onValue, boolean updateCache) {
@@ -1807,12 +1820,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     public void setSelectedId(int id) {
-        if (availableAvatars.contains(id)) {
+        if (available_avatars.contains(id)) {
             for (JPanel panel : panels.values()) {
                 panel.setBorder(BLACK_BORDER);
             }
-            this.selectedId = id;
-            panels.get(this.selectedId).setBorder(GREEN_BORDER);
+            this.selectedAvatarId = id;
+            panels.get(this.selectedAvatarId).setBorder(GREEN_BORDER);
         }
     }
 
@@ -1841,7 +1854,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
             jLabel.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent e) {
-                    if (selectedId != id) {
+                    if (selectedAvatarId != id) {
                         setSelectedId(id);
                         MageFrame.getSession().updateAvatar(id);
                     }
@@ -1851,14 +1864,19 @@ public class PreferencesDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BackgroundBrowseButton;
-    private javax.swing.JTextField BackgroundImagePath;
-    private javax.swing.JButton BattlefieldBGMButton;
-    private javax.swing.JButton BattlefieldBrowseButton;
-    private javax.swing.JTextField BattlefieldIBGMPath;
-    private javax.swing.JTextField BattlefieldImagePath;
-    private javax.swing.JButton browseButton;
+    private javax.swing.JButton btnBattlefieldBGMBrowse;
+    private javax.swing.JButton btnBrowseBackgroundImage;
+    private javax.swing.JButton btnBrowseBattlefieldImage;
+    private javax.swing.JButton btnBrowseImageLocation;
+    private javax.swing.JCheckBox cbCheckForNewImages;
+    private javax.swing.JCheckBox cbEnableBattlefieldBGM;
+    private javax.swing.JCheckBox cbEnableSounds;
     private javax.swing.JComboBox cbProxyType;
+    private javax.swing.JCheckBox cbSaveToZipFiles;
+    private javax.swing.JCheckBox cbUseDefaultBackground;
+    private javax.swing.JCheckBox cbUseDefaultBattleImage;
+    private javax.swing.JCheckBox cbUseDefaultImageFolder;
+    private javax.swing.JCheckBox cbUseRandomBattleImage;
     private javax.swing.JCheckBox checkBoxBeforeCOthers;
     private javax.swing.JCheckBox checkBoxBeforeCYou;
     private javax.swing.JCheckBox checkBoxDrawOthers;
@@ -1873,12 +1891,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox checkBoxMainYou;
     private javax.swing.JCheckBox checkBoxUpkeepOthers;
     private javax.swing.JCheckBox checkBoxUpkeepYou;
-    private javax.swing.JCheckBox checkForNewImages;
     private javax.swing.JCheckBox displayBigCardsInHand;
     private javax.swing.JButton exitButton;
-    private javax.swing.JTextField imageFolderPath;
-    private javax.swing.JCheckBox jEnableMusics;
-    private javax.swing.JCheckBox jEnableSounds;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1923,7 +1937,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
-    private javax.swing.JCheckBox saveToZipFiles;
     private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
@@ -1934,14 +1947,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JPanel tabPhases;
     private javax.swing.JPanel tabSounds;
     private javax.swing.JTabbedPane tabsPanel;
+    private javax.swing.JTextField txtBackgroundImagePath;
+    private javax.swing.JTextField txtBattlefieldIBGMPath;
+    private javax.swing.JTextField txtBattlefieldImagePath;
+    private javax.swing.JTextField txtImageFolderPath;
     private javax.swing.JPasswordField txtPasswordField;
     private javax.swing.JTextField txtProxyPort;
     private javax.swing.JTextField txtProxyServer;
     private javax.swing.JTextField txtProxyUserName;
-    private javax.swing.JCheckBox useDefaultBackground;
-    private javax.swing.JCheckBox useDefaultBattleImage;
-    private javax.swing.JCheckBox useDefaultImageFolder;
-    private javax.swing.JCheckBox useRandomBattleImage;
     // End of variables declaration//GEN-END:variables
 
     private static final PreferencesDialog dialog = new PreferencesDialog(new javax.swing.JFrame(), true);

@@ -82,7 +82,7 @@
                       <Component id="main_hand" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="main_battlefield" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="162" max="32767" attributes="0"/>
+                      <EmptySpace pref="170" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -110,7 +110,7 @@
                               <Component id="showToolTipsInAnyZone" min="-2" max="-2" attributes="0"/>
                               <Component id="displayBigCardsInHand" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="180" max="32767" attributes="0"/>
+                          <EmptySpace pref="232" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -262,7 +262,7 @@
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="135" max="32767" attributes="0"/>
+                      <EmptySpace pref="171" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -334,7 +334,7 @@
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <Component id="checkBoxEndTurnOthers" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="120" max="32767" attributes="0"/>
+                      <EmptySpace pref="162" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -449,7 +449,7 @@
                       <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel23" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace pref="72" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -459,7 +459,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Card images location:">
+                    <TitledBorder title="Card images:">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -476,16 +476,16 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="useDefaultImageFolder" min="-2" max="-2" attributes="0"/>
-                                      <Component id="checkForNewImages" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="saveToZipFiles" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbCheckForNewImages" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbSaveToZipFiles" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="242" max="32767" attributes="0"/>
+                                  <EmptySpace pref="268" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="imageFolderPath" max="32767" attributes="0"/>
+                                  <Component id="txtImageFolderPath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="browseButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBrowseImageLocation" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -495,54 +495,54 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="useDefaultImageFolder" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbUseDefaultImageFolder" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="imageFolderPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="browseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtImageFolderPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBrowseImageLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="checkForNewImages" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbCheckForNewImages" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="saveToZipFiles" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbSaveToZipFiles" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="useDefaultImageFolder">
+                <Component class="javax.swing.JCheckBox" name="cbUseDefaultImageFolder">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="use default"/>
+                    <Property name="text" type="java.lang.String" value="Use default location to save images"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useDefaultImageFolderActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultImageFolderActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="imageFolderPath">
+                <Component class="javax.swing.JTextField" name="txtImageFolderPath">
                 </Component>
-                <Component class="javax.swing.JButton" name="browseButton">
+                <Component class="javax.swing.JButton" name="btnBrowseImageLocation">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Browse..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="browseButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseImageLocationActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="checkForNewImages">
+                <Component class="javax.swing.JCheckBox" name="cbCheckForNewImages">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="check for new images on startup"/>
+                    <Property name="text" type="java.lang.String" value="Check for new images on startup"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkForNewImagesActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbCheckForNewImagesActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="saveToZipFiles">
+                <Component class="javax.swing.JCheckBox" name="cbSaveToZipFiles">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="store in zip files"/>
+                    <Property name="text" type="java.lang.String" value="Store images in zip files"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveToZipFilesActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSaveToZipFilesActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -567,29 +567,29 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="useDefaultBackground" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbUseDefaultBackground" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="BattlefieldImagePath" max="32767" attributes="0"/>
+                                  <Component id="txtBattlefieldImagePath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BattlefieldBrowseButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBrowseBattlefieldImage" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="useDefaultBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="useRandomBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbUseDefaultBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbUseRandomBattleImage" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BackgroundImagePath" max="32767" attributes="0"/>
+                                  <Component id="txtBackgroundImagePath" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BackgroundBrowseButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBrowseBackgroundImage" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -599,21 +599,21 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="useDefaultBackground" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbUseDefaultBackground" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="BackgroundImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BackgroundBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBackgroundImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBrowseBackgroundImage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="useDefaultBattleImage" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbUseDefaultBattleImage" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="useRandomBattleImage" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbUseRandomBattleImage" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="BattlefieldImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BattlefieldBrowseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBattlefieldImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBrowseBattlefieldImage" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -621,54 +621,54 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="useDefaultBackground">
+                <Component class="javax.swing.JCheckBox" name="cbUseDefaultBackground">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="use default image"/>
+                    <Property name="text" type="java.lang.String" value="Use default image"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useDefaultBackgroundActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultBackgroundActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="BackgroundImagePath">
+                <Component class="javax.swing.JTextField" name="txtBackgroundImagePath">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackgroundImagePathActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBackgroundImagePathActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="BackgroundBrowseButton">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Browse..."/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackgroundBrowseButtonActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JTextField" name="BattlefieldImagePath">
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BattlefieldImagePathActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="BattlefieldBrowseButton">
+                <Component class="javax.swing.JButton" name="btnBrowseBackgroundImage">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Browse..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BattlefieldBrowseButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseBackgroundImageActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="useDefaultBattleImage">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="default battlefield image"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="txtBattlefieldImagePath">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useDefaultBattleImageActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBattlefieldImagePathActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JCheckBox" name="useRandomBattleImage">
+                <Component class="javax.swing.JButton" name="btnBrowseBattlefieldImage">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="random battlefield image"/>
+                    <Property name="text" type="java.lang.String" value="Browse..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="useRandomBattleImageActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBrowseBattlefieldImageActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbUseDefaultBattleImage">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Use default battlefield image"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseDefaultBattleImageActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="cbUseRandomBattleImage">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Select random battlefield image"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbUseRandomBattleImageActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel14">
@@ -714,7 +714,7 @@
                       <Component id="sounds_clips" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sounds_backgroundMusic" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="254" max="32767" attributes="0"/>
+                      <EmptySpace pref="262" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -733,7 +733,6 @@
                 </Property>
               </Properties>
               <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Clips"/>
                 <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
               </AccessibilityProperties>
 
@@ -742,24 +741,25 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jEnableSounds" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="cbEnableSounds" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="410" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jEnableSounds" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbEnableSounds" min="-2" max="-2" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="jEnableSounds">
+                <Component class="javax.swing.JCheckBox" name="cbEnableSounds">
                   <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value="Sounds that will be played for certain actions (e.g. play land, attack, etc.)"/>
                     <Property name="label" type="java.lang.String" value="Enable"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEnableSoundsActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableSoundsActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
@@ -768,7 +768,7 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Background music during matches">
+                    <TitledBorder title="Music">
                       <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                         <EtchetBorder/>
                       </Border>
@@ -786,12 +786,12 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BattlefieldIBGMPath" pref="245" max="32767" attributes="0"/>
+                                  <Component id="txtBattlefieldIBGMPath" pref="280" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="BattlefieldBGMButton" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnBattlefieldBGMBrowse" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jEnableMusics" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbEnableBattlefieldBGM" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -801,11 +801,11 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jEnableMusics" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbEnableBattlefieldBGM" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="BattlefieldIBGMPath" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="BattlefieldBGMButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtBattlefieldIBGMPath" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnBattlefieldBGMBrowse" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -813,27 +813,27 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JCheckBox" name="jEnableMusics">
+                <Component class="javax.swing.JCheckBox" name="cbEnableBattlefieldBGM">
                   <Properties>
-                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                    <Property name="text" type="java.lang.String" value="Play music during match"/>
+                    <Property name="toolTipText" type="java.lang.String" value="During your matches music will be played from the seleced folder."/>
                     <Property name="actionCommand" type="java.lang.String" value="Play automatically during matches"/>
-                    <Property name="label" type="java.lang.String" value="Enable"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jEnableMusicsActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEnableBattlefieldBGMActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="BattlefieldBGMButton">
+                <Component class="javax.swing.JButton" name="btnBattlefieldBGMBrowse">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Browse..."/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BattlefieldBGMButtonActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBattlefieldBGMBrowseActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="BattlefieldIBGMPath">
+                <Component class="javax.swing.JTextField" name="txtBattlefieldIBGMPath">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BattlefieldIBGMPathActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtBattlefieldIBGMPathActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
@@ -841,9 +841,6 @@
                     <Property name="text" type="java.lang.String" value="Playing from folder:"/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
-                  <AccessibilityProperties>
-                    <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Playing from folder:"/>
-                  </AccessibilityProperties>
                 </Component>
               </SubComponents>
             </Container>
@@ -888,7 +885,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnlProxySettings" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="157" max="32767" attributes="0"/>
+                      <EmptySpace pref="178" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -963,7 +960,7 @@
                                       <Component id="txtPasswordField" alignment="0" max="32767" attributes="1"/>
                                       <Component id="txtProxyUserName" alignment="0" min="-2" pref="148" max="-2" attributes="1"/>
                                   </Group>
-                                  <Component id="txtProxyServer" alignment="0" pref="342" max="32767" attributes="1"/>
+                                  <Component id="txtProxyServer" alignment="0" pref="366" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -1076,7 +1073,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" alignment="0" pref="400" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="402" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -1134,7 +1131,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="79" max="32767" attributes="0"/>
+                              <EmptySpace pref="85" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>

@@ -21,7 +21,7 @@ public class MusicPlayer {
     
     //open file and add list
     private boolean open(){
-        String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MUSICS_PATH, "true");
+        String path = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_MATCH_MUSIC_PATH, "true");
         filepath = path + File.separator;
         if(path == null) filepath = Constants.BASE_MUSICS_PATH;
     	filelist.removeAll();
@@ -51,7 +51,7 @@ public class MusicPlayer {
     }
     
     public void play(){
-        String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MUSICS_ON, "true");
+        String soundsOn = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SOUNDS_MATCH_MUSIC_ON, "true");
         if(soundsOn.equals("true")){
             player.breaked = false;
             player.breaked_out = false;

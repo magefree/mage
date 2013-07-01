@@ -1,13 +1,12 @@
 package mage.client.util;
 
-import mage.client.MageFrame;
-import mage.view.GameView;
-import mage.view.PlayerView;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.prefs.Preferences;
+import mage.client.MageFrame;
+import mage.view.GameView;
+import mage.view.PlayerView;
 
 public class PhaseManager {
 
