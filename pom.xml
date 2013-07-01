@@ -76,6 +76,5 @@
     <properties>
         <mage-version>1.0.3</mage-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.hint.license>mage</netbeans.hint.license>
     </properties>
 </project>
