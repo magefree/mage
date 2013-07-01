@@ -31,79 +31,41 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class SingeMindOgre extends CardImpl<SingeMindOgre> {
+public class SanityGnawers extends CardImpl<SanityGnawers> {
 
-    public SingeMindOgre(UUID ownerId) {
-        super(ownerId, 45, "Singe-Mind Ogre", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{R}");
+    public SanityGnawers(UUID ownerId) {
+        super(ownerId, 44, "Sanity Gnawers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{B}{R}");
         this.expansionSetCode = "ARB";
-        this.subtype.add("Ogre");
-        this.subtype.add("Mutant");
+        this.subtype.add("Rat");
 
         this.color.setRed(true);
         this.color.setBlack(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
 
-        // When Singe-Mind Ogre enters the battlefield, target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SingeMindOgreEffect(), false);
+        // When Sanity Gnawers enters the battlefield, target player discards a card at random.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DiscardTargetEffect(1, true), false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
         
     }
 
-    public SingeMindOgre(final SingeMindOgre card) {
+    public SanityGnawers(final SanityGnawers card) {
         super(card);
     }
 
     @Override
-    public SingeMindOgre copy() {
-        return new SingeMindOgre(this);
-    }
-}
-
-class SingeMindOgreEffect extends OneShotEffect<SingeMindOgreEffect> {
-
-    public SingeMindOgreEffect() {
-        super(Outcome.LoseLife);
-        this.staticText = "target player reveals a card at random from his or her hand, then loses life equal to that card's converted mana cost";
-    }
-
-    public SingeMindOgreEffect(final SingeMindOgreEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public SingeMindOgreEffect copy() {
-        return new SingeMindOgreEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null && targetPlayer.getHand().size() > 0) {
-            Cards revealed = new CardsImpl();
-            Card card = targetPlayer.getHand().getRandom(game);
-            revealed.add(card);
-            targetPlayer.revealCards("Singe-Mind Ogre", revealed, game);
-            targetPlayer.loseLife(card.getManaCost().convertedManaCost(), game);
-            return true;
-        }
-        return false;
+    public SanityGnawers copy() {
+        return new SanityGnawers(this);
     }
 }
