@@ -63,10 +63,7 @@ public class BoosterDraftEliminationTournament extends TournamentSingleEliminati
         tableEventSource.fireTableEvent(EventType.START_DRAFT, null, draft);
     }
 
-    protected void winners() {
-        // TODO: Show winners and tournament result
-        // throw new UnsupportedOperationException("Not supported yet.");
-    }
+
 
     @Override
     public void nextStep() {

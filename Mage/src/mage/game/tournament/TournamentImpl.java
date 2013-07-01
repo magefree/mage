@@ -147,11 +147,6 @@ public abstract class TournamentImpl implements Tournament {
         Round round = new Round(rounds.size() + 1);
         rounds.add(round);
         List<TournamentPlayer> roundPlayers = getActivePlayers();
-        if (roundPlayers.size() == 1) {
-            TournamentPlayer winner = roundPlayers.get(0);
-            winner.setState(TournamentPlayerState.FINISHED);
-            winner.setStateInfo("Winner");
-        }
         while (roundPlayers.size() > 1) {
             int i = rnd.nextInt(roundPlayers.size());
             TournamentPlayer player1 = roundPlayers.get(i);

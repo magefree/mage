@@ -28,7 +28,9 @@
 
 package mage.tournament;
 
+import mage.constants.TournamentPlayerState;
 import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentPlayer;
 import mage.game.tournament.TournamentSingleElimination;
 
 /**
@@ -46,11 +48,6 @@ public class SealedEliminationTournament extends TournamentSingleElimination {
     public SealedEliminationTournament(TournamentOptions options) {
         super(options);
         currentStep = TournamentStep.START;
-    }
-
-    protected void winners() {
-        // TODO: Show winners and tournament result
-        // throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
