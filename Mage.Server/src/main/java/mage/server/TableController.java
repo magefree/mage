@@ -145,18 +145,22 @@ public class TableController {
             throw new GameException("No available seats.");
         }
         Player player = createPlayer(name, seat.getPlayerType(), skill);
-        tournament.addPlayer(player, seat.getPlayerType());
-        table.joinTable(player, seat);
-        User user = UserManager.getInstance().getUser(userId);
-        user.addTable(player.getId(), table);
-        logger.info("player joined " + player.getId());
-        //only inform human players and add them to sessionPlayerMap
-        if (seat.getPlayer().isHuman()) {
-            user.joinedTable(table.getRoomId(), table.getId(), true);
-            userPlayerMap.put(userId, player.getId());
-        }
+        if (player != null) {
+            tournament.addPlayer(player, seat.getPlayerType());
+            table.joinTable(player, seat);
+            User user = UserManager.getInstance().getUser(userId);
+            user.addTable(player.getId(), table);
+            logger.info("player joined " + player.getId());
+            //only inform human players and add them to sessionPlayerMap
+            if (seat.getPlayer().isHuman()) {
+                user.joinedTable(table.getRoomId(), table.getId(), true);
+                userPlayerMap.put(userId, player.getId());
+            }
 
-        return true;
+            return true;
+        } else {
+            throw new GameException("Playertype " + seat.getPlayerType().toString() + " could not be created.");
+        }
     }
 
     public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
