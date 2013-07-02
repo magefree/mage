@@ -54,7 +54,7 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 9;
+    private static final long CARD_DB_VERSION = 10;
 
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -208,6 +208,30 @@ public enum CardRepository {
         } catch (SQLException ex) {
         }
         return null;
+    }
+
+
+    public List<String> getClassNames() {
+        List<String> names = new ArrayList<String>();
+        try {
+            List<CardInfo> results = cardDao.queryForAll();
+            for (CardInfo card : results) {
+                names.add(card.getClassName());
+            }
+        } catch (SQLException ex) {
+        }
+        return names;
+    }
+
+    public List<CardInfo> getMissingCards(List<String> classNames) {
+        try {
+            QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
+            queryBuilder.where().not().in("className", classNames);
+
+            return cardDao.query(queryBuilder.prepare());
+        } catch (SQLException ex) {
+        }
+        return new ArrayList<CardInfo>();
     }
 
     /**

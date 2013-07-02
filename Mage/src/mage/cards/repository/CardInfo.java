@@ -59,7 +59,7 @@ public class CardInfo {
     protected int cardNumber;
     @DatabaseField
     protected String setCode;
-    @DatabaseField
+    @DatabaseField(unique = true)
     protected String className;
     @DatabaseField
     protected String power;
@@ -144,6 +144,7 @@ public class CardInfo {
         if (spellAbility != null) {
             SpellAbilityType spellAbilityType = spellAbility.getSpellAbilityType();
             if (spellAbilityType == SpellAbilityType.SPLIT_LEFT || spellAbilityType == SpellAbilityType.SPLIT_RIGHT) {
+                this.className = this.setCode + "." + this.name;
                 this.splitCardHalf = true;
             }
         }

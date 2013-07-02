@@ -30,6 +30,8 @@ package mage.server;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.game.GameException;
@@ -923,5 +925,10 @@ public class MageServerImpl implements MageServer {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<CardInfo> getMissingCardsData(List<String> classNames) {
+        return CardRepository.instance.getMissingCards(classNames);
     }
 }

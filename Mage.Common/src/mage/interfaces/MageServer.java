@@ -30,6 +30,7 @@ package mage.interfaces;
 
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
+import mage.cards.repository.CardInfo;
 import mage.cards.repository.ExpansionInfo;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
@@ -53,6 +54,7 @@ public interface MageServer {
 
     // update methods
     List<ExpansionInfo> getMissingExpansionData(List<String> codes);
+    List<CardInfo> getMissingCardsData(List<String> classNames);
 
     // user methods
     boolean setUserData(String userName, String sessionId, UserDataView userDataView) throws MageException;
