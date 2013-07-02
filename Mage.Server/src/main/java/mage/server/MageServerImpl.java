@@ -496,6 +496,7 @@ public class MageServerImpl implements MageServer {
             public void execute() {
                 User user = SessionManager.getInstance().getUser(sessionId);
                 if (user != null) {
+//                    logger.warn("sendPlayerUUID gameId=" + gameId + " sessionId=" + sessionId + " username=" + user.getName());
                     user.sendPlayerUUID(gameId, data);
                 } else {
                     logger.warn("Your session expired: gameId=" + gameId + ", sessionId=" + sessionId);
@@ -567,6 +568,17 @@ public class MageServerImpl implements MageServer {
             public void execute() {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 GameManager.getInstance().concedeGame(gameId, userId);
+            }
+        });
+    }
+
+    @Override
+    public void quitMatch(final UUID gameId, final String sessionId) throws MageException {
+        execute("quitMatch", sessionId, new Action() {
+            @Override
+            public void execute() {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                GameManager.getInstance().quitMatch(gameId, userId);
             }
         });
     }
