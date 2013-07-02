@@ -31,6 +31,10 @@ package mage.remote;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
@@ -165,6 +169,7 @@ public class SessionImpl implements Session {
             if (registerResult) {
                 sessionState = SessionState.CONNECTED;
                 serverState = server.getServerState();
+                updateDatabase();
                 logger.info(new StringBuilder("Connected as ").append(this.getUserName()).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
                 client.connected(new StringBuilder("Connected as ").append(this.getUserName()).append(" to ").append(connection.getHost()).append(":").append(connection.getPort()).append(" ").toString());
                 return true;
@@ -191,6 +196,18 @@ public class SessionImpl implements Session {
             }
         }
         return false;
+    }
+
+    private void updateDatabase() {
+        List<String> classNames = CardRepository.instance.getClassNames();
+        List<CardInfo> cards = server.getMissingCardsData(classNames);
+        CardRepository.instance.addCards(cards);
+
+        List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+        List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
+        for (ExpansionInfo expansion : expansions) {
+            ExpansionRepository.instance.add(expansion);
+        }
     }
 
     private void handleCannotConnectException(CannotConnectException ex) {
@@ -1175,7 +1192,6 @@ public class SessionImpl implements Session {
         return false;
     }
 }
-
 class MageAuthenticator extends Authenticator {
 
     private String username;
