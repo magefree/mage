@@ -87,7 +87,7 @@ public class TwoPlayerDuel extends GameImpl<TwoPlayerDuel> {
 
     @Override
     public void leave(UUID playerId) {
-
+        super.leave(playerId);
     }
 
     @Override
