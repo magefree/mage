@@ -28,13 +28,13 @@
 
 package mage.client.util;
 
-import mage.cards.CardDimensions;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import mage.cards.CardDimensions;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -78,6 +78,21 @@ public class Config {
 
         dimensions = new CardDimensions(cardScalingFactor);
         dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+// activate instead this part, to run the UI editor for some panels without error
+//        serverName = "localhost";
+//        port = 17171;
+//        remoteServer = "mage-server";
+//        cardScalingFactor = Double.valueOf(0.4);
+//        cardScalingFactorEnlarged = Double.valueOf(0.5);
+//        handScalingFactor = Double.valueOf(1.3);
+//        defaultGameType = p.getProperty("default-game-type", "Human");;
+//        defaultDeckPath = "";
+//        defaultOtherPlayerIndex = "1";
+//        defaultComputerName = "Computer";
+//
+//        dimensions = new CardDimensions(cardScalingFactor);
+//        dimensionsEnlarged = new CardDimensions(cardScalingFactorEnlarged);
+
     }
 
 }
