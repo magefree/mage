@@ -33,6 +33,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.decks.Deck;
+import mage.constants.TableState;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
@@ -276,7 +277,11 @@ public class User {
         }
         for (Entry<UUID, Table> entry: tables.entrySet()) {
             entry.getValue().leaveTable(entry.getKey());
-            if (TableManager.getInstance().isTableOwner(entry.getValue().getId(), userId)) {
+            // remove tables here only, if the match or tournament did not start yet (states waiting/starting).
+            // all other situations have to lead to a fnished match / tournament where players left / conceded for which reasons ever
+            if (TableManager.getInstance().isTableOwner(entry.getValue().getId(), userId)
+                    && (entry.getValue().getState().equals(TableState.WAITING)
+                       || entry.getValue().getState().equals(TableState.STARTING))) {
                 TableManager.getInstance().removeTable(userId, entry.getValue().getId());
             }
         }
