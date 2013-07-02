@@ -149,15 +149,17 @@ public class Table implements Serializable {
             throw new GameException("Seat is occupied.");
         }
         seat.setPlayer(player);
-        if (isReady())
+        if (isReady()) {
             state = TableState.STARTING;
+        }
         return seat.getPlayer().getId();
     }
 
     private boolean isReady() {
         for (int i = 0; i < numSeats; i++ ) {
-            if (seats[i].getPlayer() == null)
+            if (seats[i].getPlayer() == null) {
                 return false;
+            }
         }
         return true;
     }
@@ -172,8 +174,9 @@ public class Table implements Serializable {
 
     public Seat getNextAvailableSeat(String playerType) {
         for (int i = 0; i < numSeats; i++ ) {
-            if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType))
+            if (seats[i].getPlayer() == null && seats[i].getPlayerType().equals(playerType)) {
                 return seats[i];
+            }
         }
         return null;
     }
@@ -183,8 +186,9 @@ public class Table implements Serializable {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
                 seats[i].setPlayer(null);
-                if (state == TableState.STARTING)
+                if (state == TableState.STARTING) {
                     state = TableState.WAITING;
+                }
                 break;
             }
         }

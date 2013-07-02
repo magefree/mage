@@ -91,7 +91,7 @@ public class TableView implements Serializable {
             this.controllerName += sb.toString();
             this.deckType = table.getDeckType();
             if (table.getMatch().getGames().isEmpty()) {
-                this.additionalInfo = "";
+                this.additionalInfo = new StringBuilder("Timer: ").append(table.getMatch().getOptions().getMatchTimeLimit().toString()).toString();
             } else {
                 this.additionalInfo = sbScore.toString();
             }

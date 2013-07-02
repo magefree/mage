@@ -131,6 +131,11 @@ public class MatchOptions implements Serializable {
         return matchTimeLimit.getTimeLimit();
     }
 
+
+    public MatchTimeLimit getMatchTimeLimit() {
+        return this.matchTimeLimit;
+    }
+    
     public void setMatchTimeLimit(MatchTimeLimit matchTimeLimit) {
         this.matchTimeLimit = matchTimeLimit;
     }
