@@ -103,6 +103,12 @@ public class GameManager {
         }
     }
 
+    public void quitMatch(UUID gameId, UUID userId) {
+        if (gameControllers.containsKey(gameId)) {
+            gameControllers.get(gameId).quit(userId);
+        }
+    }
+
     public void undo(UUID gameId, UUID userId) {
         if (gameControllers.containsKey(gameId)) {
             gameControllers.get(gameId).undo(userId);

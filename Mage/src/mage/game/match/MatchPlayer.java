@@ -40,7 +40,9 @@ public class MatchPlayer {
     private int wins;
     private int loses;
     private Deck deck;
+
     private Player player;
+    private boolean quitted;
     private boolean doneSideboarding;
 
     public MatchPlayer(Player player, Deck deck) {
@@ -49,6 +51,7 @@ public class MatchPlayer {
         this.wins = 0;
         this.loses = 0;
         this.doneSideboarding = true;
+        this.quitted = false;
     }
 
     public int getWins() {
@@ -102,4 +105,11 @@ public class MatchPlayer {
         return this.doneSideboarding;
     }
 
+    public boolean hasQuitted() {
+        return quitted;
+    }
+
+    public void setQuitted(boolean quitted) {
+        this.quitted = quitted;
+    }
 }

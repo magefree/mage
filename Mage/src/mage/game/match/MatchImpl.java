@@ -117,11 +117,19 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public boolean isMatchOver() {
+        int activePlayers = 0;
         for (MatchPlayer player: players) {
+            if (!player.hasQuitted()) {
+                activePlayers++;
+            }
             if (player.getWins() >= options.getWinsNeeded()) {
                 endTime = new Date();
                 return true;
             }
+        }
+        if (activePlayers < 2) {
+                endTime = new Date();
+                return true;
         }
         return false;
     }
@@ -157,10 +165,12 @@ public abstract class MatchImpl implements Match {
     protected void initGame(Game game) throws GameException {
         shufflePlayers();
         for (MatchPlayer matchPlayer: this.players) {
-            matchPlayer.getPlayer().init(game);
-            game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
-            game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
-            game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
+            if (!matchPlayer.hasQuitted()) {
+                matchPlayer.getPlayer().init(game);
+                game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
+                game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
+                game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
+            }
         }
         game.setPriorityTime(options.getPriorityTime());
     }
@@ -175,6 +185,9 @@ public abstract class MatchImpl implements Match {
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
             if (p != null) {
+                if (p.hasQuitted()) {
+                    player.setQuitted(true);
+                }
                 if (p.hasWon()) {
                     player.addWin();
                 }
@@ -191,7 +204,7 @@ public abstract class MatchImpl implements Match {
         Game game = getGame();
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
-            if (p != null && p.hasLost()) {
+            if (p != null && p.hasLost() && !p.hasQuitted()) {
                 loserId = p.getId();
             }
         }
@@ -206,8 +219,10 @@ public abstract class MatchImpl implements Match {
     @Override
     public void sideboard() {
         for (MatchPlayer player: this.players) {
-            player.setSideboarding();
-            player.getPlayer().sideboard(this, player.getDeck());
+            if (!player.hasQuitted()) {
+                player.setSideboarding();
+                player.getPlayer().sideboard(this, player.getDeck());
+            }
         }
         synchronized(this) {
             while (!isDoneSideboarding()) {
@@ -221,7 +236,7 @@ public abstract class MatchImpl implements Match {
     @Override
     public boolean isDoneSideboarding() {
         for (MatchPlayer player: this.players) {
-            if (!player.isDoneSideboarding()) {
+            if (!player.hasQuitted() && !player.isDoneSideboarding()) {
                 return false;
             }
         }
@@ -261,7 +276,11 @@ public abstract class MatchImpl implements Match {
         for (MatchPlayer mp :this.getPlayers()) {
             sb.append("- ").append(mp.getPlayer().getName());
             sb.append(" (").append(mp.getWins()).append(mp.getWins()==1?" win / ":" wins / ");
-            sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)\n":" losses)\n");
+            sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)":" losses)");
+            if (mp.hasQuitted()) {
+                sb.append(" QUITTED");
+            }
+            sb.append("\n");
         }
         sb.append("\n").append(this.getWinsNeeded()).append(this.getWinsNeeded() == 1 ? " win":" wins").append(" needed to win the match\n");
         sb.append("\nGame has started\n");

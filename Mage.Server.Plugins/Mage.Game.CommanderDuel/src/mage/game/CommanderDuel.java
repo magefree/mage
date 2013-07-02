@@ -74,15 +74,15 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
     @Override
     public void quit(UUID playerId) {
         super.quit(playerId);
-        end();
     }
 
     @Override
     public Set<UUID> getOpponents(UUID playerId) {
         Set<UUID> opponents = new HashSet<UUID>();
         for (UUID opponentId: this.getPlayer(playerId).getInRange()) {
-            if (!opponentId.equals(playerId))
+            if (!opponentId.equals(playerId)) {
                 opponents.add(opponentId);
+            }
         }
         return opponents;
     }

@@ -75,14 +75,29 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         JMenuItem menuItem;
 
         Pmenu = new JPopupMenu();
-        menuItem = new JMenuItem("Concede");
+
+        menuItem = new JMenuItem("Concede game");
         Pmenu.add(menuItem);
 
         // Concede
         menuItem.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede?", "Confirm concede", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the game?", "Confirm concede game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     MageFrame.getSession().concedeGame(gameId);
+                }
+            }
+        });
+
+        menuItem = new JMenuItem("Quit match");
+        Pmenu.add(menuItem);
+
+        // Quit match
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to quit the match?", "Confirm quit match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    MageFrame.getSession().quitMatch(gameId);
                 }
             }
         });
@@ -91,6 +106,7 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         Pmenu.add(menuItem);
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseReleased(MouseEvent Me) {
                 if (Me.isPopupTrigger() && playingMode) {
                     Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());

@@ -417,7 +417,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     player.won(this);
                 }
             }
-            state.endGame();
+            end();
             endTime = new Date();
             return true;
         }
@@ -736,9 +736,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public void end() {
-        state.endGame();
-        for (Player player: state.getPlayers().values()) {
-            player.abort();
+        if (!state.isGameOver()) {
+            state.endGame();
+            for (Player player: state.getPlayers().values()) {
+                player.abort();
+            }
         }
     }
 
@@ -797,8 +799,8 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public synchronized void quit(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            leave(playerId);
-            fireInformEvent(player.getName() + " has left the game.");
+            player.quit(this);
+            fireInformEvent(player.getName() + " has quitted the match.");
         }
     }
 
@@ -1580,9 +1582,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     @Override
     public synchronized void leave(UUID playerId) {
         Player player = getPlayer(playerId);
+        if (player.hasLeft()) {
+            return;
+        }
         player.leave();
         if (this.isGameOver()) {
-            // no need to remove objects if only one player is left
+            // no need to remove objects if only one player is left so the game is over
             return;
         }
         //20100423 - 800.4a

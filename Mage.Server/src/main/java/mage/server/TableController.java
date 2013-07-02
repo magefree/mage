@@ -358,22 +358,24 @@ public class TableController {
             String creator = null;
             String opponent = null;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-                User user = UserManager.getInstance().getUser(entry.getKey());
-                if (user != null) {
-                    user.gameStarted(match.getGame().getId(), entry.getValue());
-                    if (creator == null) {
-                        creator = user.getName();
-                    } else {
-                        if (opponent == null) {
-                            opponent = user.getName();
+                if (!match.getPlayer(entry.getValue()).hasQuitted()) {
+                    User user = UserManager.getInstance().getUser(entry.getKey());
+                    if (user != null) {
+                        user.gameStarted(match.getGame().getId(), entry.getValue());
+                        if (creator == null) {
+                            creator = user.getName();
+                        } else {
+                            if (opponent == null) {
+                                opponent = user.getName();
+                            }
                         }
                     }
-                }
-                else {
-                    TableManager.getInstance().removeTable(table.getId());
-                    GameManager.getInstance().removeGame(match.getGame().getId());
-                    logger.warn("Unable to find player " + entry.getKey());
-                    break;
+                    else {
+                        TableManager.getInstance().removeTable(table.getId());
+                        GameManager.getInstance().removeGame(match.getGame().getId());
+                        logger.warn("Unable to find player " + entry.getKey());
+                        break;
+                    }
                 }
             }
             ServerMessagesUtil.getInstance().incGamesStarted();

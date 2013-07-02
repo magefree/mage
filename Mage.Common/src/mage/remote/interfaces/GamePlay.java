@@ -53,6 +53,8 @@ public interface GamePlay {
 
     boolean concedeGame(UUID gameId);
 
+    boolean quitMatch(UUID gameId);
+
     boolean submitDeck(UUID tableId, DeckCardLists deck);
 
     boolean updateDeck(UUID tableId, DeckCardLists deck);

@@ -28,16 +28,41 @@
 
 package mage.players;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpecialAction;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
 import mage.abilities.costs.AdjustingSourceCosts;
 import mage.abilities.costs.AlternativeCost;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.actions.MageDrawAction;
@@ -46,7 +71,13 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
-import mage.constants.*;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
+import mage.constants.SpellAbilityType;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -72,9 +103,6 @@ import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
-import java.util.*;
-
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
 
@@ -84,6 +112,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     /**
      * Means what exactly?
+     * No more actions?
      */
     protected boolean abort;
     protected final UUID playerId;
@@ -113,7 +142,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
      * Note! This differs from passedTurn as it doesn't care about spells and abilities in the stack and will pass them as well.
      */
     protected boolean passedAllTurns;
+
+    // conceded or connection lost game
     protected boolean left;
+    // quitted match
+    protected boolean quitted;
+
     protected RangeOfInfluence range;
     protected Set<UUID> inRange = new HashSet<UUID>();
     protected boolean isTestMode = false;
@@ -174,6 +208,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.turns = player.turns;
 
         this.left = player.left;
+        this.quitted = player.quitted;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
@@ -220,8 +255,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.manaPool = player.getManaPool().copy();
         this.turns = player.getTurns();
 
-
         this.left = player.hasLeft();
+        this.quitted = player.hasQuitted();
         this.range = player.getRange();
         this.canGainLife = player.isCanGainLife();
         this.canLoseLife = player.isCanLoseLife();
@@ -274,6 +309,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.wins = false;
         this.loses = false;
         this.left = false;
+        // quittet won't be reset because the player stays quit
         this.passed = false;
         this.passedTurn = false;
         this.passedAllTurns = false;
@@ -367,7 +403,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (!playerId.equals(this.getId())) {
             this.playersUnderYourControl.add(playerId);
             Player player = game.getPlayer(playerId);
-            if (!player.hasLeft() && !player.hasLost()) {
+            if (!player.hasLeft()&& !player.hasLost()) {
                 player.setGameUnderYourControl(false);
                 player.setTurnControlledBy(this.getId());
             }
@@ -1217,7 +1253,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void resetPassed() {
-        if (!this.loses && !this.left) {
+        if (!this.loses && !this.hasLeft()) {
             this.passed = false;
         }
         else {
@@ -1226,9 +1262,13 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
+    public void quit(Game game) {
+        quitted = true;
+        this.concede(game);
+    }
+
+    @Override
     public void concede(Game game) {
-        this.loses = true;
-        this.abort();
         game.leave(playerId);
     }
 
@@ -1265,7 +1305,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.graveyard.clear();
         this.library.clear();
     }
-
+    
     @Override
     public boolean hasLeft() {
         return this.left;
@@ -1279,7 +1319,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (!this.wins) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
             }
-            game.leave(playerId);
+            if (!hasLeft()) {
+                game.leave(playerId);
+            }
         }
     }
 
@@ -1802,4 +1844,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public int getPriorityTimeLeft() {
         return priorityTimeLeft;
     }
+
+    @Override
+    public boolean hasQuitted() {
+        return quitted;
+    }
+
 }

@@ -306,6 +306,10 @@ public class GameController implements GameCallback {
         game.concede(getPlayerId(userId));
     }
 
+    public void quit(UUID userId) {
+        game.quit(getPlayerId(userId));
+    }
+
     public void undo(UUID userId) {
         game.undo(getPlayerId(userId));
     }
