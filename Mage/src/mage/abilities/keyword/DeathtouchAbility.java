@@ -56,7 +56,7 @@ public class DeathtouchAbility extends StaticAbility<DeathtouchAbility> implemen
 
     @Override
     public String getRule() {
-        return "Deathtouch";
+        return "Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>";
     }
 
     @Override
