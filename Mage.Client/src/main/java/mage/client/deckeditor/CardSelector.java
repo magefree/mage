@@ -310,7 +310,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             else {
                 List<CardInfo> foundCards = CardRepository.instance.findCards(buildCriteria());
                 for (CardInfo cardInfo : foundCards) {
-                    Card card = cardInfo.getCard();
+                    Card card = cardInfo.getMockCard();
                     if (filter.match(card, null)) {
                         filteredCards.add(card);
                     }

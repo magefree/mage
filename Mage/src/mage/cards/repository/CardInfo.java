@@ -38,8 +38,12 @@ import java.util.List;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
+import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.mock.MockCard;
+import mage.cards.mock.MockSplitCard;
+import mage.constants.SpellAbilityType;
 
 /**
  *
@@ -55,7 +59,7 @@ public class CardInfo {
     protected int cardNumber;
     @DatabaseField
     protected String setCode;
-    @DatabaseField
+    @DatabaseField(unique = true)
     protected String className;
     @DatabaseField
     protected String power;
@@ -88,6 +92,8 @@ public class CardInfo {
     @DatabaseField
     protected boolean splitCard;
     @DatabaseField
+    protected boolean splitCardHalf;
+    @DatabaseField
     protected boolean flipCard;
     @DatabaseField
     protected boolean doubleFaced;
@@ -115,7 +121,7 @@ public class CardInfo {
         this.flipCard = card.isFlipCard();
         this.flipCardName = card.getFlipCardName();
 
-        this.doubleFaced = card.canTransform();
+        this.doubleFaced = card.canTransform() && card.getSecondCardFace() != null;
         this.nightCard = card.isNightCard();
         Card secondSide = card.getSecondCardFace();
         if (secondSide != null) {
@@ -133,10 +139,31 @@ public class CardInfo {
         this.setSuperTypes(card.getSupertype());
         this.setManaCosts(card.getManaCost().getSymbols());
         this.setRules(card.getRules());
+
+        SpellAbility spellAbility = card.getSpellAbility();
+        if (spellAbility != null) {
+            SpellAbilityType spellAbilityType = spellAbility.getSpellAbilityType();
+            if (spellAbilityType == SpellAbilityType.SPLIT_LEFT || spellAbilityType == SpellAbilityType.SPLIT_RIGHT) {
+                this.className = this.setCode + "." + this.name;
+                this.splitCardHalf = true;
+            }
+        }
     }
 
     public Card getCard() {
         return CardImpl.createCard(className);
+    }
+
+    public Card getMockCard() {
+        if (this.splitCard) {
+            return new MockSplitCard(this);
+        } else {
+            return new MockCard(this);
+        }
+    }
+
+    public boolean usesVariousArt() {
+        return Character.isDigit(className.charAt(className.length() - 1));
     }
 
     public ObjectColor getColor() {
@@ -246,6 +273,10 @@ public class CardInfo {
 
     public boolean isSplitCard() {
         return splitCard;
+    }
+
+    public boolean isSplitCardHalf() {
+        return splitCardHalf;
     }
 
     public boolean isFlipCard() {

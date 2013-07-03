@@ -33,6 +33,7 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.SplitCard;
 import mage.util.ClassScanner;
 
 /**
@@ -53,13 +54,19 @@ public class CardScanner {
         List<String> packages = new ArrayList<String>();
         for (ExpansionSet set : Sets.getInstance().values()) {
             packages.add(set.getPackageName());
+            ExpansionRepository.instance.add(new ExpansionInfo(set));
         }
 
         for (Class c : ClassScanner.findClasses(packages, CardImpl.class)) {
             if (!CardRepository.instance.cardExists(c.getCanonicalName())) {
                 Card card = CardImpl.createCard(c);
-                if (card != null && !card.isNightCard()) {
+                if (card != null) {
                     cardsToAdd.add(new CardInfo(card));
+                    if (card instanceof SplitCard) {
+                        SplitCard splitCard = (SplitCard) card;
+                        cardsToAdd.add(new CardInfo(splitCard.getLeftHalfCard()));
+                        cardsToAdd.add(new CardInfo(splitCard.getRightHalfCard()));
+                    }
                 }
             }
         }

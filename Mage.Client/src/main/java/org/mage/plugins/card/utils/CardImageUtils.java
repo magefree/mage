@@ -12,22 +12,16 @@ public class CardImageUtils {
     private static HashMap<CardDownloadData, String> pathCache = new HashMap<CardDownloadData, String>();
 
     /**
-     * Get path to image for specific card.
-     * 
-     * @param card
-     *            card to get path for
+     *
      * @return String if image exists, else null
      */
-    public static String getImagePath(CardDownloadData card) {
-        String filePath;
-
-        TFile file;
+    public static String generateTokenImagePath(CardDownloadData card) {
         if (card.isToken()) {
             if (pathCache.containsKey(card)) {
                 return pathCache.get(card);
             }
-            filePath = getTokenImagePath(card);
-            file = new TFile(filePath);
+            String filePath = getTokenImagePath(card);
+            TFile file = new TFile(filePath);
 
             if (!file.exists()) {
                 filePath = searchForCardImage(card);
@@ -36,36 +30,26 @@ public class CardImageUtils {
 
             if (file.exists()) {
                 pathCache.put(card, filePath);
+                return filePath;
             }
-        } else {
-            String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-            String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-            filePath = getImagePath(card, path);
-            file = new TFile(filePath);
         }
 
-        if (file.exists()) {
-            return filePath;
-        } else {
-            return null;
-        }
+        return null;
     }
 
     private static String getTokenImagePath(CardDownloadData card) {
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-        String filename = getImagePath(card, path);
+        String filename = generateImagePath(card);
 
         TFile file = new TFile(filename);
         if (!file.exists()) {
             CardDownloadData updated = new CardDownloadData(card);
             updated.setName(card.getName() + " 1");
-            filename = getImagePath(updated, path);
+            filename = generateImagePath(updated);
             file = new TFile(filename);
             if (!file.exists()) {
                 updated = new CardDownloadData(card);
                 updated.setName(card.getName() + " 2");
-                filename = getImagePath(updated, path);
+                filename = generateImagePath(updated);
             }
         }
 
@@ -129,7 +113,10 @@ public class CardImageUtils {
         }
     }
 
-    public static String getImagePath(CardDownloadData card, String imagesPath) {
+    public static String generateImagePath(CardDownloadData card) {
+        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
+        String imagesPath = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
+
         String imageDir = getImageDir(card, imagesPath);
         String imageName;
 

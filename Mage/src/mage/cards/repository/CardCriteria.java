@@ -171,7 +171,9 @@ public class CardCriteria {
 
     public void buildQuery(QueryBuilder qb) throws SQLException {
         Where where = qb.where();
-        int clausesCount = 0;
+        where.eq("nightCard", false);
+        where.eq("splitCardHalf", false);
+        int clausesCount = 2;
         if (name != null) {
             where.like("name", new SelectArg('%' + name + '%'));
             clausesCount++;

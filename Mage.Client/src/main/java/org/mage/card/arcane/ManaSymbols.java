@@ -1,6 +1,7 @@
 package org.mage.card.arcane;
 
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ImageHelper;
 import mage.client.util.gui.BufferedImageBuilder;
@@ -49,7 +50,7 @@ public class ManaSymbols {
             } catch (Exception e) {
             }
         }
-        List<String> setCodes = CardRepository.instance.getSetCodes();
+        List<String> setCodes = ExpansionRepository.instance.getSetCodes();
         for (String set : setCodes) {
             File file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET + set + "-C.jpg");
             try {
@@ -106,7 +107,7 @@ public class ManaSymbols {
         }
 
         File file;
-        for (String set : CardRepository.instance.getSetCodes()) {
+        for (String set : ExpansionRepository.instance.getSetCodes()) {
             file = new File(getSymbolsPath() + Constants.RESOURCE_PATH_SET_SMALL);
             if (!file.exists()) {
                 break;

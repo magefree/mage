@@ -31,11 +31,14 @@ package mage.remote;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.constants.Constants.SessionState;
 import mage.game.GameException;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentOptions;
-import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.MageServer;
 import mage.interfaces.ServerState;
@@ -71,18 +74,12 @@ public class SessionImpl implements Session {
     private SessionState sessionState = SessionState.DISCONNECTED;
     private Connection connection;
 
-    private Action embeddedMageServerAction;
-
     private static boolean debugMode = false;
-    private static boolean standalone = true;
 
     private boolean canceled = false;
 
     static {
         debugMode = System.getProperty("debug.mage") != null;
-        if (System.getProperty("skip.standalone") != null) {
-            standalone = false;
-        }
     }
 
     public SessionImpl(MageClient client) {
@@ -107,11 +104,6 @@ public class SessionImpl implements Session {
 
     @Override
     public boolean connect() {
-
-        /*if (standalone && connection.getHost().equals("localhost")) {
-            runEmbeddedMageServer();
-        }*/
-
         sessionState = SessionState.CONNECTING;
         try {
             System.setProperty("http.nonProxyHosts", "code.google.com");
@@ -177,6 +169,7 @@ public class SessionImpl implements Session {
             if (registerResult) {
                 sessionState = SessionState.CONNECTED;
                 serverState = server.getServerState();
+                updateDatabase();
                 logger.info(new StringBuilder("Connected as ").append(this.getUserName()).append(" to MAGE server at ").append(connection.getHost()).append(":").append(connection.getPort()).toString());
                 client.connected(new StringBuilder("Connected as ").append(this.getUserName()).append(" to ").append(connection.getHost()).append(":").append(connection.getPort()).append(" ").toString());
                 return true;
@@ -205,13 +198,15 @@ public class SessionImpl implements Session {
         return false;
     }
 
-    private void runEmbeddedMageServer() {
-        if (embeddedMageServerAction != null) {
-            try {
-                embeddedMageServerAction.execute();
-            } catch (MageException e) {
-                logger.error(e);
-            }
+    private void updateDatabase() {
+        List<String> classNames = CardRepository.instance.getClassNames();
+        List<CardInfo> cards = server.getMissingCardsData(classNames);
+        CardRepository.instance.addCards(cards);
+
+        List<String> setCodes = ExpansionRepository.instance.getSetCodes();
+        List<ExpansionInfo> expansions = server.getMissingExpansionData(setCodes);
+        for (ExpansionInfo expansion : expansions) {
+            ExpansionRepository.instance.add(expansion);
         }
     }
 
@@ -1196,11 +1191,6 @@ public class SessionImpl implements Session {
     }
 
     @Override
-    public void setEmbeddedMageServerAction(Action embeddedMageServerAction) {
-        this.embeddedMageServerAction = embeddedMageServerAction;
-    }
-
-    @Override
     public boolean ping() {
         try {
             if (isConnected()) {
@@ -1217,7 +1207,6 @@ public class SessionImpl implements Session {
         return false;
     }
 }
-
 class MageAuthenticator extends Authenticator {
 
     private String username;

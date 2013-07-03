@@ -5,9 +5,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
-import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -16,35 +15,36 @@ import mage.cards.repository.CardRepository;
  */
 public class ConstructedFormats {
 
-    private static final String[] constructedFormats = {"- All Sets", "- Standard", "- Extended", "- Modern",
-                                                        "Modern Masters",
-                                                        "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash","Return to Ravnica", 
-                                                        "Magic 2013", "Planechase 2012",
-                                                        "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad", 
-                                                        "Magic 2012", "Commander",
-                                                        "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
-                                                        "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar", 
-                                                        "Magic 2010", "Planechase",
-                                                        "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
-                                                        "* Shadowmoor Block", "Shadowmoor", "Eventide",
-                                                        "* Lorwyn Block", "Lorwyn", "Morningtide",
-                                                        "* Time Spiral Block", "Future Sight", "Planar Chaos", "Time Spiral", "Tenth Edition",
-                                                        "* Ravnica Block", "Dissension", "Guildpact", "Ravnica: City of Guilds",
-                                                        "* Kamigawa Block", "Saviors of Kamigawa", "Betrayers of Kamigawa", "Champions of Kamigawa","Ninth Edition",
-                                                        "* Mirrodin Block", "Fifth Dawn", "Darksteel", "Mirrodin",
-                                                        "* Onslaught Block", "Scourge", "Legions", "Onslaught","Eighth Edition",
-                                                        "* Odyssey Block", "Judgment", "Torment", "Odyssey",
-                                                        "* Invasion Block", "Apocalypse", "Planeshift", "Invasion","Seventh Edition",
-                                                        "* Masquerade Block", "Prophecy", "Nemesis", "Mercadian Masques",
-                                                        "* Urza Block", "Urza's Destiny", "Urza's Legacy", "Urza's Saga", "Sixth Edition",
-                                                        "* Tempest Block", "Exodus", "Stronghold", "Tempest",
-                                                        "* Mirage Block", "Weatherlight", "Visions", "Mirage", "Fifth Edition",
-                                                        "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
-                                                        "Homelands","Fallen Empires","The Dark","Legends","Antiquities", "Arabian Nights",
-                                                        "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
-                                                        "Guru",
-                                                        "Duel Decks: Elspeth vs. Tezzeret"
-                                                        };
+    private static final String[] constructedFormats = {
+            "- All Sets", "- Standard", "- Extended", "- Modern",
+            "Modern Masters",
+            "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
+            "Magic 2013", "Planechase 2012",
+            "* Innistrad Block", "Avacyn Restored", "Dark Ascension", "Innistrad",
+            "Magic 2012", "Commander",
+            "* Scars of Mirrodin Block", "New Phyrexia", "Mirrodin Besieged", "Scars of Mirrodin", "Magic 2011",
+            "* Zendikar Block", "Rise of the Eldrazi", "Worldwake", "Zendikar",
+            "Magic 2010", "Planechase",
+            "* Shards of Alara Block", "Alara Reborn", "Conflux", "Shards of Alara",
+            "* Shadowmoor Block", "Shadowmoor", "Eventide",
+            "* Lorwyn Block", "Lorwyn", "Morningtide",
+            "* Time Spiral Block", "Future Sight", "Planar Chaos", "Time Spiral", "Tenth Edition",
+            "* Ravnica Block", "Dissension", "Guildpact", "Ravnica: City of Guilds",
+            "* Kamigawa Block", "Saviors of Kamigawa", "Betrayers of Kamigawa", "Champions of Kamigawa", "Ninth Edition",
+            "* Mirrodin Block", "Fifth Dawn", "Darksteel", "Mirrodin",
+            "* Onslaught Block", "Scourge", "Legions", "Onslaught", "Eighth Edition",
+            "* Odyssey Block", "Judgment", "Torment", "Odyssey",
+            "* Invasion Block", "Apocalypse", "Planeshift", "Invasion", "Seventh Edition",
+            "* Masquerade Block", "Prophecy", "Nemesis", "Mercadian Masques",
+            "* Urza Block", "Urza's Destiny", "Urza's Legacy", "Urza's Saga", "Sixth Edition",
+            "* Tempest Block", "Exodus", "Stronghold", "Tempest",
+            "* Mirage Block", "Weatherlight", "Visions", "Mirage", "Fifth Edition",
+            "* Ice Age Block", "Coldsnap", "Alliances", "Ice Age", "Fourth Edition",
+            "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
+            "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
+            "Guru",
+            "Duel Decks: Elspeth vs. Tezzeret"
+    };
     
     private ConstructedFormats() {
     }
@@ -379,9 +379,7 @@ public class ConstructedFormats {
     }
 
     private static void buildLists() {
-        for (String setCode : CardRepository.instance.getSetCodes()) {
-            ExpansionSet set = Sets.findSet(setCode);
-
+        for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
             if (set.getReleaseDate().after(standardDate)) {
                 standard.add(set.getCode());
             }

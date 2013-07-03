@@ -29,6 +29,7 @@ public class WizardCardsImageSource implements CardImageSource {
     public WizardCardsImageSource() {
         sets = new HashMap<String, Map<String, String>>();
         setsAliases = new HashMap<String, String>();
+        setsAliases.put("M14", "magic2014coreset/cig");
         setsAliases.put("MMA", "modernmasters/cig");
         setsAliases.put("DGM", "dragonsmaze/cig");
         setsAliases.put("GTC", "gatecrash/cig");
@@ -50,7 +51,6 @@ public class WizardCardsImageSource implements CardImageSource {
         setsAliases.put("ARB", "alarareborn/spoiler");
         setsAliases.put("CON", "conflux/spoiler");
         setsAliases.put("ALA", "shardsofalara/spoiler");
-        setsAliases.put("HOP", "planechase/cig");
         setsAliases.put("PC2", "planechase2012edition/cig");
     }
 
@@ -60,16 +60,16 @@ public class WizardCardsImageSource implements CardImageSource {
             Document doc = Jsoup.connect("http://www.wizards.com/magic/tcg/article.aspx?x=mtg/tcg/" + setsAliases.get(cardSet)).get();
             Elements cardsImages = doc.select("img[height$=370]");
             for (int i = 0; i < cardsImages.size(); i++) {
-                String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE").replace("\u2019", "'");
+                String cardName = normalizeName(cardsImages.get(i).attr("title"));
                 if (cardName != null && !cardName.isEmpty()) {
                     if (cardName.equals("Forest") || cardName.equals("Swamp") || cardName.equals("Mountain") || cardName.equals("Island") || cardName.equals("Plains")) {
                         int landNumber = 1;
-                        while (setLinks.get(cardName + landNumber) != null) {
+                        while (setLinks.get((cardName + landNumber).toLowerCase()) != null) {
                             landNumber++;
                         }
                         cardName += landNumber;
                     }
-                    setLinks.put(cardName, cardsImages.get(i).attr("src"));
+                    setLinks.put(cardName.toLowerCase(), cardsImages.get(i).attr("src"));
                 } else {
                     setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
                 }
@@ -77,12 +77,12 @@ public class WizardCardsImageSource implements CardImageSource {
 
             cardsImages = doc.select("img[height$=470]");
             for (int i = 0; i < cardsImages.size(); i++) {
-                String cardName = cardsImages.get(i).attr("title").replace("\u00C6", "AE").replace("\u2019", "'");
+                String cardName = normalizeName(cardsImages.get(i).attr("title"));
 
                 if (cardName != null && !cardName.isEmpty()) {
                     String[] cardNames = cardName.replace(")", "").split(" \\(");
                     for (String name : cardNames) {
-                        setLinks.put(name, cardsImages.get(i).attr("src"));
+                        setLinks.put(name.toLowerCase(), cardsImages.get(i).attr("src"));
                     }
                 } else {
                     setLinks.put(Integer.toString(i), cardsImages.get(i).attr("src"));
@@ -92,6 +92,18 @@ public class WizardCardsImageSource implements CardImageSource {
             System.out.println("Exception when parsing the wizards page: " + ex.getMessage());
         }
         return setLinks;
+    }
+
+    private String normalizeName(String name) {
+        return name.replace("\u2014", "-").replace("\u2019", "'")
+                .replace("\u00C6", "AE").replace("\u00E6", "ae")
+                .replace("\u00C1", "A").replace("\u00E1", "a")
+                .replace("\u00C2", "A").replace("\u00E2", "a")
+                .replace("\u00D6", "O").replace("\u00F6", "o")
+                .replace("\u00DB", "U").replace("\u00FB", "u")
+                .replace("\u00DC", "U").replace("\u00FC", "u")
+                .replace("\u00E9", "e").replace("&", "//")
+                .replace("Hintreland Scourge", "Hinterland Scourge");
     }
 
     @Override
@@ -110,7 +122,7 @@ public class WizardCardsImageSource implements CardImageSource {
                 setLinks = getSetLinks(cardSet);
                 sets.put(cardSet, setLinks);
             }
-            String link = setLinks.get(card.getDownloadName());
+            String link = setLinks.get(card.getDownloadName().toLowerCase());
             if (link == null) {
                 if (setLinks.size() >= collectorId) {
                     link = setLinks.get(Integer.toString(collectorId - 1));

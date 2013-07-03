@@ -73,14 +73,21 @@ public class ImageCache {
 
                         CardDownloadData info = new CardDownloadData(name, set, collectorId, usesVariousArt, type);
 
+                        String path;
                         if (collectorId == 0) {
                             info.setToken(true);
+                            path = CardImageUtils.generateTokenImagePath(info);
+                        } else {
+                            path = CardImageUtils.generateImagePath(info);
                         }
-                        String path = CardImageUtils.getImagePath(info);
+
                         if (path == null) {
                             return null;
                         }
                         TFile file = new TFile(path);
+                        if (!file.exists()) {
+                            return null;
+                        }
 
                         if (thumbnail && path.endsWith(".jpg")) {
                             String thumbnailPath = buildThumbnailPath(path);

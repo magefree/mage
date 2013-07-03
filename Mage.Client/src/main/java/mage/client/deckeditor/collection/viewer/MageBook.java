@@ -31,11 +31,11 @@ package mage.client.deckeditor.collection.viewer;
 import mage.cards.Card;
 import mage.cards.CardDimensions;
 import mage.cards.MageCard;
-import mage.client.MageFrame;
-import mage.cards.CardImpl;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionRepository;
+import mage.client.MageFrame;
 import mage.client.cards.BigCard;
 import mage.client.components.HoverButton;
 import mage.client.plugins.impl.Plugins;
@@ -226,7 +226,7 @@ public class MageBook extends JComponent {
         Rectangle rectangle = new Rectangle();
         rectangle.translate(OFFSET_X, OFFSET_Y);
         for (int i = 0; i < Math.min(conf.CARDS_PER_PAGE / 2, size); i++) {
-            Card card = CardImpl.createCard(cards.get(i).getClassName());
+            Card card = cards.get(i).getMockCard();
             addCard(new CardView(card), bigCard, null, rectangle);
             rectangle = CardPosition.translatePosition(i, rectangle, conf);
         }
@@ -237,7 +237,7 @@ public class MageBook extends JComponent {
 
         rectangle.setLocation(second_page_x, OFFSET_Y);
         for (int i = conf.CARDS_PER_PAGE / 2; i < Math.min(conf.CARDS_PER_PAGE, size); i++) {
-            Card card = CardImpl.createCard(cards.get(i).getClassName());
+            Card card = cards.get(i).getMockCard();
             addCard(new CardView(card), bigCard, null, rectangle);
             rectangle = CardPosition.translatePosition(i - conf.CARDS_PER_PAGE / 2, rectangle, conf);
         }
@@ -301,7 +301,7 @@ public class MageBook extends JComponent {
         this.setsToDisplay = ConstructedFormats.getSetsByFormat(format);
         if (this.setsToDisplay.isEmpty()) {
             // display all
-            this.setsToDisplay = CardRepository.instance.getSetCodes();
+            this.setsToDisplay = ExpansionRepository.instance.getSetCodes();
         }
         addSetTabs();
         tabs.get(0).execute();

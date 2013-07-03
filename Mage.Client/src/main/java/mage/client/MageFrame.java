@@ -25,22 +25,15 @@
 * authors and should not be interpreted as representing official policies, either expressed
 * or implied, of BetaSteward_at_googlemail.com.
 */
-
-/*
- * MageFrame.java
- *
- * Created on 15-Dec-2009, 9:11:37 PM
- */
-
 package mage.client;
 
 import de.schlichtherle.truezip.file.TArchiveDetector;
 import de.schlichtherle.truezip.file.TConfig;
 import de.schlichtherle.truezip.fs.FsOutputOption;
 import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.cards.repository.CardScanner;
 import mage.client.cards.BigCard;
 import mage.client.chat.ChatPanel;
 import mage.client.components.MageComponents;
@@ -67,7 +60,6 @@ import mage.client.util.SettingsManager;
 import mage.client.util.gui.ArrowBuilder;
 import mage.client.util.MusicPlayer;
 import mage.components.ImagePanel;
-import mage.interfaces.Action;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
@@ -75,7 +67,6 @@ import mage.remote.Connection;
 import mage.remote.Connection.ProxyType;
 import mage.remote.Session;
 import mage.remote.SessionImpl;
-import mage.server.Main;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
 import org.mage.card.arcane.ManaSymbols;
@@ -94,8 +85,10 @@ import java.awt.image.BufferedImage;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -205,12 +198,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         session = new SessionImpl(this);
-        session.setEmbeddedMageServerAction(new Action() {
-            @Override
-            public void execute() {
-                Main.main(new String[]{});
-            }
-        });
         callbackClient = new CallbackClientImpl(this);
         connectDialog = new ConnectDialog();
         desktopPane.add(connectDialog, JLayeredPane.POPUP_LAYER);
@@ -480,28 +467,22 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     private void checkForNewImages() {
         long beforeCall = System.currentTimeMillis();
-        List<CardInfo> cards = CardRepository.instance.getAllCards();
+        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
         logger.info("Card pool load time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
 
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
         beforeCall = System.currentTimeMillis();
-        if (DownloadPictures.checkForNewCards(cards, path)) {
+        if (DownloadPictures.checkForNewCards(cards)) {
             logger.info("Card images checking time: " + ((System.currentTimeMillis() - beforeCall) / 1000 + " seconds"));
             if (JOptionPane.showConfirmDialog(null, "New cards are available.  Do you want to download the images?", "New images available", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                DownloadPictures.startDownload(null, cards, path);
+                DownloadPictures.startDownload(null, cards);
             }
         }
     }
 
     public void btnImagesActionPerformed(java.awt.event.ActionEvent evt) {
-        List<CardInfo> cards = CardRepository.instance.getAllCards();
+        List<CardInfo> cards = CardRepository.instance.findCards(new CardCriteria());
 
-        String useDefault = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_USE_DEFAULT, "true");
-        String path = useDefault.equals("true") ? null : PreferencesDialog.getCachedValue(PreferencesDialog.KEY_CARD_IMAGES_PATH, null);
-
-        DownloadPictures.startDownload(null, cards, path);
+        DownloadPictures.startDownload(null, cards);
     }
 
     public void btnSymbolsActionPerformed(java.awt.event.ActionEvent evt) {
@@ -1005,7 +986,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CardScanner.scan();
                 for (String arg : args) {
                     if (arg.startsWith(liteModeArg)) {
                         liteMode = true;

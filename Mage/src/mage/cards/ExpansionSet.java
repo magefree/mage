@@ -98,6 +98,10 @@ public abstract class ExpansionSet implements Serializable {
         return packageName;
     }
 
+    public String getBlockName() {
+        return blockName;
+    }
+
     @Override
     public String toString() {
         return name;

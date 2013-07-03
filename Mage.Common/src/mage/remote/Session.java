@@ -28,7 +28,6 @@
 
 package mage.remote;
 
-import mage.interfaces.Action;
 import mage.remote.interfaces.*;
 
 /**
@@ -38,5 +37,4 @@ import mage.remote.interfaces.*;
  */
 public interface Session extends ClientData, Connect, GamePlay, GameTypes, ServerState, ChatSession, Feedback, PlayerActions, Replays, Testable {
 
-    void setEmbeddedMageServerAction(Action embeddedMageServerAction);
 }

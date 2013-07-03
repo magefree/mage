@@ -79,7 +79,7 @@ public class AddLandDialog extends MageDialog {
         }
 
         for (int i = 0; i < number; i++) {
-            Card land = cards.get(random.nextInt(cards.size())).getCard();
+            Card land = cards.get(random.nextInt(cards.size())).getMockCard();
             deck.getCards().add(land);
         }
     }

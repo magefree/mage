@@ -50,8 +50,8 @@ import mage.watchers.Watcher;
 
 public abstract class SplitCard<T extends SplitCard<T>> extends CardImpl<T> {
 
-    private Card leftHalfCard;
-    private Card rightHalfCard;
+    protected Card leftHalfCard;
+    protected Card rightHalfCard;
 
     public SplitCard(UUID ownerId, int cardNumber, String nameLeft, String nameRight, Rarity rarity, CardType[] cardTypes, String costsLeft, String costsRight, boolean fused) {
         super(ownerId, cardNumber, new StringBuilder(nameLeft).append(" // ").append(nameRight).toString(), rarity, cardTypes, costsLeft + costsRight, (fused ?SpellAbilityType.SPLIT_FUSED:SpellAbilityType.SPLIT));

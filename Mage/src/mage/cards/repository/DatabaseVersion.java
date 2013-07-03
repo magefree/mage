@@ -11,7 +11,18 @@ import com.j256.ormlite.table.DatabaseTable;
 public class DatabaseVersion {
 
     @DatabaseField
+    protected String entity;
+
+    @DatabaseField
     protected Long version;
+
+    public String getEntity() {
+        return entity;
+    }
+
+    public void setEntity(String entity) {
+        this.entity = entity;
+    }
 
     public Long getVersion() {
         return version;
