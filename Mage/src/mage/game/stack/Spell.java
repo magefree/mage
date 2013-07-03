@@ -508,6 +508,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         return false;
     }
 
+    
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
         throw new UnsupportedOperationException("Unsupported operation");
@@ -614,4 +620,5 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     public Card getCard() {
         return card;
     }
+
 }
