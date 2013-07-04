@@ -58,6 +58,7 @@ import mage.client.dialog.NewTournamentDialog;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
 import mage.client.util.gui.GuiDisplayUtil;
+import mage.constants.MatchTimeLimit;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
@@ -536,6 +537,8 @@ public class TablesPanel extends javax.swing.JPanel {
                 options.setAttackOption(MultiplayerAttackOption.LEFT);
                 options.setRange(RangeOfInfluence.ALL);
                 options.setWinsNeeded(1);
+                options.setMatchTimeLimit(MatchTimeLimit.NONE);
+                options.setFreeMulligans(2);
                 table = session.createTable(roomId,    options);
 
                 session.joinTable(roomId, table.getTableId(), "Human", "Human", 1, DeckImporterUtil.importDeck("test.dck"));
