@@ -41,6 +41,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInASingleGraveyard;
 
 /**
  *
@@ -56,7 +57,7 @@ public class SereneRemembrance extends CardImpl<SereneRemembrance> {
 
         // Shuffle Serene Remembrance and up to three target cards from a single graveyard into their owners' libraries.
         this.getSpellAbility().addEffect(new SereneRemembranceEffect());
-        this.getSpellAbility().addTarget(new SereneRemembranceTargetCardsInGraveyard(0,3,new FilterCard()));
+        this.getSpellAbility().addTarget(new TargetCardInASingleGraveyard(0,3,new FilterCard("up to three target cards from a single graveyard")));
         
     }
 
@@ -112,37 +113,5 @@ class SereneRemembranceEffect extends OneShotEffect<SereneRemembranceEffect> {
             graveyardPlayer.shuffleLibrary(game);
         }
         return result;
-    }
-}
-
-class SereneRemembranceTargetCardsInGraveyard extends TargetCard<SereneRemembranceTargetCardsInGraveyard> {
-
-    public SereneRemembranceTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.targetName = "up to three target cards from a single graveyard";
-    }
-
-    public SereneRemembranceTargetCardsInGraveyard(final SereneRemembranceTargetCardsInGraveyard target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = this.getFirstTarget();
-        if (firstTarget != null) {
-            Card card = game.getCard(firstTarget);
-            Card targetCard = game.getCard(id);
-            if (card == null || targetCard == null
-                    || !card.getOwnerId().equals(targetCard.getOwnerId())) {
-                return false;
-            }
-        }
-        return super.canTarget(id, source, game);
-    }
-
-
-    @Override
-    public SereneRemembranceTargetCardsInGraveyard copy() {
-        return new SereneRemembranceTargetCardsInGraveyard(this);
     }
 }

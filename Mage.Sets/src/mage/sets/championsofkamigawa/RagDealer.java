@@ -45,6 +45,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;
+import mage.target.common.TargetCardInASingleGraveyard;
 
 /**
  *
@@ -65,7 +66,7 @@ public class RagDealer extends CardImpl<RagDealer> {
         // {2}{B}, {T}: Exile up to three target cards from a single graveyard.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new RagDealerExileEffect(), new ManaCostsImpl("{2}{B}"));
         ability.addCost(new TapSourceCost());
-        ability.addTarget(new RagDealerTargetCardsInGraveyard(0, 3, new FilterCard()));
+        ability.addTarget(new TargetCardInASingleGraveyard(0, 3, new FilterCard("up to three target cards from a single graveyard")));
         this.addAbility(ability);
     }
 
@@ -78,38 +79,6 @@ public class RagDealer extends CardImpl<RagDealer> {
         return new RagDealer(this);
     }
 
-}
-
-class RagDealerTargetCardsInGraveyard extends TargetCard<RagDealerTargetCardsInGraveyard> {
-
-    public RagDealerTargetCardsInGraveyard(int minNumTargets, int maxNumTargets, FilterCard filter) {
-        super(minNumTargets, maxNumTargets, Zone.GRAVEYARD, filter);
-        this.targetName = "up to three target cards from a single graveyard";
-    }
-
-    public RagDealerTargetCardsInGraveyard(final RagDealerTargetCardsInGraveyard target) {
-        super(target);
-    }
-
-    @Override
-    public boolean canTarget(UUID id, Ability source, Game game) {
-        UUID firstTarget = this.getFirstTarget();
-        if (firstTarget != null) {
-            Card card = game.getCard(firstTarget);
-            Card targetCard = game.getCard(id);
-            if (card == null || targetCard == null
-                    || !card.getOwnerId().equals(targetCard.getOwnerId())) {
-                return false;
-            }
-        }
-        return super.canTarget(id, source, game);
-    }
-
-
-    @Override
-    public RagDealerTargetCardsInGraveyard copy() {
-        return new RagDealerTargetCardsInGraveyard(this);
-    }
 }
 
 class RagDealerExileEffect extends OneShotEffect<RagDealerExileEffect> {

@@ -576,6 +576,20 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             return target.isChosen();
         }
 
+        if (target instanceof TargetCardInASingleGraveyard) {
+            List<Card> cards = new ArrayList<Card>();
+            for (Player player: game.getPlayers().values()) {
+                cards.addAll(player.getGraveyard().getCards(game));
+            }
+            while(!target.isChosen() && !cards.isEmpty()) {
+                Card pick = pickTarget(cards, outcome, target, source, game);
+                if (pick != null) {
+                    target.addTarget(pick.getId(), source, game);
+                }
+            }
+            return target.isChosen();
+        }
+
         throw new IllegalStateException("Target wasn't handled. class:" + target.getClass().toString());
     }
 

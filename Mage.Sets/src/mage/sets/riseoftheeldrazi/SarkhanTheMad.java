@@ -71,10 +71,12 @@ public class SarkhanTheMad extends CardImpl<SarkhanTheMad> {
         this.color.setRed(true);
 
         this.addAbility(new LoyaltyAbility(new SarkhanTheMadRevealAndDrawEffect(), 0));
+
         Target targetCreature = new TargetCreaturePermanent();
         Ability sacAbility = new LoyaltyAbility(new SarkhanTheMadSacEffect(), -2);
         sacAbility.addTarget(targetCreature);
         this.addAbility(sacAbility);
+
         Ability damageAbility = new LoyaltyAbility(new SarkhanTheMadDragonDamageEffect(), -4);
         damageAbility.addTarget(new TargetPlayer());
         this.addAbility(damageAbility);
