@@ -271,7 +271,9 @@ public class CardView extends SimpleCardView {
         this.name = emblem.getName();
         this.displayName = name;
         this.rules = emblem.getRules();
-        this.expansionSetCode = emblem.getExpansionSetCode();        
+        // emblem images are always with common (black) symbol
+        this.expansionSetCode = emblem.getExpansionSetCode();
+        this.rarity = Rarity.COMMON;
     }
 
     public CardView(boolean empty) {

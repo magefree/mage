@@ -43,7 +43,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.GameState;
 import mage.game.combat.CombatGroup;
-import mage.game.command.CommandObject;
 import mage.game.command.Emblem;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
@@ -85,6 +84,7 @@ public class GameView implements Serializable {
         }
         for (StackObject stackObject: state.getStack()) {
             if (stackObject instanceof StackAbility) {
+                // Stack Ability
                 MageObject object = game.getObject(stackObject.getSourceId());
                 Card card = game.getCard(stackObject.getSourceId());
                 if (card != null) {
@@ -100,7 +100,7 @@ public class GameView implements Serializable {
                 } else if (object != null) {
                     if (object instanceof PermanentToken) {
                         PermanentToken token = (PermanentToken)object;
-                        stack.put(stackObject.getId(), new CardView(token));
+                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, token.getName(), new CardView(token)));
                         checkPaid(stackObject.getId(), (StackAbility)stackObject);
                     } else if (object instanceof Emblem) {
                         Card sourceCard = game.getCard(((Emblem)object).getSourceId());
@@ -110,7 +110,8 @@ public class GameView implements Serializable {
                         } else {
                             throw new IllegalArgumentException("Source card for emblem not found.");
                         }
-                        stack.put(stackObject.getId(), new StackAbilityView(game, (StackAbility)stackObject, object.getName(), new CardView(((StackAbility)stackObject))));
+                        stack.put(stackObject.getId(), 
+                                new StackAbilityView(game, (StackAbility)stackObject, object.getName(), new CardView(new EmblemView(((Emblem)object),sourceCard))));
                         checkPaid(stackObject.getId(), ((StackAbility)stackObject));
                     } else {
                         StackAbility stackAbility = ((StackAbility)object);
@@ -118,9 +119,12 @@ public class GameView implements Serializable {
                         stack.put(stackObject.getId(), new CardView(((StackAbility)stackObject)));
                         checkPaid(stackObject.getId(), ((StackAbility)stackObject));
                     }
+                } else {
+
                 }
             }
             else {
+                // Spell
                 stack.put(stackObject.getId(), new CardView((Spell)stackObject));
                 checkPaid(stackObject.getId(), (Spell)stackObject);
             }
