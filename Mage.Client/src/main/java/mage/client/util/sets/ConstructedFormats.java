@@ -17,6 +17,7 @@ public class ConstructedFormats {
 
     private static final String[] constructedFormats = {
             "- All Sets", "- Standard", "- Extended", "- Modern",
+            "Magic 2014",
             "Modern Masters",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
             "Magic 2013", "Planechase 2012",
@@ -345,6 +346,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Magic 2013")) {
             return Arrays.asList("M13");
+        }
+        if (format.equals("Magic 2014")) {
+            return Arrays.asList("M14");
         }
         if (format.equals("Planechase")) {
             return Arrays.asList("HOP");
