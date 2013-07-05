@@ -33,6 +33,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -81,11 +82,10 @@ public class TxtDeckImporter extends DeckImporter {
                     lastReleasedCard = cards.get(0);
                 }
                 for (int i = 0; i < num; i++) {
-                    String className = lastReleasedCard.getClassName();
                     if (!sideboard) {
-                        deckList.getCards().add(className);
+                        deckList.getCards().add(new DeckCardInfo(lastReleasedCard.getName(),lastReleasedCard.getCardNumber(), lastReleasedCard.getSetCode()));
                     } else {
-                        deckList.getSideboard().add(className);
+                        deckList.getSideboard().add(new DeckCardInfo(lastReleasedCard.getName(),lastReleasedCard.getCardNumber(), lastReleasedCard.getSetCode()));
                     }
                 }
             }

@@ -30,6 +30,7 @@ package mage.cards.decks.importer;
 
 import java.util.List;
 import java.util.Random;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -63,11 +64,11 @@ public class DecDeckImporter extends DeckImporter {
             } else {
                 Random random = new Random();
                 for (int i = 0; i < num; i++) {
-                    String className = cards.get(random.nextInt(cards.size())).getClassName();
+                    CardInfo cardInfo = cards.get(random.nextInt(cards.size()));
                     if (!sideboard) {
-                        deckList.getCards().add(className);
+                        deckList.getCards().add(new DeckCardInfo(cardInfo.getName(),cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     } else {
-                        deckList.getSideboard().add(className);
+                        deckList.getSideboard().add(new DeckCardInfo(cardInfo.getName(),cardInfo.getCardNumber(), cardInfo.getSetCode()));
                     }
                 }
             }

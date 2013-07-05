@@ -32,6 +32,7 @@ import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import mage.cards.*;
+import mage.cards.repository.CardRepository;
 import mage.game.GameException;
 
 public class Deck implements Serializable {
@@ -45,27 +46,37 @@ public class Deck implements Serializable {
     }
 
     public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors) throws GameException {
+        return Deck.load(deckCardLists, ignoreErrors, true);
+    }
+
+    public static Deck load(DeckCardLists deckCardLists, boolean ignoreErrors, boolean mockCards) throws GameException {
         Deck deck = new Deck();
         deck.setName(deckCardLists.getName());
-        for (String cardName: deckCardLists.getCards()) {
-            Card card = CardImpl.createCard(cardName);
+        for (DeckCardInfo deckCardInfo: deckCardLists.getCards()) {
+            Card card;
+            if (mockCards) {
+                card = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum()).getMockCard();
+            } else {
+                card = CardImpl.createCard(CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum()).getClassName());
+            }
             if (card != null) {
-                deck.cards.add(CardImpl.createCard(cardName));
+                deck.cards.add(card);
             }
             else {
                 if (!ignoreErrors) {
-                    throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+                    throw new GameException("Error loading card - " + deckCardInfo.getCardName() + " for deck - " + deck.getName());
                 }
             }
         }
-        for (String cardName: deckCardLists.getSideboard()) {
-            Card card = CardImpl.createCard(cardName);
+        for (DeckCardInfo deckCardInfo: deckCardLists.getSideboard()) {
+            Card card = CardRepository.instance.findCard(deckCardInfo.getSetCode(), deckCardInfo.getCardNum()).getMockCard();
+            // Card card = CardImpl.createCard(cardName);
             if (card != null) {
-                deck.sideboard.add(CardImpl.createCard(cardName));
+                deck.sideboard.add(card);
             }
             else {
                 if (!ignoreErrors) {
-                    throw new GameException("Error loading card - " + cardName + " for deck - " + deck.getName());
+                    throw new GameException("Error loading card - " + deckCardInfo.getCardName() + " for deck - " + deck.getName());
                 }
             }
         }
@@ -78,10 +89,11 @@ public class Deck implements Serializable {
 
         deckCardLists.setName(name);
         for (Card card: cards) {
-            deckCardLists.getCards().add(card.getClass().getCanonicalName());
+
+            deckCardLists.getCards().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getExpansionSetCode()));
         }
         for (Card card: sideboard) {
-            deckCardLists.getSideboard().add(card.getClass().getCanonicalName());
+            deckCardLists.getSideboard().add(new DeckCardInfo(card.getName(), card.getCardNumber(), card.getExpansionSetCode()));
         }
 
         return deckCardLists;

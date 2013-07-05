@@ -171,7 +171,7 @@ public class TableController {
         if (seat == null) {
             throw new GameException("No available seats.");
         }
-        Deck deck = Deck.load(deckList);
+        Deck deck = Deck.load(deckList, false, false);
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
         }
@@ -211,7 +211,7 @@ public class TableController {
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return false;
         }
-        Deck deck = Deck.load(deckList);
+        Deck deck = Deck.load(deckList, false, false);
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
             throw new InvalidDeckException("Invalid deck for this format", table.getValidator().getInvalid());
         }
@@ -224,7 +224,7 @@ public class TableController {
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return;
         }
-        Deck deck = Deck.load(deckList);
+        Deck deck = Deck.load(deckList, false, false);
         updateDeck(userId, playerId, deck);
     }
 
@@ -454,7 +454,9 @@ public class TableController {
     }
 
     public void endGame() {
+        // get player that chooses who goes first
         UUID choosingPlayerId = match.getChooser();
+
         match.endGame();
         table.endGame();
 // Saving of games caused memory leaks - so save is deactivated

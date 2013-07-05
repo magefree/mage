@@ -40,34 +40,34 @@ public class DeckCardLists implements Serializable {
 
     private String name;
     private String author;
-    private List<String> cards = new ArrayList<String>();
-    private List<String> sideboard = new ArrayList<String>();
+    private List<DeckCardInfo> cards = new ArrayList<DeckCardInfo>();
+    private List<DeckCardInfo> sideboard = new ArrayList<DeckCardInfo>();
 
     /**
      * @return the cards
      */
-    public List<String> getCards() {
+    public List<DeckCardInfo> getCards() {
         return cards;
     }
 
     /**
      * @param cards the cards to set
      */
-    public void setCards(List<String> cards) {
+    public void setCards(List<DeckCardInfo> cards) {
         this.cards = cards;
     }
 
     /**
      * @return the sideboard
      */
-    public List<String> getSideboard() {
+    public List<DeckCardInfo> getSideboard() {
         return sideboard;
     }
 
     /**
      * @param sideboard the sideboard to set
      */
-    public void setSideboard(List<String> sideboard) {
+    public void setSideboard(List<DeckCardInfo> sideboard) {
         this.sideboard = sideboard;
     }
 

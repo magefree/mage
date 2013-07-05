@@ -84,7 +84,7 @@ public abstract class CardTestPlayerAPIImpl extends MageTestPlayerBase implement
         player = createNewPlayer(name);
         player.setTestMode(true);
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());

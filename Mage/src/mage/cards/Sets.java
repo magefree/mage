@@ -31,6 +31,7 @@ package mage.cards;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
+import mage.cards.decks.DeckCardInfo;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.cards.decks.DeckCardLists;
@@ -129,8 +130,8 @@ public class Sets extends HashMap<String, ExpansionSet> {
 
     public static void saveDeck(String file, DeckCardLists deck) throws FileNotFoundException {
         PrintWriter out = new PrintWriter(file);
-        Map<String, Integer> deckCards = new HashMap<String, Integer>();
-        Map<String, Integer> sideboard = new HashMap<String, Integer>();
+        Map<String, DeckCardInfo> deckCards = new HashMap<String, DeckCardInfo>();
+        Map<String, DeckCardInfo> sideboard = new HashMap<String, DeckCardInfo>();
         try {
             if (deck.getName() != null && deck.getName().length() > 0) {
                 out.println("NAME:" + deck.getName());
@@ -138,33 +139,29 @@ public class Sets extends HashMap<String, ExpansionSet> {
             if (deck.getAuthor() != null && deck.getAuthor().length() > 0) {
                 out.println("AUTHOR:" + deck.getAuthor());
             }
-            for (String cardClass: deck.getCards()) {
-                if (deckCards.containsKey(cardClass)) {
-                    deckCards.put(cardClass, deckCards.get(cardClass) + 1);
+            for (DeckCardInfo deckCardInfo: deck.getCards()) {
+                if (deckCards.containsKey(deckCardInfo.getCardKey())) {
+                    deckCards.put(deckCardInfo.getCardKey(), deckCards.get(deckCardInfo.getCardKey()).increaseQuantity());
                 }
                 else {
-                    deckCards.put(cardClass, 1);
+                    deckCards.put(deckCardInfo.getCardKey(), deckCardInfo);
                 }
             }
-            for (String cardClass: deck.getSideboard()) {
-                if (sideboard.containsKey(cardClass)) {
-                    sideboard.put(cardClass, sideboard.get(cardClass) + 1);
+
+            for (DeckCardInfo deckCardInfo: deck.getSideboard()) {
+                if (sideboard.containsKey(deckCardInfo.getCardKey())) {
+                    sideboard.put(deckCardInfo.getCardKey(), sideboard.get(deckCardInfo.getCardKey()).increaseQuantity());
                 }
                 else {
-                    sideboard.put(cardClass, 1);
+                    sideboard.put(deckCardInfo.getCardKey(), deckCardInfo);
                 }
             }
-            for (Map.Entry<String, Integer> entry: deckCards.entrySet()) {
-                Card card = CardImpl.createCard(entry.getKey());
-                if (card != null) {
-                    out.printf("%d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
-                }
+
+            for (Map.Entry<String, DeckCardInfo> entry: deckCards.entrySet()) {
+                out.printf("%d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
-            for (Map.Entry<String, Integer> entry: sideboard.entrySet()) {
-                Card card = CardImpl.createCard(entry.getKey());
-                if (card != null) {
-                    out.printf("SB: %d [%s:%d] %s%n", entry.getValue(), card.getExpansionSetCode(), card.getCardNumber(), card.getName());
-                }
+            for (Map.Entry<String, DeckCardInfo> entry: sideboard.entrySet()) {
+                out.printf("SB: %d [%s:%d] %s%n", entry.getValue().getQuantity(), entry.getValue().getSetCode(), entry.getValue().getCardNum(), entry.getValue().getCardName());
             }
         }
         finally {

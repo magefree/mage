@@ -24,6 +24,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.decks.DeckCardInfo;
 
 /**
  * Intended to test Mage server under different load patterns.
@@ -252,7 +253,7 @@ public class LoadTest {
         for (Card card : deck.getCards()) {
             CardInfo cardInfo = CardRepository.instance.findCard(card.getExpansionSetCode(), card.getCardNumber());
             if (cardInfo != null) {
-                deckList.getCards().add(cardInfo.getClassName());
+                deckList.getCards().add(new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode()));
             }
         }
         return deckList;

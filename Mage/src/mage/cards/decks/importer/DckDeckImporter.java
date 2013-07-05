@@ -29,6 +29,7 @@ package mage.cards.decks.importer;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
@@ -58,17 +59,17 @@ public class DckDeckImporter extends DeckImporter {
             String setCode = m.group(3);
             int cardNum = Integer.parseInt(m.group(4));
 
-            String className = null;
+            DeckCardInfo deckCardInfo  = null;
             CardInfo cardInfo = CardRepository.instance.findCard(setCode, cardNum);
             if (cardInfo != null) {
-                className = cardInfo.getClassName();
+                deckCardInfo = new DeckCardInfo(cardInfo.getName(), cardInfo.getCardNumber(), cardInfo.getSetCode());
             }
-            if (className != null) {
+            if (deckCardInfo != null) {
                 for (int i = 0; i < count; i++) {
                     if (!sideboard) {
-                        deckList.getCards().add(className);
+                        deckList.getCards().add(deckCardInfo);
                     } else {
-                        deckList.getSideboard().add(className);
+                        deckList.getSideboard().add(deckCardInfo);
                     }
                 }
             } else {

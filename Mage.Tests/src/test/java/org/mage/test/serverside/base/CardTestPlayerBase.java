@@ -59,7 +59,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         playerA = createNewPlayer("PlayerA");
         playerA.setTestMode(true);
         logger.debug("Loading deck...");
-        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
@@ -69,7 +69,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
         playerB = createNewPlayer("PlayerB");
         playerB.setTestMode(true);
-        Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
         if (deck2.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
         }
@@ -114,7 +114,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         playerA = createNewPlayer("ComputerA");
         playerA.setTestMode(true);
 
-        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        Deck deck = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
 
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
@@ -124,7 +124,7 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
 
         playerB = createNewPlayer("ComputerB");
         playerB.setTestMode(true);
-        Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"));
+        Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
         if (deck2.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
         }
