@@ -592,7 +592,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
         for (Player player: state.getPlayers().values()) {
             player.beginTurn(this);
-            if (priorityTime > 0) {
+            // init only if match is with timer (>0) and time left was not set yet (== MAX_VALUE).
+            // otherwise the priorityTimeLeft is set in {@link MatchImpl.initGame)
+            if (priorityTime > 0 && player.getPriorityTimeLeft() == Integer.MAX_VALUE) {
                 initTimer(player.getId());
             }
         }

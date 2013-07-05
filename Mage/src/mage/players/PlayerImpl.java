@@ -231,7 +231,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         
         this.passedTurn = player.passedTurn;
         this.passedAllTurns = player.passedAllTurns;
-
+        this.priorityTimeLeft = player.getPriorityTimeLeft();
     }
 
     @Override
@@ -278,7 +278,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
         this.turnController = player.getTurnControlledBy();
         this.passed = player.isPassed();
-
+        this.priorityTimeLeft = player.getPriorityTimeLeft();
     }
 
     @Override

@@ -170,6 +170,10 @@ public abstract class MatchImpl implements Match {
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
                 game.addPlayer(matchPlayer.getPlayer(), matchPlayer.getDeck());
+                // set the priority time left for the match
+                if (matchPlayer.getPriorityTimeLeft() > 0) {
+                    matchPlayer.getPlayer().setPriorityTimeLeft(matchPlayer.getPriorityTimeLeft());
+                }
             }
         }
         game.setPriorityTime(options.getPriorityTime());
@@ -185,6 +189,10 @@ public abstract class MatchImpl implements Match {
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
             if (p != null) {
+                // get the left time from player priority timer
+                if (game.getPriorityTime() > 0) {
+                    player.setPriorityTimeLeft(p.getPriorityTimeLeft());
+                }
                 if (p.hasQuitted()) {
                     player.setQuitted(true);
                 }

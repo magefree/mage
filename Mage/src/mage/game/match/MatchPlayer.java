@@ -44,6 +44,7 @@ public class MatchPlayer {
     private Player player;
     private boolean quitted;
     private boolean doneSideboarding;
+    private int priorityTimeLeft;
 
     public MatchPlayer(Player player, Deck deck) {
         this.player = player;
@@ -52,6 +53,14 @@ public class MatchPlayer {
         this.loses = 0;
         this.doneSideboarding = true;
         this.quitted = false;
+    }
+
+    public int getPriorityTimeLeft() {
+        return priorityTimeLeft;
+    }
+
+    public void setPriorityTimeLeft(int priorityTimeLeft) {
+        this.priorityTimeLeft = priorityTimeLeft;
     }
 
     public int getWins() {
