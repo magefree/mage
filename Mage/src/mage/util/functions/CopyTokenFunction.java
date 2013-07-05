@@ -59,8 +59,13 @@ public class CopyTokenFunction implements Function<Token, Card> {
         MageObject sourceObj = source;
         if (source instanceof PermanentToken) {
             sourceObj = ((PermanentToken) source).getToken();
+            // to show the source image, the original values have to be used
+            target.setOriginalExpansionSetCode(((Token)sourceObj).getOriginalExpansionSetCode());
+            target.setOriginalCardNumber(((Token)sourceObj).getOriginalCardNumber());
         } else if (source instanceof PermanentCard) {
             sourceObj = ((PermanentCard) source).getCard();
+            target.setOriginalExpansionSetCode(source.getExpansionSetCode());
+            target.setOriginalCardNumber(source.getCardNumber());
         }
 
         target.setName(sourceObj.getName());
@@ -79,8 +84,7 @@ public class CopyTokenFunction implements Function<Token, Card> {
         for (String type : sourceObj.getSupertype()) {
             target.getSupertype().add(type);
         }
-        target.setOriginalExpansionSetCode(source.getExpansionSetCode());
-        target.setOriginalCardNumber(source.getCardNumber());
+
         target.getAbilities().clear();
 
         for (Ability ability0 : sourceObj.getAbilities()) {

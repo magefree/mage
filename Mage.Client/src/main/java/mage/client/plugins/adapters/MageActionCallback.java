@@ -194,11 +194,6 @@ public class MageActionCallback implements ActionCallback {
     }
 
     private void showPopup(final TransferData data, final Component parentComponent, final Point parentPoint) {
-        // skip popup for not implemented cards (they have Rarity.NA)
-        if (data.card.getRarity().equals(Rarity.NA)) {
-            return;
-        }
-
         if (data.component != null) {
             String showTooltips = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
             if (showTooltips.equals("false")) {

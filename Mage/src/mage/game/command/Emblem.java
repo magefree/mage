@@ -47,12 +47,11 @@ import java.util.UUID;
  */
 public class Emblem implements CommandObject {
 
-    private String name;
     private static List emptyList = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
 
-
+    private String name;
     private UUID id;
     private UUID controllerId;
     private UUID sourceId;
@@ -62,7 +61,7 @@ public class Emblem implements CommandObject {
         this.id = UUID.randomUUID();
     }
 
-    public Emblem(Emblem emblem) {
+    public Emblem(final Emblem emblem) {
         this.id = emblem.id;
         this.controllerId = emblem.controllerId;
         this.sourceId = emblem.sourceId;
@@ -100,7 +99,7 @@ public class Emblem implements CommandObject {
 
     @Override
     public String getImageName() {
-        return "";
+        return this.name;
     }
 
     @Override

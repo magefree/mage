@@ -88,6 +88,9 @@ public class Token extends MageObjectImpl<Token> {
         super(token);
         this.description = token.description;
         this.tokenType = token.tokenType;
+        this.lastAddedTokenId = token.lastAddedTokenId;
+        this.originalCardNumber =  token.originalCardNumber;
+        this.originalExpansionSetCode = token.originalExpansionSetCode;
     }
 
     public String getDescription() {
