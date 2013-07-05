@@ -76,7 +76,9 @@ public class VenserTheSojourner extends CardImpl<VenserTheSojourner> {
 
         // +2: Exile target permanent you own. Return it to the battlefield under your control at the beginning of the next end step.
         LoyaltyAbility ability1 = new LoyaltyAbility(new VenserTheSojournerEffect(), 2);
-        ability1.addTarget(new TargetControlledPermanent());
+        Target target = new TargetControlledPermanent();
+        target.setRequired(true);
+        ability1.addTarget(target);
         this.addAbility(ability1);
 
         // -1: Creatures are unblockable this turn.
@@ -142,6 +144,7 @@ class VenserTheSojournerEffect extends OneShotEffect<VenserTheSojournerEffect> {
 class VenserTheSojournerEmblem extends Emblem {
 
     public VenserTheSojournerEmblem() {
+        this.setName("EMBLEM: Venser, the Sojourner");
         Ability ability = new VenserTheSojournerSpellCastTriggeredAbility(new ExileTargetEffect(), false);
         Target target = new TargetPermanent();
         target.setRequired(true);
