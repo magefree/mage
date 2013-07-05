@@ -14,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import mage.constants.MageObjectType;
 
 /**
  * Card info pane for displaying card rules.
@@ -63,12 +64,12 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                     List<String> rules = card.getRules();
                     List<String> rulings = new ArrayList<String>(rules);
 
-                    if (card instanceof PermanentView) {
+                    if (card.getMageObjectType().equals(MageObjectType.PERMANENT)) {
                         if (card.getPairedCard() != null) {
                             rulings.add("<span color='green'><i>Paired with another creature</i></span>");
                         }
                     }
-                    if (!card.isAbility() && (card instanceof PermanentView || card instanceof CardView)) {
+                    if (card.getMageObjectType().canHaveCounters()) {
                         List<CounterView> counters;
                         if (card instanceof PermanentView) {
                             counters = ((PermanentView) card).getCounters();
@@ -93,7 +94,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                             rulings.add(sb.toString());
                         }
                     }
-                    if (card instanceof PermanentView) {
+                    if (card.getMageObjectType().isPermanent()) {
                         int damage = ((PermanentView)card).getDamage();
                         if (damage > 0) {
                             rulings.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
@@ -155,15 +156,10 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                         pt = card.getLoyalty().toString();
                     }
 
-                    if (pt.length() > 0 || card.isToken()) {
-                        buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
-                        buffer.append(pt).append("</b></td>");
-                        if (card.isToken()) {
-                            buffer.append("<td align='right'>Token</td>");
-                        }
-                        
-                        buffer.append("</tr></table>");
-                    }
+                    buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
+                    buffer.append(pt).append("</b></td>");
+                    buffer.append("<td align='right'>").append(card.getMageObjectType().toString()).append("</td>");
+                    buffer.append("</tr></table>");
 
                     StringBuilder rule = new StringBuilder("<br/>");
                     if (card.isSplitCard()) {

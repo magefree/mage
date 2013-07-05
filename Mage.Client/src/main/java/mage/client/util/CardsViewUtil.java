@@ -59,9 +59,7 @@ public class CardsViewUtil {
         CardsView cards = new CardsView();
 
         for (EmblemView emblem : view) {
-            CardView cardView = new CardView(emblem.getName());
-            cardView.overrideRules(emblem.getRules());
-            cardView.setExpansionSetCode(emblem.getExpansionSetCode());
+            CardView cardView = new CardView(emblem);
             cards.put(emblem.getId(), cardView);
         }
 

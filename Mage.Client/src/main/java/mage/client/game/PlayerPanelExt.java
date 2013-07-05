@@ -390,7 +390,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         commandZone.setObserver(new Command() {
             @Override
             public void execute() {
-                btnExileZoneActionPerformed(null);
+                btnCommandZoneActionPerformed(null);
             }
         });
         commandZone.setBounds(0, 0, 21, 21);
@@ -650,7 +650,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         DialogManager.getManager(gameId).showGraveyardDialog(CardsViewUtil.convertSimple(player.getGraveyard()), bigCard, gameId);
     }
 
-    private void btnExileZoneActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
         DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertEmblems(player.getEmblemList()), bigCard, gameId);
     }
 

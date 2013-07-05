@@ -47,6 +47,7 @@ import java.util.UUID;
  */
 public class Emblem implements CommandObject {
 
+    private String name;
     private static List emptyList = new ArrayList();
     private static ObjectColor emptyColor = new ObjectColor();
     private static ManaCosts emptyCost = new ManaCostsImpl();
@@ -94,7 +95,7 @@ public class Emblem implements CommandObject {
 
     @Override
     public String getName() {
-        return "";
+        return name;
     }
 
     @Override
@@ -103,7 +104,9 @@ public class Emblem implements CommandObject {
     }
 
     @Override
-    public void setName(String name) {}
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public List<CardType> getCardType() {

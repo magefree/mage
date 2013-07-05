@@ -28,31 +28,31 @@
 
 package mage.view;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageObject;
-import mage.ObjectColor;
-import mage.cards.Card;
-import mage.constants.SpellAbilityType;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.game.permanent.Permanent;
-import mage.game.permanent.PermanentToken;
-import mage.game.permanent.token.Token;
-import mage.game.stack.StackAbility;
-import mage.target.Target;
-import mage.target.Targets;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.Mode;
+import mage.MageObject;
+import mage.ObjectColor;
 import mage.abilities.Modes;
 import mage.abilities.SpellAbility;
 import mage.abilities.costs.mana.ManaCosts;
+import mage.cards.Card;
 import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.MageObjectType;
+import mage.constants.Rarity;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.counters.Counter;
+import mage.counters.CounterType;
+import mage.game.command.Emblem;
+import mage.game.permanent.Permanent;
+import mage.game.permanent.PermanentToken;
+import mage.game.permanent.token.Token;
 import mage.game.stack.Spell;
+import mage.game.stack.StackAbility;
+import mage.target.Target;
+import mage.target.Targets;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -74,7 +74,12 @@ public class CardView extends SimpleCardView {
     protected List<String> manaCost;
     protected int convertedManaCost;
     protected Rarity rarity;
+
+    protected MageObjectType mageObjectType;
+
     protected boolean isAbility;
+    protected boolean isToken;
+
     protected CardView ability;
     protected int type;
 
@@ -83,7 +88,6 @@ public class CardView extends SimpleCardView {
     protected boolean transformed;
 
     protected boolean isSplitCard;
-    protected boolean isToken;
     protected String leftSplitName;
     protected ManaCosts leftSplitCosts;
     protected List<String> leftSplitRules;
@@ -136,12 +140,19 @@ public class CardView extends SimpleCardView {
         this.convertedManaCost = card.getManaCost().convertedManaCost();
 
         if (card instanceof Permanent) {
+            this.mageObjectType = MageObjectType.PERMANENT;
             Permanent permanent = (Permanent)card;
             this.power = Integer.toString(card.getPower().getValue());
             this.toughness = Integer.toString(card.getToughness().getValue());
             this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
             this.pairedCard = permanent.getPairedCard();
         } else {
+
+            if (card.isCopy()) {
+                this.mageObjectType = MageObjectType.COPY_CARD;
+            } else {
+                this.mageObjectType = MageObjectType.CARD;
+            }
             this.power = card.getPower().toString();
             this.toughness = card.getToughness().toString();
             this.loyalty = "";
@@ -155,6 +166,7 @@ public class CardView extends SimpleCardView {
 
         if (card instanceof PermanentToken) {
             this.isToken = true;
+            this.mageObjectType = MageObjectType.TOKEN;
             this.rarity = Rarity.COMMON;
             if (((PermanentToken) card).getToken().getOriginalCardNumber() > 0) {
                 // a token copied from permanent
@@ -183,6 +195,7 @@ public class CardView extends SimpleCardView {
         }
 
         if (card instanceof Spell) {
+            this.mageObjectType = MageObjectType.SPELL;
             Spell<?> spell = (Spell<?>) card;
             for (SpellAbility spellAbility: spell.getSpellAbilities()) {
                 for(UUID modeId : spellAbility.getModes().getSelectedModes()) {
@@ -204,34 +217,41 @@ public class CardView extends SimpleCardView {
         
     }
 
-    public CardView(MageObject card) {
-        super(card.getId(), "", 0, false, false);
-        this.name = card.getName();
-        if (card instanceof Permanent) {
-            this.power = Integer.toString(card.getPower().getValue());
-            this.toughness = Integer.toString(card.getToughness().getValue());
-            this.loyalty = Integer.toString(((Permanent) card).getCounters().getCount(CounterType.LOYALTY));
+    public CardView(MageObject object) {
+        super(object.getId(), "", 0, false, false);
+        this.name = object.getName();
+        this.displayName = object.getName();
+        if (object instanceof Permanent) {
+            this.mageObjectType = MageObjectType.PERMANENT;
+            this.power = Integer.toString(object.getPower().getValue());
+            this.toughness = Integer.toString(object.getToughness().getValue());
+            this.loyalty = Integer.toString(((Permanent) object).getCounters().getCount(CounterType.LOYALTY));
         } else {
-            this.power = card.getPower().toString();
-            this.toughness = card.getToughness().toString();
+            this.power = object.getPower().toString();
+            this.toughness = object.getToughness().toString();
             this.loyalty = "";
         }
-        this.cardTypes = card.getCardType();
-        this.subTypes = card.getSubtype();
-        this.superTypes = card.getSupertype();
-        this.color = card.getColor();
-        this.manaCost = card.getManaCost().getSymbols();
-        this.convertedManaCost = card.getManaCost().convertedManaCost();
-
-        if (card instanceof PermanentToken) {
-            PermanentToken permanentToken = (PermanentToken) card;
+        this.cardTypes = object.getCardType();
+        this.subTypes = object.getSubtype();
+        this.superTypes = object.getSupertype();
+        this.color = object.getColor();
+        this.manaCost = object.getManaCost().getSymbols();
+        this.convertedManaCost = object.getManaCost().convertedManaCost();
+        if (object instanceof PermanentToken) {
+            this.mageObjectType = MageObjectType.TOKEN;
+            PermanentToken permanentToken = (PermanentToken) object;
             this.rarity = Rarity.COMMON;
             this.expansionSetCode = permanentToken.getExpansionSetCode();
             this.rules = permanentToken.getRules();
             this.type = permanentToken.getToken().getTokenType();
+        } else if (object instanceof Emblem) {
+            this.mageObjectType = MageObjectType.EMBLEM;
+            Emblem emblem = (Emblem) object;
+            this.rarity = Rarity.SPECIAL;
+            this.rules = emblem.getAbilities().getRules(emblem.getName());
         }
-        if (this.rarity == null && card instanceof StackAbility) {
-            StackAbility stackAbility = (StackAbility)card;
+        if (this.rarity == null && object instanceof StackAbility) {
+            StackAbility stackAbility = (StackAbility)object;
             this.rarity = Rarity.NA;
             this.rules = new ArrayList<String>();
             this.rules.add(stackAbility.getRule());
@@ -244,6 +264,15 @@ public class CardView extends SimpleCardView {
     protected CardView() {
         super(null, "", 0, false, false);
     }
+    
+    public CardView(EmblemView emblem) {
+        this(true);
+        this.mageObjectType = MageObjectType.EMBLEM;
+        this.name = emblem.getName();
+        this.displayName = name;
+        this.rules = emblem.getRules();
+        this.expansionSetCode = emblem.getExpansionSetCode();        
+    }
 
     public CardView(boolean empty) {
         super(null, "", 0, false, false);
@@ -253,9 +282,11 @@ public class CardView extends SimpleCardView {
         fillEmpty();
     }
 
+
     public CardView(String name) {
         this(true);
         this.name = name;
+        this.displayName = name;
     }
 
     private void fillEmpty() {
@@ -277,8 +308,10 @@ public class CardView extends SimpleCardView {
 
     CardView(Token token) {
         super(token.getId(), "", 0, false, false);
+        this.isToken  = true;
         this.id = token.getId();
         this.name = token.getName();
+        this.displayName = token.getName();
         this.rules = token.getAbilities().getRules(this.name);
         this.power = token.getPower().toString();
         this.toughness = token.getToughness().toString();
@@ -488,6 +521,14 @@ public class CardView extends SimpleCardView {
 
     public int getType() {
         return type;
+    }
+
+    public MageObjectType getMageObjectType() {
+        return mageObjectType;
+    }
+
+    public void setMageObjectType(MageObjectType mageObjectType) {
+        this.mageObjectType = mageObjectType;
     }
 
     public boolean isPaid() {

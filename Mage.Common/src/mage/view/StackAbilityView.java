@@ -34,6 +34,7 @@ import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Modes;
 import mage.abilities.effects.Effect;
+import mage.constants.MageObjectType;
 import mage.game.Game;
 import mage.game.stack.StackAbility;
 import mage.target.targetpointer.FixedTarget;
@@ -46,14 +47,14 @@ import mage.target.targetpointer.TargetPointer;
 public class StackAbilityView extends CardView {
     private static final long serialVersionUID = 1L;
 
-    private String sourceName;
     private CardView sourceCard;
 
     public StackAbilityView(Game game, StackAbility ability, String sourceName, CardView sourceCard) {
         this.id = ability.getId();
-        this.name = "Ability";
-        this.sourceName = sourceName;
+        this.mageObjectType = MageObjectType.ABILITY_STACK;
         this.sourceCard = sourceCard;
+        this.sourceCard.setMageObjectType(mageObjectType);
+        this.name = "Ability";
         this.rules = new ArrayList<String>();
         rules.add(ability.getRule(sourceName));
         this.power = ability.getPower().toString();
