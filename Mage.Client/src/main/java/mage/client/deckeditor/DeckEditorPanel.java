@@ -28,7 +28,6 @@
 package mage.client.deckeditor;
 
 import mage.cards.Card;
-import mage.cards.CardImpl;
 import mage.cards.decks.Deck;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.importer.DeckImporterUtil;
@@ -203,7 +202,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                             CardInfo cardInfo = CardRepository.instance.findCard(cardView.getExpansionSetCode(), cardView.getCardNumber());
                             Card card = cardInfo != null ? cardInfo.getMockCard() : null;
                             if (card != null) {
-                                deck.getSideboard().add(CardImpl.createCard(card.getClass()));
+                                deck.getSideboard().add(card);
                             }
                             if (cardInfoPane instanceof  CardInfoPane)  {
                                 ((CardInfoPane)cardInfoPane).setCard(new CardView(card), null);
@@ -525,7 +524,7 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             File file = fcSelectDeck.getSelectedFile();
             try {
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
-                deck = Deck.load(DeckImporterUtil.importDeck(file.getPath()), true);
+                deck = Deck.load(DeckImporterUtil.importDeck(file.getPath()), true, true);
             } catch (GameException ex) {
                 JOptionPane.showMessageDialog(MageFrame.getDesktop(), ex.getMessage(), "Error loading deck", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
