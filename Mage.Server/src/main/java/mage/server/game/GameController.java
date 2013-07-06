@@ -28,6 +28,24 @@
 
 package mage.server.game;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.zip.GZIPOutputStream;
 import mage.MageException;
 import mage.abilities.Ability;
 import mage.cards.Card;
@@ -36,7 +54,6 @@ import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
-import mage.constants.Constants;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
@@ -46,7 +63,11 @@ import mage.game.events.TableEvent;
 import mage.game.permanent.Permanent;
 import mage.interfaces.Action;
 import mage.players.Player;
-import mage.server.*;
+import mage.server.ChatManager;
+import mage.server.Main;
+import mage.server.TableManager;
+import mage.server.User;
+import mage.server.UserManager;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
@@ -57,14 +78,6 @@ import mage.view.ChatMessage.MessageColor;
 import mage.view.GameView;
 import mage.view.PermanentView;
 import org.apache.log4j.Logger;
-
-import java.io.*;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.zip.GZIPOutputStream;
 
 
 /**
@@ -136,16 +149,7 @@ public class GameController implements GameCallback {
                                 if (initPlayerId == null) {
                                     throw new IllegalStateException("INIT_TIMER: playerId can't be null");
                                 }
-                                long delay = 250L; // run each 250 ms
-                                timer = new PriorityTimer(game.getPriorityTime(), delay, new Action() {
-                                    @Override
-                                    public void execute() throws MageException {
-                                        game.concede(initPlayerId);
-                                        logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
-                                    }
-                                });
-                                timers.put(initPlayerId, timer);
-                                timer.init();
+                                createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
                                 break;
                             case RESUME_TIMER:
                                 playerId = event.getPlayerId();
@@ -154,7 +158,12 @@ public class GameController implements GameCallback {
                                 }
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    throw new IllegalStateException("RESUME_TIMER: couldn't find timer for player: " + playerId);
+                                    Player player = game.getState().getPlayer(playerId);
+                                    if (player != null) {
+                                        timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
+                                    } else {
+                                        throw new IllegalStateException("RESUME_TIMER: player can't be null");
+                                    }
                                 }
                                 timer.resume();
                                 break;
@@ -231,6 +240,21 @@ public class GameController implements GameCallback {
         );
 
         checkStart();
+    }
+
+    private PriorityTimer createPlayerTimer(UUID playerId, int count) {
+        final UUID initPlayerId = playerId;
+        long delay = 250L; // run each 250 ms
+        PriorityTimer timer = new PriorityTimer(count, delay, new Action() {
+            @Override
+            public void execute() throws MageException {
+                game.concede(initPlayerId);
+                logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
+            }
+        });
+        timers.put(playerId, timer);
+        timer.init();
+        return timer;
     }
 
     private UUID getPlayerId(UUID userId) {
@@ -402,7 +426,7 @@ public class GameController implements GameCallback {
         sendMessage(userId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).sendPlayerUUID(data);
+                getGameSession(playerId).sendPlayerUUID(data);
             }
         });
     }
@@ -411,7 +435,7 @@ public class GameController implements GameCallback {
         sendMessage(userId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).sendPlayerString(data);
+                getGameSession(playerId).sendPlayerString(data);
             }
         });
     }
@@ -420,7 +444,7 @@ public class GameController implements GameCallback {
         sendMessage(userId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).sendPlayerBoolean(data);
+                getGameSession(playerId).sendPlayerBoolean(data);
             }
         });
 
@@ -430,7 +454,7 @@ public class GameController implements GameCallback {
         sendMessage(userId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).sendPlayerInteger(data);
+                getGameSession(playerId).sendPlayerInteger(data);
             }
         });
 
@@ -457,7 +481,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).ask(question);
+                getGameSession(playerId).ask(question);
             }
         });
 
@@ -467,7 +491,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).chooseAbility(new AbilityPickerView(choices));
+                getGameSession(playerId).chooseAbility(new AbilityPickerView(choices));
             }
         });
     }
@@ -476,7 +500,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).choosePile(message, new CardsView(pile1), new CardsView(pile2));
+                getGameSession(playerId).choosePile(message, new CardsView(pile1), new CardsView(pile2));
             }
         });
     }
@@ -485,7 +509,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).chooseAbility(new AbilityPickerView(modes));
+                getGameSession(playerId).chooseAbility(new AbilityPickerView(modes));
             }
         });
     }
@@ -494,7 +518,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).choose(message, choices);
+                getGameSession(playerId).choose(message, choices);
             }
         });
     }
@@ -504,15 +528,15 @@ public class GameController implements GameCallback {
             @Override
             public void execute(UUID playerId) {
                 if (cards != null) {
-                    gameSessions.get(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
+                    getGameSession(playerId).target(question, new CardsView(cards.getCards(game)), targets, required, options);
                 } else if (perms != null) {
                     CardsView permsView = new CardsView();
                     for (Permanent perm: perms) {
                         permsView.put(perm.getId(), new PermanentView(perm, game.getCard(perm.getId())));
                     }
-                    gameSessions.get(playerId).target(question, permsView, targets, required, options);
+                    getGameSession(playerId).target(question, permsView, targets, required, options);
                 } else {
-                    gameSessions.get(playerId).target(question, new CardsView(), targets, required, options);
+                    getGameSession(playerId).target(question, new CardsView(), targets, required, options);
                 }
             }
         });
@@ -523,7 +547,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).target(question, new CardsView(abilities, game), null, required, options);
+                getGameSession(playerId).target(question, new CardsView(abilities, game), null, required, options);
             }
         });
     }
@@ -532,7 +556,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).select(message);
+                getGameSession(playerId).select(message);
             }
         });
     }
@@ -541,7 +565,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).playMana(message);
+                getGameSession(playerId).playMana(message);
             }
         });
     }
@@ -550,7 +574,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).playXMana(message);
+                getGameSession(playerId).playXMana(message);
                 }
         });
     }
@@ -559,7 +583,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).getAmount(message, min, max);
+                getGameSession(playerId).getAmount(message, min, max);
             }
         });
     }
@@ -574,7 +598,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).revealCards(name, new CardsView(cards.getCards(game)));
+                getGameSession(playerId).revealCards(name, new CardsView(cards.getCards(game)));
             }
         }, false);
     }
@@ -619,7 +643,7 @@ public class GameController implements GameCallback {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                gameSessions.get(playerId).informPersonal(message);
+                getGameSession(playerId).informPersonal(message);
             }
         });
     }
@@ -638,7 +662,7 @@ public class GameController implements GameCallback {
     }
 
     public GameView getGameView(UUID playerId) {
-        return gameSessions.get(playerId).getGameView();
+        return getGameSession(playerId).getGameView();
     }
 
     @Override
@@ -739,5 +763,17 @@ public class GameController implements GameCallback {
 
     interface Command {
         void execute(UUID player);
+    }
+
+    private GameSession getGameSession(UUID playerId) {
+        if (!timers.isEmpty()) {
+            Player player = game.getState().getPlayer(playerId);
+            PriorityTimer timer = timers.get(playerId);
+            if (timer != null) {
+                //logger.warn("Timer Player " + player.getName()+ " " + player.getPriorityTimeLeft() + " Timer: " + timer.getCount());
+                player.setPriorityTimeLeft(timer.getCount());
+            }
+        }
+        return gameSessions.get(playerId);
     }
 }
