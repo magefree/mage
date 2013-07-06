@@ -36,7 +36,7 @@ import java.util.Map;
 
 import mage.cards.Card;
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidatorImpl;
+import mage.cards.decks.DeckValidator;
 import mage.constants.CardType;
 import mage.filter.FilterMana;
 
@@ -46,7 +46,7 @@ import mage.filter.FilterMana;
  */
 
 
-public class Commander extends DeckValidatorImpl {
+public class Commander extends DeckValidator {
 
     protected List<String> banned = new ArrayList<String>();
     protected List<String> bannedCommander = new ArrayList<String>();

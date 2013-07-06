@@ -42,7 +42,7 @@ import mage.cards.repository.CardRepository;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Constructed extends DeckValidatorImpl {
+public class Constructed extends DeckValidator {
 
     protected List<String> banned = new ArrayList<String>();
     protected List<String> restricted = new ArrayList<String>();

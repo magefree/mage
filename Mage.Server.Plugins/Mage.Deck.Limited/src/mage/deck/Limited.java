@@ -29,13 +29,13 @@
 package mage.deck;
 
 import mage.cards.decks.Deck;
-import mage.cards.decks.DeckValidatorImpl;
+import mage.cards.decks.DeckValidator;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class Limited extends DeckValidatorImpl {
+public class Limited extends DeckValidator {
 
     public Limited() {
         super("Limited");
