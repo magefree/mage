@@ -43,6 +43,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
 import mage.cards.ExpansionSet;
 import mage.cards.Sets;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.client.table.TournamentPlayerPanel;
 import mage.constants.MatchTimeLimit;
@@ -360,7 +362,7 @@ public class NewTournamentDialog extends MageDialog {
             }
             tOptions.getLimitedOptions().setConstructionTime((Integer)this.spnConstructTime.getValue() * 60);
             for (JComboBox pack: packs) {
-                tOptions.getLimitedOptions().getSetCodes().add(((ExpansionSet) pack.getSelectedItem()).getCode());
+                tOptions.getLimitedOptions().getSetCodes().add(((ExpansionInfo) pack.getSelectedItem()).getCode());
             }
         }
         tOptions.getMatchOptions().setMatchTimeLimit((MatchTimeLimit) this.cbTimeLimit.getSelectedItem());
@@ -431,7 +433,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         while (packs.size() < numPacks) {
             JComboBox pack = new JComboBox();
-            pack.setModel(new DefaultComboBoxModel(Sets.getInstance().getWithBoosterSortedByReleaseDate()));
+            pack.setModel(new DefaultComboBoxModel(ExpansionRepository.instance.getWithBoostersSortedByReleaseDate()));
             pnlPacks.add(pack);
             packs.add(pack);
             pack.addActionListener(new java.awt.event.ActionListener() {
