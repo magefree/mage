@@ -44,7 +44,7 @@ public class Magic2014 extends ExpansionSet {
     }
 
     private Magic2014() {
-        super("Magic 2014", "M14", "mage.sets.magic2014", new GregorianCalendar(2013, 19, 7).getTime(), SetType.CORE);
+        super("Magic 2014", "M14", "mage.sets.magic2014", new GregorianCalendar(2013, 7, 19).getTime(), SetType.CORE);
         this.hasBoosters = true;
         this.numBoosterLands = 1;
         this.numBoosterCommon = 10;
