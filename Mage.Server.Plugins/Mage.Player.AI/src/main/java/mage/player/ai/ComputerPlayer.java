@@ -43,7 +43,6 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
-import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
@@ -78,8 +77,12 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.String;
 import java.util.*;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 
 
 /**
@@ -1302,7 +1305,42 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
 
     private static void addBasicLands(Deck deck, String landName, int number) {
         Random random = new Random();
-        Set<String> landSets =  Sets.getSetsWithBasicLandsAsCodes(deck.getExpansionSetCodes());
+        Set<String> landSets =  new HashSet<String>();
+
+        // decide from which sets basic lands are taken from
+        for (String setCode :deck.getExpansionSetCodes()) {
+            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
+            if (expansionInfo.hasBasicLands()) {
+                landSets.add(expansionInfo.getCode());
+            }
+        }
+
+        // if sets have no basic land, take land from block
+        if (landSets.isEmpty()) {
+            for (String setCode :deck.getExpansionSetCodes()) {
+                ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
+                ExpansionInfo [] blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
+                for (ExpansionInfo blockSet: blockSets) {
+                    if (blockSet.hasBasicLands()) {
+                        landSets.add(blockSet.getCode());
+                    }
+                }
+            }
+        }
+        // if still no set with lands found, take one by random
+        if (landSets.isEmpty()) {
+            // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
+            // select a set with basic lands by random
+            Random generator = new Random();
+            ExpansionInfo [] basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+            if (basicLandSets.length > 0) {
+                landSets.add(basicLandSets[generator.nextInt(basicLandSets.length)-1].getCode());
+            }
+        }
+
+        if (landSets.isEmpty()) {
+            throw new IllegalArgumentException("No set with basic land was found");
+        }
 
         CardCriteria criteria = new CardCriteria();
         if (!landSets.isEmpty()) {

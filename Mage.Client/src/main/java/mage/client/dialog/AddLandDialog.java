@@ -27,17 +27,19 @@
 */
 package mage.client.dialog;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.JLayeredPane;
 import mage.Mana;
 import mage.cards.Card;
-import mage.cards.Sets;
 import mage.cards.decks.Deck;
 import mage.cards.repository.CardCriteria;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
 import mage.constants.Rarity;
 
@@ -48,7 +50,7 @@ import mage.constants.Rarity;
 public class AddLandDialog extends MageDialog {
 
     private Deck deck;
-    private Set<String> setCodesland;
+    private Set<String> setCodesland = new HashSet<String>();
     
     private static int DEFAULT_SEALED_DECK_CARD_NUMBER = 40;
 
@@ -60,8 +62,42 @@ public class AddLandDialog extends MageDialog {
 
     public void showDialog(Deck deck) {
         this.deck = deck;
-        this.setCodesland = Sets.getSetsWithBasicLandsAsCodes(deck.getExpansionSetCodes());
 
+        // decide from which sets basic lands are taken from
+        for (String setCode :deck.getExpansionSetCodes()) {
+            ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
+            if (expansionInfo.hasBasicLands()) {
+                this.setCodesland.add(expansionInfo.getCode());
+            }
+        }
+
+        // if sets have no basic land, take land from block
+        if (this.setCodesland.isEmpty()) {
+            for (String setCode :deck.getExpansionSetCodes()) {
+                ExpansionInfo expansionInfo = ExpansionRepository.instance.getSetByCode(setCode);
+                ExpansionInfo [] blockSets = ExpansionRepository.instance.getSetsFromBlock(expansionInfo.getBlockName());
+                for (ExpansionInfo blockSet: blockSets) {
+                    if (blockSet.hasBasicLands()) {
+                        this.setCodesland.add(blockSet.getCode());
+                    }
+                }
+            }
+        }
+        // if still no set with lands found, take one by random
+        if (this.setCodesland.isEmpty()) {
+            // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
+            // select a set with basic lands by random
+            Random generator = new Random();
+            ExpansionInfo [] landSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+            if (landSets.length > 0) {
+                this.setCodesland.add(landSets[generator.nextInt(landSets.length)-1].getCode());
+            }
+        }
+
+        if (this.setCodesland.isEmpty()) {
+            throw new IllegalArgumentException("No set with basic land was found");
+        }
+        
         MageFrame.getDesktop().add(this, JLayeredPane.PALETTE_LAYER);
         this.setVisible(true);
     }
