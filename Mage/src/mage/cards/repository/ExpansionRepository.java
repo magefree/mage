@@ -3,9 +3,10 @@ package mage.cards.repository;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public enum ExpansionRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "expansion";
-    private static final long EXPANSION_DB_VERSION = 1;
+    private static final long EXPANSION_DB_VERSION = 2;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
@@ -61,6 +62,58 @@ public enum ExpansionRepository {
         } catch (SQLException ex) {
         }
         return setCodes;
+    }
+
+    public ExpansionInfo[] getWithBoostersSortedByReleaseDate() {
+        ExpansionInfo[]  sets = new ExpansionInfo[0];
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.orderBy("releaseDate", false);
+            qb.where().eq("boosters", new SelectArg(true));
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            sets = expansions.toArray(new ExpansionInfo[0]);
+        } catch (SQLException ex) {
+        }
+        return sets;
+    }
+
+    public ExpansionInfo[] getSetsWithBasicLandsByReleaseDate() {
+        ExpansionInfo[]  sets = new ExpansionInfo[0];
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.orderBy("releaseDate", false);
+            qb.where().eq("basicLands", new SelectArg(true));
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            sets = expansions.toArray(new ExpansionInfo[0]);
+        } catch (SQLException ex) {
+        }
+        return sets;
+    }
+    
+    public ExpansionInfo[] getSetsFromBlock(String blockName) {
+        ExpansionInfo[]  sets = new ExpansionInfo[0];
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.where().eq("blockName", new SelectArg(blockName));
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            sets = expansions.toArray(new ExpansionInfo[0]);
+        } catch (SQLException ex) {
+        }
+        return sets;
+    }
+
+    public ExpansionInfo getSetByCode(String setCode) {
+        ExpansionInfo set = null;
+        try {
+            QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
+            qb.where().eq("code", new SelectArg(setCode));
+            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
+            if (expansions.size() > 0) {
+                set = expansions.get(0);
+            }
+        } catch (SQLException ex) {
+        }
+        return set;        
     }
 
     public List<ExpansionInfo> getAll() {
