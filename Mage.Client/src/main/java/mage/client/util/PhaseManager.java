@@ -1,12 +1,38 @@
+/*
+* Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without modification, are
+* permitted provided that the following conditions are met:
+*
+*    1. Redistributions of source code must retain the above copyright notice, this list of
+*       conditions and the following disclaimer.
+*
+*    2. Redistributions in binary form must reproduce the above copyright notice, this list
+*       of conditions and the following disclaimer in the documentation and/or other materials
+*       provided with the distribution.
+*
+* THIS SOFTWARE IS PROVIDED BY BetaSteward_at_googlemail.com ``AS IS'' AND ANY EXPRESS OR IMPLIED
+* WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+* FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL BetaSteward_at_googlemail.com OR
+* CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+* ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+* NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+* ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*
+* The views and conclusions contained in the software and documentation are those of the
+* authors and should not be interpreted as representing official policies, either expressed
+* or implied, of BetaSteward_at_googlemail.com.
+*/
+
 package mage.client.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.view.GameView;
-import mage.view.PlayerView;
 
 public class PhaseManager {
 
@@ -31,6 +57,8 @@ public class PhaseManager {
     public static String END_OF_COMBAT_OTHERS = "endOfCombatOthers";
     public static String MAIN_2_OTHERS = "main2Others";
     public static String END_OF_TURN_OTHERS = "endOfTurnOthers";
+
+    private static final Preferences prefs = MageFrame.getPreferences();
 
     private static Map<String, String> mapYou = new HashMap<String, String>() {{
         put("Upkeep - play instants and activated abilities.", UPKEEP_YOU);
@@ -57,29 +85,22 @@ public class PhaseManager {
     }
 
     public boolean isSkip(GameView gameView, String message) {
+        // no skipping if stack is not empty
         if (GameManager.getInstance().getStackSize() > 0) {
             return false;
         }
-        UUID activePlayer = null;
-        Map<String, String> map = mapOthers;
-        for (PlayerView playerView : gameView.getPlayers()) {
-            if (playerView.isActive()) {
-                activePlayer = playerView.getPlayerId();
-                if (activePlayer.equals(GameManager.getInstance().getCurrentPlayerUUID())) {
-                    map = mapYou;
-                }
-            }
-        }
-        if (activePlayer == null) {
+        if (gameView.getActivePlayerId() == null) {
             throw new IllegalStateException("No active player found.");
         }
-
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (message.equals(entry.getKey())) {
-                Preferences prefs = MageFrame.getPreferences();
-                String prop = prefs.get(entry.getValue(), PHASE_ON);
-                return !prop.equals(PHASE_ON);
-            }
+        String prefKey;
+        if (gameView.getActivePlayerId().equals(GameManager.getInstance().getCurrentPlayerUUID())) {
+            prefKey = mapYou.get(message);
+        } else {
+            prefKey = mapOthers.get(message);
+        }
+        if (prefKey != null) {
+            String prop = prefs.get(prefKey, PHASE_ON);
+            return !prop.equals(PHASE_ON);
         }
         return false;
     }

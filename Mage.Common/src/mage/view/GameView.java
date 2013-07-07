@@ -71,6 +71,7 @@ public class GameView implements Serializable {
     private List<CombatGroupView> combat = new ArrayList<CombatGroupView>();
     private TurnPhase phase;
     private PhaseStep step;
+    private UUID activePlayerId;
     private String activePlayerName = "";
     private String priorityPlayerName = "";
     private int turn;
@@ -140,6 +141,7 @@ public class GameView implements Serializable {
         this.phase = state.getTurn().getPhaseType();
         this.step = state.getTurn().getStepType();
         this.turn = state.getTurnNum();
+        this.activePlayerId = state.getActivePlayerId();
         if (state.getActivePlayerId() != null) {
             this.activePlayerName = state.getPlayer(state.getActivePlayerId()).getName();
         } else {
@@ -267,6 +269,10 @@ public class GameView implements Serializable {
 
     public int getPriorityTime() {
         return priorityTime;
+    }
+
+    public UUID getActivePlayerId() {
+        return activePlayerId;
     }
 
 }
