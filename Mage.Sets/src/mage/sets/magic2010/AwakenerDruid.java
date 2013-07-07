@@ -34,11 +34,16 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetLandPermanent;
 
@@ -62,7 +67,9 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
         this.subtype.add("Druid");
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new BecomesCreatureTargetEffect(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield), false);
+
+        // When Awakener Druid enters the battlefield, target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new AwakenerDruidBecomesCreatureEffect(), false);
         ability.addTarget(new TargetLandPermanent(filter));
         this.addAbility(ability);
     }
@@ -75,6 +82,37 @@ public class AwakenerDruid extends CardImpl<AwakenerDruid> {
     @Override
     public AwakenerDruid copy() {
         return new AwakenerDruid(this);
+    }
+}
+
+class AwakenerDruidBecomesCreatureEffect extends BecomesCreatureTargetEffect {
+
+    public AwakenerDruidBecomesCreatureEffect() {
+        super(new AwakenerDruidToken(), "land", Duration.WhileOnBattlefield);
+    }
+
+    public AwakenerDruidBecomesCreatureEffect(final AwakenerDruidBecomesCreatureEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public AwakenerDruidBecomesCreatureEffect copy() {
+        return new AwakenerDruidBecomesCreatureEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
+            this.discard();
+            return false;
+        }
+        return super.apply(layer, sublayer, source, game);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "target Forest becomes a 4/5 green Treefolk creature for as long as Awakener Druid remains on the battlefield. It's still a land";
     }
 }
 
