@@ -28,15 +28,8 @@ public class MockSplitCard extends SplitCard<MockSplitCard> {
         this.power = mageIntFromString(card.getPower());
         this.toughness = mageIntFromString(card.getToughness());
         this.cardType = card.getTypes();
-        // dont copy list with empty element (would be better to eliminate earlier but I don't know how (LevelX2))
-        if (card.getSubTypes().get(0).length() >0) {
-            // empty element leads to added "-" after cardtype.
-            this.subtype = card.getSubTypes();
-        }
-        if (card.getSupertypes().get(0).length() >0) {
-            // empty element leads to blank before Card Type.
-            this.supertype = card.getSupertypes();
-        }
+        this.subtype = card.getSubTypes();
+        this.supertype = card.getSupertypes();
 
         this.usesVariousArt = card.usesVariousArt();
 

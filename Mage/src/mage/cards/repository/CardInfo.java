@@ -185,6 +185,9 @@ public class CardInfo {
     }
 
     private List<String> parseList(String list) {
+        if (list.isEmpty()) {
+            return new ArrayList<String>();
+        }
         return Arrays.asList(list.split(SEPARATOR));
     }
 
