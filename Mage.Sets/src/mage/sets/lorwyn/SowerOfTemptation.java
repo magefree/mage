@@ -32,13 +32,19 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -56,7 +62,7 @@ public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
         this.toughness = new MageInt(2);
         this.addAbility(FlyingAbility.getInstance());
         // When Sower of Temptation enters the battlefield, gain control of target creature for as long as Sower of Temptation remains on the battlefield.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield), false);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new SowerOfTemptationControlEffect(Duration.WhileOnBattlefield), false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }
@@ -68,5 +74,43 @@ public class SowerOfTemptation extends CardImpl<SowerOfTemptation> {
     @Override
     public SowerOfTemptation copy() {
         return new SowerOfTemptation(this);
+    }
+}
+
+class SowerOfTemptationControlEffect extends ContinuousEffectImpl<SowerOfTemptationControlEffect> {
+
+    public SowerOfTemptationControlEffect(Duration duration) {
+        super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+    }
+
+    public SowerOfTemptationControlEffect(final SowerOfTemptationControlEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public SowerOfTemptationControlEffect copy() {
+        return new SowerOfTemptationControlEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent sourcePermanent = game.getPermanent(source.getSourceId());
+        if (sourcePermanent == null) {
+            this.discard();
+            return false;
+        }
+        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        if (targetPointer != null) {
+            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        }
+        if (permanent != null) {
+            return permanent.changeControllerId(source.getControllerId(), game);
+        }
+        return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        return "Gain control of target " + mode.getTargets().get(0).getTargetName() + " " + duration.toString();
     }
 }
