@@ -46,6 +46,8 @@ import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
 import java.util.UUID;
+import mage.MageObject;
+import mage.game.stack.Spell;
 
 /**
  *
@@ -102,10 +104,13 @@ class SpectralPrisonAbility extends TriggeredAbilityImpl<SpectralPrisonAbility> 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.TARGETED) {
-            Permanent enchantment = game.getPermanent(sourceId);
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getTargetId().equals(enchantment.getAttachedTo())) {
-                    return true;
+            MageObject eventSourceObject = game.getObject(event.getSourceId());
+            if (eventSourceObject != null && eventSourceObject instanceof Spell) {
+                Permanent enchantment = game.getPermanent(sourceId);
+                if (enchantment != null && enchantment.getAttachedTo() != null) {
+                    if (event.getTargetId().equals(enchantment.getAttachedTo())) {
+                        return true;
+                    }
                 }
             }
         }
