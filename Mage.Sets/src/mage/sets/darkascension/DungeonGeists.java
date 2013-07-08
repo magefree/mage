@@ -96,7 +96,7 @@ class DungeonGeistsEffect extends ReplacementEffectImpl<DungeonGeistsEffect> {
 
     public DungeonGeistsEffect() {
         super(Duration.OneUse, Outcome.Detriment);
-        this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control Dungeon Geists";
+        this.staticText = "That creature doesn't untap during its controller's untap step for as long as you control {this}";
     }
 
     public DungeonGeistsEffect(final DungeonGeistsEffect effect) {
