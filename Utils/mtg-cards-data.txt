@@ -21965,3 +21965,252 @@ Skeletal Vampire|Modern Masters|96|R|{4}{B}{B}|Creature - Vampire Skeleton|3|3|F
 Slaughter Pact|Modern Masters|97|R|{0}|Instant|||Destroy target nonblack creature.$At the beginning of your next upkeep, pay {2}{B}. If you don't, you lose the game.|
 Stinkweed Imp|Modern Masters|98|C|{2}{B}|Creature - Imp|1|2|Flying$Whenever Stinkweed Imp deals combat damage to a creature, destroy that creature.$Dredge 5 <i>(If you would draw a card, instead you may put exactly five cards from the top of your library into your graveyard. If you do, return this card from your graveyard to your hand. Otherwise, draw a card.)</i>|
 Street Wraith|Modern Masters|99|C|{3}{B}{B}|Creature - Wraith|3|4|Swampwalk$Cycling-Pay 2 life. <i>(Pay 2 life, Discard this card: Draw a card.)</i>|
+Ajani, Caller of the Pride|Magic 2014|1|M|{1}{W}{W}|Planeswalker - Ajani|4|+1: Put a +1/+1 counter on up to one target creature.$-3: Target creature gains flying and double strike until end of turn.$-8: Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.|
+Ajani's Chosen|Magic 2014|2|R|{2}{W}{W}|Creature - Cat Soldier|3|3|Whenever an enchantment enters the battlefield under your control, put a 2/2 white Cat creature token onto the battlefield. If that enchantment is an Aura, you may attach it to the token.|
+Angelic Accord|Magic 2014|3|U|{3}{W}|Enchantment|||At the beginning of each end step, if you gained 4 or more life this turn, put a 4/4 white Angel creature token with flying onto the battlefield.|
+Angelic Wall|Magic 2014|4|C|{1}{W}|Creature - Wall|0|4|Defender, flying|
+Archangel of Thune|Magic 2014|5|M|{3}{W}{W}|Creature - Angel|3|4|Flying, lifelink$Whenever you gain life, put a +1/+1 counter on each creature you control.$|
+Auramancer|Magic 2014|6|C|{2}{W}|Creature - Human Wizard|2|2|When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.|
+Banisher Priest|Magic 2014|7|U|{1}{W}{W}|Creature - Human Cleric|2|2|When Banisher Priest enters the battlefield, exile target creature an opponent controls until Banisher Priest leaves the battlefield.|
+Blessing|Magic 2014|8|U|{W}{W}|Enchantment - Aura|||Enchant creature${W}: Enchanted creature gets +1/+1 until end of turn.|
+Bonescythe Sliver|Magic 2014|9|R|{3}{W}|Creature - Sliver|2|2|Sliver creatures you control have double strike.|
+Brave the Elements|Magic 2014|10|U|{W}|Instant|||Choose a color. White creatures you control gain protection from the chosen color until end of turn.|
+Capashen Knight|Magic 2014|11|C|{1}{W}|Creature - Human Knight|1|1|First strike${1}{W}: Capashen Knight gets +1/+0 until end of turn.|
+Celestial Flare|Magic 2014|12|C|{W}{W}|Instant|||Target player sacrifices an attacking or blocking creature.|
+Charging Griffin|Magic 2014|13|C|{3}{W}|Creature - Griffin|2|2|Flying$Whenever Charging Griffin attacks, it gets +1/+1 until end of turn.|
+Congregate|Magic 2014|14|U|{3}{W}|Instant|||Target player gains 2 life for each creature on the battlefield.|
+Dawnstrike Paladin|Magic 2014|15|C|{3}{W}{W}|Creature - Human Knight|2|4|Vigilance, lifelink|
+Devout Invocation|Magic 2014|16|M|{6}{W}|Sorcery|||Tap any number of untapped creatures you control. Put a 4/4 white Angel creature token with flying onto the battlefield for each creature tapped this way. |
+Divine Favor|Magic 2014|17|C|{1}{W}|Enchantment - Aura|||Enchant creature$When Divine Favor enters the battlefield, you gain 3 life.$Enchanted creature gets +1/+3.|
+Fiendslayer Paladin|Magic 2014|18|R|{1}{W}{W}|Creature - Human Knight|2|2|First strike, lifelink$Fiendslayer Paladin can't be the target of black or red spells your opponents control.|
+Fortify|Magic 2014|19|C|{2}{W}|Instant|||Choose one — Creatures you control get +2/+0 until end of turn; or creatures you control get +0/+2 until end of turn.|
+Griffin Sentinel|Magic 2014|20|C|{2}{W}|Creature - Griffin|1|3|Flying, vigilance|
+Hive Stirrings|Magic 2014|21|C|{2}{W}|Sorcery|||Put two 1/1 colorless Sliver creature tokens onto the battlefield.|
+Imposing Sovereign|Magic 2014|22|R|{1}{W}|Creature - Human|2|1|Creatures your opponents control enter the battlefield tapped.|
+Indestructibility|Magic 2014|23|R|{3}{W}|Enchantment - Aura|||Enchant permanent$Enchanted permanent has indestructible. <i>(Effects that say "destroy" don't destroy that permanent. An indestructible creature can't be destroyed by damage.)</i>|
+Master of Diversion|Magic 2014|24|C|{2}{W}|Creature - Human Scout|2|2|Whenever Master of Diversion attacks, tap target creature defending player controls.|
+Pacifism|Magic 2014|25|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature can't attack or block.|
+Path of Bravery|Magic 2014|26|R|{2}{W}|Enchantment|||As long as your life total is greater than or equal to your starting life total, creatures you control get +1/+1.$Whenever one or more creatures you control attack, you gain life equal to the number of attacking creatures.|
+Pay No Heed|Magic 2014|27|C|{W}|Instant|||Prevent all damage a source of your choice would deal this turn.|
+Pillarfield Ox|Magic 2014|28|C|{3}{W}|Creature - Ox|2|4||
+Planar Cleansing|Magic 2014|29|R|{3}{W}{W}{W}|Sorcery|||Destroy all nonland permanents.|
+Sentinel Sliver|Magic 2014|30|C|{1}{W}|Creature - Sliver|2|2|Sliver creatures you control have vigilance.|
+Seraph of the Sword|Magic 2014|31|R|{3}{W}|Creature - Angel|3|3|Flying$Prevent all combat damage that would be dealt to Seraph of the Sword.|
+Serra Angel|Magic 2014|32|U|{3}{W}{W}|Creature - Angel|4|4|Flying, vigilance|
+Show of Valor|Magic 2014|33|C|{1}{W}|Instant|||Target creature gets +2/+4 until end of turn.|
+Siege Mastodon|Magic 2014|34|C|{4}{W}|Creature - Elephant|3|5||
+Silence|Magic 2014|35|R|{W}|Instant|||Your opponents can't cast spells this turn. <i>(Spells cast before this resolves are unaffected.)</i>|
+Solemn Offering|Magic 2014|36|C|{2}{W}|Sorcery|||Destroy target artifact or enchantment. You gain 4 life.|
+Soulmender|Magic 2014|37|C|{W}|Creature - Human Cleric|1|1|{T}: You gain 1 life.|
+Steelform Sliver|Magic 2014|38|U|{2}{W}|Creature - Sliver|2|2|Sliver creatures you control get +0/+1.|
+Stonehorn Chanter|Magic 2014|39|U|{5}{W}|Creature - Rhino Cleric|4|4|{5}{W}: Stonehorn Chanter gains vigilance and lifelink until end of turn.|
+Suntail Hawk|Magic 2014|40|C|{W}|Creature - Bird|1|1|Flying|
+Wall of Swords|Magic 2014|41|U|{3}{W}|Creature - Wall|||Defender$Flying|
+Air Servant|Magic 2014|42|U|{4}{U}|Creature - Elemental|4|3|Flying${2}{U}: Tap target creature with flying.|
+Archaeomancer|Magic 2014|43|C|{2}{U}{U}|Creature - Human Wizard|1|2|When Archaeomancer enters the battlefield, return target instant or sorcery card from your graveyard to your hand.|
+Armored Cancrix|Magic 2014|44|C|{4}{U}|Creature - Crab|2|5||
+Cancel|Magic 2014|45|C|{1}{U}{U}|Instant|||Counter target spell|
+Claustrophobia|Magic 2014|46|C|{1}{U}{U}|Enchantment - Aura|||Enchant creature$When Claustrophobia enters the battlefield, tap enchanted creature.$Enchanted creature doesn't untap during its controller's untap step.|
+Clone|Magic 2014|47|R|{3}{U}|Creature - Shapeshifter|0|0|You may have Clone enter the battlefield as a copy of any creature on the battlefield.|
+Colossal Whale|Magic 2014|48|R|{5}{U}{U}|Creature - Whale|5|5|Islandwalk$Whenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield.|
+Coral Merfolk|Magic 2014|49|C|{1}{U}|Creature - Merfolk|2|1||
+Dismiss into Dream|Magic 2014|50|R|{6}{U}|Enchantment|||Each creature your opponents control is an Illusion in addition to its other types and has "When this creature becomes the target of a spell or ability, sacrifice it."|
+Disperse|Magic 2014|51|C|{1}{U}|Instant|||Return target nonland permanent to its owner's hand.|
+Divination|Magic 2014|52|C|{2}{U}|Sorcery|||Draw two cards.|
+Domestication|Magic 2014|53|R|{2}{U}{U}|Enchantment - Aura|||Enchant creature$You control enchanted creature.$At the beginning of your end step, if enchanted creature's power is 4 or greater, sacrifice Domestication.|
+Elite Arcanist|Magic 2014|54|R|{3}{U}|Creature - Human Wizard|1|1|When Elite Arcanist enters the battlefield, you may exile an instant card from your hand.${X}, {T}: Copy the exiled card. You may cast the copy without paying its mana cost. X is the converted mana cost of the exiled card.|
+Essence Scatter|Magic 2014|55|C|{1}{U}|Instant|||Counter target creature spell.|
+Frost Breath|Magic 2014|56|C|{2}{U}|Instant|||Tap up to two target creatures. Those creatures don't untap during their controller's next untap step.|
+Galerider Sliver|Magic 2014|57|R|{U}|Creature - Sliver|1|1|Sliver creatures you control have flying.|
+Glimpse the Future|Magic 2014|58|U|{2}{U}|Sorcery|||Look at the top three cards of your library. Put one of them into your hand and the rest into your graveyard. |
+Illusionary Armor|Magic 2014|59|U|{4}{U}|Enchantment - Aura|||Enchant Creature$Enchanted creature gets +4/+4.$When enchanted creature becomes the target of a spell or ability, sacrifice Illusionary Armor.|
+Jace, Memory Adept|Magic 2014|60|M|{3}{U}{U}|Planeswalker - Jace|4|+1: Draw a card. Target player puts the top card of his or her library into his or her graveyard.$0: Target player puts the top ten cards of his or her library into his or her graveyard.$-7: Any number of target players each draw twenty cards.|
+Jace's Mindseeker|Magic 2014|61|R|{4}{U}{U}|Creature - Fish Illusion|4|4|Flying$When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard. You may cast an instant or sorcery card from among them without paying its mana cost.|
+Merfolk Spy|Magic 2014|62|C|{U}|Creature - Merfolk Rogue|1|1|Islandwalk$Whenever Merfolk Spy deals combat damage to a player, that player reveals a card at random from his or her hand.|
+Messenger Drake|Magic 2014|63|C|{3}{U}{U}|Creature - Drake|3|3|Flying$When Messenger Drake dies, draw a card.|
+Negate|Magic 2014|64|C|{1}{U}|Instant|||Counter target noncreature spell.|
+Nephalia Seakite|Magic 2014|65|C|{3}{U}|Creature - Bird|2|3|Flash$Flying|
+Opportunity|Magic 2014|66|U|{4}{U}{U}|Instant|||Target player draws four cards.|
+Phantom Warrior|Magic 2014|67|U|{1}{U}{U}|Creature - Illusion Warrior|2|2|Phantom Warrior can't be blocked.|
+Quicken|Magic 2014|68|R|{U}|Instant|||The next sorcery card you cast this turn can be cast as though it had flash.$Draw a card.|
+Scroll Thief|Magic 2014|69|C|{2}{U}|Creature - Merfolk Rogue|1|3|Whenever Scroll Thief deals combat damage to a player, draw a card.|
+Seacoast Drake|Magic 2014|70|C|{1}{U}|Creature - Drake|1|3|Flying|
+Sensory Deprivation|Magic 2014|71|C|{U}|Enchantment - Aura|||Enchant creature$Enchanted creature gets -3/-0.|
+Spell Blast|Magic 2014|72|U|{X}{U}|Instant|||Counter target spell with converted mana cost X. <i>(For example, if that spell's mana cost is {3}{U}{U}, X is 5.)</i>|
+Tidebinder Mage|Magic 2014|73|R|{U}{U}|Creature - Merfolk Wizard|2|2|When Tidebinder Mage enters the battlefield, tap target red or green creature an opponent controls. That creature doesn't untap during its controller's untap step for as long as you control Tidebinder Mage.|
+Time Ebb|Magic 2014|74|C|{2}{U}|Sorcery|||Put target creature on top of its owner's library.|
+Tome Scour|Magic 2014|75|C|{U}|Sorcery|||Target player puts the top five cards of his or her library into his or her graveyard.|
+Trained Condor|Magic 2014|76|C|{2}{U}|Creature - Bird|2|1|Flying$Whenever Trained Condor attacks, another target creature you control gains flying until end of turn.|
+Traumatize|Magic 2014|77|M|{3}{U}{U}|Sorcery|||Target player puts the top half of his or her library, rounded down, into his or her graveyard.|
+Wall of Frost|Magic 2014|78|U|{1}{U}{U}|Creature - Wall|0|7|Defender$Whenever Wall of Frost blocks a creature, that creature doesn't untap during its controller's next untap step.|
+Warden of Evos Isle|Magic 2014|79|U|{2}{U}|Creature - Bird Wizard|2|2|Flying$Creature spells with flying you cast cost {1} less to cast.|
+Water Servant|Magic 2014|80|U|{2}{U}{U}|Creature — Elemental|3|4|{U}: Water Servant gets +1/-1 until end of turn.${U}: Water Servant gets -1/+1 until end of turn.|
+Windreader Sphinx|Magic 2014|81|M|{5}{U}{U}|Creature - Sphinx|3|7|Flying$Whenever a creature with flying attacks, you may draw a card.|
+Zephyr Charge|Magic 2014|82|C|{1}{U}|Enchantment|||{1}{U}: Target creature gains flying until end of turn.|
+Accursed Spirit|Magic 2014|83|C|{3}{B}|Creature - Spirit|3|2|Intimidate|
+Altar's Reap|Magic 2014|84|C|{1}{B}|Instant|||As an additional cost to cast Altar's Reap, sacrifice a creature.$Draw two cards.|
+Artificer's Hex|Magic 2014|85|U|{B}|Enchantment - Aura|||Enchant Equipment$At the beginning of your upkeep, if enchanted Equipment is attached to a creature, destroy that creature.|
+Blightcaster|Magic 2014|86|U|{3}{B}|Creature - Human Wizard|2|3|Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.|
+Blood Bairn|Magic 2014|87|C|{2}{B}|Creature - Vampire|2|2|Sacrifice another creature: Blood Bairn gets +2/+2 until end of turn.|
+Bogbrew Witch|Magic 2014|88|R|{3}{B}|Creature - Human Wizard|1|3|{2}, {T}: Search your library for a card named Festering Newt or Bubbling Cauldron, put it onto the battlefield tapped, then shuffle your library.|
+Child of Night|Magic 2014|89|C|{1}{B}|Creature - Vampire|2|1|Lifelink|
+Corpse Hauler|Magic 2014|90|C|{1}{B}|Creature - Human Rogue|2|1|{2}{B}, Sacrifice Corpse Hauler: Return another target creature card from your graveyard to your hand.|
+Corrupt|Magic 2014|91|U|{5}{B}|Sorcery|||Corrupt deals damage equal to the number of Swamps you control to target creature or player. You gain life equal to the damage dealt this way.|
+Dark Favor|Magic 2014|92|C|{1}{B}|Enchantment - Aura|||Enchant creature$When Dark Favor enters the battlefield, you lose 1 life.$Enchanted creature gets +3/+1.|
+Dark Prophecy|Magic 2014|93|R|{B}{B}{B}|Enchantment|||Whenever a creature you control dies, you draw a card and lose 1 life.|
+Deathgaze Cockatrice|Magic 2014|94|C|{2}{B}{B}|Creature - Cockatrice|2|2|Flying, deathtouch|
+Diabolic Tutor|Magic 2014|95|U|{2}{B}{B}|Sorcery|||Search your library for a card and put that card into your hand. Then shuffle your library.|
+Doom Blade|Magic 2014|96|U|{1}{B}|Instant|||Destroy target nonblack creature.|
+Duress|Magic 2014|97|C|{B}|Sorcery|||Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.|
+Festering Newt|Magic 2014|98|C|{B}|Creature - Salamander|1|1|When Festering Newt dies, target creature an opponent controls gets -1/-1 until end of turn. That creature gets -4/-4 instead if you control a creature named Bogbrew Witch.|
+Gnawing Zombie|Magic 2014|99|U|{1}{B}|Creature - Zombie|1|3|{1}{B}, Sacrifice a creature: Target player loses 1 life and you gain 1 life.|
+Grim Return|Magic 2014|100|R|{2}{B}|Instant|||Choose target creature card in a graveyard that was put there from the battlefield this turn. Put that card onto the battlefield under your control. |
+Lifebane Zombie|Magic 2014|101|R|{1}{B}{B}|Creature - Zombie Warrior|3|1|Intimidate$When Lifebane Zombie enters the battlefield, target opponent reveals his or her hand. You choose a green or white creature card from it and exile that card.|
+Liliana of the Dark Realms|Magic 2014|102|M|{2}{B}{B}|Planeswalker - Liliana|3|+1: Search your library for a Swamp card, reveal it, and put it into your hand. Then shuffle your library.$-3: Target creature gets +X/+X or -X/-X until end of turn, where X is the number of Swamps you control.$-6: You get an emblem with "Swamps you control have ‘Tap: Add {B}{B}{B}{B} to your mana pool.'"|
+Liliana's Reaver|Magic 2014|103|R|{2}{B}{B}|Creature - Zombie|4|3|Deathtouch$Whenever Liliana's Reaver deals combat damage to a player, that player discards a card and you put a 2/2 black Zombie creature token onto the battlefield tapped.|
+Liturgy of Blood|Magic 2014|104|C|{3}{B}{B}|Sorcery|||Destroy target creature. Add {B}{B}{B} to your mana pool.|
+Mark of the Vampire|Magic 2014|105|C|{3}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has lifelink.|
+Mind Rot|Magic 2014|106|C|{2}{B}|Sorcery|||Target player discards two cards.|
+Minotaur Abomination|Magic 2014|107|C|{4}{B}{B}|Creature - Zombie Minotaur|4|6||
+Nightmare|Magic 2014|108|R|{5}{B}|Creature - Nightmare Horse|*|*|Flying$Nightmare's power and toughness are each equal to the number of Swamps you control.|
+Nightwing Shade|Magic 2014|109|C|{4}{B}|Creature - Shade|2|2|Flying${1}{B}: Nightwing Shade gets +1/+1 until end of turn.|
+Quag Sickness|Magic 2014|110|C|{2}{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets -1/-1 for each Swamp you control.|
+Rise of the Dark Realms|Magic 2014|111|M|{7}{B}{B}|Sorcery|||Put all creature cards from all graveyards onto the battlefield under your control.|
+Sanguine Bond|Magic 2014|112|R|{3}{B}{B}|Enchantment|||Whenever you gain life, target opponent loses that much life.|
+Sengir Vampire|Magic 2014|113|U|{3}{B}{B}|Creature - Vampire|4|4|Flying$Whenever a creature dealt damage by Sengir Vampire this turn dies, put a +1/+1 counter on Sengir Vampire.|
+Shadowborn Apostle|Magic 2014|114|C|{B}|Creature - Human Cleric|1|1|A deck can have any number of cards named Shadowborn Apostle.${B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.|
+Shadowborn Demon|Magic 2014|115|M|{3}{B}{B}|Creature - Demon|5|6|Flying$When Shadowborn Demon enters the battlefield, destroy target non-Demon creature.$At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature.|
+Shrivel|Magic 2014|116|C|{1}{B}|Sorcery|||All creatures get -1/-1 until end of turn.|
+Syphon Sliver|Magic 2014|117|R|{2}{B}|Creature - Sliver|2|2|Sliver creatures you control have lifelink.|
+Tenacious Dead|Magic 2014|118|U|{B}|Creature - Skeleton Warrior|1|1|When Tenacious Dead dies, you may pay {1}{B}. If you do, return it to the battlefield tapped under its owner's control.|
+Undead Minotaur|Magic 2014|119|C|{2}{B}|Creature - Zombie Minotaur|2|3||
+Vampire Warlord|Magic 2014|120|U|{4}{B}|Creature - Vampire Warrior|4|2|Sacrifice another creature: Regenerate Vampire Warlord.|
+Vile Rebirth|Magic 2014|121|C|{B}|Instant|||Exile target creature card from a graveyard. Put a 2/2 black Zombie creature token onto the battlefield.|
+Wring Flesh|Magic 2014|122|C|{B}|Instant|||Target creature gets -3/-1 until end of turn.|
+Xathrid Necromancer|Magic 2014|123|R|{2}{B}|Creature - Human Wizard|2|2|Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.|
+Academy Raider|Magic 2014|124|C|{2}{R}|Creature - Human Warrior|1|1|Intimidate$Whenever Academy Raider deals combat damage to a player, you may discard a card. If you do, draw a card.|
+Act of Treason|Magic 2014|125|C|{2}{R}|Sorcery|||Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.|
+Awaken the Ancient|Magic 2014|126|R|{1}{R}{R}{R}|Enchantment - Aura|||Enchant Mountain$Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.|
+Barrage of Expendables|Magic 2014|127|U|{R}|Enchantment|||{R}, Sacrifice a creature: Barrage of Expendables deals 1 damage to target creature or player.|
+Battle Sliver|Magic 2014|128|U|{4}{R}|Creature - Sliver|3|3|Sliver creatures you control get +2/+0.|
+Blur Sliver|Magic 2014|129|C|{2}{R}|Creature - Sliver|2|2|Sliver creatures you control have haste.|
+Burning Earth|Magic 2014|130|R|{3}{R}|Enchantment|||Whenever a player taps a nonbasic land for mana, Burning Earth deals 1 damage to that player.|
+Canyon Minotaur|Magic 2014|131|C|{3}{R}|Creature - Minotaur Warrior|3|3||
+Chandra, Pyromaster|Magic 2014|132|M|{2}{R}{R}|Planeswalker - Chandra|4|+1: Chandra, Pyromaster deals 1 damage to target player and 1 damage to up to one target creature that player controls. That creature can't block this turn.$0: Exile the top card of your library. You may play it this turn.$-7: Exile the top ten cards of your library. Choose an instant or sorcery card exiled this way and copy it three times. You may cast the copies without paying their mana costs.|
+Chandra's Outrage|Magic 2014|133|C|{2}{R}{R}|Instant|||Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.|
+Chandra's Phoenix|Magic 2014|134|R|{1}{R}{R}|Creature - Phoenix|2|2|Flying, haste$Whenever an opponent is dealt damage by a red instant or sorcery spell you control or by a red planeswalker you control, return Chandra's Phoenix from your graveyard to your hand.|
+Cyclops Tyrant|Magic 2014|135|C|{5}{R}|Creature - Cyclops|3|4|Intimidate$Cyclops Tyrant can't block creatures with power 2 or less.|
+Demolish|Magic 2014|136|C|{3}{R}|Sorcery|||Destroy target artifact or land.|
+Dragon Egg|Magic 2014|137|U|{2}{R}|Creature - Dragon|0|2|Defender$When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".|
+Dragon Hatchling|Magic 2014|138|C|{1}{R}|Creature - Dragon|0|1|Flying${R}: Dragon Hatchling gets +1/+0 until end of turn.|
+Flames of the Firebrand|Magic 2014|139|U|{2}{R}|Sorcery|||Flames of the Firebrand deals 3 damage divided as you choose among one, two, or three target creatures and/or players.|
+Fleshpulper Giant|Magic 2014|140|U|{5}{R}{R}|Creature - Giant|4|4|When Fleshpulper Giant enters the battlefield, you may destroy target creature with toughness 2 or less.|
+Goblin Diplomats|Magic 2014|141|R|{1}{R}|Creature - Goblin|2|1|{T}: Each creature attacks this turn if able.|
+Goblin Shortcutter|Magic 2014|142|C|{1}{R}|Creature - Goblin Scout|2|1|When Goblin Shortcutter enters the battlefield, target creature can't block this turn.|
+Lava Axe|Magic 2014|143|C|{4}{R}|Sorcery|||Lava Axe deals 5 damage to target player.|
+Lightning Talons|Magic 2014|144|C|{2}{R}|Enchantment - Aura|||Enchant Creature$Enchanted creature gets +3/+0 and has first strike.|
+Marauding Maulhorn|Magic 2014|145|C|{2}{R}{R}|Creature - Beast|5|3|Marauding Maulhorn attacks each combat if able unless you control a creature named Advocate of the Beast.|
+Mindsparker|Magic 2014|146|R|{1}{R}{R}|Creature - Elemental|3|2|First strike$Whenever an opponent casts a white or blue instant or sorcery spell, Mindsparker deals 2 damage to that player.|
+Molten Birth|Magic 2014|147|U|{1}{R}{R}|Sorcery|||Put two 1/1 red Elemental creature tokens onto the battlefield. Then flip a coin. If you win the flip, return Molten Birth to its owner's hand. |
+Ogre Battledriver|Magic 2014|148|R|{2}{R}{R}|Creature - Ogre Warrior|3|3|Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.|
+Pitchburn Devils|Magic 2014|149|C|{4}{R}|Creature - Devil|3|3|When Pitchburn Devils dies, it deals 3 damage to target creature or player.|
+Regathan Firecat|Magic 2014|150|C|{2}{R}|Creature - Elemental Cat|4|1||
+Scourge of Valkas|Magic 2014|151|M|{2}{R}{R}{R}|Creature - Dragon|4|4|Flying$Whenever Scourge of Valkas or another Dragon enters the battlefield under your control, it deals X damage to target creature or player, where X is the number of Dragons you control.${R}: Scourge of Valkas gets +1/+0 until end of turn.|
+Seismic Stomp|Magic 2014|152|C|{1}{R}|Sorcery|||Creatures without flying can't block this turn.|
+Shiv's Embrace|Magic 2014|153|U|{2}{R}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has flying.${R}: Enchanted creature gets +1/+0 until end of turn.|
+Shivan Dragon|Magic 2014|154|R|{4}{R}{R}|Creature - Dragon|5|5|Flying${R}: Shivan Dragon gets +1/+0 until end of turn.|
+Shock|Magic 2014|155|C|{R}|Instant|||Shock deals 2 damage to target creature or player.|
+Smelt|Magic 2014|156|C|{R}|Instant|||Destroy target artifact.|
+Striking Sliver|Magic 2014|157|C|{R}|Creature - Sliver|1|1|Sliver creatures you control have first strike.|
+Thorncaster Sliver|Magic 2014|158|R|{4}{R}|Creature - Sliver|2|2|Sliver creatures you control have "Whenever this creature attacks, it deals 1 damage to target creature or player."|
+Thunder Strike|Magic 2014|159|C|{1}{R}|Instant|||Target creature gets +2/+0 and gains first strike until end of turn.|
+Volcanic Geyser|Magic 2014|160|U|{X}{R}{R}|Instant|||Volcanic Geyser deals X damage to target creature or player.|
+Wild Guess|Magic 2014|161|C|{R}{R}|Sorcery|||As an additional cost to cast Wild Guess, discard a card.$Draw two cards.|
+Wild Ricochet|Magic 2014|162|R|{2}{R}{R}|Instant|||You may choose new targets for target instant or sorcery spell. Then copy that spell. You may choose new targets for the copy.|
+Young Pyromancer|Magic 2014|163|U|{1}{R}|Creature - Human Shaman|2|1|Whenever you cast an instant or sorcery spell, put a 1/1 red Elemental creature token onto the battlefield.|
+Advocate of the Beast|Magic 2014|164|C|{2}{G}|Creature - Elf Shaman|2|3|At the beginning of your end step, put a +1/+1 counter on target Beast creature you control.|
+Bramblecrush|Magic 2014|165|U|{2}{G}{G}|Sorcery|||Destroy target noncreature permanent.|
+Briarpack Alpha|Magic 2014|166|U|{3}{G}|Creature - Wolf|3|3|Flash$When Briarpack Alpha enters the battlefield, target creature gets +2/+2 until end of turn.|
+Brindle Boar|Magic 2014|167|C|{2}{G}|Creature - Boar|2|2|Sacrifice Brindle Boar: You gain 4 life.|
+Deadly Recluse|Magic 2014|168|C|{1}{G}|Creature - Spider|1|2|Reach, deathtouch|
+Elvish Mystic|Magic 2014|169|C|{G}|Creature - Elf Druid|1|1|{T}: Add {G} to your mana pool.|
+Enlarge|Magic 2014|170|U|{3}{G}{G}|Sorcery|||Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able.|
+Fog|Magic 2014|171|C|{G}|Instant|||Prevent all combat damage that would be dealt this turn.|
+Garruk, Caller of Beasts|Magic 2014|172|M|{4}{G}{G}|Planeswalker - Garruk|4|+1: Reveal the top 5 cards of your library. Put all creature cards revealed this way into your hand and the rest on the bottom of your library in any order.$-3: You may put a green creature card from your hand onto the battlefield.$-7: You get an emblem with "Whenever you cast a creature spell, you may search your library for a creature card, put it onto the battlefield, then shuffle your library."|
+Garruk's Horde|Magic 2014|173|R|{5}{G}{G}|Creature - Beast|7|7|Trample$Play with the top card of your library revealed.$You may cast the top card of your library if it's a creature card. <i>(Do this only any time you could cast that creature card. You still pay the spell's costs.)</i>|
+Giant Growth|Magic 2014|174|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
+Giant Spider|Magic 2014|175|C|{3}{G}|Creature - Spider|2|4|Reach|
+Gladecover Scout|Magic 2014|176|C|{G}|Creature - Elf Scout|1|1|Hexproof|
+Groundshaker Sliver|Magic 2014|177|C|{6}{G}|Creature - Sliver|5|5|Sliver creatures you control have trample.|
+Howl of the Night Pack|Magic 2014|178|U|{6}{G}|Sorcery|||Put a 2/2 green Wolf creature token onto the battlefield for each Forest you control.|
+Hunt the Weak|Magic 2014|179|C|{3}{G}|Sorcery|||Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.|
+Into the Wilds|Magic 2014|180|R|{3}{G}|Enchantment|||At the beginning of your upkeep, look at the top card of your library. If it's a land card, you may put it onto the battlefield. |
+Kalonian Hydra|Magic 2014|181|M|{3}{G}{G}|Creature - Hydra|0|0|Trample$Kalonian Hydra enters the battlefield with four +1/+1 counters on it.$Whenever Kalonian Hydra attacks, double the number of +1/+1 counters on each creature you control.|
+Kalonian Tusker|Magic 2014|182|U|{G}{G}|Creature - Beast|3|3||
+Lay of the Land|Magic 2014|183|C|{G}|Sorcery|||Search your library for a basic land card, reveal that card, and put it into your hand. Then shuffle your library.|
+Manaweft Sliver|Magic 2014|184|U|{1}{G}|Creature - Sliver|1|1|Sliver creatures you control have "{T}: Add one mana of any color to your mana pool."|
+Megantic Sliver|Magic 2014|185|R|{5}{G}|Creature - Sliver|3|3|Sliver creatures you control get +3/+3.|
+Naturalize|Magic 2014|186|C|{1}{G}|Instant|||Destroy target artifact or enchantment.|
+Oath of the Ancient Wood|Magic 2014|187|R|{2}{G}|Enchantment|||Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.|
+Plummet|Magic 2014|188|C|{1}{G}|Instant|||Destroy target creature with flying.|
+Predatory Sliver|Magic 2014|189|C|{1}{G}|Creature - Sliver|1|1|Sliver creatures you control get +1/+1.|
+Primeval Bounty|Magic 2014|190|M|{5}{G}|Enchantment|||Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.$Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.$Whenever a land enters the battlefield under your control, you gain 3 life. |
+Ranger's Guile|Magic 2014|191|C|{G}|Instant|||Target creature gets +1/+1 and gains hexproof until end of turn.|
+Rootwalla|Magic 2014|192|C|{2}{G}|Creature - Lizard|2|2|{1}{G}: Rootwalla gets +2/+2 until end of turn. Activate this ability only once each turn.|
+Rumbling Baloth|Magic 2014|193|C|{2}{G}{G}|Creature - Beast|4|4||
+Savage Summoning|Magic 2014|194|R|{G}|Instant|||Savage Summoning can't be countered.$The next creature card you cast this turn can be cast as though it had flash. That spell can't be countered. That creature enters the battlefield with an additional +1/+1 counter on it. |
+Scavenging Ooze|Magic 2014|195|R|{1}{G}|Creature - Ooze|2|2|{G}: Exile target card from a graveyard. If it was a creature card, put a +1/+1 counter on Scavenging Ooze and you gain 1 life.|
+Sporemound|Magic 2014|196|C|{3}{G}{G}|Creature - Fungus|3|3|Whenever a land enters the battlefield under your control, put a 1/1 green Saproling creature token onto the battlefield.|
+Trollhide|Magic 2014|197|C|{2}{G}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has "{1}{G}: Regenerate this creature."|
+Vastwood Hydra|Magic 2014|198|R|{X}{G}{G}|Creature- Hydra|0|0|Vastwood Hydra enters the battlefield with X +1/+1 counters on it.$When Vastwood Hydra dies, you may distribute a number of +1/+1 counters equal to the number of +1/+1 counters on Vastwood Hydra among any number of creatures you control.|
+Verdant Haven|Magic 2014|199|C|{2}{G}|Enchantment - Aura|||Enchant land$When Verdant Haven enters the battlefield, you gain 2 life.$Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
+Voracious Wurm|Magic 2014|200|U|{1}{G}|Creature - Wurm|2|2|Voracious Wurm enters the battlefield with X +1/+1 counters on it, where X is the amount of life you've gained this turn.|
+Windstorm|Magic 2014|201|U|{X}{G}|Instant|||Windstorm deals X damage to each creature with flying.|
+Witchstalker|Magic 2014|202|R|{1}{G}{G}|Creature - Wolf|3|3|Hexproof$Whenever an opponent casts a blue or black spell during your turn, put a +1/+1 counter on Witchstalker.|
+Woodborn Behemoth|Magic 2014|203|U|{3}{G}{G}|Creature - Elemental|4|4|As long as you control eight or more lands, Woodborn Behemoth gets +4/+4 and has trample.|
+Accorder's Shield|Magic 2014|204|U|{0}|Artifact - Equipment|||Equipped creature gets +0/+3 and has vigilance.$Equip {3}|
+Bubbling Cauldron|Magic 2014|205|U|{2}|Artifact|||{1}, {T}, Sacrifice a creature: You gain 4 life.${1}, {T}, Sacrifice a creature named Festering Newt: Each opponent loses 4 life. You gain life equal to the life lost this way. |
+Darksteel Forge|Magic 2014|206|M|{9}|Artifact|||Artifacts you control have indestructible.|
+Darksteel Ingot|Magic 2014|207|C|{3}|Artifact|||Indestructible${T}: Add one mana of any color to your mana pool.|
+Door of Destinies|Magic 2014|208|R|{4}|Artifact|||As Door of Destinies enters the battlefield, choose a creature type.$Whenever you cast a spell of the chosen type, put a charge counter on Door of Destinies.$Creatures you control of the chosen type get +1/+1 for each charge counter on Door of Destinies.|
+Elixir of Immortality|Magic 2014|209|U|{1}|Artifact|||{2}, {T}: You gain 5 life. Shuffle Elixir of Immortality and your graveyard into their owner's library.|
+Fireshrieker|Magic 2014|210|U|{3}|Artifact - Equipment|||Equipped creature has double strike.$Equip {2}|
+Guardian of the Ages|Magic 2014|211|R|{7}|Artifact Creature - Golem|7|7|Defender$Whenever a creature attacks you or a planeswalker you control, if Guardian of the Ages has defender, it loses defender and gains trample.|
+Haunted Plate Mail|Magic 2014|212|R|{4}|Artifact - Equipment|||Equipped creature gets +4/+4.${0}: Until end of turn, Haunted Plate Mail becomes a 4/4 Spirit artifact creature that's no longer an Equipment. Activate this ability only if you control no creatures.$Equip {4}|
+Millstone|Magic 2014|213|U|{2}|Artifact|||{2}, {T}: Target player puts the top two cards of his or her library into his or her graveyard.|
+Pyromancer's Gauntlet|Magic 2014|214|R|{5}|Artifact|||If a red instant or sorcery spell you control or a red planeswalker you control would deal damage to a permanent or player, it deals that much damage plus 2 to that permanent or player instead.|
+Ratchet Bomb|Magic 2014|215|R|{2}|Artifact|||{T}: Put a charge counter on Ratchet Bomb.${T}, Sacrifice Ratchet Bomb: Destroy each nonland permanent with converted mana cost equal to the number of charge counters on Ratchet Bomb.|
+Ring of Three Wishes|Magic 2014|216|M|{5}|Artifact|||Ring of Three Wishes enters the battlefield with three wish counters on it.${5}, {T}, Remove a wish counter from Ring of Three Wishes: Search your library for a card and put that card into your hand. Then shuffle your library. |
+Rod of Ruin|Magic 2014|217|U|{4}|Artifact|||{3}, {T}: Rod of Ruin deals 1 damage to target creature or player.|
+Sliver Construct|Magic 2014|218|C|{3}|Artifact Creature - Sliver Construct |2|2||
+Staff of the Death Magus|Magic 2014|219|U|{3}|Artifact|||Whenever you cast a black spell or a Swamp enters the battlefield under your control, you gain 1 life.|
+Staff of the Flame Magus|Magic 2014|220|U|{3}|Artifact|||Whenever you cast a red spell or a Mountain enters the battlefield under your control, you gain 1 life.|
+Staff of the Mind Magus|Magic 2014|221|U|{3}|Artifact|||Whenever you cast a blue spell or an Island enters the battlefield under your control, you gain 1 life.|
+Staff of the Sun Magus|Magic 2014|222|U|{3}|Artifact|||Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.|
+Staff of the Wild Magus|Magic 2014|223|U|{3}|Artifact|||Whenever you cast a green spell or a Forest enters the battlefield under your control, you may gain 1 life.|
+Strionic Resonator|Magic 2014|224|R|{2}|Artifact|||{2}, {T}: Copy target triggered ability you control. You may choose new targets for the copy. <i>(A triggered ability uses the words "when", "whenever" or "at".)</i>|
+Trading Post|Magic 2014|225|R|{4}|Artifact|||{1}, {T}, Discard a card: You gain 4 life.${1}, {T}, Pay 1 life: Put a 0/1 white Goat creature token onto the battlefield.${1}, {T}, Sacrifice a creature: Return target artifact card from your graveyard to your hand.${1}, {T}, Sacrifice an artifact: Draw a card.|
+Vial of Poison|Magic 2014|226|U|{1}|Artifact|||{1}, Sacrifice Vial of Poison: Target creature gains deathtouch until end of turn. |
+Encroaching Wastes|Magic 2014|227|U||Land|||{T}: Add {1} to your mana pool.${4}, {T}: Sacrifice Encroaching Wastes: Destroy target nonbasic land.|
+Mutavault|Magic 2014|228|R||Land|||{T}: Add {1} to your mana pool.${1}: Mutavault becomes a 2/2 creature with all creature types until end of turn. It's still a land.|
+Shimmering Grotto|Magic 2014|229|C||Land|||{T}: Add {1} to your mana pool.${1}, {T}: Add one mana of any color to your mana pool.|
+Plains|Magic 2014|230|L||Basic Land - Plains|||W|
+Plains|Magic 2014|231|L||Basic Land - Plains|||W|
+Plains|Magic 2014|232|L||Basic Land - Plains|||W|
+Plains|Magic 2014|233|L||Basic Land - Plains|||W|
+Island|Magic 2014|234|L||Basic Land - Island|||U|
+Island|Magic 2014|235|L||Basic Land - Island|||U|
+Island|Magic 2014|236|L||Basic Land - Island|||U|
+Island|Magic 2014|237|L||Basic Land - Island|||U|
+Swamp|Magic 2014|238|L||Basic Land - Swamp|||B|
+Swamp|Magic 2014|239|L||Basic Land - Swamp|||B|
+Swamp|Magic 2014|240|L||Basic Land - Swamp|||B|
+Swamp|Magic 2014|241|L||Basic Land - Swamp|||B|
+Mountain|Magic 2014|242|L||Basic Land - Mountain|||R|
+Mountain|Magic 2014|243|L||Basic Land - Mountain|||R|
+Mountain|Magic 2014|244|L||Basic Land - Mountain|||R|
+Mountain|Magic 2014|245|L||Basic Land - Mountain|||R|
+Forest|Magic 2014|246|L||Basic Land - Forest|||G|
+Forest|Magic 2014|247|L||Basic Land - Forest|||G|
+Forest|Magic 2014|248|L||Basic Land - Forest|||G|
+Forest|Magic 2014|249|L||Basic Land - Forest|||G|
