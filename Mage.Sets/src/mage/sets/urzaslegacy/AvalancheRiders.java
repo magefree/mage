@@ -35,6 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.EchoAbility;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetLandPermanent;
 
@@ -53,6 +54,9 @@ public class AvalancheRiders extends CardImpl<AvalancheRiders> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Echo {3}{R} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)
         this.addAbility(new EchoAbility("{3}{R}"));
         //When Avalanche Riders enters the battlefield, destroy target land.
         Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
