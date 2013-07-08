@@ -52,7 +52,7 @@ import mage.watchers.WatcherImpl;
 public class MaelstromNexus extends CardImpl<MaelstromNexus> {
 
     public MaelstromNexus(UUID ownerId) {
-        super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{G}");
+        super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
         this.expansionSetCode = "ARB";
 
         this.color.setRed(true);
