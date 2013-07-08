@@ -28,11 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -42,6 +37,10 @@ import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.FilterCard;
 import mage.filter.FilterSpell;
@@ -61,29 +60,31 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DimirCharm extends CardImpl<DimirCharm> {
     
-    private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");
     private static final FilterCreaturePermanent filterCreature = new FilterCreaturePermanent("creature with power 2 or less");
+    private static final FilterSpell filterSorcery = new FilterSpell("sorcery spell");
     
     static {
-        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
         filterCreature.add(new PowerPredicate(Filter.ComparisonType.LessThan, 3));
+        filterSorcery.add(new CardTypePredicate(CardType.SORCERY));
     }
 
     public DimirCharm (UUID ownerId) {
         super(ownerId, 154, "Dimir Charm", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{B}");
         this.expansionSetCode = "GTC";
 
-        this.color.setBlue(true);
         this.color.setBlack(true);
+        this.color.setBlue(true);
 
         //Choose one - Counter target sorcery spell
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell(filterSorcery));
+
         //or destroy target creature with power 2 or less
-        Mode mode = new Mode();
-        mode.getEffects().add(new DestroyTargetEffect());
-        mode.getTargets().add(new TargetCreaturePermanent(filterCreature));
-        this.getSpellAbility().addMode(mode);
+        Mode mode1 = new Mode();
+        mode1.getEffects().add(new DestroyTargetEffect());
+        mode1.getTargets().add(new TargetCreaturePermanent(filterCreature));
+        this.getSpellAbility().addMode(mode1);
+
         //or look at the top three cards of target player's library, then put one back and the rest into that player's graveyard
         Mode mode2 = new Mode();
         mode2.getEffects().add(new DimirCharmEffect());
@@ -102,28 +103,19 @@ public class DimirCharm extends CardImpl<DimirCharm> {
 }
 
 class DimirCharmEffect extends OneShotEffect {
-
-
     public DimirCharmEffect() {
             super(Outcome.Benefit);
-            
     }
 
     public DimirCharmEffect(final DimirCharmEffect effect) {
         super(effect);
     }
-
-    @Override
-    public DimirCharmEffect copy() {
-        return new DimirCharmEffect(this);
-    }
-    
-    
+   
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getFirstTarget());
         Player controller = game.getPlayer(source.getControllerId());
-        if(player != null && controller != null){
+        if(controller != null && player != null){
             Cards cards = new CardsImpl();
             for(int i = 0; i < 3; i++){
                 Card card = player.getLibrary().removeFromTop(game);
@@ -132,7 +124,6 @@ class DimirCharmEffect extends OneShotEffect {
                     game.getState().setZone(card.getId(), Zone.PICK);
                 }
             }
-            
             if(cards.size() > 0){
                 TargetCard target = new TargetCard(Zone.PICK, new FilterCard("Card to put back on top of library"));
                 target.setRequired(true);
@@ -142,6 +133,7 @@ class DimirCharmEffect extends OneShotEffect {
                         card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
                         cards.remove(card);
                     }
+                    
                     for(Card card2 : cards.getCards(game)){
                         if(card2 != null){
                             card2.moveToZone(Zone.GRAVEYARD, source.getId(), game, true);
@@ -152,12 +144,14 @@ class DimirCharmEffect extends OneShotEffect {
         }
         return false;
     }
-
-    
   
+    @Override
+    public DimirCharmEffect copy() {
+        return new DimirCharmEffect(this);
+    }
+
     @Override
     public String getText(Mode mode) {
         return "look at the top three cards of target player's library, then put one back and the rest into that player's graveyard";
     }    
-
 }
