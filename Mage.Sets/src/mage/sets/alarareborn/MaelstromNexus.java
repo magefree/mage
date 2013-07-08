@@ -90,7 +90,6 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexus
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST) {
-            System.out.println("A spell was cast");
             Spell spell = game.getStack().getSpell(event.getTargetId());
             FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn", this.getSourceId());
             if (spell != null
@@ -160,7 +159,6 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        System.out.println("Inside the CascadeEffect method");
         Card card;
         Player player = game.getPlayer(source.getControllerId());
         ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
