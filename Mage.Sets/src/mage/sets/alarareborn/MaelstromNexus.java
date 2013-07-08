@@ -29,23 +29,20 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.keyword.CascadeAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
+import mage.players.Player;
 import mage.watchers.WatcherImpl;
 
 /**
@@ -55,7 +52,7 @@ import mage.watchers.WatcherImpl;
 public class MaelstromNexus extends CardImpl<MaelstromNexus> {
 
     public MaelstromNexus(UUID ownerId) {
-        super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{W}{U}{B}{R}{G}");
+        super(ownerId, 130, "Maelstrom Nexus", Rarity.MYTHIC, new CardType[]{CardType.ENCHANTMENT}, "{G}");
         this.expansionSetCode = "ARB";
 
         this.color.setRed(true);
@@ -65,8 +62,8 @@ public class MaelstromNexus extends CardImpl<MaelstromNexus> {
         this.color.setWhite(true);
 
         // The first spell you cast each turn has cascade.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaelstromNexusEffect(new CascadeAbility(), Duration.WhileOnStack, "The first spell you cast each turn has cascade", true)));
-        this.addWatcher(new CastSpellThisTurnWatcher());
+        this.addAbility(new MaelstromNexusTriggeredAbility());
+        this.addWatcher(new FirstSpellCastThisTurnWatcher());
 
     }
 
@@ -80,15 +77,46 @@ public class MaelstromNexus extends CardImpl<MaelstromNexus> {
     }
 }
 
-class CastSpellThisTurnWatcher extends WatcherImpl<CastSpellThisTurnWatcher> {
+class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexusTriggeredAbility> {
+
+    public MaelstromNexusTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new CascadeEffect());
+    }
+
+    public MaelstromNexusTriggeredAbility(MaelstromNexusTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.SPELL_CAST) {
+            System.out.println("A spell was cast");
+            Spell spell = game.getStack().getSpell(event.getTargetId());
+            FirstSpellCastThisTurnWatcher watcher = (FirstSpellCastThisTurnWatcher) game.getState().getWatchers().get("FirstSpellCastThisTurn", this.getSourceId());
+            if (spell != null
+                    && watcher != null
+                    && watcher.conditionMet()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public MaelstromNexusTriggeredAbility copy() {
+        return new MaelstromNexusTriggeredAbility(this);
+    }
+}
+
+class FirstSpellCastThisTurnWatcher extends WatcherImpl<FirstSpellCastThisTurnWatcher> {
 
     int spellCount = 0;
 
-    public CastSpellThisTurnWatcher() {
-        super("CastSpellThisTurn", WatcherScope.CARD);
+    public FirstSpellCastThisTurnWatcher() {
+        super("FirstSpellCastThisTurn", WatcherScope.CARD);
     }
 
-    public CastSpellThisTurnWatcher(final CastSpellThisTurnWatcher watcher) {
+    public FirstSpellCastThisTurnWatcher(final FirstSpellCastThisTurnWatcher watcher) {
         super(watcher);
     }
 
@@ -96,18 +124,20 @@ class CastSpellThisTurnWatcher extends WatcherImpl<CastSpellThisTurnWatcher> {
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && event.getPlayerId() == controllerId) {
             Spell spell = (Spell) game.getObject(event.getTargetId());
-            if (this.getSourceId().equals(spell.getSourceId())) {
+            if (spell != null) {
                 spellCount++;
                 if (spellCount == 1) {
                     condition = true;
+                } else {
+                    condition = false;
                 }
             }
         }
     }
 
     @Override
-    public CastSpellThisTurnWatcher copy() {
-        return new CastSpellThisTurnWatcher(this);
+    public FirstSpellCastThisTurnWatcher copy() {
+        return new FirstSpellCastThisTurnWatcher(this);
     }
 
     @Override
@@ -117,62 +147,52 @@ class CastSpellThisTurnWatcher extends WatcherImpl<CastSpellThisTurnWatcher> {
     }
 }
 
-class MaelstromNexusEffect extends ContinuousEffectImpl<MaelstromNexusEffect> {
+class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
-    protected Ability ability;
-    // shall a card gain the ability (otherwise permanent)
-    private boolean onCard;
-
-    public MaelstromNexusEffect(Ability ability, Duration duration) {
-        this(ability, duration, null);
+    public CascadeEffect() {
+        super(Outcome.PutCardInPlay);
+        staticText = "The first spell you cast each turn has cascade";
     }
 
-    public MaelstromNexusEffect(Ability ability, Duration duration, String rule) {
-        this(ability, duration, rule, false);
-    }
-
-    public MaelstromNexusEffect(Ability ability, Duration duration, String rule, boolean onCard) {
-        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA,
-                ability.getEffects().size() > 0 ? ability.getEffects().get(0).getOutcome() : Outcome.AddAbility);
-        this.ability = ability;
-        staticText = rule;
-        this.onCard = onCard;
-    }
-
-    public MaelstromNexusEffect(final MaelstromNexusEffect effect) {
+    public CascadeEffect(CascadeEffect effect) {
         super(effect);
-        this.ability = effect.ability.copy();
-        this.onCard = effect.onCard;
-    }
-
-    @Override
-    public MaelstromNexusEffect copy() {
-        return new MaelstromNexusEffect(this);
-    }
-
-    @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        targetPointer.init(game, source);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        CastSpellThisTurnWatcher watcher = (CastSpellThisTurnWatcher) game.getState().getWatchers().get("CastSpellThisTurn", source.getSourceId());
-        StackObject spellObject = game.getStack().getFirst();
-        Spell spell = game.getStack().getSpell(spellObject.getSourceId());
-        if (spell == null) {
-            return false;
-        }
-        if (watcher.conditionMet()
-                && spell.getControllerId() == source.getControllerId()) {
-            if (onCard) {
-                Card card = game.getCard(spell.getSourceId());
-                if (card != null) {
-                    card.addAbility(ability);
-                }
+        System.out.println("Inside the CascadeEffect method");
+        Card card;
+        Player player = game.getPlayer(source.getControllerId());
+        ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
+        int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
+        do {
+            card = player.getLibrary().removeFromTop(game);
+            if (card == null) {
+                break;
+            }
+                
+            card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
+        } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
+
+        if (card != null) {
+            if (player.chooseUse(outcome, "Use cascade effect on " + card.getName() + "?", game)) {
+                player.cast(card.getSpellAbility(), game, true);
+                exile.remove(card.getId());
             }
         }
-        return false;
+
+        while (exile.size() > 0) {
+            card = exile.getRandom(game);
+            exile.remove(card.getId());
+            card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        }
+
+        return true;
     }
+
+    @Override
+    public CascadeEffect copy() {
+        return new CascadeEffect(this);
+    }
+
 }
