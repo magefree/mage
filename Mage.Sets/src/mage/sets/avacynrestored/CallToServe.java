@@ -69,6 +69,7 @@ public class CallToServe extends CardImpl<CallToServe> {
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
         // Enchanted creature gets +1/+2, has flying, and is an Angel in addition to its other types.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 2, Duration.WhileOnBattlefield)));
