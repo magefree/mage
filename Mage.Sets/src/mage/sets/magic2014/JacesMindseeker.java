@@ -69,7 +69,7 @@ public class JacesMindseeker extends CardImpl<JacesMindseeker> {
         // When Jace's Mindseeker enters the battlefield, target opponent puts the top five cards of his or her library into his or her graveyard. 
         // You may cast an instant or sorcery card from among them without paying its mana cost.
         Ability ability = new EntersBattlefieldTriggeredAbility(new JaceMindseekerEffect());
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
     }
 

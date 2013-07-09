@@ -54,6 +54,8 @@ import mage.watchers.WatcherImpl;
  */
 public class ColossalWhale extends CardImpl<ColossalWhale> {
 
+    private UUID exileId = UUID.randomUUID();
+
     public ColossalWhale(UUID ownerId) {
         super(ownerId, 48, "Colossal Whale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
         this.expansionSetCode = "M14";
@@ -66,8 +68,8 @@ public class ColossalWhale extends CardImpl<ColossalWhale> {
         // Islandwalk
         this.addAbility(new IslandwalkAbility());
         // Whenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield.
-        this.addAbility(new ColossalWhaleAbility());
-        this.addWatcher(new ColossalWhaleWatcher());
+        this.addAbility(new ColossalWhaleAbility(exileId));
+        this.addWatcher(new ColossalWhaleWatcher(exileId));
 
 
     }
@@ -84,9 +86,9 @@ public class ColossalWhale extends CardImpl<ColossalWhale> {
 
 class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
 
-    public ColossalWhaleAbility() {
+    public ColossalWhaleAbility(UUID exileId) {
         super(Zone.BATTLEFIELD, null);
-        this.addEffect(new ExileTargetEffect(this.getSourceId(),"Colossal Whale"));
+        this.addEffect(new ExileTargetEffect(exileId,"Colossal Whale"));
     }
 
     public ColossalWhaleAbility(final ColossalWhaleAbility ability) {
@@ -122,12 +124,16 @@ class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
 
 class ColossalWhaleWatcher extends WatcherImpl<ColossalWhaleWatcher> {
 
-    ColossalWhaleWatcher () {
+    UUID exileId;
+
+    ColossalWhaleWatcher (UUID exileId) {
         super("BattlefieldLeft", WatcherScope.CARD);
+        this.exileId = exileId;
     }
 
-    ColossalWhaleWatcher(ColossalWhaleWatcher watcher) {
+    ColossalWhaleWatcher(final ColossalWhaleWatcher watcher) {
         super(watcher);
+        this.exileId = watcher.exileId;
     }
 
     @Override
@@ -135,7 +141,6 @@ class ColossalWhaleWatcher extends WatcherImpl<ColossalWhaleWatcher> {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                UUID exileId = this.getSourceId();
                 ExileZone exile = game.getExile().getExileZone(exileId);
                 if (exile != null) {
                     LinkedList<UUID> cards = new LinkedList<UUID>(exile);
