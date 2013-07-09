@@ -28,20 +28,11 @@
 package mage.sets.alarareborn;
 
 import java.util.UUID;
-
+import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.constants.Zone;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -58,7 +49,7 @@ public class Brainbite extends CardImpl<Brainbite> {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
-        this.getSpellAbility().addEffect(new BrainbiteEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect());
         // Draw a card.
         this.getSpellAbility().addEffect(new DrawCardControllerEffect(1));
         this.getSpellAbility().addTarget(new TargetOpponent());
@@ -72,42 +63,4 @@ public class Brainbite extends CardImpl<Brainbite> {
     public Brainbite copy() {
         return new Brainbite(this);
     }
-}
-
-class BrainbiteEffect extends OneShotEffect<BrainbiteEffect> {
-
-    public BrainbiteEffect() {
-        super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
-    }
-
-    public BrainbiteEffect(final BrainbiteEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Brainbite", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public BrainbiteEffect copy() {
-        return new BrainbiteEffect(this);
-    }
-
 }

@@ -43,13 +43,22 @@ import mage.target.TargetCard;
  */
 public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<DiscardCardYouChooseTargetOpponentEffect> {
 
+    private FilterCard filter;
+
     public DiscardCardYouChooseTargetOpponentEffect() {
+        this(new FilterCard("a card"));
+    }
+
+    public DiscardCardYouChooseTargetOpponentEffect(FilterCard filter) {
         super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
+        staticText = new StringBuilder("Target opponent reveals his or her hand. You choose ")
+                .append(filter.getMessage()).append(" from it. That player discards that card").toString();
+        this.filter = filter;
     }
 
     public DiscardCardYouChooseTargetOpponentEffect(final DiscardCardYouChooseTargetOpponentEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
@@ -59,7 +68,7 @@ public class DiscardCardYouChooseTargetOpponentEffect extends OneShotEffect<Disc
             player.revealCards("Discard", player.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
             if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
+                TargetCard target = new TargetCard(Zone.PICK, filter);
                                 target.setRequired(true);
                 if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
                     Card card = player.getHand().get(target.getFirstTarget(), game);

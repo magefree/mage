@@ -29,20 +29,13 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -51,12 +44,20 @@ import mage.target.common.TargetOpponent;
  */
 public class Duress extends CardImpl<Duress> {
 
+    private static final FilterCard filter = new FilterCard("a noncreature, nonland card");
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
+
     public Duress(UUID ownerId){
         super(ownerId, 96, "Duress", Rarity.COMMON, new CardType[]{CardType.SORCERY},"{B}");
         this.expansionSetCode = "M10";
         this.color.setBlack(true);
+
+        // Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DuressEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(filter));
     }
 
     public Duress(final Duress card) {
@@ -67,49 +68,4 @@ public class Duress extends CardImpl<Duress> {
     public Duress copy() {
         return new Duress(this);
     }
-}
-
-class DuressEffect extends OneShotEffect<DuressEffect> {
-
-    private static final FilterCard filter = new FilterCard("noncreature, nonland card");
-
-    static {
-        filter.add(Predicates.not(new CardTypePredicate(CardType.CREATURE)));
-        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
-    }
-
-    public DuressEffect() {
-        super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a noncreature, nonland card from it. That player discards that card";
-    }
-
-    public DuressEffect(final DuressEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Duress", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public DuressEffect copy() {
-        return new DuressEffect(this);
-    }
-
 }

@@ -33,6 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
@@ -51,6 +52,13 @@ import mage.target.common.TargetOpponent;
  */
 public class Despise extends CardImpl<Despise> {
 
+    private static final FilterCard filter = new FilterCard("a creature or planeswalker card");
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.CREATURE),
+                new CardTypePredicate(CardType.PLANESWALKER)));
+    }
+
     public Despise(UUID ownerId) {
         super(ownerId, 56, "Despise", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "NPH";
@@ -59,7 +67,7 @@ public class Despise extends CardImpl<Despise> {
 
         // Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new DespiseEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(filter));
     }
 
     public Despise(final Despise card) {
@@ -70,50 +78,4 @@ public class Despise extends CardImpl<Despise> {
     public Despise copy() {
         return new Despise(this);
     }
-}
-
-class DespiseEffect extends OneShotEffect<DespiseEffect> {
-
-    private static final FilterCard filter = new FilterCard("creature or planeswalker card");
-
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.CREATURE),
-                new CardTypePredicate(CardType.PLANESWALKER)));
-    }
-
-    public DespiseEffect() {
-        super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a creature or planeswalker card from it. That player discards that card";
-    }
-
-    public DespiseEffect(final DespiseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Despise", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public DespiseEffect copy() {
-        return new DespiseEffect(this);
-    }
-
 }

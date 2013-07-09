@@ -28,18 +28,10 @@
 package mage.sets.visions;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -56,7 +48,7 @@ public class Coercion extends CardImpl<Coercion> {
 
         // Target opponent reveals his or her hand. You choose a card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new CoercionEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect());
     }
 
     public Coercion(final Coercion card) {
@@ -67,43 +59,4 @@ public class Coercion extends CardImpl<Coercion> {
     public Coercion copy() {
         return new Coercion(this);
     }
-}
-
-class CoercionEffect extends OneShotEffect<CoercionEffect> {
-
-    
-    public CoercionEffect() {
-        super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a card from it. That player discards that card";
-    }
-
-    public CoercionEffect(final CoercionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Coercion", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, new FilterCard());
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        return player.discard(card, source, game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public CoercionEffect copy() {
-        return new CoercionEffect(this);
-    }
-
 }

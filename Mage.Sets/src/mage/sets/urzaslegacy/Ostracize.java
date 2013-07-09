@@ -28,18 +28,11 @@
 package mage.sets.urzaslegacy;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.discard.DiscardCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterCreatureCard;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -56,7 +49,7 @@ public class Ostracize extends CardImpl<Ostracize> {
 
         // Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card.
         this.getSpellAbility().addTarget(new TargetOpponent());
-        this.getSpellAbility().addEffect(new OstracizeEffect());
+        this.getSpellAbility().addEffect(new DiscardCardYouChooseTargetOpponentEffect(new FilterCreatureCard("a creature card")));
     }
 
     public Ostracize(final Ostracize card) {
@@ -66,41 +59,5 @@ public class Ostracize extends CardImpl<Ostracize> {
     @Override
     public Ostracize copy() {
         return new Ostracize(this);
-    }
-}
-
-class OstracizeEffect extends OneShotEffect<OstracizeEffect> {
-
-    public OstracizeEffect() {
-        super(Outcome.Discard);
-        staticText = "Target opponent reveals his or her hand. You choose a creature card from it. That player discards that card";
-    }
-
-    public OstracizeEffect(final OstracizeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Ostracize", player.getHand(), game);
-
-            Player you = game.getPlayer(source.getControllerId());
-            TargetCard target = new TargetCard(Zone.PICK, new FilterCreatureCard());
-            target.setRequired(true);
-            if (you != null && you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                Card card = player.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return player.discard(card, source, game);
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public OstracizeEffect copy() {
-        return new OstracizeEffect(this);
     }
 }
