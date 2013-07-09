@@ -106,13 +106,10 @@ public class DiscardTargetEffect extends OneShotEffect<DiscardTargetEffect> {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         }
         sb.append(" discards ");
-        sb.append(CardUtil.numberToText(amount.toString())).append(" card");
-        try {
-            if (Integer.parseInt(amount.toString()) > 1) {
-                sb.append("s");
-            }
-        } catch (Exception e) {
-            sb.append("s");
+        if (amount.toString().equals("1")) {
+            sb.append(" a card");
+        } else {
+            sb.append(CardUtil.numberToText(amount.toString())).append(" cards");
         }
         if (randomDiscard) {
             sb.append(" at random");
