@@ -29,22 +29,14 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
-import mage.filter.FilterCard;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterInstantOrSorceryCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -67,7 +59,7 @@ public class SinCollector extends CardImpl<SinCollector> {
         this.color.setWhite(true);
 
         // When Sin Collector enters the battlefield, target opponent reveals his or her hand. You choose an instant or sorcery card from it and exile that card.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new SinCollectorEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileCardYouChooseTargetOpponentEffect(new FilterInstantOrSorceryCard("an instant or sorcery card")));
         ability.addTarget(new TargetOpponent());
         this.addAbility(ability);
     }
@@ -80,50 +72,4 @@ public class SinCollector extends CardImpl<SinCollector> {
     public SinCollector copy() {
         return new SinCollector(this);
     }
-}
-
-
-class SinCollectorEffect extends OneShotEffect<SinCollectorEffect> {
-
-    private static final FilterCard filter = new FilterCard("instant or sorcery card");
-    static {
-        filter.add(Predicates.or(
-                new CardTypePredicate(CardType.INSTANT),
-                new CardTypePredicate(CardType.SORCERY)));
-    }
-
-    public SinCollectorEffect() {
-        super(Outcome.Exile);
-        staticText = "target opponent reveals his or her hand. You choose an instant or sorcery card from it and exile that card";
-    }
-
-    public SinCollectorEffect(final SinCollectorEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getFirstTarget());
-        if (player != null) {
-            player.revealCards("Sin Collector", player.getHand(), game);
-            Player you = game.getPlayer(source.getControllerId());
-            if (you != null) {
-                TargetCard target = new TargetCard(Zone.PICK, filter);
-                target.setRequired(true);
-                if (you.choose(Outcome.Benefit, player.getHand(), target, game)) {
-                    Card card = player.getHand().get(target.getFirstTarget(), game);
-                    if (card != null) {
-                        card.moveToExile(null, null , source.getSourceId(), game);
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public SinCollectorEffect copy() {
-        return new SinCollectorEffect(this);
-    }
-
 }

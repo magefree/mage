@@ -28,20 +28,13 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
-import mage.cards.Card;
+import mage.abilities.effects.common.ExileCardYouChooseTargetOpponentEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.Filter;
-import mage.filter.FilterCard;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
-import mage.game.Game;
-import mage.players.Player;
-import mage.target.TargetCard;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -50,6 +43,11 @@ import mage.target.common.TargetOpponent;
  */
 public class AppetiteForBrains extends CardImpl<AppetiteForBrains> {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a card from it with converted mana cost 4 or greater");
+    static {
+        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
+    }
+
     public AppetiteForBrains(UUID ownerId) {
         super(ownerId, 84, "Appetite for Brains", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{B}");
         this.expansionSetCode = "AVR";
@@ -57,7 +55,7 @@ public class AppetiteForBrains extends CardImpl<AppetiteForBrains> {
         this.color.setBlack(true);
 
         // Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card.
-        this.getSpellAbility().addEffect(new AppetiteForBrainsEffect());
+        this.getSpellAbility().addEffect(new ExileCardYouChooseTargetOpponentEffect(filter));
         this.getSpellAbility().addTarget(new TargetOpponent());
     }
 
@@ -68,44 +66,5 @@ public class AppetiteForBrains extends CardImpl<AppetiteForBrains> {
     @Override
     public AppetiteForBrains copy() {
         return new AppetiteForBrains(this);
-    }
-}
-
-class AppetiteForBrainsEffect extends OneShotEffect<AppetiteForBrainsEffect> {
-
-    public AppetiteForBrainsEffect() {
-        super(Outcome.Exile);
-        this.staticText = "Target opponent reveals his or her hand. You choose a card from it with converted mana cost 4 or greater and exile that card";
-    }
-
-    public AppetiteForBrainsEffect(final AppetiteForBrainsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AppetiteForBrainsEffect copy() {
-        return new AppetiteForBrainsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (player != null && targetPlayer != null) {
-            FilterCard filter = new FilterCard("with converted mana cost 4 or greater");
-            filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.GreaterThan, 3));
-
-            targetPlayer.revealCards("Appetite for Brains", targetPlayer.getHand(), game);
-            TargetCard target = new TargetCard(Zone.PICK, filter);
-            target.setRequired(true);
-            if (targetPlayer.getHand().count(filter, game) > 0
-                    && player.choose(Outcome.Exile, targetPlayer.getHand(), target, game)) {
-                Card card = targetPlayer.getHand().get(target.getFirstTarget(), game);
-                if (card != null) {
-                    return card.moveToExile(null, "", source.getId(), game);
-                }
-            }
-        }
-        return false;
     }
 }
