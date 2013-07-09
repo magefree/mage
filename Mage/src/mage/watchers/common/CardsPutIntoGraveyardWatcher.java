@@ -29,8 +29,10 @@
 package mage.watchers.common;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.UUID;
 
 import mage.constants.WatcherScope;
@@ -44,13 +46,14 @@ import mage.watchers.WatcherImpl;
 
 /**
  * Counts amount of cards put into graveyards of players during the current turn.
- *
+ * Also the UUIDs of cards that went to graveyard from Battlefield this turn.
  *
  * @author LevelX2
  */
 public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGraveyardWatcher> {
 
     private Map<UUID, Integer> amountOfCardsThisTurn = new HashMap<UUID, Integer>();
+    private Set<UUID> cardsPutToGraveyardFromBattlefield = new HashSet<UUID>();
 
 
     public CardsPutIntoGraveyardWatcher() {
@@ -71,7 +74,7 @@ public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGravey
         }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent) event).getToZone() == Zone.GRAVEYARD) {
             UUID playerId = event.getPlayerId();
-            if (playerId != null) {
+            if (playerId != null && game.getCard(event.getTargetId()) != null) {
                 Integer amount = amountOfCardsThisTurn.get(playerId);
                 if (amount == null) {
                     amount = new Integer(1);
@@ -79,11 +82,14 @@ public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGravey
                     ++amount;
                 }
                 amountOfCardsThisTurn.put(playerId, amount);
+                if (((ZoneChangeEvent) event).getFromZone().equals(Zone.BATTLEFIELD)) {
+                    cardsPutToGraveyardFromBattlefield.add(event.getTargetId());
+                }
             }
         }
     }
 
-    public int getLiveGained(UUID playerId) {
+    public int getAmountCardsPutToGraveyard(UUID playerId) {
         Integer amount = amountOfCardsThisTurn.get(playerId);
         if (amount != null) {
             return amount.intValue();
@@ -91,10 +97,17 @@ public class CardsPutIntoGraveyardWatcher extends WatcherImpl<CardsPutIntoGravey
         return 0;
     }
 
+    public Set<UUID> getCardsPutToGraveyardFromBattlefield() {
+        Set<UUID> cards = new HashSet<UUID>();
+        cards.addAll(cardsPutToGraveyardFromBattlefield);
+        return cards;
+    }
+
     @Override
     public void reset() {
         super.reset();
         amountOfCardsThisTurn.clear();
+        cardsPutToGraveyardFromBattlefield.clear();
     }
 
     @Override

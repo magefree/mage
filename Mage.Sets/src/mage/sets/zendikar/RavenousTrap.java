@@ -98,7 +98,7 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl<RavenousTrapAltern
         CardsPutIntoGraveyardWatcher watcher = (CardsPutIntoGraveyardWatcher) game.getState().getWatchers().get("CardsPutIntoGraveyardWatcher");
         if (watcher != null) {
             for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-                if (watcher.getLiveGained(opponentId) > 2) {
+                if (watcher.getAmountCardsPutToGraveyard(opponentId) > 2) {
                     return true;
                 }
             }
