@@ -95,10 +95,14 @@ class LilianaVessEffect extends OneShotEffect<LilianaVessEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Player player: game.getPlayers().values()) {
-            for (Card card: player.getGraveyard().getCards(game)) {
-                if (card.getCardType().contains(CardType.CREATURE)) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+        Player controller = game.getPlayer(source.getControllerId());
+        for (UUID playerId: controller.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                    }
                 }
             }
         }
