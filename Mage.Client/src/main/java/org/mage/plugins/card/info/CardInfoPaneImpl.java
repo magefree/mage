@@ -94,7 +94,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                             rulings.add(sb.toString());
                         }
                     }
-                    if (card.getMageObjectType().isPermanent()) {
+                    if (card.getMageObjectType().isPermanent() && card instanceof PermanentView) {
                         int damage = ((PermanentView)card).getDamage();
                         if (damage > 0) {
                             rulings.add("<span color='red'><b>Damage dealt:</b> " + damage + "</span>");
