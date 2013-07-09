@@ -66,7 +66,11 @@ public class RelentlessRats extends CardImpl<RelentlessRats> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Relentless Rats gets +1/+1 for each other creature on the battlefield named Relentless Rats.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new RelentlessRatsEffect()));
+
+        // A deck can have any number of cards named Relentless Rats.
+        this.addInfo("rule", "A deck can have any number of cards named Relentless Rats.");
     }
 
     public RelentlessRats(final RelentlessRats card) {

@@ -28,48 +28,38 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.Mana;
+import mage.abilities.effects.common.BasicManaEffect;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class LiturgyOfBlood extends CardImpl<LiturgyOfBlood> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public LiturgyOfBlood(UUID ownerId) {
+        super(ownerId, 104, "Liturgy of Blood", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{3}{B}{B}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // Destroy target creature. Add {B}{B}{B} to your mana pool.
+        this.getSpellAbility().addEffect(new DestroyTargetEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)));
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public LiturgyOfBlood(final LiturgyOfBlood card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public LiturgyOfBlood copy() {
+        return new LiturgyOfBlood(this);
     }
 }

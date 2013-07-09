@@ -29,47 +29,46 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
+import mage.abilities.effects.common.CreateTokenEffect;
+import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.permanent.token.ZombieToken;
 
 /**
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class LilianasReaver extends CardImpl<LilianasReaver> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public LilianasReaver(UUID ownerId) {
+        super(ownerId, 103, "Liliana's Reaver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
+        this.subtype.add("Zombie");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(3);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // Deathtouch
+        this.addAbility(DeathtouchAbility.getInstance());
+        // Whenever Liliana's Reaver deals combat damage to a player, that player discards a card and you put a 2/2 black Zombie creature token onto the battlefield tapped.
+
+        Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new DiscardTargetEffect(1),false, true);
+        ability.addEffect(new CreateTokenEffect(new ZombieToken(), 1, true, false));
+        this.addAbility(ability);
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public LilianasReaver(final LilianasReaver card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public LilianasReaver copy() {
+        return new LilianasReaver(this);
     }
 }

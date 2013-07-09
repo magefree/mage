@@ -28,48 +28,73 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class RiseOfTheDarkRealms extends CardImpl<RiseOfTheDarkRealms> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public RiseOfTheDarkRealms(UUID ownerId) {
+        super(ownerId, 111, "Rise of the Dark Realms", Rarity.MYTHIC, new CardType[]{CardType.SORCERY}, "{7}{B}{B}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // Put all creature cards from all graveyards onto the battlefield under your control.
+        this.getSpellAbility().addEffect(new RiseOfTheDarkRealmsEffect());
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public RiseOfTheDarkRealms(final RiseOfTheDarkRealms card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public RiseOfTheDarkRealms copy() {
+        return new RiseOfTheDarkRealms(this);
     }
+}
+
+class RiseOfTheDarkRealmsEffect extends OneShotEffect<RiseOfTheDarkRealmsEffect> {
+
+    public RiseOfTheDarkRealmsEffect() {
+        super(Outcome.PutCreatureInPlay);
+        staticText = "Put all creature cards from all graveyards onto the battlefield under your control";
+    }
+
+    public RiseOfTheDarkRealmsEffect(final RiseOfTheDarkRealmsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        for (UUID playerId: controller.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                for (Card card: player.getGraveyard().getCards(game)) {
+                    if (card.getCardType().contains(CardType.CREATURE)) {
+                        card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId());
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public RiseOfTheDarkRealmsEffect copy() {
+        return new RiseOfTheDarkRealmsEffect(this);
+    }
+
 }

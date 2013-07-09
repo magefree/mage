@@ -29,47 +29,54 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.permanent.token.ZombieToken;
 
 /**
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class XathridNecromancer extends CardImpl<XathridNecromancer> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creature you control");
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new SubtypePredicate("Human"));
     }
 
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public XathridNecromancer(UUID ownerId) {
+        super(ownerId, 123, "Xathrid Necromancer", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
+        this.subtype.add("Human");
+        this.subtype.add("Wizard");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // Whenever Xathrid Necromancer or another Human creature you control dies, put a 2/2 black Zombie creature token onto the battlefield tapped.
+        Effect effect = new CreateTokenEffect(new ZombieToken(), 1, true, false);
+        Ability ability = new DiesThisOrAnotherCreatureTriggeredAbility(effect, false, filter);
+        this.addAbility(ability);
+
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public XathridNecromancer(final XathridNecromancer card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public XathridNecromancer copy() {
+        return new XathridNecromancer(this);
     }
 }

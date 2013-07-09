@@ -29,47 +29,61 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInLibrary;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class ShadowbornApostle extends CardImpl<ShadowbornApostle> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a Demon creature");
+    private static final FilterControlledCreaturePermanent filterApostle = new FilterControlledCreaturePermanent("six creatures named Shadowborn Apostle");
     static {
-        filter.add(new SubtypePredicate("Sliver"));
+        filter.add(new SubtypePredicate("Demon"));
+        filterApostle.add(new NamePredicate("Shadowborn Apostle"));
     }
 
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public ShadowbornApostle(UUID ownerId) {
+        super(ownerId, 114, "Shadowborn Apostle", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Sliver");
+        this.subtype.add("Human");
+        this.subtype.add("Cleric");
 
-        this.color.setBlue(true);
+        this.color.setBlack(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // A deck can have any number of cards named Shadowborn Apostle.
+        this.addInfo("rule", "A deck can have any number of cards named Shadowborn Apostle.");
+        // {B}, Sacrifice six creatures named Shadowborn Apostle: Search your library for a Demon creature and put it onto the battlefield. Then shuffle your library.
+        Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, true);
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new ManaCostsImpl("{B}"));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledCreaturePermanent(6,6,filterApostle, false)));
+        this.addAbility(ability);
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public ShadowbornApostle(final ShadowbornApostle card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public ShadowbornApostle copy() {
+        return new ShadowbornApostle(this);
     }
 }

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -44,32 +44,32 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  *
  * @author LevelX2
  */
-public class GaleriderSliver extends CardImpl<GaleriderSliver> {
+public class SyphonSliver extends CardImpl<SyphonSliver> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
     static {
         filter.add(new SubtypePredicate("Sliver"));
     }
 
-    public GaleriderSliver(UUID ownerId) {
-        super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
+    public SyphonSliver(UUID ownerId) {
+        super(ownerId, 117, "Syphon Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M14";
         this.subtype.add("Sliver");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
 
-        // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        // Sliver creatures you control have lifelink.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
     }
 
-    public GaleriderSliver(final GaleriderSliver card) {
+    public SyphonSliver(final SyphonSliver card) {
         super(card);
     }
 
     @Override
-    public GaleriderSliver copy() {
-        return new GaleriderSliver(this);
+    public SyphonSliver copy() {
+        return new SyphonSliver(this);
     }
 }

@@ -118,7 +118,7 @@ public class Commander extends DeckValidator {
         countCards(counts, deck.getSideboard());
         for (Map.Entry<String, Integer> entry: counts.entrySet()) {
             if (entry.getValue() > 1) {
-                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")) {
+                if (!basicLandNames.contains(entry.getKey()) && !entry.getKey().equals("Relentless Rats")&& !entry.getKey().equals("Shadowborn Apostle")) {
                     invalid.put(entry.getKey(), "Too many: " + entry.getValue());
                     valid = false;
                 }
