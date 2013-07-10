@@ -86,6 +86,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
         this.cardType.addAll(object.cardType);
         this.subtype.addAll(object.subtype);
         this.supertype.addAll(object.supertype);
+        this.copy = object.copy;
     }
 
     @Override

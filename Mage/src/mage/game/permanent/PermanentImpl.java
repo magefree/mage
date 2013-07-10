@@ -131,7 +131,6 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
         this.pairedCard = permanent.pairedCard;
-        this.copy = permanent.copy;
     }
 
     @Override
