@@ -79,6 +79,9 @@ public class FightTargetsEffect extends OneShotEffect<FightTargetsEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         return "Target " + mode.getTargets().get(0).getTargetName() + " fights another target " + mode.getTargets().get(1).getTargetName();
     }
 
