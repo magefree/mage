@@ -436,6 +436,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.exile = state.exile;
         this.battlefield = state.battlefield;
         this.zones = state.zones;
+        this.values = state.values;
         for (Player copyPlayer: state.players.values()) {
             Player origPlayer = players.get(copyPlayer.getId());
             origPlayer.restore(copyPlayer);
