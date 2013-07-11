@@ -29,64 +29,51 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
+public class OgreBattledriver extends CardImpl<OgreBattledriver> {
+    
+    private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
+    
+    static {
+        filter.add(new AnotherPredicate());
+    }
+    
+    private String rule = "Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.";
 
-    public DragonEgg(UUID ownerId) {
-        super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public OgreBattledriver(UUID ownerId) {
+        super(ownerId, 148, "Ogre Battledriver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Dragon");
+        this.subtype.add("Ogre");
+        this.subtype.add("Warrior");
 
         this.color.setRed(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
-
+        // Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.
+        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, false, true, rule, true));
+        
     }
 
-    public DragonEgg(final DragonEgg card) {
+    public OgreBattledriver(final OgreBattledriver card) {
         super(card);
     }
 
     @Override
-    public DragonEgg copy() {
-        return new DragonEgg(this);
-    }
-}
-
-class DragonToken extends Token {
-
-    DragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
+    public OgreBattledriver copy() {
+        return new OgreBattledriver(this);
     }
 }

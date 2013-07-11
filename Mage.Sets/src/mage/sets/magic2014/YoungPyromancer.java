@@ -29,64 +29,50 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.common.SpellCastTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
-
-    public DragonEgg(UUID ownerId) {
-        super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "M14";
-        this.subtype.add("Dragon");
-
-        this.color.setRed(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
-
+public class YoungPyromancer extends CardImpl<YoungPyromancer> {
+    
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
+    
+    static {
+        filter.add(Predicates.or(
+                new CardTypePredicate(CardType.INSTANT),
+                new CardTypePredicate(CardType.SORCERY)));
     }
 
-    public DragonEgg(final DragonEgg card) {
+    public YoungPyromancer(UUID ownerId) {
+        super(ownerId, 163, "Young Pyromancer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{R}");
+        this.expansionSetCode = "M14";
+        this.subtype.add("Human");
+        this.subtype.add("Shaman");
+
+        this.color.setRed(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
+
+        // Whenever you cast an instant or sorcery spell, put a 1/1 red Elemental creature token onto the battlefield.
+        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
+        
+    }
+
+    public YoungPyromancer(final YoungPyromancer card) {
         super(card);
     }
 
     @Override
-    public DragonEgg copy() {
-        return new DragonEgg(this);
-    }
-}
-
-class DragonToken extends Token {
-
-    DragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
+    public YoungPyromancer copy() {
+        return new YoungPyromancer(this);
     }
 }

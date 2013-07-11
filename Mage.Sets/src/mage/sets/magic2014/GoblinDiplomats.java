@@ -29,64 +29,80 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.watchers.common.DamagedByWatcher;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
+public class GoblinDiplomats extends CardImpl<GoblinDiplomats> {
 
-    public DragonEgg(UUID ownerId) {
-        super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public GoblinDiplomats(UUID ownerId) {
+        super(ownerId, 141, "Goblin Diplomats", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{R}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Dragon");
+        this.subtype.add("Goblin");
 
         this.color.setRed(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
-
+        // {T}: Each creature attacks this turn if able.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GoblinDiplomatsEffect(), new TapSourceCost()));
+        
     }
 
-    public DragonEgg(final DragonEgg card) {
+    public GoblinDiplomats(final GoblinDiplomats card) {
         super(card);
     }
 
     @Override
-    public DragonEgg copy() {
-        return new DragonEgg(this);
+    public GoblinDiplomats copy() {
+        return new GoblinDiplomats(this);
     }
 }
 
-class DragonToken extends Token {
+class GoblinDiplomatsEffect extends RequirementEffect<GoblinDiplomatsEffect> {
 
-    DragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
+    public GoblinDiplomatsEffect() {
+        super(Duration.EndOfTurn);
+        this.staticText = "Each creature attacks this turn if able";
+    }
+
+    public GoblinDiplomatsEffect(final GoblinDiplomatsEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public GoblinDiplomatsEffect copy() {
+        return new GoblinDiplomatsEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
     }
 }

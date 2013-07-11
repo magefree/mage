@@ -29,64 +29,51 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.filter.Filter.ComparisonType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.ToughnessPredicate;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
-
-    public DragonEgg(UUID ownerId) {
-        super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "M14";
-        this.subtype.add("Dragon");
-
-        this.color.setRed(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
-
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
-
+public class FleshpulperGiant extends CardImpl<FleshpulperGiant> {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with toughess 2 or less");
+    
+    static {
+        filter.add(new ToughnessPredicate(ComparisonType.LessThan, 3));
     }
 
-    public DragonEgg(final DragonEgg card) {
+    public FleshpulperGiant(UUID ownerId) {
+        super(ownerId, 140, "Fleshpulper Giant", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{5}{R}{R}");
+        this.expansionSetCode = "M14";
+        this.subtype.add("Giant");
+
+        this.color.setRed(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
+
+        // When Fleshpulper Giant enters the battlefield, you may destroy target creature with toughness 2 or less.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
+        
+    }
+
+    public FleshpulperGiant(final FleshpulperGiant card) {
         super(card);
     }
 
     @Override
-    public DragonEgg copy() {
-        return new DragonEgg(this);
-    }
-}
-
-class DragonToken extends Token {
-
-    DragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
+    public FleshpulperGiant copy() {
+        return new FleshpulperGiant(this);
     }
 }

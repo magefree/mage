@@ -28,65 +28,69 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.permanent.token.Token;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
  * @author jeffwadsworth
  */
-public class DragonEgg extends CardImpl<DragonEgg> {
+public class SeismicStomp extends CardImpl<SeismicStomp> {
 
-    public DragonEgg(UUID ownerId) {
-        super(ownerId, 137, "Dragon Egg", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
+    public SeismicStomp(UUID ownerId) {
+        super(ownerId, 152, "Seismic Stomp", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{R}");
         this.expansionSetCode = "M14";
-        this.subtype.add("Dragon");
 
         this.color.setRed(true);
-        this.power = new MageInt(0);
-        this.toughness = new MageInt(2);
 
-        // Defender
-        this.addAbility(DefenderAbility.getInstance());
-
-        // When Dragon Egg dies, put a 2/2 red Dragon creature token with flying onto the battlefield. It has "{R}: This creature gets +1/+0 until end of turn".
-        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new DragonToken()), false));
-
+        // Creatures without flying can't block this turn.
+        this.getSpellAbility().addEffect(new SeismicStompEffect());
     }
 
-    public DragonEgg(final DragonEgg card) {
+    public SeismicStomp(final SeismicStomp card) {
         super(card);
     }
 
     @Override
-    public DragonEgg copy() {
-        return new DragonEgg(this);
+    public SeismicStomp copy() {
+        return new SeismicStomp(this);
     }
 }
 
-class DragonToken extends Token {
+class SeismicStompEffect extends RestrictionEffect<SeismicStompEffect> {
 
-    DragonToken() {
-        super("Dragon", "2/2 red Dragon creature token with flying that has \"{R}: This creature gets +1/+0 until end of turn");
-        cardType.add(CardType.CREATURE);
-        color.setRed(true);
-        subtype.add("Dragon");
-        power = new MageInt(2);
-        toughness = new MageInt(2);
-        addAbility(FlyingAbility.getInstance());
-        addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
-        
+    SeismicStompEffect() {
+        super(Duration.EndOfTurn);
+        staticText = "Creatures without flying can't block this turn";
     }
+
+    SeismicStompEffect(final SeismicStompEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (!permanent.getAbilities().contains(FlyingAbility.getInstance())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public SeismicStompEffect copy() {
+        return new SeismicStompEffect(this);
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
 }
