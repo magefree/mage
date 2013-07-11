@@ -28,11 +28,12 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
+import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.continious.BoostAllEffect;
-import mage.cards.CardImpl;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -46,7 +47,7 @@ public class Shrivel extends CardImpl<Shrivel> {
 
         this.color.setBlack(true);
 
-        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new BoostAllEffect(-1, -1, Duration.EndOfTurn, new FilterCreaturePermanent("All creatures"), false));
     }
 
     public Shrivel(final Shrivel card) {
