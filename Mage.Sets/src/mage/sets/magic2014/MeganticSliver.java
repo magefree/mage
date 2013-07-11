@@ -37,18 +37,12 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author LevelX2
  */
 public class MeganticSliver extends CardImpl<MeganticSliver> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
 
     public MeganticSliver(UUID ownerId) {
         super(ownerId, 185, "Megantic Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{G}");
@@ -60,10 +54,8 @@ public class MeganticSliver extends CardImpl<MeganticSliver> {
         this.toughness = new MageInt(3);
 
         // Sliver creatures you control get +3/+3.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(3,3, Duration.WhileInGraveyard, filter)));
-
-
-
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new BoostControlledEffect(3,3, Duration.WhileInGraveyard, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
     }
 
     public MeganticSliver(final MeganticSliver card) {

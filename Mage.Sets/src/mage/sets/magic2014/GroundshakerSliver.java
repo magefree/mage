@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,11 +47,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GroundshakerSliver extends CardImpl<GroundshakerSliver> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public GroundshakerSliver(UUID ownerId) {
         super(ownerId, 177, "Groundshaker Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{6}{G}");
         this.expansionSetCode = "M14";
@@ -62,7 +58,8 @@ public class GroundshakerSliver extends CardImpl<GroundshakerSliver> {
 
         // Sliver creatures you control have trample.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
-                new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+                new GainAbilityControlledEffect(TrampleAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
     }
 
     public GroundshakerSliver(final GroundshakerSliver card) {

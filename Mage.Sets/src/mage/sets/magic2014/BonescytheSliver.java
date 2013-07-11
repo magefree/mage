@@ -31,13 +31,16 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
@@ -46,14 +49,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class BonescytheSliver extends CardImpl<BonescytheSliver> {
     
-    static final private FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Sliver creatures you control");
-    
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-    
-    private String rule = "Sliver creatures you control have double strike";
-
     public BonescytheSliver(UUID ownerId) {
         super(ownerId, 9, "Bonescythe Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
         this.expansionSetCode = "M14";
@@ -64,7 +59,9 @@ public class BonescytheSliver extends CardImpl<BonescytheSliver> {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have double strike.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(DoubleStrikeAbility.getInstance(), Duration.WhileOnBattlefield, filter, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
     }
 
     public BonescytheSliver(final BonescytheSliver card) {

@@ -30,7 +30,6 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -55,7 +54,9 @@ public class SteelformSliver extends CardImpl<SteelformSliver> {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control get +0/+1.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures you control"), false)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield,
+                new FilterCreaturePermanent("Sliver", "Sliver creatures you control"), false)));
     }
 
     public SteelformSliver(final SteelformSliver card) {

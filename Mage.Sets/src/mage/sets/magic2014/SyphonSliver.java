@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,11 +47,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class SyphonSliver extends CardImpl<SyphonSliver> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public SyphonSliver(UUID ownerId) {
         super(ownerId, 117, "Syphon Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "M14";
@@ -61,7 +57,9 @@ public class SyphonSliver extends CardImpl<SyphonSliver> {
         this.toughness = new MageInt(2);
 
         // Sliver creatures you control have lifelink.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(LifelinkAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(LifelinkAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
     }
 
     public SyphonSliver(final SyphonSliver card) {

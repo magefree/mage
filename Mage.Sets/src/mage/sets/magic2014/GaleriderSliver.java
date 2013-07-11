@@ -46,11 +46,6 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class GaleriderSliver extends CardImpl<GaleriderSliver> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Sliver creatures");
-    static {
-        filter.add(new SubtypePredicate("Sliver"));
-    }
-
     public GaleriderSliver(UUID ownerId) {
         super(ownerId, 57, "Galerider Sliver", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{U}");
         this.expansionSetCode = "M14";
@@ -61,7 +56,9 @@ public class GaleriderSliver extends CardImpl<GaleriderSliver> {
         this.toughness = new MageInt(1);
 
         // Sliver creatures you control have flying.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield, filter)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new GainAbilityControlledEffect(FlyingAbility.getInstance(),
+                Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver","Sliver creatures"))));
     }
 
     public GaleriderSliver(final GaleriderSliver card) {
