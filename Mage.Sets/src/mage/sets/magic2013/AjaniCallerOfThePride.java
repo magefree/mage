@@ -28,9 +28,6 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -45,7 +42,9 @@ import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 import mage.target.common.TargetCreaturePermanent;
@@ -69,14 +68,14 @@ public class AjaniCallerOfThePride extends CardImpl<AjaniCallerOfThePride> {
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.LOYALTY.createInstance(4)), false));
         // +1: Put a +1/+1 counter on up to one target creature.
         Ability ability = new LoyaltyAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), 1);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(0,1));
         this.addAbility(ability);
         // -3: Target creature gains flying and double strike until end of turn.
         Effects effects = new Effects();
         effects.add(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn));
         effects.add(new GainAbilityTargetEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn));
         ability = new LoyaltyAbility(effects, -3);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
         // -8: Put X 2/2 white Cat creature tokens onto the battlefield, where X is your life total.
         this.addAbility(new LoyaltyAbility(new CreateTokenEffect(new CatToken(), new ControllerLifeCount()), -8));
