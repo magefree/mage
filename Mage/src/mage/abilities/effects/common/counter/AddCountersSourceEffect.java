@@ -38,6 +38,7 @@ import mage.counters.Counter;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -130,7 +131,7 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         // put a +1/+1 counter on it for each attacking creature you control.
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(" ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
         } else {
             sb.append("a ");
         }

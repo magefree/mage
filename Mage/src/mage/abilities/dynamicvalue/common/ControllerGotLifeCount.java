@@ -28,18 +28,33 @@
 
 package mage.abilities.dynamicvalue.common;
 
+import java.io.ObjectStreamException;
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.dynamicvalue.DynamicValue;
+import mage.cards.Card;
 import mage.game.Game;
-import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.watchers.common.PlayerGainedLifeWatcher;
 
 /**
- *
+ * Amount of life the controller got this turn.
+ * 
  * @author LevelX2
  */
 
-public class OpponentsLostLifeCount implements DynamicValue {
+public class ControllerGotLifeCount implements DynamicValue, MageSingleton {
+
+    private static final ControllerGotLifeCount fINSTANCE =  new ControllerGotLifeCount();
+
+    private Object readResolve() throws ObjectStreamException {
+        return fINSTANCE;
+    }
+
+    public static ControllerGotLifeCount getInstance(Card card) {
+        card.addWatcher(new PlayerGainedLifeWatcher());
+        return fINSTANCE;
+    }
 
     @Override
     public int calculate(Game game, Ability sourceAbility) {
@@ -47,20 +62,16 @@ public class OpponentsLostLifeCount implements DynamicValue {
     }
 
     public int calculate(Game game, UUID controllerId) {
-        PlayerLostLifeWatcher watcher = (PlayerLostLifeWatcher) game.getState().getWatchers().get("PlayerLostLifeWatcher");
+        PlayerGainedLifeWatcher watcher = (PlayerGainedLifeWatcher) game.getState().getWatchers().get("PlayerGainedLifeWatcher");
         if (watcher != null) {
-            int amountLifeLost = 0;
-            for(UUID opponent: game.getOpponents(controllerId)){
-                amountLifeLost += watcher.getLiveLost(opponent);
-            }
-            return amountLifeLost;
+            return watcher.getLiveGained(controllerId);
         }
         return 0;
     }
 
     @Override
     public DynamicValue copy() {
-        return new OpponentsLostLifeCount();
+        return new ControllerGotLifeCount();
     }
 
     @Override
@@ -70,6 +81,6 @@ public class OpponentsLostLifeCount implements DynamicValue {
 
     @Override
     public String getMessage() {
-        return "the total life lost by your opponents this turn";
+        return "the amount of life you've gained this turn";
     }
 }

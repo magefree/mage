@@ -29,8 +29,8 @@
 package mage.abilities.common;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -76,14 +76,13 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
             UUID targetId = event.getTargetId();
             Permanent permanent = game.getPermanent(targetId);
-            if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+            if (permanent.getControllerId().equals(this.getControllerId())
+                    && filter.match(permanent, getSourceId(), getControllerId(), game)) {
                 return true;
             }
         }
         return false;
     }
-
-
 
     @Override
     public EntersBattlefieldControlledTriggeredAbility copy() {
