@@ -25,53 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.sets.mirrodin;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class OathOfTheAncientWood extends CardImpl<OathOfTheAncientWood> {
+public class Fireshrieker extends mage.sets.magic2014.Fireshrieker {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Oath of the Ancient Wood or another enchantment");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+    public Fireshrieker(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 171;
+        this.expansionSetCode = "MRD";
     }
 
-    public OathOfTheAncientWood(UUID ownerId) {
-        super(ownerId, 187, "Oath of the Ancient Wood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
-        this.expansionSetCode = "M14";
-
-        this.color.setGreen(true);
-
-        // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
-        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, false, null, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
-        this.addAbility(ability);
-    }
-
-    public OathOfTheAncientWood(final OathOfTheAncientWood card) {
+    public Fireshrieker(final Fireshrieker card) {
         super(card);
     }
 
     @Override
-    public OathOfTheAncientWood copy() {
-        return new OathOfTheAncientWood(this);
+    public Fireshrieker copy() {
+        return new Fireshrieker(this);
     }
 }

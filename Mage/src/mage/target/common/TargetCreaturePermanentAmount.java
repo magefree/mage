@@ -30,9 +30,11 @@ package mage.target.common;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.constants.Zone;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
@@ -53,6 +55,10 @@ public class TargetCreaturePermanentAmount extends TargetAmount<TargetCreaturePe
     }
 
     public TargetCreaturePermanentAmount(int amount, FilterCreaturePermanent filter) {
+        this(new StaticValue(amount), filter);
+    }
+
+    public TargetCreaturePermanentAmount(DynamicValue amount, FilterCreaturePermanent filter) {
         super(amount);
         this.zone = Zone.ALL;
         this.filter = filter;

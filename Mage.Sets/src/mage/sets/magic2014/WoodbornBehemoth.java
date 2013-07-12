@@ -28,50 +28,56 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.TrampleAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.counters.CounterType;
-import mage.filter.common.FilterEnchantmentPermanent;
-import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.target.common.TargetCreaturePermanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
  * @author LevelX2
  */
-public class OathOfTheAncientWood extends CardImpl<OathOfTheAncientWood> {
+public class WoodbornBehemoth extends CardImpl<WoodbornBehemoth> {
 
-    private static final FilterEnchantmentPermanent filter = new FilterEnchantmentPermanent("Oath of the Ancient Wood or another enchantment");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-    public OathOfTheAncientWood(UUID ownerId) {
-        super(ownerId, 187, "Oath of the Ancient Wood", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}");
+    public WoodbornBehemoth(UUID ownerId) {
+        super(ownerId, 203, "Woodborn Behemoth", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}{G}");
         this.expansionSetCode = "M14";
+        this.subtype.add("Elemental");
 
         this.color.setGreen(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(4);
 
-        // Whenever Oath of the Ancient Wood or another enchantment enters the battlefield under your control, you may put a +1/+1 counter on target creature.
-        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
-        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, effect, filter, false, false, null, true);
-        ability.addTarget(new TargetCreaturePermanent(true));
+        // As long as you control eight or more lands, Woodborn Behemoth gets +4/+4 and has trample.
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(
+                new BoostSourceEffect(4,4, Duration.EndOfTurn),
+                new ControlsPermanentCondition(new FilterLandPermanent(), ControlsPermanentCondition.CountType.MORE_THAN,7),
+                "As long as you control eight or more lands, {this} gets +4/+4");
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(TrampleAbility.getInstance(), Duration.WhileOnBattlefield),
+                new ControlsPermanentCondition(new FilterLandPermanent(), ControlsPermanentCondition.CountType.MORE_THAN,7),
+                " and has trample");
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, effect1);
+        ability.addEffect(effect2);
         this.addAbility(ability);
     }
 
-    public OathOfTheAncientWood(final OathOfTheAncientWood card) {
+    public WoodbornBehemoth(final WoodbornBehemoth card) {
         super(card);
     }
 
     @Override
-    public OathOfTheAncientWood copy() {
-        return new OathOfTheAncientWood(this);
+    public WoodbornBehemoth copy() {
+        return new WoodbornBehemoth(this);
     }
 }
