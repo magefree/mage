@@ -28,12 +28,15 @@
 
 package mage.abilities.keyword;
 
+import java.util.UUID;
 import mage.constants.Outcome;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.common.AttachEffect;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
@@ -52,6 +55,18 @@ public class EquipAbility extends ActivatedAbilityImpl<EquipAbility> {
         this.timing = TimingRule.SORCERY;
     }
 
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if(super.canActivate(playerId, game)){
+            Permanent permanent = game.getPermanent(sourceId);
+            if(permanent != null && permanent.hasSubtype("Equipment")){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
 
     public EquipAbility(final EquipAbility ability) {
         super(ability);
