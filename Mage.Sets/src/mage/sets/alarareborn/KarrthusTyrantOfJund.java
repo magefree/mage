@@ -63,10 +63,10 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KarrthusTyrantOfJund extends CardImpl<KarrthusTyrantOfJund> {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("all dragons you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragons you control");
     
     static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
         filter.add(new SubtypePredicate("Dragon"));
     }
 
@@ -110,7 +110,7 @@ class KarrthusEffect extends OneShotEffect<KarrthusEffect> {
 
     public KarrthusEffect() {
         super(Outcome.GainControl);
-        this.staticText = "gain control of all dragons";
+        this.staticText = "gain control of all Dragons, then untap all Dragons";
     }
 
     public KarrthusEffect(final KarrthusEffect effect) {
