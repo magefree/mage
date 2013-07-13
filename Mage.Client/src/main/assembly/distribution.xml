@@ -32,6 +32,21 @@
         <fileSet>
             <filtered>false</filtered>
             <directory>release/</directory>
+            <excludes>
+                <exclude>*.bat</exclude>
+                <exclude>*.command</exclude>
+                <exclude>*.sh</exclude>
+            </excludes>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>release/</directory>
+            <includes>
+                <include>*.bat</include>
+                <include>*.command</include>
+                <include>*.sh</include>
+            </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>
         <fileSet>
