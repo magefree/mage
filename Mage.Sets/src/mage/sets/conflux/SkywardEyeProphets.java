@@ -45,7 +45,6 @@ import mage.game.Game;
 import mage.players.Player;
 
 /**
- *
  * @author North
  */
 public class SkywardEyeProphets extends CardImpl<SkywardEyeProphets> {
@@ -75,41 +74,41 @@ public class SkywardEyeProphets extends CardImpl<SkywardEyeProphets> {
     public SkywardEyeProphets copy() {
         return new SkywardEyeProphets(this);
     }
-}
+    
+    public static class SkywardEyeProphetsEffect extends OneShotEffect<SkywardEyeProphetsEffect> {
 
-class SkywardEyeProphetsEffect extends OneShotEffect<SkywardEyeProphetsEffect> {
+	public SkywardEyeProphetsEffect() {
+	    super(Outcome.DrawCard);
+	    this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand";
+	}
 
-    public SkywardEyeProphetsEffect() {
-        super(Outcome.DrawCard);
-        this.staticText = "Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand";
-    }
+	public SkywardEyeProphetsEffect(final SkywardEyeProphetsEffect effect) {
+	    super(effect);
+	}
 
-    public SkywardEyeProphetsEffect(final SkywardEyeProphetsEffect effect) {
-        super(effect);
-    }
+	@Override
+	public SkywardEyeProphetsEffect copy() {
+	    return new SkywardEyeProphetsEffect(this);
+	}
 
-    @Override
-    public SkywardEyeProphetsEffect copy() {
-        return new SkywardEyeProphetsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null && player.getLibrary().size() > 0) {
-            CardsImpl cards = new CardsImpl();
-            Card card = player.getLibrary().removeFromTop(game);
-            if (card != null) {
-                cards.add(card);
-                player.revealCards("Skyward Eye Prophets", cards, game);
-                if (card.getCardType().contains(CardType.LAND)) {
-                    card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
-                } else {
-                    card.moveToZone(Zone.HAND, source.getId(), game, true);
-                }
-                return true;
-            }
-        }
-        return false;
+	@Override
+	public boolean apply(Game game, Ability source) {
+	    Player player = game.getPlayer(source.getControllerId());
+	    if (player != null && player.getLibrary().size() > 0) {
+		CardsImpl cards = new CardsImpl();
+		Card card = player.getLibrary().removeFromTop(game);
+		if (card != null) {
+		    cards.add(card);
+		    player.revealCards("Skyward Eye Prophets", cards, game);
+		    if (card.getCardType().contains(CardType.LAND)) {
+			card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId());
+		    } else {
+			card.moveToZone(Zone.HAND, source.getId(), game, true);
+		    }
+		    return true;
+		}
+	    }
+	    return false;
+	}
     }
 }
