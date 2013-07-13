@@ -105,6 +105,11 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexus
     public MaelstromNexusTriggeredAbility copy() {
         return new MaelstromNexusTriggeredAbility(this);
     }
+    
+    @Override
+    public String getRule() {
+        return "The first spell you cast each turn has cascade.";
+    }
 }
 
 class FirstSpellCastThisTurnWatcher extends WatcherImpl<FirstSpellCastThisTurnWatcher> {
@@ -150,7 +155,6 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
     public CascadeEffect() {
         super(Outcome.PutCardInPlay);
-        staticText = "The first spell you cast each turn has cascade";
     }
 
     public CascadeEffect(CascadeEffect effect) {
