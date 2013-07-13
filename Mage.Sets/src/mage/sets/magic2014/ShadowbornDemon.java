@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
+import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.InvertCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -43,9 +43,12 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.game.Game;
+import mage.players.Player;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -85,7 +88,7 @@ public class ShadowbornDemon extends CardImpl<ShadowbornDemon> {
         triggeredAbility.addTarget(target);
         this.addAbility(new ConditionalTriggeredAbility(
                 triggeredAbility,
-                new InvertCondition(new CardsInControllerGraveCondition(6)),
+                new InvertCondition(new CreatureCardsInControllerGraveCondition(6)),
                 "At the beginning of your upkeep, if there are fewer than six creature cards in your graveyard, sacrifice a creature"));
 
     }
@@ -97,5 +100,23 @@ public class ShadowbornDemon extends CardImpl<ShadowbornDemon> {
     @Override
     public ShadowbornDemon copy() {
         return new ShadowbornDemon(this);
+    }
+}
+
+class CreatureCardsInControllerGraveCondition implements Condition {
+    private int value;
+
+    public CreatureCardsInControllerGraveCondition(int value) {
+        this.value = value;
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player p = game.getPlayer(source.getControllerId());
+        if (p != null && p.getGraveyard().count(new FilterCreatureCard(), game) >= value)
+        {
+                    return true;
+        }
+        return false;
     }
 }
