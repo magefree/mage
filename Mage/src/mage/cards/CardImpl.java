@@ -208,7 +208,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
         ability.setSourceId(this.getId());
         abilities.add(ability);
     }
-
+    
     @Override
     public void addWatcher(Watcher watcher) {
         watcher.setSourceId(this.getId());

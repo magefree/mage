@@ -128,7 +128,6 @@ public interface Card extends MageObject {
 
     void removeCounters(String name, int amount, Game game);
     void removeCounters(Counter counter, Game game);
-
     @Override
     Card copy();
 }
