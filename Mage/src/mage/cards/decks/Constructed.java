@@ -64,9 +64,9 @@ public class Constructed extends DeckValidator {
             invalid.put("Deck", "Must contain at least 60 cards: has only " + deck.getCards().size() + " cards");
             valid = false;
         }
-        //20091005 - 100.4a
-        if (!deck.getSideboard().isEmpty() && deck.getSideboard().size() != 15) {
-            invalid.put("Sideboard", "Must have 0 or 15 cards: has " + deck.getSideboard().size() + " cards");
+        //20130713 - 100.4a
+        if (deck.getSideboard().size() > 15) {
+            invalid.put("Sideboard", "Must contain no more than 15 cards : has " + deck.getSideboard().size() + " cards");
             valid = false;
         }
 
