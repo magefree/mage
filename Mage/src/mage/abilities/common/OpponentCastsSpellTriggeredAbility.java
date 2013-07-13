@@ -41,8 +41,10 @@ import mage.target.targetpointer.FixedTarget;
  * @author BetaSteward_at_googlemail.com
  */
 public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<OpponentCastsSpellTriggeredAbility> {
+
     private static final FilterCard spellCard = new FilterCard("a spell");
     protected FilterCard filter;
+    protected boolean setTargetPointerPlayer;
 
     public OpponentCastsSpellTriggeredAbility(Effect effect, boolean optional) {
         this(effect, spellCard, optional);
@@ -51,24 +53,33 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     public OpponentCastsSpellTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
         this(Zone.BATTLEFIELD, effect, filter, optional);
     }
-    
+
     public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional) {
         super(zone, effect, optional);
         this.filter = filter;
     }
 
+    public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional, boolean setTargetPointerPlayer) {
+        super(zone, effect, optional);
+        this.filter = filter;
+        this.setTargetPointerPlayer = setTargetPointerPlayer;
+    }
 
     public OpponentCastsSpellTriggeredAbility(final OpponentCastsSpellTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
+        this.setTargetPointerPlayer = ability.setTargetPointerPlayer;
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, game)) {
+            if (spell != null && filter.match(spell, game) && !setTargetPointerPlayer) {
                 this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
+                return true;
+            } else {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
                 return true;
             }
         }
@@ -84,5 +95,4 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     public OpponentCastsSpellTriggeredAbility copy() {
         return new OpponentCastsSpellTriggeredAbility(this);
     }
-
 }

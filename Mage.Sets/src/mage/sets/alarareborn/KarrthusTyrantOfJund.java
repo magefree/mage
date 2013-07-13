@@ -46,13 +46,11 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
@@ -63,7 +61,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class KarrthusTyrantOfJund extends CardImpl<KarrthusTyrantOfJund> {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("other Dragons you control");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Dragon creatures you control");
     
     static {
         filter.add(new AnotherPredicate());
