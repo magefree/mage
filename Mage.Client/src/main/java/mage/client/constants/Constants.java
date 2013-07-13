@@ -79,8 +79,8 @@ public final class Constants {
     public static final String RESOURCE_PATH_MANA_MEDIUM = IO.imageBaseDir + "symbols" + File.separator + "medium";
     public static final String RESOURCE_PATH_SET = IO.imageBaseDir + "sets" + File.separator;
     public static final String RESOURCE_PATH_SET_SMALL = RESOURCE_PATH_SET + File.separator + "small" + File.separator;
-    public static final String BASE_SOUND_PATH = "plugins" + File.separator + "sounds" + File.separator;
-    public static final String BASE_MUSICS_PATH = "plugins" + File.separator + "sounds" + File.separator + "music" + File.separator ;
+    public static final String BASE_SOUND_PATH = "sounds" + File.separator;
+    public static final String BASE_MUSICS_PATH = "music" + File.separator ;
     
     public interface IO {
         String imageBaseDir = "plugins" + File.separator + "images" + File.separator;

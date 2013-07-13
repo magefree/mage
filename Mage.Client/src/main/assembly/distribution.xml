@@ -18,21 +18,19 @@
             <outputDirectory>/lib/</outputDirectory>
             <excludes>
                 <exclude>org.mage:mage-client</exclude>
-                <exclude>org.mage:mage-theme-plugin</exclude>
                 <exclude>org.mage:mage-counter-plugin</exclude>
             </excludes>
         </dependencySet>
         <dependencySet>
             <outputDirectory>/plugins</outputDirectory>
             <includes>
-                <include>org.mage:mage-theme-plugin</include>
                 <include>org.mage:mage-counter-plugin</include>
             </includes>
         </dependencySet>
     </dependencySets>
     <fileSets>
         <fileSet>
-            <filtered>true</filtered>
+            <filtered>false</filtered>
             <directory>release/</directory>
             <outputDirectory>/</outputDirectory>
         </fileSet>
@@ -44,13 +42,6 @@
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>
-        <fileSet>
-            <filtered>false</filtered>
-            <directory>plugins/sounds/</directory>
-            <includes>
-                <include>*.wav</include>
-            </includes>
-            <outputDirectory>plugins/sounds/</outputDirectory>
-        </fileSet>
+
     </fileSets>
 </assembly>

@@ -19,14 +19,14 @@ import java.io.InputStream;
 import java.util.Map;
 
 @PluginImplementation
-@Author(name = "nantuko")
+@Author(name = "nantuko")   
+/* udpated by Noahsark */
 public class ThemePluginImpl implements ThemePlugin {
 
     private static final Logger log = Logger.getLogger(ThemePluginImpl.class);
     private static BufferedImage background;
     private List flist = new List();
-    private String BackgroundDir = "plugins" + File.separator + "plugin.data" + File.separator 
-                + "background" + File.separator;
+    private String BackgroundDir = "backgrounds" + File.separator;
     @Init
     public void init() {
     }
