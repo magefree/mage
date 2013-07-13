@@ -114,7 +114,7 @@ class FiendslayerPaladinEffect extends ReplacementEffectImpl<FiendslayerPaladinE
         if (event.getType() == GameEvent.EventType.TARGET) {
             Card targetCard = game.getCard(event.getTargetId());
             StackObject stackObject = (StackObject) game.getStack().getStackObject(event.getSourceId());
-            if (targetCard != null && stackObject != null) {
+            if (targetCard != null && stackObject != null && targetCard.getId().equals(source.getSourceId())) {
                 if (stackObject.getColor().contains(ObjectColor.BLACK)
                         || stackObject.getColor().contains(ObjectColor.RED)) {
                     if (!stackObject.getControllerId().equals(source.getControllerId())
