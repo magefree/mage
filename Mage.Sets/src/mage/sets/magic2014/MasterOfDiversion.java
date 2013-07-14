@@ -31,16 +31,14 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.AbilityType;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -60,7 +58,8 @@ public class MasterOfDiversion extends CardImpl<MasterOfDiversion> {
         this.toughness = new MageInt(2);
 
         // Whenever Master of Diversion attacks, tap target creature defending player controls.
-        Ability ability = new AttacksTriggeredAbility(new MasterOfDiversionEffect(), false);
+        Ability ability = new AttacksTriggeredAbility(new TapTargetEffect(), false);
+        ability.addTarget(new TargetCreaturePermanent(new FilterCreaturePermanent("creature defending player controls")));
         this.addAbility(ability);
 
     }
@@ -70,44 +69,20 @@ public class MasterOfDiversion extends CardImpl<MasterOfDiversion> {
     }
 
     @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability.getAbilityType().equals(AbilityType.TRIGGERED)) {
+            ability.getTargets().clear();
+            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
+            UUID defenderId = game.getCombat().getDefendingPlayer(ability.getControllerId());
+            filter.add(new ControllerIdPredicate(defenderId));
+            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
+            target.setRequired(true);
+            ability.addTarget(target);
+        }
+    }
+
+    @Override
     public MasterOfDiversion copy() {
         return new MasterOfDiversion(this);
-    }
-}
-
-class MasterOfDiversionEffect extends OneShotEffect<MasterOfDiversionEffect> {
-
-    public MasterOfDiversionEffect() {
-        super(Outcome.Tap);
-        staticText = "tap target creature defending player controls";
-    }
-
-    public MasterOfDiversionEffect(final MasterOfDiversionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        if (you == null) {
-            return false;
-        }
-        FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
-        filter.add(new ControllerIdPredicate(defenderId));
-        TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-        target.setRequired(true);
-        if (you.choose(Outcome.Tap, target, source.getId(), game)) {
-            Permanent targetCreature = game.getPermanent(target.getFirstTarget());
-            if (targetCreature != null) {
-                return targetCreature.tap(game);
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public MasterOfDiversionEffect copy() {
-        return new MasterOfDiversionEffect(this);
     }
 }
