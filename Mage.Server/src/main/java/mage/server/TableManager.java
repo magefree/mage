@@ -319,6 +319,7 @@ public class TableManager {
                         if (player != null && player.isHuman()) {
                             canBeRemoved = false;
                         }
+                        /* temporarily fix for issue #262 */
                         if(table.getGameType().equals("Two Player Duel")){
                             canBeRemoved = false;
                         }
