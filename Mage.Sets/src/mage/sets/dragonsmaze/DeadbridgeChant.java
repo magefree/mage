@@ -98,7 +98,6 @@ class DeadbridgeChantEffect extends OneShotEffect<DeadbridgeChantEffect> {
         if (player != null && !player.getGraveyard().isEmpty()) {
             Card card = player.getGraveyard().getRandom(game);
             if (card != null) {
-                Card sourceCard = game.getCard(source.getId());
                 Zone targetZone = Zone.HAND;
                 String text = " put into hand of ";
                 if (card.getCardType().contains(CardType.CREATURE)) {
@@ -106,7 +105,7 @@ class DeadbridgeChantEffect extends OneShotEffect<DeadbridgeChantEffect> {
                     text = " put onto battlefield for ";
                 }
                 card.moveToZone(targetZone, source.getId(), game, false);
-                game.informPlayers(new StringBuilder(sourceCard.getName()).append(": ").append(card.getName()).append(text).append(player.getName()).toString());
+                game.informPlayers(new StringBuilder("Deadbridge Chant: ").append(card.getName()).append(text).append(player.getName()).toString());
                 return true;
             }
         }
