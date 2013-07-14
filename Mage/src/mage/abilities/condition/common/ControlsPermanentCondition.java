@@ -97,13 +97,13 @@ public class ControlsPermanentCondition implements Condition {
 
         switch ( this.type ) {
             case FEWER_THAN:
-                conditionApplies = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) < this.count;
+                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) < this.count;
                 break;
             case MORE_THAN:
-                conditionApplies = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) > this.count;
+                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) > this.count;
                 break;
             case EQUAL_TO:
-                conditionApplies = game.getBattlefield().count(filter, source.getSourceId(), source.getControllerId(), game) == this.count;
+                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) == this.count;
                 break;
         }
 
