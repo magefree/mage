@@ -168,7 +168,7 @@ public class DevourEffect extends ReplacementEffectImpl<DevourEffect> {
         if (object != null) {
             return (List<ArrayList<String>>) object;
         }
-        return null;
+        return new ArrayList<ArrayList<String>>();
     }
 
     public int getDevouredCreaturesAmount(Game game, UUID permanentId) {
