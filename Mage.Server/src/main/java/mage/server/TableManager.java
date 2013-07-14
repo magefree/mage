@@ -319,6 +319,9 @@ public class TableManager {
                         if (player != null && player.isHuman()) {
                             canBeRemoved = false;
                         }
+                        if(table.getGameType().equals("Two Player Duel")){
+                            canBeRemoved = false;
+                        }
                     }
                     if (canBeRemoved) {
                         logger.info("Table with no human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
