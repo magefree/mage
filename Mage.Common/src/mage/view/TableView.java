@@ -81,7 +81,10 @@ public class TableView implements Serializable {
             StringBuilder sb = new StringBuilder();
             StringBuilder sbScore = new StringBuilder();
             for(MatchPlayer matchPlayer: table.getMatch().getPlayers()) {
-                if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
+                if (matchPlayer.getPlayer() == null) {
+                    sb.append(", ").append("[unknown]");
+                    sbScore.append("-").append(matchPlayer.getWins());
+                } else if (!matchPlayer.getPlayer().getName().equals(table.getControllerName())) {
                     sb.append(", ").append(matchPlayer.getPlayer().getName());
                     sbScore.append("-").append(matchPlayer.getWins());
                 } else {
