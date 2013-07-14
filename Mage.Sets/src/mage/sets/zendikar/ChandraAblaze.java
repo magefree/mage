@@ -39,6 +39,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.effects.common.discard.DiscardHandAllEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -74,7 +75,7 @@ public class ChandraAblaze extends CardImpl<ChandraAblaze> {
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
         // -2: Each player discards his or her hand, then draws three cards.
-        ability = new LoyaltyAbility(new ChandraAblazeEffect3(), -2);
+        ability = new LoyaltyAbility(new DiscardHandAllEffect(), -2);
         ability.addEffect(new ChandraAblazeEffect4());
         this.addAbility(ability);
         // -7: Cast any number of red instant and/or sorcery cards from your graveyard without paying their mana costs.
@@ -159,38 +160,6 @@ class ChandraAblazeEffect2 extends OneShotEffect<ChandraAblazeEffect2> {
             }
         }
         return false;
-    }
-}
-
-class ChandraAblazeEffect3 extends OneShotEffect<ChandraAblazeEffect3> {
-
-    public ChandraAblazeEffect3() {
-        super(Outcome.Benefit);
-        this.staticText = "Each player discards his or her hand";
-    }
-
-    public ChandraAblazeEffect3(final ChandraAblazeEffect3 effect) {
-        super(effect);
-    }
-
-    @Override
-    public ChandraAblazeEffect3 copy() {
-        return new ChandraAblazeEffect3(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player sourcePlayer = game.getPlayer(source.getControllerId());
-        for (UUID playerId : sourcePlayer.getInRange()) {
-            Player player = game.getPlayer(playerId);
-            if (player != null) {
-                Set<Card> cards = player.getHand().getCards(game);
-                for (Card card : cards) {
-                    player.discard(card, source, game);
-                }
-            }
-        }
-        return true;
     }
 }
 
