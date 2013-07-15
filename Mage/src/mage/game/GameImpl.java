@@ -90,6 +90,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -1291,35 +1292,62 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
 
         }
-        //20091005 - 704.5j, 801.14
+        //201300713 - 704.5j
+        // If a player controls two or more planeswalkers that share a planeswalker type, that player
+        // chooses one of them, and the rest are put into their owners' graveyards.
+        // This is called the "planeswalker uniqueness rule."
         if (planeswalkers.size() > 1) {  //don't bother checking if less than 2 planeswalkers in play
             for (Permanent planeswalker: planeswalkers) {
                 for (String planeswalkertype: planeswalker.getSubtype()) {
                     FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
                     filterPlaneswalker.add(new SubtypePredicate(planeswalkertype));
+                    filterPlaneswalker.add(new ControllerIdPredicate(planeswalker.getControllerId()));
                     if (getBattlefield().contains(filterPlaneswalker, planeswalker.getControllerId(), this, 2)) {
-                        for (Permanent perm: getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
-                            perm.moveToZone(Zone.GRAVEYARD, null, this, false);
+                        Player controller = this.getPlayer(planeswalker.getControllerId());
+                        if (controller != null) {
+                            Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
+                            targetPlaneswalkerToKeep.setTargetName(new StringBuilder(planeswalker.getName()).append(" to keep?").toString());
+                            targetPlaneswalkerToKeep.setRequired(true);
+                            controller.chooseTarget(Outcome.Sacrifice, targetPlaneswalkerToKeep, null, this);
+                            for (Permanent dupPlaneswalker: this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
+                                if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
+                                    dupPlaneswalker.moveToZone(Zone.GRAVEYARD, null, this, false);
+                                }
+                            }
                         }
                         return true;
                     }
                 }
             }
         }
-        //20091005 - 704.5k, 801.12
+        //201300713 - 704.5k
+        // If a player controls two or more legendary permanents with the same name, that player
+        // chooses one of them, and the rest are put into their owners' graveyards.
+        // This is called the "legend rule."
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend: legendary) {
                 FilterPermanent filterLegendName = new FilterPermanent();
                 filterLegendName.add(new SupertypePredicate("Legendary"));
                 filterLegendName.add(new NamePredicate(legend.getName()));
+                filterLegendName.add(new ControllerIdPredicate(legend.getControllerId()));
                 if (getBattlefield().contains(filterLegendName, legend.getControllerId(), this, 2)) {
-                    for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
-                        dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
+                    Player controller = this.getPlayer(legend.getControllerId());
+                    if (controller != null) {
+                        Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
+                        targetLegendaryToKeep.setTargetName(new StringBuilder(legend.getName()).append(" to keep (Legendary Rule)?").toString());
+                        targetLegendaryToKeep.setRequired(true);
+                        controller.chooseTarget(Outcome.Sacrifice, targetLegendaryToKeep, null, this);
+                        for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
+                            if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
+                                dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
+                            }
+                        }
                     }
                     return true;
                 }
             }
         }
+
         // (Isochron Scepter) 12/1/2004: If you don't want to cast the copy, you can choose not to; the copy ceases to exist the next time state-based actions are checked.
         for(Card card: this.getState().getExile().getAllCards(this)) {
             if (card.isCopy()) {
