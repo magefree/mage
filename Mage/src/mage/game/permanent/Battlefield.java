@@ -115,39 +115,6 @@ public class Battlefield implements Serializable {
         }
         return count;
     }
-    
-    /**
-     * Returns a count of all {@link Permanent} that are within the range of influence of the specified player id
-     * and is controlled by specified player ,and that match the supplied filter.
-     * 
-     * @param filter
-     * @param sourceId 
-     * @param sourcePlayerId
-     * @param game
-     * @return count
-     */
-    public int countControlled(FilterPermanent filter, UUID sourceId, UUID sourcePlayerId, Game game) {
-        int count = 0;
-        if (game.getRangeOfInfluence() == RangeOfInfluence.ALL) {
-            for (Permanent permanent: field.values()) {
-                if (filter.match(permanent, sourceId, sourcePlayerId, game) 
-                        && permanent.getControllerId().equals(sourcePlayerId)) {
-                    count++;
-                }
-            }
-        }
-        else {
-            Set<UUID> range = game.getPlayer(sourcePlayerId).getInRange();
-            for (Permanent permanent: field.values()) {
-                if (range.contains(permanent.getControllerId()) 
-                        && filter.match(permanent, sourceId, sourcePlayerId, game)
-                        && permanent.getControllerId().equals(sourcePlayerId)) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
 
     /**
      * Returns true if the battlefield contains at least 1 {@link Permanent}

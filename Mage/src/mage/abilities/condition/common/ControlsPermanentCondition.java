@@ -30,6 +30,7 @@ package mage.abilities.condition.common;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 
 /**
@@ -95,15 +96,18 @@ public class ControlsPermanentCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
 
+        FilterPermanent localFilter = filter.copy();
+        localFilter.add(new ControllerIdPredicate(source.getControllerId()));
+
         switch ( this.type ) {
             case FEWER_THAN:
-                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) < this.count;
+                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) < this.count;
                 break;
             case MORE_THAN:
-                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) > this.count;
+                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) > this.count;
                 break;
             case EQUAL_TO:
-                conditionApplies = game.getBattlefield().countControlled(filter, source.getSourceId(), source.getControllerId(), game) == this.count;
+                conditionApplies = game.getBattlefield().count(localFilter, source.getSourceId(), source.getControllerId(), game) == this.count;
                 break;
         }
 
