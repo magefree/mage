@@ -75,7 +75,8 @@ public class CavernOfSouls extends CardImpl<CavernOfSouls> {
 
         // {tap}: Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
         this.addAbility(new ConditionalAnyColorManaAbility(1, new CavernOfSoulsManaBuilder()));
-        this.addWatcher(new CavernOfSoulsWatcher());
+        WatcherImpl watcher = new CavernOfSoulsWatcher();
+        this.addWatcher(watcher);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CavernOfSoulsCantCounterEffect()));
     }
 
@@ -147,7 +148,7 @@ class CavernOfSoulsConditionalMana extends ConditionalMana {
 }
 
 class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
-
+    
     @Override
     public boolean apply(Game game, Ability source, UUID manaProducer) {
         // check: ... to cast a creature spell
@@ -168,7 +169,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
 
     public List<UUID> spells = new ArrayList<UUID>();
-
+  
     public CavernOfSoulsWatcher() {
         super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.GAME);
     }
@@ -185,8 +186,8 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
-            if (event.getSourceId().equals(this.sourceId)) {
-                spells.add(event.getTargetId());
+            if (game.getObject(event.getSourceId()).getName().equals("Cavern of Souls")) {
+                spells.add(event.getTargetId()); 
             }
         }
     }
@@ -200,7 +201,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
 }
 
 class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSoulsCantCounterEffect> {
-
+    
     public CavernOfSoulsCantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = null;
