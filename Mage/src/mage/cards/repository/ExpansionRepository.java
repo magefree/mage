@@ -10,6 +10,7 @@ import com.j256.ormlite.table.TableUtils;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -77,14 +78,13 @@ public enum ExpansionRepository {
         return sets;
     }
 
-    public ExpansionInfo[] getSetsWithBasicLandsByReleaseDate() {
-        ExpansionInfo[]  sets = new ExpansionInfo[0];
+    public List<ExpansionInfo> getSetsWithBasicLandsByReleaseDate() {
+        List<ExpansionInfo> sets = new LinkedList<ExpansionInfo>();
         try {
             QueryBuilder<ExpansionInfo, Object> qb = expansionDao.queryBuilder();
             qb.orderBy("releaseDate", false);
             qb.where().eq("basicLands", new SelectArg(true));
-            List<ExpansionInfo> expansions = expansionDao.query(qb.prepare());
-            sets = expansions.toArray(new ExpansionInfo[0]);
+            sets = expansionDao.query(qb.prepare());
         } catch (SQLException ex) {
         }
         return sets;

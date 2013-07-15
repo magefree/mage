@@ -88,9 +88,9 @@ public class AddLandDialog extends MageDialog {
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
             Random generator = new Random();
-            ExpansionInfo [] landSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (landSets.length > 0) {
-                this.setCodesland.add(landSets[generator.nextInt(landSets.length)-1].getCode());
+            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+            if (basicLandSets.size() > 0) {
+                this.setCodesland.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
             }
         }
 

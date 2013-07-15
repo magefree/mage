@@ -1332,9 +1332,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             // if sets have no basic lands and also it has no parent or parent has no lands get last set with lands
             // select a set with basic lands by random
             Random generator = new Random();
-            ExpansionInfo [] basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
-            if (basicLandSets.length > 0) {
-                landSets.add(basicLandSets[generator.nextInt(basicLandSets.length)-1].getCode());
+            List<ExpansionInfo> basicLandSets = ExpansionRepository.instance.getSetsWithBasicLandsByReleaseDate();
+            if (basicLandSets.size() > 0) {
+                landSets.add(basicLandSets.get(generator.nextInt(basicLandSets.size())).getCode());
             }
         }
 
