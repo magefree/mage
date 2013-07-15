@@ -803,7 +803,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         Player player = state.getPlayer(playerId);
         if (player != null) {
             player.quit(this);
-            fireInformEvent(player.getName() + " has quitted the match.");
+            fireInformEvent(player.getName() + " quits the match.");
         }
     }
 
