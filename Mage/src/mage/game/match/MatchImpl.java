@@ -119,7 +119,7 @@ public abstract class MatchImpl implements Match {
     public boolean isMatchOver() {
         int activePlayers = 0;
         for (MatchPlayer player: players) {
-            if (!player.hasQuitted()) {
+            if (!player.hasQuit()) {
                 activePlayers++;
             }
             if (player.getWins() >= options.getWinsNeeded()) {
@@ -165,7 +165,7 @@ public abstract class MatchImpl implements Match {
     protected void initGame(Game game) throws GameException {
         shufflePlayers();
         for (MatchPlayer matchPlayer: this.players) {
-            if (!matchPlayer.hasQuitted()) {
+            if (!matchPlayer.hasQuit()) {
                 matchPlayer.getPlayer().init(game);
                 game.loadCards(matchPlayer.getDeck().getCards(), matchPlayer.getPlayer().getId());
                 game.loadCards(matchPlayer.getDeck().getSideboard(), matchPlayer.getPlayer().getId());
@@ -193,8 +193,8 @@ public abstract class MatchImpl implements Match {
                 if (game.getPriorityTime() > 0) {
                     player.setPriorityTimeLeft(p.getPriorityTimeLeft());
                 }
-                if (p.hasQuitted()) {
-                    player.setQuitted(true);
+                if (p.hasQuit()) {
+                    player.setQuit(true);
                 }
                 if (p.hasWon()) {
                     player.addWin();
@@ -212,7 +212,7 @@ public abstract class MatchImpl implements Match {
         Game game = getGame();
         for (MatchPlayer player: this.players) {
             Player p = game.getPlayer(player.getPlayer().getId());
-            if (p != null && p.hasLost() && !p.hasQuitted()) {
+            if (p != null && p.hasLost() && !p.hasQuit()) {
                 loserId = p.getId();
             }
         }
@@ -227,7 +227,7 @@ public abstract class MatchImpl implements Match {
     @Override
     public void sideboard() {
         for (MatchPlayer player: this.players) {
-            if (!player.hasQuitted()) {
+            if (!player.hasQuit()) {
                 player.setSideboarding();
                 player.getPlayer().sideboard(this, player.getDeck());
             }
@@ -244,7 +244,7 @@ public abstract class MatchImpl implements Match {
     @Override
     public boolean isDoneSideboarding() {
         for (MatchPlayer player: this.players) {
-            if (!player.hasQuitted() && !player.isDoneSideboarding()) {
+            if (!player.hasQuit() && !player.isDoneSideboarding()) {
                 return false;
             }
         }
@@ -285,7 +285,7 @@ public abstract class MatchImpl implements Match {
             sb.append("- ").append(mp.getPlayer().getName());
             sb.append(" (").append(mp.getWins()).append(mp.getWins()==1?" win / ":" wins / ");
             sb.append(mp.getLoses()).append(mp.getLoses()==1?" loss)":" losses)");
-            if (mp.hasQuitted()) {
+            if (mp.hasQuit()) {
                 sb.append(" QUITTED");
             }
             sb.append("\n");

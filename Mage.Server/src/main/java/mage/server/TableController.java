@@ -370,7 +370,7 @@ public class TableController {
             String creator = null;
             String opponent = null;
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-                if (!match.getPlayer(entry.getValue()).hasQuitted()) {
+                if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
                         user.gameStarted(match.getGame().getId(), entry.getValue());

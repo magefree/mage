@@ -99,7 +99,7 @@ public interface Player extends MageItem, Copyable<Player> {
 
     boolean hasLost();
     boolean hasWon();
-    boolean hasQuitted();
+    boolean hasQuit();
     void quit(Game game);
     boolean hasLeft();
     /**
