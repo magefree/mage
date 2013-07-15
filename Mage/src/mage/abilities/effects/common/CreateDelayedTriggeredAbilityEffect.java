@@ -28,9 +28,6 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
@@ -44,15 +41,22 @@ import mage.game.Game;
 public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDelayedTriggeredAbilityEffect> {
 
     protected DelayedTriggeredAbility ability;
+    protected boolean copyTargets;
 
     public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability) {
+        this(ability, true);
+    }
+
+    public CreateDelayedTriggeredAbilityEffect(DelayedTriggeredAbility ability, boolean copyTargets) {
         super(ability.getEffects().get(0).getOutcome());
         this.ability = ability;
+        this.copyTargets = copyTargets;
     }
 
     public CreateDelayedTriggeredAbilityEffect(final CreateDelayedTriggeredAbilityEffect effect) {
         super(effect);
         this.ability = effect.ability.copy();
+        this.copyTargets = effect.copyTargets;
     }
 
     @Override
@@ -65,7 +69,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDel
         DelayedTriggeredAbility delayedAbility = (DelayedTriggeredAbility) ability.copy();
         delayedAbility.setSourceId(source.getSourceId());
         delayedAbility.setControllerId(source.getControllerId());
-        delayedAbility.getTargets().addAll(source.getTargets());
+        if (this.copyTargets) {
+            delayedAbility.getTargets().addAll(source.getTargets());
+        }
         game.addDelayedTriggeredAbility(delayedAbility);
         return true;
     }
