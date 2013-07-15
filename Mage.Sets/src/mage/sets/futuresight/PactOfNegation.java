@@ -53,7 +53,7 @@ public class PactOfNegation extends CardImpl<PactOfNegation> {
         this.getSpellAbility().addTarget(new TargetSpell());
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         // At the beginning of your next upkeep, pay {3}{U}{U}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{3}{U}{U}"))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{3}{U}{U}")), false));
     }
 
     public PactOfNegation(final PactOfNegation card) {
