@@ -410,13 +410,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             List<Permanent> targets;
             boolean outcomeTargets = true;
             if (outcome.isGood()) {
-                targets = threats(playerId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(playerId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
             }
             else {
-                targets = threats(opponentId, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(opponentId, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
             }            
             if (targets.isEmpty() && target.isRequired()) {
-                targets = threats(null, source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
+                targets = threats(null, source == null?null:source.getSourceId(), ((TargetPermanent)target).getFilter(), game, target.getTargets());
                 Collections.reverse(targets);
                 outcomeTargets = false;
                 //targets = game.getBattlefield().getActivePermanents(((TargetPermanent)target).getFilter(), playerId, game);
@@ -1792,7 +1792,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     protected List<Permanent> threats(UUID playerId, UUID sourceId, FilterPermanent filter, Game game, List<UUID> targets) {
-        List<Permanent> threats = playerId == null ?
+        List<Permanent> threats = (playerId == null || sourceId ==null) ?
                 game.getBattlefield().getActivePermanents(filter, this.getId(), sourceId, game) : // all permanents within the range of the player
                 game.getBattlefield().getAllActivePermanents(filter, playerId, game); // all controlled permanents of playerId
 

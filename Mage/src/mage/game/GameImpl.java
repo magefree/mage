@@ -1308,7 +1308,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                             Target targetPlaneswalkerToKeep = new TargetPermanent(filterPlaneswalker);
                             targetPlaneswalkerToKeep.setTargetName(new StringBuilder(planeswalker.getName()).append(" to keep?").toString());
                             targetPlaneswalkerToKeep.setRequired(true);
-                            controller.chooseTarget(Outcome.Sacrifice, targetPlaneswalkerToKeep, null, this);
+                            controller.chooseTarget(Outcome.Benefit, targetPlaneswalkerToKeep, null, this);
                             for (Permanent dupPlaneswalker: this.getBattlefield().getActivePermanents(filterPlaneswalker, planeswalker.getControllerId(), this)) {
                                 if (!targetPlaneswalkerToKeep.getTargets().contains(dupPlaneswalker.getId())) {
                                     dupPlaneswalker.moveToZone(Zone.GRAVEYARD, null, this, false);
@@ -1336,7 +1336,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         Target targetLegendaryToKeep = new TargetPermanent(filterLegendName);
                         targetLegendaryToKeep.setTargetName(new StringBuilder(legend.getName()).append(" to keep (Legendary Rule)?").toString());
                         targetLegendaryToKeep.setRequired(true);
-                        controller.chooseTarget(Outcome.Sacrifice, targetLegendaryToKeep, null, this);
+                        controller.chooseTarget(Outcome.Benefit, targetLegendaryToKeep, null, this);
                         for (Permanent dupLegend: getBattlefield().getActivePermanents(filterLegendName, legend.getControllerId(), this)) {
                             if (!targetLegendaryToKeep.getTargets().contains(dupLegend.getId())) {
                                 dupLegend.moveToZone(Zone.GRAVEYARD, null, this, false);
