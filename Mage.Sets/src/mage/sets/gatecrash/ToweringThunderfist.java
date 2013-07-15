@@ -37,6 +37,7 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.Duration;
 import mage.constants.Zone;
 
 /**
@@ -56,7 +57,7 @@ public class ToweringThunderfist extends CardImpl<ToweringThunderfist> {
         this.toughness = new MageInt(4);
 
         // {W}: Towering Thunderfist gains vigilance until end of turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance()), new ManaCostsImpl("{W}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(VigilanceAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{W}")));
     }
 
     public ToweringThunderfist(final ToweringThunderfist card) {
