@@ -28,9 +28,6 @@
 package mage.sets.futuresight;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.common.delayed.PactDelayedTriggeredAbility;
@@ -38,7 +35,9 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -60,7 +59,7 @@ public class InterventionPact extends CardImpl<InterventionPact> {
         this.getSpellAbility().addEffect(new InterventionPactPreventDamageEffect());
         this.getSpellAbility().addTarget(new TargetSource());
         // At the beginning of your next upkeep, pay {1}{W}{W}. If you don't, you lose the game.
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}"))));
+        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new PactDelayedTriggeredAbility(new ManaCostsImpl("{1}{W}{W}")), false));
     }
 
     public InterventionPact(final InterventionPact card) {
