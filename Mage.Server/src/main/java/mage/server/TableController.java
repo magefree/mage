@@ -109,7 +109,12 @@ public class TableController {
         tournament = TournamentFactory.getInstance().createTournament(options.getTournamentType(), options);
         if (userId != null) {
             User user = UserManager.getInstance().getUser(userId);
-            controllerName = user.getName();
+            if (user == null) {
+                logger.fatal(new StringBuilder("User for userId ").append(userId).append(" could not be retrieved from UserManager").toString());
+                controllerName = "[unknown]";
+            } else {
+                controllerName = user.getName();
+            }
         } 
         else {
             controllerName = "System";
@@ -177,6 +182,9 @@ public class TableController {
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
+        if (player == null) {
+            throw new GameException(new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString());
+        }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
         User user = UserManager.getInstance().getUser(userId);
@@ -456,7 +464,7 @@ public class TableController {
     public void endGame() {
         // get player that chooses who goes first
         UUID choosingPlayerId = match.getChooser();
-
+logger.warn("endGame() " + match.getPlayers().toString());
         match.endGame();
         table.endGame();
 // Saving of games caused memory leaks - so save is deactivated

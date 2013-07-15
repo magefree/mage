@@ -32,8 +32,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import mage.constants.TableState;
 import mage.cards.decks.DeckValidator;
+import mage.constants.TableState;
 import mage.game.events.Listener;
 import mage.game.events.TableEvent;
 import mage.game.events.TableEventSource;
@@ -56,6 +56,7 @@ public class Table implements Serializable {
     private Seat[] seats;
     private int numSeats;
     private boolean isTournament;
+    private boolean isTournamentSubTable;
     private DeckValidator validator;
     private TableState state = TableState.WAITING;
     private Match match;
