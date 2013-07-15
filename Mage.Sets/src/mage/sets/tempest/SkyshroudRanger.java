@@ -79,7 +79,7 @@ class SkyshroudRangerEffect extends OneShotEffect<SkyshroudRangerEffect> {
 
     SkyshroudRangerEffect() {
         super(Outcome.PutLandInPlay);
-        staticText = "You may put a land card from your hand onto the battlefield. Activate this ability only any time you could cast a sorcery";
+        staticText = "You may put a land card from your hand onto the battlefield";
     }
 
     SkyshroudRangerEffect(final SkyshroudRangerEffect effect) {
