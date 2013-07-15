@@ -56,7 +56,7 @@ public class Table implements Serializable {
     private Seat[] seats;
     private int numSeats;
     private boolean isTournament;
-    private boolean isTournamentSubTable;
+    private boolean tournamentSubTable;
     private DeckValidator validator;
     private TableState state = TableState.WAITING;
     private Match match;
@@ -225,6 +225,14 @@ public class Table implements Serializable {
 
     public String getControllerName() {
         return controllerName;
+    }
+
+    public boolean isTournamentSubTable() {
+        return tournamentSubTable;
+    }
+
+    public void setTournamentSubTable(boolean tournamentSubTable) {
+        this.tournamentSubTable = tournamentSubTable;
     }
 
 }
