@@ -46,8 +46,8 @@ public class WheelOfFortune extends CardImpl<WheelOfFortune> {
         this.color.setRed(true);
 
         // Each player discards his or her hand and draws seven cards.
-	this.getSpellAbility().addEffect(new DiscardHandAllEffect());
-	this.getSpellAbility().addEffect(new DrawCardAllEffect(7));
+        this.getSpellAbility().addEffect(new DiscardHandAllEffect());
+        this.getSpellAbility().addEffect(new DrawCardAllEffect(7));
     }
 
     public WheelOfFortune(final WheelOfFortune card) {

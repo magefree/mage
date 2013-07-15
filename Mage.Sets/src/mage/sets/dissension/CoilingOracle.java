@@ -53,7 +53,7 @@ public class CoilingOracle extends CardImpl<CoilingOracle> {
         this.toughness = new MageInt(1);
 	
         // When Coiling Oracle enters the battlefield, reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put that card into your hand.
-	this.addAbility(new EntersBattlefieldTriggeredAbility(new SkywardEyeProphetsEffect()));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new SkywardEyeProphetsEffect()));
     }
 
     public CoilingOracle(final CoilingOracle card) {

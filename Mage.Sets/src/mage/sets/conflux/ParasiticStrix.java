@@ -74,45 +74,45 @@ public class ParasiticStrix extends CardImpl<ParasiticStrix> {
     public ParasiticStrix copy() {
         return new ParasiticStrix(this);
     }
-    
-    static class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl<ParasiticStrixTriggeredAbility> {
-        
-        public ParasiticStrixTriggeredAbility() {
-            super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
-            this.addEffect(new GainLifeEffect(2));
-            this.addTarget(new TargetPlayer(true));
+}
+
+class ParasiticStrixTriggeredAbility extends TriggeredAbilityImpl<ParasiticStrixTriggeredAbility> {
+
+    public ParasiticStrixTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new LoseLifeTargetEffect(2));
+        this.addEffect(new GainLifeEffect(2));
+        this.addTarget(new TargetPlayer(true));
+    }
+
+    public ParasiticStrixTriggeredAbility(final ParasiticStrixTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public ParasiticStrixTriggeredAbility copy() {
+        return new ParasiticStrixTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) && event.getTargetId().equals(this.getSourceId())) {
+            return true;
         }
-        
-        public ParasiticStrixTriggeredAbility(final ParasiticStrixTriggeredAbility ability) {
-            super(ability);
+        return false;
+    }
+
+    @Override
+    public boolean checkInterveningIfClause(Game game) {
+        FilterPermanent filter = new FilterPermanent();
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+        if (game.getBattlefield().countAll(filter, this.controllerId, game) >= 1) {
+            return true;
         }
-        
-        @Override
-        public ParasiticStrixTriggeredAbility copy() {
-            return new ParasiticStrixTriggeredAbility(this);
-        }
-        
-        @Override
-        public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType().equals(EventType.ENTERS_THE_BATTLEFIELD) && event.getTargetId().equals(this.getSourceId())) {
-                return true;
-            }
-            return false;
-        }
-        
-        @Override
-        public boolean checkInterveningIfClause(Game game) {
-            FilterPermanent filter = new FilterPermanent();
-            filter.add(new ColorPredicate(ObjectColor.BLACK));
-            if (game.getBattlefield().countAll(filter, this.controllerId, game) >= 1) {
-                return true;
-            }
-            return false;
-        }
-        
-        @Override
-        public String getRule() {
-            return "When Parasitic Strix enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.";
-        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When Parasitic Strix enters the battlefield, if you control a black permanent, target player loses 2 life and you gain 2 life.";
     }
 }

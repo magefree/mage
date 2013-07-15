@@ -42,31 +42,31 @@ import mage.players.Player;
 public class DiscardHandAllEffect extends OneShotEffect<DiscardHandAllEffect> {
 
     public DiscardHandAllEffect() {
-	super(Outcome.Discard);
-	this.staticText = "Each player discards his or her hand";
+        super(Outcome.Discard);
+        this.staticText = "Each player discards his or her hand";
     }
 
     public DiscardHandAllEffect(final DiscardHandAllEffect effect) {
-	super(effect);
+        super(effect);
     }
 
     @Override
     public DiscardHandAllEffect copy() {
-	return new DiscardHandAllEffect(this);
+        return new DiscardHandAllEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-	Player sourcePlayer = game.getPlayer(source.getControllerId());
-	for (UUID playerId : sourcePlayer.getInRange()) {
-	    Player player = game.getPlayer(playerId);
-	    if (player != null) {
-		Set<Card> cards = player.getHand().getCards(game);
-		for (Card card : cards) {
-		    player.discard(card, source, game);
-		}
-	    }
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        for (UUID playerId : sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                Set<Card> cards = player.getHand().getCards(game);
+                for (Card card : cards) {
+                    player.discard(card, source, game);
+                }
+            }
 	}
-	return true;
+        return true;
     }
 }

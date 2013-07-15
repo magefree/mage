@@ -60,7 +60,7 @@ public class EdricSpymasterOfTrest extends CardImpl<EdricSpymasterOfTrest> {
         this.toughness = new MageInt(2);
 
         // Whenever a creature deals combat damage to one of your opponents, its controller may draw a card.
-	this.addAbility(new EdricSpymasterOfTrestTriggeredAbility());
+        this.addAbility(new EdricSpymasterOfTrestTriggeredAbility());
     }
 
     public EdricSpymasterOfTrest(final EdricSpymasterOfTrest card) {
@@ -71,39 +71,37 @@ public class EdricSpymasterOfTrest extends CardImpl<EdricSpymasterOfTrest> {
     public EdricSpymasterOfTrest copy() {
         return new EdricSpymasterOfTrest(this);
     }
-    
-    public static class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl<EdricSpymasterOfTrestTriggeredAbility> {
+}
 
-	public EdricSpymasterOfTrestTriggeredAbility() {
-	    super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), true);
-	}
-	
-	public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
-	    super(ability);
-	}
-	
-	@Override
-	public EdricSpymasterOfTrestTriggeredAbility copy() {
-	    return new EdricSpymasterOfTrestTriggeredAbility(this);
-	}
+class EdricSpymasterOfTrestTriggeredAbility extends TriggeredAbilityImpl<EdricSpymasterOfTrestTriggeredAbility> {
 
-	@Override
-	public boolean checkTrigger(GameEvent event, Game game) {
-	    
-	    if (event.getType().equals(EventType.DAMAGED_PLAYER) &&
-		    ((DamagedPlayerEvent) event).isCombatDamage() &&
-		    game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
-		    for (Effect effect : this.getEffects()) {
-			effect.setTargetPointer(new FixedTarget(game.getPermanent(event.getSourceId()).getControllerId()));
-		    }
-		    return true;
-	    }
-	    return false;
-	}
-	
-	@Override
-	public String getRule() {
-	    return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card";
-	}
+    public EdricSpymasterOfTrestTriggeredAbility() {
+        super(Zone.BATTLEFIELD, new DrawCardTargetEffect(1), true);
+    }
+
+    public EdricSpymasterOfTrestTriggeredAbility(final EdricSpymasterOfTrestTriggeredAbility ability) {
+        super(ability);
+    }
+
+    @Override
+    public EdricSpymasterOfTrestTriggeredAbility copy() {
+        return new EdricSpymasterOfTrestTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+
+        if (event.getType().equals(EventType.DAMAGED_PLAYER) && ((DamagedPlayerEvent) event).isCombatDamage() && game.getOpponents(this.controllerId).contains(((DamagedPlayerEvent) event).getPlayerId())) {
+            for (Effect effect : this.getEffects()) {
+                effect.setTargetPointer(new FixedTarget(game.getPermanent(event.getSourceId()).getControllerId()));
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "Whenever a creature deals combat damage to one of your opponents, its controller may draw a card";
     }
 }
