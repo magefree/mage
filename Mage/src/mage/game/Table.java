@@ -138,7 +138,7 @@ public class Table implements Serializable {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        return new Date(createTime.getTime());
     }
 
     public boolean isTournament() {
@@ -221,6 +221,10 @@ public class Table implements Serializable {
 
     public Tournament getTournament() {
         return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
 
     public String getControllerName() {

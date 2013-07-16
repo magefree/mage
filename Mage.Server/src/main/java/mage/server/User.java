@@ -156,6 +156,10 @@ public class User {
         fireCallback(new ClientCallback("construct", tableId, new TableClientMessage(deck, tableId, time)));
     }
 
+    public void showTournament(final UUID tournamentId) {
+        fireCallback(new ClientCallback("showTournament", tournamentId));
+    }
+
     public void watchGame(final UUID gameId) {
         fireCallback(new ClientCallback("watchGame", gameId));
     }

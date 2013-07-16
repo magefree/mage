@@ -67,6 +67,8 @@ public interface PlayerActions {
 
     boolean watchTable(UUID roomId, UUID tableId);
 
+    boolean watchTournamentTable(UUID tableId);
+
     boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList);
 
     TableView getTable(UUID roomId, UUID tableId);

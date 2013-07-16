@@ -77,6 +77,7 @@ public interface MageServer {
     boolean submitDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
     void updateDeck(String sessionId, UUID tableId, DeckCardLists deckList) throws MageException, GameException;
     boolean watchTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
+    boolean watchTournamentTable(String sessionId, UUID tableId) throws MageException;
     void leaveTable(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void swapSeats(String sessionId, UUID roomId, UUID tableId, int seatNum1, int seatNum2) throws MageException;
     void removeTable(String sessionId, UUID roomId, UUID tableId) throws MageException;

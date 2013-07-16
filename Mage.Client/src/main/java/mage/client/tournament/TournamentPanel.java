@@ -63,11 +63,11 @@ public class TournamentPanel extends javax.swing.JPanel {
     private static final Logger logger = Logger.getLogger(TournamentPanel.class);
 
     private UUID tournamentId;
+    private boolean firstInitDone = false;
     private Session session;
     private TournamentPlayersTableModel playersModel;
     private TournamentMatchesTableModel matchesModel;
     private UpdateTournamentTask updateTask;
-    private boolean titleSet = false;
     private DateFormat df;
 
     /** Creates new form TournamentPanel */
@@ -92,10 +92,15 @@ public class TournamentPanel extends javax.swing.JPanel {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
                 UUID gameId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
                 String state = (String)tableMatches.getValueAt(modelRow, 4);
-
-                if (state.equals("Finished")) {
-                    logger.info("Replaying game " + gameId);
-                    session.replayGame(gameId);
+                String actionText = (String)tableMatches.getValueAt(modelRow, 6);
+                UUID tableId = UUID.fromString((String)matchesModel.getValueAt(modelRow, 7));
+//                if (state.equals("Finished") && action.equals("Replay")) {
+//                    logger.info("Replaying game " + gameId);
+//                    session.replayGame(gameId);
+//                }
+                if (state.equals("Dueling") && actionText.equals("Watch")) {
+                    logger.info("Watching game " + gameId);
+                    session.watchTournamentTable(tableId);
                 }
             }
         };
@@ -121,6 +126,10 @@ public class TournamentPanel extends javax.swing.JPanel {
         }
     }
 
+    public UUID getTournamentId() {
+        return tournamentId;
+    }
+
     public void hideTournament() {
         stopTasks();
         this.chatPanel1.disconnect();
@@ -135,7 +144,7 @@ public class TournamentPanel extends javax.swing.JPanel {
 
     public void update(TournamentView tournament) {
 
-        if (!titleSet) {
+        if (!firstInitDone) {
             Component c = this.getParent();
             while (c != null && !(c instanceof TournamentPane)) {
                 c = c.getParent();
@@ -143,20 +152,17 @@ public class TournamentPanel extends javax.swing.JPanel {
             if (c != null) {
                 ((TournamentPane)c).setTitle("Tournament [" + tournament.getTournamentName() +"]");
             }
-            titleSet = true;
+            txtName.setText(tournament.getTournamentName());
+            txtType.setText(tournament.getTournamentType());
+
+            txtStartTime.setText(df.format(tournament.getStartTime()));
+            txtEndTime.setText("running...");
+            
+            firstInitDone = true;
         }
 
-        txtName.setText(tournament.getTournamentName());
-        txtType.setText(tournament.getTournamentType());
-
-        txtStartTime.setText(df.format(tournament.getStartTime()));
-
-        if (tournament.getEndTime() != null) {
+        if (txtEndTime.getText().equals("running...") && tournament.getEndTime() != null) {
             txtEndTime.setText(df.format(tournament.getEndTime()));
-            btnCloseWindow.setVisible(true);
-        } else {
-            txtEndTime.setText("running...");
-            btnCloseWindow.setVisible(false);
         }
         
         playersModel.loadData(tournament);
@@ -241,7 +247,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtEndTime.setFocusable(false);
 
         btnCloseWindow.setText("Close Window");
-        btnCloseWindow.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCloseWindowActionPerformed(evt);
@@ -331,7 +337,7 @@ public class TournamentPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(actionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -422,9 +428,11 @@ class TournamentPlayersTableModel extends AbstractTableModel {
 class TournamentMatchesTableModel extends AbstractTableModel {
     private String[] columnNames = new String[]{"Round Number", "Players", "Match Id", "Game Id", "State", "Result", "Action"};
     private TournamentGameView[] games = new TournamentGameView[0];
+    private boolean watchingAllowed;
 
     public void loadData(TournamentView tournament) {
         List<TournamentGameView> views = new ArrayList<TournamentGameView>();
+        watchingAllowed = tournament.isWatchingAllowed();
         for (RoundView round: tournament.getRounds()) {
             for (TournamentGameView game: round.getGames()) {
                 views.add(game);
@@ -460,10 +468,15 @@ class TournamentMatchesTableModel extends AbstractTableModel {
             case 5:
                 return games[arg0].getResult();
             case 6:
-                if (games[arg0].getState().equals("Finished")) {
-                    return "Replay";
+//                if (games[arg0].getState().equals("Finished")) {
+//                    return "Replay";
+//                }
+                if (watchingAllowed && games[arg0].getState().equals("Dueling")) {
+                    return "Watch";
                 }
                 return "";
+            case 7:
+                return games[arg0].getTableId().toString();
         }
         return "";
     }

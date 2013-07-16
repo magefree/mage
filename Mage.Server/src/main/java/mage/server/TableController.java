@@ -257,15 +257,24 @@ public class TableController {
     }
 
     public boolean watchTable(UUID userId) {
-        if (table.getState() != TableState.DUELING) {
-            return false;
+        if (table.isTournament()) {
+            UserManager.getInstance().getUser(userId).showTournament(table.getTournament().getId());
+            return true;
+        } else {
+            if (table.isTournamentSubTable() && !table.getTournament().getOptions().isWatchingAllowed()) {
+                return false;
+            }
+            if (table.getState() != TableState.DUELING) {
+                return false;
+            }
+            // you can't watch your own game
+            if (userPlayerMap.get(userId) != null) {
+                return false;
+            }
+            UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
+            return true;
+
         }
-        // you can't watch your own game
-        if (userPlayerMap.get(userId) != null) {
-            return false;
-        }
-        UserManager.getInstance().getUser(userId).watchGame(match.getGame().getId());
-        return true;
     }
 
     public boolean replayTable(UUID userId) {
@@ -464,7 +473,6 @@ public class TableController {
     public void endGame() {
         // get player that chooses who goes first
         UUID choosingPlayerId = match.getChooser();
-logger.warn("endGame() " + match.getPlayers().toString());
         match.endGame();
         table.endGame();
 // Saving of games caused memory leaks - so save is deactivated

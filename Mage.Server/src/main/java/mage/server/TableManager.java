@@ -305,7 +305,7 @@ public class TableManager {
         List<UUID> toRemove = new ArrayList<UUID>();
         for (Table table : tables.values()) {
             if (!table.getState().equals(TableState.FINISHED)) {
-                // remove all tables created more than expire_time ago
+                // remove all not finished tables created more than expire_time ago
                 long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
                 if (diff >= EXPIRE_TIME) {
                     logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
@@ -319,8 +319,8 @@ public class TableManager {
                         if (player != null && player.isHuman()) {
                             canBeRemoved = false;
                         }
-                        // tournament sub tables may not be removed, will be done by the tournament itself
-                        if(table.isTournamentSubTable()){
+                        // tournament sub tables may not be removed as long the tournament is not finished
+                        if(table.isTournamentSubTable() && table.getTournament().getEndTime() == null) {
                             canBeRemoved = false;
                         }
                     }

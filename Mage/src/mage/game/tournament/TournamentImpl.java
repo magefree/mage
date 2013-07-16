@@ -33,7 +33,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import mage.cards.Card;
 import mage.cards.ExpansionSet;
 import mage.cards.decks.Deck;
-import mage.constants.TournamentPlayerState;
 import mage.game.events.*;
 import mage.game.events.TableEvent.EventType;
 import mage.game.match.Match;
@@ -309,12 +308,15 @@ public abstract class TournamentImpl implements Tournament {
 
     @Override
     public Date getStartTime() {
-        return startTime;
+        return new Date(startTime.getTime());
     }
 
     @Override
     public Date getEndTime() {
-        return endTime;
+        if (endTime == null) {
+            return null;
+        }
+        return new Date(endTime.getTime());
     }
 
 }

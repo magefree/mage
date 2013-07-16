@@ -1439,10 +1439,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     rememberPick(card, RateCard.rateCard(card, null));
                 }
                 chosenColors = chooseDeckColorsIfPossible();
+                log.warn(this.getName() + " after choose Deck Colors.");
             }
             deck = buildDeck(new ArrayList<Card>(deck.getSideboard()), chosenColors);
+            log.warn(this.getName() + " after build deck.");
         }
         tournament.submitDeck(playerId, deck);
+        log.warn(this.getName() + " after submit deck.");
     }
 
     public Card pickBestCard(List<Card> cards, List<ColoredManaSymbol> chosenColors) {
@@ -1599,6 +1602,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
      * 3. get card colors as chosen starting from most rated card
      */
     protected List<ColoredManaSymbol> chooseDeckColorsIfPossible() {
+        log.warn(this.getName() + " choose Deck Colors.");
         if (pickedCards.size() > 2) {
             // sort by score and color mana symbol count in descending order
             Collections.sort(pickedCards, new Comparator<PickedCard>() {

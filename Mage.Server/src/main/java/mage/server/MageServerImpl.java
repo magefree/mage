@@ -641,6 +641,17 @@ public class MageServerImpl implements MageServer {
     }
 
     @Override
+    public boolean watchTournamentTable(final String sessionId, final UUID tableId) throws MageException {
+        return executeWithResult("setUserData", sessionId, new ActionWithBooleanResult() {
+            @Override
+            public Boolean execute() throws MageException {
+                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                return TableManager.getInstance().watchTable(userId, tableId);
+            }
+        });
+    }
+
+    @Override
     public void watchGame(final UUID gameId, final String sessionId) throws MageException {
         execute("watchGame", sessionId, new Action() {
             @Override

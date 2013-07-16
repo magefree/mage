@@ -49,6 +49,7 @@ public class TournamentView implements Serializable {
     private Date startTime;
     private Date endTime;
 
+    private boolean watchingAllowed;
 
     private List<RoundView> rounds = new ArrayList<RoundView>();
     private List<TournamentPlayerView> players = new ArrayList<TournamentPlayerView>();
@@ -59,6 +60,7 @@ public class TournamentView implements Serializable {
         tournamentType = tournament.getOptions().getTournamentType();
         startTime = tournament.getStartTime();
         endTime = tournament.getEndTime();
+        watchingAllowed = tournament.getOptions().isWatchingAllowed();
 
         for (TournamentPlayer player: tournament.getPlayers()) {
             players.add(new TournamentPlayerView(player));
@@ -77,11 +79,18 @@ public class TournamentView implements Serializable {
     }
 
     public Date getStartTime() {
-        return startTime;
+        return new Date(startTime.getTime());
     }
 
     public Date getEndTime() {
-        return endTime;
+        if (endTime == null) {
+            return null;
+        }
+        return new Date(endTime.getTime());
+    }
+
+    public boolean isWatchingAllowed() {
+        return watchingAllowed;
     }
 
     public List<TournamentPlayerView> getPlayers() {

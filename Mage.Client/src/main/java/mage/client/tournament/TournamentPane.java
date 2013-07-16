@@ -58,6 +58,13 @@ public class TournamentPane extends MagePane {
         tournamentPanel.hideTournament();
     }
 
+    public UUID getTournamentId() {
+        if (this.tournamentPanel == null) {
+            return null;
+        }
+        return tournamentPanel.getTournamentId();
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

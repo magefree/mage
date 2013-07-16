@@ -47,6 +47,7 @@ public class TournamentGameView implements Serializable {
     private String state;
     private String result;
     private String players;
+    private UUID tableId;
 
     TournamentGameView(int roundNum, TournamentPairing pair, Game game) {
         this.roundNum = roundNum;
@@ -61,6 +62,7 @@ public class TournamentGameView implements Serializable {
             this.state = "Dueling";
             this.result = "";
         }
+        this.tableId = pair.getTableId();
     }
 
     public int getRoundNum() {
@@ -86,4 +88,9 @@ public class TournamentGameView implements Serializable {
     public String getPlayers() {
         return this.players;
     }
+
+    public UUID getTableId() {
+        return tableId;
+    }
+    
 }

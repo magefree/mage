@@ -407,6 +407,21 @@ public class SessionImpl implements Session {
     }
 
     @Override
+    public boolean watchTournamentTable(UUID tableId) {
+        try {
+            if (isConnected()) {
+                server.watchTournamentTable(sessionId, tableId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
+
+    @Override
     public boolean joinTable(UUID roomId, UUID tableId, String playerName, String playerType, int skill, DeckCardLists deckList) {
         try {
             if (isConnected()) {

@@ -59,6 +59,7 @@ import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.MatchTimeLimit;
+import static mage.constants.TableState.DUELING;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
@@ -123,11 +124,11 @@ public class TablesPanel extends javax.swing.JPanel {
          int modelRow = Integer.valueOf( e.getActionCommand() );
          UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
          UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
-         String state = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
+         String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
          boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
          String owner = (String)tableModel.getValueAt(modelRow, 1);
 
-         if (state.equals("Join")) {
+         if (action.equals("Join")) {
              if (owner.equals(session.getUserName())) {
                  try {
                      JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
@@ -158,16 +159,21 @@ public class TablesPanel extends javax.swing.JPanel {
                  logger.info("Joining table " + tableId);
                  joinTableDialog.showDialog(roomId, tableId);
              }
-         } else if (state.equals("Remove")) {
+         } else if (action.equals("Remove")) {
              if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                  session.removeTable(roomId, tableId);
              }
-         } else if (state.equals("Watch")) {
-             if (!isTournament) {
-                 logger.info("Watching table " + tableId);
+         } else if (action.equals("Show")) {
+             if (isTournament) {
+                 logger.info("Showing tournament table " + tableId);
                  session.watchTable(roomId, tableId);
              }
-         } else if (state.equals("Replay")) {
+         } else if (action.equals("Watch")) {
+             if (!isTournament) {
+                 logger.info("Watching table " + tableId);                 
+                 session.watchTable(roomId, tableId);
+             }
+         } else if (action.equals("Replay")) {
              logger.info("Replaying game " + gameId);
              // no replay because of memory leaks
              // session.replayGame(gameId);
@@ -181,13 +187,17 @@ public class TablesPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
-                if (games.size() == 1) {
-                    session.replayGame(games.get(0));
+                if (matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN) instanceof List) {
+                    List<UUID> games = (List<UUID>)matchesModel.getValueAt(modelRow, MatchesTableModel.ACTION_COLUMN);
+                    if (games.size() == 1) {
+                        session.replayGame(games.get(0));
+                    }
+                    else {
+                        gameChooser.show(games, MageFrame.getDesktop().getMousePosition());
+                    }
                 }
-                else {
-                    gameChooser.show(games, MageFrame.getDesktop().getMousePosition());
-                }
+                // MageFrame.getDesktop().showTournament(tournamentId);
+
             }
         };
 
@@ -655,29 +665,27 @@ class TableTableModel extends AbstractTableModel {
                 return timeFormatter.format(tables[arg0].getCreateTime());
             case 9:
                 switch (tables[arg0].getTableState()) {
+
                     case WAITING:
                         String owner = tables[arg0].getControllerName();
                         if (session != null && owner.equals(session.getUserName())) {
                             return "Remove";
                         }
                         return "Join";
-                    case DUELING:
-                        owner = tables[arg0].getControllerName();
-                        if (session != null && owner.equals(session.getUserName())) {
-                            return "Remove";
-                        }
+                    case CONSTRUCTING:
                         if (tables[arg0].isTournament()) {
-                            return "None";
+                            return "Show";
+                        }
+                    case DUELING:
+                        if (tables[arg0].isTournament()) {
+                            return "Show";
                         } else {
+                            owner = tables[arg0].getControllerName();
+                            if (session != null && owner.equals(session.getUserName())) {
+                                return "Remove";
+                            }
                             return "Watch";
-                        }
-                        
-                    case FINISHED:
-                        owner = tables[arg0].getControllerName();
-                        if (session != null && owner.equals(session.getUserName())) {
-                            return "Remove";
-                        }
-                        return "None";
+                        }                        
                     default:
                         return "";
                 }

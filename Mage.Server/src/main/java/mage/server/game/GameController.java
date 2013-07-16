@@ -309,6 +309,10 @@ public class GameController implements GameCallback {
     }
 
     public void watch(UUID userId) {
+        if (userPlayerMap.get(userId) != null) {
+            // You can't watch a game if you already a player in it
+            return;
+        }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
             GameWatcher gameWatcher = new GameWatcher(userId, game);

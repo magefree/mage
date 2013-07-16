@@ -28,9 +28,8 @@
 
 package mage.game.tournament;
 
-import mage.game.match.Match;
-
 import java.util.UUID;
+import mage.game.match.Match;
 
 /**
  *
@@ -38,10 +37,11 @@ import java.util.UUID;
  */
 public class TournamentPairing {
 
-    UUID id = UUID.randomUUID();
-    Match match;
-    TournamentPlayer player1;
-    TournamentPlayer player2;
+    private UUID id = UUID.randomUUID();
+    private UUID tableId;
+    private Match match;
+    private TournamentPlayer player1;
+    private TournamentPlayer player2;
 
     public TournamentPairing(TournamentPlayer player1, TournamentPlayer player2) {
         this.player1 = player1;
@@ -86,4 +86,13 @@ public class TournamentPairing {
             player2.setEliminated();
         }
     }
+
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(UUID tableId) {
+        this.tableId = tableId;
+    }
+
 }

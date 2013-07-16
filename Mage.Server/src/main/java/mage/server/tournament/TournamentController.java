@@ -197,12 +197,14 @@ public class TournamentController {
             TableManager tableManager = TableManager.getInstance();
             Table table = tableManager.createTable(GamesRoomManager.getInstance().getMainRoomId(), matchOptions);
             table.setTournamentSubTable(true);
+            table.setTournament(tournament);
             TournamentPlayer player1 = pair.getPlayer1();
             TournamentPlayer player2 = pair.getPlayer2();
             tableManager.addPlayer(getPlayerSessionId(player1.getPlayer().getId()), table.getId(), player1.getPlayer(), player1.getPlayerType(), player1.getDeck());
             tableManager.addPlayer(getPlayerSessionId(player2.getPlayer().getId()), table.getId(), player2.getPlayer(), player2.getPlayerType(), player2.getDeck());
             tableManager.startMatch(null, table.getId());
             pair.setMatch(tableManager.getMatch(table.getId()));
+            pair.setTableId(table.getId());
             player1.setState(TournamentPlayerState.DUELING);
             player2.setState(TournamentPlayerState.DUELING);
         } catch (GameException ex) {

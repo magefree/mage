@@ -39,12 +39,12 @@ import mage.game.match.MatchOptions;
  */
 public class TournamentOptions implements Serializable {
 
-
     protected String name;
     protected String tournamentType;
     protected List<String> playerTypes = new ArrayList<String>();
     protected MatchOptions matchOptions = new MatchOptions("", "Two Player Duel");
     protected LimitedOptions limitedOptions;
+    protected boolean watchingAllowed = true;
 
     public TournamentOptions(String name) {
         this.name = name;
@@ -76,6 +76,14 @@ public class TournamentOptions implements Serializable {
 
     public LimitedOptions getLimitedOptions() {
         return limitedOptions;
+    }
+
+    public boolean isWatchingAllowed() {
+        return watchingAllowed;
+    }
+
+    public void setWatchingAllowed(boolean watchingAllowed) {
+        this.watchingAllowed = watchingAllowed;
     }
 
 }

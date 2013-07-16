@@ -594,6 +594,13 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
 
     public void showTournament(UUID tournamentId) {
         try {
+            for(Component component :desktopPane.getComponents()) {
+                if (component instanceof TournamentPane &&
+                    ((TournamentPane) component).getTournamentId().equals(tournamentId)) {
+                    setActive((TournamentPane) component);
+                    return;
+                }
+            }
             TournamentPane tournamentPane = new TournamentPane();
             desktopPane.add(tournamentPane, JLayeredPane.DEFAULT_LAYER);
             tournamentPane.setMaximum(true);
