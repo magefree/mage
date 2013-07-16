@@ -145,8 +145,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     // conceded or connection lost game
     protected boolean left;
-    // quitted match
-    protected boolean quitted;
+    // quit match
+    protected boolean quit;
 
     protected RangeOfInfluence range;
     protected Set<UUID> inRange = new HashSet<UUID>();
@@ -208,7 +208,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.turns = player.turns;
 
         this.left = player.left;
-        this.quitted = player.quitted;
+        this.quit = player.quit;
         this.range = player.range;
         this.canGainLife = player.canGainLife;
         this.canLoseLife = player.canLoseLife;
@@ -256,7 +256,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.turns = player.getTurns();
 
         this.left = player.hasLeft();
-        this.quitted = player.hasQuitted();
+        this.quit = player.hasQuit();
         this.range = player.getRange();
         this.canGainLife = player.isCanGainLife();
         this.canLoseLife = player.isCanLoseLife();
@@ -1263,7 +1263,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public void quit(Game game) {
-        quitted = true;
+        quit = true;
         this.concede(game);
     }
 
@@ -1846,8 +1846,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
-    public boolean hasQuitted() {
-        return quitted;
+    public boolean hasQuit() {
+        return quit;
     }
 
 }
