@@ -30,6 +30,7 @@ package mage.game.tournament;
 
 import java.util.UUID;
 import mage.game.match.Match;
+import mage.game.match.MatchPlayer;
 
 /**
  *
@@ -69,10 +70,12 @@ public class TournamentPairing {
     }
 
     public void eliminatePlayers() {
-        if (match.getPlayer(player1.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
+        MatchPlayer mPlayer1 = match.getPlayer(player1.getPlayer().getId());
+        MatchPlayer mPlayer2 = match.getPlayer(player2.getPlayer().getId());
+        if (mPlayer1.hasQuit() || (!mPlayer2.hasQuit() && mPlayer1.getWins() < match.getWinsNeeded())) {
             player1.setEliminated();
         }
-        if (match.getPlayer(player2.getPlayer().getId()).getWins() < match.getWinsNeeded()) {
+        if (mPlayer2.hasQuit() || (!mPlayer1.hasQuit() && mPlayer2.getWins() < match.getWinsNeeded())) {
             player2.setEliminated();
         }
     }
