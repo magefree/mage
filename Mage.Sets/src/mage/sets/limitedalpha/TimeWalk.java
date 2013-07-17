@@ -25,47 +25,41 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
+import mage.game.turn.TurnMod;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class TimeSieve extends CardImpl<TimeSieve> {
+public class TimeWalk extends CardImpl<TimeWalk> {
 
-    public TimeSieve(UUID ownerId) {
-        super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public TimeWalk(UUID ownerId) {
+        super(ownerId, 84, "Time Walk", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{1}{U}");
+        this.expansionSetCode = "LEA";
 
         this.color.setBlue(true);
-        this.color.setBlack(true);
 
-        // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterArtifactPermanent("five artifacts"), true)));
-        this.addAbility(ability);
-
+        // Take an extra turn after this one.
+        this.getSpellAbility().addEffect(new AddExtraTurnControllerEffect());
     }
 
-    public TimeSieve(final TimeSieve card) {
+    public TimeWalk(final TimeWalk card) {
         super(card);
     }
 
     @Override
-    public TimeSieve copy() {
-        return new TimeSieve(this);
+    public TimeWalk copy() {
+        return new TimeWalk(this);
     }
 }

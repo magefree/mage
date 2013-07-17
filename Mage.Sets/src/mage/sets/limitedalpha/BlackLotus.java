@@ -25,47 +25,43 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
+import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.effects.common.AddManaOfAnyColorEffect;
+import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.choices.ChoiceColor;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class TimeSieve extends CardImpl<TimeSieve> {
+public class BlackLotus extends CardImpl<BlackLotus> {
 
-    public TimeSieve(UUID ownerId) {
-        super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public BlackLotus(UUID ownerId) {
+        super(ownerId, 70, "Black Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
+        this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-
-        // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterArtifactPermanent("five artifacts"), true)));
+        // {tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
+        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
+        ability.addCost(new SacrificeSourceCost());
+        ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
-
     }
 
-    public TimeSieve(final TimeSieve card) {
+    public BlackLotus(final BlackLotus card) {
         super(card);
     }
 
     @Override
-    public TimeSieve copy() {
-        return new TimeSieve(this);
+    public BlackLotus copy() {
+        return new BlackLotus(this);
     }
 }

@@ -25,47 +25,76 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class TimeSieve extends CardImpl<TimeSieve> {
+public class Timetwister extends CardImpl<Timetwister> {
 
-    public TimeSieve(UUID ownerId) {
-        super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public Timetwister(UUID ownerId) {
+        super(ownerId, 85, "Timetwister", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{2}{U}");
+        this.expansionSetCode = "LEA";
 
         this.color.setBlue(true);
-        this.color.setBlack(true);
 
-        // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterArtifactPermanent("five artifacts"), true)));
-        this.addAbility(ability);
+        // Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards.
+        this.getSpellAbility().addEffect(new TimetwisterEffect());
 
     }
 
-    public TimeSieve(final TimeSieve card) {
+    public Timetwister(final Timetwister card) {
         super(card);
     }
 
     @Override
-    public TimeSieve copy() {
-        return new TimeSieve(this);
+    public Timetwister copy() {
+        return new Timetwister(this);
     }
+}
+
+class TimetwisterEffect extends OneShotEffect<TimetwisterEffect> {
+
+    public TimetwisterEffect() {
+        super(Outcome.Neutral);
+        staticText = "Each player shuffles his or her hand and graveyard into his or her library, then draws seven cards";
+    }
+
+    public TimetwisterEffect(final TimetwisterEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player sourcePlayer = game.getPlayer(source.getControllerId());
+        for (UUID playerId: sourcePlayer.getInRange()) {
+            Player player = game.getPlayer(playerId);
+            if (player != null) {
+                player.getLibrary().addAll(player.getHand().getCards(game), game);
+                player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
+                player.shuffleLibrary(game);
+                player.getHand().clear();
+                player.getGraveyard().clear();
+                player.drawCards(7, game);
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public TimetwisterEffect copy() {
+        return new TimetwisterEffect(this);
+    }
+
 }

@@ -25,47 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.alarareborn;
+package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeTargetCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
+import mage.abilities.mana.BlueManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
- * @author jeffwadsworth
+ * @author LevelX2
  */
-public class TimeSieve extends CardImpl<TimeSieve> {
+public class MoxSapphire extends CardImpl<MoxSapphire> {
 
-    public TimeSieve(UUID ownerId) {
-        super(ownerId, 31, "Time Sieve", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{U}{B}");
-        this.expansionSetCode = "ARB";
+    public MoxSapphire(UUID ownerId) {
+        super(ownerId, 265, "Mox Sapphire", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
+        this.expansionSetCode = "LEA";
 
-        this.color.setBlue(true);
-        this.color.setBlack(true);
-
-        // {tap}, Sacrifice five artifacts: Take an extra turn after this one.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddExtraTurnControllerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(5, 5, new FilterArtifactPermanent("five artifacts"), true)));
-        this.addAbility(ability);
-
+        // {tap}: Add {U} to your mana pool.
+        this.addAbility(new BlueManaAbility());
     }
 
-    public TimeSieve(final TimeSieve card) {
+    public MoxSapphire(final MoxSapphire card) {
         super(card);
     }
 
     @Override
-    public TimeSieve copy() {
-        return new TimeSieve(this);
+    public MoxSapphire copy() {
+        return new MoxSapphire(this);
     }
 }
