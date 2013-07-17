@@ -10,7 +10,7 @@ import java.util.UUID;
 /**
  * @author noxx
  */
-public class EmblemView implements Serializable {
+public class EmblemView implements CommandObjectView, Serializable {
 
     protected UUID id;
     protected String name;
@@ -24,18 +24,22 @@ public class EmblemView implements Serializable {
         rules = emblem.getAbilities().getRules(sourceCard.getName());
     }
 
+    @Override
     public String getExpansionSetCode() {
         return expansionSetCode;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public UUID getId() {
         return id;
     }
 
+    @Override
     public List<String> getRules() {
         return rules;
     }
