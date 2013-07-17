@@ -28,17 +28,14 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import mage.filter.common.FilterArtifactPermanent;
 
 /**
  *
@@ -55,7 +52,10 @@ public class FangrenMarauder extends CardImpl<FangrenMarauder> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
 
-        this.addAbility(new FangrenMarauderTriggeredAbility());
+        // Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.
+        this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
+                new GainLifeEffect(5), new FilterArtifactPermanent(),
+                "Whenever an enchantment is put into a graveyard from the battlefield, ", true));        
     }
 
     public FangrenMarauder(final FangrenMarauder card) {
@@ -65,39 +65,5 @@ public class FangrenMarauder extends CardImpl<FangrenMarauder> {
     @Override
     public FangrenMarauder copy() {
         return new FangrenMarauder(this);
-    }
-}
-
-class FangrenMarauderTriggeredAbility extends TriggeredAbilityImpl<FangrenMarauderTriggeredAbility> {
-
-    public FangrenMarauderTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GainLifeEffect(5), true);
-    }
-
-    public FangrenMarauderTriggeredAbility(final FangrenMarauderTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    && zEvent.getToZone() == Zone.GRAVEYARD
-                    && zEvent.getTarget().getCardType().contains(CardType.ARTIFACT)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever an artifact is put into a graveyard from the battlefield, you may gain 5 life.";
-    }
-
-    @Override
-    public FangrenMarauderTriggeredAbility copy() {
-        return new FangrenMarauderTriggeredAbility(this);
     }
 }

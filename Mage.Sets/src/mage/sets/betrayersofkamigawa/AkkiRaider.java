@@ -28,20 +28,15 @@
 package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.ZoneChangeAllTriggeredAbility;
+import mage.abilities.effects.common.continious.BoostSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterLandPermanent;
 
 /**
  *
@@ -59,7 +54,9 @@ public class AkkiRaider extends CardImpl<AkkiRaider> {
         this.toughness = new MageInt(1);
 
         // Whenever a land is put into a graveyard from the battlefield, Akki Raider gets +1/+0 until end of turn.
-        this.addAbility(new AkkiRaiderTriggeredAbility(new BoostSourceEffect(1,0,Duration.EndOfTurn)));
+        this.addAbility(new ZoneChangeAllTriggeredAbility(Zone.BATTLEFIELD, Zone.BATTLEFIELD, Zone.GRAVEYARD,
+                new BoostSourceEffect(1,0,Duration.EndOfTurn), new FilterLandPermanent(),
+                "Whenever a land is put into a graveyard from the battlefield, ", false));
     }
 
     public AkkiRaider(final AkkiRaider card) {
@@ -71,42 +68,4 @@ public class AkkiRaider extends CardImpl<AkkiRaider> {
         return new AkkiRaider(this);
     }
 
-private class AkkiRaiderTriggeredAbility extends TriggeredAbilityImpl<AkkiRaiderTriggeredAbility> {
-
-    public AkkiRaiderTriggeredAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
-    }
-
-    public AkkiRaiderTriggeredAbility(final AkkiRaiderTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE 
-                && ((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD
-                && ((ZoneChangeEvent)event).getFromZone() == Zone.BATTLEFIELD) {
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if (permanent == null) {
-                permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
-            }
-            if (permanent != null && permanent.getCardType().contains(CardType.LAND)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever a land is put into a graveyard from the battlefield, " + super.getRule();
-    }
-
-    @Override
-    public AkkiRaiderTriggeredAbility copy() {
-        return new AkkiRaiderTriggeredAbility(this);
-    }
-
 }
-}
-
