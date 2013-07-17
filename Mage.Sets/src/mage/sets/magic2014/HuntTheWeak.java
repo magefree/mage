@@ -28,16 +28,20 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
+import mage.abilities.Ability;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.FightTargetsEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.game.Game;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -60,8 +64,10 @@ public class HuntTheWeak extends CardImpl<HuntTheWeak> {
         this.color.setGreen(true);
 
         // Put a +1/+1 counter on target creature you control. Then that creature fights target creature you don't control.
-        this.getSpellAbility().addEffect(new AddCountersTargetEffect(CounterType.P1P1.createInstance()));
-        Effect effect = new FightTargetsEffect();
+        Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance());
+        effect.setApplyEffectsAfter();
+        this.getSpellAbility().addEffect(effect);
+        effect = new FightTargetsEffect();
         effect.setText("Then that creature fights target creature you don't control");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
@@ -79,4 +85,5 @@ public class HuntTheWeak extends CardImpl<HuntTheWeak> {
     public HuntTheWeak copy() {
         return new HuntTheWeak(this);
     }
+
 }
