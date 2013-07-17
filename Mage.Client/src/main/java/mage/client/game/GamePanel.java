@@ -326,11 +326,9 @@ public final class GamePanel extends javax.swing.JPanel {
     }
 
     public synchronized void init(GameView game) {
-        logger.warn("init.");
         combat.init(gameId, bigCard);
         combat.setLocation(500, 300);
         addPlayers(game);
-        logger.warn("added players.");
         updateGame(game);
     }
 
