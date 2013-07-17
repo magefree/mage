@@ -28,12 +28,11 @@
 
 package mage.client.util;
 
+import java.util.List;
 import mage.cards.Card;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
 import mage.view.*;
-
-import java.util.List;
 
 /**
  *
@@ -55,12 +54,17 @@ public class CardsViewUtil {
         return cards;
     }
 
-    public static CardsView convertEmblems(List<EmblemView> view) {
+    public static CardsView convertCommandObject(List<CommandObjectView> view) {
         CardsView cards = new CardsView();
 
-        for (EmblemView emblem : view) {
-            CardView cardView = new CardView(emblem);
-            cards.put(emblem.getId(), cardView);
+        for (CommandObjectView commandObject : view) {
+            if(commandObject instanceof EmblemView ){
+                CardView cardView = new CardView((EmblemView)commandObject);
+                cards.put(commandObject.getId(), cardView);
+            }
+            else if(commandObject instanceof CommanderView ){
+                cards.put(commandObject.getId(),(CommanderView)commandObject);
+            }
         }
 
         return cards;

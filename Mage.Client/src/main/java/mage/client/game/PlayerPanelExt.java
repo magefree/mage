@@ -651,7 +651,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     }
 
     private void btnCommandZoneActionPerformed(java.awt.event.ActionEvent evt) {
-        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertEmblems(player.getEmblemList()), bigCard, gameId);
+        DialogManager.getManager(gameId).showEmblemsDialog(CardsViewUtil.convertCommandObject(player.getCommadObjectList()), bigCard, gameId);
     }
 
     private void btnCheatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheatActionPerformed

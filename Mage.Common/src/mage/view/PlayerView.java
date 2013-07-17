@@ -39,6 +39,7 @@ import mage.players.Player;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.game.command.Commander;
 
 /**
  *
@@ -61,7 +62,7 @@ public class PlayerView implements Serializable {
     private Map<UUID, PermanentView> battlefield = new LinkedHashMap<UUID, PermanentView>();
     private CardView topCard;
     private UserDataView userDataView;
-    private List<EmblemView> emblemList = new ArrayList<EmblemView>();
+    private List<CommandObjectView> commandList = new ArrayList<CommandObjectView>();
     private List<UUID> attachments = new ArrayList<UUID>();
     private int statesSavedSize;
     private int priorityTimeLeft;
@@ -100,7 +101,16 @@ public class PlayerView implements Serializable {
                 if (emblem.getControllerId().equals(this.playerId)) {
                     Card sourceCard = game.getCard(((CommandObject)emblem).getSourceId());
                     if (sourceCard != null) {
-                        emblemList.add(new EmblemView(emblem, sourceCard));
+                        commandList.add(new EmblemView(emblem, sourceCard));
+                    }
+                }
+            }
+            else if(commandObject instanceof Commander){
+                Commander commander = (Commander)commandObject;
+                if(commander.getControllerId().equals(this.playerId)){
+                    Card sourceCard = game.getCard(commander.getSourceId());
+                    if(sourceCard != null){
+                        commandList.add(new CommanderView(commander, sourceCard));
                     }
                 }
             }
@@ -180,8 +190,8 @@ public class PlayerView implements Serializable {
         return this.userDataView;
     }
 
-    public List<EmblemView> getEmblemList() {
-        return emblemList;
+    public List<CommandObjectView> getCommadObjectList() {
+        return commandList;
     }
 
     public List<UUID> getAttachments() {
