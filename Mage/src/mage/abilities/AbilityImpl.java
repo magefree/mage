@@ -44,7 +44,6 @@ import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
-import mage.game.GameState;
 import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.target.Targets;
@@ -53,8 +52,6 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.keyword.EntwineAbility;
-import mage.constants.SpellAbilityType;
 
 
 /**
