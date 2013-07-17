@@ -52,8 +52,6 @@ import org.apache.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import mage.abilities.keyword.EntwineAbility;
-import mage.constants.SpellAbilityType;
 
 
 /**
@@ -151,6 +149,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 if (effect instanceof OneShotEffect) {
                     if (!(effect instanceof PostResolveEffect)) {
                         result &= effect.apply(game, this);
+                        // 20130716 
+                        game.applyEffects();
                     }
                 }
                 else {
