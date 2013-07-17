@@ -50,6 +50,7 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import mage.constants.SpellAbilityType;
+import mage.game.command.Commander;
 
 
 public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> implements Card {
@@ -290,6 +291,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case OUTSIDE:
                         game.getPlayer(ownerId).getSideboard().remove(this);
                         break;
+                    case COMMAND:
                     case STACK:
                     case PICK:
                         break;
@@ -312,6 +314,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     break;
                 case EXILED:
                     game.getExile().getPermanentExile().add(this);
+                    break;
+                case COMMAND:
+                    game.addCommander(new Commander(this));
                     break;
                 case LIBRARY:
                     if (flag) {
@@ -368,6 +373,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         break;
                     case OUTSIDE:
                         game.getPlayer(ownerId).getSideboard().remove(this);
+                        break;
+                        
+                    case COMMAND:
+                        game.getState().getCommand().remove((Commander)game.getObject(objectId));
                         break;
                     default:
                         //logger.warning("moveToZone, not fully implemented: from="+event.getFromZone() + ", to="+event.getToZone());

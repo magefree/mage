@@ -66,6 +66,7 @@ import mage.util.functions.ApplyToPermanent;
 
 import java.io.Serializable;
 import java.util.*;
+import mage.game.command.Commander;
 
 public interface Game extends MageItem, Serializable {
 
@@ -174,6 +175,7 @@ public interface Game extends MageItem, Serializable {
     void emptyManaPools();
     void addEffect(ContinuousEffect continuousEffect, Ability source);
     void addEmblem(Emblem emblem, Ability source);
+    void addCommander(Commander commander);
     void addPermanent(Permanent permanent);
 
     // priority methods

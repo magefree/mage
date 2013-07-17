@@ -90,7 +90,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
+import mage.abilities.common.CastCommanderAbility;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.game.command.Commander;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -305,6 +307,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 return item;
             }
         }
+        
+        for (CommandObject commandObject : state.getCommand()) {
+            if (commandObject instanceof Commander && commandObject.getId().equals(objectId)) {
+                return commandObject;
+            }
+        }
+                
         object = getCard(objectId);
 
         if (object == null) {
@@ -998,7 +1007,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         for (Ability ability : newEmblem.getAbilities()) {
             ability.setSourceId(newEmblem.getId());
         }
-        state.addEmblem(newEmblem);
+        state.addCommandObject(newEmblem);
+    }
+    
+    
+    @Override
+    public void addCommander(Commander commander){
+        state.addCommandObject(commander);
+        for(Ability ability : commander.getAbilities()){
+            if(ability instanceof CastCommanderAbility){
+                state.addOtherAbility(commander.getId(), (CastCommanderAbility)ability);
+            }
+        }
     }
 
     @Override
