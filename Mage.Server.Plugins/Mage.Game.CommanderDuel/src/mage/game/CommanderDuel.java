@@ -31,11 +31,15 @@ package mage.game;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.cards.Card;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
+import mage.game.command.Commander;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
+import mage.players.Player;
 
 public class CommanderDuel extends GameImpl<CommanderDuel> {
 
@@ -68,6 +72,22 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
     @Override
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
         super.init(choosingPlayerId, gameOptions);
+        
+        //Move commender to commande zone
+        for (UUID playerId: state.getPlayerList(startingPlayerId)) {
+            Player player = getPlayer(playerId);
+            if(player != null){
+                if(player.getSideboard().size() > 0){
+                    Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
+                    if(commander != null){
+                        commander.moveToZone(Zone.COMMAND, null, this, true);
+                        
+                    }
+                }
+            }
+            
+        }
+        
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
 
@@ -96,5 +116,6 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
     public CommanderDuel copy() {
         return new CommanderDuel(this);
     }
+
 
 }
