@@ -51,6 +51,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
     protected TargetPointer targetPointer = FirstTargetPointer.getInstance();
     protected String staticText = "";
     protected Map<String, Object> values;
+    protected boolean applyEffectsAfter = false;
 
     public EffectImpl(Outcome outcome) {
         this.id = UUID.randomUUID();
@@ -70,6 +71,7 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
                 values.put(entry.getKey(), entry.getValue());
             }
         }
+        this.applyEffectsAfter = effect.applyEffectsAfter;
     }
 
     @Override
@@ -132,5 +134,19 @@ public abstract class EffectImpl<T extends Effect<T>> implements Effect<T> {
             return null;
         }
         return values.get(key);
+    }
+
+    /**
+     * If set, the game.applyEffects() method will be called to apply the effects before the
+     * next effect (of the same ability) will resolve.
+     */
+    @Override
+    public void setApplyEffectsAfter() {
+        applyEffectsAfter = true;
+    }
+
+    @Override
+    public boolean applyEffectsAfter() {
+        return applyEffectsAfter;
     }
 }

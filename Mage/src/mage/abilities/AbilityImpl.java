@@ -156,6 +156,10 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 else {
                     game.addEffect((ContinuousEffect) effect, this);
                 }
+                // some effects must be applied before next effect is resolved, because effect is dependend.
+                if (effect.applyEffectsAfter()) {
+                    game.applyEffects();
+                }
             }
         }
         return result;
