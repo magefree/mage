@@ -44,6 +44,7 @@ import mage.cards.Card;
 import mage.choices.Choice;
 import mage.choices.Choices;
 import mage.game.Game;
+import mage.game.GameState;
 import mage.game.permanent.PermanentCard;
 import mage.target.Target;
 import mage.target.Targets;
@@ -151,6 +152,8 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
                 if (effect instanceof OneShotEffect) {
                     if (!(effect instanceof PostResolveEffect)) {
                         result &= effect.apply(game, this);
+                        // 20130716 
+                        game.applyEffects();
                     }
                 }
                 else {
