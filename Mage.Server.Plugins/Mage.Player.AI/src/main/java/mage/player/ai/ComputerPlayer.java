@@ -363,11 +363,17 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
         }
         if (target instanceof TargetDiscard || target instanceof TargetCardInHand) {
             if (outcome.isGood()) {
-                Card card = pickBestCard(new ArrayList<Card>(hand.getCards(game)), null, target, source, game);
-                if (card != null) {
-                    if (target.canTarget(card.getId(), source, game)) {
-                        target.addTarget(card.getId(), source, game);
-                        return true;
+                ArrayList<Card> cardsInHand = new ArrayList<Card>(hand.getCards(game));
+                while (!target.isChosen() && !cardsInHand.isEmpty() && target.getMaxNumberOfTargets() < target.getTargets().size()) {
+                    Card card = pickBestCard(cardsInHand, null, target, source, game);
+                    if (card != null) {
+                        if (target.canTarget(card.getId(), source, game)) {
+                            target.addTarget(card.getId(), source, game);
+                            cardsInHand.remove(card);
+                            if (target.isChosen()) {
+                                return true;
+                            }
+                        }
                     }
                 }
             }
@@ -377,7 +383,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     for (int i = unplayable.size() - 1; i >= 0; i--) {
                         if (target.canTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game)) {
                             target.addTarget(unplayable.values().toArray(new Card[0])[i].getId(), source, game);
-                            return true;
+                            if (target.isChosen()) {
+                                return true;
+                            }
                         }
                     }
                 }
@@ -385,7 +393,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     for (int i = 0; i < hand.size(); i++) {
                         if (target.canTarget(hand.toArray(new UUID[0])[i], source, game)) {
                             target.addTarget(hand.toArray(new UUID[0])[i], source, game);
-                            return true;
+                            if (target.isChosen()) {
+                                return true;
+                            }
                         }
                     }
                 }
