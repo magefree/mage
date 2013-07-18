@@ -57,14 +57,14 @@
             </includes>
             <outputDirectory>/</outputDirectory>
         </fileSet>
-          <fileSet>
--            <filtered>false</filtered>
--            <directory>sounds/</directory>
--            <includes>
--                <include>*.wav</include>
--            </includes>
--            <outputDirectory>sounds/</outputDirectory>
--        </fileSet>
+        <fileSet>
+            <filtered>false</filtered>
+            <directory>sounds/</directory>
+            <includes>
+                <include>*.wav</include>
+            </includes>
+            <outputDirectory>sounds/</outputDirectory>
+        </fileSet>
 
     </fileSets>
 </assembly>
