@@ -74,7 +74,7 @@ public class AwakenTheAncient extends CardImpl<AwakenTheAncient> {
         this.addAbility(ability);
 
         // Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land.
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new GiantToken(), "Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land", Duration.EndOfTurn));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new GiantToken(), "Enchanted Mountain is a 7/7 red Giant creature with haste. It's still a land", Duration.Custom));
         this.addAbility(ability2);
 
     }
