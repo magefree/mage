@@ -57,6 +57,11 @@ public class TournamentManager {
         controllers.get(tournamentId).join(userId);
     }
 
+    public void quit(UUID tournamentId, UUID userId) {
+        controllers.get(tournamentId).quit(userId);
+    }
+
+
     public void kill(UUID tournamentId, UUID userId) {
         controllers.get(tournamentId).kill(userId);
     }

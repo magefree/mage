@@ -121,6 +121,7 @@ public class TournamentSession {
 
     public void setKilled() {
         killed = true;
+        TournamentManager.getInstance().kill(tournament.getId(), userId);
     }
 
     private synchronized void setupTimeout(int seconds) {

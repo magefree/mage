@@ -45,6 +45,7 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
+import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.TableManager;
 import mage.server.UserManager;
@@ -237,10 +238,10 @@ public class TournamentController {
     public void submitDeck(UUID playerId, Deck deck) {
         if (tournamentSessions.containsKey(playerId)) {
             TournamentPlayer player = tournament.getPlayer(playerId);
-            if (player != null) {
+            if (player != null && !player.hasQuit()) {
+                tournamentSessions.get(playerId).submitDeck(deck);
                 ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK);
-            }
-            tournamentSessions.get(playerId).submitDeck(deck);
+            }            
         }
     }
 
@@ -257,21 +258,35 @@ public class TournamentController {
         }
     }
 
-//    public UUID getSessionId() {
-//        return this.sessionId;
-//    }
-
     public UUID getChatId() {
         return chatId;
     }
 
-    public void kill(UUID userId) {
-        if (userPlayerMap.containsKey(userId)) {
-            tournamentSessions.get(userPlayerMap.get(userId)).setKilled();
-            tournamentSessions.remove(userPlayerMap.get(userId));
-            leave(userId);
-            userPlayerMap.remove(userId);
+    public void quit(UUID userId) {
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            TournamentPlayer player = tournament.getPlayer(playerId);
+            if (player != null) {
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK);
+                String info;
+                if (tournament.isDoneConstructing()) {
+                    info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+                } else {
+                    info = "during Construction phase";
+                }
+                player.setQuit(info);
+            }
         }
+    }
+
+    public void kill(UUID userId) {
+        quit(userId);
+//        if (userPlayerMap.containsKey(userId)) {
+//            tournamentSessions.get(userPlayerMap.get(userId)).setKilled();
+//            tournamentSessions.remove(userPlayerMap.get(userId));
+//            leave(userId);
+//            userPlayerMap.remove(userId);
+//        }
     }
 
     private void leave(UUID userId) {

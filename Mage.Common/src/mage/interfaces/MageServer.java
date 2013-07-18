@@ -119,6 +119,7 @@ public interface MageServer {
     //tournament methods
     void startTournament(String sessionId, UUID roomId, UUID tableId) throws MageException;
     void joinTournament(UUID draftId, String sessionId) throws MageException;
+    void quitTournament(UUID tournamentId, String sessionId) throws MageException;
     TournamentView getTournament(UUID tournamentId) throws MageException;
 
     //draft methods

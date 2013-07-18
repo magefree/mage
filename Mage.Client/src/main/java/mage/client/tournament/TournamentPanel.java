@@ -76,7 +76,8 @@ public class TournamentPanel extends javax.swing.JPanel {
         matchesModel = new TournamentMatchesTableModel();
 
         initComponents();
-
+        btnQuitTournament.setVisible(false);
+        
         df = DateFormat.getDateTimeInstance();
 
         tablePlayers.createDefaultColumnsFromModel();
@@ -124,6 +125,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         else {
             hideTournament();
         }
+
     }
 
     public UUID getTournamentId() {
@@ -169,6 +171,20 @@ public class TournamentPanel extends javax.swing.JPanel {
         matchesModel.loadData(tournament);
         this.tablePlayers.repaint();
         this.tableMatches.repaint();
+
+        // player is active in tournament
+        btnQuitTournament.setVisible(false);
+        if (tournament.getEndTime() == null) {
+            for (TournamentPlayerView player : tournament.getPlayers()) {
+                if (player.getName().equals(session.getUserName())) {
+                    if (!player.hasQuit()) {
+                        btnQuitTournament.setVisible(true);
+                    }
+                    break;
+                }
+            }
+        }
+
     }
 
     public void startTasks() {
@@ -204,6 +220,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtStartTime = new javax.swing.JTextField();
         lablEndTime = new javax.swing.JLabel();
         txtEndTime = new javax.swing.JTextField();
+        btnQuitTournament = new javax.swing.JButton();
         btnCloseWindow = new javax.swing.JButton();
         jSplitPane2 = new javax.swing.JSplitPane();
         jSplitPane1 = new javax.swing.JSplitPane();
@@ -246,6 +263,14 @@ public class TournamentPanel extends javax.swing.JPanel {
         txtEndTime.setText("jTextField2");
         txtEndTime.setFocusable(false);
 
+        btnQuitTournament.setText("Quit Tournament");
+        btnQuitTournament.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnQuitTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitTournamentActionPerformed(evt);
+            }
+        });
+
         btnCloseWindow.setText("Close Window");
         btnCloseWindow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCloseWindow.addActionListener(new java.awt.event.ActionListener() {
@@ -278,7 +303,9 @@ public class TournamentPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCloseWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCloseWindow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuitTournament, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         actionPanelLayout.setVerticalGroup(
@@ -289,7 +316,8 @@ public class TournamentPanel extends javax.swing.JPanel {
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblStartTime)
-                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuitTournament))
                 .addGap(9, 9, 9)
                 .addGroup(actionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblType)
@@ -345,10 +373,19 @@ public class TournamentPanel extends javax.swing.JPanel {
         hideTournament();
     }//GEN-LAST:event_btnCloseWindowActionPerformed
 
+    private void btnQuitTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTournamentActionPerformed
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit the tournament?", "Confirm quit tournament", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            MageFrame.getSession().quitTournament(tournamentId);
+        }
+
+    }//GEN-LAST:event_btnQuitTournamentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel actionPanel;
     private javax.swing.JButton btnCloseWindow;
+    private javax.swing.JButton btnQuitTournament;
     private mage.client.chat.ChatPanel chatPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

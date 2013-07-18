@@ -23,36 +23,36 @@ import mage.game.Game;
  */
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl<ConditionalActivatedAbility> {
 
-        private Condition condition;
-    private String staticText = "";
+    private Condition condition;
+    private String ruleText = "";
 
-        private static final Effects emptyEffects = new Effects();
+    private static final Effects emptyEffects = new Effects();
 
-        public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
+    public ConditionalActivatedAbility(Zone zone, Effect effect, ManaCosts cost, Condition condition, String rule) {
         super(zone, effect, cost);
         this.condition = condition;
-        this.staticText = rule;
+        this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Costs costs, Condition condition, String rule) {
         super(zone, effect, costs);
-                this.condition = condition;
-        this.staticText = rule;
+        this.condition = condition;
+        this.ruleText = rule;
     }
 
     public ConditionalActivatedAbility(Zone zone, Effect effect, Cost cost, Condition condition, String rule) {
         super(zone, effect, cost);
-                this.condition = condition;
-        this.staticText = rule;
+        this.condition = condition;
+        this.ruleText = rule;
     }
 
-    public ConditionalActivatedAbility(ConditionalActivatedAbility ability) {
+    public ConditionalActivatedAbility(final ConditionalActivatedAbility ability) {
         super(ability);
-                this.condition = ability.condition;
-        this.staticText = ability.staticText;
+        this.condition = ability.condition;
+        this.ruleText = ability.ruleText;
     }
 
-        @Override
+    @Override
     public Effects getEffects(Game game, EffectType effectType) {
         if (!condition.apply(game, this)) {
             return emptyEffects;
@@ -60,8 +60,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl<Conditiona
         return super.getEffects(game, effectType);
     }
 
-        @Override
-        public boolean canActivate(UUID playerId, Game game) {
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
         if (!condition.apply(game, this)) {
             return false;
         }
@@ -73,8 +73,8 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl<Conditiona
         return new ConditionalActivatedAbility(this);
     }
 
-        @Override
+    @Override
     public String getRule() {
-        return staticText;
+        return ruleText;
     }
 }

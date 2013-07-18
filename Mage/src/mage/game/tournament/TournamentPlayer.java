@@ -47,6 +47,7 @@ public class TournamentPlayer {
     protected Deck deck;
     protected String results = "";
     protected boolean eliminated = false;
+    protected boolean quit = false;
     protected boolean doneConstructing;
     protected boolean joined = false;
 
@@ -149,5 +150,18 @@ public class TournamentPlayer {
     public void setStateInfo(String stateInfo) {
         this.stateInfo = stateInfo;
     }
+
+    public boolean hasQuit() {
+        return quit;
+    }
+
+    public void setQuit(String info) {
+        setEliminated();
+        this.setState(TournamentPlayerState.CANCELED);
+        this.setStateInfo(info);
+        this.quit = true;
+        this.doneConstructing = true;
+    }
+
 }
 

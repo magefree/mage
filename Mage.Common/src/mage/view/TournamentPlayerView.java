@@ -29,6 +29,7 @@
 package mage.view;
 
 import java.io.Serializable;
+import mage.constants.TournamentPlayerState;
 import mage.game.tournament.TournamentPlayer;
 
 /**
@@ -42,6 +43,7 @@ public class TournamentPlayerView implements Serializable {
     private String state;
     private String results;
     private int points;
+    private boolean quit;
 
     TournamentPlayerView(TournamentPlayer player) {
         this.name = player.getPlayer().getName();
@@ -52,6 +54,7 @@ public class TournamentPlayerView implements Serializable {
         this.state = sb.toString();
         this.points = player.getPoints();
         this.results = player.getResults();
+        this.quit = player.getState().equals(TournamentPlayerState.ELIMINATED) || player.getState().equals(TournamentPlayerState.CANCELED);
     }
 
     public String getName() {
@@ -69,4 +72,9 @@ public class TournamentPlayerView implements Serializable {
     public String getResults() {
         return results;
     }
+
+    public boolean hasQuit() {
+        return quit;
+    }
+
 }

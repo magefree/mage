@@ -66,7 +66,10 @@
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnCloseWindow" min="-2" pref="129" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnCloseWindow" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                      <Component id="btnQuitTournament" alignment="1" min="-2" pref="129" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -80,6 +83,7 @@
                       <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnQuitTournament" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -151,6 +155,15 @@
             <Property name="text" type="java.lang.String" value="jTextField2"/>
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnQuitTournament">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quit Tournament"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnQuitTournamentActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCloseWindow">
           <Properties>

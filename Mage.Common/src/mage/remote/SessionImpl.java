@@ -953,6 +953,20 @@ public class SessionImpl implements Session {
         }
         return false;
     }
+    @Override
+    public boolean quitTournament(UUID tournamentId) {
+        try {
+            if (isConnected()) {
+                server.quitTournament(tournamentId, sessionId);
+                return true;
+            }
+        } catch (MageException ex) {
+            handleMageException(ex);
+        } catch (Throwable t) {
+            handleThrowable(t);
+        }
+        return false;
+    }
 
     @Override
     public boolean undo(UUID gameId) {
