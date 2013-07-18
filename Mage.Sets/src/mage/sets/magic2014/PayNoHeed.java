@@ -36,6 +36,7 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.game.Game;
+import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.target.TargetSource;
 
@@ -67,7 +68,6 @@ public class PayNoHeed extends CardImpl<PayNoHeed> {
 }
 
 class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
-
     private TargetSource target = new TargetSource();
 
     public PayNoHeedEffect() {
@@ -97,7 +97,7 @@ class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
+        if (event.getSourceId().equals(target.getFirstTarget())) {
             preventDamage(event, source, target.getFirstTarget(), game);
             return true;
         }
@@ -115,8 +115,8 @@ class PayNoHeedEffect extends PreventionEffectImpl<PayNoHeedEffect> {
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (!this.used && super.applies(event, source, game)) {
-            if (event.getTargetId().equals(source.getControllerId()) && event.getSourceId().equals(target.getFirstTarget())) {
+        if (event instanceof DamageEvent && super.applies(event, source, game)) {
+            if (event.getSourceId().equals(target.getFirstTarget())) {
                 return true;
             }
         }
