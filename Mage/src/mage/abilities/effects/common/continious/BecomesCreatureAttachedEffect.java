@@ -45,7 +45,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
     protected String type;
 
     public BecomesCreatureAttachedEffect(Token token, String text, Duration duration) {
-        super(duration, Outcome.BecomeCreature);
+        super(duration, Layer.TypeChangingEffects_4,  SubLayer.NA, Outcome.BecomeCreature);
         this.token = token;
         staticText = text;
     }
