@@ -53,7 +53,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class AwakenTheAncient extends CardImpl<AwakenTheAncient> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("Mountain");
 
     static {
         filter.add(new SubtypePredicate("Mountain"));
@@ -91,7 +91,7 @@ public class AwakenTheAncient extends CardImpl<AwakenTheAncient> {
     private class GiantToken extends Token {
 
         GiantToken() {
-            super("", "7/7 red Giant creature with haste");
+            super("Giant", "7/7 red Giant creature with haste");
             cardType.add(CardType.CREATURE);
             color.setRed(true);
             subtype.add("Giant");
