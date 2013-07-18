@@ -86,7 +86,7 @@ public class CorruptedZendikon extends CardImpl<CorruptedZendikon> {
 class OozeToken extends Token {
 
     OozeToken() {
-        super("", "3/3 black Ooze creature");
+        super("Ooze", "3/3 black Ooze creature");
         cardType.add(CardType.CREATURE);
         color.setBlack(true);
         subtype.add("Ooze");

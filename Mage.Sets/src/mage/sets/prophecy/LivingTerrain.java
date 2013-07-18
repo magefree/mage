@@ -63,7 +63,7 @@ public class LivingTerrain extends CardImpl<LivingTerrain> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         // Enchanted land is a 5/6 green Treefolk creature that's still a land.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Duration.EndOfTurn)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new TreefolkToken(), "Enchanted land is a 5/6 green Treefolk creature that's still a land", Duration.Custom)));
     }
 
     public LivingTerrain(final LivingTerrain card) {
