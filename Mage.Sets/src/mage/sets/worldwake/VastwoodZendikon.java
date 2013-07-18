@@ -66,7 +66,7 @@ public class VastwoodZendikon extends CardImpl<VastwoodZendikon> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new VastwoodElementalToken(), "Enchanted land is a 6/4 green Elemental creature. It's still a land", Duration.Custom));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new VastwoodElementalToken(), "Enchanted land is a 6/4 green Elemental creature. It's still a land", Duration.WhileOnBattlefield ));
         this.addAbility(ability2);
         
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);

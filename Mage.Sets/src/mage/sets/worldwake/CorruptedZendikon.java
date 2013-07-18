@@ -66,7 +66,7 @@ public class CorruptedZendikon extends CardImpl<CorruptedZendikon> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
 
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.Custom));
+        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new OozeToken(), "Enchanted land is a 3/3 black Ooze creature. It's still a land.", Duration.WhileOnBattlefield));
         this.addAbility(ability2);
 
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
