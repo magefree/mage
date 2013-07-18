@@ -29,15 +29,20 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
  *
@@ -48,6 +53,7 @@ public class OgreBattledriver extends CardImpl<OgreBattledriver> {
     private final static FilterCreaturePermanent filter = new FilterCreaturePermanent("another creature");
     
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new AnotherPredicate());
     }
     
@@ -64,7 +70,9 @@ public class OgreBattledriver extends CardImpl<OgreBattledriver> {
         this.toughness = new MageInt(3);
 
         // Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn.
-        this.addAbility(new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, false, true, rule, true));
+        Ability ability = new EntersBattlefieldAllTriggeredAbility(Zone.BATTLEFIELD, new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, false, true, rule, true);
+        ability.addEffect(new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
+        this.addAbility(ability);
         
     }
 
