@@ -217,9 +217,18 @@ public class TableController {
 
     public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
         UUID playerId = userPlayerMap.get(userId);
-        TournamentPlayer player = tournament.getPlayer(playerId);
-        if (player.hasQuit()) {
-            return true; // so the construct panel closes after submit
+        if (table.isTournament()) {
+            TournamentPlayer player = tournament.getPlayer(playerId);
+            if (player.hasQuit()) {
+                return true; // so the construct panel closes after submit
+            }
+        } else {
+            if (table.getMatch() != null) {
+                MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
+                if (mPlayer.hasQuit()) {
+                    return true; // so the construct panel closes after submit
+                }
+            }
         }
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return false;
