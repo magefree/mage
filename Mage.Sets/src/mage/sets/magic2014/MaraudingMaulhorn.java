@@ -29,10 +29,11 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -40,6 +41,8 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.NamePredicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -47,14 +50,11 @@ import mage.filter.predicate.mageobject.NamePredicate;
  */
 public class MaraudingMaulhorn extends CardImpl<MaraudingMaulhorn> {
     
-    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");
-    
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");    
     static {
         filter.add(new NamePredicate("Advocate of the Beast"));
     }
 
-    private String rule = "{this} attacks each combat if able unless you control a creature named Advocate of the Beast";
-    
     public MaraudingMaulhorn(UUID ownerId) {
         super(ownerId, 145, "Marauding Maulhorn", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}{R}");
         this.expansionSetCode = "M14";
@@ -65,7 +65,7 @@ public class MaraudingMaulhorn extends CardImpl<MaraudingMaulhorn> {
         this.toughness = new MageInt(3);
 
         // Marauding Maulhorn attacks each combat if able unless you control a creature named Advocate of the Beast.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new AttacksIfAbleSourceEffect(Duration.WhileOnBattlefield), new ControlsPermanentCondition(filter), rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MaraudingMaulhornEffect()));
         
     }
 
@@ -77,4 +77,47 @@ public class MaraudingMaulhorn extends CardImpl<MaraudingMaulhorn> {
     public MaraudingMaulhorn copy() {
         return new MaraudingMaulhorn(this);
     }
+}
+
+class MaraudingMaulhornEffect extends RequirementEffect<MaraudingMaulhornEffect> {
+
+    private final static FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature named Advocate of the Beast");
+    static {
+        filter.add(new NamePredicate("Advocate of the Beast"));
+    }
+
+    public MaraudingMaulhornEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "{this} attacks each combat if able unless you control a creature named Advocate of the Beast";
+    }
+
+    public MaraudingMaulhornEffect(final MaraudingMaulhornEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MaraudingMaulhornEffect copy() {
+        return new MaraudingMaulhornEffect(this);
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            if (new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 1).apply(game, source)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean mustAttack(Game game) {
+        return true;
+    }
+
+    @Override
+    public boolean mustBlock(Game game) {
+        return false;
+    }
+
 }
