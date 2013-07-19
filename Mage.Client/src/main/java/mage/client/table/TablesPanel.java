@@ -34,20 +34,32 @@
 
 package mage.client.table;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingWorker;
 import javax.swing.table.AbstractTableModel;
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.RangeOfInfluence;
 import mage.cards.decks.importer.DeckImporterUtil;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -55,19 +67,19 @@ import mage.client.components.MageComponents;
 import mage.client.dialog.JoinTableDialog;
 import mage.client.dialog.NewTableDialog;
 import mage.client.dialog.NewTournamentDialog;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.dialog.TableWaitingDialog;
 import mage.client.util.ButtonColumn;
 import mage.client.util.gui.GuiDisplayUtil;
 import mage.constants.MatchTimeLimit;
-import static mage.constants.TableState.DUELING;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
 import mage.game.match.MatchOptions;
 import mage.remote.MageRemoteException;
 import mage.remote.Session;
 import mage.view.MatchView;
 import mage.view.TableView;
 import org.apache.log4j.Logger;
-
-
 
 /**
  *
@@ -117,69 +129,69 @@ public class TablesPanel extends javax.swing.JPanel {
 
         Action joinTable;
         joinTable = new AbstractAction()
- {
-     @Override
-     public void actionPerformed(ActionEvent e)
-     {
-         int modelRow = Integer.valueOf( e.getActionCommand() );
-         UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
-         UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
-         String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
-         boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
-         String owner = (String)tableModel.getValueAt(modelRow, 1);
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                int modelRow = Integer.valueOf( e.getActionCommand() );
+                UUID tableId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 3);
+                UUID gameId = (UUID)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 2);
+                String action = (String)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN);
+                boolean isTournament = (Boolean)tableModel.getValueAt(modelRow, TableTableModel.ACTION_COLUMN + 1);
+                String owner = (String)tableModel.getValueAt(modelRow, 1);
 
-         if (action.equals("Join")) {
-             if (owner.equals(session.getUserName())) {
-                 try {
-                     JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
-                     JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
-                     for (JInternalFrame frame : windows) {
-                         if (frame.getTitle().equals("Waiting for players")) {
-                             frame.toFront();
-                             frame.setVisible(true);
-                             try {
-                                 frame.setSelected(true);
-                             } catch (PropertyVetoException ve) {
-                                 ve.printStackTrace();
-                                 logger.error(ve);
+                if (action.equals("Join")) {
+                     if (owner.equals(session.getUserName())) {
+                         try {
+                             JDesktopPane desktopPane = (JDesktopPane)MageFrame.getUI().getComponent(MageComponents.DESKTOP_PANE);
+                             JInternalFrame[] windows = desktopPane.getAllFramesInLayer(javax.swing.JLayeredPane.DEFAULT_LAYER);
+                             for (JInternalFrame frame : windows) {
+                                 if (frame.getTitle().equals("Waiting for players")) {
+                                     frame.toFront();
+                                     frame.setVisible(true);
+                                     try {
+                                         frame.setSelected(true);
+                                     } catch (PropertyVetoException ve) {
+                                         ve.printStackTrace();
+                                         logger.error(ve);
+                                     }
+                                 }
+
                              }
+                         } catch (Exception ex) {
+                             logger.error(ex);
                          }
-
+                         return;
                      }
-                 } catch (Exception ex) {
-                     logger.error(ex);
+                     if (isTournament) {
+                         logger.info("Joining tournament " + tableId);
+                         session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
+                     }
+                     else {
+                         logger.info("Joining table " + tableId);
+                         joinTableDialog.showDialog(roomId, tableId);
+                     }
+                 } else if (action.equals("Remove")) {
+                     if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                         session.removeTable(roomId, tableId);
+                     }
+                 } else if (action.equals("Show")) {
+                     if (isTournament) {
+                         logger.info("Showing tournament table " + tableId);
+                         session.watchTable(roomId, tableId);
+                     }
+                 } else if (action.equals("Watch")) {
+                     if (!isTournament) {
+                         logger.info("Watching table " + tableId);
+                         session.watchTable(roomId, tableId);
+                     }
+                 } else if (action.equals("Replay")) {
+                     logger.info("Replaying game " + gameId);
+                     // no replay because of memory leaks
+                     // session.replayGame(gameId);
                  }
-                 return;
              }
-             if (isTournament) {
-                 logger.info("Joining tournament " + tableId);
-                 session.joinTournamentTable(roomId, tableId, session.getUserName(), "Human", 1);
-             }
-             else {
-                 logger.info("Joining table " + tableId);
-                 joinTableDialog.showDialog(roomId, tableId);
-             }
-         } else if (action.equals("Remove")) {
-             if (JOptionPane.showConfirmDialog(null, "Are you sure you want to remove table?", "Removing table", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                 session.removeTable(roomId, tableId);
-             }
-         } else if (action.equals("Show")) {
-             if (isTournament) {
-                 logger.info("Showing tournament table " + tableId);
-                 session.watchTable(roomId, tableId);
-             }
-         } else if (action.equals("Watch")) {
-             if (!isTournament) {
-                 logger.info("Watching table " + tableId);                 
-                 session.watchTable(roomId, tableId);
-             }
-         } else if (action.equals("Replay")) {
-             logger.info("Replaying game " + gameId);
-             // no replay because of memory leaks
-             // session.replayGame(gameId);
-         }
-     }
- };
+         };
 
         Action replayMatch = new AbstractAction()
         {
@@ -207,6 +219,39 @@ public class TablesPanel extends javax.swing.JPanel {
         new ButtonColumn(tableCompleted, replayMatch, MatchesTableModel.ACTION_COLUMN);
     }
 
+
+    private void saveDividerLocations() {
+        // save panel sizes and divider locations.
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, Integer.toString(chatPanel.getSplitDividerLocation()));
+    }
+
+    private void restoreDividerLocations() {
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        if (rec != null) {
+            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
+            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            // use divider positions only if screen size is the same as it was the time the settings were saved
+            if (size != null && size.equals(sb.toString())) {
+                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_1, null);
+                if (location != null && jSplitPane1 != null) {
+                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
+                }
+                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_2, null);
+                if (location != null && jSplitPane2 != null) {
+                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
+                }
+                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TABLES_DIVIDER_LOCATION_3, null);
+                if (location != null && chatPanel != null) {
+                    chatPanel.setSplitDividerLocation(Integer.parseInt(location));
+                }
+            }
+        }
+    }
     public Map<String, JComponent> getUIComponents() {
         Map<String, JComponent> components = new HashMap<String, JComponent>();
 
@@ -306,6 +351,7 @@ public class TablesPanel extends javax.swing.JPanel {
         reloadMessages();
 
         MageFrame.getUI().addButton(MageComponents.NEW_GAME_BUTTON, btnNewTable);
+        this.restoreDividerLocations();
     }
 
     protected void reloadMessages() {
@@ -325,6 +371,7 @@ public class TablesPanel extends javax.swing.JPanel {
     }
 
     public void hideTables() {
+        this.saveDividerLocations();
         for (Component component : MageFrame.getDesktop().getComponents()) {
             if (component instanceof TableWaitingDialog) {
                 ((TableWaitingDialog)component).closeDialog();
@@ -615,7 +662,7 @@ private void chkShowCompletedActionPerformed(java.awt.event.ActionEvent evt) {//
 
 class TableTableModel extends AbstractTableModel {
 
-    public static int ACTION_COLUMN = 9; // column the action is located (starting with 0)
+    public static final int ACTION_COLUMN = 9; // column the action is located (starting with 0)
 
     private String[] columnNames = new String[]{"Match Name", "Owner / Players", "Game Type", "Wins", "Free Mulligans", "Deck Type", "Info", "Status", "Created", "Action"};
     private TableView[] tables = new TableView[0];
@@ -822,7 +869,7 @@ class UpdatePlayersTask extends SwingWorker<Void, Collection<String>> {
 
 class MatchesTableModel extends AbstractTableModel {
 
-    public static int ACTION_COLUMN = 7; // column the action is located (starting with 0)
+    public static final int ACTION_COLUMN = 7; // column the action is located (starting with 0)
 
     private String[] columnNames = new String[]{"Match Name", "Game Type", "Deck Type", "Players", "Result", "Start Time", "End Time","Action"};
     private MatchView[] matches = new MatchView[0];

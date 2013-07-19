@@ -95,10 +95,21 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     public static final String KEY_BIG_CARD_TOGGLED = "bigCardToggled";
 
-    public static final String KEY_GAMEPANEL_LAST_SIZE = "gamepanelLastSize";
+
+    // Size of frame to check if divider locations should be used 
+    public static final String KEY_MAGE_PANEL_LAST_SIZE = "gamepanelLastSize";
+
+    // positions of divider bars
+    public static final String KEY_TABLES_DIVIDER_LOCATION_1 = "tablePanelDividerLocation1";
+    public static final String KEY_TABLES_DIVIDER_LOCATION_2 = "tablePanelDividerLocation2";
+    public static final String KEY_TABLES_DIVIDER_LOCATION_3 = "tablePanelDividerLocation3";
+
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_0 = "gamepanelDividerLocation0";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_1 = "gamepanelDividerLocation1";
     public static final String KEY_GAMEPANEL_DIVIDER_LOCATION_2 = "gamepanelDividerLocation2";
+
+    public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_1 = "tournamentPanelDividerLocation1";
+    public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_2 = "tournamentPanelDividerLocation2";
 
     // default setting for new table dialog
     public static final String KEY_NEW_TABLE_NAME = "newTableName";
@@ -1615,16 +1626,17 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
         prop = prefs.get(KEY_BATTLEFIELD_IMAGE_RANDOM, "true");
         
-        if(dialog.cbUseRandomBattleImage.isEnabled())
-        if(prop.equals("true")){
-            dialog.cbUseRandomBattleImage.setSelected(true);
-            dialog.useRandomBattleField();        
-        }else{
-            dialog.cbUseRandomBattleImage.setSelected(false);
-            dialog.useSelectedBattleField();
-            String path = prefs.get(KEY_BATTLEFIELD_IMAGE, "");
-            dialog.txtBattlefieldImagePath.setText(path);
-            updateCache(KEY_BATTLEFIELD_IMAGE, path);
+        if(dialog.cbUseRandomBattleImage.isEnabled()) {
+            if(prop.equals("true")){
+                dialog.cbUseRandomBattleImage.setSelected(true);
+                dialog.useRandomBattleField();
+            }else{
+                dialog.cbUseRandomBattleImage.setSelected(false);
+                dialog.useSelectedBattleField();
+                String path = prefs.get(KEY_BATTLEFIELD_IMAGE, "");
+                dialog.txtBattlefieldImagePath.setText(path);
+                updateCache(KEY_BATTLEFIELD_IMAGE, path);
+            }
         }   
     }
 

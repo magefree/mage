@@ -180,16 +180,16 @@ public final class GamePanel extends javax.swing.JPanel {
         // save panel sizes and divider locations.
         Rectangle rec = MageFrame.getDesktop().getBounds();
         StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
-        PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_LAST_SIZE, sb.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_0, Integer.toString(this.jSplitPane0.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_GAMEPANEL_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
     }
 
-    public void restoreDividerLocations() {
+    private void restoreDividerLocations() {
         Rectangle rec = MageFrame.getDesktop().getBounds();
         if (rec != null) {
-            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAMEPANEL_LAST_SIZE, null);
+            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
             StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
             // use divider positions only if screen size is the same as it was the time the settings were saved
             if (size != null && size.equals(sb.toString())) {

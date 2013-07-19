@@ -34,18 +34,20 @@
 
 package mage.client.chat;
 
+import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
-import mage.client.components.ColorPane;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.*;
-import java.util.List;
 
 /**
  *
@@ -57,7 +59,7 @@ public class ChatPanel extends javax.swing.JPanel {
     private Session session;
 
     private List<String> players = new ArrayList<String>();
-    private TableModel tableModel;
+    private final TableModel tableModel;
 
     /**
      * Chat message color for opponents.
@@ -125,16 +127,16 @@ public class ChatPanel extends javax.swing.JPanel {
     public ChatPanel(boolean addPlayersTab) {
         tableModel = new TableModel();
         initComponents();
-        jTable1.setBackground(new Color(0, 0, 0, 0));
-        jTable1.setForeground(Color.white);
+        jTablePlayers.setBackground(new Color(0, 0, 0, 0));
+        jTablePlayers.setForeground(Color.white);
         setBackground(new Color(0, 0, 0, 100));
-        if (jScrollPane1 != null) {
-            jScrollPane1.setBackground(new Color(0, 0, 0, 100));
-            jScrollPane1.getViewport().setBackground(new Color(0, 0, 0, 100));
+        if (jScrollPaneTxt != null) {
+            jScrollPaneTxt.setBackground(new Color(0, 0, 0, 100));
+            jScrollPaneTxt.getViewport().setBackground(new Color(0, 0, 0, 100));
         }
-        if (jScrollPane2 != null) {
-            jScrollPane2.setBackground(new Color(0, 0, 0, 100));
-            jScrollPane2.getViewport().setBackground(new Color(0, 0, 0, 100));
+        if (jScrollPanePlayers != null) {
+            jScrollPanePlayers.setBackground(new Color(0, 0, 0, 100));
+            jScrollPanePlayers.getViewport().setBackground(new Color(0, 0, 0, 100));
         }
         if (!addPlayersTab) {
             simplifyComponents();
@@ -223,8 +225,21 @@ public class ChatPanel extends javax.swing.JPanel {
         this.txtConversation.setExtBackgroundColor(new Color(0,0,0,100));
         this.txtConversation.setBackground(new Color(0,0,0,0));
         this.txtConversation.setForeground(new Color(255,255,255));
-        this.jScrollPane1.setOpaque(false);
-        this.jScrollPane1.getViewport().setOpaque(false);
+        this.jScrollPaneTxt.setOpaque(false);
+        this.jScrollPaneTxt.getViewport().setOpaque(false);
+    }
+
+    public void setSplitDividerLocation(int location) {
+        if (jSplitPane1 != null) {
+        jSplitPane1.setDividerLocation(location);
+        }
+    }
+
+    public int getSplitDividerLocation() {
+        if (jSplitPane1 == null) {
+            return 0;
+        }
+        return this.jSplitPane1.getDividerLocation();
     }
 
 class TableModel extends AbstractTableModel {
@@ -287,12 +302,31 @@ class TableModel extends AbstractTableModel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtMessage = new javax.swing.JTextField();
         jSplitPane1 = new javax.swing.JSplitPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtConversation = new ColorPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPaneTxt = new javax.swing.JScrollPane();
+        txtConversation = new mage.client.components.ColorPane();
+        jScrollPanePlayers = new javax.swing.JScrollPane();
+        jTablePlayers = new javax.swing.JTable();
+        txtMessage = new javax.swing.JTextField();
+
+        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane1.setResizeWeight(0.25);
+
+        txtConversation.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtConversation.setFocusCycleRoot(false);
+        txtConversation.setMargin(new java.awt.Insets(2, 2, 2, 2));
+        txtConversation.setOpaque(false);
+        jScrollPaneTxt.setViewportView(txtConversation);
+
+        jSplitPane1.setRightComponent(jScrollPaneTxt);
+
+        jTablePlayers.setModel(this.tableModel);
+        jTablePlayers.setToolTipText("Connected players");
+        jTablePlayers.setGridColor(new java.awt.Color(255, 255, 255));
+        jScrollPanePlayers.setViewportView(jTablePlayers);
+
+        jSplitPane1.setTopComponent(jScrollPanePlayers);
 
         txtMessage.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -300,42 +334,19 @@ class TableModel extends AbstractTableModel {
             }
         });
 
-        jSplitPane1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-        jSplitPane1.setResizeWeight(0.25);
-
-//        txtConversation.setColumns(20);
-        txtConversation.setOpaque(false);
-//        txtConversation.setEditable(false);
-        txtConversation.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-//        txtConversation.setLineWrap(true);
-//        txtConversation.setRows(5);
-//        txtConversation.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(txtConversation);
-        jScrollPane1.setBorder(new EmptyBorder(0,0,0,0));
-
-        jSplitPane1.setLeftComponent(jScrollPane2);
-
-        jTable1.setModel(this.tableModel);
-        jTable1.setToolTipText("Connected players");
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane2.setViewportView(jTable1);
-
-        jSplitPane1.setBottomComponent(jScrollPane1);
-        jSplitPane1.setDividerLocation(150 + jSplitPane1.getInsets().bottom);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+            .addComponent(txtMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -345,18 +356,17 @@ class TableModel extends AbstractTableModel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(txtMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+            .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                .addComponent(jScrollPaneTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        jTable1 = null;
-        jScrollPane2 = null;
+        jTablePlayers = null;
+        jScrollPanePlayers = null;
     }
 
     private void txtMessageKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMessageKeyTyped
@@ -401,11 +411,11 @@ class TableModel extends AbstractTableModel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPanePlayers;
+    private javax.swing.JScrollPane jScrollPaneTxt;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
-    private ColorPane txtConversation;
+    private javax.swing.JTable jTablePlayers;
+    private mage.client.components.ColorPane txtConversation;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 

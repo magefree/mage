@@ -46,6 +46,7 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.ButtonColumn;
 import mage.remote.Session;
 import mage.view.RoundView;
@@ -76,6 +77,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         matchesModel = new TournamentMatchesTableModel();
 
         initComponents();
+        this.restoreDividerLocations();
         btnQuitTournament.setVisible(false);
         
         df = DateFormat.getDateTimeInstance();
@@ -91,10 +93,13 @@ public class TournamentPanel extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e)
             {
                 int modelRow = Integer.valueOf( e.getActionCommand() );
-                UUID gameId = UUID.fromString((String)tableMatches.getValueAt(modelRow, 3));
-                String state = (String)tableMatches.getValueAt(modelRow, 4);
-                String actionText = (String)tableMatches.getValueAt(modelRow, 6);
-                UUID tableId = UUID.fromString((String)matchesModel.getValueAt(modelRow, 7));
+                
+                String state = (String)tableMatches.getValueAt(modelRow, 2);
+                String actionText = (String)tableMatches.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN);
+                UUID tableId = UUID.fromString((String)matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN +1));
+                UUID gameId = UUID.fromString((String)matchesModel.getValueAt(modelRow, TournamentMatchesTableModel.ACTION_COLUMN +3));
+
+                
 //                if (state.equals("Finished") && action.equals("Replay")) {
 //                    logger.info("Replaying game " + gameId);
 //                    session.replayGame(gameId);
@@ -106,9 +111,37 @@ public class TournamentPanel extends javax.swing.JPanel {
             }
         };
 
-        // replay button, don't delete this
-        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, 6);
+        // action button, don't delete this
+        ButtonColumn buttonColumn = new ButtonColumn(tableMatches, action, TournamentMatchesTableModel.ACTION_COLUMN);
 
+    }
+
+    private void saveDividerLocations() {
+        // save panel sizes and divider locations.
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, sb.toString());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, Integer.toString(this.jSplitPane1.getDividerLocation()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, Integer.toString(this.jSplitPane2.getDividerLocation()));
+    }
+
+    private void restoreDividerLocations() {
+        Rectangle rec = MageFrame.getDesktop().getBounds();
+        if (rec != null) {
+            String size = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_MAGE_PANEL_LAST_SIZE, null);
+            StringBuilder sb = new StringBuilder(Double.toString(rec.getWidth())).append("x").append(Double.toString(rec.getHeight()));
+            // use divider positions only if screen size is the same as it was the time the settings were saved
+            if (size != null && size.equals(sb.toString())) {
+                String location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_1, null);
+                if (location != null && jSplitPane1 != null) {
+                    jSplitPane1.setDividerLocation(Integer.parseInt(location));
+                }
+                location = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_TOURNAMENT_DIVIDER_LOCATION_2, null);
+                if (location != null && jSplitPane2 != null) {
+                    jSplitPane2.setDividerLocation(Integer.parseInt(location));
+                }
+            }
+        }
     }
 
     public synchronized void showTournament(UUID tournamentId) {
@@ -135,6 +168,7 @@ public class TournamentPanel extends javax.swing.JPanel {
     public void hideTournament() {
         stopTasks();
         this.chatPanel1.disconnect();
+        this.saveDividerLocations();
         Component c = this.getParent();
         while (c != null && !(c instanceof TournamentPane)) {
             c = c.getParent();
@@ -463,7 +497,10 @@ class TournamentPlayersTableModel extends AbstractTableModel {
 }
 
 class TournamentMatchesTableModel extends AbstractTableModel {
-    private String[] columnNames = new String[]{"Round Number", "Players", "Match Id", "Game Id", "State", "Result", "Action"};
+
+    public static final int ACTION_COLUMN = 4; // column the action is located
+
+    private String[] columnNames = new String[]{"Round Number", "Players", "State", "Result", "Action"};
     private TournamentGameView[] games = new TournamentGameView[0];
     private boolean watchingAllowed;
 
@@ -497,14 +534,10 @@ class TournamentMatchesTableModel extends AbstractTableModel {
             case 1:
                 return games[arg0].getPlayers();
             case 2:
-                return games[arg0].getMatchId().toString();
-            case 3:
-                return games[arg0].getGameId().toString();
-            case 4:
                 return games[arg0].getState();
-            case 5:
+            case 3:
                 return games[arg0].getResult();
-            case 6:
+            case 4:
 //                if (games[arg0].getState().equals("Finished")) {
 //                    return "Replay";
 //                }
@@ -512,8 +545,13 @@ class TournamentMatchesTableModel extends AbstractTableModel {
                     return "Watch";
                 }
                 return "";
-            case 7:
+            case 5:
                 return games[arg0].getTableId().toString();
+            case 6:
+                return games[arg0].getMatchId().toString();
+            case 7:
+                return games[arg0].getGameId().toString();
+
         }
         return "";
     }
@@ -536,7 +574,7 @@ class TournamentMatchesTableModel extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex != 6) {
+        if (columnIndex != ACTION_COLUMN) {
             return false;
         }
         return true;

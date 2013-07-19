@@ -52,8 +52,9 @@ public abstract class MagePane extends javax.swing.JInternalFrame {
     }
 
     private void hideTitle() {
-        if (ui instanceof BasicInternalFrameUI)
+        if (ui instanceof BasicInternalFrameUI) {
             ((BasicInternalFrameUI) ui).setNorthPane(null);
+        }
     }
 
     @Override
