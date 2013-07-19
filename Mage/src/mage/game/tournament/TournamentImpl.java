@@ -119,6 +119,13 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public void quit(UUID playerId) {
+        synchronized (this) {
+            this.notifyAll();
+        }
+    }
+
+    @Override
     public void leave(UUID playerId) {
         if (players.containsKey(playerId)) {
             players.remove(playerId);

@@ -89,8 +89,12 @@ public class MatchView implements Serializable {
         }
         this.players = sb1.toString();
         StringBuilder sb2 = new StringBuilder();
-        for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
-            sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(" ");
+        if (table.getTournament().getRounds().size() > 0) {
+            for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {
+                sb2.append(tPlayer.getPlayer().getName()).append(": ").append(tPlayer.getResults()).append(" ");
+            }
+        } else {
+          sb2.append("Canceled");
         }
         this.result = sb2.toString();
         this.startTime = table.getTournament().getStartTime();

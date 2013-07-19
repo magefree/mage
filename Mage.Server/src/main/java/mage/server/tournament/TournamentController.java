@@ -275,6 +275,7 @@ public class TournamentController {
                     info = "during Construction phase";
                 }
                 player.setQuit(info);
+                tournament.quit(playerId);
             }
         }
     }

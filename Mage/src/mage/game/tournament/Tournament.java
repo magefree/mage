@@ -63,6 +63,7 @@ public interface Tournament {
     void autoSubmit(UUID playerId, Deck deck);
     boolean allJoined();
     boolean isDoneConstructing();
+    void quit(UUID playerId);
     void leave(UUID playerId);
     void nextStep();
 

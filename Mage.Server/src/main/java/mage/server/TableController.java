@@ -53,6 +53,7 @@ import mage.game.match.MatchOptions;
 import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
+import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
@@ -216,6 +217,10 @@ public class TableController {
 
     public synchronized boolean submitDeck(UUID userId, DeckCardLists deckList) throws MageException {
         UUID playerId = userPlayerMap.get(userId);
+        TournamentPlayer player = tournament.getPlayer(playerId);
+        if (player.hasQuit()) {
+            return true; // so the construct panel closes after submit
+        }
         if (table.getState() != TableState.SIDEBOARDING && table.getState() != TableState.CONSTRUCTING) {
             return false;
         }
