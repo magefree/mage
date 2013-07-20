@@ -377,15 +377,32 @@ public class CardUtil {
      * @return - the specific UUID
      */
     public static UUID getCardExileZoneId(Game game, Ability source) {
-        UUID exileId = null;
-        Card card = game.getCard(source.getSourceId());
-        if (card != null) {
-            exileId = (UUID) game.getState().getValue(new StringBuilder("SourceExileZone").append(source.getSourceId()).append(card.getZoneChangeCounter()).toString());
-            if (exileId == null) {
-                exileId = UUID.randomUUID();
-                game.getState().setValue(new StringBuilder("SourceExileZone").append(source.getSourceId()).append(card.getZoneChangeCounter()).toString(), exileId);
-            }
+        String key = getCardZoneString("SourceExileZone", source.getSourceId(), game);
+        UUID exileId = (UUID) game.getState().getValue(key);
+        if (exileId == null) {
+            exileId = UUID.randomUUID();
+            game.getState().setValue(key, exileId);
         }
         return exileId;
+    }
+
+    /**
+     * Creates a string from text + cardId and the zoneChangeCounter of the card (from cardId)
+     *
+     * @param text
+     * @param cardId
+     * @param game
+     * @return
+     */
+    public static String getCardZoneString(String text, UUID cardId, Game game) {
+        StringBuilder uniqueString = new StringBuilder();
+        Card card = game.getCard(cardId);
+        if (card != null) {
+            if (text != null) {
+                uniqueString.append(text);
+            }
+            uniqueString.append(cardId).append(card.getZoneChangeCounter());
+        }
+        return uniqueString.toString();
     }
 }
