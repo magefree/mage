@@ -32,7 +32,6 @@ import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.SpellAbility;
-import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.constants.Outcome;
@@ -55,7 +54,6 @@ public class CastCommanderAbility extends ActivatedAbilityImpl<CastCommanderAbil
         this.usesStack = false;
         this.controllerId = card.getOwnerId();
         this.sourceId = card.getId();
-        //TODO : add +2 each time you player cast it
     }
 
     public CastCommanderAbility(final CastCommanderAbility ability) {
@@ -100,7 +98,19 @@ class CastCommanderEffect extends OneShotEffect<CastCommanderEffect> {
                 for (Target target : spellAbility.getTargets()) {
                     target.setRequired(true);
                 }
-                return controller.cast(spellAbility, game, true);
+                if(controller.cast(spellAbility, game, true)){
+                    Integer castCount = (Integer)game.getState().getValue(commander.getId() + "_castCount");
+                    if(castCount != null){
+                        castCount++;
+                        game.getState().setValue(commander.getId() + "_castCount", castCount);
+                    }
+                    else {
+                        castCount = 1;
+                        game.getState().setValue(commander.getId() + "_castCount", castCount);
+                    }
+                    return true;
+                }
+                return false;
             }
         }
         return false;
