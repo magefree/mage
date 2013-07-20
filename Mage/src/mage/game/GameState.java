@@ -29,21 +29,35 @@
 package mage.game;
 
 import java.io.Serializable;
-import java.util.*;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.DelayedTriggeredAbilities;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
+import mage.abilities.SpecialActions;
+import mage.abilities.StaticAbility;
+import mage.abilities.TriggeredAbilities;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.effects.Effect;
 import mage.cards.Card;
 import mage.cards.SplitCard;
 import mage.choices.Choice;
+import mage.constants.Zone;
 import mage.game.combat.Combat;
 import mage.game.combat.CombatGroup;
 import mage.game.command.Command;
 import mage.game.command.CommandObject;
-import mage.game.command.Emblem;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
@@ -58,7 +72,6 @@ import mage.target.Target;
 import mage.util.Copyable;
 import mage.watchers.Watcher;
 import mage.watchers.Watchers;
-
 
 /**
 *
@@ -86,7 +99,6 @@ public class GameState implements Serializable, Copyable<GameState> {
     private int turnNum = 1;
     private boolean gameOver;
     private boolean paused;
-//    private List<String> messages = new ArrayList<String>();
     private ContinuousEffects effects;
     private TriggeredAbilities triggers;
     private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
@@ -310,15 +322,15 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public LookedAt getLookedAt(UUID playerId) {
         if (lookedAt.get(playerId) == null) {
-            LookedAt l = new LookedAt();
-            lookedAt.put(playerId, l);
-            return l;
+            LookedAt lookedAtCards = new LookedAt();
+            lookedAt.put(playerId, lookedAtCards);
+            return lookedAtCards;
         }
         return lookedAt.get(playerId);
     }
 
-    public void clearLookedAt() {
-        lookedAt.clear();
+    public void clearLookedAt(UUID playerId) {
+        lookedAt.remove(playerId);
     }
 
     public Turn getTurn() {

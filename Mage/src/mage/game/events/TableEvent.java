@@ -28,16 +28,15 @@
 
 package mage.game.events;
 
+import java.io.Serializable;
+import java.util.EventObject;
+import java.util.UUID;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.game.Game;
 import mage.game.draft.Draft;
 import mage.game.match.MatchOptions;
 import mage.game.tournament.TournamentPairing;
-
-import java.io.Serializable;
-import java.util.EventObject;
-import java.util.UUID;
 
 /**
  *

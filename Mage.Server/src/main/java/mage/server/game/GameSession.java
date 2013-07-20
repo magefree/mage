@@ -160,15 +160,6 @@ public class GameSession extends GameWatcher {
         }
     }
 
-    public void revealCards(final String name, final CardsView cardView) {
-        if (!killed) {
-            User user = UserManager.getInstance().getUser(userId);
-            if (user != null) {
-                user.fireCallback(new ClientCallback("gameReveal", game.getId(), new GameClientMessage(cardView, name)));
-            }
-        }
-    }
-
     private synchronized void setupTimeout() {
         if (!useTimeout) {
             return;
@@ -234,7 +225,7 @@ public class GameSession extends GameWatcher {
             list.add(new LookedAtView(entry.getKey(), entry.getValue(), game));
         }
         gameView.setLookedAt(list);
-        game.getState().clearLookedAt();
+        game.getState().clearLookedAt(playerId);
 
         return gameView;
     }

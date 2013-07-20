@@ -138,23 +138,20 @@ public class GameController implements GameCallback {
                                 ChatManager.getInstance().broadcast(chatId, "", event.getMessage(), MessageColor.ORANGE, event.getWithTime());
                                 logger.debug(game.getId() + " " + event.getMessage());
                                 break;
-                            case REVEAL:
-                                revealCards(event.getMessage(), event.getCards());
-                                break;
                             case ERROR:
                                 error(event.getMessage(), event.getException());
                                 break;
                             case INIT_TIMER:
                                 final UUID initPlayerId = event.getPlayerId();
                                 if (initPlayerId == null) {
-                                    throw new IllegalStateException("INIT_TIMER: playerId can't be null");
+                                    throw new MageException("INIT_TIMER: playerId can't be null");
                                 }
                                 createPlayerTimer(event.getPlayerId(), game.getPriorityTime());
                                 break;
                             case RESUME_TIMER:
                                 playerId = event.getPlayerId();
                                 if (playerId == null) {
-                                    throw new IllegalStateException("RESUME_TIMER: playerId can't be null");
+                                    throw new MageException("RESUME_TIMER: playerId can't be null");
                                 }
                                 timer = timers.get(playerId);
                                 if (timer == null) {
@@ -162,7 +159,7 @@ public class GameController implements GameCallback {
                                     if (player != null) {
                                         timer = createPlayerTimer(event.getPlayerId(), player.getPriorityTimeLeft());
                                     } else {
-                                        throw new IllegalStateException("RESUME_TIMER: player can't be null");
+                                        throw new MageException("RESUME_TIMER: player can't be null");
                                     }
                                 }
                                 timer.resume();
@@ -170,11 +167,11 @@ public class GameController implements GameCallback {
                             case PAUSE_TIMER:
                                 playerId = event.getPlayerId();
                                 if (playerId == null) {
-                                    throw new IllegalStateException("PAUSE_TIMER: playerId can't be null");
+                                    throw new MageException("PAUSE_TIMER: playerId can't be null");
                                 }
                                 timer = timers.get(playerId);
                                 if (timer == null) {
-                                    throw new IllegalStateException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
+                                    throw new MageException("PAUSE_TIMER: couldn't find timer for player: " + playerId);
                                 }
                                 timer.pause();
                                 break;
@@ -224,9 +221,6 @@ public class GameController implements GameCallback {
                                 break;
                             case AMOUNT:
                                 amount(event.getPlayerId(), event.getMessage(), event.getMin(), event.getMax());
-                                break;
-                            case LOOK:
-                                lookAtCards(event.getPlayerId(), event.getMessage(), event.getCards());
                                 break;
                             case PERSONAL_MESSAGE:
                                 informPersonal(event.getPlayerId(), event.getMessage());
@@ -590,21 +584,6 @@ public class GameController implements GameCallback {
                 getGameSession(playerId).getAmount(message, min, max);
             }
         });
-    }
-
-    private synchronized void revealCards(String name, Cards cards) throws MageException {
-        for (GameSession session: gameSessions.values()) {
-            session.revealCards(name, new CardsView(cards.getCards(game)));
-        }
-    }
-
-    private synchronized void lookAtCards(UUID playerId, final String name, final Cards cards) throws MageException {
-        perform(playerId, new Command() {
-            @Override
-            public void execute(UUID playerId) {
-                getGameSession(playerId).revealCards(name, new CardsView(cards.getCards(game)));
-            }
-        }, false);
     }
 
     private void informOthers(UUID playerId) throws MageException {

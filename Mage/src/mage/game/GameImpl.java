@@ -1482,14 +1482,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public void fireLookAtCardsEvent(UUID playerId, String message, Cards cards) {
-        if (simulation) {
-            return;
-        }
-        playerQueryEventSource.target(playerId, message, cards);
-    }
-
-    @Override
     public void fireGetAmountEvent(UUID playerId, String message, int min, int max) {
         if (simulation) {
             return;
@@ -1518,7 +1510,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (simulation) {
             return;
         }
-//        state.addMessage(message);
         fireInformEvent(message);
     }
 

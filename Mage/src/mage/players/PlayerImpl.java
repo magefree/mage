@@ -977,13 +977,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void revealCards(String name, Cards cards, Game game) {
         game.getState().getRevealed().add(name, cards);
-//        game.fireRevealCardsEvent(this.name + " revealed", cards);
     }
 
     @Override
     public void lookAtCards(String name, Cards cards, Game game) {
         game.getState().getLookedAt(this.playerId).add(name, cards);
-        game.fireLookAtCardsEvent(playerId, this.name + " looking at", cards);
+        game.fireUpdatePlayersEvent();
     }
 
     @Override
