@@ -120,7 +120,6 @@ class TestOfFaithPreventDamageTargetEffect extends PreventionEffectImpl<TestOfFa
                     game.informPlayers("Test of Faith: Adding " + prevented + " +1/+1 counters to " + targetPermanent.getName());
                 }
             }
-            return true;
         }
         return false;
     }
