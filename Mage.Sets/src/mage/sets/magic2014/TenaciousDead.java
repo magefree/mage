@@ -55,7 +55,7 @@ public class TenaciousDead extends CardImpl<TenaciousDead> {
         this.toughness = new MageInt(1);
 
         // When Tenacious Dead dies, you may pay {1}{B}. If you do, return it to the battlefield tapped under its owner's control.
-        Effect effect = new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), new ManaCostsImpl("{1}{B}"));
+        Effect effect = new DoIfCostPaid(new ReturnToBattlefieldUnderOwnerControlSourceEffect(true), new ManaCostsImpl("{1}{B}"));
         this.addAbility(new DiesTriggeredAbility(effect, false));
 
     }

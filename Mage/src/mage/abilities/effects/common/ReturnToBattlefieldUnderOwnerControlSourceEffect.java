@@ -28,11 +28,11 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -41,13 +41,21 @@ import mage.game.Game;
  */
 public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEffect<ReturnToBattlefieldUnderOwnerControlSourceEffect> {
 
+    private boolean tapped;
+
     public ReturnToBattlefieldUnderOwnerControlSourceEffect() {
+        this(false);
+    }
+
+    public ReturnToBattlefieldUnderOwnerControlSourceEffect(boolean tapped) {
         super(Outcome.Benefit);
-        staticText = "return that card to the battlefield under it's owner's control";
+        this.tapped = tapped;
+        staticText = new StringBuilder("return that card to the battlefield").append(tapped?" tapped":"").append(" under it's owner's control").toString();
     }
 
     public ReturnToBattlefieldUnderOwnerControlSourceEffect(final ReturnToBattlefieldUnderOwnerControlSourceEffect effect) {
         super(effect);
+        this.tapped = effect.tapped;
     }
 
     @Override
@@ -60,7 +68,7 @@ public class ReturnToBattlefieldUnderOwnerControlSourceEffect extends OneShotEff
         Card card = game.getCard(source.getSourceId());
         if (card != null) {
             Zone currentZone = game.getState().getZone(card.getId());
-            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId())) {
+            if (card.putOntoBattlefield(game, currentZone, source.getSourceId(), card.getOwnerId(),tapped)) {
                 return true;
             }
         }
