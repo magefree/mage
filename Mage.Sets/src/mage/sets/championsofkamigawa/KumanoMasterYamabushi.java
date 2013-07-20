@@ -91,7 +91,7 @@ public class KumanoMasterYamabushi extends CardImpl<KumanoMasterYamabushi> {
 class KumanaoMasterYamabushiEffect extends ReplacementEffectImpl<KumanaoMasterYamabushiEffect> {
 
     public KumanaoMasterYamabushiEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
     }
 

@@ -67,8 +67,8 @@ public class Frostwielder extends CardImpl<Frostwielder> {
         // {T}: Frostwielder deals 1 damage to target creature or player.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
-        // If a creature dealt damage by Frostwielder this turn would die, exile it instead.
         this.addAbility(ability);
+        // If a creature dealt damage by Frostwielder this turn would die, exile it instead.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new FrostwielderEffect()));
 
         this.addWatcher(new DamagedByWatcher());
@@ -89,7 +89,7 @@ public class Frostwielder extends CardImpl<Frostwielder> {
 class FrostwielderEffect extends ReplacementEffectImpl<FrostwielderEffect> {
 
     public FrostwielderEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
     }
 

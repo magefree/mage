@@ -81,7 +81,7 @@ public class KumanosPupils extends CardImpl<KumanosPupils> {
 class KumanosPupilsEffect extends ReplacementEffectImpl<KumanosPupilsEffect> {
 
     public KumanosPupilsEffect() {
-        super(Duration.EndOfTurn, Outcome.Exile);
+        super(Duration.WhileOnBattlefield, Outcome.Exile);
         staticText = "If a creature dealt damage by {this} this turn would die, exile it instead";
     }
 
