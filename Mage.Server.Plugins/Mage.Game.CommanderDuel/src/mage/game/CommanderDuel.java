@@ -31,12 +31,16 @@ package mage.game;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.EmptyEffect;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.CommanderReplacementEffect;
+import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
 import mage.constants.MultiplayerAttackOption;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
-import mage.game.command.Commander;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
@@ -72,7 +76,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
     @Override
     protected void init(UUID choosingPlayerId, GameOptions gameOptions) {
         super.init(choosingPlayerId, gameOptions);
-        
+        Ability ability = new SimpleStaticAbility(Zone.COMMAND, new EmptyEffect("Commander effects"));
         //Move commender to commande zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
@@ -81,13 +85,15 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
                     Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
                     if(commander != null){
                         commander.moveToZone(Zone.COMMAND, null, this, true);
-                        
+                        ability.addEffect(new CommanderReplacementEffect(commander.getId()));
+                        ability.addEffect(new CommanderCostModification(commander.getId()));
+                        getState().setValue(commander + "_castCount", new Integer(0));
                     }
                 }
             }
             
         }
-        
+        this.getState().addAbility(ability, null, null);
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
 
