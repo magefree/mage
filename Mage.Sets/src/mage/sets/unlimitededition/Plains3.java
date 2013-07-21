@@ -25,43 +25,27 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.unlimitededition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author KholdFuzion
  */
-public class BlackLotus extends CardImpl<BlackLotus> {
+public class Plains3 extends mage.cards.basiclands.Plains {
 
-    public BlackLotus(UUID ownerId) {
-        super(ownerId, 232, "Black Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "LEA";
-
-        // {tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+    public Plains3(UUID ownerId) {
+        super(ownerId, 291);
+        this.expansionSetCode = "2ED";
     }
 
-    public BlackLotus(final BlackLotus card) {
+    public Plains3(final Plains3 card) {
         super(card);
     }
 
     @Override
-    public BlackLotus copy() {
-        return new BlackLotus(this);
+    public Plains3 copy() {
+        return new Plains3(this);
     }
 }
