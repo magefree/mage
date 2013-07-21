@@ -7,7 +7,10 @@ git log tagOrSha1..HEAD --diff-filter=A --name-status | sed -ne 's/^A[^u]Mage.Se
 for Windows: you need to replace ' by "" and remove -u in sort
 
 Example for cards implemented from 0.8.7 till 0.9:
-git log 9ac166abc92f70aebdbe34825880ff8f909465ed..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt 
+git log 9ac166abc92f70aebdbe34825880ff8f909465ed..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+since 1.0.2-release:
+git log 6b38cd5b18298b07962b969bfa2eb69c62839575..HEAD --diff-filter=A --name-status | sed -ne "s/^A[^u]Mage.Sets\/src\/mage\/sets\///p" | sort > added_cards.txt
+since 1.0.3-release:
 
 3. Copy added_cards.txt to trunk\Utils folder
 4. Run script:

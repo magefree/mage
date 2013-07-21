@@ -710,6 +710,7 @@ public class GameController implements GameCallback {
 
     private void sendMessage(UUID userId, Command command) {
         final UUID playerId = userPlayerMap.get(userId);
+        // player has game under control (is not cotrolled by other player)
         if (game.getPlayer(playerId).isGameUnderControl()) {
                 // if it's your priority (or game not started yet in which case it will be null)
                 // then execute only your action
