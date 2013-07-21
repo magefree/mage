@@ -5818,6 +5818,7 @@ Henchfiend of Ukor|Future Sight|117|C|{3}{R}|Creature - Ogre|3|2|Haste$Echo {1}{
 Homing Sliver|Future Sight|118|C|{2}{R}|Creature - Sliver|2|2|Each Sliver card in each player's hand has slivercycling {3}.$Slivercycling {3} <i>({3}, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)</i>|
 Shah of Naar Isle|Future Sight|119|R|{3}{R}|Creature - Efreet|6|6|Trample$Echo {0} <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>$When Shah of Naar Isle's echo cost is paid, each opponent may draw up to three cards.|
 Magus of the Moat|Future Sight|12|R|{2}{W}{W}|Creature - Human Wizard|0|3|Creatures without flying can't attack.|
+
 Skizzik Surger|Future Sight|120|U|{4}{R}{R}|Creature - Elemental|6|4|Haste$Echo-Sacrifice two lands. <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>|
 Steamflogger Boss|Future Sight|121|R|{3}{R}|Creature - Goblin Rigger|3|3|Other Rigger creatures you control get +1/+0 and have haste.$If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.|
 Storm Entity|Future Sight|122|U|{1}{R}|Creature - Elemental|1|1|Haste$Storm Entity enters the battlefield with a +1/+1 counter on it for each other spell cast this turn.|
@@ -8419,7 +8420,7 @@ Merfolk of the Pearl Trident|Limited Edition Alpha|67|C|{U}|Creature - Merfolk|1
 Phantasmal Forces|Limited Edition Alpha|68|U|{3}{U}|Creature - Illusion|4|1|Flying$At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.|
 Phantasmal Terrain|Limited Edition Alpha|69|C|{U}{U}|Enchantment - Aura|||Enchant land$As Phantasmal Terrain enters the battlefield, choose a basic land type.$Enchanted land is the chosen type.|
 Dark Ritual|Limited Edition Alpha|7|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
-Black Lotus|Limited Edition Alpha|70|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
+Black Lotus|Limited Edition Alpha|232|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
 Phantom Monster|Limited Edition Alpha|70|U|{3}{U}|Creature - Illusion|3|3|Flying|
 Pirate Ship|Limited Edition Alpha|71|R|{4}{U}|Creature - Human Pirate|4|3|Pirate Ship can't attack unless defending player controls an Island.${tap}: Pirate Ship deals 1 damage to target creature or player.$When you control no Islands, sacrifice Pirate Ship.|
 Power Leak|Limited Edition Alpha|72|C|{1}{U}|Enchantment - Aura|||Enchant enchantment$At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.|
@@ -8721,7 +8722,7 @@ Merfolk of the Pearl Trident|Limited Edition Beta|67|C|{U}|Creature - Merfolk|1|
 Phantasmal Forces|Limited Edition Beta|68|U|{3}{U}|Creature - Illusion|4|1|Flying$At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.|
 Phantasmal Terrain|Limited Edition Beta|69|C|{U}{U}|Enchantment - Aura|||Enchant land$As Phantasmal Terrain enters the battlefield, choose a basic land type.$Enchanted land is the chosen type.|
 Dark Ritual|Limited Edition Beta|7|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
-Black Lotus|Limited Edition Beta|70|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
+Black Lotus|Limited Edition Beta|234|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
 Phantom Monster|Limited Edition Beta|70|U|{3}{U}|Creature - Illusion|3|3|Flying|
 Pirate Ship|Limited Edition Beta|71|R|{4}{U}|Creature - Human Pirate|4|3|Pirate Ship can't attack unless defending player controls an Island.${tap}: Pirate Ship deals 1 damage to target creature or player.$When you control no Islands, sacrifice Pirate Ship.|
 Power Leak|Limited Edition Beta|72|C|{1}{U}|Enchantment - Aura|||Enchant enchantment$At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.|
@@ -20147,7 +20148,7 @@ Merfolk of the Pearl Trident|Unlimited Edition|67|C|{U}|Creature - Merfolk|1|1||
 Phantasmal Forces|Unlimited Edition|68|U|{3}{U}|Creature - Illusion|4|1|Flying$At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.|
 Phantasmal Terrain|Unlimited Edition|69|C|{U}{U}|Enchantment - Aura|||Enchant land$As Phantasmal Terrain enters the battlefield, choose a basic land type.$Enchanted land is the chosen type.|
 Dark Ritual|Unlimited Edition|7|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
-Black Lotus|Unlimited Edition|70|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
+Black Lotus|Unlimited Edition|233|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
 Phantom Monster|Unlimited Edition|70|U|{3}{U}|Creature - Illusion|3|3|Flying|
 Pirate Ship|Unlimited Edition|71|R|{4}{U}|Creature - Human Pirate|4|3|Pirate Ship can't attack unless defending player controls an Island.${tap}: Pirate Ship deals 1 damage to target creature or player.$When you control no Islands, sacrifice Pirate Ship.|
 Power Leak|Unlimited Edition|72|C|{1}{U}|Enchantment - Aura|||Enchant enchantment$At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.|

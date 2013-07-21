@@ -28,40 +28,24 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author KholdFuzion
  */
-public class BlackLotus extends CardImpl<BlackLotus> {
+public class Plains1 extends mage.cards.basiclands.Plains {
 
-    public BlackLotus(UUID ownerId) {
-        super(ownerId, 232, "Black Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
+    public Plains1(UUID ownerId) {
+        super(ownerId, 285);
         this.expansionSetCode = "LEA";
-
-        // {tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
     }
 
-    public BlackLotus(final BlackLotus card) {
+    public Plains1(final Plains1 card) {
         super(card);
     }
 
     @Override
-    public BlackLotus copy() {
-        return new BlackLotus(this);
+    public Plains1 copy() {
+        return new Plains1(this);
     }
 }
