@@ -25,43 +25,29 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.limitedalpha;
+package mage.sets.fourthedition;
 
 import java.util.UUID;
-import mage.abilities.Ability;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.AddManaOfAnyColorEffect;
-import mage.abilities.mana.SimpleManaAbility;
-import mage.cards.CardImpl;
-import mage.choices.ChoiceColor;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 
 /**
  *
- * @author LevelX2
+ * @author KholdFuzion
+
  */
-public class BlackLotus extends CardImpl<BlackLotus> {
+public class HowlFromBeyond extends mage.sets.limitedalpha.HowlFromBeyond {
 
-    public BlackLotus(UUID ownerId) {
-        super(ownerId, 232, "Black Lotus", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "LEA";
-
-        // {tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.
-        Ability ability = new SimpleManaAbility(Zone.BATTLEFIELD, new AddManaOfAnyColorEffect(3), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addChoice(new ChoiceColor());
-        this.addAbility(ability);
+    public HowlFromBeyond(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 25;
+        this.expansionSetCode = "4ED";
     }
 
-    public BlackLotus(final BlackLotus card) {
+    public HowlFromBeyond(final HowlFromBeyond card) {
         super(card);
     }
 
     @Override
-    public BlackLotus copy() {
-        return new BlackLotus(this);
+    public HowlFromBeyond copy() {
+        return new HowlFromBeyond(this);
     }
 }
