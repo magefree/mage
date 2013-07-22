@@ -28,18 +28,12 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.AttachmentType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.KickedCondition;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
@@ -49,10 +43,15 @@ import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.TrampleAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCardInLibrary;
@@ -83,7 +82,10 @@ public class Gigantiform extends CardImpl<Gigantiform> {
         // Enchanted creature is 8/8 and has trample.
         this.addAbility(new GigantiformAbility());
         // When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.
-        this.addAbility(new GigantiformTriggeredAbility());
+        this.addAbility(new ConditionalTriggeredAbility(
+                new EntersBattlefieldTriggeredAbility(new GigantiformEffect(), true),
+                KickedCondition.getInstance(),
+                "When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library."));
     }
 
     public Gigantiform(final Gigantiform card) {
@@ -119,39 +121,8 @@ class GigantiformAbility extends StaticAbility<GigantiformAbility> {
     }
 }
 
-class GigantiformTriggeredAbility extends TriggeredAbilityImpl<GigantiformTriggeredAbility> {
-
-    public GigantiformTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new GigantiformEffect());
-    }
-
-    public GigantiformTriggeredAbility(final GigantiformTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public GigantiformTriggeredAbility copy() {
-        return new GigantiformTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(this.getSourceId())
-                && KickedCondition.getInstance().apply(game, this)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When Gigantiform enters the battlefield, if it was kicked, you may search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library.";
-    }
-}
-
 class GigantiformEffect extends OneShotEffect<GigantiformEffect> {
 
-    private static final String message = "Do you wish to search your library for a card named Gigantiform, put it onto the battlefield, then shuffle your library?";
     private static final FilterCard filter = new FilterCard("card named Gigantiform");
 
     static {
@@ -175,7 +146,7 @@ class GigantiformEffect extends OneShotEffect<GigantiformEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         TargetCardInLibrary target = new TargetCardInLibrary(filter);
-        if (player != null && player.chooseUse(Outcome.PutCardInPlay, message, game) && player.searchLibrary(target, game)) {
+        if (player != null && player.searchLibrary(target, game)) {
             Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
             if (card != null) {
                 card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId());

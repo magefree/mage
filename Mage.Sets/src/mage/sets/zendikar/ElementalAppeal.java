@@ -35,6 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
@@ -65,7 +66,7 @@ public class ElementalAppeal extends CardImpl<ElementalAppeal> {
         // If Elemental Appeal was kicked, that creature gets +7/+0 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(
                 new BoostTargetEffect(7, 0, Duration.EndOfTurn),
-                KickedCondition.getInstance(),
+                new LockedInCondition(KickedCondition.getInstance()),
                 "If {this} was kicked, that creature gets +7/+0 until end of turn"));
     }
 

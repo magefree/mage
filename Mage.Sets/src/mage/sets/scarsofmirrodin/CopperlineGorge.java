@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.UnlessCondition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -55,7 +55,7 @@ public class CopperlineGorge extends CardImpl<CopperlineGorge> {
         this.expansionSetCode = "SOM";
 
         // Copperline Gorge enters the battlefield tapped unless you control two or fewer other lands.
-        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
+        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
         String abilityText = "tapped unless you control two or fewer other lands";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());

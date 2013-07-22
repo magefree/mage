@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.UnlessCondition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlueManaAbility;
@@ -60,7 +60,7 @@ public class HinterlandHarbor extends CardImpl<HinterlandHarbor> {
         super(ownerId, 241, "Hinterland Harbor", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "ISD";
 
-        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
         String abilityText = "tapped unless you control a Forest or an Island";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new GreenManaAbility());

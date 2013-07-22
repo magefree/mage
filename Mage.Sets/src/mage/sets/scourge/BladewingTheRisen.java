@@ -25,29 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.sets.scourge;
 
-package mage.abilities.condition.common;
-
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
  *
  * @author LevelX2
  */
+public class BladewingTheRisen extends mage.sets.commander.BladewingTheRisen {
 
+    public BladewingTheRisen(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 136;
+        this.expansionSetCode = "SCG";
+    }
 
-public class FixedCondition implements Condition{
-
-    protected boolean conditionMet;
-
-    public FixedCondition(boolean conditionMet) {
-        this.conditionMet = conditionMet;
+    public BladewingTheRisen(final BladewingTheRisen card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return conditionMet;
+    public BladewingTheRisen copy() {
+        return new BladewingTheRisen(this);
     }
 }

@@ -25,26 +25,23 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.condition.common;
+package mage.abilities.condition;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 /**
- * A simple {@link mage.abilities.condition.Condition} to invert a decorated conditions
- * {@link mage.abilities.condition.Condition#apply(mage.game.Game, mage.abilities.Ability) apply(mage.game.Game, mage.abilities.Ability)}
+ * A simple {@link Condition} to invert a decorated conditions
+ * {@link Condition#apply(mage.game.Game, mage.abilities.Ability) apply(mage.game.Game, mage.abilities.Ability)}
  *  method invocation.
- *  
- *  The copy for {@link UnlessCondition}.
- *
- * @author noxx
+ * 
+ * @author maurer.it_at_gmail.com
  */
 public class InvertCondition implements Condition {
 
     private Condition condition;
 
-    public InvertCondition(Condition condition) {
+    public InvertCondition ( Condition condition ) {
         this.condition = condition;
     }
 

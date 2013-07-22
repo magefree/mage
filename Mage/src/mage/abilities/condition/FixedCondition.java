@@ -26,48 +26,27 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.abilities.condition;
 
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
  *
- * @author maurer.it_at_gmail.com
+ * @author LevelX2
  */
-public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
 
-    private static FilterLandPermanent filter = new FilterLandPermanent();
 
-    public RazorvergeThicket (UUID ownerId) {
-        super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "SOM";
+public class FixedCondition implements Condition{
 
-        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 lands";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-        this.addAbility(new GreenManaAbility());
-        this.addAbility(new WhiteManaAbility());
-    }
+    protected boolean conditionMet;
 
-    public RazorvergeThicket (final RazorvergeThicket card) {
-        super(card);
+    public FixedCondition(boolean conditionMet) {
+        this.conditionMet = conditionMet;
     }
 
     @Override
-    public RazorvergeThicket copy() {
-        return new RazorvergeThicket(this);
+    public boolean apply(Game game, Ability source) {
+        return conditionMet;
     }
-
 }

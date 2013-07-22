@@ -33,6 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -64,7 +65,7 @@ public class KorAeronaut extends CardImpl<KorAeronaut> {
 
         EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), false);
         ability.addTarget(new TargetCreaturePermanent());
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new LockedInCondition(KickedCondition.getInstance()), "When {this} enters the battlefield, if it was kicked, target creature gains flying until end of turn."));
     }
 
     public KorAeronaut(final KorAeronaut card) {

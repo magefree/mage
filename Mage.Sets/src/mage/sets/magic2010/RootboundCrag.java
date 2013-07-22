@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.common.UnlessCondition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.GreenManaAbility;
@@ -60,7 +60,7 @@ public class RootboundCrag extends CardImpl<RootboundCrag> {
         super(ownerId, 227, "Rootbound Crag", Rarity.RARE, new CardType[]{CardType.LAND}, null);
         this.expansionSetCode = "M10";
 
-        Condition controls = new UnlessCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
+        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0));
         String abilityText = "tap it unless you control a Mountain or a Forest";
         this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
         this.addAbility(new RedManaAbility());

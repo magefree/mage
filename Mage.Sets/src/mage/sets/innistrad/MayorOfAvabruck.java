@@ -31,7 +31,6 @@ import mage.MageInt;
 import mage.abilities.TriggeredAbility;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.InvertCondition;
 import mage.abilities.condition.common.NoSpellsWereCastLastTurnCondition;
 import mage.abilities.condition.common.TransformedCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
@@ -46,6 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
+import mage.abilities.condition.InvertCondition;
 
 /**
  *
