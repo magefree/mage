@@ -25,49 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
+package mage.abilities.condition;
 
-package mage.sets.scarsofmirrodin;
-
-import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.condition.InvertCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.TapSourceEffect;
-import mage.abilities.mana.GreenManaAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterLandPermanent;
+import mage.abilities.Ability;
+import mage.game.Game;
 
 /**
+ * A simple {@link Condition} to check the condition only one time at the start (result locked in).
+ * All subsequent checks return the first result.
  *
- * @author maurer.it_at_gmail.com
+ * @author LevelX2
  */
-public class RazorvergeThicket extends CardImpl<RazorvergeThicket> {
+public class LockedInCondition implements Condition {
 
-    private static FilterLandPermanent filter = new FilterLandPermanent();
+    private boolean conditionChecked = false;
+    private boolean result;
+    private Condition condition;
 
-    public RazorvergeThicket (UUID ownerId) {
-        super(ownerId, 228, "Razorverge Thicket", Rarity.RARE, new CardType[]{CardType.LAND}, null);
-        this.expansionSetCode = "SOM";
-
-        Condition controls = new InvertCondition(new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.FEWER_THAN, 4));
-        String abilityText = "tap it unless you control fewer than 3 lands";
-        this.addAbility(new EntersBattlefieldAbility(new ConditionalOneShotEffect(new TapSourceEffect(), controls, abilityText), abilityText));
-        this.addAbility(new GreenManaAbility());
-        this.addAbility(new WhiteManaAbility());
+    public LockedInCondition ( Condition condition ) {
+        this.condition = condition;
     }
 
-    public RazorvergeThicket (final RazorvergeThicket card) {
-        super(card);
-    }
-
+    /*
+     * {@inheritDoc}
+     */
     @Override
-    public RazorvergeThicket copy() {
-        return new RazorvergeThicket(this);
+    public boolean apply(Game game, Ability source) {
+        if(!conditionChecked) {
+            result = !condition.apply(game, source);
+            conditionChecked = true;
+        }
+        return result;
     }
 
 }

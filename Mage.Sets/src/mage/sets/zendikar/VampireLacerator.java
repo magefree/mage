@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.condition.common.TenOrLessLifeCondition;
-import mage.abilities.condition.UnlessCondition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class VampireLacerator extends CardImpl<VampireLacerator> {
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(
             new ConditionalOneShotEffect(
                     new LoseLifeSourceEffect(1),
-                    new UnlessCondition( new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT) ),
+                    new InvertCondition( new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT) ),
                     "you lose 1 life unless an opponent has 10 or less life"), TargetController.YOU, false));
     }
 

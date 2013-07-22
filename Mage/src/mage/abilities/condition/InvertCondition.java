@@ -28,7 +28,6 @@
 package mage.abilities.condition;
 
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.game.Game;
 
 /**
@@ -38,11 +37,11 @@ import mage.game.Game;
  * 
  * @author maurer.it_at_gmail.com
  */
-public class UnlessCondition implements Condition {
+public class InvertCondition implements Condition {
 
     private Condition condition;
 
-    public UnlessCondition ( Condition condition ) {
+    public InvertCondition ( Condition condition ) {
         this.condition = condition;
     }
 

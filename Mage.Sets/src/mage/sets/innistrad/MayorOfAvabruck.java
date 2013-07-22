@@ -45,7 +45,7 @@ import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 
 import java.util.UUID;
-import mage.abilities.condition.UnlessCondition;
+import mage.abilities.condition.InvertCondition;
 
 /**
  *
@@ -76,7 +76,7 @@ public class MayorOfAvabruck extends CardImpl<MayorOfAvabruck> {
         this.toughness = new MageInt(1);
 
         // Other Human creatures you control get +1/+1.
-        Effect effect = new ConditionalContinousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new UnlessCondition(new TransformedCondition()), ruleText);
+        Effect effect = new ConditionalContinousEffect(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true), new InvertCondition(new TransformedCondition()), ruleText);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
 
         // At the beginning of each upkeep, if no spells were cast last turn, transform Mayor of Avabruck.
