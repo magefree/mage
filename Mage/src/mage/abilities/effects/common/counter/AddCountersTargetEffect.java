@@ -38,6 +38,9 @@ import mage.players.Player;
 
 import java.util.UUID;
 import mage.abilities.Mode;
+import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.util.CardUtil;
 
 /**
  *
@@ -46,19 +49,32 @@ import mage.abilities.Mode;
 public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffect> {
 
     private Counter counter;
+    private DynamicValue amount;
 
     public AddCountersTargetEffect(Counter counter) {
         this(counter, Outcome.Benefit);
-     }
+    }
 
-        public AddCountersTargetEffect(Counter counter, Outcome outcome) {
+    public AddCountersTargetEffect(Counter counter, DynamicValue amount) {
+        this(counter, amount, Outcome.Benefit);
+    }
+
+    public AddCountersTargetEffect(Counter counter, Outcome outcome) {
+        this(counter, new StaticValue(0), outcome);
+    }
+
+    public AddCountersTargetEffect(Counter counter, DynamicValue amount, Outcome outcome) {
         super(outcome);
         this.counter = counter;
-     }
+        this.amount = amount;
+    }
 
     public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
         super(effect);
-        this.counter = effect.counter.copy();
+        if (effect.counter != null) {
+            this.counter = effect.counter.copy();
+        }
+        this.amount = effect.amount;
     }
 
     @Override
@@ -68,13 +84,17 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
             Permanent permanent = game.getPermanent(uuid);
             if (permanent != null) {
                 if (counter != null) {
-                    permanent.addCounters(counter.copy(), game);
+                    Counter newCounter = counter.copy();
+                    newCounter.add(amount.calculate(game, source));
+                    permanent.addCounters(newCounter, game);
                     affectedTargets ++;
                 }
             } else {
                 Player player = game.getPlayer(uuid);
                 if (player != null) {
-                    player.addCounters(counter.copy(), game);
+                    Counter newCounter = counter.copy();
+                    newCounter.add(amount.calculate(game, source));
+                    player.addCounters(newCounter, game);
                     affectedTargets ++;
                 }
             }
@@ -87,14 +107,18 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {
-            sb.append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters on target ");
+            sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
+        } else {
+            sb.append("a ");
         }
-        else {
-            sb.append("a ").append(counter.getName()).append(" counter on target ");
-        }
-        // TODO add normal text infrastructure for target pointers
-        if (mode.getTargets().size() > 0)
+        sb.append(counter.getName().toLowerCase()).append(" counter on target ");
+        // TODO: add normal text infrastructure for target pointers
+        if (mode.getTargets().size() > 0) {
             sb.append(mode.getTargets().get(0).getTargetName());
+        }
+        if (amount.getMessage().length() > 0) {
+            sb.append(" for each ").append(amount.getMessage());
+        }
         return sb.toString();
     }
 
