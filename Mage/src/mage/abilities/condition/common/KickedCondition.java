@@ -59,7 +59,7 @@ public class KickedCondition implements Condition {
         if (card != null) {
             for (Ability ability: card.getAbilities()) {
                 if (ability instanceof KickerAbility) {
-                    if(((KickerAbility) ability).isKicked()) {
+                    if(((KickerAbility) ability).isKicked(game)) {
                         return true;
                     }
                 }

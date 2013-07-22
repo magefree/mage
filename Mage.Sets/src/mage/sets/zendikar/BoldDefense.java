@@ -64,7 +64,7 @@ public class BoldDefense extends CardImpl<BoldDefense> {
 
 
         ContinuousEffect effect = new GainAbilityControlledEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false);
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), staticText, true));
     }
 
     public BoldDefense(final BoldDefense card) {

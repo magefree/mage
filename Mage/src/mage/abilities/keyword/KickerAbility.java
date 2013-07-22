@@ -42,6 +42,8 @@ import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.cards.Card;
+import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -90,6 +92,8 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
     protected String reminderText;
     protected List<OptionalAdditionalCost> kickerCosts = new LinkedList<OptionalAdditionalCost>();
     private   int xManaValue = 0;
+    // needed to reset kicked status, if card changes zone after casting it
+    private   int zoneChangeCounter = 0;
 
     public KickerAbility(String manaString) {
        this(KICKER_KEYWORD, KICKER_REMINDER_MANA);
@@ -115,6 +119,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
        this.keywordText = ability.keywordText;
        this.reminderText = ability.reminderText;
        this.xManaValue = ability.xManaValue;
+       this.zoneChangeCounter = ability.zoneChangeCounter;
 
     }
 
@@ -139,31 +144,54 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
         for (OptionalAdditionalCost cost: kickerCosts) {
             cost.reset();
         }
+        zoneChangeCounter = 0;
     }
 
     public int getXManaValue() {
         return xManaValue;
     }
     
-    public int getKickedCounter() {
-        int counter = 0;
-        for (OptionalAdditionalCost cost: kickerCosts) {
-            counter += cost.getActivateCount();
+    public int getKickedCounter(Game game) {
+        if (isKicked(game)) {
+            int counter = 0;
+            for (OptionalAdditionalCost cost: kickerCosts) {
+                counter += cost.getActivateCount();
+            }
+            return counter;
         }
-        return counter;
+        return 0;
     }
 
-    public boolean isKicked() {
-        for (OptionalAdditionalCost cost: kickerCosts) {
-            if(cost.isActivated()) {
-                return true;
+    public boolean isKicked(Game game) {
+        Card card = game.getCard(sourceId);
+        // kicked status counts only if card not changed zone since it was kicked
+        if (card != null && card.getZoneChangeCounter() <= zoneChangeCounter +1) {
+            for (OptionalAdditionalCost cost: kickerCosts) {
+                if(cost.isActivated()) {
+                    return true;
+                }
             }
+        } else {
+            this.resetKicker();
         }
         return false;
     }
 
     public List<OptionalAdditionalCost> getKickerCosts () {
         return kickerCosts;
+    }
+
+    private void activateKicker(OptionalAdditionalCost kickerCost, Game game) {
+        kickerCost.activate();
+        // remember zone change counter
+        if (zoneChangeCounter == 0) {
+            Card card = game.getCard(sourceId);
+            if (card != null) {
+                zoneChangeCounter = card.getZoneChangeCounter();
+            } else {
+                throw new IllegalArgumentException("Kicker source card not found");
+            }
+        }
     }
 
     @Override
@@ -182,7 +210,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
                         }
                         if (kickerCost.canPay(sourceId, controllerId, game) &&
                                 player.chooseUse(Outcome.Benefit, new StringBuilder("Pay ").append(times).append(kickerCost.getText(false)).append(" ?").toString(), game)) {
-                            kickerCost.activate();
+                            this.activateKicker(kickerCost, game);
                             for (Iterator it = ((Costs) kickerCost).iterator(); it.hasNext();) {
                                 Cost cost = (Cost) it.next();
                                 if (cost instanceof ManaCostsImpl) {
