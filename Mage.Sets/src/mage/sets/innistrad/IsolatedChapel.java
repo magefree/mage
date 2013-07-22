@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.common.UnlessCondition;
+import mage.abilities.condition.UnlessCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.TapSourceEffect;
 import mage.abilities.mana.BlackManaAbility;

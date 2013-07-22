@@ -33,7 +33,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.condition.common.CastFromHandCondition;
-import mage.abilities.common.UnlessCondition;
+import mage.abilities.condition.UnlessCondition;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;

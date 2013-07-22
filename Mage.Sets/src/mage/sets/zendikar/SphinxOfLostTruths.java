@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
-import mage.abilities.common.UnlessCondition;
+import mage.abilities.condition.UnlessCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.DiscardControllerEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
