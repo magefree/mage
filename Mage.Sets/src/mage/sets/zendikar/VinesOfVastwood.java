@@ -29,6 +29,7 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -63,7 +64,7 @@ public class VinesOfVastwood extends CardImpl<VinesOfVastwood> {
 
         // If Vines of Vastwood was kicked, that creature gets +4/+4 until end of turn.
         this.getSpellAbility().addEffect(new ConditionalContinousEffect(new BoostTargetEffect(4, 4, Duration.EndOfTurn),
-                KickedCondition.getInstance(), staticText));
+                new LockedInCondition(KickedCondition.getInstance()), staticText));
     }
 
     public VinesOfVastwood(final VinesOfVastwood card) {

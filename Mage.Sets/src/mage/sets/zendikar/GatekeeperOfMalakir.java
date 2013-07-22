@@ -27,21 +27,20 @@
  */
 package mage.sets.zendikar;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.SacrificeEffect;
+import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.TargetPlayer;
-
-import java.util.UUID;
-import mage.abilities.keyword.KickerAbility;
 
 /**
  *
@@ -66,12 +65,12 @@ public class GatekeeperOfMalakir extends CardImpl<GatekeeperOfMalakir> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Kicker {B} (You may pay an additional {B} as you cast this spell.)
         this.addAbility(new KickerAbility("{B}"));
 
-
+        // When Gatekeeper of Malakir enters the battlefield, if it was kicked, target player sacrifices a creature.
         EntersBattlefieldTriggeredAbility ability =
                 new EntersBattlefieldTriggeredAbility(new SacrificeEffect(filter, 1, "target player"));
-
         Ability conditionalAbility = new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, target player sacrifices a creature.");
         conditionalAbility.addTarget(new TargetPlayer());
         this.addAbility(conditionalAbility);

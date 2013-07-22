@@ -28,6 +28,7 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
+import mage.abilities.condition.LockedInCondition;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -60,7 +61,7 @@ public class VampiresBite extends CardImpl<VampiresBite> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(3, 0, Duration.EndOfTurn));
         ContinuousEffect effect = new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn);
-        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, KickedCondition.getInstance(), "If {this} was kicked, that creature gains lifelink until end of turn"));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(effect, new LockedInCondition(KickedCondition.getInstance()), "If {this} was kicked, that creature gains lifelink until end of turn"));
     }
 
     public VampiresBite(final VampiresBite card) {

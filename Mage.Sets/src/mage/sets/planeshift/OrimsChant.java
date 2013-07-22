@@ -29,16 +29,17 @@
 package mage.sets.planeshift;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.condition.Condition;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.KickerAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.players.Player;
@@ -118,14 +119,16 @@ class OrimsChantCantCastEffect extends ReplacementEffectImpl<OrimsChantCantCastE
 class OrimsChantCantAttackEffect extends ReplacementEffectImpl<OrimsChantCantAttackEffect> {
 
     private static final String effectText = "If Orim's Chant was kicked, creatures can't attack this turn";
+    private Condition condition = new LockedInCondition(KickedCondition.getInstance());
 
     OrimsChantCantAttackEffect ( ) {
         super(Duration.EndOfTurn, Outcome.Benefit);
         staticText = effectText;
     }
 
-    OrimsChantCantAttackEffect ( OrimsChantCantAttackEffect effect ) {
+    OrimsChantCantAttackEffect (final OrimsChantCantAttackEffect effect ) {
         super(effect);
+        this.condition = effect.condition;
     }
 
     @Override
@@ -143,7 +146,7 @@ class OrimsChantCantAttackEffect extends ReplacementEffectImpl<OrimsChantCantAtt
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && KickedCondition.getInstance().apply(game, source)) {
+        if ( event.getType() == GameEvent.EventType.DECLARE_ATTACKER && condition.apply(game, source)) {
             return true;
         }
         return false;
