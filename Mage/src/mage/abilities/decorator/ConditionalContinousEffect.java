@@ -3,7 +3,7 @@ package mage.abilities.decorator;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
-import mage.abilities.condition.common.FixedCondition;
+import mage.abilities.condition.FixedCondition;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
