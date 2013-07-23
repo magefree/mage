@@ -37,6 +37,7 @@ import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 
 import java.util.UUID;
+import mage.game.command.Commander;
 
 
 /**
@@ -193,6 +194,9 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                             break;
                         case EXILED:
                             game.getExile().getPermanentExile().add(card);
+                            break;
+                        case COMMAND:
+                            game.addCommander(new Commander(card));
                             break;
                         case LIBRARY:
                             if (flag)

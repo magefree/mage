@@ -44,6 +44,8 @@ import mage.constants.Zone;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.watchers.Watcher;
+import mage.watchers.common.CommanderCombatDamageWatcher;
 
 public class CommanderDuel extends GameImpl<CommanderDuel> {
 
@@ -88,6 +90,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
                         ability.addEffect(new CommanderReplacementEffect(commander.getId()));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
                         getState().setValue(commander + "_castCount", new Integer(0));
+                        getState().getWatchers().add(new CommanderCombatDamageWatcher(commander.getId()));
                     }
                 }
             }
@@ -97,6 +100,29 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
 
+    /* 20130711
+     *903.14a A player that’s been dealt 21 or more combat damage by the same commander
+     * over the course of the game loses the game. (This is a state-based action. See rule 704.) 
+     *
+     */
+    @Override
+    protected boolean checkStateBasedActions() {
+        for(Watcher watcher : getState().getWatchers().values()){
+            if(watcher instanceof CommanderCombatDamageWatcher){
+                CommanderCombatDamageWatcher damageWatcher = (CommanderCombatDamageWatcher)watcher;
+                for(UUID playerUUID : damageWatcher.getDamageToPlayer().keySet()){
+                    Player player = getPlayer(playerUUID);
+                    if(player != null && damageWatcher.getDamageToPlayer().get(playerUUID) >= 21){
+                        player.lost(this);
+                    }
+                }
+            }
+        }
+        return super.checkStateBasedActions();
+    }
+
+    
+    
     @Override
     public void quit(UUID playerId) {
         super.quit(playerId);
@@ -115,7 +141,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
 
     @Override
     public void leave(UUID playerId) {
-
+        super.leave(playerId);
     }
 
     @Override
