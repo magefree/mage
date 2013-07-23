@@ -28,18 +28,17 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.common.EquippedCondition;
+import mage.abilities.condition.common.TenOrLessLifeCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.IntimidateAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 
 /**
@@ -48,8 +47,8 @@ import mage.constants.Zone;
  */
 public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
 
-    private static final String rule1 = "As long as {this} is equipped, it gets +2/+1";
-    private static final String rule2 = "As long as {this} is equipped, it has intimidate";
+    private static final String rule1 = "As long as opponent has 10 or less life, {this} gets +2/+1";
+    private static final String rule2 = "As long as opponent has 10 or less life, {this} has intimidate";
 
     public GuulDrazVampire(UUID ownerId) {
         super(ownerId, 93, "Guul Draz Vampire", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -61,9 +60,9 @@ public class GuulDrazVampire extends CardImpl<GuulDrazVampire> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
-        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), EquippedCondition.getInstance(), rule1);
+        ConditionalContinousEffect effect1 = new ConditionalContinousEffect(new BoostSourceEffect(2, 1, Duration.WhileOnBattlefield), new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT), rule1);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect1));
-        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), EquippedCondition.getInstance(), rule2);
+        ConditionalContinousEffect effect2 = new ConditionalContinousEffect(new GainAbilitySourceEffect(IntimidateAbility.getInstance()), new TenOrLessLifeCondition(TenOrLessLifeCondition.CheckType.AN_OPPONENT), rule2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect2));
 
     }
