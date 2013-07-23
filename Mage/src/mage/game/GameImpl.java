@@ -439,7 +439,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (winnerId == null) {
             return "Game is a draw";
         }
-        return "Player " + state.getPlayer(winnerId).getName() + " is the winner";
+        return new StringBuilder("Player ").append(state.getPlayer(winnerId).getName()).append(" is the winner").toString();
     }
 
     @Override
@@ -708,14 +708,18 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected UUID findWinnersAndLosers() {
         UUID winner = null;
         for (Player player: state.getPlayers().values()) {
-            if (player.hasWon() || (!player.hasLost() && !player.hasLeft())) {
+            if (player.hasWon()) {
+                winner = player.getId();
+                break;
+            }
+            if (!player.hasLost() && !player.hasLeft()) {
                 player.won(this);
                 winner = player.getId();
                 break;
             }
         }
         for (Player player: state.getPlayers().values()) {
-            if (winner != null && !player.getId().equals(winner)) {
+            if (winner != null && !player.getId().equals(winner) && !player.hasLost()) {
                 player.lost(this);
             }
         }
@@ -1937,12 +1941,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Date getStartTime() {
-        return startTime;
+        return new Date(startTime.getTime());
     }
 
     @Override
     public Date getEndTime() {
-        return endTime;
+        return new Date(endTime.getTime());
     }
 
     @Override

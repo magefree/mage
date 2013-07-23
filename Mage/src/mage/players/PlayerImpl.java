@@ -111,10 +111,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     private static Random rnd = new Random();
 
     /**
-     * Means what exactly?
-     * No more actions?
+     * Used to cancel waiting requests send to the player
      */
     protected boolean abort;
+
     protected final UUID playerId;
     protected String name;
     protected boolean human;
@@ -1333,17 +1333,23 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public void won(Game game) {
         if (!game.replaceEvent(new GameEvent(GameEvent.EventType.WINS, null, null, playerId))) {
             if (!this.loses) {
-                //20100423 - 800.6, 801.16
-                if (game.getPlayers().size() > 2) {
-                    for (UUID opponentId: game.getOpponents(playerId)) {
-                        Player opponent = game.getPlayer(opponentId);
-                        if (opponent != null && !opponent.hasLost()) {
-                            opponent.lost(game);
-                        }
+                //20130501 - 800.7, 801.16
+                // all opponents in range loose the game
+                for (UUID opponentId: game.getOpponents(playerId)) {
+                    Player opponent = game.getPlayer(opponentId);
+                    if (opponent != null && !opponent.hasLost()) {
+                        opponent.lost(game);
                     }
-                    this.wins = true;
                 }
-                else {
+                // if no more opponents alive, you win and the game ends
+                int opponentsAlive = 0;
+                for (UUID opponentId: game.getOpponents(playerId)) {
+                    Player opponent = game.getPlayer(opponentId);
+                    if (!opponent.hasLost()) {
+                        opponentsAlive++;
+                    }
+                }
+                if (opponentsAlive == 0) {
                     this.wins = true;
                     game.end();
                 }
