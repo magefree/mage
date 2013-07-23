@@ -28,10 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -41,6 +37,9 @@ import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnFromGraveyardToBattlefieldTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -58,7 +57,7 @@ public class Scarecrone extends CardImpl<Scarecrone> {
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
         filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new SubtypePredicate("Scarecrow"));
+        filterScarecrow.add(new SubtypePredicate("Scarecrow"));
     }
 
     public Scarecrone(UUID ownerId) {
