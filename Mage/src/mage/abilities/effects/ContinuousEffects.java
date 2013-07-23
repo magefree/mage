@@ -563,6 +563,7 @@ public class ContinuousEffects implements Serializable {
                                 checked++;
                             }
                         }
+                        break;
                     }
                 }                
             }
