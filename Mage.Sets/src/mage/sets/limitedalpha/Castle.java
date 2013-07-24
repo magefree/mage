@@ -28,9 +28,14 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterUntappedCreature;
 
 /**
  *
@@ -44,8 +49,9 @@ public class Castle extends CardImpl<Castle> {
         this.expansionSetCode = "LEA";
 
         this.color.setWhite(true);
-
+        
         // Untapped creatures you control get +0/+2.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));
     }
 
     public Castle(final Castle card) {

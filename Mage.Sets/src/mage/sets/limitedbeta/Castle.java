@@ -45,9 +45,6 @@ public class Castle extends mage.sets.limitedalpha.Castle {
         super(ownerId);
         this.cardNumber = 194;
         this.expansionSetCode = "LEB";
-        
-        // Untapped creatures you control get +0/+2.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(0, 2, Duration.WhileOnBattlefield, new FilterUntappedCreature())));
     }
 
     public Castle(final Castle card) {
