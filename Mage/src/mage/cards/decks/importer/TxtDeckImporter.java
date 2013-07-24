@@ -31,12 +31,13 @@ package mage.cards.decks.importer;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import mage.cards.ExpansionSet;
 import mage.cards.Sets;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
 import mage.cards.repository.CardRepository;
+import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
 
 /**
  *
@@ -70,7 +71,7 @@ public class TxtDeckImporter extends DeckImporter {
                 Date lastReleaseDate = new GregorianCalendar(1900, 1, 1).getTime();
                 CardInfo lastReleasedCard = null;
                 for (CardInfo cardinfo: cards) {
-                    ExpansionSet set = Sets.findSet(cardinfo.getSetCode());
+                    ExpansionInfo set = ExpansionRepository.instance.getSetByCode(cardinfo.getSetCode());
                     if (set != null) {
                         if (lastReleaseDate == null || set.getReleaseDate().after(lastReleaseDate)) {
                             lastReleasedCard = cardinfo;
