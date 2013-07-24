@@ -28,7 +28,7 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -47,7 +47,7 @@ public class AncestralRecall extends CardImpl<AncestralRecall> {
         this.color.setBlue(true);
 
         // Target player draws three cards.
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(3));
+        this.getSpellAbility().addEffect(new DrawCardTargetEffect(3));
         this.getSpellAbility().addTarget(new TargetPlayer(true));
     }
 
