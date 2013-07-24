@@ -76,7 +76,7 @@ public class Mindsparker extends CardImpl<Mindsparker> {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever an opponent casts a white or blue instant or sorcery spell, Mindsparker deals 2 damage to that player.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false));
+        this.addAbility(new OpponentCastsSpellTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false, true));
 
     }
 

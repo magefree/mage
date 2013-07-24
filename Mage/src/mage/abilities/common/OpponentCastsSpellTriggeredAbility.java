@@ -27,9 +27,9 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,8 +55,7 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     }
 
     public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional) {
-        super(zone, effect, optional);
-        this.filter = filter;
+        this(zone, effect, filter, optional, false);
     }
 
     public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional, boolean setTargetPointerPlayer) {
@@ -67,7 +66,7 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
 
     public OpponentCastsSpellTriggeredAbility(final OpponentCastsSpellTriggeredAbility ability) {
         super(ability);
-        filter = ability.filter;
+        this.filter = ability.filter;
         this.setTargetPointerPlayer = ability.setTargetPointerPlayer;
     }
 
@@ -75,12 +74,13 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST && game.getOpponents(controllerId).contains(event.getPlayerId())) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell != null && filter.match(spell, game) && !setTargetPointerPlayer) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getTargetId()));
-                return true;
-            } else {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(event.getPlayerId()));
-                return true;
+            if (spell != null && filter.match(spell, game)) {
+                if (setTargetPointerPlayer) {
+                    for (Effect effect: this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    }
+                    return true;
+                }
             }
         }
         return false;
