@@ -8475,6 +8475,7 @@ Frozen Shade|Limited Edition Beta|18|C|{2}{B}|Creature - Shade|0|1|{B}: Frozen S
 Gloom|Limited Edition Beta|19|U|{2}{B}|Enchantment|||White spells cost {3} more to cast.$Activated abilities of white enchantments cost {3} more to activate.|
 Howl from Beyond|Limited Edition Beta|20|C|{X}{B}|Instant|||Target creature gets +X/+0 until end of turn.|
 Hypnotic Specter|Limited Edition Beta|21|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.|
+Lich|Limited Edition Beta|237|R|{B}{B}{B}{B}|Enchantment|||As Lich enters the battlefield, you lose life equal to your life total.$You don't lose the game for having 0 or less life.$If you would gain life, draw that many cards instead.$Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.$When Lich is put into a graveyard from the battlefield, you lose the game.|
 Lord of the Pit|Limited Edition Beta|23|R|{4}{B}{B}{B}|Creature - Demon|7|7|Flying, trample$At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.|
 Mind Twist|Limited Edition Beta|24|R|{X}{B}|Sorcery|||Target player discards X cards at random.|
 Nether Shadow|Limited Edition Beta|25|R|{B}{B}|Creature - Spirit|1|1|Haste$At the beginning of your upkeep, if Nether Shadow is in your graveyard with three or more creature cards above it, you may put Nether Shadow onto the battlefield.|
@@ -8485,7 +8486,6 @@ Pestilence|Limited Edition Beta|29|C|{2}{B}{B}|Enchantment|||At the beginning of
 Plague Rats|Limited Edition Beta|30|C|{2}{B}|Creature - Rat|*|*|Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.|
 Raise Dead|Limited Edition Beta|31|C|{B}|Sorcery|||Return target creature card from your graveyard to your hand.|
 Royal Assassin|Limited Edition Beta|32|R|{1}{B}{B}|Creature - Human Assassin|1|1|{tap}: Destroy target tapped creature.|
-Natural Selection|Limited Edition Beta|32|R|{G}|Instant|||Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.|
 Sacrifice|Limited Edition Beta|33|U|{B}|Instant|||As an additional cost to cast Sacrifice, sacrifice a creature.$Add to your mana pool an amount of {B} equal to the sacrificed creature's converted mana cost.|
 Scathe Zombies|Limited Edition Beta|34|C|{2}{B}|Creature - Zombie|2|2||
 Scavenging Ghoul|Limited Edition Beta|35|U|{3}{B}|Creature - Zombie|2|2|At the beginning of each end step, put a corpse counter on Scavenging Ghoul for each creature that died this turn.$Remove a corpse counter from Scavenging Ghoul: Regenerate Scavenging Ghoul.|
@@ -8529,7 +8529,6 @@ Power Leak|Limited Edition Beta|72|C|{1}{U}|Enchantment - Aura|||Enchant enchant
 Power Sink|Limited Edition Beta|73|C|{X}{U}|Instant|||Counter target spell unless its controller pays {X}. If he or she doesn't, that player taps all lands with mana abilities he or she controls and empties his or her mana pool.|
 Prodigal Sorcerer|Limited Edition Beta|74|C|{2}{U}|Creature - Human Wizard|1|1|{tap}: Prodigal Sorcerer deals 1 damage to target creature or player.|
 Psionic Blast|Limited Edition Beta|75|U|{2}{U}|Instant|||Psionic Blast deals 4 damage to target creature or player and 2 damage to you.|
-Ice Storm|Limited Edition Beta|75|U|{2}{G}|Sorcery|||Destroy target land.|
 Psychic Venom|Limited Edition Beta|76|C|{1}{U}|Enchantment - Aura|||Enchant land$Whenever enchanted land becomes tapped, Psychic Venom deals 2 damage to that land's controller.|
 Sea Serpent|Limited Edition Beta|77|C|{5}{U}|Creature - Serpent|5|5|Sea Serpent can't attack unless defending player controls an Island.$$When you control no Islands, sacrifice Sea Serpent.|
 Siren's Call|Limited Edition Beta|78|U|{U}|Instant|||Cast Siren's Call only during an opponent's turn, before attackers are declared.$Creatures the active player controls attack this turn if able.$At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.|
@@ -8564,6 +8563,7 @@ Giant Growth|Limited Edition Beta|106|C|{G}|Instant|||Target creature gets +3/+3
 Giant Spider|Limited Edition Beta|107|C|{3}{G}|Creature - Spider|2|4|Reach <i>(This creature can block creatures with flying.)</i>|
 Grizzly Bears|Limited Edition Beta|108|C|{1}{G}|Creature - Bear|2|2||
 Hurricane|Limited Edition Beta|109|U|{X}{G}|Sorcery|||Hurricane deals X damage to each creature with flying and each player.|
+Ice Storm|Limited Edition Beta|110|U|{2}{G}|Sorcery|||Destroy target land.|
 Instill Energy|Limited Edition Beta|111|U|{G}|Enchantment - Aura|||Enchant creature$Enchanted creature can attack as though it had haste.${0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.|
 Ironroot Treefolk|Limited Edition Beta|112|C|{4}{G}|Creature - Treefolk|3|5||
 Kudzu|Limited Edition Beta|113|R|{1}{G}{G}|Enchantment - Aura|||Enchant land$When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of his or her choice.|
@@ -8574,6 +8574,7 @@ Living Artifact|Limited Edition Beta|117|R|{G}|Enchantment - Aura|||Enchant arti
 Living Lands|Limited Edition Beta|118|R|{3}{G}|Enchantment|||All Forests are 1/1 creatures that are still lands.|
 Llanowar Elves|Limited Edition Beta|119|C|{G}|Creature - Elf Druid|1|1|{tap}: Add {G} to your mana pool.|
 Lure|Limited Edition Beta|120|U|{1}{G}{G}|Enchantment - Aura|||Enchant creature$All creatures able to block enchanted creature do so.|
+Natural Selection|Limited Edition Beta|121|R|{G}|Instant|||Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.|
 Regeneration|Limited Edition Beta|122|C|{1}{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>${G}: Regenerate enchanted creature. <i>(The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
 Regrowth|Limited Edition Beta|123|U|{1}{G}|Sorcery|||Return target card from your graveyard to your hand.|
 Scryb Sprites|Limited Edition Beta|124|C|{G}|Creature - Faerie|1|1|Flying|
@@ -8689,7 +8690,6 @@ Black Lotus|Limited Edition Beta|233|R|{0}|Artifact|||{tap}, Sacrifice Black Lot
 Black Vise|Limited Edition Beta|234|U|{1}|Artifact|||As Black Vise enters the battlefield, choose an opponent.$At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.|
 Celestial Prism|Limited Edition Beta|235|U|{3}|Artifact|||{2}, {tap}: Add one mana of any color to your mana pool.|
 Chaos Orb|Limited Edition Beta|236|R|{2}|Artifact|||{1}, {tap}: If Chaos Orb is on the battlefield, flip Chaos Orb onto the battlefield from a height of at least one foot. If Chaos Orb turns over completely at least once during the flip, destroy all permanents it touches. Then destroy Chaos Orb.|
-Lich|Limited Edition Beta|237|R|{B}{B}{B}{B}|Enchantment|||As Lich enters the battlefield, you lose life equal to your life total.$You don't lose the game for having 0 or less life.$If you would gain life, draw that many cards instead.$Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.$When Lich is put into a graveyard from the battlefield, you lose the game.|
 Clockwork Beast|Limited Edition Beta|237|R|{6}|Artifact Creature - Beast|0|4|Clockwork Beast enters the battlefield with seven +1/+0 counters on it.$At end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.${X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.|
 Conservator|Limited Edition Beta|238|U|{4}|Artifact|||{3}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.|
 Copper Tablet|Limited Edition Beta|239|U|{2}|Artifact|||At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.|
