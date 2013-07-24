@@ -29,14 +29,13 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.Outcome;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
 import mage.util.CardUtil;
@@ -70,18 +69,19 @@ public class ReturnFromGraveyardToBattlefieldTargetEffect extends OneShotEffect<
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean result = false;
         for (UUID targetId: getTargetPointer().getTargets(game, source)) {
             Card card = game.getCard(targetId);
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null) {
                     if(card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), source.getControllerId(), tapped)){
-                        return true;
+                        result = true;
                     }
                 }
             }
         }
-        return true;
+        return result;
     }
 
     @Override
