@@ -8455,229 +8455,34 @@ Channel|Limited Edition Alpha|97|U|{G}{G}|Sorcery|||Until end of turn, any time 
 Cockatrice|Limited Edition Alpha|98|R|{3}{G}{G}|Creature - Cockatrice|2|4|Flying$Whenever Cockatrice blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.|
 Craw Wurm|Limited Edition Alpha|99|C|{4}{G}{G}|Creature - Wurm|6|4||
 Animate Dead|Limited Edition Beta|1|U|{1}{B}|Enchantment - Aura|||Enchant creature card in a graveyard$When Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.$Enchanted creature gets -1/-0.|
-Deathlace|Limited Edition Beta|10|R|{B}|Instant|||Target spell or permanent becomes black. <i>(Mana symbols on that permanent remain unchanged.)</i>|
-Elvish Archers|Limited Edition Beta|100|R|{1}{G}|Creature - Elf Archer|2|1|First strike|
-Fastbond|Limited Edition Beta|101|R|{G}|Enchantment|||You may play any number of additional lands on each of your turns.$Whenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.|
-Fog|Limited Edition Beta|102|C|{G}|Instant|||Prevent all combat damage that would be dealt this turn.|
-Force of Nature|Limited Edition Beta|103|R|{2}{G}{G}{G}{G}|Creature - Elemental|8|8|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.|
-Fungusaur|Limited Edition Beta|104|R|{3}{G}|Creature - Fungus Lizard|2|2|Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.|
-Gaea's Liege|Limited Edition Beta|105|R|{3}{G}{G}{G}|Creature - Avatar|*|*|As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.${tap}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.|
-Giant Growth|Limited Edition Beta|106|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
-Giant Spider|Limited Edition Beta|107|C|{3}{G}|Creature - Spider|2|4|Reach <i>(This creature can block creatures with flying.)</i>|
-Grizzly Bears|Limited Edition Beta|108|C|{1}{G}|Creature - Bear|2|2||
-Hurricane|Limited Edition Beta|109|U|{X}{G}|Sorcery|||Hurricane deals X damage to each creature with flying and each player.|
-Demonic Attorney|Limited Edition Beta|11|R|{1}{B}{B}|Sorcery|||Remove Demonic Attorney from your deck before playing if you're not playing for ante.$Each player antes the top card of his or her library.|
-Instill Energy|Limited Edition Beta|111|U|{G}|Enchantment - Aura|||Enchant creature$Enchanted creature can attack as though it had haste.${0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.|
-Ironroot Treefolk|Limited Edition Beta|112|C|{4}{G}|Creature - Treefolk|3|5||
-Kudzu|Limited Edition Beta|113|R|{1}{G}{G}|Enchantment - Aura|||Enchant land$When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of his or her choice.|
-Ley Druid|Limited Edition Beta|114|U|{2}{G}|Creature - Human Druid|1|1|{tap}: Untap target land.|
-Lifeforce|Limited Edition Beta|115|U|{G}{G}|Enchantment|||{G}{G}: Counter target black spell.|
-Lifelace|Limited Edition Beta|116|R|{G}|Instant|||Target spell or permanent becomes green. <i>(Mana symbols on that permanent remain unchanged.)</i>|
-Living Artifact|Limited Edition Beta|117|R|{G}|Enchantment - Aura|||Enchant artifact$Whenever you're dealt damage, put that many vitality counters on Living Artifact.$At the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.|
-Living Lands|Limited Edition Beta|118|R|{3}{G}|Enchantment|||All Forests are 1/1 creatures that are still lands.|
-Llanowar Elves|Limited Edition Beta|119|C|{G}|Creature - Elf Druid|1|1|{tap}: Add {G} to your mana pool.|
-Demonic Hordes|Limited Edition Beta|12|R|{3}{B}{B}{B}|Creature - Demon|5|5|{tap}: Destroy target land.$At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.|
-Lure|Limited Edition Beta|120|U|{1}{G}{G}|Enchantment - Aura|||Enchant creature$All creatures able to block enchanted creature do so.|
-Regeneration|Limited Edition Beta|122|C|{1}{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>${G}: Regenerate enchanted creature. <i>(The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
-Regrowth|Limited Edition Beta|123|U|{1}{G}|Sorcery|||Return target card from your graveyard to your hand.|
-Scryb Sprites|Limited Edition Beta|124|C|{G}|Creature - Faerie|1|1|Flying|
-Shanodin Dryads|Limited Edition Beta|125|C|{G}|Creature - Dryad|1|1|Forestwalk|
-Stream of Life|Limited Edition Beta|126|C|{X}{G}|Sorcery|||Target player gains X life.|
-Thicket Basilisk|Limited Edition Beta|127|U|{3}{G}{G}|Creature - Basilisk|2|4|Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.|
-Timber Wolves|Limited Edition Beta|128|R|{G}|Creature - Wolf|1|1|Banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
-Tranquility|Limited Edition Beta|129|C|{2}{G}|Sorcery|||Destroy all enchantments.|
-Demonic Tutor|Limited Edition Beta|13|U|{1}{B}|Sorcery|||Search your library for a card and put that card into your hand. Then shuffle your library.|
-Tsunami|Limited Edition Beta|130|U|{3}{G}|Sorcery|||Destroy all Islands.|
-Verduran Enchantress|Limited Edition Beta|131|R|{1}{G}{G}|Creature - Human Druid|0|2|Whenever you cast an enchantment spell, you may draw a card.|
-Wall of Brambles|Limited Edition Beta|132|U|{2}{G}|Creature - Plant Wall|2|3|Defender <i>(This creature can't attack.)</i>${G}: Regenerate Wall of Brambles.|
-Wall of Ice|Limited Edition Beta|133|U|{2}{G}|Creature - Wall|0|7|Defender <i>(This creature can't attack.)</i>|
-Wall of Wood|Limited Edition Beta|134|C|{G}|Creature - Wall|0|3|Defender <i>(This creature can't attack.)</i>|
-Wanderlust|Limited Edition Beta|135|U|{2}{G}|Enchantment - Aura|||Enchant creature$At the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.|
-War Mammoth|Limited Edition Beta|136|C|{3}{G}|Creature - Elephant|3|3|Trample|
-Web|Limited Edition Beta|137|R|{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$Enchanted creature gets +0/+2 and has reach. <i>(It can block creatures with flying.)</i>|
-Wild Growth|Limited Edition Beta|138|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
-Badlands|Limited Edition Beta|139|R||Land - Swamp Mountain||||
-Drain Life|Limited Edition Beta|14|C|{X}{1}{B}|Sorcery|||Spend only black mana on X.$Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.|
-Burrowing|Limited Edition Beta|140|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has mountainwalk.|
-Chaoslace|Limited Edition Beta|141|R|{R}|Instant|||Target spell or permanent becomes red. <i>(Its mana symbols remain unchanged.)</i>|
-Disintegrate|Limited Edition Beta|142|C|{X}{R}|Sorcery|||Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.|
-Dragon Whelp|Limited Edition Beta|143|U|{2}{R}{R}|Creature - Dragon|2|3|Flying${R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.|
-Dwarven Demolition Team|Limited Edition Beta|144|U|{2}{R}|Creature - Dwarf|1|1|{tap}: Destroy target Wall.|
-Dwarven Warriors|Limited Edition Beta|145|C|{2}{R}|Creature - Dwarf Warrior|1|1|{tap}: Target creature with power 2 or less is unblockable this turn.|
-Earth Elemental|Limited Edition Beta|146|U|{3}{R}{R}|Creature - Elemental|4|5||
-Earthbind|Limited Edition Beta|147|C|{R}|Enchantment - Aura|||Enchant creature$When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."|
-Earthquake|Limited Edition Beta|148|R|{X}{R}|Sorcery|||Earthquake deals X damage to each creature without flying and each player.|
-False Orders|Limited Edition Beta|149|C|{R}|Instant|||Cast False Orders only during the declare blockers step.$Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.|
-Drudge Skeletons|Limited Edition Beta|15|C|{1}{B}|Creature - Skeleton|1|1|{B}: Regenerate Drudge Skeletons. <i>(The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
-Fire Elemental|Limited Edition Beta|150|U|{3}{R}{R}|Creature - Elemental|5|4||
-Fireball|Limited Edition Beta|151|C|{X}{R}|Sorcery|||Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.$Fireball costs {1} more to cast for each target beyond the first.|
-Firebreathing|Limited Edition Beta|152|C|{R}|Enchantment - Aura|||Enchant creature${R}: Enchanted creature gets +1/+0 until end of turn.|
-Flashfires|Limited Edition Beta|153|U|{3}{R}|Sorcery|||Destroy all Plains.|
-Fork|Limited Edition Beta|154|R|{R}{R}|Instant|||Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.|
-Goblin Balloon Brigade|Limited Edition Beta|155|U|{R}|Creature - Goblin Warrior|1|1|{R}: Goblin Balloon Brigade gains flying until end of turn.|
-Goblin King|Limited Edition Beta|156|R|{1}{R}{R}|Creature - Goblin|2|2|Other Goblin creatures get +1/+1 and have mountainwalk. <i>(They're unblockable as long as defending player controls a Mountain.)</i>|
-Granite Gargoyle|Limited Edition Beta|157|R|{2}{R}|Creature - Gargoyle|2|2|Flying${R}: Granite Gargoyle gets +0/+1 until end of turn.|
-Gray Ogre|Limited Edition Beta|158|C|{2}{R}|Creature - Ogre|2|2||
-Hill Giant|Limited Edition Beta|159|C|{3}{R}|Creature - Giant|3|3||
-Evil Presence|Limited Edition Beta|16|U|{B}|Enchantment - Aura|||Enchant land$Enchanted land is a Swamp.|
-Hurloon Minotaur|Limited Edition Beta|160|C|{1}{R}{R}|Creature - Minotaur|2|3||
-Ironclaw Orcs|Limited Edition Beta|161|C|{1}{R}|Creature - Orc|2|2|Ironclaw Orcs can't block creatures with power 2 or greater.|
-Keldon Warlord|Limited Edition Beta|162|U|{2}{R}{R}|Creature - Human Barbarian|*|*|Keldon Warlord's power and toughness are each equal to the number of non-Wall creatures you control.|
-Lightning Bolt|Limited Edition Beta|163|C|{R}|Instant|||Lightning Bolt deals 3 damage to target creature or player.|
-Mana Flare|Limited Edition Beta|164|R|{2}{R}|Enchantment|||Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.|
-Manabarbs|Limited Edition Beta|165|R|{3}{R}|Enchantment|||Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.|
-Mons's Goblin Raiders|Limited Edition Beta|166|C|{R}|Creature - Goblin|1|1||
-Orcish Artillery|Limited Edition Beta|167|U|{1}{R}{R}|Creature - Orc Warrior|1|3|{tap}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.|
-Orcish Oriflamme|Limited Edition Beta|168|U|{3}{R}|Enchantment|||Attacking creatures you control get +1/+0.|
-Power Surge|Limited Edition Beta|169|R|{R}{R}|Enchantment|||At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.|
-Fear|Limited Edition Beta|17|C|{B}{B}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$Enchanted creature has fear. <i>(It can't be blocked except by artifact creatures and/or black creatures.)</i>|
-Raging River|Limited Edition Beta|170|R|{R}{R}|Enchantment|||Whenever one or more creatures you control attack, each defending player divides all creatures without flying he or she controls into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.|
-Red Elemental Blast|Limited Edition Beta|171|C|{R}|Instant|||Choose one - Counter target blue spell; or destroy target blue permanent.|
-Roc of Kher Ridges|Limited Edition Beta|172|R|{3}{R}|Creature - Bird|3|3|Flying|
-Rock Hydra|Limited Edition Beta|173|R|{X}{R}{R}|Creature - Hydra|0|0|Rock Hydra enters the battlefield with X +1/+1 counters on it.$For each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.${R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.${R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate this ability only during your upkeep.|
-Sedge Troll|Limited Edition Beta|174|R|{2}{R}|Creature - Troll|2|2|Sedge Troll gets +1/+1 as long as you control a Swamp.${B}: Regenerate Sedge Troll.|
-Shatter|Limited Edition Beta|175|C|{1}{R}|Instant|||Destroy target artifact.|
-Shivan Dragon|Limited Edition Beta|176|R|{4}{R}{R}|Creature - Dragon|5|5|Flying${R}: Shivan Dragon gets +1/+0 until end of turn.|
-Smoke|Limited Edition Beta|177|R|{R}{R}|Enchantment|||Players can't untap more than one creature during their untap steps.|
-Stone Giant|Limited Edition Beta|178|U|{2}{R}{R}|Creature - Giant|3|4|{tap}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.|
-Stone Rain|Limited Edition Beta|179|C|{2}{R}|Sorcery|||Destroy target land.|
-Frozen Shade|Limited Edition Beta|18|C|{2}{B}|Creature - Shade|0|1|{B}: Frozen Shade gets +1/+1 until end of turn.|
-Tunnel|Limited Edition Beta|180|U|{R}|Instant|||Destroy target Wall. It can't be regenerated.|
-Two-Headed Giant of Foriys|Limited Edition Beta|181|R|{4}{R}|Creature - Giant|4|4|Trample$Two-Headed Giant of Foriys can block an additional creature.|
-Uthden Troll|Limited Edition Beta|182|U|{2}{R}|Creature - Troll|2|2|{R}: Regenerate Uthden Troll.|
-Wall of Fire|Limited Edition Beta|183|U|{1}{R}{R}|Creature - Wall|0|5|Defender <i>(This creature can't attack.)</i>${R}: Wall of Fire gets +1/+0 until end of turn.|
-Wall of Stone|Limited Edition Beta|184|U|{1}{R}{R}|Creature - Wall|0|8|Defender <i>(This creature can't attack.)</i>|
-Wheel of Fortune|Limited Edition Beta|185|R|{2}{R}|Sorcery|||Each player discards his or her hand and draws seven cards.|
-Animate Wall|Limited Edition Beta|186|R|{W}|Enchantment - Aura|||Enchant Wall$Enchanted Wall can attack as though it didn't have defender.|
-Armageddon|Limited Edition Beta|187|R|{3}{W}|Sorcery|||Destroy all lands.|
-Balance|Limited Edition Beta|188|R|{1}{W}|Sorcery|||Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.|
-Lance|Limited Edition Beta|188|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has first strike.|
-Benalish Hero|Limited Edition Beta|189|C|{W}|Creature - Human Soldier|1|1|Banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
-Gloom|Limited Edition Beta|19|U|{2}{B}|Enchantment|||White spells cost {3} more to cast.$Activated abilities of white enchantments cost {3} more to activate.|
-Black Ward|Limited Edition Beta|190|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from black. This effect doesn't remove Black Ward.|
-Blaze of Glory|Limited Edition Beta|191|R|{W}|Instant|||Cast Blaze of Glory only during combat before blockers are declared.$Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.|
-Blessing|Limited Edition Beta|192|R|{W}{W}|Enchantment - Aura|||Enchant creature${W}: Enchanted creature gets +1/+1 until end of turn.|
-Blue Ward|Limited Edition Beta|193|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.|
-Castle|Limited Edition Beta|194|U|{3}{W}|Enchantment|||Untapped creatures you control get +0/+2.|
-Circle of Protection: Black|Limited Edition Beta|195|C|{1}{W}|Enchantment|||{1}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.|
-Circle of Protection: Blue|Limited Edition Beta|196|C|{1}{W}|Enchantment|||{1}: The next time a blue source of your choice would deal damage to you this turn, prevent that damage.|
-Circle of Protection: Green|Limited Edition Beta|197|C|{1}{W}|Enchantment|||{1}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.|
-Circle of Protection: Red|Limited Edition Beta|198|C|{1}{W}|Enchantment|||{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.|
-Circle of Protection: White|Limited Edition Beta|199|C|{1}{W}|Enchantment|||{1}: The next time a white source of your choice would deal damage to you this turn, prevent that damage.|
 Bad Moon|Limited Edition Beta|2|R|{1}{B}|Enchantment|||Black creatures get +1/+1.|
-Howl from Beyond|Limited Edition Beta|20|C|{X}{B}|Instant|||Target creature gets +X/+0 until end of turn.|
-Consecrate Land|Limited Edition Beta|200|U|{W}|Enchantment - Aura|||Enchant land$Enchanted land is indestructible and can't be enchanted by other Auras.|
-Conversion|Limited Edition Beta|201|U|{2}{W}{W}|Enchantment|||At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.$All Mountains are Plains.|
-Crusade|Limited Edition Beta|202|R|{W}{W}|Enchantment|||White creatures get +1/+1.|
-Death Ward|Limited Edition Beta|203|C|{W}|Instant|||Regenerate target creature.|
-Disenchant|Limited Edition Beta|204|C|{1}{W}|Instant|||Destroy target artifact or enchantment.|
-Farmstead|Limited Edition Beta|205|R|{W}{W}{W}|Enchantment - Aura|||Enchant land$Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."|
-Green Ward|Limited Edition Beta|206|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from green. This effect doesn't remove Green Ward.|
-Guardian Angel|Limited Edition Beta|207|C|{X}{W}|Instant|||Prevent the next X damage that would be dealt to target creature or player this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.|
-Healing Salve|Limited Edition Beta|208|C|{W}|Instant|||Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.|
-Holy Armor|Limited Edition Beta|209|C|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +0/+2.${W}: Enchanted creature gets +0/+1 until end of turn.|
-Hypnotic Specter|Limited Edition Beta|21|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.|
-Holy Strength|Limited Edition Beta|210|C|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+2.|
-Island Sanctuary|Limited Edition Beta|211|R|{1}{W}|Enchantment|||If you would draw a card during your draw step, instead you may skip that draw. If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk.|
-Karma|Limited Edition Beta|212|U|{2}{W}{W}|Enchantment|||At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.|
-Mesa Pegasus|Limited Edition Beta|214|C|{1}{W}|Creature - Pegasus|1|1|Flying; banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
-Northern Paladin|Limited Edition Beta|215|R|{2}{W}{W}|Creature - Human Knight|3|3|{W}{W}, {tap}: Destroy target black permanent.|
-Pearled Unicorn|Limited Edition Beta|216|C|{2}{W}|Creature - Unicorn|2|2||
-Personal Incarnation|Limited Edition Beta|217|R|{3}{W}{W}{W}|Creature - Avatar Incarnation|6|6|{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Any player may activate this ability, but only if he or she owns Personal Incarnation.$When Personal Incarnation dies, its owner loses half his or her life, rounded up.|
-Purelace|Limited Edition Beta|218|R|{W}|Instant|||Target spell or permanent becomes white. <i>(Mana symbols on that permanent remain unchanged.)</i>|
-Red Ward|Limited Edition Beta|219|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from red. This effect doesn't remove Red Ward.|
-Resurrection|Limited Edition Beta|220|U|{2}{W}{W}|Sorcery|||Return target creature card from your graveyard to the battlefield.|
-Reverse Damage|Limited Edition Beta|221|R|{1}{W}{W}|Instant|||The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.|
-Righteousness|Limited Edition Beta|222|R|{W}|Instant|||Target blocking creature gets +7/+7 until end of turn.|
-Samite Healer|Limited Edition Beta|223|C|{1}{W}|Creature - Human Cleric|1|1|{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.|
-Savannah Lions|Limited Edition Beta|224|R|{W}|Creature - Cat|2|1||
-Serra Angel|Limited Edition Beta|225|U|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>|
-Swords to Plowshares|Limited Edition Beta|226|U|{W}|Instant|||Exile target creature. Its controller gains life equal to its power.|
-Veteran Bodyguard|Limited Edition Beta|227|R|{3}{W}{W}|Creature - Human|2|5|As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.|
-Wall of Swords|Limited Edition Beta|228|U|{3}{W}|Creature - Wall|3|5|Defender, flying <i>(This creature can't attack, and it can block creatures with flying.)</i>|
-White Knight|Limited Edition Beta|229|U|{W}{W}|Creature - Human Knight|2|2|First strike <i>(This creature deals combat damage before creatures without first strike.)</i>$Protection from black <i>(This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)</i>|
-Lord of the Pit|Limited Edition Beta|23|R|{4}{B}{B}{B}|Creature - Demon|7|7|Flying, trample$At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.|
-White Ward|Limited Edition Beta|230|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from white. This effect doesn't remove White Ward.|
-Wrath of God|Limited Edition Beta|231|R|{2}{W}{W}|Sorcery|||Destroy all creatures. They can't be regenerated.|
-Ankh of Mishra|Limited Edition Beta|232|R|{2}|Artifact|||Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.|
-Basalt Monolith|Limited Edition Beta|233|U|{3}|Artifact|||Basalt Monolith doesn't untap during your untap step.${tap}: Add {3} to your mana pool.${3}: Untap Basalt Monolith.|
-Black Vise|Limited Edition Beta|235|U|{1}|Artifact|||As Black Vise enters the battlefield, choose an opponent.$At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.|
-Celestial Prism|Limited Edition Beta|236|U|{3}|Artifact|||{2}, {tap}: Add one mana of any color to your mana pool.|
-Chaos Orb|Limited Edition Beta|237|R|{2}|Artifact|||{1}, {tap}: If Chaos Orb is on the battlefield, flip Chaos Orb onto the battlefield from a height of at least one foot. If Chaos Orb turns over completely at least once during the flip, destroy all permanents it touches. Then destroy Chaos Orb.|
-Lich|Limited Edition Beta|237|R|{B}{B}{B}{B}|Enchantment|||As Lich enters the battlefield, you lose life equal to your life total.$You don't lose the game for having 0 or less life.$If you would gain life, draw that many cards instead.$Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.$When Lich is put into a graveyard from the battlefield, you lose the game.|
-Clockwork Beast|Limited Edition Beta|238|R|{6}|Artifact Creature - Beast|0|4|Clockwork Beast enters the battlefield with seven +1/+0 counters on it.$At end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.${X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.|
-Conservator|Limited Edition Beta|239|U|{4}|Artifact|||{3}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.|
-Mind Twist|Limited Edition Beta|24|R|{X}{B}|Sorcery|||Target player discards X cards at random.|
-Copper Tablet|Limited Edition Beta|240|U|{2}|Artifact|||At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.|
-Crystal Rod|Limited Edition Beta|241|U|{1}|Artifact|||Whenever a player casts a blue spell, you may pay {1}. If you do, you gain 1 life.|
-Cyclopean Tomb|Limited Edition Beta|242|R|{4}|Artifact|||{2}, {tap}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.$When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.|
-Dingus Egg|Limited Edition Beta|243|R|{4}|Artifact|||Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.|
-Disrupting Scepter|Limited Edition Beta|244|R|{3}|Artifact|||{3}, {tap}: Target player discards a card. Activate this ability only during your turn.|
-Forcefield|Limited Edition Beta|245|R|{3}|Artifact|||{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.|
-Gauntlet of Might|Limited Edition Beta|246|R|{4}|Artifact|||Red creatures get +1/+1.$Whenever a Mountain is tapped for mana, its controller adds {R} to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
-Glasses of Urza|Limited Edition Beta|247|U|{1}|Artifact|||{tap}: Look at target player's hand.|
-Helm of Chatzuk|Limited Edition Beta|248|R|{1}|Artifact|||{1}, {tap}: Target creature gains banding until end of turn. <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
-Howling Mine|Limited Edition Beta|249|R|{2}|Artifact|||At the beginning of each player's draw step, if Howling Mine is untapped, that player draws an additional card.|
-Nether Shadow|Limited Edition Beta|25|R|{B}{B}|Creature - Spirit|1|1|Haste$At the beginning of your upkeep, if Nether Shadow is in your graveyard with three or more creature cards above it, you may put Nether Shadow onto the battlefield.|
-Icy Manipulator|Limited Edition Beta|250|U|{4}|Artifact|||{1}, {tap}: Tap target artifact, creature, or land.|
-Illusionary Mask|Limited Edition Beta|251|R|{2}|Artifact|||{X}: You may choose a creature card in your hand whose mana cost could be paid by some amount of, or all of, the mana you spent on {X}. If you do, you may cast that card face down as a 2/2 creature spell without paying its mana cost. If the creature that spell becomes as it resolves has not been turned face up and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up and assigns or deals damage, is dealt damage, or becomes tapped. Activate this ability only any time you could cast a sorcery.|
-Iron Star|Limited Edition Beta|252|U|{1}|Artifact|||Whenever a player casts a red spell, you may pay {1}. If you do, you gain 1 life.|
-Ivory Cup|Limited Edition Beta|253|U|{1}|Artifact|||Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.|
-Jade Monolith|Limited Edition Beta|254|R|{4}|Artifact|||{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.|
-Jade Statue|Limited Edition Beta|255|U|{4}|Artifact|3|6|{2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat.|
-Jayemdae Tome|Limited Edition Beta|256|R|{4}|Artifact|||{4}, {tap}: Draw a card.|
-Juggernaut|Limited Edition Beta|257|U|{4}|Artifact Creature - Juggernaut|5|3|Juggernaut attacks each turn if able.$Juggernaut can't be blocked by Walls.|
-Kormus Bell|Limited Edition Beta|258|R|{4}|Artifact|||All Swamps are 1/1 black creatures that are still lands.|
-Library of Leng|Limited Edition Beta|259|U|{1}|Artifact|||You have no maximum hand size.$If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.|
-Nettling Imp|Limited Edition Beta|26|U|{2}{B}|Creature - Imp|1|1|{tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.|
-Living Wall|Limited Edition Beta|260|U|{4}|Artifact Creature - Wall|0|6|Defender <i>(This creature can't attack.)</i>${1}: Regenerate Living Wall.|
-Mana Vault|Limited Edition Beta|261|R|{1}|Artifact|||Mana Vault doesn't untap during your untap step.$At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.$At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.${tap}: Add {3} to your mana pool.|
-Meekstone|Limited Edition Beta|262|R|{1}|Artifact|||Creatures with power 3 or greater don't untap during their controllers' untap steps.|
-Mox Emerald|Limited Edition Beta|263|R|{0}|Artifact|||{tap}: Add {G} to your mana pool.|
-Mox Jet|Limited Edition Beta|264|R|{0}|Artifact|||{tap}: Add {B} to your mana pool.|
-Mox Pearl|Limited Edition Beta|265|R|{0}|Artifact|||{tap}: Add {W} to your mana pool.|
-Mox Ruby|Limited Edition Beta|266|R|{0}|Artifact|||{tap}: Add {R} to your mana pool.|
-Mox Sapphire|Limited Edition Beta|267|R|{0}|Artifact|||{tap}: Add {U} to your mana pool.|
-Nevinyrral's Disk|Limited Edition Beta|268|R|{4}|Artifact|||Nevinyrral's Disk enters the battlefield tapped.${1}, {tap}: Destroy all artifacts, creatures, and enchantments.|
-Obsianus Golem|Limited Edition Beta|269|U|{6}|Artifact Creature - Golem|4|6||
-Nightmare|Limited Edition Beta|27|R|{5}{B}|Creature - Nightmare Horse|*|*|Flying$Nightmare's power and toughness are each equal to the number of Swamps you control.|
-Rod of Ruin|Limited Edition Beta|270|U|{4}|Artifact|||{3}, {tap}: Rod of Ruin deals 1 damage to target creature or player.|
-Sol Ring|Limited Edition Beta|271|U|{1}|Artifact|||{tap}: Add {2} to your mana pool.|
-Soul Net|Limited Edition Beta|272|U|{1}|Artifact|||Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.|
-Sunglasses of Urza|Limited Edition Beta|273|R|{3}|Artifact|||You may spend white mana as though it were red mana.|
-The Hive|Limited Edition Beta|274|R|{5}|Artifact|||{5}, {tap}: Put a 1/1 colorless Insect artifact creature token with flying named Wasp onto the battlefield. <i>(It can't be blocked except by creatures with flying or reach.)</i>|
-Throne of Bone|Limited Edition Beta|275|U|{1}|Artifact|||Whenever a player casts a black spell, you may pay {1}. If you do, you gain 1 life.|
-Time Vault|Limited Edition Beta|276|R|{2}|Artifact|||Time Vault enters the battlefield tapped.$Time Vault doesn't untap during your untap step.$If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.${tap}: Take an extra turn after this one.|
-Winter Orb|Limited Edition Beta|277|R|{2}|Artifact|||Players can't untap more than one land during their untap steps.|
-Wooden Sphere|Limited Edition Beta|278|U|{1}|Artifact|||Whenever a player casts a green spell, you may pay {1}. If you do, you gain 1 life.|
-Bayou|Limited Edition Beta|279|R||Land - Swamp Forest||||
-Paralyze|Limited Edition Beta|28|C|{B}|Enchantment - Aura|||Enchant creature$When Paralyze enters the battlefield, tap enchanted creature.$Enchanted creature doesn't untap during its controller's untap step.$At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If he or she does, untap the creature.|
-Forest|Limited Edition Beta|280|L||Basic Land - Forest|||G|
-Forest|Limited Edition Beta|280|L||Basic Land - Forest|||G|
-Forest|Limited Edition Beta|280|L||Basic Land - Forest|||G|
-Island|Limited Edition Beta|283|L||Basic Land - Island|||U|
-Island|Limited Edition Beta|283|L||Basic Land - Island|||U|
-Island|Limited Edition Beta|283|L||Basic Land - Island|||U|
-Mountain|Limited Edition Beta|286|L||Basic Land - Mountain|||R|
-Mountain|Limited Edition Beta|286|L||Basic Land - Mountain|||R|
-Mountain|Limited Edition Beta|286|L||Basic Land - Mountain|||R|
-Plains|Limited Edition Beta|289|L||Basic Land - Plains|||W|
-Plains|Limited Edition Beta|289|L||Basic Land - Plains|||W|
-Plains|Limited Edition Beta|289|L||Basic Land - Plains|||W|
-Pestilence|Limited Edition Beta|29|C|{2}{B}{B}|Enchantment|||At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.${B}: Pestilence deals 1 damage to each creature and each player.|
-Plateau|Limited Edition Beta|292|R||Land - Mountain Plains||||
-Savannah|Limited Edition Beta|293|R||Land - Forest Plains||||
-Scrubland|Limited Edition Beta|294|R||Land - Plains Swamp||||
-Swamp|Limited Edition Beta|295|L||Basic Land - Swamp|||B|
-Swamp|Limited Edition Beta|295|L||Basic Land - Swamp|||B|
-Swamp|Limited Edition Beta|295|L||Basic Land - Swamp|||B|
-Taiga|Limited Edition Beta|298|R||Land - Mountain Forest||||
-Tropical Island|Limited Edition Beta|299|R||Land - Forest Island||||
 Black Knight|Limited Edition Beta|3|U|{B}{B}|Creature - Human Knight|2|2|First strike <i>(This creature deals combat damage before creatures without first strike.)</i>$Protection from white <i>(This creature can't be blocked, targeted, dealt damage, or enchanted by anything white.)</i>|
+Bog Wraith|Limited Edition Beta|4|U|{3}{B}|Creature - Wraith|3|3|Swampwalk <i>(This creature is unblockable as long as defending player controls a Swamp.)</i>|
+Contract from Below|Limited Edition Beta|5|R|{B}|Sorcery|||Remove Contract from Below from your deck before playing if you're not playing for ante.$Discard your hand, add the top card of your library to the ante, then draw seven cards.|
+Cursed Land|Limited Edition Beta|6|U|{2}{B}{B}|Enchantment - Aura|||Enchant land$At the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.|
+Dark Ritual|Limited Edition Beta|7|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
+Darkpact|Limited Edition Beta|8|R|{B}{B}{B}|Sorcery|||Remove Darkpact from your deck before playing if you're not playing for ante.$You own target card in the ante. Exchange that card with the top card of your library.|
+Deathgrip|Limited Edition Beta|9|U|{B}{B}|Enchantment|||{B}{B}: Counter target green spell.|
+Deathlace|Limited Edition Beta|10|R|{B}|Instant|||Target spell or permanent becomes black. <i>(Mana symbols on that permanent remain unchanged.)</i>|
+Demonic Attorney|Limited Edition Beta|11|R|{1}{B}{B}|Sorcery|||Remove Demonic Attorney from your deck before playing if you're not playing for ante.$Each player antes the top card of his or her library.|
+Demonic Hordes|Limited Edition Beta|12|R|{3}{B}{B}{B}|Creature - Demon|5|5|{tap}: Destroy target land.$At the beginning of your upkeep, unless you pay {B}{B}{B}, tap Demonic Hordes and sacrifice a land of an opponent's choice.|
+Demonic Tutor|Limited Edition Beta|13|U|{1}{B}|Sorcery|||Search your library for a card and put that card into your hand. Then shuffle your library.|
+Drain Life|Limited Edition Beta|14|C|{X}{1}{B}|Sorcery|||Spend only black mana on X.$Drain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.|
+Drudge Skeletons|Limited Edition Beta|15|C|{1}{B}|Creature - Skeleton|1|1|{B}: Regenerate Drudge Skeletons. <i>(The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
+Evil Presence|Limited Edition Beta|16|U|{B}|Enchantment - Aura|||Enchant land$Enchanted land is a Swamp.|
+Fear|Limited Edition Beta|17|C|{B}{B}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$Enchanted creature has fear. <i>(It can't be blocked except by artifact creatures and/or black creatures.)</i>|
+Frozen Shade|Limited Edition Beta|18|C|{2}{B}|Creature - Shade|0|1|{B}: Frozen Shade gets +1/+1 until end of turn.|
+Gloom|Limited Edition Beta|19|U|{2}{B}|Enchantment|||White spells cost {3} more to cast.$Activated abilities of white enchantments cost {3} more to activate.|
+Howl from Beyond|Limited Edition Beta|20|C|{X}{B}|Instant|||Target creature gets +X/+0 until end of turn.|
+Hypnotic Specter|Limited Edition Beta|21|U|{1}{B}{B}|Creature - Specter|2|2|Flying$Whenever Hypnotic Specter deals damage to an opponent, that player discards a card at random.|
+Lord of the Pit|Limited Edition Beta|23|R|{4}{B}{B}{B}|Creature - Demon|7|7|Flying, trample$At the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.|
+Mind Twist|Limited Edition Beta|24|R|{X}{B}|Sorcery|||Target player discards X cards at random.|
+Nether Shadow|Limited Edition Beta|25|R|{B}{B}|Creature - Spirit|1|1|Haste$At the beginning of your upkeep, if Nether Shadow is in your graveyard with three or more creature cards above it, you may put Nether Shadow onto the battlefield.|
+Nettling Imp|Limited Edition Beta|26|U|{2}{B}|Creature - Imp|1|1|{tap}: Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That creature attacks this turn if able. If it doesn't, destroy it at the beginning of the next end step. Activate this ability only during an opponent's turn, before attackers are declared.|
+Nightmare|Limited Edition Beta|27|R|{5}{B}|Creature - Nightmare Horse|*|*|Flying$Nightmare's power and toughness are each equal to the number of Swamps you control.|
+Paralyze|Limited Edition Beta|28|C|{B}|Enchantment - Aura|||Enchant creature$When Paralyze enters the battlefield, tap enchanted creature.$Enchanted creature doesn't untap during its controller's untap step.$At the beginning of the upkeep of enchanted creature's controller, that player may pay {4}. If he or she does, untap the creature.|
+Pestilence|Limited Edition Beta|29|C|{2}{B}{B}|Enchantment|||At the beginning of the end step, if no creatures are on the battlefield, sacrifice Pestilence.${B}: Pestilence deals 1 damage to each creature and each player.|
 Plague Rats|Limited Edition Beta|30|C|{2}{B}|Creature - Rat|*|*|Plague Rats's power and toughness are each equal to the number of creatures named Plague Rats on the battlefield.|
-Tundra|Limited Edition Beta|300|R||Land - Plains Island||||
-Underground Sea|Limited Edition Beta|301|R||Land - Island Swamp||||
-Volcanic Island|Limited Edition Beta|302|R||Land - Island Mountain||||
 Raise Dead|Limited Edition Beta|31|C|{B}|Sorcery|||Return target creature card from your graveyard to your hand.|
 Royal Assassin|Limited Edition Beta|32|R|{1}{B}{B}|Creature - Human Assassin|1|1|{tap}: Destroy target tapped creature.|
 Natural Selection|Limited Edition Beta|32|R|{G}|Instant|||Look at the top three cards of target player's library, then put them back in any order. You may have that player shuffle his or her library.|
@@ -8688,7 +8493,6 @@ Sengir Vampire|Limited Edition Beta|36|U|{3}{B}{B}|Creature - Vampire|4|4|Flying
 Simulacrum|Limited Edition Beta|37|U|{1}{B}|Instant|||You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.|
 Sinkhole|Limited Edition Beta|38|C|{B}{B}|Sorcery|||Destroy target land.|
 Terror|Limited Edition Beta|39|C|{1}{B}|Instant|||Destroy target nonartifact, nonblack creature. It can't be regenerated.|
-Bog Wraith|Limited Edition Beta|4|U|{3}{B}|Creature - Wraith|3|3|Swampwalk <i>(This creature is unblockable as long as defending player controls a Swamp.)</i>|
 Unholy Strength|Limited Edition Beta|40|C|{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+1.|
 Wall of Bone|Limited Edition Beta|41|U|{2}{B}|Creature - Skeleton Wall|1|4|Defender <i>(This creature can't attack.)</i>${B}: Regenerate Wall of Bone. <i>(The next time this creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
 Warp Artifact|Limited Edition Beta|42|R|{B}{B}|Enchantment - Aura|||Enchant artifact$At the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.|
@@ -8699,7 +8503,6 @@ Zombie Master|Limited Edition Beta|46|R|{1}{B}{B}|Creature - Zombie|2|3|Other Zo
 Air Elemental|Limited Edition Beta|47|U|{3}{U}{U}|Creature - Elemental|4|4|Flying|
 Ancestral Recall|Limited Edition Beta|48|R|{U}|Instant|||Target player draws three cards.|
 Animate Artifact|Limited Edition Beta|49|U|{3}{U}|Enchantment - Aura|||Enchant artifact$As long as enchanted artifact isn't a creature, it's an artifact creature with power and toughness each equal to its converted mana cost.|
-Contract from Below|Limited Edition Beta|5|R|{B}|Sorcery|||Remove Contract from Below from your deck before playing if you're not playing for ante.$Discard your hand, add the top card of your library to the ante, then draw seven cards.|
 Blue Elemental Blast|Limited Edition Beta|50|C|{U}|Instant|||Choose one - Counter target red spell; or destroy target red permanent.|
 Braingeyser|Limited Edition Beta|51|R|{X}{U}{U}|Sorcery|||Target player draws X cards.|
 Clone|Limited Edition Beta|52|U|{3}{U}|Creature - Shapeshifter|0|0|You may have Clone enter the battlefield as a copy of any creature on the battlefield.|
@@ -8710,7 +8513,6 @@ Creature Bond|Limited Edition Beta|56|C|{1}{U}|Enchantment - Aura|||Enchant crea
 Drain Power|Limited Edition Beta|57|R|{U}{U}|Sorcery|||Target player activates a mana ability of each land he or she controls. Then put all mana from that player's mana pool into yours.|
 Feedback|Limited Edition Beta|58|U|{2}{U}|Enchantment - Aura|||Enchant enchantment$At the beginning of the upkeep of enchanted enchantment's controller, Feedback deals 1 damage to that player.|
 Flight|Limited Edition Beta|59|C|{U}|Enchantment - Aura|||Enchant creature$Enchanted creature has flying.|
-Cursed Land|Limited Edition Beta|6|U|{2}{B}{B}|Enchantment - Aura|||Enchant land$At the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.|
 Invisibility|Limited Edition Beta|60|C|{U}{U}|Enchantment - Aura|||Enchant creature$Enchanted creature can't be blocked except by Walls.|
 Jump|Limited Edition Beta|61|C|{U}|Instant|||Target creature gains flying until end of turn.|
 Lifetap|Limited Edition Beta|62|U|{U}{U}|Enchantment|||Whenever a Forest an opponent controls becomes tapped, you gain 1 life.|
@@ -8721,8 +8523,6 @@ Mana Short|Limited Edition Beta|66|R|{2}{U}|Instant|||Tap all lands target playe
 Merfolk of the Pearl Trident|Limited Edition Beta|67|C|{U}|Creature - Merfolk|1|1||
 Phantasmal Forces|Limited Edition Beta|68|U|{3}{U}|Creature - Illusion|4|1|Flying$At the beginning of your upkeep, sacrifice Phantasmal Forces unless you pay {U}.|
 Phantasmal Terrain|Limited Edition Beta|69|C|{U}{U}|Enchantment - Aura|||Enchant land$As Phantasmal Terrain enters the battlefield, choose a basic land type.$Enchanted land is the chosen type.|
-Dark Ritual|Limited Edition Beta|7|C|{B}|Instant|||Add {B}{B}{B} to your mana pool.|
-Black Lotus|Limited Edition Beta|234|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
 Phantom Monster|Limited Edition Beta|70|U|{3}{U}|Creature - Illusion|3|3|Flying|
 Pirate Ship|Limited Edition Beta|71|R|{4}{U}|Creature - Human Pirate|4|3|Pirate Ship can't attack unless defending player controls an Island.${tap}: Pirate Ship deals 1 damage to target creature or player.$When you control no Islands, sacrifice Pirate Ship.|
 Power Leak|Limited Edition Beta|72|C|{1}{U}|Enchantment - Aura|||Enchant enchantment$At the beginning of the upkeep of enchanted enchantment's controller, that player may pay any amount of mana. Power Leak deals 2 damage to that player. Prevent X of that damage, where X is the amount of mana that player paid this way.|
@@ -8734,7 +8534,6 @@ Psychic Venom|Limited Edition Beta|76|C|{1}{U}|Enchantment - Aura|||Enchant land
 Sea Serpent|Limited Edition Beta|77|C|{5}{U}|Creature - Serpent|5|5|Sea Serpent can't attack unless defending player controls an Island.$$When you control no Islands, sacrifice Sea Serpent.|
 Siren's Call|Limited Edition Beta|78|U|{U}|Instant|||Cast Siren's Call only during an opponent's turn, before attackers are declared.$Creatures the active player controls attack this turn if able.$At the beginning of the next end step, destroy all non-Wall creatures that player controls that didn't attack this turn. Ignore this effect for each creature the player didn't control continuously since the beginning of the turn.|
 Sleight of Mind|Limited Edition Beta|79|R|{U}|Instant|||Change the text of target spell or permanent by replacing all instances of one color word with another. <i>(For example, you may change "target black spell" to "target blue spell." This effect lasts indefinitely.)</i>|
-Darkpact|Limited Edition Beta|8|R|{B}{B}{B}|Sorcery|||Remove Darkpact from your deck before playing if you're not playing for ante.$You own target card in the ante. Exchange that card with the top card of your library.|
 Spell Blast|Limited Edition Beta|80|C|{X}{U}|Instant|||Counter target spell with converted mana cost X.|
 Stasis|Limited Edition Beta|81|R|{1}{U}|Enchantment|||Players skip their untap steps.$$At the beginning of your upkeep, sacrifice Stasis unless you pay {U}.|
 Steal Artifact|Limited Edition Beta|82|U|{2}{U}{U}|Enchantment - Aura|||Enchant artifact$You control enchanted artifact.|
@@ -8745,7 +8544,6 @@ Twiddle|Limited Edition Beta|86|C|{U}|Instant|||You may tap or untap target arti
 Unsummon|Limited Edition Beta|87|C|{U}|Instant|||Return target creature to its owner's hand.|
 Vesuvan Doppelganger|Limited Edition Beta|88|R|{3}{U}{U}|Creature - Shapeshifter|0|0|You may have Vesuvan Doppelganger enter the battlefield as a copy of any creature on the battlefield except it doesn't copy that creature's color and it gains "At the beginning of your upkeep, you may have this creature become a copy of target creature except it doesn't copy that creature's color. If you do, this creature gains this ability."|
 Volcanic Eruption|Limited Edition Beta|89|R|{X}{U}{U}{U}|Sorcery|||Destroy X target Mountains. Volcanic Eruption deals damage to each creature and each player equal to the number of Mountains put into a graveyard this way.|
-Deathgrip|Limited Edition Beta|9|U|{B}{B}|Enchantment|||{B}{B}: Counter target green spell.|
 Wall of Air|Limited Edition Beta|90|U|{1}{U}{U}|Creature - Wall|1|5|Defender, flying <i>(This creature can't attack, and it can block creatures with flying.)</i>|
 Wall of Water|Limited Edition Beta|91|U|{1}{U}{U}|Creature - Wall|0|5|Defender <i>(This creature can't attack.)</i>${U}: Wall of Water gets +1/+0 until end of turn.|
 Water Elemental|Limited Edition Beta|92|U|{3}{U}|Creature - Elemental|5|4||
@@ -8756,6 +8554,208 @@ Camouflage|Limited Edition Beta|96|U|{G}|Instant|||Cast Camouflage only during y
 Channel|Limited Edition Beta|97|U|{G}{G}|Sorcery|||Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add {1} to your mana pool.|
 Cockatrice|Limited Edition Beta|98|R|{3}{G}{G}|Creature - Cockatrice|2|4|Flying$Whenever Cockatrice blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.|
 Craw Wurm|Limited Edition Beta|99|C|{4}{G}{G}|Creature - Wurm|6|4||
+Elvish Archers|Limited Edition Beta|100|R|{1}{G}|Creature - Elf Archer|2|1|First strike|
+Fastbond|Limited Edition Beta|101|R|{G}|Enchantment|||You may play any number of additional lands on each of your turns.$Whenever you play a land, if it wasn't the first land you played this turn, Fastbond deals 1 damage to you.|
+Fog|Limited Edition Beta|102|C|{G}|Instant|||Prevent all combat damage that would be dealt this turn.|
+Force of Nature|Limited Edition Beta|103|R|{2}{G}{G}{G}{G}|Creature - Elemental|8|8|Trample <i>(If this creature would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)</i>$At the beginning of your upkeep, Force of Nature deals 8 damage to you unless you pay {G}{G}{G}{G}.|
+Fungusaur|Limited Edition Beta|104|R|{3}{G}|Creature - Fungus Lizard|2|2|Whenever Fungusaur is dealt damage, put a +1/+1 counter on it.|
+Gaea's Liege|Limited Edition Beta|105|R|{3}{G}{G}{G}|Creature - Avatar|*|*|As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.${tap}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.|
+Giant Growth|Limited Edition Beta|106|C|{G}|Instant|||Target creature gets +3/+3 until end of turn.|
+Giant Spider|Limited Edition Beta|107|C|{3}{G}|Creature - Spider|2|4|Reach <i>(This creature can block creatures with flying.)</i>|
+Grizzly Bears|Limited Edition Beta|108|C|{1}{G}|Creature - Bear|2|2||
+Hurricane|Limited Edition Beta|109|U|{X}{G}|Sorcery|||Hurricane deals X damage to each creature with flying and each player.|
+Instill Energy|Limited Edition Beta|111|U|{G}|Enchantment - Aura|||Enchant creature$Enchanted creature can attack as though it had haste.${0}: Untap enchanted creature. Activate this ability only during your turn and only once each turn.|
+Ironroot Treefolk|Limited Edition Beta|112|C|{4}{G}|Creature - Treefolk|3|5||
+Kudzu|Limited Edition Beta|113|R|{1}{G}{G}|Enchantment - Aura|||Enchant land$When enchanted land becomes tapped, destroy it. That land's controller attaches Kudzu to a land of his or her choice.|
+Ley Druid|Limited Edition Beta|114|U|{2}{G}|Creature - Human Druid|1|1|{tap}: Untap target land.|
+Lifeforce|Limited Edition Beta|115|U|{G}{G}|Enchantment|||{G}{G}: Counter target black spell.|
+Lifelace|Limited Edition Beta|116|R|{G}|Instant|||Target spell or permanent becomes green. <i>(Mana symbols on that permanent remain unchanged.)</i>|
+Living Artifact|Limited Edition Beta|117|R|{G}|Enchantment - Aura|||Enchant artifact$Whenever you're dealt damage, put that many vitality counters on Living Artifact.$At the beginning of your upkeep, you may remove a vitality counter from Living Artifact. If you do, you gain 1 life.|
+Living Lands|Limited Edition Beta|118|R|{3}{G}|Enchantment|||All Forests are 1/1 creatures that are still lands.|
+Llanowar Elves|Limited Edition Beta|119|C|{G}|Creature - Elf Druid|1|1|{tap}: Add {G} to your mana pool.|
+Lure|Limited Edition Beta|120|U|{1}{G}{G}|Enchantment - Aura|||Enchant creature$All creatures able to block enchanted creature do so.|
+Regeneration|Limited Edition Beta|122|C|{1}{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>${G}: Regenerate enchanted creature. <i>(The next time that creature would be destroyed this turn, it isn't. Instead tap it, remove all damage from it, and remove it from combat.)</i>|
+Regrowth|Limited Edition Beta|123|U|{1}{G}|Sorcery|||Return target card from your graveyard to your hand.|
+Scryb Sprites|Limited Edition Beta|124|C|{G}|Creature - Faerie|1|1|Flying|
+Shanodin Dryads|Limited Edition Beta|125|C|{G}|Creature - Dryad|1|1|Forestwalk|
+Stream of Life|Limited Edition Beta|126|C|{X}{G}|Sorcery|||Target player gains X life.|
+Thicket Basilisk|Limited Edition Beta|127|U|{3}{G}{G}|Creature - Basilisk|2|4|Whenever Thicket Basilisk blocks or becomes blocked by a non-Wall creature, destroy that creature at end of combat.|
+Timber Wolves|Limited Edition Beta|128|R|{G}|Creature - Wolf|1|1|Banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
+Tranquility|Limited Edition Beta|129|C|{2}{G}|Sorcery|||Destroy all enchantments.|
+Tsunami|Limited Edition Beta|130|U|{3}{G}|Sorcery|||Destroy all Islands.|
+Verduran Enchantress|Limited Edition Beta|131|R|{1}{G}{G}|Creature - Human Druid|0|2|Whenever you cast an enchantment spell, you may draw a card.|
+Wall of Brambles|Limited Edition Beta|132|U|{2}{G}|Creature - Plant Wall|2|3|Defender <i>(This creature can't attack.)</i>${G}: Regenerate Wall of Brambles.|
+Wall of Ice|Limited Edition Beta|133|U|{2}{G}|Creature - Wall|0|7|Defender <i>(This creature can't attack.)</i>|
+Wall of Wood|Limited Edition Beta|134|C|{G}|Creature - Wall|0|3|Defender <i>(This creature can't attack.)</i>|
+Wanderlust|Limited Edition Beta|135|U|{2}{G}|Enchantment - Aura|||Enchant creature$At the beginning of the upkeep of enchanted creature's controller, Wanderlust deals 1 damage to that player.|
+War Mammoth|Limited Edition Beta|136|C|{3}{G}|Creature - Elephant|3|3|Trample|
+Web|Limited Edition Beta|137|R|{G}|Enchantment - Aura|||Enchant creature <i>(Target a creature as you cast this. This card enters the battlefield attached to that creature.)</i>$Enchanted creature gets +0/+2 and has reach. <i>(It can block creatures with flying.)</i>|
+Wild Growth|Limited Edition Beta|138|C|{G}|Enchantment - Aura|||Enchant land$Whenever enchanted land is tapped for mana, its controller adds {G} to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
+Burrowing|Limited Edition Beta|139|U|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has mountainwalk.|
+Chaoslace|Limited Edition Beta|140|R|{R}|Instant|||Target spell or permanent becomes red. <i>(Its mana symbols remain unchanged.)</i>|
+Disintegrate|Limited Edition Beta|141|C|{X}{R}|Sorcery|||Disintegrate deals X damage to target creature or player. That creature can't be regenerated this turn. If the creature would die this turn, exile it instead.|
+Dragon Whelp|Limited Edition Beta|142|U|{2}{R}{R}|Creature - Dragon|2|3|Flying${R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.|
+Dwarven Demolition Team|Limited Edition Beta|143|U|{2}{R}|Creature - Dwarf|1|1|{tap}: Destroy target Wall.|
+Dwarven Warriors|Limited Edition Beta|144|C|{2}{R}|Creature - Dwarf Warrior|1|1|{tap}: Target creature with power 2 or less is unblockable this turn.|
+Earth Elemental|Limited Edition Beta|145|U|{3}{R}{R}|Creature - Elemental|4|5||
+Earthbind|Limited Edition Beta|146|C|{R}|Enchantment - Aura|||Enchant creature$When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and Earthbind gains "Enchanted creature loses flying."|
+Earthquake|Limited Edition Beta|147|R|{X}{R}|Sorcery|||Earthquake deals X damage to each creature without flying and each player.|
+False Orders|Limited Edition Beta|148|C|{R}|Instant|||Cast False Orders only during the declare blockers step.$Remove target creature defending player controls from combat. Creatures it was blocking that had become blocked by only that creature this combat become unblocked. You may have it block an attacking creature of your choice.|
+Fire Elemental|Limited Edition Beta|149|U|{3}{R}{R}|Creature - Elemental|5|4||
+Fireball|Limited Edition Beta|150|C|{X}{R}|Sorcery|||Fireball deals X damage divided evenly, rounded down, among any number of target creatures and/or players.$Fireball costs {1} more to cast for each target beyond the first.|
+Firebreathing|Limited Edition Beta|151|C|{R}|Enchantment - Aura|||Enchant creature${R}: Enchanted creature gets +1/+0 until end of turn.|
+Flashfires|Limited Edition Beta|152|U|{3}{R}|Sorcery|||Destroy all Plains.|
+Fork|Limited Edition Beta|153|R|{R}{R}|Instant|||Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.|
+Goblin Balloon Brigade|Limited Edition Beta|154|U|{R}|Creature - Goblin Warrior|1|1|{R}: Goblin Balloon Brigade gains flying until end of turn.|
+Goblin King|Limited Edition Beta|155|R|{1}{R}{R}|Creature - Goblin|2|2|Other Goblin creatures get +1/+1 and have mountainwalk. <i>(They're unblockable as long as defending player controls a Mountain.)</i>|
+Granite Gargoyle|Limited Edition Beta|156|R|{2}{R}|Creature - Gargoyle|2|2|Flying${R}: Granite Gargoyle gets +0/+1 until end of turn.|
+Gray Ogre|Limited Edition Beta|157|C|{2}{R}|Creature - Ogre|2|2||
+Hill Giant|Limited Edition Beta|158|C|{3}{R}|Creature - Giant|3|3||
+Hurloon Minotaur|Limited Edition Beta|159|C|{1}{R}{R}|Creature - Minotaur|2|3||
+Ironclaw Orcs|Limited Edition Beta|160|C|{1}{R}|Creature - Orc|2|2|Ironclaw Orcs can't block creatures with power 2 or greater.|
+Keldon Warlord|Limited Edition Beta|161|U|{2}{R}{R}|Creature - Human Barbarian|*|*|Keldon Warlord's power and toughness are each equal to the number of non-Wall creatures you control.|
+Lightning Bolt|Limited Edition Beta|162|C|{R}|Instant|||Lightning Bolt deals 3 damage to target creature or player.|
+Mana Flare|Limited Edition Beta|163|R|{2}{R}|Enchantment|||Whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.|
+Manabarbs|Limited Edition Beta|164|R|{3}{R}|Enchantment|||Whenever a player taps a land for mana, Manabarbs deals 1 damage to that player.|
+Mons's Goblin Raiders|Limited Edition Beta|165|C|{R}|Creature - Goblin|1|1||
+Orcish Artillery|Limited Edition Beta|166|U|{1}{R}{R}|Creature - Orc Warrior|1|3|{tap}: Orcish Artillery deals 2 damage to target creature or player and 3 damage to you.|
+Orcish Oriflamme|Limited Edition Beta|167|U|{3}{R}|Enchantment|||Attacking creatures you control get +1/+0.|
+Power Surge|Limited Edition Beta|168|R|{R}{R}|Enchantment|||At the beginning of each player's upkeep, Power Surge deals X damage to that player, where X is the number of untapped lands he or she controlled at the beginning of this turn.|
+Raging River|Limited Edition Beta|169|R|{R}{R}|Enchantment|||Whenever one or more creatures you control attack, each defending player divides all creatures without flying he or she controls into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.|
+Red Elemental Blast|Limited Edition Beta|170|C|{R}|Instant|||Choose one - Counter target blue spell; or destroy target blue permanent.|
+Roc of Kher Ridges|Limited Edition Beta|171|R|{3}{R}|Creature - Bird|3|3|Flying|
+Rock Hydra|Limited Edition Beta|172|R|{X}{R}{R}|Creature - Hydra|0|0|Rock Hydra enters the battlefield with X +1/+1 counters on it.$For each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.${R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.${R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate this ability only during your upkeep.|
+Sedge Troll|Limited Edition Beta|173|R|{2}{R}|Creature - Troll|2|2|Sedge Troll gets +1/+1 as long as you control a Swamp.${B}: Regenerate Sedge Troll.|
+Shatter|Limited Edition Beta|174|C|{1}{R}|Instant|||Destroy target artifact.|
+Shivan Dragon|Limited Edition Beta|175|R|{4}{R}{R}|Creature - Dragon|5|5|Flying${R}: Shivan Dragon gets +1/+0 until end of turn.|
+Smoke|Limited Edition Beta|176|R|{R}{R}|Enchantment|||Players can't untap more than one creature during their untap steps.|
+Stone Giant|Limited Edition Beta|177|U|{2}{R}{R}|Creature - Giant|3|4|{tap}: Target creature you control with toughness less than Stone Giant's power gains flying until end of turn. Destroy that creature at the beginning of the next end step.|
+Stone Rain|Limited Edition Beta|178|C|{2}{R}|Sorcery|||Destroy target land.|
+Tunnel|Limited Edition Beta|179|U|{R}|Instant|||Destroy target Wall. It can't be regenerated.|
+Two-Headed Giant of Foriys|Limited Edition Beta|180|R|{4}{R}|Creature - Giant|4|4|Trample$Two-Headed Giant of Foriys can block an additional creature.|
+Uthden Troll|Limited Edition Beta|181|U|{2}{R}|Creature - Troll|2|2|{R}: Regenerate Uthden Troll.|
+Wall of Fire|Limited Edition Beta|182|U|{1}{R}{R}|Creature - Wall|0|5|Defender <i>(This creature can't attack.)</i>${R}: Wall of Fire gets +1/+0 until end of turn.|
+Wall of Stone|Limited Edition Beta|183|U|{1}{R}{R}|Creature - Wall|0|8|Defender <i>(This creature can't attack.)</i>|
+Wheel of Fortune|Limited Edition Beta|184|R|{2}{R}|Sorcery|||Each player discards his or her hand and draws seven cards.|
+Animate Wall|Limited Edition Beta|185|R|{W}|Enchantment - Aura|||Enchant Wall$Enchanted Wall can attack as though it didn't have defender.|
+Armageddon|Limited Edition Beta|186|R|{3}{W}|Sorcery|||Destroy all lands.|
+Balance|Limited Edition Beta|187|R|{1}{W}|Sorcery|||Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players discard cards and sacrifice creatures the same way.|
+Lance|Limited Edition Beta|188|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has first strike.|
+Benalish Hero|Limited Edition Beta|188|C|{W}|Creature - Human Soldier|1|1|Banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
+Black Ward|Limited Edition Beta|189|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from black. This effect doesn't remove Black Ward.|
+Blaze of Glory|Limited Edition Beta|190|R|{W}|Instant|||Cast Blaze of Glory only during combat before blockers are declared.$Target creature defending player controls can block any number of creatures this turn. It blocks each attacking creature this turn if able.|
+Blessing|Limited Edition Beta|191|R|{W}{W}|Enchantment - Aura|||Enchant creature${W}: Enchanted creature gets +1/+1 until end of turn.|
+Blue Ward|Limited Edition Beta|192|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from blue. This effect doesn't remove Blue Ward.|
+Castle|Limited Edition Beta|193|U|{3}{W}|Enchantment|||Untapped creatures you control get +0/+2.|
+Circle of Protection: Black|Limited Edition Beta|194|C|{1}{W}|Enchantment|||{1}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.|
+Circle of Protection: Blue|Limited Edition Beta|195|C|{1}{W}|Enchantment|||{1}: The next time a blue source of your choice would deal damage to you this turn, prevent that damage.|
+Circle of Protection: Green|Limited Edition Beta|196|C|{1}{W}|Enchantment|||{1}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.|
+Circle of Protection: Red|Limited Edition Beta|197|C|{1}{W}|Enchantment|||{1}: The next time a red source of your choice would deal damage to you this turn, prevent that damage.|
+Circle of Protection: White|Limited Edition Beta|198|C|{1}{W}|Enchantment|||{1}: The next time a white source of your choice would deal damage to you this turn, prevent that damage.|
+Consecrate Land|Limited Edition Beta|199|U|{W}|Enchantment - Aura|||Enchant land$Enchanted land is indestructible and can't be enchanted by other Auras.|
+Conversion|Limited Edition Beta|200|U|{2}{W}{W}|Enchantment|||At the beginning of your upkeep, sacrifice Conversion unless you pay {W}{W}.$All Mountains are Plains.|
+Crusade|Limited Edition Beta|201|R|{W}{W}|Enchantment|||White creatures get +1/+1.|
+Death Ward|Limited Edition Beta|202|C|{W}|Instant|||Regenerate target creature.|
+Disenchant|Limited Edition Beta|203|C|{1}{W}|Instant|||Destroy target artifact or enchantment.|
+Farmstead|Limited Edition Beta|204|R|{W}{W}{W}|Enchantment - Aura|||Enchant land$Enchanted land has "At the beginning of your upkeep, you may pay {W}{W}. If you do, you gain 1 life."|
+Green Ward|Limited Edition Beta|205|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from green. This effect doesn't remove Green Ward.|
+Guardian Angel|Limited Edition Beta|206|C|{X}{W}|Instant|||Prevent the next X damage that would be dealt to target creature or player this turn. Until end of turn, you may pay {1} any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.|
+Healing Salve|Limited Edition Beta|207|C|{W}|Instant|||Choose one - Target player gains 3 life; or prevent the next 3 damage that would be dealt to target creature or player this turn.|
+Holy Armor|Limited Edition Beta|208|C|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +0/+2.${W}: Enchanted creature gets +0/+1 until end of turn.|
+Holy Strength|Limited Edition Beta|209|C|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +1/+2.|
+Island Sanctuary|Limited Edition Beta|210|R|{1}{W}|Enchantment|||If you would draw a card during your draw step, instead you may skip that draw. If you do, until your next turn, you can't be attacked except by creatures with flying and/or islandwalk.|
+Karma|Limited Edition Beta|211|U|{2}{W}{W}|Enchantment|||At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps he or she controls.|
+Mesa Pegasus|Limited Edition Beta|212|C|{1}{W}|Creature - Pegasus|1|1|Flying; banding <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding you control are blocking or being blocked by a creature, you divide that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
+Northern Paladin|Limited Edition Beta|214|R|{2}{W}{W}|Creature - Human Knight|3|3|{W}{W}, {tap}: Destroy target black permanent.|
+Pearled Unicorn|Limited Edition Beta|215|C|{2}{W}|Creature - Unicorn|2|2||
+Personal Incarnation|Limited Edition Beta|216|R|{3}{W}{W}{W}|Creature - Avatar Incarnation|6|6|{0}: The next 1 damage that would be dealt to Personal Incarnation this turn is dealt to its owner instead. Any player may activate this ability, but only if he or she owns Personal Incarnation.$When Personal Incarnation dies, its owner loses half his or her life, rounded up.|
+Purelace|Limited Edition Beta|217|R|{W}|Instant|||Target spell or permanent becomes white. <i>(Mana symbols on that permanent remain unchanged.)</i>|
+Red Ward|Limited Edition Beta|218|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from red. This effect doesn't remove Red Ward.|
+Resurrection|Limited Edition Beta|219|U|{2}{W}{W}|Sorcery|||Return target creature card from your graveyard to the battlefield.|
+Reverse Damage|Limited Edition Beta|220|R|{1}{W}{W}|Instant|||The next time a source of your choice would deal damage to you this turn, prevent that damage. You gain life equal to the damage prevented this way.|
+Righteousness|Limited Edition Beta|221|R|{W}|Instant|||Target blocking creature gets +7/+7 until end of turn.|
+Samite Healer|Limited Edition Beta|222|C|{1}{W}|Creature - Human Cleric|1|1|{tap}: Prevent the next 1 damage that would be dealt to target creature or player this turn.|
+Savannah Lions|Limited Edition Beta|223|R|{W}|Creature - Cat|2|1||
+Serra Angel|Limited Edition Beta|224|U|{3}{W}{W}|Creature - Angel|4|4|Flying$Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>|
+Swords to Plowshares|Limited Edition Beta|225|U|{W}|Instant|||Exile target creature. Its controller gains life equal to its power.|
+Veteran Bodyguard|Limited Edition Beta|226|R|{3}{W}{W}|Creature - Human|2|5|As long as Veteran Bodyguard is untapped, all damage that would be dealt to you by unblocked creatures is dealt to Veteran Bodyguard instead.|
+Wall of Swords|Limited Edition Beta|227|U|{3}{W}|Creature - Wall|3|5|Defender, flying <i>(This creature can't attack, and it can block creatures with flying.)</i>|
+White Knight|Limited Edition Beta|228|U|{W}{W}|Creature - Human Knight|2|2|First strike <i>(This creature deals combat damage before creatures without first strike.)</i>$Protection from black <i>(This creature can't be blocked, targeted, dealt damage, or enchanted by anything black.)</i>|
+White Ward|Limited Edition Beta|229|U|{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has protection from white. This effect doesn't remove White Ward.|
+Wrath of God|Limited Edition Beta|230|R|{2}{W}{W}|Sorcery|||Destroy all creatures. They can't be regenerated.|
+Ankh of Mishra|Limited Edition Beta|231|R|{2}|Artifact|||Whenever a land enters the battlefield, Ankh of Mishra deals 2 damage to that land's controller.|
+Basalt Monolith|Limited Edition Beta|232|U|{3}|Artifact|||Basalt Monolith doesn't untap during your untap step.${tap}: Add {3} to your mana pool.${3}: Untap Basalt Monolith.|
+Black Lotus|Limited Edition Beta|233|R|{0}|Artifact|||{tap}, Sacrifice Black Lotus: Add three mana of any one color to your mana pool.|
+Black Vise|Limited Edition Beta|234|U|{1}|Artifact|||As Black Vise enters the battlefield, choose an opponent.$At the beginning of the chosen player's upkeep, Black Vise deals X damage to that player, where X is the number of cards in his or her hand minus 4.|
+Celestial Prism|Limited Edition Beta|235|U|{3}|Artifact|||{2}, {tap}: Add one mana of any color to your mana pool.|
+Chaos Orb|Limited Edition Beta|236|R|{2}|Artifact|||{1}, {tap}: If Chaos Orb is on the battlefield, flip Chaos Orb onto the battlefield from a height of at least one foot. If Chaos Orb turns over completely at least once during the flip, destroy all permanents it touches. Then destroy Chaos Orb.|
+Lich|Limited Edition Beta|237|R|{B}{B}{B}{B}|Enchantment|||As Lich enters the battlefield, you lose life equal to your life total.$You don't lose the game for having 0 or less life.$If you would gain life, draw that many cards instead.$Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.$When Lich is put into a graveyard from the battlefield, you lose the game.|
+Clockwork Beast|Limited Edition Beta|237|R|{6}|Artifact Creature - Beast|0|4|Clockwork Beast enters the battlefield with seven +1/+0 counters on it.$At end of combat, if Clockwork Beast attacked or blocked this combat, remove a +1/+0 counter from it.${X}, {tap}: Put up to X +1/+0 counters on Clockwork Beast. This ability can't cause the total number of +1/+0 counters on Clockwork Beast to be greater than seven. Activate this ability only during your upkeep.|
+Conservator|Limited Edition Beta|238|U|{4}|Artifact|||{3}, {tap}: Prevent the next 2 damage that would be dealt to you this turn.|
+Copper Tablet|Limited Edition Beta|239|U|{2}|Artifact|||At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.|
+Crystal Rod|Limited Edition Beta|240|U|{1}|Artifact|||Whenever a player casts a blue spell, you may pay {1}. If you do, you gain 1 life.|
+Cyclopean Tomb|Limited Edition Beta|241|R|{4}|Artifact|||{2}, {tap}: Put a mire counter on target non-Swamp land. That land is a Swamp for as long as it has a mire counter on it. Activate this ability only during your upkeep.$When Cyclopean Tomb is put into a graveyard from the battlefield, at the beginning of each of your upkeeps for the rest of the game, remove all mire counters from a land that a mire counter was put onto with Cyclopean Tomb but that a mire counter has not been removed from with Cyclopean Tomb.|
+Dingus Egg|Limited Edition Beta|242|R|{4}|Artifact|||Whenever a land is put into a graveyard from the battlefield, Dingus Egg deals 2 damage to that land's controller.|
+Disrupting Scepter|Limited Edition Beta|243|R|{3}|Artifact|||{3}, {tap}: Target player discards a card. Activate this ability only during your turn.|
+Forcefield|Limited Edition Beta|244|R|{3}|Artifact|||{1}: The next time an unblocked creature of your choice would deal combat damage to you this turn, prevent all but 1 of that damage.|
+Gauntlet of Might|Limited Edition Beta|245|R|{4}|Artifact|||Red creatures get +1/+1.$Whenever a Mountain is tapped for mana, its controller adds {R} to his or her mana pool <i>(in addition to the mana the land produces)</i>.|
+Glasses of Urza|Limited Edition Beta|246|U|{1}|Artifact|||{tap}: Look at target player's hand.|
+Helm of Chatzuk|Limited Edition Beta|247|R|{1}|Artifact|||{1}, {tap}: Target creature gains banding until end of turn. <i>(Any creatures with banding, and up to one without, can attack in a band. Bands are blocked as a group. If any creatures with banding a player controls are blocking or being blocked by a creature, that player divides that creature's combat damage, not its controller, among any of the creatures it's being blocked by or is blocking.)</i>|
+Howling Mine|Limited Edition Beta|248|R|{2}|Artifact|||At the beginning of each player's draw step, if Howling Mine is untapped, that player draws an additional card.|
+Icy Manipulator|Limited Edition Beta|249|U|{4}|Artifact|||{1}, {tap}: Tap target artifact, creature, or land.|
+Illusionary Mask|Limited Edition Beta|250|R|{2}|Artifact|||{X}: You may choose a creature card in your hand whose mana cost could be paid by some amount of, or all of, the mana you spent on {X}. If you do, you may cast that card face down as a 2/2 creature spell without paying its mana cost. If the creature that spell becomes as it resolves has not been turned face up and would assign or deal damage, be dealt damage, or become tapped, instead it's turned face up and assigns or deals damage, is dealt damage, or becomes tapped. Activate this ability only any time you could cast a sorcery.|
+Iron Star|Limited Edition Beta|251|U|{1}|Artifact|||Whenever a player casts a red spell, you may pay {1}. If you do, you gain 1 life.|
+Ivory Cup|Limited Edition Beta|252|U|{1}|Artifact|||Whenever a player casts a white spell, you may pay {1}. If you do, you gain 1 life.|
+Jade Monolith|Limited Edition Beta|253|R|{4}|Artifact|||{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.|
+Jade Statue|Limited Edition Beta|254|U|{4}|Artifact|3|6|{2}: Jade Statue becomes a 3/6 Golem artifact creature until end of combat. Activate this ability only during combat.|
+Jayemdae Tome|Limited Edition Beta|255|R|{4}|Artifact|||{4}, {tap}: Draw a card.|
+Juggernaut|Limited Edition Beta|256|U|{4}|Artifact Creature - Juggernaut|5|3|Juggernaut attacks each turn if able.$Juggernaut can't be blocked by Walls.|
+Kormus Bell|Limited Edition Beta|257|R|{4}|Artifact|||All Swamps are 1/1 black creatures that are still lands.|
+Library of Leng|Limited Edition Beta|258|U|{1}|Artifact|||You have no maximum hand size.$If an effect causes you to discard a card, discard it, but you may put it on top of your library instead of into your graveyard.|
+Living Wall|Limited Edition Beta|259|U|{4}|Artifact Creature - Wall|0|6|Defender <i>(This creature can't attack.)</i>${1}: Regenerate Living Wall.|
+Mana Vault|Limited Edition Beta|260|R|{1}|Artifact|||Mana Vault doesn't untap during your untap step.$At the beginning of your upkeep, you may pay {4}. If you do, untap Mana Vault.$At the beginning of your draw step, if Mana Vault is tapped, it deals 1 damage to you.${tap}: Add {3} to your mana pool.|
+Meekstone|Limited Edition Beta|261|R|{1}|Artifact|||Creatures with power 3 or greater don't untap during their controllers' untap steps.|
+Mox Emerald|Limited Edition Beta|262|R|{0}|Artifact|||{tap}: Add {G} to your mana pool.|
+Mox Jet|Limited Edition Beta|263|R|{0}|Artifact|||{tap}: Add {B} to your mana pool.|
+Mox Pearl|Limited Edition Beta|264|R|{0}|Artifact|||{tap}: Add {W} to your mana pool.|
+Mox Ruby|Limited Edition Beta|265|R|{0}|Artifact|||{tap}: Add {R} to your mana pool.|
+Mox Sapphire|Limited Edition Beta|266|R|{0}|Artifact|||{tap}: Add {U} to your mana pool.|
+Nevinyrral's Disk|Limited Edition Beta|267|R|{4}|Artifact|||Nevinyrral's Disk enters the battlefield tapped.${1}, {tap}: Destroy all artifacts, creatures, and enchantments.|
+Obsianus Golem|Limited Edition Beta|268|U|{6}|Artifact Creature - Golem|4|6||
+Rod of Ruin|Limited Edition Beta|269|U|{4}|Artifact|||{3}, {tap}: Rod of Ruin deals 1 damage to target creature or player.|
+Sol Ring|Limited Edition Beta|270|U|{1}|Artifact|||{tap}: Add {2} to your mana pool.|
+Soul Net|Limited Edition Beta|271|U|{1}|Artifact|||Whenever a creature dies, you may pay {1}. If you do, you gain 1 life.|
+Sunglasses of Urza|Limited Edition Beta|272|R|{3}|Artifact|||You may spend white mana as though it were red mana.|
+The Hive|Limited Edition Beta|273|R|{5}|Artifact|||{5}, {tap}: Put a 1/1 colorless Insect artifact creature token with flying named Wasp onto the battlefield. <i>(It can't be blocked except by creatures with flying or reach.)</i>|
+Throne of Bone|Limited Edition Beta|274|U|{1}|Artifact|||Whenever a player casts a black spell, you may pay {1}. If you do, you gain 1 life.|
+Time Vault|Limited Edition Beta|275|R|{2}|Artifact|||Time Vault enters the battlefield tapped.$Time Vault doesn't untap during your untap step.$If you would begin your turn while Time Vault is tapped, you may skip that turn instead. If you do, untap Time Vault.${tap}: Take an extra turn after this one.|
+Winter Orb|Limited Edition Beta|276|R|{2}|Artifact|||Players can't untap more than one land during their untap steps.|
+Wooden Sphere|Limited Edition Beta|277|U|{1}|Artifact|||Whenever a player casts a green spell, you may pay {1}. If you do, you gain 1 life.|
+Badlands|Limited Edition Beta|278|R||Land - Swamp Mountain||||
+Bayou|Limited Edition Beta|279|R||Land - Swamp Forest||||
+Forest|Limited Edition Beta|280|L||Basic Land - Forest|||G|
+Forest|Limited Edition Beta|281|L||Basic Land - Forest|||G|
+Forest|Limited Edition Beta|282|L||Basic Land - Forest|||G|
+Island|Limited Edition Beta|283|L||Basic Land - Island|||U|
+Island|Limited Edition Beta|284|L||Basic Land - Island|||U|
+Island|Limited Edition Beta|285|L||Basic Land - Island|||U|
+Mountain|Limited Edition Beta|286|L||Basic Land - Mountain|||R|
+Mountain|Limited Edition Beta|287|L||Basic Land - Mountain|||R|
+Mountain|Limited Edition Beta|288|L||Basic Land - Mountain|||R|
+Plains|Limited Edition Beta|289|L||Basic Land - Plains|||W|
+Plains|Limited Edition Beta|290|L||Basic Land - Plains|||W|
+Plains|Limited Edition Beta|291|L||Basic Land - Plains|||W|
+Plateau|Limited Edition Beta|292|R||Land - Mountain Plains||||
+Savannah|Limited Edition Beta|293|R||Land - Forest Plains||||
+Scrubland|Limited Edition Beta|294|R||Land - Plains Swamp||||
+Swamp|Limited Edition Beta|295|L||Basic Land - Swamp|||B|
+Swamp|Limited Edition Beta|296|L||Basic Land - Swamp|||B|
+Swamp|Limited Edition Beta|297|L||Basic Land - Swamp|||B|
+Taiga|Limited Edition Beta|298|R||Land - Mountain Forest||||
+Tropical Island|Limited Edition Beta|299|R||Land - Forest Island||||
+Tundra|Limited Edition Beta|300|R||Land - Plains Island||||
+Underground Sea|Limited Edition Beta|301|R||Land - Island Swamp||||
+Volcanic Island|Limited Edition Beta|302|R||Land - Island Mountain||||
 Ajani Goldmane|Lorwyn|1|R|{2}{W}{W}|Planeswalker - Ajani|||+1: You gain 2 life.$-1: Put a +1/+1 counter on each creature you control. Those creatures gain vigilance until end of turn.$-6: Put a white Avatar creature token onto the battlefield. It has "This creature's power and toughness are each equal to your life total."|
 Cloudgoat Ranger|Lorwyn|10|U|{3}{W}{W}|Creature - Giant Warrior|3|3|When Cloudgoat Ranger enters the battlefield, put three 1/1 white Kithkin Soldier creature tokens onto the battlefield.$Tap three untapped Kithkin you control: Cloudgoat Ranger gets +2/+0 and gains flying until end of turn.|
 Bog Hoodlums|Lorwyn|100|C|{5}{B}|Creature - Goblin Warrior|4|1|Bog Hoodlums can't block.$When Bog Hoodlums enters the battlefield, clash with an opponent. If you win, put a +1/+1 counter on Bog Hoodlums. <i>(Each clashing player reveals the top card of his or her library, then puts that card on the top or bottom. A player wins if his or her card had a higher converted mana cost.)</i>|
