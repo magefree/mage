@@ -28,67 +28,46 @@
 package mage.sets.limitedalpha;
 
 import java.util.UUID;
+import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.UntapTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
+import mage.target.common.TargetLandPermanent;
 
 /**
  *
  * @author KholdFuzion
 
  */
-public class CopperTablet extends CardImpl<CopperTablet> {
+public class LeyDruid extends CardImpl<LeyDruid> {
 
-    public CopperTablet(UUID ownerId) {
-        super(ownerId, 238, "Copper Tablet", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{2}");
+    public LeyDruid(UUID ownerId) {
+        super(ownerId, 114, "Ley Druid", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{G}");
         this.expansionSetCode = "LEA";
+        this.subtype.add("Human");
+        this.subtype.add("Druid");
 
-        // At the beginning of each player's upkeep, Copper Tablet deals 1 damage to that player.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new CopperTabletEffect(), TargetController.ANY, false);
+        this.color.setGreen(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // {tap}: Untap target land.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new TapSourceCost());
+        ability.addTarget(new TargetLandPermanent());
         this.addAbility(ability);
     }
 
-    public CopperTablet(final CopperTablet card) {
+    public LeyDruid(final LeyDruid card) {
         super(card);
     }
 
     @Override
-    public CopperTablet copy() {
-        return new CopperTablet(this);
-    }
-}
-
-class CopperTabletEffect extends OneShotEffect<CopperTabletEffect> {
-
-    public CopperTabletEffect() {
-        super(Outcome.Damage);
-        staticText = "Copper Tablet deals 1 damage to that player";
-    }
-
-    public CopperTabletEffect(final CopperTabletEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public CopperTabletEffect copy() {
-        return new CopperTabletEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(targetPointer.getFirst(game, source));
-        if (player != null) {
-            player.damage(1, source.getId(), game, false, true);
-            return true;
-        }
-        return false;
+    public LeyDruid copy() {
+        return new LeyDruid(this);
     }
 }
