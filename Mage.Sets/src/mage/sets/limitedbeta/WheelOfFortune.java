@@ -36,7 +36,7 @@ public class WheelOfFortune extends mage.sets.limitedalpha.WheelOfFortune {
 
     public WheelOfFortune(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 185;
+        this.cardNumber = 184;
         this.expansionSetCode = "LEB";
     }
 

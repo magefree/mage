@@ -37,7 +37,7 @@ public class SavannahLions extends mage.sets.eighthedition.SavannahLions {
 
     public SavannahLions(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 224;
+        this.cardNumber = 223;
         this.expansionSetCode = "LEB";
     }
 

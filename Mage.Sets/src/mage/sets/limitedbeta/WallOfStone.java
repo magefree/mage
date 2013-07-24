@@ -37,7 +37,7 @@ public class WallOfStone extends mage.sets.fifthedition.WallOfStone {
 
     public WallOfStone(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 184;
+        this.cardNumber = 183;
         this.expansionSetCode = "LEB";
     }
 

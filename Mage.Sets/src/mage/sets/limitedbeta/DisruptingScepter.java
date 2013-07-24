@@ -37,7 +37,7 @@ public class DisruptingScepter extends mage.sets.seventhedition.DisruptingScepte
 
     public DisruptingScepter(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 244;
+        this.cardNumber = 243;
         this.expansionSetCode = "LEB";
     }
 

@@ -37,7 +37,7 @@ public class StoneGiant extends mage.sets.magic2010.StoneGiant {
 
     public StoneGiant(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 178;
+        this.cardNumber = 177;
         this.expansionSetCode = "LEB";
     }
 

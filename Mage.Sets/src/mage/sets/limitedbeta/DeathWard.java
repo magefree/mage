@@ -38,7 +38,7 @@ public class DeathWard extends mage.sets.limitedalpha.DeathWard {
 
     public DeathWard(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 203;
+        this.cardNumber = 202;
         this.expansionSetCode = "LEB";
     }
 

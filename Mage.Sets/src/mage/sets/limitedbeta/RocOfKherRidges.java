@@ -37,7 +37,7 @@ public class RocOfKherRidges extends mage.sets.limitedalpha.RocOfKherRidges {
 
     public RocOfKherRidges(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 172;
+        this.cardNumber = 171;
         this.expansionSetCode = "LEB";
     }
 

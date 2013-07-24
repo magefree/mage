@@ -37,7 +37,7 @@ public class ObsianusGolem extends mage.sets.sixthedition.ObsianusGolem {
 
     public ObsianusGolem(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 269;
+        this.cardNumber = 268;
         this.expansionSetCode = "LEB";
     }
 

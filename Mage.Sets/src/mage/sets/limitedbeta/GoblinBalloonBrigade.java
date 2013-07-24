@@ -38,7 +38,7 @@ public class GoblinBalloonBrigade extends mage.sets.magic2011.GoblinBalloonBriga
 
     public GoblinBalloonBrigade(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 155;
+        this.cardNumber = 154;
         this.expansionSetCode = "LEB";
         this.rarity = Rarity.UNCOMMON;
     }

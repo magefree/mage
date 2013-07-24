@@ -37,7 +37,7 @@ public class GrayOgre extends mage.sets.fourthedition.GrayOgre {
 
     public GrayOgre(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 158;
+        this.cardNumber = 157;
         this.expansionSetCode = "LEB";
     }
 

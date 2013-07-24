@@ -37,7 +37,7 @@ public class HowlingMine extends mage.sets.magic2010.HowlingMine {
 
     public HowlingMine(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 249;
+        this.cardNumber = 248;
         this.expansionSetCode = "LEB";
     }
 

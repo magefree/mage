@@ -37,7 +37,7 @@ public class MoxSapphire extends mage.sets.limitedalpha.MoxSapphire {
 
     public MoxSapphire(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 267;
+        this.cardNumber = 266;
         this.expansionSetCode = "LEB";
     }
 

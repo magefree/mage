@@ -37,7 +37,7 @@ public class MoxEmerald extends mage.sets.limitedalpha.MoxEmerald {
 
     public MoxEmerald(UUID ownerId) {
         super(ownerId);
-        this.cardNumber = 263;
+        this.cardNumber = 262;
         this.expansionSetCode = "LEB";
     }
 
