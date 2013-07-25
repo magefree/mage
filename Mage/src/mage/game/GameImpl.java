@@ -1645,6 +1645,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                         attachedTo.removeAttachment(perm.getId(), this);
                     }
                 }
+                // check if it's a creature and must be removed from combat
+                if (perm.getCardType().contains(CardType.CREATURE) && this.getCombat() != null) {
+                    this.getCombat().removeFromCombat(perm.getId(), this);
+                }
                 it.remove();
             }
         }

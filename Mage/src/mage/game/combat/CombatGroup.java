@@ -73,12 +73,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
 
     public boolean hasFirstOrDoubleStrike(Game game) {
         for (UUID permId: attackers) {
-            if (hasFirstOrDoubleStrike(game.getPermanent(permId))) {
+            Permanent attacker = game.getPermanent(permId);
+            if (attacker != null && hasFirstOrDoubleStrike(attacker)) {
                 return true;
             }
         }
         for (UUID permId: blockers) {
-            if (hasFirstOrDoubleStrike(game.getPermanent(permId))) {
+            Permanent blocker = game.getPermanent(permId);
+            if (blocker != null && hasFirstOrDoubleStrike(blocker)) {
                 return true;
             }
         }
