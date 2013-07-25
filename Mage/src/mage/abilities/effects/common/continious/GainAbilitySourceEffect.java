@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.continious;
 
 import mage.abilities.Ability;
@@ -50,6 +49,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
 
     /**
      * Add ability with Duration.WhileOnBattlefield
+     *
      * @param ability
      */
     public GainAbilitySourceEffect(Ability ability) {
@@ -57,7 +57,7 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration) {
-       this(ability, duration, false);
+        this(ability, duration, false);
     }
 
     public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard) {
@@ -65,6 +65,15 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
         this.ability = ability;
         staticText = "{this} gains \"" + ability.getRule() + "\" " + duration.toString();
         this.onCard = onCard;
+    }
+
+    public GainAbilitySourceEffect(Ability ability, Duration duration, boolean onCard, boolean noStaticText) {
+        super(duration, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
+        this.ability = ability;
+        this.onCard = onCard;
+        if (noStaticText) {
+            staticText = null;
+        }
     }
 
     public GainAbilitySourceEffect(final GainAbilitySourceEffect effect) {
@@ -97,5 +106,4 @@ public class GainAbilitySourceEffect extends ContinuousEffectImpl<GainAbilitySou
         }
         return false;
     }
-
 }

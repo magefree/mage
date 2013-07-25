@@ -44,6 +44,7 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
 
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
+    protected String rule;
 
     /**
      * If true, the source that triggered the ability will be set as target to effect.
@@ -56,6 +57,11 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
 
     public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
         this(effect, filter, optional, false);
+    }
+    
+    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
+        this(effect, filter, optional, false);
+        this.rule = rule;
     }
 
     public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
@@ -72,6 +78,7 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
         super(ability);
         filter = ability.filter;
         this.rememberSource = ability.rememberSource;
+        this.rule = ability.rule;
     }
 
     @Override
@@ -90,6 +97,9 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
 
     @Override
     public String getRule() {
+        if (rule != null && !rule.isEmpty()) {
+            return rule;
+        }
         return "Whenever you cast " + filter.getMessage() + ", " + super.getRule();
     }
 
