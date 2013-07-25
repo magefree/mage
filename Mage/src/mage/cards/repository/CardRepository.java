@@ -32,6 +32,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.SelectArg;
+import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import java.io.File;
@@ -163,10 +164,12 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> qb = cardDao.queryBuilder();
             qb.distinct().selectColumns("name");
-            qb.where()
-                    .not().like("types", '%' + CardType.CREATURE.name() + '%')
-                    .and()
-                    .not().like("types", '%' + CardType.LAND.name() + '%');
+            Where where = qb.where();
+            where.and(where.not().like("types", '%' + CardType.CREATURE.name() +'%'),where.not().like("types", '%' + CardType.LAND.name() + '%'));
+//            qb.where()
+//                    .not().like("types", '%' + CardType.CREATURE.name() + '%')
+//                    .and()
+//                    .not().like("types", '%' + CardType.LAND.name() + '%');
             List<CardInfo> results = cardDao.query(qb.prepare());
             for (CardInfo card : results) {
                 int result = card.getName().indexOf(" // ");
