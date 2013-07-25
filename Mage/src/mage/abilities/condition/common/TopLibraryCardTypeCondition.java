@@ -31,6 +31,7 @@ import mage.constants.CardType;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  * @author jeffwadsworth
@@ -50,19 +51,22 @@ public class TopLibraryCardTypeCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         boolean conditionApplies = false;
-        switch (this.type) {
-            case CREATURE:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.CREATURE);
-                break;
-            case LAND:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.LAND);
-                break;
-            case SORCERY:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.SORCERY);
-                break;
-            case INSTANT:
-                conditionApplies |= game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getCardType().contains(CardType.INSTANT);
-                break;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null && controller.getLibrary().size() > 0) {
+            switch (this.type) {
+                case CREATURE:
+                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.CREATURE);
+                    break;
+                case LAND:
+                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.LAND);
+                    break;
+                case SORCERY:
+                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.SORCERY);
+                    break;
+                case INSTANT:
+                    conditionApplies |= controller.getLibrary().getFromTop(game).getCardType().contains(CardType.INSTANT);
+                    break;
+            }
         }
         return conditionApplies;
     }
