@@ -1317,6 +1317,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             //20100423 - 603.9
             if (!this.wins) {
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.LOST, null, null, playerId));
+                game.informPlayers(new StringBuilder(this.getName()).append(" has lost the game.").toString());
             }
             if (!hasLeft()) {
                 game.leave(playerId);
@@ -1350,6 +1351,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     }
                 }
                 if (opponentsAlive == 0) {
+                    game.informPlayers(new StringBuilder(this.getName()).append(" has won the game").toString());
                     this.wins = true;
                     game.end();
                 }
