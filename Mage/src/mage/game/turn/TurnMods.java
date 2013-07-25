@@ -107,12 +107,19 @@ public class TurnMods extends ArrayList<TurnMod> {
     }
 
     public boolean skipStep(UUID playerId, PhaseStep step) {
-        ListIterator<TurnMod> it = this.listIterator(this.size());
-        while (it.hasPrevious()) {
-            TurnMod turnMod = it.previous();
-            if (turnMod.getSkipStep() != null && turnMod.getPlayerId().equals(playerId) && turnMod.getSkipStep() == step) {
-                it.remove();
-                return true;
+        if (step != null) {
+            ListIterator<TurnMod> it = this.listIterator(this.size());
+            while (it.hasPrevious()) {
+                TurnMod turnMod = it.previous();
+                if (turnMod.getSkipStep() != null) {
+                    if (turnMod.getPlayerId().equals(playerId)) {
+                        if (turnMod.getSkipStep() == step) {
+                            it.remove();
+                            return true;
+
+                        }
+                    }
+                }
             }
         }
         return false;
