@@ -168,6 +168,7 @@ public interface Game extends MageItem, Serializable {
      */
     int mulliganDownTo(UUID playerId);
     void mulligan(UUID playerId);
+    void endMulligan(UUID playerId);
     void quit(UUID playerId);
     void concede(UUID playerId);
     void undo(UUID playerId);

@@ -664,6 +664,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
                 fireEvent(event);
                 if (!player.chooseMulligan(this)) {
+                    endMulligan(player.getId());
                     break;
                 }
 
@@ -782,7 +783,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return player.getHand().size() - deduction;
     }
 
-
+    @Override
+    public void endMulligan(UUID playerId){
+    }
+    
     @Override
     public void mulligan(UUID playerId) {
         Player player = getPlayer(playerId);

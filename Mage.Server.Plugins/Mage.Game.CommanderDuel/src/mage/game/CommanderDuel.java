@@ -28,7 +28,9 @@
 
 package mage.game;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import mage.abilities.Ability;
@@ -37,18 +39,25 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.CommanderReplacementEffect;
 import mage.abilities.effects.common.cost.CommanderCostModification;
 import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
 import mage.constants.PhaseStep;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
+import mage.filter.FilterCard;
 import mage.game.match.MatchType;
 import mage.game.turn.TurnMod;
 import mage.players.Player;
+import mage.target.common.TargetCardInHand;
 import mage.watchers.Watcher;
 import mage.watchers.common.CommanderCombatDamageWatcher;
 
 public class CommanderDuel extends GameImpl<CommanderDuel> {
 
+    private Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
+    
     public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);
     }
@@ -98,6 +107,76 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
         }
         this.getState().addAbility(ability, null, null);
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
+    }
+    
+    
+    //20130711
+    /*903.8. The Commander variant uses an alternate mulligan rule. 
+     * Each time a player takes a mulligan, rather than shuffling his or her entire hand of cards into his or her library, that player exiles any number of cards from his or her hand face down. 
+     * Then the player draws a number of cards equal to one less than the number of cards he or she exiled this way. 
+     * That player may look at all cards exiled this way while taking mulligans. 
+     * Once a player keeps an opening hand, that player shuffles all cards he or she exiled this way into his or her library.
+     * */
+    //TODO implement may look at exile cards
+    @Override
+    public void mulligan(UUID playerId) {
+        Player player = getPlayer(playerId);
+        TargetCardInHand target = new TargetCardInHand(1, player.getHand().size(), new FilterCard("card to mulligan"));
+        target.setNotTarget(true);
+        //target.setRequired(true);
+        if(player.choose(Outcome.Exile, player.getHand(), target, this)){
+            int numCards = target.getTargets().size();
+            for(UUID uuid : target.getTargets()){
+                Card card = player.getHand().get(uuid, this);
+                if(card != null){
+                    if(!mulliganedCards.containsKey(playerId)){
+                        mulliganedCards.put(playerId, new CardsImpl());
+                    }
+                    card.setFaceDown(true);
+                    card.moveToExile(null, "", null, this);
+                    mulliganedCards.get(playerId).add(card);
+                }
+            }
+            int deduction = 1;
+            if (freeMulligans > 0) {
+                if (usedFreeMulligans != null && usedFreeMulligans.containsKey(player.getId())) {
+                    int used = usedFreeMulligans.get(player.getId()).intValue();
+                    if (used < freeMulligans ) {
+                        deduction = 0;
+                        usedFreeMulligans.put(player.getId(), new Integer(used+1));
+                    }
+                } else {
+                    deduction = 0;{
+
+                }
+                    usedFreeMulligans.put(player.getId(), new Integer(1));
+                }
+            }
+            player.drawCards(numCards - deduction, this);
+            fireInformEvent(new StringBuilder(player.getName())
+                    .append(" mulligans ")
+                    .append(numCards)
+                    .append(numCards == 1? " card":" cards")
+                    .append(deduction == 0 ? " for free and draws ":" down to ")
+                    .append(Integer.toString(player.getHand().size()))
+                    .append(player.getHand().size() <= 1? " card":" cards").toString());
+        }        
+    }
+    
+    @Override
+    public void endMulligan(UUID playerId){
+        //return cards to
+        Player player = getPlayer(playerId);
+        if(player != null && mulliganedCards.containsKey(playerId)){
+            for(Card card : mulliganedCards.get(playerId).getCards(this)){
+                if(card != null){
+                    card.moveToZone(Zone.LIBRARY, null, this, false);
+                }
+            }
+            if(mulliganedCards.get(playerId).size() > 0){
+                player.shuffleLibrary(this);
+            }
+        }
     }
 
     /* 20130711
