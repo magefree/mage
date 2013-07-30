@@ -23,91 +23,73 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblGameType" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="lbDeckType" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbDeckType" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblGameType" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="cbGameType" min="-2" pref="398" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="lblFreeMulligans" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace pref="12" max="32767" attributes="0"/>
                               <Component id="spnFreeMulligans" min="-2" pref="50" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtName" min="-2" pref="546" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <Component id="cbDeckType" max="32767" attributes="1"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="cbTimeLimit" min="-2" pref="126" max="-2" attributes="1"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btnOK" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbDeckType" min="-2" pref="338" max="-2" attributes="1"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lbTimeLimit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbTimeLimit" min="-2" pref="126" max="-2" attributes="1"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
-                                  <Component id="spnNumPlayers" min="-2" pref="57" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblRange" min="-2" max="-2" attributes="1"/>
-                                  <Component id="cbRange" min="-2" pref="143" max="-2" attributes="1"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbAttackOption" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
-                          <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pnlOtherPlayers" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtName" alignment="1" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btnOK" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblNumPlayers" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnNumPlayers" min="-2" pref="57" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblRange" min="-2" max="-2" attributes="1"/>
+                          <Component id="cbRange" min="-2" pref="143" max="-2" attributes="1"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblAttack" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbAttackOption" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="spnNumWins" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="lblNumWins" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jSeparator2" alignment="1" max="32767" attributes="0"/>
+                  <Component id="player1Panel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnlOtherPlayers" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jSeparator3" pref="633" max="32767" attributes="0"/>
+                  <Component id="jSeparator3" pref="642" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -117,9 +99,9 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtName" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -173,7 +155,7 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOtherPlayers" pref="181" max="32767" attributes="0"/>
+              <Component id="pnlOtherPlayers" pref="185" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -187,7 +169,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="252" max="32767" attributes="0"/>
+                  <EmptySpace pref="285" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
