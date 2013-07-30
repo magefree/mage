@@ -58,11 +58,17 @@ public class NewPlayerPanel extends javax.swing.JPanel {
         fcSelectDeck.addChoosableFileFilter(new DeckFilter());
         String deckPath = MageFrame.getPreferences().get("defaultDeckPath", "");
         if (deckPath.isEmpty()) {
-            if (Config.defaultDeckPath != null) deckPath = Config.defaultDeckPath;
+            if (Config.defaultDeckPath != null) {
+                deckPath = Config.defaultDeckPath;
+            }
         }
         this.txtPlayerDeck.setText(deckPath);
-        if (Config.defaultComputerName != null) this.txtPlayerName.setText(Config.defaultComputerName);
-        if (cbLevel.getModel().getSize() > 0) cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
+        if (Config.defaultComputerName != null) {
+            this.txtPlayerName.setText(Config.defaultComputerName);
+        }
+        if (cbLevel.getModel().getSize() > 0) {
+            cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
+        }
     }
 
     public void setPlayerName(String playerName) {
@@ -73,8 +79,9 @@ public class NewPlayerPanel extends javax.swing.JPanel {
 
     protected void playerLoadDeck() {
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty())
+        if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        }
         int ret = fcSelectDeck.showDialog(this, "Select Deck");
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
@@ -224,8 +231,9 @@ class DeckFilter extends FileFilter {
 
     @Override
     public boolean accept(File f) {
-        if (f.isDirectory())
+        if (f.isDirectory()) {
             return true;
+        }
 
         String ext = null;
         String s = f.getName();
