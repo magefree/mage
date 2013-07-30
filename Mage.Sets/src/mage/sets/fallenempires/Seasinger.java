@@ -44,15 +44,13 @@ import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.common.FilterLandPermanent;
-import mage.filter.predicate.Predicate;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.target.common.TargetCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerControlsIslandPredicate;
 
 /**
  *
@@ -103,23 +101,6 @@ public class Seasinger extends CardImpl<Seasinger> {
     @Override
     public Seasinger copy() {
         return new Seasinger(this);
-    }
-}
-
-class ControllerControlsIslandPredicate implements Predicate<Permanent> {
-    public static final FilterLandPermanent filter = new FilterLandPermanent("Island");
-    {
-        filter.add(new SubtypePredicate("Island"));
-    }
-
-    @Override
-    public boolean apply(Permanent input, Game game) {
-        return (game.getBattlefield().countAll(filter, input.getControllerId(), game) > 0);
-    }
-
-    @Override
-    public String toString() {
-        return "Controls an island";
     }
 }
 
