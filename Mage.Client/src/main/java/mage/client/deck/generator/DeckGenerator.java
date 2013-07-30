@@ -1,24 +1,5 @@
 package mage.client.deck.generator;
 
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
-import mage.Mana;
-import mage.cards.Card;
-import mage.cards.ExpansionSet;
-import mage.cards.decks.Deck;
-import mage.cards.repository.CardCriteria;
-import mage.cards.repository.CardInfo;
-import mage.cards.repository.CardRepository;
-import mage.cards.repository.ExpansionRepository;
-import mage.client.MageFrame;
-import mage.client.util.gui.ColorsChooser;
-import mage.client.util.sets.ConstructedFormats;
-import mage.constants.Rarity;
-import mage.interfaces.rate.RateCallback;
-import mage.cards.Sets;
-import mage.utils.DeckBuilder;
-
-import javax.swing.*;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -29,7 +10,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import mage.Mana;
+import mage.cards.Card;
+import mage.cards.Sets;
+import mage.cards.decks.Deck;
+import mage.cards.repository.CardCriteria;
+import mage.cards.repository.CardInfo;
+import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
+import mage.cards.repository.ExpansionRepository;
+import mage.client.MageFrame;
+import mage.client.util.gui.ColorsChooser;
+import mage.client.util.sets.ConstructedFormats;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.interfaces.rate.RateCallback;
+import mage.utils.DeckBuilder;
+
 
 /**
  * Generates random card pool and builds a deck.
@@ -40,7 +46,8 @@ public class DeckGenerator {
 
     private static JDialog dlg;
     private static String selectedColors;
-    private static JComboBox formats;
+    private static JComboBox cbSets;
+    private static JComboBox cbDeckSize;
 
     private static final int SPELL_CARD_POOL_SIZE = 180;
 
@@ -78,15 +85,29 @@ public class DeckGenerator {
 
         p0.add(Box.createVerticalStrut(5));
         JPanel jPanel = new JPanel();
-        JLabel text3 = new JLabel("Choose format:");
-        formats = new JComboBox(ConstructedFormats.getTypes());
-        formats.setSelectedIndex(0);
-        formats.setPreferredSize(new Dimension(300, 25));
-        formats.setMaximumSize(new Dimension(300, 25));
-        formats.setAlignmentX(Component.LEFT_ALIGNMENT);
+        JLabel text3 = new JLabel("Choose sets:");
+        cbSets = new JComboBox(ConstructedFormats.getTypes());
+        cbSets.setSelectedIndex(0);
+        cbSets.setPreferredSize(new Dimension(300, 25));
+        cbSets.setMaximumSize(new Dimension(300, 25));
+        cbSets.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel.add(text3);
-        jPanel.add(formats);
+        jPanel.add(cbSets);
+
         p0.add(jPanel);
+
+        p0.add(Box.createVerticalStrut(5));
+        JPanel jPanel2 = new JPanel();
+        JLabel textDeckSize = new JLabel("Deck size:");
+        cbDeckSize = new JComboBox(new String[]{"40","60"});
+        cbDeckSize.setSelectedIndex(0);
+        cbDeckSize.setPreferredSize(new Dimension(300, 25));
+        cbDeckSize.setMaximumSize(new Dimension(300, 25));
+        cbDeckSize.setAlignmentX(Component.LEFT_ALIGNMENT);
+        jPanel2.add(textDeckSize);
+        jPanel2.add(cbDeckSize);
+
+        p0.add(jPanel2);
 
         final JButton btnGenerate = new JButton("Ok");
         btnGenerate.addActionListener(new ActionListener() {
@@ -137,13 +158,17 @@ public class DeckGenerator {
         List<ColoredManaSymbol> allowedColors = new ArrayList<ColoredManaSymbol>();
         selectedColors = selectedColors != null ? selectedColors.toUpperCase() : getRandomColors("X");
 
-        String format = (String) formats.getSelectedItem();
+        String format = (String) cbSets.getSelectedItem();
         List<String> setsToUse = ConstructedFormats.getSetsByFormat(format);
         if (setsToUse.isEmpty()) {
             // use all
             setsToUse = ExpansionRepository.instance.getSetCodes();
         }
 
+        int deckSize = Integer.parseInt(cbDeckSize.getSelectedItem().toString());
+        if (deckSize < 40) {
+            deckSize = 40;
+        }
         if (selectedColors.contains("X")) {
             selectedColors = getRandomColors(selectedColors);
         }
@@ -164,7 +189,7 @@ public class DeckGenerator {
 
         final List<String> setsToUseFinal = setsToUse;
 
-        deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, setsToUseFinal, landCardPool, new RateCallback() {
+        deck = DeckBuilder.buildDeck(spellCardPool, allowedColors, setsToUseFinal, landCardPool, deckSize, new RateCallback() {
             @Override
             public int rateCard(Card card) {
                 return 6;

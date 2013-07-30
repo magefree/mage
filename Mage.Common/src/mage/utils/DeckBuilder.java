@@ -1,13 +1,18 @@
 package mage.utils;
 
-import mage.constants.CardType;
-import mage.constants.ColoredManaSymbol;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import mage.Mana;
 import mage.cards.Card;
 import mage.cards.decks.Deck;
+import mage.constants.CardType;
+import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
-
-import java.util.*;
 
 /**
  * Builds deck from provided card pool.
@@ -16,18 +21,24 @@ import java.util.*;
  */
 public class DeckBuilder {
 
-    private static String selectedColors;
+//    private static String selectedColors;
+//
+//    private static final int SPELL_CARD_POOL_SIZE = 60;
 
-    private static final int SPELL_CARD_POOL_SIZE = 60;
-
-    private static final int DECK_COUNT[] = {3, 6, 6, 4, 3, 2};
+    private static final int DECK_COUNT40[] = {3, 6, 6, 4, 3, 2};
+    private static final int DECK_COUNT60[] = {4, 9, 9, 5, 5, 3};
     private static final int DECK_COST[] = {1, 2, 3, 4, 6, 10};
-    private static final int DECK_SPELLS = 23;
-    private static final int DECK_LANDS = 17;
-    private static final int DECK_SIZE = DECK_SPELLS + DECK_LANDS;
+//    private static final int DECK_SPELLS = 23;
+//    private static final int DECK_LANDS = 17;
+//    private static final int DECK_SIZE = DECK_SPELLS + DECK_LANDS;
     private static final int MIN_CARD_SCORE = 25;
     private static final int MIN_SOURCE = 16;
     private static Deck deck = new Deck();
+
+    private static int deckCount[];
+    private static int deckSize;
+    private static int deckSpells;
+    private static int deckLands;
 
     /**
      * Hide constructor.
@@ -35,7 +46,8 @@ public class DeckBuilder {
     private DeckBuilder() {
     }
 
-    public synchronized static Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, RateCallback callback) {
+    public synchronized static Deck buildDeck(List<Card> spellCardPool, List<ColoredManaSymbol> allowedColors, List<String> setsToUse, List<Card> landCardPool, int deckCardSize, RateCallback callback) {
+        deckSize = deckCardSize;
         deck = new Deck();
 
         final Collection<MageScoredCard> remainingCards = new ArrayList<MageScoredCard>();
@@ -48,13 +60,23 @@ public class DeckBuilder {
             names.add(card.getName());
         }
         int min = 0;
-        for (int index = 0; index < DECK_COUNT.length; index++) {
+        if (deckSize == 40) {
+            deckCount = DECK_COUNT40;
+            deckSpells = 23;
+            deckLands = 17;
+        } else {
+            deckCount = DECK_COUNT60;
+            deckSpells = 35;
+            deckLands = 25;
+        }
+
+        for (int index = 0; index < deckCount.length; index++) {
             final int max = DECK_COST[index];
-            addCardsToDeck(remainingCards, min, max, DECK_COUNT[index]);
+            addCardsToDeck(remainingCards, min, max, deckCount[index]);
             min = max + 1;
         }
-        addCardsToDeck(remainingCards, 0, 4, DECK_SPELLS - deck.getCards().size());
-        addCardsToDeck(remainingCards, 5, 10, DECK_SPELLS - deck.getCards().size());
+        addCardsToDeck(remainingCards, 0, 4, deckSpells - deck.getCards().size());
+        addCardsToDeck(remainingCards, 5, 10, deckSpells - deck.getCards().size());
         addLandsToDeck(allowedColors, setsToUse, landCardPool, callback);
 
         return deck;
@@ -170,7 +192,7 @@ public class DeckBuilder {
         }
 
         // Add optimal basic lands to deck.
-        while (deck.getCards().size() < DECK_SIZE) {
+        while (deck.getCards().size() < deckSize) {
             ColoredManaSymbol bestColor = null;
             int lowestRatio = Integer.MAX_VALUE;
             for (final ColoredManaSymbol color : ColoredManaSymbol.values()) {
@@ -209,7 +231,7 @@ public class DeckBuilder {
         public MageScoredCard(Card card, List<ColoredManaSymbol> allowedColors, RateCallback cardRater) {
             this.card = card;
 
-            int type = 0;
+            int type;
             if (card.getCardType().contains(CardType.CREATURE)) {
                 type = 10;
             } else if (card.getSubtype().contains("Equipment")) {
