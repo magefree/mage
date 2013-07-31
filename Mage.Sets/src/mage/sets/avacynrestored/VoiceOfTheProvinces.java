@@ -28,15 +28,14 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -71,7 +70,7 @@ public class VoiceOfTheProvinces extends CardImpl<VoiceOfTheProvinces> {
 
 class HumanToken extends Token {
     public HumanToken() {
-        super("Human", "a 1/1 white Human creature token");
+        super("Human", "1/1 white Human creature token");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.WHITE;
         subtype.add("Human");

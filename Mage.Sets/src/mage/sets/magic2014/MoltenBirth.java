@@ -94,7 +94,7 @@ class MoltenBirthEffect extends OneShotEffect<MoltenBirthEffect> {
             token.putOntoBattlefield(2, game, source.getId(), source.getControllerId());
             if (you.flipCoin(game)) {
                 molten.moveToZone(Zone.HAND, source.getId(), game, true);
-                game.informPlayers(you.getName() + "won the flip.  Molten Birth is returned to" + you.getName() + "hand.");
+                game.informPlayers(new StringBuilder(you.getName()).append(" won the flip.  Molten Birth is returned to ").append(you.getName()).append(" hand.").toString());
             }
         }
         return false;
