@@ -28,12 +28,13 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -58,15 +59,16 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Card card = game.getCard(source.getFirstTarget());
-        if (card != null) {
-            Player player = game.getPlayer(card.getOwnerId());
-            if (player != null) {
-                card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-                return true;
+        for (UUID cardId: getTargetPointer().getTargets(game, source)) {
+            Card card = game.getCard(cardId);
+            if (card != null && game.getState().getZone(cardId).equals(Zone.GRAVEYARD)) {
+                Player player = game.getPlayer(card.getOwnerId());
+                if (player != null) {
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                }
             }
         }
-        return false;
+        return true;
     }
 
     @Override
