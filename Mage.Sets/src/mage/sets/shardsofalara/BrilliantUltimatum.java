@@ -53,7 +53,7 @@ import mage.target.common.TargetOpponent;
 public class BrilliantUltimatum extends CardImpl<BrilliantUltimatum> {
 
     public BrilliantUltimatum(UUID ownerId) {
-        super(ownerId, 159, "Brilliant Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{B}{B}");
+        super(ownerId, 159, "Brilliant Ultimatum", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{W}{W}{U}{U}{U}{B}{B}");
         this.expansionSetCode = "ALA";
 
         this.color.setBlue(true);
