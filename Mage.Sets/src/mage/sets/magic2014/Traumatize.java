@@ -28,7 +28,6 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.constants.Rarity;
 
 /**
  *
@@ -40,7 +39,6 @@ public class Traumatize extends mage.sets.tenth.Traumatize {
         super(ownerId);
         this.cardNumber = 77;
         this.expansionSetCode = "M14";
-        this.rarity = Rarity.MYTHIC;
     }
 
     public Traumatize(final Traumatize card) {
