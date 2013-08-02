@@ -1,14 +1,11 @@
 package mage.player.ai.utils;
 
+import mage.cards.decks.Deck;
 import mage.cards.Card;
 import org.apache.log4j.Logger;
 
-import mage.player.ai.utils.CardDatabase;
-import mage.cards.decks.Deck;
-
 import java.io.InputStream;
 import java.util.*;
-import mage.player.ai.ComputerPlayer;
 
 /**
  * Class responsible for reading ratings from resources and rating gived cards.
@@ -21,28 +18,11 @@ public class PickBestDraftCard {
     private static Map<String, CardDatabase> ratings;
     
     private static final Logger log = Logger.getLogger(PickBestDraftCard.class);
-    /**
-     * Rating that is given for new cards.
-     * Ratings are in [1,10] range, so setting it high will make new cards appear more often.
-     */
-    private static final int DEFAULT_NOT_RATED_CARD_RATING = 4;
 
 
-
-    /**
-     * Hide constructor.
-     */
     private PickBestDraftCard() {
     }
 
-    /**
-     * Get absolute score of the card.
-     * Depends on type, manacost, rating.
-     * If allowedColors is null then the rating is retrieved from the cache
-     *
-     * @param card
-     * @return
-     */
     public static Card pickBestDraftCard(List<Card> cards, Deck deck) {
         if (cards.isEmpty()) {
             return null;
@@ -62,9 +42,7 @@ public class PickBestDraftCard {
         int[] prevScore = new int[10];
         int[] postScore = new int[10];
         
-        /*
-         * Previous best deck score with 2 colors.
-         */
+
         prevScore[0] = deck.draftBG;
         prevScore[1] = deck.draftBR;
         prevScore[2] = deck.draftBU;
@@ -249,7 +227,6 @@ public class PickBestDraftCard {
         bestCardType.equals("NA"))
         deck.draftUW = deck.draftUW + bestCardScore;
         
-        log.info(bestCard.getName() + "   " + bestCardScore + "   " + bestCardType);
         return bestCard;
     }
 
