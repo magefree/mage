@@ -53,6 +53,6 @@ public class SaviorsOfKamigawa extends ExpansionSet {
         this.numBoosterCommon = 11;
         this.numBoosterUncommon = 3;
         this.numBoosterRare = 1;
-        this.ratioBoosterMythic = 8;
+        this.ratioBoosterMythic = 0;
     }
 }
