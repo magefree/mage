@@ -28,15 +28,15 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -57,7 +57,7 @@ public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
     }
 
     public HorobiDeathsWail(UUID ownerId) {
-        super(ownerId, 117, "Horobi Death's Wail", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, 117, "Horobi Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
@@ -115,4 +115,3 @@ class HorobiDeathsWailAbility extends TriggeredAbilityImpl<HorobiDeathsWailAbili
         return "When a creature becomes the target of a spell or ability, destroy that creature.";
     }
 }
-
