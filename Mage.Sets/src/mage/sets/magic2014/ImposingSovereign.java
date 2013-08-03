@@ -32,7 +32,6 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -96,9 +95,10 @@ class ImposingSovereignEffect extends ReplacementEffectImpl<ImposingSovereignEff
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
-            Card c = game.getCard(event.getTargetId());
-            if (c != null && c.getCardType().contains(CardType.CREATURE))
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getCardType().contains(CardType.CREATURE)) {
                 return true;
+            }
         }
         return false;
     }
