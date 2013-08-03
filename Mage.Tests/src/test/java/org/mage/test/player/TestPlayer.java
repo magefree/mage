@@ -54,6 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import mage.filter.common.FilterCreatureForCombatBlock;
 
 /**
  *
@@ -154,7 +155,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                 String command = action.getAction();
                 command = command.substring(command.indexOf("block:") + 6);
                 String[] groups = command.split(";");
-                FilterCreatureForCombat filterBlocker = new FilterCreatureForCombat();
+                FilterCreatureForCombatBlock filterBlocker = new FilterCreatureForCombatBlock();
                 filterBlocker.add(new NamePredicate(groups[0]));
                 Permanent blocker = findPermanent(filterBlocker, playerId, game);
                 if (blocker != null) {

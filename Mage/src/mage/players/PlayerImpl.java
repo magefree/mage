@@ -83,6 +83,7 @@ import mage.counters.CounterType;
 import mage.counters.Counters;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.combat.CombatGroup;
@@ -1468,7 +1469,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
 
     @Override
     public List<Permanent> getAvailableBlockers(Game game) {
-        FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
+        FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
         List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
         return blockers;
     }

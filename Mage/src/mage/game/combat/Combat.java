@@ -37,7 +37,7 @@ import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -55,7 +55,7 @@ import mage.util.trace.TraceUtil;
 public class Combat implements Serializable, Copyable<Combat> {
 
     private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
-    private static FilterCreatureForCombat filterBlockers = new FilterCreatureForCombat();
+    private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
 
     protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<UUID, CombatGroup>();

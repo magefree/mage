@@ -28,31 +28,45 @@
 
 package mage.filter.common;
 
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.constants.AsThoughEffectType;
+import mage.filter.predicate.Predicate;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
- * @author North
+ * @author LevelX2
  */
-public class FilterCreatureForCombat extends FilterCreatureForCombatBase {
+public class FilterCreatureForCombatBlock extends FilterCreatureForCombatBase {
 
-    public FilterCreatureForCombat() {
+    public FilterCreatureForCombatBlock() {
         this("");
     }
 
-    public FilterCreatureForCombat(String name) {
+    public FilterCreatureForCombatBlock(String name) {
         super(name);
-        this.add(Predicates.not(new TappedPredicate()));
+        this.add(new BlockTappedPredicate());
     }
 
-    public FilterCreatureForCombat(final FilterCreatureForCombat filter) {
+    public FilterCreatureForCombatBlock(final FilterCreatureForCombatBlock filter) {
         super(filter);
     }
 
     @Override
-    public FilterCreatureForCombat copy() {
-        return new FilterCreatureForCombat(this);
+    public FilterCreatureForCombatBlock copy() {
+        return new FilterCreatureForCombatBlock(this);
+    }
+}
+
+class BlockTappedPredicate implements Predicate<Permanent> {
+
+    @Override
+    public boolean apply(Permanent input, Game game) {
+        return !input.isTapped() || game.getState().getContinuousEffects().asThough(input.getId(), AsThoughEffectType.BLOCK_TAPPED, game);
+    }
+
+    @Override
+    public String toString() {
+        return "untapped or can block tapped";
     }
 }

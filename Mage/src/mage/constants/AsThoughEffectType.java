@@ -5,7 +5,7 @@ package mage.constants;
  * @author North
  */
 public enum AsThoughEffectType {
-    BLOCK,
+    BLOCK_TAPPED,
     BE_BLOCKED,
     ATTACK,
     CAST,

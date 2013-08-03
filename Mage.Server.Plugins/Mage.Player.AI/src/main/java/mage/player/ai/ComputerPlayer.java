@@ -1701,7 +1701,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     }
 
     protected List<Permanent> getOpponentBlockers(UUID opponentId, Game game) {
-        FilterCreatureForCombat blockFilter = new FilterCreatureForCombat();
+        FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
         List<Permanent> blockers = game.getBattlefield().getAllActivePermanents(blockFilter, opponentId, game);
         return blockers;
     }

@@ -863,7 +863,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public boolean canBlock(UUID attackerId, Game game) {
-        if (tapped) {
+        if (tapped && !game.getState().getContinuousEffects().asThough(this.getId(), AsThoughEffectType.BLOCK_TAPPED, game)) {
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);

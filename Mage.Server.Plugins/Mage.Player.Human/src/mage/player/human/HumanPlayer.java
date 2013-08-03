@@ -28,8 +28,22 @@
 
 package mage.player.human;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.SpecialAction;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
@@ -41,12 +55,15 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
+import mage.filter.common.FilterCreatureForCombatBase;
+import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
 import mage.game.draft.Draft;
@@ -65,9 +82,6 @@ import mage.target.common.TargetDefender;
 import mage.util.ManaUtil;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
-import java.util.*;
-
 
 /**
  *
@@ -77,6 +91,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
 
     private final transient PlayerResponse response = new PlayerResponse();
 
+    protected static FilterCreatureForCombatBlock filterCreatureForCombatBlock = new FilterCreatureForCombatBlock();
     protected static FilterCreatureForCombat filterCreatureForCombat = new FilterCreatureForCombat();
     protected static FilterAttackingCreature filterAttack = new FilterAttackingCreature();
     protected static FilterBlockingCreature filterBlock = new FilterBlockingCreature();
@@ -593,7 +608,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     @Override
     public void selectBlockers(Game game, UUID defendingPlayerId) {
         updateGameStatePriority("selectBlockers", game);
-        FilterCreatureForCombat filter = filterCreatureForCombat.copy();
+        FilterCreatureForCombatBlock filter = filterCreatureForCombatBlock.copy();
         filter.add(new ControllerIdPredicate(defendingPlayerId));
         while (!abort) {
             game.fireSelectEvent(playerId, "Select blockers");
@@ -601,10 +616,6 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             if (response.getBoolean() != null) {
                 return;
             } else if (response.getInteger() != null) {
-                //if (response.getInteger() == -9999) {
-                //    passedAllTurns = true;
-                //}
-                //passedTurn = true;
                 return;
             } else if (response.getUUID() != null) {
                 Permanent blocker = game.getPermanent(response.getUUID());
@@ -613,8 +624,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         selectCombatGroup(blocker.getId(), game);
                     }
                     else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
-//                        if (game.getState().getTriggered().isEmpty() && game.getState().getDelayed().isEmpty())
-                            game.getCombat().removeBlocker(blocker.getId(), game);
+                        game.getCombat().removeBlocker(blocker.getId(), game);
                     }
                 }
             }
