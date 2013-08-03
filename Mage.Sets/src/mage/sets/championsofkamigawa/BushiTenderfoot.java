@@ -35,6 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FlippedCondition;
@@ -74,7 +75,9 @@ public class BushiTenderfoot extends CardImpl<BushiTenderfoot> {
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), "")));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KenzoTheHardhearted()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
     }
 
     public BushiTenderfoot(final BushiTenderfoot card) {

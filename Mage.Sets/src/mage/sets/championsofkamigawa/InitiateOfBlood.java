@@ -80,8 +80,9 @@ public class InitiateOfBlood extends CardImpl<InitiateOfBlood> {
 
         // When that creature is put into a graveyard this turn, flip Initiate of Blood.
         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new FlipSourceEffect()));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new GokaTheUnjust()), FlippedCondition.getInstance(), "")));
-
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new GokaTheUnjust()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
 
     }
 

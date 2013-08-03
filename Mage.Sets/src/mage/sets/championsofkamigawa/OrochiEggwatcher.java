@@ -81,7 +81,10 @@ public class OrochiEggwatcher extends CardImpl<OrochiEggwatcher> {
         ability.addEffect(new ConditionalOneShotEffect(new FlipSourceEffect(), 
                 new ControlsPermanentCondition(new FilterControlledCreaturePermanent(),ControlsPermanentCondition.CountType.MORE_THAN, 9),"If you control ten or more creatures, flip {this}"));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new ShidakoBroodmistress()), FlippedCondition.getInstance(), "")));
+
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new ShidakoBroodmistress()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
     }
 
     public OrochiEggwatcher(final OrochiEggwatcher card) {

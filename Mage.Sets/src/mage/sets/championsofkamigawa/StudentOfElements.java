@@ -34,6 +34,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.FlippedCondition;
@@ -69,7 +70,10 @@ public class StudentOfElements extends CardImpl<StudentOfElements> {
 
         // When Student of Elements has flying, flip it.
         this.addAbility(new StudentOfElementsHasFlyingAbility());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TobitaMasterOfWinds()), FlippedCondition.getInstance(), "")));
+
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new TobitaMasterOfWinds()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
 
     }
 

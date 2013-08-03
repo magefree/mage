@@ -75,7 +75,9 @@ public class NezumiGraverobber extends CardImpl<NezumiGraverobber> {
         ability.addTarget(new TargetCardInOpponentsGraveyard(new FilterCard("card from an opponent's graveyard")));
         ability.addEffect(new NezumiGraverobberFlipEffect());
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), "")));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new NighteyesTheDesecratorToken()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
     }
 
     public NezumiGraverobber(final NezumiGraverobber card) {

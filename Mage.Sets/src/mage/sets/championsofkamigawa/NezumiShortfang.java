@@ -81,7 +81,9 @@ public class NezumiShortfang extends CardImpl<NezumiShortfang> {
                     new CardsInTargetOpponentHandCondition(CardsInTargetOpponentHandCondition.CountType.FEWER_THAN, 1),
                     "Then if that player has no cards in hand, flip {this}"));
         this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new StabwhiskerTheOdious()), FlippedCondition.getInstance(), "")));
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new StabwhiskerTheOdious()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
     }
 
     public NezumiShortfang(final NezumiShortfang card) {

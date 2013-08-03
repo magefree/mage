@@ -84,7 +84,9 @@ public class FaithfulSquire extends CardImpl<FaithfulSquire> {
                 new HasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
                 "At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it.", true));
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KaisoMemoryOfLoyalty()), FlippedCondition.getInstance(), "")));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KaisoMemoryOfLoyalty()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
    }
 
     public FaithfulSquire(final FaithfulSquire card) {
