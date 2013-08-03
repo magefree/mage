@@ -79,7 +79,9 @@ public class KitsuneMystic extends CardImpl<KitsuneMystic> {
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect()),
                 new EnchantedCondition(2),"At the beginning of the end step, if {this} is enchanted by two or more Auras, flip it.", false
                 ));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new AutumnTailKitsuneSage()), FlippedCondition.getInstance(), "")));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new AutumnTailKitsuneSage()), FlippedCondition.getInstance(), ""));
+        ability.setRuleVisible(false);
+        this.addAbility(ability);
     }
 
     public KitsuneMystic(final KitsuneMystic card) {
