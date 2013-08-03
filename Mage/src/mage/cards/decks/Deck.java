@@ -41,6 +41,17 @@ public class Deck implements Serializable {
     private String name;
     private Set<Card> cards = new LinkedHashSet<Card>();
     private Set<Card> sideboard = new LinkedHashSet<Card>();
+    
+    public int draftBG = 0;
+    public int draftBR = 0;
+    public int draftBU = 0;
+    public int draftBW = 0;
+    public int draftGR = 0;
+    public int draftGU = 0;
+    public int draftGW = 0;
+    public int draftRU = 0;
+    public int draftRW = 0;
+    public int draftUW = 0;
 
     public static Deck load(DeckCardLists deckCardLists) throws GameException {
         return Deck.load(deckCardLists, false);
