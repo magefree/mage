@@ -75,6 +75,8 @@ import mage.util.Copier;
 import mage.util.TreeNode;
 import org.apache.log4j.Logger;
 
+import mage.player.ai.utils.PickBestDraftCard;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.String;
@@ -1554,44 +1556,15 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             throw new IllegalArgumentException("No cards to pick from.");
         }
         try {
-            Card bestCard = pickBestCard(cards, chosenColors);
-            int maxScore = RateCard.rateCard(bestCard, chosenColors);
-            int pickedCardRate = RateCard.getCardRating(bestCard);
-
-            if (pickedCardRate <= 3) {
-                // if card is bad
-                // try to counter pick without any color restriction
-                Card counterPick = pickBestCard(cards, null);
-                int counterPickScore = RateCard.getCardRating(counterPick);
-                // card is really good
-                // take it!
-                if (counterPickScore >= 8) {
-                    bestCard = counterPick;
-                    maxScore =  RateCard.rateCard(bestCard, chosenColors);
-                }
-            }
-
-
-            String colors = "not chosen yet";
-            // remember card if colors are not chosen yet
-            if (chosenColors == null) {
-                rememberPick(bestCard, maxScore);
-                chosenColors = chooseDeckColorsIfPossible();
-            }
-            if (chosenColors != null) {
-                colors = "";
-                for (ColoredManaSymbol symbol : chosenColors) {
-                    colors += symbol.toString();
-                }
-            }
-            log.debug("[DEBUG] AI picked: " + bestCard.getName() + ", score=" + maxScore + ", deck colors=" + colors);
+            PickBestDraftCard.readRatings();
+            Card bestCard = PickBestDraftCard.pickBestDraftCard(cards, deck);
             draft.addPick(playerId, bestCard.getId());
         } catch (Exception e) {
             e.printStackTrace();
             draft.addPick(playerId, cards.get(0).getId());
         }
     }
-
+    
     /**
      * Remember picked card with its score.
      *
