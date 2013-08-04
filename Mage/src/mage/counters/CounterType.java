@@ -72,7 +72,8 @@ public enum CounterType {
     THEFT(new TheftCounter().name),
     AGE(new AgeCounter().name),
     BLAZE(new BlazeCounter().name),
-    ICE(new IceCounter().name);
+    ICE(new IceCounter().name),
+    BRIBERY(new BriberyCounter().name);
 
     private String name;
 
