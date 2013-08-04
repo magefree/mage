@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
@@ -48,7 +48,6 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 public class BubblingBeebles extends CardImpl<BubblingBeebles> {
 
     private static final FilterPermanent filter = new FilterPermanent();
-
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
     }
@@ -62,10 +61,10 @@ public class BubblingBeebles extends CardImpl<BubblingBeebles> {
         this.toughness = new MageInt(3);
 
         // Bubbling Beebles is unblockable as long as defending player controls an enchantment.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalRestrictionEffect(
                 new UnblockableSourceEffect(),
-                new DefendingPlayerControlsCondition(filter),
-                "{this} is unblockable as long as defending player controls an enchantment");
+                new DefendingPlayerControlsCondition(filter));
+        effect.setText("{this} is unblockable as long as defending player controls an enchantment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

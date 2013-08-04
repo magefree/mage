@@ -28,20 +28,23 @@
 package mage.sets.innistrad;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.condition.common.EquippedHasSubtypeCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.AttachmentType;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -68,7 +71,9 @@ public class BondsOfFaith extends CardImpl<BondsOfFaith> {
 
         // Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEquippedEffect(2, 2), new EquippedHasSubtypeCondition("Human"), rule)));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BondsOfFaithEffect()));
+        Effect effect = new ConditionalRestrictionEffect(new CantAttackBlockAttachedEffect(AttachmentType.AURA), new InvertCondition(new EquippedHasSubtypeCondition("Human")));
+        effect.setText("Otherwise, it can't attack or block");
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 
     public BondsOfFaith(final BondsOfFaith card) {
@@ -79,44 +84,4 @@ public class BondsOfFaith extends CardImpl<BondsOfFaith> {
     public BondsOfFaith copy() {
         return new BondsOfFaith(this);
     }
-}
-
-class BondsOfFaithEffect extends RestrictionEffect<BondsOfFaithEffect> {
-
-    private static final Condition condition = new EquippedHasSubtypeCondition("Human");
-
-    public BondsOfFaithEffect() {
-        super(Duration.WhileOnBattlefield);
-        staticText = "Otherwise, it can't attack or block";
-    }
-
-    public BondsOfFaithEffect(final BondsOfFaithEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getAttachments().contains((source.getSourceId()))) {
-            if (!condition.apply(game, source)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean canAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
-    }
-
-    @Override
-    public BondsOfFaithEffect copy() {
-        return new BondsOfFaithEffect(this);
-    }
-
 }

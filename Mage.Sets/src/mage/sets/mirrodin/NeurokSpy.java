@@ -28,17 +28,16 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterArtifactPermanent;
 
 /**
@@ -57,10 +56,10 @@ public class NeurokSpy extends CardImpl<NeurokSpy> {
         this.toughness = new MageInt(2);
 
         //Neurok Spy is unblockable as long as defending player controls an artifact.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalRestrictionEffect(
                 new UnblockableSourceEffect(),
-                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()),
-                "{this} is unblockable as long as defending player controls an artifact");
+                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()));
+        effect.setText("{this} is unblockable as long as defending player controls an artifact");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

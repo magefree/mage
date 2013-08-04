@@ -34,7 +34,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
@@ -66,10 +66,10 @@ public class HazyHomunculus extends CardImpl<HazyHomunculus> {
         this.toughness = new MageInt(1);
 
         // Hazy Homunculus is unblockable as long as defending player controls an untapped land.
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalRestrictionEffect(
                 new UnblockableSourceEffect(),
-                new DefendingPlayerControlsCondition(filter),
-                "{this} is unblockable as long as defending player controls an untapped land");
+                new DefendingPlayerControlsCondition(filter));
+        effect.setText("{this} is unblockable as long as defending player controls an untapped land");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

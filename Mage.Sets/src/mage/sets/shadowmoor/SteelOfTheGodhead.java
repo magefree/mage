@@ -33,7 +33,10 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.UnblockableAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -74,7 +77,9 @@ public class SteelOfTheGodhead extends CardImpl<SteelOfTheGodhead> {
         this.addAbility(whiteAbility);
         // As long as enchanted creature is blue, it gets +1/+1 and is unblockable.
         SimpleStaticAbility blueAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "As long as enchanted creature is blue, it gets +1/+1"));
-        blueAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(new UnblockableAbility(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE), "and is unblockable"));
+        Effect effect = new ConditionalRestrictionEffect(new UnblockableAttachedEffect(AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLUE));
+        effect.setText("and is unblockable");
+        blueAbility.addEffect(effect);
         this.addAbility(blueAbility);
     }
 

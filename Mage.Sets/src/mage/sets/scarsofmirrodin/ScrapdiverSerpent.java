@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
-import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UnblockableSourceEffect;
 import mage.cards.CardImpl;
@@ -57,10 +57,10 @@ public class ScrapdiverSerpent extends CardImpl<ScrapdiverSerpent> {
         this.toughness = new MageInt(5);
 
         // Scrapdiver Serpent is unblockable as long as defending player controls an artifact
-        Effect effect = new ConditionalContinousEffect(
+        Effect effect = new ConditionalRestrictionEffect(
                 new UnblockableSourceEffect(),
-                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()),
-                "{this} is unblockable as long as defending player controls an artifact");
+                new DefendingPlayerControlsCondition(new FilterArtifactPermanent()));
+        effect.setText("{this} is unblockable as long as defending player controls an artifact");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

@@ -49,7 +49,7 @@ import java.util.UUID;
  */
 public class SnapsailGlider extends CardImpl<SnapsailGlider> {
 
-    protected static String text = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
+    protected static String rule = "Metalcraft - Snapsail Glider has flying as long as you control three or more artifacts";
 
     public SnapsailGlider (UUID ownerId) {
         super(ownerId, 203, "Snapsail Glider", Rarity.COMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
@@ -58,7 +58,7 @@ public class SnapsailGlider extends CardImpl<SnapsailGlider> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         ContinuousEffect effect = new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.WhileOnBattlefield);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, MetalcraftCondition.getInstance(), text)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(effect, MetalcraftCondition.getInstance(), rule)));
     }
 
     public SnapsailGlider (final SnapsailGlider card) {

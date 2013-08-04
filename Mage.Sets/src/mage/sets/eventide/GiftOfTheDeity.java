@@ -33,6 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.EnchantedCreatureColorCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.decorator.ConditionalRequirementEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.MustBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
@@ -42,6 +44,7 @@ import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.constants.AttachmentType;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -73,8 +76,13 @@ public class GiftOfTheDeity extends CardImpl<GiftOfTheDeity> {
         blackAbility.addEffect(new ConditionalContinousEffect(new GainAbilityAttachedEffect(DeathtouchAbility.getInstance(), AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.BLACK), "and has deathtouch"));
         this.addAbility(blackAbility);
         // As long as enchanted creature is green, it gets +1/+1 and all creatures able to block it do so.
-        SimpleStaticAbility greenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "As long as enchanted creature is green, it gets +1/+1"));
-        greenAbility.addEffect(new ConditionalContinousEffect(new MustBlockAttachedEffect(AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.GREEN), "and all creatures able to block it do so"));
+        SimpleStaticAbility greenAbility = new SimpleStaticAbility(Zone.BATTLEFIELD,
+                new ConditionalContinousEffect(new BoostEnchantedEffect(1, 1),
+                new EnchantedCreatureColorCondition(ObjectColor.GREEN),
+                "As long as enchanted creature is green, it gets +1/+1"));
+        Effect effect = new ConditionalRequirementEffect(new MustBlockAttachedEffect(AttachmentType.AURA), new EnchantedCreatureColorCondition(ObjectColor.GREEN));
+        effect.setText("and all creatures able to block it do so");
+        greenAbility.addEffect(effect);
         this.addAbility(greenAbility);
     }
 
