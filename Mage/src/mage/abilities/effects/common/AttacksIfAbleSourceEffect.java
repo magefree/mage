@@ -42,10 +42,12 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSo
 
     public AttacksIfAbleSourceEffect(Duration duration) {
         super(duration);
-        if (this.duration == Duration.EndOfTurn)
+        if (this.duration == Duration.EndOfTurn) {
             staticText = "{this} attacks this turn if able";
-        else
+        }
+        else {
             staticText = "{this} attacks each turn if able";
+        }
     }
 
     public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
