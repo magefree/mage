@@ -21,16 +21,9 @@ import mage.interfaces.rate.RateCallback;
  */
 public class DeckBuilder {
 
-//    private static String selectedColors;
-//
-//    private static final int SPELL_CARD_POOL_SIZE = 60;
-
     private static final int DECK_COUNT40[] = {3, 6, 6, 4, 3, 2};
     private static final int DECK_COUNT60[] = {4, 9, 9, 5, 5, 3};
     private static final int DECK_COST[] = {1, 2, 3, 4, 6, 10};
-//    private static final int DECK_SPELLS = 23;
-//    private static final int DECK_LANDS = 17;
-//    private static final int DECK_SIZE = DECK_SPELLS + DECK_LANDS;
     private static final int MIN_CARD_SCORE = 25;
     private static final int MIN_SOURCE = 16;
     private static Deck deck = new Deck();
