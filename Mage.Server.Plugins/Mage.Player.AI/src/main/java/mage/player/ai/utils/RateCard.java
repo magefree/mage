@@ -67,68 +67,12 @@ public class RateCard {
         } else {
             type = 6;
         }
-        int score = 10 * getCardRating(card) + 2 * type + getManaCostScore(card, allowedColors)
-                + 40 * isRemoval(card);
+        int score = type;
         if (allowedColors == null)
             rated.put(card.getName(), score);
         return score;
     }
 
-    private static int isRemoval(Card card) {
-        if (card.getSubtype().contains("Aura") || card.getCardType().contains(CardType.INSTANT)
-                || card.getCardType().contains(CardType.SORCERY)) {
-
-            for (Ability ability : card.getAbilities()) {
-                for (Effect effect : ability.getEffects()) {
-                    if (effect.getOutcome().equals(Outcome.Removal)) {
-                        log.debug("Found removal: " + card.getName());
-                        return 1;
-                    }
-                    if (effect.getOutcome().equals(Outcome.Damage)) {
-                        if (effect instanceof DamageTargetEffect) {
-                            DamageTargetEffect damageEffect = (DamageTargetEffect) effect;
-                            if (damageEffect.getAmount() > 1) {
-                                for (Target target : ability.getTargets()) {
-                                    if (target instanceof TargetCreaturePermanent || target instanceof TargetCreatureOrPlayer) {
-                                        log.debug("Found damage dealer: " + card.getName());
-                                        return 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (effect.getOutcome().equals(Outcome.DestroyPermanent)) {
-                        for (Target target : ability.getTargets()) {
-                            if (target instanceof TargetCreaturePermanent) {
-                                log.info("Found destroyer: " + card.getName());
-                                return 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Return rating of the card.
-     *
-     * @param card Card to rate.
-     * @return Rating number from [1;10].
-     */
-    public static int getCardRating(Card card) {
-        if (ratings == null) {
-            readRatings();
-        }
-        if (ratings.containsKey(card.getName())) {
-            int r = ratings.get(card.getName());
-            // normalize to [1..10]
-            float f = 10.0f * (r - min) / (max - min);
-            return (int) Math.round(f);
-        }
-        return DEFAULT_NOT_RATED_CARD_RATING;
-    }
 
     /**
      * Reads ratings from resources.
