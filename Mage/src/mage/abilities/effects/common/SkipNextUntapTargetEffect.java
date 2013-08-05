@@ -114,10 +114,12 @@ public class SkipNextUntapTargetEffect extends ReplacementEffectImpl<SkipNextUnt
 
     @Override
     public String getText(Mode mode) {
-            if (staticText.length() > 0) 
+            if (staticText.length() > 0) {
                 return staticText + " doesn't untap during its controller's next untap step";
-            else 
-        return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+            }
+            else {
+                return "Target " + mode.getTargets().get(0).getTargetName() + " doesn't untap during its controller's next untap step";
+            }
     }
 
 }

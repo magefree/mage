@@ -64,8 +64,9 @@ public class DeckArea extends javax.swing.JPanel {
 
     public void loadDeck(Deck deck, BigCard bigCard) {
         deckList.loadCards(new CardsView(deck.getCards()), bigCard, null);
-        if (sideboardList.isVisible())
+        if (sideboardList.isVisible()) {
             sideboardList.loadCards(new CardsView(deck.getSideboard()), bigCard, null);
+        }
     }
 
     public void addDeckEventListener(Listener<Event> listener) {
