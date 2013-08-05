@@ -52,12 +52,14 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected List<UUID> attackerOrder = new ArrayList<UUID>();
     protected Map<UUID, UUID> players = new HashMap<UUID, UUID>();
     protected boolean blocked;
-    protected UUID defenderId;
+    protected UUID defenderId; // planeswalker or player
+    protected UUID defendingPlayerId;
     protected boolean defenderIsPlaneswalker;
 
-    public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker) {
+    public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker, UUID defendingPlayerId) {
         this.defenderId = defenderId;
         this.defenderIsPlaneswalker = defenderIsPlaneswalker;
+        this.defendingPlayerId = defendingPlayerId;
     }
 
     public CombatGroup(final CombatGroup group) {
@@ -379,6 +381,10 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean canBlock(Permanent blocker, Game game) {
+        // you can't block if combat group attacks another player
+        if (!defendingPlayerId.equals(blocker.getControllerId()) ) {
+            return false;
+        }
         for (UUID attackerId: attackers) {
             if (!blocker.canBlock(attackerId, game)) {
                 return false;

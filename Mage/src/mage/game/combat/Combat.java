@@ -404,7 +404,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             return;
         }
         Permanent defender = game.getPermanent(defenderId);
-        CombatGroup newGroup = new CombatGroup(defenderId, defender != null);
+        CombatGroup newGroup = new CombatGroup(defenderId, defender != null, defender != null ? defender.getControllerId(): defenderId);
         newGroup.attackers.add(attackerId);
         Permanent attacker = game.getPermanent(attackerId);
         if (!attacker.getAbilities().containsKey(VigilanceAbility.getInstance().getId())) {
@@ -419,7 +419,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         Permanent blocker = game.getPermanent(blockerId);
         if (blockerId != null && blocker != null && blocker.getBlocking() > 1) {
             if (!blockingGroups.containsKey(blockerId)) {
-                CombatGroup newGroup = new CombatGroup(playerId, playerId != null);
+                CombatGroup newGroup = new CombatGroup(playerId, false, playerId);
                 newGroup.blockers.add(blockerId);
                 // add all blocked attackers
                 for (CombatGroup group : groups) {
