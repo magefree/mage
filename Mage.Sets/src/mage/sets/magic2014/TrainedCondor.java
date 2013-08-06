@@ -38,6 +38,9 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
@@ -46,6 +49,10 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class TrainedCondor extends CardImpl<TrainedCondor> {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another target creature you control");
+    static {
+        filter.add(new AnotherPredicate());
+    }
     public TrainedCondor(UUID ownerId) {
         super(ownerId, 76, "Trained Condor", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "M14";
@@ -60,7 +67,9 @@ public class TrainedCondor extends CardImpl<TrainedCondor> {
         // Whenever Trained Condor attacks, another target creature you control gains flying until end of turn.
         Effect effect = new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn);
         Ability ability = new AttacksTriggeredAbility(effect, false);
-        ability.addTarget(new TargetControlledCreaturePermanent(true));
+        Target target = new TargetControlledCreaturePermanent(1, 1, filter, true);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
