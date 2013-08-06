@@ -674,7 +674,7 @@ public class ComputerPlayer2 extends ComputerPlayer<ComputerPlayer2> implements 
             for (int i = 0; i < groups.size(); i++) {
                 if (i < combat.getGroups().size()) {
                     for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
-                        this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+                        this.declareBlocker(defendingPlayerId, blockerId, groups.get(i).getAttackers().get(0), game);
                         if (logger.isDebugEnabled()) {
                             Permanent blocker = game.getPermanent(blockerId);
                             if (blocker != null)

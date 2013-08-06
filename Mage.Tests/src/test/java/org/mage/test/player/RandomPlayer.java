@@ -207,7 +207,7 @@ public class RandomPlayer extends ComputerPlayer<RandomPlayer> {
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
                 if (group.getAttackers().size() > 0)
-                    this.declareBlocker(blocker.getId(), group.getAttackers().get(0), game);
+                    this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
             }
         }
         actionCount++;

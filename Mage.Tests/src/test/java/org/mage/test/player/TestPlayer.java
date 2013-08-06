@@ -163,7 +163,7 @@ public class TestPlayer extends ComputerPlayer<TestPlayer> {
                     filterAttacker.add(new NamePredicate(groups[1]));
                     Permanent attacker = findPermanent(filterAttacker, opponentId, game);
                     if (attacker != null) {
-                        this.declareBlocker(blocker.getId(), attacker.getId(), game);
+                        this.declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), game);
                     }
                 }
             }

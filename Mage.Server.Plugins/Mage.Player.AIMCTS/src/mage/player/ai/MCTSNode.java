@@ -174,7 +174,7 @@ public class MCTSNode {
                     for (int i = 0; i < groups.size(); i++) {
                         if (i < block.size()) {
                             for (UUID blockerId: block.get(i)) {
-                                simPlayer.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), sim);
+                                simPlayer.declareBlocker(simPlayer.getId(), blockerId, groups.get(i).getAttackers().get(0), sim);
                             }
                         }
                     }

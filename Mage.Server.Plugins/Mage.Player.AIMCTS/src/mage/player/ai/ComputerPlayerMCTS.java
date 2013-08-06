@@ -213,7 +213,7 @@ public class ComputerPlayerMCTS extends ComputerPlayer<ComputerPlayerMCTS> imple
         for (int i = 0; i < groups.size(); i++) {
             if (i < combat.getGroups().size()) {
                 for (UUID blockerId: combat.getGroups().get(i).getBlockers()) {
-                    this.declareBlocker(blockerId, groups.get(i).getAttackers().get(0), game);
+                    this.declareBlocker(this.getId(), blockerId, groups.get(i).getAttackers().get(0), game);
                 }
             }
         }

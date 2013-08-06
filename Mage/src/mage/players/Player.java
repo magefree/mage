@@ -272,7 +272,7 @@ public interface Player extends MageItem, Copyable<Player> {
     void pickCard(List<Card> cards, Deck deck, Draft draft);
 
     void declareAttacker(UUID attackerId, UUID defenderId, Game game);
-    void declareBlocker(UUID blockerId, UUID attackerId, Game game);
+    void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game);
     List<Permanent> getAvailableAttackers(Game game);
     List<Permanent> getAvailableBlockers(Game game);
 

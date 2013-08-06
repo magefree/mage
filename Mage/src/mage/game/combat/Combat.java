@@ -246,6 +246,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public void selectBlockers(Game game) {
         if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, attackerId, attackerId))) {
+
+            // !! Attention: Changes to this block must be also done in card "OdricMaster Tactician".
             Player player = game.getPlayer(attackerId);
             //20101001 - 509.1c
             checkBlockRequirementsBefore(player, game);
@@ -314,7 +316,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                             UUID attackId = effect.mustBlockAttacker(ability, game);
                             Player defender = game.getPlayer(creature.getControllerId());
                             if (attackId != null && defender != null) {
-                                defender.declareBlocker(creature.getId(), attackId, game);
+                                defender.declareBlocker(defender.getId(), creature.getId(), attackId, game);
                             }
                         }
                     }
@@ -345,7 +347,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 if (defender != null) {
                                     for (UUID attackingCreatureId : getAttackers()) {
                                         if (creature.canBlock(attackingCreatureId, game)) {
-                                            defender.declareBlocker(creature.getId(), attackingCreatureId, game);
+                                            defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
                                             break;
                                         }
                                     }

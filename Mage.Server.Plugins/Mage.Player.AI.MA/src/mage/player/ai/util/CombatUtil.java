@@ -209,7 +209,7 @@ public class CombatUtil {
             return null;
         }
 
-        sim.getPlayer(defendingPlayerId).declareBlocker(blocker.getId(), attacker.getId(), sim);
+        sim.getPlayer(defendingPlayerId).declareBlocker(defendingPlayerId, blocker.getId(), attacker.getId(), sim);
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defendingPlayerId, defendingPlayerId));
 
         sim.checkStateAndTriggered();

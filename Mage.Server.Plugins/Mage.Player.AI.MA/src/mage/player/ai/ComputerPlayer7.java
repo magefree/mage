@@ -449,7 +449,7 @@ public class ComputerPlayer7 extends ComputerPlayer6 implements Player {
                     if (group.getAttackers().size() > 0) {
                         UUID attackerId = group.getAttackers().get(0);
                         for (UUID blockerId: group.getBlockers()) {
-                            sim.getPlayer(defenderId).declareBlocker(blockerId, attackerId, sim);
+                            sim.getPlayer(defenderId).declareBlocker(defenderId, blockerId, attackerId, sim);
                         }
                     }
                 }

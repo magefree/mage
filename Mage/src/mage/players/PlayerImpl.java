@@ -1390,10 +1390,10 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
-    public void declareBlocker(UUID blockerId, UUID attackerId, Game game) {
+    public void declareBlocker(UUID defenderId, UUID blockerId, UUID attackerId, Game game) {
         Permanent blocker = game.getPermanent(blockerId);
         CombatGroup group = game.getCombat().findGroup(attackerId);
-        if (blocker != null && group != null && group.canBlock(blocker, game) && blocker.getControllerId().equals(playerId)) {
+        if (blocker != null && group != null && group.canBlock(blocker, game) && blocker.getControllerId().equals(defenderId)) {
             group.addBlocker(blockerId, playerId, game);
             game.getCombat().addBlockingGroup(blockerId, attackerId, playerId, game);
         }

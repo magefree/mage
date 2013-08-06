@@ -621,7 +621,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 Permanent blocker = game.getPermanent(response.getUUID());
                 if (blocker != null) {
                     if (filter.match(blocker, null, playerId, game)) {
-                        selectCombatGroup(blocker.getId(), game);
+                        selectCombatGroup(defendingPlayerId, blocker.getId(), game);
                     }
                     else if (filterBlock.match(blocker, null, playerId, game) && game.getStack().isEmpty()) {
                         game.getCombat().removeBlocker(blocker.getId(), game);
@@ -666,7 +666,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         return null;
     }
 
-    protected void selectCombatGroup(UUID blockerId, Game game) {
+    protected void selectCombatGroup(UUID defenderId, UUID blockerId, Game game) {
         updateGameStatePriority("selectCombatGroup", game);
         TargetAttackingCreature target = new TargetAttackingCreature();
         game.fireSelectTargetEvent(playerId, "Select attacker to block", target.possibleTargets(null, playerId, game), target.isRequired(), null);
@@ -674,7 +674,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         if (response.getBoolean() != null) {
             // do nothing
         } else if (response.getUUID() != null) {
-            declareBlocker(blockerId, response.getUUID(), game);
+            declareBlocker(defenderId, blockerId, response.getUUID(), game);
         }
     }
 

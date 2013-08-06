@@ -196,15 +196,18 @@ public class SimulatedPlayerMCTS extends MCTSPlayer {
     public void selectBlockers(Game game, UUID defendingPlayerId) {
 //        logger.info("select blockers");
         int numGroups = game.getCombat().getGroups().size();
-        if (numGroups == 0) return;
+        if (numGroups == 0) {
+            return;
+        }
 
         List<Permanent> blockers = getAvailableBlockers(game);
         for (Permanent blocker: blockers) {
             int check = rnd.nextInt(numGroups + 1);
             if (check < numGroups) {
                 CombatGroup group = game.getCombat().getGroups().get(check);
-                if (group.getAttackers().size() > 0)
-                    this.declareBlocker(blocker.getId(), group.getAttackers().get(0), game);
+                if (group.getAttackers().size() > 0) {
+                    this.declareBlocker(this.getId(), blocker.getId(), group.getAttackers().get(0), game);
+                }
             }
         }
         actionCount++;
