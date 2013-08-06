@@ -84,7 +84,7 @@ class BurningEarthTriggeredAbility extends TriggeredAbilityImpl<BurningEarthTrig
             }
             if (permanent != null 
                     && permanent.getCardType().contains(CardType.LAND)
-                    && permanent.getSupertype().contains("Basic")) {
+                    && !permanent.getSupertype().contains("Basic")) {
                 getEffects().get(0).setTargetPointer(new FixedTarget(permanent.getControllerId()));
                 return true;
             }
