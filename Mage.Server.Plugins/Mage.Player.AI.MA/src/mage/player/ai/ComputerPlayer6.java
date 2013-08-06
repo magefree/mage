@@ -850,7 +850,7 @@ public class ComputerPlayer6 extends ComputerPlayer<ComputerPlayer6> implements 
                 List<Permanent> blockers = entry.getValue();
                 if (blockers != null) {
                     for (Permanent blocker : blockers) {
-                        player.declareBlocker(blocker.getId(), attackerId, game);
+                        player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
                         blocked = true;
                     }
                 }
