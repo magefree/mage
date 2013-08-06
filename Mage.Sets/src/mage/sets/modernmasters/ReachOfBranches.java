@@ -36,8 +36,10 @@ import mage.abilities.common.EntersBattlefieldAllTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.permanent.token.Token;
 
 /**
@@ -48,6 +50,7 @@ public class ReachOfBranches extends CardImpl<ReachOfBranches> {
 
     private static final FilterLandPermanent filter = new FilterLandPermanent("Forest");
     static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
         filter.add(new SubtypePredicate("Forest"));
     }
 
