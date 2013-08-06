@@ -73,8 +73,9 @@ public class VerdelothTheAncient extends CardImpl<VerdelothTheAncient> {
         // Saproling creatures and other Treefolk creatures get +1/+1.
         FilterCreaturePermanent filter = new FilterCreaturePermanent("Saproling creatures and other Treefolk creatures");
         filter.add(Predicates.or(
-                new SubtypePredicate("Treefolk"),
-                new SubtypePredicate("Saproling")));
+                Predicates.and(new SubtypePredicate("Treefolk"), Predicates.not(new PermanentIdPredicate(this.getId()))),
+                new SubtypePredicate("Saproling"))
+                );
         filter.add(Predicates.not(new PermanentIdPredicate(this.getId())));
                 
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1,1, Duration.WhileOnBattlefield, filter, false)));
