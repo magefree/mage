@@ -55,6 +55,7 @@ public class OtherworldlyJourney extends CardImpl<OtherworldlyJourney> {
     public OtherworldlyJourney(UUID ownerId) {
         super(ownerId, 37, "Otherworldly Journey", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{1}{W}");
         this.expansionSetCode = "CHK";
+        this.subtype.add("Arcane");
         this.color.setWhite(true);
         // Exile target creature. At the beginning of the next end step, return that card to the battlefield under its owner's control with a +1/+1 counter on it.
         this.getSpellAbility().addEffect(new OtherworldlyJourneyEffect());
