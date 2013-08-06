@@ -81,7 +81,7 @@ class WindreaderSphinxTriggeredAbility extends TriggeredAbilityImpl<WindreaderSp
     }
 
     public WindreaderSphinxTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1));
+        super(Zone.BATTLEFIELD, new DrawCardControllerEffect(1), true);
     }
 
     public WindreaderSphinxTriggeredAbility(final WindreaderSphinxTriggeredAbility ability) {
