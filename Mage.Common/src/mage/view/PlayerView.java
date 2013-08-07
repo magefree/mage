@@ -127,14 +127,17 @@ public class PlayerView implements Serializable {
     private boolean showInBattlefield(Permanent permanent, GameState state) {
 
         //show permanents controlled by player or attachments to permanents controlled by player
-        if (permanent.getAttachedTo() == null)
+        if (permanent.getAttachedTo() == null) {
             return permanent.getControllerId().equals(playerId);
+        }
         else {
             Permanent attachedTo = state.getPermanent(permanent.getAttachedTo());
-            if (attachedTo != null)
+            if (attachedTo != null) {
                 return attachedTo.getControllerId().equals(playerId);
-            else
+            }
+            else {
                 return permanent.getControllerId().equals(playerId);
+            }
         }
     }
 

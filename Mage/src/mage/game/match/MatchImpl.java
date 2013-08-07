@@ -208,6 +208,7 @@ public abstract class MatchImpl implements Match {
                 }
             }
         }
+        game.fireGameEndInfo();
     }
 
     @Override

@@ -51,6 +51,7 @@ import mage.view.DeckView;
 import mage.view.DraftClientMessage;
 import mage.view.DraftView;
 import mage.view.GameClientMessage;
+import mage.view.GameEndView;
 import mage.view.GameView;
 import mage.view.TableClientMessage;
 import org.apache.log4j.Logger;
@@ -239,6 +240,9 @@ public class CallbackClientImpl implements CallbackClient {
                         if (panel != null) {
                             panel.updateGame((GameView) callback.getData());
                         }
+                    }
+                    else if (callback.getMethod().equals("endGameInfo")) {
+                        MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
                     }
                     else if (callback.getMethod().equals("gameInform")) {
 

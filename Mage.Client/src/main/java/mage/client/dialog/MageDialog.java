@@ -40,6 +40,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
+import mage.client.MageFrame;
 
 /**
  *
@@ -155,6 +156,11 @@ public class MageDialog extends javax.swing.JInternalFrame {
 
     public void hideDialog() {
         this.setVisible(false);
+    }
+
+    public void removeDialog() {
+        this.setVisible(false);
+        MageFrame.getDesktop().remove(this);
     }
 
     public void setTitelBarToolTip(final String text) {

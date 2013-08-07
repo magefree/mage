@@ -155,6 +155,10 @@ public class TableController {
             tournament.addPlayer(player, seat.getPlayerType());
             table.joinTable(player, seat);
             User user = UserManager.getInstance().getUser(userId);
+            if (user == null) {
+                logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
+                return false;
+            }
             user.addTable(player.getId(), table);
             logger.info("player joined " + player.getId());
             //only inform human players and add them to sessionPlayerMap

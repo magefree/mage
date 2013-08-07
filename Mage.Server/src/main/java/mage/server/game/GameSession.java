@@ -36,6 +36,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import mage.cards.Cards;
 import mage.game.Game;
+import mage.game.match.Match;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.players.net.UserData;
@@ -156,6 +157,15 @@ public class GameSession extends GameWatcher {
             User user = UserManager.getInstance().getUser(userId);
             if (user != null) {
                 user.fireCallback(new ClientCallback("gameSelectAmount", game.getId(), new GameClientMessage(message, min, max)));
+            }
+        }
+    }
+
+    public void endGameInfo(Match match) {
+        if (!killed) {
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                user.fireCallback(new ClientCallback("endGameInfo", game.getId(), getGameEndView(playerId, match)));
             }
         }
     }

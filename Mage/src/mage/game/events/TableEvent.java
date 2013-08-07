@@ -45,7 +45,7 @@ import mage.game.tournament.TournamentPairing;
 public class TableEvent extends EventObject implements ExternalEvent, Serializable {
 
     public enum EventType {
-        UPDATE, INFO, STATUS, REVEAL, LOOK, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, ERROR,
+        UPDATE, INFO, STATUS, START_DRAFT, START_MATCH, SIDEBOARD, CONSTRUCT, SUBMIT_DECK, END, END_GAME_INFO, ERROR,
         INIT_TIMER, RESUME_TIMER, PAUSE_TIMER
     }
 

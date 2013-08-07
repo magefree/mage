@@ -93,6 +93,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.Preferences;
+import mage.view.GameEndView;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -609,6 +610,12 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             setActive(tournamentPane);
         } catch (PropertyVetoException ex) {
         }
+    }
+
+    public void showGameEndDialog(GameEndView gameEndView) {
+        GameEndDialog gameEndDialog = new GameEndDialog(gameEndView);
+        desktopPane.add(gameEndDialog, JLayeredPane.POPUP_LAYER);
+        gameEndDialog.showDialog();
     }
 
     public void showTableWaitingDialog(UUID roomId, UUID tableId, boolean isTournament) {

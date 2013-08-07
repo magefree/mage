@@ -1552,6 +1552,15 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
+    public void fireGameEndInfo() {
+        if (simulation) {
+            return;
+        }
+        logger.trace("fireGameEndIfo");
+        tableEventSource.fireTableEvent(EventType.END_GAME_INFO, null, this);
+    }
+
+    @Override
     public void fireErrorEvent(String message, Exception ex) {
         tableEventSource.fireTableEvent(EventType.ERROR, message, ex, this);
     }

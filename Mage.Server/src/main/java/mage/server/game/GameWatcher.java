@@ -38,6 +38,8 @@ import org.apache.log4j.Logger;
 
 import java.rmi.RemoteException;
 import java.util.UUID;
+import mage.game.match.Match;
+import mage.view.GameEndView;
 
 /**
  *
@@ -123,6 +125,10 @@ public class GameWatcher {
 
     public GameView getGameView() {
         return new GameView(game.getState(), game);
+    }
+    
+    public GameEndView getGameEndView(UUID playerId, Match match) {
+        return new GameEndView(game.getState(), game, playerId, match);
     }
 
 }

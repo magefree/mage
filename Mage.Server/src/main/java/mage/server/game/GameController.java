@@ -57,6 +57,7 @@ import mage.cards.repository.CardRepository;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.GameException;
+import mage.game.Table;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
@@ -140,6 +141,9 @@ public class GameController implements GameCallback {
                                 break;
                             case ERROR:
                                 error(event.getMessage(), event.getException());
+                                break;
+                            case END_GAME_INFO:
+                                endGameInfo();
                                 break;
                             case INIT_TIMER:
                                 final UUID initPlayerId = event.getPlayerId();
@@ -473,6 +477,21 @@ public class GameController implements GameCallback {
         for (final GameWatcher gameWatcher: watchers.values()) {
             gameWatcher.update();
         }
+    }
+
+    private synchronized void endGameInfo() {
+        Table table = TableManager.getInstance().getTable(tableId);
+        if (table != null) {
+            if (table.getMatch() != null) {
+                for (final GameSession gameSession: gameSessions.values()) {
+                    gameSession.endGameInfo(table.getMatch());
+                }
+            }
+        }
+        // TODO: inform watchers
+//        for (final GameWatcher gameWatcher: watchers.values()) {
+//                gameWatcher.update();
+//        }
     }
 
     private synchronized void ask(UUID playerId, final String question) throws MageException {

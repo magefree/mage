@@ -160,6 +160,10 @@ public class User {
         fireCallback(new ClientCallback("showTournament", tournamentId));
     }
 
+    public void showGameEndDialog(final UUID gameId) {
+        fireCallback(new ClientCallback("showGameEndDialog", gameId));
+    }
+
     public void watchGame(final UUID gameId) {
         fireCallback(new ClientCallback("watchGame", gameId));
     }
