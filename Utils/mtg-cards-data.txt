@@ -5818,8 +5818,6 @@ Henchfiend of Ukor|Future Sight|117|C|{3}{R}|Creature - Ogre|3|2|Haste$Echo {1}{
 Homing Sliver|Future Sight|118|C|{2}{R}|Creature - Sliver|2|2|Each Sliver card in each player's hand has slivercycling {3}.$Slivercycling {3} <i>({3}, Discard this card: Search your library for a Sliver card, reveal it, and put it into your hand. Then shuffle your library.)</i>|
 Shah of Naar Isle|Future Sight|119|R|{3}{R}|Creature - Efreet|6|6|Trample$Echo {0} <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>$When Shah of Naar Isle's echo cost is paid, each opponent may draw up to three cards.|
 Magus of the Moat|Future Sight|12|R|{2}{W}{W}|Creature - Human Wizard|0|3|Creatures without flying can't attack.|
-
-
 Skizzik Surger|Future Sight|120|U|{4}{R}{R}|Creature - Elemental|6|4|Haste$Echo-Sacrifice two lands. <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>|
 Steamflogger Boss|Future Sight|121|R|{3}{R}|Creature - Goblin Rigger|3|3|Other Rigger creatures you control get +1/+0 and have haste.$If a Rigger you control would assemble a Contraption, it assembles two Contraptions instead.|
 Storm Entity|Future Sight|122|U|{1}{R}|Creature - Elemental|1|1|Haste$Storm Entity enters the battlefield with a +1/+1 counter on it for each other spell cast this turn.|
@@ -9606,7 +9604,6 @@ Goblin Grenade|Magic 2012|140|U|{R}|Sorcery|||As an additional cost to cast Gobl
 Goblin Piker|Magic 2012|141|C|{1}{R}|Creature - Goblin Warrior|2|1||
 Goblin Tunneler|Magic 2012|142|C|{1}{R}|Creature - Goblin Rogue|1|1|{tap}: Target creature with power 2 or less is unblockable this turn.|
 Goblin War Paint|Magic 2012|143|C|{1}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has haste. <i>(It can attack and {tap} no matter when it came under its controller's control.)</i>|
-
 Gorehorn Minotaurs|Magic 2012|144|C|{2}{R}{R}|Creature - Minotaur Warrior|3|3|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>|
 Grim Lavamancer|Magic 2012|145|R|{R}|Creature - Human Wizard|1|1|{R}, {tap}, Exile two cards from your graveyard: Grim Lavamancer deals 2 damage to target creature or player.|
 Incinerate|Magic 2012|146|C|{1}{R}|Instant|||Incinerate deals 3 damage to target creature or player. A creature dealt damage this way can't be regenerated this turn.|
@@ -13620,7 +13617,6 @@ Balshan Griffin|Odyssey|67|U|{3}{U}|Creature - Griffin|3|2|Flying${1}{U}, Discar
 Bamboozle|Odyssey|68|U|{2}{U}|Sorcery|||Target player reveals the top four cards of his or her library. You choose two of those cards and put them into his or her graveyard. Put the rest on top of his or her library in any order.|
 Battle of Wits|Odyssey|69|R|{3}{U}{U}|Enchantment|||At the beginning of your upkeep, if you have 200 or more cards in your library, you win the game.|
 Aven Cloudchaser|Odyssey|7|C|{3}{W}|Creature - Bird Soldier|2|2|Flying <i>(This creature can't be blocked except by creatures with flying or reach.)</i>$When Aven Cloudchaser enters the battlefield, destroy target enchantment.|
-
 Careful Study|Odyssey|70|C|{U}|Sorcery|||Draw two cards, then discard two cards.|
 Cephalid Broker|Odyssey|71|U|{3}{U}|Creature - Cephalid|2|2|{tap}: Target player draws two cards, then discards two cards.|
 Cephalid Looter|Odyssey|72|C|{2}{U}|Creature - Cephalid Rogue|2|1|{tap}: Target player draws a card, then discards a card.|
