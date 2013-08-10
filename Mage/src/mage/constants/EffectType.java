@@ -13,6 +13,7 @@ public enum EffectType {
     REDIRECTION("Redirection Effect"),
     ASTHOUGH("As Though Effect"),
     RESTRICTION("Restriction Effect"),
+    RESTRICTION_UNTAP_NOT_MORE_THAN("Restriction untap not more than Effect"),
     REQUIREMENT("Requirement Effect"),
     COSTMODIFICATION("Cost Modification Effect"),
     SPLICE("Splice Card  Effect");

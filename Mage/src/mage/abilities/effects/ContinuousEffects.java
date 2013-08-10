@@ -67,6 +67,7 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<PreventionEffect> preventionEffects = new ContinuousEffectsList<PreventionEffect>();
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<RequirementEffect>();
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
+    private ContinuousEffectsList<RestrictionUntapNotMoreThanEffect> restrictionUntapNotMoreThanEffects = new ContinuousEffectsList<RestrictionUntapNotMoreThanEffect>();
     private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
     private ContinuousEffectsList<SpliceCardEffect> spliceCardEffects = new ContinuousEffectsList<SpliceCardEffect>();
@@ -98,6 +99,7 @@ public class ContinuousEffects implements Serializable {
         preventionEffects = effect.preventionEffects.copy();
         requirementEffects = effect.requirementEffects.copy();
         restrictionEffects = effect.restrictionEffects.copy();
+        restrictionUntapNotMoreThanEffects = effect.restrictionUntapNotMoreThanEffects.copy();
         asThoughEffects = effect.asThoughEffects.copy();
         costModificationEffects = effect.costModificationEffects.copy();
         spliceCardEffects = effect.spliceCardEffects.copy();
@@ -114,6 +116,7 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(preventionEffects);
         allEffectsLists.add(requirementEffects);
         allEffectsLists.add(restrictionEffects);
+        allEffectsLists.add(restrictionUntapNotMoreThanEffects);
         allEffectsLists.add(asThoughEffects);
         allEffectsLists.add(costModificationEffects);
         allEffectsLists.add(spliceCardEffects);
@@ -159,6 +162,7 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeInactiveEffects(game);
         requirementEffects.removeInactiveEffects(game);
         restrictionEffects.removeInactiveEffects(game);
+        restrictionUntapNotMoreThanEffects.removeInactiveEffects(game);
         asThoughEffects.removeInactiveEffects(game);
         costModificationEffects.removeInactiveEffects(game);
         spliceCardEffects.removeInactiveEffects(game);
@@ -251,7 +255,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = restrictionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<Ability>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, permanent, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
                     if (effect.applies(permanent, ability, game)) {
                         applicableAbilities.add(ability);
                     }
@@ -264,6 +268,25 @@ public class ContinuousEffects implements Serializable {
         return effects;
     }
 
+    public HashMap<RestrictionUntapNotMoreThanEffect, HashSet<Ability>> getApplicableRestrictionUntapNotMoreThanEffects(Player player, Game game) {
+        HashMap<RestrictionUntapNotMoreThanEffect, HashSet<Ability>> effects = new HashMap<RestrictionUntapNotMoreThanEffect, HashSet<Ability>>();
+        for (RestrictionUntapNotMoreThanEffect effect: restrictionUntapNotMoreThanEffects) {
+            HashSet<Ability> abilities = restrictionUntapNotMoreThanEffects.getAbility(effect.getId());
+            HashSet<Ability> applicableAbilities = new HashSet<Ability>();
+            for (Ability ability : abilities) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                    if (effect.applies(player, ability, game)) {
+                        applicableAbilities.add(ability);
+                    }
+                }
+            }
+            if (!applicableAbilities.isEmpty()) {
+                effects.put(effect, abilities);
+            }
+        }
+        return effects;
+    }
+    
     /**
      *
      * @param event
@@ -707,6 +730,10 @@ public class ContinuousEffects implements Serializable {
             case RESTRICTION:
                 RestrictionEffect newRestrictionEffect = (RestrictionEffect)effect;
                 restrictionEffects.addEffect(newRestrictionEffect, source);
+                break;
+            case RESTRICTION_UNTAP_NOT_MORE_THAN:
+                RestrictionUntapNotMoreThanEffect newRestrictionUntapNotMoreThanEffect = (RestrictionUntapNotMoreThanEffect)effect;
+                restrictionUntapNotMoreThanEffects.addEffect(newRestrictionUntapNotMoreThanEffect, source);
                 break;
             case REQUIREMENT:
                 RequirementEffect newRequirementEffect = (RequirementEffect)effect;
