@@ -27,32 +27,22 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.List;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.PhaseStep;
-import mage.constants.WatcherScope;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -77,7 +67,6 @@ public class StoicAngel extends CardImpl<StoicAngel> {
         this.addAbility(VigilanceAbility.getInstance());
         // Players can't untap more than one creature during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new StoicAngelEffect()));
-        this.addWatcher(new StoicAngelWatcher());
     }
 
     public StoicAngel(final StoicAngel card) {
@@ -90,37 +79,12 @@ public class StoicAngel extends CardImpl<StoicAngel> {
     }
 }
 
-class StoicAngelWatcher extends WatcherImpl<StoicAngelWatcher> {
+class StoicAngelEffect extends RestrictionUntapNotMoreThanEffect<StoicAngelEffect> {
 
-    public StoicAngelWatcher() {
-        super("StoicAngelWatcher", WatcherScope.GAME);
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
 
-    public StoicAngelWatcher(final StoicAngelWatcher watcher) {
-        super(watcher);
-    }
-    
-    @Override
-    public void watch(GameEvent event, Game game) {
-         if(event.getType() == GameEvent.EventType.UNTAP_STEP_PRE){            
-            game.getState().setValue("StoicAngelUntapCreature", null);
-        }
-    }
-
-    @Override
-    public StoicAngelWatcher copy() {
-        return new StoicAngelWatcher(this);
-    }
-}
-
-class StoicAngelEffect extends ReplacementEffectImpl<StoicAngelEffect> {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature to untap");
-    static{
-        filter.add(new TappedPredicate());
-    }
     public StoicAngelEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, 1, filter);
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
@@ -129,49 +93,14 @@ class StoicAngelEffect extends ReplacementEffectImpl<StoicAngelEffect> {
     }
 
     @Override
+    public boolean applies(Player player, Ability source, Game game) {
+        // applied to all players
+        return true;
+    }
+
+    @Override
     public StoicAngelEffect copy() {
         return new StoicAngelEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if(game.getState().getValue("StoicAngelUntapCreature") == null){
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), game);
-            if(permanents.size() == 1){
-                game.getState().setValue("StoicAngelUntapCreature", permanents.get(0).getId());
-            }
-            else if(permanents.size() > 1){
-                Player player = game.getPlayer(event.getPlayerId());
-                Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);
-                if(player != null && player.choose(Outcome.Untap, target, source.getId(), game)){
-                    //TODO : This effect is bugged with other "don't untap effect".
-                    game.getState().setValue("StoicAngelUntapCreature", target.getFirstTarget());
-                }
-            }
-        }
-        if(event.getTargetId().equals(game.getState().getValue("StoicAngelUntapCreature"))){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP){
-            Player player = game.getPlayer(event.getPlayerId());
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if(player != null && game.getActivePlayerId().equals(event.getPlayerId())
-                    && permanent != null && permanent.getCardType().contains(CardType.CREATURE)){
-                return true;      
-            }
-        }
-        return false;
-    }
 }

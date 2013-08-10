@@ -27,23 +27,19 @@
  */
 package mage.sets.limitedalpha;
 
-import java.util.List;
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.cards.CardImpl;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.filter.predicate.permanent.TappedPredicate;
+import mage.filter.common.FilterControlledPermanent;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledCreaturePermanent;
-import mage.watchers.WatcherImpl;
 
 /**
  *
@@ -60,7 +56,6 @@ public class Smoke extends CardImpl<Smoke> {
 
         // Players can't untap more than one creature during their untap steps.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new SmokeEffect()));
-        this.addWatcher(new SmokeWatcher());
     }
 
     public Smoke(final Smoke card) {
@@ -73,37 +68,12 @@ public class Smoke extends CardImpl<Smoke> {
     }
 }
 
-class SmokeWatcher extends WatcherImpl<SmokeWatcher> {
+class SmokeEffect extends RestrictionUntapNotMoreThanEffect<SmokeEffect> {
 
-    public SmokeWatcher() {
-        super("SmokeWatcher", WatcherScope.GAME);
-    }
+    private static final FilterControlledPermanent filter = new FilterControlledCreaturePermanent();
 
-    public SmokeWatcher(final SmokeWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if(event.getType() == GameEvent.EventType.UNTAP_STEP_PRE){
-            game.getState().setValue("SmokeUntapCreature", null);
-        }
-    }
-
-    @Override
-    public SmokeWatcher copy() {
-        return new SmokeWatcher(this);
-    }
-}
-
-class SmokeEffect extends ReplacementEffectImpl<SmokeEffect> {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("creature to untap");
-    static{
-        filter.add(new TappedPredicate());
-    }
     public SmokeEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        super(Duration.WhileOnBattlefield, 1, filter);
         staticText = "Players can't untap more than one creature during their untap steps";
     }
 
@@ -112,49 +82,14 @@ class SmokeEffect extends ReplacementEffectImpl<SmokeEffect> {
     }
 
     @Override
+    public boolean applies(Player player, Ability source, Game game) {
+        // applied to all players
+        return true;
+    }
+
+    @Override
     public SmokeEffect copy() {
         return new SmokeEffect(this);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return false;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if(game.getState().getValue("SmokeUntapCreature") == null){
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, event.getPlayerId(), game);
-            if(permanents.size() == 1){
-                game.getState().setValue("SmokeUntapCreature", permanents.get(0).getId());
-            }
-            else if(permanents.size() > 1){
-                Player player = game.getPlayer(event.getPlayerId());
-                Target target = new TargetControlledCreaturePermanent(1, 1, filter, true, true);
-                if(player != null && player.choose(Outcome.Untap, target, source.getId(), game)){
-                    //TODO : This effect is bugged with other "don't untap effect".Also affects Stoic Angel.
-                    game.getState().setValue("SmokeUntapCreature", target.getFirstTarget());
-                }
-            }
-        }
-        if(event.getTargetId().equals(game.getState().getValue("SmokeUntapCreature"))){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == GameEvent.EventType.UNTAP){
-            Player player = game.getPlayer(event.getPlayerId());
-            Permanent permanent = game.getPermanent(event.getTargetId());
-            if(player != null && game.getActivePlayerId().equals(event.getPlayerId())
-                    && permanent != null && permanent.getCardType().contains(CardType.CREATURE)){
-                return true;
-            }
-        }
-        return false;
-    }
 }
