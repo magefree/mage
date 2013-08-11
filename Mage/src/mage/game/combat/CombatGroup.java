@@ -56,6 +56,11 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     protected UUID defendingPlayerId;
     protected boolean defenderIsPlaneswalker;
 
+    /**
+     * @param defenderId the player that controls the defending permanents
+     * @param defenderIsPlaneswalker is the defending permanent a planeswalker
+     * @param defendingPlayerId regular controller of the defending permanents
+     */
     public CombatGroup(UUID defenderId, boolean defenderIsPlaneswalker, UUID defendingPlayerId) {
         this.defenderId = defenderId;
         this.defenderIsPlaneswalker = defenderIsPlaneswalker;
@@ -63,14 +68,15 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public CombatGroup(final CombatGroup group) {
-        this.blocked = group.blocked;
-        this.defenderId = group.defenderId;
-        this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;
         this.attackers.addAll(group.attackers);
         this.blockers.addAll(group.blockers);
         this.blockerOrder.addAll(group.blockerOrder);
         this.attackerOrder.addAll(group.attackerOrder);
         this.players.putAll(group.players);
+        this.blocked = group.blocked;
+        this.defenderId = group.defenderId;
+        this.defendingPlayerId = group.defendingPlayerId;
+        this.defenderIsPlaneswalker = group.defenderIsPlaneswalker;
     }
 
     public boolean hasFirstOrDoubleStrike(Game game) {
@@ -381,7 +387,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
     }
 
     public boolean canBlock(Permanent blocker, Game game) {
-        // you can't block if combat group attacks another player
+        // player can't block if another player is attacked
         if (!defendingPlayerId.equals(blocker.getControllerId()) ) {
             return false;
         }
