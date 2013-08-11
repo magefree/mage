@@ -30,23 +30,20 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.effects.CostModificationEffectImpl;
-import mage.abilities.keyword.FlashbackAbility;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.RetraceAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.filter.common.FilterNonlandCard;
 import mage.game.Game;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
+import mage.target.Target;
+import mage.target.common.TargetCardInHand;
 
 /**
  *
@@ -71,7 +68,7 @@ public class MaelstromArchangel extends CardImpl<MaelstromArchangel> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Maelstrom Archangel deals combat damage to a player, you may cast a nonland card from your hand without paying its mana cost.
-        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MaelstromArchangelEffect(), true));
+        this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new MaelstromArchangelCastEffect(), false));
         
     }
 
@@ -85,48 +82,50 @@ public class MaelstromArchangel extends CardImpl<MaelstromArchangel> {
     }
 }
 
-class MaelstromArchangelEffect extends CostModificationEffectImpl<MaelstromArchangelEffect> {
+class MaelstromArchangelCastEffect extends OneShotEffect<MaelstromArchangelCastEffect> {
 
-    public MaelstromArchangelEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PlayForFree);
-        staticText = "You may cast nonland cards from your hand without paying their mana costs";
+    private static final FilterCard filter = new FilterNonlandCard("nonland card from your hand");
+
+    public MaelstromArchangelCastEffect() {
+        super(Outcome.PlayForFree);
+        this.staticText = "you may cast a nonland card from your hand without paying its mana cost";
     }
 
-    private MaelstromArchangelEffect(final MaelstromArchangelEffect effect) {
+    public MaelstromArchangelCastEffect(final MaelstromArchangelCastEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        SpellAbility spellAbility = (SpellAbility) abilityToModify;
-        spellAbility.getManaCostsToPay().clear();
-        return true;
+    public MaelstromArchangelCastEffect copy() {
+        return new MaelstromArchangelCastEffect(this);
     }
 
     @Override
-    public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof SpellAbility || abilityToModify instanceof FlashbackAbility || abilityToModify instanceof RetraceAbility) {
-            Card sourceCard = game.getCard(abilityToModify.getSourceId());
-            StackObject stackObject = game.getStack().getStackObject(abilityToModify.getSourceId());
-            if (stackObject != null && stackObject instanceof Spell) {
-                Zone zone = ((Spell)stackObject).getFromZone();
-                if (zone != null && zone.equals(Zone.HAND)) {
-                    if (sourceCard != null && sourceCard.getOwnerId().equals(source.getControllerId())
-                            && !sourceCard.getCardType().contains(CardType.LAND)) {
-                        Player you = game.getPlayer(source.getControllerId());
-                        String message = "Cast " + sourceCard.getName() + " without paying its mana costs?";
-                        if (you != null && you.chooseUse(Outcome.PlayForFree, message, game)) {
-                            return true;
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            Target target = new TargetCardInHand(filter);
+            target.setRequired(true);
+            if (target.canChoose(source.getSourceId(), controller.getId(), game) &&
+              controller.chooseUse(outcome, "Cast a nonland card from your hand without paying its mana cost?", game)) {
+                Card cardToCast = null;
+                boolean cancel = false;
+                while (!cancel) {
+                    if (controller.chooseTarget(outcome, target, source, game)) {
+                        cardToCast = game.getCard(target.getFirstTarget());
+                        if (cardToCast != null && cardToCast.getSpellAbility().canChooseTarget(game)) {
+                            cancel = true;
                         }
+                    } else {
+                        cancel = true;
                     }
                 }
+                if (cardToCast != null) {
+                    controller.cast(cardToCast.getSpellAbility(), game, true);
+                }
             }
+            return true;
         }
         return false;
-    }
-
-    @Override
-    public MaelstromArchangelEffect copy() {
-        return new MaelstromArchangelEffect(this);
     }
 }
