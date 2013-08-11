@@ -115,7 +115,7 @@ public class KickerAbility extends StaticAbility<KickerAbility> implements Optio
 
     public KickerAbility(final KickerAbility ability) {
        super(ability);
-       this.kickerCosts = ability.kickerCosts;
+       this.kickerCosts.addAll(ability.kickerCosts);
        this.keywordText = ability.keywordText;
        this.reminderText = ability.reminderText;
        this.xManaValue = ability.xManaValue;

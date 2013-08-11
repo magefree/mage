@@ -32,6 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.LockedInCondition;
 import mage.abilities.condition.common.KickedCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
@@ -73,7 +74,7 @@ public class MoldShambler extends CardImpl<MoldShambler> {
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
-        this.addAbility(new ConditionalTriggeredAbility(ability, KickedCondition.getInstance(), "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
+        this.addAbility(new ConditionalTriggeredAbility(ability, new LockedInCondition(KickedCondition.getInstance()), "When {this} enters the battlefield, if it was kicked, destroy target noncreature permanent."));
     }
 
     public MoldShambler(final MoldShambler card) {

@@ -16,6 +16,8 @@ public class GoblinBushwhackerTest extends CardTestPlayerBase {
         // Goblin Bushwhacker - Creature — Goblin Warrior 1/1, R - Kicker {R} (You may pay an additional {R} as you cast this spell.)
         // When Goblin Bushwhacker enters the battlefield, if it was kicked, creatures you control get +1/+0 and gain haste until end of turn.
         addCard(Zone.HAND, playerA, "Goblin Bushwhacker");
+
+        // Creature — Human Soldier 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Goblin Bushwhacker");

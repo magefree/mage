@@ -52,7 +52,7 @@ public class LockedInCondition implements Condition {
     @Override
     public boolean apply(Game game, Ability source) {
         if(!conditionChecked) {
-            result = !condition.apply(game, source);
+            result = condition.apply(game, source);
             conditionChecked = true;
         }
         return result;
