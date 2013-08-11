@@ -38,6 +38,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -127,7 +128,18 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl<DoublingSeasonCo
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent p = game.getPermanent(event.getTargetId());
         if (p != null) {
-            p.addCounters(CounterType.valueOf(event.getData().toUpperCase(Locale.ENGLISH)).createInstance(event.getAmount() * 2), game, event.getAppliedEffects());
+            String counterName = event.getData().toUpperCase(Locale.ENGLISH);
+            Counter counter;
+            if (counterName.equals("+1/+1")) {
+                counter = CounterType.P1P1.createInstance(event.getAmount() * 2);
+            } else if (counterName.equals("-1/-1")) {
+                counter = CounterType.M1M1.createInstance(event.getAmount() * 2);
+            } else {
+                counter = new Counter(counterName, event.getAmount() * 2);
+            }
+            p.addCounters(counter, game, event.getAppliedEffects());
+
+
         }
         return true;
     }
