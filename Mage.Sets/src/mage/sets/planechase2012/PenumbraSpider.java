@@ -28,13 +28,13 @@
 package mage.sets.planechase2012;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.LeavesBattlefieldTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.Token;
 
 /**
@@ -55,7 +55,7 @@ public class PenumbraSpider extends CardImpl<PenumbraSpider> {
         // Reach
         this.addAbility(ReachAbility.getInstance());
         // When Penumbra Spider dies, put a 2/4 black Spider creature token with reach onto the battlefield.
-        this.addAbility(new LeavesBattlefieldTriggeredAbility(new CreateTokenEffect(new SpiderToken()), false));
+        this.addAbility(new DiesTriggeredAbility(new CreateTokenEffect(new SpiderToken()), false));
     }
 
     public PenumbraSpider(final PenumbraSpider card) {
