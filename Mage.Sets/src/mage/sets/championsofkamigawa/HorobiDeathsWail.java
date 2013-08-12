@@ -57,7 +57,7 @@ public class HorobiDeathsWail extends CardImpl<HorobiDeathsWail> {
     }
 
     public HorobiDeathsWail(UUID ownerId) {
-        super(ownerId, 117, "Horobi Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
+        super(ownerId, 117, "Horobi, Death's Wail", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{B}");
         this.expansionSetCode = "CHK";
         this.supertype.add("Legendary");
         this.subtype.add("Spirit");
