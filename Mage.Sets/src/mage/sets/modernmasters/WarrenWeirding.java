@@ -40,12 +40,12 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -85,6 +85,10 @@ public class WarrenWeirding extends CardImpl<WarrenWeirding> {
 
 class WarrenWeirdingEffect extends OneShotEffect<WarrenWeirdingEffect> {
 
+    private static final FilterCreaturePermanent filterGoblin = new FilterCreaturePermanent("creature an opponent controls");
+    static {
+        filterGoblin.add(new SubtypePredicate("Goblin"));
+    }
     WarrenWeirdingEffect ( ) {
         super(Outcome.Sacrifice);
         staticText = "Target player sacrifices a creature. If a Goblin is sacrificed this way, that player puts two 1/1 black Goblin Rogue creature tokens onto the battlefield, and those tokens gain haste until end of turn";
@@ -109,11 +113,13 @@ class WarrenWeirdingEffect extends OneShotEffect<WarrenWeirdingEffect> {
         if (target.canChoose(player.getId(), game)) {
             player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             Permanent permanent = game.getPermanent(target.getFirstTarget());
-            if (permanent != null && permanent.getSubtype().contains("Goblin")) {
+            if (permanent != null) {
                 permanent.sacrifice(source.getSourceId(), game);
-                Effect effect = new CreateTokenTargetEffect(new WarrenWeirdingBlackGoblinRogueToken(), 2);
-                effect.setTargetPointer(new FixedTarget(player.getId()));
-                effect.apply(game, source);
+                if (filterGoblin.match(permanent, game)) {
+                    Effect effect = new CreateTokenTargetEffect(new WarrenWeirdingBlackGoblinRogueToken(), 2);
+                    effect.setTargetPointer(new FixedTarget(player.getId()));
+                    effect.apply(game, source);
+                }
             }
             return true;
         }
