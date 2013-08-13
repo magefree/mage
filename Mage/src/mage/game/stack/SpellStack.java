@@ -43,8 +43,9 @@ public class SpellStack extends ArrayDeque<StackObject> {
     public SpellStack () {}
 
     public SpellStack(final SpellStack stack) {
+        
         for (StackObject spell: stack) {
-            this.push(spell.copy());
+            this.addLast(spell.copy());
         }
     }
 
