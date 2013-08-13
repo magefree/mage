@@ -102,9 +102,7 @@ class BlindingBeamEffect extends OneShotEffect<BlindingBeamEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(getTargetPointer().getFirst(game, source));
         if (player != null) {
-            for (Permanent creature: game.getBattlefield().getAllActivePermanents(new FilterCreaturePermanent(), player.getId(), game)) {
-                game.addEffect(new BlindingBeamEffect2(creature.getId()), source);
-            }
+            game.addEffect(new BlindingBeamEffect2(player.getId()), source);
             return true;
         }
         return false;
@@ -119,16 +117,18 @@ class BlindingBeamEffect extends OneShotEffect<BlindingBeamEffect> {
 
 class BlindingBeamEffect2 extends ReplacementEffectImpl<BlindingBeamEffect2> {
 
-    protected UUID creatureId;
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
-    public BlindingBeamEffect2(UUID creatureId) {
-        super(Duration.OneUse, Outcome.Detriment);
-        this.creatureId = creatureId;
+    private UUID targetPlayerId;
+
+    public BlindingBeamEffect2(UUID targetPlayerId) {
+        super(Duration.Custom, Outcome.Detriment);
+        this.targetPlayerId = targetPlayerId;
     }
 
     public BlindingBeamEffect2(final BlindingBeamEffect2 effect) {
         super(effect);
-        creatureId = effect.creatureId;
+        this.targetPlayerId = effect.targetPlayerId;
     }
 
     @Override
@@ -143,16 +143,23 @@ class BlindingBeamEffect2 extends ReplacementEffectImpl<BlindingBeamEffect2> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        used = true;
         return true;
     }
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (game.getTurn().getStepType() == PhaseStep.UNTAP &&
-                event.getType() == EventType.UNTAP &&
-                event.getTargetId().equals(creatureId)) {
-            return true;
+        // replace untap event of creatures of target player
+        if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
+                return true;
+            }
+        }
+        // discard effect at end of next untap step of target player
+        if (event.getType().equals(EventType.UNTAP_STEP_POST)) {
+            if (targetPlayerId.equals(event.getPlayerId())) {
+                discard();
+            }
         }
         return false;
     }
