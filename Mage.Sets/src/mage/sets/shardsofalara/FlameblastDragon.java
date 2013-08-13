@@ -29,18 +29,18 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -58,9 +58,12 @@ public class FlameblastDragon extends CardImpl<FlameblastDragon> {
         this.color.setRed(true);
         this.power = new MageInt(5);
         this.toughness = new MageInt(5);
+
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+        // Whenever Flameblast Dragon attacks, you may pay {X}{R}. If you do, Flameblast Dragon deals X damage to target creature or player.
         Ability ability = new AttacksTriggeredAbility(new FlameblastDragonEffect(), false);
-        ability.addTarget(new TargetCreatureOrPlayer());
+        ability.addTarget(new TargetCreatureOrPlayer(true));
         this.addAbility(ability);
     }
 
@@ -90,9 +93,9 @@ class FlameblastDragonEffect extends OneShotEffect<FlameblastDragonEffect> {
         ManaCosts cost = new ManaCostsImpl("{X}{R}");
         if (player != null) {
             if (player.chooseUse(Outcome.Damage, "Pay " + cost.getText() + "? If you do, Flameblast Dragon deals X damage to target creature or player", game)) {
-                cost.clearPaid();
+                int costX = player.announceXMana(0, Integer.MAX_VALUE, "Announce the value for {X}", game, source);
+                cost.add(new GenericManaCost(costX));
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
-                    int costX = cost.getX();
                     Permanent permanent = game.getPermanent(source.getFirstTarget());
                     if (permanent != null) {
                         permanent.damage(costX, source.getId(), game, true, false);
