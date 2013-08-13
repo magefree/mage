@@ -220,6 +220,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Permanent blocker = game.getPermanent(blockers.get(0));
         Permanent attacker = game.getPermanent(attackers.get(0));
         if (blocker != null && attacker != null) {
+            int blockerDamage = blocker.getPower().getValue(); // must be set before attacker damage marking because of effects like Test of Faith
             if (blocked && canDamage(attacker, first)) {
                 int damage = attacker.getPower().getValue();
                 if (hasTrample(attacker)) {
@@ -247,8 +248,7 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
             if (canDamage(blocker, first)) {
-                if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
-                    int blockerDamage = blocker.getPower().getValue();
+                if (blocker.getBlocking() == 1) { // blocking several creatures handled separately                    
                     attacker.markDamage(blockerDamage, blocker.getId(), game, true, true);
                 }
             }
@@ -264,6 +264,16 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
         Player player = game.getPlayer(attacker.getControllerId());
         int damage = attacker.getPower().getValue();
         if (canDamage(attacker, first)) {
+            // must be set before attacker damage marking because of effects like Test of Faith
+            Map<UUID, Integer> blockerPower = new HashMap<UUID, Integer>();
+            for (UUID blockerId: blockerOrder) {
+                Permanent blocker = game.getPermanent(blockerId);
+                if (canDamage(blocker, first)) {
+                    if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
+                        blockerPower.put(blockerId, blocker.getPower().getValue());
+                    }
+                }
+            }
             Map<UUID, Integer> assigned = new HashMap<UUID, Integer>();
             if (blocked) {
                 for (UUID blockerId: blockerOrder) {
@@ -288,11 +298,9 @@ public class CombatGroup implements Serializable, Copyable<CombatGroup> {
                 }
             }
             for (UUID blockerId: blockerOrder) {
-                Permanent blocker = game.getPermanent(blockerId);
-                if (canDamage(blocker, first)) {
-                    if (blocker.getBlocking() == 1) { // blocking several creatures handled separately
-                        attacker.markDamage(blocker.getPower().getValue(), blocker.getId(), game, true, true);
-                    }
+                Integer power = blockerPower.get(blockerId);
+                if (power != null) {
+                    attacker.markDamage(power.intValue(), blockerId, game, true, true);
                 }
             }
             for (Map.Entry<UUID, Integer> entry : assigned.entrySet()) {
