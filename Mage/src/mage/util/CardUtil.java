@@ -387,7 +387,9 @@ public class CardUtil {
     }
 
     /**
-     * Creates a string from text + cardId and the zoneChangeCounter of the card (from cardId)
+     * Creates a string from text + cardId and the zoneChangeCounter of the card (from cardId).
+     * This string can be used to save and get values that must be specific to a permanent instance.
+     * So they won't match, if a permanent was e.g. exiled and came back immediately.
      *
      * @param text
      * @param cardId
