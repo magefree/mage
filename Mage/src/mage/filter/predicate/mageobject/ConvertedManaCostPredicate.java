@@ -28,8 +28,11 @@
 package mage.filter.predicate.mageobject;
 
 import mage.MageObject;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
 import mage.filter.Filter;
 import mage.filter.predicate.IntComparePredicate;
+import mage.game.stack.StackObject;
 
 /**
  *
@@ -43,7 +46,21 @@ public class ConvertedManaCostPredicate extends IntComparePredicate<MageObject> 
 
     @Override
     protected int getInputValue(MageObject input) {
-        return input.getManaCost().convertedManaCost();
+        if(input instanceof StackObject){
+            int manaCost = 0;
+            for(ManaCost cost : input.getManaCost()){
+                if(cost instanceof VariableManaCost){
+                    manaCost += ((StackObject)input).getStackAbility().getManaCostsToPay().getX();
+                }
+                else{
+                    manaCost += cost.convertedManaCost();
+                }
+            }
+            return manaCost;
+        }
+        else{
+            return input.getManaCost().convertedManaCost();
+        }
     }
 
     @Override
