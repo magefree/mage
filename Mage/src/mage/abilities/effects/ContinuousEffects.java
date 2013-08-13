@@ -36,6 +36,7 @@ import mage.constants.Layer;
 import mage.constants.SubLayer;
 import mage.MageObject;
 import mage.abilities.Ability;
+import mage.abilities.MageSingleton;
 import mage.abilities.SpellAbility;
 import mage.abilities.StaticAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
@@ -255,7 +256,7 @@ public class ContinuousEffects implements Serializable {
             HashSet<Ability> abilities = restrictionEffects.getAbility(effect.getId());
             HashSet<Ability> applicableAbilities = new HashSet<Ability>();
             for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, ability instanceof MageSingleton ? permanent : null, false)) {
                     if (effect.applies(permanent, ability, game)) {
                         applicableAbilities.add(ability);
                     }
