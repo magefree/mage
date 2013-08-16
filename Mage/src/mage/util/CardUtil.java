@@ -371,10 +371,9 @@ public class CardUtil {
     /**
      * Creates and saves a (card + zoneChangeCounter) specific exileId.
      *
-     *
-     * @param game
-     * @param source - source ability
-     * @return - the specific UUID
+     * @param game the current game
+     * @param source source ability
+     * @return the specific UUID
      */
     public static UUID getCardExileZoneId(Game game, Ability source) {
         String key = getCardZoneString("SourceExileZone", source.getSourceId(), game);
@@ -391,9 +390,9 @@ public class CardUtil {
      * This string can be used to save and get values that must be specific to a permanent instance.
      * So they won't match, if a permanent was e.g. exiled and came back immediately.
      *
-     * @param text
-     * @param cardId
-     * @param game
+     * @param text short value to describe the value
+     * @param cardId id of the card
+     * @param game the game
      * @return
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {

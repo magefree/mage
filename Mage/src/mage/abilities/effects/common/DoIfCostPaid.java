@@ -31,7 +31,7 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
         Player player = game.getPlayer(source.getControllerId());
         MageObject mageObject = game.getObject(source.getSourceId());
         if (player != null && mageObject != null) {
-            String message = new StringBuilder("Pay ").append(cost.getText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).toString();
+            String message = new StringBuilder(getCostText()).append(" and ").append(executingEffect.getText(source.getModes().getMode())).append("?").toString();
             message = CardUtil.replaceSourceName(message, mageObject.getName());
             if (player.chooseUse(executingEffect.getOutcome(), message, game)) {
                 cost.clearPaid();
@@ -47,12 +47,16 @@ public class DoIfCostPaid extends OneShotEffect<DoIfCostPaid> {
 
     @Override
     public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder("you may ");
+        return new StringBuilder("you may ").append(getCostText()).append(". If you do, ").append(executingEffect.getText(mode)).toString();
+    }
+
+    private String getCostText() {
+        StringBuilder sb = new StringBuilder();
         String costText = cost.getText();
-        if (costText.length() <7 || !costText.substring(0, 7).toLowerCase().equals("discard")) {
+        if (costText != null && !costText.toLowerCase().startsWith("discard") && !costText.toLowerCase().startsWith("sacrifice")) {
             sb.append("pay ");
         }
-        return sb.append(costText).append(". If you do, ").append(executingEffect.getText(mode)).toString();
+        return sb.append(costText).toString();
     }
 
     @Override

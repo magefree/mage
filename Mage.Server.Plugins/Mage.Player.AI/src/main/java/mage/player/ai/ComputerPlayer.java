@@ -411,10 +411,13 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
             for (Permanent permanent: targets) {
                 if (((TargetControlledPermanent)target).canTarget(playerId, permanent.getId(), source, game)) {
                     target.addTarget(permanent.getId(), source, game);
-                    return true;
+                    if (target.getNumberOfTargets() <= target.getTargets().size() && (!outcome.isGood() || target.getMaxNumberOfTargets() <= target.getTargets().size())) {
+                        return true;
+                    }
                 }
             }
-            return false;
+            return target.isChosen();
+
         }
         if (target instanceof TargetPermanent) {
             List<Permanent> targets;
