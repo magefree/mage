@@ -43,8 +43,8 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class AEtherShockwave extends CardImpl<AEtherShockwave> {
 
-    private static final FilterCreaturePermanent filterSpirit = new FilterCreaturePermanent("all Spirits");
-    private static final FilterCreaturePermanent filterNonSpirit = new FilterCreaturePermanent("all non-Spirit creatures");
+    private static final FilterCreaturePermanent filterSpirit = new FilterCreaturePermanent("Spirits");
+    private static final FilterCreaturePermanent filterNonSpirit = new FilterCreaturePermanent("non-Spirit creatures");
     static {
         filterSpirit.add(new SubtypePredicate("Spirit"));
         filterNonSpirit.add(Predicates.not(new SubtypePredicate("Spirit")));
