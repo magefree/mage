@@ -28,14 +28,16 @@
 package mage.sets.elspethvstezzeret;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.NamePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
@@ -88,14 +90,13 @@ class ReturnToHandAllNamedPermanentsEffect extends OneShotEffect<ReturnToHandAll
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getFirstTarget());
-        String name = permanent.getName();
-
-        permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
-        for (Permanent perm: game.getBattlefield().getActivePermanents(source.getControllerId(), game)) {
-            if (perm.getName().equals(name))
-                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+        if (permanent != null) {
+            FilterPermanent filter = new FilterPermanent();
+            filter.add(new NamePredicate(permanent.getName()));
+            for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+                perm.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+            }
         }
-
         return true;
     }
 
