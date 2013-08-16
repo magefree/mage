@@ -80,7 +80,7 @@ public class BudokaGardener extends CardImpl<BudokaGardener> {
         this.addAbility(ability);
 
         Ability flipAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new DokaiWeaverofLife()), FlippedCondition.getInstance(), "{this} becomes Dokai, Weaver of Life"));
-        ability.setRuleVisible(false);
+        flipAbility.setRuleVisible(false);
         this.addAbility(flipAbility);
     }
 
