@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.dynamicvalue.common.CardsInControllerHandCount;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.LookLibraryControllerEffect;
 import mage.cards.CardImpl;
 
@@ -53,7 +54,10 @@ public class DescendantOfSoramaro extends CardImpl<DescendantOfSoramaro> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
         // {1}{U}: Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(new CardsInControllerHandCount()), new ManaCostsImpl("{1}{U}")));
+        Effect effect = new LookLibraryControllerEffect(new CardsInControllerHandCount());
+        effect.setText("Look at the top X cards of your library, where X is the number of cards in your hand, then put them back in any order");
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                effect, new ManaCostsImpl("{1}{U}")));
     }
 
     public DescendantOfSoramaro(final DescendantOfSoramaro card) {
