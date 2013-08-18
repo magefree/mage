@@ -28,9 +28,13 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -92,8 +96,9 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
                     break;
                 case ColorChangingEffects_5:
                     if (sublayer == SubLayer.NA) {
-                        if (token.getColor().hasColor())
+                        if (token.getColor().hasColor()) {
                             permanent.getColor().setColor(token.getColor());
+                        }
                     }
                     break;
                 case AbilityAddingRemovingEffects_6:
@@ -116,6 +121,10 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
                     }
             }
             return true;
+        } else {
+            if (duration.equals(Duration.Custom)) {
+                this.discard();
+            }
         }
         return false;
     }
@@ -126,10 +135,12 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
     }
 
     private void setText() {
-        if (type.length() > 0)
+        if (type.length() > 0) {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription() + " that's still a " + this.type;
-        else
+        }
+        else {
             staticText = duration.toString() + " {this} becomes a " + token.getDescription();
+        }
     }
 
     @Override

@@ -28,10 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SourceMatchesFilterCondition;
@@ -41,6 +37,10 @@ import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.permanent.token.Token;
@@ -71,13 +71,13 @@ public class FigureOfDestiny extends CardImpl<FigureOfDestiny> {
         // {RW}: Figure of Destiny becomes a 2/2 Kithkin Spirit.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
-                new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken1(), "", Duration.WhileOnBattlefield),
+                new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken1(), "", Duration.Custom),
                 new ManaCostsImpl("{R/W}")));
         // {RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
-                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.WhileOnBattlefield),
+                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken2(), "", Duration.Custom),
                     new SourceMatchesFilterCondition(filter2),
                     "If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior",
                     true),
@@ -87,7 +87,7 @@ public class FigureOfDestiny extends CardImpl<FigureOfDestiny> {
         this.addAbility(new SimpleActivatedAbility(
                 Zone.BATTLEFIELD,
                 new ConditionalContinousEffect(
-                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.WhileOnBattlefield),
+                    new BecomesCreatureSourceEffect(new FigureOfDestiny.FigureOfDestinyToken3(), "", Duration.Custom),
                     new SourceMatchesFilterCondition(filter3),
                     "If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike",
                     true),
