@@ -50,7 +50,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class FreedFromTheReal extends CardImpl<FreedFromTheReal> {
 
     public FreedFromTheReal(UUID ownerId) {
-        super(ownerId, 38, "Freed from the Real", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
+        super(ownerId, 38, "Freed from the Real", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}");
         this.expansionSetCode = "SOK";
         this.color.setBlue(true);
         this.subtype.add("Aura");
