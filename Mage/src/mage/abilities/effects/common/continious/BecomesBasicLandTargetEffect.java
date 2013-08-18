@@ -30,6 +30,7 @@ package mage.abilities.effects.common.continious;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.mana.BlackManaAbility;
@@ -37,6 +38,8 @@ import mage.abilities.mana.BlueManaAbility;
 import mage.abilities.mana.GreenManaAbility;
 import mage.abilities.mana.RedManaAbility;
 import mage.abilities.mana.WhiteManaAbility;
+import mage.choices.Choice;
+import mage.choices.ChoiceBasicLandType;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -44,6 +47,7 @@ import mage.constants.Outcome;
 import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -51,19 +55,31 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<BecomesBasicLandEnchantedEffect> {
+public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl<BecomesBasicLandTargetEffect> {
 
+    protected boolean chooseLandType;
     protected ArrayList<String> landTypes = new ArrayList();
 
-    public BecomesBasicLandEnchantedEffect(String... landNames) {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        landTypes.addAll(Arrays.asList(landNames));
-        this.staticText = setText();
+    public BecomesBasicLandTargetEffect(Duration duration) {
+        this(duration, true, new String[0]);
     }
 
-    public BecomesBasicLandEnchantedEffect(final BecomesBasicLandEnchantedEffect effect) {
+    public BecomesBasicLandTargetEffect(Duration duration, String... landNames) {
+        this(duration, false, landNames);
+    }
+
+    public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, String... landNames) {
+        super(duration, Outcome.Detriment);
+        landTypes.addAll(Arrays.asList(landNames));
+        this.chooseLandType = chooseLandType;
+        this.staticText = setText();
+
+    }
+
+    public BecomesBasicLandTargetEffect(final BecomesBasicLandTargetEffect effect) {
         super(effect);
         this.landTypes.addAll(effect.landTypes);
+        this.chooseLandType = effect.chooseLandType;
     }
 
     @Override
@@ -72,15 +88,29 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<Become
     }
 
     @Override
-    public BecomesBasicLandEnchantedEffect copy() {
-        return new BecomesBasicLandEnchantedEffect(this);
+    public BecomesBasicLandTargetEffect copy() {
+        return new BecomesBasicLandTargetEffect(this);
+    }
+    @Override
+    public void init(Ability source, Game game) {
+        super.init(source, game);
+        // choose land type
+        if (chooseLandType) {
+            Player controller = game.getPlayer(source.getControllerId());
+            if (controller != null) {
+                Choice choice = new ChoiceBasicLandType();
+                controller.choose(outcome, choice, game);
+                landTypes.add(choice.getChoice());
+            } else {
+                this.discard();
+            }
+        }
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent enchantment = game.getPermanent(source.getSourceId());
-        if (enchantment != null && enchantment.getAttachedTo() != null) {
-            Permanent land = game.getPermanent(enchantment.getAttachedTo());
+        for (UUID targetPermanent : targetPointer.getTargets(game, source)) {
+            Permanent land = game.getPermanent(targetPermanent);
             if (land != null) {
                 switch (layer) {
                     case AbilityAddingRemovingEffects_6:
@@ -107,10 +137,9 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<Become
                         land.getSubtype().addAll(landTypes);
                         break;
                 }
-                return true;
             }
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -119,18 +148,26 @@ public class BecomesBasicLandEnchantedEffect extends ContinuousEffectImpl<Become
     }
 
     private String setText() {
-        StringBuilder sb = new StringBuilder("Enchanted land is a ");
-        int i = 1;
-        for (String landType : landTypes)  {
-            if (i >1) {
-                if (i == landTypes.size()) {
-                    sb.append(" and ");
-                } else {
-                    sb.append(", ");
+        StringBuilder sb = new StringBuilder();
+        if (chooseLandType) {
+            sb.append("Target land becomes the basic land type of your choice ");
+        } else {
+            sb.append("Target land becomes a ");
+            int i = 1;
+            for (String landType : landTypes)  {
+                if (i >1) {
+                    if (i == landTypes.size()) {
+                        sb.append(" and ");
+                    } else {
+                        sb.append(", ");
+                    }
                 }
+                i++;
+                sb.append(landType);
             }
-            i++;
-            sb.append(landType);
+        }
+        if (!duration.toString().isEmpty() && !duration.equals(Duration.EndOfGame)) {
+                sb.append(" ").append(duration.toString());
         }
         return sb.toString();
     }

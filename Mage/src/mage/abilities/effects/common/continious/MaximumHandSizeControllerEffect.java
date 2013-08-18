@@ -37,6 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
  * @author nantuko, LevelX2
@@ -162,7 +163,7 @@ public class MaximumHandSizeControllerEffect extends ContinuousEffectImpl<Maximu
             sb.append(" is ");
         }
         if (handSize != Integer.MAX_VALUE) {
-            sb.append(handSize);
+            sb.append(CardUtil.numberToText(handSize));
         }
         if (duration == Duration.EndOfGame) {
             sb.append(" for the rest of the game");
