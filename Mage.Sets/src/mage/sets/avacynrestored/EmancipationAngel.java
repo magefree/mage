@@ -28,15 +28,14 @@
 package mage.sets.avacynrestored;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.common.TargetControlledPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -55,11 +54,7 @@ public class EmancipationAngel extends CardImpl<EmancipationAngel> {
 
         this.addAbility(FlyingAbility.getInstance());
         // When Emancipation Angel enters the battlefield, return a permanent you control to its owner's hand.
-        Ability ability  = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        TargetControlledPermanent target = new TargetControlledPermanent();
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), false));
     }
 
     public EmancipationAngel(final EmancipationAngel card) {

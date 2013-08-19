@@ -28,23 +28,21 @@
 package mage.sets.saviorsofkamigawa;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
+import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect;
-import mage.abilities.effects.common.continious.MaximumHandSizeControllerEffect.HandSizeModification;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -52,7 +50,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class TrustedAdvisor extends CardImpl<TrustedAdvisor> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature");
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("blue creature you control");
 
     static {
         filter.add(new ColorPredicate(ObjectColor.BLUE));
@@ -72,11 +70,7 @@ public class TrustedAdvisor extends CardImpl<TrustedAdvisor> {
                 new MaximumHandSizeControllerEffect(2, Duration.WhileOnBattlefield, HandSizeModification.INCREASE)));
 
         // At the beginning of your upkeep, return a blue creature you control to its owner's hand.
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
-        TargetControlledPermanent t = new TargetControlledPermanent(filter);
-        t.setRequired(true);
-        ability.addTarget(t);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), TargetController.YOU, false));
 
     }
 

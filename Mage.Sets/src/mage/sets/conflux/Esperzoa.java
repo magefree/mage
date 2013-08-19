@@ -29,31 +29,23 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledArtifactPermanent;
 
 /**
  *
  * @author Loki
  */
 public class Esperzoa extends CardImpl<Esperzoa> {
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("artifact");
 
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
-
+    
     public Esperzoa (UUID ownerId) {
         super(ownerId, 25, "Esperzoa", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{2}{U}");
         this.expansionSetCode = "CON";
@@ -61,12 +53,12 @@ public class Esperzoa extends CardImpl<Esperzoa> {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(3);
+        
+        //Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
-        TargetControlledPermanent t = new TargetControlledPermanent(filter);
-        t.setRequired(true);
-        ability.addTarget(t);
-        this.addAbility(ability);
+
+        //At the beginning of your upkeep, return an artifact you control to its owner's hand.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledArtifactPermanent()), TargetController.YOU, false));
     }
 
     public Esperzoa (final Esperzoa card) {

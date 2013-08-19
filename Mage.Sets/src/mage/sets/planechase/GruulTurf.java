@@ -28,22 +28,18 @@
 package mage.sets.planechase;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  * @author Loki
@@ -55,12 +51,11 @@ public class GruulTurf extends CardImpl<GruulTurf> {
     public GruulTurf(UUID ownerId) {
         super(ownerId, 134, "Gruul Turf", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "HOP";
+        
         this.addAbility(new EntersBattlefieldTappedAbility());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        Target target = new TargetControlledPermanent(filter);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
+        
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 1, 0, 0, 0, 0, 0), new TapSourceCost()));
     }
 

@@ -36,7 +36,9 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
@@ -59,7 +61,7 @@ public class RoaringPrimadox extends CardImpl<RoaringPrimadox> {
         this.toughness = new MageInt(4);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new RoaringPrimadoxEffect()));
+        this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
     public RoaringPrimadox(final RoaringPrimadox card) {
@@ -69,38 +71,5 @@ public class RoaringPrimadox extends CardImpl<RoaringPrimadox> {
     @Override
     public RoaringPrimadox copy() {
         return new RoaringPrimadox(this);
-    }
-}
-
-class RoaringPrimadoxEffect extends OneShotEffect<RoaringPrimadoxEffect> {
-
-    public RoaringPrimadoxEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return a creature you control to its owner's hand";
-    }
-
-    public RoaringPrimadoxEffect(final RoaringPrimadoxEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public RoaringPrimadoxEffect copy() {
-        return new RoaringPrimadoxEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
-                }
-            }
-            return true;
-        }
-        return false;
     }
 }

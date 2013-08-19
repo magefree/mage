@@ -32,13 +32,11 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -54,13 +52,12 @@ public class KorSkyfisher extends CardImpl<KorSkyfisher> {
         this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(3);
+        
+        //Flying
         this.addAbility(FlyingAbility.getInstance());
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        Target target = new TargetControlledPermanent();
-        target.setRequired(true);
-        target.setNotTarget(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        
+        //When Kor Skyfisher enters the battlefield, return a permanent you control to its owner's hand.
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), false));
     }
 
     public KorSkyfisher (final KorSkyfisher card) {
