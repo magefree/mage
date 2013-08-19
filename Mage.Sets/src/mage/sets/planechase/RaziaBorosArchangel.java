@@ -35,8 +35,8 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PreventionEffectImpl;
 import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.keyword.VigilanceAbility;
 import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.VigilanceAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -55,7 +55,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class RaziaBorosArchangel extends CardImpl<RaziaBorosArchangel> {
 
     public RaziaBorosArchangel(UUID ownerId) {
-        super(ownerId, 92, "Razia, Boros Archangel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{W}");
+        super(ownerId, 92, "Razia, Boros Archangel", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}{W}{W}");
         this.expansionSetCode = "HOP";
         this.supertype.add("Legendary");
         this.subtype.add("Angel");
@@ -122,7 +122,7 @@ class RaziaBorosArchangelEffect extends PreventionEffectImpl<RaziaBorosArchangel
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         GameEvent preventEvent = new GameEvent(GameEvent.EventType.PREVENT_DAMAGE, source.getFirstTarget(), source.getId(), source.getControllerId(), event.getAmount(), false);
         if (!game.replaceEvent(preventEvent)) {
-            int prevented = 0;
+            int prevented;
             if (event.getAmount() >= this.amount) {
                 int damage = amount;
                 event.setAmount(event.getAmount() - amount);

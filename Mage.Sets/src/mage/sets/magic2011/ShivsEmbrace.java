@@ -63,12 +63,15 @@ public class ShivsEmbrace extends CardImpl<ShivsEmbrace> {
         this.color.setRed(true);
         this.subtype.add("Aura");
 
+        // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
+        // Enchanted creature gets +2/+2 and has flying.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShivsEmbraceEffect()));
+        // {R}: Enchanted creature gets +1/+0 until end of turn.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(1, 0, Duration.EndOfTurn), new ManaCostsImpl("{R}")));
 
     }
