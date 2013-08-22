@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BecomesCreatureSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -50,7 +50,7 @@ public class JadeIdol extends CardImpl<JadeIdol> {
     public JadeIdol(UUID ownerId) {
         super(ownerId, 256, "Jade Idol", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT}, "{4}");
         this.expansionSetCode = "CHK";
-        this.addAbility(new SpellCastTriggeredAbility(new BecomesCreatureSourceEffect(new JadeIdolToken(), "", Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BecomesCreatureSourceEffect(new JadeIdolToken(), "", Duration.EndOfTurn), filter, false));
     }
 
     public JadeIdol(final JadeIdol card) {

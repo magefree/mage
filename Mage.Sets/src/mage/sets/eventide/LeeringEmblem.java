@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -49,7 +49,7 @@ public class LeeringEmblem extends CardImpl<LeeringEmblem> {
         super(ownerId, 171, "Leering Emblem", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
         this.expansionSetCode = "EVE";
         this.subtype.add("Equipment");
-        this.addAbility(new SpellCastTriggeredAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostEquippedEffect(2, 2, Duration.EndOfTurn), false));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(2)));
     }
 

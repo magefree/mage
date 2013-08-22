@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.Mana;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -64,7 +64,7 @@ public class PetalmaneBaku extends CardImpl<PetalmaneBaku> {
         this.toughness = new MageInt(2);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // {1}, Remove X ki counters from Petalmane Baku: Add X mana of any one color to your mana pool.
         Ability ability = new PetalmaneBakuManaAbility();

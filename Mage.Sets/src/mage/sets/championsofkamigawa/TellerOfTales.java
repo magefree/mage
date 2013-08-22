@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class TellerOfTales extends CardImpl<TellerOfTales> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may tap or untap target creature.
-        Ability ability = new SpellCastTriggeredAbility(new MayTapOrUntapTargetEffect(),filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(),filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

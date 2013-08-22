@@ -30,7 +30,7 @@ package mage.sets.modernmasters;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -69,7 +69,7 @@ public class MaskedAdmirers extends CardImpl<MaskedAdmirers> {
         // Whenever you cast a creature spell, you may pay {G}{G}. If you do, return Masked Admirers from your graveyard to your hand.
         OneShotEffect effect = new ReturnToHandSourceEffect();
         effect.setText("return {this} from your graveyard to your hand");
-        this.addAbility(new SpellCastTriggeredAbility(
+        this.addAbility(new SpellCastControllerTriggeredAbility(
                 Zone.GRAVEYARD, new DoIfCostPaid(effect, new ManaCostsImpl("{G}{G}")), filter, false, false));
     }
 

@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class IllusoryDemon extends CardImpl<IllusoryDemon> {
         this.addAbility(FlyingAbility.getInstance());
         
         // When you cast a spell, sacrifice Illusory Demon.
-        this.addAbility(new SpellCastTriggeredAbility(new SacrificeSourceEffect(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), false));
     }
 
     public IllusoryDemon(final IllusoryDemon card) {

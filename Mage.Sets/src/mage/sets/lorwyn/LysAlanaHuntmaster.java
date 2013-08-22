@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -58,7 +58,7 @@ public class LysAlanaHuntmaster extends CardImpl<LysAlanaHuntmaster> {
         this.color.setGreen(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new ElfToken()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElfToken()), filter, true));
     }
 
     public LysAlanaHuntmaster(final LysAlanaHuntmaster card) {

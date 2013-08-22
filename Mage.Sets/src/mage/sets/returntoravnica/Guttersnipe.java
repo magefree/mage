@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamagePlayersEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -65,7 +65,7 @@ public class Guttersnipe extends CardImpl<Guttersnipe> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast an instant or sorcery spell, Guttersnipe deals 2 damage to each opponent.
-        this.addAbility(new SpellCastTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DamagePlayersEffect(2, TargetController.OPPONENT), filter, false));
     }
 
     public Guttersnipe (final Guttersnipe card) {

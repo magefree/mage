@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -65,7 +65,7 @@ public class BounteousKirin extends CardImpl<BounteousKirin> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain life equal to that spell's converted mana cost.
-        this.addAbility(new SpellCastTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), new FilterSpiritOrArcaneCard(), true, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new BounteousKirinEffect(), new FilterSpiritOrArcaneCard(), true, true));
     }
 
     public BounteousKirin(final BounteousKirin card) {

@@ -31,7 +31,7 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -55,7 +55,7 @@ public class SigilOfTheEmptyThrone extends CardImpl<SigilOfTheEmptyThrone> {
         this.expansionSetCode = "CON";
         this.color.setWhite(true);
 
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new AngelToken()), filter, false));
     }
 
     public SigilOfTheEmptyThrone(final SigilOfTheEmptyThrone card) {

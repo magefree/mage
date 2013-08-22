@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class KamiOfThePaintedRoad extends CardImpl<KamiOfThePaintedRoad> {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, Kami of the Painted Road gains protection from the color of your choice until end of turn.
-        Ability ability = new SpellCastTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), filter, true);
         Choice colorChoice = new ChoiceColor();
         colorChoice.setMessage("Choose color (Kami of the Painted Road)");
         ability.addChoice(new ChoiceColor());

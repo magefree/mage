@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class SireOfTheStorm extends CardImpl<SireOfTheStorm> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
     }
 
     public SireOfTheStorm(final SireOfTheStorm card) {

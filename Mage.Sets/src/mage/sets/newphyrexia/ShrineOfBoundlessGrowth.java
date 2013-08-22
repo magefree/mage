@@ -38,7 +38,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.dynamicvalue.common.CountersCount;
@@ -66,7 +66,7 @@ public class ShrineOfBoundlessGrowth extends CardImpl<ShrineOfBoundlessGrowth> {
         this.expansionSetCode = "NPH";
 
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), TargetController.YOU, false));
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, false));
 
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DynamicManaEffect(Mana.ColorlessMana, new CountersCount(CounterType.CHARGE)), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());

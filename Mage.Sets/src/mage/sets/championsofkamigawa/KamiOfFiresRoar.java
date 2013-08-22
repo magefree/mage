@@ -35,7 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -57,7 +57,7 @@ public class KamiOfFiresRoar extends CardImpl<KamiOfFiresRoar> {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, target creature can't block this turn.
-        Ability ability = new SpellCastTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

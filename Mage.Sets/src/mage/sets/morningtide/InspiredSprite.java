@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -66,7 +66,7 @@ public class InspiredSprite extends CardImpl<InspiredSprite> {
         this.toughness = new MageInt(2);
         this.addAbility(FlashAbility.getInstance());
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardControllerEffect(), new TapSourceCost()));
     }
 

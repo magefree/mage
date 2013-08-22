@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
@@ -54,7 +54,7 @@ public class SoulOfMagma extends CardImpl<SoulOfMagma> {
         this.color.setRed(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(1), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(1), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

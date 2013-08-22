@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.ReachAbility;
@@ -66,7 +66,7 @@ public class LysAlanaBowmaster extends CardImpl<LysAlanaBowmaster> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
         this.addAbility(ReachAbility.getInstance());
-        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(2), filterElf, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(2), filterElf, true);
         ability.addTarget(new TargetCreaturePermanent(filterFlying));
         this.addAbility(ability);
     }

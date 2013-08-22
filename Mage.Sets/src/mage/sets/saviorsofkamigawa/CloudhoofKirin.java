@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
@@ -66,7 +66,7 @@ public class CloudhoofKirin extends CardImpl<CloudhoofKirin> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may have target player put the top X cards of his or her library into his or her graveyard, where X is that spell's converted mana cost.
-        Ability ability = new SpellCastTriggeredAbility(Zone.BATTLEFIELD, new CloudhoofKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CloudhoofKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -70,7 +70,7 @@ public class Gelectrode extends CardImpl<Gelectrode> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
     public Gelectrode(final Gelectrode card) {

@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -66,7 +66,7 @@ public class Lifesmith extends CardImpl<Lifesmith> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SpellCastTriggeredAbility(new LifesmithEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new LifesmithEffect(), filter, false));
     }
 
     public Lifesmith (final Lifesmith card) {

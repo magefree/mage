@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
@@ -63,7 +63,7 @@ public class Painsmith extends CardImpl<Painsmith> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(2, 0, Duration.EndOfTurn), filter, true);
         ability.addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);

@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -68,9 +68,9 @@ public class ThistledownDuo extends CardImpl<ThistledownDuo> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a white spell, Thistledown Duo gets +1/+1 until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), whiteFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), whiteFilter, false));
         // Whenever you cast a blue spell, Thistledown Duo gains flying until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), blueFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), blueFilter, false));
     }
 
     public ThistledownDuo(final ThistledownDuo card) {

@@ -38,7 +38,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.target.common.TargetCreaturePermanent;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 
 /**
  *
@@ -59,7 +59,7 @@ public class Equilibrium extends CardImpl<Equilibrium> {
         this.color.setBlue(true);
 
         // Whenever you cast a creature spell, you may pay {1}. If you do, return target creature to its owner's hand.
-        Ability ability = new SpellCastTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(1)), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ReturnToHandTargetEffect(), new GenericManaCost(1)), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

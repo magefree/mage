@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -66,7 +66,7 @@ public class BlademaneBaku extends CardImpl<BlademaneBaku> {
         this.toughness = new MageInt(1);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // {1}, Remove X ki counters from Blademane Baku: For each counter removed, Blademane Baku gets +2/+0 until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BlademaneBakuBoostEffect(), new GenericManaCost(1));

@@ -37,7 +37,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.RemoveVariableCountersSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
@@ -70,7 +70,7 @@ public class SkullmaneBaku extends CardImpl<SkullmaneBaku> {
         this.toughness = new MageInt(1);
         
         // Whenever you cast a Spirit or Arcane spell, you may put a ki counter on Skullmane Baku.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.KI.createInstance()), filter, true));
 
         // {1}, {T}, Remove X ki counters from Skullmane Baku: Target creature gets -X/-X until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SkullmaneBakuUnboostEffect(), new GenericManaCost(1));

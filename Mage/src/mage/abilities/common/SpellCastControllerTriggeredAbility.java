@@ -27,9 +27,9 @@
  */
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -40,7 +40,7 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author North
  */
-public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
+public class SpellCastControllerTriggeredAbility extends TriggeredAbilityImpl<SpellCastControllerTriggeredAbility> {
 
     private static final FilterSpell spellCard = new FilterSpell("a spell");
     protected FilterSpell filter;
@@ -51,30 +51,30 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
      */
     protected boolean rememberSource = false;
 
-    public SpellCastTriggeredAbility(Effect effect, boolean optional) {
+    public SpellCastControllerTriggeredAbility(Effect effect, boolean optional) {
         this(Zone.BATTLEFIELD, effect, spellCard, optional, false);
     }
 
-    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
+    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional) {
         this(effect, filter, optional, false);
     }
     
-    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
+    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, String rule) {
         this(effect, filter, optional, false);
         this.rule = rule;
     }
 
-    public SpellCastTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+    public SpellCastControllerTriggeredAbility(Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
         this(Zone.BATTLEFIELD, effect, filter, optional, rememberSource);
     }
 
-    public SpellCastTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
+    public SpellCastControllerTriggeredAbility(Zone zone, Effect effect, FilterSpell filter, boolean optional, boolean rememberSource) {
         super(zone, effect, optional);
         this.filter = filter;
         this.rememberSource = rememberSource;
     }
 
-    public SpellCastTriggeredAbility(final SpellCastTriggeredAbility ability) {
+    public SpellCastControllerTriggeredAbility(final SpellCastControllerTriggeredAbility ability) {
         super(ability);
         filter = ability.filter;
         this.rememberSource = ability.rememberSource;
@@ -104,7 +104,7 @@ public class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTri
     }
 
     @Override
-    public SpellCastTriggeredAbility copy() {
-        return new SpellCastTriggeredAbility(this);
+    public SpellCastControllerTriggeredAbility copy() {
+        return new SpellCastControllerTriggeredAbility(this);
     }
 }

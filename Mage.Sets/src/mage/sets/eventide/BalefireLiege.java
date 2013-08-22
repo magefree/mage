@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -75,10 +75,10 @@ public class BalefireLiege extends CardImpl<BalefireLiege> {
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterRedCreature, true)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhiteCreature, true)));
-        Ability ability = new SpellCastTriggeredAbility(new DamageTargetEffect(3), filterRedSpell, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new DamageTargetEffect(3), filterRedSpell, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new GainLifeEffect(3), filterWhiteSpell, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(3), filterWhiteSpell, false));
     }
 
     public BalefireLiege(final BalefireLiege card) {

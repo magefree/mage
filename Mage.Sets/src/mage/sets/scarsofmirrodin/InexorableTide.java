@@ -31,7 +31,7 @@ package mage.sets.scarsofmirrodin;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.ProliferateEffect;
 import mage.cards.CardImpl;
 
@@ -46,7 +46,7 @@ public class InexorableTide extends CardImpl<InexorableTide> {
         this.expansionSetCode = "SOM";
         this.color.setBlue(true);
 
-        this.addAbility(new SpellCastTriggeredAbility(new ProliferateEffect(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ProliferateEffect(), false));
     }
 
     public InexorableTide (final InexorableTide card) {

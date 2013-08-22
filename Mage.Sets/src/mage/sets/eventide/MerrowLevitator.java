@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.UntapSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
@@ -71,7 +71,7 @@ public class MerrowLevitator extends CardImpl<MerrowLevitator> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filterBlueSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filterBlueSpell, true));
     }
 
     public MerrowLevitator(final MerrowLevitator card) {

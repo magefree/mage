@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.AttacksTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -62,7 +62,7 @@ public class WitchMawNephilim extends CardImpl<WitchMawNephilim> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell, you may put two +1/+1 counters on Witch-Maw Nephilim.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(2)), true));
 
         // Whenever Witch-Maw Nephilim attacks, it gains trample until end of turn if its power is 10 or greater.
         this.addAbility(new WitchMawNephilimTriggeredAbility());

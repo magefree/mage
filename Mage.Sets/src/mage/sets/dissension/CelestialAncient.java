@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class CelestialAncient extends CardImpl<CelestialAncient> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersAllEffect(CounterType.P1P1.createInstance(), new FilterControlledCreaturePermanent()),filter, false));
     }
 
     public CelestialAncient(final CelestialAncient card) {

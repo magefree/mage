@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.SwitchPowerToughnessSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -67,7 +67,7 @@ public class Fluxcharger extends CardImpl<Fluxcharger> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast an instant or sorcery spell, you may switch Fluxcharger's power and toughness until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SwitchPowerToughnessSourceEffect(Duration.EndOfTurn), filter, true));
 
     }
 

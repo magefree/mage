@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
@@ -74,10 +74,10 @@ public class DeathbringerLiege extends CardImpl<DeathbringerLiege> {
         this.toughness = new MageInt(4);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterWhite, true)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlack, true)));
-        Ability ability = new SpellCastTriggeredAbility(new TapTargetEffect(), filterWhiteSpellCard, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new TapTargetEffect(), filterWhiteSpellCard, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        ability = new SpellCastTriggeredAbility(new DeathbringerLiegeEffect(), filterBlackSpellCard, true);
+        ability = new SpellCastControllerTriggeredAbility(new DeathbringerLiegeEffect(), filterBlackSpellCard, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

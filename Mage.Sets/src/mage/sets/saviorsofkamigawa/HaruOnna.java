@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class HaruOnna extends CardImpl<HaruOnna> {
         // When Haru-Onna enters the battlefield, draw a card.
         this.addAbility(new EntersBattlefieldTriggeredAbility(new DrawCardControllerEffect(1)));
         // Whenever you cast a Spirit or Arcane spell, you may return Haru-Onna to its owner's hand.
-        this.addAbility(new SpellCastTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new ReturnToHandSourceEffect(), filter, true));
     }
 
     public HaruOnna(final HaruOnna card) {

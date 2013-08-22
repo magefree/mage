@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class Dreamcatcher extends CardImpl<Dreamcatcher> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.
-        Ability ability = new SpellCastTriggeredAbility(new SacrificeSourceEffect(), new FilterSpiritOrArcaneCard(), true, 
+        Ability ability = new SpellCastControllerTriggeredAbility(new SacrificeSourceEffect(), new FilterSpiritOrArcaneCard(), true, 
                 "Whenever you cast a Spirit or Arcane spell, you may sacrifice Dreamcatcher. If you do, draw a card.");
         ability.addEffect(new DrawCardControllerEffect(1));
         this.addAbility(ability);

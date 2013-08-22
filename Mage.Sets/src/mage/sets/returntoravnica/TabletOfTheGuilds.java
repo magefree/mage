@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.AsEntersBattlefieldAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -59,7 +59,7 @@ public class TabletOfTheGuilds extends CardImpl<TabletOfTheGuilds> {
         this.addAbility(new AsEntersBattlefieldAbility(new TabletOfTheGuildsEntersBattlefieldEffect()));
 
         // Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
-       this.addAbility(new SpellCastTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true ));
+       this.addAbility(new SpellCastControllerTriggeredAbility(new TabletOfTheGuildsGainLifeEffect(), new FilterSpell("a spell"), false, true ));
     }
 
     public TabletOfTheGuilds(final TabletOfTheGuilds card) {

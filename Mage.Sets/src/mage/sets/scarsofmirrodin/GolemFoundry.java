@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
@@ -59,7 +59,7 @@ public class GolemFoundry extends CardImpl<GolemFoundry> {
         super(ownerId, 160, "Golem Foundry", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{3}");
         this.expansionSetCode = "SOM";
 
-        this.addAbility(new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.CHARGE.createInstance()), filter, true));
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new GolemToken()), new RemoveCountersSourceCost(CounterType.CHARGE.createInstance(3))));
     }
 

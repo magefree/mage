@@ -34,7 +34,7 @@ import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Abilities;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
@@ -71,7 +71,7 @@ public class Tallowisp extends CardImpl<Tallowisp> {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a Spirit or Arcane spell, you may search your library for an Aura card with enchant creature, reveal it, and put it into your hand. If you do, shuffle your library.
-        this.addAbility(new SpellCastTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), filterTrigger, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new SearchLibraryPutInHandEffect(new TargetCardInLibrary(filterAura), true, true), filterTrigger, true));
     }
 
     public Tallowisp(final Tallowisp card) {

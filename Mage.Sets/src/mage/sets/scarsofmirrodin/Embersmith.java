@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -67,7 +67,7 @@ public class Embersmith extends CardImpl<Embersmith> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new EmbersmithEffect(), filter, false);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new EmbersmithEffect(), filter, false);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

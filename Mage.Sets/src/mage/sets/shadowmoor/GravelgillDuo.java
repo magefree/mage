@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FearAbility;
@@ -68,9 +68,9 @@ public class GravelgillDuo extends CardImpl<GravelgillDuo> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a blue spell, Gravelgill Duo gets +1/+1 until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), blueFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), blueFilter, false));
         // Whenever you cast a black spell, Gravelgill Duo gains fear until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), blackFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(FearAbility.getInstance(), Duration.EndOfTurn), blackFilter, false));
     }
 
     public GravelgillDuo(final GravelgillDuo card) {

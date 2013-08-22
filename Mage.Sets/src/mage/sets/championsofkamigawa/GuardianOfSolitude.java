@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class GuardianOfSolitude extends CardImpl<GuardianOfSolitude> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
-        Ability ability = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

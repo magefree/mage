@@ -29,7 +29,7 @@ package mage.sets.magic2014;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -63,7 +63,7 @@ public class YoungPyromancer extends CardImpl<YoungPyromancer> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast an instant or sorcery spell, put a 1/1 red Elemental creature token onto the battlefield.
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new ElementalToken()), filter, false));
         
     }
 

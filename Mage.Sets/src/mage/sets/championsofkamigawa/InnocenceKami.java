@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -64,7 +64,7 @@ public class InnocenceKami extends CardImpl<InnocenceKami> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, false));
     }
 
     public InnocenceKami(final InnocenceKami card) {

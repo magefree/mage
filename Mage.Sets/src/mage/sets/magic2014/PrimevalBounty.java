@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.GainLifeEffect;
@@ -66,11 +66,11 @@ public class PrimevalBounty extends CardImpl<PrimevalBounty> {
         this.color.setGreen(true);
 
         // Whenever you cast a creature spell, put a 3/3 green Beast creature token onto the battlefield.
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new BeastToken()), filterCreature, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new BeastToken()), filterCreature, false));
 
         // Whenever you cast a noncreature spell, put three +1/+1 counters on target creature you control.
         Effect effect = new AddCountersTargetEffect(CounterType.P1P1.createInstance(3));
-        Ability ability = new SpellCastTriggeredAbility(effect, filterNonCreature, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, filterNonCreature, false);
         ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
 

@@ -36,7 +36,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.MayTapOrUntapTargetEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
@@ -75,7 +75,7 @@ public class MerrowReejerey extends CardImpl<MerrowReejerey> {
         // Other Merfolk creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter1, true)));
         // Whenever you cast a Merfolk spell, you may tap or untap target permanent.
-        Ability ability = new SpellCastTriggeredAbility(new MayTapOrUntapTargetEffect(), filter2, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new MayTapOrUntapTargetEffect(), filter2, true);
         Target target = new TargetPermanent();
         target.setRequired(true);
         ability.addTarget(new TargetPermanent());

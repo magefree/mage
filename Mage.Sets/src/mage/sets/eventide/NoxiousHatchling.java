@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.effects.common.counter.RemoveCounterSourceEffect;
 import mage.abilities.keyword.WitherAbility;
@@ -70,9 +70,9 @@ public class NoxiousHatchling extends CardImpl<NoxiousHatchling> {
         // Wither (This deals damage to creatures in the form of -1/-1 counters.)
         this.addAbility(WitherAbility.getInstance());
         // Whenever you cast a black spell, remove a -1/-1 counter from Noxious Hatchling.
-        this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterBlackSpell, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterBlackSpell, false));
         // Whenever you cast a green spell, remove a -1/-1 counter from Noxious Hatchling.
-        this.addAbility(new SpellCastTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterGreenSpell, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new RemoveCounterSourceEffect(CounterType.M1M1.createInstance()), filterGreenSpell, false));
     }
 
     public NoxiousHatchling(final NoxiousHatchling card) {

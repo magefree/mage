@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DamageTargetEffect;
 import mage.abilities.effects.common.UntapSourceEffect;
@@ -68,7 +68,7 @@ public class CinderPyromancer extends CardImpl<CinderPyromancer> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
-        this.addAbility(new SpellCastTriggeredAbility(new UntapSourceEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new UntapSourceEffect(), filter, true));
     }
 
     public CinderPyromancer (final CinderPyromancer card) {

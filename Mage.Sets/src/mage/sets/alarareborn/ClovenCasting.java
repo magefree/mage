@@ -29,7 +29,7 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
@@ -68,7 +68,7 @@ public class ClovenCasting extends CardImpl<ClovenCasting> {
         this.color.setBlue(true);
 
         // Whenever you cast a multicolored instant or sorcery spell, you may pay {1}. If you do, copy that spell. You may choose new targets for the copy.
-        this.addAbility(new SpellCastTriggeredAbility(new DoIfCostPaid(new ClovenCastingEffect(), new GenericManaCost(1)), filter, true, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DoIfCostPaid(new ClovenCastingEffect(), new GenericManaCost(1)), filter, true, true));
 
     }
 

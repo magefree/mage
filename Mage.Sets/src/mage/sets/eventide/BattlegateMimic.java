@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continious.SetPowerToughnessSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
@@ -68,7 +68,7 @@ public class BattlegateMimic extends CardImpl<BattlegateMimic> {
         this.toughness = new MageInt(1);
 
         // Whenever you cast a spell that's both red and white, Battlegate Mimic becomes 4/2 and gains first strike until end of turn.
-        Ability ability = new SpellCastTriggeredAbility(new SetPowerToughnessSourceEffect(4, 2, Duration.EndOfTurn), filter, false, rule);
+        Ability ability = new SpellCastControllerTriggeredAbility(new SetPowerToughnessSourceEffect(4, 2, Duration.EndOfTurn), filter, false, rule);
         ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, false, true));
         this.addAbility(ability);
         

@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
@@ -74,7 +74,7 @@ public class SkyfireKirin extends CardImpl<SkyfireKirin> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's converted mana cost until end of turn.
-        Ability ability = new SpellCastTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new SkyfireKirinEffect(), new FilterSpiritOrArcaneCard(), true, true);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }

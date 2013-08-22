@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.OnEventTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.Card;
@@ -76,7 +76,7 @@ public class CharmbreakerDevils extends CardImpl<CharmbreakerDevils> {
         // At the beginning of your upkeep, return an instant or sorcery card at random from your graveyard to your hand.
         this.addAbility(new OnEventTriggeredAbility(EventType.UPKEEP_STEP_PRE, "beginning of your upkeep", new CharmbreakerDevilsEffect(), false));
         // Whenever you cast an instant or sorcery spell, Charmbreaker Devils gets +4/+0 until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(4, 0, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(4, 0, Duration.EndOfTurn), filter, false));
     }
 
     public CharmbreakerDevils(final CharmbreakerDevils card) {

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawDiscardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -59,7 +59,7 @@ public class Riddlesmith extends CardImpl<Riddlesmith> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
 
-        this.addAbility(new SpellCastTriggeredAbility(new DrawDiscardControllerEffect(), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawDiscardControllerEffect(), filter, true));
     }
 
     public Riddlesmith (final Riddlesmith card) {
