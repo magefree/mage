@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -65,7 +65,7 @@ public class MoldAdder extends CardImpl<MoldAdder> {
         this.toughness = new MageInt(1);
 
         // Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on Mold Adder.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true));
     }
 
     public MoldAdder(final MoldAdder card) {

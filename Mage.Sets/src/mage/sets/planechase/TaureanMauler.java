@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ChangelingAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class TaureanMauler extends CardImpl<TaureanMauler> {
         this.addAbility(ChangelingAbility.getInstance());
         
         // Whenever an opponent casts a spell, you may put a +1/+1 counter on Taurean Mauler.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), true));
         
     }
 

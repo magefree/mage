@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.CardImpl;
@@ -56,7 +56,7 @@ public class DragonlairSpider extends CardImpl<DragonlairSpider> {
         this.addAbility(ReachAbility.getInstance());
 
         // Whenever an opponent casts a spell, put a 1/1 green Insect creature token onto the battlefield.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new CreateTokenEffect(new InsectToken()), false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new CreateTokenEffect(new InsectToken()), false));
 
 
     }

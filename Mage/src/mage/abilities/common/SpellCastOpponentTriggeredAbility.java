@@ -40,31 +40,31 @@ import mage.target.targetpointer.FixedTarget;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<OpponentCastsSpellTriggeredAbility> {
+public class SpellCastOpponentTriggeredAbility extends TriggeredAbilityImpl<SpellCastOpponentTriggeredAbility> {
 
     private static final FilterCard spellCard = new FilterCard("a spell");
     protected FilterCard filter;
     protected boolean setTargetPointerPlayer;
 
-    public OpponentCastsSpellTriggeredAbility(Effect effect, boolean optional) {
+    public SpellCastOpponentTriggeredAbility(Effect effect, boolean optional) {
         this(effect, spellCard, optional);
     }
 
-    public OpponentCastsSpellTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
+    public SpellCastOpponentTriggeredAbility(Effect effect, FilterCard filter, boolean optional) {
         this(Zone.BATTLEFIELD, effect, filter, optional);
     }
 
-    public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional) {
+    public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional) {
         this(zone, effect, filter, optional, false);
     }
 
-    public OpponentCastsSpellTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional, boolean setTargetPointerPlayer) {
+    public SpellCastOpponentTriggeredAbility(Zone zone, Effect effect, FilterCard filter, boolean optional, boolean setTargetPointerPlayer) {
         super(zone, effect, optional);
         this.filter = filter;
         this.setTargetPointerPlayer = setTargetPointerPlayer;
     }
 
-    public OpponentCastsSpellTriggeredAbility(final OpponentCastsSpellTriggeredAbility ability) {
+    public SpellCastOpponentTriggeredAbility(final SpellCastOpponentTriggeredAbility ability) {
         super(ability);
         this.filter = ability.filter;
         this.setTargetPointerPlayer = ability.setTargetPointerPlayer;
@@ -92,7 +92,7 @@ public class OpponentCastsSpellTriggeredAbility extends TriggeredAbilityImpl<Opp
     }
 
     @Override
-    public OpponentCastsSpellTriggeredAbility copy() {
-        return new OpponentCastsSpellTriggeredAbility(this);
+    public SpellCastOpponentTriggeredAbility copy() {
+        return new SpellCastOpponentTriggeredAbility(this);
     }
 }

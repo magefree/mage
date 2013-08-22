@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -76,7 +76,7 @@ public class Mindsparker extends CardImpl<Mindsparker> {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever an opponent casts a white or blue instant or sorcery spell, Mindsparker deals 2 damage to that player.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false, true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false, true));
 
     }
 
