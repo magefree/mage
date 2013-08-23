@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
@@ -62,8 +62,11 @@ public class HikariTwilightGuardian extends CardImpl<HikariTwilightGuardian> {
         this.color.setWhite(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
-        this.addAbility(new SpellCastTriggeredAbility(new HikariTwilightGuardianEffect(), filter, true));
+
+        // Whenever you cast a Spirit or Arcane spell, you may exile Hikari, Twilight Guardian. If you do, return it to the battlefield under its owner's control at the beginning of the next end step.
+        this.addAbility(new SpellCastControllerTriggeredAbility(new HikariTwilightGuardianEffect(), filter, true));
     }
 
     public HikariTwilightGuardian (final HikariTwilightGuardian card) {

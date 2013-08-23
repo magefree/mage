@@ -217,10 +217,12 @@ public class LevelerCardBuilder {
         public String getRule() {
             StringBuilder sb = new StringBuilder();
             sb.append("Level ").append(level1);
-            if (level2 == -1)
+            if (level2 == -1) {
                 sb.append("+");
-            else
+            }
+            else {
                 sb.append("-").append(level2);
+            }
             sb.append(": ").append(power).append("/").append(toughness).append(" ");
             for (String rule: abilities.getRules("{this}")) {
                 sb.append(rule).append(" ");
