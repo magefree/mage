@@ -69,9 +69,9 @@ public class MatchView implements Serializable {
         for (MatchPlayer player: match.getPlayers()) {
             sb1.append(player.getPlayer().getName()).append(", ");
             sb2.append(player.getPlayer().getName()).append(" ").append(player.getWins()).append("-").append(player.getLoses()).append(", ");
-            players = sb1.substring(0, sb1.length() - 2);
-            result = sb2.substring(0, sb2.length() - 2);
         }
+        players = sb1.substring(0, sb1.length() - 2);
+        result = sb2.substring(0, sb2.length() - 2);
         this.startTime = match.getStartTime();
         this.endTime = match.getEndTime();
     }
