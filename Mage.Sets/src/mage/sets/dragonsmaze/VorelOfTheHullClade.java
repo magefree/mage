@@ -28,10 +28,6 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -39,6 +35,9 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.filter.FilterPermanent;
@@ -111,9 +110,8 @@ class VorelOfTheHullCladeEffect extends OneShotEffect<VorelOfTheHullCladeEffect>
             return false;
         }
         for (Counter counter : target.getCounters().values()) {
-            Counter newCounter = new Counter(counter.getName(), 1);
+            Counter newCounter = new Counter(counter.getName(), counter.getCount());
             target.addCounters(newCounter, game);
-            System.out.println("The target and counter type added is " + target.getName() + counter.getName());
         }
         return true;
     }
@@ -124,4 +122,3 @@ class VorelOfTheHullCladeEffect extends OneShotEffect<VorelOfTheHullCladeEffect>
     }
 
 }
-
