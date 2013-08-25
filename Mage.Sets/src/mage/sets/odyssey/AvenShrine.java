@@ -4,9 +4,11 @@ import mage.card.CardImpl;
 import mage.constants.Rarity;
 import mage.constants.CardType;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.GainLifeTriggeredEffect;
-
-
+import mage.abilities.common.GainLifeTargetEffect;
+import mage.filter.FilterCard;
+import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
+import mage.target.targetpointer.FixedTarget;
 
 
 import java.util.UUID
