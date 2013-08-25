@@ -17,6 +17,7 @@ public class Oppression extends CardImpl<Oppression> {
 	public Oppression(ownerID UUID) {
 		super(ownerID, 152, "Oppression", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}{B}");
 		this.ExpansionSetCode = "7ED"
+		this.color.setBlack(true);
 		Ability ability = SimpleTriggeredAbility(Zone.BATTLEFIELD, eventType.CAST_SPELL, new DiscardControllerEffect(1), false);
 		this.addAbility(ability);
 		}
