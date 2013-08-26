@@ -28,18 +28,14 @@
 
 package mage.abilities.effects;
 
-import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.game.stack.Spell;
-import mage.game.stack.StackAbility;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
@@ -70,28 +66,16 @@ public abstract class RedirectionEffect<T extends RedirectionEffect<T>> extends 
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         DamageEvent damageEvent = (DamageEvent)event;
         Permanent permanent = game.getPermanent(redirectTarget.getFirstTarget());
-        Ability damageSource = getSource(damageEvent.getSourceId(), game);
-        if (permanent != null && damageSource != null) {
-            permanent.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage());
+        if (permanent != null) {
+            permanent.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isPreventable(), damageEvent.isCombatDamage(), event.getAppliedEffects());
             return true;
         }
         Player player = game.getPlayer(redirectTarget.getFirstTarget());
         if (player != null) {
-            player.damage(damageEvent.getAmount(), damageSource.getId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable());
+            player.damage(damageEvent.getAmount(), event.getSourceId(), game, damageEvent.isCombatDamage(), damageEvent.isPreventable(), event.getAppliedEffects());
             return true;
         }
         return false;
-    }
-
-    protected Ability getSource(UUID sourceId, Game game) {
-        StackObject source = game.getStack().getStackObject(sourceId);
-        if (source != null) {
-            if (source instanceof StackAbility)
-                return (StackAbility)source;
-            if (source instanceof Spell)
-                return ((Spell)source).getSpellAbility();
-        }
-        return null;
     }
 
 }

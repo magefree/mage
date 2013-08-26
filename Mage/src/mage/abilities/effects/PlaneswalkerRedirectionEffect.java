@@ -28,9 +28,10 @@
 
 package mage.abilities.effects;
 
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
 import mage.filter.common.FilterPlaneswalkerPermanent;
 import mage.game.Game;
 import mage.game.events.DamageEvent;
@@ -41,7 +42,6 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetPermanent;
 
-import java.util.UUID;
 
 /**
  *
@@ -92,11 +92,13 @@ public class PlaneswalkerRedirectionEffect extends RedirectionEffect<Planeswalke
 
     private UUID getSourceControllerId(UUID sourceId, Game game) {
         StackObject source = game.getStack().getStackObject(sourceId);
-        if (source != null)
+        if (source != null) {
             return source.getControllerId();
+        }
         Permanent permanent = game.getBattlefield().getPermanent(sourceId);
-        if (permanent != null)
+        if (permanent != null) {
             return permanent.getControllerId();
+        }
         return null;
     }
 }

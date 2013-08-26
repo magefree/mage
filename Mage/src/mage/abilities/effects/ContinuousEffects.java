@@ -721,6 +721,7 @@ public class ContinuousEffects implements Serializable {
     public void addEffect(ContinuousEffect effect, Ability source) {
         switch (effect.getEffectType()) {
             case REPLACEMENT:
+            case REDIRECTION:
                 ReplacementEffect newReplacementEffect = (ReplacementEffect)effect;
                 replacementEffects.addEffect(newReplacementEffect, source);
                 break;

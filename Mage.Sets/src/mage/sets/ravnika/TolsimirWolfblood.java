@@ -93,7 +93,7 @@ public class TolsimirWolfblood extends CardImpl<TolsimirWolfblood> {
 class VojaToken extends Token{
     public VojaToken(){
         super("Voja", "legendary 2/2 green and white Wolf creature token named Voja");
-        
+        this.cardType.add(CardType.CREATURE);
         this.supertype.add("Legendary");
         this.subtype.add("Wolf");
 
