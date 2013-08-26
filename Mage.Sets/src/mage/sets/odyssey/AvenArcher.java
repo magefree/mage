@@ -39,7 +39,7 @@ import mage.abilities.cost.common.TapSourceCost;
 import mage.target.common.TargetAttackingOrBlockingCreature;
 import mage.abilites.effects.common.DamageTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
-
+import mage.abilities.costs.mana.ManaCostsImpl;
 
 import java.util.UUID;
 
@@ -59,7 +59,7 @@ public class AvenArcher extends CardImpl<AvenArcher> {
 		this.addAbility(FlyingAbility.getInstance());
 		
 		// Has {T}, Pay 2W: Aven Archer deals 2 damage to target attacking or blocking creature.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), "{2}{W}");
+		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{W}"));
 		ability.addCost = new TapSourceCost();
 		ability.addTarget(TargetAttackingOrBlockingCreature());
 		this.addAbility(ability);
