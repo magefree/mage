@@ -25,39 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package.mage.sets.odyssey
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.cards.CardImpl;
-import mage.abilities.common.EntersBattlefieldTappedAbility;
-import mage.abilities.mana.WhiteManaAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.mana.AnyColorManaAbility;
-
+package mage.sets.odyssey;
 
 import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTappedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.WhiteManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+
+/**
+ *
+ * @author cbt33
+ */
 
 public class AbandonedOutpost extends CardImpl<AbandonedOutpost> {
 
-	public AbandonedOutpost(ownerId UUID){
-		super(ownerId, 312, "Abandoned Outpost", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
-		this.expansionSetCode = "ODY";
+    public AbandonedOutpost(UUID ownerId){
+        super(ownerId, 312, "Abandoned Outpost", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ODY";
+
+        // This enters the battlefield tapped
+        this.addAbility(new EntersBattlefieldTappedAbility());
+
+        // Tap to add {W} to your mana pool
+        this.addAbility(new WhiteManaAbility());
+
+        // Tap to add any color mana to your mana pool. Sacrifice Abandoned Outpost.
+        Ability ability = new AnyColorManaAbility();
+        ability.addCost(new SacrificeSourceCost());
+        this.addAbility(ability);
 		
-		// This enters the battlefield tapped
-		this.addAbility(new EntersBattlefieldTappedAbility())
-		
-		// Tap to add [W] to your mana pool 
-		this.addAbility(new WhiteManaAbility());
-		
-		// Tap to add any color mana to your mana pool. Sacrifice Abandoned Outpost.
-		Ability ability = new AnyColorManaAbility());
-		ability.addCost(new SacrificeSourceCost());
-		this.addAbility(ability);
-		
-	}
+    }
 	
-	public AbandonedOutpost(final AbandonedOutpost card) {
+    public AbandonedOutpost(final AbandonedOutpost card) {
         super(card);
     }
 
