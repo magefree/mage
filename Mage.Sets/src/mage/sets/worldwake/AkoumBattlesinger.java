@@ -34,8 +34,11 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.MageInt;
 import mage.abilities.common.AllyEntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
@@ -46,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class AkoumBattlesinger extends CardImpl<AkoumBattlesinger> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Ally creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("have Ally creatures");
 
     static {
         filter.add(new SubtypePredicate("Ally"));
@@ -64,6 +67,9 @@ public class AkoumBattlesinger extends CardImpl<AkoumBattlesinger> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
 
+        // Haste
+        this.addAbility(HasteAbility.getInstance());
+        // Whenever Akoum Battlesinger or another Ally enters the battlefield under your control, you may have Ally creatures you control get +1/+0 until end of turn.
         this.addAbility(new AllyEntersBattlefieldTriggeredAbility(new BoostControlledEffect(1, 0, Duration.EndOfTurn, filter, false), true));
     }
 
