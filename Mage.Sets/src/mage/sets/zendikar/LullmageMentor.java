@@ -163,6 +163,9 @@ class CastedSpellsWithSpellTarget extends WatcherImpl<CastedSpellsWithSpellTarge
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.SPELL_CAST || event.getType() == GameEvent.EventType.ACTIVATED_ABILITY) {
             StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            if (stackObject == null) {
+                stackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+            }
             if (stackObject != null && stackObject.getStackAbility() != null) {
                 for (Target target: stackObject.getStackAbility().getTargets()) {
                     if (target instanceof TargetSpell && target.getFirstTarget() != null) {
