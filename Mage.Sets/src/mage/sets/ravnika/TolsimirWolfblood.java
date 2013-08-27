@@ -52,8 +52,8 @@ import mage.game.permanent.token.Token;
  */
 public class TolsimirWolfblood extends CardImpl<TolsimirWolfblood> {
 
-    private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("Other green creatures you control");
-    private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("Other white creatures you control");
+    private static final FilterCreaturePermanent filterGreen = new FilterCreaturePermanent("green creatures you control");
+    private static final FilterCreaturePermanent filterWhite = new FilterCreaturePermanent("white creatures you control");
     static {
         filterGreen.add(new ColorPredicate(ObjectColor.GREEN));
         filterGreen.add(new ControllerPredicate(TargetController.YOU));

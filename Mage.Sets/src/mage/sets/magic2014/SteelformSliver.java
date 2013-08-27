@@ -56,7 +56,7 @@ public class SteelformSliver extends CardImpl<SteelformSliver> {
         // Sliver creatures you control get +0/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
                 new BoostControlledEffect(0, 1, Duration.WhileOnBattlefield,
-                new FilterCreaturePermanent("Sliver", "Sliver creatures you control"), false)));
+                new FilterCreaturePermanent("Sliver", "Sliver creatures"), false)));
     }
 
     public SteelformSliver(final SteelformSliver card) {

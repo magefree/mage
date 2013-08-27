@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Deprive extends CardImpl<Deprive> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
     public Deprive(UUID ownerId) {
         super(ownerId, 59, "Deprive", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");

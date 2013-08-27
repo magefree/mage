@@ -74,7 +74,7 @@ public class VelaTheNightClad extends CardImpl<VelaTheNightClad> {
         this.addAbility(new SimpleStaticAbility(
                 Zone.BATTLEFIELD,
                 new GainAbilityControlledEffect(IntimidateAbility.getInstance(),
-                    Duration.WhileOnBattlefield, new FilterCreaturePermanent("Other creatures you control"), true )));
+                    Duration.WhileOnBattlefield, new FilterCreaturePermanent(), true )));
         // Whenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
         Ability ability = new ZoneChangeAllTriggeredAbility(
                 Zone.BATTLEFIELD,

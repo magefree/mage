@@ -38,7 +38,8 @@ import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
+import mage.filter.common.FilterArtifactPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
@@ -46,11 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class LeoninAbunas extends CardImpl<LeoninAbunas> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Artifacts you control");
-
-    static {
-        filter.add(new CardTypePredicate(CardType.ARTIFACT));
-    }
+    private static final FilterPermanent filter = new FilterArtifactPermanent();
 
     public LeoninAbunas(UUID ownerId) {
         super(ownerId, 8, "Leonin Abunas", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");

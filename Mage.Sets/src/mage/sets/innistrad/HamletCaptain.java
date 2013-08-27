@@ -44,7 +44,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class HamletCaptain extends CardImpl<HamletCaptain> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Human creatures");
 
     static {
         filter.add(new SubtypePredicate("Human"));

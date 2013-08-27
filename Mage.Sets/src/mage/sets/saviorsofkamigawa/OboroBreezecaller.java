@@ -50,7 +50,7 @@ import mage.target.common.TargetLandPermanent;
  */
 public class OboroBreezecaller extends CardImpl<OboroBreezecaller> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
+    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent("land");
 
     public OboroBreezecaller(UUID ownerId) {
         super(ownerId, 48, "Oboro Breezecaller", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");

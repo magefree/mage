@@ -36,6 +36,7 @@ import mage.target.TargetSpell;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 import java.util.UUID;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -47,7 +48,7 @@ public class FamiliarsRuse extends CardImpl<FamiliarsRuse> {
         super(ownerId, 64, "Familiar's Ruse", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{U}{U}");
         this.expansionSetCode = "LRW";
         this.color.setBlue(true);
-        this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledCreaturePermanent()));
+        this.getSpellAbility().addCost(new ReturnToHandTargetCost(new TargetControlledCreaturePermanent(1,1, new FilterControlledCreaturePermanent("creature"),false)));
         this.getSpellAbility().addEffect(new CounterTargetEffect());
         this.getSpellAbility().addTarget(new TargetSpell());
     }

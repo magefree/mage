@@ -35,14 +35,13 @@ import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
  * @author North
  */
 public class TortoiseFormation extends CardImpl<TortoiseFormation> {
-
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
 
     public TortoiseFormation(UUID ownerId) {
         super(ownerId, 61, "Tortoise Formation", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{3}{U}");
@@ -51,7 +50,7 @@ public class TortoiseFormation extends CardImpl<TortoiseFormation> {
         this.color.setBlue(true);
 
         // Creatures you control gain shroud until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, filter));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
     }
 
     public TortoiseFormation(final TortoiseFormation card) {
