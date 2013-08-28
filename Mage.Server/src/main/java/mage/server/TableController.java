@@ -435,7 +435,9 @@ public class TableController {
                 TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
-                    user.tournamentStarted(tournament.getId(), entry.getValue());
+                    if (user != null) {
+                        user.tournamentStarted(tournament.getId(), entry.getValue());
+                    }
                 }
                 ServerMessagesUtil.getInstance().incTournamentsStarted();
             }
