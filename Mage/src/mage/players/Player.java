@@ -315,4 +315,7 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int getPriorityTimeLeft();
+
+    void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
+    boolean hasReachedNextTurnAfterLeaving();
 }

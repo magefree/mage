@@ -29,7 +29,6 @@
 package mage.abilities.effects.common;
 
 import java.util.UUID;
-
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
@@ -152,7 +151,7 @@ class DetainRestrictionEffect extends RestrictionEffect<DetainRestrictionEffect>
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 for(UUID targetId :this.getTargetPointer().getTargets(game, source)) {
                     Permanent permanent = game.getPermanent(targetId);
                     if (permanent != null) {

@@ -29,7 +29,6 @@
 package mage.players;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -110,7 +109,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -170,6 +168,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected List<UUID> attachments = new ArrayList<UUID>();
 
     protected boolean topCardRevealed = false;
+    
+    // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
+    // or until a specific point in that turn will last until that turn would have begun. 
+    // They neither expire immediately nor last indefinitely.
+    protected boolean reachedNextTurnAfterLeaving = false;
 
     protected UserData userData;
 
@@ -241,6 +244,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.passedTurn = player.passedTurn;
         this.passedAllTurns = player.passedAllTurns;
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
     }
 
     @Override
@@ -288,6 +292,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.turnController = player.getTurnControlledBy();
         this.passed = player.isPassed();
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
     }
 
     @Override
@@ -326,7 +331,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.setLife(game.getLife(), game);
+        this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+
     }
 
     @Override
@@ -2002,6 +2009,16 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean hasQuit() {
         return quit;
+    }
+
+    @Override
+    public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
+        this.reachedNextTurnAfterLeaving = reachedNextTurnAfterLeaving;
+    }
+
+    @Override
+    public boolean hasReachedNextTurnAfterLeaving() {
+        return reachedNextTurnAfterLeaving;
     }
 
 }

@@ -114,7 +114,7 @@ class DetainAllRestrictionEffect extends RestrictionEffect<DetainAllRestrictionE
     public boolean isInactive(Ability source, Game game) {
         if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
         {
-            if (game.getActivePlayerId().equals(source.getControllerId())) {
+            if (game.getActivePlayerId().equals(source.getControllerId()) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
                 for(FixedTarget fixedTarget :this.detainedObjects) {
                     Permanent permanent = game.getPermanent(fixedTarget.getFirst(game, source));
                     if (permanent != null) {
