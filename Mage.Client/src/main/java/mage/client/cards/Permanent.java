@@ -101,6 +101,7 @@ public class Permanent extends Card {
     protected String getText(String cardType) {
         StringBuilder sb = new StringBuilder();
         sb.append(super.getText(cardType));
+        if (permanent.getOriginal() != null) {
         sb.append("\n----- Originally -------\n");
         sb.append(permanent.getOriginal().getName());
         if (permanent.getOriginal().getManaCost().size() > 0) {
@@ -125,6 +126,7 @@ public class Permanent extends Card {
             sb.append(permanent.getOriginal().getRarity().toString());
         }
 //        sb.append("\n").append(card.getId());
+        }
         return sb.toString();
 
     }
