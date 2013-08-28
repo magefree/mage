@@ -127,8 +127,8 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl<DoublingSeasonCo
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent p = game.getPermanent(event.getTargetId());
-        if (p != null) {
-            String counterName = event.getData().toUpperCase(Locale.ENGLISH);
+        String counterName = event.getData();
+        if (p != null && counterName != null) {
             Counter counter;
             if (counterName.equals("+1/+1")) {
                 counter = CounterType.P1P1.createInstance(event.getAmount() * 2);
@@ -138,10 +138,9 @@ class DoublingSeasonCounterEffect extends ReplacementEffectImpl<DoublingSeasonCo
                 counter = new Counter(counterName, event.getAmount() * 2);
             }
             p.addCounters(counter, game, event.getAppliedEffects());
-
-
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
