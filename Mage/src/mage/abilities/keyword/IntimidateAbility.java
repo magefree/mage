@@ -51,10 +51,12 @@ class IntimidateEffect extends RestrictionEffect<IntimidateEffect> implements Ma
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         boolean result = false;
-        if (blocker.getCardType().contains(CardType.ARTIFACT) && (blocker.getCardType().contains(CardType.CREATURE)))
+        if (blocker.getCardType().contains(CardType.ARTIFACT) && (blocker.getCardType().contains(CardType.CREATURE))) {
             result = true;
-        if (attacker.getColor().shares(blocker.getColor()))
+        }
+        if (attacker.getColor().shares(blocker.getColor())) {
             result = true;
+        }
         return result;
     }
 
