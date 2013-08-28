@@ -47,7 +47,11 @@ import mage.target.common.TargetControlledPermanent;
 import java.util.UUID;
 
 /**
- * TODO: Javadoc me
+ * 702.84. Annihilator
+ *   702.84a Annihilator is a triggered ability. "Annihilator N" means "Whenever this
+ *   creature attacks, defending player sacrifices N permanents."
+ *
+ *   702.84b If a creature has multiple instances of annihilator, each triggers separately.
  * 
  * @author maurer.it_at_gmail.com
  */
@@ -88,10 +92,9 @@ public class AnnihilatorAbility extends TriggeredAbilityImpl<AnnihilatorAbility>
 class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
 
     private final int count;
-    private static final FilterControlledPermanent filter;
-
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent();;
     static {
-        filter = new FilterControlledPermanent();
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
     AnnihilatorEffect ( int count ) {
@@ -115,7 +118,7 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
             player = game.getPlayer(permanent.getControllerId());
         }
 
-        filter.add(new ControllerPredicate(TargetController.YOU));
+   
         int amount = Math.min(count, game.getBattlefield().countAll(filter, player.getId(), game));
         Target target = new TargetControlledPermanent(amount, amount, filter, false);
 
