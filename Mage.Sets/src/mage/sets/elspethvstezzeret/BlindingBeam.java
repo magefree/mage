@@ -45,6 +45,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.game.turn.Step;
 import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -147,18 +148,23 @@ class BlindingBeamEffect2 extends ReplacementEffectImpl<BlindingBeamEffect2> {
     }
 
     @Override
+    public boolean isInactive(Ability source, Game game) {
+        if (game.getPhase().getStep().getType() == PhaseStep.UNTAP && game.getStep().getStepPart() == Step.StepPart.PRE)
+        {
+            if (game.getActivePlayerId().equals(targetPlayerId) || game.getPlayer(source.getControllerId()).hasReachedNextTurnAfterLeaving()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         // replace untap event of creatures of target player
         if (game.getTurn().getStepType() == PhaseStep.UNTAP && event.getType() == EventType.UNTAP) {
             Permanent permanent = game.getPermanent(event.getTargetId());
             if (permanent != null && permanent.getControllerId().equals(targetPlayerId) && filter.match(permanent, game)) {
                 return true;
-            }
-        }
-        // discard effect at end of next untap step of target player
-        if (event.getType().equals(EventType.UNTAP_STEP_POST)) {
-            if (targetPlayerId.equals(event.getPlayerId())) {
-                discard();
             }
         }
         return false;
