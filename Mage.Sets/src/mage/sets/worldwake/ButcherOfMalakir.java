@@ -27,28 +27,24 @@
  */
 package mage.sets.worldwake;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
  *
@@ -57,6 +53,9 @@ import mage.target.common.TargetControlledPermanent;
 public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public ButcherOfMalakir(UUID ownerId) {
         super(ownerId, 53, "Butcher of Malakir", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -102,22 +101,13 @@ class ButcherOfMalakirEffect extends OneShotEffect<ButcherOfMalakirEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentId : opponents) {
+        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
             Player player = game.getPlayer(opponentId);
-            Target target = new TargetControlledPermanent(filter);
+            Target target = new TargetControlledCreaturePermanent(true);
 
             if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                }
-
+                player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                 Permanent permanent = game.getPermanent(target.getFirstTarget());
-
                 if (permanent != null) {
                     permanent.sacrifice(source.getSourceId(), game);
                 }
