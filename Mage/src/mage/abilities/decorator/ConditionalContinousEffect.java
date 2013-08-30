@@ -63,17 +63,32 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     public ConditionalContinousEffect(final ConditionalContinousEffect effect) {
         super(effect);
-        this.effect = effect.effect;
-        this.otherwiseEffect = effect.otherwiseEffect;
+        this.effect = (ContinuousEffect) effect.effect.copy();
+        if (otherwiseEffect != null) {
+            this.otherwiseEffect = (ContinuousEffect) effect.otherwiseEffect.copy();
+        }
         this.condition = effect.condition;
         this.lockedInCondition = effect.lockedInCondition;
     }
 
     @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
+    public boolean isDiscarded() {
+        return effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        if (lockedInCondition) {
             condition = new FixedCondition(condition.apply(game, source));
         }
+        effect.init(source, game);
+        if (otherwiseEffect != null) {
+            otherwiseEffect.init(source, game);
+        }
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         if (condition.apply(game, source)) {
             effect.setTargetPointer(this.targetPointer);
             return effect.apply(layer, sublayer, source, game);
