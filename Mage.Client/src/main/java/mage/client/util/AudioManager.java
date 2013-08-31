@@ -47,6 +47,10 @@ public class AudioManager {
             audioManager.onHover = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnHover.wav");
 
             audioManager.playerJoinedTable = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerJoinedTable.wav");
+            audioManager.playerSubmittedDeck = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerSubmittedDeck.wav");
+            audioManager.playerLeft = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLeft.wav");
+            audioManager.playerWon = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerWon.wav");
+            audioManager.playerLost = audioManager.loadClip(Constants.BASE_SOUND_PATH + "OnPlayerLost.wav");
         }
         return audioManager;
     }
@@ -123,6 +127,22 @@ public class AudioManager {
         checkAndPlayClip(getManager().playerJoinedTable);
     }
 
+    public static void playPlayerSubmittedDeck() {
+        checkAndPlayClip(getManager().playerSubmittedDeck);
+    }
+
+    public static void playPlayerLeft() {
+        checkAndPlayClip(getManager().playerLeft);
+    }
+
+    public static void playPlayerLost() {
+        checkAndPlayClip(getManager().playerLost);
+    }
+
+    public static void playPlayerWon() {
+        checkAndPlayClip(getManager().playerWon);
+    }
+
     private static void checkAndPlayClip(Clip clip) {
         try {
             if (clip != null) {
@@ -186,4 +206,8 @@ public class AudioManager {
     private Clip onHover = null;
 
     private Clip playerJoinedTable = null;
+    private Clip playerSubmittedDeck = null;
+    private Clip playerLeft = null;
+    private Clip playerWon = null;
+    private Clip playerLost = null;
 }

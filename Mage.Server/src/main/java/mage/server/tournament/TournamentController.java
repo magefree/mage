@@ -45,13 +45,13 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
-import mage.players.Player;
 import mage.server.ChatManager;
 import mage.server.TableManager;
 import mage.server.UserManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
@@ -240,7 +240,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK, true, SoundToPlay.PlayerSubmittedDeck);
             }            
         }
     }
@@ -267,7 +267,7 @@ public class TournamentController {
         if (playerId != null) {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null) {
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, SoundToPlay.PlayerLeft);
                 String info;
                 if (tournament.isDoneConstructing()) {
                     info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();

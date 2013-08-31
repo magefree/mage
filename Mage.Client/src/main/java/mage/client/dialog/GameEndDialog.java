@@ -91,9 +91,9 @@ public class GameEndDialog extends MageDialog {
         this.txtLife.setText(sb.toString());
 
         if (gameEndView.hasWon()) {
-            AudioManager.playPlayerJoinedTable();
+            AudioManager.playPlayerWon();
         } else {
-            AudioManager.playButtonCancel();
+            AudioManager.playPlayerLost();
         }
 
         txtMatchScore.setText(gameEndView.getMatchView().getResult());

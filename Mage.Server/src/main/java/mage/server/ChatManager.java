@@ -32,6 +32,7 @@ import mage.view.ChatMessage.MessageColor;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import mage.view.ChatMessage.SoundToPlay;
 
 /**
  *
@@ -73,6 +74,10 @@ public class ChatManager {
 
     public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime) {
         chatSessions.get(chatId).broadcast(userName, message, color, withTime);
+    }
+
+    public void broadcast(UUID chatId, String userName, String message, MessageColor color, boolean withTime, SoundToPlay soundToPlay) {
+        chatSessions.get(chatId).broadcast(userName, message, color, withTime, soundToPlay);
     }
 
     /**

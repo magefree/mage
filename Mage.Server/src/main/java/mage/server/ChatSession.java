@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mage.interfaces.callback.ClientCallback;
 import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.SoundToPlay;
 import org.apache.log4j.Logger;
 
 /**
@@ -89,6 +90,10 @@ public class ChatSession {
     }
 
     public void broadcast(String userName, String message, MessageColor color, boolean withTime) {
+        broadcast(userName, message, color, withTime, null);
+    }
+
+    public void broadcast(String userName, String message, MessageColor color, boolean withTime, SoundToPlay soundToPlay) {
         if (!message.isEmpty()) {
             Calendar cal = new GregorianCalendar();
             final String msg = message;
@@ -98,7 +103,7 @@ public class ChatSession {
             for (UUID userId: clients.keySet()) {
                 User user = UserManager.getInstance().getUser(userId);
                 if (user != null) {
-                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color)));
+                    user.fireCallback(new ClientCallback("chatMessage", chatId, new ChatMessage(username, msg, time, color, soundToPlay)));
                 }
                 else {
                     kill(userId, User.DisconnectReason.CleaningUp);

@@ -39,6 +39,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.AudioManager;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
 import mage.client.util.object.SaveObjectUtil;
@@ -112,6 +113,16 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         ChatPanel panel = MageFrame.getChat(callback.getObjectId());
                         if (panel != null) {
+                            if (message.getSoundToPlay() != null) {
+                                switch (message.getSoundToPlay()) {
+                                    case PlayerLeft:
+                                        AudioManager.playPlayerLeft();
+                                        break;
+                                    case  PlayerSubmittedDeck:
+                                        AudioManager.playPlayerSubmittedDeck();
+                                        break;
+                                }
+                            }
                             if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE) && panel.getConnectedChat() != null) {
                                 panel.getConnectedChat().receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
                                         "\nTurn Mousewheel - Show big image of card your mousepointer hovers over" +

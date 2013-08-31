@@ -41,16 +41,26 @@ public class ChatMessage implements Serializable {
     private String time;
     private String message;
     private MessageColor color;
+    private SoundToPlay soundToPlay;
 
     public enum MessageColor {
         BLACK, RED, GREEN, BLUE, ORANGE;
     }
 
+    public enum SoundToPlay {
+        PlayerLeft, PlayerSubmittedDeck;
+    }
+
     public ChatMessage(String username, String message, String time, MessageColor color) {
+        this(username, message, time, color, null);
+    }
+
+    public ChatMessage(String username, String message, String time, MessageColor color, SoundToPlay soundToPlay) {
         this.username = username;
         this.message = message;
         this.time = time;
         this.color = color;
+        this.soundToPlay = soundToPlay;
     }
 
     public String getMessage() {
@@ -76,4 +86,9 @@ public class ChatMessage implements Serializable {
     public String getTime() {
         return time;
     }
+
+    public SoundToPlay getSoundToPlay() {
+        return soundToPlay;
+    }
+
 }

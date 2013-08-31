@@ -56,7 +56,7 @@
               <Component id="tabPane" min="-2" pref="277" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -155,22 +155,13 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPlayerInfo" min="-2" pref="90" max="-2" attributes="0"/>
-                                  <Component id="lblDurationMatch" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
-                                  <Component id="lblMatchScore" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblDurationGame" min="-2" pref="101" max="-2" attributes="0"/>
-                                  <Component id="lblLife" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="lblPlayerInfo" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="lblDurationMatch" alignment="0" min="-2" pref="101" max="-2" attributes="0"/>
+                          <Component id="lblMatchScore" alignment="0" min="-2" pref="86" max="-2" attributes="0"/>
+                          <Component id="lblDurationGame" min="-2" pref="101" max="-2" attributes="0"/>
+                          <Component id="lblLife" alignment="0" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
