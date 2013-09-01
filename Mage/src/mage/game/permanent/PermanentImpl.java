@@ -237,10 +237,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
-        counters.removeCounter(name, amount);
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
-        event.setData(name);
         for (int i = 0; i < amount; i++) {
+            counters.removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
+            event.setData(name);
             game.fireEvent(event);
         }
     }

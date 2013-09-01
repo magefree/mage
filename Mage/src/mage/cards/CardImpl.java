@@ -611,10 +611,10 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
-        counters.removeCounter(name, amount);
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
-        event.setData(name);
         for (int i = 0; i < amount; i++) {
+            counters.removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, ownerId);
+            event.setData(name);
             game.fireEvent(event);
         }
     }

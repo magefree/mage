@@ -150,12 +150,12 @@ class FuryCharmRemoveCounterEffect extends OneShotEffect<FuryCharmRemoveCounterE
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
-            permanent.getCounters().removeCounter(CounterType.TIME, 2);
+            permanent.removeCounters(CounterType.TIME.getName(), 2,  game);
             return true;
         }
         Card card = game.getCard(this.getTargetPointer().getFirst(game, source));
         if (card != null) {
-            card.getCounters().removeCounter(CounterType.TIME, 2);
+            card.removeCounters(CounterType.TIME.getName(), 2,  game);
             return true;
         }
         return false;
