@@ -63,18 +63,18 @@ public abstract class CardTestPlayerBase extends CardTestPlayerAPIImpl {
         logger.debug("Done!");
         if (deck.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck.getCards().size());
-        }
-        game.addPlayer(playerA, deck);
+        }        
         game.loadCards(deck.getCards(), playerA.getId());
+        game.addPlayer(playerA, deck);
 
         playerB = createNewPlayer("PlayerB");
         playerB.setTestMode(true);
         Deck deck2 = Deck.load(DeckImporterUtil.importDeck("RB Aggro.dck"), false, false);
         if (deck2.getCards().size() < 40) {
             throw new IllegalArgumentException("Couldn't load deck, deck size=" + deck2.getCards().size());
-        }
-        game.addPlayer(playerB, deck2);
+        }        
         game.loadCards(deck2.getCards(), playerB.getId());
+        game.addPlayer(playerB, deck2);
         activePlayer = playerA;
         currentGame = game;
 

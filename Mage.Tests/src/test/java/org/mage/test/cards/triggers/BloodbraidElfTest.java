@@ -9,6 +9,24 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  * @author noxx, Loki
  */
 public class BloodbraidElfTest extends CardTestPlayerBase {
+    /*
+     *  Terminus
+     *      Sorcery, 4WW (6)
+     *      Put all creatures on the bottom of their owners' libraries.
+     *      Miracle {W} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)
+     *
+     *  Bloodbraid Elf
+     *      Creature — Elf Berserker 3/2, 2RG (4)
+     *      Haste
+     *      Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs
+     *      less. You may cast it without paying its mana cost. Put the exiled cards on the bottom in a random order.)
+     *
+     *  Goblin Wardriver
+     *      Creature — Goblin Warrior 2/2, RR (2)
+     *      Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)
+     *
+     */
+
     @Test
     public void testCascade() {
         addCard(Zone.HAND, playerA, "Bloodbraid Elf");
