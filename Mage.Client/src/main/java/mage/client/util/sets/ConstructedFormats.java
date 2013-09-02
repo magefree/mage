@@ -17,6 +17,7 @@ public class ConstructedFormats {
 
     private static final String[] constructedFormats = {
             "- All Sets", "- Standard", "- Extended", "- Modern",
+            "* Theros Block", "Theros",
             "Magic 2014",
             "Modern Masters",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
@@ -59,7 +60,13 @@ public class ConstructedFormats {
     }
 
     public static List<String> getSetsByFormat(String format) {
-
+        
+        if (format.equals("* Theros Block")) {
+            return Arrays.asList("THS");
+        }
+        if (format.equals("Theros")) {
+            return Arrays.asList("THS");
+        }
         if (format.equals("Arabian Nights")) {
             return Arrays.asList("ARN");
         }
