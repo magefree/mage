@@ -74,9 +74,8 @@ class MutavaultToken extends Token {
     public MutavaultToken() {
         super("", "2/2 creature with all creature types");
         cardType.add(CardType.CREATURE);
-        subtype.add("Changling");
+        subtype.add(ChangelingAbility.ALL_CREATURE_TYPE);
         power = new MageInt(2);
         toughness = new MageInt(2);
-        this.addAbility(ChangelingAbility.getInstance());
     }
 }

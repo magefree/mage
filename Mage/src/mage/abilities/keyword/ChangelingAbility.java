@@ -44,7 +44,7 @@ import mage.abilities.StaticAbility;
  * @author nantuko
  */
 public class ChangelingAbility extends StaticAbility<ChangelingAbility> implements MageSingleton {
-
+    public static final String ALL_CREATURE_TYPE = "All Creature Type";
     private static final ChangelingAbility fINSTANCE =  new ChangelingAbility();
 
     private Object readResolve() throws ObjectStreamException {

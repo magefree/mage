@@ -46,7 +46,7 @@ public class SubtypePredicate implements Predicate<MageObject> {
 
     @Override
     public boolean apply(MageObject input, Game game) {
-        if (input.getAbilities().contains(ChangelingAbility.getInstance())) {
+        if (input.getAbilities().contains(ChangelingAbility.getInstance()) || input.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
             return true;
         }
 
