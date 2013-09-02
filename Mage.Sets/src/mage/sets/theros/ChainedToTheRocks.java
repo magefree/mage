@@ -25,26 +25,34 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2014;
+package mage.sets.theros;
 
 import java.util.LinkedList;
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.ExileTargetEffect;
-import mage.abilities.keyword.IslandwalkAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
+
 import mage.constants.CardType;
 import mage.constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.AttachEffect;
+import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.keyword.EnchantAbility;
+import mage.cards.Card;
+import mage.cards.CardImpl;
+import mage.constants.Outcome;
+import mage.constants.TargetController;
 import mage.constants.WatcherScope;
 import mage.constants.Zone;
+import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.WatcherImpl;
 
@@ -52,86 +60,62 @@ import mage.watchers.WatcherImpl;
  *
  * @author LevelX2
  */
-public class ColossalWhale extends CardImpl<ColossalWhale> {
+public class ChainedToTheRocks extends CardImpl<ChainedToTheRocks> {
 
+    private static final FilterControlledLandPermanent filter = new FilterControlledLandPermanent("Mountain you control");
+    private static final FilterCreaturePermanent filterTarget = new FilterCreaturePermanent("creature an opponent controls");
+    static {
+        filter.add(new SubtypePredicate("Mountain"));
+        filterTarget.add(new ControllerPredicate(TargetController.OPPONENT));
+    }
     private UUID exileId = UUID.randomUUID();
 
-    public ColossalWhale(UUID ownerId) {
-        super(ownerId, 48, "Colossal Whale", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{U}{U}");
-        this.expansionSetCode = "M14";
-        this.subtype.add("Whale");
+    public ChainedToTheRocks(UUID ownerId) {
+        super(ownerId, 4, "Chained to the Rocks", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+        this.expansionSetCode = "THS";
+        this.subtype.add("Aura");
 
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
+        this.color.setWhite(true);
 
-        // Islandwalk
-        this.addAbility(new IslandwalkAbility());
-        // Whenever Colossal Whale attacks, you may exile target creature defending player controls until Colossal Whale leaves the battlefield.
-        this.addAbility(new ColossalWhaleAbility(exileId));
-        this.addWatcher(new ColossalWhaleWatcher(exileId));
+        // Enchant Mountain you control
+        TargetPermanent auraTarget = new TargetPermanent(filter);
+        this.getSpellAbility().addTarget(auraTarget);
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Exile));
+        Ability ability = new EnchantAbility(auraTarget.getTargetName());
+        this.addAbility(ability);
 
+
+        // When Chained to the Rocks enters the battlefield, exile target creature an opponent controls until Chained to the Rocks leaves the battlefield. (That creature returns under its owner's control.)
+        Effect effect = new ExileTargetEffect(exileId, this.getName());
+        effect.setText("exile target creature an opponent controls until {this} leaves the battlefield. <i>(That creature returns under its owner's control.)</i>");
+        ability = new EntersBattlefieldTriggeredAbility(effect);
+        ability.addTarget(new TargetCreaturePermanent(filterTarget));
+        this.addAbility(ability);
+        this.addWatcher(new ChainedToTheRocksWatcher(exileId));
 
     }
 
-    public ColossalWhale(final ColossalWhale card) {
+    public ChainedToTheRocks(final ChainedToTheRocks card) {
         super(card);
     }
 
     @Override
-    public ColossalWhale copy() {
-        return new ColossalWhale(this);
+    public ChainedToTheRocks copy() {
+        return new ChainedToTheRocks(this);
     }
 }
 
-class ColossalWhaleAbility extends TriggeredAbilityImpl<ColossalWhaleAbility> {
 
-    public ColossalWhaleAbility(UUID exileId) {
-        super(Zone.BATTLEFIELD, null);
-        this.addEffect(new ExileTargetEffect(exileId,"Colossal Whale"));
-    }
-
-    public ColossalWhaleAbility(final ColossalWhaleAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
-            FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
-            filter.add(new ControllerIdPredicate(defenderId));
-
-            this.getTargets().clear();
-            TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-            target.setRequired(true);
-            this.addTarget(target);
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "Whenever {this} attacks, you may exile target creature defending player controls until {this} leaves the battlefield.";
-    }
-
-    @Override
-    public ColossalWhaleAbility copy() {
-        return new ColossalWhaleAbility(this);
-    }
-}
-
-class ColossalWhaleWatcher extends WatcherImpl<ColossalWhaleWatcher> {
+class ChainedToTheRocksWatcher extends WatcherImpl<ChainedToTheRocksWatcher> {
 
     private UUID exileId;
 
-    ColossalWhaleWatcher (UUID exileId) {
+    ChainedToTheRocksWatcher (UUID exileId) {
         super("BattlefieldLeft", WatcherScope.CARD);
         this.exileId = exileId;
     }
 
-    ColossalWhaleWatcher(final ColossalWhaleWatcher watcher) {
+    ChainedToTheRocksWatcher(final ChainedToTheRocksWatcher watcher) {
         super(watcher);
         this.exileId = watcher.exileId;
     }
@@ -160,7 +144,7 @@ class ColossalWhaleWatcher extends WatcherImpl<ColossalWhaleWatcher> {
     }
 
     @Override
-    public ColossalWhaleWatcher copy() {
-        return new ColossalWhaleWatcher(this);
+    public ChainedToTheRocksWatcher copy() {
+        return new ChainedToTheRocksWatcher(this);
     }
 }
