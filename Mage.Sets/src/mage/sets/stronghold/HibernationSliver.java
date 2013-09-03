@@ -25,36 +25,50 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.stronghold;
 
-import mage.MageObject;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.costs.common.PayLifeCost;
+import mage.abilities.effects.common.ReturnToHandSourceEffect;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 
 /**
  *
- * @author North
+ * @author Plopman
  */
-public class SubtypePredicate implements Predicate<MageObject> {
+public class HibernationSliver extends CardImpl<HibernationSliver> {
 
-    private final String subtype;
+    public HibernationSliver(UUID ownerId) {
+        super(ownerId, 140, "Hibernation Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{U}{B}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Sliver");
 
-    public SubtypePredicate(String subtype) {
-        this.subtype = subtype;
+        this.color.setBlue(true);
+        this.color.setBlack(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // All Slivers have "Pay 2 life: Return this permanent to its owner's hand."
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandSourceEffect(), new PayLifeCost(2));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterPermanent("Sliver", "All Slivers"), "All Slivers have \"Pay 2 life: Return this permanent to its owner's hand")));
+    }
+
+    public HibernationSliver(final HibernationSliver card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        if (input.getAbilities().contains(ChangelingAbility.getInstance()) || input.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-            return true;
-        }
-
-        return input.getSubtype().contains(subtype);
-    }
-
-    @Override
-    public String toString() {
-        return "Subtype(" + subtype + ')';
+    public HibernationSliver copy() {
+        return new HibernationSliver(this);
     }
 }

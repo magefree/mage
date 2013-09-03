@@ -25,36 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.odyssey;
 
-import mage.MageObject;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.Mana;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DamageControllerEffect;
+import mage.abilities.mana.AnyColorManaAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.mana.SimpleManaAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author Plopman
  */
-public class SubtypePredicate implements Predicate<MageObject> {
+public class TarnishedCitadel extends CardImpl<TarnishedCitadel> {
 
-    private final String subtype;
+    public TarnishedCitadel(UUID ownerId) {
+        super(ownerId, 329, "Tarnished Citadel", Rarity.RARE, new CardType[]{CardType.LAND}, "");
+        this.expansionSetCode = "ODY";
 
-    public SubtypePredicate(String subtype) {
-        this.subtype = subtype;
+        // {tap}: Add {1} to your mana pool.
+        this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, Mana.ColorlessMana, new TapSourceCost()));
+        // {tap}: Add one mana of any color to your mana pool. Tarnished Citadel deals 3 damage to you.
+        ManaAbility ability = new AnyColorManaAbility(new TapSourceCost());
+        ability.addEffect(new DamageControllerEffect(3));
+        this.addAbility(ability);
+    }
+
+    public TarnishedCitadel(final TarnishedCitadel card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        if (input.getAbilities().contains(ChangelingAbility.getInstance()) || input.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-            return true;
-        }
-
-        return input.getSubtype().contains(subtype);
-    }
-
-    @Override
-    public String toString() {
-        return "Subtype(" + subtype + ')';
+    public TarnishedCitadel copy() {
+        return new TarnishedCitadel(this);
     }
 }

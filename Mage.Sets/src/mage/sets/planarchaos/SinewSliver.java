@@ -25,36 +25,44 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.planarchaos;
 
-import mage.MageObject;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.BoostAllEffect;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author Plopman
  */
-public class SubtypePredicate implements Predicate<MageObject> {
+public class SinewSliver extends CardImpl<SinewSliver> {
 
-    private final String subtype;
+    public SinewSliver(UUID ownerId) {
+        super(ownerId, 30, "Sinew Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{W}");
+        this.expansionSetCode = "PLC";
+        this.subtype.add("Sliver");
 
-    public SubtypePredicate(String subtype) {
-        this.subtype = subtype;
+        this.color.setWhite(true);
+        this.power = new MageInt(1);
+        this.toughness = new MageInt(1);
+
+        // All Sliver creatures get +1/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "All Sliver creatures"), false)));
+    }
+
+    public SinewSliver(final SinewSliver card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        if (input.getAbilities().contains(ChangelingAbility.getInstance()) || input.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-            return true;
-        }
-
-        return input.getSubtype().contains(subtype);
-    }
-
-    @Override
-    public String toString() {
-        return "Subtype(" + subtype + ')';
+    public SinewSliver copy() {
+        return new SinewSliver(this);
     }
 }

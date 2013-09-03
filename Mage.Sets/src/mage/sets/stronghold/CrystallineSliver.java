@@ -25,36 +25,46 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.mageobject;
+package mage.sets.stronghold;
 
-import mage.MageObject;
-import mage.abilities.keyword.ChangelingAbility;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.GainAbilityAllEffect;
+import mage.abilities.keyword.ShroudAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 
 /**
  *
- * @author North
+ * @author Plopman
  */
-public class SubtypePredicate implements Predicate<MageObject> {
+public class CrystallineSliver extends CardImpl<CrystallineSliver> {
 
-    private final String subtype;
+    public CrystallineSliver(UUID ownerId) {
+        super(ownerId, 139, "Crystalline Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{W}{U}");
+        this.expansionSetCode = "STH";
+        this.subtype.add("Sliver");
 
-    public SubtypePredicate(String subtype) {
-        this.subtype = subtype;
+        this.color.setBlue(true);
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // All Slivers have shroud.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, new FilterPermanent("Sliver", "All Slivers"))));
+    }
+
+    public CrystallineSliver(final CrystallineSliver card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(MageObject input, Game game) {
-        if (input.getAbilities().contains(ChangelingAbility.getInstance()) || input.getSubtype().contains(ChangelingAbility.ALL_CREATURE_TYPE)) {
-            return true;
-        }
-
-        return input.getSubtype().contains(subtype);
-    }
-
-    @Override
-    public String toString() {
-        return "Subtype(" + subtype + ')';
+    public CrystallineSliver copy() {
+        return new CrystallineSliver(this);
     }
 }
