@@ -112,6 +112,7 @@ public class GameEvent {
         FLIP, FLIPPED,
         UNFLIP, UNFLIPPED,
         TRANSFORM, TRANSFORMED,
+        BECOMES_MONSTROUS,
         PHASE_OUT, PHASED_OUT,
         PHASE_IN, PHASED_IN,
         TURNFACEUP, TURNEDFACEUP,

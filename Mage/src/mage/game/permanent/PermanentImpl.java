@@ -57,6 +57,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected boolean tapped;
     protected boolean flipped;
     protected boolean transformed;
+    protected boolean monstrous;
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -130,6 +131,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.minBlockedBy = permanent.minBlockedBy;
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
+        this.monstrous = permanent.monstrous;
         this.pairedCard = permanent.pairedCard;
     }
 
@@ -1006,6 +1008,16 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public void setTransformed(boolean value) {
         this.transformed = value;
+    }
+
+    @Override
+    public boolean isMonstrous() {
+        return this.monstrous;
+    }
+
+    @Override
+    public void setMonstrous(boolean value) {
+        this.monstrous = value;
     }
 
     @Override
