@@ -39,6 +39,7 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +55,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
     public ScryEffect(int scryNumber) {
         super(Outcome.Benefit);
         this.scryNumber = scryNumber;
-        staticText = "Scry " + scryNumber;
+        this.setText();
     }
 
     public ScryEffect(final ScryEffect effect) {
@@ -109,4 +110,15 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
         return new ScryEffect(this);
     }
 
+    private void setText() {
+        StringBuilder sb = new StringBuilder("Scry ").append(scryNumber);
+        if (scryNumber == 1) {
+            sb.append("<i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
+        } else {
+            sb.append("<i>(Look at the top ");
+            sb.append(CardUtil.numberToText(scryNumber));
+            sb.append(" cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>");
+        }
+        staticText = sb.toString();
+    }
 }
