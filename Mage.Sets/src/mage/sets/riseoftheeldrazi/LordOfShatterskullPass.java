@@ -107,7 +107,7 @@ class LordOfShatterskullPassEffect extends OneShotEffect<LordOfShatterskullPassE
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
         if (defenderId != null) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent();
             filter.add(new ControllerIdPredicate(defenderId));

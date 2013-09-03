@@ -526,11 +526,35 @@ public class Combat implements Serializable, Copyable<Combat> {
         return false;
     }
 
-    public UUID getDefendingPlayer(UUID attackerId) {
+    /**
+     *
+     * @param attackerId
+     * @return uuid of defending player or planeswalker
+     */
+    public UUID getDefenderId(UUID attackerId) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
             if (group.getAttackers().contains(attackerId)) {
                 defenderId = group.getDefenderId();
+                break;
+            }
+        }
+        return defenderId;
+    }
+
+    public UUID getDefendingPlayerId(UUID attackerId, Game game) {
+        UUID defenderId = null;
+        for (CombatGroup group : groups) {
+            if (group.getAttackers().contains(attackerId)) {
+                defenderId = group.getDefenderId();
+                if (group.defenderIsPlaneswalker) {
+                    Permanent permanent = game.getPermanent(defenderId);
+                    if (permanent != null) {
+                        defenderId = permanent.getControllerId();
+                    } else {
+                        defenderId = null;
+                    }
+                }
                 break;
             }
         }

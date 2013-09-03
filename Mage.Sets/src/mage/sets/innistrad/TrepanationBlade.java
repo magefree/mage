@@ -103,7 +103,7 @@ class TrepanationBladeDiscardEffect extends OneShotEffect<TrepanationBladeDiscar
             if (creature == null) {
                 return false;
             }
-            UUID defenderId = game.getCombat().getDefendingPlayer(creature.getId());
+            UUID defenderId = game.getCombat().getDefenderId(creature.getId());
             Player player = game.getPlayer(defenderId);
             if (player == null) {
                 return false;

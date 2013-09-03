@@ -47,7 +47,7 @@ public class DefendingPlayerControlsCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defendingPlayer = game.getCombat().getDefendingPlayer(source.getSourceId());
+        UUID defendingPlayer = game.getCombat().getDefenderId(source.getSourceId());
         return defendingPlayer != null && game.getBattlefield().countAll(filter, defendingPlayer, game) > 0;
     }
 }

@@ -161,7 +161,7 @@ class ReturnAttackerToHandTargetCost extends CostImpl<ReturnAttackerToHandTarget
                 if (permanent == null) {
                     return false;
                 }
-                defendingPlayerId = game.getCombat().getDefendingPlayer(permanent.getId());
+                defendingPlayerId = game.getCombat().getDefenderId(permanent.getId());
                 paid |= permanent.moveToZone(Zone.HAND, sourceId, game, false);
             }
         }

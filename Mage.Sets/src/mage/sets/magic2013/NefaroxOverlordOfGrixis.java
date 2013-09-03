@@ -106,7 +106,7 @@ class NefaroxOverlordOfGrixisTriggeredAbility extends TriggeredAbilityImpl<Nefar
             UUID nefarox = this.getSourceId();
             if (nefarox != null) {
                 if (game.getCombat().attacksAlone() && nefarox == game.getCombat().getAttackers().get(0)) {
-                    UUID defender = game.getCombat().getDefendingPlayer(nefarox);
+                    UUID defender = game.getCombat().getDefenderId(nefarox);
                     this.getEffects().get(0).setTargetPointer(new FixedTarget(defender));
                     return true;
                 }

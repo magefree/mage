@@ -113,7 +113,7 @@ class GrimgrinCorpseBornAbility extends TriggeredAbilityImpl<GrimgrinCorpseBornA
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ATTACKER_DECLARED && event.getSourceId().equals(this.getSourceId())) {
             FilterCreaturePermanent filter = new FilterCreaturePermanent("creature defending player controls");
-            UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
+            UUID defenderId = game.getCombat().getDefenderId(sourceId);
             filter.add(new ControllerIdPredicate(defenderId));
 
             this.getTargets().clear();

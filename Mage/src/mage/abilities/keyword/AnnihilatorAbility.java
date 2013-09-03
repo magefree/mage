@@ -109,7 +109,7 @@ class AnnihilatorEffect extends OneShotEffect<AnnihilatorEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
         Player player = game.getPlayer(defenderId);
 
         //Defender may be a planeswalker.
