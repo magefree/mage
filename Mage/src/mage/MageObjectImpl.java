@@ -175,7 +175,7 @@ public abstract class MageObjectImpl<T extends MageObjectImpl<T>> implements Mag
                 return false;
             }
             // as it is creature subtype, then check the existence of Changeling
-            return abilities.contains(ChangelingAbility.getInstance());
+            return abilities.contains(ChangelingAbility.getInstance()) || this.subtype.contains(ChangelingAbility.ALL_CREATURE_TYPE);
         }
     }
 
