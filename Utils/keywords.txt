@@ -21,7 +21,7 @@ Cascade|new|
 Exalted|new|
 Flanking|new|
 Forestwalk|new|
-Indestructible|new|
+Indestructible|instance|
 Islandwalk|new|
 Living weapon|new|
 Mountainwalk|new|
