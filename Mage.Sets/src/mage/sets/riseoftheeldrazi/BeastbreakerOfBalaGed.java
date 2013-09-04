@@ -57,13 +57,19 @@ public class BeastbreakerOfBalaGed extends LevelerCard<BeastbreakerOfBalaGed> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Level up {2}{G} ({2}{G}: Put a level counter on this. Level up only as a sorcery.)
         this.addAbility(new LevelUpAbility(new ManaCostsImpl("{2}{G}")));
 
         Abilities<Ability> levelAbilities = new AbilitiesImpl<Ability>();
         levelAbilities.add(TrampleAbility.getInstance());
 
         LevelerCardBuilder.construct(this,
+                // LEVEL 1-3
+                //      4/4
                 new LevelerCardBuilder.LevelAbility(1, 3, new AbilitiesImpl<Ability>(), 4, 4),
+                // LEVEL 1-3
+                //      4/4
+                //      Trample
                 new LevelerCardBuilder.LevelAbility(4, -1, levelAbilities, 6, 6)
         );
     }
