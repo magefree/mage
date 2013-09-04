@@ -83,9 +83,6 @@ public class ThassaGodOfTheSea extends CardImpl<ThassaGodOfTheSea> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CantBeBlockedTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{1}{U}"));
         ability.addTarget(new TargetControlledCreaturePermanent(true));
         this.addAbility(ability);
-
-
-
     }
 
     public ThassaGodOfTheSea(final ThassaGodOfTheSea card) {
@@ -95,21 +92,5 @@ public class ThassaGodOfTheSea extends CardImpl<ThassaGodOfTheSea> {
     @Override
     public ThassaGodOfTheSea copy() {
         return new ThassaGodOfTheSea(this);
-    }
-}
-
-
-class ThassaGodOfTheSeaToken extends Token {
-
-    public ThassaGodOfTheSeaToken() {
-        super("Cleric", "2/1 white Cleric enchantment creature");
-        this.cardType.add(CardType.CREATURE);
-        this.cardType.add(CardType.ENCHANTMENT);
-
-        this.subtype.add("Cleric");
-        this.color.isWhite();
-
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(1);
     }
 }
