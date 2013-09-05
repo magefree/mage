@@ -43,11 +43,14 @@ public class Limited extends DeckValidator {
 
     @Override
     public boolean validate(Deck deck) {
+         boolean valid = true;
         //20091005 - 100.2b
-        if (deck.getCards().size() < 40)
-            return false;
+        if (deck.getCards().size() < 40) {
+            invalid.put("Deck", "Must contain at least 40 cards: has only " + deck.getCards().size() + " cards");
+            valid = false;
 
-        return true;
+        }
+        return valid;
     }
 
 }
