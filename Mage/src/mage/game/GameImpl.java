@@ -28,7 +28,6 @@
 
 package mage.game;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
