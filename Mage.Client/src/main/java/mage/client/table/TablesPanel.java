@@ -118,6 +118,7 @@ public class TablesPanel extends javax.swing.JPanel {
         tableTables.createDefaultColumnsFromModel();
         chatPanel.useExtendedView(ChatPanel.VIEW_MODE.NONE);
         chatPanel.setBorder(null);
+        chatPanel.setChatType(ChatPanel.ChatType.TABLES);
 
         JComponent[] components = new JComponent[] {chatPanel, jSplitPane1, jScrollPane1, jScrollPane2, jPanel1, jPanel3};
         for (JComponent component : components) {

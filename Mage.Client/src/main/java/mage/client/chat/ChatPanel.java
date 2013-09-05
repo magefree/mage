@@ -103,6 +103,18 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     /**
+     * Controls the output start messages as the chat panel is created
+     *
+     */
+    private ChatType chatType = ChatType.DEFAULT;
+
+    public enum ChatType {
+        DEFAULT, GAME, TABLES, TOURNAMENT
+    }
+
+    private boolean startMessageDone = false;
+
+    /**
      * Maps message colors to {@link Color}.
      */
     private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
@@ -142,6 +154,23 @@ public class ChatPanel extends javax.swing.JPanel {
             simplifyComponents();
         }
     }
+
+    public ChatType getChatType() {
+        return chatType;
+    }
+
+    public void setChatType(ChatType chatType) {
+        this.chatType = chatType;
+    }
+
+    public boolean isStartMessageDone() {
+        return startMessageDone;
+    }
+
+    public void setStartMessageDone(boolean startMessageDone) {
+        this.startMessageDone = startMessageDone;
+    }
+
 
     public void connect(UUID chatId) {
         session = MageFrame.getSession();

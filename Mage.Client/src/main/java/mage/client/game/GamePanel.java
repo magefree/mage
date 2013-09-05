@@ -715,6 +715,7 @@ public final class GamePanel extends javax.swing.JPanel {
         userChatPanel = new mage.client.chat.ChatPanel();
         userChatPanel.setParentChat(gameChatPanel);
         userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
+        userChatPanel.setChatType(ChatPanel.ChatType.GAME);
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));

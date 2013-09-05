@@ -86,6 +86,7 @@ public class TournamentPanel extends javax.swing.JPanel {
         tableMatches.createDefaultColumnsFromModel();
 
         chatPanel1.useExtendedView(ChatPanel.VIEW_MODE.NONE);
+        chatPanel1.setChatType(ChatPanel.ChatType.TOURNAMENT);
 
         Action action = new AbstractAction()
         {

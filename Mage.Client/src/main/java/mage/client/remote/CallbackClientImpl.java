@@ -35,6 +35,7 @@ import mage.Constants;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
+import mage.client.chat.ChatPanel.ChatType;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
@@ -113,6 +114,7 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         ChatPanel panel = MageFrame.getChat(callback.getObjectId());
                         if (panel != null) {
+                            // play the to the message connected sound
                             if (message.getSoundToPlay() != null) {
                                 switch (message.getSoundToPlay()) {
                                     case PlayerLeft:
@@ -123,20 +125,17 @@ public class CallbackClientImpl implements CallbackClient {
                                         break;
                                 }
                             }
-                            if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE) && panel.getConnectedChat() != null) {
-                                panel.getConnectedChat().receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
-                                        "\nTurn Mousewheel - Show big image of card your mousepointer hovers over" +
-                                        "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
-                                        "\nF4 - Skip current turn but stop on declare attackers" +
-                                        "\nF9 - Skip everything until your next turn" +
-                                        "\nF3 - Undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
-                            } else {
-                                if (message.isUserMessage() && panel.getConnectedChat() != null) {
-                                    panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
-                                } else {
-                                    panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
-                                }
+                            // send start message to chat if needed
+                            if (!panel.isStartMessageDone()) {
+                                createChatStartMessage(panel);
                             }
+                            // send the message itself
+                            if (message.isUserMessage() && panel.getConnectedChat() != null) {
+                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+                            } else {
+                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                            }
+                            
                         }
                     } else if (callback.getMethod().equals("serverMessage")) {
                         if (callback.getData() != null) {
@@ -337,6 +336,34 @@ public class CallbackClientImpl implements CallbackClient {
                 }
             }
         });
+    }
+
+    private void createChatStartMessage(ChatPanel chatPanel) {
+        chatPanel.setStartMessageDone(true);
+        ChatPanel usedPanel = chatPanel;
+        if (chatPanel.getConnectedChat() != null) {
+            usedPanel = chatPanel.getConnectedChat();
+        }
+        switch (usedPanel.getChatType()) {
+            case GAME:
+                usedPanel.receiveMessage("", "You may use hot keys to play faster: " + "" +
+                        "\nTurn Mousewheel - Show big image of card your mousepointer hovers over" +
+                        "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
+                        "\nF4 - Skip current turn but stop on declare attackers" +
+                        "\nF9 - Skip everything until your next turn" +
+                        "\nF3 - Undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
+                break;
+            case TOURNAMENT:
+                usedPanel.receiveMessage("", "On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.", "", ChatMessage.MessageColor.ORANGE);
+                break;
+            case TABLES:
+                usedPanel.receiveMessage("",
+                        "Download card images by using the \"Images\" menu to the top right ." +
+                        "\nDownload icons and symbols by using the \"Symbols\" menu to the top right.",
+                        "", ChatMessage.MessageColor.ORANGE);
+                break;
+
+        }      
     }
 
     public UUID getId() {

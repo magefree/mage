@@ -517,7 +517,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         this.gameOptions = options;
         scorePlayer = state.getPlayers().values().iterator().next();
         init(choosingPlayerId, options);
-        informPlayers(Constants.MSG_TIP_HOT_KEYS_CODE);
         play(startingPlayerId);
         //saveState();
     }
