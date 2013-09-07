@@ -93,6 +93,9 @@ public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
     }
 }
 
+// !!! Changes to the cascade effect here have to be copied to the cascadeEffect of Maelstrom Nexus card eventually.
+// There is a functional copy of this effect
+
 class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
     public CascadeEffect() {
