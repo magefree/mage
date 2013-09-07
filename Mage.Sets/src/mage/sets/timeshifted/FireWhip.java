@@ -47,7 +47,6 @@ import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
-import mage.target.common.TargetCreaturePermanent;
 
 /**
  *

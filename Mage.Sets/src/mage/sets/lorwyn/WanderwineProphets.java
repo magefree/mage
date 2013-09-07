@@ -38,6 +38,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetControlledPermanent;
 
 /**
@@ -45,6 +46,12 @@ import mage.target.common.TargetControlledPermanent;
  * @author Plopman
  */
 public class WanderwineProphets extends CardImpl<WanderwineProphets> {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk");
+
+    static {
+        filter.add(new SubtypePredicate("Merfolk"));
+    }
 
     public WanderwineProphets(UUID ownerId) {
         super(ownerId, 95, "Wanderwine Prophets", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{U}{U}");
@@ -60,7 +67,7 @@ public class WanderwineProphets extends CardImpl<WanderwineProphets> {
         this.addAbility(new ChampionAbility(this, "Merfolk"));
         // Whenever Wanderwine Prophets deals combat damage to a player, you may sacrifice a Merfolk. If you do, take an extra turn after this one.
         Ability ability = new DealsCombatDamageToAPlayerTriggeredAbility(new AddExtraTurnControllerEffect(), true);
-        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, new FilterControlledPermanent("Merfolk", "Merfolk"), true)));
+        ability.addCost(new SacrificeTargetCost(new TargetControlledPermanent(1, 1, filter, true)));
         this.addAbility(ability);
         
     }

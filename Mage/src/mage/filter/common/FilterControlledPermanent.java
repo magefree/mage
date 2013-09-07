@@ -30,7 +30,6 @@ package mage.filter.common;
 
 import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
-import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
 /**
@@ -48,13 +47,6 @@ public class FilterControlledPermanent extends FilterPermanent {
         this.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public FilterControlledPermanent(String subtype, String name) {
-        super(name);
-        this.add(new SubtypePredicate(subtype));
-        this.add(new ControllerPredicate(TargetController.YOU));
-    }
-
-        
     public FilterControlledPermanent(final FilterControlledPermanent filter) {
         super(filter);
     }

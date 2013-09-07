@@ -34,12 +34,19 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Plopman
  */
 public class MerrowCommerce extends CardImpl<MerrowCommerce> {
+
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("Merfolk you control");
+
+    static {
+        filter.add(new SubtypePredicate("Merfolk"));
+    }
 
     public MerrowCommerce(UUID ownerId) {
         super(ownerId, 72, "Merrow Commerce", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
@@ -50,7 +57,7 @@ public class MerrowCommerce extends CardImpl<MerrowCommerce> {
         this.color.setBlue(true);
 
         // At the beginning of your end step, untap all Merfolk you control.
-        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new UntapAllControllerEffect(new FilterControlledPermanent("Merfolk", "Merfolk you control"), "untap all Merfolk you control"), false));
+        this.addAbility(new BeginningOfYourEndStepTriggeredAbility(new UntapAllControllerEffect(filter, "untap all Merfolk you control"), false));
     }
 
     public MerrowCommerce(final MerrowCommerce card) {

@@ -46,6 +46,7 @@ import mage.constants.Zone;
 import mage.filter.common.FilterControlledPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.AbilityPredicate;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -54,10 +55,13 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class JaggedScarArchers extends CardImpl<JaggedScarArchers> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterCreaturePermanent flyingCreatureFilter = new FilterCreaturePermanent("creature with flying");
+    private static final FilterControlledPermanent controlledElvesFilter = new FilterControlledPermanent("Elves you control");
     static {
-        filter.add(new AbilityPredicate(FlyingAbility.class));
+        flyingCreatureFilter.add(new AbilityPredicate(FlyingAbility.class));
+        controlledElvesFilter.add(new SubtypePredicate("Elf"));
     }
+
     public JaggedScarArchers(UUID ownerId) {
         super(ownerId, 222, "Jagged-Scar Archers", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{G}");
         this.expansionSetCode = "LRW";
@@ -69,10 +73,10 @@ public class JaggedScarArchers extends CardImpl<JaggedScarArchers> {
         this.toughness = new MageInt(0);
 
         // Jagged-Scar Archers's power and toughness are each equal to the number of Elves you control.
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledPermanent("Elf",  "Elves you control")), Duration.EndOfGame)));
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, new SetPowerToughnessSourceEffect(new PermanentsOnBattlefieldCount(controlledElvesFilter), Duration.EndOfGame)));
         // {tap}: Jagged-Scar Archers deals damage equal to its power to target creature with flying.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(new SourcePermanentPowerCount()), new TapSourceCost());
-        ability.addTarget(new TargetCreaturePermanent(filter));
+        ability.addTarget(new TargetCreaturePermanent(flyingCreatureFilter));
         this.addAbility(ability);
     }
 
