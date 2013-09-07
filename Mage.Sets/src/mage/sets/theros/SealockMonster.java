@@ -30,7 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.BecomesMonstrousSourceTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
@@ -48,8 +48,8 @@ import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 import mage.target.common.TargetLandPermanent;
 
 /**
@@ -72,7 +72,11 @@ public class SealockMonster extends CardImpl<SealockMonster> {
         // {5}{U}{U}: Monstrosity 3.</i>
         this.addAbility(new MonstrosityAbility("{5}{U}{U}",3));
         // When Sealock Monster becomes monstrous, target land becomes an island in addition to its other types.
-        this.addAbility(new SealockMonsterTriggeredAbility());
+        Ability ability = new BecomesMonstrousSourceTriggeredAbility(new SealockMonsterBecomesIslandTargetEffect());
+        Target target = new TargetLandPermanent();
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
 
     }
 
@@ -125,36 +129,6 @@ class SealockMonsterCantAttackEffect extends ReplacementEffectImpl<SealockMonste
             }
         }
         return false;
-    }
-}
-
-class SealockMonsterTriggeredAbility extends TriggeredAbilityImpl<SealockMonsterTriggeredAbility> {
-
-    public SealockMonsterTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new SealockMonsterBecomesIslandTargetEffect(), false);
-        this.addTarget(new TargetLandPermanent());
-    }
-
-    public SealockMonsterTriggeredAbility(final SealockMonsterTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public SealockMonsterTriggeredAbility copy() {
-        return new SealockMonsterTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType().equals(EventType.BECOMES_MONSTROUS) && event.getSourceId().equals(this.getSourceId())) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When Sealock Monster becomes monstrous, " + super.getRule();
     }
 }
 
