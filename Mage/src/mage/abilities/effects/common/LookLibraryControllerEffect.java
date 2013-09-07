@@ -175,7 +175,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(targetZoneLookedCards, source.getId(), game, true);
+                    card.moveToZone(targetZoneLookedCards, source.getId(), game, putOnTop);
                 }
                 break;
             case GRAVEYARD: 

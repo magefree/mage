@@ -100,7 +100,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl<LoseCreat
 
     @Override
     public boolean hasLayer(Layer layer) {
-        return layer == Layer.PTChangingEffects_7 || layer == Layer.TypeChangingEffects_4;
+        return layer == Layer.TypeChangingEffects_4;
     }
 
 }

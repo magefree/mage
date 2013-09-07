@@ -42,7 +42,7 @@ import mage.target.common.TargetAttackingCreature;
  * of creature cards you can discard to give an attacking creature a bonus.
  * (An ability word has no rules meaning.)
  *
- * @author Ludwig
+ * @author LevelX2
  */
 
 
