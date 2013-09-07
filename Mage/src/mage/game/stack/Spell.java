@@ -188,10 +188,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 }
                 return false;
             }
-            //20091005 - 608.2b
-            game.informPlayers(getName() + " has been fizzled.");
-            counter(null, game);
-            return false;
+            if (card.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
+                updateOptionalCosts(0);
+                result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
+                return result;
+            } else {
+                //20091005 - 608.2b
+                game.informPlayers(getName() + " has been fizzled.");
+                counter(null, game);
+                return false;
+            }
         } else {
             updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);

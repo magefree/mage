@@ -1223,8 +1223,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     if (target instanceof TargetPermanent) {
                         Permanent attachedTo = getPermanent(perm.getAttachedTo());
                         if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-                                somethingHappened = true;
+                            // handle bestow unattachment
+                            Card card = this.getCard(perm.getId());
+                            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                UUID wasAttachedTo = perm.getAttachedTo();
+                                perm.attachTo(null, this);
+                                fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                            } else {
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                    somethingHappened = true;
+                                }
                             }
                         }
                         else {
