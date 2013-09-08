@@ -77,6 +77,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
             game.setZone(card.getId(), Zone.PICK);
         }
         TargetCard target1 = new TargetCard(Zone.PICK, filter1);
+        // move cards to the bottom of the library
         while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
             Card card = cards.get(target1.getFirstTarget(), game);
             if (card != null) {
@@ -85,6 +86,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
             }
             target1.clearChosen();
         }
+        // move cards to the top of the library
         if (cards.size() > 1) {
             TargetCard target2 = new TargetCard(Zone.PICK, filter2);
             target2.setRequired(true);
@@ -113,9 +115,9 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
     private void setText() {
         StringBuilder sb = new StringBuilder("Scry ").append(scryNumber);
         if (scryNumber == 1) {
-            sb.append("<i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
+            sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
         } else {
-            sb.append("<i>(Look at the top ");
+            sb.append(". <i>(Look at the top ");
             sb.append(CardUtil.numberToText(scryNumber));
             sb.append(" cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>");
         }
