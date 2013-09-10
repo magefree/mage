@@ -55,7 +55,7 @@ public class HinterlandScourge extends CardImpl<HinterlandScourge> {
         this.expansionSetCode = "DKA";
         this.subtype.add("Werewolf");
 
-        // this card is the second face of double-faced card
+        // this card is the second face of double-faced card of Hinterland Hermit
         this.nightCard = true;
         this.canTransform = true;
 
