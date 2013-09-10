@@ -88,7 +88,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
                 target1.clearChosen();
             }
             // move cards to the top of the library
-            int onTop = cards.size();
+            int onBottom = scryNumber - cards.size();
             if (cards.size() > 1) {
                 TargetCard target2 = new TargetCard(Zone.PICK, filter2);
                 target2.setRequired(true);
@@ -107,7 +107,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
                 card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
             }
             game.informPlayers(new StringBuilder(player.getName()).append(" puts ")
-                    .append(onTop).append(onTop == 1 ?" card":"cards")
+                    .append(onBottom).append(onBottom == 1 ?" card":" cards")
                     .append(" on the bottom of his or her library (scry ")
                     .append(scryNumber).append(")").toString());
             return true;

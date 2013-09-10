@@ -47,7 +47,11 @@ import mage.game.stack.Spell;
 public class HeroicAbility extends TriggeredAbilityImpl<HeroicAbility> {
 
     public HeroicAbility(Effect effect) {
-        super(Zone.BATTLEFIELD, effect, false);
+        this(effect, false);
+    }
+
+    public HeroicAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
     public HeroicAbility(final HeroicAbility ability) {
