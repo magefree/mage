@@ -88,21 +88,23 @@ class PsychicStrikeEffect extends OneShotEffect<PsychicStrikeEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        boolean countered = false;
         StackObject stackObject = game.getStack().getStackObject(targetPointer.getFirst(game, source));
-        if (stackObject != null && game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+        if (game.getStack().counter(source.getFirstTarget(), source.getSourceId(), game)) {
+            countered = true;
+        }
+        if (stackObject != null) {
             Player controller = game.getPlayer(stackObject.getControllerId());
-            if (controller == null) {
-                return false;
-            }
-            int cardsCount = Math.min(2, controller.getLibrary().size());
-            for (int i = 0; i < cardsCount; i++) {
-                Card card = controller.getLibrary().removeFromTop(game);
-                if (card != null) {
-                    card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+            if (controller != null) {
+                int cardsCount = Math.min(2, controller.getLibrary().size());
+                for (int i = 0; i < cardsCount; i++) {
+                    Card card = controller.getLibrary().removeFromTop(game);
+                    if (card != null) {
+                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    }
                 }
             }
-            return true;            
         }
-        return false;
+        return countered;
     }
 }
