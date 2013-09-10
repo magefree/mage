@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class NayaHushblade extends CardImpl<NayaHushblade> {
     
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another multicolor permanent");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     
     static {
         filter.add(new MulticoloredPredicate());
@@ -74,13 +74,12 @@ public class NayaHushblade extends CardImpl<NayaHushblade> {
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter),
-                "As long as you control another multicolored permanent, Naya Hushblade gets +1/+1 and has shroud"));
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                "As long as you control another multicolored permanent, Naya Hushblade gets +1/+1"));
+        ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(ShroudAbility.getInstance()),
                 new ControlsPermanentCondition(filter),
-                null));
+                " and has shroud"));
         this.addAbility(ability);
-        this.addAbility(ability2);
     }
 
     public NayaHushblade(final NayaHushblade card) {
