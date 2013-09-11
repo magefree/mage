@@ -36,7 +36,7 @@ import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
 
@@ -46,7 +46,7 @@ import mage.filter.predicate.mageobject.ColorPredicate;
  */
 public class MoldAdder extends CardImpl<MoldAdder> {
 
-    private static final FilterCard filter = new FilterCard("blue or black spell");
+    private static final FilterSpell filter = new FilterSpell("blue or black spell");
 
     static {
         filter.add(Predicates.or(

@@ -126,8 +126,9 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets == 0)
-                return true;
+        if (remainingTargets == 0) {
+            return true;
+        }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
@@ -135,8 +136,9 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
                     && watcher != null && watcher.damageSources.contains(permanent.getId())) {
                         count++;
-                        if (count >= remainingTargets)
-                                return true;
+                        if (count >= remainingTargets) {
+                            return true;
+                        }
                 }
         }
         return false;
