@@ -38,6 +38,8 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -163,6 +165,7 @@ class AshiokNightmareWeaverPutIntoPlayEffect extends OneShotEffect<AshiokNightma
         FilterCard filter = new FilterCreatureCard(new StringBuilder("creature card with converted mana cost {").append(cmc).append("} exiled with Ashiok, Nightmare Weaver").toString());
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.Equal, cmc));
         Target target = new TargetCardInExile(filter, CardUtil.getCardExileZoneId(game, source));
+        target.setRequired(true);
 
         if (target.canChoose(source.getSourceId(), player.getId(), game)) {
             if (player.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
@@ -247,13 +250,17 @@ class AshiokNightmareWeaverExileAllEffect extends OneShotEffect<AshiokNightmareW
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
             Player opponent = game.getPlayer(opponentId);
             if (opponent != null) {
-                for (UUID cardId :opponent.getHand()) {
+                Cards cards = new CardsImpl();
+                cards.addAll(opponent.getHand());
+                for (UUID cardId : cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         card.moveToExile(exileId, "Ashiok, Nightmare Weaver", source.getSourceId(), game);
                     }
                 }
-                for (UUID cardId :opponent.getGraveyard()) {
+                cards.clear();
+                cards.addAll(opponent.getGraveyard());
+                for (UUID cardId :cards) {
                     Card card = game.getCard(cardId);
                     if (card != null) {
                         card.moveToExile(exileId, "Ashiok, Nightmare Weaver", source.getSourceId(), game);

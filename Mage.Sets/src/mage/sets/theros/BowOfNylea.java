@@ -81,13 +81,14 @@ public class BowOfNylea extends CardImpl<BowOfNylea> {
         this.color.setGreen(true);
 
         // Attacking creatures you control have deathtouch.
-        GainAbilityControlledEffect gainEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterAttackingCreature(), false);
+        GainAbilityControlledEffect gainEffect = new GainAbilityControlledEffect(DeathtouchAbility.getInstance(), Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, gainEffect));
         
         // {1}{G}, {T}: Choose one - Put a +1/+1 counter on target creature;
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
                 new AddCountersTargetEffect(CounterType.P1P1.createInstance()),
                 new ManaCostsImpl("{1}{G}"));
+        ability.addTarget(new TargetCreaturePermanent());
         ability.addCost(new TapSourceCost());
         // or Bow of Nylea deals 2 damage to target creature with flying;
         Mode mode = new Mode();
