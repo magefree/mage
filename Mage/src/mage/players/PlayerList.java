@@ -50,10 +50,10 @@ public class PlayerList extends CircularList<UUID> {
         while (true) {
             player = game.getPlayer(super.getNext());
             if (!player.hasLeft() && !player.hasLost()) {
-                if (!player.hasReachedNextTurnAfterLeaving()) {
-                    player.setReachedNextTurnAfterLeaving(true);
-                }
                 break;
+            }
+            if (!player.hasReachedNextTurnAfterLeaving()) {
+                player.setReachedNextTurnAfterLeaving(true);
             }
             if (player.getId().equals(start)) {
                 return null;
