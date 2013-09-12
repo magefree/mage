@@ -51,6 +51,11 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
         this(1, 1, new FilterPermanent(), false);
     }
 
+    public TargetPermanent(boolean required) {
+        this(1, 1, new FilterPermanent(), false);
+        this.setRequired(required);
+    }
+    
     public TargetPermanent(FilterPermanent filter) {
         this(1, 1, filter, false);
     }

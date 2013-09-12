@@ -28,15 +28,14 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -57,13 +56,9 @@ public class HuntingMoa extends CardImpl<HuntingMoa> {
 
         this.addAbility(new EchoAbility("{2}{G}"));
         // When Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
-        Ability enterAbility = new EntersBattlefieldTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        enterAbility.addTarget(new TargetCreaturePermanent());
+        Ability enterAbility = new EntersBattlefieldOrDiesSourceTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
+        enterAbility.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(enterAbility);
-        // When Hunting Moa enters the battlefield or dies, put a +1/+1 counter on target creature.
-        Ability diesAbility = new DiesTriggeredAbility(new AddCountersTargetEffect(CounterType.P1P1.createInstance()), false);
-        diesAbility.addTarget(new TargetCreaturePermanent());
-        this.addAbility(diesAbility);
     }
 
     public HuntingMoa(final HuntingMoa card) {

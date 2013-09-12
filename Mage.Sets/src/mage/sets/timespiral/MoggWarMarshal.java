@@ -29,17 +29,12 @@ package mage.sets.timespiral;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -61,7 +56,7 @@ public class MoggWarMarshal extends CardImpl<MoggWarMarshal> {
         // Echo {1}{R}
         this.addAbility(new EchoAbility("{1}{R}"));
         // When Mogg War Marshal enters the battlefield or dies, put a 1/1 red Goblin creature token onto the battlefield.
-        this.addAbility(new MoggWarMarshallTriggeredAbility());
+        this.addAbility(new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 1), false));
     }
 
     public MoggWarMarshal(final MoggWarMarshal card) {
@@ -71,41 +66,5 @@ public class MoggWarMarshal extends CardImpl<MoggWarMarshal> {
     @Override
     public MoggWarMarshal copy() {
         return new MoggWarMarshal(this);
-    }
-}
-
-class MoggWarMarshallTriggeredAbility extends TriggeredAbilityImpl<MoggWarMarshallTriggeredAbility> {
-
-    public MoggWarMarshallTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new CreateTokenEffect(new GoblinToken(), 1), false);
-    }
-
-    public MoggWarMarshallTriggeredAbility(final MoggWarMarshallTriggeredAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MoggWarMarshallTriggeredAbility copy() {
-        return new MoggWarMarshallTriggeredAbility(this);
-    }
-
-    @Override
-    public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD
-                && event.getTargetId().equals(getSourceId())) {
-            return true;
-        }
-        if (event.getType() == EventType.ZONE_CHANGE && event.getTargetId().equals(this.getSourceId())) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent)event;
-            if (zEvent.getFromZone().equals(Zone.BATTLEFIELD)  && zEvent.getToZone().equals(Zone.GRAVEYARD)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public String getRule() {
-        return "When Mogg War Marshal enters the battlefield or dies, " + super.getRule();
     }
 }
