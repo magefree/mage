@@ -517,10 +517,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
      */
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        int xValue = 0;
         updateGameStatePriority("announceXMana", game);
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
-        return response.getInteger();
+        if (response != null) {
+            xValue =  response.getInteger();
+        }
+        return xValue;
     }
 
     protected void playManaAbilities(ManaCost unpaid, Game game) {
