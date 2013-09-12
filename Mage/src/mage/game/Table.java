@@ -186,13 +186,9 @@ public class Table implements Serializable {
         for (int i = 0; i < numSeats; i++ ) {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
-                if (match != null) {
-                    match.leave(playerId);
-                } else {
-                    seats[i].setPlayer(null);
-                    if (state == TableState.STARTING) {
-                        state = TableState.WAITING;
-                    }
+                seats[i].setPlayer(null);
+                if (state == TableState.STARTING) {
+                    state = TableState.WAITING;
                 }
                 break;
             }

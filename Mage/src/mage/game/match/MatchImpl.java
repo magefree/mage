@@ -90,6 +90,9 @@ public abstract class MatchImpl implements Match {
     public boolean leave(UUID playerId) {
         MatchPlayer mPlayer = getPlayer(playerId);
         if (mPlayer != null) {
+            if (games.isEmpty() ) {
+                return players.remove(mPlayer);
+            }
             mPlayer.setQuit(true);
             synchronized (this) {
                 this.notifyAll();
