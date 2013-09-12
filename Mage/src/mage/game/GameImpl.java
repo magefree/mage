@@ -514,10 +514,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void start(UUID choosingPlayerId, GameOptions options) {
         startTime = new Date();
         this.gameOptions = options;
-        scorePlayer = state.getPlayers().values().iterator().next();
-        init(choosingPlayerId, options);
-        play(startingPlayerId);
-        //saveState();
+        if (state.getPlayers().values().iterator().hasNext()) {
+            scorePlayer = state.getPlayers().values().iterator().next();
+            init(choosingPlayerId, options);
+            play(startingPlayerId);
+        }
     }
 
     @Override
