@@ -624,22 +624,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         TargetPlayer targetPlayer = new TargetPlayer();
         targetPlayer.setRequired(true);
         targetPlayer.setTargetName("starting player");
-        Player choosingPlayer;
-        if (choosingPlayerId == null) {
-            choosingPlayer = getPlayer(pickChoosingPlayer());
-        }
-        else {
+        Player choosingPlayer = null;
+        if (choosingPlayerId != null) {
             choosingPlayer = this.getPlayer(choosingPlayerId);
         }
-        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+        if (choosingPlayer == null) {
+            choosingPlayer = getPlayer(pickChoosingPlayer());
+        }
+        if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
             fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
-        }
-        else {
+        } else {
+            // not possible to choose starting player, stop here
             return;
         }
 
-        //saveState();
 
         //20091005 - 103.3
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
