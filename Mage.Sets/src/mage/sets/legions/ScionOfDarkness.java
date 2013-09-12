@@ -113,7 +113,7 @@ class ScionOfDarknessEffect extends OneShotEffect<ScionOfDarknessEffect> {
             if (you.chooseTarget(Outcome.PutCreatureInPlay, target, source, game)) {
                 Card card = game.getCard(target.getFirstTarget());
                 if (card != null) {
-                    card.putOntoBattlefield(game, Zone.GRAVEYARD, id, you.getId());
+                    card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getSourceId(), you.getId());
                     return true;
                 }
             }

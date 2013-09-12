@@ -97,6 +97,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
     private Battlefield battlefield;
     private int turnNum = 1;
+    private boolean extraTurn = false;
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -142,6 +143,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.lookedAt.putAll(state.lookedAt);
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
+        this.extraTurn = state.extraTurn;
         this.gameOver = state.gameOver;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger: state.triggered) {
@@ -347,6 +349,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void setTurnNum(int turnNum) {
         this.turnNum = turnNum;
+    }
+
+    public boolean isExtraTurn() {
+        return extraTurn;
+    }
+
+    public void setExtraTurn(boolean extraTurn) {
+        this.extraTurn = extraTurn;
     }
 
     public boolean isGameOver() {
@@ -612,6 +622,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;
+        extraTurn = false;
         gameOver = false;
         specialActions.clear();
         otherAbilities.clear();
