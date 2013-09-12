@@ -1964,11 +1964,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Date getStartTime() {
+        if (startTime == null) {
+            return null;
+        }
         return new Date(startTime.getTime());
     }
 
     @Override
     public Date getEndTime() {
+        if (endTime == null) {
+            return null;
+        }
         return new Date(endTime.getTime());
     }
 
