@@ -47,7 +47,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class ScourgeOfGeierReach extends CardImpl<ScourgeOfGeierReach> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("for each creature your opponents control");
 
     static {
         filter.add(new ControllerPredicate(TargetController.OPPONENT));
