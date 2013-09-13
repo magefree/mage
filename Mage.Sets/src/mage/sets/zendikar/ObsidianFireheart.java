@@ -29,11 +29,6 @@
 package mage.sets.zendikar;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -44,6 +39,11 @@ import mage.abilities.effects.common.DamageControllerEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.common.FilterLandPermanent;
 import mage.filter.predicate.Predicates;
@@ -78,7 +78,7 @@ public class ObsidianFireheart extends CardImpl<ObsidianFireheart> {
         // For as long as that land has a blaze counter on it, it has "At the beginning
         // of your upkeep, this land deals 1 damage to you." (The land continues to burn
         // after Obsidian Fireheart has left the battlefield.)
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),new ManaCostsImpl("{1}{R}{R}{R}"));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddCountersTargetEffect(CounterType.BLAZE.createInstance()),new ManaCostsImpl("{1}{R}{R}"));
         ability.addTarget(new TargetLandPermanent(filter));
         Effect effect = new ObsidianFireheartGainAbilityEffect(
                 new BeginningOfUpkeepTriggeredAbility(
