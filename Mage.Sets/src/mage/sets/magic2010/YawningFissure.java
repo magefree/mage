@@ -27,21 +27,12 @@
  */
 package mage.sets.magic2010;
 
-import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledLandPermanent;
-import mage.filter.common.FilterControlledPermanent;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -56,7 +47,7 @@ public class YawningFissure extends CardImpl<YawningFissure> {
         this.color.setRed(true);
 
         // Each opponent sacrifices a land.
-        this.getSpellAbility().addEffect(new YawningFissureEffect());
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(new FilterControlledLandPermanent()));
     }
 
     public YawningFissure(final YawningFissure card) {
@@ -66,46 +57,5 @@ public class YawningFissure extends CardImpl<YawningFissure> {
     @Override
     public YawningFissure copy() {
         return new YawningFissure(this);
-    }
-}
-
-class YawningFissureEffect extends OneShotEffect<YawningFissureEffect> {
-
-    private static final FilterControlledPermanent filter = new FilterControlledLandPermanent();
-
-    public YawningFissureEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a land";
-    }
-
-    public YawningFissureEffect(final YawningFissureEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public YawningFissureEffect copy() {
-        return new YawningFissureEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentId : opponents) {
-            Player player = game.getPlayer(opponentId);
-            Target target = new TargetControlledPermanent(filter);
-
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                }
-
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-
-                if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
-                }
-            }
-        }
-        return true;
     }
 }
