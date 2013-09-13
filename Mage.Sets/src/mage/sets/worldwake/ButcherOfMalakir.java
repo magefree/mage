@@ -36,7 +36,6 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 
@@ -65,7 +64,7 @@ public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent()), false, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterCreaturePermanent()), false, filter));
     }
 
     public ButcherOfMalakir(final ButcherOfMalakir card) {

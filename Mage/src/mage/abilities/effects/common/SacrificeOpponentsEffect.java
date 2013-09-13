@@ -36,7 +36,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.constants.Outcome;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -52,16 +52,16 @@ import mage.util.CardUtil;
 public class SacrificeOpponentsEffect extends OneShotEffect<SacrificeOpponentsEffect> {
 
     protected DynamicValue amount;
-    protected FilterControlledPermanent filter;
+    protected FilterPermanent filter;
 
-    public SacrificeOpponentsEffect(FilterControlledPermanent filter) {
+    public SacrificeOpponentsEffect(FilterPermanent filter) {
         this(1, filter);
     }
-    public SacrificeOpponentsEffect(int amount, FilterControlledPermanent filter) {
+    public SacrificeOpponentsEffect(int amount, FilterPermanent filter) {
         this(new StaticValue(amount), filter);
     }
 
-    public SacrificeOpponentsEffect(DynamicValue amount, FilterControlledPermanent filter) {
+    public SacrificeOpponentsEffect(DynamicValue amount, FilterPermanent filter) {
         super(Outcome.Sacrifice);
         this.amount = amount;
         this.filter = filter;
@@ -108,10 +108,15 @@ public class SacrificeOpponentsEffect extends OneShotEffect<SacrificeOpponentsEf
         StringBuilder sb = new StringBuilder();
         sb.append("Each opponent sacrifices ");
         if (amount.toString().equals("X")) {
-            sb.append(amount.toString()).append(" ");
+            sb.append(amount.toString());
         } else {
-            sb.append(CardUtil.numberToText(amount.toString()));
+            if (amount.toString().equals("1")) {
+                sb.append("a");
+            } else {
+                sb.append(CardUtil.numberToText(amount.toString()));
+            }
         }
+        sb.append(" ");
         sb.append(filter.getMessage());
         staticText = sb.toString();
     }

@@ -122,8 +122,10 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(preText);
-        if (preText.endsWith("player") || preText.endsWith("opponent")) {
+        if (preText != null) {
+            sb.append(preText);
+        }
+        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
             sb.append(" sacrifices ");
         } else {
             sb.append(" sacrifice ");
