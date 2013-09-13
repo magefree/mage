@@ -84,10 +84,12 @@ public class SetPowerToughnessSourceEffect extends ContinuousEffectImpl<SetPower
                 return true;
             }
             else {
-                if (power != Integer.MIN_VALUE)
+                if (power != Integer.MIN_VALUE) {
                     target.getPower().setValue(power);
-                if (toughness != Integer.MIN_VALUE)
+                }
+                if (toughness != Integer.MIN_VALUE) {
                     target.getToughness().setValue(toughness);
+                }
             }
         }
         return false;

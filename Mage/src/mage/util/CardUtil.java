@@ -402,7 +402,9 @@ public class CardUtil {
             if (text != null) {
                 uniqueString.append(text);
             }
-            uniqueString.append(cardId).append(card.getZoneChangeCounter());
+            uniqueString.append(card.getZoneChangeCounter());
+        } else {
+            uniqueString.append(cardId);
         }
         return uniqueString.toString();
     }

@@ -25,54 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2010;
+package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.ObjectColor;
-import mage.abilities.common.SpellCastOpponentTriggeredAbility;
-import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.common.DiesTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.ScryEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.counters.CounterType;
-import mage.filter.FilterSpell;
-import mage.filter.predicate.Predicates;
-import mage.filter.predicate.mageobject.ColorPredicate;
+import mage.constants.Zone;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class MoldAdder extends CardImpl<MoldAdder> {
+public class ReaperOfTheWilds extends CardImpl<ReaperOfTheWilds> {
 
-    private static final FilterSpell filter = new FilterSpell("blue or black spell");
-    static {
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.BLUE),
-                new ColorPredicate(ObjectColor.BLACK)));
-    }
-
-    public MoldAdder(UUID ownerId) {
-        super(ownerId, 194, "Mold Adder", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{G}");
-        this.expansionSetCode = "M10";
-        this.subtype.add("Fungus");
-        this.subtype.add("Snake");
+    public ReaperOfTheWilds(UUID ownerId) {
+        super(ownerId, 201, "Reaper of the Wilds", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{B}{G}");
+        this.expansionSetCode = "THS";
+        this.subtype.add("Gorgon");
 
         this.color.setGreen(true);
-        this.power = new MageInt(1);
-        this.toughness = new MageInt(1);
+        this.color.setBlack(true);
+        this.power = new MageInt(4);
+        this.toughness = new MageInt(5);
 
-        // Whenever an opponent casts a blue or black spell, you may put a +1/+1 counter on Mold Adder.
-        this.addAbility(new SpellCastOpponentTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), filter, true));
+        // Whenever another creature dies, scry 1.</i>
+        this.addAbility(new DiesCreatureTriggeredAbility(new ScryEffect(1), false, true));
+        // {B}: Reaper of the Wilds gains deathtouch until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{B}")));
+        // {1}{G}: Reaper of the Wilds gains hexproof until end of turn.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HexproofAbility.getInstance(), Duration.EndOfTurn), new ManaCostsImpl("{1}{G}")));
     }
 
-    public MoldAdder(final MoldAdder card) {
+    public ReaperOfTheWilds(final ReaperOfTheWilds card) {
         super(card);
     }
 
     @Override
-    public MoldAdder copy() {
-        return new MoldAdder(this);
+    public ReaperOfTheWilds copy() {
+        return new ReaperOfTheWilds(this);
     }
 }
