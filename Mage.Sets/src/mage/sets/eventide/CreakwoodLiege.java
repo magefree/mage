@@ -28,8 +28,6 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -37,6 +35,11 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.permanent.token.Token;
@@ -64,8 +67,12 @@ public class CreakwoodLiege extends CardImpl<CreakwoodLiege> {
         this.color.setBlack(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+
+        // Other black creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterBlackCreature, true)));
+        // Other green creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filterGreenCreature, true)));
+        // At the beginning of your upkeep, you may put a 1/1 black and green Worm creature token onto the battlefield.
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(new CreateTokenEffect(new CreakwoodLiegeToken(), 1), TargetController.YOU, true));
     }
 

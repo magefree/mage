@@ -60,11 +60,11 @@ public class DevotionCount implements DynamicValue {
 
     @Override
     public String toString() {
-        return new StringBuilder("devotion to ").append(devotionColor.toString()).toString();
+        return "put a number of";
     }
 
     @Override
     public String getMessage() {
-        return toString();
+        return new StringBuilder("devotion to ").append(devotionColor.toString()).toString();
     }
 }
