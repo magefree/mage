@@ -34,7 +34,7 @@ import mage.abilities.common.SacrificeSourceTriggeredAbility;
 import mage.abilities.condition.common.AttachedToCounterCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.SacrificeSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
@@ -45,21 +45,20 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.counters.CounterType;
 import mage.target.TargetPermanent;
-import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class OrdealOfPurphoros extends CardImpl<OrdealOfPurphoros> {
+public class OrdealOfThassa extends CardImpl<OrdealOfThassa> {
 
-    public OrdealOfPurphoros(UUID ownerId) {
-        super(ownerId, 131, "Ordeal of Purphoros", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{R}");
+    public OrdealOfThassa(UUID ownerId) {
+        super(ownerId, 58, "Ordeal of Thassa", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{U}");
         this.expansionSetCode = "THS";
         this.subtype.add("Aura");
 
-        this.color.setRed(true);
+        this.color.setBlue(true);
 
         // Enchant creature
         TargetPermanent auraTarget = new TargetCreaturePermanent();
@@ -67,24 +66,22 @@ public class OrdealOfPurphoros extends CardImpl<OrdealOfPurphoros> {
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.AddAbility));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-        // Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.
+        // Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Thassa.
         ability = new AttacksAttachedTriggeredAbility(new AddCountersAttachedEffect(CounterType.P1P1.createInstance(),"it"), AttachmentType.AURA, false);
         ability.addEffect(new ConditionalOneShotEffect(new SacrificeSourceEffect(), new AttachedToCounterCondition(CounterType.P1P1, 3),
                 "Then if it has three or more +1/+1 counters on it, sacrifice {this}"));
         this.addAbility(ability);
-        // When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.
-        ability = new SacrificeSourceTriggeredAbility(
-                new DamageTargetEffect(3),false);
-        ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(ability);
+        // When you sacrifice Ordeal of Thassa, draw two cards.
+        this.addAbility(new SacrificeSourceTriggeredAbility(new DrawCardControllerEffect(2), false));
+
     }
 
-    public OrdealOfPurphoros(final OrdealOfPurphoros card) {
+    public OrdealOfThassa(final OrdealOfThassa card) {
         super(card);
     }
 
     @Override
-    public OrdealOfPurphoros copy() {
-        return new OrdealOfPurphoros(this);
+    public OrdealOfThassa copy() {
+        return new OrdealOfThassa(this);
     }
 }
