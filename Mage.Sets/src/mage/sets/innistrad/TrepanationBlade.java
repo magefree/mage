@@ -37,7 +37,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
-import mage.abilities.common.AttacksEquippedTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
@@ -62,7 +62,7 @@ public class TrepanationBlade extends CardImpl<TrepanationBlade> {
 
         // Whenever equipped creature attacks, defending player reveals cards from the top of his or her library until he or she reveals a land card.
         // The creature gets +1/+0 until end of turn for each card revealed this way. That player puts the revealed cards into his or her graveyard.
-        Ability ability = new AttacksEquippedTriggeredAbility(new TrepanationBladeDiscardEffect());
+        Ability ability = new AttacksAttachedTriggeredAbility(new TrepanationBladeDiscardEffect());
         ability.addEffect(new TrepanationBladeBoostEffect());
         this.addAbility(ability);
         // Equip {2}

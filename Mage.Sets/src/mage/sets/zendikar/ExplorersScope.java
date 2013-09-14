@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEquippedTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -56,7 +56,7 @@ public class ExplorersScope extends CardImpl<ExplorersScope> {
         this.expansionSetCode = "ZEN";
         this.subtype.add("Equipment");
 
-        this.addAbility(new AttacksEquippedTriggeredAbility(new ExplorersScopeEffect()));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new ExplorersScopeEffect()));
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }
 

@@ -26,47 +26,44 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.sets.scarsofmirrodin;
+package mage.abilities.common;
 
-import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.AttacksAttachedTriggeredAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.common.continious.BoostEquippedEffect;
-import mage.abilities.effects.common.DestroyTargetEffect;
-import mage.abilities.keyword.EquipAbility;
-import mage.cards.CardImpl;
-import mage.constants.Outcome;
-import mage.target.TargetPermanent;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
- * @author Loki
+ * @author LevelX2
  */
-public class ArgentumArmor extends CardImpl<ArgentumArmor> {
 
-    public ArgentumArmor (UUID ownerId) {
-        super(ownerId, 137, "Argentum Armor", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{6}");
-        this.expansionSetCode = "SOM";
-        this.subtype.add("Equipment");
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
-        Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
-        ability.addTarget(new TargetPermanent());
-        this.addAbility(ability);
-        this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));
+public class SacrificeSourceTriggeredAbility extends TriggeredAbilityImpl<SacrificeSourceTriggeredAbility> {
+
+    public SacrificeSourceTriggeredAbility(Effect effect, boolean optional) {
+        super(Zone.BATTLEFIELD, effect, optional);
     }
 
-    public ArgentumArmor (final ArgentumArmor card) {
-        super(card);
+    public SacrificeSourceTriggeredAbility(final SacrificeSourceTriggeredAbility ability) {
+        super(ability);
     }
 
     @Override
-    public ArgentumArmor copy() {
-        return new ArgentumArmor(this);
+    public SacrificeSourceTriggeredAbility copy() {
+        return new SacrificeSourceTriggeredAbility(this);
+    }
+
+    @Override
+    public boolean checkTrigger(GameEvent event, Game game) {
+         if (event.getType() == GameEvent.EventType.SACRIFICED_PERMANENT && event.getTargetId().equals(sourceId)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getRule() {
+        return "When you sacrifice {this}, " + super.getRule();
     }
 }

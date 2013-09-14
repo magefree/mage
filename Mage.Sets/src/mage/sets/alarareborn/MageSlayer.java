@@ -29,7 +29,7 @@ package mage.sets.alarareborn;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEquippedTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.EquipAbility;
@@ -56,7 +56,7 @@ public class MageSlayer extends CardImpl<MageSlayer> {
         this.color.setGreen(true);
 
         // Whenever equipped creature attacks, it deals damage equal to its power to defending player.
-        this.addAbility(new AttacksEquippedTriggeredAbility(new MageSlayerEffect(), false));
+        this.addAbility(new AttacksAttachedTriggeredAbility(new MageSlayerEffect(), false));
 
         // Equip {3}
         this.addAbility(new EquipAbility(Outcome.Benefit, new GenericManaCost(3), new TargetControlledCreaturePermanent()));
