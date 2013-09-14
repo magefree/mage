@@ -128,7 +128,6 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        // put a +1/+1 counter on it for each attacking creature you control.
         sb.append("put ");
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
