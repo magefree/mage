@@ -58,8 +58,7 @@ public class KeepsakeGorgon extends CardImpl<KeepsakeGorgon> {
     }
 
     public KeepsakeGorgon(UUID ownerId) {
-        super(ownerId, 94, "Keepsake Gorgon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        // TODO: Check card number
+        super(ownerId, 93, "Keepsake Gorgon", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "THS";
         this.subtype.add("Gorgon");
 

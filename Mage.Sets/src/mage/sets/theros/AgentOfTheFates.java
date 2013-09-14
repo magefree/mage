@@ -45,7 +45,6 @@ public class AgentOfTheFates extends CardImpl<AgentOfTheFates> {
 
     public AgentOfTheFates(UUID ownerId) {
         super(ownerId, 76, "Agent of the Fates", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{1}{B}{B}");
-        // TODO: check card number
         this.expansionSetCode = "THS";
         this.subtype.add("Human");
         this.subtype.add("Assassin");

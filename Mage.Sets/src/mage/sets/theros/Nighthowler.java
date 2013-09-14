@@ -52,7 +52,6 @@ public class Nighthowler extends CardImpl<Nighthowler> {
 
     public Nighthowler(UUID ownerId) {
         super(ownerId, 98, "Nighthowler", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT, CardType.CREATURE}, "{1}{B}{B}");
-        // TODO: Check card number
         this.expansionSetCode = "THS";
         this.subtype.add("Horror");
 

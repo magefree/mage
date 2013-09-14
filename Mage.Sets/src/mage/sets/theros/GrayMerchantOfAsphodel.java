@@ -48,8 +48,7 @@ import mage.players.Player;
 public class GrayMerchantOfAsphodel extends CardImpl<GrayMerchantOfAsphodel> {
 
     public GrayMerchantOfAsphodel(UUID ownerId) {
-        super(ownerId, 87, "Gray Merchant of Asphodel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
-        // TODO: check card number
+        super(ownerId, 89, "Gray Merchant of Asphodel", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
         this.expansionSetCode = "THS";
         this.subtype.add("Zombie");
 
