@@ -53,9 +53,17 @@ public class UndyingTest extends CardTestPlayerBase {
      */
     @Test
     public void testUndyingEvil() {
+        // Elite Vanguard
+        // Creature — Human Soldier 2/1
         addCard(Zone.BATTLEFIELD, playerA, "Elite Vanguard");
         addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
+        // Last Gasp
+        // Instant, 1B
+        // Target creature gets -3/-3 until end of turn.
         addCard(Zone.HAND, playerA, "Last Gasp");
+        // Undying Evil
+        // Target creature gains undying until end of turn. 
+        // When it dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
         addCard(Zone.HAND, playerA, "Undying Evil");
 
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Last Gasp", "Elite Vanguard");

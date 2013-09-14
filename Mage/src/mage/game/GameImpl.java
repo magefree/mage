@@ -127,9 +127,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
-    protected Map<UUID, MageObject> lki = new HashMap<UUID, MageObject>();
-    protected Map<UUID, MageObject> shortLivingLKI = new HashMap<UUID, MageObject>();
+    protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();    
+    protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
+    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
     protected GameState state;
 
     protected Date startTime;
@@ -1763,18 +1763,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         /*if (!lki.containsKey(objectId)) {
             return getCard(objectId);
         }*/
-        MageObject object = lki.get(objectId);
-        if (object != null) {
-            return object.copy();
+        Map<UUID, MageObject> lkiMap = lki.get(zone);
+        if (lkiMap != null) {
+            MageObject object = lkiMap.get(objectId);
+            if (object != null) {
+                return object.copy();
+            }
         }
         return null;
     }
 
     @Override
     public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
-        MageObject object = shortLivingLKI.get(objectId);
-        if (object != null) {
-            return object.copy();
+        Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
+        if (shortLivingLkiMap != null) {
+            MageObject object = shortLivingLkiMap.get(objectId);
+            if (object != null) {
+                return object.copy();
+            }
         }
         return null;
     }
@@ -1790,8 +1796,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
-            lki.put(objectId, copy);
-            shortLivingLKI.put(objectId, copy);
+
+            Map<UUID, MageObject> lkiMap = lki.get(zone);
+            if (lkiMap != null) {
+                lkiMap.put(objectId, copy);
+            } else {
+                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                newMap.put(objectId, copy);
+                lki.put(zone, newMap);
+            }
+
+            Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
+            if (shortLivingLkiMap != null) {
+                shortLivingLkiMap.put(objectId, copy);
+            } else {
+                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                newMap.put(objectId, copy);
+                shortLivingLKI.put(zone, newMap);
+            }
         }
     }
 

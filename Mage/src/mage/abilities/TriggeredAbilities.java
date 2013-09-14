@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import mage.MageObject;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -64,7 +65,13 @@ public class TriggeredAbilities extends HashMap<String, TriggeredAbility> {
     public void checkTriggers(GameEvent event, Game game) {
         for (TriggeredAbility ability: this.values()) {
             if (ability.isInUseableZone(game, null, true)) {
-                MageObject object = getMageObject(event, game, ability);
+                MageObject object = null;
+                if (!ability.getZone().equals(Zone.COMMAND) && !game.getState().getZone(ability.getSourceId()).equals(ability.getZone())) {
+                    object = game.getShortLivingLKI(ability.getSourceId(), ability.getZone());
+                }
+                if (object == null) {
+                    object = getMageObject(event, game, ability);
+                }
                 if (object != null) {
                     if (checkAbilityStillExists(ability, event, object)) {
                         if (object instanceof Permanent) {
