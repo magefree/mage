@@ -397,14 +397,13 @@ public class CardUtil {
      */
     public static String getCardZoneString(String text, UUID cardId, Game game) {
         StringBuilder uniqueString = new StringBuilder();
+        if (text != null) {
+            uniqueString.append(text);
+        }
+        uniqueString.append(cardId);
         Card card = game.getCard(cardId);
         if (card != null) {
-            if (text != null) {
-                uniqueString.append(text);
-            }
             uniqueString.append(card.getZoneChangeCounter());
-        } else {
-            uniqueString.append(cardId);
         }
         return uniqueString.toString();
     }

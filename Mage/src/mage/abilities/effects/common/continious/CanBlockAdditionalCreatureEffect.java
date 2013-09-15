@@ -27,14 +27,15 @@
  */
 package mage.abilities.effects.common.continious;
 
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 /**
  *
@@ -82,7 +83,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
                 case RulesEffects:
                     // maxBlocks = 0 equals to "can block any number of creatures"
                     if (perm.getMaxBlocks() > 0) {
-                        perm.setMaxBlocks(perm.getMaxBlocks() + 1);
+                        perm.setMaxBlocks(perm.getMaxBlocks() + amount);
                     } else {
                         perm.setMaxBlocks(0);
                     }
@@ -108,7 +109,7 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
                 sb.append("an additional creature");
                 break;
             default:
-                sb.append(amount).append(" additional creatures");
+                sb.append(CardUtil.numberToText(amount)).append(" additional creatures");
         }
         return sb.toString();
     }

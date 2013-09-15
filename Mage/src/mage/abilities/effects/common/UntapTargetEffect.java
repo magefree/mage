@@ -63,9 +63,6 @@ public class UntapTargetEffect extends OneShotEffect<UntapTargetEffect> {
             if (permanent != null) {
                 permanent.untap(game);
             }
-            else {
-                return false;
-            }
         }
         return true;
     }

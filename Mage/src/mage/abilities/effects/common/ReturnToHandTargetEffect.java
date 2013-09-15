@@ -37,6 +37,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 
 /**
@@ -96,14 +97,17 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
         if (mode.getTargets().size() < 1) {
             return "";
         }
-        if (mode.getTargets().get(0).getNumberOfTargets() == 0 && mode.getTargets().get(0).getMaxNumberOfTargets() > 0) {
-            return "Return up to " + mode.getTargets().get(0).getMaxNumberOfTargets() +" target " + mode.getTargets().get(0).getTargetName() + " to their owners' hand";
+        Target target = mode.getTargets().get(0);
+        StringBuilder sb = new StringBuilder("Return ");
+        if (target.getNumberOfTargets() == 0 && target.getMaxNumberOfTargets() > 0) {
+            sb.append("up to ").append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" to their owners' hand");
+            return sb.toString();
         } else {
-            StringBuilder sb = new StringBuilder("Return ");
-            if (!mode.getTargets().get(0).getTargetName().startsWith("another")) {
+            if (!target.getTargetName().startsWith("another")) {
                 sb.append(" target ");
             }
-            return sb.append(mode.getTargets().get(0).getTargetName()).append(" to it's owner's hand").toString();
+            sb.append(target.getTargetName()).append(" to it's owner's hand").toString();
+            return sb.toString();
         }
     }
 
