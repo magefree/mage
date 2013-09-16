@@ -141,7 +141,7 @@ class StolenGoodsCastFromExileEffect extends AsThoughEffectImpl<StolenGoodsCastF
                 if (player != null && player.chooseUse(Outcome.Benefit, "Cast the card without paying cost?", game)) {
                     player.cast(card.getSpellAbility(), game, true);
                 }
-                return false;
+                return true;
             }
         }
         return false;
