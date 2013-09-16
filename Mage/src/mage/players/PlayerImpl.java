@@ -914,6 +914,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (zone != Zone.HAND) {
                 if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        ability.setControllerId(this.getId());
                         useable.put(ability.getId(), ability);
                     }
                 }

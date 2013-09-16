@@ -5,13 +5,14 @@ package mage.constants;
  * @author North
  */
 public enum AsThoughEffectType {
-    BLOCK_TAPPED,
-    BE_BLOCKED,
     ATTACK,
+    BLOCK_TAPPED,
+    BE_BLOCKED,    
     CAST,
-    TARGET,
-    PAY,
     DAMAGE,
     HEXPROOF,
-    REVEAL_FACE_DOWN
+    SPEND_ANY_MANA,
+    PAY,
+    REVEAL_FACE_DOWN,
+    TARGET
 }

@@ -29,11 +29,18 @@
 package mage.abilities.effects;
 
 import java.io.Serializable;
-import java.util.*;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.MageSingleton;
@@ -42,8 +49,12 @@ import mage.abilities.StaticAbility;
 import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
+import mage.constants.SubLayer;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -69,7 +80,7 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<RequirementEffect>();
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
     private ContinuousEffectsList<RestrictionUntapNotMoreThanEffect> restrictionUntapNotMoreThanEffects = new ContinuousEffectsList<RestrictionUntapNotMoreThanEffect>();
-    private ContinuousEffectsList<AsThoughEffect> asThoughEffects = new ContinuousEffectsList<AsThoughEffect>();
+    private Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>>(AsThoughEffectType.class);
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
     private ContinuousEffectsList<SpliceCardEffect> spliceCardEffects = new ContinuousEffectsList<SpliceCardEffect>();
 
@@ -101,7 +112,10 @@ public class ContinuousEffects implements Serializable {
         requirementEffects = effect.requirementEffects.copy();
         restrictionEffects = effect.restrictionEffects.copy();
         restrictionUntapNotMoreThanEffects = effect.restrictionUntapNotMoreThanEffects.copy();
-        asThoughEffects = effect.asThoughEffects.copy();
+        for (Map.Entry<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> entry : effect.asThoughEffectsMap.entrySet()) {
+            asThoughEffectsMap.put(entry.getKey(), entry.getValue());
+        }
+
         costModificationEffects = effect.costModificationEffects.copy();
         spliceCardEffects = effect.spliceCardEffects.copy();
         for (Map.Entry<UUID, UUID> entry : effect.sources.entrySet()) {
@@ -118,7 +132,9 @@ public class ContinuousEffects implements Serializable {
         allEffectsLists.add(requirementEffects);
         allEffectsLists.add(restrictionEffects);
         allEffectsLists.add(restrictionUntapNotMoreThanEffects);
-        allEffectsLists.add(asThoughEffects);
+        for(ContinuousEffectsList asThoughtlist :asThoughEffectsMap.values()) {
+            allEffectsLists.add(asThoughtlist);
+        }
         allEffectsLists.add(costModificationEffects);
         allEffectsLists.add(spliceCardEffects);
     }
@@ -141,7 +157,9 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfCombatEffects();
         requirementEffects.removeEndOfCombatEffects();
         restrictionEffects.removeEndOfCombatEffects();
-        asThoughEffects.removeEndOfCombatEffects();
+        for(ContinuousEffectsList asThoughtlist :asThoughEffectsMap.values()) {
+            asThoughtlist.removeEndOfCombatEffects();
+        }
         costModificationEffects.removeEndOfCombatEffects();
         spliceCardEffects.removeEndOfCombatEffects();
     }
@@ -152,7 +170,9 @@ public class ContinuousEffects implements Serializable {
         preventionEffects.removeEndOfTurnEffects();
         requirementEffects.removeEndOfTurnEffects();
         restrictionEffects.removeEndOfTurnEffects();
-        asThoughEffects.removeEndOfTurnEffects();
+        for(ContinuousEffectsList asThoughtlist :asThoughEffectsMap.values()) {
+            asThoughtlist.removeEndOfTurnEffects();
+        }
         costModificationEffects.removeEndOfTurnEffects();
         spliceCardEffects.removeEndOfTurnEffects();
     }
@@ -164,7 +184,9 @@ public class ContinuousEffects implements Serializable {
         requirementEffects.removeInactiveEffects(game);
         restrictionEffects.removeInactiveEffects(game);
         restrictionUntapNotMoreThanEffects.removeInactiveEffects(game);
-        asThoughEffects.removeInactiveEffects(game);
+        for(ContinuousEffectsList asThoughtlist :asThoughEffectsMap.values()) {
+            asThoughtlist.removeInactiveEffects(game);
+        }
         costModificationEffects.removeInactiveEffects(game);
         spliceCardEffects.removeInactiveEffects(game);
     }
@@ -394,15 +416,12 @@ public class ContinuousEffects implements Serializable {
     }
 
     public boolean asThough(UUID objectId, AsThoughEffectType type, Game game) {
-        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(game);
-
+        List<AsThoughEffect> asThoughEffectsList = getApplicableAsThoughEffects(type, game);
         for (AsThoughEffect effect: asThoughEffectsList) {
-            if (effect.getAsThoughEffectType() == type) {
-                HashSet<Ability> abilities = asThoughEffects.getAbility(effect.getId());
-                for (Ability ability : abilities) {
-                    if (effect.applies(objectId, ability, game)) {
-                        return true;
-                    }
+            HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+            for (Ability ability : abilities) {
+                if (effect.applies(objectId, ability, game)) {
+                    return true;
                 }
             }
         }
@@ -412,24 +431,25 @@ public class ContinuousEffects implements Serializable {
     /**
      * Filters out asThough effects that are not active.
      *
+     * @param AsThoughEffectType type
      * @param game
      * @return
      */
-    private List<AsThoughEffect> getApplicableAsThoughEffects(Game game) {
+    private List<AsThoughEffect> getApplicableAsThoughEffects(AsThoughEffectType type, Game game) {
         List<AsThoughEffect> asThoughEffectsList = new ArrayList<AsThoughEffect>();
-
-        for (AsThoughEffect effect: asThoughEffects) {
-            HashSet<Ability> abilities = asThoughEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
-                    if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
-                        asThoughEffectsList.add(effect);
-                        break;
+        if (asThoughEffectsMap.containsKey(type)) {
+            for (AsThoughEffect effect: asThoughEffectsMap.get(type)) {
+                HashSet<Ability> abilities = asThoughEffectsMap.get(type).getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if (!(ability instanceof StaticAbility) || ability.isInUseableZone(game, null, false)) {
+                        if (effect.getDuration() != Duration.OneUse || !effect.isUsed()) {
+                            asThoughEffectsList.add(effect);
+                            break;
+                        }
                     }
                 }
             }
         }
-
         return asThoughEffectsList;
     }
 
@@ -743,7 +763,11 @@ public class ContinuousEffects implements Serializable {
                 break;
             case ASTHOUGH:
                 AsThoughEffect newAsThoughEffect = (AsThoughEffect)effect;
-                asThoughEffects.addEffect(newAsThoughEffect, source);
+                if (!asThoughEffectsMap.containsKey(newAsThoughEffect.getAsThoughEffectType())) {
+                    ContinuousEffectsList list = new ContinuousEffectsList();
+                    asThoughEffectsMap.put(newAsThoughEffect.getAsThoughEffectType(), list);
+                }
+                asThoughEffectsMap.get(newAsThoughEffect.getAsThoughEffectType()).addEffect(newAsThoughEffect, source);
                 break;
             case COSTMODIFICATION:
                 CostModificationEffect newCostModificationEffect = (CostModificationEffect)effect;

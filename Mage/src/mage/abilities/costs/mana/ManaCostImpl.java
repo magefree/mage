@@ -92,6 +92,17 @@ public abstract class ManaCostImpl<T extends ManaCostImpl<T>> extends CostImpl<T
         return this.sourceFilter;
     }
 
+    /*
+     * Restrict the allowed mana sources to pay the cost
+     *
+     * e.g. Spend only mana produced by basic lands to cast Imperiosaur.
+     * uses:
+     *     private static final FilterLandPermanent filter = new FilterLandPermanent();
+     *       static { filter.add(new SupertypePredicate("Basic")); }
+     *
+     * It will be cecked in ManaPool.pay method
+     *
+     */
     @Override
     public void setSourceFilter(Filter filter) {
         this.sourceFilter = filter;
