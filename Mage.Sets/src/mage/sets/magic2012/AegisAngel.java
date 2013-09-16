@@ -39,16 +39,27 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentOnBattlefieldControlUnchangedCondition;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.keyword.IndestructibleAbility;
 import mage.cards.CardImpl;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.WatcherImpl;
 
 /**
@@ -72,14 +83,18 @@ public class AegisAngel extends CardImpl<AegisAngel> {
 
         // Flying
         this.addAbility(FlyingAbility.getInstance());
+
         // When Aegis Angel enters the battlefield, another target permanent is indestructible for as long as you control Aegis Angel.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new AegisAngelEffect(), false);
+
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+                new GainAbilityTargetEffect(IndestructibleAbility.getInstance(), Duration.Custom),
+                new PermanentOnBattlefieldControlUnchangedCondition(),
+                "another target permanent is indestructible for as long as you control Aegis Angel");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         Target target = new TargetPermanent(filter);
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
-
-        this.addWatcher(new AegisAngelWatcher());
     }
 
     public AegisAngel(final AegisAngel card) {
@@ -91,85 +106,4 @@ public class AegisAngel extends CardImpl<AegisAngel> {
         return new AegisAngel(this);
     }
 
-}
-
-class AegisAngelEffect extends ReplacementEffectImpl<AegisAngelEffect> {
-
-    public AegisAngelEffect() {
-        super(Duration.OneUse, Outcome.Benefit);
-        this.staticText = "another target permanent is indestructible for as long as you control {this}";
-    }
-
-    public AegisAngelEffect(AegisAngelEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public AegisAngelEffect copy() {
-        return new AegisAngelEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL) {
-            if (event.getTargetId().equals(source.getSourceId())) {
-                this.used = true;
-                return false;
-            }
-        }
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD && event.getTargetId().equals(source.getSourceId())) {
-            this.used = true;
-            return false;
-        }
-
-        return event.getType().equals(GameEvent.EventType.DESTROY_PERMANENT)
-                && this.targetPointer.getTargets(game, source).contains(event.getTargetId());
-    }
-}
-
-class AegisAngelWatcher extends WatcherImpl<AegisAngelWatcher> {
-
-    AegisAngelWatcher() {
-        super("ControlLost", WatcherScope.CARD);
-    }
-
-    AegisAngelWatcher(AegisAngelWatcher watcher) {
-        super(watcher);
-    }
-
-    @Override
-    public void watch(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.LOST_CONTROL && event.getPlayerId().equals(controllerId) && event.getTargetId().equals(sourceId)) {
-            condition = true;
-            game.replaceEvent(event);
-            return;
-        }
-        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && event.getTargetId().equals(sourceId)) {
-            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
-                condition = true;
-                game.replaceEvent(event);
-            }
-        }
-    }
-
-    @Override
-    public void reset() {
-        //don't reset condition each turn - only when this leaves the battlefield
-    }
-
-    @Override
-    public AegisAngelWatcher copy() {
-        return new AegisAngelWatcher(this);
-    }
 }
