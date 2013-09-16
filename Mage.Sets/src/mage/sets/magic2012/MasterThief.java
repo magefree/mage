@@ -29,17 +29,22 @@
 package mage.sets.magic2012;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.condition.common.ControlsPermanentCondition;
+import mage.abilities.condition.common.PermanentOnBattlefieldControlUnchangedCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.GainControlTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.filter.FilterPermanent;
+import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.target.TargetPermanent;
 
 /**
@@ -48,7 +53,6 @@ import mage.target.TargetPermanent;
 public class MasterThief extends CardImpl<MasterThief> {
 
     private static final FilterPermanent filter = new FilterPermanent("artifact");
-
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));
     }
@@ -61,7 +65,13 @@ public class MasterThief extends CardImpl<MasterThief> {
         this.color.setBlue(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
-        Ability ability = new EntersBattlefieldTriggeredAbility(new GainControlTargetEffect(Duration.WhileOnBattlefield), false);
+
+        // When Master Thief enters the battlefield, gain control of target artifact for as long as you control Master Thief.
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+                new GainControlTargetEffect(Duration.Custom),
+                new PermanentOnBattlefieldControlUnchangedCondition(),
+                "gain control of target artifact for as long as you control Master Thief");
+        Ability ability = new EntersBattlefieldTriggeredAbility(effect, false);
         ability.addTarget(new TargetPermanent(filter));
         this.addAbility(ability);
     }
