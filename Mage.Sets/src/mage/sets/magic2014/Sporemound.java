@@ -35,7 +35,7 @@ import mage.abilities.effects.common.CreateTokenEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterControlledLandPermanent;
+import mage.filter.common.FilterLandPermanent;
 import mage.game.permanent.token.SaprolingToken;
 
 /**
@@ -55,7 +55,7 @@ public class Sporemound extends CardImpl<Sporemound> {
 
         // Whenever a land enters the battlefield under your control, put a 1/1 green Saproling creature token onto the battlefield.
         Effect effect = new CreateTokenEffect(new SaprolingToken());
-        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(effect, new FilterControlledLandPermanent("a land you control")));
+        this.addAbility(new EntersBattlefieldControlledTriggeredAbility(effect, new FilterLandPermanent("a land")));
     }
 
     public Sporemound(final Sporemound card) {
