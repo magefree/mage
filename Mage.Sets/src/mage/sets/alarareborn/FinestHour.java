@@ -36,6 +36,7 @@ import mage.constants.TurnPhase;
 import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
@@ -45,6 +46,7 @@ import mage.game.events.GameEvent.EventType;
 import mage.game.permanent.Permanent;
 import mage.game.turn.TurnMod;
 import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -58,7 +60,12 @@ public class FinestHour extends CardImpl<FinestHour> {
         this.color.setWhite(true);
         this.color.setGreen(true);
         this.color.setBlue(true);
+
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());
+
+        // Whenever a creature you control attacks alone, if it's the first combat phase of the turn, untap that
+        // creature. After this phase, there is an additional combat phase.
         this.addAbility(new FinestHourAbility());
     }
 
@@ -93,8 +100,9 @@ class FinestHourAbility extends TriggeredAbilityImpl<FinestHourAbility> {
         if (checkInterveningIfClause(game) && game.getActivePlayerId().equals(this.controllerId)) {
             if (event.getType() == EventType.DECLARED_ATTACKERS) {
                 if (game.getCombat().attacksAlone()) {
-                    this.addTarget(new TargetCreaturePermanent());
-                    getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
+                    for (Effect effect: this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                    }
                     return true;
                 }
             }
@@ -131,15 +139,13 @@ class FinestHourEffect extends OneShotEffect<FinestHourEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
+        Permanent permanent = game.getPermanent(this.getTargetPointer().getFirst(game, source));
         if (permanent != null) {
             permanent.untap(game);
             game.getState().getTurnMods().add(new TurnMod(source.getControllerId(), TurnPhase.COMBAT, null, false));
+            return true;
         }
-        else {
-            return false;
-        }
-        return true;
+        return false;
     }
 
 }
