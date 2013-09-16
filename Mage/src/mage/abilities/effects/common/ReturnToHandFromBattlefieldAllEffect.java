@@ -42,17 +42,17 @@ import mage.game.permanent.Permanent;
  */
 
 
-public class ReturnToHandAllEffect extends OneShotEffect<ReturnToHandAllEffect> {
+public class ReturnToHandFromBattlefieldAllEffect extends OneShotEffect<ReturnToHandFromBattlefieldAllEffect> {
 
     private FilterPermanent filter;
     
-    public ReturnToHandAllEffect(FilterPermanent filter) {
+    public ReturnToHandFromBattlefieldAllEffect(FilterPermanent filter) {
         super(Outcome.ReturnToHand);
         this.filter = filter;
         staticText = "Return all " + filter.getMessage() + " to their owners' hands";
     }
 
-    public ReturnToHandAllEffect(final ReturnToHandAllEffect effect) {
+    public ReturnToHandFromBattlefieldAllEffect(final ReturnToHandFromBattlefieldAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
     }
@@ -66,8 +66,7 @@ public class ReturnToHandAllEffect extends OneShotEffect<ReturnToHandAllEffect> 
     }
 
     @Override
-    public ReturnToHandAllEffect copy() {
-        return new ReturnToHandAllEffect(this);
+    public ReturnToHandFromBattlefieldAllEffect copy() {
+        return new ReturnToHandFromBattlefieldAllEffect(this);
     }
 }
-

@@ -25,52 +25,59 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.shardsofalara;
+package mage.abilities.effects.common;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
-import mage.abilities.keyword.UnearthAbility;
-import mage.cards.CardImpl;
-import mage.filter.common.FilterNonlandPermanent;
-import mage.filter.predicate.permanent.AnotherPredicate;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
+import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class KederektLeviathan extends CardImpl<KederektLeviathan> {
-    
-    private static final FilterNonlandPermanent filter = new FilterNonlandPermanent("all other nonland permanents");
-    static{
-        filter.add(new AnotherPredicate());
+
+public class ReturnToHandFromGraveyardAllEffect extends OneShotEffect<ReturnToHandFromGraveyardAllEffect> {
+
+    private FilterCard filter;
+
+    public ReturnToHandFromGraveyardAllEffect(FilterCard filter) {
+        super(Outcome.ReturnToHand);
+        this.filter = filter;
+        staticText = "Each player returns all " + filter.getMessage() + " from his or her graveyard to his or her hand";
     }
 
-    public KederektLeviathan(UUID ownerId) {
-        super(ownerId, 48, "Kederekt Leviathan", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{6}{U}{U}");
-        this.expansionSetCode = "ALA";
-        this.subtype.add("Leviathan");
-
-        this.color.setBlue(true);
-        this.power = new MageInt(5);
-        this.toughness = new MageInt(5);
-
-        // When Kederekt Leviathan enters the battlefield, return all other nonland permanents to their owners' hands.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
-        // Unearth {6}{U}
-        this.addAbility(new UnearthAbility(new ManaCostsImpl("{6}{U}")));
-    }
-
-    public KederektLeviathan(final KederektLeviathan card) {
-        super(card);
+    public ReturnToHandFromGraveyardAllEffect(final ReturnToHandFromGraveyardAllEffect effect) {
+        super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
-    public KederektLeviathan copy() {
-        return new KederektLeviathan(this);
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                Player player = game.getPlayer(playerId);
+                if (player != null) {
+                    for (Card card :player.getGraveyard().getCards(filter, game)) {
+                        card.moveToZone(Zone.HAND, playerId, game, false);
+                    }
+                }
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public ReturnToHandFromGraveyardAllEffect copy() {
+        return new ReturnToHandFromGraveyardAllEffect(this);
     }
 }
