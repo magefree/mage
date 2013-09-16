@@ -39,7 +39,7 @@ import mage.constants.Zone;
 
 /**
  *
- * @author noxx (Angel of Jubilation), cbt
+ * @author noxx (Angel of Jubilation), cbt33
  */
 public class BlessedOrator extends CardImpl<BlessedOrator> {
 
