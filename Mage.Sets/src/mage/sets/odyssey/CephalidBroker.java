@@ -25,38 +25,54 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.odyssey;
 
+import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.DiscardTargetEffect;
+import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.DrawDiscardTargetEffect;
-import mage.cards.CardImpl;
 import mage.constants.Zone;
+import mage.target.TargetPlayer;
 
-import java.util.UUID;
 
+
+/**
+ *
+ * @author cbt33, North (Merfolk Looter)
+ *     
+ */
 public class CephalidBroker extends CardImpl<CephalidBroker> {
 
-	public CephalidBroker(UUID ownerID)
-		super(ownerID, 71, "Cephalid Broker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}")
-		this.expansionSetCode = "ODY";
-		this.subtype.add("Cephalid");
-		this.color.setBlue(true);
-		this.power = MageInt(2);
-		this.toughness = MageInt(2);
-		this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawDiscardTargetEffect(2,2), new TapSourceCost()));
-		
-	public CephalidBroker(final CephalidBroker card);{
-		super(card);
-		}
-	
-@Override
-	public CephalidBroker copy() {
-		return new CephalidBroker(this);
-	}
-	
+    public CephalidBroker(UUID ownerId) {
+        super(ownerId, 71, "Cephalid Broker", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{U}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Cephalid");
+
+        this.color.setBlue(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // {tap}: Target player draws two cards, then discards two cards.
+        
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(2), new TapSourceCost());
+        ability.addEffect(new DiscardTargetEffect(2));
+        ability.addTarget(new TargetPlayer());
+        this.addAbility(ability);
+    }
+
+    public CephalidBroker(final CephalidBroker card) {
+        super(card);
+    }
+
+    @Override
+    public CephalidBroker copy() {
+        return new CephalidBroker(this);
+    }
 }
