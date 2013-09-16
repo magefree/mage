@@ -25,54 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.sets.odyssey;
 
-import mage.constants.CardType;
-import mage.MageInt;
-import mage.constants.Rarity;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.cards.CardImpl;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.cost.common.TapSourceCost;
-import mage.target.common.TargetAttackingOrBlockingCreature;
-import mage.abilites.effects.common.DamageTargetEffect;
-import mage.abilities.keyword.FlyingAbility;
-import mage.abilities.costs.mana.ManaCostsImpl;
-
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.keyword.FlyingAbility;
+import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.target.common.TargetAttackingOrBlockingCreature;
 
-
+/**
+ *
+ * @author cbt33
+ */
 public class AvenArcher extends CardImpl<AvenArcher> {
-	
-	public AvenArcher(ownerID UUID){
-		super(ownerID, 6, "Aven Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
-		this.ExpansionSetCode = "ODY";
-		this.subtype.add("Bird");
-		this.subtype.add("Soldier");
-		this.power = new MageInt(2);
-		this.toughness = new MageInt(2);
-		this.color.setWhite(true);
-		
-		// Flying
-		this.addAbility(FlyingAbility.getInstance());
-		
-		// Has {T}, Pay 2W: Aven Archer deals 2 damage to target attacking or blocking creature.
-		Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{W}"));
-		ability.addCost = new TapSourceCost();
-		ability.addTarget(TargetAttackingOrBlockingCreature());
+
+    public AvenArcher(UUID ownerId) {
+        super(ownerId, 6, "Aven Archer", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{W}{W}");
+        this.expansionSetCode = "ODY";
+        this.subtype.add("Bird");
+        this.subtype.add("Soldier");
+        this.subtype.add("Archer");
+
+        this.color.setWhite(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(2);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        
+        // {2}{W}, {tap}: Aven Archer deals 2 damage to target attacking or blocking creature.
+        
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(2), new ManaCostsImpl("{2}{W}"));
+		ability.addCost(new TapSourceCost());
+		ability.addTarget(new TargetAttackingOrBlockingCreature());
 		this.addAbility(ability);
-		}
-		
-		public AvenArcher(final AvenArcher card){
-			super(card);
-			}
-			
-	@Override
-		public AvenArcher copy(){
-			return new AvenArcher(this);
-			}
-			
-			
-	}
+    }
+
+    public AvenArcher(final AvenArcher card) {
+        super(card);
+    }
+
+    @Override
+    public AvenArcher copy() {
+        return new AvenArcher(this);
+    }
+}
