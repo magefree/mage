@@ -75,7 +75,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     @Override
     public boolean isDiscarded() {
-        return effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
+        return this.discarded || effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
     }
     
     @Override

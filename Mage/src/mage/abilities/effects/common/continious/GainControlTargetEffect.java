@@ -28,13 +28,14 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.UUID;
+import mage.abilities.Ability;
+import mage.abilities.Mode;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -44,12 +45,22 @@ import mage.game.permanent.Permanent;
  */
 public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTargetEffect> {
 
+    private UUID fixedControllerId;
+    private boolean fixedController;
+
     public GainControlTargetEffect(Duration duration) {
+        this(duration, false);
+    }
+
+    public GainControlTargetEffect(Duration duration, boolean fixedController) {
         super(duration, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
+        this.fixedController = fixedController;
     }
 
     public GainControlTargetEffect(final GainControlTargetEffect effect) {
         super(effect);
+        this.fixedControllerId = effect.fixedControllerId;
+        this.fixedController = effect.fixedController;
     }
 
     @Override
@@ -58,13 +69,22 @@ public class GainControlTargetEffect extends ContinuousEffectImpl<GainControlTar
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getFirstTarget());
-        if (targetPointer != null) {
-            permanent = game.getPermanent(targetPointer.getFirst(game, source));
+    public void init(Ability source, Game game) {
+        if (fixedController) {
+            this.fixedControllerId = source.getControllerId();
         }
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
         if (permanent != null) {
-            return permanent.changeControllerId(source.getControllerId(), game);
+            if (fixedController) {
+                return permanent.changeControllerId(fixedControllerId, game);
+            } else {
+                return permanent.changeControllerId(source.getControllerId(), game);
+            }
+        
         }
         return false;
     }

@@ -778,8 +778,7 @@ public class ContinuousEffects implements Serializable {
                 spliceCardEffects.addEffect(newSpliceCardEffect, source);
                 break;
             default:
-                ContinuousEffect newEffect = (ContinuousEffect)effect;
-                layeredEffects.addEffect(newEffect, source);
+                layeredEffects.addEffect(effect, source);
                 break;
         }
     }
