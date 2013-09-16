@@ -100,6 +100,7 @@ class AdaptiveAutomatonEffect extends OneShotEffect<AdaptiveAutomatonEffect> {
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice());
+            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>");
         }
         return false;
     }

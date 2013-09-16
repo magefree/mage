@@ -102,6 +102,7 @@ class XenograftEffect extends OneShotEffect<XenograftEffect> {
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(source.getSourceId() + "_XenograftType", typeChoice.getChoice());
+            permanent.addInfo("chosen type", "<i>Chosen type: " + typeChoice.getChoice().toString() + "</i>");
         }
         return false;
     }
