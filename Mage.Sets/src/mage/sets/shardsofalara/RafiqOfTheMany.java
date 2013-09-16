@@ -29,20 +29,21 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
-import mage.target.common.TargetCreaturePermanent;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -61,7 +62,11 @@ public class RafiqOfTheMany extends CardImpl<RafiqOfTheMany> {
         this.subtype.add("Knight");
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
+
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());
+
+        // Whenever a creature you control attacks alone, it gains double strike until end of turn.
         this.addAbility(new RafiqOfTheManyAbility());
     }
 
@@ -95,8 +100,9 @@ class RafiqOfTheManyAbility extends TriggeredAbilityImpl<RafiqOfTheManyAbility> 
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
             if (game.getCombat().attacksAlone()) {
-                this.addTarget(new TargetCreaturePermanent());
-                getTargets().get(0).add(game.getCombat().getAttackers().get(0), game);
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                }
                 return true;
             }
         }
