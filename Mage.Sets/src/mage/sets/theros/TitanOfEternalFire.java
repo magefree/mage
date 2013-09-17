@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.target.common.TargetCreatureOrPlayer;
 
 /**
@@ -63,7 +63,7 @@ public class TitanOfEternalFire extends CardImpl<TitanOfEternalFire> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new ManaCostsImpl("{R}"));
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreatureOrPlayer());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Human", "Each Human creature you control"))));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Human", "Each Human creature"))));
     }
 
     public TitanOfEternalFire(final TitanOfEternalFire card) {
