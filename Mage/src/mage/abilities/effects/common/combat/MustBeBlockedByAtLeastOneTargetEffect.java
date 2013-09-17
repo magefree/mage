@@ -37,6 +37,9 @@ import mage.game.permanent.Permanent;
 
 
 /**
+ * !! This effect does only support one target.
+ *
+ *
  * http://tappedout.net/mtg-questions/must-be-blocked-if-able-effect-makes-other-attacking-creatures-essentially-unblockable/
  *
  * When you Declare Blockers, you choose an arrangement for your blockers,
@@ -81,7 +84,7 @@ public class MustBeBlockedByAtLeastOneTargetEffect extends RequirementEffect<Mus
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent.canBlock(this.getTargetPointer().getFirst(game, source), game);
     }
 
     @Override

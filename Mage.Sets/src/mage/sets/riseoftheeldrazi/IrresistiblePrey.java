@@ -28,16 +28,14 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.target.common.TargetCreaturePermanent;
 

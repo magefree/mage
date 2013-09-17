@@ -340,11 +340,31 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
         //20101001 - 509.1c
+        // check mustBeBlockedByAtLeastOne
+        Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<UUID, Set<UUID>>();
+
+        // check mustBlockAny
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
             // Does the creature not block and is an opponent of the attacker
             if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 // get all requiremet effects that apply to the creature
-                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).keySet()) {
+                for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                    RequirementEffect effect = (RequirementEffect)entry.getKey();
+                    // get possible mustBeBlockedByAtLeastOne blocker
+                    for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                        UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
+                        if (toBeBlockedCreature != null) {
+                            Set<UUID> potentialBlockers;
+                            if (mustBeBlockedByAtLeastOne.containsKey(toBeBlockedCreature)) {
+                                potentialBlockers = mustBeBlockedByAtLeastOne.get(toBeBlockedCreature);
+                            } else {
+                                potentialBlockers = new HashSet<UUID>();
+                                mustBeBlockedByAtLeastOne.put(toBeBlockedCreature, potentialBlockers);
+                            }
+                            potentialBlockers.add(creature.getId());
+                        }
+                    }
+
                     // check the mustBlockAny
                     if (effect.mustBlockAny(game)) {
                         // check that it can block at least one of the attackers
@@ -376,6 +396,36 @@ public class Combat implements Serializable, Copyable<Combat> {
                 }
             }
         }
+
+        // check mustBeBlockedByAtLeastOne
+        // TODO: Check if already blocking creatures that block other creatures have no madatory block and have to block here
+        for (UUID toBeBlockedCreatureId: mustBeBlockedByAtLeastOne.keySet()) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
+                    // creature is not blocked but has possible blockers
+                    if (controller.isHuman()) {
+                        Permanent toBeBlockedCreature = game.getPermanent(toBeBlockedCreatureId);
+                        if (toBeBlockedCreature != null) {
+                            game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getName()).append(" has to be blocked by at least one creature.").toString());
+                        }
+                        return false;
+                    } else {
+                        // take the first potential blocker from the set to block for the AI
+                        UUID blockingCreatureId = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId).iterator().next();
+                        Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                        if (blockingCreature != null) {
+                            Player defender = game.getPlayer(blockingCreature.getControllerId());
+                            if (defender != null) {
+                                defender.declareBlocker(defender.getId(), blockingCreatureId, toBeBlockedCreatureId, game);
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+
         return true;
     }
 

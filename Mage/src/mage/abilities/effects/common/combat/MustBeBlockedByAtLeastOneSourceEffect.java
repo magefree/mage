@@ -81,7 +81,7 @@ public class MustBeBlockedByAtLeastOneSourceEffect extends RequirementEffect<Mus
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent.canBlock(source.getSourceId(), game);
     }
 
     @Override
