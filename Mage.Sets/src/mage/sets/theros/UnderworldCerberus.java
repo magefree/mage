@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.ReturnToHandFromGraveyardAllEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

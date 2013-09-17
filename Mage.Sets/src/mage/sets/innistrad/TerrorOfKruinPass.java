@@ -39,7 +39,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.TwoOrMoreSpellsWereCastLastTurnCondition;
 import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.effects.common.TransformSourceEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.abilities.keyword.TransformAbility;
 import mage.cards.CardImpl;

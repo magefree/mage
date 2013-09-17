@@ -25,51 +25,64 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirage;
+package mage.sets.theros;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
-import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
-import mage.abilities.keyword.FlankingAbility;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneSourceEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
+import mage.target.Target;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class SearingSpearAskari extends CardImpl<SearingSpearAskari> {
+public class LoathsomeCatoblepas extends CardImpl<LoathsomeCatoblepas> {
 
-    public SearingSpearAskari(UUID ownerId) {
-        super(ownerId, 191, "Searing Spear Askari", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{R}");
-        this.expansionSetCode = "MIR";
-        this.subtype.add("Human");
-        this.subtype.add("Knight");
-
-        this.color.setRed(true);
-        this.power = new MageInt(2);
-        this.toughness = new MageInt(2);
-
-        // Flanking
-        this.addAbility(new FlankingAbility());
-        // {1}{R}: Searing Spear Askari can't be blocked except by two or more creatures this turn.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new CantBeBlockedByOneEffect(2)), Duration.EndOfTurn), new ManaCostsImpl("{1}{R}")));
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
+    static {
+        filter.add(new ControllerPredicate(TargetController.OPPONENT));
     }
 
-    public SearingSpearAskari(final SearingSpearAskari card) {
+    public LoathsomeCatoblepas(UUID ownerId) {
+        super(ownerId, 95, "Loathsome Catoblepas", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{5}{B}");
+        this.expansionSetCode = "THS";
+        this.subtype.add("Beast");
+
+        this.color.setBlack(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(3);
+
+        // {2}{G}: Loathsome Catoblepas must be blocked this turn if able.
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneSourceEffect(), new ManaCostsImpl("{2}{G}")));
+        // When Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.
+        Ability ability = new DiesTriggeredAbility(new BoostTargetEffect(-3,-3, Duration.EndOfTurn), false);
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+
+    }
+
+    public LoathsomeCatoblepas(final LoathsomeCatoblepas card) {
         super(card);
     }
 
     @Override
-    public SearingSpearAskari copy() {
-        return new SearingSpearAskari(this);
+    public LoathsomeCatoblepas copy() {
+        return new LoathsomeCatoblepas(this);
     }
 }

@@ -64,18 +64,18 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MustBeBlockedTargetEffect extends RequirementEffect<MustBeBlockedTargetEffect> {
+public class MustBeBlockedByAtLeastOneTargetEffect extends RequirementEffect<MustBeBlockedByAtLeastOneTargetEffect> {
 
-    public MustBeBlockedTargetEffect() {
+    public MustBeBlockedByAtLeastOneTargetEffect() {
         this(Duration.EndOfTurn);
     }
 
-    public MustBeBlockedTargetEffect(Duration duration) {
+    public MustBeBlockedByAtLeastOneTargetEffect(Duration duration) {
         super(duration);
         staticText = "Target creature must be blocked this turn if able";
     }
 
-    public MustBeBlockedTargetEffect(final MustBeBlockedTargetEffect effect) {
+    public MustBeBlockedByAtLeastOneTargetEffect(final MustBeBlockedByAtLeastOneTargetEffect effect) {
         super(effect);
     }
 
@@ -91,17 +91,17 @@ public class MustBeBlockedTargetEffect extends RequirementEffect<MustBeBlockedTa
 
     @Override
     public boolean mustBlock(Game game) {
-        return true;
+        return false;
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
+    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
         return this.getTargetPointer().getFirst(game, source);
     }
 
     @Override
-    public MustBeBlockedTargetEffect copy() {
-        return new MustBeBlockedTargetEffect(this);
+    public MustBeBlockedByAtLeastOneTargetEffect copy() {
+        return new MustBeBlockedByAtLeastOneTargetEffect(this);
     }
 
 }

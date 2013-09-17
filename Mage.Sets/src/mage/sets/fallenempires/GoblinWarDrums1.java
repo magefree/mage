@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.TargetController;
 import mage.filter.common.FilterCreaturePermanent;

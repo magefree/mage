@@ -34,7 +34,7 @@ import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByCreaturesSourceEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;

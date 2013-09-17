@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.LandfallAbility;
-import mage.abilities.effects.common.combat.MustBlockSourceTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;
@@ -54,7 +54,7 @@ public class TurntimberBasilisk extends CardImpl<TurntimberBasilisk> {
 
         this.addAbility(DeathtouchAbility.getInstance());
         // Landfall - Whenever a land enters the battlefield under your control, you may have target creature block Turntimber Basilisk this turn if able.
-        LandfallAbility ability = new LandfallAbility(new MustBlockSourceTargetEffect(), true);
+        LandfallAbility ability = new LandfallAbility(new MustBeBlockedByTargetSourceEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

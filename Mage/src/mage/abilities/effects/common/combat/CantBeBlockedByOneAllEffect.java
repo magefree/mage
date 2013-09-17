@@ -25,14 +25,15 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.continious;
+package mage.abilities.effects.common.combat;
 
-import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SubLayer;
+import mage.abilities.Ability;
+import mage.abilities.effects.ContinuousEffectImpl;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.util.CardUtil;
@@ -41,57 +42,43 @@ import mage.util.CardUtil;
  *
  * @author LevelX2
  */
+public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl<CantBeBlockedByOneAllEffect> {
 
-public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBlockAdditionalCreatureEffect> {
-
+    private FilterCreaturePermanent filter;
     protected int amount;
 
-    public CanBlockAdditionalCreatureEffect() {
-        this(1);
+    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter) {
+        this(amount, filter, Duration.WhileOnBattlefield);
     }
 
-    /**
-     * Changes the number of creatures source creature can block
-     *
-     * @param amount - 0 = any number, 1-x = n additional blocks
-     */
-    public CanBlockAdditionalCreatureEffect(int amount) {
-        this(Duration.WhileOnBattlefield, amount);
-    }
-
-    public CanBlockAdditionalCreatureEffect(Duration duration, int amount) {
+    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter, Duration duration) {
         super(duration, Outcome.Benefit);
         this.amount = amount;
-        staticText = setText();
+        this.filter = filter;
+        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
     }
 
-    public CanBlockAdditionalCreatureEffect(final CanBlockAdditionalCreatureEffect effect) {
+    public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
         super(effect);
         this.amount = effect.amount;
+        this.filter = effect.filter;
     }
 
     @Override
-    public CanBlockAdditionalCreatureEffect copy() {
-        return new CanBlockAdditionalCreatureEffect(this);
+    public CantBeBlockedByOneAllEffect copy() {
+        return new CantBeBlockedByOneAllEffect(this);
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        Permanent perm = game.getPermanent(source.getSourceId());
-        if (perm != null) {
-            switch (layer) {
-                case RulesEffects:
-                    // maxBlocks = 0 equals to "can block any number of creatures"
-                    if (perm.getMaxBlocks() > 0) {
-                        perm.setMaxBlocks(perm.getMaxBlocks() + amount);
-                    } else {
-                        perm.setMaxBlocks(0);
-                    }
-                    break;
+        switch (layer) {
+            case RulesEffects:
+                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
+                    perm.setMinBlockedBy(amount);
+                }
+                break;
             }
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
@@ -99,24 +86,8 @@ public class CanBlockAdditionalCreatureEffect extends ContinuousEffectImpl<CanBl
         return false;
     }
 
-    private String setText() {
-        StringBuilder sb = new StringBuilder("{this} can block ");
-        switch(amount) {
-            case 0:
-                sb.append("any number of creatures");
-                break;
-            case 1:
-                sb.append("an additional creature");
-                break;
-            default:
-                sb.append(CardUtil.numberToText(amount)).append(" additional creatures");
-        }
-        return sb.toString();
-    }
-
     @Override
     public boolean hasLayer(Layer layer) {
         return layer == Layer.RulesEffects;
     }
-
 }

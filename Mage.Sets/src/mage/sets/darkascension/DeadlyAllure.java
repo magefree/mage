@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.combat.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashbackAbility;
@@ -52,7 +52,7 @@ public class DeadlyAllure extends CardImpl<DeadlyAllure> {
         this.color.setBlack(true);
 
         // Target creature gains deathtouch until end of turn and must be blocked this turn if able.
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()), Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()), Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(DeathtouchAbility.getInstance(), Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
 

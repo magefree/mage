@@ -30,7 +30,7 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CanBlockOnlyFlyingEffect;
+import mage.abilities.effects.common.combat.CanBlockOnlyFlyingEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

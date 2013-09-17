@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -25,66 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.AsThoughEffectImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class MustBlockAttachedEffect extends RequirementEffect<MustBlockAttachedEffect> {
 
-    protected AttachmentType attachmentType;
+public class CanAttackAsThoughtItDidntHaveDefenderEffect extends AsThoughEffectImpl<CanAttackAsThoughtItDidntHaveDefenderEffect> {
 
-    public MustBlockAttachedEffect(AttachmentType attachmentType) {
-        this(Duration.WhileOnBattlefield, attachmentType);
+    public CanAttackAsThoughtItDidntHaveDefenderEffect(Duration duration) {
+        super(AsThoughEffectType.ATTACK, duration, Outcome.Benefit);
+        staticText = "{this} can attack as though it didn't have defender";
     }
 
-    public MustBlockAttachedEffect(Duration duration, AttachmentType attachmentType) {
-        super(duration);
-        this.attachmentType = attachmentType;
-        staticText = "All creatures able to block " + (attachmentType.equals(AttachmentType.AURA) ? "enchanted":"equipped") + " creature do so";
-    }
-
-    public MustBlockAttachedEffect(final MustBlockAttachedEffect effect) {
+    public CanAttackAsThoughtItDidntHaveDefenderEffect(final CanAttackAsThoughtItDidntHaveDefenderEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
+    public boolean apply(Game game, Ability source) {
         return true;
     }
 
     @Override
-    public boolean mustAttack(Game game) {
-        return false;
+    public CanAttackAsThoughtItDidntHaveDefenderEffect copy() {
+        return new CanAttackAsThoughtItDidntHaveDefenderEffect(this);
     }
 
     @Override
-    public boolean mustBlock(Game game) {
+    public boolean applies(UUID sourceId, Ability source, Game game) {
         return true;
-    }
-
-    @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            return attachment.getAttachedTo() ;
-        }
-        return null;
-    }
-
-    @Override
-    public MustBlockAttachedEffect copy() {
-        return new MustBlockAttachedEffect(this);
     }
 
 }

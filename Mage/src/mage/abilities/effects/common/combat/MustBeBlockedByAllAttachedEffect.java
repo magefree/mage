@@ -25,69 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.continious;
 
+package mage.abilities.effects.common.combat;
+
+import java.util.UUID;
+import mage.constants.AttachmentType;
 import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.abilities.Ability;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.util.CardUtil;
 
 /**
  *
  * @author LevelX2
  */
-public class CantBeBlockedByOneAllEffect extends ContinuousEffectImpl<CantBeBlockedByOneAllEffect> {
+public class MustBeBlockedByAllAttachedEffect extends RequirementEffect<MustBeBlockedByAllAttachedEffect> {
 
-    private FilterCreaturePermanent filter;
-    protected int amount;
+    protected AttachmentType attachmentType;
 
-    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter) {
-        this(amount, filter, Duration.WhileOnBattlefield);
+    public MustBeBlockedByAllAttachedEffect(AttachmentType attachmentType) {
+        this(Duration.WhileOnBattlefield, attachmentType);
     }
 
-    public CantBeBlockedByOneAllEffect(int amount, FilterCreaturePermanent filter, Duration duration) {
-        super(duration, Outcome.Benefit);
-        this.amount = amount;
-        this.filter = filter;
-        staticText = new StringBuilder("Each ").append(filter.getMessage()).append(" can't be blocked except by ").append(CardUtil.numberToText(amount)).append(" or more creatures").toString();
+    public MustBeBlockedByAllAttachedEffect(Duration duration, AttachmentType attachmentType) {
+        super(duration);
+        this.attachmentType = attachmentType;
+        staticText = "All creatures able to block " + (attachmentType.equals(AttachmentType.AURA) ? "enchanted":"equipped") + " creature do so";
     }
 
-    public CantBeBlockedByOneAllEffect(final CantBeBlockedByOneAllEffect effect) {
+    public MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
         super(effect);
-        this.amount = effect.amount;
-        this.filter = effect.filter;
     }
 
     @Override
-    public CantBeBlockedByOneAllEffect copy() {
-        return new CantBeBlockedByOneAllEffect(this);
-    }
-
-    @Override
-    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        switch (layer) {
-            case RulesEffects:
-                for (Permanent perm: game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-                    perm.setMinBlockedBy(amount);
-                }
-                break;
-            }
+    public boolean applies(Permanent permanent, Ability source, Game game) {
         return true;
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
+    public boolean mustAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean hasLayer(Layer layer) {
-        return layer == Layer.RulesEffects;
+    public boolean mustBlock(Game game) {
+        return true;
     }
+
+    @Override
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null) {
+            return attachment.getAttachedTo() ;
+        }
+        return null;
+    }
+
+    @Override
+    public MustBeBlockedByAllAttachedEffect copy() {
+        return new MustBeBlockedByAllAttachedEffect(this);
+    }
+
 }

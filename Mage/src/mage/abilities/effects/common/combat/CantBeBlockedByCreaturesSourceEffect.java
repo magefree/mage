@@ -25,27 +25,33 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.continious;
+package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
+import mage.constants.Duration;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithLessPowerEffect> {
 
-    public CantBeBlockedByCreaturesWithLessPowerEffect() {
+public class CantBeBlockedByCreaturesSourceEffect extends RestrictionEffect<CantBeBlockedByCreaturesSourceEffect> {
+
+    private FilterCreaturePermanent filter;
+
+    public CantBeBlockedByCreaturesSourceEffect(FilterCreaturePermanent filter, Duration duration) {
         super(Duration.WhileOnBattlefield);
-        staticText = "Creatures with power less than {this}'s power can't block it";
+        this.filter = filter;
+        staticText = new StringBuilder("{this} can't be blocked by ").append(filter.getMessage()).toString();
     }
 
-    public CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
+    public CantBeBlockedByCreaturesSourceEffect(final CantBeBlockedByCreaturesSourceEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
@@ -58,14 +64,14 @@ public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffe
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        if (blocker.getPower().getValue() < attacker.getPower().getValue()) {
+        if (filter.match(blocker, source.getSourceId(), source.getControllerId(), game)) {
             return false;
         }
         return true;
     }
 
     @Override
-    public CantBeBlockedByCreaturesWithLessPowerEffect copy() {
-        return new CantBeBlockedByCreaturesWithLessPowerEffect(this);
+    public CantBeBlockedByCreaturesSourceEffect copy() {
+        return new CantBeBlockedByCreaturesSourceEffect(this);
     }
 }

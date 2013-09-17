@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.combat.MustBlockSourceTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByTargetSourceEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class GiantAmbushBeetle extends CardImpl<GiantAmbushBeetle> {
         this.addAbility(HasteAbility.getInstance());
         
         // When Giant Ambush Beetle enters the battlefield, you may have target creature block it this turn if able.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new MustBlockSourceTargetEffect(Duration.EndOfTurn), true);
+        Ability ability = new EntersBattlefieldTriggeredAbility(new MustBeBlockedByTargetSourceEffect(Duration.EndOfTurn), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

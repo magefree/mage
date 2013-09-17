@@ -35,7 +35,7 @@ import mage.abilities.condition.common.MonstrousCondition;
 import mage.abilities.decorator.ConditionalAsThoughEffect;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.continious.CanAttackAsThoughtItDidntHaveDefenderEffect;
+import mage.abilities.effects.common.combat.CanAttackAsThoughtItDidntHaveDefenderEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.DefenderAbility;
 import mage.abilities.keyword.IndestructibleAbility;

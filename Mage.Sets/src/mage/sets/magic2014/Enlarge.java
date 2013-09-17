@@ -28,7 +28,7 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.abilities.effects.common.combat.MustBeBlockedTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;
@@ -53,7 +53,7 @@ public class Enlarge extends CardImpl<Enlarge> {
         // Target creature gets +7/+7 and gains trample until end of turn. It must be blocked this turn if able.
         this.getSpellAbility().addEffect(new BoostTargetEffect(7,7, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new MustBeBlockedTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addEffect(new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 

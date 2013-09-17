@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -39,28 +39,24 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSourceTargetEffect> {
+public class MustBeBlockedByAllSourceEffect extends RequirementEffect<MustBeBlockedByAllSourceEffect> {
 
-    public MustBlockSourceTargetEffect() {
-        this(Duration.EndOfTurn);
+    public MustBeBlockedByAllSourceEffect() {
+        this(Duration.WhileOnBattlefield);
     }
 
-    public MustBlockSourceTargetEffect(Duration duration) {
+    public MustBeBlockedByAllSourceEffect(Duration duration) {
         super(duration);
-        staticText = "Target creature blocks {this} this turn if able";
+        staticText = "All creatures able to block {this} do so";
     }
 
-    public MustBlockSourceTargetEffect(final MustBlockSourceTargetEffect effect) {
+    public MustBeBlockedByAllSourceEffect(final MustBeBlockedByAllSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null && creature.getId().equals(permanent.getId())) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     @Override
@@ -79,8 +75,8 @@ public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSour
     }
 
     @Override
-    public MustBlockSourceTargetEffect copy() {
-        return new MustBlockSourceTargetEffect(this);
+    public MustBeBlockedByAllSourceEffect copy() {
+        return new MustBeBlockedByAllSourceEffect(this);
     }
 
 }

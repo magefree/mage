@@ -35,7 +35,7 @@ import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.common.AddContinuousEffectToGame;
 import mage.abilities.effects.common.combat.CantBlockAllEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneAllEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.filter.common.FilterCreaturePermanent;

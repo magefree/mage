@@ -345,9 +345,9 @@ public class Combat implements Serializable, Copyable<Combat> {
             if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 // get all requiremet effects that apply to the creature
                 for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).keySet()) {
-
+                    // check the mustBlockAny
                     if (effect.mustBlockAny(game)) {
-                        // check that it can block an attacker
+                        // check that it can block at least one of the attackers
                         boolean mayBlock = false;
                         for (UUID attackingCreatureId : getAttackers()) {
                             if (creature.canBlock(attackingCreatureId, game)) {
@@ -355,6 +355,7 @@ public class Combat implements Serializable, Copyable<Combat> {
                                 break;
                             }
                         }
+                        // is so inform human player or set block for AI player
                         if (mayBlock) {
                             if (controller.isHuman()) {
                                 game.informPlayer(controller, "Creature should block this turn: " + creature.getName());

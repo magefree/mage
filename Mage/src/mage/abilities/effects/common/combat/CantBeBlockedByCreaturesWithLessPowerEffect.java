@@ -25,34 +25,32 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common.continious;
+package mage.abilities.effects.common.combat;
 
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
 import mage.constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
+public class CantBeBlockedByCreaturesWithLessPowerEffect extends RestrictionEffect<CantBeBlockedByCreaturesWithLessPowerEffect> {
 
-public class CantBeBlockedTargetEffect extends RestrictionEffect<CantBeBlockedTargetEffect> {
-
-    public CantBeBlockedTargetEffect(Duration duration) {
-        super(duration);
+    public CantBeBlockedByCreaturesWithLessPowerEffect() {
+        super(Duration.WhileOnBattlefield);
+        staticText = "Creatures with power less than {this}'s power can't block it";
     }
 
-    public CantBeBlockedTargetEffect(final CantBeBlockedTargetEffect effect) {
+    public CantBeBlockedByCreaturesWithLessPowerEffect(final CantBeBlockedByCreaturesWithLessPowerEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.getTargetPointer().getTargets(game, source).contains(permanent.getId())) {
+        if (permanent.getId().equals(source.getSourceId())) {
             return true;
         }
         return false;
@@ -60,33 +58,14 @@ public class CantBeBlockedTargetEffect extends RestrictionEffect<CantBeBlockedTa
 
     @Override
     public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+        if (blocker.getPower().getValue() < attacker.getPower().getValue()) {
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public CantBeBlockedTargetEffect copy() {
-        return new CantBeBlockedTargetEffect(this);
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (staticText != null && !staticText.isEmpty()) {
-            return staticText;
-        }
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if(target.getNumberOfTargets() > 1){
-            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
-                sb.append("Up to");
-            }
-            sb.append(target.getMaxNumberOfTargets()).append(" target ").append(target.getTargetName()).append(" gain ");
-        } else {
-            sb.append("Target ").append(target.getTargetName()).append(" can't be blocked");
-        }
-        if (duration.equals(Duration.EndOfTurn)) {
-            sb.append(" this turn");
-        }
-
-        return sb.toString();
+    public CantBeBlockedByCreaturesWithLessPowerEffect copy() {
+        return new CantBeBlockedByCreaturesWithLessPowerEffect(this);
     }
 }

@@ -28,14 +28,14 @@
 
 package mage.abilities.effects;
 
+import java.util.UUID;
+import mage.abilities.Ability;
 import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
-import mage.abilities.Ability;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
-import java.util.UUID;
 
 /**
  *
@@ -72,6 +72,10 @@ public abstract class RequirementEffect<T extends RequirementEffect<T>> extends 
     }
 
     public UUID mustBlockAttacker(Ability source, Game game) {
+        return null;
+    }
+
+    public UUID mustBlockAttackerIfElseUnblocked(Ability source, Game game) {
         return null;
     }
 

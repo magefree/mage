@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.cards.CardImpl;
 
