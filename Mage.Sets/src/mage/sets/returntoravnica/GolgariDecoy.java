@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;

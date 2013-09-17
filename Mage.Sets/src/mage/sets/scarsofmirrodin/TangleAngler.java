@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceTargetEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceTargetEffect;
 import mage.abilities.keyword.InfectAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

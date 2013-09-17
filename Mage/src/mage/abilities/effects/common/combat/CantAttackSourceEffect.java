@@ -26,64 +26,44 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
 import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author magenoxx_at_googlemail.com
+ * @author BetaSteward_at_googlemail.com
  */
-public class BlocksIfAbleTargetEffect extends RequirementEffect<BlocksIfAbleTargetEffect> {
+public class CantAttackSourceEffect extends RestrictionEffect<CantAttackSourceEffect> {
 
-    public BlocksIfAbleTargetEffect(Duration duration) {
+    public CantAttackSourceEffect(Duration duration) {
         super(duration);
     }
 
-    public BlocksIfAbleTargetEffect(final BlocksIfAbleTargetEffect effect) {
+    public CantAttackSourceEffect(final CantAttackSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public BlocksIfAbleTargetEffect copy() {
-        return new BlocksIfAbleTargetEffect(this);
-    }
-
-    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null && creature.getId().equals(permanent.getId())) {
+        if (permanent.getId().equals(source.getSourceId())) {
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean mustAttack(Game game) {
+    public boolean canAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean mustBlock(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean mustBlockAny(Game game) {
-        return true;
-    }
-
-    @Override
-    public String getText(Mode mode) {
-        if (this.duration == Duration.EndOfTurn)
-            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
-        else
-            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
+    public CantAttackSourceEffect copy() {
+        return new CantAttackSourceEffect(this);
     }
 
 }

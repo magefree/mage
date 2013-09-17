@@ -34,7 +34,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.DiscardCardCost;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FlyingAbility;

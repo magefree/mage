@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;

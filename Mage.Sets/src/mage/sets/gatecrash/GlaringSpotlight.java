@@ -41,7 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.effects.common.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.UnblockableAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.HexproofAbility;
 import mage.cards.CardImpl;

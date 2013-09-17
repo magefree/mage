@@ -44,7 +44,7 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.ReturnFromExileEffect;
-import mage.abilities.effects.common.UnblockableAllEffect;
+import mage.abilities.effects.common.combat.UnblockableAllEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;

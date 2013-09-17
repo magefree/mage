@@ -25,56 +25,57 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
-import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.abilities.effects.ReplacementEffectImpl;
+import mage.constants.Duration;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
  * @author LevelX2
  */
-public class CantBlockAllEffect extends RestrictionEffect<CantBlockAllEffect> {
 
-    private FilterCreaturePermanent filter;
+public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl<CantBlockAttackActivateAttachedEffect> {
 
-    public CantBlockAllEffect(FilterCreaturePermanent filter, Duration duration) {
-        super(duration);
-        this.filter = filter;
+    public CantBlockAttackActivateAttachedEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
     }
 
-    public CantBlockAllEffect(final CantBlockAllEffect effect) {
+    public CantBlockAttackActivateAttachedEffect(final CantBlockAttackActivateAttachedEffect effect) {
         super(effect);
-        this.filter = effect.filter;
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+    public CantBlockAttackActivateAttachedEffect copy() {
+        return new CantBlockAttackActivateAttachedEffect(this);
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public boolean apply(Game game, Ability source) {
+        return true;
     }
 
     @Override
-    public CantBlockAllEffect copy() {
-        return new CantBlockAllEffect(this);
+    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
+        return true;
     }
 
     @Override
-    public String getText(Mode mode) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(filter.getMessage()).append(" can't block");
-        if (Duration.EndOfTurn.equals(this.duration)) {
-            sb.append(" this turn");
+    public boolean applies(GameEvent event, Ability source, Game game) {
+        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
+            Permanent enchantment = game.getPermanent(source.getSourceId());
+            if (enchantment != null && enchantment.getAttachedTo() != null) {
+                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
+                    return true;
+                }
+            }
         }
-        return sb.toString();
+        return false;
     }
 }

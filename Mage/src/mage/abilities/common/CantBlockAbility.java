@@ -29,7 +29,7 @@ package mage.abilities.common;
 
 import mage.constants.Duration;
 import mage.constants.Zone;
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 
 /**
  *

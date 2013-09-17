@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.UnblockableTargetEffect;
 import mage.abilities.keyword.TransmuteAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

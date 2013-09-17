@@ -28,7 +28,7 @@
 package mage.sets.magic2014;
 
 import java.util.UUID;
-import mage.abilities.effects.common.MustBeBlockedTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.TrampleAbility;

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.UnblockableTargetEffect;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

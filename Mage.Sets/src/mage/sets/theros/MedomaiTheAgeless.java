@@ -35,7 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.CantAttackSourceEffect;
+import mage.abilities.effects.common.combat.CantAttackSourceEffect;
 import mage.abilities.effects.common.turn.AddExtraTurnControllerEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

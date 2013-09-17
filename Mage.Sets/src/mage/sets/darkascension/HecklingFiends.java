@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.constants.Zone;

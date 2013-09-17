@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
 import mage.abilities.decorator.ConditionalRequirementEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;

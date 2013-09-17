@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
+import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.effects.common.DestroySourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

@@ -26,11 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
 import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,18 +38,25 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffect> {
+public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSourceEffect> {
 
-    public CantBlockSourceEffect(Duration duration) {
+    public AttacksIfAbleSourceEffect(Duration duration) {
         super(duration);
-        this.staticText = "{this} can't block";
-        if (duration.equals(Duration.EndOfTurn)) {
-            this.staticText += " this turn";
+        if (this.duration == Duration.EndOfTurn) {
+            staticText = "{this} attacks this turn if able";
+        }
+        else {
+            staticText = "{this} attacks each turn if able";
         }
     }
 
-    public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
+    public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public AttacksIfAbleSourceEffect copy() {
+        return new AttacksIfAbleSourceEffect(this);
     }
 
     @Override
@@ -61,13 +68,13 @@ public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffe
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public boolean mustAttack(Game game) {
+        return true;
     }
 
     @Override
-    public CantBlockSourceEffect copy() {
-        return new CantBlockSourceEffect(this);
+    public boolean mustBlock(Game game) {
+        return false;
     }
 
 }

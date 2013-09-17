@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceEffect;
 import mage.cards.CardImpl;
 
 /**

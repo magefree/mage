@@ -25,57 +25,47 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
-import mage.constants.Outcome;
-import mage.abilities.Ability;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
+import mage.abilities.Ability;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
-import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author LevelX2
+ * @author North
  */
+public class UnblockableSourceEffect extends RestrictionEffect<UnblockableSourceEffect> {
 
-public class CantBlockAttackActivateAttachedEffect extends ReplacementEffectImpl<CantBlockAttackActivateAttachedEffect> {
-
-    public CantBlockAttackActivateAttachedEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Detriment);
-        staticText = "Enchanted creature can't attack or block, and its activated abilities can't be activated";
+    public UnblockableSourceEffect() {
+        this(Duration.WhileOnBattlefield);
+    }
+    public UnblockableSourceEffect(Duration duration) {
+        super(duration);
+        this.staticText = "{this} is unblockable";
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            this.staticText += " this turn";
+        }
     }
 
-    public CantBlockAttackActivateAttachedEffect(final CantBlockAttackActivateAttachedEffect effect) {
+    public UnblockableSourceEffect(UnblockableSourceEffect effect) {
         super(effect);
     }
 
     @Override
-    public CantBlockAttackActivateAttachedEffect copy() {
-        return new CantBlockAttackActivateAttachedEffect(this);
+    public UnblockableSourceEffect copy() {
+        return new UnblockableSourceEffect(this);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARE_ATTACKER || event.getType() == GameEvent.EventType.DECLARE_BLOCKER || event.getType() == GameEvent.EventType.ACTIVATE_ABILITY) {
-            Permanent enchantment = game.getPermanent(source.getSourceId());
-            if (enchantment != null && enchantment.getAttachedTo() != null) {
-                if (event.getSourceId().equals(enchantment.getAttachedTo())) {
-                    return true;
-                }
-            }
-        }
+    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
         return false;
+    }
+
+    @Override
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        return permanent.getId().equals(source.getSourceId());
     }
 }

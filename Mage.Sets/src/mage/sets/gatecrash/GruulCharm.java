@@ -35,7 +35,7 @@ import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.common.CantBlockAllEffect;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;

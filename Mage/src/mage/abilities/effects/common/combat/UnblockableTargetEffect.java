@@ -25,38 +25,33 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
 import mage.constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.Target;
 
 /**
  *
  * @author North
  */
-public class UnblockableSourceEffect extends RestrictionEffect<UnblockableSourceEffect> {
+public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTargetEffect> {
 
-    public UnblockableSourceEffect() {
-        this(Duration.WhileOnBattlefield);
-    }
-    public UnblockableSourceEffect(Duration duration) {
-        super(duration);
-        this.staticText = "{this} is unblockable";
-        if (Duration.EndOfTurn.equals(this.duration)) {
-            this.staticText += " this turn";
-        }
+    public UnblockableTargetEffect() {
+        super(Duration.EndOfTurn);
     }
 
-    public UnblockableSourceEffect(UnblockableSourceEffect effect) {
+    public UnblockableTargetEffect(UnblockableTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public UnblockableSourceEffect copy() {
-        return new UnblockableSourceEffect(this);
+    public UnblockableTargetEffect copy() {
+        return new UnblockableTargetEffect(this);
     }
 
     @Override
@@ -66,6 +61,34 @@ public class UnblockableSourceEffect extends RestrictionEffect<UnblockableSource
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.getId().equals(source.getSourceId());
+        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (mode.getTargets().isEmpty()) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        Target target = mode.getTargets().get(0);
+        if (target.getMaxNumberOfTargets() > 1) {
+            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
+                sb.append("up to ");
+            }
+            sb.append(target.getMaxNumberOfTargets()).append(" ");
+        }
+        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
+        if (target.getMaxNumberOfTargets() > 1) {
+            sb.append("s are unblockable");
+        } else {
+            sb.append(" is unblockable");
+        }
+
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            sb.append(" this turn");
+        }
+
+        return sb.toString();
     }
 }

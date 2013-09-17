@@ -36,7 +36,7 @@ import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantAttackBlockAttachedEffect;
+import mage.abilities.effects.common.combat.CantAttackBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

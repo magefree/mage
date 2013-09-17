@@ -26,12 +26,11 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
 import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -39,44 +38,36 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffect> {
+public class CantBlockSourceEffect extends RestrictionEffect<CantBlockSourceEffect> {
 
-    public MustBlockSourceEffect() {
-        this(Duration.WhileOnBattlefield);
-    }
-
-    public MustBlockSourceEffect(Duration duration) {
+    public CantBlockSourceEffect(Duration duration) {
         super(duration);
-        staticText = "All creatures able to block {this} do so";
+        this.staticText = "{this} can't block";
+        if (duration.equals(Duration.EndOfTurn)) {
+            this.staticText += " this turn";
+        }
     }
 
-    public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
+    public CantBlockSourceEffect(final CantBlockSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
+        if (permanent.getId().equals(source.getSourceId())) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean mustBlock(Game game) {
-        return true;
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getSourceId();
-    }
-
-    @Override
-    public MustBlockSourceEffect copy() {
-        return new MustBlockSourceEffect(this);
+    public CantBlockSourceEffect copy() {
+        return new CantBlockSourceEffect(this);
     }
 
 }

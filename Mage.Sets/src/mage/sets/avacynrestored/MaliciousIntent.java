@@ -33,7 +33,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

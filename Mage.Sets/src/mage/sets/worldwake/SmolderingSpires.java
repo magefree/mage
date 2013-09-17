@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.mana.RedManaAbility;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

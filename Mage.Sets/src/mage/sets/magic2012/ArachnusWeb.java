@@ -37,7 +37,7 @@ import mage.abilities.common.OnEventTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantBlockAttackActivateAttachedEffect;
+import mage.abilities.effects.common.combat.CantBlockAttackActivateAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;

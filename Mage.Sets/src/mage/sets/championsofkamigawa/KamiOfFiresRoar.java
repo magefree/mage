@@ -36,7 +36,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterSpiritOrArcaneCard;
 import mage.target.common.TargetCreaturePermanent;

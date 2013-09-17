@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.UnblockableTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;

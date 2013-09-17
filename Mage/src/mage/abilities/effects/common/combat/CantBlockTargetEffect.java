@@ -25,7 +25,7 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
 import mage.constants.Duration;
 import mage.abilities.Ability;
@@ -34,34 +34,38 @@ import mage.abilities.effects.RestrictionEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  *
  * @author North
  */
-public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTargetEffect> {
+public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffect> {
 
-    public UnblockableTargetEffect() {
-        super(Duration.EndOfTurn);
+    public CantBlockTargetEffect(Duration duration) {
+        super(duration);
     }
 
-    public UnblockableTargetEffect(UnblockableTargetEffect effect) {
+    public CantBlockTargetEffect(final CantBlockTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public UnblockableTargetEffect copy() {
-        return new UnblockableTargetEffect(this);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return this.targetPointer.getTargets(game, source).contains(permanent.getId());
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public CantBlockTargetEffect copy() {
+        return new CantBlockTargetEffect(this);
     }
 
     @Override
@@ -76,15 +80,14 @@ public class UnblockableTargetEffect extends RestrictionEffect<UnblockableTarget
             if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
                 sb.append("up to ");
             }
-            sb.append(target.getMaxNumberOfTargets()).append(" ");
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
         }
         sb.append("target ").append(mode.getTargets().get(0).getTargetName());
         if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s are unblockable");
-        } else {
-            sb.append(" is unblockable");
+            sb.append("s");
         }
 
+        sb.append(" can't block");
         if (Duration.EndOfTurn.equals(this.duration)) {
             sb.append(" this turn");
         }

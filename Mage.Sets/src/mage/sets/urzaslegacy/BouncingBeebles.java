@@ -37,7 +37,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.DefendingPlayerControlsCondition;
 import mage.abilities.decorator.ConditionalRestrictionEffect;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterArtifactPermanent;
 

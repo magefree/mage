@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastControllerTriggeredAbility;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;

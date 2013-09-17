@@ -25,42 +25,37 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
-import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RestrictionEffect;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class CantBlockAttachedEffect extends RestrictionEffect<CantBlockAttachedEffect> {
+public class CantBlockAllEffect extends RestrictionEffect<CantBlockAllEffect> {
 
-    public CantBlockAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature can't block";
-        } else {
-            this.staticText = "Equiped creature can't block";
-        }
+    private FilterCreaturePermanent filter;
+
+    public CantBlockAllEffect(FilterCreaturePermanent filter, Duration duration) {
+        super(duration);
+        this.filter = filter;
     }
 
-    public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
+    public CantBlockAllEffect(final CantBlockAllEffect effect) {
         super(effect);
+        this.filter = effect.filter;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null
-                && permanent.getId().equals(attachment.getAttachedTo())) {
-            return true;
-        }
-        return false;
+        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
     }
 
     @Override
@@ -69,7 +64,17 @@ public class CantBlockAttachedEffect extends RestrictionEffect<CantBlockAttached
     }
 
     @Override
-    public CantBlockAttachedEffect copy() {
-        return new CantBlockAttachedEffect(this);
+    public CantBlockAllEffect copy() {
+        return new CantBlockAllEffect(this);
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(filter.getMessage()).append(" can't block");
+        if (Duration.EndOfTurn.equals(this.duration)) {
+            sb.append(" this turn");
+        }
+        return sb.toString();
     }
 }

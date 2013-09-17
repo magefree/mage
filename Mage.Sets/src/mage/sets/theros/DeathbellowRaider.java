@@ -32,7 +32,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 import mage.abilities.effects.common.RegenerateSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;

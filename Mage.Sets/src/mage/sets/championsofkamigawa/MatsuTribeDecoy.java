@@ -36,7 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceTargetEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceTargetEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
 import mage.cards.CardImpl;

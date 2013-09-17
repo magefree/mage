@@ -306,7 +306,20 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void checkBlockRequirementsBefore(Player player, Game game) {
-        //20101001 - 509.1c
+        /*20101001 - 509.1c
+         * 509.1c The defending player checks each creature he or she controls to see whether it's affected by
+         * any requirements (effects that say a creature must block, or that it must block if some condition is met).
+         * If the number of requirements that are being obeyed is fewer than the maximum possible number of
+         * requirements that could be obeyed without disobeying any restrictions, the declaration of blockers is
+         * illegal. If a creature can't block unless a player pays a cost, that player is not required to pay
+         * that cost, even if blocking with that creature would increase the number of requirements being obeyed.
+         *
+         * Example: A player controls one creature that "blocks if able" and another creature with no abilities.
+         * An effect states "Creatures can't be blocked except by two or more creatures." Having only the first
+         * creature block violates the restriction. Having neither creature block fulfills the restriction but
+         * not the requirement. Having both creatures block the same attacking creature fulfills both the restriction
+         * and the requirement, so that's the only option.
+         */
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
             if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
@@ -328,8 +341,11 @@ public class Combat implements Serializable, Copyable<Combat> {
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
         //20101001 - 509.1c
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
+            // Does the creature not block and is an opponent of the attacker
             if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
+                // get all requiremet effects that apply to the creature
                 for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).keySet()) {
+
                     if (effect.mustBlockAny(game)) {
                         // check that it can block an attacker
                         boolean mayBlock = false;

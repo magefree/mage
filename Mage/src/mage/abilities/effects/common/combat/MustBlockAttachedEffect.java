@@ -25,73 +25,66 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
 
+package mage.abilities.effects.common.combat;
+
+import java.util.UUID;
+import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.util.CardUtil;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class CantBlockTargetEffect extends RestrictionEffect<CantBlockTargetEffect> {
+public class MustBlockAttachedEffect extends RequirementEffect<MustBlockAttachedEffect> {
 
-    public CantBlockTargetEffect(Duration duration) {
-        super(duration);
+    protected AttachmentType attachmentType;
+
+    public MustBlockAttachedEffect(AttachmentType attachmentType) {
+        this(Duration.WhileOnBattlefield, attachmentType);
     }
 
-    public CantBlockTargetEffect(final CantBlockTargetEffect effect) {
+    public MustBlockAttachedEffect(Duration duration, AttachmentType attachmentType) {
+        super(duration);
+        this.attachmentType = attachmentType;
+        staticText = "All creatures able to block " + (attachmentType.equals(AttachmentType.AURA) ? "enchanted":"equipped") + " creature do so";
+    }
+
+    public MustBlockAttachedEffect(final MustBlockAttachedEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (this.targetPointer.getTargets(game, source).contains(permanent.getId())) {
-            return true;
-        }
+        return true;
+    }
+
+    @Override
+    public boolean mustAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
+    public boolean mustBlock(Game game) {
+        return true;
     }
 
     @Override
-    public CantBlockTargetEffect copy() {
-        return new CantBlockTargetEffect(this);
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null) {
+            return attachment.getAttachedTo() ;
+        }
+        return null;
     }
 
     @Override
-    public String getText(Mode mode) {
-        if (mode.getTargets().isEmpty()) {
-            return "";
-        }
-
-        StringBuilder sb = new StringBuilder();
-        Target target = mode.getTargets().get(0);
-        if (target.getMaxNumberOfTargets() > 1) {
-            if (target.getMaxNumberOfTargets() != target.getNumberOfTargets()) {
-                sb.append("up to ");
-            }
-            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" ");
-        }
-        sb.append("target ").append(mode.getTargets().get(0).getTargetName());
-        if (target.getMaxNumberOfTargets() > 1) {
-            sb.append("s");
-        }
-
-        sb.append(" can't block");
-        if (Duration.EndOfTurn.equals(this.duration)) {
-            sb.append(" this turn");
-        }
-
-        return sb.toString();
+    public MustBlockAttachedEffect copy() {
+        return new MustBlockAttachedEffect(this);
     }
+
 }

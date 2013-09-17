@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,8 +26,9 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
@@ -38,30 +39,25 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSourceEffect> {
+public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSourceTargetEffect> {
 
-    public AttacksIfAbleSourceEffect(Duration duration) {
-        super(duration);
-        if (this.duration == Duration.EndOfTurn) {
-            staticText = "{this} attacks this turn if able";
-        }
-        else {
-            staticText = "{this} attacks each turn if able";
-        }
+    public MustBlockSourceTargetEffect() {
+        this(Duration.EndOfTurn);
     }
 
-    public AttacksIfAbleSourceEffect(final AttacksIfAbleSourceEffect effect) {
+    public MustBlockSourceTargetEffect(Duration duration) {
+        super(duration);
+        staticText = "Target creature blocks {this} this turn if able";
+    }
+
+    public MustBlockSourceTargetEffect(final MustBlockSourceTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public AttacksIfAbleSourceEffect copy() {
-        return new AttacksIfAbleSourceEffect(this);
-    }
-
-    @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
+        Permanent creature = game.getPermanent(source.getFirstTarget());
+        if (creature != null && creature.getId().equals(permanent.getId())) {
             return true;
         }
         return false;
@@ -69,12 +65,22 @@ public class AttacksIfAbleSourceEffect extends RequirementEffect<AttacksIfAbleSo
 
     @Override
     public boolean mustAttack(Game game) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean mustBlock(Game game) {
-        return false;
+        return true;
+    }
+
+    @Override
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        return source.getSourceId();
+    }
+
+    @Override
+    public MustBlockSourceTargetEffect copy() {
+        return new MustBlockSourceTargetEffect(this);
     }
 
 }

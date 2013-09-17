@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.MustBlockAttachedEffect;
+import mage.abilities.effects.common.combat.MustBlockAttachedEffect;
 import mage.abilities.effects.common.continious.BoostEnchantedEffect;
 import mage.abilities.effects.common.continious.GainAbilityAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;

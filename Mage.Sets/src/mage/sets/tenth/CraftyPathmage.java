@@ -36,7 +36,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.UnblockableTargetEffect;
+import mage.abilities.effects.common.combat.UnblockableTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.Filter;
 import mage.filter.common.FilterCreaturePermanent;

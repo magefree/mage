@@ -38,7 +38,7 @@ import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;

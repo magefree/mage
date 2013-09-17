@@ -25,12 +25,12 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
+import mage.constants.AttachmentType;
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
-import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,37 +38,38 @@ import mage.game.permanent.Permanent;
  *
  * @author North
  */
-public class UnblockableAllEffect extends RestrictionEffect<UnblockableAllEffect> {
+public class CantBlockAttachedEffect extends RestrictionEffect<CantBlockAttachedEffect> {
 
-    private FilterPermanent filter;
-
-    public UnblockableAllEffect(FilterPermanent filter, Duration duration) {
-        super(duration);
-        this.filter = filter;
-
-        this.staticText = filter.getMessage() + " are unblockable";
-        if (duration.equals(Duration.EndOfTurn)) {
-            this.staticText += " this turn";
+    public CantBlockAttachedEffect(AttachmentType attachmentType) {
+        super(Duration.WhileOnBattlefield);
+        if (attachmentType.equals(AttachmentType.AURA)) {
+            this.staticText = "Enchanted creature can't block";
+        } else {
+            this.staticText = "Equiped creature can't block";
         }
     }
 
-    public UnblockableAllEffect(UnblockableAllEffect effect) {
+    public CantBlockAttachedEffect(final CantBlockAttachedEffect effect) {
         super(effect);
-        this.filter = effect.filter;
-    }
-
-    @Override
-    public UnblockableAllEffect copy() {
-        return new UnblockableAllEffect(this);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return false;
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return filter.match(permanent, source.getSourceId(), source.getControllerId(), game);
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null
+                && permanent.getId().equals(attachment.getAttachedTo())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canBlock(Permanent attacker, Permanent blocker, Ability source, Game game) {
+        return false;
+    }
+
+    @Override
+    public CantBlockAttachedEffect copy() {
+        return new CantBlockAttachedEffect(this);
     }
 }

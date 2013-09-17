@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.abilities.keyword.HasteAbility;
 import mage.abilities.keyword.EvokeAbility;
 import mage.cards.CardImpl;

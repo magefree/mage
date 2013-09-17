@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.target.common.TargetCreaturePermanent;

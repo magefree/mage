@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  * 
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,32 +26,32 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
-import java.util.UUID;
-import mage.constants.Duration;
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
  *
- * @author BetaSteward_at_googlemail.com
+ * @author magenoxx_at_googlemail.com
  */
-public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSourceTargetEffect> {
+public class BlocksIfAbleTargetEffect extends RequirementEffect<BlocksIfAbleTargetEffect> {
 
-    public MustBlockSourceTargetEffect() {
-        this(Duration.EndOfTurn);
-    }
-
-    public MustBlockSourceTargetEffect(Duration duration) {
+    public BlocksIfAbleTargetEffect(Duration duration) {
         super(duration);
-        staticText = "Target creature blocks {this} this turn if able";
     }
 
-    public MustBlockSourceTargetEffect(final MustBlockSourceTargetEffect effect) {
+    public BlocksIfAbleTargetEffect(final BlocksIfAbleTargetEffect effect) {
         super(effect);
+    }
+
+    @Override
+    public BlocksIfAbleTargetEffect copy() {
+        return new BlocksIfAbleTargetEffect(this);
     }
 
     @Override
@@ -70,17 +70,22 @@ public class MustBlockSourceTargetEffect extends RequirementEffect<MustBlockSour
 
     @Override
     public boolean mustBlock(Game game) {
+        return false;
+    }
+
+    @Override
+    public boolean mustBlockAny(Game game) {
         return true;
     }
 
     @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getSourceId();
-    }
-
-    @Override
-    public MustBlockSourceTargetEffect copy() {
-        return new MustBlockSourceTargetEffect(this);
+    public String getText(Mode mode) {
+        if (this.duration == Duration.EndOfTurn) {
+            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks this turn if able";
+        }
+        else {
+            return "Target " + mode.getTargets().get(0).getTargetName() + " blocks each turn if able";
+        }
     }
 
 }

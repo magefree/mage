@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;

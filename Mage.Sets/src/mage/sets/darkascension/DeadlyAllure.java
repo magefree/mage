@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBlockSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DeathtouchAbility;
 import mage.abilities.keyword.FlashbackAbility;

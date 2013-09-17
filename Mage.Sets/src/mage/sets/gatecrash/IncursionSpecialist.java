@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.effects.common.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;

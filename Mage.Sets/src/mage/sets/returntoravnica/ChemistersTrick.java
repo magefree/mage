@@ -37,7 +37,7 @@ import mage.constants.TargetController;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.keyword.OverloadAbility;

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.CantBlockAllEffect;
+import mage.abilities.effects.common.combat.CantBlockAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;

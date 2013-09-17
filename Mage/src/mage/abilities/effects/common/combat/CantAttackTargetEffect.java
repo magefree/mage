@@ -25,9 +25,9 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.abilities.effects.common;
 
-import mage.constants.AttachmentType;
+package mage.abilities.effects.common.combat;
+
 import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RestrictionEffect;
@@ -36,37 +36,34 @@ import mage.game.permanent.Permanent;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class UnblockableAttachedEffect extends RestrictionEffect<UnblockableAttachedEffect> {
+public class CantAttackTargetEffect extends RestrictionEffect<CantAttackTargetEffect> {
 
-    public UnblockableAttachedEffect(AttachmentType attachmentType) {
-        super(Duration.WhileOnBattlefield);
-        if (attachmentType.equals(AttachmentType.AURA)) {
-            this.staticText = "Enchanted creature is unblockable";
-        } else {
-            this.staticText = "Equiped creature is unblockable";
-        }
+    public CantAttackTargetEffect(Duration duration) {
+        super(duration);
     }
 
-    public UnblockableAttachedEffect(UnblockableAttachedEffect effect) {
+    public CantAttackTargetEffect(final CantAttackTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public UnblockableAttachedEffect copy() {
-        return new UnblockableAttachedEffect(this);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
+    public boolean applies(Permanent permanent, Ability source, Game game) {
+        if (permanent.getId().equals(targetPointer.getFirst(game, source))) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null
-                && attachment.getAttachedTo().equals(permanent.getId());
+    public boolean canAttack(Game game) {
+        return false;
     }
+
+    @Override
+    public CantAttackTargetEffect copy() {
+        return new CantAttackTargetEffect(this);
+    }
+
 }

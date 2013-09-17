@@ -37,7 +37,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.PutIntoGraveFromBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.CantBlockAttachedEffect;
+import mage.abilities.effects.common.combat.CantBlockAttachedEffect;
 import mage.abilities.effects.common.ReturnToHandSourceEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;

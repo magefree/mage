@@ -41,7 +41,7 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
-import mage.abilities.effects.common.AttacksIfAbleTargetEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.AttacksThisTurnMarkerAbility;
 import mage.abilities.keyword.FlyingAbility;

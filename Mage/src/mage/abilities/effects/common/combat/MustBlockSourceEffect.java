@@ -26,11 +26,12 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.effects.common;
+package mage.abilities.effects.common.combat;
 
+import java.util.UUID;
 import mage.constants.Duration;
 import mage.abilities.Ability;
-import mage.abilities.effects.RestrictionEffect;
+import mage.abilities.effects.RequirementEffect;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -38,32 +39,44 @@ import mage.game.permanent.Permanent;
  *
  * @author BetaSteward_at_googlemail.com
  */
-public class CantAttackSourceEffect extends RestrictionEffect<CantAttackSourceEffect> {
+public class MustBlockSourceEffect extends RequirementEffect<MustBlockSourceEffect> {
 
-    public CantAttackSourceEffect(Duration duration) {
-        super(duration);
+    public MustBlockSourceEffect() {
+        this(Duration.WhileOnBattlefield);
     }
 
-    public CantAttackSourceEffect(final CantAttackSourceEffect effect) {
+    public MustBlockSourceEffect(Duration duration) {
+        super(duration);
+        staticText = "All creatures able to block {this} do so";
+    }
+
+    public MustBlockSourceEffect(final MustBlockSourceEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getSourceId())) {
-            return true;
-        }
+        return true;
+    }
+
+    @Override
+    public boolean mustAttack(Game game) {
         return false;
     }
 
     @Override
-    public boolean canAttack(Game game) {
-        return false;
+    public boolean mustBlock(Game game) {
+        return true;
     }
 
     @Override
-    public CantAttackSourceEffect copy() {
-        return new CantAttackSourceEffect(this);
+    public UUID mustBlockAttacker(Ability source, Game game) {
+        return source.getSourceId();
+    }
+
+    @Override
+    public MustBlockSourceEffect copy() {
+        return new MustBlockSourceEffect(this);
     }
 
 }
