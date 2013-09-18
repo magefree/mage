@@ -40,12 +40,15 @@ import mage.game.events.GameEvent.EventType;
  */
 public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl<BecomesMonstrousSourceTriggeredAbility> {
 
+    private int monstrosityValue;
+
     public BecomesMonstrousSourceTriggeredAbility(Effect effect) {
         super(Zone.BATTLEFIELD, effect, false);
     }
 
     public BecomesMonstrousSourceTriggeredAbility(final BecomesMonstrousSourceTriggeredAbility ability) {
         super(ability);
+        this.monstrosityValue = ability.monstrosityValue;
     }
 
     @Override
@@ -56,9 +59,14 @@ public class BecomesMonstrousSourceTriggeredAbility extends TriggeredAbilityImpl
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType().equals(EventType.BECOMES_MONSTROUS) && event.getSourceId().equals(this.getSourceId())) {
+            this.monstrosityValue = event.getAmount();
             return true;
         }
         return false;
+    }
+
+    public int getMonstrosityValue() {
+        return monstrosityValue;
     }
 
     @Override
