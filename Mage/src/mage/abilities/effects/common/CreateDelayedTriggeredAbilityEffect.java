@@ -73,7 +73,6 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDel
         if (this.copyTargets) {
             delayedAbility.getTargets().addAll(source.getTargets());
             for(Effect effect : delayedAbility.getEffects()) {
-                effect.setTargetPointer(targetPointer);
                 effect.getTargetPointer().init(game, source);
             }
         }
