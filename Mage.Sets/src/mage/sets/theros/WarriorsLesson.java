@@ -45,7 +45,7 @@ import mage.target.common.TargetCreaturePermanent;
 public class WarriorsLesson extends CardImpl<WarriorsLesson> {
 
     public WarriorsLesson(UUID ownerId) {
-        super(ownerId, 184, "Warrior's Lesson", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
+        super(ownerId, 184, "Warriors' Lesson", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{G}");
         this.expansionSetCode = "THS";
 
         this.color.setGreen(true);

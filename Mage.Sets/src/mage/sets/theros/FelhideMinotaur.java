@@ -37,10 +37,10 @@ import mage.constants.Rarity;
  *
  * @author LevelX2
  */
-public class FellhideMinotaur extends CardImpl<FellhideMinotaur> {
+public class FelhideMinotaur extends CardImpl<FelhideMinotaur> {
 
-    public FellhideMinotaur(UUID ownerId) {
-        super(ownerId, 87, "Fellhide Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
+    public FelhideMinotaur(UUID ownerId) {
+        super(ownerId, 87, "Felhide Minotaur", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{2}{B}");
         this.expansionSetCode = "THS";
         this.subtype.add("Minotaur");
 
@@ -49,12 +49,12 @@ public class FellhideMinotaur extends CardImpl<FellhideMinotaur> {
         this.toughness = new MageInt(3);
     }
 
-    public FellhideMinotaur(final FellhideMinotaur card) {
+    public FelhideMinotaur(final FelhideMinotaur card) {
         super(card);
     }
 
     @Override
-    public FellhideMinotaur copy() {
-        return new FellhideMinotaur(this);
+    public FelhideMinotaur copy() {
+        return new FelhideMinotaur(this);
     }
 }
