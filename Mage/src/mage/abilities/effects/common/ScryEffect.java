@@ -37,6 +37,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.util.CardUtil;
@@ -110,6 +111,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
                     .append(onBottom).append(onBottom == 1 ?" card":" cards")
                     .append(" on the bottom of his or her library (scry ")
                     .append(scryNumber).append(")").toString());
+            game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, source.getControllerId(), source.getSourceId(), source.getControllerId()));
             return true;
         }
         return false;
