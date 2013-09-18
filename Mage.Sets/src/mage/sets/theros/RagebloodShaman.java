@@ -49,7 +49,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
  */
 public class RagebloodShaman extends CardImpl<RagebloodShaman> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur", "Minotaur creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Minotaur", "Minotaur creatures");
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
     }
