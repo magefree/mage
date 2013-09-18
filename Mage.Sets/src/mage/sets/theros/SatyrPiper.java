@@ -29,6 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.combat.MustBeBlockedByAtLeastOneTargetEffect;
@@ -37,6 +38,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -55,7 +57,10 @@ public class SatyrPiper extends CardImpl<SatyrPiper> {
         this.toughness = new MageInt(1);
 
         // {3}{G}: Target creature must be blocked this turn if able.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{G}")));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MustBeBlockedByAtLeastOneTargetEffect(Duration.EndOfTurn), new ManaCostsImpl("{3}{G}"));
+        ability.addTarget(new TargetCreaturePermanent(true));
+        this.addAbility(ability);
+
     }
 
     public SatyrPiper(final SatyrPiper card) {
