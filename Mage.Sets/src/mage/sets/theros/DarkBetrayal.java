@@ -50,7 +50,7 @@ public class DarkBetrayal extends CardImpl<DarkBetrayal> {
     }
 
     public DarkBetrayal(UUID ownerId) {
-        super(ownerId, 84, "Dark Betrayal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
+        super(ownerId, 83, "Dark Betrayal", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "THS";
 
         this.color.setBlack(true);

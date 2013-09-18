@@ -60,7 +60,7 @@ public class HuntTheHunter extends CardImpl<HuntTheHunter> {
     }
 
     public HuntTheHunter(UUID ownerId) {
-        super(ownerId, 157, "Hunt the Hunter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
+        super(ownerId, 159, "Hunt the Hunter", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{G}");
         this.expansionSetCode = "THS";
 
         this.color.setGreen(true);
