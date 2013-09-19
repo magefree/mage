@@ -1215,8 +1215,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-                        somethingHappened = true;
+                    Card card = this.getCard(perm.getId());
+                    if (card != null && !card.getCardType().contains(CardType.CREATURE)) { // no bestow creature
+                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                            somethingHappened = true;
+                        }
                     }
                 }
                 else {
