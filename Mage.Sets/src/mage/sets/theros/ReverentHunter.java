@@ -55,7 +55,7 @@ public class ReverentHunter extends CardImpl<ReverentHunter> {
         this.toughness = new MageInt(1);
 
         // When Reverent Hunter enters the battlefield, put a number of +1/+1 counters on it equal to your devotion to green.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(), new DevotionCount(ManaType.GREEN), true)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(0), new DevotionCount(ManaType.GREEN), true)));
 
     }
 

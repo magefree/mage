@@ -95,7 +95,11 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
             if (card != null) {
                 if (counter != null) {
                     Counter newCounter = counter.copy();
-                    newCounter.add(amount.calculate(game, source));
+                    int countersToAdd = amount.calculate(game, source);
+                    if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                        countersToAdd--;
+                    }
+                    newCounter.add(countersToAdd);
                     card.addCounters(newCounter, game);
                     if (informPlayers) {
                         Player player = game.getPlayer(source.getControllerId());
@@ -111,7 +115,11 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
             if (permanent != null) {
                 if (counter != null) {
                     Counter newCounter = counter.copy();
-                    newCounter.add(amount.calculate(game, source));
+                    int countersToAdd = amount.calculate(game, source);
+                    if (countersToAdd > 0 && newCounter.getCount() == 1) {
+                        countersToAdd--;
+                    }
+                    newCounter.add(countersToAdd);
                     permanent.addCounters(newCounter, game);
                     if (informPlayers) {
                         Player player = game.getPlayer(source.getControllerId());
