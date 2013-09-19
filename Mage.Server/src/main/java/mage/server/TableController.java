@@ -395,7 +395,7 @@ public class TableController {
             table.initGame();
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
-            String opponent = null;
+            StringBuilder opponent = new StringBuilder();
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
@@ -404,9 +404,10 @@ public class TableController {
                         if (creator == null) {
                             creator = user.getName();
                         } else {
-                            if (opponent == null) {
-                                opponent = user.getName();
+                            if (opponent.length() > 0) {
+                                opponent.append(" - ");
                             }
+                            opponent.append(user.getName());
                         }
                     }
                     else {
@@ -417,10 +418,19 @@ public class TableController {
                     }
                 }
             }
+            // Append AI opponents to the log file
+            for (MatchPlayer mPlayer :match.getPlayers()) {
+                if (!mPlayer.getPlayer().isHuman()) {
+                    if (opponent.length() > 0) {
+                        opponent.append(" - ");
+                    }
+                    opponent.append(mPlayer.getPlayer().getName());
+                }
+            }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
-            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
+            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         }
         catch (Exception ex) {
             logger.fatal("Error starting game", ex);
