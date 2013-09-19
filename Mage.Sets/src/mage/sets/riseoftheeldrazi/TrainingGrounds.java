@@ -28,25 +28,24 @@
 
 package mage.sets.riseoftheeldrazi;
 
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.UUID;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.CostModificationEffectImpl;
+import mage.cards.CardImpl;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.SubLayer;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.SpellAbility;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.costs.Cost;
-import mage.abilities.costs.mana.GenericManaCost;
-import mage.abilities.effects.ContinuousEffectImpl;
-import mage.cards.CardImpl;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.players.Player;
 
 /**
  *
@@ -59,7 +58,7 @@ public class TrainingGrounds extends CardImpl<TrainingGrounds> {
         this.expansionSetCode = "ROE";
 
         this.color.setBlue(true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsCostReductionEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new TrainingGroundsEffect()));
     }
 
     public TrainingGrounds (final TrainingGrounds card) {
@@ -72,61 +71,65 @@ public class TrainingGrounds extends CardImpl<TrainingGrounds> {
     }
 }
 
-class TrainingGroundsCostReductionEffect extends ContinuousEffectImpl<TrainingGroundsCostReductionEffect> {
-
+class TrainingGroundsEffect extends CostModificationEffectImpl<TrainingGroundsEffect> {
+    
     private static final String effectText = "Activated abilities of creatures you control cost up to {2} less to activate. This effect can't reduce the amount of mana an ability costs to activate to less than one mana";
     private static final FilterControlledCreaturePermanent filter;
-
     static {
         filter = new FilterControlledCreaturePermanent();
     }
 
-    TrainingGroundsCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Layer.TextChangingEffects_3, SubLayer.NA, Outcome.Benefit);
+    public TrainingGroundsEffect() {
+        super(Duration.Custom, Outcome.Benefit);
         staticText = effectText;
     }
 
-    TrainingGroundsCostReductionEffect ( TrainingGroundsCostReductionEffect effect ) {
+    public TrainingGroundsEffect(final TrainingGroundsEffect effect) {
         super(effect);
     }
 
     @Override
-    public boolean apply(Game game, Ability source) {
-        boolean applied = false;
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game);
-
-        if ( permanents != null && !permanents.isEmpty() ) {
-            for ( Permanent permanent : permanents ) {
-                for ( Ability ability : permanent.getAbilities() ) {
-                    if ( !(ability instanceof SpellAbility) && ability.getManaCosts() != null ) {
-                        int costCount = ability.getManaCosts().size();
-                        for ( Cost cost : ability.getManaCosts() ) {
-                            if ( cost instanceof GenericManaCost ) {
-                                GenericManaCost costCasted = (GenericManaCost)cost;
-                                int amount = costCasted.convertedManaCost();
-                                int adjustedAmount = 0;
-                                if ( costCount == 1 && (amount - 2) <= 0 ) {
-                                    adjustedAmount = 1;
-                                }
-                                else {
-                                    //In case the adjusted amount goes below 0.
-                                    adjustedAmount = Math.max(0, amount - 2);
-                                }
-                                costCasted.setMana(adjustedAmount);
-                                applied = true;
-                            }
-                        }
-                    }
-                }
+    public boolean apply(Game game, Ability source, Ability abilityToModify) {
+        Mana mana = abilityToModify.getManaCostsToPay().getMana();
+        int reduceMax = mana.getColorless();
+        if(mana.count() == mana.getColorless()){
+            reduceMax--;
+        }
+        if(reduceMax > 2){
+            reduceMax = 2;
+        }
+        Player player = game.getPlayer(abilityToModify.getControllerId());
+        if(player != null){
+            ChoiceImpl choice = new ChoiceImpl(true);
+            LinkedHashSet<String> set = new LinkedHashSet<String>();
+            
+            for(int i = 0; i <= reduceMax; i++){
+                set.add(String.valueOf(i));
+            }
+            choice.setChoices(set);
+            choice.setMessage("Reduce ability cost");
+            if(player.choose(Outcome.Benefit, choice, game)){
+                int reduce = Integer.parseInt(choice.getChoice());
+                mana.setColorless(mana.getColorless() - reduce);
+                abilityToModify.getManaCostsToPay().load(mana.toString());
+                return true;
             }
         }
-
-        return applied;
+         return false;
     }
 
     @Override
-    public TrainingGroundsCostReductionEffect copy() {
-        return new TrainingGroundsCostReductionEffect(this);
+    public boolean applies(Ability abilityToModify, Ability source, Game game) {
+        //Activated abilities of creatures you control
+        Permanent permanent = game.getPermanent(abilityToModify.getSourceId());
+        if (abilityToModify instanceof ActivatedAbility && permanent != null && filter.match(permanent, source.getId(), source.getControllerId(), game)) {
+            return true;
+        }
+        return false;
     }
 
+    @Override
+    public TrainingGroundsEffect copy() {
+        return new TrainingGroundsEffect(this);
+    }
 }
