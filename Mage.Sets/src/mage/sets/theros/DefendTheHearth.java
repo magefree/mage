@@ -28,7 +28,7 @@
 package mage.sets.theros;
 
 import java.util.UUID;
-import mage.abilities.effects.common.PreventAllDamageEffect;
+import mage.abilities.effects.common.PreventAllDamageToPlayersEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -47,7 +47,7 @@ public class DefendTheHearth extends CardImpl<DefendTheHearth> {
         this.color.setGreen(true);
 
         // Prevent all combat damage that would be dealt to players this turn.
-        this.getSpellAbility().addEffect(new PreventAllDamageEffect(Duration.EndOfTurn, true));
+        this.getSpellAbility().addEffect(new PreventAllDamageToPlayersEffect(Duration.EndOfTurn, true));
     }
 
     public DefendTheHearth(final DefendTheHearth card) {

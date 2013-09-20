@@ -44,15 +44,15 @@ import mage.game.permanent.Permanent;
 public class PreventAllDamageEffect extends PreventionEffectImpl<PreventAllDamageEffect> {
 
     private FilterPermanent filter;
-    private Boolean onlyCombat;
+    private boolean onlyCombat;
 
-    public PreventAllDamageEffect(FilterPermanent filter, Duration duration, Boolean onlyCombat) {
+    public PreventAllDamageEffect(FilterPermanent filter, Duration duration, boolean onlyCombat) {
         super(duration);
         this.filter = filter;
         this.onlyCombat = onlyCombat;
     }
 
-    public PreventAllDamageEffect(Duration duration, Boolean onlyCombat) {
+    public PreventAllDamageEffect(Duration duration, boolean onlyCombat) {
         super(duration);
         this.onlyCombat = onlyCombat;
     }

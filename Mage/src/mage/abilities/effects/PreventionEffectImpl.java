@@ -57,6 +57,7 @@ public abstract class PreventionEffectImpl<T extends PreventionEffectImpl<T>> ex
             case DAMAGE_CREATURE:
             case DAMAGE_PLAYER:
             case DAMAGE_PLANESWALKER:
+                // return preventable flag
                 return event.getFlag();
             default:
                 return false;
