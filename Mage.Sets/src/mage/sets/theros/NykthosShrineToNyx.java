@@ -133,7 +133,7 @@ class NykthosDynamicManaEffect extends ManaEffect {
         this.computedMana.clear();
         if (!source.getChoices().isEmpty()) {
             Choice choice = source.getChoices().get(0);
-            if (choice != null && choice instanceof ChoiceColor) {
+            if (choice != null && choice instanceof ChoiceColor && choice.getChoice() != null) {
                 String color = choice.getChoice();
                 if (color.equals("Red")) {
                     computedMana.setRed(new DevotionCount(ManaType.RED).calculate(game, source));
