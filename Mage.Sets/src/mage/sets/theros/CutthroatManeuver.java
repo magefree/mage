@@ -52,7 +52,7 @@ public class CutthroatManeuver extends CardImpl<CutthroatManeuver> {
 
         // Up to two target creatures each get +1/+1 and gain lifelink until end of turn.
         Effect effect = new BoostTargetEffect(1,1, Duration.EndOfTurn);
-        effect.setText("Up to two target creatures each get +2/+2");
+        effect.setText("Up to two target creatures each get +1/+1");
         this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn,
                 "and gain lifelink until end of turn"));
