@@ -56,6 +56,7 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.BestowAbility;
 
 import mage.cards.SplitCard;
 
@@ -313,6 +314,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public List<CardType> getCardType() {
+        if (this.getSpellAbility() instanceof BestowAbility) {
+            List<CardType> cardTypes = new ArrayList<CardType>();
+            cardTypes.addAll(card.getCardType());
+            cardTypes.remove(CardType.CREATURE);
+            return cardTypes;
+        }
         return card.getCardType();
     }
 
