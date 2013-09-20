@@ -30,17 +30,22 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.Target;
 import mage.target.TargetSpell;
 
 /**
@@ -67,8 +72,12 @@ public class MeletisCharlatan extends CardImpl<MeletisCharlatan> {
         this.toughness = new MageInt(3);
 
         // {2}{U}, {T}: The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy.
-        this.getSpellAbility().addEffect(new MeletisCharlatanCopyTargetSpellEffect());
-        this.getSpellAbility().addTarget(new TargetSpell(filter));
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new MeletisCharlatanCopyTargetSpellEffect(), new ManaCostsImpl("{2}{U}"));
+        ability.addCost(new TapSourceCost());
+        Target target = new TargetSpell(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
     }
 
     public MeletisCharlatan(final MeletisCharlatan card) {
