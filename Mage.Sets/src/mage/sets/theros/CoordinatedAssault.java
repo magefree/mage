@@ -36,6 +36,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -55,6 +56,7 @@ public class CoordinatedAssault extends CardImpl<CoordinatedAssault> {
         this.getSpellAbility().addEffect(effect);
         effect = new GainAbilityTargetEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn, "and gain first strike until end of turn");
         this.getSpellAbility().addEffect(effect);
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
     public CoordinatedAssault(final CoordinatedAssault card) {
