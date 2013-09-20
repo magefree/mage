@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class Cantivore extends CardImpl<Cantivore> {
 
-    public static final FilterCard filter = new FilterCard("Enchantment");
+    public static final FilterCard filter = new FilterCard("enchantment cards");
     
     static {
         filter.add(new CardTypePredicate(CardType.ENCHANTMENT));
