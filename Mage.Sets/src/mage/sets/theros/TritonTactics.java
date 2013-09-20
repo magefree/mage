@@ -35,9 +35,9 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -70,7 +70,9 @@ public class TritonTactics extends CardImpl<TritonTactics> {
         // Up to two target creatures each get +0/+3 until end of turn. Untap those creatures.
         // At this turn's next end of combat, tap each creature that was blocked by one of those
         // creatures this turn and it doesn't untap during its controller's next untap step.
-        this.getSpellAbility().addEffect(new BoostTargetEffect(0,3, Duration.EndOfTurn));
+        Effect effect = new BoostTargetEffect(0,3, Duration.EndOfTurn);
+        effect.setText("Up to two target creatures each get +0/+3 until end of turn");
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0, 2));
         this.getSpellAbility().addEffect(new TritonTacticsUntapTargetEffect());
         this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TritonTacticsTriggeredAbility()));
