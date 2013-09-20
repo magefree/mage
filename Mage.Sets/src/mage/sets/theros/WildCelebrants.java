@@ -54,9 +54,10 @@ public class WildCelebrants extends CardImpl<WildCelebrants> {
         this.toughness = new MageInt(3);
 
         // When Wild Celebrants enters the battlefield, you may destroy target artifact.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new DestroyTargetEffect(), true);
         Target target = new TargetArtifactPermanent();
         target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
