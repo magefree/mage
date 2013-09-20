@@ -74,7 +74,7 @@ public class ProphetOfKruphix extends CardImpl<ProphetOfKruphix> {
         this.toughness = new MageInt(3);
 
         // Untap all creatures and lands you control during each other player's untap step.
-        Effect effect = new UntapAllControllerEffect(filter, "Untap all creatures and lands you control during each other player's untap step");
+        Effect effect = new UntapAllControllerEffect(filter, "Untap all creatures and lands you control");
         this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.NOT_YOU, false));
         // You may cast creature cards as though they had flash.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProphetOfKruphixEffect()));

@@ -10,6 +10,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.players.Player;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -53,6 +54,17 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl<Begin
                         }
                     }
                     return yours;
+                case NOT_YOU:
+                    Player controller = game.getPlayer(this.getControllerId());
+                    if (controller != null && controller.getInRange().contains(event.getPlayerId()) && !event.getPlayerId().equals(this.getControllerId())) {
+                        if (getTargets().size() == 0) {
+                            for (Effect effect : this.getEffects()) {
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            }
+                        }
+                        return true;
+                    }
+		    break;
                 case OPPONENT:
                     if (game.getOpponents(this.controllerId).contains(event.getPlayerId())) {
                         if (getTargets().size() == 0) {
@@ -64,12 +76,15 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl<Begin
                     }
 		    break;
                 case ANY:
-                    if (getTargets().size() == 0) {
-                        for (Effect effect : this.getEffects()) {
-                            effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                    controller = game.getPlayer(this.getControllerId());
+                    if (controller != null && controller.getInRange().contains(event.getPlayerId())) {
+                        if (getTargets().size() == 0) {
+                            for (Effect effect : this.getEffects()) {
+                                effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
+                            }
                         }
+                        return true;
                     }
-                    return true;
             }
         }
         return false;
@@ -77,15 +92,19 @@ public class BeginningOfUntapTriggeredAbility extends TriggeredAbilityImpl<Begin
 
     @Override
     public String getRule() {
+        StringBuilder sb = new StringBuilder();
         switch (targetController) {
             case YOU:
-                return "At the beginning of your untap step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return sb.append("At the beginning of your untap step, ").append(generateZoneString()).append(getEffects().getText(modes.getMode())).toString();
+            case NOT_YOU:
+                return sb.append(getEffects().getText(modes.getMode())).append(" during each other player's untap step").append(generateZoneString()).toString();
             case OPPONENT:
-                return "At the beginning of each opponent's untap step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return sb.append("At the beginning of each opponent's untap step, ").append(generateZoneString()).append(getEffects().getText(modes.getMode())).toString();
             case ANY:
-                return "At the beginning of each player's untap step, " + generateZoneString() + getEffects().getText(modes.getMode());
+                return sb.append("At the beginning of each player's untap step, ").append(generateZoneString()).append(getEffects().getText(modes.getMode())).toString();
+
         }
-        return "";
+        return "BeginningOfUntapTriggeredAbility: targetController value not supported";
     }
 
     private String generateZoneString() {
