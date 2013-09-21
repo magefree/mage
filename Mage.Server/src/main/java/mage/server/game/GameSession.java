@@ -170,6 +170,14 @@ public class GameSession extends GameWatcher {
         }
     }
 
+    /**
+     * Reset the timeout counter after priority in game changed
+     * 
+     */
+    public void signalPriorityChange() {
+        setupTimeout();
+    }
+
     private synchronized void setupTimeout() {
         if (!useTimeout) {
             return;
@@ -179,7 +187,12 @@ public class GameSession extends GameWatcher {
             new Runnable() {
                 @Override
                 public void run() {
-                    GameManager.getInstance().timeout(game.getId(), userId);
+                    // if player has no priority, he does not get timeout
+                    if(game.getPriorityPlayerId().equals(playerId)) {
+                        GameManager.getInstance().timeout(game.getId(), userId);
+                    } else {
+                        setupTimeout();
+                    }
                 }
             },
             ConfigSettings.getInstance().getMaxSecondsIdle(), TimeUnit.SECONDS
