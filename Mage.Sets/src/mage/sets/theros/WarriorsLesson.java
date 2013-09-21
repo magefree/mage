@@ -52,7 +52,7 @@ public class WarriorsLesson extends CardImpl<WarriorsLesson> {
 
         // Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."
         Ability ability = new DealsDamageToAPlayerTriggeredAbility(new DrawCardControllerEffect(1),false);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfGame));
+        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(ability, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(0,2));
     }
 
