@@ -32,7 +32,7 @@ import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterLandPermanent;
+import mage.filter.common.FilterControlledLandPermanent;
 
 /**
  *
@@ -47,7 +47,7 @@ public class YawningFissure extends CardImpl<YawningFissure> {
         this.color.setRed(true);
 
         // Each opponent sacrifices a land.
-        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(new FilterLandPermanent()));
+        this.getSpellAbility().addEffect(new SacrificeOpponentsEffect(new FilterControlledLandPermanent("a land")));
     }
 
     public YawningFissure(final YawningFissure card) {

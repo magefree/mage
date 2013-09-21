@@ -35,7 +35,7 @@ import mage.abilities.keyword.HeroicAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -56,7 +56,7 @@ public class AgentOfTheFates extends CardImpl<AgentOfTheFates> {
         // Deathtouch
         this.addAbility(DeathtouchAbility.getInstance());
         // Heroic - Whenever you cast a spell that targets Agent of the Fates, each opponent sacrifices a creature.
-        this.addAbility(new HeroicAbility(new SacrificeOpponentsEffect(new FilterCreaturePermanent())));
+        this.addAbility(new HeroicAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature"))));
     }
 
     public AgentOfTheFates(final AgentOfTheFates card) {
