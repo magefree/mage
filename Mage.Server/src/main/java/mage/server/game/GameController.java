@@ -69,6 +69,7 @@ import mage.server.Main;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
+import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
@@ -400,7 +401,12 @@ public class GameController implements GameCallback {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(userPlayerMap.get(userId)).getName() + " has timed out.  Auto concede.", MessageColor.BLACK);
+            ;
+            StringBuilder sb = new StringBuilder(game.getPlayer(userPlayerMap.get(userId)).getName())
+                    .append(" has timed out (player had priority and was not active for ")
+                    .append(ConfigSettings.getInstance().getMaxSecondsIdle())
+                    .append(" seconds ) - Auto concede.");
+            ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK);
             concede(userId);
         }
     }
