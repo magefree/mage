@@ -354,6 +354,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     }
 
     @Override
+    public void otherPlayerLeftGame(Game game) {
+        findRange(game);
+    }
+
+
+    @Override
     public void beginTurn(Game game) {
         this.landsPlayed = 0;
         findRange(game);

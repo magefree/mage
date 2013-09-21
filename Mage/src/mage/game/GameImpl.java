@@ -1710,6 +1710,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }            
         }
 
+        // Update players in range of
+        for (Player leftPlayer :this.getPlayers().values()) {
+            if (leftPlayer.isInGame()) {
+                leftPlayer.otherPlayerLeftGame(this);
+            }
+        }
     }
 
     @Override

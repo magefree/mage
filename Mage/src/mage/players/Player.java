@@ -107,7 +107,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean isInGame();
-
+    /**
+     * Called if other player left the game
+     */
+    void otherPlayerLeftGame(Game game);
+    
     ManaPool getManaPool();
     Set<UUID> getInRange();
     boolean isTopCardRevealed();
