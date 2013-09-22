@@ -55,7 +55,7 @@ public class LeoninSnarecaster extends CardImpl<LeoninSnarecaster> {
 
         // When Leonin Snarecaster enters the battlefield, you may tap target creature.
         Ability ability = new EntersBattlefieldTriggeredAbility(new TapTargetEffect(), true);
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
