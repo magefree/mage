@@ -122,22 +122,25 @@ class DiscipleOfPhenaxEffect extends OneShotEffect<DiscipleOfPhenaxEffect> {
                     }
                 }
             }
-
-            targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
-
-            Player you = game.getPlayer(source.getControllerId());
-
-            if (you != null) {
-                TargetCard yourChoice = new TargetCard(Zone.PICK, new FilterCard());
-                yourChoice.setRequired(true);
-                yourChoice.setNotTarget(true);
-                if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
-                    Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
-                    if (card != null) {
-                        return targetPlayer.discard(card, source, game);
+            if (!revealedCards.isEmpty()) {
+                targetPlayer.revealCards("Disciple of Phenax", revealedCards, game);
+                Player you = game.getPlayer(source.getControllerId());
+                if (you != null) {
+                    TargetCard yourChoice = new TargetCard(Zone.PICK, new FilterCard());
+                    yourChoice.setRequired(true);
+                    yourChoice.setNotTarget(true);
+                    if (you.choose(Outcome.Benefit, revealedCards, yourChoice, game)) {
+                        Card card = targetPlayer.getHand().get(yourChoice.getFirstTarget(), game);
+                        if (card != null) {
+                            return targetPlayer.discard(card, source, game);
+                        }
                     }
+                } else {
+                    return false;
                 }
             }
+            return true;
+
         }
 
         return false;
