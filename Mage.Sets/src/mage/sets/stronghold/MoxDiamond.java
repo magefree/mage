@@ -28,21 +28,21 @@
 package mage.sets.stronghold;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.mana.AnyColorManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterLandCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 
@@ -106,7 +106,7 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl<MoxDiamondReplac
             else{
                 Card card = game.getCard(event.getTargetId());
                 if (card != null) {
-                    return card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
                 return true;
             }
@@ -117,8 +117,9 @@ class MoxDiamondReplacementEffect extends ReplacementEffectImpl<MoxDiamondReplac
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
-            if(source.getSourceId().equals(event.getTargetId())){
+        if (event.getType() == GameEvent.EventType.ZONE_CHANGE && source.getSourceId().equals(event.getTargetId())) {
+            ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+            if(zEvent.getToZone().equals(Zone.BATTLEFIELD)){
                 return true;
             }
         }
