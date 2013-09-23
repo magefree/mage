@@ -435,6 +435,7 @@ public class NewTournamentDialog extends MageDialog {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
         if (numbPlayers < tournamentType.getMinPlayers() || numbPlayers > tournamentType.getMaxPlayers()) {
             numbPlayers = tournamentType.getMinPlayers();
+            createPlayers(numbPlayers - 1);
         }
         this.spnNumPlayers.setModel(new SpinnerNumberModel(numbPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
@@ -446,6 +447,7 @@ public class NewTournamentDialog extends MageDialog {
             this.pnlPacks.setVisible(false);
         }
         this.pnlDraftOptions.setVisible(tournamentType.isDraft());
+
     }
 
     private void createPacks(int numPacks) {
@@ -617,7 +619,7 @@ public class NewTournamentDialog extends MageDialog {
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, tOptions.getTournamentType());
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
         PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
-       if (tOptions.getTournamentType().equals("Sealed Elimination")) {
+        if (tOptions.getTournamentType().equals("Sealed Elimination")) {
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, tOptions.getLimitedOptions().getSetCodes().toString());
             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, Integer.toString(tOptions.getPlayerTypes().size()));
         } else if (tOptions.getTournamentType().equals("Elimination Booster Draft")) {

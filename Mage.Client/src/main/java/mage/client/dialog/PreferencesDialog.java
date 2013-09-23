@@ -137,6 +137,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";
     public static final String KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS = "newTournamentAllowSpectators";
 
+    // pref setting for deck generator
+    public static final String KEY_NEW_DECK_GENERATOR_DECK_SIZE = "newDeckGeneratorDeckSize";
+    public static final String KEY_NEW_DECK_GENERATOR_SET = "newDeckGeneratorSet";
+
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";
     public static final String KEY_DRAFT_PILES_TOGGLE = "draftPilesToggle";

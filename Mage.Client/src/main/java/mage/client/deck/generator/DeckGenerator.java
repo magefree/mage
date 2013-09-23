@@ -28,6 +28,7 @@ import mage.cards.repository.CardRepository;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
+import mage.client.dialog.PreferencesDialog;
 import mage.client.util.gui.ColorsChooser;
 import mage.client.util.sets.ConstructedFormats;
 import mage.constants.CardType;
@@ -35,6 +36,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.Rarity;
 import mage.interfaces.rate.RateCallback;
 import mage.utils.DeckBuilder;
+import mage.view.TournamentTypeView;
 
 
 /**
@@ -93,8 +95,12 @@ public class DeckGenerator {
         cbSets.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel.add(text3);
         jPanel.add(cbSets);
-
         p0.add(jPanel);
+
+        String prefSet = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SET, null);
+        if (prefSet != null) {
+            cbSets.setSelectedItem(prefSet);
+        }
 
         p0.add(Box.createVerticalStrut(5));
         JPanel jPanel2 = new JPanel();
@@ -106,8 +112,12 @@ public class DeckGenerator {
         cbDeckSize.setAlignmentX(Component.LEFT_ALIGNMENT);
         jPanel2.add(textDeckSize);
         jPanel2.add(cbDeckSize);
-
         p0.add(jPanel2);
+
+        String prefSize = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_DECK_SIZE, "60");
+        if (prefSet != null) {
+            cbDeckSize.setSelectedItem(prefSize);
+        }
 
         final JButton btnGenerate = new JButton("Ok");
         btnGenerate.addActionListener(new ActionListener() {
@@ -135,6 +145,11 @@ public class DeckGenerator {
         dlg.dispose();
 
         if (selectedColors != null) {
+            // save values to prefs
+             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_DECK_SIZE, cbDeckSize.getSelectedItem().toString());
+             PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_DECK_GENERATOR_SET, cbSets.getSelectedItem().toString());
+
+            // build deck
             buildDeck();
             try {
                 File tmp = File.createTempFile("tempDeck" + UUID.randomUUID().toString(), ".dck");
