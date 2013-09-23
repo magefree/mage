@@ -66,13 +66,15 @@ public class ScionOfOona extends CardImpl<ScionOfOona> {
         this.color.setBlue(true);
         this.power = new MageInt(1);
         this.toughness = new MageInt(1);
-        this.addAbility(FlashAbility.getInstance());
-        this.addAbility(FlyingAbility.getInstance());
 
+        // Flash
+        this.addAbility(FlashAbility.getInstance());
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
         // Other Faerie creatures you control get +1/+1.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
         // Other Faeries you control have shroud.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.EndOfTurn, filter, true)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(ShroudAbility.getInstance(), Duration.WhileOnBattlefield, filter, true)));
     }
 
     public ScionOfOona(final ScionOfOona card) {
