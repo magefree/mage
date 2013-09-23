@@ -111,7 +111,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_1 = "tournamentPanelDividerLocation1";
     public static final String KEY_TOURNAMENT_DIVIDER_LOCATION_2 = "tournamentPanelDividerLocation2";
 
-    // default setting for new table dialog
+    // pref setting for new table dialog
     public static final String KEY_NEW_TABLE_NAME = "newTableName";
     public static final String KEY_NEW_TABLE_DECK_TYPE = "newTableDeckType";
     public static final String KEY_NEW_TABLE_TIME_LIMIT = "newTableTimeLimit";
@@ -122,6 +122,20 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_NEW_TABLE_RANGE = "newTableRange";
     public static final String KEY_NEW_TABLE_ATTACK_OPTION = "newTableAttackOption";
     public static final String KEY_NEW_TABLE_NUMBER_PLAYERS = "newTableNumberPlayers";
+
+    // pref setting for new tournament dialog
+    public static final String KEY_NEW_TOURNAMENT_NAME = "newTournamentName";
+    public static final String KEY_NEW_TOURNAMENT_TIME_LIMIT = "newTournamentTimeLimit";
+    public static final String KEY_NEW_TOURNAMENT_CONSTR_TIME = "newTournamentConstructionTime";
+    public static final String KEY_NEW_TOURNAMENT_TYPE = "newTournamentType";
+    public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS = "newTournamentNumberOfFreeMulligans";
+    public static final String KEY_NEW_TOURNAMENT_NUMBER_OF_WINS = "newTournamentNumberOfWins";
+    public static final String KEY_NEW_TOURNAMENT_PACKS_SEALED = "newTournamentPacksSealed";
+    public static final String KEY_NEW_TOURNAMENT_PACKS_DRAFT = "newTournamentPacksDraft";
+    public static final String KEY_NEW_TOURNAMENT_PLAYERS_SEALED = "newTournamentPlayersSealed";
+    public static final String KEY_NEW_TOURNAMENT_PLAYERS_DRAFT = "newTournamentPlayersDraft";
+    public static final String KEY_NEW_TOURNAMENT_DRAFT_TIMING = "newTournamentDraftTiming";
+    public static final String KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS = "newTournamentAllowSpectators";
 
     // used to save and restore the settings for the cardArea (draft, sideboarding, deck builder)
     public static final String KEY_DRAFT_VIEW = "draftView";

@@ -37,12 +37,11 @@ package mage.client.dialog;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
-import mage.cards.ExpansionSet;
-import mage.cards.Sets;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
 import mage.client.MageFrame;
@@ -92,8 +91,10 @@ public class NewTournamentDialog extends MageDialog {
         cbTimeLimit.setModel(new DefaultComboBoxModel(MatchTimeLimit.values()));
         cbDraftTiming.setModel(new DefaultComboBoxModel(DraftOptions.TimingOption.values()));
         cbAllowSpectators.setSelected(true);
+
+        setTournamentSettingsFromPrefs();
+
         this.setModal(true);
-        setTournamentOptions();
         this.setLocation(150, 100);
         this.setVisible(true);
     }
@@ -354,7 +355,7 @@ public class NewTournamentDialog extends MageDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbTournamentTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTournamentTypeActionPerformed
-        setTournamentOptions();
+        setTournamentOptions((Integer) this.spnNumPlayers.getValue());
     }//GEN-LAST:event_cbTournamentTypeActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
@@ -388,6 +389,9 @@ public class NewTournamentDialog extends MageDialog {
         tOptions.getMatchOptions().setAttackOption(MultiplayerAttackOption.LEFT);
         tOptions.getMatchOptions().setRange(RangeOfInfluence.ALL);
         tOptions.getMatchOptions().setLimited(true);
+
+        saveTournamentSettingsToPrefs(tOptions);
+
         table = session.createTournamentTable(roomId, tOptions);
         if (table == null) {
             JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -395,7 +399,7 @@ public class NewTournamentDialog extends MageDialog {
         }
         if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human", 1)) {
             for (TournamentPlayerPanel player: players) {
-                if (!player.getPlayerType().equals("Human")) {
+                if (!player.getPlayerType().toString().equals("Human")) {
                     if (!player.joinTournamentTable(roomId, table.getTableId())) {
                         JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
                         session.removeTable(roomId, table.getTableId());
@@ -427,11 +431,13 @@ public class NewTournamentDialog extends MageDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_spnNumWinsnumPlayersChanged
 
-    private void setTournamentOptions() {
+    private void setTournamentOptions(int numbPlayers) {
         TournamentTypeView tournamentType = (TournamentTypeView) cbTournamentType.getSelectedItem();
-        this.spnNumPlayers.setModel(new SpinnerNumberModel(tournamentType.getMinPlayers(), tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
+        if (numbPlayers < tournamentType.getMinPlayers() || numbPlayers > tournamentType.getMaxPlayers()) {
+            numbPlayers = tournamentType.getMinPlayers();
+        }
+        this.spnNumPlayers.setModel(new SpinnerNumberModel(numbPlayers, tournamentType.getMinPlayers(), tournamentType.getMaxPlayers(), 1));
         this.spnNumPlayers.setEnabled(tournamentType.getMinPlayers() != tournamentType.getMaxPlayers());
-        createPlayers(tournamentType.getMinPlayers() - 1);
         if (tournamentType.isLimited()) {
             this.pnlPacks.setVisible(true);
             createPacks(tournamentType.getNumBoosters());
@@ -527,6 +533,105 @@ public class NewTournamentDialog extends MageDialog {
             }
         }
     }
+
+
+    /**
+     * set the tournament settings from java prefs
+     */
+    private void setTournamentSettingsFromPrefs () {
+        int numPlayers;
+        txtName.setText(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME, "Tournament"));
+        int timeLimit = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT, "1500"));
+        for (MatchTimeLimit mtl :MatchTimeLimit.values()) {
+            if (mtl.getTimeLimit() == timeLimit) {
+                this.cbTimeLimit.setSelectedItem(mtl);
+                break;
+            }
+        }
+        this.spnConstructTime.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, "600"))/60);
+        String tournamentTypeName = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, "Sealed Elimination");
+        for (TournamentTypeView tournamentTypeView : session.getTournamentTypes()) {
+            if (tournamentTypeView.getName().equals(tournamentTypeName)) {
+                cbTournamentType.setSelectedItem(tournamentTypeView);
+                break;
+            }
+        }
+        this.spnFreeMulligans.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, "0")));
+        this.spnNumWins.setValue(Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, "2")));
+
+        if (cbTournamentType.getSelectedItem().toString().equals("Sealed Elimination")) {
+            numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, "2"));
+            setTournamentOptions(numPlayers);
+            loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, ""));
+        }
+        
+        if (cbTournamentType.getSelectedItem().toString().equals("Elimination Booster Draft")) {
+            numPlayers = Integer.parseInt(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, "4"));
+            setTournamentOptions(numPlayers);
+            loadBoosterPacks(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, ""));
+
+            String draftTiming = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, "REGULAR");
+            for (TimingOption timingOption : DraftOptions.TimingOption.values()) {
+                if (timingOption.toString().equals(draftTiming)) {
+                    cbDraftTiming.setSelectedItem(draftTiming);
+                    break;
+                }
+            }
+        }
+        this.cbAllowSpectators.setSelected(PreferencesDialog.getCachedValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, "Yes").equals("Yes"));
+    }
+
+    private void loadBoosterPacks(String packString) {
+        if (packString.length()>0) {
+            String[] packsArray = packString.substring(1, packString.length() - 1).split(",");
+            int packNumber = 0;
+            for (String pack : packsArray ){
+                packNumber++;
+                if (this.packs.size() >= packNumber - 1) {
+                    JComboBox comboBox = this.packs.get(packNumber-1);
+                    ComboBoxModel model = comboBox.getModel();
+                    int size = model.getSize();
+                    for(int i=0;i<size;i++) {
+                        ExpansionInfo element = (ExpansionInfo) model.getElementAt(i);
+                        if (element.getCode().equals(pack.trim())) {
+                            comboBox.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Save the settings to java prefs to reload it next time the dialog will be created
+     *
+     * @param tOptions Tournament options
+
+     */
+    private void saveTournamentSettingsToPrefs(TournamentOptions tOptions) {
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NAME, tOptions.getName());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TIME_LIMIT, Integer.toString(tOptions.getMatchOptions().getPriorityTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_CONSTR_TIME, Integer.toString(tOptions.getLimitedOptions().getConstructionTime()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_TYPE, tOptions.getTournamentType());
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_FREE_MULLIGANS, Integer.toString(tOptions.getMatchOptions().getFreeMulligans()));
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_NUMBER_OF_WINS, Integer.toString(tOptions.getMatchOptions().getWinsNeeded()));
+       if (tOptions.getTournamentType().equals("Sealed Elimination")) {
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_SEALED, tOptions.getLimitedOptions().getSetCodes().toString());
+            PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_SEALED, Integer.toString(tOptions.getPlayerTypes().size()));
+        } else if (tOptions.getTournamentType().equals("Elimination Booster Draft")) {
+            DraftOptions draftOptions = (DraftOptions) tOptions.getLimitedOptions();
+            if (draftOptions != null) {
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PACKS_DRAFT, draftOptions.getSetCodes().toString());
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_PLAYERS_DRAFT, Integer.toString(tOptions.getPlayerTypes().size()));
+                PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_DRAFT_TIMING, draftOptions.getTiming().name());
+            }
+        }
+
+        PreferencesDialog.saveValue(PreferencesDialog.KEY_NEW_TOURNAMENT_ALLOW_SPECTATORS, (tOptions.isWatchingAllowed()?"Yes":"No"));
+    }
+
 
     public TableView getTable() {
         return table;
