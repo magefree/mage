@@ -101,6 +101,8 @@ public class CardView extends SimpleCardView {
     protected boolean paid;
     protected List<CounterView> counters;
 
+    protected boolean controlledByOwner = true;
+
     public CardView(Card card, UUID cardId) {
         this(card);
         this.id = cardId;
@@ -146,6 +148,9 @@ public class CardView extends SimpleCardView {
             this.toughness = Integer.toString(card.getToughness().getValue());
             this.loyalty = Integer.toString(permanent.getCounters().getCount(CounterType.LOYALTY));
             this.pairedCard = permanent.getPairedCard();
+            if (!permanent.getControllerId().equals(permanent.getOwnerId())) {
+                controlledByOwner = false;
+            }
         } else {
 
             if (card.isCopy()) {
@@ -544,4 +549,9 @@ public class CardView extends SimpleCardView {
     public List<CounterView> getCounters() {
         return counters;
     }
+
+    public boolean isControlledByOwner() {
+        return controlledByOwner;
+    }
+    
 }
