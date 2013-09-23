@@ -29,6 +29,7 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
@@ -173,9 +174,22 @@ class AkroanHorseCreateTokenEffect extends OneShotEffect<AkroanHorseCreateTokenE
     @Override
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
-            Token token = new SoldierToken();
+            Token token = new AkroanHorseSoldierToken();
             token.putOntoBattlefield(1, game, source.getSourceId(), opponentId);
         }
         return true;
     }
+}
+
+class AkroanHorseSoldierToken extends Token {
+
+    public AkroanHorseSoldierToken() {
+        super("Soldier", "1/1 white Soldier creature token");
+        cardType.add(CardType.CREATURE);
+        color = ObjectColor.WHITE;
+        subtype.add("Soldier");
+        power = new MageInt(1);
+        toughness = new MageInt(1);
+    }
+
 }
