@@ -29,20 +29,16 @@ package mage.sets.innistrad;
 
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
 import mage.constants.*;
 import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.game.events.GameEvent.EventType;
-import mage.game.events.ZoneChangeEvent;
+import java.util.UUID;
+import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.effects.OneShotEffect;
+import mage.cards.Card;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import mage.watchers.common.DamagedByWatcher;
-
-import java.util.UUID;
 
 /**
  *
@@ -60,11 +56,9 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
         this.toughness = new MageInt(2);
 
         this.addAbility(FirstStrikeAbility.getInstance());
-        // Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.
-        AbattoirGhoulEffect effect = new AbattoirGhoulEffect();
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
-        this.addWatcher(new DamagedByWatcher());
+        // Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness.
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AbattoirGhoulEffect(), false));
     }
 
     public AbattoirGhoul(final AbattoirGhoul card) {
@@ -77,11 +71,11 @@ public class AbattoirGhoul extends CardImpl<AbattoirGhoul> {
     }
 }
 
-class AbattoirGhoulEffect extends ReplacementEffectImpl<AbattoirGhoulEffect> {
+class AbattoirGhoulEffect extends OneShotEffect<AbattoirGhoulEffect> {
 
     public AbattoirGhoulEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.GainLife);
-        staticText = "Whenever a creature dealt damage by Abattoir Ghoul this turn dies, you gain life equal to that creature's toughness";
+        super(Outcome.GainLife);
+        staticText = "you gain life equal to that creature's toughness";
     }
 
     public AbattoirGhoulEffect(final AbattoirGhoulEffect effect) {
@@ -95,33 +89,18 @@ class AbattoirGhoulEffect extends ReplacementEffectImpl<AbattoirGhoulEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent permanent = ((ZoneChangeEvent)event).getTarget();
-        if (permanent != null) {
-            MageInt toughness = permanent.getToughness();
-            Player player = game.getPlayer(source.getControllerId());
-            if (player != null) {
-                player.gainLife(toughness.getValue(), game);
+        Player you = game.getPlayer(source.getControllerId());
+        Card card = game.getCard(targetPointer.getFirst(game, source));
+        if (card != null) {
+            Permanent creature = (Permanent) game.getLastKnownInformation(card.getId(), Zone.BATTLEFIELD);
+            if (creature != null) {
+                int toughness = creature.getToughness().getValue();
+                if (you != null) {
+                    you.gainLife(toughness, game);
+                    return true;
+                }
             }
         }
         return false;
     }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            Permanent p = game.getPermanent(source.getSourceId());
-            if (p != null) {
-                DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-                if (watcher != null)
-                    return watcher.damagedCreatures.contains(event.getTargetId());
-            }
-        }
-        return false;
-    }
-
 }
