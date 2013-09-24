@@ -239,6 +239,19 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
      * @return
      */
     public boolean chooseNewTargets(Game game, UUID playerId) {
+        return chooseNewTargets(game, playerId, false, false);
+    }
+
+    /**
+     *
+     *
+     * @param game
+     * @param playerId
+     * @param forceChange - does only work for targets with maximal one targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @return
+     */
+    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             for(SpellAbility spellAbility: spellAbilities) {
@@ -256,9 +269,22 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         } else {
                             name = object.getName();
                         }
-                        if (name != null && player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
-                                newTarget.addTarget(targetId, spellAbility, game, false);
+                        if (name != null && (forceChange || player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game))) {
+                            if (forceChange &&  target.possibleTargets(this.getSourceId(), playerId, game).size() > 1 ) {
+                                int iteration = 0;
+                                do {
+                                    if (iteration > 0) {
+                                        game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
+                                    }
+                                    iteration++;
+                                    newTarget.clearChosen();
+                                    player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game);
+                                } while (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1);
+
+                            } else {
+                                if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
+                                    newTarget.addTarget(targetId, spellAbility, game, false);
+                                }
                             }
                         }
                         else {

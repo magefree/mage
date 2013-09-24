@@ -42,7 +42,7 @@ import mage.target.TargetSpell;
  */
 public class Swerve extends CardImpl<Swerve> {
     
-    private static final FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell("spell with a single target");
     
     static {
         filter.add(new NumberOfTargetsPredicate(1));
@@ -56,7 +56,7 @@ public class Swerve extends CardImpl<Swerve> {
         this.color.setBlue(true);
 
         // Change the target of target spell with a single target.
-        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect());
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         
     }

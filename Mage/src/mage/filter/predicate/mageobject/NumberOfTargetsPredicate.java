@@ -31,6 +31,7 @@ import mage.MageObject;
 import mage.filter.predicate.Predicate;
 import mage.game.Game;
 import mage.game.stack.Spell;
+import mage.target.Target;
 import mage.target.Targets;
 
 /**
@@ -49,11 +50,13 @@ public class NumberOfTargetsPredicate implements Predicate<MageObject> {
     public boolean apply(MageObject input, Game game) {
         Spell spell = game.getStack().getSpell(input.getId());
         if (spell != null) {
-            Targets target = spell.getSpellAbility().getTargets();
-            if (target != null) {
-                if (target.size() == targets) {
-                    return true;
-                }
+            Targets spellTargets = spell.getSpellAbility().getTargets();
+            int numberOfTargets = 0;
+            for (Target target : spellTargets) {
+                numberOfTargets += target.getTargets().size();
+            }
+            if (numberOfTargets == targets) {
+                return true;
             }
         }
         return false;
