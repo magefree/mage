@@ -185,7 +185,8 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
-            if (game.getObject(event.getSourceId()).getName().equals("Cavern of Souls")) {
+            MageObject object = game.getObject(event.getSourceId());
+            if (object != null && object.getName().equals("Cavern of Souls")) {
                 spells.add(event.getTargetId()); 
             }
         }
