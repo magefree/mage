@@ -296,7 +296,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     case PICK:
                         break;
                     default:
-                        logger.fatal("invalid zone for card - " + fromZone);
+                        logger.fatal(new StringBuilder("Invalid from zone [").append(fromZone).append("] for card [").append(this.getName()).toString());
                         break;
                 }
                 game.rememberLKI(objectId, event.getFromZone(), this);
@@ -342,7 +342,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                     event.setTarget(permanent);
                     break;
                 default:
-                    logger.fatal("invalid zone for card - " + toZone);
+                    logger.fatal(new StringBuilder("Invalid from zone [").append(toZone).append("] for card [").append(this.getName()).toString());
                     return false;
             }
             setControllerId(ownerId);
@@ -435,13 +435,18 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
 
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
-        return putOntoBattlefield(game, fromZone, sourceId, controllerId, false);
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, false);
     }
         
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped){
+        return this.putOntoBattlefield(game, fromZone, sourceId, controllerId, tapped, null);
+
+    }
      
     @Override   
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped){
-        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD);
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects){
+        ZoneChangeEvent event = new ZoneChangeEvent(this.objectId, sourceId, controllerId, fromZone, Zone.BATTLEFIELD, appliedEffects, tapped);
         if (!game.replaceEvent(event)) {
             if (fromZone != null) {
                 boolean removed = false;
@@ -476,7 +481,7 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
             game.addPermanent(permanent);
             game.setZone(objectId, Zone.BATTLEFIELD);
             game.setScopeRelevant(true);
-            game.applyEffects(); // magenoxx: this causes bugs - LevelX2: but it's neccessary for casting e.g. Kird Ape which must trigger evolve
+            game.applyEffects(); 
             permanent.setTapped(tapped);
             permanent.entersBattlefield(sourceId, game, event.getFromZone(), true);
             game.setScopeRelevant(false);

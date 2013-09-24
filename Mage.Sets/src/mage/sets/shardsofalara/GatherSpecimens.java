@@ -37,15 +37,10 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import static mage.constants.Zone.EXILED;
-import static mage.constants.Zone.GRAVEYARD;
-import static mage.constants.Zone.HAND;
-import static mage.constants.Zone.LIBRARY;
-import static mage.constants.Zone.PICK;
+import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
-import mage.game.permanent.PermanentCard;
 
 /**
  *
@@ -76,6 +71,8 @@ public class GatherSpecimens extends CardImpl<GatherSpecimens> {
 
 class GatherSpecimensReplacementEffect extends ReplacementEffectImpl<GatherSpecimensReplacementEffect> {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard();
+
     public GatherSpecimensReplacementEffect() {
         super(Duration.EndOfTurn, Outcome.GainControl);
         staticText = "If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead";
@@ -97,57 +94,12 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl<GatherSpeci
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        if (((ZoneChangeEvent) event).getFromZone() == Zone.HAND
-                || ((ZoneChangeEvent) event).getFromZone() == Zone.EXILED
-                || ((ZoneChangeEvent) event).getFromZone() == Zone.LIBRARY
-                || ((ZoneChangeEvent) event).getFromZone() == Zone.GRAVEYARD
-                || ((ZoneChangeEvent) event).getFromZone() == Zone.PICK) {
-            Card card = game.getCard(((ZoneChangeEvent) event).getTargetId());
-            game.replaceEvent(event);
-            if (card != null) {
-                Zone currentZone = game.getState().getZone(card.getId());
-                ZoneChangeEvent event2 = new ZoneChangeEvent(card.getId(), source.getSourceId(), source.getControllerId(), currentZone, Zone.BATTLEFIELD);
-                if (currentZone != null) {
-                    boolean removed = false;
-                    switch (currentZone) {
-                        case GRAVEYARD:
-                            removed = game.getPlayer(card.getOwnerId()).removeFromGraveyard(card, game);
-                            break;
-                        case HAND:
-                            removed = game.getPlayer(card.getOwnerId()).removeFromHand(card, game);
-                            break;
-                        case LIBRARY:
-                            removed = game.getPlayer(card.getOwnerId()).removeFromLibrary(card, game);
-                            break;
-                        case EXILED:
-                            game.getExile().removeCard(card, game);
-                            removed = true;
-                            break;
-                        case PICK:
-                            removed = true;
-                            break;
-                        default:
-                            System.out.println("putOntoBattlefield, not fully implemented: fromZone=" + currentZone);
-                    }
-                    game.rememberLKI(card.getId(), event2.getFromZone(), card);
-                    if (!removed) {
-                        System.out.println("Couldn't find card in fromZone, card=" + card.getName() + ", fromZone=" + currentZone);
-                    }
-                }
-                PermanentCard permanent = new PermanentCard(card, source.getControllerId());
-                game.resetForSourceId(permanent.getId());
-                game.addPermanent(permanent);
-                game.setZone(card.getId(), Zone.BATTLEFIELD);
-                game.setScopeRelevant(true);
-                game.applyEffects();
-                permanent.entersBattlefield(source.getSourceId(), game, currentZone, true);
-                game.setScopeRelevant(false);
-                game.applyEffects();
-                game.fireEvent(new ZoneChangeEvent(permanent, source.getControllerId(), currentZone, Zone.BATTLEFIELD));
-                return true;
-            }
+        ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
+        Card card = game.getCard(((ZoneChangeEvent) event).getTargetId());
+        if (card != null) {
+            card.putOntoBattlefield(game, zEvent.getFromZone(), zEvent.getSourceId(), source.getControllerId(), zEvent.comesIntoPlayTapped(), zEvent.getAppliedEffects());
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -155,10 +107,10 @@ class GatherSpecimensReplacementEffect extends ReplacementEffectImpl<GatherSpeci
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE
                 && ((ZoneChangeEvent) event).getToZone() == Zone.BATTLEFIELD) {
             Card card = game.getCard(((ZoneChangeEvent) event).getTargetId());
-            if (card != null
-                    && card.getCardType().contains(CardType.CREATURE)
-                    && card.getOwnerId() != source.getControllerId()) {
-                return true;
+            if (card != null && filter.match(card, source.getSourceId(), source.getControllerId(), game)) {
+                if (game.getOpponents(source.getControllerId()).contains(event.getPlayerId())) {
+                    return true;
+                }
             }
         }
         return false;

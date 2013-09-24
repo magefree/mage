@@ -67,12 +67,17 @@ public class ZoneChangeEvent extends GameEvent {
     }
 
     public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects) {
+        this(targetId, sourceId, playerId, fromZone, toZone, appliedEffects, false);
+    }
+
+    public ZoneChangeEvent(UUID targetId, UUID sourceId, UUID playerId, Zone fromZone, Zone toZone, ArrayList<UUID> appliedEffects, boolean comesIntoPlayTapped) {
         super(EventType.ZONE_CHANGE, targetId, sourceId, playerId);
         this.fromZone = fromZone;
         this.toZone = toZone;
         if (appliedEffects != null) {
             this.appliedEffects = appliedEffects;
         }
+        this.flag = comesIntoPlayTapped;
     }
 
     public ZoneChangeEvent(Permanent target, UUID playerId, Zone fromZone, Zone toZone) {
@@ -106,4 +111,9 @@ public class ZoneChangeEvent extends GameEvent {
     public boolean isDiesEvent() {
        return (toZone == Zone.GRAVEYARD && fromZone == Zone.BATTLEFIELD);
     }
+
+    public boolean comesIntoPlayTapped() {
+       return this.flag;
+    }
+
 }

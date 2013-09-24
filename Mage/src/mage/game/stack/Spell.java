@@ -522,14 +522,20 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     
-    @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
         throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
