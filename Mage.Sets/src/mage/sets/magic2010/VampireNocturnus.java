@@ -40,10 +40,12 @@ import mage.abilities.condition.Condition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.continious.*;
 import mage.abilities.keyword.FlyingAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -119,6 +121,13 @@ class VampireNocturnusCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return game.getPlayer(source.getControllerId()).getLibrary().getFromTop(game).getColor().isBlack();
+        Player player = game.getPlayer(source.getControllerId());
+        if (player != null) {
+            Card card = player.getLibrary().getFromTop(game);
+            if (card != null) {
+                return card.getColor().isBlack();
+            }
+        }
+        return false;
     }
 }
