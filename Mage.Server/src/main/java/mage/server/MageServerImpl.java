@@ -219,7 +219,12 @@ public class MageServerImpl implements MageServer {
     //FIXME: why no sessionId here???
     public List<TableView> getTables(UUID roomId) throws MageException {
         try {
-            return GamesRoomManager.getInstance().getRoom(roomId).getTables();
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return room.getTables();
+            } else {
+                return null;
+            }
         }
         catch (Exception ex) {
             handleException(ex);
@@ -231,7 +236,12 @@ public class MageServerImpl implements MageServer {
     //FIXME: why no sessionId here???
     public List<MatchView> getFinishedMatches(UUID roomId) throws MageException {
         try {
-            return GamesRoomManager.getInstance().getRoom(roomId).getFinished();
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return room.getFinished();
+            } else {
+                return null;
+            }
         }
         catch (Exception ex) {
             handleException(ex);
@@ -243,7 +253,12 @@ public class MageServerImpl implements MageServer {
     //FIXME: why no sessionId here???
     public List<String> getConnectedPlayers(UUID roomId) throws MageException {
         try {
-            return GamesRoomManager.getInstance().getRoom(roomId).getPlayers();
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return room.getPlayers();
+            } else {
+                return null;
+            }
         }
         catch (Exception ex) {
             handleException(ex);
@@ -255,7 +270,12 @@ public class MageServerImpl implements MageServer {
     //FIXME: why no sessionId here???
     public TableView getTable(UUID roomId, UUID tableId) throws MageException {
         try {
-            return GamesRoomManager.getInstance().getRoom(roomId).getTable(tableId);
+            GamesRoom room = GamesRoomManager.getInstance().getRoom(roomId);
+            if (room != null) {
+                return room.getTable(tableId);
+            } else {
+                return null;
+            }
         }
         catch (Exception ex) {
             handleException(ex);
