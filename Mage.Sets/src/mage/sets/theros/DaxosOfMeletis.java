@@ -121,10 +121,13 @@ class DaxosOfMeletisEffect extends OneShotEffect<DaxosOfMeletisEffect> {
                 if (cmc > 0) {
                     controller.gainLife(cmc, game);
                 }
-                // allow to cast the card
-                game.addEffect(new DaxosOfMeletisCastFromExileEffect(card.getId(), exileId), source);
-                // and you may spend mana as though it were mana of any color to cast it
-                game.addEffect(new DaxosOfMeletisSpendAnyManaEffect(card.getId()), source);
+                // Add effects only if the card has a spellAbility (e.g. not for lands).
+                if (card.getSpellAbility() != null) {
+                    // allow to cast the card
+                    game.addEffect(new DaxosOfMeletisCastFromExileEffect(card.getId(), exileId), source);
+                    // and you may spend mana as though it were mana of any color to cast it
+                    game.addEffect(new DaxosOfMeletisSpendAnyManaEffect(card.getId()), source);
+                }
             }
             return true;
         }
@@ -165,7 +168,7 @@ class DaxosOfMeletisCastFromExileEffect extends AsThoughEffectImpl<DaxosOfMeleti
         if (sourceId.equals(this.cardId)) {
             Card card = game.getCard(this.cardId);
             if (card != null && game.getState().getExile().getExileZone(exileId).contains(cardId)) {
-                if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
+                if (card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
                     return true;
                 }
             }
