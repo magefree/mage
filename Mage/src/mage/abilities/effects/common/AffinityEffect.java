@@ -4,6 +4,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.SpellAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.filter.common.FilterControlledPermanent;
@@ -13,7 +14,7 @@ public class AffinityEffect extends CostModificationEffectImpl<AffinityEffect> {
     private FilterControlledPermanent filter;
 
     public AffinityEffect(FilterControlledPermanent affinityFilter) {
-        super(Duration.Custom, Outcome.Benefit);
+        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = affinityFilter;
         staticText = "Affinity for " + filter.getMessage();
     }

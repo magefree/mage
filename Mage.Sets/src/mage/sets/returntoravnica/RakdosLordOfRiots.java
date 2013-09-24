@@ -129,7 +129,7 @@ class RakdosLordOfRiotsCost extends CostImpl<RakdosLordOfRiotsCost> {
 class RakdosLordOfRiotsCostReductionEffect extends CostModificationEffectImpl<RakdosLordOfRiotsCostReductionEffect> {
 
     RakdosLordOfRiotsCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Creature spells you cast cost {1} less to cast for each 1 life your opponents have lost this turn";
     }
 

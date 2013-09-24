@@ -32,6 +32,7 @@ import mage.constants.Duration;
 import mage.constants.EffectType;
 import mage.constants.Outcome;
 import mage.abilities.Ability;
+import mage.constants.CostModificationType;
 import mage.game.Game;
 
 /**
@@ -42,14 +43,18 @@ import mage.game.Game;
  */
 public abstract class CostModificationEffectImpl<T extends CostModificationEffectImpl<T>> extends ContinuousEffectImpl<T> implements CostModificationEffect<T> {
 
-    public CostModificationEffectImpl ( Duration duration, Outcome outcome ) {
+    private CostModificationType modificationType;
+    
+    public CostModificationEffectImpl ( Duration duration, Outcome outcome, CostModificationType type) {
         super(duration, outcome);
         this.effectType = EffectType.COSTMODIFICATION;
+        this.modificationType = type;
     }
 
     public CostModificationEffectImpl(final CostModificationEffectImpl<T> effect) {
         super(effect);
         this.effectType = effect.effectType;
+        this.modificationType = effect.modificationType;
     }
 
     /**
@@ -63,4 +68,10 @@ public abstract class CostModificationEffectImpl<T extends CostModificationEffec
      */
     @Override
     public final boolean apply ( Game game, Ability source ) { return false; }
+    
+    
+    @Override
+    public CostModificationType getModificationType(){
+        return this.modificationType;
+    }
 }

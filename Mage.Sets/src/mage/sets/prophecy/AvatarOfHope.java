@@ -49,6 +49,7 @@ import mage.players.Player;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.constants.CostModificationType;
 
 /**
  *
@@ -115,7 +116,7 @@ class AdjustingCostsAbility extends SimpleStaticAbility implements AdjustingSour
 class AdjustingCostsEffect extends CostModificationEffectImpl<AdjustingCostsEffect> {
 
     public AdjustingCostsEffect() {
-        super(Duration.Custom, Outcome.Benefit);
+        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
     }
 
     public AdjustingCostsEffect(final AdjustingCostsEffect effect) {

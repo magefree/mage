@@ -29,6 +29,7 @@
 package mage.abilities.effects;
 
 import mage.abilities.Ability;
+import mage.constants.CostModificationType;
 import mage.game.Game;
 
 /**
@@ -64,4 +65,10 @@ public interface CostModificationEffect<T extends CostModificationEffect<T>> ext
      * @return
      */
     boolean applies(Ability abilityToModify, Ability source, Game game);
+    
+    /**
+     * Return the type of modification
+     * @return 
+     */
+    CostModificationType getModificationType();
 }

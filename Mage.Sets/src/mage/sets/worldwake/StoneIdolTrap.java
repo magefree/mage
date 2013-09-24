@@ -91,7 +91,7 @@ class StoneIdolTrapCostReductionEffect extends CostModificationEffectImpl<StoneI
         filter.add(new AttackingPredicate());
     }
     public StoneIdolTrapCostReductionEffect() {
-        super(Duration.WhileOnStack, Outcome.Benefit);
+        super(Duration.WhileOnStack, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "{this} costs {1} less to cast for each attacking creature";
     }
 

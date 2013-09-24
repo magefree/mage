@@ -119,7 +119,7 @@ class SemblanceAnvilCostReductionEffect extends CostModificationEffectImpl<Sembl
     private static final String effectText = "Spells you cast that share a card type with the exiled card cost {2} less to cast";
 
     SemblanceAnvilCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
 

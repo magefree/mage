@@ -47,6 +47,7 @@ import mage.target.Target;
 import mage.util.CardUtil;
 
 import java.util.UUID;
+import mage.constants.CostModificationType;
 
 /**
  *
@@ -89,7 +90,7 @@ class ElderwoodScionCostReductionEffect extends CostModificationEffectImpl<Elder
     private static final String effectText = "Spells you cast that target {this} cost {2} less to cast";
 
     ElderwoodScionCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
 
@@ -132,7 +133,7 @@ class ElderwoodScionCostReductionEffect2 extends CostModificationEffectImpl<Elde
     private static final String effectText = "Spells your opponents cast that target Elderwood Scion cost {2} more to cast";
 
     ElderwoodScionCostReductionEffect2() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = effectText;
     }
 

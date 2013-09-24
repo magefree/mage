@@ -32,6 +32,7 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.game.Game;
@@ -50,7 +51,7 @@ public class CommanderCostModification extends CostModificationEffectImpl<Comman
     private UUID commander;
     
     public CommanderCostModification(UUID commander) {
-        super(Duration.Custom, Outcome.Neutral);
+        super(Duration.Custom, Outcome.Neutral, CostModificationType.INCREASE_COST);
         this.commander = commander;
     }
 

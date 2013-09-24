@@ -38,6 +38,7 @@ import mage.abilities.effects.CostModificationEffectImpl;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -80,7 +81,7 @@ class TrainingGroundsEffect extends CostModificationEffectImpl<TrainingGroundsEf
     }
 
     public TrainingGroundsEffect() {
-        super(Duration.Custom, Outcome.Benefit);
+        super(Duration.Custom, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
 

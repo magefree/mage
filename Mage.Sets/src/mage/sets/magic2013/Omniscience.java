@@ -72,7 +72,7 @@ public class Omniscience extends CardImpl<Omniscience> {
 class OmniscienceEffect extends CostModificationEffectImpl<OmniscienceEffect> {
 
     public OmniscienceEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.PlayForFree);
+        super(Duration.WhileOnBattlefield, Outcome.PlayForFree, CostModificationType.SET_COST);
         this.staticText = "You may cast nonland cards from your hand without paying their mana costs";
     }
 

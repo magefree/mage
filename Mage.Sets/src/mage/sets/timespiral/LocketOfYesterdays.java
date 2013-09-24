@@ -69,7 +69,7 @@ public class LocketOfYesterdays extends CardImpl<LocketOfYesterdays> {
 class LocketOfYesterdaysCostReductionEffect extends CostModificationEffectImpl<LocketOfYesterdaysCostReductionEffect> {
 
     LocketOfYesterdaysCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard";
     }
 

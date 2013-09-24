@@ -41,25 +41,25 @@ import mage.util.CardUtil;
 
 /**
  *
- * @author LevelX2
+ * @author Plopman
  */
-public class SpellsCostReductionAllEffect extends CostModificationEffectImpl<SpellsCostReductionAllEffect> {
+public class SpellsCostIncreasementAllEffect extends CostModificationEffectImpl<SpellsCostIncreasementAllEffect> {
 
     private FilterCard filter;
     private int amount;
 
-    public SpellsCostReductionAllEffect(int amount) {
+    public SpellsCostIncreasementAllEffect(int amount) {
         this(new FilterCard("All Spells "), amount);
     }
 
-    public SpellsCostReductionAllEffect(FilterCard filter, int amount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
+    public SpellsCostIncreasementAllEffect(FilterCard filter, int amount) {
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         this.filter = filter;
         this.amount = amount;
-        this.staticText = new StringBuilder(filter.getMessage()).append(" cost {").append(amount).append("} less to cast").toString();
+        this.staticText = new StringBuilder(filter.getMessage()).append(" cost {").append(amount).append("} more to cast").toString();
     }
 
-    protected SpellsCostReductionAllEffect(SpellsCostReductionAllEffect effect) {
+    protected SpellsCostIncreasementAllEffect(SpellsCostIncreasementAllEffect effect) {
         super(effect);
         this.filter = effect.filter;
         this.amount = effect.amount;
@@ -67,7 +67,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl<Spe
 
     @Override
     public boolean apply(Game game, Ability source, Ability abilityToModify) {
-        CardUtil.reduceCost(abilityToModify, this.amount);
+        CardUtil.increaseCost(abilityToModify, this.amount);
         return true;
     }
 
@@ -81,7 +81,7 @@ public class SpellsCostReductionAllEffect extends CostModificationEffectImpl<Spe
     }
 
     @Override
-    public SpellsCostReductionAllEffect copy() {
-        return new SpellsCostReductionAllEffect(this);
+    public SpellsCostIncreasementAllEffect copy() {
+        return new SpellsCostIncreasementAllEffect(this);
     }
 }

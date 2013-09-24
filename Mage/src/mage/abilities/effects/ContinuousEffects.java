@@ -50,6 +50,7 @@ import mage.abilities.keyword.SpliceOntoArcaneAbility;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.constants.AsThoughEffectType;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.constants.Layer;
 import mage.constants.Outcome;
@@ -454,6 +455,20 @@ public class ContinuousEffects implements Serializable {
     }
 
     /**
+     * 601.2e The player determines the total cost of the spell. Usually this is
+     * just the mana cost. Some spells have additional or alternative costs. Some
+     * effects may increase or reduce the cost to pay, or may provide other alternative costs.
+     * Costs may include paying mana, tapping permanents, sacrificing permanents,
+     * discarding cards, and so on. The total cost is the mana cost or alternative
+     * cost (as determined in rule 601.2b), plus all additional costs and cost increases,
+     * and minus all cost reductions. If the mana component of the total cost is reduced
+     * to nothing by cost reduction effects, it is considered to be {0}. 
+     * It can’t be reduced to less than {0}. Once the total cost is determined,
+     * any effects that directly affect the total cost are applied.
+     * Then the resulting total cost becomes “locked in.”
+     * If effects would change the total cost after this time, they have no effect.
+     */
+    /**
      * Inspects all {@link Permanent permanent's} {@link Ability abilities} on the battlefield
      * for {@link CostModificationEffect cost modification effects} and applies them if necessary.
      *
@@ -465,10 +480,34 @@ public class ContinuousEffects implements Serializable {
         List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
 
         for ( CostModificationEffect effect : costEffects) {
-            HashSet<Ability> abilities = costModificationEffects.getAbility(effect.getId());
-            for (Ability ability : abilities) {
-                if ( effect.applies(abilityToModify, ability, game) ) {
-                    effect.apply(game, ability, abilityToModify);
+            if(effect.getModificationType() == CostModificationType.INCREASE_COST){
+                HashSet<Ability> abilities = costModificationEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if ( effect.applies(abilityToModify, ability, game) ) {
+                        effect.apply(game, ability, abilityToModify);
+                    }
+                }
+            }
+        }
+        
+        for ( CostModificationEffect effect : costEffects) {
+            if(effect.getModificationType() == CostModificationType.REDUCE_COST){
+                HashSet<Ability> abilities = costModificationEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if ( effect.applies(abilityToModify, ability, game) ) {
+                        effect.apply(game, ability, abilityToModify);
+                    }
+                }
+            }
+        }
+                
+        for ( CostModificationEffect effect : costEffects) {
+            if(effect.getModificationType() == CostModificationType.SET_COST){
+                HashSet<Ability> abilities = costModificationEffects.getAbility(effect.getId());
+                for (Ability ability : abilities) {
+                    if ( effect.applies(abilityToModify, ability, game) ) {
+                        effect.apply(game, ability, abilityToModify);
+                    }
                 }
             }
         }

@@ -68,7 +68,7 @@ public class DefenseGrid extends CardImpl<DefenseGrid> {
 class DefenseGridCostModificationEffect extends CostModificationEffectImpl<DefenseGridCostModificationEffect> {
 
     DefenseGridCostModificationEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Each spell costs {3} more to cast except during its controller's turn";
     }
 
