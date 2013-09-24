@@ -38,10 +38,11 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.filter.common.FilterArtifactPermanent;
+import mage.filter.common.FilterArtifactCard;
 import mage.filter.predicate.permanent.AnotherPredicate;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
@@ -85,8 +86,15 @@ public class SludgeStrider extends CardImpl<SludgeStrider> {
 
 class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl<SludgeStriderTriggeredAbility> {
 
+    private static final FilterArtifactCard filter = new FilterArtifactCard("another artifact under your control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new AnotherPredicate());
+    }
+
     public SludgeStriderTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), true);
+        // setting optional = false because DoIfCostPaid already asks the player
+        super(Zone.BATTLEFIELD, new DoIfCostPaid(new SludgeStriderEffect(), new GenericManaCost(1)), false);
     }
 
     public SludgeStriderTriggeredAbility(final SludgeStriderTriggeredAbility ability) {
@@ -95,22 +103,21 @@ class SludgeStriderTriggeredAbility extends TriggeredAbilityImpl<SludgeStriderTr
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
+        if (event.getType() == GameEvent.EventType.ENTERS_THE_BATTLEFIELD) {
+            Permanent permanent = game.getPermanent(event.getTargetId());
+            if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                return true;
+            }
+        }
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-            if (zEvent.getFromZone() == Zone.BATTLEFIELD
-                    || zEvent.getToZone() == Zone.BATTLEFIELD) {
+            if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 UUID targetId = event.getTargetId();
                 Permanent permanent = game.getPermanent(targetId);
                 if (permanent == null) {
                     permanent = (Permanent) game.getLastKnownInformation(targetId, Zone.BATTLEFIELD);
                 }
-                if (permanent == null) {
-                    return false;
-                }
-                FilterArtifactPermanent filter = new FilterArtifactPermanent();
-                filter.add(new ControllerIdPredicate(super.getControllerId()));
-                filter.add(new AnotherPredicate());
-                if (filter.match(permanent, getSourceId(), getControllerId(), game)) {
+                if (permanent != null && filter.match(permanent, getSourceId(), getControllerId(), game)) {
                     return true;
                 }
             }
@@ -133,6 +140,7 @@ class SludgeStriderEffect extends OneShotEffect<SludgeStriderEffect> {
 
     SludgeStriderEffect() {
         super(Outcome.Detriment);
+        staticText = "target player loses 1 life and you gain 1 life";
     }
 
     SludgeStriderEffect(final SludgeStriderEffect effect) {
