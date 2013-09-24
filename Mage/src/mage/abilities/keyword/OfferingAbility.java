@@ -42,6 +42,7 @@ import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.cards.Card;
+import mage.constants.CostModificationType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -189,7 +190,7 @@ class OfferingCostReductionEffect extends CostModificationEffectImpl<OfferingCos
     private ManaCosts<ManaCost> manaCostsToReduce;
 
     OfferingCostReductionEffect (UUID spellAbilityId, ManaCosts<ManaCost> manaCostsToReduce, UUID activationId) {
-        super(Duration.OneUse, Outcome.Benefit);
+        super(Duration.OneUse, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.spellAbilityId = spellAbilityId;
         this.manaCostsToReduce = manaCostsToReduce;
         this.activationId = activationId;
