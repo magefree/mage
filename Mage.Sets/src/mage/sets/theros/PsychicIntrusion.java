@@ -97,7 +97,7 @@ class PsychicIntrusionExileEffect extends OneShotEffect<PsychicIntrusionExileEff
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player opponent = game.getPlayer(source.getFirstTarget());
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
         if (opponent != null) {
             opponent.revealCards("Psychic Intrusion", opponent.getHand(), game);
             Player you = game.getPlayer(source.getControllerId());
@@ -109,7 +109,12 @@ class PsychicIntrusionExileEffect extends OneShotEffect<PsychicIntrusionExileEff
                     if (opponent.chooseUse(Outcome.Detriment, "Exile card from opponents Hand?", game)) {
                         fromHand = true;
                     }
+                } else {
+                    if (cardsHand > 0) {
+                        fromHand = true;
+                    }
                 }
+
                 Card card = null;
                 if (cardsHand > 0 && fromHand) {
                     TargetCard target = new TargetCard(Zone.PICK, filter);
@@ -130,13 +135,19 @@ class PsychicIntrusionExileEffect extends OneShotEffect<PsychicIntrusionExileEff
                 if (card != null) {
                     // move card to exile
                     UUID exileId = CardUtil.getCardExileZoneId(game, source);
-                    card.moveToExile(exileId, "Daxos of Meletis", source.getSourceId(), game);
+                    card.moveToExile(exileId, "Psychic Intrusion", source.getSourceId(), game);
                     // allow to cast the card
                     game.addEffect(new PsychicIntrusionCastFromExileEffect(card.getId(), exileId), source);
                     // and you may spend mana as though it were mana of any color to cast it
                     game.addEffect(new PsychicIntrusionSpendAnyManaEffect(card.getId()), source);
-                }
+                    game.informPlayers(new StringBuilder("Psychic Intrusion: ")
+                            .append(you.getName())
+                            .append(" exiles ")
+                            .append(card.getName())
+                            .append(" from")
+                            .append(fromHand ? " hand":" graveyard").toString());
 
+                }
                 return true;
             }
         }
