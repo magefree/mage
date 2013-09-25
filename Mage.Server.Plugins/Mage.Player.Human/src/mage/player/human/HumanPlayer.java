@@ -484,6 +484,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("playMana", game);
         game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
         waitForResponse(game);
+        if (!this.isInGame()) {
+            return false;
+        }
         if (response.getBoolean() != null) {
             return false;
         } else if (response.getUUID() != null) {

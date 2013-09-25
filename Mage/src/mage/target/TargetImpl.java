@@ -54,6 +54,7 @@ public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
     protected int minNumberOfTargets;
     protected boolean required = false;
     protected boolean chosen = false;
+    // is the target handled as targeted spell/ability (notTarget = true is used for not targeted effects like e.g. sacrifice)
     protected boolean notTarget = false;
     protected boolean atRandom = false;
 

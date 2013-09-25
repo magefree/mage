@@ -153,8 +153,9 @@ class ChampionExileCost extends CostImpl<ChampionExileCost> {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null)
+                if (permanent == null) {
                     return false;
+                }
                 paid |= permanent.moveToExile(sourceId, exileZone, sourceId, game);
             }
         }

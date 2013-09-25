@@ -92,7 +92,7 @@ public class SacrificeAllEffect extends OneShotEffect<SacrificeAllEffect> {
                 int numTargets = Math.min(amount.calculate(game, source), game.getBattlefield().countAll(filter, player.getId(), game));
                 TargetControlledPermanent target = new TargetControlledPermanent(numTargets, numTargets, filter, false);
                 if (target.canChoose(player.getId(), game)) {
-                    while (!target.isChosen()) {
+                    while (!target.isChosen() && player.isInGame()) {
                         player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
                     }
                     perms.addAll(target.getTargets());
