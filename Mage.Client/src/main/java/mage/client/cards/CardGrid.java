@@ -74,28 +74,39 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
      * Max amount of cards in card grid for which card images will be drawn.
      * Done so to solve issue with memory for big piles of cards.
      */
-    private static final int MAX_IMAGES = 250;
+    public static final int MAX_IMAGES = 300;
 
     public CardGrid() {
         initComponents();
         setOpaque(false);
     }
-
     @Override
     public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    }
+
+    @Override
+    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
         boolean drawImage = showCards.size() < MAX_IMAGES;
         this.bigCard = bigCard;
         this.gameId = gameId;
-        for (CardView card: showCards.values()) {
-            if (!cards.containsKey(card.getId())) {
-                addCard(card, bigCard, gameId, drawImage);
+        if (merge) {
+            for (CardView card: showCards.values()) {
+                if (!cards.containsKey(card.getId())) {
+                    addCard(card, bigCard, gameId, drawImage);
+                }
             }
-        }
-        for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
-            Entry<UUID, MageCard> entry = i.next();
-            if (!showCards.containsKey(entry.getKey())) {
-                removeCardImg(entry.getKey());
-                i.remove();
+            for (Iterator<Entry<UUID, MageCard>> i = cards.entrySet().iterator(); i.hasNext();) {
+                Entry<UUID, MageCard> entry = i.next();
+                if (!showCards.containsKey(entry.getKey())) {
+                    removeCardImg(entry.getKey());
+                    i.remove();
+                }
+            }
+        } else {
+            this.clear();
+            for (CardView card: showCards.values()) {
+                addCard(card, bigCard, gameId, drawImage);
             }
         }
         System.gc();
@@ -144,8 +155,9 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
             MageCard lastCard = null;
             for (MageCard cardImg: sortedCards) {
                 if (piles) {
-                    if (lastCard == null)
+                    if (lastCard == null) {
                         lastCard = cardImg;
+                    }
                     switch (sortBy) {
                         case NAME:
                             if (!cardImg.getOriginal().getName().equals(lastCard.getOriginal().getName())) {
@@ -201,6 +213,19 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
         resizeArea();
            revalidate();
            repaint();
+    }
+
+    private void clear() {
+        this.cards.clear();
+        removeAllCardImg();
+    }
+
+    private void removeAllCardImg() {
+        for (Component comp: getComponents()) {
+            if (comp instanceof Card || comp instanceof MageCard) {
+                remove(comp);
+            }
+        }
     }
 
     private void removeCardImg(UUID cardId) {
@@ -306,6 +331,11 @@ public class CardGrid extends javax.swing.JLayeredPane implements MouseListener,
     public void refresh() {
         revalidate();
            repaint();
+    }
+
+    @Override
+    public int cardsSize() {
+        return cards.size();
     }
 }
 

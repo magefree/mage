@@ -204,12 +204,15 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        for (CardType type : types) {
-            where.like("types", new SelectArg('%' + type.name() + '%'));
-        }
-        if (!types.isEmpty()) {
-            where.or(types.size());
-            clausesCount++;
+
+        if (types.size() != 7) { //if all types selected - no selection needed
+            for (CardType type : types) {
+                where.like("types", new SelectArg('%' + type.name() + '%'));
+            }
+            if (!types.isEmpty()) {
+                where.or(types.size());
+                clausesCount++;
+            }
         }
 
         for (CardType type : notTypes) {
@@ -277,6 +280,6 @@ public class CardCriteria {
             qb.limit(count);
         }
 
-        qb.orderBy("cardNumber", true);
+        // qb.orderBy("cardNumber", true);
     }
 }

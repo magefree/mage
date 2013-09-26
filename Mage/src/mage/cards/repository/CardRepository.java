@@ -44,6 +44,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import mage.constants.CardType;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -265,7 +266,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             criteria.buildQuery(queryBuilder);
-
+            
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }
