@@ -23,7 +23,7 @@ public enum ExpansionRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "expansion";
-    private static final long EXPANSION_DB_VERSION = 2;
+    private static final long EXPANSION_DB_VERSION = 3;
 
     private Dao<ExpansionInfo, Object> expansionDao;
 
