@@ -59,6 +59,7 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private String sortBy;
     private Long start;
     private Long count;
 
@@ -166,6 +167,11 @@ public class CardCriteria {
 
     public CardCriteria subtypes(String... subtypes) {
         this.subtypes.addAll(Arrays.asList(subtypes));
+        return this;
+    }
+
+    public CardCriteria setOrderBy(String sortBy) {
+        this.sortBy = sortBy;
         return this;
     }
 
@@ -279,7 +285,9 @@ public class CardCriteria {
         if (count != null) {
             qb.limit(count);
         }
-
-        // qb.orderBy("cardNumber", true);
+        
+        if (sortBy != null) {
+            qb.orderBy(sortBy, true);
+        }
     }
 }

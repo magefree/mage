@@ -44,7 +44,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.Callable;
 import mage.constants.CardType;
-import org.apache.log4j.Logger;
 
 /**
  *

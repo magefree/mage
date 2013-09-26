@@ -268,6 +268,7 @@ public class MageBook extends JComponent {
     private List<CardInfo> getCards(int page, String set) {
         CardCriteria criteria = new CardCriteria();
         criteria.setCodes(set).start((long) page * conf.CARDS_PER_PAGE).count((long) conf.CARDS_PER_PAGE + 1);
+        criteria.setOrderBy("cardNumber");
         List<CardInfo> cards = CardRepository.instance.findCards(criteria);
         if (cards.size() > conf.CARDS_PER_PAGE) {
             pageRight.setVisible(true);

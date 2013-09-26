@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.constants.SetType;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -391,14 +392,16 @@ public class ConstructedFormats {
 
     private static void buildLists() {
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
-            if (set.getReleaseDate().after(standardDate)) {
-                standard.add(set.getCode());
-            }
-            if (set.getReleaseDate().after(extendedDate)) {
-                extended.add(set.getCode());
-            }
-            if (set.getReleaseDate().after(modernDate)) {
-                modern.add(set.getCode());
+            if (!set.getType().equals(SetType.REPRINT)) {
+                if (set.getReleaseDate().after(standardDate)) {
+                    standard.add(set.getCode());
+                }
+                if (set.getReleaseDate().after(extendedDate)) {
+                    extended.add(set.getCode());
+                }
+                if (set.getReleaseDate().after(modernDate)) {
+                    modern.add(set.getCode());
+                }
             }
         }
     }
