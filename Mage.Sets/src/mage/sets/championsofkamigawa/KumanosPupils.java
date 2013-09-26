@@ -54,7 +54,7 @@ import mage.watchers.common.DamagedByWatcher;
 public class KumanosPupils extends CardImpl<KumanosPupils> {
 
     public KumanosPupils(UUID ownerId) {
-        super(ownerId, 177, "Kumano's Pupils", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
+        super(ownerId, 177, "Kumano's Pupils", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{4}{R}");
         this.expansionSetCode = "CHK";
         this.subtype.add("Human");
         this.subtype.add("Shaman");

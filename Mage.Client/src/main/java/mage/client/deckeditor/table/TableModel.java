@@ -84,69 +84,84 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     @Override
     public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    }
+
+    @Override
+    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
         this.bigCard = bigCard;
         this.gameId = gameId;
         int landCount = 0;
         int creatureCount = 0;
-        for (CardView card : showCards.values()) {
-            if (!cards.containsKey(card.getId())) {
+        if (!merge) {
+            this.clear();
+            for (CardView card : showCards.values()) {
                 addCard(card, bigCard, gameId);
             }
-            if (updateCountsCallback != null) {
-                if (card.getCardTypes().contains(CardType.LAND))
-                    landCount++;
-                if (card.getCardTypes().contains(CardType.CREATURE))
-                    creatureCount++;
+        } else {
+            for (CardView card : showCards.values()) {
+                if (!cards.containsKey(card.getId())) {
+                    addCard(card, bigCard, gameId);
+                }
+                if (updateCountsCallback != null) {
+                    if (card.getCardTypes().contains(CardType.LAND)) {
+                        landCount++;
+                    }
+                    if (card.getCardTypes().contains(CardType.CREATURE)) {
+                        creatureCount++;
+                    }
+                }
             }
-        }
-        // not easy logic for merge :)
-        for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext();) {
-            Entry<UUID, CardView> entry = i.next();
-            if (!showCards.containsKey(entry.getKey())) {
-                i.remove();
-                if (displayNoCopies) {
-                    String key = entry.getValue().getName() + entry.getValue().getExpansionSetCode() + entry.getValue().getCardNumber();
-                    if (cardsNoCopies.containsKey(key)) {
-                        Integer count = cardsNoCopies.get(key);
-                        count--;
-                        if (count > 0) {
-                            cardsNoCopies.put(key, count);
-                        } else {
-                            cardsNoCopies.remove(key);
-                        }
-                        for (int j = 0; j < view.size(); j++) {
-                            CardView cv = view.get(j);
-                            if (cv.getId().equals(entry.getValue().getId())) {
-                                if (count > 0) {
-                                    // replace by another card with the same name+setCode
-                                    String key1 = cv.getName()+cv.getExpansionSetCode()+cv.getCardNumber();
-                                    for (CardView cardView : cards.values()) {
-                                        String key2 = cardView.getName()+cardView.getExpansionSetCode()+cardView.getCardNumber();
-                                        if ((key1).equals(key2)) {
-                                            view.set(j, cardView);
-                                            break;
+
+            // no easy logic for merge :)
+            for (Iterator<Entry<UUID, CardView>> i = cards.entrySet().iterator(); i.hasNext();) {
+                Entry<UUID, CardView> entry = i.next();
+                if (!showCards.containsKey(entry.getKey())) {
+                    i.remove();
+                    if (displayNoCopies) {
+                        String key = entry.getValue().getName() + entry.getValue().getExpansionSetCode() + entry.getValue().getCardNumber();
+                        if (cardsNoCopies.containsKey(key)) {
+                            Integer count = cardsNoCopies.get(key);
+                            count--;
+                            if (count > 0) {
+                                cardsNoCopies.put(key, count);
+                            } else {
+                                cardsNoCopies.remove(key);
+                            }
+                            for (int j = 0; j < view.size(); j++) {
+                                CardView cv = view.get(j);
+                                if (cv.getId().equals(entry.getValue().getId())) {
+                                    if (count > 0) {
+                                        // replace by another card with the same name+setCode
+                                        String key1 = cv.getName()+cv.getExpansionSetCode()+cv.getCardNumber();
+                                        for (CardView cardView : cards.values()) {
+                                            String key2 = cardView.getName()+cardView.getExpansionSetCode()+cardView.getCardNumber();
+                                            if ((key1).equals(key2)) {
+                                                view.set(j, cardView);
+                                                break;
+                                            }
                                         }
+                                    } else {
+                                        view.remove(j);
                                     }
-                                } else {
-                                    view.remove(j);
+                                    break;
                                 }
+                            }
+                        }
+                    } else {
+                        for (CardView cv : view) {
+                            if (cv.getId().equals(entry.getKey())) {
+                                view.remove(cv);
                                 break;
                             }
                         }
                     }
-                } else {
-                    for (CardView cv : view) {
-                        if (cv.getId().equals(entry.getKey())) {
-                            view.remove(cv);
-                            break;
-                        }
-                    }
                 }
             }
-        }
 
-        if (updateCountsCallback != null) {
-            updateCountsCallback.update(cards.size(), creatureCount, landCount);
+            if (updateCountsCallback != null) {
+                updateCountsCallback.update(cards.size(), creatureCount, landCount);
+            }
         }
 
         sort(1, true);
@@ -383,5 +398,10 @@ public class TableModel extends AbstractTableModel implements ICardGrid {
 
     public void setUpdateCountsCallback(UpdateCountsCallback callback) {
         this.updateCountsCallback = callback;
+    }
+
+    @Override
+    public int cardsSize() {
+        return cards.size();
     }
 }
