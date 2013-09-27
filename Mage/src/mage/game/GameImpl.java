@@ -572,7 +572,23 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     private boolean playTurn(Player player) {
-        fireStatusEvent("Turn " + Integer.toString(state.getTurnNum()), true);
+        StringBuilder sb = new StringBuilder("Turn ");
+        sb.append(state.getTurnNum()).append(" (");
+        int delimiter = this.getPlayers().size() - 1;
+        for (Player gamePlayer : this.getPlayers().values()) {
+            sb.append(gamePlayer.getLife());
+            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            if (poison > 0) {
+                sb.append("[P:").append(poison).append("]");
+            }
+            if (delimiter > 0) {
+                sb.append(" - ");
+                delimiter--;
+            }
+        }       
+        sb.append(")");
+        fireStatusEvent(sb.toString(), true);
+        
         if (checkStopOnTurnOption()) {
             return false;
         }
