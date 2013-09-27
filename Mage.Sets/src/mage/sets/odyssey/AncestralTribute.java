@@ -28,14 +28,14 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
+import mage.abilities.effects.common.GainLifeEffect;
+import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.abilities.dynamicvalue.common.CardsInControllerGraveyardCount;
-import mage.abilities.effects.common.GainLifeEffect;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.keyword.FlashbackAbility;
 import mage.filter.FilterCard;
 
 /**
@@ -50,13 +50,12 @@ public class AncestralTribute extends CardImpl<AncestralTribute> {
         this.expansionSetCode = "ODY";
 
         this.color.setWhite(true);
-        
-        
+                
         // You gain 2 life for each card in your graveyard.
-		this.getSpellAbility().addEffect(new GainLifeEffect((new CardsInControllerGraveyardCount(new FilterCard(), 2))));
-        
-		// Flashback {9}{W}{W}{W}
-		this.addAbility(new FlashbackAbility(new ManaCostsImpl("{9}{W}{W}{W}"), TimingRule.SORCERY));
+	this.getSpellAbility().addEffect(new GainLifeEffect((new CardsInControllerGraveyardCount(new FilterCard(), 2))));
+
+	// Flashback {9}{W}{W}{W}
+	this.addAbility(new FlashbackAbility(new ManaCostsImpl("{9}{W}{W}{W}"), TimingRule.SORCERY));
 
         
     }

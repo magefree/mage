@@ -30,6 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -51,6 +52,7 @@ public class WordsOfWisdom extends CardImpl<WordsOfWisdom> {
         this.color.setBlue(true);
 
         // You draw two cards, then each other player draws a card.
+        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
         this.getSpellAbility().addEffect(new WordsOfWisdomEffect());
     }
 
@@ -68,7 +70,7 @@ class WordsOfWisdomEffect extends OneShotEffect<WordsOfWisdomEffect> {
 
     public WordsOfWisdomEffect() {
         super(Outcome.Detriment);
-        this.staticText = "each other player draws a card";
+        this.staticText = "then each other player draws a card";
     }
 
     public WordsOfWisdomEffect(final WordsOfWisdomEffect effect) {
@@ -84,28 +86,16 @@ class WordsOfWisdomEffect extends OneShotEffect<WordsOfWisdomEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-                    controller.drawCards(2, game);
             for(UUID playerId: controller.getInRange()) {
                 if (!playerId.equals(controller.getId())) {
                     Player player = game.getPlayer(playerId);
                     if (player != null) {
                         player.drawCards(1, game);
-                        //TargetCardInHand target = new TargetCardInHand(new FilterCreatureCard());
-                       // if (target.canChoose(source.getSourceId(), playerId, game)
-                         //       && player.chooseUse(Outcome.Neutral, "Put a creature card from your hand in play?", game)
-                           //     && player.choose(Outcome.PutCreatureInPlay, target, source.getSourceId(), game)) {
-                           // Card card = game.getCard(target.getFirstTarget());
-                           // if (card != null) {
-                             //   card.putOntoBattlefield(game, Zone.HAND, source.getId(), player.getId());
-                           }
-                        //}
                     }
                 }
             }
-            return false;
         }
+       return false;
+    }
        
 }
-
-
-

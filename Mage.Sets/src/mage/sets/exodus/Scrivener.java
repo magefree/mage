@@ -30,7 +30,7 @@ package mage.sets.exodus;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.EntersBattlefieldAbility;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ReturnFromGraveyardToHandTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -46,7 +46,7 @@ import mage.target.common.TargetCardInGraveyard;
  
 public class Scrivener extends CardImpl<Scrivener> {
 
-    private static final FilterCard filter = new FilterCard("Instant");
+    private static final FilterCard filter = new FilterCard("instant card from your graveyard");
     
     static{
     filter.add(new CardTypePredicate(CardType.INSTANT));
@@ -63,7 +63,7 @@ public class Scrivener extends CardImpl<Scrivener> {
         this.toughness = new MageInt(2);
 
         // When Scrivener enters the battlefield, you may return target instant card from your graveyard to your hand.
-       Ability ability = new EntersBattlefieldAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
+       Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnFromGraveyardToHandTargetEffect(), true);
        ability.addTarget(new TargetCardInGraveyard(filter));
        this.addAbility(ability);
         

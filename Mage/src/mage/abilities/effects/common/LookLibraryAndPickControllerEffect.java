@@ -164,6 +164,9 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
             case BATTLEFIELD:
                 sb.append("put ").append(filter.getMessage()).append(" onto the battlefield");
                 break;
+            case GRAVEYARD:
+                sb.append("put ").append(filter.getMessage()).append(" into your graveyard");
+                break;
         }
         return sb.append("?").toString();
     }
@@ -180,6 +183,9 @@ public class LookLibraryAndPickControllerEffect extends LookLibraryControllerEff
                 break;
             case BATTLEFIELD:
                 sb.append("put onto the battlefield");
+                break;
+            case GRAVEYARD:
+                sb.append("put into the graveyard");
                 break;
         }
         return sb.toString();

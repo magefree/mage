@@ -30,12 +30,14 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.SpellCastAllTriggeredAbility;
-import mage.abilities.common.delayed.AtEndOfTurnDelayedTriggeredAbility;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -60,7 +62,7 @@ public class UnifyingTheory extends CardImpl<UnifyingTheory> {
         this.color.setBlue(true);
 
         // Whenever a player casts a spell, that player may pay {2}. If the player does, he or she draws a card.
-    this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect(), new FilterSpell("a spell"), false, true));
+        this.addAbility(new SpellCastAllTriggeredAbility(new UnifyingTheoryEffect() , new FilterSpell("a spell"), false, true));
     }
 
     public UnifyingTheory(final UnifyingTheory card) {
@@ -77,7 +79,7 @@ class UnifyingTheoryEffect extends OneShotEffect<UnifyingTheoryEffect> {
 
     public UnifyingTheoryEffect() {
         super(Outcome.Detriment);
-        this.staticText = "that player may pay {2}. If the player does, he or she draws a card.";
+        this.staticText = "that player may pay {2}. If the player does, he or she draws a card";
     }
 
     public UnifyingTheoryEffect(final UnifyingTheoryEffect effect) {
@@ -100,13 +102,7 @@ class UnifyingTheoryEffect extends OneShotEffect<UnifyingTheoryEffect> {
             if (caster.chooseUse(Outcome.DrawCard, "Pay {2} to draw a card?", game)) {
                 Cost cost = new ManaCostsImpl("{2}");
                 if (cost.pay(source, game, source.getSourceId(), caster.getId(), false)) {
-                    Effect effect = new DrawCardTargetEffect(1);
-                    effect.setTargetPointer(new FixedTarget(caster.getId()));
-                    //Ability ability = new AtEndOfTurnDelayedTriggeredAbility(effect);
-                    //return ability.activate(game, true);
-                    return effect.apply(game, source);
-                    //return new SimpleTriggeredAbility(Zone.BATTLEFIELD, effect, "").apply(game,source);
-                    //return new CreateDelayedTriggeredAbilityEffect(new AtEndOfTurnDelayedTriggeredAbility(effect, TargetController.ANY)).apply(game, source);
+                    caster.drawCards(1, game);
                 }
             }
             return true;

@@ -59,9 +59,11 @@ public class EarnestFellowship extends CardImpl<EarnestFellowship> {
         this.expansionSetCode = "ODY";
 
         this.color.setWhite(true);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));
 
         // Each creature has protection from its colors.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new EarnestFellowshipEffect()));
+
+        
         
     }
 
@@ -81,7 +83,7 @@ class EarnestFellowshipEffect extends ContinuousEffectImpl<EarnestFellowshipEffe
    
 
     public EarnestFellowshipEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.staticText = "Each creature has protection from its colors";
     }
 
@@ -95,58 +97,31 @@ class EarnestFellowshipEffect extends ContinuousEffectImpl<EarnestFellowshipEffe
     }
 
     @Override
-    public void init(Ability source, Game game) {
-        super.init(source, game);
-        if (this.affectedObjectsSet) {
-            List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-            for (Permanent permanent : permanents) {
-                objects.add(permanent.getId());
-            }
-        }
-    }
-
-    @Override
     public boolean apply(Game game, Ability source) {
-        List<Permanent> permanents = game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game);
-        for (Permanent permanent : permanents) {
-            if (!this.affectedObjectsSet || objects.contains(permanent.getId())) {
-                ObjectColor color = permanent.getColor();   
-                FilterCard filterColor = new FilterCard("its own Colors");
-               
+        for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), game)) {
+            if (permanent.getColor().hasColor()) {
+                ObjectColor color = permanent.getColor();
+                FilterCard filterColor = new FilterCard("its own Colors");               
                 if (color.contains(ObjectColor.BLACK)){
-                filterColor.add(new ColorPredicate(ObjectColor.BLACK));
-                Ability ability = new ProtectionAbility(filterColor);
-                permanent.addAbility(ability, id, game);
-                }
-                
+                    filterColor.add(new ColorPredicate(ObjectColor.BLACK));
+                }               
                 if (color.contains(ObjectColor.BLUE)){
-                filterColor.add(new ColorPredicate(ObjectColor.BLUE));
-                Ability ability = new ProtectionAbility(filterColor);
-                permanent.addAbility(ability, id, game);
-                }
-                
+                    filterColor.add(new ColorPredicate(ObjectColor.BLUE));
+                }                
                 if (color.contains(ObjectColor.WHITE)){
-                filterColor.add(new ColorPredicate(ObjectColor.WHITE));
-                Ability ability = new ProtectionAbility(filterColor);
-                permanent.addAbility(ability, id, game);
-                }
-                
+                    filterColor.add(new ColorPredicate(ObjectColor.WHITE));
+                }                
                 if (color.contains(ObjectColor.RED)){
-                filterColor.add(new ColorPredicate(ObjectColor.RED));
-                Ability ability = new ProtectionAbility(filterColor);
-                permanent.addAbility(ability, id, game);
-                }
-                
+                    filterColor.add(new ColorPredicate(ObjectColor.RED));
+                }                
                 if (color.contains(ObjectColor.GREEN)){
-                filterColor.add(new ColorPredicate(ObjectColor.GREEN));
-                Ability ability = new ProtectionAbility(filterColor);
-                permanent.addAbility(ability, id, game);
+                    filterColor.add(new ColorPredicate(ObjectColor.GREEN));
                 }
+                Ability ability = new ProtectionAbility(filterColor);
+                permanent.addAbility(ability, source.getSourceId(), game);
             }
        }
         return true;
     }
 
 }
-
-

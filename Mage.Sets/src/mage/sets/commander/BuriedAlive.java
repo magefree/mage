@@ -33,8 +33,6 @@ import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.cards.Cards;
-import mage.cards.CardsImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
@@ -56,8 +54,9 @@ public class BuriedAlive extends CardImpl<BuriedAlive> {
         this.expansionSetCode = "CMD";
 
         this.color.setBlack(true);
-        this.getSpellAbility().addEffect(new BuriedAliveEffect());
+
         // Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library.
+        this.getSpellAbility().addEffect(new BuriedAliveEffect());        
         
     }
 
@@ -74,7 +73,7 @@ public class BuriedAlive extends CardImpl<BuriedAlive> {
 class BuriedAliveEffect extends SearchEffect<BuriedAliveEffect> {
 
   public BuriedAliveEffect() {
-        super(new TargetCardInLibrary(1, 3, new FilterCreatureCard()), Outcome.Neutral);
+        super(new TargetCardInLibrary(0, 3, new FilterCreatureCard()), Outcome.Detriment);
         staticText = "Search your library for up to three creature cards and put them into your graveyard. Then shuffle your library";
     }
 
@@ -90,25 +89,21 @@ class BuriedAliveEffect extends SearchEffect<BuriedAliveEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null) {
-            return false;
-        }
-        if (player.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                Cards cards = new CardsImpl();
-                for (UUID cardId: (List<UUID>)target.getTargets()) {
-                    Card card = player.getLibrary().remove(cardId, game);
-                    if (card != null){
-                        card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+        if (player != null) {
+            if (player.searchLibrary(target, game)) {
+                if (target.getTargets().size() > 0) {
+                    for (UUID cardId: (List<UUID>)target.getTargets()) {
+                        Card card = player.getLibrary().remove(cardId, game);
+                        if (card != null){
+                            card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                        }
                     }
                 }
             }
             player.shuffleLibrary(game);
             return true;
         }
-        player.shuffleLibrary(game);
         return false;
     }
-
     
 }
