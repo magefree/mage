@@ -78,7 +78,7 @@ public class MonstrosityAbility extends ActivatedAbilityImpl<MonstrosityAbility>
      * @param monstrosityValue use Integer.MAX_VALUE for monstrosity X.
      */
     public MonstrosityAbility(String manaString, int monstrosityValue) {
-        super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(),new ManaCostsImpl(manaString));
+        super(Zone.BATTLEFIELD, new BecomeMonstrousSourceEffect(monstrosityValue),new ManaCostsImpl(manaString));
         this.monstrosityValue = monstrosityValue;
     }
 
@@ -94,25 +94,21 @@ public class MonstrosityAbility extends ActivatedAbilityImpl<MonstrosityAbility>
 
     @Override
     public String getRule() {
-        return new StringBuilder(manaCosts.getText()).append(": Monstrosity ")
-                .append(monstrosityValue == Integer.MAX_VALUE ? "X":monstrosityValue)
-                .append(".  <i>(If this creature isn't monstrous, put ")
-                .append(monstrosityValue == Integer.MAX_VALUE ? "X":CardUtil.numberToText(monstrosityValue))
-                .append(" +1/+1 counters on it and it becomes monstrous.)</i>").toString();
+        return new StringBuilder(manaCosts.getText()).append(": ").append(super.getRule()).toString();
     }
 
     public int getMonstrosityValue() {
         return monstrosityValue;
     }
 
-
-
 }
+
+
 class BecomeMonstrousSourceEffect extends OneShotEffect<BecomeMonstrousSourceEffect> {
 
-    public BecomeMonstrousSourceEffect() {
+    public BecomeMonstrousSourceEffect(int monstrosityValue) {
         super(Outcome.BoostCreature);
-        this.staticText = "";
+        this.staticText = setText(monstrosityValue);
     }
 
     public BecomeMonstrousSourceEffect(final BecomeMonstrousSourceEffect effect) {
@@ -140,4 +136,14 @@ class BecomeMonstrousSourceEffect extends OneShotEffect<BecomeMonstrousSourceEff
         }
         return false;
     }
+
+    private String setText(int monstrosityValue) {
+        StringBuilder sb = new StringBuilder("Monstrosity ");
+        sb.append(monstrosityValue == Integer.MAX_VALUE ? "X":monstrosityValue)
+                .append(".  <i>(If this creature isn't monstrous, put ")
+                .append(monstrosityValue == Integer.MAX_VALUE ? "X":CardUtil.numberToText(monstrosityValue))
+                .append(" +1/+1 counters on it and it becomes monstrous.)</i>").toString();
+        return sb.toString();
+    }
+
 }

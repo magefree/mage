@@ -30,7 +30,6 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
-import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.abilities.effects.common.ScryEffect;
 import mage.cards.CardImpl;

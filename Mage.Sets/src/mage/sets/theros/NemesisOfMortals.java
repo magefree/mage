@@ -30,7 +30,9 @@ package mage.sets.theros;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.MonstrosityAbility;
 import mage.cards.CardImpl;
@@ -61,20 +63,32 @@ public class NemesisOfMortals extends CardImpl<NemesisOfMortals> {
         this.addAbility(new SimpleStaticAbility(Zone.ALL, new NemesisOfMortalsEffect()));
 
         // {7}{G}{G}: Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard.
-        this.addAbility(new MonstrosityAbility("{7}{G}{G}", 5));
+        Ability  ability = new MonstrosityAbility("{7}{G}{G}", 5);
+        for (Effect effect : ability.getEffects()) {
+            effect.setText("Monstrosity 5.  This ability costs {1} less to activate for each creature card in your graveyard");
+        }
+        this.addAbility(ability);
     }
 
     @Override
     public void adjustCosts(Ability ability, Game game) {
-        Player player = game.getPlayer(this.getOwnerId());
-        int creatureCount = player.getGraveyard().count(new FilterCreatureCard(), game);
-        int cost = 4 - creatureCount;
-        String adjustedCost = "{G}{G}";
-        if (cost > 0) {
-            adjustedCost = "{" + String.valueOf(cost) + "}" + adjustedCost;
+        if (ability instanceof SpellAbility || ability instanceof MonstrosityAbility) {
+            Player player = game.getPlayer(this.getOwnerId());
+            int creatureCount = player.getGraveyard().count(new FilterCreatureCard(), game);
+            int genericMana;
+            if (ability instanceof MonstrosityAbility) {
+                genericMana = 7 - creatureCount;
+            } else {
+                genericMana = 4 - creatureCount;
+            }
+            StringBuilder adjustedCost = new StringBuilder();
+            if (genericMana > 0) {
+                adjustedCost.append("{").append(genericMana).append("}");
+            }
+            adjustedCost.insert(0,"{G}{G}");
+            ability.getManaCostsToPay().clear();
+            ability.getManaCostsToPay().load(adjustedCost.toString());
         }
-        ability.getManaCostsToPay().clear();
-        ability.getManaCostsToPay().load(adjustedCost);
     }
 
     public NemesisOfMortals(final NemesisOfMortals card) {
