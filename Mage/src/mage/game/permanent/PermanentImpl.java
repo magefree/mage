@@ -619,6 +619,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         int damageDone = 0;
+        // because of "Doran, the Siege Tower" we can't check here for 0 damage.
         if (canDamage(game.getObject(sourceId), game)) {
             if (cardType.contains(CardType.PLANESWALKER)) {
                 damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
