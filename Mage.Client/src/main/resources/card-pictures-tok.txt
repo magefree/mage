@@ -1,3 +1,15 @@
+|Generate|TOK:THS|Cleric|
+|Generate|TOK:THS|Soldier 1|
+|Generate|TOK:THS|Soldier 2|
+|Generate|TOK:THS|Bird|
+|Generate|TOK:THS|Elemental|
+|Generate|TOK:THS|Harpy|
+|Generate|TOK:THS|Soldier 3|
+|Generate|TOK:THS|Boar|
+|Generate|TOK:THS|Satyr|
+|Generate|TOK:THS|Golem|
+|Generate|EMBLEM-:THS|Elspeth, Suns Champion|
+
 |Generate|TOK:MMA|Giant-Warrior|
 |Generate|TOK:MMA|Kithkin-Soldier|
 |Generate|TOK:MMA|Soldier|
