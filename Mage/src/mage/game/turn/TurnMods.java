@@ -112,7 +112,7 @@ public class TurnMods extends ArrayList<TurnMod> {
             while (it.hasPrevious()) {
                 TurnMod turnMod = it.previous();
                 if (turnMod.getSkipStep() != null) {
-                    if (turnMod.getPlayerId().equals(playerId)) {
+                    if (turnMod.getPlayerId() != null && turnMod.getPlayerId().equals(playerId)) {
                         if (turnMod.getSkipStep() == step) {
                             it.remove();
                             return true;
