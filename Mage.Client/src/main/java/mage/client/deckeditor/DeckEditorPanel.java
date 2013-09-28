@@ -104,8 +104,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                         setTimeout(timeout);
                     }
                     else {
-                        if (updateDeckTask != null)
+                        if (updateDeckTask != null) {
                             updateDeckTask.cancel(true);
+                        }
                         setTimeout(0);
                         countdown.stop();
                         hideDeckEditor();
@@ -116,8 +117,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
    }
 
     public void showDeckEditor(DeckEditorMode mode, Deck deck, UUID tableId, int time) {
-        if (deck != null)
+        if (deck != null) {
             this.deck = deck;
+        }
         this.tableId = tableId;
         this.mode = mode;
         this.btnAddLand.setVisible(false);
@@ -130,8 +132,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.cardSelector.loadSideboard(new ArrayList<Card>(deck.getSideboard()), this.bigCard);
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
-                if (!MageFrame.getSession().isTestMode())
-                    this.btnLoad.setVisible(false);
+                if (!MageFrame.getSession().isTestMode()) {
+            this.btnLoad.setVisible(false);
+        }
                 this.deckArea.showSideboard(false);
                 countdown.stop();
                 this.timeout = time;
@@ -150,8 +153,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 //this.cardTableSelector.loadCards(this.bigCard);
                 this.btnExit.setVisible(true);
                 this.btnImport.setVisible(true);
-                if (!MageFrame.getSession().isTestMode())
+                if (!MageFrame.getSession().isTestMode()) {
                     this.btnLoad.setVisible(true);
+                }
                 this.deckArea.showSideboard(true);
                 this.txtTimeRemaining.setVisible(false);
                 break;
@@ -282,14 +286,16 @@ public class DeckEditorPanel extends javax.swing.JPanel {
     }
 
     public void hideDeckEditor() {
-        if (updateDeckTask != null)
+        if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
+        }
         Component c = this.getParent();
         while (c != null && !(c instanceof DeckEditorPane)) {
             c = c.getParent();
         }
-        if (c != null)
+        if (c != null) {
             ((DeckEditorPane)c).hideFrame();
+        }
     }
 
     private BigCard getBigCard() {
@@ -517,8 +523,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty())
+        if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        }
         int ret = fcSelectDeck.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
@@ -543,16 +550,18 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String lastFolder = MageFrame.getPreferences().get("lastDeckFolder", "");
-        if (!lastFolder.isEmpty())
+        if (!lastFolder.isEmpty()) {
             fcSelectDeck.setCurrentDirectory(new File(lastFolder));
+        }
         deck.setName(this.txtDeckName.getText());
         int ret = fcSelectDeck.showSaveDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcSelectDeck.getSelectedFile();
             try {
                 String fileName = file.getPath();
-                if (!fileName.endsWith(".dck"))
+                if (!fileName.endsWith(".dck")) {
                     fileName += ".dck";
+                }
                 setCursor(new Cursor(Cursor.WAIT_CURSOR));
                 Sets.saveDeck(fileName, deck.getDeckCardLists());
             } catch (Exception ex) {
@@ -587,8 +596,9 @@ public class DeckEditorPanel extends javax.swing.JPanel {
 
     private void btnImportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImportActionPerformed
         String lastFolder = MageFrame.getPreferences().get("lastImportFolder", "");
-        if (!lastFolder.isEmpty())
+        if (!lastFolder.isEmpty()) {
             fcImportDeck.setCurrentDirectory(new File(lastFolder));
+        }
         int ret = fcImportDeck.showOpenDialog(this);
         if (ret == JFileChooser.APPROVE_OPTION) {
             File file = fcImportDeck.getSelectedFile();
@@ -613,19 +623,22 @@ public class DeckEditorPanel extends javax.swing.JPanel {
             }
             refreshDeck();
             try {
-                if (file != null)
+                if (file != null) {
                     MageFrame.getPreferences().put("lastImportFolder", file.getCanonicalPath());
+                }
             } catch (IOException ex) {    }
         }
         fcImportDeck.setSelectedFile(null);
     }//GEN-LAST:event_btnImportActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {
-        if (updateDeckTask != null)
+        if (updateDeckTask != null) {
             updateDeckTask.cancel(true);
+        }
 
-        if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists()))
+        if (MageFrame.getSession().submitDeck(tableId, deck.getDeckCardLists())) {
             hideDeckEditor();
+        }
     }
 
     private void btnAddLandActionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,8 +672,9 @@ class DeckFilter extends FileFilter {
 
     @Override
     public boolean accept(File f) {
-        if (f.isDirectory())
+        if (f.isDirectory()) {
             return true;
+        }
 
         String ext = null;
         String s = f.getName();
@@ -682,8 +696,9 @@ class ImportFilter extends FileFilter {
 
     @Override
     public boolean accept(File f) {
-        if (f.isDirectory())
+        if (f.isDirectory()) {
             return true;
+        }
 
         String ext = null;
         String s = f.getName();
@@ -693,8 +708,9 @@ class ImportFilter extends FileFilter {
             ext = s.substring(i+1).toLowerCase();
         }
         if (ext != null) {
-            if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt"))
+            if (ext.toLowerCase().equals("dec") || ext.toLowerCase().equals("mwdeck") || ext.toLowerCase().equals("txt")) {
                 return true;
+            }
         }
         return false;
     }

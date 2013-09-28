@@ -34,16 +34,16 @@
 
 package mage.client.deckeditor;
 
+import java.awt.Component;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.JComponent;
 import mage.cards.decks.Deck;
 import mage.client.MagePane;
 import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.plugins.impl.Plugins;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  *
@@ -56,8 +56,8 @@ public class DeckEditorPane extends MagePane {
 
         boolean initialized = false;
         if (Plugins.getInstance().isThemePluginLoaded()) {
-            Map<String, JComponent> ui = new HashMap<String, JComponent>();
-            JComponent container = Plugins.getInstance().updateTablePanel(ui);
+            Map<String, JComponent> uiMap = new HashMap<String, JComponent>();
+            JComponent container = Plugins.getInstance().updateTablePanel(uiMap);
             if (container != null) {
                 deckEditorPanel1 = new mage.client.deckeditor.DeckEditorPanel();
                 initComponents(container);
@@ -73,13 +73,16 @@ public class DeckEditorPane extends MagePane {
     }
 
     public void show(DeckEditorMode mode, Deck deck, String name, UUID tableId, int time) {
-        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited)
+        if (mode == DeckEditorMode.Sideboard || mode == DeckEditorMode.Limited) {
             this.setTitle("Deck Editor - " + tableId.toString());
+        }
         else {
-            if (deck != null)
+            if (deck != null) {
                 this.setTitle("Deck Editor - " + deck.getName());
-            else
+            }
+            else {
                 this.setTitle("Deck Editor");
+            }
         }
         this.deckEditorPanel1.showDeckEditor(mode, deck, tableId, time);
         this.repaint();
