@@ -223,13 +223,13 @@ public class TableController {
         UUID playerId = userPlayerMap.get(userId);
         if (table.isTournament()) {
             TournamentPlayer player = tournament.getPlayer(playerId);
-            if (player.hasQuit()) {
+            if (player == null || player.hasQuit()) {
                 return true; // so the construct panel closes after submit
             }
         } else {
             if (table.getMatch() != null) {
                 MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
-                if (mPlayer.hasQuit()) {
+                if (mPlayer == null || mPlayer.hasQuit()) {
                     return true; // so the construct panel closes after submit
                 }
             }
