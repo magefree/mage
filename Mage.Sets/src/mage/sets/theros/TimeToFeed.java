@@ -42,11 +42,13 @@ import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 import mage.target.Target;
 import mage.target.common.TargetControlledCreaturePermanent;
 import mage.target.common.TargetCreaturePermanent;
@@ -75,16 +77,18 @@ public class TimeToFeed extends CardImpl<TimeToFeed> {
 
         this.color.setGreen(true);
 
-        // Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that creature.
+        // Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. 
         this.getSpellAbility().addEffect(new TimeToFeedTextEffect());
+        // Target creature you control fights that creature.
+        Effect effect = new FightTargetsEffect();
+        effect.setText("Target creature you control fights that creature");
+        this.getSpellAbility().addEffect(effect);
+
         Target target = new TargetCreaturePermanent(filter1);
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
         this.getSpellAbility().addTarget(new TargetControlledCreaturePermanent(true));
-        this.getSpellAbility().addEffect(new CreateDelayedTriggeredAbilityEffect(new TimeToFeedDiesTargetTriggeredAbility()));
-        Effect effect = new FightTargetsEffect();
-        effect.setText("Target creature you control fights that creature");
-        this.getSpellAbility().addEffect(effect);
+        
     }
 
     public TimeToFeed(final TimeToFeed card) {
@@ -101,7 +105,7 @@ class TimeToFeedTextEffect extends OneShotEffect<TimeToFeedTextEffect> {
 
     public TimeToFeedTextEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Choose target creature an opponent controls";
+        this.staticText = "Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life";
     }
 
     public TimeToFeedTextEffect(final TimeToFeedTextEffect effect) {
@@ -115,30 +119,46 @@ class TimeToFeedTextEffect extends OneShotEffect<TimeToFeedTextEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
+        Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (creature != null) {
+            DelayedTriggeredAbility ability = new TimeToFeedDiesTriggeredAbility(creature.getId(), creature.getZoneChangeCounter());
+            new CreateDelayedTriggeredAbilityEffect(ability, false).apply(game, source);
+        }
+
         return true;
     }
 }
 
-class TimeToFeedDiesTargetTriggeredAbility extends DelayedTriggeredAbility<TimeToFeedDiesTargetTriggeredAbility> {
+class TimeToFeedDiesTriggeredAbility extends DelayedTriggeredAbility<TimeToFeedDiesTriggeredAbility> {
 
-    public TimeToFeedDiesTargetTriggeredAbility() {
+    private UUID watchedCreatureId;
+    private int zoneChangeCounter;
+
+    public TimeToFeedDiesTriggeredAbility(UUID watchedCreatureId, int zoneChangeCounter) {
         super(new GainLifeEffect(3), Duration.EndOfTurn, false);
+        this.watchedCreatureId = watchedCreatureId;
+        this.zoneChangeCounter = zoneChangeCounter;
     }
 
-    public TimeToFeedDiesTargetTriggeredAbility(final TimeToFeedDiesTargetTriggeredAbility ability) {
+    public TimeToFeedDiesTriggeredAbility(final TimeToFeedDiesTriggeredAbility ability) {
         super(ability);
+        this.watchedCreatureId = ability.watchedCreatureId;
+        this.zoneChangeCounter = ability.zoneChangeCounter;
     }
 
     @Override
-    public TimeToFeedDiesTargetTriggeredAbility copy() {
-        return new TimeToFeedDiesTargetTriggeredAbility(this);
+    public TimeToFeedDiesTriggeredAbility copy() {
+        return new TimeToFeedDiesTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && ((ZoneChangeEvent)event).isDiesEvent()) {
-            if (event.getTargetId().equals(getEffects().get(0).getTargetPointer().getFirst(game, this))) {
-                return true;
+            if (event.getTargetId().equals(watchedCreatureId)) {
+                Permanent creature = (Permanent) game.getLastKnownInformation(watchedCreatureId, Zone.BATTLEFIELD);
+                if (creature.getZoneChangeCounter() == this.zoneChangeCounter) {
+                    return true;
+                }
             }
         }
         return false;
