@@ -28,6 +28,8 @@
 
 package mage.server;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -174,28 +176,40 @@ public class TableController {
     }
 
     public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user == null) {
+            return false;
+        }
         if (table.getState() != TableState.WAITING) {
+            user.showUserMessage("Join Table", "No available seats.");
             return false;
         }
         Seat seat = table.getNextAvailableSeat(playerType);
         if (seat == null) {
-            throw new GameException("No available seats.");
+            user.showUserMessage("Join Table", "No available seats.");
+            return false;
         }
         Deck deck = Deck.load(deckList, false, false);
+
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-            table.getValidator().getName();
-            throw new InvalidDeckException(
-                    new StringBuilder(name).append(" has an invalid deck for the ").append(table.getValidator().getName()).append(" Format").toString(),
-                    table.getValidator().getInvalid());
+            StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
+            for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
+                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+            }
+            sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
+            user.showUserMessage("Join Table", sb.toString());
+            return false;
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {
-            throw new GameException(new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString());
+            String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString();
+            logger.warn(new StringBuilder("User: ").append(user.getName()).append(" => ").append(message).toString());
+            user.showUserMessage("Join Table",message);
+            return false;
         }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
-        User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
         logger.info("player joined " + player.getId());
         //only inform human players and add them to sessionPlayerMap

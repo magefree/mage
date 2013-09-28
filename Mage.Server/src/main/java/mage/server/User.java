@@ -29,6 +29,8 @@ package mage.server;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -162,6 +164,13 @@ public class User {
 
     public void showGameEndDialog(final UUID gameId) {
         fireCallback(new ClientCallback("showGameEndDialog", gameId));
+    }
+
+    public void showUserMessage(final String titel,  String message) {
+        List<String> messageData = new LinkedList<String>();
+        messageData.add(titel);
+        messageData.add(message);
+        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
     }
 
     public void watchGame(final UUID gameId) {

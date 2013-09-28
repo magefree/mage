@@ -356,7 +356,7 @@ public class NewTableDialog extends MageDialog {
         } catch (ClassNotFoundException ex) {
             handleError(ex);
         }
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+        // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
         session.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOKActionPerformed

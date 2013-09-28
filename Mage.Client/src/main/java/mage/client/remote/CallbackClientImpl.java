@@ -28,6 +28,8 @@
 
 package mage.client.remote;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -251,6 +253,12 @@ public class CallbackClientImpl implements CallbackClient {
                     }
                     else if (callback.getMethod().equals("endGameInfo")) {
                         MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
+                    }
+                    else if (callback.getMethod().equals("showUserMessage")) {
+                        List<String> messageData = (List<String>) callback.getData();
+                        if (messageData.size() == 2) {
+                            JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
+                        }
                     }
                     else if (callback.getMethod().equals("gameInform")) {
 
