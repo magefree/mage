@@ -183,7 +183,10 @@ public class TableController {
         }
         Deck deck = Deck.load(deckList, false, false);
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-            throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
+            table.getValidator().getName();
+            throw new InvalidDeckException(
+                    new StringBuilder(name).append(" has an invalid deck for the ").append(table.getValidator().getName()).append(" Format").toString(),
+                    table.getValidator().getInvalid());
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
