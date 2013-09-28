@@ -743,27 +743,18 @@ public class GameController implements GameCallback {
                     if (gameSessions.containsKey(playerId)) {
                         command.execute(playerId);
                     }
-                } // otherwise execute the action under other player's control
-                else {
-                    //System.out.println("asThough: " + playerId + " " + game.getPriorityPlayerId());
+                } else {
+                    // otherwise execute the action under other player's control
                     Player player = game.getPlayer(playerId);
-                    boolean found = false;
-                    for (UUID controlled : player.getPlayersUnderYourControl()) {
-                        if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
-                            command.execute(controlled);
-                            found = true;
+                    if (player != null) {
+                        for (UUID controlled : player.getPlayersUnderYourControl()) {
+                            if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
+                                command.execute(controlled);
+                            }
                         }
                     }
-                    if (!found) {
-                        // something wrong - it may cause game freezes
-                        logger.warn("WARNING! GameController.sendMessage - couldn't find session for action execution. Player: " + player.getName());
-                        // log additional information
-                        logger.warn("    action player: " + player.getName() + ", id: " + player.getId());
-                        Player priorityPlayer = game.getPlayer(game.getPriorityPlayerId());
-                        logger.warn("    priority player: " + priorityPlayer.getName() + ", id: " + priorityPlayer.getId());
-                        logger.warn("    command: " + command.toString());
-                        logger.warn("    command-class: " + command.getClass().getName());
-                    }
+                    // else player has no priority to do something, so ignore the command
+                    // e.g. you click at one of your cards, but you can't play something at that moment
                 }
         } else {
             // ignore - no control over the turn
