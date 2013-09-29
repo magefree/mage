@@ -50,6 +50,7 @@ import org.apache.log4j.Logger;
 import java.lang.reflect.Constructor;
 import java.util.*;
 import mage.constants.SpellAbilityType;
+import static mage.constants.Zone.EXILED;
 import mage.game.command.Commander;
 
 
@@ -413,6 +414,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         break;
                     case EXILED:
                         game.getExile().removeCard(this, game);
+                        break;
+                    case STACK:
+                        // nothing to do
                         break;
                     default:
                         logger.warn("moveToExile, not fully implemented: from="+fromZone);

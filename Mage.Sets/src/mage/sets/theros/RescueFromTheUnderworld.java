@@ -35,7 +35,7 @@ import mage.abilities.costs.Cost;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
+import mage.abilities.effects.common.ExileSpellEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -91,7 +91,7 @@ public class RescueFromTheUnderworld extends CardImpl<RescueFromTheUnderworld> {
         Target target = new TargetCardInYourGraveyard(new FilterCreatureCard("creature card in your graveyard"));
         target.setRequired(true);
         this.getSpellAbility().addTarget(target);
-        this.getSpellAbility().addEffect(new ExileSourceEffect());
+        this.getSpellAbility().addEffect(ExileSpellEffect.getInstance());
     }
 
     public RescueFromTheUnderworld(final RescueFromTheUnderworld card) {
