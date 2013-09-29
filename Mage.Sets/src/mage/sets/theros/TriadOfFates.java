@@ -34,7 +34,6 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DrawCardTargetEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
 import mage.abilities.effects.common.ExileTargetForSourceEffect;
 import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlTargetEffect;
@@ -88,6 +87,7 @@ public class TriadOfFates extends CardImpl<TriadOfFates> {
         this.addAbility(ability);
         // {W}, {T}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetForSourceEffect("Triad of Fates"), new ManaCostsImpl("{W}"));
+        ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         target.setRequired(true);
         ability.addTarget(target);
@@ -95,6 +95,7 @@ public class TriadOfFates extends CardImpl<TriadOfFates> {
         this.addAbility(ability);
         // {B}, {T}: Exile target creature that has a fate counter on it. Its controller draws two cards.
         ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileTargetEffect(), new ManaCostsImpl("{B}"));
+        ability.addCost(new TapSourceCost());
         target = new TargetCreaturePermanent(filterCounter);
         target.setRequired(true);
         ability.addTarget(target);
