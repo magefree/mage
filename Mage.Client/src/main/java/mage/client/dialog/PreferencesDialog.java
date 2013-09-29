@@ -77,6 +77,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
+    public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
     public static final String KEY_CARD_IMAGES_PATH = "cardImagesPath";
@@ -248,6 +249,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
         displayBigCardsInHand = new javax.swing.JCheckBox();
         main_battlefield = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
+        main_gamelog = new javax.swing.JPanel();
+        cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -295,9 +298,9 @@ public class PreferencesDialog extends javax.swing.JDialog {
         cbEnableSounds = new javax.swing.JCheckBox();
         sounds_backgroundMusic = new javax.swing.JPanel();
         cbEnableBattlefieldBGM = new javax.swing.JCheckBox();
-        btnBattlefieldBGMBrowse = new javax.swing.JButton();
-        txtBattlefieldIBGMPath = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        txtBattlefieldIBGMPath = new javax.swing.JTextField();
+        btnBattlefieldBGMBrowse = new javax.swing.JButton();
         tabConnection = new javax.swing.JPanel();
         lblProxyType = new javax.swing.JLabel();
         cbProxyType = new javax.swing.JComboBox();
@@ -337,6 +340,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         setTitle("Preferences");
 
         main_hand.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Hand"));
+        main_hand.setLayout(new java.awt.BorderLayout());
 
         showToolTipsInAnyZone.setSelected(true);
         showToolTipsInAnyZone.setText("Show tooltips");
@@ -345,6 +349,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 showToolTipsInAnyZoneActionPerformed(evt);
             }
         });
+        main_hand.add(showToolTipsInAnyZone, java.awt.BorderLayout.CENTER);
 
         displayBigCardsInHand.setText("Use big images (for high resolution screens)");
         displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
@@ -352,28 +357,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 displayBigCardsInHandActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout main_handLayout = new javax.swing.GroupLayout(main_hand);
-        main_hand.setLayout(main_handLayout);
-        main_handLayout.setHorizontalGroup(
-            main_handLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_handLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(main_handLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(showToolTipsInAnyZone)
-                    .addComponent(displayBigCardsInHand))
-                .addContainerGap(232, Short.MAX_VALUE))
-        );
-        main_handLayout.setVerticalGroup(
-            main_handLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_handLayout.createSequentialGroup()
-                .addComponent(showToolTipsInAnyZone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayBigCardsInHand)
-                .addContainerGap(59, Short.MAX_VALUE))
-        );
+        main_hand.add(displayBigCardsInHand, java.awt.BorderLayout.PAGE_START);
 
         main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
+        main_battlefield.setLayout(new java.awt.BorderLayout());
 
         nonLandPermanentsInOnePile.setSelected(true);
         nonLandPermanentsInOnePile.setLabel("Put non-land permanents in one pile");
@@ -382,34 +369,31 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 nonLandPermanentsInOnePileActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout main_battlefieldLayout = new javax.swing.GroupLayout(main_battlefield);
-        main_battlefield.setLayout(main_battlefieldLayout);
-        main_battlefieldLayout.setHorizontalGroup(
-            main_battlefieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_battlefieldLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nonLandPermanentsInOnePile)
-                .addContainerGap(226, Short.MAX_VALUE))
-        );
-        main_battlefieldLayout.setVerticalGroup(
-            main_battlefieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(main_battlefieldLayout.createSequentialGroup()
-                .addComponent(nonLandPermanentsInOnePile)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
+        main_battlefield.add(nonLandPermanentsInOnePile, java.awt.BorderLayout.CENTER);
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+
+        main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
+        main_gamelog.setLayout(new java.awt.BorderLayout());
+
+        cbGameLogAutoSave.setSelected(true);
+        cbGameLogAutoSave.setText("Auto save game logs     (to \"../Mage.Client/gamelogs/\" directory)");
+        cbGameLogAutoSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGameLogAutoSaveActionPerformed(evt);
+            }
+        });
+        main_gamelog.add(cbGameLogAutoSave, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout tabMainLayout = new javax.swing.GroupLayout(tabMain);
         tabMain.setLayout(tabMainLayout);
         tabMainLayout.setHorizontalGroup(
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabMainLayout.createSequentialGroup()
+            .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(main_battlefield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_hand, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(main_hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(main_battlefield, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
@@ -417,10 +401,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(main_hand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_battlefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(171, Short.MAX_VALUE))
         );
+
+        main_gamelog.getAccessibleContext().setAccessibleName("Game log");
 
         tabsPanel.addTab("Main", tabMain);
 
@@ -492,7 +480,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(tabPhasesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         tabPhasesLayout.setVerticalGroup(
             tabPhasesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -547,7 +535,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(checkBoxEndTurnYou)
                     .addComponent(jLabel8)
                     .addComponent(checkBoxEndTurnOthers))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Phases", tabPhases);
@@ -587,18 +575,16 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
+                .addComponent(txtImageFolderPath)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBrowseImageLocation))
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbUseDefaultImageFolder)
-                            .addComponent(cbCheckForNewImages)
-                            .addComponent(cbSaveToZipFiles))
-                        .addContainerGap(268, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(txtImageFolderPath)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBrowseImageLocation))))
+                    .addComponent(cbUseDefaultImageFolder)
+                    .addComponent(cbCheckForNewImages)
+                    .addComponent(cbSaveToZipFiles))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,29 +660,34 @@ public class PreferencesDialog extends javax.swing.JDialog {
         jPanel23Layout.setHorizontalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(cbUseDefaultBackground)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtBattlefieldImagePath)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel14))
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel15)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addComponent(txtBattlefieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnBrowseBattlefieldImage))
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbUseDefaultBattleImage)
-                            .addComponent(cbUseRandomBattleImage))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addComponent(txtBackgroundImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBackgroundImagePath)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBrowseBackgroundImage))))
+                        .addComponent(btnBrowseBackgroundImage)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel23Layout.createSequentialGroup()
+                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbUseRandomBattleImage)
+                    .addComponent(cbUseDefaultBattleImage)
+                    .addComponent(cbUseDefaultBackground))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel23Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtBackgroundImagePath, txtBattlefieldImagePath});
+
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
@@ -736,12 +727,13 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         tabsPanel.addTab("Images", tabImages);
 
         sounds_clips.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Clips"));
+        sounds_clips.setLayout(new java.awt.BorderLayout());
 
         cbEnableSounds.setToolTipText("Sounds that will be played for certain actions (e.g. play land, attack, etc.)");
         cbEnableSounds.setLabel("Enable");
@@ -750,20 +742,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 cbEnableSoundsActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout sounds_clipsLayout = new javax.swing.GroupLayout(sounds_clips);
-        sounds_clips.setLayout(sounds_clipsLayout);
-        sounds_clipsLayout.setHorizontalGroup(
-            sounds_clipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sounds_clipsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(cbEnableSounds)
-                .addContainerGap(410, Short.MAX_VALUE))
-        );
-        sounds_clipsLayout.setVerticalGroup(
-            sounds_clipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cbEnableSounds)
-        );
+        sounds_clips.add(cbEnableSounds, java.awt.BorderLayout.CENTER);
 
         sounds_backgroundMusic.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Music"));
 
@@ -776,12 +755,8 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        btnBattlefieldBGMBrowse.setText("Browse...");
-        btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBattlefieldBGMBrowseActionPerformed(evt);
-            }
-        });
+        jLabel16.setText("Playing from folder:");
+        jLabel16.setToolTipText("");
 
         txtBattlefieldIBGMPath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -789,8 +764,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel16.setText("Playing from folder:");
-        jLabel16.setToolTipText("");
+        btnBattlefieldBGMBrowse.setText("Browse...");
+        btnBattlefieldBGMBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBattlefieldBGMBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sounds_backgroundMusicLayout = new javax.swing.GroupLayout(sounds_backgroundMusic);
         sounds_backgroundMusic.setLayout(sounds_backgroundMusicLayout);
@@ -798,16 +777,14 @@ public class PreferencesDialog extends javax.swing.JDialog {
             sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnBattlefieldBGMBrowse))
-                    .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
-                        .addComponent(cbEnableBattlefieldBGM)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBattlefieldIBGMPath, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBattlefieldBGMBrowse))
+            .addGroup(sounds_backgroundMusicLayout.createSequentialGroup()
+                .addComponent(cbEnableBattlefieldBGM)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         sounds_backgroundMusicLayout.setVerticalGroup(
             sounds_backgroundMusicLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -838,7 +815,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 .addComponent(sounds_clips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sounds_backgroundMusic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
 
         sounds_clips.getAccessibleContext().setAccessibleDescription("");
@@ -908,7 +885,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addGroup(pnlProxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(txtPasswordField, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtProxyUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                    .addComponent(txtProxyServer, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlProxyLayout.setVerticalGroup(
@@ -978,7 +955,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                     .addComponent(cbProxyType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlProxySettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
 
         pnlProxySettings.getAccessibleContext().setAccessibleDescription("");
@@ -1184,7 +1161,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1223,11 +1200,11 @@ public class PreferencesDialog extends javax.swing.JDialog {
         tabAvatars.setLayout(tabAvatarsLayout);
         tabAvatarsLayout.setHorizontalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
         );
         tabAvatarsLayout.setVerticalGroup(
             tabAvatarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
 
         tabsPanel.addTab("Avatars", tabAvatars);
@@ -1250,7 +1227,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
@@ -1279,6 +1256,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
         save(prefs, dialog.checkBoxUpkeepYou, PhaseManager.UPKEEP_YOU);
@@ -1524,6 +1502,10 @@ public class PreferencesDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnBattlefieldBGMBrowseActionPerformed
 
+    private void cbGameLogAutoSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGameLogAutoSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbGameLogAutoSaveActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1606,6 +1588,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+        load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
     }
 
     private static void loadImagesSettings(Preferences prefs) {
@@ -1901,6 +1884,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox cbCheckForNewImages;
     private javax.swing.JCheckBox cbEnableBattlefieldBGM;
     private javax.swing.JCheckBox cbEnableSounds;
+    private javax.swing.JCheckBox cbGameLogAutoSave;
     private javax.swing.JComboBox cbProxyType;
     private javax.swing.JCheckBox cbSaveToZipFiles;
     private javax.swing.JCheckBox cbUseDefaultBackground;
@@ -1961,6 +1945,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
     private javax.swing.JPanel main_battlefield;
+    private javax.swing.JPanel main_gamelog;
     private javax.swing.JPanel main_hand;
     private javax.swing.JCheckBox nonLandPermanentsInOnePile;
     private javax.swing.JPanel pnlProxy;

@@ -221,6 +221,10 @@ public class ChatPanel extends javax.swing.JPanel {
         }
     }
 
+    public String getText() {
+        return txtConversation.getText();
+    }
+
     public ChatPanel getConnectedChat() {
         return connectedChat;
     }
