@@ -52,7 +52,7 @@ public class ReadTheBones extends CardImpl<ReadTheBones> {
         this.getSpellAbility().addEffect(new ScryEffect(2));
         Effect effect = new DrawCardControllerEffect(2);
         effect.setText("then draw two cards");
-        this.getSpellAbility().addEffect(new DrawCardControllerEffect(2));
+        this.getSpellAbility().addEffect(effect);
         this.getSpellAbility().addEffect(new LoseLifeSourceEffect(2));
     }
 
