@@ -47,7 +47,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  
 public class BraidsCabalMinion extends CardImpl<BraidsCabalMinion> {
     
-        public static final FilterPermanent filter = new FilterPermanent("Artifact, Creature, or Land");
+        public static final FilterPermanent filter = new FilterPermanent("artifact, creature, or land");
             
            static{
                filter.add(Predicates.or(new CardTypePredicate(CardType.ARTIFACT),
