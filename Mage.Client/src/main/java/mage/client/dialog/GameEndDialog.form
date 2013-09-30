@@ -56,7 +56,7 @@
               <Component id="tabPane" min="-2" pref="277" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btnOk" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -166,7 +166,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtPlayerInfo" max="32767" attributes="0"/>
-                          <Component id="txtDurationGame" alignment="1" pref="489" max="32767" attributes="0"/>
+                          <Component id="txtDurationGame" alignment="1" pref="494" max="32767" attributes="0"/>
                           <Component id="txtLife" alignment="1" pref="489" max="32767" attributes="0"/>
                           <Component id="txtDurationMatch" alignment="1" pref="489" max="32767" attributes="0"/>
                           <Component id="txtMatchScore" alignment="1" pref="489" max="32767" attributes="0"/>
@@ -202,7 +202,7 @@
                           <Component id="lblPlayerInfo" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="txtPlayerInfo" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                      <EmptySpace pref="105" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

@@ -1245,6 +1245,10 @@ public final class GamePanel extends javax.swing.JPanel {
         hoverButtons.put(name, button);
     }
 
+    public String getGameLog() {
+        return gameChatPanel.getText();
+    }
+
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
