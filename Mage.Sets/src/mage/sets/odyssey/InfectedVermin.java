@@ -59,7 +59,7 @@ public class InfectedVermin extends CardImpl<InfectedVermin> {
         // Threshold - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard.
         this.addAbility(new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
                 new DamageEverythingEffect(3),
-                new ManaCostsImpl("{2}{B}"),
+                new ManaCostsImpl("{3}{B}"),
                 new CardsInControllerGraveCondition(7),
                 "<br/><br/><i>Threshold</i> - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard."));
     }
