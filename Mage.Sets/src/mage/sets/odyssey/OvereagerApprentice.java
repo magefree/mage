@@ -58,7 +58,7 @@ public class OvereagerApprentice extends CardImpl<OvereagerApprentice> {
 
         // Discard a card, Sacrifice Overeager Apprentice: Add {B}{B}{B} to your mana pool.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)), new DiscardCardCost());
-        ability.addCost(new SacrificeSourceCost())
+        ability.addCost(new SacrificeSourceCost());
         this.addAbility(ability);
     }
 
