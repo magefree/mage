@@ -59,8 +59,8 @@ public class CursedMonstrosity extends CardImpl<CursedMonstrosity> {
         // Whenever Cursed Monstrosity becomes the target of a spell or ability, sacrifice it unless you discard a land card.
         this.addAbility(new BecomesTargetTriggeredAbility(
                             new SacrificeSourceUnlessPaysEffect(
-                            new DiscardTargetCost(
-                            new TargetCardInHand(new FilterLandCard()))));
+                            new DiscardTargetCost(new TargetCardInHand(new FilterLandCard()))
+                )));
     }
 
     public CursedMonstrosity(final CursedMonstrosity card) {
