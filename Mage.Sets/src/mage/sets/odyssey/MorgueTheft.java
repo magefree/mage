@@ -35,8 +35,7 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.TimingRule;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterCreatureCard;
 import mage.target.common.TargetCardInYourGraveyard;
 
 /**
@@ -45,12 +44,6 @@ import mage.target.common.TargetCardInYourGraveyard;
  */
 public class MorgueTheft extends CardImpl<MorgueTheft> {
     
-    private static final FilterCard filter = new FilterCard("creature");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-    }
-
     public MorgueTheft(UUID ownerId) {
         super(ownerId, 151, "Morgue Theft", Rarity.COMMON, new CardType[]{CardType.SORCERY}, "{1}{B}");
         this.expansionSetCode = "ODY";
@@ -59,7 +52,7 @@ public class MorgueTheft extends CardImpl<MorgueTheft> {
 
         // Return target creature card from your graveyard to your hand.
         this.getSpellAbility().addEffect(new ReturnFromGraveyardToHandTargetEffect());
-        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(filter));
+        this.getSpellAbility().addTarget(new TargetCardInYourGraveyard(new FilterCreatureCard()));
         // Flashback {4}{B}
         this.addAbility(new FlashbackAbility(new ManaCostsImpl("{4}{B}"), TimingRule.SORCERY));
         
