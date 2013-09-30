@@ -1,6 +1,7 @@
 syntax: glob
 Mage.Client/*.dck
 Mage.Client/db
+Mage.Client/gamelogs
 Mage.Client/mageclient.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
