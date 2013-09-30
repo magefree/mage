@@ -48,7 +48,7 @@ import mage.target.common.TargetControlledCreaturePermanent;
  */
 public class MalevolentAwakening extends CardImpl<MalevolentAwakening> {
     
-    private static final FilterCard filter = new FilterCard("creature from your graveyard");
+    private static final FilterCard filter = new FilterCard("creature card from your graveyard");
     
     static{
         filter.add(new CardTypePredicate(CardType.CREATURE));
