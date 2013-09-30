@@ -10,6 +10,9 @@
 |Generate|TOK:THS|Golem|
 |Generate|EMBLEM-:THS|Elspeth, Suns Champion|
 
+|Generate|TOK:DDL|Griffin|
+|Generate|TOK:DDL|Beast|
+
 |Generate|TOK:MMA|Giant-Warrior|
 |Generate|TOK:MMA|Kithkin-Soldier|
 |Generate|TOK:MMA|Soldier|

@@ -46,6 +46,7 @@ public class ConstructedFormats {
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
             "Guru",
+            "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Elspeth vs. Tezzeret"
     };
     
@@ -376,6 +377,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
+        }
+        if (format.equals("Duel Decks: Heroes vs. Monsters")) {
+            return Arrays.asList("DDL");
         }
         
         if (format.equals("- Standard")) {

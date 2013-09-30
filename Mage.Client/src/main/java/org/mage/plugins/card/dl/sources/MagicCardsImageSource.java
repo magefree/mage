@@ -18,6 +18,7 @@ public class MagicCardsImageSource implements CardImageSource {
         {
             put("THS", "theros");
             put("M14", "magic-2014");
+            put("DDL", "duel-decks-heroes-vs-monsters");
             put("MMA", "modern-masters");
             put("DGM", "dragons-maze");
             put("GTC", "gatecrash");
