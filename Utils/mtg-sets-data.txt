@@ -28,12 +28,13 @@ Dissension|DIS|
 Deckmasters|DKM|
 Dragon's Maze|DGM|
 The Dark|DRK|
-Duel Decks: Divine vs. Demonic|DVD|
+Duel Decks: Divine vs. Demonic|DDC|
 Duel Decks: Elspeth vs. Tezzeret|DDF|
 Duel Decks: Elves vs. Goblins|EVG|
-Duel Decks: Garruk vs. Liliana|GVL|
-Duel Decks: Jace vs. Chandra|JVC|
-Duel Decks: Phyrexia vs. the Coalition|PVC|
+Duel Decks: Garruk vs. Liliana|DDD|
+Duel Decks: Jace vs. Chandra|DD2|
+Duel Decks: Phyrexia vs. the Coalition|DDE|
+Duel Decks: Heroes vs. Monsters|DDL|
 Eventide|EVE|
 Exodus|EXO|
 Fallen Empires|FEM|

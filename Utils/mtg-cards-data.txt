@@ -22463,3 +22463,84 @@ March of the Returned|Theros|96|C|{3}{B}|Sorcery|||Return up to two target creat
 Mogis's Marauder|Theros|97|U|{2}{B}|Creature - Human Berserker|2|2|When Mogis's Marauder enters the battlefield, up to X target creatures each gain intimidate and haste until end of turn, where X is your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>|
 Nighthowler|Theros|98|R|{1}{B}{B}|Enchantment Creature - Horror|0|0|Bestow {2}{B}{B} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.|
 Ordeal of Erebos|Theros|99|U|{1}{B}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Erebos.$When you sacrifice Ordeal of Erebos, target player discards two cards.|
+Sun Titan|Duel Decks: Heroes vs. Monsters|1|M|{4}{W}{W}|Creature - Giant|6|6|Vigilance$Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.|
+Freewind Equenaut|Duel Decks: Heroes vs. Monsters|10|C|{2}{W}|Creature - Human Archer|2|2|Flying$As long as Freewind Equenaut is enchanted, it has "{tap}: Freewind Equenaut deals 2 damage to target attacking or blocking creature."|
+Anax and Cymede|Duel Decks: Heroes vs. Monsters|11|R|{1}{R}{W}|Legendary Creature - Human Soldier|3|2|First strike, vigilance$Heroic - Whenever you cast a spell that targets Anax and Cymede, creatures you control get +1/+1 and gain trample until end of turn.|
+Armory Guard|Duel Decks: Heroes vs. Monsters|12|C|{3}{W}|Creature - Giant Soldier|2|5|Armory Guard has vigilance as long as you control a Gate.|
+Gustcloak Sentinel|Duel Decks: Heroes vs. Monsters|13|U|{2}{W}{W}|Creature - Human Soldier|3|3|Whenever Gustcloak Sentinel becomes blocked, you may untap it and remove it from combat.|
+Dawnstrike Paladin|Duel Decks: Heroes vs. Monsters|14|C|{3}{W}{W}|Creature - Human Knight|2|4|Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>$Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Nobilis of War|Duel Decks: Heroes vs. Monsters|15|R|{RW}{RW}{RW}{RW}{RW}|Creature - Spirit Avatar|3|4|Flying$Attacking creatures you control get +2/+0.|
+Kamahl, Pit Fighter|Duel Decks: Heroes vs. Monsters|16|R|{4}{R}{R}|Legendary Creature - Human Barbarian|6|1|Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>${tap}: Kamahl, Pit Fighter deals 3 damage to target creature or player.|
+Condemn|Duel Decks: Heroes vs. Monsters|17|U|{W}|Instant|||Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness.|
+Daily Regimen|Duel Decks: Heroes vs. Monsters|18|U|{W}|Enchantment - Aura|||Enchant creature${1}{W}: Put a +1/+1 counter on enchanted creature.|
+Pay No Heed|Duel Decks: Heroes vs. Monsters|19|C|{W}|Instant|||Prevent all damage a source of your choice would deal this turn.|
+Somberwald Vigilante|Duel Decks: Heroes vs. Monsters|2|C|{R}|Creature - Human Warrior|1|1|Whenever Somberwald Vigilante becomes blocked by a creature, Somberwald Vigilante deals 1 damage to that creature.|
+Righteousness|Duel Decks: Heroes vs. Monsters|20|U|{W}|Instant|||Target blocking creature gets +7/+7 until end of turn.|
+Stand Firm|Duel Decks: Heroes vs. Monsters|21|C|{W}|Instant|||Target creature gets +1/+1 until end of turn.$Scry 2. <i>(To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Magma Jet|Duel Decks: Heroes vs. Monsters|22|U|{1}{R}|Instant|||Magma Jet deals 2 damage to target creature or player. Scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Ordeal of Purphoros|Duel Decks: Heroes vs. Monsters|23|U|{1}{R}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.$When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.|
+Bonds of Faith|Duel Decks: Heroes vs. Monsters|24|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.|
+Moment of Heroism|Duel Decks: Heroes vs. Monsters|25|C|{1}{W}|Instant|||Target creature gets +2/+2 and gains lifelink until end of turn. <i>(Damage dealt by the creature also causes its controller to gain that much life.)</i>|
+Undying Rage|Duel Decks: Heroes vs. Monsters|26|U|{2}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and can't block.$When Undying Rage is put into a graveyard from the battlefield, return Undying Rage to its owner's hand.|
+Battle Mastery|Duel Decks: Heroes vs. Monsters|27|U|{2}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has double strike.|
+Griffin Guide|Duel Decks: Heroes vs. Monsters|28|U|{2}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has flying.$When enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.|
+Smite the Monstrous|Duel Decks: Heroes vs. Monsters|29|C|{3}{W}|Instant|||Destroy target creature with power 4 or greater.|
+Figure of Destiny|Duel Decks: Heroes vs. Monsters|3|R|{RW}|Creature - Kithkin|1|1|{RW}: Figure of Destiny becomes a 2/2 Kithkin Spirit.${RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.${RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.|
+Miraculous Recovery|Duel Decks: Heroes vs. Monsters|30|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
+Winds of Rath|Duel Decks: Heroes vs. Monsters|31|R|{3}{W}{W}|Sorcery|||Destroy all creatures that aren't enchanted. They can't be regenerated.|
+Pyrokinesis|Duel Decks: Heroes vs. Monsters|32|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Boros Guildgate|Duel Decks: Heroes vs. Monsters|33|C||Land - Gate|||Boros Guildgate enters the battlefield tapped.${tap}: Add {R} or {W} to your mana pool.|
+New Benalia|Duel Decks: Heroes vs. Monsters|34|U||Land|||New Benalia enters the battlefield tapped.$When New Benalia enters the battlefield, scry 1. <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>${tap}: Add {W} to your mana pool.|
+Mountain|Duel Decks: Heroes vs. Monsters|35|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|36|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|37|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|38|L||Basic Land - Mountain|||R|
+Plains|Duel Decks: Heroes vs. Monsters|39|L||Basic Land - Plains|||W|
+Cavalry Pegasus|Duel Decks: Heroes vs. Monsters|4|C|{1}{W}|Creature - Pegasus|1|1|Flying$Whenever Cavalry Pegasus attacks, each attacking Human gains flying until end of turn.|
+Plains|Duel Decks: Heroes vs. Monsters|40|L||Basic Land - Plains|||W|
+Plains|Duel Decks: Heroes vs. Monsters|41|L||Basic Land - Plains|||W|
+Plains|Duel Decks: Heroes vs. Monsters|42|L||Basic Land - Plains|||W|
+Polukranos, World Eater|Duel Decks: Heroes vs. Monsters|43|M|{2}{G}{G}|Legendary Creature - Hydra|5|5|{X}{X}{G}: Monstrosity X. <i>(If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)</i>$When Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.|
+Orcish Lumberjack|Duel Decks: Heroes vs. Monsters|44|C|{R}|Creature - Orc|1|1|{tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.|
+Deadly Recluse|Duel Decks: Heroes vs. Monsters|45|C|{1}{G}|Creature - Spider|1|2|Reach <i>(This creature can block creatures with flying.)</i>$Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>|
+Kavu Predator|Duel Decks: Heroes vs. Monsters|46|U|{1}{G}|Creature - Kavu|2|2|Trample$Whenever an opponent gains life, put that many +1/+1 counters on Kavu Predator.|
+Satyr Hedonist|Duel Decks: Heroes vs. Monsters|47|C|{1}{G}|Creature - Satyr|2|1|{R}, Sacrifice Satyr Hedonist: Add {R}{R}{R} to your mana pool.|
+Zhur-Taa Druid|Duel Decks: Heroes vs. Monsters|48|C|{R}{G}|Creature - Human Druid|1|1|{tap}: Add {G} to your mana pool.$Whenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.|
+Blood Ogre|Duel Decks: Heroes vs. Monsters|49|C|{2}{R}|Creature - Ogre Warrior|2|2|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>$First strike <i>(This creature deals combat damage before creatures without first strike.)</i>|
+Fencing Ace|Duel Decks: Heroes vs. Monsters|5|U|{1}{W}|Creature - Human Soldier|1|1|Double strike <i>(This creature deals both first-strike and regular combat damage.)</i>|
+Troll Ascetic|Duel Decks: Heroes vs. Monsters|50|R|{1}{G}{G}|Creature - Troll Shaman|3|2|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>${1}{G}: Regenerate Troll Ascetic.|
+Crowned Ceratok|Duel Decks: Heroes vs. Monsters|51|U|{3}{G}|Creature - Rhino|4|3|Trample$Each creature you control with a +1/+1 counter on it has trample.|
+Gorehorn Minotaurs|Duel Decks: Heroes vs. Monsters|52|C|{2}{R}{R}|Creature - Minotaur Warrior|3|3|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>|
+Ghor-Clan Savage|Duel Decks: Heroes vs. Monsters|53|C|{3}{G}{G}|Creature - Centaur Berserker|2|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>|
+Deus of Calamity|Duel Decks: Heroes vs. Monsters|54|R|{RG}{RG}{RG}{RG}{RG}|Creature - Spirit Avatar|6|6|Trample$Whenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.|
+Conquering Manticore|Duel Decks: Heroes vs. Monsters|55|R|{4}{R}{R}|Creature - Manticore|5|5|Flying$When Conquering Manticore enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.|
+Crater Hellion|Duel Decks: Heroes vs. Monsters|56|R|{4}{R}{R}|Creature - Hellion Beast|6|6|Echo {4}{R}{R} <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>$When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.|
+Skarrgan Firebird|Duel Decks: Heroes vs. Monsters|57|R|{4}{R}{R}|Creature - Phoenix|3|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>$Flying${R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.|
+Valley Rannet|Duel Decks: Heroes vs. Monsters|58|C|{4}{R}{G}|Creature - Beast|6|3|Mountaincycling {2}, forestcycling {2} <i>({2}, Discard this card: Search your library for a Mountain or Forest card, reveal it, and put it into your hand. Then shuffle your library.)</i>|
+Krosan Tusker|Duel Decks: Heroes vs. Monsters|59|C|{5}{G}{G}|Creature - Boar Beast|6|5|Cycling {2}{G} <i>({2}{G}, Discard this card: Draw a card.)</i>$When you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.|
+Thraben Valiant|Duel Decks: Heroes vs. Monsters|6|C|{1}{W}|Creature - Human Soldier|2|1|Vigilance|
+Skarrgan Skybreaker|Duel Decks: Heroes vs. Monsters|60|U|{4}{R}{R}{G}|Creature - Giant Shaman|3|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>${1}, Sacrifice Skarrgan Skybreaker: Skarrgan Skybreaker deals damage equal to its power to target creature or player.|
+Shower of Sparks|Duel Decks: Heroes vs. Monsters|61|C|{R}|Instant|||Shower of Sparks deals 1 damage to target creature and 1 damage to target player.|
+Prey Upon|Duel Decks: Heroes vs. Monsters|62|C|{G}|Sorcery|||Target creature you control fights target creature you don't control. <i>(Each deals damage equal to its power to the other.)</i>|
+Pyroclasm|Duel Decks: Heroes vs. Monsters|63|U|{1}{R}|Sorcery|||Pyroclasm deals 2 damage to each creature.|
+Regrowth|Duel Decks: Heroes vs. Monsters|64|U|{1}{G}|Sorcery|||Return target card from your graveyard to your hand.|
+Terrifying Presence|Duel Decks: Heroes vs. Monsters|65|C|{1}{G}|Instant|||Prevent all combat damage that would be dealt by creatures other than target creature this turn.|
+Destructive Revelry|Duel Decks: Heroes vs. Monsters|66|U|{R}{G}|Instant|||Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.|
+Dragon Blood|Duel Decks: Heroes vs. Monsters|67|U|{3}|Artifact|||{3}, {tap}: Put a +1/+1 counter on target creature.|
+Volt Charge|Duel Decks: Heroes vs. Monsters|68|C|{2}{R}|Instant|||Volt Charge deals 3 damage to target creature or player. Proliferate. <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)</i>|
+Beast Within|Duel Decks: Heroes vs. Monsters|69|U|{2}{G}|Instant|||Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.|
+Stun Sniper|Duel Decks: Heroes vs. Monsters|7|U|{R}{W}|Creature - Human Archer|1|1|{1}, {tap}: Stun Sniper deals 1 damage to target creature. Tap that creature.|
+Fires of Yavimaya|Duel Decks: Heroes vs. Monsters|70|U|{1}{R}{G}|Enchantment|||Creatures you control have haste.$Sacrifice Fires of Yavimaya: Target creature gets +2/+2 until end of turn.|
+Kazandu Refuge|Duel Decks: Heroes vs. Monsters|71|U||Land|||Kazandu Refuge enters the battlefield tapped.$When Kazandu Refuge enters the battlefield, you gain 1 life.${tap}: Add {R} or {G} to your mana pool.|
+Llanowar Reborn|Duel Decks: Heroes vs. Monsters|72|U||Land|||Llanowar Reborn enters the battlefield tapped.${tap}: Add {G} to your mana pool.$Graft 1 <i>(This land enters the battlefield with a +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this land onto it.)</i>|
+Skarrg, the Rage Pits|Duel Decks: Heroes vs. Monsters|73|U||Land|||{tap}: Add {1} to your mana pool.${R}{G}, {tap}: Target creature gets +1/+1 and gains trample until end of turn.|
+Mountain|Duel Decks: Heroes vs. Monsters|74|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|75|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|76|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|77|L||Basic Land - Mountain|||R|
+Forest|Duel Decks: Heroes vs. Monsters|78|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Heroes vs. Monsters|79|L||Basic Land - Forest|||G|
+Truefire Paladin|Duel Decks: Heroes vs. Monsters|8|U|{R}{W}|Creature - Human Knight|2|2|Vigilance${R}{W}: Truefire Paladin gets +2/+0 until end of turn.${R}{W}: Truefire Paladin gains first strike until end of turn.|
+Forest|Duel Decks: Heroes vs. Monsters|80|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Heroes vs. Monsters|81|L||Basic Land - Forest|||G|
+Auramancer|Duel Decks: Heroes vs. Monsters|9|C|{2}{W}|Creature - Human Wizard|2|2|When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.|
