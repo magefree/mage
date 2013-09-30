@@ -36,8 +36,7 @@ import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
-import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.common.FilterLandCard;
 import mage.target.common.TargetCardInHand;
 
 /**
@@ -45,12 +44,6 @@ import mage.target.common.TargetCardInHand;
  * @author cbt33
  */
 public class CursedMonstrosity extends CardImpl<CursedMonstrosity> {
-    
-    private static final FilterCard filter = new FilterCard("Land");
-            
-            static{
-                filter.add(new CardTypePredicate(CardType.LAND));
-            }
 
     public CursedMonstrosity(UUID ownerId) {
         super(ownerId, 126, "Cursed Monstrosity", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{B}");
@@ -67,7 +60,7 @@ public class CursedMonstrosity extends CardImpl<CursedMonstrosity> {
         this.addAbility(new BecomesTargetTriggeredAbility(
                             new SacrificeSourceUnlessPaysEffect(
                             new DiscardTargetCost(
-                            new TargetCardInHand(filter)))));
+                            new TargetCardInHand(new FilterLandCard()))));
     }
 
     public CursedMonstrosity(final CursedMonstrosity card) {
