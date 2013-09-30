@@ -30,7 +30,7 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.ActivateAsSorceryActivatedAbility;
 import mage.abilities.costs.common.SacrificeTargetCost;
 import mage.abilities.effects.common.DiscardTargetEffect;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class SadisticHypnotist extends CardImpl<SadisticHypnotist> {
         this.toughness = new MageInt(2);
 
         // Sacrifice a creature: Target player discards two cards. Activate this ability only any time you could cast a sorcery.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
+        Ability ability = new ActivateAsSorceryActivatedAbility(Zone.BATTLEFIELD, new DiscardTargetEffect(2), new SacrificeTargetCost(new TargetControlledCreaturePermanent(true)));
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
