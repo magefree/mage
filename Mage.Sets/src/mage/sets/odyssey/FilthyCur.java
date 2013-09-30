@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
