@@ -29,20 +29,22 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.LifelinkAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
-import mage.target.common.TargetCreaturePermanent;
+import mage.game.events.GameEvent.EventType;
+import mage.target.targetpointer.FixedTarget;
 
 /**
  *
@@ -58,7 +60,10 @@ public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
 
+        // Flying
         this.addAbility(FlyingAbility.getInstance());
+
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());
 
         // Whenever a creature you control attacks alone, it gains lifelink until end of turn.
@@ -79,7 +84,7 @@ public class BattlegraceAngel extends CardImpl<BattlegraceAngel> {
 class BattlegraceAngelAbility extends TriggeredAbilityImpl<BattlegraceAngelAbility> {
 
     public BattlegraceAngelAbility() {
-        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn));
+        super(Zone.BATTLEFIELD, new GainAbilityTargetEffect(LifelinkAbility.getInstance(), Duration.EndOfTurn), false);
     }
 
     public BattlegraceAngelAbility(final BattlegraceAngelAbility ability) {
@@ -93,11 +98,11 @@ class BattlegraceAngelAbility extends TriggeredAbilityImpl<BattlegraceAngelAbili
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-        if (event.getType() == GameEvent.EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
+        if (event.getType() == EventType.DECLARED_ATTACKERS && game.getActivePlayerId().equals(this.controllerId) ) {
             if (game.getCombat().attacksAlone()) {
-                TargetCreaturePermanent target = new TargetCreaturePermanent();
-                this.addTarget(target);
-                this.getTargets().get(0).add(game.getCombat().getAttackers().get(0),game);
+                for (Effect effect: this.getEffects()) {
+                    effect.setTargetPointer(new FixedTarget(game.getCombat().getAttackers().get(0)));
+                }
                 return true;
             }
         }
