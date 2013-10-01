@@ -56,6 +56,8 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
+    // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
+    private boolean useToughnessForDamage;
 
     protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<UUID, CombatGroup>();
@@ -64,7 +66,10 @@ public class Combat implements Serializable, Copyable<Combat> {
     // <creature that can block, <all attackers that force the creature to block it>>
     protected Map<UUID, Set<UUID>> creaturesForcedToBlockAttackers = new HashMap<UUID, Set<UUID>>();
 
+
+
     public Combat() {
+        this.useToughnessForDamage = false;
     }
 
     public Combat(final Combat combat) {
@@ -76,6 +81,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (Map.Entry<UUID, CombatGroup> group : combat.blockingGroups.entrySet()) {
             blockingGroups.put(group.getKey(), group.getValue());
         }
+        this.useToughnessForDamage = combat.useToughnessForDamage;
     }
 
     public List<CombatGroup> getGroups() {
@@ -104,6 +110,18 @@ public class Combat implements Serializable, Copyable<Combat> {
             blockers.addAll(group.blockers);
         }
         return blockers;
+    }
+
+    public boolean useToughnessForDamage() {
+        return useToughnessForDamage;
+    }
+
+    public void setUseToughnessForDamage(boolean useToughnessForDamage) {
+        this.useToughnessForDamage = useToughnessForDamage;
+    }
+
+    public void reset() {
+        this.useToughnessForDamage = false;
     }
 
     public void clear() {

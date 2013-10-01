@@ -384,6 +384,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             player.reset();
         }
         battlefield.reset(game);
+        combat.reset();
         resetOtherAbilities();
         effects.apply(game);
         battlefield.fireControlChangeEvents(game);
@@ -578,6 +579,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         values.put(valueId, value);
     }
 
+    /**
+     * Other abilities are used to implement some special kind of continious effects.
+     *
+     * Crucible of Worlds - You may play land cards from your graveyard.
+     * Past in Flames - Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+     *
+     * @param objectId
+     * @param zone
+     * @return
+     */
     public Abilities<ActivatedAbility> getOtherAbilities(UUID objectId, Zone zone) {
         if (otherAbilities.containsKey(objectId)) {
             return otherAbilities.get(objectId).getActivatedAbilities(zone);

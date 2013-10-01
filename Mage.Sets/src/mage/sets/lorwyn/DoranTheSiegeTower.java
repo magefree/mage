@@ -36,9 +36,13 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.cards.CardImpl;
+import mage.constants.AttachmentType;
 import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.events.DamageCreatureEvent;
 import mage.game.events.DamagePlaneswalkerEvent;
@@ -47,6 +51,15 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 
 /**
+ *
+ * 613.10. Some continuous effects affect game rules rather than objects. For example,
+ * effects may modify a player's maximum hand size, or say that a creature must attack
+ * this turn if able. These effects are applied after all other continuous effects have
+ * been applied. Continuous effects that affect the costs of spells or abilities are
+ * applied according to the order specified in rule 601.2e. All other such effects are
+ * applied in timestamp order. See also the rules for timestamp order and dependency
+ * (rules 613.6 and 613.7)
+ *
  *
  * @author LevelX2
  */
@@ -66,7 +79,7 @@ public class DoranTheSiegeTower extends CardImpl<DoranTheSiegeTower> {
         this.toughness = new MageInt(5);
 
         // Each creature assigns combat damage equal to its toughness rather than its power.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoranTheSiegeTowerEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new DoranTheSiegeTowerCombatDamageRuleEffect()));
     }
 
     public DoranTheSiegeTower(final DoranTheSiegeTower card) {
@@ -79,56 +92,40 @@ public class DoranTheSiegeTower extends CardImpl<DoranTheSiegeTower> {
     }
 }
 
-class DoranTheSiegeTowerEffect extends ReplacementEffectImpl<DoranTheSiegeTowerEffect> {
+class DoranTheSiegeTowerCombatDamageRuleEffect extends ContinuousEffectImpl<DoranTheSiegeTowerCombatDamageRuleEffect> {
 
-    public DoranTheSiegeTowerEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Damage);
+    public DoranTheSiegeTowerCombatDamageRuleEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
         staticText = "Each creature assigns combat damage equal to its toughness rather than its power";
     }
 
-    public DoranTheSiegeTowerEffect(final DoranTheSiegeTowerEffect effect) {
+    public DoranTheSiegeTowerCombatDamageRuleEffect(final DoranTheSiegeTowerCombatDamageRuleEffect effect) {
         super(effect);
     }
 
     @Override
-    public DoranTheSiegeTowerEffect copy() {
-        return new DoranTheSiegeTowerEffect(this);
+    public DoranTheSiegeTowerCombatDamageRuleEffect copy() {
+        return new DoranTheSiegeTowerCombatDamageRuleEffect(this);
     }
 
     @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        switch (event.getType()) {
-            case DAMAGE_PLAYER:
-                 if (((DamagePlayerEvent) event).isCombatDamage())  {
-                    return true;
-                 }
-                 break;
-            case DAMAGE_PLANESWALKER:
-                 if (((DamagePlaneswalkerEvent) event).isCombatDamage()) {
-                    return true;
-                 }
-                 break;
-            case DAMAGE_CREATURE:
-                 if (((DamageCreatureEvent) event).isCombatDamage()) {
-                    return true;
-                 }
-                 break;
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        switch (layer) {
+            case RulesEffects:
+                // Change the rule
+                game.getCombat().setUseToughnessForDamage(true);
+                break;
         }
         return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        return true;
+        return false;
     }
 
     @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-         Permanent permanent = game.getPermanent(event.getSourceId());
-         if (permanent != null) {
-             event.setAmount(permanent.getToughness().getValue());
-         }
-         return false;
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
-
 }
