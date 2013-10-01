@@ -122,10 +122,12 @@ class SnapcasterMageEffect extends ContinuousEffectImpl<SnapcasterMageEffect> {
         MageObject sourceObject = game.getObject(source.getSourceId());
         if (card != null && sourceObject != null) {
             FlashbackAbility ability;
-            if (card.getCardType().contains(CardType.INSTANT))
+            if (card.getCardType().contains(CardType.INSTANT)) {
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-            else
+            }
+            else {
                 ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
+            }
             ability.setSourceId(card.getId());
             ability.setControllerId(card.getOwnerId());
             game.getState().addOtherAbility(card.getId(), ability);

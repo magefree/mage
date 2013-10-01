@@ -114,10 +114,12 @@ class PastInFlamesEffect extends ContinuousEffectImpl<PastInFlamesEffect> {
                 if (objects.contains(cardId)) {
                     Card card = game.getCard(cardId);
                     FlashbackAbility ability = null;
-                    if (card.getCardType().contains(CardType.INSTANT))
+                    if (card.getCardType().contains(CardType.INSTANT)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.INSTANT);
-                    else if (card.getCardType().contains(CardType.SORCERY))
+                    }
+                    else if (card.getCardType().contains(CardType.SORCERY)) {
                         ability = new FlashbackAbility(card.getManaCost(), TimingRule.SORCERY);
+                    }
                     if (ability != null) {
                         ability.setSourceId(cardId);
                         ability.setControllerId(card.getOwnerId());
