@@ -16,8 +16,13 @@ import mage.constants.SetType;
  */
 public class ConstructedFormats {
 
+    public static final String ALL = "- All Sets";
+    public static final String STANDARD = "- Standard";
+    public static final String EXTENDED = "- Extended";
+    public static final String MODERN = "- Modern";
+
     private static final String[] constructedFormats = {
-            "- All Sets", "- Standard", "- Extended", "- Modern",
+            ALL, STANDARD, EXTENDED, MODERN,
             "* Theros Block", "Theros",
             "Magic 2014",
             "Modern Masters",
@@ -382,13 +387,13 @@ public class ConstructedFormats {
             return Arrays.asList("DDL");
         }
         
-        if (format.equals("- Standard")) {
+        if (format.equals(STANDARD)) {
             return standard;
         }
-        if (format.equals("- Extended")) {
+        if (format.equals(EXTENDED)) {
             return extended;
         }
-        if (format.equals("- Modern")) {
+        if (format.equals(MODERN)) {
             return modern;
         }
         return all;
@@ -411,7 +416,7 @@ public class ConstructedFormats {
     }
 
     private static final List<String> standard = new ArrayList<String>();
-    private static final Date standardDate = new GregorianCalendar(2011, 9, 29).getTime();
+    private static final Date standardDate = new GregorianCalendar(2012, 9, 28).getTime();
 
     private static final List<String> extended = new ArrayList<String>();
     private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();
