@@ -133,8 +133,8 @@ public class DeckEditorPanel extends javax.swing.JPanel {
                 this.btnExit.setVisible(false);
                 this.btnImport.setVisible(false);
                 if (!MageFrame.getSession().isTestMode()) {
-            this.btnLoad.setVisible(false);
-        }
+                    this.btnLoad.setVisible(false);
+                }
                 this.deckArea.showSideboard(false);
                 countdown.stop();
                 this.timeout = time;
