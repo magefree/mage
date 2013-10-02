@@ -111,7 +111,7 @@ class AxebaneGuardianManaEffect extends ManaEffect<AxebaneGuardianManaEffect> {
             Mana mana = new Mana();
             for(int i = 0; i < x; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
+                while (!player.choose(Outcome.Benefit, choiceColor, game)  && player.isInGame()) {
                     game.debugMessage("player canceled choosing color. retrying.");
                 }
                 

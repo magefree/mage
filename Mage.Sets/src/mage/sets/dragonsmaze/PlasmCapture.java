@@ -133,8 +133,8 @@ class PlasmCaptureManaEffect extends ManaEffect<PlasmCaptureManaEffect> {
             Mana mana = new Mana();
             for(int i = 0; i < amountOfMana; i++){
                 ChoiceColor choiceColor = new ChoiceColor();
-                while (!player.choose(Outcome.Benefit, choiceColor, game)) {
-                    game.debugMessage("player canceled choosing color. retrying.");
+                while (!player.choose(Outcome.Benefit, choiceColor, game) && player.isInGame()) {
+                    game.debugMessage("player canceled choosing color. retrying." );
                 }
 
                 if (choiceColor.getColor().isBlack()) {

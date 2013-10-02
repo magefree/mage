@@ -108,7 +108,7 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.Benefit, typeChoice, game)) {
+            while (!player.choose(Outcome.Benefit, typeChoice, game) && player.isInGame()) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
