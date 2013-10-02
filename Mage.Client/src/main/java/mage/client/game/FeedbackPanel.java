@@ -70,6 +70,7 @@ public class FeedbackPanel extends javax.swing.JPanel {
     private FeedbackMode mode;
     private MageDialog connectedDialog;
     private ChatPanel connectedChatPanel;
+    private int lastMessageId;
 
     private static final ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
 
@@ -84,8 +85,17 @@ public class FeedbackPanel extends javax.swing.JPanel {
         session = MageFrame.getSession();
     }
 
-    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options) {
+    public void getFeedback(FeedbackMode mode, String message, boolean special, Map<String, Serializable> options, int messageId) {
         logger.info("text: " + message);
+
+        synchronized (this) {
+            if (messageId < this.lastMessageId) {
+                logger.warn("ignoring message from later source: " + messageId + ", text=" + message);
+                return;
+            }
+            this.lastMessageId = messageId;
+        }
+
         this.lblMessage.setText(message);
         this.helper.setMessage(message);
         this.selected = false;
