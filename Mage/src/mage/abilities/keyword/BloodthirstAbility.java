@@ -8,6 +8,7 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.util.CardUtil;
 import mage.watchers.common.BloodthirstWatcher;
 
 /**
@@ -34,7 +35,15 @@ public class BloodthirstAbility extends EntersBattlefieldAbility {
 
     @Override
     public String getRule() {
-        return "Bloodthirst " + amount;
+        StringBuilder sb = new StringBuilder("Bloodthirst ").append(amount)
+                .append(" <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with ");
+        if (amount == 1) {
+            sb.append("a +1/+1 counter");
+        } else {
+            sb.append(CardUtil.numberToText(amount)).append(" counters");
+        }
+        sb.append(" on it.)</i>");
+        return sb.toString();
     }
 }
 
@@ -44,7 +53,7 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
     BloodthirstEffect(int amount) {
         super(Outcome.BoostCreature);
         this.amount = amount;
-        staticText = "this permanent comes into play with " + amount + " +1/+1 counters on it";
+        staticText =  new StringBuilder("this permanent comes into play with ").append(this.amount).append(" +1/+1 counters on it").toString();
     }
 
     BloodthirstEffect(final BloodthirstEffect effect) {
@@ -61,8 +70,10 @@ class BloodthirstEffect extends OneShotEffect<BloodthirstEffect> {
                 Permanent p = game.getPermanent(source.getSourceId());
                 if (p != null) {
                     p.addCounters(CounterType.P1P1.createInstance(amount), game);
+
                 }
             }
+            return true;
         }
         return false;
     }

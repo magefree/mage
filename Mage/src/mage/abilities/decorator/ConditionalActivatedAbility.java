@@ -24,7 +24,7 @@ import mage.game.Game;
 public class ConditionalActivatedAbility extends ActivatedAbilityImpl<ConditionalActivatedAbility> {
 
     private Condition condition;
-    private String ruleText = "";
+    private String ruleText = null;
 
     private static final Effects emptyEffects = new Effects();
 
@@ -75,6 +75,9 @@ public class ConditionalActivatedAbility extends ActivatedAbilityImpl<Conditiona
 
     @Override
     public String getRule() {
-        return ruleText;
+        if (ruleText != null && !ruleText.isEmpty()) {
+            return ruleText;
+        }
+        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString();
     }
 }

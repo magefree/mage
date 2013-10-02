@@ -140,6 +140,7 @@ class XenagosManaEffect extends OneShotEffect <XenagosManaEffect> {
                 }
                 player.getManaPool().addMana(mana, game, source);
             }
+            return true;
         }
         return false;
     }
