@@ -6,6 +6,7 @@ import de.schlichtherle.truezip.file.TVFS;
 import de.schlichtherle.truezip.fs.FsSyncException;
 import mage.cards.repository.CardInfo;
 import mage.client.dialog.PreferencesDialog;
+import mage.client.util.sets.ConstructedFormats;
 import mage.remote.Connection;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
@@ -31,10 +32,7 @@ import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,6 +45,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
     private JButton startDownloadButton;
     private int cardIndex;
     private ArrayList<CardDownloadData> cards;
+    private ArrayList<CardDownloadData> type2cards;
     private JComboBox jComboBox1;
     private JLabel jLabel1;
     private static boolean offlineMode = false;
@@ -164,15 +163,24 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         bar.setPreferredSize(d);
 
         p0.add(Box.createVerticalStrut(5));
-        checkBox = new JCheckBox("Download for current game only.");
+        checkBox = new JCheckBox("Download images for Standard (Type2) only");
         p0.add(checkBox);
         p0.add(Box.createVerticalStrut(5));
-        checkBox.setEnabled(!offlineMode);
 
         checkBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int count = DownloadPictures.this.cards.size();
+                ArrayList<CardDownloadData> cardsToDownload = DownloadPictures.this.cards;
+                if (checkBox.isSelected()) {
+                    DownloadPictures.this.type2cards = new ArrayList<CardDownloadData>();
+                    for (CardDownloadData data : DownloadPictures.this.cards) {
+                        if (data.isType2()) {
+                            DownloadPictures.this.type2cards.add(data);
+                        }
+                    }
+                    cardsToDownload = DownloadPictures.this.type2cards;
+                }
+                int count = cardsToDownload.size();
                 float mb = (count * cardImageSource.getAverageSize()) / 1024;
                 bar.setString(String.format(cardIndex == count ? "%d of %d cards finished! Please close!"
                         : "%d of %d cards finished! Please wait! [%.1f Mb]", 0, count, mb));
@@ -213,6 +221,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         ArrayList<CardDownloadData> allCardsUrls = new ArrayList<CardDownloadData>();
         HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
+        /**
+         * get filter for Standard Type 2 cards
+         */
+        Set<String> type2SetsFilter = new HashSet<String>();
+        type2SetsFilter.addAll(ConstructedFormats.getSetsByFormat(ConstructedFormats.STANDARD));
+
         try {
             offlineMode = true;
 
@@ -227,6 +241,10 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
                     url.setFlipCard(card.isFlipCard());
                     url.setSplitCard(card.isSplitCard());
+
+                    if (type2SetsFilter.contains(card.getSetCode())) {
+                        url.setType2(true);
+                    }
 
                     allCardsUrls.add(url);
                     if (card.isDoubleFaced()) {
@@ -355,6 +373,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
     @Override
     public void run() {
+        this.cardIndex = 0;
 
         File base = new File(Constants.IO.imageBaseDir);
         if (!base.exists()) {
@@ -384,11 +403,14 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         if (p != null) {
             HashSet<String> ignoreUrls = SettingsManager.getIntance().getIgnoreUrls();
 
-            update(0);
-            for (int i = 0; i < cards.size() && !cancel; i++) {
+            ArrayList<CardDownloadData> cardsToDownload = this.checkBox.isSelected() ? type2cards : cards;
+
+            update(0, cardsToDownload.size());
+
+            for (int i = 0; i < cardsToDownload.size() && !cancel; i++) {
                 try {
 
-                    CardDownloadData card = cards.get(i);
+                    CardDownloadData card = cardsToDownload.get(i);
 
                     log.info("Downloading card: " + card.getName() + " (" + card.getSet() + ")");
 
@@ -403,11 +425,11 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                     }
 
                     if (url != null) {
-                        Runnable task = new DownloadTask(card, new URL(url));
+                        Runnable task = new DownloadTask(card, new URL(url), cardsToDownload.size());
                         executor.execute(task);
                     } else {
                         synchronized (sync) {
-                            update(cardIndex + 1);
+                            update(cardIndex + 1, cardsToDownload.size());
                         }
                     }
 
@@ -438,10 +460,12 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
 
         private CardDownloadData card;
         private URL url;
+        private int count;
 
-        public DownloadTask(CardDownloadData card, URL url) {
+        public DownloadTask(CardDownloadData card, URL url, int count) {
             this.card = card;
             this.url = url;
+            this.count = count;
         }
 
         @Override
@@ -460,7 +484,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (existingFile.exists()) {
                     new TFile(existingFile).cp_rp(outputFile);
                     synchronized (sync) {
-                        update(cardIndex + 1);
+                        update(cardIndex + 1, count);
                     }
                     existingFile.delete();
                     File parent = existingFile.getParentFile();
@@ -518,7 +542,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
             }
 
             synchronized (sync) {
-                update(cardIndex + 1);
+                update(cardIndex + 1, count);
             }
         }
 
@@ -543,9 +567,8 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
         }
     }
 
-    private void update(int card) {
+    private void update(int card, int count) {
         this.cardIndex = card;
-        int count = DownloadPictures.this.cards.size();
 
         if (cardIndex < count) {
             float mb = ((count - card) * cardImageSource.getAverageSize()) / 1024;

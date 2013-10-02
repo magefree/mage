@@ -18,6 +18,7 @@ public class CardDownloadData {
     private boolean flippedSide;
     private boolean splitCard;
     private boolean usesVariousArt;
+    private boolean isType2;
 
     public CardDownloadData(String name, String set, Integer collectorId, boolean usesVariousArt, Integer type) {
         this(name, set, collectorId, usesVariousArt, type, false);
@@ -76,6 +77,9 @@ public class CardDownloadData {
         if (this.secondSide != other.secondSide) {
             return false;
         }
+        if (this.isType2 != other.isType2) {
+            return false;
+        }
         return true;
     }
 
@@ -89,6 +93,7 @@ public class CardDownloadData {
         hash = 47 * hash + (this.token ? 1 : 0);
         hash = 47 * hash + (this.twoFacedCard ? 1 : 0);
         hash = 47 * hash + (this.secondSide ? 1 : 0);
+        hash = 47 * hash + (this.isType2 ? 1 : 0);
         return hash;
     }
 
@@ -166,5 +171,13 @@ public class CardDownloadData {
 
     public void setFlippedSide(boolean flippedSide) {
         this.flippedSide = flippedSide;
+    }
+
+    public boolean isType2() {
+        return isType2;
+    }
+
+    public void setType2(boolean type2) {
+        isType2 = type2;
     }
 }
