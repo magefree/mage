@@ -572,23 +572,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     private boolean playTurn(Player player) {
-        StringBuilder sb = new StringBuilder("Turn ");
-        sb.append(state.getTurnNum()).append(" (");
-        int delimiter = this.getPlayers().size() - 1;
-        for (Player gamePlayer : this.getPlayers().values()) {
-            sb.append(gamePlayer.getLife());
-            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
-            if (poison > 0) {
-                sb.append("[P:").append(poison).append("]");
-            }
-            if (delimiter > 0) {
-                sb.append(" - ");
-                delimiter--;
-            }
-        }       
-        sb.append(")");
-        fireStatusEvent(sb.toString(), true);
-        
+        this.logStartOfTurn(player);
         if (checkStopOnTurnOption()) {
             return false;
         }
@@ -603,6 +587,26 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return true;
     }
 
+
+    private void logStartOfTurn(Player player) {
+        StringBuilder sb = new StringBuilder("Turn ").append(state.getTurnNum()).append(" ");
+        sb.append(player.getName());
+        sb.append(" (");
+        int delimiter = this.getPlayers().size() - 1;
+        for (Player gamePlayer : this.getPlayers().values()) {
+            sb.append(gamePlayer.getLife());
+            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            if (poison > 0) {
+                sb.append("[P:").append(poison).append("]");
+            }
+            if (delimiter > 0) {
+                sb.append(" - ");
+                delimiter--;
+            }
+        }
+        sb.append(")");
+        fireStatusEvent(sb.toString(), true);
+    }
 
     private boolean checkStopOnTurnOption() {
         if (gameOptions.stopOnTurn != null && gameOptions.stopAtStep == PhaseStep.UNTAP) {
