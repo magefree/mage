@@ -44,6 +44,7 @@ import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
 import mage.game.GameException;
 import mage.game.GameOptions;
+import mage.game.GameState;
 import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -56,6 +57,7 @@ import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
+import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
@@ -66,6 +68,7 @@ import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
+import mage.view.GameEndView;
 import org.apache.log4j.Logger;
 
 
@@ -173,6 +176,22 @@ public class TableController {
         } else {
             throw new GameException("Playertype " + seat.getPlayerType().toString() + " could not be created.");
         }
+    }
+
+    public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, String playerType, int skill) {
+        Player newPlayer = createPlayer(name, playerType, skill);
+        if (newPlayer == null || table.getState() != TableState.DRAFTING) {
+            return false;
+        }
+        TournamentPlayer oldTournamentPlayer = tournament.getPlayer(oldPlayer.getId());
+        tournament.removePlayer(oldPlayer.getId());       
+        tournament.addPlayer(newPlayer, playerType);
+
+        TournamentPlayer newTournamentPlayer = tournament.getPlayer(newPlayer.getId());        
+        newTournamentPlayer.setState(oldTournamentPlayer.getState());
+        
+        DraftManager.getInstance().getController(table.getId()).replacePlayer(oldPlayer, newPlayer);
+        return true;
     }
 
     public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
@@ -334,26 +353,29 @@ public class TableController {
         return player;
     }
 
-    public void kill(UUID userId) {
-        leaveTable(userId);
-        userPlayerMap.remove(userId);
-    }
-
     public synchronized void leaveTable(UUID userId) {
-        if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
-            UUID playerId = userPlayerMap.get(userId);
-            if (playerId != null) {
-                table.leaveTable(playerId);
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
+                table.leaveNotStartedTable(playerId);
                 if (table.isTournament()) {
-                    tournament.leave(playerId);
+                    TournamentManager.getInstance().quit(tournament.getId(), userId);
                 } else {
                     match.leave(playerId);
                 }
                 User user = UserManager.getInstance().getUser(userId);
                 user.removeTable(playerId);
                 userPlayerMap.remove(userId);
-            }            
+            } else if (!table.getState().equals(TableState.FINISHED)) {
+                if (table.isTournament()) {
+                    TableManager.getInstance().userQuitTournamentSubTables(userId);
+                    TournamentManager.getInstance().quit(tournament.getId(), userId);
+                } else {
+                    match.leave(playerId);
+                }
+            }
         }
+
     }
 
     public synchronized void startMatch(UUID userId) {
@@ -497,6 +519,30 @@ public class TableController {
         }
     }
 
+    private void sendMatchEndInfo(UUID playerId) {
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
+                if (user != null) {
+                    StringBuilder sb = new StringBuilder();
+                    if (table.isTournamentSubTable()) {
+                        sb.append("Your tournament match of round ");
+                        sb.append(table.getTournament().getRounds().size());
+                        sb.append(" is over. ");
+                    } else {
+                        sb.append("Match [").append(match.getName()).append("] is over. ");
+                    }
+                    if(match.getPlayers().size() > 2) {
+                        sb.append("All your opponents have lost or quit the match.");
+                    } else {
+                        sb.append("Your opponent has quit the match.");
+                    }
+                    user.showUserMessage("Match info", sb.toString());
+                }
+                break;
+            }
+        }
+    }
     public int getRemainingTime() {
         return (int) futureTimeout.getDelay(TimeUnit.SECONDS);
     }    
@@ -533,7 +579,17 @@ public class TableController {
                 setupTimeout(Match.SIDEBOARD_TIME);
                 match.sideboard();
                 cancelTimeout();
-                startGame(choosingPlayerId);
+                if (!match.isMatchOver()) {
+                    startGame(choosingPlayerId);
+                } else {
+                    table.endGame();
+                    // opponent(s) left during sideboarding
+                    for (MatchPlayer mPlayer :match.getPlayers()) {
+                        if(!mPlayer.hasQuit()) {
+                            this.sendMatchEndInfo(mPlayer.getPlayer().getId());
+                        }
+                    }                     
+                }
             }
             else {
                 match.getGames().clear();

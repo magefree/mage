@@ -77,6 +77,11 @@ public abstract class TournamentImpl implements Tournament {
     }
 
     @Override
+    public void removePlayer(UUID playerId) {
+        players.remove(playerId);
+    }
+
+    @Override
     public TournamentPlayer getPlayer(UUID playerId) {
         return players.get(playerId);
     }
@@ -125,6 +130,7 @@ public abstract class TournamentImpl implements Tournament {
         }
     }
 
+    // can only be used, if tournament did not start yet?
     @Override
     public void leave(UUID playerId) {
         if (players.containsKey(playerId)) {

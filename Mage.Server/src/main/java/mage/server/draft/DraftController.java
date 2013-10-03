@@ -38,6 +38,7 @@ import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.players.Player;
 import mage.server.TableManager;
 import mage.server.UserManager;
 import mage.server.game.GameController;
@@ -129,6 +130,15 @@ public class DraftController {
         checkStart();
     }
 
+    public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
+        if (draft.replacePlayer(oldPlayer, newPlayer)) {
+            draftSessions.get(oldPlayer.getId()).setKilled();
+            draftSessions.remove(oldPlayer.getId());
+            return true;
+        }
+        return false;
+    }
+
     private synchronized void startDraft() {
         for (final Entry<UUID, DraftSession> entry: draftSessions.entrySet()) {
             if (!entry.getValue().init()) {
@@ -212,4 +222,11 @@ public class DraftController {
         }
     }
 
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    public void abortDraft() {
+        draft.setAbort(true);
+    }
 }

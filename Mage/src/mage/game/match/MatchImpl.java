@@ -285,7 +285,7 @@ public abstract class MatchImpl implements Match {
             player.updateDeck(deck);
         }
     }
-    
+
     protected String createGameStartMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMatch score:\n");

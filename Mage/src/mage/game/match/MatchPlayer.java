@@ -119,6 +119,7 @@ public class MatchPlayer {
     }
 
     public void setQuit(boolean quit) {
+        this.doneSideboarding = true;
         this.quit = quit;
     }
 }

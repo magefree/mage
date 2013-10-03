@@ -48,6 +48,10 @@ public class TournamentManager {
         return INSTANCE;
     }
 
+    public TournamentController getTournamentController(UUID tournamentId) {
+        return controllers.get(tournamentId);
+    }
+    
     public void createTournamentSession(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         TournamentController tournamentController = new TournamentController(tournament, userPlayerMap, tableId);
         controllers.put(tournament.getId(), tournamentController);
@@ -63,7 +67,7 @@ public class TournamentManager {
 
 
     public void kill(UUID tournamentId, UUID userId) {
-        controllers.get(tournamentId).kill(userId);
+        controllers.get(tournamentId).quit(userId);
     }
 
     public void timeout(UUID tournamentId, UUID userId) {

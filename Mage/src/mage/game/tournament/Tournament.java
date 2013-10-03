@@ -47,6 +47,7 @@ public interface Tournament {
 
     UUID getId();
     void addPlayer(Player player, String playerType);
+    void removePlayer(UUID playerId);
     TournamentPlayer getPlayer(UUID playerId);
     Collection<TournamentPlayer> getPlayers();
     Collection<Round> getRounds();

@@ -120,10 +120,10 @@ public class UserManager {
 
     public void removeUser(UUID userId, User.DisconnectReason reason) {
         if (users.containsKey(userId)) {
-            logger.info("user removed " + userId);
+            logger.info("Remove user " + users.get(userId).getName() + ": " + userId + " Reason: " + reason.toString());
             ChatManager.getInstance().removeUser(userId, reason);
             ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
-            users.get(userId).kill(User.DisconnectReason.Disconnected);
+            users.get(userId).kill(reason);
             users.remove(userId);
         }
     }

@@ -166,9 +166,12 @@ public class TableManager {
         }
     }
 
-    public void removeSession(UUID userId) {
+    // remove user from all tournament sub tables
+    public void userQuitTournamentSubTables(UUID userId) {
         for (TableController controller: controllers.values()) {
-            controller.kill(userId);
+            if (controller.getTable().isTournamentSubTable()) {
+                controller.leaveTable(userId);
+            }
         }
     }
 
@@ -190,6 +193,13 @@ public class TableManager {
     public void leaveTable(UUID userId, UUID tableId) {
         if (controllers.containsKey(tableId)) {
             controllers.get(tableId).leaveTable(userId);
+            // table not started yet and user is he owner, remove the table
+            if (isTableOwner(tableId, userId)) {
+                if (getTable(tableId).getState().equals(TableState.WAITING)
+                        || getTable(tableId).getState().equals(TableState.STARTING)) {
+                    removeTable(tableId);
+                }
+            }
         }
     }
 

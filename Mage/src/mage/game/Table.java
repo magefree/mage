@@ -182,7 +182,7 @@ public class Table implements Serializable {
         return null;
     }
 
-    public void leaveTable(UUID playerId) {
+    public void leaveNotStartedTable(UUID playerId) {
         for (int i = 0; i < numSeats; i++ ) {
             Player player = seats[i].getPlayer();
             if (player != null && player.getId().equals(playerId)) {
