@@ -99,7 +99,11 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
         Permanent permanent = ((ZoneChangeEvent) event).getTarget();
         if (permanent != null) {
-            return permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
+            if(permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false)) {
+                game.informPlayers(new StringBuilder(permanent.getName()).append(" was put on the bottom of its owner's library").toString());
+                return true;
+            }
+            
         }
         return false;
     }
