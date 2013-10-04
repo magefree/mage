@@ -29,13 +29,15 @@ public class DirectLinksForDownload implements Iterable<DownloadJob> {
 
     private static final Map<String, String> directLinks = new LinkedHashMap<String, String>();
 
+    public static final String cardbackFilename = "cardback.jpg";
+
     static {
-        directLinks.put("cardback.jpg", backsideUrl);
+        directLinks.put(cardbackFilename, backsideUrl);
     }
 
     private static final String DEFAULT_IMAGES_PATH =  File.separator + "default";
     private static final File DEFAULT_OUT_DIR = new File("plugins" + File.separator + "images" + DEFAULT_IMAGES_PATH);
-    private static File outDir  = DEFAULT_OUT_DIR;
+    public static File outDir  = DEFAULT_OUT_DIR;
 
     public DirectLinksForDownload(String path) {
         if (path == null) {
