@@ -174,7 +174,7 @@ public class DownloadPictures extends DefaultBoundedRangeModel implements Runnab
                 if (checkBox.isSelected()) {
                     DownloadPictures.this.type2cards = new ArrayList<CardDownloadData>();
                     for (CardDownloadData data : DownloadPictures.this.cards) {
-                        if (data.isType2()) {
+                        if (data.isType2() || data.isToken()) {
                             DownloadPictures.this.type2cards.add(data);
                         }
                     }
