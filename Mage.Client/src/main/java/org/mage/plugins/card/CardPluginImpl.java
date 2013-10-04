@@ -19,6 +19,7 @@ import org.mage.plugins.card.constants.Constants;
 import org.mage.plugins.card.dl.DownloadGui;
 import org.mage.plugins.card.dl.DownloadJob;
 import org.mage.plugins.card.dl.Downloader;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.dl.sources.GathererSets;
 import org.mage.plugins.card.dl.sources.GathererSymbols;
 import org.mage.plugins.card.images.ImageCache;
@@ -442,6 +443,11 @@ public class CardPluginImpl implements CardPlugin {
         it = new GathererSets(imagesPath);
         for(DownloadJob job:it) {
                 g.getDownloader().add(job);
+        }
+
+        it = new DirectLinksForDownload(imagesPath);
+        for(DownloadJob job:it) {
+            g.getDownloader().add(job);
         }
 
         JDialog d = new JDialog((Frame) null, "Download pictures", false);
