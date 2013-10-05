@@ -38,18 +38,22 @@ import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.BeginningOfYourEndStepTriggeredAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CreateDelayedTriggeredAbilityEffect;
-import mage.abilities.effects.common.ExileSourceEffect;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
-import mage.abilities.effects.common.ReturnToBattlefieldUnderOwnerControlSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.HasteAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.common.TargetOpponent;
 
 /**
@@ -77,7 +81,7 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
         ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
         //At the beginning of your end step you may exile Obzedat. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
-        Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ExileSourceEffect(), true);
+        Ability ability2 = new BeginningOfYourEndStepTriggeredAbility(new ObzedatGhostCouncilExileSourceEffect(), true);
         ability2.addEffect(new CreateDelayedTriggeredAbilityEffect(new BeginningOfYourUpkeepdelayTriggeredAbility()));
         this.addAbility(ability2);
     }
@@ -92,10 +96,38 @@ public class ObzedatGhostCouncil extends CardImpl<ObzedatGhostCouncil> {
     }
 }
 
+
+class ObzedatGhostCouncilExileSourceEffect extends OneShotEffect<ObzedatGhostCouncilExileSourceEffect> {
+
+    public ObzedatGhostCouncilExileSourceEffect() {
+        super(Outcome.Exile);
+        staticText = "Exile {this}";
+    }
+
+    public ObzedatGhostCouncilExileSourceEffect(final ObzedatGhostCouncilExileSourceEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ObzedatGhostCouncilExileSourceEffect copy() {
+        return new ObzedatGhostCouncilExileSourceEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            return permanent.moveToExile(source.getSourceId(),permanent.getName(), source.getId(), game);
+        }
+        return false;
+    }
+
+}
+
 class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility<BeginningOfYourUpkeepdelayTriggeredAbility> {
 
     public BeginningOfYourUpkeepdelayTriggeredAbility() {
-        this(new ReturnToBattlefieldUnderOwnerControlSourceEffect(), TargetController.YOU);
+        this(new ObzedatGhostCouncilReturnEffect(), TargetController.YOU);
         this.addEffect(new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn));
     }
 
@@ -124,4 +156,36 @@ class BeginningOfYourUpkeepdelayTriggeredAbility extends DelayedTriggeredAbility
     public String getRule() {
         return "If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste";
     }
+}
+
+class ObzedatGhostCouncilReturnEffect extends OneShotEffect<ObzedatGhostCouncilReturnEffect> {
+
+    public ObzedatGhostCouncilReturnEffect() {
+        super(Outcome.Benefit);
+    }
+
+    public ObzedatGhostCouncilReturnEffect(final ObzedatGhostCouncilReturnEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ObzedatGhostCouncilReturnEffect copy() {
+        return new ObzedatGhostCouncilReturnEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            ExileZone currentZone = game.getState().getExile().getExileZone(source.getSourceId());
+            // return it only from the own exile zone
+            if (currentZone.size() > 0) {
+                if (card.putOntoBattlefield(game, Zone.EXILED, source.getSourceId(), card.getOwnerId(), false)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
