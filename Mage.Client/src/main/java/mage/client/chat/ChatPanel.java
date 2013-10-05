@@ -45,6 +45,9 @@ import java.util.Map;
 import java.util.UUID;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
@@ -281,6 +284,11 @@ class TableModel extends AbstractTableModel {
 
     public void loadData(List<String> players) {
         this.players = players;
+        JTableHeader th = jTablePlayers.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue(new StringBuilder("Players").append(" (").append(this.players.size()).append(")").toString());
+        th.repaint();
         this.fireTableDataChanged();
     }
 
