@@ -31,7 +31,7 @@ import java.util.UUID;
 
 import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerAttachedTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
 import mage.abilities.effects.common.DiscardTargetEffect;
@@ -68,7 +68,7 @@ public class ElderMastery extends CardImpl<ElderMastery> {
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(3, 3, Duration.WhileOnBattlefield)));
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FlyingAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield)));
         // Whenever enchanted creature deals damage to a player, that player discards two cards.
-        this.addAbility(new DealsCombatDamageToAPlayerAttachedTriggeredAbility(new DiscardTargetEffect(2), "enchanted", false, true));
+        this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new DiscardTargetEffect(2), "enchanted", false, true));
     }
 
     public ElderMastery(final ElderMastery card) {

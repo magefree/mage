@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToAPlayerAttachedTriggeredAbility;
+import mage.abilities.common.DealsDamageToAPlayerAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
@@ -64,7 +64,7 @@ public class ElbrusTheBindingBlade extends CardImpl<ElbrusTheBindingBlade> {
         // Equipped creature gets +1/+0.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(1, 0)));
         // When equipped creature deals combat damage to a player, unattach Elbrus, the Binding Blade, then transform it.
-         this.addAbility(new DealsCombatDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
+         this.addAbility(new DealsDamageToAPlayerAttachedTriggeredAbility(new ElbrusTheBindingBladeEffect(), "equipped", true));
        // Equip {1}
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(1)));
     }

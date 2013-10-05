@@ -94,6 +94,9 @@ public class ReturnToHandTargetEffect extends OneShotEffect<ReturnToHandTargetEf
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         if (mode.getTargets().size() < 1) {
             return "";
         }

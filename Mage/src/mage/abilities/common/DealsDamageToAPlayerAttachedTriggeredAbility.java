@@ -12,29 +12,35 @@ import mage.target.targetpointer.FixedTarget;
 /**
  * @author Loki
  */
-public class DealsCombatDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbilityImpl<DealsCombatDamageToAPlayerAttachedTriggeredAbility> {
+public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbilityImpl<DealsDamageToAPlayerAttachedTriggeredAbility> {
     private boolean setFixedTargetPointer;
     private String attachedDescription;
+    private boolean onlyCombat;
 
-    public DealsCombatDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
+    public DealsDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional) {
         this(effect, attachedDescription, optional, false);
     }
 
-    public DealsCombatDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
+    public DealsDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer) {
+        this(effect, attachedDescription, optional, setFixedTargetPointer, true);
+    }
+
+    public DealsDamageToAPlayerAttachedTriggeredAbility(Effect effect, String attachedDescription, boolean optional, boolean setFixedTargetPointer, boolean onlyCombat) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.setFixedTargetPointer = setFixedTargetPointer;
         this.attachedDescription = attachedDescription;
     }
 
-    public DealsCombatDamageToAPlayerAttachedTriggeredAbility(final DealsCombatDamageToAPlayerAttachedTriggeredAbility ability) {
+    public DealsDamageToAPlayerAttachedTriggeredAbility(final DealsDamageToAPlayerAttachedTriggeredAbility ability) {
         super(ability);
         this.setFixedTargetPointer = ability.setFixedTargetPointer;
         this.attachedDescription = ability.attachedDescription;
+        this.onlyCombat = ability.onlyCombat;
     }
 
     @Override
-    public DealsCombatDamageToAPlayerAttachedTriggeredAbility copy() {
-        return new DealsCombatDamageToAPlayerAttachedTriggeredAbility(this);
+    public DealsDamageToAPlayerAttachedTriggeredAbility copy() {
+        return new DealsDamageToAPlayerAttachedTriggeredAbility(this);
     }
 
     @Override
@@ -42,7 +48,8 @@ public class DealsCombatDamageToAPlayerAttachedTriggeredAbility extends Triggere
         if (event instanceof DamagedPlayerEvent) {
             DamagedPlayerEvent damageEvent = (DamagedPlayerEvent) event;
             Permanent p = game.getPermanent(event.getSourceId());
-            if (damageEvent.isCombatDamage() && p != null && p.getAttachments().contains(this.getSourceId())) {
+            if ((!onlyCombat || damageEvent.isCombatDamage())
+                    && p != null && p.getAttachments().contains(this.getSourceId())) {
                 if (setFixedTargetPointer) {
                     for (Effect effect : this.getEffects()) {
                         effect.setTargetPointer(new FixedTarget(event.getPlayerId()));
@@ -56,6 +63,12 @@ public class DealsCombatDamageToAPlayerAttachedTriggeredAbility extends Triggere
 
     @Override
     public String getRule() {
-        return "Whenever " + attachedDescription + " creature deals combat damage to a player, " + super.getRule();
+        StringBuilder sb = new StringBuilder("Whenever ").append(attachedDescription);
+        sb.append(" creature deals");
+        if (!onlyCombat) {
+            sb.append(" combat");
+        }
+        sb.append(" damage to a player, ").append(super.getRule());
+        return  sb.toString();
     }
 }
