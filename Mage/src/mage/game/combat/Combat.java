@@ -29,13 +29,20 @@
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.*;
-import mage.constants.Outcome;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -193,7 +200,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-        game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
+        game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(" creatures").toString());
     }
 
     protected void checkAttackRequirements(Player player, Game game) {
@@ -290,6 +297,31 @@ public class Combat implements Serializable, Copyable<Combat> {
                     choose = !checkBlockRequirementsAfter(defender, defender, game);
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+
+                // add info about attacker blocked by blocker to the game log
+                for (CombatGroup group :this.getGroups()) {
+                    StringBuilder sb = new StringBuilder();
+                    for(UUID attackingCreatureId : group.getAttackers()) {
+                        Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                        if (attackingCreature != null) {
+                            sb.append(attackingCreature.getName()).append(" ");
+                        }
+                    }
+                    if (group.getBlockers().size() > 0) {
+                        sb.append("blocked by ");
+                        for(UUID blockingCreatureId : group.getBlockers()) {
+                            Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                            if (blockingCreature != null) {
+                                sb.append(blockingCreature.getName()).append(" ");
+                            }
+                        }
+
+                    } else{
+                        sb.append("unblocked");
+                    }
+                    game.informPlayers(sb.toString());
+                }
+
             }
             TraceUtil.traceCombatIfNeeded(game, this);
         }
