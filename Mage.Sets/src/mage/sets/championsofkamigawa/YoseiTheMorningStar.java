@@ -58,6 +58,7 @@ public class YoseiTheMorningStar extends CardImpl<YoseiTheMorningStar> {
     public YoseiTheMorningStar(UUID ownerId) {
         super(ownerId, 50, "Yosei, the Morning Star", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{W}{W}");
         this.expansionSetCode = "CHK";
+        this.supertype.add("Legendary");
         this.subtype.add("Dragon");
         this.subtype.add("Spirit");
         this.color.setWhite(true);
