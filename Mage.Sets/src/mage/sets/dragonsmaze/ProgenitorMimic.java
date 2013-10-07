@@ -52,7 +52,6 @@ import mage.filter.predicate.permanent.TokenPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.sets.tokens.EmptyToken;
-import mage.util.CardUtil;
 import mage.util.functions.ApplyToPermanent;
 
 /**
