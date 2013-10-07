@@ -78,6 +78,7 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl<LoseCreat
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
+                        permanent.getSubtype().clear();
                     }
                     break;
             }

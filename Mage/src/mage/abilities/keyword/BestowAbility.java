@@ -167,16 +167,18 @@ class BestowTypeChangingEffect extends ContinuousEffectImpl<BestowTypeChangingEf
         if (permanent != null) {
             switch (layer) {
                 case TypeChangingEffects_4:
-                    if (permanent.getAttachedTo() == null) {
-                        if (permanent.getSubtype().contains("Aura")) {
-                            permanent.getSubtype().remove("Aura");
-                        }
-                    } else {
-                        if (sublayer == SubLayer.NA) {
+                    if (sublayer == SubLayer.NA) {
+                        if (permanent.getAttachedTo() == null) {
+                            if (permanent.getSubtype().contains("Aura")) {
+                                permanent.getSubtype().remove("Aura");
+                            }
+                        } else {
                             permanent.getCardType().remove(CardType.CREATURE);
-                        }
-                        if (!permanent.getSubtype().contains("Aura")) {
-                            permanent.getSubtype().add("Aura");
+                            permanent.getSubtype().clear();
+                            if (!permanent.getSubtype().contains("Aura")) {
+
+                                permanent.getSubtype().add("Aura");
+                            }
                         }
                     }
                     break;

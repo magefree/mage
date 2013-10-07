@@ -48,7 +48,6 @@ import mage.constants.ManaType;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
-import mage.game.permanent.token.Token;
 import mage.target.common.TargetControlledCreaturePermanent;
 
 /**
