@@ -94,6 +94,10 @@ public class ConfigSettings {
     public String getUserNamePattern() {
         return config.getServer().getUserNamePattern();
     }
+    
+    public String getMaxAiOpponents() {
+        return config.getServer().getMaxAiOpponents();
+    }
 
     public List<Plugin> getPlayerTypes() {
         return config.getPlayerTypes().getPlayerType();

@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
+import mage.server.util.ConfigSettings;
 
 /**
  *
@@ -144,11 +145,34 @@ public class MageServerImpl implements MageServer {
         return executeWithResult("createTournamentTable", sessionId, new ActionWithTableViewResult() {
             @Override
             public TableView execute() throws MageException {
-                UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
-                TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
-                logger.info("Tournament table " + table.getTableId() + " created");
-                LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
-                return table;
+                try {
+                    UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
+                    // check AI players max
+                    String maxAiOpponents = ConfigSettings.getInstance().getMaxAiOpponents();
+                    if (maxAiOpponents != null) {
+                        int max = Integer.parseInt(maxAiOpponents);
+                        int aiPlayers = 0;
+                        for (String playerType : options.getPlayerTypes()) {
+                            if (!playerType.equals("Human")) {
+                                aiPlayers++;
+                            }
+                        }
+                        if (aiPlayers > max) {
+                            User user = UserManager.getInstance().getUser(userId);
+                            if (user != null) {
+                                user.showUserMessage("Create tournament", "It's only allowed to use a maximum of " + max + " AI players.");
+                            }
+                            throw new MageException("No message");
+                        }
+                    }
+                    TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
+                    logger.info("Tournament table " + table.getTableId() + " created");
+                    LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
+                    return table;
+                } catch (Exception ex) {
+                    handleException(ex);
+                }
+                return null;
             }
         });
     }
@@ -816,8 +840,10 @@ public class MageServerImpl implements MageServer {
      }
 
     public void handleException(Exception ex) throws MageException {
-        logger.fatal("", ex);
-        throw new MageException("Server error: " + ex.getMessage());
+        if (!ex.getMessage().equals("No message")) {
+            logger.fatal("", ex);
+            throw new MageException("Server error: " + ex.getMessage());
+        }
     }
 
     @Override

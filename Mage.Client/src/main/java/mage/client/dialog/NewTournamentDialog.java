@@ -394,7 +394,7 @@ public class NewTournamentDialog extends MageDialog {
 
         table = session.createTournamentTable(roomId, tOptions);
         if (table == null) {
-            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error creating table.", "Error", JOptionPane.ERROR_MESSAGE);
+            // message must be send by server!
             return;
         }
         if (session.joinTournamentTable(roomId, table.getTableId(), this.txtPlayer1Name.getText(), "Human", 1)) {

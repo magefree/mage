@@ -78,8 +78,9 @@ public class PlayerFactory {
     }
 
     public void addPlayerType(String name, Class playerType) {
-        if (playerType != null)
+        if (playerType != null) {
             this.playerTypes.put(name, playerType);
+        }
     }
 
 }
