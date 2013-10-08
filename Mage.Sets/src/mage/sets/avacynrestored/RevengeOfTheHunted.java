@@ -91,7 +91,7 @@ class RevengeOfTheHuntedEffect extends RequirementEffect<RevengeOfTheHuntedEffec
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return true;
+        return permanent.canBlock(source.getFirstTarget(), game);
     }
 
     @Override

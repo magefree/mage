@@ -60,6 +60,10 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect<MustBeBl
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment != null && attachment.getAttachedTo() != null) {
+            return permanent.canBlock(attachment.getAttachedTo(), game);
+        }
         return true;
     }
 

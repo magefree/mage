@@ -96,7 +96,10 @@ class GrapplingHookEffect extends RequirementEffect<GrapplingHookEffect> {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getFirstTarget())) {
-            return true;
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                return permanent.canBlock(equipment.getAttachedTo(), game);
+            }
         }
         return false;
     }

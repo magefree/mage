@@ -374,7 +374,7 @@ public class Combat implements Serializable, Copyable<Combat> {
          * and the requirement, so that's the only option.
          */
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
-            if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
+                if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                     RequirementEffect effect = (RequirementEffect)entry.getKey();
                     if (effect.mustBlock(game)) {
@@ -400,7 +400,7 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
-        // Get one time a list of all opponents in range
+        // Get once a list of all opponents in range
         Set<UUID> opponents = game.getOpponents(attackerId);
         //20101001 - 509.1c
         // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet

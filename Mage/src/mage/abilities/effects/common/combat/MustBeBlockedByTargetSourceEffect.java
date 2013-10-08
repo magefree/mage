@@ -56,9 +56,11 @@ public class MustBeBlockedByTargetSourceEffect extends RequirementEffect<MustBeB
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getFirstTarget());
-        if (creature != null && creature.getId().equals(permanent.getId())) {
-            return true;
+        if (permanent.getId().equals(source.getFirstTarget())) {
+            Permanent blocker = game.getPermanent(source.getFirstTarget());
+            if (blocker != null && blocker.canBlock(source.getSourceId(), game)) {
+                return true;
+            }
         }
         return false;
     }

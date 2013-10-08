@@ -869,6 +869,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
+        // controller of attacking permanent must be an opponent
+        if (!game.getOpponents(this.getControllerId()).contains(attacker.getControllerId())) {
+            return false;
+        }
         //20101001 - 509.1b
         for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = (RestrictionEffect)entry.getKey();
