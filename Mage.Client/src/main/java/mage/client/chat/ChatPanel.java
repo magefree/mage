@@ -427,7 +427,7 @@ class TableModel extends AbstractTableModel {
             boolean update;
             int size = players.size();
             List<String> list = new ArrayList<String>(players);
-            Collections.sort(list);
+            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
             if (size != this.players.size()) {
                 update = true;
             } else {
