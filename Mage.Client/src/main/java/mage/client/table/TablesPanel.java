@@ -799,7 +799,7 @@ class UpdateTablesTask extends SwingWorker<Void, Collection<TableView>> {
             if (tables != null) {
                 this.publish(tables);
             }
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         }
         return null;
     }
