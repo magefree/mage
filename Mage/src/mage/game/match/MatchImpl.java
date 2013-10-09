@@ -104,7 +104,7 @@ public abstract class MatchImpl implements Match {
 
     @Override
     public void startMatch() throws GameException {
-
+        this.startTime = new Date();
     }
 
     @Override

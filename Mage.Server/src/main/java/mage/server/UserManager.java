@@ -105,7 +105,7 @@ public class UserManager {
             ChatManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
-                logger.info(new StringBuilder("User ").append(user.getName()).append("disconnected  id:").append(userId).toString());
+                logger.info(new StringBuilder("User ").append(user.getName()).append(" disconnected  id:").append(userId).toString());
                 users.get(userId).setSessionId("");
                 ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
             }
