@@ -57,15 +57,15 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
         switch (controller) {
             case YOU:
                 PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",playerId);
-                if (watcher != null && watcher.damageSources.contains(object.getId())) {
-                    return true;
+                if (watcher != null ) {
+                    return watcher.hasSourceDoneDamage(object.getId(), game);
                 }
                 break;
             case OPPONENT:
                 for (UUID opponentId : game.getOpponents(playerId)) {
                     watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",opponentId);
-                    if (watcher != null && watcher.damageSources.contains(object.getId())) {
-                        return true;
+                    if (watcher != null ) {
+                        return watcher.hasSourceDoneDamage(object.getId(), game);
                     }
                 }
                 break;
@@ -75,8 +75,8 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
                     for (UUID notYouId : you.getInRange()) {
                         if (!notYouId.equals(playerId)) {
                             watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",notYouId);
-                            if (watcher != null && watcher.damageSources.contains(object.getId())) {
-                                return true;
+                            if (watcher != null ) {
+                                return watcher.hasSourceDoneDamage(object.getId(), game);
                             }
                         }
                     }
@@ -87,8 +87,8 @@ public class DamagedPlayerThisTurnPredicate implements ObjectPlayerPredicate<Obj
                 if (you != null) {
                     for (UUID anyId : you.getInRange()) {
                         watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",anyId);
-                        if (watcher != null && watcher.damageSources.contains(object.getId())) {
-                            return true;
+                        if (watcher != null ) {
+                            return watcher.hasSourceDoneDamage(object.getId(), game);
                         }
                     }
                 }

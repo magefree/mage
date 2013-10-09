@@ -45,8 +45,8 @@ public class DealtDamageToAnOpponent implements Condition {
     public boolean apply(Game game, Ability source) {
         for (UUID opponentId: game.getOpponents(source.getControllerId())) {
             PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", opponentId);
-            if (watcher != null && watcher.damageSources.contains(source.getSourceId())) {
-                        return true;
+            if (watcher != null) {
+                return watcher.hasSourceDoneDamage(source.getSourceId(), game);
             }
         }
         return false;
