@@ -248,7 +248,7 @@ public class GameController implements GameCallback {
             @Override
             public void execute() throws MageException {
                 game.concede(initPlayerId);
-                logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
+                logger.debug("Game timeout for player: " + initPlayerId + ". Conceding.");
             }
         });
         timers.put(playerId, timer);
@@ -267,7 +267,7 @@ public class GameController implements GameCallback {
         User user = UserManager.getInstance().getUser(userId);
         gameSession.setUserData(user.getUserData());
         user.addGame(playerId, gameSession);
-        logger.info(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
+        logger.debug(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
         ChatManager.getInstance().broadcast(chatId, "", new StringBuilder(game.getPlayer(playerId).getName()).append(" has joined the game").toString(), MessageColor.BLACK);
         checkStart();
     }
@@ -694,7 +694,7 @@ public class GameController implements GameCallback {
             finally {
                 output.close();
             }
-            logger.info("Saved game:" + game.getId());
+            logger.debug("Saved game:" + game.getId());
         }
         catch(IOException ex) {
             logger.fatal("Cannot save game.", ex);

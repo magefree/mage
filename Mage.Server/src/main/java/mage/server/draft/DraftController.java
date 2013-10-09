@@ -110,7 +110,7 @@ public class DraftController {
         for (DraftPlayer player: draft.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
-                logger.info("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
+                logger.debug("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
             }
         }
         checkStart();
@@ -125,7 +125,7 @@ public class DraftController {
         DraftSession draftSession = new DraftSession(draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
         UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
-        logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
+        logger.debug("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
         draft.getPlayer(playerId).setJoined();
         checkStart();
     }
@@ -198,7 +198,7 @@ public class DraftController {
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             draft.autoPick(userPlayerMap.get(userId));
-            logger.info("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
+            logger.debug("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
         }
     }
 

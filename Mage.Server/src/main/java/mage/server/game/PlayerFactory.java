@@ -61,7 +61,7 @@ public class PlayerFactory {
             if (playerTypeClass != null) {
                 con = playerTypeClass.getConstructor(new Class[]{String.class, RangeOfInfluence.class, int.class});
                 player = (Player)con.newInstance(new Object[] {name, range, skill});
-                logger.info("Player created: " + name + "-" + player.getId().toString());
+                logger.debug("Player created: " + name + "-" + player.getId().toString());
                 return player;
             }
             else {

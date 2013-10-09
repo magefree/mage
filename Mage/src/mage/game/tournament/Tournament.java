@@ -77,4 +77,7 @@ public interface Tournament {
     // tournament times
     Date getStartTime();
     Date getEndTime();
+    // tournament type
+    TournamentType getTournamentType(); 
+    void setTournamentType(TournamentType tournamentType);
 }

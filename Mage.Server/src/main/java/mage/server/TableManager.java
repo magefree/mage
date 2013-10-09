@@ -309,7 +309,7 @@ public class TableManager {
     }
 
     private void checkExpired() {
-        logger.info("Table expire checking...");
+        logger.debug("Table expire checking...");
 
         Date now = new Date();
         List<UUID> toRemove = new ArrayList<UUID>();
@@ -318,7 +318,7 @@ public class TableManager {
                 // remove all not finished tables created more than expire_time ago
                 long diff = (now.getTime() - table.getCreateTime().getTime()) / EXPIRE_TIME_UNIT_VALUE;
                 if (diff >= EXPIRE_TIME) {
-                    logger.info("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
+                    logger.warn("Table expired: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
                     toRemove.add(table.getId());
                 }
                 // remove immediately non tournament tables with no human players
@@ -326,7 +326,7 @@ public class TableManager {
                     boolean canBeRemoved = true;
                     for (MatchPlayer matchPlayer :table.getMatch().getPlayers()) {
                         Player player = matchPlayer.getPlayer();
-                        if (player != null && player.isHuman()) {
+                        if (player != null && player.isHuman() && !player.hasLeft()) {
                             canBeRemoved = false;
                         }
                         // tournament sub tables may not be removed as long the tournament is not finished
@@ -335,7 +335,7 @@ public class TableManager {
                         }
                     }
                     if (canBeRemoved) {
-                        logger.info("Table with no human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
+                        logger.warn("Table with no active human player: id = " + table.getId() + ", created_by=" + table.getControllerName() + ". Removing...");
                         toRemove.add(table.getId());
                     }
                 }

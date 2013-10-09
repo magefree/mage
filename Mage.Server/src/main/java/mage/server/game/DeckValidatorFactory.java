@@ -63,7 +63,7 @@ public class DeckValidatorFactory {
             logger.fatal("DeckValidatorFactory error", ex);
             return null;
         }
-        logger.info("Deck validator created: " + validator.getName());
+        logger.debug("Deck validator created: " + validator.getName());
 
         return validator;
     }

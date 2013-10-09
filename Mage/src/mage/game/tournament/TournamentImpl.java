@@ -52,6 +52,7 @@ public abstract class TournamentImpl implements Tournament {
     protected static Random rnd = new Random();
     protected String matchName;
     protected TournamentOptions options;
+    protected TournamentType tournamentType;
     protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
     protected String setsInfoShort;
 
@@ -330,6 +331,16 @@ public abstract class TournamentImpl implements Tournament {
             return null;
         }
         return new Date(endTime.getTime());
+    }
+
+    @Override
+    public TournamentType getTournamentType() {
+        return tournamentType;
+    }
+
+    @Override
+    public void setTournamentType(TournamentType tournamentType) {
+        this.tournamentType = tournamentType;
     }
 
 }

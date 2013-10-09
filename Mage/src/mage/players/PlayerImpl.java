@@ -91,6 +91,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
@@ -2027,5 +2028,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public boolean hasReachedNextTurnAfterLeaving() {
         return reachedNextTurnAfterLeaving;
     }
-
+    
+    @Override
+    public boolean canJoinTable(Table table) {
+        return true;
+    }
 }

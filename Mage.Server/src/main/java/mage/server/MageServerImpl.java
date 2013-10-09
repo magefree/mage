@@ -28,6 +28,11 @@
 
 package mage.server;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.ExecutorService;
 import mage.MageException;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -44,25 +49,36 @@ import mage.interfaces.ServerState;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.MageVersionException;
 import mage.server.draft.DraftManager;
-import mage.server.game.*;
+import mage.server.game.DeckValidatorFactory;
+import mage.server.game.GameFactory;
+import mage.server.game.GameManager;
+import mage.server.game.GamesRoom;
+import mage.server.game.GamesRoomManager;
+import mage.server.game.PlayerFactory;
+import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.FeedbackServiceImpl;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
+import mage.server.util.ConfigSettings;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import mage.utils.*;
-import mage.view.*;
+import mage.utils.ActionWithBooleanResult;
+import mage.utils.ActionWithNullNegativeResult;
+import mage.utils.ActionWithTableViewResult;
+import mage.utils.CompressUtil;
+import mage.utils.MageVersion;
+import mage.view.ChatMessage;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.DraftPickView;
+import mage.view.GameView;
+import mage.view.MatchView;
+import mage.view.TableView;
+import mage.view.TournamentView;
+import mage.view.UserDataView;
+import mage.view.UserView;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import mage.server.util.ConfigSettings;
 
 /**
  *
@@ -133,7 +149,7 @@ public class MageServerImpl implements MageServer {
             public TableView execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTable(userId, options);
-                logger.info("Table " + table.getTableId() + " created");
+                logger.debug("Table " + table.getTableId() + " created");
                 LogServiceImpl.instance.log(LogKeys.KEY_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                 return table;
             }
@@ -166,7 +182,7 @@ public class MageServerImpl implements MageServer {
                         }
                     }
                     TableView table = GamesRoomManager.getInstance().getRoom(roomId).createTournamentTable(userId, options);
-                    logger.info("Tournament table " + table.getTableId() + " created");
+                    logger.debug("Tournament table " + table.getTableId() + " created");
                     LogServiceImpl.instance.log(LogKeys.KEY_TOURNAMENT_TABLE_CREATED, sessionId, userId.toString(), table.getTableId().toString());
                     return table;
                 } catch (Exception ex) {
@@ -195,7 +211,7 @@ public class MageServerImpl implements MageServer {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTable(userId, tableId, name, playerType, skill, deckList);
-                logger.info("Session " + sessionId + " joined table " + tableId);
+                logger.debug("Session " + sessionId + " joined table " + tableId);
                 return ret;
             }
         });
@@ -208,7 +224,7 @@ public class MageServerImpl implements MageServer {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = GamesRoomManager.getInstance().getRoom(roomId).joinTournamentTable(userId, tableId, name, playerType, skill);
-                logger.info("Session " + sessionId + " joined table " + tableId);
+                logger.debug("Session " + sessionId + " joined table " + tableId);
                 return ret;
             }
         });
@@ -221,7 +237,7 @@ public class MageServerImpl implements MageServer {
             public Boolean execute() throws MageException {
                 UUID userId = SessionManager.getInstance().getSession(sessionId).getUserId();
                 boolean ret = TableManager.getInstance().submitDeck(userId, tableId, deckList);
-                logger.info("Session " + sessionId + " submitted deck");
+                logger.debug("Session " + sessionId + " submitted deck");
                 return ret;
             }
         });
@@ -318,7 +334,7 @@ public class MageServerImpl implements MageServer {
             @Override
             public void execute() {
                 SessionManager.getInstance().disconnect(sessionId, true);
-                logger.info("Client deregistered ...");
+                logger.debug("Client deregistered ...");
             }
         });
     }

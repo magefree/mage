@@ -401,7 +401,7 @@ public class NewTournamentDialog extends MageDialog {
             for (TournamentPlayerPanel player: players) {
                 if (!player.getPlayerType().toString().equals("Human")) {
                     if (!player.joinTournamentTable(roomId, table.getTableId())) {
-                        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining tournament.", "Error", JOptionPane.ERROR_MESSAGE);
+                        // error message must be send by sever
                         session.removeTable(roomId, table.getTableId());
                         table = null;
                         return;

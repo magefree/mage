@@ -61,7 +61,7 @@ public class ChatSession {
             String userName = user.getName();
             clients.put(userId, userName);
             broadcast(userName, " has joined", MessageColor.BLUE);
-            logger.info(userName + " joined chat " + chatId);
+            logger.debug(userName + " joined chat " + chatId);
         }
     }
 
@@ -81,7 +81,7 @@ public class ChatSession {
                      message = " has left chat";
             }
             broadcast(userName, message, MessageColor.BLUE);
-            logger.info(userName + message + " " + chatId);
+            logger.debug(userName + message + " " + chatId);
         }
     }
 

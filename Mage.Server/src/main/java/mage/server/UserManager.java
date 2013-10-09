@@ -104,7 +104,8 @@ public class UserManager {
         if (userId != null) {
             ChatManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
             if (users.containsKey(userId)) {
-                logger.info("user disconnected " + userId);
+                User user = users.get(userId);
+                logger.info(new StringBuilder("User ").append(user.getName()).append("disconnected  id:").append(userId).toString());
                 users.get(userId).setSessionId("");
                 ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
             }
@@ -122,7 +123,7 @@ public class UserManager {
         if (users.containsKey(userId)) {
             logger.info("Remove user " + users.get(userId).getName() + ": " + userId + " Reason: " + reason.toString());
             ChatManager.getInstance().removeUser(userId, reason);
-            ChatManager.getInstance().broadcast(userId, "has disconnected", MessageColor.BLACK);
+            ChatManager.getInstance().broadcast(userId, new StringBuilder("has disconnected (").append(reason.toString()).append(")").toString(), MessageColor.BLACK);
             users.get(userId).kill(reason);
             users.remove(userId);
         }

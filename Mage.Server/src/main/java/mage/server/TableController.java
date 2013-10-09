@@ -28,7 +28,6 @@
 
 package mage.server;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -36,15 +35,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import mage.constants.RangeOfInfluence;
-import mage.constants.TableState;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
+import mage.constants.RangeOfInfluence;
+import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.GameOptions;
-import mage.game.GameState;
 import mage.game.Seat;
 import mage.game.Table;
 import mage.game.draft.Draft;
@@ -57,18 +55,20 @@ import mage.game.match.MatchPlayer;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentOptions;
 import mage.game.tournament.TournamentPlayer;
-import mage.interfaces.callback.ClientCallback;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
-import mage.server.game.*;
+import mage.server.game.DeckValidatorFactory;
+import mage.server.game.GameFactory;
+import mage.server.game.GameManager;
+import mage.server.game.PlayerFactory;
+import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
 import mage.server.tournament.TournamentManager;
 import mage.server.util.ServerMessagesUtil;
 import mage.server.util.ThreadExecutor;
-import mage.view.GameEndView;
 import org.apache.log4j.Logger;
 
 
@@ -164,8 +164,12 @@ public class TableController {
                 logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
                 return false;
             }
+            if (!player.canJoinTable(table)) {
+                user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+                return false;
+            }
             user.addTable(player.getId(), table);
-            logger.info("player joined " + player.getId());
+            logger.debug("player joined " + player.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
                 user.joinedTable(table.getRoomId(), table.getId(), true);
@@ -227,10 +231,14 @@ public class TableController {
             user.showUserMessage("Join Table",message);
             return false;
         }
+        if (!player.canJoinTable(table)) {
+            user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+            return false;
+        }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
         user.addTable(player.getId(), table);
-        logger.info("player joined " + player.getId());
+        logger.debug("player joined " + player.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
             user.joinedTable(table.getRoomId(), table.getId(), false);
@@ -348,7 +356,7 @@ public class TableController {
             player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
         }
         if (player != null) {
-            logger.info("Player created " + player.getId());
+            logger.debug("Player created " + player.getId());
         }
         return player;
     }

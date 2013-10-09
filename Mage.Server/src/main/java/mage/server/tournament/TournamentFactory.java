@@ -67,6 +67,7 @@ public class TournamentFactory {
             con = tournaments.get(tournamentType).getConstructor(new Class[]{TournamentOptions.class});
             tournament = con.newInstance(new Object[] {options});
             // transfer set information, create short info string for included sets
+            tournament.setTournamentType(tournamentTypes.get(tournamentType));
             Map<String,Integer> setInfo = new LinkedHashMap<String,Integer>();
             for (String setCode: options.getLimitedOptions().getSetCodes()) {
                 tournament.getSets().add(Sets.findSet(setCode));
@@ -82,7 +83,7 @@ public class TournamentFactory {
             logger.fatal("TournamentFactory error ", ex);
             return null;
         }
-        logger.info("Tournament created: " + tournamentType); // + game.getId().toString());
+        logger.debug("Tournament created: " + tournamentType); // + game.getId().toString());
 
         return tournament;
     }

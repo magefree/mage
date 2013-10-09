@@ -136,7 +136,7 @@ public class TournamentController {
         for (TournamentPlayer player: tournament.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
-                logger.info("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
+                logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
                 ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
             }
         }
@@ -150,7 +150,7 @@ public class TournamentController {
         UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
         TournamentPlayer player = tournament.getPlayer(playerId);
         player.setJoined();
-        logger.info("player " + playerId + " has joined tournament " + tournament.getId());
+        logger.debug("player " + playerId + " has joined tournament " + tournament.getId());
         ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
         checkStart();
     }
