@@ -68,7 +68,7 @@ public class FireWhip extends CardImpl<FireWhip> {
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
         
-        // Enchanted creature has "{tap}: This creature deals 1 damage to target creature or player."
+        // Enchanted creature has "{t}: This creature deals 1 damage to target creature or player."
         Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DamageTargetEffect(1), new TapSourceCost());
         ability1.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(ability1, AttachmentType.AURA, Duration.WhileOnBattlefield, "Enchanted creature has \"{tap}: This creature deals 1 damage to target creature or player.\"")));

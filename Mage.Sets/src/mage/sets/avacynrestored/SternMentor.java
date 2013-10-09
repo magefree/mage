@@ -63,7 +63,7 @@ public class SternMentor extends CardImpl<SternMentor> {
         // Soulbond
         this.addAbility(SoulbondAbility.getInstance());
 
-        // As long as Stern Mentor is paired with another creature, each of those creatures has "{tap}: Target player puts the top two cards of his or her library into his or her graveyard."
+        // As long as Stern Mentor is paired with another creature, each of those creatures has "{t}: Target player puts the top two cards of his or her library into his or her graveyard."
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutLibraryIntoGraveTargetEffect(2), new TapSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityPairedEffect(ability, ruleText)));

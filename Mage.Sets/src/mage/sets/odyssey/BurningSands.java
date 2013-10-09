@@ -38,8 +38,6 @@ import mage.constants.Zone;
 import mage.filter.common.FilterLandPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-import mage.target.Target;
-import mage.target.TargetPlayer;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -48,7 +46,7 @@ import mage.target.targetpointer.FixedTarget;
  */
 public class BurningSands extends CardImpl<BurningSands> {
 
-    private static final FilterLandPermanent filter = new FilterLandPermanent("creature an opponent controls");
+    private static final FilterLandPermanent filter = new FilterLandPermanent("a land");
 
     public BurningSands(UUID ownerId) {
         super(ownerId, 180, "Burning Sands", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{3}{R}{R}");
@@ -57,7 +55,7 @@ public class BurningSands extends CardImpl<BurningSands> {
         this.color.setRed(true);
 
         // Whenever a creature dies, that creature's controller sacrifices a land.
-        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller sacrifices a land"), false, false, true));
+        this.addAbility(new DiesCreatureTriggeredAbility(new SacrificeEffect(filter, 1, "that creature's controller"), false, false, true));
     }
 
     @Override
