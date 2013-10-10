@@ -28,9 +28,7 @@
 
 package mage.tournament;
 
-import mage.constants.TournamentPlayerState;
 import mage.game.tournament.TournamentOptions;
-import mage.game.tournament.TournamentPlayer;
 import mage.game.tournament.TournamentSingleElimination;
 
 /**

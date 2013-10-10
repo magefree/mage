@@ -17,16 +17,17 @@
     <modules>
         <module>Mage.Deck.Constructed</module>
         <module>Mage.Deck.Limited</module>
-		<module>Mage.Game.CommanderDuel</module>
+	<module>Mage.Game.CommanderDuel</module>
         <module>Mage.Game.FreeForAll</module>
         <module>Mage.Game.TwoPlayerDuel</module>
         <module>Mage.Player.AI</module>
         <module>Mage.Player.AIMinimax</module>
         <module>Mage.Player.AI.MA</module>
         <module>Mage.Player.AIMCTS</module>
-		<module>Mage.Player.AI.DraftBot</module>
+        <module>Mage.Player.AI.DraftBot</module>
         <module>Mage.Player.Human</module>
         <module>Mage.Tournament.BoosterDraft</module>
+        <module>Mage.Tournament.Constructed</module>
         <module>Mage.Tournament.Sealed</module>
   </modules>
 
