@@ -29,6 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.Condition;
@@ -39,6 +40,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.WatcherScope;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -95,8 +98,13 @@ class CastBlueSpellThisTurnCondition implements Condition {
 }
 
 class DreamThiefWatcher extends WatcherImpl<DreamThiefWatcher> {
-    
-    UUID cardId;
+
+    private static final FilterSpell filter = new FilterSpell();
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
+    }
+
+    private UUID cardId;
 
     public DreamThiefWatcher(UUID cardId) {
         super("DreamThiefWatcher", WatcherScope.PLAYER);
@@ -115,15 +123,13 @@ class DreamThiefWatcher extends WatcherImpl<DreamThiefWatcher> {
 
     @Override
     public void watch(GameEvent event, Game game) {
-        if (condition == true) //no need to check - condition has already occured
-        {
+        if (condition == true) { //no need to check - condition has already occured
             return;
         }
         if (event.getType() == EventType.SPELL_CAST
                 && controllerId == event.getPlayerId()) {
             Spell spell = game.getStack().getSpell(event.getTargetId());
-            if (spell.getColor().isBlue()
-                    && spell.getSourceId() != cardId) {
+            if (!spell.getSourceId().equals(cardId) && filter.match(spell, game)) {
                 condition = true;
             }
         }
