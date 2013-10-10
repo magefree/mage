@@ -28,21 +28,15 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
-import mage.players.Player;
 
 /**
  *
@@ -58,8 +52,7 @@ public class IdleThoughts extends CardImpl<IdleThoughts> {
 
         // {2}: Draw a card if you have no cards in hand.
         this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
-                new DrawCardControllerEffect(2), new CardsInHandCondition(), 
-                "Draw a card if you have no cards in hand"), new ManaCostsImpl("{{2}}")));
+                new DrawCardControllerEffect(2), new CardsInHandCondition(), "Draw a card if you have no cards in hand"), new ManaCostsImpl("{2}")));
     }
 
     public IdleThoughts(final IdleThoughts card) {
