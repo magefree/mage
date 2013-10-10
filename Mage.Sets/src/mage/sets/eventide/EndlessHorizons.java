@@ -103,17 +103,21 @@ class EndlessHorizonsEffect extends SearchEffect<EndlessHorizonsEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        if (you != null && you.searchLibrary(target, game)) {
-            if (target.getTargets().size() > 0) {
-                for (UUID cardId : target.getTargets()) {
-                    Card card = you.getLibrary().remove(cardId, game);
-                    if (card != null) {
-                        card.moveToExile(CardUtil.getCardExileZoneId(game, source), "Endless Horizons", source.getSourceId(), game);
+        if (you != null) {
+            if (you.searchLibrary(target, game)) {
+                UUID exileZone = CardUtil.getCardExileZoneId(game, source);
+                if (target.getTargets().size() > 0) {
+                    for (UUID cardId : target.getTargets()) {
+                        Card card = you.getLibrary().getCard(cardId, game);
+                        if (card != null) {
+                            card.moveToExile(exileZone, "Endless Horizons", source.getSourceId(), game);
+                        }
                     }
                 }
-                you.shuffleLibrary(game);
-                return true;
             }
+            you.shuffleLibrary(game);
+            return true;
+
         }
         return false;
     }
@@ -140,15 +144,13 @@ class EndlessHorizonsEffect extends SearchEffect<EndlessHorizonsEffect> {
             ExileZone exZone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
             if (exZone != null) {
                 for (Card card : exZone.getCards(game)) {
-                    if (card != null
-                            && card.getOwnerId() == source.getControllerId()) {
-                        if (card.moveToZone(Zone.HAND, source.getId(), game, false)) {
-                            return true;
-                        }
+                    if (card.getOwnerId() == source.getControllerId()) {
+                        card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                        break; // only one
                     }
                 }
             }
-            return false;
+            return true;
         }
     
 }

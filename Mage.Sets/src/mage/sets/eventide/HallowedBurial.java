@@ -35,6 +35,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -83,10 +84,8 @@ class HallowedBurialEffect extends OneShotEffect<HallowedBurialEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(CardType.CREATURE)) {
-            if (creature != null) {
-                creature.moveToZone(Zone.LIBRARY, source.getId(), game, false);
-            }
+        for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getSourceId(), game)) {
+            creature.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false);
         }
         return false;
     }

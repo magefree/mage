@@ -62,9 +62,8 @@ public class KithkinZealot extends CardImpl<KithkinZealot> {
 
         // When Kithkin Zealot enters the battlefield, you gain 1 life for each black and/or red permanent target opponent controls.
         Ability ability = new EntersBattlefieldTriggeredAbility(new KithkinZealotEffect(), false);
-        ability.addTarget(new TargetOpponent());
+        ability.addTarget(new TargetOpponent(true));
         this.addAbility(ability);
-
     }
 
     public KithkinZealot(final KithkinZealot card) {
@@ -78,6 +77,13 @@ public class KithkinZealot extends CardImpl<KithkinZealot> {
 }
 
 class KithkinZealotEffect extends OneShotEffect<KithkinZealotEffect> {
+
+    private static final FilterPermanent filter = new FilterPermanent();
+    static {
+        filter.add(Predicates.or(
+                new ColorPredicate(ObjectColor.BLACK),
+                new ColorPredicate(ObjectColor.RED)));
+    }
 
     public KithkinZealotEffect() {
         super(Outcome.Neutral);
@@ -96,18 +102,12 @@ class KithkinZealotEffect extends OneShotEffect<KithkinZealotEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
-        Player opponent = game.getPlayer(source.getFirstTarget());
-        FilterPermanent filter = new FilterPermanent();
-        filter.add(Predicates.or(
-                new ColorPredicate(ObjectColor.BLACK),
-                new ColorPredicate(ObjectColor.RED)));
-        if (opponent != null) {
+        Player opponent = game.getPlayer(targetPointer.getFirst(game, source));
+
+        if (you!= null && opponent != null) {
             int amount = game.getBattlefield().countAll(filter, opponent.getId(), game);
-            if (you != null) {
-                you.gainLife(amount, game);
-                return true;
-            }
-            
+            you.gainLife(amount, game);
+            return true;            
         }
         return false;
     }

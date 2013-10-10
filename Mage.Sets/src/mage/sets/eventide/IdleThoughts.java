@@ -33,7 +33,9 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.CardsInHandCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
@@ -55,7 +57,9 @@ public class IdleThoughts extends CardImpl<IdleThoughts> {
         this.color.setBlue(true);
 
         // {2}: Draw a card if you have no cards in hand.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new IdleThoughtsEffect(), new ManaCostsImpl("{2}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
+                new DrawCardControllerEffect(2), new CardsInHandCondition(), 
+                "Draw a card if you have no cards in hand"), new ManaCostsImpl("{{2}}")));
     }
 
     public IdleThoughts(final IdleThoughts card) {
@@ -65,34 +69,5 @@ public class IdleThoughts extends CardImpl<IdleThoughts> {
     @Override
     public IdleThoughts copy() {
         return new IdleThoughts(this);
-    }
-}
-
-class IdleThoughtsEffect extends OneShotEffect<IdleThoughtsEffect> {
-
-    public IdleThoughtsEffect() {
-        super(Outcome.Benefit);
-        this.staticText = "Draw a card if you have no cards in hand";
-    }
-
-    public IdleThoughtsEffect(final IdleThoughtsEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public IdleThoughtsEffect copy() {
-        return new IdleThoughtsEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Condition condition = new CardsInHandCondition();
-        Player you = game.getPlayer(source.getControllerId());
-        if (condition.apply(game, source)
-                && you != null) {
-            you.drawCards(1, game);
-            return true;
-        }
-        return false;
     }
 }
