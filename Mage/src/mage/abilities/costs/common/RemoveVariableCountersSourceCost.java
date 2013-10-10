@@ -77,13 +77,17 @@ public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCou
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         Permanent permanent = game.getPermanent(sourceId);
-        Player player = game.getPlayer(permanent.getControllerId());
-        this.amountPaid = player.getAmount(minimalCountersToPay, permanent.getCounters().getCount(name), "Choose X counters to remove", game);
-        if (this.amountPaid >= minimalCountersToPay) {
-            permanent.removeCounters(name, amountPaid, game);
-            this.paid = true;
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                this.amountPaid = player.getAmount(minimalCountersToPay, permanent.getCounters().getCount(name), "Choose X counters to remove", game);
+                if (this.amountPaid >= minimalCountersToPay) {
+                    permanent.removeCounters(name, amountPaid, game);
+                    this.paid = true;
+                }
+                game.informPlayers(new StringBuilder(player.getName()).append(" removes ").append(this.amountPaid).append(" ").append(name).append(" counter from ").append(permanent.getName()).toString());
+            }
         }
-        game.informPlayers(player.getName() + " removes " + this.amountPaid + " " + name + " counter from " + permanent.getName());
         return paid;
     }
 
