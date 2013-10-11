@@ -45,13 +45,16 @@ import mage.game.match.MatchOptions;
 import mage.game.tournament.Tournament;
 import mage.game.tournament.TournamentPairing;
 import mage.game.tournament.TournamentPlayer;
-import mage.players.Player;
 import mage.server.ChatManager;
+import mage.server.TableController;
 import mage.server.TableManager;
+import mage.server.User;
 import mage.server.UserManager;
+import mage.server.draft.DraftManager;
 import mage.server.game.GamesRoomManager;
 import mage.server.util.ThreadExecutor;
 import mage.view.ChatMessage.MessageColor;
+import mage.view.ChatMessage.SoundToPlay;
 import mage.view.TournamentView;
 import org.apache.log4j.Logger;
 
@@ -70,6 +73,8 @@ public class TournamentController {
     private Tournament tournament;
     private ConcurrentHashMap<UUID, UUID> userPlayerMap = new ConcurrentHashMap<UUID, UUID>();
     private ConcurrentHashMap<UUID, TournamentSession> tournamentSessions = new ConcurrentHashMap<UUID, TournamentSession>();
+
+    private boolean abort = false;
 
     public TournamentController(Tournament tournament, ConcurrentHashMap<UUID, UUID> userPlayerMap, UUID tableId) {
         this.userPlayerMap = userPlayerMap;
@@ -93,16 +98,18 @@ public class TournamentController {
                             startDraft(event.getDraft());
                             break;
                         case CONSTRUCT:
-                            construct();
+                            if (!abort) {
+                                construct();
+                            } else {
+                                endTournament();
+                            }
                             break;
                         case START_MATCH:
-                            initTournament(); // set state
-                            startMatch(event.getPair(), event.getMatchOptions());
+                            if (!abort) {
+                                initTournament(); // set state
+                                startMatch(event.getPair(), event.getMatchOptions());
+                            }
                             break;
-//                        case SUBMIT_DECK:
-//                            submitDeck(event.getPlayerId(), event.getDeck());
-//                            break;
-
                         case END:
                             endTournament();
                             break;
@@ -129,7 +136,7 @@ public class TournamentController {
         for (TournamentPlayer player: tournament.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
-                logger.info("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
+                logger.debug("player " + player.getPlayer().getId() + " has joined tournament " + tournament.getId());
                 ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
             }
         }
@@ -143,7 +150,7 @@ public class TournamentController {
         UserManager.getInstance().getUser(userId).addTournament(playerId, tournamentSession);
         TournamentPlayer player = tournament.getPlayer(playerId);
         player.setJoined();
-        logger.info("player " + playerId + " has joined tournament " + tournament.getId());
+        logger.debug("player " + playerId + " has joined tournament " + tournament.getId());
         ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has joined the tournament", MessageColor.BLACK);
         checkStart();
     }
@@ -240,7 +247,7 @@ public class TournamentController {
             TournamentPlayer player = tournament.getPlayer(playerId);
             if (player != null && !player.hasQuit()) {
                 tournamentSessions.get(playerId).submitDeck(deck);
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK);
+                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has submitted his tournament deck", MessageColor.BLACK, true, SoundToPlay.PlayerSubmittedDeck);
             }            
         }
     }
@@ -265,37 +272,57 @@ public class TournamentController {
     public void quit(UUID userId) {
         UUID playerId = userPlayerMap.get(userId);
         if (playerId != null) {
-            TournamentPlayer player = tournament.getPlayer(playerId);
-            if (player != null) {
-                ChatManager.getInstance().broadcast(chatId, "", player.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK);
-                String info;
-                if (tournament.isDoneConstructing()) {
-                    info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+            TournamentPlayer tPlayer = tournament.getPlayer(playerId);
+            if (tPlayer != null) {
+                if (started) {
+                    ChatManager.getInstance().broadcast(chatId, "", tPlayer.getPlayer().getName() + " has quit the tournament", MessageColor.BLACK, true, SoundToPlay.PlayerLeft);
+                    String info;
+                    if (tournament.isDoneConstructing()) {
+                        info = new StringBuilder("during round ").append(tournament.getRounds().size()).toString();
+                    } else {
+                        if (tPlayer.getState().equals(TournamentPlayerState.DRAFTING)) {
+                            info = "during Draft phase";
+                            if (!checkToReplaceDraftPlayerByAi(userId, tPlayer)) {
+                                this.abortTournament();
+                            }
+                        } else if (tPlayer.getState().equals(TournamentPlayerState.CONSTRUCTING)) {
+                            info = "during Construction phase";
+                        } else {
+                            info = "";
+                        }
+                    }
+                    tPlayer.setQuit(info);
+                    tournament.quit(playerId);
                 } else {
-                    info = "during Construction phase";
+                    tournament.leave(playerId);
                 }
-                player.setQuit(info);
-                tournament.quit(playerId);
             }
         }
     }
 
-    public void kill(UUID userId) {
-        quit(userId);
-//        if (userPlayerMap.containsKey(userId)) {
-//            tournamentSessions.get(userPlayerMap.get(userId)).setKilled();
-//            tournamentSessions.remove(userPlayerMap.get(userId));
-//            leave(userId);
-//            userPlayerMap.remove(userId);
-//        }
-    }
+    private boolean checkToReplaceDraftPlayerByAi(UUID userId, TournamentPlayer leavingPlayer) {
 
-    private void leave(UUID userId) {
-        tournament.leave(getPlayerId(userId));
-    }
-
-    private UUID getPlayerId(UUID userId) {
-        return userPlayerMap.get(userId);
+        int humans = 0;
+        for (TournamentPlayer tPlayer :tournament.getPlayers()) {
+            if (tPlayer.getPlayer().isHuman()) {
+                humans++;
+            }
+        }
+        // replace player that quits with draft bot
+        if (humans > 1) {
+            String replacePlayerName = "Draftbot";
+            User user = UserManager.getInstance().getUser(userId);
+            if (user != null) {
+                replacePlayerName = "Draftbot (" + user.getName() + ")";
+            }
+            TableController tableController = TableManager.getInstance().getController(tableId);
+            if (tableController != null) {
+                tableController.replaceDraftPlayer(leavingPlayer.getPlayer(), replacePlayerName, "Computer - draftbot", 5);
+                ChatManager.getInstance().broadcast(chatId, "", leavingPlayer.getPlayer().getName() + " was replaced by draftbot", MessageColor.BLACK, true, null);
+            }
+            return true;
+        }
+        return false;
     }
 
     private UUID getPlayerSessionId(UUID playerId) {
@@ -311,4 +338,8 @@ public class TournamentController {
         return new TournamentView(tournament);
     }
 
+    private void abortTournament() {
+        this.abort = true;
+        DraftManager.getInstance().getController(tableId).abortDraft();
+    }
 }

@@ -112,8 +112,7 @@ class EtherwroughtPageEffect extends OneShotEffect<EtherwroughtPageEffect> {
                 cards.add(card);
                 you.lookAtCards("Etherwrought Page", cards, game);
                 if (you.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
-                    card = you.getLibrary().removeFromTop(game);
-                    return card.moveToZone(Zone.GRAVEYARD, source.getId(), game, false);
+                    return card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
                 return true;
             }

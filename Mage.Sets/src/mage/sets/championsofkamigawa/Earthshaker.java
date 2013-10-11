@@ -33,7 +33,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -63,7 +63,7 @@ public class Earthshaker extends CardImpl<Earthshaker> {
         this.power = new MageInt(4);
         this.toughness = new MageInt(5);
         // Whenever you cast a Spirit or Arcane spell, Earthshaker deals 2 damage to each creature without flying.
-        this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DamageAllEffect(new StaticValue(2) , creatureFilter), filter, false));
     }
 
     public Earthshaker(final Earthshaker card) {

@@ -28,17 +28,14 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.keyword.UnblockableAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.filter.common.FilterControlledCreaturePermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -59,11 +56,7 @@ public class KeymasterRogue extends CardImpl<KeymasterRogue> {
         // Keymaster Rogue is unblockable.
         this.addAbility(new UnblockableAbility());
         // When Keymaster Rogue enters the battlefield, return a creature you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        Target target = new TargetControlledPermanent(1, 1, new FilterControlledCreaturePermanent(), false);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent())));
     }
 
     public KeymasterRogue(final KeymasterRogue card) {

@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.common.EntersBattlefieldControlledTriggeredAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.GainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -60,7 +60,7 @@ public class StaffOfTheSunMagus extends CardImpl<StaffOfTheSunMagus> {
         this.expansionSetCode = "M14";
 
         // Whenever you cast a white spell or a Plains enters the battlefield under your control, you gain 1 life.
-        this.addAbility(new SpellCastTriggeredAbility(new GainLifeEffect(1), filterSpell,false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainLifeEffect(1), filterSpell,false));
         this.addAbility(new EntersBattlefieldControlledTriggeredAbility(Zone.BATTLEFIELD, new GainLifeEffect(1), filterLand, false));
     }
 

@@ -11,11 +11,13 @@ import mage.client.dialog.PreferencesDialog;
 import mage.view.CardView;
 import org.apache.log4j.Logger;
 import org.mage.plugins.card.constants.Constants;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.utils.CardImageUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -77,6 +79,9 @@ public class ImageCache {
                         if (collectorId == 0) {
                             info.setToken(true);
                             path = CardImageUtils.generateTokenImagePath(info);
+                            if (path == null) {
+                                path = DirectLinksForDownload.outDir + File.separator + DirectLinksForDownload.cardbackFilename;
+                            }
                         } else {
                             path = CardImageUtils.generateImagePath(info);
                         }

@@ -29,13 +29,20 @@
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.*;
-import mage.constants.Outcome;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
 import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
+import mage.constants.Outcome;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -56,13 +63,20 @@ public class Combat implements Serializable, Copyable<Combat> {
 
     private static FilterPlaneswalkerPermanent filterPlaneswalker = new FilterPlaneswalkerPermanent();
     private static FilterCreatureForCombatBlock filterBlockers = new FilterCreatureForCombatBlock();
+    // There are effects that let creatures assigns combat damage equal to its toughness rather than its power
+    private boolean useToughnessForDamage;
 
     protected List<CombatGroup> groups = new ArrayList<CombatGroup>();
     protected Map<UUID, CombatGroup> blockingGroups = new HashMap<UUID, CombatGroup>();
     protected Set<UUID> defenders = new HashSet<UUID>();
     protected UUID attackerId; //the player that is attacking
+    // <creature that can block, <all attackers that force the creature to block it>>
+    protected Map<UUID, Set<UUID>> creaturesForcedToBlockAttackers = new HashMap<UUID, Set<UUID>>();
+
+
 
     public Combat() {
+        this.useToughnessForDamage = false;
     }
 
     public Combat(final Combat combat) {
@@ -74,6 +88,7 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (Map.Entry<UUID, CombatGroup> group : combat.blockingGroups.entrySet()) {
             blockingGroups.put(group.getKey(), group.getValue());
         }
+        this.useToughnessForDamage = combat.useToughnessForDamage;
     }
 
     public List<CombatGroup> getGroups() {
@@ -104,11 +119,24 @@ public class Combat implements Serializable, Copyable<Combat> {
         return blockers;
     }
 
+    public boolean useToughnessForDamage() {
+        return useToughnessForDamage;
+    }
+
+    public void setUseToughnessForDamage(boolean useToughnessForDamage) {
+        this.useToughnessForDamage = useToughnessForDamage;
+    }
+
+    public void reset() {
+        this.useToughnessForDamage = false;
+    }
+
     public void clear() {
         groups.clear();
         blockingGroups.clear();
         defenders.clear();
         attackerId = null;
+        creaturesForcedToBlockAttackers.clear();
     }
 
     public String getValue() {
@@ -172,7 +200,7 @@ public class Combat implements Serializable, Copyable<Combat> {
             }
         }
         game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_ATTACKERS, attackerId, attackerId));
-        game.fireInformEvent(player.getName() + " attacks with " + groups.size() + " creatures");
+        game.informPlayers(new StringBuilder(player.getName()).append(" attacks with ").append(groups.size()).append(" creatures").toString());
     }
 
     protected void checkAttackRequirements(Player player, Game game) {
@@ -269,6 +297,31 @@ public class Combat implements Serializable, Copyable<Combat> {
                     choose = !checkBlockRequirementsAfter(defender, defender, game);
                 }
                 game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, defenderId, defenderId));
+
+                // add info about attacker blocked by blocker to the game log
+                for (CombatGroup group :this.getGroups()) {
+                    StringBuilder sb = new StringBuilder();
+                    for(UUID attackingCreatureId : group.getAttackers()) {
+                        Permanent attackingCreature = game.getPermanent(attackingCreatureId);
+                        if (attackingCreature != null) {
+                            sb.append(attackingCreature.getName()).append(" ");
+                        }
+                    }
+                    if (group.getBlockers().size() > 0) {
+                        sb.append("blocked by ");
+                        for(UUID blockingCreatureId : group.getBlockers()) {
+                            Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                            if (blockingCreature != null) {
+                                sb.append(blockingCreature.getName()).append(" ");
+                            }
+                        }
+
+                    } else{
+                        sb.append("unblocked");
+                    }
+                    game.informPlayers(sb.toString());
+                }
+
             }
             TraceUtil.traceCombatIfNeeded(game, this);
         }
@@ -306,9 +359,22 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public void checkBlockRequirementsBefore(Player player, Game game) {
-        //20101001 - 509.1c
+        /*20101001 - 509.1c
+         * 509.1c The defending player checks each creature he or she controls to see whether it's affected by
+         * any requirements (effects that say a creature must block, or that it must block if some condition is met).
+         * If the number of requirements that are being obeyed is fewer than the maximum possible number of
+         * requirements that could be obeyed without disobeying any restrictions, the declaration of blockers is
+         * illegal. If a creature can't block unless a player pays a cost, that player is not required to pay
+         * that cost, even if blocking with that creature would increase the number of requirements being obeyed.
+         *
+         * Example: A player controls one creature that "blocks if able" and another creature with no abilities.
+         * An effect states "Creatures can't be blocked except by two or more creatures." Having only the first
+         * creature block violates the restriction. Having neither creature block fulfills the restriction but
+         * not the requirement. Having both creatures block the same attacking creature fulfills both the restriction
+         * and the requirement, so that's the only option.
+         */
         for (Permanent creature : game.getBattlefield().getActivePermanents(filterBlockers, player.getId(), game)) {
-            if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
+                if (game.getOpponents(attackerId).contains(creature.getControllerId())) {
                 for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
                     RequirementEffect effect = (RequirementEffect)entry.getKey();
                     if (effect.mustBlock(game)) {
@@ -316,7 +382,15 @@ public class Combat implements Serializable, Copyable<Combat> {
                             UUID attackId = effect.mustBlockAttacker(ability, game);
                             Player defender = game.getPlayer(creature.getControllerId());
                             if (attackId != null && defender != null) {
-                                defender.declareBlocker(defender.getId(), creature.getId(), attackId, game);
+                                if (creaturesForcedToBlockAttackers.containsKey(creature.getId())) {
+                                    creaturesForcedToBlockAttackers.get(creature.getId()).add(attackId);
+                                } else {
+                                    Set<UUID> forcingAttackers = new HashSet<UUID>();
+                                    forcingAttackers.add(attackId);
+                                    creaturesForcedToBlockAttackers.put(creature.getId(), forcingAttackers);
+                                    // assign block to the first forcing attacker automatically
+                                    defender.declareBlocker(defender.getId(), creature.getId(), attackId, game);
+                                }
                             }
                         }
                     }
@@ -326,38 +400,204 @@ public class Combat implements Serializable, Copyable<Combat> {
     }
 
     public boolean checkBlockRequirementsAfter(Player player, Player controller, Game game) {
+        // Get once a list of all opponents in range
+        Set<UUID> opponents = game.getOpponents(attackerId);
         //20101001 - 509.1c
+        // map with attackers (UUID) that must be blocked by at least one blocker and a set of all creatures that can block it and don't block yet
+        Map<UUID, Set<UUID>> mustBeBlockedByAtLeastOne = new HashMap<UUID, Set<UUID>>();
+
+        // check mustBlockAny
         for (Permanent creature : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), game)) {
-            if (creature.getBlocking() == 0 && game.getOpponents(attackerId).contains(creature.getControllerId())) {
-                for (RequirementEffect effect : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).keySet()) {
-                    if (effect.mustBlockAny(game)) {
-                        // check that it can block an attacker
-                        boolean mayBlock = false;
-                        for (UUID attackingCreatureId : getAttackers()) {
-                            if (creature.canBlock(attackingCreatureId, game)) {
-                                mayBlock = true;
-                                break;
+            // creature is controlled by an opponent of the attacker
+            if (opponents.contains(creature.getControllerId())) {
+
+                // Creature is already blocking but not forced to do so
+                if (creature.getBlocking() > 0) {
+                    // get all requirement effects that apply to the creature (ce.g. is able to block attacker)
+                    for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                        RequirementEffect effect = (RequirementEffect)entry.getKey();
+                        // get possible mustBeBlockedByAtLeastOne blocker
+                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                            UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
+                            if (toBeBlockedCreature != null) {
+                                Set<UUID> potentialBlockers;
+                                if (mustBeBlockedByAtLeastOne.containsKey(toBeBlockedCreature)) {
+                                    potentialBlockers = mustBeBlockedByAtLeastOne.get(toBeBlockedCreature);
+                                } else {
+                                    potentialBlockers = new HashSet<UUID>();
+                                    mustBeBlockedByAtLeastOne.put(toBeBlockedCreature, potentialBlockers);
+                                }
+                                potentialBlockers.add(creature.getId());
                             }
                         }
-                        if (mayBlock) {
-                            if (controller.isHuman()) {
-                                game.informPlayer(controller, "Creature should block this turn: " + creature.getName());
-                            } else {
-                                Player defender = game.getPlayer(creature.getControllerId());
-                                if (defender != null) {
-                                    for (UUID attackingCreatureId : getAttackers()) {
-                                        if (creature.canBlock(attackingCreatureId, game)) {
-                                            defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
-                                            break;
+                    }
+                }
+                
+                // Creature is not blocking yet
+                if (creature.getBlocking() == 0) {
+                    // get all requirement effects that apply to the creature
+                    for (Map.Entry entry : game.getContinuousEffects().getApplicableRequirementEffects(creature, game).entrySet()) {
+                        RequirementEffect effect = (RequirementEffect)entry.getKey();
+                        // get possible mustBeBlockedByAtLeastOne blocker
+                        for (Ability ability: (HashSet<Ability>)entry.getValue()) {
+                            UUID toBeBlockedCreature = effect.mustBlockAttackerIfElseUnblocked(ability, game);
+                            if (toBeBlockedCreature != null) {
+                                Set<UUID> potentialBlockers;
+                                if (mustBeBlockedByAtLeastOne.containsKey(toBeBlockedCreature)) {
+                                    potentialBlockers = mustBeBlockedByAtLeastOne.get(toBeBlockedCreature);
+                                } else {
+                                    potentialBlockers = new HashSet<UUID>();
+                                    mustBeBlockedByAtLeastOne.put(toBeBlockedCreature, potentialBlockers);
+                                }
+                                potentialBlockers.add(creature.getId());
+                            }
+                        }
+
+                        // check the mustBlockAny requirement ----------------------------------------
+                        if (effect.mustBlockAny(game)) {
+                            // check that it can block at least one of the attackers
+                            boolean mayBlock = false;
+                            for (UUID attackingCreatureId : getAttackers()) {
+                                if (creature.canBlock(attackingCreatureId, game)) {
+                                    mayBlock = true;
+                                    break;
+                                }
+                            }
+                            // is so inform human player or set block for AI player
+                            if (mayBlock) {
+                                if (controller.isHuman()) {
+                                    game.informPlayer(controller, "Creature should block this turn: " + creature.getName());
+                                } else {
+                                    Player defender = game.getPlayer(creature.getControllerId());
+                                    if (defender != null) {
+                                        for (UUID attackingCreatureId : getAttackers()) {
+                                            if (creature.canBlock(attackingCreatureId, game)) {
+                                                defender.declareBlocker(defender.getId(), creature.getId(), attackingCreatureId, game);
+                                                break;
+                                            }
                                         }
                                     }
                                 }
+                                return false;
                             }
-                            return false;
+                        }
+
+                    }
+                }
+
+            }
+
+        }
+
+        // check attacking creature mustBeBlockedByAtLeastOne
+        for (UUID toBeBlockedCreatureId: mustBeBlockedByAtLeastOne.keySet()) {
+            for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                if (combatGroup.getBlockers().isEmpty() && combatGroup.getAttackers().contains(toBeBlockedCreatureId)) {
+                    // creature is not blocked but has possible blockers
+                    if (controller.isHuman()) {
+                        Permanent toBeBlockedCreature = game.getPermanent(toBeBlockedCreatureId);
+                        if (toBeBlockedCreature != null) {
+                            // check if all possible blocker block other creatures they are forced to block
+                            // read through all possible blockers
+                            boolean possibleBlockerAvailable = false;
+                            for (UUID possibleBlockerId : mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId)) {
+                                Set<UUID> forcingAttackers = creaturesForcedToBlockAttackers.get(possibleBlockerId);
+                                if (forcingAttackers == null) {
+                                    // no other creature forces the blocker to block -> it's available
+                                    possibleBlockerAvailable = true;
+                                    break;
+                                }
+                                // get the attackers he blocks
+                                List<UUID> blockedAttackers = null;
+                                for (CombatGroup combatGroupToCheck : game.getCombat().getGroups()) {
+                                    if (combatGroupToCheck.getBlockers().contains(possibleBlockerId)) {
+                                        blockedAttackers = combatGroupToCheck.getAttackers();
+                                        break;
+                                    }
+                                }
+                                if (blockedAttackers == null) {
+                                    // he blocks no other creature -> it's available
+                                    possibleBlockerAvailable = true;
+                                    break;
+                                }
+
+                                // get attackers forcing the possible blocker to block
+                                possibleBlockerAvailable = true;
+                                for (UUID blockedAttackerId : blockedAttackers) {
+                                    if (creaturesForcedToBlockAttackers.get(possibleBlockerId).contains(blockedAttackerId)) {
+                                        possibleBlockerAvailable = false;
+                                        break;
+                                    }
+                                }
+                                if (possibleBlockerAvailable) {
+                                    break;
+                                }
+                            }
+                            if (possibleBlockerAvailable) {
+                                game.informPlayer(controller, new StringBuilder(toBeBlockedCreature.getName()).append(" has to be blocked by at least one creature.").toString());
+                                return false;
+                            }
+                        }
+
+                    } else {
+                        // take the first potential blocker from the set to block for the AI
+                        UUID blockingCreatureId = mustBeBlockedByAtLeastOne.get(toBeBlockedCreatureId).iterator().next();
+                        Permanent blockingCreature = game.getPermanent(blockingCreatureId);
+                        if (blockingCreature != null) {
+                            Player defender = game.getPlayer(blockingCreature.getControllerId());
+                            if (defender != null) {
+                                defender.declareBlocker(defender.getId(), blockingCreatureId, toBeBlockedCreatureId, game);
+                            }
                         }
                     }
                 }
             }
+
+        }
+        // check if creatures are forced to block but do not block at all or block creatures they are not forced to block
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<UUID, Set<UUID>> entry :creaturesForcedToBlockAttackers.entrySet()) {
+            boolean blockIsValid;
+            Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
+            // creature does not block -> not allowed
+            if (creatureForcedToBlock.getBlocking() == 0) {
+                blockIsValid = false;
+            } else {
+                blockIsValid = false;
+                // which attacker is he blocking
+                CombatGroups:
+                for (CombatGroup combatGroup : game.getCombat().getGroups()) {
+                    if (combatGroup.getBlockers().contains(creatureForcedToBlock.getId())) {
+                        for (UUID forcingAttackerId :combatGroup.getAttackers()) {
+                            if (entry.getValue().contains(forcingAttackerId)) {
+                                // the creature is blocking a forcing attacker, so the block is ok
+                                blockIsValid = true;
+                                break CombatGroups;
+                            } else {
+                                // check if the blocker blocks a attacker that must be blocked at least by one and is the only blocker, this block is also valid
+                                if (combatGroup.getBlockers().size() == 1) {
+                                    if (mustBeBlockedByAtLeastOne.containsKey(forcingAttackerId)) {
+                                        if (mustBeBlockedByAtLeastOne.get(forcingAttackerId).contains(creatureForcedToBlock.getId())) {
+                                            blockIsValid = true;
+                                            break CombatGroups;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            if (!blockIsValid) {
+                sb.append(" ").append(creatureForcedToBlock.getName());
+            }
+        }
+        if (sb.length() > 0) {
+            sb.insert(0, "Some creatures are forced to block certain attacker(s):\n");
+            sb.append("\nPlease block with each of these creatures an appropriate attacker.");
+            game.informPlayer(controller, sb.toString());
+            return false;
         }
         return true;
     }
@@ -526,11 +766,35 @@ public class Combat implements Serializable, Copyable<Combat> {
         return false;
     }
 
-    public UUID getDefendingPlayer(UUID attackerId) {
+    /**
+     *
+     * @param attackerId
+     * @return uuid of defending player or planeswalker
+     */
+    public UUID getDefenderId(UUID attackerId) {
         UUID defenderId = null;
         for (CombatGroup group : groups) {
             if (group.getAttackers().contains(attackerId)) {
                 defenderId = group.getDefenderId();
+                break;
+            }
+        }
+        return defenderId;
+    }
+
+    public UUID getDefendingPlayerId(UUID attackerId, Game game) {
+        UUID defenderId = null;
+        for (CombatGroup group : groups) {
+            if (group.getAttackers().contains(attackerId)) {
+                defenderId = group.getDefenderId();
+                if (group.defenderIsPlaneswalker) {
+                    Permanent permanent = game.getPermanent(defenderId);
+                    if (permanent != null) {
+                        defenderId = permanent.getControllerId();
+                    } else {
+                        defenderId = null;
+                    }
+                }
                 break;
             }
         }

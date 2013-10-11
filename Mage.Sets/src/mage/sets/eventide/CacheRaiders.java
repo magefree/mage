@@ -28,17 +28,14 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-
+import mage.MageInt;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
-import mage.cards.CardImpl;
 import mage.constants.TargetController;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
+import mage.filter.common.FilterControlledPermanent;
 
 /**
  *
@@ -54,11 +51,9 @@ public class CacheRaiders extends CardImpl<CacheRaiders> {
         this.color.setBlue(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(new ReturnToHandTargetEffect(), TargetController.YOU, false);
-        Target target = new TargetControlledPermanent();
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        
+        //At the beginning of your upkeep, return a permanent you control to its owner's hand.
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(new FilterControlledPermanent()), TargetController.YOU, false));
     }
 
     public CacheRaiders(final CacheRaiders card) {

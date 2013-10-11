@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -39,7 +39,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -52,7 +52,7 @@ import mage.players.Player;
  */
 public class Mindsparker extends CardImpl<Mindsparker> {
 
-    private static final FilterCard filter = new FilterCard("white or blue instant or sorcery spell");
+    private static final FilterSpell filter = new FilterSpell("white or blue instant or sorcery spell");
 
     static {
         filter.add(Predicates.or(
@@ -76,7 +76,7 @@ public class Mindsparker extends CardImpl<Mindsparker> {
         this.addAbility(FirstStrikeAbility.getInstance());
 
         // Whenever an opponent casts a white or blue instant or sorcery spell, Mindsparker deals 2 damage to that player.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false, true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(Zone.BATTLEFIELD, new MindsparkerEffect(), filter, false, true));
 
     }
 

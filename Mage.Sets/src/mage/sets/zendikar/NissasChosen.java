@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  *
@@ -96,9 +97,13 @@ class NissasChosenEffect extends ReplacementEffectImpl<NissasChosenEffect> {
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Card card = game.getCard(event.getTargetId());
-        if ( card != null ) {
-            return card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        Permanent permanent = ((ZoneChangeEvent) event).getTarget();
+        if (permanent != null) {
+            if(permanent.moveToZone(Zone.LIBRARY, source.getSourceId(), game, false)) {
+                game.informPlayers(new StringBuilder(permanent.getName()).append(" was put on the bottom of its owner's library").toString());
+                return true;
+            }
+            
         }
         return false;
     }

@@ -339,7 +339,7 @@ public class NewTableDialog extends MageDialog {
                 for (TablePlayerPanel player: players) {
                     if (!player.getPlayerType().equals("Human")) {
                         if (!player.joinTable(roomId, table.getTableId())) {
-                            JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+                            // error message must be send by the server
                             session.removeTable(roomId, table.getTableId());
                             table = null;
                             return;
@@ -356,7 +356,7 @@ public class NewTableDialog extends MageDialog {
         } catch (ClassNotFoundException ex) {
             handleError(ex);
         }
-        JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
+        // JOptionPane.showMessageDialog(MageFrame.getDesktop(), "Error joining table.", "Error", JOptionPane.ERROR_MESSAGE);
         session.removeTable(roomId, table.getTableId());
         table = null;
     }//GEN-LAST:event_btnOKActionPerformed

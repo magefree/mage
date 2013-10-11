@@ -76,13 +76,13 @@ public class KentaroTheSmilingCat extends CardImpl<KentaroTheSmilingCat> {
         return new KentaroTheSmilingCat(this);
     }
 
-
+    //TODO : change CostModification to AlternativCost
     private class KentaroTheSmilingCatCostReductionEffect extends CostModificationEffectImpl<KentaroTheSmilingCatCostReductionEffect> {
 
         private static final String effectText = "You may pay {X} rather than pay the mana cost for Samurai spells you cast, where X is that spell's converted mana cost";
 
         KentaroTheSmilingCatCostReductionEffect() {
-            super(Duration.WhileOnBattlefield, Outcome.Benefit);
+            super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.SET_COST);
             staticText = effectText;
         }
 

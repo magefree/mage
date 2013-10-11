@@ -28,18 +28,15 @@
 package mage.sets.onslaught;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.Costs;
-import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.UntapTargetEffect;
-import mage.abilities.mana.GreenManaAbility;
+import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
@@ -50,6 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  * @author Melkhior
  */
 public class WirewoodLodge extends CardImpl<WirewoodLodge> {
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Elf");
     static {
         filter.add(new SubtypePredicate("Elf"));
@@ -58,15 +56,15 @@ public class WirewoodLodge extends CardImpl<WirewoodLodge> {
     public WirewoodLodge(UUID ownerId) {
         super(ownerId, 329, "Wirewood Lodge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "ONS";
-        Ability greenManaAbility = new GreenManaAbility();
-        this.addAbility(greenManaAbility);
-        Costs costs = new CostsImpl();
-        costs.add(new TapSourceCost());
-        costs.add(new ManaCostsImpl("{G}"));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), costs);
-    TargetCreaturePermanent target = new TargetCreaturePermanent(filter);
-    ability.addTarget(target);
-    this.addAbility(ability);
+        
+        // {T}: Add {1} to your mana pool.
+        this.addAbility(new ColorlessManaAbility());
+        
+        // {G}, {T}: Untap target Elf.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UntapTargetEffect(), new ManaCostsImpl("{G}"));
+        ability.addCost(new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(filter));
+        this.addAbility(ability);
     }
 
     public WirewoodLodge(final WirewoodLodge card) {

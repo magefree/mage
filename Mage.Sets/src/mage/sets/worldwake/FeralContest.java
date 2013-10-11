@@ -92,10 +92,9 @@ class FeralContestEffect extends RequirementEffect<FeralContestEffect> {
     }
 
     @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent creature = game.getPermanent(source.getTargets().get(1).getFirstTarget());
-        if (creature != null) {
-            return true;
+    public boolean applies(Permanent permanent, Ability source, Game game) {        
+        if (permanent.getId().equals(source.getTargets().get(1).getFirstTarget())) {
+            return permanent.canBlock(source.getFirstTarget(), game);
         }
         return false;
     }

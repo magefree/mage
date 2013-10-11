@@ -22,6 +22,7 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
     protected ContinuousEffect otherwiseEffect;
     protected Condition condition;
     protected boolean lockedInCondition;
+    protected boolean initDone = false;
 
     public ConditionalContinousEffect(ContinuousEffect effect, Condition condition, String text) {
         this(effect, null, condition, text);
@@ -63,22 +64,42 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     public ConditionalContinousEffect(final ConditionalContinousEffect effect) {
         super(effect);
-        this.effect = effect.effect;
-        this.otherwiseEffect = effect.otherwiseEffect;
+        this.effect = (ContinuousEffect) effect.effect.copy();
+        if (effect.otherwiseEffect != null) {
+            this.otherwiseEffect = (ContinuousEffect) effect.otherwiseEffect.copy();
+        }
         this.condition = effect.condition;
         this.lockedInCondition = effect.lockedInCondition;
+        this.initDone = effect.initDone;
+    }
+
+    @Override
+    public boolean isDiscarded() {
+        return this.discarded || effect.isDiscarded() || (otherwiseEffect != null && otherwiseEffect.isDiscarded());
+    }
+    
+    @Override
+    public void init(Ability source, Game game) {
+        if (lockedInCondition) {
+            condition = new FixedCondition(condition.apply(game, source));
+        }
+        effect.init(source, game);
+        effect.setTargetPointer(this.targetPointer);
+        if (otherwiseEffect != null) {
+            otherwiseEffect.setTargetPointer(this.targetPointer);
+            otherwiseEffect.init(source, game);
+        }
+        initDone = true;
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
+        if (!initDone) { // if simpleStaticAbility, init won't be called
+            init(source, game);
         }
         if (condition.apply(game, source)) {
-            effect.setTargetPointer(this.targetPointer);
             return effect.apply(layer, sublayer, source, game);
         } else if (otherwiseEffect != null) {
-            otherwiseEffect.setTargetPointer(this.targetPointer);
             return otherwiseEffect.apply(layer, sublayer, source, game);
         }
         if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
@@ -92,9 +113,6 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
 
     @Override
     public boolean apply(Game game, Ability source) {
-        if (lockedInCondition && !(condition instanceof FixedCondition)) {
-            condition = new FixedCondition(condition.apply(game, source));
-        }
         if (condition.apply(game, source)) {
             effect.setTargetPointer(this.targetPointer);
             return effect.apply(game, source);
@@ -104,6 +122,9 @@ public class ConditionalContinousEffect extends ContinuousEffectImpl<Conditional
         }
         if (!condition.apply(game, source) && effect.getDuration() == Duration.OneUse) {
             used = true;
+        }
+        if (!condition.apply(game, source) && effect.getDuration() == Duration.Custom) {
+            this.discard();
         }
         return false;
     }

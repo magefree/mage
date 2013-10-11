@@ -61,6 +61,8 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     protected TimingOption timing;
     protected int[] times = {75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5};
 
+    protected boolean abort = false;
+
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
@@ -84,8 +86,47 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     }
 
     @Override
+    public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
+        if (newPlayer != null) {
+            DraftPlayer newDraftPlayer = new DraftPlayer(newPlayer);
+            DraftPlayer oldDraftPlayer = players.get(oldPlayer.getId());
+            newDraftPlayer.setBooster(oldDraftPlayer.getBooster());
+            Map<UUID, DraftPlayer> newPlayers = new HashMap<UUID, DraftPlayer>();
+            PlayerList newTable = new PlayerList();
+            synchronized (players) {
+                for(Map.Entry<UUID, DraftPlayer> entry :players.entrySet()) {
+                    if (entry.getKey().equals(oldPlayer.getId())) {
+                        newPlayers.put(newPlayer.getId(), newDraftPlayer);
+                    } else {
+                        newPlayers.put(entry.getKey(), entry.getValue());
+                    }
+                }
+                players = newPlayers;
+            }
+            synchronized (table) {
+                for(UUID playerId :table) {
+                    if (playerId.equals(oldPlayer.getId())) {
+                        newTable.add(newPlayer.getId());
+                    } else {
+                        newTable.add(playerId);
+                    }
+                }
+                table = newTable;
+            }
+            if (oldDraftPlayer.isPicking()) {
+                newDraftPlayer.setPicking();
+                newDraftPlayer.getPlayer().pickCard(newDraftPlayer.getBooster(), newDraftPlayer.getDeck(), this);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public Collection<DraftPlayer> getPlayers() {
-        return players.values();
+        synchronized (players) {
+            return players.values();
+        }
     }
 
     @Override
@@ -118,45 +159,52 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
         this.addPick(playerId, players.get(playerId).getBooster().get(0).getId());
     }
 
-    protected void passLeft() {
-        UUID startId = table.get(0);
-        UUID currentId = startId;
-        UUID nextId = table.getNext();
-        DraftPlayer current = players.get(currentId);
-        DraftPlayer next = players.get(nextId);
-        List<Card> currentBooster = current.booster;
-        while (true) {
-            List<Card> nextBooster = next.booster;
-            next.setBooster(currentBooster);
-            if (nextId == startId)
-                break;
-            currentBooster = nextBooster;
-            current = next;
-            currentId = nextId;
-            nextId = table.getNext();
-            next = players.get(nextId);
+        protected void passLeft() {
+        synchronized (players) {
+            UUID startId = table.get(0);
+            UUID currentId = startId;
+            UUID nextId = table.getNext();
+                DraftPlayer current = players.get(currentId);
+                DraftPlayer next = players.get(nextId);
+            List<Card> currentBooster = current.booster;
+            while (true) {
+                List<Card> nextBooster = next.booster;
+                next.setBooster(currentBooster);
+                if (nextId == startId) {
+                    break;
+                }
+                currentBooster = nextBooster;
+                current = next;
+                currentId = nextId;
+                nextId = table.getNext();
+                next = players.get(nextId);
+            }
         }
     }
 
     protected void passRight() {
-        UUID startId = table.get(0);
-        UUID currentId = startId;
-        UUID prevId = table.getPrevious();
-        DraftPlayer current = players.get(currentId);
-        DraftPlayer prev = players.get(prevId);
-        List<Card> currentBooster = current.booster;
-        while (true) {
-            List<Card> prevBooster = prev.booster;
-            prev.setBooster(currentBooster);
-            if (prevId == startId)
-                break;
-            currentBooster = prevBooster;
-            current = prev;
-            currentId = prevId;
-            prevId = table.getPrevious();
-            prev = players.get(prevId);
+        synchronized (players) {
+            UUID startId = table.get(0);
+            UUID currentId = startId;
+            UUID prevId = table.getPrevious();
+            DraftPlayer current = players.get(currentId);
+            DraftPlayer prev = players.get(prevId);
+            List<Card> currentBooster = current.booster;
+            while (true) {
+                List<Card> prevBooster = prev.booster;
+                prev.setBooster(currentBooster);
+                if (prevId == startId) {
+                    break;
+                }
+                currentBooster = prevBooster;
+                current = prev;
+                currentId = prevId;
+                prevId = table.getPrevious();
+                prev = players.get(prevId);
+            }
         }
     }
+
 
     protected void openBooster() {
         if (boosterNum < sets.size()) {
@@ -172,8 +220,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     protected boolean pickCards() {
         cardNum++;
         for (DraftPlayer player: players.values()) {
-            if (player.getBooster().size() == 0)
+            if (player.getBooster().isEmpty()) {
                 return false;
+            }
             player.setPicking();
             player.getPlayer().pickCard(player.getBooster(), player.getDeck(), this);
         }
@@ -189,8 +238,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
 
     protected boolean donePicking() {
         for (DraftPlayer player: players.values()) {
-            if (player.isPicking())
+            if (player.isPicking()) {
                 return false;
+            }
         }
         return true;
     }
@@ -198,8 +248,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     @Override
     public boolean allJoined() {
         for (DraftPlayer player: this.players.values()) {
-            if (!player.isJoined())
+            if (!player.isJoined()) {
                 return false;
+            }
         }
         return true;
     }
@@ -227,8 +278,9 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
     @Override
     public void firePickCardEvent(UUID playerId) {
         DraftPlayer player = players.get(playerId);
-        if (cardNum > 15)
+        if (cardNum > 15) {
             cardNum = 15;
+        }
         int time = times[cardNum - 1] * timing.getFactor();
         playerQueryEventSource.pickCard(playerId, "Pick card", player.getBooster(), time);
     }
@@ -249,6 +301,16 @@ public abstract class DraftImpl<T extends DraftImpl<T>> implements Draft {
             }
         }
         return !player.isPicking();
+    }
+
+    @Override
+    public boolean isAbort() {
+        return abort;
+    }
+
+    @Override
+    public void setAbort(boolean abort) {
+        this.abort = abort;
     }
 
 }

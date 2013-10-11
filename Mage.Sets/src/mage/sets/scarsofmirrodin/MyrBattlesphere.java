@@ -155,7 +155,7 @@ class MyrBattlesphereEffect extends OneShotEffect<MyrBattlesphereEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        UUID defenderId = game.getCombat().getDefendingPlayer(source.getSourceId());
+        UUID defenderId = game.getCombat().getDefenderId(source.getSourceId());
         Player defender = game.getPlayer(defenderId);
         if (defender != null) {
             defender.damage(amount.calculate(game, source), source.getSourceId(), game, false, false);

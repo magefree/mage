@@ -53,10 +53,12 @@ public class FirstCombatDamageStep extends Step<FirstCombatDamageStep> {
 
     @Override
     public boolean skipStep(Game game, UUID activePlayerId) {
-        if (game.getCombat().noAttackers())
+        if (game.getCombat().noAttackers()) {
             return true;
-        if (!game.getCombat().hasFirstOrDoubleStrike(game))
+        }
+        if (!game.getCombat().hasFirstOrDoubleStrike(game)) {
             return true;
+        }
         return super.skipStep(game, activePlayerId);
     }
 

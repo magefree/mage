@@ -35,4 +35,5 @@ import java.util.UUID;
  */
 public interface Controllable {
     UUID getControllerId();
+    UUID getId();
 }

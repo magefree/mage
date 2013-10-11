@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -59,7 +59,7 @@ public class MesaEnchantress extends CardImpl<MesaEnchantress> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, true));
     }
 
     public MesaEnchantress(final MesaEnchantress card) {

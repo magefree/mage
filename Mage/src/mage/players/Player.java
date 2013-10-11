@@ -28,19 +28,32 @@
 
 package mage.players;
 
-import mage.constants.Outcome;
-import mage.constants.RangeOfInfluence;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import mage.MageItem;
 import mage.MageObject;
-import mage.abilities.*;
+import mage.abilities.Abilities;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
+import mage.constants.Outcome;
+import mage.constants.RangeOfInfluence;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.draft.Draft;
 import mage.game.match.Match;
 import mage.game.permanent.Permanent;
@@ -51,9 +64,6 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 import mage.target.common.TargetCardInLibrary;
 import mage.util.Copyable;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  *
@@ -107,7 +117,11 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean isInGame();
-
+    /**
+     * Called if other player left the game
+     */
+    void otherPlayerLeftGame(Game game);
+    
     ManaPool getManaPool();
     Set<UUID> getInRange();
     boolean isTopCardRevealed();
@@ -315,4 +329,14 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     int getPriorityTimeLeft();
+
+    void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving);
+    boolean hasReachedNextTurnAfterLeaving();
+    /**
+     * Checks if a AI player is able to join a table
+     * i.e. Draft - bot can not enter a table with constructed format
+     * @param table
+     * @return
+     */
+    boolean canJoinTable(Table table);
 }

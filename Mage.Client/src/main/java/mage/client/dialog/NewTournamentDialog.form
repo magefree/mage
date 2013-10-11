@@ -113,7 +113,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="pnlPacks" pref="67" max="32767" attributes="0"/>
+              <Component id="pnlPacks" pref="69" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -124,7 +124,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="spnNumPlayers" pref="23" max="32767" attributes="1"/>
+                                  <Component id="spnNumPlayers" pref="25" max="32767" attributes="1"/>
                                   <Component id="pnlDraftOptions" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>

@@ -32,7 +32,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -58,7 +58,7 @@ public class Mindmoil extends CardImpl<Mindmoil> {
         this.color.setRed(true);
 
         // Whenever you cast a spell, put the cards in your hand on the bottom of your library in any order, then draw that many cards.
-        this.addAbility(new SpellCastTriggeredAbility(new MindmoilEffect(), false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new MindmoilEffect(), false));
     }
 
     public Mindmoil(final Mindmoil card) {

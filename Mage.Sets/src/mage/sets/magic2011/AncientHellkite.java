@@ -98,7 +98,7 @@ class AncientHellkiteAbility extends ActivatedAbilityImpl<AncientHellkiteAbility
 
     @Override
     public boolean activate(Game game, boolean noMana) {
-        UUID defenderId = game.getCombat().getDefendingPlayer(sourceId);
+        UUID defenderId = game.getCombat().getDefenderId(sourceId);
         if (defenderId != null) {
             FilterCreaturePermanent filter = filterTemplate.copy();
             filter.add(new ControllerIdPredicate(defenderId));

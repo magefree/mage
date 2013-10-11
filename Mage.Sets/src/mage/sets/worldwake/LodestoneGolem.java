@@ -73,7 +73,7 @@ public class LodestoneGolem extends CardImpl<LodestoneGolem> {
 class LodestoneGolemCostReductionEffect extends CostModificationEffectImpl<LodestoneGolemCostReductionEffect> {
 
     LodestoneGolemCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Nonartifact spells cost {1} more to cast";
     }
 

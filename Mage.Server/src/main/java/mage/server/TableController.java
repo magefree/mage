@@ -28,18 +28,19 @@
 
 package mage.server;
 
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import mage.constants.RangeOfInfluence;
-import mage.constants.TableState;
 import mage.MageException;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.InvalidDeckException;
+import mage.constants.RangeOfInfluence;
+import mage.constants.TableState;
 import mage.game.GameException;
 import mage.game.GameOptions;
 import mage.game.Seat;
@@ -57,7 +58,11 @@ import mage.game.tournament.TournamentPlayer;
 import mage.players.Player;
 import mage.server.challenge.ChallengeManager;
 import mage.server.draft.DraftManager;
-import mage.server.game.*;
+import mage.server.game.DeckValidatorFactory;
+import mage.server.game.GameFactory;
+import mage.server.game.GameManager;
+import mage.server.game.PlayerFactory;
+import mage.server.game.ReplayManager;
 import mage.server.services.LogKeys;
 import mage.server.services.impl.LogServiceImpl;
 import mage.server.tournament.TournamentFactory;
@@ -159,8 +164,12 @@ public class TableController {
                 logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
                 return false;
             }
+            if (!player.canJoinTable(table)) {
+                user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+                return false;
+            }
             user.addTable(player.getId(), table);
-            logger.info("player joined " + player.getId());
+            logger.debug("player joined " + player.getId());
             //only inform human players and add them to sessionPlayerMap
             if (seat.getPlayer().isHuman()) {
                 user.joinedTable(table.getRoomId(), table.getId(), true);
@@ -173,28 +182,63 @@ public class TableController {
         }
     }
 
+    public synchronized boolean replaceDraftPlayer(Player oldPlayer, String name, String playerType, int skill) {
+        Player newPlayer = createPlayer(name, playerType, skill);
+        if (newPlayer == null || table.getState() != TableState.DRAFTING) {
+            return false;
+        }
+        TournamentPlayer oldTournamentPlayer = tournament.getPlayer(oldPlayer.getId());
+        tournament.removePlayer(oldPlayer.getId());       
+        tournament.addPlayer(newPlayer, playerType);
+
+        TournamentPlayer newTournamentPlayer = tournament.getPlayer(newPlayer.getId());        
+        newTournamentPlayer.setState(oldTournamentPlayer.getState());
+        
+        DraftManager.getInstance().getController(table.getId()).replacePlayer(oldPlayer, newPlayer);
+        return true;
+    }
+
     public synchronized boolean joinTable(UUID userId, String name, String playerType, int skill, DeckCardLists deckList) throws MageException {
+        User user = UserManager.getInstance().getUser(userId);
+        if (user == null) {
+            return false;
+        }
         if (table.getState() != TableState.WAITING) {
+            user.showUserMessage("Join Table", "No available seats.");
             return false;
         }
         Seat seat = table.getNextAvailableSeat(playerType);
         if (seat == null) {
-            throw new GameException("No available seats.");
+            user.showUserMessage("Join Table", "No available seats.");
+            return false;
         }
         Deck deck = Deck.load(deckList, false, false);
+
         if (!Main.isTestMode() && !table.getValidator().validate(deck)) {
-            throw new InvalidDeckException(name + " has an invalid deck for this format", table.getValidator().getInvalid());
+            StringBuilder sb = new StringBuilder("You (").append(name).append(") have an invalid deck for the selected ").append(table.getValidator().getName()).append(" Format. \n\n");
+            for (Map.Entry<String, String> entry : table.getValidator().getInvalid().entrySet()) {
+                sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+            }
+            sb.append("\n\nSelect a deck that is appropriate for the selected format and try again!");
+            user.showUserMessage("Join Table", sb.toString());
+            return false;
         }
 
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player == null) {
-            throw new GameException(new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString());
+            String message = new StringBuilder("Could not create player ").append(name).append(" of type ").append(seat.getPlayerType().toString()).toString();
+            logger.warn(new StringBuilder("User: ").append(user.getName()).append(" => ").append(message).toString());
+            user.showUserMessage("Join Table",message);
+            return false;
+        }
+        if (!player.canJoinTable(table)) {
+            user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
+            return false;
         }
         match.addPlayer(player, deck);
         table.joinTable(player, seat);
-        User user = UserManager.getInstance().getUser(userId);
         user.addTable(player.getId(), table);
-        logger.info("player joined " + player.getId());
+        logger.debug("player joined " + player.getId());
         //only inform human players and add them to sessionPlayerMap
         if (seat.getPlayer().isHuman()) {
             user.joinedTable(table.getRoomId(), table.getId(), false);
@@ -223,13 +267,13 @@ public class TableController {
         UUID playerId = userPlayerMap.get(userId);
         if (table.isTournament()) {
             TournamentPlayer player = tournament.getPlayer(playerId);
-            if (player.hasQuit()) {
+            if (player == null || player.hasQuit()) {
                 return true; // so the construct panel closes after submit
             }
         } else {
             if (table.getMatch() != null) {
                 MatchPlayer mPlayer = table.getMatch().getPlayer(playerId);
-                if (mPlayer.hasQuit()) {
+                if (mPlayer == null || mPlayer.hasQuit()) {
                     return true; // so the construct panel closes after submit
                 }
             }
@@ -312,31 +356,34 @@ public class TableController {
             player = PlayerFactory.getInstance().createPlayer(playerType, name, options.getRange(), skill);
         }
         if (player != null) {
-            logger.info("Player created " + player.getId());
+            logger.debug("Player created " + player.getId());
         }
         return player;
     }
 
-    public void kill(UUID userId) {
-        leaveTable(userId);
-        userPlayerMap.remove(userId);
-    }
-
     public synchronized void leaveTable(UUID userId) {
-        if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
-            UUID playerId = userPlayerMap.get(userId);
-            if (playerId != null) {
-                table.leaveTable(playerId);
+        UUID playerId = userPlayerMap.get(userId);
+        if (playerId != null) {
+            if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
+                table.leaveNotStartedTable(playerId);
                 if (table.isTournament()) {
-                    tournament.leave(playerId);
+                    TournamentManager.getInstance().quit(tournament.getId(), userId);
                 } else {
                     match.leave(playerId);
                 }
                 User user = UserManager.getInstance().getUser(userId);
                 user.removeTable(playerId);
                 userPlayerMap.remove(userId);
-            }            
+            } else if (!table.getState().equals(TableState.FINISHED)) {
+                if (table.isTournament()) {
+                    TableManager.getInstance().userQuitTournamentSubTables(userId);
+                    TournamentManager.getInstance().quit(tournament.getId(), userId);
+                } else {
+                    match.leave(playerId);
+                }
+            }
         }
+
     }
 
     public synchronized void startMatch(UUID userId) {
@@ -395,7 +442,7 @@ public class TableController {
             table.initGame();
             GameManager.getInstance().createGameSession(match.getGame(), userPlayerMap, table.getId(), choosingPlayerId);
             String creator = null;
-            String opponent = null;
+            StringBuilder opponent = new StringBuilder();
             for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
@@ -404,9 +451,10 @@ public class TableController {
                         if (creator == null) {
                             creator = user.getName();
                         } else {
-                            if (opponent == null) {
-                                opponent = user.getName();
+                            if (opponent.length() > 0) {
+                                opponent.append(" - ");
                             }
+                            opponent.append(user.getName());
                         }
                     }
                     else {
@@ -417,10 +465,19 @@ public class TableController {
                     }
                 }
             }
+            // Append AI opponents to the log file
+            for (MatchPlayer mPlayer :match.getPlayers()) {
+                if (!mPlayer.getPlayer().isHuman()) {
+                    if (opponent.length() > 0) {
+                        opponent.append(" - ");
+                    }
+                    opponent.append(mPlayer.getPlayer().getName());
+                }
+            }
             ServerMessagesUtil.getInstance().incGamesStarted();
 
             // log about game started
-            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent);
+            LogServiceImpl.instance.log(LogKeys.KEY_GAME_STARTED, String.valueOf(userPlayerMap.size()), creator, opponent.toString());
         }
         catch (Exception ex) {
             logger.fatal("Error starting game", ex);
@@ -435,7 +492,9 @@ public class TableController {
                 TournamentManager.getInstance().createTournamentSession(tournament, userPlayerMap, table.getId());
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
-                    user.tournamentStarted(tournament.getId(), entry.getValue());
+                    if (user != null) {
+                        user.tournamentStarted(tournament.getId(), entry.getValue());
+                    }
                 }
                 ServerMessagesUtil.getInstance().incTournamentsStarted();
             }
@@ -468,6 +527,30 @@ public class TableController {
         }
     }
 
+    private void sendMatchEndInfo(UUID playerId) {
+        for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
+            if (entry.getValue().equals(playerId)) {
+                User user = UserManager.getInstance().getUser(entry.getKey());
+                if (user != null) {
+                    StringBuilder sb = new StringBuilder();
+                    if (table.isTournamentSubTable()) {
+                        sb.append("Your tournament match of round ");
+                        sb.append(table.getTournament().getRounds().size());
+                        sb.append(" is over. ");
+                    } else {
+                        sb.append("Match [").append(match.getName()).append("] is over. ");
+                    }
+                    if(match.getPlayers().size() > 2) {
+                        sb.append("All your opponents have lost or quit the match.");
+                    } else {
+                        sb.append("Your opponent has quit the match.");
+                    }
+                    user.showUserMessage("Match info", sb.toString());
+                }
+                break;
+            }
+        }
+    }
     public int getRemainingTime() {
         return (int) futureTimeout.getDelay(TimeUnit.SECONDS);
     }    
@@ -504,7 +587,17 @@ public class TableController {
                 setupTimeout(Match.SIDEBOARD_TIME);
                 match.sideboard();
                 cancelTimeout();
-                startGame(choosingPlayerId);
+                if (!match.isMatchOver()) {
+                    startGame(choosingPlayerId);
+                } else {
+                    table.endGame();
+                    // opponent(s) left during sideboarding
+                    for (MatchPlayer mPlayer :match.getPlayers()) {
+                        if(!mPlayer.hasQuit()) {
+                            this.sendMatchEndInfo(mPlayer.getPlayer().getId());
+                        }
+                    }                     
+                }
             }
             else {
                 match.getGames().clear();

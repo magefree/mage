@@ -84,4 +84,12 @@ public class DraftManager {
         draftControllers.remove(draftId);
     }
 
+    public DraftController getController(UUID tableId) {
+        for (DraftController controller: draftControllers.values()) {
+            if (controller.getTableId().equals(tableId)) {
+                return controller;
+            }
+        }
+        return null;
+    }
 }

@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.cards.CardImpl;
 import mage.game.Game;
 

@@ -65,7 +65,7 @@ public class FaerieMacabre extends CardImpl<FaerieMacabre> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Discard Faerie Macabre: Exile up to two target cards from graveyards.
-        Ability ability = new SimpleActivatedAbility(Zone.HAND, new ExileTargetEffect(), new DiscardSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.HAND, new FaerieMacabreExileTargetEffect(), new DiscardSourceCost());
         ability.addTarget(new TargetCardInGraveyard(0, 2, new FilterCard("cards from graveyards")));
         this.addAbility(ability);
     }
@@ -80,19 +80,19 @@ public class FaerieMacabre extends CardImpl<FaerieMacabre> {
     }
 }
 
-class ExileTargetEffect extends OneShotEffect<ExileTargetEffect> {
+class FaerieMacabreExileTargetEffect extends OneShotEffect<FaerieMacabreExileTargetEffect> {
 
-    public ExileTargetEffect() {
+    public FaerieMacabreExileTargetEffect() {
         super(Outcome.Exile);
     }
 
-    public ExileTargetEffect(final ExileTargetEffect effect) {
+    public FaerieMacabreExileTargetEffect(final FaerieMacabreExileTargetEffect effect) {
         super(effect);
     }
 
     @Override
-    public ExileTargetEffect copy() {
-        return new ExileTargetEffect(this);
+    public FaerieMacabreExileTargetEffect copy() {
+        return new FaerieMacabreExileTargetEffect(this);
     }
 
     @Override

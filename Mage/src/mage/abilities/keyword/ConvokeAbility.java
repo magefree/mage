@@ -29,6 +29,7 @@
 package mage.abilities.keyword;
 
 import java.util.UUID;
+import mage.ObjectColor;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -123,9 +124,8 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
                     if (perm == null) {
                         continue;
                     }
-                    ManaCosts manaCostsCreature = perm.getSpellAbility().getManaCosts();
-                    if (manaCostsCreature != null && manaCostsCreature.convertedManaCost() > 0 && perm.tap(game)) {
-                        Choice chooseManaType = buildChoice(manaCostsCreature, ability.getManaCostsToPay());
+                    if (perm.tap(game)) {
+                        Choice chooseManaType = buildChoice(perm.getColor(), ability.getManaCostsToPay());
                         if (chooseManaType.getChoices().size() > 0) {
                             if (chooseManaType.getChoices().size() > 1) {
                                 chooseManaType.getChoices().add("Colorless");
@@ -168,23 +168,22 @@ public class ConvokeAbility extends SimpleStaticAbility implements AdjustingSour
         }
     }
 
-    private Choice buildChoice(ManaCosts manaCosts, ManaCosts manaCostsSpell) {
+    private Choice buildChoice(ObjectColor creatureColor, ManaCosts manaCostsSpell) {
        Choice choice = new ChoiceImpl();
-       String creatureCosts = manaCosts.getText();
        String spellCosts = manaCostsSpell.getText();
-       if (creatureCosts.contains("B") && spellCosts.contains("B")) {
+       if (creatureColor.isBlack() && spellCosts.contains("B")) {
            choice.getChoices().add("Black");
        }
-       if (creatureCosts.contains("U") && spellCosts.contains("U")) {
+       if (creatureColor.isBlue() && spellCosts.contains("U")) {
            choice.getChoices().add("Blue");
        }
-       if (creatureCosts.contains("G") && spellCosts.contains("G")) {
+       if (creatureColor.isGreen() && spellCosts.contains("G")) {
            choice.getChoices().add("Green");
        }
-       if (creatureCosts.contains("R") && spellCosts.contains("R")) {
+       if (creatureColor.isRed() && spellCosts.contains("R")) {
            choice.getChoices().add("Red");
        }
-       if (creatureCosts.contains("W") && spellCosts.contains("W")) {
+       if (creatureColor.isWhite() && spellCosts.contains("W")) {
            choice.getChoices().add("White");
        }
        return choice;

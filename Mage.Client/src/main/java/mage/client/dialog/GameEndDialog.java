@@ -38,10 +38,16 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import mage.client.MageFrame;
+import mage.client.game.GamePanel;
 import mage.client.util.AudioManager;
 import mage.client.util.Format;
 import mage.client.util.ImageHelper;
@@ -75,6 +81,12 @@ public class GameEndDialog extends MageDialog {
 
         this.lblResultText.setText(gameEndView.getResultMessage());
 
+        String autoSave = PreferencesDialog.getCachedValue(PreferencesDialog.KEY_GAME_LOG_AUTO_SAVE, "true");
+        if (autoSave.equals("true")) {
+            this.saveGameLog(gameEndView);
+        }
+        
+
         // game duration
         txtDurationGame.setText(Format.getDuration(gameEndView.getStartTime(), gameEndView.getEndTime()));
         txtDurationGame.setToolTipText(new StringBuilder(df.format(gameEndView.getStartTime())).append(" - ").append(df.format(gameEndView.getEndTime())).toString() );
@@ -91,9 +103,9 @@ public class GameEndDialog extends MageDialog {
         this.txtLife.setText(sb.toString());
 
         if (gameEndView.hasWon()) {
-            AudioManager.playPlayerJoinedTable();
+            AudioManager.playPlayerWon();
         } else {
-            AudioManager.playButtonCancel();
+            AudioManager.playPlayerLost();
         }
 
         txtMatchScore.setText(gameEndView.getMatchView().getResult());
@@ -109,6 +121,32 @@ public class GameEndDialog extends MageDialog {
             lblMatchInfo.setText(new StringBuilder("You need ").append(winsNeeded == 1 ? "one win ":winsNeeded + " wins ").append("to win the match.").toString());
         }
 
+
+    }
+
+    private void saveGameLog(GameEndView gameEndView) {
+        String dir = "gamelogs";
+        File saveDir = new File(dir);
+        //Here comes the existence check
+        if(!saveDir.exists()) {
+            saveDir.mkdirs();
+        }
+        // get game log
+        try {            
+            GamePanel gamePanel = MageFrame.getGame(gameEndView.getMatchView().getGames().get(gameEndView.getMatchView().getGames().size()-1));
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            sdf.applyPattern( "yyyyMMdd_HHmmss" );
+            String fileName = new StringBuilder(dir).append(File.separator)
+                    .append(sdf.format(gameEndView.getStartTime()))
+                    .append("_").append(gameEndView.getMatchView().getGameType())
+                    .append("_").append(gameEndView.getMatchView().getGames().size())
+                    .append(".txt").toString();
+            PrintWriter out = new PrintWriter(fileName);
+            out.print(gamePanel.getGameLog());
+            out.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Error while writing game log to file\n\n" + ex, "Error writing gamelog", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 

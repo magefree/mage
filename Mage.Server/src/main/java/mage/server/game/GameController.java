@@ -69,6 +69,7 @@ import mage.server.Main;
 import mage.server.TableManager;
 import mage.server.User;
 import mage.server.UserManager;
+import mage.server.util.ConfigSettings;
 import mage.server.util.Splitter;
 import mage.server.util.SystemUtil;
 import mage.server.util.ThreadExecutor;
@@ -247,7 +248,7 @@ public class GameController implements GameCallback {
             @Override
             public void execute() throws MageException {
                 game.concede(initPlayerId);
-                logger.info("Game timeout for player: " + initPlayerId + ". Conceding.");
+                logger.debug("Game timeout for player: " + initPlayerId + ". Conceding.");
             }
         });
         timers.put(playerId, timer);
@@ -266,7 +267,7 @@ public class GameController implements GameCallback {
         User user = UserManager.getInstance().getUser(userId);
         gameSession.setUserData(user.getUserData());
         user.addGame(playerId, gameSession);
-        logger.info(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
+        logger.debug(new StringBuilder("Player ").append(playerId).append(" has joined game ").append(game.getId()).toString());
         ChatManager.getInstance().broadcast(chatId, "", new StringBuilder(game.getPlayer(playerId).getName()).append(" has joined the game").toString(), MessageColor.BLACK);
         checkStart();
     }
@@ -400,7 +401,12 @@ public class GameController implements GameCallback {
 
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
-            ChatManager.getInstance().broadcast(chatId, "", game.getPlayer(userPlayerMap.get(userId)).getName() + " has timed out.  Auto concede.", MessageColor.BLACK);
+            ;
+            StringBuilder sb = new StringBuilder(game.getPlayer(userPlayerMap.get(userId)).getName())
+                    .append(" has timed out (player had priority and was not active for ")
+                    .append(ConfigSettings.getInstance().getMaxSecondsIdle())
+                    .append(" seconds ) - Auto concede.");
+            ChatManager.getInstance().broadcast(chatId, "", sb.toString() , MessageColor.BLACK);
             concede(userId);
         }
     }
@@ -688,7 +694,7 @@ public class GameController implements GameCallback {
             finally {
                 output.close();
             }
-            logger.info("Saved game:" + game.getId());
+            logger.debug("Saved game:" + game.getId());
         }
         catch(IOException ex) {
             logger.fatal("Cannot save game.", ex);
@@ -737,27 +743,18 @@ public class GameController implements GameCallback {
                     if (gameSessions.containsKey(playerId)) {
                         command.execute(playerId);
                     }
-                } // otherwise execute the action under other player's control
-                else {
-                    //System.out.println("asThough: " + playerId + " " + game.getPriorityPlayerId());
+                } else {
+                    // otherwise execute the action under other player's control
                     Player player = game.getPlayer(playerId);
-                    boolean found = false;
-                    for (UUID controlled : player.getPlayersUnderYourControl()) {
-                        if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
-                            command.execute(controlled);
-                            found = true;
+                    if (player != null) {
+                        for (UUID controlled : player.getPlayersUnderYourControl()) {
+                            if (gameSessions.containsKey(controlled) && game.getPriorityPlayerId().equals(controlled)) {
+                                command.execute(controlled);
+                            }
                         }
                     }
-                    if (!found) {
-                        // something wrong - it may cause game freezes
-                        logger.warn("WARNING! GameController.sendMessage - couldn't find session for action execution. Player: " + player.getName());
-                        // log additional information
-                        logger.warn("    action player: " + player.getName() + ", id: " + player.getId());
-                        Player priorityPlayer = game.getPlayer(game.getPriorityPlayerId());
-                        logger.warn("    priority player: " + priorityPlayer.getName() + ", id: " + priorityPlayer.getId());
-                        logger.warn("    command: " + command.toString());
-                        logger.warn("    command-class: " + command.getClass().getName());
-                    }
+                    // else player has no priority to do something, so ignore the command
+                    // e.g. you click at one of your cards, but you can't play something at that moment
                 }
         } else {
             // ignore - no control over the turn

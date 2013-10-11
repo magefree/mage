@@ -28,7 +28,7 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.abilities.effects.common.ReturnToHandAllEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
@@ -41,11 +41,7 @@ import mage.filter.FilterPermanent;
  
 public class Upheaval extends CardImpl<Upheaval> {
     
-    private static final FilterPermanent filter = new FilterPermanent("permanent");
-            
-            //static{
-             //   filter.add(new CardTypePredicate(CardType.))
-           // }
+    private static final FilterPermanent filter = new FilterPermanent("permanents");
 
     public Upheaval(UUID ownerId) {
         super(ownerId, 113, "Upheaval", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{U}{U}");
@@ -54,7 +50,7 @@ public class Upheaval extends CardImpl<Upheaval> {
         this.color.setBlue(true);
 
         // Return all permanents to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandAllEffect(filter));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(filter));
     }
 
     public Upheaval(final Upheaval card) {

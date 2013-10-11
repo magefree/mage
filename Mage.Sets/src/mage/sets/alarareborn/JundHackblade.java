@@ -41,7 +41,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterControlledPermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
 import mage.filter.predicate.permanent.AnotherPredicate;
 
@@ -51,7 +51,7 @@ import mage.filter.predicate.permanent.AnotherPredicate;
  */
 public class JundHackblade extends CardImpl<JundHackblade> {
     
-     private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another multicolor permanent");
+     private static final FilterControlledPermanent filter = new FilterControlledPermanent("another multicolor permanent");
     
     static {
         filter.add(new MulticoloredPredicate());
@@ -75,12 +75,11 @@ public class JundHackblade extends CardImpl<JundHackblade> {
                 new BoostSourceEffect(1,1, Duration.WhileOnBattlefield),
                 new ControlsPermanentCondition(filter),
                 "As long as you control another multicolored permanent, {this} gets +1/+1"));
-        Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+        ability.addEffect(new ConditionalContinousEffect(
                 new GainAbilitySourceEffect(HasteAbility.getInstance()),
                 new ControlsPermanentCondition(filter),
-                "As long as you control another multicolored permanent, {this} has haste"));
+                "and has haste"));
         this.addAbility(ability);
-        this.addAbility(ability2);
     }
 
     public JundHackblade(final JundHackblade card) {

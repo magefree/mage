@@ -31,7 +31,7 @@ package mage.abilities.common;
 import mage.constants.Duration;
 import mage.constants.Zone;
 import mage.abilities.StaticAbility;
-import mage.abilities.effects.common.AttacksIfAbleSourceEffect;
+import mage.abilities.effects.common.combat.AttacksIfAbleSourceEffect;
 
 /**
  *

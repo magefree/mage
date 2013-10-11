@@ -45,7 +45,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class Broodwarden extends CardImpl<Broodwarden> {
 
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Spawn creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Eldrazi Spawn creatures");
 
     static {
         filter.add(new SubtypePredicate("Eldrazi"));
@@ -61,8 +61,8 @@ public class Broodwarden extends CardImpl<Broodwarden> {
         this.color.setGreen(true);
         this.power = new MageInt(4);
         this.toughness = new MageInt(4);
-
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)));
+        // Eldrazi Spawn creatures you control get +2/+1.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(2, 1, Duration.WhileOnBattlefield, filter, false)));
     }
 
     public Broodwarden(final Broodwarden card) {

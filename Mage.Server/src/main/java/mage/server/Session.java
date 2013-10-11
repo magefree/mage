@@ -82,7 +82,7 @@ public class Session {
         Pattern p = Pattern.compile(ConfigSettings.getInstance().getUserNamePattern(), Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(userName);
         if (m.find()) {
-           throw new MageException("User name includes not allowed characters: use a-z, A-Z and 0-9");
+           throw new MageException("User name '" + userName + "' includes not allowed characters: use a-z, A-Z and 0-9");
         }
         User user = UserManager.getInstance().createUser(userName, host);
         if (user == null) {  // user already exists
@@ -99,11 +99,11 @@ public class Session {
                 }
             }
             else {
-                throw new MageException("User name already in use");
+                throw new MageException("User name " + userName + " already in use");
             }
         }
         if (!UserManager.getInstance().connectToSession(sessionId, user.getId())) {
-            throw new MageException("Error connecting");
+            throw new MageException("Error connecting " + userName);
         }
         this.userId = user.getId();
     }

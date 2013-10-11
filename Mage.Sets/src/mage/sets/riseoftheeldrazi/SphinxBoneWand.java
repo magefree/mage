@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -63,7 +63,7 @@ public class SphinxBoneWand extends CardImpl<SphinxBoneWand> {
         this.expansionSetCode = "ROE";
 
         // Whenever you cast an instant or sorcery spell, you may put a charge counter on Sphinx-Bone Wand. If you do, Sphinx-Bone Wand deals damage equal to the number of charge counters on it to target creature or player.
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new SphinxBoneWandEffect(), filter, true);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new SphinxBoneWandEffect(), filter, true);
         ability.addTarget(new TargetCreatureOrPlayer());
         this.addAbility(ability);
     }

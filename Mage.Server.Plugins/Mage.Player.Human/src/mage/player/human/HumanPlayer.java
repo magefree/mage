@@ -55,14 +55,12 @@ import mage.cards.Cards;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.constants.Zone;
 import mage.filter.common.FilterAttackingCreature;
 import mage.filter.common.FilterBlockingCreature;
 import mage.filter.common.FilterCreatureForCombat;
-import mage.filter.common.FilterCreatureForCombatBase;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -486,6 +484,9 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("playMana", game);
         game.firePlayManaEvent(playerId, "Pay " + unpaid.getText());
         waitForResponse(game);
+        if (!this.isInGame()) {
+            return false;
+        }
         if (response.getBoolean() != null) {
             return false;
         } else if (response.getUUID() != null) {
@@ -517,10 +518,14 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
      */
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        int xValue = 0;
         updateGameStatePriority("announceXMana", game);
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
-        return response.getInteger();
+        if (response != null && response.getInteger() != null) {
+            xValue =  response.getInteger().intValue();
+        }
+        return xValue;
     }
 
     protected void playManaAbilities(ManaCost unpaid, Game game) {

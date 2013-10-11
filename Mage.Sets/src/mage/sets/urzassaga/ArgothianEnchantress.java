@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
@@ -62,7 +62,7 @@ public class ArgothianEnchantress extends CardImpl<ArgothianEnchantress> {
 
         this.addAbility(ShroudAbility.getInstance());
         // Whenever you cast an Enchantment spell, you draw a card.
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
     }
 
     public ArgothianEnchantress(final ArgothianEnchantress card) {

@@ -67,11 +67,16 @@ public class MatchView implements Serializable {
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         for (MatchPlayer player: match.getPlayers()) {
-            sb1.append(player.getPlayer().getName()).append(", ");
-            sb2.append(player.getPlayer().getName()).append(" ").append(player.getWins()).append("-").append(player.getLoses()).append(", ");
-            players = sb1.substring(0, sb1.length() - 2);
-            result = sb2.substring(0, sb2.length() - 2);
+            sb1.append(player.getPlayer().getName());
+            if(player.hasQuit()) {
+               sb1.append(" [quit] ");
+            }
+            sb1.append(", ");
+            sb2.append(player.getPlayer().getName()).append(" ");
+            sb2.append(player.getWins()).append("-").append(player.getLoses()).append(", ");
         }
+        players = sb1.substring(0, sb1.length() - 2);
+        result = sb2.substring(0, sb2.length() - 2);
         this.startTime = match.getStartTime();
         this.endTime = match.getEndTime();
     }
@@ -81,7 +86,7 @@ public class MatchView implements Serializable {
         this.matchId = table.getTournament().getId();
         this.matchName = table.getName();
         this.gameType = table.getGameType();
-        this.deckType = table.getDeckType();
+        this.deckType = new StringBuilder(table.getDeckType()).append(" ").append(table.getTournament().getSetsFormatedShort()).toString();
 
         StringBuilder sb1 = new StringBuilder();
         for (TournamentPlayer tPlayer : table.getTournament().getPlayers()) {

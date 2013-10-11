@@ -32,22 +32,18 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.ObjectColor;
-import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.CostsImpl;
 import mage.abilities.costs.common.ExileFromHandCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
 import mage.filter.FilterSpell;
 import mage.filter.common.FilterOwnedCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardIdPredicate;
 import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.mageobject.NumberOfTargetsPredicate;
-import mage.game.Game;
-import mage.game.stack.Spell;
 import mage.target.TargetSpell;
 import mage.target.common.TargetCardInHand;
 
@@ -57,8 +53,7 @@ import mage.target.common.TargetCardInHand;
  */
 public class Misdirection extends CardImpl<Misdirection> {
 
-    private static final FilterSpell filter2 = new FilterSpell();
-
+    private static final FilterSpell filter2 = new FilterSpell("spell with a single target");
     static {
         filter2.add(new NumberOfTargetsPredicate(1));
     }
@@ -78,7 +73,7 @@ public class Misdirection extends CardImpl<Misdirection> {
         costs.add(new ExileFromHandCost(new TargetCardInHand(filterCardInHand)));
         this.getSpellAbility().addAlternativeCost(new AlternativeCostImpl("You may exile a blue card from your hand rather than pay Misdirection's mana cost", costs));
         // Change the target of target spell with a single target.
-        this.getSpellAbility().addEffect(new MisdirectionEffect());
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter2));
     }
 
@@ -92,28 +87,3 @@ public class Misdirection extends CardImpl<Misdirection> {
     }
 }
 
-class MisdirectionEffect extends OneShotEffect<MisdirectionEffect> {
-
-    public MisdirectionEffect() {
-        super(Outcome.Neutral);
-        staticText = "Change the target of target spell with a single target";
-    }
-
-    public MisdirectionEffect(final MisdirectionEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        if (spell != null && source.getControllerId() != null) {
-            return spell.chooseNewTargets(game, source.getControllerId());
-        }
-        return false;
-    }
-
-    @Override
-    public MisdirectionEffect copy() {
-        return new MisdirectionEffect(this);
-    }
-}

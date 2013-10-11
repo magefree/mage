@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.abilities.keyword.ScavengeAbility;
 import mage.cards.CardImpl;
 import mage.constants.Zone;
@@ -56,7 +56,7 @@ public class GolgariDecoy extends CardImpl<GolgariDecoy> {
         this.toughness = new MageInt(2);
 
         // All creatures able to block Golgari Decoy do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
         // Scavenge {3}{G}{G} ({3}{G}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)
         this.addAbility(new ScavengeAbility(new ManaCostsImpl("{3}{G}{G}")));
     }

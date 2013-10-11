@@ -35,6 +35,7 @@ import mage.filter.predicate.ObjectPlayer;
 import mage.filter.predicate.ObjectPlayerPredicate;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -56,6 +57,11 @@ public class FilterPermanent extends FilterObject<Permanent> {
 
     public FilterPermanent(String name) {
         super(name);
+    }
+    
+    public FilterPermanent(String subtype, String name) {
+        super(name);
+        this.add(new SubtypePredicate(subtype));
     }
 
     public boolean match(Permanent permanent, UUID sourceId, UUID playerId, Game game) {

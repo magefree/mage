@@ -32,10 +32,13 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
+import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.UnblockableTargetEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.UnblockableTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -43,10 +46,12 @@ import mage.filter.Filter;
 import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
+import mage.filter.predicate.mageobject.PowerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetPermanent;
+import mage.target.common.TargetCreaturePermanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -54,6 +59,8 @@ import mage.target.targetpointer.FixedTarget;
  * @author LevelX2
  */
 public class MinamoSightbender extends CardImpl<MinamoSightbender> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with power X or less");
 
     public MinamoSightbender(UUID ownerId) {
         super(ownerId, 41, "Minamo Sightbender", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{U}");
@@ -65,7 +72,30 @@ public class MinamoSightbender extends CardImpl<MinamoSightbender> {
         this.toughness = new MageInt(1);
 
         // {X}, {T}: Target creature with power X or less is unblockable this turn.
-        this.addAbility(new MinamoSightbenderAbility());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
+
+    }
+
+    @Override
+    public void adjustTargets(Ability ability, Game game) {
+        if (ability instanceof SimpleActivatedAbility) {
+            for (Effect effect :ability.getEffects()) {
+                if (effect instanceof UnblockableTargetEffect) {
+                    int manaX = ability.getManaCostsToPay().getX();
+                    ability.getTargets().clear();
+                    FilterCreaturePermanent newFilter = new FilterCreaturePermanent(new StringBuilder("creature with power ").append(manaX).append(" or less").toString());
+                    filter.add(new PowerPredicate(Filter.ComparisonType.LessThan, manaX +1));
+                    Target target = new TargetCreaturePermanent(newFilter);
+                    ability.addTarget(target);
+                    break;
+                }
+            }
+        }
     }
 
     public MinamoSightbender(final MinamoSightbender card) {
@@ -76,39 +106,4 @@ public class MinamoSightbender extends CardImpl<MinamoSightbender> {
     public MinamoSightbender copy() {
         return new MinamoSightbender(this);
     }
-}
-
-
-class MinamoSightbenderAbility extends ActivatedAbilityImpl<MinamoSightbenderAbility> {
-
-    public MinamoSightbenderAbility() {
-        super(Zone.BATTLEFIELD,new UnblockableTargetEffect(), new ManaCostsImpl("{X}"));
-        this.addCost(new TapSourceCost());
-    }
-
-    public MinamoSightbenderAbility(MinamoSightbenderAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public MinamoSightbenderAbility copy() {
-        return new MinamoSightbenderAbility(this);
-    }
-
-    @Override
-    public boolean resolve(Game game) {
-        int manaX = this.getManaCostsToPay().getX();
-        FilterPermanent filter = new FilterCreaturePermanent("creature with power " + manaX + " or less");
-        filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, manaX + 1));
-        Target target = new TargetPermanent(filter);
-        Player player = game.getPlayer(controllerId);
-        if (player != null) {
-            if (player.chooseTarget(Outcome.Benefit, target, this, game)) {
-                this.getEffects().get(0).setTargetPointer(new FixedTarget(target.getFirstTarget()));
-                return super.resolve(game);
-            }
-        }
-        return false;
-    }
-
 }

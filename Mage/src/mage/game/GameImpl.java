@@ -28,7 +28,6 @@
 
 package mage.game;
 
-import mage.Constants;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -128,9 +127,9 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     protected transient TableEventSource tableEventSource = new TableEventSource();
     protected transient PlayerQueryEventSource playerQueryEventSource = new PlayerQueryEventSource();
 
-    protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();
-    protected Map<UUID, MageObject> lki = new HashMap<UUID, MageObject>();
-    protected Map<UUID, MageObject> shortLivingLKI = new HashMap<UUID, MageObject>();
+    protected Map<UUID, Card> gameCards = new HashMap<UUID, Card>();    
+    protected Map<Zone,HashMap<UUID, MageObject>> lki = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
+    protected Map<Zone,HashMap<UUID, MageObject>> shortLivingLKI = new EnumMap<Zone, HashMap<UUID, MageObject>>(Zone.class);
     protected GameState state;
 
     protected Date startTime;
@@ -515,11 +514,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void start(UUID choosingPlayerId, GameOptions options) {
         startTime = new Date();
         this.gameOptions = options;
-        scorePlayer = state.getPlayers().values().iterator().next();
-        init(choosingPlayerId, options);
-        informPlayers(Constants.MSG_TIP_HOT_KEYS_CODE);
-        play(startingPlayerId);
-        //saveState();
+        if (state.getPlayers().values().iterator().hasNext()) {
+            scorePlayer = state.getPlayers().values().iterator().next();
+            init(choosingPlayerId, options);
+            play(startingPlayerId);
+        }
     }
 
     @Override
@@ -559,10 +558,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
                 //20091005 - 500.7
                 while (getState().getTurnMods().extraTurn(player.getId())) {
+                    state.setExtraTurn(true);
                     playTurn(player);
                     state.setTurnNum(state.getTurnNum() + 1);
                 }
-
+                state.setExtraTurn(false);
                 player = players.getNext(this);
             }
         }
@@ -572,7 +572,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     private boolean playTurn(Player player) {
-        fireStatusEvent("Turn " + Integer.toString(state.getTurnNum()), true);
+        this.logStartOfTurn(player);
         if (checkStopOnTurnOption()) {
             return false;
         }
@@ -587,6 +587,26 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         return true;
     }
 
+
+    private void logStartOfTurn(Player player) {
+        StringBuilder sb = new StringBuilder("Turn ").append(state.getTurnNum()).append(" ");
+        sb.append(player.getName());
+        sb.append(" (");
+        int delimiter = this.getPlayers().size() - 1;
+        for (Player gamePlayer : this.getPlayers().values()) {
+            sb.append(gamePlayer.getLife());
+            int poison = gamePlayer.getCounters().getCount(CounterType.POISON);
+            if (poison > 0) {
+                sb.append("[P:").append(poison).append("]");
+            }
+            if (delimiter > 0) {
+                sb.append(" - ");
+                delimiter--;
+            }
+        }
+        sb.append(")");
+        fireStatusEvent(sb.toString(), true);
+    }
 
     private boolean checkStopOnTurnOption() {
         if (gameOptions.stopOnTurn != null && gameOptions.stopAtStep == PhaseStep.UNTAP) {
@@ -626,22 +646,21 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         TargetPlayer targetPlayer = new TargetPlayer();
         targetPlayer.setRequired(true);
         targetPlayer.setTargetName("starting player");
-        Player choosingPlayer;
-        if (choosingPlayerId == null) {
-            choosingPlayer = getPlayer(pickChoosingPlayer());
-        }
-        else {
+        Player choosingPlayer = null;
+        if (choosingPlayerId != null) {
             choosingPlayer = this.getPlayer(choosingPlayerId);
         }
-        if (choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
+        if (choosingPlayer == null) {
+            choosingPlayer = getPlayer(pickChoosingPlayer());
+        }
+        if (choosingPlayer != null && choosingPlayer.choose(Outcome.Benefit, targetPlayer, null, this)) {
             startingPlayerId = ((List<UUID>)targetPlayer.getTargets()).get(0);
             fireInformEvent(state.getPlayer(startingPlayerId).getName() + " will start");
-        }
-        else {
+        } else {
+            // not possible to choose starting player, stop here
             return;
         }
 
-        //saveState();
 
         //20091005 - 103.3
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
@@ -1216,8 +1235,11 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             if (filterAura.match(perm, this)) {
                 //20091005 - 704.5n, 702.14c
                 if (perm.getAttachedTo() == null) {
-                    if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-                        somethingHappened = true;
+                    Card card = this.getCard(perm.getId());
+                    if (card != null && !card.getCardType().contains(CardType.CREATURE)) { // no bestow creature
+                        if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                            somethingHappened = true;
+                        }
                     }
                 }
                 else {
@@ -1225,8 +1247,16 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     if (target instanceof TargetPermanent) {
                         Permanent attachedTo = getPermanent(perm.getAttachedTo());
                         if (attachedTo == null || !attachedTo.getAttachments().contains(perm.getId())) {
-                            if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
-                                somethingHappened = true;
+                            // handle bestow unattachment
+                            Card card = this.getCard(perm.getId());
+                            if (card != null && card.getCardType().contains(CardType.CREATURE)) {
+                                UUID wasAttachedTo = perm.getAttachedTo();
+                                perm.attachTo(null, this);
+                                fireEvent(new GameEvent(GameEvent.EventType.UNATTACHED, wasAttachedTo, perm.getId(), perm.getControllerId()));
+                            } else {
+                                if (perm.moveToZone(Zone.GRAVEYARD, null, this, false)) {
+                                    somethingHappened = true;
+                                }
                             }
                         }
                         else {
@@ -1700,6 +1730,12 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }            
         }
 
+        // Update players in range of
+        for (Player leftPlayer :this.getPlayers().values()) {
+            if (leftPlayer.isInGame()) {
+                leftPlayer.otherPlayerLeftGame(this);
+            }
+        }
     }
 
     @Override
@@ -1756,18 +1792,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         /*if (!lki.containsKey(objectId)) {
             return getCard(objectId);
         }*/
-        MageObject object = lki.get(objectId);
-        if (object != null) {
-            return object.copy();
+        Map<UUID, MageObject> lkiMap = lki.get(zone);
+        if (lkiMap != null) {
+            MageObject object = lkiMap.get(objectId);
+            if (object != null) {
+                return object.copy();
+            }
         }
         return null;
     }
 
     @Override
     public MageObject getShortLivingLKI(UUID objectId, Zone zone) {
-        MageObject object = shortLivingLKI.get(objectId);
-        if (object != null) {
-            return object.copy();
+        Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
+        if (shortLivingLkiMap != null) {
+            MageObject object = shortLivingLkiMap.get(objectId);
+            if (object != null) {
+                return object.copy();
+            }
         }
         return null;
     }
@@ -1783,8 +1825,24 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public void rememberLKI(UUID objectId, Zone zone, MageObject object) {
         if (object instanceof Permanent || object instanceof StackObject) {
             MageObject copy = object.copy();
-            lki.put(objectId, copy);
-            shortLivingLKI.put(objectId, copy);
+
+            Map<UUID, MageObject> lkiMap = lki.get(zone);
+            if (lkiMap != null) {
+                lkiMap.put(objectId, copy);
+            } else {
+                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                newMap.put(objectId, copy);
+                lki.put(zone, newMap);
+            }
+
+            Map<UUID, MageObject> shortLivingLkiMap = shortLivingLKI.get(zone);
+            if (shortLivingLkiMap != null) {
+                shortLivingLkiMap.put(objectId, copy);
+            } else {
+                HashMap<UUID, MageObject> newMap = new HashMap<UUID, MageObject>();
+                newMap.put(objectId, copy);
+                shortLivingLKI.put(zone, newMap);
+            }
         }
     }
 
@@ -1958,11 +2016,17 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
 
     @Override
     public Date getStartTime() {
+        if (startTime == null) {
+            return null;
+        }
         return new Date(startTime.getTime());
     }
 
     @Override
     public Date getEndTime() {
+        if (endTime == null) {
+            return null;
+        }
         return new Date(endTime.getTime());
     }
 

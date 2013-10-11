@@ -59,11 +59,10 @@ public class CephalidBroker extends CardImpl<CephalidBroker> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        // {tap}: Target player draws two cards, then discards two cards.
-        
+        // {tap}: Target player draws two cards, then discards two cards.        
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DrawCardTargetEffect(2), new TapSourceCost());
         ability.addEffect(new DiscardTargetEffect(2));
-        ability.addTarget(new TargetPlayer());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 

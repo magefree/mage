@@ -28,8 +28,10 @@
 
 package mage.abilities.effects.common.continious;
 
+import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.cards.Card;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Layer;
@@ -47,6 +49,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
 
     protected Token token;
     protected String type;
+    protected int zoneChangeCounter;
 
     public BecomesCreatureSourceEffect(Token token, String type, Duration duration) {
         super(duration, Outcome.BecomeCreature);
@@ -59,6 +62,7 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
+        this.zoneChangeCounter = effect.zoneChangeCounter;
     }
 
     @Override
@@ -70,12 +74,16 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
     public void init(Ability source, Game game) {
         super.init(source, game);
         this.getAffectedObjects().add(source.getSourceId());
+        Permanent permanent = game.getPermanent(source.getSourceId());
+        if (permanent != null) {
+            this.zoneChangeCounter = permanent.getZoneChangeCounter();
+        }
     }
 
     @Override
     public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
         Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
+        if (permanent != null && permanent.getZoneChangeCounter() == this.zoneChangeCounter) {
             switch (layer) {
                 case TypeChangingEffects_4:
                     if (sublayer == SubLayer.NA) {
@@ -112,11 +120,11 @@ public class BecomesCreatureSourceEffect extends ContinuousEffectImpl<BecomesCre
                     break;
                 case PTChangingEffects_7:
                     if (sublayer == SubLayer.SetPT_7b) {
-                        int power = token.getPower().getValue();
-                        int toughness = token.getToughness().getValue();
-                        if (power != 0 && toughness != 0) {
-                            permanent.getPower().setValue(power);
-                            permanent.getToughness().setValue(toughness);
+                        MageInt power = token.getPower();
+                        MageInt toughness = token.getToughness();
+                        if (power != null && toughness != null) {
+                            permanent.getPower().setValue(power.getValue());
+                            permanent.getToughness().setValue(toughness.getValue());
                         }
                     }
             }

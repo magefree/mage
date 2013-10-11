@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -62,7 +62,7 @@ public class KilnFiend extends CardImpl<KilnFiend> {
         this.power = new MageInt(1);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false));
     }
 
     public KilnFiend(final KilnFiend card) {

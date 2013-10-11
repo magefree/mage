@@ -55,7 +55,7 @@ public enum CardRepository {
 
     private static final String JDBC_URL = "jdbc:sqlite:db/cards.db";
     private static final String VERSION_ENTITY_NAME = "card";
-    private static final long CARD_DB_VERSION = 13;
+    private static final long CARD_DB_VERSION = 17;
 
     private Random random = new Random();
     private Dao<CardInfo, Object> cardDao;
@@ -265,7 +265,7 @@ public enum CardRepository {
         try {
             QueryBuilder<CardInfo, Object> queryBuilder = cardDao.queryBuilder();
             criteria.buildQuery(queryBuilder);
-
+            
             return cardDao.query(queryBuilder.prepare());
         } catch (SQLException ex) {
         }

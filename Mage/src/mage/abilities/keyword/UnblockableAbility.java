@@ -28,7 +28,7 @@
 package mage.abilities.keyword;
 
 import mage.abilities.EvasionAbility;
-import mage.abilities.effects.common.UnblockableSourceEffect;
+import mage.abilities.effects.common.combat.UnblockableSourceEffect;
 
 /**
  * @author BetaSteward_at_googlemail.com

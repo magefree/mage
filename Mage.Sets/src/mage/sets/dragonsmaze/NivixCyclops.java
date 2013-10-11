@@ -35,7 +35,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.DefenderAbility;
@@ -75,7 +75,7 @@ public class NivixCyclops extends CardImpl<NivixCyclops> {
         this.addAbility(DefenderAbility.getInstance());
 
         // Whenever you cast an instant or sorcery spell, Nivix Cyclops gets +3/+0 until end of turn and can attack this turn as though it didn't have defender.
-        Ability ability = new SpellCastTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostSourceEffect(3, 0, Duration.EndOfTurn), filter, false);
         ability.addEffect(new AsThoughNoDefenderEffect());
         this.addAbility(ability);
 

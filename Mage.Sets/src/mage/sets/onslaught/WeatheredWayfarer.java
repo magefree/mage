@@ -35,6 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.condition.Condition;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.search.SearchLibraryPutInHandEffect;
 import mage.cards.CardImpl;
@@ -62,11 +63,13 @@ public class WeatheredWayfarer extends CardImpl<WeatheredWayfarer> {
         this.toughness = new MageInt(1);
 
         // {W}, {tap}: Search your library for a land card, reveal it, and put it into your hand. Then shuffle your library. Activate this ability only if an opponent controls more lands than you.
-        this.addAbility(new ActivateIfConditionActivatedAbility(
-                Zone.BATTLEFIELD, 
+        Ability ability = new ActivateIfConditionActivatedAbility(
+                Zone.BATTLEFIELD,
                 new SearchLibraryPutInHandEffect(new TargetCardInLibrary(new FilterLandCard()), true, true),
                 new ManaCostsImpl("{W}"),
-                new OpponentControllsMoreLandCondition()));
+                new OpponentControllsMoreLandCondition());
+        ability.addCost(new TapSourceCost());
+        this.addAbility(ability);
     }
 
     public WeatheredWayfarer(final WeatheredWayfarer card) {

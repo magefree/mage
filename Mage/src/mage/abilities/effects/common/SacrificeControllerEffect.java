@@ -27,8 +27,6 @@
  */
 package mage.abilities.effects.common;
 
-import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
@@ -37,6 +35,8 @@ import mage.game.Game;
 import mage.target.targetpointer.FixedTarget;
 
 /**
+ * The controlling player of the source ability has to sacrifice [count] permanents
+ * that match the [filter].
  *
  * @author LevelX
  */

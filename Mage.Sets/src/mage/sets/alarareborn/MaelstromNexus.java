@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.stack.Spell;
 import mage.players.Player;
+import mage.target.targetpointer.FixedTarget;
 import mage.watchers.WatcherImpl;
 
 /**
@@ -95,6 +96,7 @@ class MaelstromNexusTriggeredAbility extends TriggeredAbilityImpl<MaelstromNexus
             if (spell != null
                     && watcher != null
                     && watcher.conditionMet()) {
+                this.getEffects().get(0).setTargetPointer(new FixedTarget(spell.getSourceId()));
                 return true;
             }
         }
@@ -166,7 +168,11 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
         Card card;
         Player player = game.getPlayer(source.getControllerId());
         ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
-        int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
+        Card stackCard = game.getCard(targetPointer.getFirst(game, source));
+        if (stackCard == null) {
+            return false;
+        }
+        int sourceCost = stackCard.getManaCost().convertedManaCost();
         do {
             card = player.getLibrary().removeFromTop(game);
             if (card == null) {

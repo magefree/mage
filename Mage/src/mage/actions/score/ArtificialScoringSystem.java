@@ -15,7 +15,7 @@ public class ArtificialScoringSystem implements ScoringSystem {
 
     static {
         inst = new ArtificialScoringSystem();
-        log.info("ArtificialScoringSystem has been instantiated.");
+        log.debug("ArtificialScoringSystem has been instantiated.");
     }
 
     /**
@@ -25,6 +25,7 @@ public class ArtificialScoringSystem implements ScoringSystem {
      * @param game
      * @return
      */
+    @Override
     public int getLoseGameScore(final Game game) {
         if (game.getStep() == null) {
             return 0;

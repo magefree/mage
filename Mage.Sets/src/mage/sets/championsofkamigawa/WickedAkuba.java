@@ -28,17 +28,16 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ColoredManaCost;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.FilterPlayer;
 import mage.filter.predicate.ObjectSourcePlayer;
 import mage.filter.predicate.ObjectSourcePlayerPredicate;
@@ -89,8 +88,8 @@ class WickedAkubaPredicate implements ObjectSourcePlayerPredicate<ObjectSourcePl
     @Override
     public boolean apply(ObjectSourcePlayer<Player> input, Game game) {
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", input.getObject().getId());
-        if (watcher != null && watcher.damageSources.contains(input.getSourceId())) {
-            return true;
+        if (watcher != null) {
+            return watcher.hasSourceDoneDamage(input.getSourceId(), game);
         }
 
         return false;

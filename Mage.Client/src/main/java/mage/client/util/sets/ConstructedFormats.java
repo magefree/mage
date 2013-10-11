@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import mage.cards.repository.ExpansionInfo;
 import mage.cards.repository.ExpansionRepository;
+import mage.constants.SetType;
 
 /**
  * Utility class for constructed formats (expansions and other editions).
@@ -15,8 +16,14 @@ import mage.cards.repository.ExpansionRepository;
  */
 public class ConstructedFormats {
 
+    public static final String ALL = "- All Sets";
+    public static final String STANDARD = "- Standard";
+    public static final String EXTENDED = "- Extended";
+    public static final String MODERN = "- Modern";
+
     private static final String[] constructedFormats = {
-            "- All Sets", "- Standard", "- Extended", "- Modern",
+            ALL, STANDARD, EXTENDED, MODERN,
+            "* Theros Block", "Theros",
             "Magic 2014",
             "Modern Masters",
             "* Return to Ravnica Block", "Dragon's Maze", "Gatecrash", "Return to Ravnica",
@@ -44,6 +51,7 @@ public class ConstructedFormats {
             "Homelands", "Fallen Empires", "The Dark", "Legends", "Antiquities", "Arabian Nights",
             "Revised Edition", "Unlimited Edition", "Limited Edition Beta", "Limited Edition Alpha",
             "Guru",
+            "Duel Decks: Heroes vs. Monsters",
             "Duel Decks: Elspeth vs. Tezzeret"
     };
     
@@ -59,7 +67,13 @@ public class ConstructedFormats {
     }
 
     public static List<String> getSetsByFormat(String format) {
-
+        
+        if (format.equals("* Theros Block")) {
+            return Arrays.asList("THS");
+        }
+        if (format.equals("Theros")) {
+            return Arrays.asList("THS");
+        }
         if (format.equals("Arabian Nights")) {
             return Arrays.asList("ARN");
         }
@@ -369,14 +383,17 @@ public class ConstructedFormats {
         if (format.equals("Duel Decks: Elspeth vs. Tezzeret")) {
             return Arrays.asList("DDF");
         }
+        if (format.equals("Duel Decks: Heroes vs. Monsters")) {
+            return Arrays.asList("DDL");
+        }
         
-        if (format.equals("- Standard")) {
+        if (format.equals(STANDARD)) {
             return standard;
         }
-        if (format.equals("- Extended")) {
+        if (format.equals(EXTENDED)) {
             return extended;
         }
-        if (format.equals("- Modern")) {
+        if (format.equals(MODERN)) {
             return modern;
         }
         return all;
@@ -384,20 +401,22 @@ public class ConstructedFormats {
 
     private static void buildLists() {
         for (ExpansionInfo set : ExpansionRepository.instance.getAll()) {
-            if (set.getReleaseDate().after(standardDate)) {
-                standard.add(set.getCode());
-            }
-            if (set.getReleaseDate().after(extendedDate)) {
-                extended.add(set.getCode());
-            }
-            if (set.getReleaseDate().after(modernDate)) {
-                modern.add(set.getCode());
+            if (!set.getType().equals(SetType.REPRINT)) {
+                if (set.getReleaseDate().after(standardDate)) {
+                    standard.add(set.getCode());
+                }
+                if (set.getReleaseDate().after(extendedDate)) {
+                    extended.add(set.getCode());
+                }
+                if (set.getReleaseDate().after(modernDate)) {
+                    modern.add(set.getCode());
+                }
             }
         }
     }
 
     private static final List<String> standard = new ArrayList<String>();
-    private static final Date standardDate = new GregorianCalendar(2011, 9, 29).getTime();
+    private static final Date standardDate = new GregorianCalendar(2012, 9, 28).getTime();
 
     private static final List<String> extended = new ArrayList<String>();
     private static final Date extendedDate = new GregorianCalendar(2009, 8, 20).getTime();

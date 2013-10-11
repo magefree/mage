@@ -28,18 +28,17 @@
 
 package mage.abilities;
 
-import mage.constants.AbilityType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.keyword.FlashAbility;
-import mage.game.Game;
-
-import java.util.UUID;
-import mage.constants.SpellAbilityType;
 import mage.cards.SplitCard;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
+import mage.game.Game;
 
 /**
  *
@@ -71,24 +70,25 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
         
     }
 
-//    public SpellAbility(Cost cost, String cardName, Effect effect, Zone zone) {
-//        super(zone, effect, cost);
-//        this.spellAbilityType = SpellAbilityType.BASE;
-//        this.name = "Cast " + cardName;
-//    }
-
     public SpellAbility(SpellAbility ability) {
         super(ability);
         this.spellAbilityType = ability.spellAbilityType;
     }
 
-    @Override
-    public boolean canActivate(UUID playerId, Game game) {
+    public boolean spellCanBeActivatedRegularlyNow(UUID playerId, Game game) {
         MageObject object = game.getObject(sourceId);
         if ((object.getCardType().contains(CardType.INSTANT) ||
                 object.getAbilities().containsKey(FlashAbility.getInstance().getId()) ||
-                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game) ||
                 game.canPlaySorcery(playerId))) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canActivate(UUID playerId, Game game) {
+        if (this.spellCanBeActivatedRegularlyNow(playerId, game) ||
+                game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.CAST, game)) {
             if (spellAbilityType.equals(SpellAbilityType.SPLIT)) {
                 return false;
             }

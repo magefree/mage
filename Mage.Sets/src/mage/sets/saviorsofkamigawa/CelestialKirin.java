@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyAllEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -66,7 +66,7 @@ public class CelestialKirin extends CardImpl<CelestialKirin> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, destroy all permanents with that spell's converted mana cost.
-        this.addAbility(new SpellCastTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), new FilterSpiritOrArcaneCard(), false, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new CelestialKirinEffect(), new FilterSpiritOrArcaneCard(), false, true));
     }
 
     public CelestialKirin(final CelestialKirin card) {

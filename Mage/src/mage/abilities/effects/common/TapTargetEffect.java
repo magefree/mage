@@ -37,6 +37,7 @@ import mage.game.permanent.Permanent;
 import mage.target.Target;
 
 import java.util.UUID;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -81,9 +82,9 @@ public class TapTargetEffect extends OneShotEffect<TapTargetEffect> {
         Target target = mode.getTargets().get(0);
         if (target.getMaxNumberOfTargets() > 1) {
             if (target.getMaxNumberOfTargets() == target.getNumberOfTargets()) {
-                return "tap " + target.getNumberOfTargets() + " target " + target.getTargetName() + "s";
+                return "tap " + CardUtil.numberToText(target.getNumberOfTargets()) + " target " + target.getTargetName() + "s";
             } else {
-                return "tap up to " + target.getMaxNumberOfTargets() + " target " + target.getTargetName() + "s";
+                return "tap up to " + CardUtil.numberToText(target.getMaxNumberOfTargets()) + " target " + target.getTargetName() + "s";
             }
         } else if (target.getMaxNumberOfTargets() == 0){
             return "tap X target " + mode.getTargets().get(0).getTargetName();

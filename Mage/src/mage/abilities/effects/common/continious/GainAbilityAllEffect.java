@@ -118,7 +118,11 @@ public class GainAbilityAllEffect extends ContinuousEffectImpl<GainAbilityAllEff
                 sb.append(" have ");
             }
         } else {
-            sb.append(" gain ");
+            if (filter.getMessage().toLowerCase().startsWith("each")) {
+                sb.append(" gains ");
+            } else {
+                sb.append(" gain ");
+            }            
         }
         sb.append(ability.getRule());
         if (duration.toString().length() > 0) {

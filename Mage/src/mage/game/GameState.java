@@ -97,6 +97,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
     private Battlefield battlefield;
     private int turnNum = 1;
+    private boolean extraTurn = false;
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -142,6 +143,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.lookedAt.putAll(state.lookedAt);
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
+        this.extraTurn = state.extraTurn;
         this.gameOver = state.gameOver;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger: state.triggered) {
@@ -349,6 +351,14 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.turnNum = turnNum;
     }
 
+    public boolean isExtraTurn() {
+        return extraTurn;
+    }
+
+    public void setExtraTurn(boolean extraTurn) {
+        this.extraTurn = extraTurn;
+    }
+
     public boolean isGameOver() {
         return this.gameOver;
     }
@@ -374,6 +384,7 @@ public class GameState implements Serializable, Copyable<GameState> {
             player.reset();
         }
         battlefield.reset(game);
+        combat.reset();
         resetOtherAbilities();
         effects.apply(game);
         battlefield.fireControlChangeEvents(game);
@@ -568,6 +579,16 @@ public class GameState implements Serializable, Copyable<GameState> {
         values.put(valueId, value);
     }
 
+    /**
+     * Other abilities are used to implement some special kind of continious effects.
+     *
+     * Crucible of Worlds - You may play land cards from your graveyard.
+     * Past in Flames - Each instant and sorcery card in your graveyard gains flashback until end of turn. The flashback cost is equal to its mana cost.
+     *
+     * @param objectId
+     * @param zone
+     * @return
+     */
     public Abilities<ActivatedAbility> getOtherAbilities(UUID objectId, Zone zone) {
         if (otherAbilities.containsKey(objectId)) {
             return otherAbilities.get(objectId).getActivatedAbilities(zone);
@@ -612,6 +633,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         revealed.clear();
         lookedAt.clear();
         turnNum = 0;
+        extraTurn = false;
         gameOver = false;
         specialActions.clear();
         otherAbilities.clear();

@@ -28,17 +28,12 @@
 package mage.sets.dragonsmaze;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.common.TargetControlledCreaturePermanent;
+import mage.constants.*;
+import mage.filter.common.FilterControlledCreaturePermanent;
 
 /**
  *
@@ -58,7 +53,7 @@ public class SpeciesGorger extends CardImpl<SpeciesGorger> {
         this.toughness = new MageInt(6);
 
         // At the beginning of your upkeep, return a creature you control to its owner's hand.
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChooseEffect(), TargetController.YOU, false));
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ReturnToHandChosenControlledPermanentEffect(new FilterControlledCreaturePermanent()), TargetController.YOU, false));
         
     }
 
@@ -72,36 +67,3 @@ public class SpeciesGorger extends CardImpl<SpeciesGorger> {
     }
 }
 
-class ReturnToHandChooseEffect extends OneShotEffect<ReturnToHandChooseEffect> {
-
-    public ReturnToHandChooseEffect() {
-        super(Outcome.ReturnToHand);
-        this.staticText = "return a creature you control to its owner's hand";
-    }
-
-    public ReturnToHandChooseEffect(final ReturnToHandChooseEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ReturnToHandChooseEffect copy() {
-        return new ReturnToHandChooseEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
-        if (player != null) {
-            TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent();
-            target.setRequired(true);
-            if (player.choose(this.outcome, target, source.getSourceId(), game)) {
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-                if (permanent != null) {
-                    return permanent.moveToZone(Zone.HAND, source.getId(), game, false);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-}

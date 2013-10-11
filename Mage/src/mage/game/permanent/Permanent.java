@@ -72,6 +72,9 @@ public interface Permanent extends Card, Controllable {
     boolean turnFaceUp(Game game);
     boolean turnFaceDown(Game game);
 
+    boolean isMonstrous();
+    void setMonstrous(boolean value);
+
     List<UUID> getAttachments();
     UUID getAttachedTo();
     void attachTo(UUID permanentId, Game game);

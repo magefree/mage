@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.cards.CardImpl;
 
 /**
@@ -51,7 +51,7 @@ public class PrizedUnicorn extends CardImpl<PrizedUnicorn> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()));
     }
 
     public PrizedUnicorn(final PrizedUnicorn card) {

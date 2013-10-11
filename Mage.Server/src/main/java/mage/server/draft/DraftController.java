@@ -38,6 +38,7 @@ import mage.game.draft.DraftPlayer;
 import mage.game.events.Listener;
 import mage.game.events.PlayerQueryEvent;
 import mage.game.events.TableEvent;
+import mage.players.Player;
 import mage.server.TableManager;
 import mage.server.UserManager;
 import mage.server.game.GameController;
@@ -109,7 +110,7 @@ public class DraftController {
         for (DraftPlayer player: draft.getPlayers()) {
             if (!player.getPlayer().isHuman()) {
                 player.setJoined();
-                logger.info("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
+                logger.debug("player " + player.getPlayer().getId() + " has joined draft " + draft.getId());
             }
         }
         checkStart();
@@ -124,9 +125,18 @@ public class DraftController {
         DraftSession draftSession = new DraftSession(draft, userId, playerId);
         draftSessions.put(playerId, draftSession);
         UserManager.getInstance().getUser(userId).addDraft(playerId, draftSession);
-        logger.info("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
+        logger.debug("User " + UserManager.getInstance().getUser(userId).getName() + " has joined draft " + draft.getId());
         draft.getPlayer(playerId).setJoined();
         checkStart();
+    }
+
+    public boolean replacePlayer(Player oldPlayer, Player newPlayer) {
+        if (draft.replacePlayer(oldPlayer, newPlayer)) {
+            draftSessions.get(oldPlayer.getId()).setKilled();
+            draftSessions.remove(oldPlayer.getId());
+            return true;
+        }
+        return false;
     }
 
     private synchronized void startDraft() {
@@ -188,7 +198,7 @@ public class DraftController {
     public void timeout(UUID userId) {
         if (userPlayerMap.containsKey(userId)) {
             draft.autoPick(userPlayerMap.get(userId));
-            logger.info("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
+            logger.debug("Draft pick timeout - autopick for player: " + userPlayerMap.get(userId));
         }
     }
 
@@ -212,4 +222,11 @@ public class DraftController {
         }
     }
 
+    public UUID getTableId() {
+        return tableId;
+    }
+
+    public void abortDraft() {
+        draft.setAbort(true);
+    }
 }

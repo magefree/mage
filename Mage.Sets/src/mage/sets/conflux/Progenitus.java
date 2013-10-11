@@ -35,13 +35,14 @@ import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
-import mage.abilities.StaticAbility;
 import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
+import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -82,10 +83,10 @@ public class Progenitus extends CardImpl<Progenitus> {
     }
 }
 
-class ProgenitusProtectionAbility extends StaticAbility<ProgenitusProtectionAbility> {
+class ProgenitusProtectionAbility extends ProtectionAbility {
 
     public ProgenitusProtectionAbility() {
-        super(Zone.BATTLEFIELD, null);
+        super(new FilterCard("everything"));
     }
 
     public ProgenitusProtectionAbility(final ProgenitusProtectionAbility ability) {
@@ -102,6 +103,7 @@ class ProgenitusProtectionAbility extends StaticAbility<ProgenitusProtectionAbil
         return "Protection from everything";
     }
 
+    @Override
     public boolean canTarget(MageObject source, Game game) {
         return false;
     }

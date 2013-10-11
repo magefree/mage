@@ -41,6 +41,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.effects.common.cost.SpellsCostReductionEffect;
 import mage.cards.CardImpl;
+import mage.constants.CostModificationType;
 import mage.constants.Duration;
 import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -95,7 +96,7 @@ class GrandArbiterAugustinIVCostIncreaseEffect extends CostModificationEffectImp
     private static final String effectText = "Spells your opponents cast cost {1} more to cast";
 
     GrandArbiterAugustinIVCostIncreaseEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = effectText;
     }
 

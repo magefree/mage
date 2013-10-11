@@ -90,18 +90,21 @@ public abstract class MatchImpl implements Match {
     public boolean leave(UUID playerId) {
         MatchPlayer mPlayer = getPlayer(playerId);
         if (mPlayer != null) {
-            boolean result = players.remove(mPlayer);
+            if (games.isEmpty() ) {
+                return players.remove(mPlayer);
+            }
+            mPlayer.setQuit(true);
             synchronized (this) {
                 this.notifyAll();
             }
-            return result;
+            return true;
         }
         return false;
     }
 
     @Override
     public void startMatch() throws GameException {
-
+        this.startTime = new Date();
     }
 
     @Override
@@ -282,7 +285,7 @@ public abstract class MatchImpl implements Match {
             player.updateDeck(deck);
         }
     }
-    
+
     protected String createGameStartMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append("\nMatch score:\n");
@@ -302,12 +305,15 @@ public abstract class MatchImpl implements Match {
     
     @Override
     public Date getStartTime() {
-        return startTime;
+        return new Date(startTime.getTime());
     }
 
     @Override
     public Date getEndTime() {
-        return endTime;
+        if (endTime != null) {
+            return new Date(endTime.getTime());
+        }
+        return null;
     }
 
 }

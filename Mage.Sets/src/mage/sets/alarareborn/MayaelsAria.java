@@ -38,7 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -96,8 +96,8 @@ class MayaelsAriaEffect extends OneShotEffect<MayaelsAriaEffect> {
         if (you == null) {
             return false;
         }
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+        FilterCreaturePermanent filter = new FilterCreaturePermanent();
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
             if (creature.getPower().getValue() > 4) {
                 condition1 = true;
             }
@@ -109,7 +109,7 @@ class MayaelsAriaEffect extends OneShotEffect<MayaelsAriaEffect> {
             }
         }
         if (condition1) {
-            for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, game)) {
+            for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
                 creature.addCounters(CounterType.P1P1.createInstance(), game);
             }
         }

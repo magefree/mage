@@ -80,7 +80,7 @@ public class RepentantVampire extends CardImpl<RepentantVampire> {
                                                             new DestroyTargetEffect(), 
                                                             new TapSourceCost(), 
                                                             new CardsInControllerGraveCondition(7), 
-                                                            "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has \"{tap}: Destroy target black creature.");
+                                                            "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has \"{t}: Destroy target black creature.");
          ability.addTarget(new TargetCreaturePermanent(filter));
          ability.addEffect(new ConditionalContinousEffect(new SetCardColorSourceEffect(ObjectColor.WHITE, Duration.EndOfGame), new CardsInControllerGraveCondition(7), ""));
          this.addAbility(ability);

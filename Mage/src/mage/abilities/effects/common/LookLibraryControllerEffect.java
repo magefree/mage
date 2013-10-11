@@ -43,6 +43,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -175,7 +176,7 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
                 }
                 if (cards.size() == 1) {
                     Card card = cards.get(cards.iterator().next(), game);
-                    card.moveToZone(targetZoneLookedCards, source.getId(), game, true);
+                    card.moveToZone(targetZoneLookedCards, source.getId(), game, putOnTop);
                 }
                 break;
             case GRAVEYARD: 
@@ -230,20 +231,8 @@ public class LookLibraryControllerEffect extends OneShotEffect<LookLibraryContro
             case 1:
                 sb.append("card ");
                 break;
-            case 2:
-                sb.append("two");
-                break;
-            case 3:
-                sb.append("three");
-                break;
-            case 4:
-                sb.append("four");
-                break;
-            case 5:
-                sb.append("five");
-                break;
             default:
-                sb.append(numberLook);
+                sb.append(CardUtil.numberToText(numberLook));
                 break;
         }
         if (numberLook != 1) {

@@ -44,12 +44,20 @@ import mage.players.Player;
  */
 public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnFromGraveyardToHandTargetEffect> {
 
+    boolean informPlayers;
+
     public ReturnFromGraveyardToHandTargetEffect() {
+        this(true);
+    }
+
+    public ReturnFromGraveyardToHandTargetEffect(boolean informPlayers) {
         super(Outcome.ReturnToHand);
+        this.informPlayers = informPlayers;
     }
 
     public ReturnFromGraveyardToHandTargetEffect(final ReturnFromGraveyardToHandTargetEffect effect) {
         super(effect);
+        this.informPlayers = effect.informPlayers;
     }
 
     @Override
@@ -65,6 +73,9 @@ public class ReturnFromGraveyardToHandTargetEffect extends OneShotEffect<ReturnF
                 Player player = game.getPlayer(card.getOwnerId());
                 if (player != null) {
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
+                    if (informPlayers) {
+                        game.informPlayers(new StringBuilder(player.getName()).append(" returned ").append(card.getName()).append(" from graveyard to hand").toString());
+                    }
                 }
             }
         }

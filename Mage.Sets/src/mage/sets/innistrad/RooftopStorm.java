@@ -70,12 +70,14 @@ public class RooftopStorm extends CardImpl<RooftopStorm> {
     }
 }
 
+
+//TODO : change to alternativCost
 class RooftopStormCostReductionEffect extends CostModificationEffectImpl<RooftopStormCostReductionEffect> {
 
     private static final String effectText = "You may pay {0} rather than pay the mana cost for Zombie creature spells you cast";
 
     RooftopStormCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = effectText;
     }
 

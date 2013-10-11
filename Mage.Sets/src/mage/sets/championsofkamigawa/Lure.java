@@ -37,7 +37,7 @@ import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.MustBlockAttachedEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllAttachedEffect;
 import mage.abilities.keyword.EnchantAbility;
 import mage.cards.CardImpl;
 import mage.target.TargetPermanent;
@@ -63,7 +63,7 @@ public class Lure extends CardImpl<Lure> {
         this.addAbility(ability);
 
         // All creatures able to block enchanted creature do so.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockAttachedEffect(AttachmentType.AURA)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllAttachedEffect(AttachmentType.AURA)));
     }
 
     public Lure (final Lure card) {

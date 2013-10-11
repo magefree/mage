@@ -29,19 +29,18 @@
 package mage.sets.conflux;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterBasicLandCard;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-
 import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -96,11 +95,7 @@ class PathToExileEffect extends OneShotEffect {
                     if (player.searchLibrary(target, game)) {
                         Card card = player.getLibrary().getCard(target.getFirstTarget(), game);
                         if (card != null) {
-                            if (card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), permanent.getControllerId())) {
-                                Permanent land = game.getPermanent(card.getId());
-                                if (land != null)
-                                    land.setTapped(true);
-                            }
+                            card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), permanent.getControllerId(), true);
                         }
                     }
                     player.shuffleLibrary(game);

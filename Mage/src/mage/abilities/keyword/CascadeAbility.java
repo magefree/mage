@@ -93,6 +93,9 @@ public class CascadeAbility extends TriggeredAbilityImpl<CascadeAbility> {
     }
 }
 
+// !!! Changes to the cascade effect here have to be copied to the cascadeEffect of Maelstrom Nexus card eventually.
+// There is a functional copy of this effect
+
 class CascadeEffect extends OneShotEffect<CascadeEffect> {
 
     public CascadeEffect() {
@@ -110,11 +113,10 @@ class CascadeEffect extends OneShotEffect<CascadeEffect> {
         ExileZone exile = game.getExile().createZone(source.getSourceId(), player.getName() + " Cascade");
         int sourceCost = game.getCard(source.getSourceId()).getManaCost().convertedManaCost();
         do {
-            card = player.getLibrary().removeFromTop(game);
+            card = player.getLibrary().getFromTop(game);
             if (card == null) {
                 break;
-            }
-                
+            }                
             card.moveToExile(exile.getId(), exile.getName(), source.getId(), game);
         } while (card.getCardType().contains(CardType.LAND) || card.getManaCost().convertedManaCost() >= sourceCost);
 

@@ -52,8 +52,9 @@ public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbi
         if (effect != null) {
             this.addEffect(effect);
         }
-        if (cost != null)
+        if (cost != null) {
             this.addCost(cost);
+        }
     }
 
     public ManaAbility(ManaAbility ability) {
@@ -63,8 +64,9 @@ public abstract class ManaAbility<T extends ManaAbility<T>> extends ActivatedAbi
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (!controlsAbility(playerId, game))
+        if (!controlsAbility(playerId, game)) {
             return false;
+        }
         //20091005 - 605.3a
         return costs.canPay(sourceId, controllerId, game);
     }

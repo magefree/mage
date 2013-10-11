@@ -35,7 +35,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.Effect;
-import mage.abilities.effects.common.MustBlockSourceEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
@@ -68,7 +68,7 @@ public class ArmedDangerous extends SplitCard<ArmedDangerous> {
         // All creatures able to block target creature this turn do so.
         getRightHalfCard().getColor().setGreen(true);
         Effect effect = new GainAbilityTargetEffect(
-                new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBlockSourceEffect(Duration.EndOfCombat)), Duration.EndOfTurn,
+                new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect(Duration.EndOfCombat)), Duration.EndOfTurn,
                 "All creatures able to block target creature this turn do so");
         getRightHalfCard().getSpellAbility().addEffect(effect);
         getRightHalfCard().getSpellAbility().addTarget(new TargetCreaturePermanent(true));

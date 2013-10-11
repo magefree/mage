@@ -33,7 +33,9 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
-import mage.abilities.effects.common.CantBlockSourceEffect;
+import mage.abilities.decorator.ConditionalRestrictionEffect;
+import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.combat.CantBlockSourceEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -65,13 +67,14 @@ public class ChildhoodHorror extends CardImpl<ChildhoodHorror> {
                 new ConditionalContinousEffect(
                     new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield),
                     new CardsInControllerGraveCondition(7),
-                    "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, Childhood Horror gets +2/+2."
+                    "<i>Threshold</i> - If seven or more cards are in your graveyard, Childhood Horror gets +2/+2"
                 ));
-        thresholdAbility.addEffect(
-                new ConditionalContinousEffect(
+
+        Effect effect = new ConditionalRestrictionEffect(
                     new CantBlockSourceEffect(Duration.WhileOnBattlefield),
-                    new CardsInControllerGraveCondition(7),
-                    "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, Childhood Horror can't block."));
+                    new CardsInControllerGraveCondition(7));
+        effect.setText("and can't block");
+        thresholdAbility.addEffect(effect);
         this.addAbility(thresholdAbility);                                                                           
     }
 

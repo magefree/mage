@@ -34,6 +34,7 @@ import mage.abilities.SpellAbility;
 import mage.abilities.effects.CostModificationEffectImpl;
 import mage.abilities.keyword.FlashbackAbility;
 import mage.cards.Card;
+import mage.constants.CostModificationType;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.util.CardUtil;
@@ -48,7 +49,7 @@ public class SpellsCostReductionEffect extends CostModificationEffectImpl<Spells
     private int amount;
 
     public SpellsCostReductionEffect(FilterCard filter, int amount) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.filter = filter;
         this.amount = amount;
 

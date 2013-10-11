@@ -28,19 +28,19 @@
 
 package mage.players;
 
-import mage.ConditionalMana;
-import mage.constants.ManaType;
-import mage.Mana;
-import mage.abilities.Ability;
-import mage.filter.Filter;
-import mage.filter.FilterMana;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import mage.ConditionalMana;
+import mage.Mana;
+import mage.abilities.Ability;
+import mage.constants.AsThoughEffectType;
+import mage.constants.ManaType;
+import mage.filter.Filter;
+import mage.filter.FilterMana;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 
 /**
  *
@@ -85,14 +85,24 @@ public class ManaPool implements Serializable {
         }
         for (ManaPoolItem mana : manaItems) {
             if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
-                if (mana.get(manaType) > 0) {
+                boolean spendAnyMana = spendAnyMana(ability, game);
+                if (mana.get(manaType) > 0 || (spendAnyMana && mana.count() > 0)) {
                     game.fireEvent(new GameEvent(GameEvent.EventType.MANA_PAYED, ability.getId(), mana.getSourceId(), ability.getControllerId()));
-                    mana.remove(manaType);
+                    if (spendAnyMana) {
+                        mana.removeAny();
+                    } else {
+                        mana.remove(manaType);
+                    }
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    // check if any mana can be spend to cast the mana cost of an ability
+    private boolean spendAnyMana(Ability ability, Game game) {
+        return game.getContinuousEffects().asThough(ability.getSourceId(), AsThoughEffectType.SPEND_ANY_MANA, game);
     }
 
     public int get(ManaType manaType) {
@@ -105,8 +115,9 @@ public class ManaPool implements Serializable {
         }
         for (ManaPoolItem mana : manaItems) {
             if (mana.isConditional() && mana.getConditionalMana().get(manaType) > 0 && mana.getConditionalMana().apply(ability, game, mana.getSourceId())) {
-                if (filter == null || filter.match(game.getObject(mana.getSourceId()), game))
+                if (filter == null || filter.match(game.getObject(mana.getSourceId()), game)) {
                     return mana.getConditionalMana().get(manaType);
+                }
             }
         }
         return 0;
@@ -195,8 +206,9 @@ public class ManaPool implements Serializable {
                     if (count > 0) {
                         total += count;
                         c.removeAll(filter);
-                        if (c.count() == 0)
+                        if (c.count() == 0) {
                             it.remove();
+                        }
                     }
                 }
             }
@@ -225,8 +237,9 @@ public class ManaPool implements Serializable {
                     total += item.getColorless();
                     item.removeColorless();
                 }
-                if (item.count() == 0)
+                if (item.count() == 0) {
                     it.remove();
+                }
             }
         }
         return total;
@@ -246,12 +259,24 @@ public class ManaPool implements Serializable {
         }
         Mana test = getMana();
         Mana m = new Mana();
-        if (filter.isBlack()) m.setBlack(test.getBlack());
-        if (filter.isBlue()) m.setBlue(test.getBlue());
-        if (filter.isColorless()) m.setColorless(test.getColorless());
-        if (filter.isGreen()) m.setGreen(test.getGreen());
-        if (filter.isRed()) m.setRed(test.getRed());
-        if (filter.isWhite()) m.setWhite(test.getWhite());
+        if (filter.isBlack()) {
+            m.setBlack(test.getBlack());
+        }
+        if (filter.isBlue()) {
+            m.setBlue(test.getBlue());
+        }
+        if (filter.isColorless()) {
+            m.setColorless(test.getColorless());
+        }
+        if (filter.isGreen()) {
+            m.setGreen(test.getGreen());
+        }
+        if (filter.isRed()) {
+            m.setRed(test.getRed());
+        }
+        if (filter.isWhite()) {
+            m.setWhite(test.getWhite());
+        }
         return m;
     }
 

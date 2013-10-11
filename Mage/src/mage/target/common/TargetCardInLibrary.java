@@ -28,7 +28,11 @@
 
 package mage.target.common;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.abilities.Ability;
@@ -85,7 +89,7 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
             int maxCards = Math.min(cardLimit.intValue(), targetPlayer.getLibrary().size());
             cards = targetPlayer.getLibrary().getTopCards(game, maxCards);
         }
-
+        Collections.sort(cards, new CardNameComparator());
         while (!isChosen() && !doneChosing()) {
             chosen = targets.size() >= minNumberOfTargets;
             if (!player.choose(outcome, new CardsImpl(Zone.LIBRARY, cards), this, game)) {
@@ -120,4 +124,12 @@ public class TargetCardInLibrary extends TargetCard<TargetCardInLibrary> {
     }
 
 
+}
+
+class CardNameComparator implements Comparator<Card> {
+
+    @Override
+    public int compare(Card o1, Card o2) {
+        return o1.getName().compareTo(o2.getName());
+    }
 }

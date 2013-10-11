@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
@@ -59,8 +59,8 @@ public class FableOfWolfAndOwl extends CardImpl<FableOfWolfAndOwl> {
         this.expansionSetCode = "EVE";
         this.color.setBlue(true);
         this.color.setGreen(true);
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));
-        this.addAbility(new SpellCastTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new WolfToken(), 1), filterGreenSpell, true));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new CreateTokenEffect(new OwlToken(), 1), filterBlueSpell, true));
     }
 
     public FableOfWolfAndOwl(final FableOfWolfAndOwl card) {

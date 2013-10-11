@@ -31,6 +31,7 @@ package mage.abilities.effects.common;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.Mode;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.game.Game;
 
@@ -71,6 +72,9 @@ public class CreateDelayedTriggeredAbilityEffect extends OneShotEffect<CreateDel
         delayedAbility.setControllerId(source.getControllerId());
         if (this.copyTargets) {
             delayedAbility.getTargets().addAll(source.getTargets());
+            for(Effect effect : delayedAbility.getEffects()) {
+                effect.getTargetPointer().init(game, source);
+            }
         }
         game.addDelayedTriggeredAbility(delayedAbility);
         return true;

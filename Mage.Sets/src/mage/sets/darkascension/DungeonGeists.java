@@ -79,6 +79,7 @@ public class DungeonGeists extends CardImpl<DungeonGeists> {
         target.setRequired(true);
         ability.addTarget(target);
         this.addAbility(ability);
+        // watcher needed to send normal events to Dungeon Geists ReplacementEffect
         this.addWatcher(new DungeonGeistsWatcher());
     }
 
@@ -167,7 +168,6 @@ class DungeonGeistsWatcher extends WatcherImpl<DungeonGeistsWatcher> {
             if (zEvent.getFromZone() == Zone.BATTLEFIELD) {
                 condition = true;
                 game.replaceEvent(event);
-                return;
             }
         }
     }

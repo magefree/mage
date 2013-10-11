@@ -35,7 +35,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.AttacksTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.UndyingAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterCreaturePermanent;

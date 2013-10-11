@@ -31,6 +31,7 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.abilities.effects.common.LoseLifeControllerEffect;
 import mage.abilities.effects.common.LoseLifeSourceEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -89,7 +90,8 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE) {
             if (event.getTargetId().equals(this.sourceId)) {
-                game.getPlayer(this.controllerId).loseLife(event.getAmount(), game);
+                this.getEffects().clear();
+                this.addEffect(new LoseLifeControllerEffect(event.getAmount()));
                 this.getControllerId();
                 return true;
             }
@@ -99,6 +101,6 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
 
     @Override
     public String getRule() {
-        return "Whenever {this} is dealt damage, you lose life equal to that damage";
+        return "Whenever {this} is dealt damage, you lose that much life";
     }
 }

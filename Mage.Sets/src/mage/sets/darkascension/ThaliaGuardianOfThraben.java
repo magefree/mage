@@ -80,7 +80,7 @@ public class ThaliaGuardianOfThraben extends CardImpl<ThaliaGuardianOfThraben> {
 class ThaliaGuardianOfThrabenCostReductionEffect extends CostModificationEffectImpl<ThaliaGuardianOfThrabenCostReductionEffect> {
 
     ThaliaGuardianOfThrabenCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.INCREASE_COST);
         staticText = "Noncreature spells cost {1} more to cast";
     }
 

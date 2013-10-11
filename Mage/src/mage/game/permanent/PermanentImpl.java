@@ -57,6 +57,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     protected boolean tapped;
     protected boolean flipped;
     protected boolean transformed;
+    protected boolean monstrous;
     protected UUID originalControllerId;
     protected UUID controllerId;
     protected UUID beforeResetControllerId;
@@ -130,6 +131,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         this.minBlockedBy = permanent.minBlockedBy;
         this.maxBlockedBy = permanent.maxBlockedBy;
         this.transformed = permanent.transformed;
+        this.monstrous = permanent.monstrous;
         this.pairedCard = permanent.pairedCard;
     }
 
@@ -237,10 +239,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public void removeCounters(String name, int amount, Game game) {
-        counters.removeCounter(name, amount);
-        GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
-        event.setData(name);
         for (int i = 0; i < amount; i++) {
+            counters.removeCounter(name, 1);
+            GameEvent event = GameEvent.getEvent(GameEvent.EventType.COUNTER_REMOVED, objectId, controllerId);
+            event.setData(name);
             game.fireEvent(event);
         }
     }
@@ -617,7 +619,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
      */
     private int damage(int damageAmount, UUID sourceId, Game game, boolean preventable, boolean combat, boolean markDamage, ArrayList<UUID> appliedEffects) {
         int damageDone = 0;
-        if (canDamage(game.getObject(sourceId), game)) {
+        if (damageAmount > 0 && canDamage(game.getObject(sourceId), game)) {
             if (cardType.contains(CardType.PLANESWALKER)) {
                 damageDone = damagePlaneswalker(damageAmount, sourceId, game, preventable, combat, markDamage, appliedEffects);
             } else {
@@ -867,6 +869,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             return false;
         }
         Permanent attacker = game.getPermanent(attackerId);
+        // controller of attacking permanent must be an opponent
+        if (!game.getOpponents(this.getControllerId()).contains(attacker.getControllerId())) {
+            return false;
+        }
         //20101001 - 509.1b
         for (Map.Entry entry: game.getContinuousEffects().getApplicableRestrictionEffects(this, game).entrySet()) {
             RestrictionEffect effect = (RestrictionEffect)entry.getKey();
@@ -1006,6 +1012,16 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     @Override
     public void setTransformed(boolean value) {
         this.transformed = value;
+    }
+
+    @Override
+    public boolean isMonstrous() {
+        return this.monstrous;
+    }
+
+    @Override
+    public void setMonstrous(boolean value) {
+        this.monstrous = value;
     }
 
     @Override

@@ -70,7 +70,11 @@ public class PermanentView extends CardView {
             original.expansionSetCode = permanent.getExpansionSetCode();
         }
         else {
-            original = new CardView(card);
+            if (card != null) {
+                original = new CardView(card);
+            } else {
+                original = null;
+            }
         }
         this.transformed = permanent.isTransformed();
     }

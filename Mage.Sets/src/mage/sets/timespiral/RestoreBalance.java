@@ -81,6 +81,7 @@ class RestoreBalanceEffect extends OneShotEffect<RestoreBalanceEffect> {
    
     public RestoreBalanceEffect() {
         super(Outcome.Sacrifice);
+        staticText = "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
     }
 
     public RestoreBalanceEffect(final RestoreBalanceEffect effect) {
@@ -94,87 +95,93 @@ class RestoreBalanceEffect extends OneShotEffect<RestoreBalanceEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        int minLand = Integer.MAX_VALUE, minCreature = Integer.MAX_VALUE, minCard = Integer.MAX_VALUE;
-        //LAND
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                int count = game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game).size();
-                if(count < minLand){
-                    minLand = count;
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            int minLand = Integer.MAX_VALUE, minCreature = Integer.MAX_VALUE, minCard = Integer.MAX_VALUE;
+            //LAND
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game).size();
+                    if(count < minLand){
+                        minLand = count;
+                    }
                 }
             }
-        }
-        
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent(), true);
-                target.setRequired(true);
-                if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                    for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game)){
-                        if(permanent != null && !target.getTargets().contains(permanent.getId())){
-                            permanent.sacrifice(source.getSourceId(), game);
+
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    TargetControlledPermanent target = new TargetControlledPermanent(minLand, minLand, new FilterControlledLandPermanent(), true);
+                    target.setRequired(true);
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
+                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledLandPermanent(), player.getId(), source.getId(), game)){
+                            if(permanent != null && !target.getTargets().contains(permanent.getId())){
+                                permanent.sacrifice(source.getSourceId(), game);
+                            }
                         }
                     }
                 }
             }
-        }
-         
-        
-        //CREATURE
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                int count = game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game).size();
-                if(count < minCreature){
-                    minCreature = count;
+
+
+            //CREATURE
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    int count = game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game).size();
+                    if(count < minCreature){
+                        minCreature = count;
+                    }
                 }
             }
-        }
-        
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent(), true);
-                target.setRequired(true);
-                if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                    for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game)){
-                        if(permanent != null && !target.getTargets().contains(permanent.getId())){
-                            permanent.sacrifice(source.getSourceId(), game);
+
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    TargetControlledPermanent target = new TargetControlledPermanent(minCreature, minCreature, new FilterControlledCreaturePermanent(), true);
+                    target.setRequired(true);
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
+                        for(Permanent permanent : game.getBattlefield().getActivePermanents(new FilterControlledCreaturePermanent(), player.getId(), source.getId(), game)){
+                            if(permanent != null && !target.getTargets().contains(permanent.getId())){
+                                permanent.sacrifice(source.getSourceId(), game);
+                            }
                         }
                     }
                 }
             }
-        }
-           
-        //CARD IN HAND
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                int count = player.getHand().size();
-                if(count < minCard){
-                    minCard = count;
+
+            //CARD IN HAND
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    int count = player.getHand().size();
+                    if(count < minCard){
+                        minCard = count;
+                    }
                 }
             }
-        }
-        
-        for(Player player : game.getPlayers().values()){
-            if(player != null){
-                TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
-                target.setRequired(true);
-                if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
-                    Cards cards =  player.getHand().copy();
-                    for(UUID cardUUID : cards){
-                        Card card = player.getHand().get(cardUUID, game);
-                        if(card != null && !target.getTargets().contains(cardUUID)){
-                            player.discard(card, source, game);
+
+            for(UUID playerId : controller.getInRange()){
+                Player player = game.getPlayer(playerId);
+                if(player != null){
+                    TargetCardInHand target = new TargetCardInHand(minCard, new FilterCard());
+                    target.setRequired(true);
+                    if(target.choose(Outcome.Benefit, player.getId(), source.getId(), game)){
+                        Cards cards =  player.getHand().copy();
+                        for(UUID cardUUID : cards){
+                            Card card = player.getHand().get(cardUUID, game);
+                            if(card != null && !target.getTargets().contains(cardUUID)){
+                                player.discard(card, source, game);
+                            }
                         }
                     }
                 }
             }
+
+            return true;
         }
-           
-        return true;
+        return false;
     }
 
-    @Override
-    public String getText(Mode mode) {
-        return "Each player chooses a number of lands he or she controls equal to the number of lands controlled by the player who controls the fewest, then sacrifices the rest. Players sacrifice creatures and discard cards the same way";
-    }
 }

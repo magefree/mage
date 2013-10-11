@@ -50,7 +50,8 @@ public class RemoveCounterSourceEffect extends OneShotEffect<RemoveCounterSource
             StringBuilder sb = new StringBuilder();
             sb.append("remove ").append(Integer.toString(counter.getCount())).append(" ").append(counter.getName()).append(" counters from {this}");
             staticText = sb.toString();
-        } else
+        } else {
             staticText = "remove a " + counter.getName() + " counter from {this}";
+        }
     }
 }

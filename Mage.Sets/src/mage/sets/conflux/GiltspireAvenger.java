@@ -30,9 +30,6 @@ package mage.sets.conflux;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.MageObject;
 import mage.abilities.Ability;
@@ -41,13 +38,15 @@ import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.ExaltedAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 import mage.watchers.common.PlayerDamagedBySourceWatcher;
-
 
 /**
  *
@@ -103,7 +102,7 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
     @Override
     public boolean canTarget(UUID id, Ability source, Game game) {
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource",source.getControllerId());
-        if (watcher != null && watcher.damageSources.contains(id)) {
+        if (watcher != null && watcher.hasSourceDoneDamage(id, game)) {
             return super.canTarget(id, source, game);
         }
         return false;
@@ -116,7 +115,7 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
         for (UUID targetId : availablePossibleTargets) {
             Permanent permanent = game.getPermanent(targetId);
-            if(permanent != null && watcher != null && watcher.damageSources.contains(targetId)){
+            if(permanent != null && watcher != null && watcher.hasSourceDoneDamage(targetId, game)){
                 possibleTargets.add(targetId);
             }
         }
@@ -126,17 +125,19 @@ class GiltspireAvengerTarget<T extends TargetCreaturePermanent<T>> extends Targe
     @Override
     public boolean canChoose(UUID sourceId, UUID sourceControllerId, Game game) {
         int remainingTargets = this.minNumberOfTargets - targets.size();
-        if (remainingTargets == 0)
-                return true;
+        if (remainingTargets == 0) {
+            return true;
+        }
         int count = 0;
         MageObject targetSource = game.getObject(sourceId);
         PlayerDamagedBySourceWatcher watcher = (PlayerDamagedBySourceWatcher) game.getState().getWatchers().get("PlayerDamagedBySource", sourceControllerId);
         for (Permanent permanent: game.getBattlefield().getActivePermanents(filter, sourceControllerId, sourceId, game)) {
                 if (!targets.containsKey(permanent.getId()) && permanent.canBeTargetedBy(targetSource, sourceControllerId, game)
-                    && watcher != null && watcher.damageSources.contains(permanent.getId())) {
+                    && watcher != null && watcher.hasSourceDoneDamage(permanent.getId(), game)) {
                         count++;
-                        if (count >= remainingTargets)
-                                return true;
+                        if (count >= remainingTargets) {
+                            return true;
+                        }
                 }
         }
         return false;

@@ -35,7 +35,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.common.ChancellorAbility;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.CounterUnlessPaysEffect;
@@ -66,7 +66,7 @@ public class ChancellorOfTheAnnex extends CardImpl<ChancellorOfTheAnnex> {
         this.addAbility(FlyingAbility.getInstance());
 
         // Whenever an opponent casts a spell, counter it unless that player pays {1}.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new CounterUnlessPaysEffect(new GenericManaCost(1)), false));
     }
 
     public ChancellorOfTheAnnex(final ChancellorOfTheAnnex card) {

@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
@@ -58,11 +59,7 @@ public class RakdosCarnarium extends CardImpl<RakdosCarnarium> {
         // Rakdos Carnarium enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
         // When Rakdos Carnarium enters the battlefield, return a land you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect());
-        Target target = new TargetControlledPermanent(filter);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
         // {tap}: Add {B}{R} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(1, 0, 0, 0, 1, 0, 0), new TapSourceCost()));
     }

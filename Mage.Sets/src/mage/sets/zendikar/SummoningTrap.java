@@ -47,6 +47,7 @@ import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetCard;
 import mage.watchers.Watcher;
@@ -108,10 +109,20 @@ class SummoningTrapWatcher extends WatcherImpl<SummoningTrapWatcher> {
         if (condition == true) {// no need to check - condition has already occured
             return;
         }
-        if (event.getType() == EventType.COUNTERED
-                && game.getStack().getStackObject(event.getTargetId()).getCardType().contains(CardType.CREATURE)
-                && game.getOpponents(controllerId).contains(event.getPlayerId())) {
-            condition = true;
+        if (event.getType() == EventType.COUNTERED) {
+            StackObject stackObject = game.getStack().getStackObject(event.getTargetId());
+            if (stackObject == null) {
+                stackObject = (StackObject) game.getLastKnownInformation(event.getTargetId(), Zone.STACK);
+            }
+            StackObject counterObject = game.getStack().getStackObject(event.getSourceId());
+            if (counterObject == null) {
+                counterObject = (StackObject) game.getLastKnownInformation(event.getSourceId(), Zone.STACK);
+            }
+            if (stackObject != null && counterObject != null 
+                    && stackObject.getCardType().contains(CardType.CREATURE)
+                    && game.getOpponents(controllerId).contains(counterObject.getControllerId())) {
+                condition = true;
+            }
         }
     }
 }

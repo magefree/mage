@@ -50,13 +50,17 @@ public class SimpleTriggeredAbility extends TriggeredAbilityImpl<SimpleTriggered
     }
 
     public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect, String prefix, boolean onlyController) {
-        super(zone, effect);
+        this(zone, eventType, effect, prefix, onlyController, false);
+    }
+
+    public SimpleTriggeredAbility(Zone zone, EventType eventType, Effect effect, String prefix, boolean onlyController, boolean optional) {
+        super(zone, effect, optional);
         this.eventType = eventType;
         this.onlyController = onlyController;
         this.prefix = prefix;
     }
 
-    public SimpleTriggeredAbility(SimpleTriggeredAbility ability) {
+    public SimpleTriggeredAbility(final SimpleTriggeredAbility ability) {
         super(ability);
         this.eventType = ability.eventType;
         this.onlyController = ability.onlyController;

@@ -31,13 +31,19 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.LookLibraryAndPickControllerEffect;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.cards.CardsImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterCard;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
@@ -52,12 +58,8 @@ public class ThinkTank extends CardImpl<ThinkTank> {
         this.color.setBlue(true);
 
         // At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
-       //Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LookLibraryControllerEffect(1), TargetController.YOU, false);
-        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new LookLibraryAndPickControllerEffect(new StaticValue(1), false, new StaticValue(1), new FilterCard(), Zone.GRAVEYARD, false, false), TargetController.YOU, false);
-        this.addAbility(ability);
+        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ThinkTankLookLibraryEffect(), TargetController.YOU, false));
 
-       // Ability ability2 = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new PutTopCardOfYourLibraryIntoGraveEffect(1), TargetController.YOU, true);
-        //this.addAbility(ability2);
     }
 
     public ThinkTank(final ThinkTank card) {
@@ -67,5 +69,43 @@ public class ThinkTank extends CardImpl<ThinkTank> {
     @Override
     public ThinkTank copy() {
         return new ThinkTank(this);
+    }
+}
+
+class ThinkTankLookLibraryEffect extends OneShotEffect<ThinkTankLookLibraryEffect> {
+
+    public ThinkTankLookLibraryEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "look at the top card of your library. You may put that card into your graveyard";
+    }
+
+    public ThinkTankLookLibraryEffect(final ThinkTankLookLibraryEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ThinkTankLookLibraryEffect copy() {
+        return new ThinkTankLookLibraryEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player you = game.getPlayer(source.getControllerId());
+        if (you != null) {
+            if (you.getLibrary().size() > 0) {
+                Card card = you.getLibrary().getFromTop(game);
+                if (card != null) {
+                    CardsImpl cards = new CardsImpl();
+                    cards.add(card);
+                    you.lookAtCards("Think Tank", cards, game);
+                    if (you.chooseUse(Outcome.Neutral, "Do you wish to put the card into your graveyard?", game)) {
+                        return card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
+                    }
+
+                }
+            }
+            return true;
+        }
+        return false;
     }
 }

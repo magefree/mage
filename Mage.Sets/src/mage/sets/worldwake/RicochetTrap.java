@@ -31,12 +31,11 @@ import java.util.UUID;
 
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Outcome;
 import mage.constants.WatcherScope;
 import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.ColoredManaCost;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ChooseNewTargetsTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.ColoredManaSymbol;
 import mage.filter.FilterSpell;
@@ -54,7 +53,7 @@ import mage.watchers.WatcherImpl;
  */
 public class RicochetTrap extends CardImpl<RicochetTrap> {
 
-    private static final FilterSpell filter = new FilterSpell();
+    private static final FilterSpell filter = new FilterSpell("spell with a single target");
 
     static {
         filter.add(new NumberOfTargetsPredicate(1));
@@ -71,7 +70,7 @@ public class RicochetTrap extends CardImpl<RicochetTrap> {
         this.getSpellAbility().addAlternativeCost(new RicochetTrapAlternativeCost());
 
         // Change the target of target spell with a single target.
-        this.getSpellAbility().addEffect(new RicochetTrapEffect());
+        this.getSpellAbility().addEffect(new ChooseNewTargetsTargetEffect(true, true));
         this.getSpellAbility().addTarget(new TargetSpell(filter));
 
         this.addWatcher(new RicochetTrapWatcher());
@@ -152,31 +151,5 @@ class RicochetTrapAlternativeCost extends AlternativeCostImpl<RicochetTrapAltern
     @Override
     public String getText() {
         return "If an opponent cast a blue spell this turn, you may pay {R} rather than pay {this} mana cost";
-    }
-}
-
-class RicochetTrapEffect extends OneShotEffect<RicochetTrapEffect> {
-
-    public RicochetTrapEffect() {
-        super(Outcome.Neutral);
-        staticText = "Change the target of target spell with a single target";
-    }
-
-    public RicochetTrapEffect(final RicochetTrapEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Spell spell = game.getStack().getSpell(source.getFirstTarget());
-        if (spell != null && source.getControllerId() != null) {
-            return spell.chooseNewTargets(game, source.getControllerId());
-        }
-        return false;
-    }
-
-    @Override
-    public RicochetTrapEffect copy() {
-        return new RicochetTrapEffect(this);
     }
 }

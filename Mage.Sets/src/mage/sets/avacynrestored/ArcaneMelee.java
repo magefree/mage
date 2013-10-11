@@ -70,7 +70,7 @@ public class ArcaneMelee extends CardImpl<ArcaneMelee> {
 class ArcaneMeleeCostReductionEffect extends CostModificationEffectImpl<ArcaneMeleeCostReductionEffect> {
 
     ArcaneMeleeCostReductionEffect ( ) {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Instant and sorcery spells cost {2} less to cast";
     }
 

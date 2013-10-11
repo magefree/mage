@@ -70,7 +70,7 @@ public class GameFactory {
             logger.fatal("Error creating match - " + gameType, ex);
             return null;
         }
-        logger.info("Game created: " + gameType); // + game.getId().toString());
+        logger.debug("Game created: " + gameType); // + game.getId().toString());
 
         return match;
     }

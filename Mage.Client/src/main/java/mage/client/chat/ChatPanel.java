@@ -45,6 +45,9 @@ import java.util.Map;
 import java.util.UUID;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import mage.client.MageFrame;
 import mage.remote.Session;
 import mage.view.ChatMessage.MessageColor;
@@ -103,6 +106,18 @@ public class ChatPanel extends javax.swing.JPanel {
     }
 
     /**
+     * Controls the output start messages as the chat panel is created
+     *
+     */
+    private ChatType chatType = ChatType.DEFAULT;
+
+    public enum ChatType {
+        DEFAULT, GAME, TABLES, TOURNAMENT
+    }
+
+    private boolean startMessageDone = false;
+
+    /**
      * Maps message colors to {@link Color}.
      */
     private static final Map<MessageColor, Color> colorMap = new EnumMap<MessageColor, Color>(MessageColor.class);
@@ -142,6 +157,23 @@ public class ChatPanel extends javax.swing.JPanel {
             simplifyComponents();
         }
     }
+
+    public ChatType getChatType() {
+        return chatType;
+    }
+
+    public void setChatType(ChatType chatType) {
+        this.chatType = chatType;
+    }
+
+    public boolean isStartMessageDone() {
+        return startMessageDone;
+    }
+
+    public void setStartMessageDone(boolean startMessageDone) {
+        this.startMessageDone = startMessageDone;
+    }
+
 
     public void connect(UUID chatId) {
         session = MageFrame.getSession();
@@ -190,6 +222,10 @@ public class ChatPanel extends javax.swing.JPanel {
             this.txtConversation.append(userColor, username + ": ");
             this.txtConversation.append(textColor, message + "\n");
         }
+    }
+
+    public String getText() {
+        return txtConversation.getText();
     }
 
     public ChatPanel getConnectedChat() {
@@ -248,6 +284,11 @@ class TableModel extends AbstractTableModel {
 
     public void loadData(List<String> players) {
         this.players = players;
+        JTableHeader th = jTablePlayers.getTableHeader();
+        TableColumnModel tcm = th.getColumnModel();
+        TableColumn tc = tcm.getColumn(0);
+        tc.setHeaderValue(new StringBuilder("Players").append(" (").append(this.players.size()).append(")").toString());
+        th.repaint();
         this.fireTableDataChanged();
     }
 
@@ -386,7 +427,7 @@ class TableModel extends AbstractTableModel {
             boolean update;
             int size = players.size();
             List<String> list = new ArrayList<String>(players);
-            Collections.sort(list);
+            Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
             if (size != this.players.size()) {
                 update = true;
             } else {

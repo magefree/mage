@@ -94,7 +94,7 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
         //had, if thats the case this ability should fizzle.
         if (amount > 0 && target.canChoose(source.getSourceId(), player.getId(), game)) {
             boolean abilityApplied = false;
-            while (!target.isChosen() && target.canChoose(player.getId(), game)) {
+            while (!target.isChosen() && target.canChoose(player.getId(), game) && player.isInGame()) {
                 player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
             }
 
@@ -122,8 +122,10 @@ public class SacrificeEffect extends OneShotEffect<SacrificeEffect>{
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append(preText);
-        if (preText.endsWith("player") || preText.endsWith("opponent")) {
+        if (preText != null) {
+            sb.append(preText);
+        }
+        if (preText != null && (preText.endsWith("player") || preText.endsWith("opponent"))) {
             sb.append(" sacrifices ");
         } else {
             sb.append(" sacrifice ");

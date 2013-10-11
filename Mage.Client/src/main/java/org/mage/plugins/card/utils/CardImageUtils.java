@@ -1,15 +1,19 @@
 package org.mage.plugins.card.utils;
 
 import de.schlichtherle.truezip.file.TFile;
+
+import java.io.File;
 import java.util.HashMap;
 import mage.client.constants.Constants;
 import mage.client.dialog.PreferencesDialog;
+import org.mage.plugins.card.dl.sources.DirectLinksForDownload;
 import org.mage.plugins.card.images.CardDownloadData;
 import org.mage.plugins.card.properties.SettingsManager;
 
 public class CardImageUtils {
 
     private static HashMap<CardDownloadData, String> pathCache = new HashMap<CardDownloadData, String>();
+
 
     /**
      *
@@ -23,10 +27,11 @@ public class CardImageUtils {
             String filePath = getTokenImagePath(card);
             TFile file = new TFile(filePath);
 
-            if (!file.exists()) {
+            // Issue #329
+            /*if (!file.exists()) {
                 filePath = searchForCardImage(card);
                 file = new TFile(filePath);
-            }
+            }*/
 
             if (file.exists()) {
                 pathCache.put(card, filePath);

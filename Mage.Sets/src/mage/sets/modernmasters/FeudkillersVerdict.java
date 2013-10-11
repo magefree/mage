@@ -111,7 +111,7 @@ class FeudkillersVerdictEffect extends OneShotEffect<FeudkillersVerdictEffect> {
 
 class GiantWarriorToken extends Token {
     GiantWarriorToken() {
-        super("Warrior", "5/5 white Giant Warrior creature token");
+        super("Giant Warrior", "5/5 white Giant Warrior creature token");
         cardType.add(CardType.CREATURE);
         color.setWhite(true);
         subtype.add("Giant");

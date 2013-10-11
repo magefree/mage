@@ -79,7 +79,7 @@ public class IndestructibleAbility extends StaticAbility<IndestructibleAbility> 
 
     @Override
     public String getRule() {
-        return "{this} is indestructible.";
+        return "Indestructible";
     }
 
 }

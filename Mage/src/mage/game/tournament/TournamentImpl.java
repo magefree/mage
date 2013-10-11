@@ -52,6 +52,7 @@ public abstract class TournamentImpl implements Tournament {
     protected static Random rnd = new Random();
     protected String matchName;
     protected TournamentOptions options;
+    protected TournamentType tournamentType;
     protected List<ExpansionSet> sets = new ArrayList<ExpansionSet>();
     protected String setsInfoShort;
 
@@ -74,6 +75,11 @@ public abstract class TournamentImpl implements Tournament {
     @Override
     public void addPlayer(Player player, String playerType) {
         players.put(player.getId(), new TournamentPlayer(player, playerType));
+    }
+
+    @Override
+    public void removePlayer(UUID playerId) {
+        players.remove(playerId);
     }
 
     @Override
@@ -125,6 +131,7 @@ public abstract class TournamentImpl implements Tournament {
         }
     }
 
+    // can only be used, if tournament did not start yet?
     @Override
     public void leave(UUID playerId) {
         if (players.containsKey(playerId)) {
@@ -324,6 +331,16 @@ public abstract class TournamentImpl implements Tournament {
             return null;
         }
         return new Date(endTime.getTime());
+    }
+
+    @Override
+    public TournamentType getTournamentType() {
+        return tournamentType;
+    }
+
+    @Override
+    public void setTournamentType(TournamentType tournamentType) {
+        this.tournamentType = tournamentType;
     }
 
 }

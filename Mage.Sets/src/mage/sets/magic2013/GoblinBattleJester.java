@@ -34,8 +34,8 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
-import mage.abilities.effects.common.CantBlockTargetEffect;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
+import mage.abilities.effects.common.combat.CantBlockTargetEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -63,7 +63,7 @@ public class GoblinBattleJester extends CardImpl<GoblinBattleJester> {
         this.toughness = new MageInt(2);
 
         // Whenever you cast a red spell, target creature can't block this turn.
-        Ability ability = new SpellCastTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(new CantBlockTargetEffect(Duration.EndOfTurn), filter, false);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

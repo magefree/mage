@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.PowerPredicate;
  */
 public class MayaelTheAnima extends CardImpl<MayaelTheAnima> {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 5 or greater to put onto the battlefield");
+    private static final FilterCreatureCard filter = new FilterCreatureCard("a creature card with power 5 or greater");
     static {
         filter.add(new CardTypePredicate(CardType.CREATURE));
         filter.add(new PowerPredicate(ComparisonType.GreaterThan, 4));
@@ -71,7 +71,7 @@ public class MayaelTheAnima extends CardImpl<MayaelTheAnima> {
         // You may put a creature card with power 5 or greater from among them onto the battlefield.
         // Put the rest on the bottom of your library in any order.
         SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD,
-                new LookLibraryAndPickControllerEffect(5,1, filter,false),
+                new LookLibraryAndPickControllerEffect(5,1, filter,false, false, Zone.BATTLEFIELD, true),
                 new ManaCostsImpl("{3}{R}{G}{W}"));
         ability.addCost(new TapSourceCost());
         this.addAbility(ability);

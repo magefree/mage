@@ -30,7 +30,7 @@ package mage.sets.saviorsofkamigawa;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -67,7 +67,7 @@ public class InfernalKirin extends CardImpl<InfernalKirin> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever you cast a Spirit or Arcane spell, target player reveals his or her hand and discards all cards with that spell's converted mana cost.
-        Ability ability = new SpellCastTriggeredAbility(Zone.BATTLEFIELD, new InfernalKirinEffect(), new FilterSpiritOrArcaneCard(), false, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.BATTLEFIELD, new InfernalKirinEffect(), new FilterSpiritOrArcaneCard(), false, true);
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
 

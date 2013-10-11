@@ -44,16 +44,12 @@ import mage.game.permanent.Permanent;
  */
 public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect {
 
-    FilterCard protectionFilter;
-
     public GainProtectionFromColorTargetEffect(Duration duration) {
         super(new ProtectionAbility(new FilterCard()), duration);
-        protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
     }
 
     public GainProtectionFromColorTargetEffect(final GainProtectionFromColorTargetEffect effect) {
         super(effect);
-        this.protectionFilter = effect.protectionFilter.copy();
     }
 
     @Override
@@ -66,10 +62,11 @@ public class GainProtectionFromColorTargetEffect extends GainAbilityTargetEffect
         Permanent creature = game.getPermanent(source.getFirstTarget());
         if (creature != null) {
             ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
+            FilterCard protectionFilter = (FilterCard)((ProtectionAbility)ability).getFilter();
             protectionFilter.add(new ColorPredicate(choice.getColor()));
             protectionFilter.setMessage(choice.getChoice());
             ((ProtectionAbility)ability).setFilter(protectionFilter);
-            creature.addAbility(ability, game);
+            creature.addAbility(ability, source.getSourceId(), game);
             return true;
         }
         return false;

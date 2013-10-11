@@ -27,12 +27,11 @@
 */
 package mage.players;
 
-import mage.ConditionalMana;
-import mage.constants.ManaType;
-import mage.Mana;
-
 import java.io.Serializable;
 import java.util.UUID;
+import mage.ConditionalMana;
+import mage.Mana;
+import mage.constants.ManaType;
 
 /**
  *
@@ -74,8 +73,9 @@ public class ManaPoolItem implements Serializable {
         this.white = item.white;
         this.black = item.black;
         this.colorless = item.colorless;
-        if (item.conditionalMana != null)
+        if (item.conditionalMana != null) {
             this.conditionalMana = item.conditionalMana.copy();
+        }
         this.sourceId = item.sourceId;
     }
 
@@ -92,8 +92,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeRed() {
-        if (red > 0)
+        if (red > 0) {
             red--;
+        }
     }
 
     public int getGreen() {
@@ -101,8 +102,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeGreen() {
-        if (green > 0)
+        if (green > 0) {
             green--;
+        }
     }
 
     public int getBlue() {
@@ -110,8 +112,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeBlue() {
-        if (blue > 0)
+        if (blue > 0) {
             blue--;
+        }
     }
 
     public int getBlack() {
@@ -119,8 +122,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeBlack() {
-        if (black > 0)
+        if (black > 0) {
             black--;
+        }
     }
 
     public int getWhite() {
@@ -128,8 +132,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeWhite() {
-        if (white > 0)
+        if (white > 0) {
             white--;
+        }
     }
 
     public int getColorless() {
@@ -137,8 +142,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public void removeColorless() {
-        if (colorless > 0)
+        if (colorless > 0) {
             colorless--;
+        }
     }
 
     public boolean isConditional() {
@@ -154,8 +160,9 @@ public class ManaPoolItem implements Serializable {
     }
 
     public int count() {
-        if (conditionalMana == null)
+        if (conditionalMana == null) {
             return red + green + blue + white + black + colorless;
+        }
         return conditionalMana.count();
     }
 
@@ -177,31 +184,53 @@ public class ManaPoolItem implements Serializable {
         return 0;
     }
 
+    public void removeAny() {
+        if (black > 0) {
+            black--;
+        } else if (blue > 0) {
+            blue--;
+        } else if (green > 0) {
+            green--;
+        } else if (red > 0) {
+            red--;
+        } else if (white > 0) {
+            white--;
+        } else if (colorless > 0) {
+            colorless--;
+        }
+    }
+    
     public void remove(ManaType manaType) {
         switch(manaType) {
             case BLACK:
-                if (black > 0)
+                if (black > 0) {
                     black--;
+                }
                 break;
             case BLUE:
-                if (blue > 0)
+                if (blue > 0) {
                     blue--;
+                }
                 break;
             case GREEN:
-                if (green > 0)
+                if (green > 0) {
                     green--;
+                }
                 break;
             case RED:
-                if (red > 0)
+                if (red > 0) {
                     red--;
+                }
                 break;
             case WHITE:
-                if (white > 0)
+                if (white > 0) {
                     white--;
+                }
                 break;
             case COLORLESS:
-                if (colorless > 0)
+                if (colorless > 0) {
                     colorless--;
+                }
                 break;
         }
     }

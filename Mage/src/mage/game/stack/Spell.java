@@ -56,6 +56,7 @@ import mage.watchers.Watcher;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.abilities.keyword.BestowAbility;
 
 import mage.cards.SplitCard;
 
@@ -188,10 +189,16 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 }
                 return false;
             }
-            //20091005 - 608.2b
-            game.informPlayers(getName() + " has been fizzled.");
-            counter(null, game);
-            return false;
+            if (card.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
+                updateOptionalCosts(0);
+                result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
+                return result;
+            } else {
+                //20091005 - 608.2b
+                game.informPlayers(getName() + " has been fizzled.");
+                counter(null, game);
+                return false;
+            }
         } else {
             updateOptionalCosts(0);
             result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
@@ -232,6 +239,19 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
      * @return
      */
     public boolean chooseNewTargets(Game game, UUID playerId) {
+        return chooseNewTargets(game, playerId, false, false);
+    }
+
+    /**
+     *
+     *
+     * @param game
+     * @param playerId
+     * @param forceChange - does only work for targets with maximal one targetId
+     * @param onlyOneTarget - 114.6b one target must be changed to another target
+     * @return
+     */
+    public boolean chooseNewTargets(Game game, UUID playerId, boolean forceChange, boolean onlyOneTarget) {
         Player player = game.getPlayer(playerId);
         if (player != null) {
             for(SpellAbility spellAbility: spellAbilities) {
@@ -249,9 +269,22 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                         } else {
                             name = object.getName();
                         }
-                        if (name != null && player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game)) {
-                            if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
-                                newTarget.addTarget(targetId, spellAbility, game, false);
+                        if (name != null && (forceChange || player.chooseUse(spellAbility.getEffects().get(0).getOutcome(), "Change target from " + name + "?", game))) {
+                            if (forceChange &&  target.possibleTargets(this.getSourceId(), playerId, game).size() > 1 ) {
+                                int iteration = 0;
+                                do {
+                                    if (iteration > 0) {
+                                        game.informPlayer(player, "You may only select exactly one target that must be different from the origin target!");
+                                    }
+                                    iteration++;
+                                    newTarget.clearChosen();
+                                    player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game);
+                                } while (targetId.equals(newTarget.getFirstTarget()) || newTarget.getTargets().size() != 1);
+
+                            } else {
+                                if (!player.chooseTarget(spellAbility.getEffects().get(0).getOutcome(), newTarget, spellAbility, game)) {
+                                    newTarget.addTarget(targetId, spellAbility, game, false);
+                                }
                             }
                         }
                         else {
@@ -307,6 +340,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public List<CardType> getCardType() {
+        if (this.getSpellAbility() instanceof BestowAbility) {
+            List<CardType> cardTypes = new ArrayList<CardType>();
+            cardTypes.addAll(card.getCardType());
+            cardTypes.remove(CardType.CREATURE);
+            return cardTypes;
+        }
         return card.getCardType();
     }
 
@@ -509,14 +548,20 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     }
 
     
-    @Override
-    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
     
     @Override
     public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId) {
         throw new UnsupportedOperationException("Unsupported operation");
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

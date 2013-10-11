@@ -45,11 +45,13 @@ public class BoosterDraft extends DraftImpl<BoosterDraft> {
     public void start() {
         while (boosterNum < sets.size()) {
             openBooster();
-            while (pickCards()) {
-                if (boosterNum % 2 == 1)
+            while (!isAbort() && pickCards()) {
+                if (boosterNum % 2 == 1) {
                     passLeft();
-                else
+                }
+                else {
                     passRight();
+                }
                 fireUpdatePlayersEvent();
             }
         }

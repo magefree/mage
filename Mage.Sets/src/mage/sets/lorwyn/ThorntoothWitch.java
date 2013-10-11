@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
@@ -62,7 +62,7 @@ public class ThorntoothWitch extends CardImpl<ThorntoothWitch> {
         this.power = new MageInt(3);
         this.toughness = new MageInt(4);
         // Whenever you cast a Treefolk spell, you may have target creature get +3/-3 until end of turn.
-        Ability ability = new SpellCastTriggeredAbility(new BoostTargetEffect(3, -3, Duration.EndOfTurn), filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(new BoostTargetEffect(3, -3, Duration.EndOfTurn), filter, true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
     }

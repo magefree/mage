@@ -30,7 +30,7 @@ package mage.sets.gatecrash;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.effects.common.ReturnToHandAllEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterAttackingCreature;
 
@@ -47,7 +47,7 @@ public class AEtherize extends CardImpl<AEtherize> {
         this.color.setBlue(true);
 
         // Return all attacking creatures to their owners' hands.
-        this.getSpellAbility().addEffect(new ReturnToHandAllEffect(new FilterAttackingCreature("attacking creatures")));
+        this.getSpellAbility().addEffect(new ReturnToHandFromBattlefieldAllEffect(new FilterAttackingCreature("attacking creatures")));
     }
 
     public AEtherize(final AEtherize card) {

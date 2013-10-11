@@ -158,7 +158,11 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
 
                     buffer.append("<table cellspacing=0 cellpadding=0 border=0 width='100%' valign='bottom'><tr><td><b>");
                     buffer.append(pt).append("</b></td>");
-                    buffer.append("<td align='right'>").append(card.getMageObjectType().toString()).append("</td>");
+                    buffer.append("<td align='right'>");
+                    if (!card.isControlledByOwner()) {
+                        buffer.append("[only controlled] ");
+                    }
+                    buffer.append(card.getMageObjectType().toString()).append("</td>");
                     buffer.append("</tr></table>");
 
                     StringBuilder rule = new StringBuilder("<br/>");

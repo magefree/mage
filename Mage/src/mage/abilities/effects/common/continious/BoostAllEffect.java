@@ -73,7 +73,7 @@ public class BoostAllEffect extends ContinuousEffectImpl<BoostAllEffect> {
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule) {
-        this(power, toughness, duration, filter, excludeSource, null, false);
+        this(power, toughness, duration, filter, excludeSource, rule, false);
     }
 
     public BoostAllEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, String rule, boolean lockedInPT) {

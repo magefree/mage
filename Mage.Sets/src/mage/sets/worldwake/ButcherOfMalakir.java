@@ -27,28 +27,18 @@
  */
 package mage.sets.worldwake;
 
-import java.util.Set;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesThisOrAnotherCreatureTriggeredAbility;
-import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.SacrificeOpponentsEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
-import mage.constants.Outcome;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.TargetController;
-import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -57,6 +47,9 @@ import mage.target.common.TargetControlledPermanent;
 public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
 
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature you control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+    }
 
     public ButcherOfMalakir(UUID ownerId) {
         super(ownerId, 53, "Butcher of Malakir", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{5}{B}{B}");
@@ -72,7 +65,7 @@ public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
         this.addAbility(FlyingAbility.getInstance());
         
         // Whenever Butcher of Malakir or another creature you control dies, each opponent sacrifices a creature.
-        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new ButcherOfMalakirEffect(), false, filter));
+        this.addAbility(new DiesThisOrAnotherCreatureTriggeredAbility(new SacrificeOpponentsEffect(new FilterControlledCreaturePermanent("a creature")), false, filter));
     }
 
     public ButcherOfMalakir(final ButcherOfMalakir card) {
@@ -82,47 +75,5 @@ public class ButcherOfMalakir extends CardImpl<ButcherOfMalakir> {
     @Override
     public ButcherOfMalakir copy() {
         return new ButcherOfMalakir(this);
-    }
-}
-class ButcherOfMalakirEffect extends OneShotEffect<ButcherOfMalakirEffect> {
-
-    public ButcherOfMalakirEffect() {
-        super(Outcome.Sacrifice);
-        this.staticText = "Each opponent sacrifices a creature";
-    }
-
-    public ButcherOfMalakirEffect(final ButcherOfMalakirEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public ButcherOfMalakirEffect copy() {
-        return new ButcherOfMalakirEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        FilterControlledPermanent filter = new FilterControlledPermanent("creature you control");
-        filter.add(new CardTypePredicate(CardType.CREATURE));
-        filter.add(new ControllerPredicate(TargetController.YOU));
-
-        Set<UUID> opponents = game.getOpponents(source.getControllerId());
-        for (UUID opponentId : opponents) {
-            Player player = game.getPlayer(opponentId);
-            Target target = new TargetControlledPermanent(filter);
-
-            if (target.canChoose(player.getId(), game)) {
-                while (!target.isChosen() && target.canChoose(player.getId(), game)) {
-                    player.choose(Outcome.Sacrifice, target, source.getSourceId(), game);
-                }
-
-                Permanent permanent = game.getPermanent(target.getFirstTarget());
-
-                if (permanent != null) {
-                    permanent.sacrifice(source.getSourceId(), game);
-                }
-            }
-        }
-        return true;
     }
 }

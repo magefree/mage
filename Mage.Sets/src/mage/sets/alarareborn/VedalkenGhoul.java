@@ -85,7 +85,7 @@ class VedalkenGhoulTriggeredAbility extends TriggeredAbilityImpl<VedalkenGhoulTr
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.CREATURE_BLOCKED && event.getTargetId().equals(this.getSourceId())) {
-            UUID defendingPlayer = game.getCombat().getDefendingPlayer(this.getSourceId());
+            UUID defendingPlayer = game.getCombat().getDefenderId(this.getSourceId());
             if (defendingPlayer != null) {
                 for (Effect effect : this.getEffects()) {
                     effect.setTargetPointer(new FixedTarget(defendingPlayer));

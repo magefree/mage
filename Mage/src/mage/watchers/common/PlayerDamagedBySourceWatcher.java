@@ -27,15 +27,15 @@
  */
 package mage.watchers.common;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 import mage.constants.WatcherScope;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.util.CardUtil;
 import mage.watchers.WatcherImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Watcher stores whitch sources did damage to a player
@@ -44,16 +44,16 @@ import java.util.UUID;
  */
 public class PlayerDamagedBySourceWatcher extends WatcherImpl<PlayerDamagedBySourceWatcher> {
 
-    public List<UUID> damageSources = new ArrayList<UUID>();
+    private Set<String> damageSourceIds = new HashSet<String>();
 
     public PlayerDamagedBySourceWatcher(UUID playerId) {
         super("PlayerDamagedBySource", WatcherScope.PLAYER);
-                setControllerId(playerId);
+        setControllerId(playerId);
     }
 
     public PlayerDamagedBySourceWatcher(final PlayerDamagedBySourceWatcher watcher) {
         super(watcher);
-        this.damageSources.addAll(watcher.damageSources);
+        this.damageSourceIds.addAll(watcher.damageSourceIds);
     }
 
     @Override
@@ -64,15 +64,27 @@ public class PlayerDamagedBySourceWatcher extends WatcherImpl<PlayerDamagedBySou
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == EventType.DAMAGED_PLAYER) {
-                        if (event.getTargetId().equals(controllerId) && !damageSources.contains(event.getSourceId())) {
-                                damageSources.add(event.getSourceId());
-                        }
-                }
+            if (event.getTargetId().equals(controllerId)) {
+                damageSourceIds.add(CardUtil.getCardZoneString(null, event.getSourceId(), game));
+            }
+        }
+    }
+
+    /**
+     * Checks if the current object with sourceId has damaged the player during the current turn.
+     * The zoneChangeCounter will be taken into account.
+     * 
+     * @param sourceId
+     * @param game
+     * @return 
+     */
+    public boolean hasSourceDoneDamage(UUID sourceId, Game game) {
+        return damageSourceIds.contains(CardUtil.getCardZoneString(null, sourceId, game));
     }
 
     @Override
     public void reset() {
         super.reset();
-        damageSources.clear();
+        damageSourceIds.clear();
     }
 }

@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DamageAllEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -73,10 +73,10 @@ public class TiborAndLumia extends CardImpl<TiborAndLumia> {
         this.color.setBlue(true);
         this.power = new MageInt(3);
         this.toughness = new MageInt(3);
-        Ability firstAbility = new SpellCastTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filterBlue, false);
+        Ability firstAbility = new SpellCastControllerTriggeredAbility(new GainAbilityTargetEffect(FlyingAbility.getInstance(), Duration.EndOfTurn), filterBlue, false);
         firstAbility.addTarget(new TargetCreaturePermanent());
         this.addAbility(firstAbility);
-        this.addAbility(new SpellCastTriggeredAbility(new DamageAllEffect(1, filter), filterRed, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DamageAllEffect(1, filter), filterRed, false));
 
     }
 

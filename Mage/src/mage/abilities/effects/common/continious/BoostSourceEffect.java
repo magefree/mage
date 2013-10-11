@@ -28,14 +28,14 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.Outcome;
-import mage.constants.SubLayer;
 import mage.abilities.Ability;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -108,22 +108,27 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> i
         StringBuilder sb = new StringBuilder();
         sb.append("{this} gets ");
         String p = power.toString();
-        if(!p.startsWith("-"))
+        if(!p.startsWith("-")) {
             sb.append("+");
+        }
         sb.append(p).append("/");
         String t = toughness.toString();
         if(!t.startsWith("-")){
-            if(t.startsWith("-"))
+            if(t.startsWith("-")) {
                 sb.append("-");
-            else
+            }
+            else {
                 sb.append("+");
+            }
         }
         sb.append(t);
-        if (duration != Duration.WhileOnBattlefield)
+        if (duration != Duration.WhileOnBattlefield) {
             sb.append(" ").append(duration.toString());
+        }
         String message = power.getMessage();
-        if (message.length() == 0)
+        if (message.length() == 0) {
             message = toughness.getMessage();
+        }
         if (message.length() > 0) {
             sb.append(" for each ");
         }

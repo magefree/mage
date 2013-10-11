@@ -47,8 +47,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class DoggedHunter extends CardImpl<DoggedHunter> {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("target creature token");
-
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature token");
     static {
         filter.add(new TokenPredicate());
     }

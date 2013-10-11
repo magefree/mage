@@ -83,7 +83,7 @@ public class HeraldOfWar extends CardImpl<HeraldOfWar> {
 class HeraldOfWarCostReductionEffect extends CostModificationEffectImpl<HeraldOfWarCostReductionEffect> {
 
     HeraldOfWarCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         staticText = "Angel spells and Human spells you cast cost {1} less to cast for each +1/+1 counter on Herald of War";
     }
 

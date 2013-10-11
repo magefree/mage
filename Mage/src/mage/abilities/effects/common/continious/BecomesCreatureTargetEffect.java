@@ -39,6 +39,8 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
+import mage.target.Target;
+import mage.util.CardUtil;
 
 /**
  * @author BetaSteward_at_googlemail.com
@@ -98,8 +100,9 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
-                            if (token.getColor().hasColor())
+                            if (token.getColor().hasColor()) {
                                 permanent.getColor().setColor(token.getColor());
+                            }
                         }
                         break;
                     case AbilityAddingRemovingEffects_6:
@@ -136,10 +139,24 @@ public class BecomesCreatureTargetEffect extends ContinuousEffectImpl<BecomesCre
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes a ").append(token.getDescription());
+        Target target = mode.getTargets().get(0);
+        if(target.getMaxNumberOfTargets() > 1){
+            if (target.getNumberOfTargets() < target.getMaxNumberOfTargets()) {
+                sb.append("Up to ");
+            }
+            sb.append(CardUtil.numberToText(target.getMaxNumberOfTargets())).append(" target ").append(target.getTargetName()).append("  each become ");
+        } else {
+            sb.append("Target ").append(target.getTargetName()).append(" becomes a ");
+        }
+        sb.append(token.getDescription());
         sb.append(" ").append(duration.toString());
-        if (type != null && type.length() > 0)
-            sb.append(". It's still a ").append(type);
+        if (type != null && type.length() > 0) {
+            if (target.getMaxNumberOfTargets() > 1) {
+                sb.append(". They're still ").append(type);
+            } else {
+                sb.append(". It's still a ").append(type);
+            }
+        }
         return sb.toString();
     }
 

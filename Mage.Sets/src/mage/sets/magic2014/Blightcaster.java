@@ -30,7 +30,7 @@ package mage.sets.magic2014;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
@@ -64,7 +64,7 @@ public class Blightcaster extends CardImpl<Blightcaster> {
 
         // Whenever you cast an enchantment spell, you may have target creature get -2/-2 until end of turn.
         Effect effect = new BoostTargetEffect(-2,-2, Duration.EndOfTurn);
-        Ability ability = new SpellCastTriggeredAbility(effect, filter, true);
+        Ability ability = new SpellCastControllerTriggeredAbility(effect, filter, true);
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
 

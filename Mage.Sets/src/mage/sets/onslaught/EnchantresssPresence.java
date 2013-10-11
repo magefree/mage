@@ -30,7 +30,7 @@ package mage.sets.onslaught;
 import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.filter.FilterSpell;
@@ -56,7 +56,7 @@ public class EnchantresssPresence extends CardImpl<EnchantresssPresence> {
         this.color.setGreen(true);
 
         // Whenever you cast an enchantment spell, draw a card.
-        this.addAbility(new SpellCastTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new DrawCardControllerEffect(1), filter, false));
     }
 
     public EnchantresssPresence(final EnchantresssPresence card) {

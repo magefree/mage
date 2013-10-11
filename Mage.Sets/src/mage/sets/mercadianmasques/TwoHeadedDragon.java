@@ -37,8 +37,8 @@ import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
-import mage.abilities.effects.common.continious.CanBlockAdditionalCreatureEffect;
-import mage.abilities.effects.common.continious.CantBeBlockedByOneEffect;
+import mage.abilities.effects.common.combat.CanBlockAdditionalCreatureEffect;
+import mage.abilities.effects.common.combat.CantBeBlockedByOneEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 

@@ -29,7 +29,6 @@
 package mage.players;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -92,6 +91,7 @@ import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
 import mage.game.ExileZone;
 import mage.game.Game;
+import mage.game.Table;
 import mage.game.combat.CombatGroup;
 import mage.game.events.DamagePlayerEvent;
 import mage.game.events.DamagedPlayerEvent;
@@ -110,7 +110,6 @@ import mage.target.common.TargetCardInLibrary;
 import mage.target.common.TargetDiscard;
 import mage.watchers.common.BloodthirstWatcher;
 import org.apache.log4j.Logger;
-import org.omg.CORBA.DynAnyPackage.Invalid;
 
 
 public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Serializable {
@@ -170,6 +169,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected List<UUID> attachments = new ArrayList<UUID>();
 
     protected boolean topCardRevealed = false;
+    
+    // 800.4i When a player leaves the game, any continuous effects with durations that last until that player's next turn
+    // or until a specific point in that turn will last until that turn would have begun. 
+    // They neither expire immediately nor last indefinitely.
+    protected boolean reachedNextTurnAfterLeaving = false;
 
     protected UserData userData;
 
@@ -241,6 +245,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.passedTurn = player.passedTurn;
         this.passedAllTurns = player.passedAllTurns;
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.reachedNextTurnAfterLeaving = player.reachedNextTurnAfterLeaving;
     }
 
     @Override
@@ -288,6 +293,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.turnController = player.getTurnControlledBy();
         this.passed = player.isPassed();
         this.priorityTimeLeft = player.getPriorityTimeLeft();
+        this.reachedNextTurnAfterLeaving = player.hasReachedNextTurnAfterLeaving();
     }
 
     @Override
@@ -326,7 +332,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.canLoseLife = true;
         this.topCardRevealed = false;
         this.setLife(game.getLife(), game);
+        this.setReachedNextTurnAfterLeaving(false);
         game.getState().getWatchers().add(new BloodthirstWatcher(playerId));
+
     }
 
     @Override
@@ -345,6 +353,12 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     public Counters getCounters() {
         return counters;
     }
+
+    @Override
+    public void otherPlayerLeftGame(Game game) {
+        findRange(game);
+    }
+
 
     @Override
     public void beginTurn(Game game) {
@@ -907,6 +921,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             if (zone != Zone.HAND) {
                 if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
                     for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                        ability.setControllerId(this.getId());
                         useable.put(ability.getId(), ability);
                     }
                 }
@@ -2004,4 +2019,18 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         return quit;
     }
 
+    @Override
+    public void setReachedNextTurnAfterLeaving(boolean reachedNextTurnAfterLeaving) {
+        this.reachedNextTurnAfterLeaving = reachedNextTurnAfterLeaving;
+    }
+
+    @Override
+    public boolean hasReachedNextTurnAfterLeaving() {
+        return reachedNextTurnAfterLeaving;
+    }
+    
+    @Override
+    public boolean canJoinTable(Table table) {
+        return true;
+    }
 }

@@ -33,14 +33,15 @@ public class GathererSets implements Iterable<DownloadJob> {
                                                  "SHM", "EVE"};
     
     private static final String[] withMythics = {"M10", "M11", "M12", "M13", "M14",
-                                                 "DDF", 
+                                                 "DDF", "DDL",
                                                  "ALA", "CON", "ARB",
                                                  "ZEN", "WWK", "ROE", 
                                                  "SOM", "MBS", "NPH",
                                                  "CMD", "PC2",
                                                  "ISD", "DKA", "AVR", 
                                                  "RTR", "GTC", "DGM",
-                                                 "MMA" };
+                                                 "MMA",
+                                                 "THS"};
     private static final HashMap<String, String> symbolsReplacements = new HashMap<String, String>();
 
     static {

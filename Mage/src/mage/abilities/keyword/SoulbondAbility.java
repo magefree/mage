@@ -55,7 +55,7 @@ public class SoulbondAbility extends StaticAbility<SoulbondAbility> implements M
 
     @Override
     public String getRule() {
-        return "Soulbond (You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)";
+        return "Soulbond <i>(You may pair this creature with another unpaired creature when either enters the battlefield. They remain paired for as long as you control both of them.)<i/>";
     }
 
     @Override

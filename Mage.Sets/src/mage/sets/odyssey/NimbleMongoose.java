@@ -59,7 +59,7 @@ public class NimbleMongoose extends CardImpl<NimbleMongoose> {
         // Shroud
         this.addAbility(ShroudAbility.getInstance());
         // Threshold - Nimble Mongoose gets +2/+2 as long as seven or more cards are in your graveyard.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "{this} gets +2/+2 as long as seven or more cards are in your graveyard")));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new BoostSourceEffect(2, 2, Duration.WhileOnBattlefield), new CardsInControllerGraveCondition(7), "<i> Threshold</i> - {this} gets +2/+2 as long as seven or more cards are in your graveyard")));
     }
 
     public NimbleMongoose(final NimbleMongoose card) {

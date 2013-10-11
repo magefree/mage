@@ -47,6 +47,7 @@ public interface Tournament {
 
     UUID getId();
     void addPlayer(Player player, String playerType);
+    void removePlayer(UUID playerId);
     TournamentPlayer getPlayer(UUID playerId);
     Collection<TournamentPlayer> getPlayers();
     Collection<Round> getRounds();
@@ -76,4 +77,7 @@ public interface Tournament {
     // tournament times
     Date getStartTime();
     Date getEndTime();
+    // tournament type
+    TournamentType getTournamentType(); 
+    void setTournamentType(TournamentType tournamentType);
 }

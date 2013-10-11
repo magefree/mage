@@ -163,6 +163,7 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
         return list;
     }
 
+
     public void loadCards(CardsView showCards, BigCard bigCard, UUID gameId) {
         this.cards = showCards;
         this.bigCard = bigCard;
@@ -317,6 +318,11 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     @Override
     public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId) {
+        this.loadCards(showCards, sortBy, piles, bigCard, gameId, true);
+    }
+
+    @Override
+    public void loadCards(CardsView showCards, SortBy sortBy, boolean piles, BigCard bigCard, UUID gameId, boolean merge) {
         cards = showCards;
         this.bigCard = bigCard;
         this.gameId = gameId;
@@ -533,5 +539,10 @@ public class CardsList extends javax.swing.JPanel implements MouseListener, ICar
 
     public void setDisplayNoCopies(boolean value) {
         mainModel.setDisplayNoCopies(value);
+    }
+
+    @Override
+    public int cardsSize() {
+        return cards.size();
     }
 }

@@ -32,7 +32,7 @@ import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -54,7 +54,7 @@ public class Counterbalance extends CardImpl<Counterbalance> {
         this.color.setBlue(true);
 
         // Whenever an opponent casts a spell, you may reveal the top card of your library. If you do, counter that spell if it has the same converted mana cost as the revealed card.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new CounterbalanceEffect(), true));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new CounterbalanceEffect(), true));
     }
 
     public Counterbalance(final Counterbalance card) {

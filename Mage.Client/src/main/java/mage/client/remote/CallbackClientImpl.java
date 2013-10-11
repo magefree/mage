@@ -28,10 +28,11 @@
 
 package mage.client.remote;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import mage.Constants;
 import mage.cards.decks.Deck;
 import mage.client.MageFrame;
 import mage.client.chat.ChatPanel;
@@ -39,6 +40,7 @@ import mage.client.constants.Constants.DeckEditorMode;
 import mage.client.draft.DraftPanel;
 import mage.client.game.GamePanel;
 import mage.client.plugins.impl.Plugins;
+import mage.client.util.AudioManager;
 import mage.client.util.DeckUtil;
 import mage.client.util.GameManager;
 import mage.client.util.object.SaveObjectUtil;
@@ -112,20 +114,28 @@ public class CallbackClientImpl implements CallbackClient {
                         ChatMessage message = (ChatMessage) callback.getData();
                         ChatPanel panel = MageFrame.getChat(callback.getObjectId());
                         if (panel != null) {
-                            if (message.getMessage().equals(Constants.MSG_TIP_HOT_KEYS_CODE) && panel.getConnectedChat() != null) {
-                                panel.getConnectedChat().receiveMessage("[Tips] ", "You may use hot keys to play faster: " + "" +
-                                        "\nTurn Mousewheel - Show big image of card your mousepointer hovers over" +
-                                        "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
-                                        "\nF4 - Skip current turn but stop on declare attackers" +
-                                        "\nF9 - Skip everything until your next turn" +
-                                        "\nF3 - Undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
-                            } else {
-                                if (message.isUserMessage() && panel.getConnectedChat() != null) {
-                                    panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
-                                } else {
-                                    panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                            // play the to the message connected sound
+                            if (message.getSoundToPlay() != null) {
+                                switch (message.getSoundToPlay()) {
+                                    case PlayerLeft:
+                                        AudioManager.playPlayerLeft();
+                                        break;
+                                    case  PlayerSubmittedDeck:
+                                        AudioManager.playPlayerSubmittedDeck();
+                                        break;
                                 }
                             }
+                            // send start message to chat if needed
+                            if (!panel.isStartMessageDone()) {
+                                createChatStartMessage(panel);
+                            }
+                            // send the message itself
+                            if (message.isUserMessage() && panel.getConnectedChat() != null) {
+                                panel.getConnectedChat().receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), ChatMessage.MessageColor.BLACK);
+                            } else {
+                                panel.receiveMessage(message.getUsername(), message.getMessage(), message.getTime(), message.getColor());
+                            }
+                            
                         }
                     } else if (callback.getMethod().equals("serverMessage")) {
                         if (callback.getData() != null) {
@@ -149,7 +159,7 @@ public class CallbackClientImpl implements CallbackClient {
                     else if (callback.getMethod().equals("replayDone")) {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.endMessage((String) callback.getData());
+                            panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("replayUpdate")) {
@@ -167,7 +177,7 @@ public class CallbackClientImpl implements CallbackClient {
                     else if (callback.getMethod().equals("gameOver")) {
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.endMessage((String) callback.getData());
+                            panel.endMessage((String) callback.getData(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gameError")) {
@@ -177,21 +187,22 @@ public class CallbackClientImpl implements CallbackClient {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.ask(message.getMessage(), message.getGameView());
+                            panel.ask(message.getMessage(), message.getGameView(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gameTarget")) {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(), message.getTargets(), message.isFlag(), message.getOptions());
+                            panel.pickTarget(message.getMessage(), message.getCardsView(), message.getGameView(),
+                                    message.getTargets(), message.isFlag(), message.getOptions(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gameSelect")) {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.select(message.getMessage(), message.getGameView());
+                            panel.select(message.getMessage(), message.getGameView(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gameChooseAbility")) {
@@ -218,14 +229,14 @@ public class CallbackClientImpl implements CallbackClient {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.playMana(message.getMessage(), message.getGameView());
+                            panel.playMana(message.getMessage(), message.getGameView(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gamePlayXMana")) {
                         GameClientMessage message = (GameClientMessage) callback.getData();
                         GamePanel panel = MageFrame.getGame(callback.getObjectId());
                         if (panel != null) {
-                            panel.playXMana(message.getMessage(), message.getGameView());
+                            panel.playXMana(message.getMessage(), message.getGameView(), callback.getMessageId());
                         }
                     }
                     else if (callback.getMethod().equals("gameSelectAmount")) {
@@ -244,13 +255,19 @@ public class CallbackClientImpl implements CallbackClient {
                     else if (callback.getMethod().equals("endGameInfo")) {
                         MageFrame.getInstance().showGameEndDialog((GameEndView) callback.getData());
                     }
+                    else if (callback.getMethod().equals("showUserMessage")) {
+                        List<String> messageData = (List<String>) callback.getData();
+                        if (messageData.size() == 2) {
+                            JOptionPane.showMessageDialog(null, messageData.get(1), messageData.get(0), JOptionPane.WARNING_MESSAGE);
+                        }
+                    }
                     else if (callback.getMethod().equals("gameInform")) {
 
                         if (callback.getMessageId() > messageId) {
                             GameClientMessage message = (GameClientMessage) callback.getData();
                             GamePanel panel = MageFrame.getGame(callback.getObjectId());
                             if (panel != null) {
-                                panel.inform(message.getMessage(), message.getGameView());
+                                panel.inform(message.getMessage(), message.getGameView(), callback.getMessageId());
                             }
                         }
                         else {
@@ -326,6 +343,34 @@ public class CallbackClientImpl implements CallbackClient {
                 }
             }
         });
+    }
+
+    private void createChatStartMessage(ChatPanel chatPanel) {
+        chatPanel.setStartMessageDone(true);
+        ChatPanel usedPanel = chatPanel;
+        if (chatPanel.getConnectedChat() != null) {
+            usedPanel = chatPanel.getConnectedChat();
+        }
+        switch (usedPanel.getChatType()) {
+            case GAME:
+                usedPanel.receiveMessage("", "You may use hot keys to play faster: " + "" +
+                        "\nTurn Mousewheel - Show big image of card your mousepointer hovers over" +
+                        "\nF2 - Confirm \"Ok\", \"Yes\" or \"Done\" button" +
+                        "\nF4 - Skip current turn but stop on declare attackers" +
+                        "\nF9 - Skip everything until your next turn" +
+                        "\nF3 - Undo F4/F9", "", ChatMessage.MessageColor.ORANGE);
+                break;
+            case TOURNAMENT:
+                usedPanel.receiveMessage("", "On this panel you can see the players, their state and the results of the games of the tournament. Also you can chat with the competitors of the tournament.", "", ChatMessage.MessageColor.ORANGE);
+                break;
+            case TABLES:
+                usedPanel.receiveMessage("",
+                        "Download card images by using the \"Images\" menu to the top right ." +
+                        "\nDownload icons and symbols by using the \"Symbols\" menu to the top right.",
+                        "", ChatMessage.MessageColor.ORANGE);
+                break;
+
+        }      
     }
 
     public UUID getId() {

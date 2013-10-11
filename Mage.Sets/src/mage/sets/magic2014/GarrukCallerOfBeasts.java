@@ -32,7 +32,7 @@ import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.LoyaltyAbility;
 import mage.abilities.common.EntersBattlefieldAbility;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.GetEmblemEffect;
 import mage.abilities.effects.common.PutOntoBattlefieldTargetEffect;
@@ -109,7 +109,7 @@ class GarrukCallerOfBeastsEmblem extends Emblem {
 
     public GarrukCallerOfBeastsEmblem() {
         Effect effect = new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(new FilterCreatureCard("creature card")),false, true, Outcome.PutCreatureInPlay);
-        Ability ability = new SpellCastTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
+        Ability ability = new SpellCastControllerTriggeredAbility(Zone.COMMAND, effect, filter, true, false);
         this.getAbilities().add(ability);
     }
 }

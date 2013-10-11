@@ -59,6 +59,7 @@ public class CardCriteria {
     private boolean red;
     private boolean white;
     private boolean colorless;
+    private String sortBy;
     private Long start;
     private Long count;
 
@@ -169,6 +170,11 @@ public class CardCriteria {
         return this;
     }
 
+    public CardCriteria setOrderBy(String sortBy) {
+        this.sortBy = sortBy;
+        return this;
+    }
+
     public void buildQuery(QueryBuilder qb) throws SQLException {
         Where where = qb.where();
         where.eq("nightCard", false);
@@ -204,12 +210,15 @@ public class CardCriteria {
             clausesCount++;
         }
 
-        for (CardType type : types) {
-            where.like("types", new SelectArg('%' + type.name() + '%'));
-        }
-        if (!types.isEmpty()) {
-            where.or(types.size());
-            clausesCount++;
+
+        if (types.size() != 7) { //if all types selected - no selection needed
+            for (CardType type : types) {
+                where.like("types", new SelectArg('%' + type.name() + '%'));
+            }
+            if (!types.isEmpty()) {
+                where.or(types.size());
+                clausesCount++;
+            }
         }
 
         for (CardType type : notTypes) {
@@ -276,7 +285,9 @@ public class CardCriteria {
         if (count != null) {
             qb.limit(count);
         }
-
-        qb.orderBy("cardNumber", true);
+        
+        if (sortBy != null) {
+            qb.orderBy(sortBy, true);
+        }
     }
 }

@@ -35,7 +35,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEquippedTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.RequirementEffect;
@@ -61,7 +61,7 @@ public class GrapplingHook extends CardImpl<GrapplingHook> {
         // Equipped creature has double strike.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(DoubleStrikeAbility.getInstance(), AttachmentType.EQUIPMENT)));
         // Whenever equipped creature attacks, you may have target creature block it this turn if able.
-        Ability ability = new AttacksEquippedTriggeredAbility(new GrapplingHookEffect(), true);
+        Ability ability = new AttacksAttachedTriggeredAbility(new GrapplingHookEffect(), true);
         ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(ability);
         // Equip {4}
@@ -96,7 +96,10 @@ class GrapplingHookEffect extends RequirementEffect<GrapplingHookEffect> {
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
         if (permanent.getId().equals(source.getFirstTarget())) {
-            return true;
+            Permanent equipment = game.getPermanent(source.getSourceId());
+            if (equipment != null && equipment.getAttachedTo() != null) {
+                return permanent.canBlock(equipment.getAttachedTo(), game);
+            }
         }
         return false;
     }

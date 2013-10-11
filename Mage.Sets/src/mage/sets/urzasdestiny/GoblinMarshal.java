@@ -28,15 +28,14 @@
 package mage.sets.urzasdestiny;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DiesTriggeredAbility;
-import mage.abilities.common.EntersBattlefieldTriggeredAbility;
+import mage.abilities.common.EntersBattlefieldOrDiesSourceTriggeredAbility;
 import mage.abilities.effects.common.CreateTokenEffect;
 import mage.abilities.keyword.EchoAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.game.permanent.token.GoblinToken;
 
 /**
@@ -56,11 +55,8 @@ public class GoblinMarshal extends CardImpl<GoblinMarshal> {
 
         this.addAbility(new EchoAbility("{4}{R}{R}"));
         // When Goblin Marshal enters the battlefield or dies, put two 1/1 red Goblin creature tokens onto the battlefield.
-        Ability enterAbility = new EntersBattlefieldTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2), false);
+        Ability enterAbility = new EntersBattlefieldOrDiesSourceTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2), false);
         this.addAbility(enterAbility);
-        // When Goblin Marshal enters the battlefield or dies, put two 1/1 red Goblin creature tokens onto the battlefield.
-        Ability diesAbility = new DiesTriggeredAbility(new CreateTokenEffect(new GoblinToken(), 2), false);
-        this.addAbility(diesAbility);
     }
 
     public GoblinMarshal(final GoblinMarshal card) {

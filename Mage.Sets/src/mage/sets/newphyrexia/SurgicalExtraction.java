@@ -67,6 +67,9 @@ public class SurgicalExtraction extends CardImpl<SurgicalExtraction> {
 
         this.color.setBlack(true);
 
+        // Choose target card in a graveyard other than a basic land card. Search its owner's graveyard,
+        // hand, and library for any number of cards with the same name as that card and exile them.
+        // Then that player shuffles his or her library.
         this.getSpellAbility().addEffect(new SurgicalExtractionEffect());
         this.getSpellAbility().addTarget(new TargetCardInGraveyard(filter));
     }
@@ -121,8 +124,7 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getGraveyard().get(targetId, game);
                             if (targetCard != null) {
-                                targetPlayer.getGraveyard().remove(targetCard);
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                targetCard.moveToExile(null, null, source.getSourceId(), game);
                             }
                         }
                     }
@@ -138,8 +140,7 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
                         for (UUID targetId : targets) {
                             Card targetCard = targetPlayer.getHand().get(targetId, game);
                             if (targetCard != null) {
-                                targetPlayer.getHand().remove(targetCard);
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                targetCard.moveToExile(null, null, source.getSourceId(), game);
                             }
                         }
                     }
@@ -155,20 +156,18 @@ class SurgicalExtractionEffect extends OneShotEffect<SurgicalExtractionEffect> {
                     if (player.choose(Outcome.Exile, cardsInLibrary, target, game)) {
                         List<UUID> targets = target.getTargets();
                         for (UUID targetId : targets) {
-                            Card targetCard = targetPlayer.getLibrary().remove(targetId, game);
+                            Card targetCard = targetPlayer.getLibrary().getCard(targetId, game);
                             if (targetCard != null) {
-                                targetCard.moveToZone(Zone.EXILED, source.getId(), game, false);
+                                targetCard.moveToExile(null, null, source.getSourceId(), game);
                             }
                         }
                     }
                 } else {
                     player.lookAtCards(targetPlayer.getName() + " library", cardsInLibrary, game);
                 }
+                targetPlayer.shuffleLibrary(game);
+                return true;
             }
-
-            targetPlayer.shuffleLibrary(game);
-
-            return true;
         }
 
         return false;

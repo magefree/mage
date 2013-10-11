@@ -185,6 +185,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                 Player owner = game.getPlayer(ownerId);
                 game.rememberLKI(objectId, Zone.BATTLEFIELD, this);
                 if (owner != null) {
+                    this.setControllerId(ownerId); // neccessary for e.g. abilities in graveyard or hand to not have a controller != owner
                     switch (event.getToZone()) {
                         case GRAVEYARD:
                             owner.putInGraveyard(card, game, !flag);
@@ -199,10 +200,11 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
                             game.addCommander(new Commander(card));
                             break;
                         case LIBRARY:
-                            if (flag)
+                            if (flag) {
                                 owner.getLibrary().putOnTop(card, game);
-                            else
+                            } else {
                                 owner.getLibrary().putOnBottom(card, game);
+                            }
                             break;
                         case BATTLEFIELD:
                             //should never happen

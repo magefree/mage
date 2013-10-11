@@ -30,7 +30,7 @@ package mage.sets.timespiral;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.condition.common.SuspendedCondition;
 import mage.abilities.costs.mana.ColoredManaCost;
@@ -49,7 +49,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.filter.FilterCard;
+import mage.filter.FilterSpell;
 import mage.game.Game;
 import mage.players.Player;
 
@@ -76,7 +76,7 @@ public class PardicDragon extends CardImpl<PardicDragon> {
         this.addAbility(new SuspendAbility(2, new ManaCostsImpl("{R}{R}"), this, true));
         // Whenever an opponent casts a spell, if Pardic Dragon is suspended, that player may put a time counter on Pardic Dragon.
         this.addAbility(new ConditionalTriggeredAbility(
-                new OpponentCastsSpellTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), new FilterCard(), false, true),
+                new SpellCastOpponentTriggeredAbility(Zone.EXILED, new PardicDragonEffect(), new FilterSpell(), false, true),
                 SuspendedCondition.getInstance(),
                 "Whenever an opponent casts a spell, if {this} is suspended, that player may put a time counter on Pardic Dragon."
                 ));

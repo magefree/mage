@@ -37,8 +37,11 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.stack.Spell;
 import mage.target.TargetPlayer;
 
 /**
@@ -72,7 +75,12 @@ public class CeaseFire extends CardImpl<CeaseFire> {
 }
 
 class CeaseFireEffect extends ReplacementEffectImpl<CeaseFireEffect> {
-   
+
+    private static final FilterSpell filter = new FilterSpell();
+    static {
+        filter.add(new CardTypePredicate(CardType.CREATURE));
+    }
+
     public CeaseFireEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
         staticText = "Target player can't cast creature spells.";
@@ -101,7 +109,7 @@ class CeaseFireEffect extends ReplacementEffectImpl<CeaseFireEffect> {
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.CAST_SPELL && event.getPlayerId().equals(source.getFirstTarget())) {
             MageObject object = game.getObject(event.getSourceId());
-            if (object.getCardType().contains(CardType.CREATURE)) {
+            if (filter.match((Spell) object, game)) {
                 return true;
             }
         }

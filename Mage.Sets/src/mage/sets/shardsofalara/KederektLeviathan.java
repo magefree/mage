@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.common.ReturnToHandAllEffect;
+import mage.abilities.effects.common.ReturnToHandFromBattlefieldAllEffect;
 import mage.abilities.keyword.UnearthAbility;
 import mage.cards.CardImpl;
 import mage.filter.common.FilterNonlandPermanent;
@@ -60,7 +60,7 @@ public class KederektLeviathan extends CardImpl<KederektLeviathan> {
         this.toughness = new MageInt(5);
 
         // When Kederekt Leviathan enters the battlefield, return all other nonland permanents to their owners' hands.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandAllEffect(filter)));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandFromBattlefieldAllEffect(filter)));
         // Unearth {6}{U}
         this.addAbility(new UnearthAbility(new ManaCostsImpl("{6}{U}")));
     }

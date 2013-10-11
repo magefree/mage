@@ -42,7 +42,7 @@ import mage.target.TargetPlayer;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.filter.FilterSpell;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -73,7 +73,7 @@ public class HandOfThePraetors extends CardImpl<HandOfThePraetors> {
 
         this.addAbility(InfectAbility.getInstance());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, true)));
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new AddPoisonCounterTargetEffect(1), filterSpell, false);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new AddPoisonCounterTargetEffect(1), filterSpell, false);
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
     }

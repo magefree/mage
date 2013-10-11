@@ -25,7 +25,7 @@ public class DeckBuilder {
     private static final int DECK_COUNT60[] = {4, 9, 9, 5, 5, 3};
     private static final int DECK_COST[] = {1, 2, 3, 4, 6, 10};
     private static final int MIN_CARD_SCORE = 25;
-    private static final int MIN_SOURCE = 16;
+    private static final int MIN_SOURCE = 3; // minmal number of sources for a mana color, will be taken also if ratio would give a lower number
     private static Deck deck = new Deck();
 
     private static int deckCount[];

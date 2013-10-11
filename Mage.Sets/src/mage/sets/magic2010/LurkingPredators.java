@@ -33,7 +33,7 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.OpponentCastsSpellTriggeredAbility;
+import mage.abilities.common.SpellCastOpponentTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
@@ -55,7 +55,7 @@ public class LurkingPredators extends CardImpl<LurkingPredators> {
         this.color.setGreen(true);
 
         // Whenever an opponent casts a spell, reveal the top card of your library. If it's a creature card, put it onto the battlefield. Otherwise, you may put that card on the bottom of your library.
-        this.addAbility(new OpponentCastsSpellTriggeredAbility(new LurkingPredatorsEffect(), false));
+        this.addAbility(new SpellCastOpponentTriggeredAbility(new LurkingPredatorsEffect(), false));
     }
 
     public LurkingPredators(final LurkingPredators card) {

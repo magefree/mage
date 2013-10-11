@@ -28,21 +28,18 @@
 package mage.sets.guildpact;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.Mana;
-import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ReturnToHandTargetEffect;
+import mage.abilities.effects.common.ReturnToHandChosenControlledPermanentEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.common.FilterControlledPermanent;
-import mage.target.Target;
-import mage.target.common.TargetControlledPermanent;
 
 /**
  *
@@ -60,11 +57,7 @@ public class OrzhovBasilica extends CardImpl<OrzhovBasilica> {
         this.addAbility(new EntersBattlefieldTappedAbility());
 
         // When Orzhov Basilica enters the battlefield, return a land you control to its owner's hand.
-        Ability ability = new EntersBattlefieldTriggeredAbility(new ReturnToHandTargetEffect(), false);
-        Target target = new TargetControlledPermanent(filter);
-        target.setRequired(true);
-        ability.addTarget(target);
-        this.addAbility(ability);
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ReturnToHandChosenControlledPermanentEffect(filter), false));
 
         // {T}: Add {W}{B} to your mana pool.
         this.addAbility(new SimpleManaAbility(Zone.BATTLEFIELD, new Mana(0, 0, 0, 1, 1, 0, 0), new TapSourceCost()));

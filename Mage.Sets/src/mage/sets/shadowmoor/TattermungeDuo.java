@@ -33,7 +33,7 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.ObjectColor;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ForestwalkAbility;
@@ -68,9 +68,9 @@ public class TattermungeDuo extends CardImpl<TattermungeDuo> {
         this.toughness = new MageInt(3);
 
         // Whenever you cast a red spell, Tattermunge Duo gets +1/+1 until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), redFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new BoostSourceEffect(1, 1, Duration.EndOfTurn), redFilter, false));
         // Whenever you cast a green spell, Tattermunge Duo gains forestwalk until end of turn.
-        this.addAbility(new SpellCastTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), greenFilter, false));
+        this.addAbility(new SpellCastControllerTriggeredAbility(new GainAbilitySourceEffect(new ForestwalkAbility(), Duration.EndOfTurn), greenFilter, false));
     }
 
     public TattermungeDuo(final TattermungeDuo card) {

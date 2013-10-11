@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.SpellCastTriggeredAbility;
+import mage.abilities.common.SpellCastControllerTriggeredAbility;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.cards.CardImpl;
 import mage.counters.CounterType;
@@ -62,7 +62,7 @@ public class Kurgadon extends CardImpl<Kurgadon> {
         this.toughness = new MageInt(3);
 
 		// Whenever you cast a creature spell with converted mana cost 6 or greater, put three +1/+1 counters on Kurgadon.
-        SpellCastTriggeredAbility ability = new SpellCastTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), filterSpell, false);
+        SpellCastControllerTriggeredAbility ability = new SpellCastControllerTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance(3)), filterSpell, false);
         this.addAbility(ability);
     }
 

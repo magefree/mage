@@ -34,7 +34,23 @@
 
 package mage.client.deckeditor;
 
-import mage.constants.CardType;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableCellRenderer;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.cards.Card;
@@ -49,6 +65,7 @@ import mage.client.cards.ICardGrid;
 import mage.client.constants.Constants.SortBy;
 import mage.client.deckeditor.table.TableModel;
 import mage.client.util.sets.ConstructedFormats;
+import mage.constants.CardType;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -59,12 +76,6 @@ import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardsView;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.event.*;
-import java.util.*;
 
 /**
  *
@@ -92,7 +103,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         currentView = mainModel; // by default we use List View        
     }
 
-    public void makeTransparent() {
+    private void makeTransparent() {
         this.addComponentListener(this);
         setOpaque(false);
         cardGrid.setOpaque(false);
@@ -107,7 +118,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         tbTypes.setOpaque(true); // false = transparent
     }
 
-    public void initListViewComponents() {
+    private void initListViewComponents() {
         mainTable = new JTable();
 
         mainModel = new TableModel();
@@ -135,6 +146,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         chkPiles.setEnabled(false);
 
         mainTable.addMouseListener(new MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
@@ -178,70 +190,73 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         this.btnClear.setVisible(true);
         this.cbExpansionSet.setVisible(true);
         cbExpansionSet.setModel(new DefaultComboBoxModel(ConstructedFormats.getTypes()));
+        // Action event on Expansion set triggers loadCards method
         cbExpansionSet.setSelectedIndex(0);
-
-        filterCards();
     }
 
     private FilterCard buildFilter() {
         FilterCard filter = new FilterCard();
-        ArrayList<Predicate<MageObject>> predicates = new ArrayList<Predicate<MageObject>>();
-
-        if (this.rdoGreen.isSelected()) {
-            predicates.add(new ColorPredicate(ObjectColor.GREEN));
-        }
-        if (this.rdoRed.isSelected()) {
-            predicates.add(new ColorPredicate(ObjectColor.RED));
-        }
-        if (this.rdoBlack.isSelected()) {
-            predicates.add(new ColorPredicate(ObjectColor.BLACK));
-        }
-        if (this.rdoBlue.isSelected()) {
-            predicates.add(new ColorPredicate(ObjectColor.BLUE));
-        }
-        if (this.rdoWhite.isSelected()) {
-            predicates.add(new ColorPredicate(ObjectColor.WHITE));
-        }
-        if (this.rdoColorless.isSelected()) {
-            predicates.add(new ColorlessPredicate());
-        }
-        filter.add(Predicates.or(predicates));
-
-        predicates.clear();
-        if (this.rdoLand.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.LAND));
-        }
-        if (this.rdoArtifacts.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.ARTIFACT));
-        }
-        if (this.rdoCreatures.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.CREATURE));
-        }
-        if (this.rdoEnchantments.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.ENCHANTMENT));
-        }
-        if (this.rdoInstants.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.INSTANT));
-        }
-        if (this.rdoSorceries.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.SORCERY));
-        }
-        if (this.rdoPlaneswalkers.isSelected()) {
-            predicates.add(new CardTypePredicate(CardType.PLANESWALKER));
-        }
-        filter.add(Predicates.or(predicates));
 
         String name = jTextFieldSearch.getText().trim();
         filter.add(new CardTextPredicate(name));
 
-        if (this.cbExpansionSet.isVisible()) {
-            String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
-            if (!expansionSelection.equals("- All Sets")) {
-                ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
-                for (String setCode : ConstructedFormats.getSetsByFormat(expansionSelection)) {
-                    expansionPredicates.add(new ExpansionSetPredicate(setCode));
+        if (limited) {
+            ArrayList<Predicate<MageObject>> predicates = new ArrayList<Predicate<MageObject>>();
+
+            if (this.rdoGreen.isSelected()) {
+                predicates.add(new ColorPredicate(ObjectColor.GREEN));
+            }
+            if (this.rdoRed.isSelected()) {
+                predicates.add(new ColorPredicate(ObjectColor.RED));
+            }
+            if (this.rdoBlack.isSelected()) {
+                predicates.add(new ColorPredicate(ObjectColor.BLACK));
+            }
+            if (this.rdoBlue.isSelected()) {
+                predicates.add(new ColorPredicate(ObjectColor.BLUE));
+            }
+            if (this.rdoWhite.isSelected()) {
+                predicates.add(new ColorPredicate(ObjectColor.WHITE));
+            }
+            if (this.rdoColorless.isSelected()) {
+                predicates.add(new ColorlessPredicate());
+            }
+            filter.add(Predicates.or(predicates));
+
+            predicates.clear();
+            if (this.rdoLand.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.LAND));
+            }
+            if (this.rdoArtifacts.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.ARTIFACT));
+            }
+            if (this.rdoCreatures.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.CREATURE));
+            }
+            if (this.rdoEnchantments.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.ENCHANTMENT));
+            }
+            if (this.rdoInstants.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.INSTANT));
+            }
+            if (this.rdoSorceries.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.SORCERY));
+            }
+            if (this.rdoPlaneswalkers.isSelected()) {
+                predicates.add(new CardTypePredicate(CardType.PLANESWALKER));
+            }
+            filter.add(Predicates.or(predicates));
+
+
+            if (this.cbExpansionSet.isVisible()) {
+                String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
+                if (!expansionSelection.equals("- All Sets")) {
+                    ArrayList<Predicate<Card>> expansionPredicates = new ArrayList<Predicate<Card>>();
+                    for (String setCode : ConstructedFormats.getSetsByFormat(expansionSelection)) {
+                        expansionPredicates.add(new ExpansionSetPredicate(setCode));
+                    }
+                    filter.add(Predicates.or(expansionPredicates));
                 }
-                filter.add(Predicates.or(expansionPredicates));
             }
         }
 
@@ -279,11 +294,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             criteria.types(CardType.PLANESWALKER);
         }
 
-        String text = jTextFieldSearch.getText().trim();
-        if (!text.isEmpty()) {
-            // criteria.rules(text);
-        }
-
         if (this.cbExpansionSet.isVisible()) {
             String expansionSelection = this.cbExpansionSet.getSelectedItem().toString();
             if (!expansionSelection.equals("- All Sets")) {
@@ -314,9 +324,12 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                     if (filter.match(card, null)) {
                         filteredCards.add(card);
                     }
-                }
+                }                
             }
-            this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null);
+            if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
+                this.toggleViewMode();
+            }
+            this.currentView.loadCards(new CardsView(filteredCards), (SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected(), bigCard, null, false);
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         }
         finally {
@@ -326,10 +339,6 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     public void setCardCount(int value) {
         this.cardCount.setText(String.valueOf(value));
-    }
-
-    public ICardGrid getCardsList() {
-        return this.currentView;
     }
 
     public List<ICardGrid> getCardGridComponents() {
@@ -807,13 +816,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_rdoPlaneswalkersActionPerformed
 
     private void cbExpansionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbExpansionSetActionPerformed
-        if (this.cbExpansionSet.getSelectedItem().equals("-- Standard")) {
-            filterCards();
-        } else {
-            // auto switch for ListView for "All sets" (too many cards to load)
-            jToggleListView.doClick();
-            jToggleListView.setSelected(true);
-        }
+        filterCards();
     }//GEN-LAST:event_cbExpansionSetActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -841,35 +844,39 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     }//GEN-LAST:event_btnBoosterActionPerformed
 
     private void cbSortByActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortByActionPerformed
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }//GEN-LAST:event_cbSortByActionPerformed
 
     private void chkPilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkPilesActionPerformed
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }//GEN-LAST:event_chkPilesActionPerformed
 
     private void jToggleListViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleListViewActionPerformed
-        jToggleCardView.setSelected(false);
-        currentView = mainModel;
-        jScrollPane1.setViewportView(mainTable);
-        cbSortBy.setEnabled(false);
-        chkPiles.setEnabled(false);
-        jButtonAddToMain.setEnabled(true);
-        jButtonAddToSideboard.setEnabled(true);
+        if (!(currentView instanceof TableModel)) {
+            toggleViewMode();
+        } else {
+            jToggleListView.setSelected(true);
+        }
         filterCards();
     }//GEN-LAST:event_jToggleListViewActionPerformed
 
     private void jToggleCardViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCardViewActionPerformed
-        jToggleListView.setSelected(false);
-        currentView = cardGrid;
-        jScrollPane1.setViewportView(cardGrid);
-        cbSortBy.setEnabled(true);
-        chkPiles.setEnabled(true);
-        jButtonAddToMain.setEnabled(false);
-        jButtonAddToSideboard.setEnabled(false);
-        filterCards();
+        if (currentView.cardsSize() > CardGrid.MAX_IMAGES) {
+            jToggleCardView.setSelected(false);
+            JOptionPane.showMessageDialog(this, new StringBuilder("The card view can't be used for more than ").append(CardGrid.MAX_IMAGES).append(" cards.").toString());
+
+        } else {
+            if (!(currentView instanceof CardGrid)) {
+                toggleViewMode();
+            } else {
+                jToggleCardView.setSelected(true);
+            }
+            filterCards();
+        }
     }//GEN-LAST:event_jToggleCardViewActionPerformed
 
     private void jButtonAddToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddToMainActionPerformed
@@ -881,8 +888,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 mainModel.doubleClick(index);
             }
             //if (!mode.equals(Constants.DeckEditorMode.Constructed))
-            if (limited)
+            if (limited) {
                 mainModel.fireTableDataChanged();
+            }
         }
     }//GEN-LAST:event_jButtonAddToMainActionPerformed
 
@@ -895,8 +903,9 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
                 mainModel.shiftDoubleClick(index);
             }
             //if (!mode.equals(Constants.DeckEditorMode.Constructed))
-            if (limited)
+            if (limited) {
                 mainModel.fireTableDataChanged();
+            }
         }
     }//GEN-LAST:event_jButtonAddToSideboardActionPerformed
 
@@ -918,9 +927,33 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
         filterCards();
     }//GEN-LAST:event_jButtonCleanActionPerformed
 
+    private void toggleViewMode() {
+        if (currentView instanceof CardGrid) {
+            jToggleListView.setSelected(true);
+            jToggleCardView.setSelected(false);
+            currentView = mainModel;
+            jScrollPane1.setViewportView(mainTable);
+            cbSortBy.setEnabled(false);
+            chkPiles.setEnabled(false);
+            jButtonAddToMain.setEnabled(true);
+            jButtonAddToSideboard.setEnabled(true);            
+        } else {
+            jToggleCardView.setSelected(true);
+            jToggleListView.setSelected(false);
+            currentView = cardGrid;
+            jScrollPane1.setViewportView(cardGrid);
+            cbSortBy.setEnabled(true);
+            chkPiles.setEnabled(true);
+            jButtonAddToMain.setEnabled(false);
+            jButtonAddToSideboard.setEnabled(false);        
+        }
+    }
+
     public List<Integer> asList(final int[] is) {
         List<Integer> list = new ArrayList<Integer>();
-        for (int i : is) list.add(i);
+        for (int i : is) {
+            list.add(i);
+        }
         return list;
     }
 
@@ -978,26 +1011,30 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
 
     @Override
     public void componentResized(ComponentEvent e) {
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        if (cbSortBy.getSelectedItem() instanceof SortBy)
+        if (cbSortBy.getSelectedItem() instanceof SortBy) {
             this.currentView.drawCards((SortBy) cbSortBy.getSelectedItem(), chkPiles.isSelected());
+        }
     }
 
 }

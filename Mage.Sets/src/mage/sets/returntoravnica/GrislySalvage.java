@@ -74,6 +74,11 @@ public class GrislySalvage extends CardImpl<GrislySalvage> {
 }
 class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
 
+    private static final FilterCard filterPutInHand = new FilterCard("creature or land card to put in hand");
+    static {
+        filterPutInHand.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
+    }
+
     public GrislySalvageEffect() {
         super(Outcome.DrawCard);
         this.staticText = "Reveal the top five cards of your library. You may put a creature or land card from among them into your hand. Put the rest into your graveyard";
@@ -100,7 +105,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
                 Card card = player.getLibrary().removeFromTop(game);
                 if (card != null) {
                     cards.add(card);
-                    if (card.getCardType().contains(CardType.CREATURE) || card.getCardType().contains(CardType.LAND)) {
+                    if (filterPutInHand.match(card, source.getSourceId(), source.getControllerId(), game)) {
                         properCardFound = true;
                     }
                 }
@@ -108,9 +113,7 @@ class GrislySalvageEffect extends OneShotEffect<GrislySalvageEffect> {
 
             if (!cards.isEmpty()) {
                 player.revealCards("Grisly Salvage", cards, game);
-                FilterCard filter = new FilterCard("creature or land card to put in hand");
-                filter.add(Predicates.or(new CardTypePredicate(CardType.CREATURE), new CardTypePredicate(CardType.LAND)));
-                TargetCard target = new TargetCard(Zone.PICK, filter);
+                TargetCard target = new TargetCard(Zone.PICK, filterPutInHand);
                 if (properCardFound && player.choose(Outcome.DrawCard, cards, target, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {

@@ -29,6 +29,8 @@ package mage.server;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -164,6 +166,13 @@ public class User {
         fireCallback(new ClientCallback("showGameEndDialog", gameId));
     }
 
+    public void showUserMessage(final String titel,  String message) {
+        List<String> messageData = new LinkedList<String>();
+        messageData.add(titel);
+        messageData.add(message);
+        fireCallback(new ClientCallback("showUserMessage", null, messageData ));
+    }
+
     public void watchGame(final UUID gameId) {
         fireCallback(new ClientCallback("watchGame", gameId));
     }
@@ -284,14 +293,7 @@ public class User {
             session.setKilled();
         }
         for (Entry<UUID, Table> entry: tables.entrySet()) {
-            entry.getValue().leaveTable(entry.getKey());
-            // remove tables here only, if the match or tournament did not start yet (states waiting/starting).
-            // all other situations have to lead to a fnished match / tournament where players left / conceded for which reasons ever
-            if (TableManager.getInstance().isTableOwner(entry.getValue().getId(), userId)
-                    && (entry.getValue().getState().equals(TableState.WAITING)
-                       || entry.getValue().getState().equals(TableState.STARTING))) {
-                TableManager.getInstance().removeTable(userId, entry.getValue().getId());
-            }
+            TableManager.getInstance().leaveTable(userId, entry.getValue().getId());
         }
         ChatManager.getInstance().removeUser(userId, reason);
     }

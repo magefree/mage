@@ -33,10 +33,10 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.Game;
@@ -50,8 +50,6 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ArmWithAEther extends CardImpl<ArmWithAEther> {
 
-    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("Creatures you control");
-
     public ArmWithAEther(UUID ownerId) {
         super(ownerId, 28, "Arm with AEther", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "NPH";
@@ -59,7 +57,9 @@ public class ArmWithAEther extends CardImpl<ArmWithAEther> {
         this.color.setBlue(true);
 
         // Until end of turn, creatures you control gain "Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand."
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(new ArmWithAEtherTriggeredAbility(), Duration.EndOfTurn, filter));
+        Effect effect = new GainAbilityControlledEffect(new ArmWithAEtherTriggeredAbility(), Duration.EndOfTurn, new FilterCreaturePermanent());
+        effect.setText("Until end of turn, creatures you control gain \"Whenever this creature deals damage to an opponent, you may return target creature that player controls to its owner's hand.\"");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public ArmWithAEther(final ArmWithAEther card) {

@@ -50,8 +50,19 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
 
     @Test
     public void testCard3() {
+        // Sorin, Lord of Innistrad English
+        //  Planeswalker — Sorin (Loyalty: 3), 2WB
+        //  +1: Put a 1/1 black Vampire creature token with lifelink onto the battlefield.
+        //  -2: You get an emblem with "Creatures you control get +1/+0."
+        //  -6: Destroy up to three target creatures and/or other planeswalkers. Return each card put into a graveyard this way to the battlefield under your control.
         addCard(Zone.BATTLEFIELD, playerA, "Sorin, Lord of Innistrad");
+        // Craw Wurm
+        //  Creature — Wurm 6/4, 4GG
         addCard(Zone.BATTLEFIELD, playerB, "Craw Wurm");
+        // Angel of Mercy English
+        //  Creature — Angel 3/3, 4W (5)
+        //  Flying
+        //  When Angel of Mercy enters the battlefield, you gain 3 life.
         addCard(Zone.BATTLEFIELD, playerB, "Angel of Mercy");
 
         addCounters(1, PhaseStep.UPKEEP, playerA, "Sorin, Lord of Innistrad", CounterType.LOYALTY, 3);
@@ -62,8 +73,9 @@ public class SorinLordOfInnistradTest extends CardTestPlayerBase {
         assertPermanentCount(playerA, "Craw Wurm", 1);
         assertPermanentCount(playerA, "Angel of Mercy", 1);
 
-        assertLife(playerA, 23);
+        
         assertLife(playerB, 20);
+        assertLife(playerA, 23);
         assertPermanentCount(playerA, "Sorin, Lord of Innistrad", 0);
         assertPermanentCount(playerB, "Craw Wurm", 0);
         assertPermanentCount(playerB, "Angel of Mercy", 0);

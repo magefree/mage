@@ -37,8 +37,10 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.filter.FilterCard;
 import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.players.Player;
 import mage.target.TargetCard;
+import mage.util.CardUtil;
 
 /**
  *
@@ -54,7 +56,7 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
     public ScryEffect(int scryNumber) {
         super(Outcome.Benefit);
         this.scryNumber = scryNumber;
-        staticText = "Scry " + scryNumber;
+        this.setText();
     }
 
     public ScryEffect(final ScryEffect effect) {
@@ -65,43 +67,54 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        Cards cards = new CardsImpl(Zone.PICK);
-        int count = Math.min(scryNumber, player.getLibrary().size());
-        if (count == 0) {
-            return false;
-        }
-        for (int i = 0; i < count; i++) {
-            Card card = player.getLibrary().removeFromTop(game);
-            cards.add(card);
-            game.setZone(card.getId(), Zone.PICK);
-        }
-        TargetCard target1 = new TargetCard(Zone.PICK, filter1);
-        while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
-            Card card = cards.get(target1.getFirstTarget(), game);
-            if (card != null) {
-                cards.remove(card);
-                card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
+        if (player != null) {
+            Cards cards = new CardsImpl(Zone.PICK);
+            int count = Math.min(scryNumber, player.getLibrary().size());
+            if (count == 0) {
+                return false;
             }
-            target1.clearChosen();
-        }
-        if (cards.size() > 1) {
-            TargetCard target2 = new TargetCard(Zone.PICK, filter2);
-            target2.setRequired(true);
-            while (cards.size() > 1) {
-                player.choose(Outcome.Benefit, cards, target2, game);
-                Card card = cards.get(target2.getFirstTarget(), game);
+            for (int i = 0; i < count; i++) {
+                Card card = player.getLibrary().removeFromTop(game);
+                cards.add(card);
+                game.setZone(card.getId(), Zone.PICK);
+            }
+            TargetCard target1 = new TargetCard(Zone.PICK, filter1);
+            // move cards to the bottom of the library
+            while (cards.size() > 0 && player.choose(Outcome.Detriment, cards, target1, game)) {
+                Card card = cards.get(target1.getFirstTarget(), game);
                 if (card != null) {
                     cards.remove(card);
-                    card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    card.moveToZone(Zone.LIBRARY, source.getId(), game, false);
                 }
-                target2.clearChosen();
+                target1.clearChosen();
             }
+            // move cards to the top of the library
+            int onBottom = scryNumber - cards.size();
+            if (cards.size() > 1) {
+                TargetCard target2 = new TargetCard(Zone.PICK, filter2);
+                target2.setRequired(true);
+                while (cards.size() > 1) {
+                    player.choose(Outcome.Benefit, cards, target2, game);
+                    Card card = cards.get(target2.getFirstTarget(), game);
+                    if (card != null) {
+                        cards.remove(card);
+                        card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+                    }
+                    target2.clearChosen();
+                }
+            }
+            if (cards.size() == 1) {
+                Card card = cards.get(cards.iterator().next(), game);
+                card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
+            }
+            game.informPlayers(new StringBuilder(player.getName()).append(" puts ")
+                    .append(onBottom).append(onBottom == 1 ?" card":" cards")
+                    .append(" on the bottom of his or her library (scry ")
+                    .append(scryNumber).append(")").toString());
+            game.fireEvent(new GameEvent(GameEvent.EventType.SCRY, source.getControllerId(), source.getSourceId(), source.getControllerId()));
+            return true;
         }
-        if (cards.size() == 1) {
-            Card card = cards.get(cards.iterator().next(), game);
-            card.moveToZone(Zone.LIBRARY, source.getId(), game, true);
-        }
-        return true;
+        return false;
     }
 
     @Override
@@ -109,4 +122,15 @@ public class ScryEffect extends OneShotEffect<ScryEffect> {
         return new ScryEffect(this);
     }
 
+    private void setText() {
+        StringBuilder sb = new StringBuilder("Scry ").append(scryNumber);
+        if (scryNumber == 1) {
+            sb.append(". <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>");
+        } else {
+            sb.append(". <i>(Look at the top ");
+            sb.append(CardUtil.numberToText(scryNumber));
+            sb.append(" cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>");
+        }
+        staticText = sb.toString();
+    }
 }

@@ -218,11 +218,6 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
             tablesPane = new TablesPane();
             desktopPane.add(tablesPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
             tablesPane.setMaximum(true);
-
-            collectionViewerPane = new CollectionViewerPane();
-            desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-            collectionViewerPane.setMaximum(true);
-
         } catch (PropertyVetoException ex) {
             logger.fatal(null, ex);
         }
@@ -972,8 +967,22 @@ public class MageFrame extends javax.swing.JFrame implements MageClient {
     }
 
     public void showCollectionViewer() {
-        this.collectionViewerPane.setVisible(true);
-        setActive(collectionViewerPane);
+        JInternalFrame[] windows = desktopPane.getAllFramesInLayer(JLayeredPane.DEFAULT_LAYER);
+        for (JInternalFrame window : windows) {
+            if (window instanceof CollectionViewerPane) {
+                setActive((MagePane) window);
+                return;
+            }
+        }
+        try {
+            collectionViewerPane = new CollectionViewerPane();
+            desktopPane.add(collectionViewerPane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+            collectionViewerPane.setMaximum(true);
+            this.collectionViewerPane.setVisible(true);
+            setActive(collectionViewerPane);
+        } catch (PropertyVetoException ex) {
+            logger.fatal(null, ex);
+        }
     }
 
     static void renderSplashFrame(Graphics2D g) {

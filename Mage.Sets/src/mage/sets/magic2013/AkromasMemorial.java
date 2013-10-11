@@ -64,8 +64,8 @@ public class AkromasMemorial extends CardImpl<AkromasMemorial> {
     @Override
     public void build() {
         // Creatures you control have flying, first strike, vigilance, trample, haste, and protection from black and from red.
-        CompoundAbility abilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance(), HasteAbility.getInstance(), new ProtectionAbility(filterBlack), new ProtectionAbility(filterRed));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(abilities, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures you control"))));
+        CompoundAbility compoundAbilities = new CompoundAbility(FlyingAbility.getInstance(), FirstStrikeAbility.getInstance(), VigilanceAbility.getInstance(), TrampleAbility.getInstance(), HasteAbility.getInstance(), new ProtectionAbility(filterBlack), new ProtectionAbility(filterRed));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityControlledEffect(compoundAbilities, Duration.WhileOnBattlefield, new FilterControlledCreaturePermanent("Creatures"))));
     }
 
     public AkromasMemorial(final AkromasMemorial card) {

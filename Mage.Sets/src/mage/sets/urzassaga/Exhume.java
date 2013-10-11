@@ -28,18 +28,19 @@
 package mage.sets.urzassaga;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.players.Player;
-import mage.target.common.TargetCardInYourGraveyard;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
@@ -94,9 +95,11 @@ class ExhumeEffect extends OneShotEffect<ExhumeEffect> {
             Player player = game.getPlayer(playerId);
             if (player != null) {
                 FilterCreatureCard filterCreatureCard = new FilterCreatureCard("creature card from your graveyard");
-                TargetCardInYourGraveyard target = new TargetCardInYourGraveyard(filterCreatureCard);
+                filterCreatureCard.add(new OwnerIdPredicate(playerId));
+                TargetCardInGraveyard target = new TargetCardInGraveyard(filterCreatureCard);
                 target.setRequired(true);
-                if (player.chooseTarget(outcome, target, source, game)) {
+                if (target.canChoose(playerId, game) &&
+                        player.chooseTarget(outcome, target, source, game)) {
                     Card card = game.getCard(target.getFirstTarget());
                     if (card != null) {
                         card.putOntoBattlefield(game, Zone.GRAVEYARD, source.getId(), player.getId());

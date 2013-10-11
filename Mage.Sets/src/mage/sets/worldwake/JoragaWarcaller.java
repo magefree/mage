@@ -53,7 +53,7 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
     
     private static final String rule = "Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller";
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Other elf creatures you control");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("elf creatures you control");
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
@@ -81,7 +81,8 @@ public class JoragaWarcaller extends CardImpl<JoragaWarcaller> {
 
         
         // Other Elf creatures you control get +1/+1 for each +1/+1 counter on Joraga Warcaller.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                new BoostAllEffect( new CountersCount(CounterType.P1P1), new CountersCount(CounterType.P1P1), Duration.WhileOnBattlefield, filter, true, rule)));
         
     }
 

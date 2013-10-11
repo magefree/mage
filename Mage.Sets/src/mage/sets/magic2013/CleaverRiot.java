@@ -34,7 +34,7 @@ import mage.constants.Rarity;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.DoubleStrikeAbility;
 import mage.cards.CardImpl;
-import mage.filter.common.FilterControlledCreaturePermanent;
+import mage.filter.common.FilterCreaturePermanent;
 
 /**
  *
@@ -49,7 +49,7 @@ public class CleaverRiot extends CardImpl<CleaverRiot> {
         this.color.setRed(true);
 
         // Creatures you control gain double strike until end of turn.
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterControlledCreaturePermanent(), false));
+        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(DoubleStrikeAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent(), false));
     }
 
     public CleaverRiot(final CleaverRiot card) {

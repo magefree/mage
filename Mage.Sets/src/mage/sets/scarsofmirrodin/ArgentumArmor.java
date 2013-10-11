@@ -34,7 +34,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.abilities.Ability;
-import mage.abilities.common.AttacksEquippedTriggeredAbility;
+import mage.abilities.common.AttacksAttachedTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.common.continious.BoostEquippedEffect;
@@ -55,7 +55,7 @@ public class ArgentumArmor extends CardImpl<ArgentumArmor> {
         this.expansionSetCode = "SOM";
         this.subtype.add("Equipment");
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEquippedEffect(6, 6)));
-        Ability ability = new AttacksEquippedTriggeredAbility(new DestroyTargetEffect());
+        Ability ability = new AttacksAttachedTriggeredAbility(new DestroyTargetEffect());
         ability.addTarget(new TargetPermanent());
         this.addAbility(ability);
         this.addAbility(new EquipAbility(Outcome.AddAbility, new GenericManaCost(6)));

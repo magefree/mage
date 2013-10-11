@@ -560,29 +560,29 @@ public final class GamePanel extends javax.swing.JPanel {
         }
     }
 
-    public void ask(String question, GameView gameView) {
+    public void ask(String question, GameView gameView, int messageId) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null);
+        this.feedbackPanel.getFeedback(FeedbackMode.QUESTION, question, false, null, messageId);
     }
 
-    public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options) {
+    public void pickTarget(String message, CardsView cardView, GameView gameView, Set<UUID> targets, boolean required, Map<String, Serializable> options, int messageId) {
         updateGame(gameView);
         Map<String, Serializable> options0 = options == null ? new HashMap<String, Serializable>() : options;
         if (cardView != null && cardView.size() > 0) {
             ShowCardsDialog dialog = showCards(message, cardView, required, options0);
             options0.put("dialog", dialog);
         }
-        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0);
+        this.feedbackPanel.getFeedback(required?FeedbackMode.INFORM:FeedbackMode.CANCEL, message, gameView.getSpecial(), options0, messageId);
 
     }
 
-    public void inform(String information, GameView gameView) {
+    public void inform(String information, GameView gameView, int messageId) {
         updateGame(gameView);
-        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null);
+        this.feedbackPanel.getFeedback(FeedbackMode.INFORM, information, gameView.getSpecial(), null, messageId);
     }
 
-    public void endMessage(String message) {
-        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null);
+    public void endMessage(String message, int messageId) {
+        this.feedbackPanel.getFeedback(FeedbackMode.END, message, false, null, messageId);
         ArrowBuilder.getBuilder().removeAllArrows(gameId);
     }
 
@@ -590,7 +590,7 @@ public final class GamePanel extends javax.swing.JPanel {
         return JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION);
     }
 
-    public void select(String message, GameView gameView) {
+    public void select(String message, GameView gameView, int messageId) {
         updateGame(gameView);
         String messageToDisplay = message;
         Map<String, Serializable> options = null;
@@ -609,22 +609,22 @@ public final class GamePanel extends javax.swing.JPanel {
                 break;
             }
         }
-        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), options);
+        this.feedbackPanel.getFeedback(FeedbackMode.SELECT, messageToDisplay, gameView.getSpecial(), options, messageId);
         if (PhaseManager.getInstance().isSkip(gameView, message)) {
             this.feedbackPanel.doClick();
         }
     }
 
-    public void playMana(String message, GameView gameView) {
+    public void playMana(String message, GameView gameView, int messageId) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null);
+        this.feedbackPanel.getFeedback(FeedbackMode.CANCEL, message, gameView.getSpecial(), null, messageId);
     }
 
-    public void playXMana(String message, GameView gameView) {
+    public void playXMana(String message, GameView gameView, int messageId) {
         updateGame(gameView);
         DialogManager.getManager(gameId).fadeOut();
-        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null);
+        this.feedbackPanel.getFeedback(FeedbackMode.CONFIRM, message, gameView.getSpecial(), null, messageId);
     }
 
     public void replayMessage(String message) {
@@ -715,6 +715,7 @@ public final class GamePanel extends javax.swing.JPanel {
         userChatPanel = new mage.client.chat.ChatPanel();
         userChatPanel.setParentChat(gameChatPanel);
         userChatPanel.useExtendedView(ChatPanel.VIEW_MODE.CHAT);
+        userChatPanel.setChatType(ChatPanel.ChatType.GAME);
         gameChatPanel.setConnectedChat(userChatPanel);
         gameChatPanel.disableInput();
         gameChatPanel.setMinimumSize(new java.awt.Dimension(100, 48));
@@ -1242,6 +1243,10 @@ public final class GamePanel extends javax.swing.JPanel {
         button.setToolTipText(name.replaceAll("_", " "));
         button.setPreferredSize(new Dimension(36, 36));
         hoverButtons.put(name, button);
+    }
+
+    public String getGameLog() {
+        return gameChatPanel.getText();
     }
 
     private mage.client.components.ability.AbilityPicker abilityPicker;

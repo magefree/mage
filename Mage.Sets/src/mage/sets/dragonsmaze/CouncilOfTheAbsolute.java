@@ -49,6 +49,7 @@ import mage.cards.CardImpl;
 import mage.cards.repository.CardRepository;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
+import mage.constants.CostModificationType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
@@ -170,7 +171,7 @@ class CouncilOfTheAbsoluteReplacementEffect extends ReplacementEffectImpl<Counci
 class CouncilOfTheAbsoluteCostReductionEffect extends CostModificationEffectImpl<CouncilOfTheAbsoluteCostReductionEffect> {
 
     public CouncilOfTheAbsoluteCostReductionEffect() {
-        super(Duration.WhileOnBattlefield, Outcome.Benefit);
+        super(Duration.WhileOnBattlefield, Outcome.Benefit, CostModificationType.REDUCE_COST);
         this.staticText = "Spells with the chosen name cost 2 less for you to cast";
     }
 

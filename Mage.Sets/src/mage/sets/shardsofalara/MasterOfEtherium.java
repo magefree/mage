@@ -1,4 +1,4 @@
-/*
+    /*
  *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
@@ -48,7 +48,7 @@ import mage.filter.predicate.permanent.ControllerPredicate;
 public class MasterOfEtherium extends CardImpl<MasterOfEtherium> {
 
     private static final FilterControlledPermanent filterCounted = new FilterControlledPermanent("artifacts you control");
-    private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("artifact creatures you control");
+    private static final FilterCreaturePermanent filterBoosted = new FilterCreaturePermanent("artifact creatures");
 
     static {
         filterCounted.add(new CardTypePredicate(CardType.ARTIFACT));

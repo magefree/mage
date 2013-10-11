@@ -28,18 +28,16 @@
 
 package mage.abilities.effects.common.search;
 
-import mage.constants.Outcome;
-import mage.constants.Zone;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.effects.SearchEffect;
 import mage.cards.Card;
+import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInLibrary;
-
-import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -87,8 +85,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        if (player == null)
+        if (player == null) {
             return false;
+        }
         if (player.searchLibrary(target, game)) {
             if (target.getTargets().size() > 0) {
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
@@ -101,8 +100,9 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
             player.shuffleLibrary(game);
             return true;
         }
-        if (forceShuffle)
+        if (forceShuffle) {
             player.shuffleLibrary(game);
+        }
         return false;
     }
 
@@ -121,12 +121,15 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
         else {
             sb.append("a ").append(target.getTargetName()).append(" and put it onto the battlefield");
         }
-        if (tapped)
+        if (tapped) {
             sb.append(" tapped");
-        if (forceShuffle)
+        }
+        if (forceShuffle) {
             sb.append(". Then shuffle your library");
-        else
+        }
+        else {
             sb.append(". If you do, shuffle your library");
+        }
         staticText = sb.toString();
     }
 

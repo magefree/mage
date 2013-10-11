@@ -41,19 +41,35 @@ import mage.game.stack.Spell;
  */
 public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargetsTargetEffect> {
 
+    private boolean forceChange;
+    private boolean onlyOneTarget;
+
     public ChooseNewTargetsTargetEffect() {
+        this(false, false);
+    }
+
+    /**
+     *
+     * @param forceChange - forces the user to choose another target (only targets with maxtargets = 1 supported)
+     */
+
+    public ChooseNewTargetsTargetEffect(boolean forceChange, boolean onlyOneTarget) {
         super(Outcome.Benefit);
+        this.forceChange = forceChange;
+        this.onlyOneTarget = onlyOneTarget;
     }
 
     public ChooseNewTargetsTargetEffect(final ChooseNewTargetsTargetEffect effect) {
         super(effect);
+        this.forceChange = effect.forceChange;
+        this.onlyOneTarget = effect.onlyOneTarget;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
         Spell spell = game.getStack().getSpell(source.getFirstTarget());
         if (spell != null) {
-            return spell.chooseNewTargets(game, source.getControllerId());
+            return spell.chooseNewTargets(game, source.getControllerId(), forceChange, onlyOneTarget);
         }
         return false;
     }
@@ -65,6 +81,13 @@ public class ChooseNewTargetsTargetEffect extends OneShotEffect<ChooseNewTargets
 
     @Override
     public String getText(Mode mode) {
-        return "You may choose new targets for target " + mode.getTargets().get(0).getTargetName();
+        StringBuilder sb = new StringBuilder();
+        if (forceChange) {
+            sb.append("Change the target of target ");
+        } else {
+            sb.append("You may choose new targets for target ");
+        }
+        sb.append(mode.getTargets().get(0).getTargetName());
+        return sb.toString();
     }
 }

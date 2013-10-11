@@ -22214,3 +22214,333 @@ Forest|Magic 2014|246|L||Basic Land - Forest|||G|
 Forest|Magic 2014|247|L||Basic Land - Forest|||G|
 Forest|Magic 2014|248|L||Basic Land - Forest|||G|
 Forest|Magic 2014|249|L||Basic Land - Forest|||G|
+Battlewise Valor|Theros|1|C|{1}{W}|Instant|||Target creature gets +2/+2 until end of turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Ephara's Warden|Theros|10|C|{3}{W}|Creature - Human Cleric|1|2|{tap}: Tap target creature with power 3 or less.|
+Pharika's Cure|Theros|100|C|{B}{B}|Instant|||Pharika's Cure deals 2 damage to target creature and you gain 2 life.|
+Read the Bones|Theros|101|C|{2}{B}|Sorcery|||Scry 2, then draw two cards. You lose 2 life. <i>(To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Rescue from the Underworld|Theros|102|U|{4}{B}|Instant|||As an additional cost to cast Rescue from the Underworld, sacrifice a creature.$Choose target creature card in your graveyard. Return that card and the sacrificed card to the battlefield under your control at the beginning of your next upkeep. Exile Rescue from the Underworld.|
+Returned Centaur|Theros|103|C|{3}{B}|Creature - Zombie Centaur|2|4|When Returned Centaur enters the battlefield, target player puts the top four cards of his or her library into his or her graveyard.|
+Returned Phalanx|Theros|104|C|{1}{B}|Creature - Zombie Soldier|3|3|Defender${1}{U}: Returned Phalanx can attack this turn as though it didn't have defender.|
+Scourgemark|Theros|105|C|{1}{B}|Enchantment - Aura|||Enchant creature$When Scourgemark enters the battlefield, draw a card.$Enchanted creature gets +1/+0.|
+Sip of Hemlock|Theros|106|C|{4}{B}{B}|Sorcery|||Destroy target creature. Its controller loses 2 life.|
+Thoughtseize|Theros|107|R|{B}|Sorcery|||Target player reveals his or her hand. You choose a nonland card from it. That player discards that card. You lose 2 life.|
+Tormented Hero|Theros|108|U|{B}|Creature - Human Warrior|2|1|Tormented Hero enters the battlefield tapped.$Heroic - Whenever you cast a spell that targets Tormented Hero, each opponent loses 1 life. You gain life equal to the life lost this way.|
+Viper's Kiss|Theros|109|C|{B}|Enchantment - Aura|||Enchant creature$Enchanted creature gets -1/-1, and its activated abilities can't be activated.|
+Evangel of Heliod|Theros|11|U|{4}{W}{W}|Creature - Human Cleric|1|3|When Evangel of Heliod enters the battlefield, put a number of 1/1 white Soldier creature tokens onto the battlefield equal to your devotion to white. <i>(Each {W} in the mana costs of permanents you control counts toward your devotion to white.)</i>|
+Whip of Erebos|Theros|110|R|{2}{B}{B}|Legendary Enchantment Artifact|||Creatures you control have lifelink.${2}{B}{B}, {tap}: Return target creature card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step. If it would leave the battlefield, exile it instead of putting it anywhere else. Activate this ability only any time you could cast a sorcery.|
+Akroan Crusader|Theros|111|C|{R}|Creature - Human Soldier|1|1|Heroic - Whenever you cast a spell that targets Akroan Crusader, put a 1/1 red Soldier creature token with haste onto the battlefield.|
+Anger of the Gods|Theros|112|R|{1}{R}{R}|Sorcery|||Anger of the Gods deals 3 damage to each creature. If a creature dealt damage this way would die this turn, exile it instead.|
+Arena Athlete|Theros|113|U|{1}{R}|Creature - Human|2|1|Heroic - Whenever you cast a spell that targets Arena Athlete, target creature an opponent controls can't block this turn.|
+Borderland Minotaur|Theros|114|C|{2}{R}{R}|Creature - Minotaur Warrior|4|3||
+Boulderfall|Theros|115|C|{6}{R}{R}|Instant|||Boulderfall deals 5 damage divided as you choose among any number of target creatures and/or players.|
+Coordinated Assault|Theros|116|U|{R}|Instant|||Up to two target creatures each get +1/+0 and gain first strike until end of turn.|
+Deathbellow Raider|Theros|117|C|{1}{R}|Creature - Minotaur Berserker|2|3|Deathbellow Raider attacks each turn if able.${2}{B}: Regenerate Deathbellow Raider.|
+Demolish|Theros|118|C|{3}{R}|Sorcery|||Destroy target artifact or land.|
+Dragon Mantle|Theros|119|C|{R}|Enchantment - Aura|||Enchant creature$When Dragon Mantle enters the battlefield, draw a card.$Enchanted creature has "{R}: This creature gets +1/+0 until end of turn."|
+Fabled Hero|Theros|12|R|{1}{W}{W}|Creature - Human Soldier|2|2|Double strike$Heroic - Whenever you cast a spell that targets Fabled Hero, put a +1/+1 counter on Fabled Hero.|
+Ember Swallower|Theros|120|R|{2}{R}{R}|Creature - Elemental|4|5|{5}{R}{R}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Ember Swallower becomes monstrous, each player sacrifices three lands.|
+Fanatic of Mogis|Theros|121|U|{3}{R}|Creature - Minotaur Shaman|4|2|When Fanatic of Mogis enters the battlefield, it deals damage to each opponent equal to your devotion to red. <i>(Each {R} in the mana costs of permanents you control counts toward your devotion to red.)</i>|
+Firedrinker Satyr|Theros|122|R|{R}|Creature - Satyr Shaman|2|1|Whenever Firedrinker Satyr is dealt damage, it deals that much damage to you.${1}{R}: Firedrinker Satyr gets +1/+0 until end of turn and deals 1 damage to you.|
+Flamespeaker Adept|Theros|123|U|{2}{R}|Creature - Human Shaman|2|3|Whenever you scry, Flamespeaker Adept gets +2/+0 and gains first strike until end of turn.|
+Hammer of Purphoros|Theros|124|R|{1}{R}{R}|Legendary Enchantment Artifact|||Creatures you control have haste.${2}{R}, {tap}, Sacrifice a land: Put a 3/3 colorless Golem enchantment artifact creature token onto the battlefield.|
+Ill-Tempered Cyclops|Theros|125|C|{3}{R}|Creature - Cyclops|3|3|Trample${5}{R}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>|
+Labyrinth Champion|Theros|126|R|{3}{R}|Creature - Human Warrior|2|2|Heroic - Whenever you cast a spell that targets Labyrinth Champion, Labyrinth Champion deals 2 damage to target creature or player.|
+Lightning Strike|Theros|127|C|{1}{R}|Instant|||Lightning Strike deals 3 damage to target creature or player.|
+Magma Jet|Theros|128|U|{1}{R}|Instant|||Magma Jet deals 2 damage to target creature or player. Scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Messenger's Speed|Theros|129|C|{R}|Enchantment - Aura|||Enchant creature$Enchanted creature has trample and haste.|
+Favored Hoplite|Theros|13|U|{W}|Creature - Human Soldier|1|2|Heroic - Whenever you cast a spell that targets Favored Hoplite, put a +1/+1 counter on Favored Hoplite and prevent all damage that would be dealt to it this turn.|
+Minotaur Skullcleaver|Theros|130|C|{2}{R}|Creature - Minotaur Berserker|2|2|Haste$When Minotaur Skullcleaver enters the battlefield, it gets +2/+0 until end of turn.|
+Ordeal of Purphoros|Theros|131|U|{1}{R}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.$When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.|
+Peak Eruption|Theros|132|U|{2}{R}|Sorcery|||Destroy target Mountain. Peak Eruption deals 3 damage to that land's controller.|
+Portent of Betrayal|Theros|133|C|{3}{R}|Sorcery|||Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Priest of Iroas|Theros|134|C|{R}|Creature - Human Cleric|1|1|{3}{W}, Sacrifice Priest of Iroas: Destroy target enchantment.|
+Purphoros, God of the Forge|Theros|135|M|{3}{R}|Legendary Enchantment Creature - God|6|5|Indestructible$As long as your devotion to red is less than five, Purphoros isn't a creature.$Whenever another creature enters the battlefield under your control, Purphoros deals 2 damage to each opponent.${2}{R}: Creatures you control get +1/+0 until end of turn.|
+Purphoros's Emissary|Theros|136|U|{3}{R}|Enchantment Creature - Ox|3|3|Bestow {6}{R} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Purphoros's Emissary can't be blocked except by two or more creatures.$Enchanted creature gets +3/+3 and can't be blocked except by two or more creatures.|
+Rage of Purphoros|Theros|137|C|{4}{R}|Sorcery|||Rage of Purphoros deals 4 damage to target creature. It can't be regenerated this turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Rageblood Shaman|Theros|138|R|{1}{R}{R}|Creature - Minotaur Shaman|2|3|Trample$Other Minotaur creatures you control get +1/+1 and have trample.|
+Satyr Rambler|Theros|139|C|{1}{R}|Creature - Satyr|2|1|Trample|
+Gift of Immortality|Theros|14|R|{2}{W}|Enchantment - Aura|||Enchant creature$When enchanted creature dies, return that card to the battlefield under its owner's control. Return Gift of Immortality to the battlefield attached to that creature at the beginning of the next end step.|
+Spark Jolt|Theros|140|C|{R}|Instant|||Spark Jolt deals 1 damage to target creature or player. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Spearpoint Oread|Theros|141|C|{2}{R}|Enchantment Creature - Nymph|2|2|Bestow {5}{R} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$First strike$Enchanted creature gets +2/+2 and has first strike.|
+Stoneshock Giant|Theros|142|U|{3}{R}{R}|Creature - Giant|5|4|{6}{R}{R}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Stoneshock Giant becomes monstrous, creatures without flying your opponents control can't block this turn.|
+Stormbreath Dragon|Theros|143|M|{3}{R}{R}|Creature - Dragon|4|4|Flying, haste, protection from white${5}{R}{R}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Stormbreath Dragon becomes monstrous, it deals damage to each opponent equal to the number of cards in that player's hand.|
+Titan of Eternal Fire|Theros|144|R|{5}{R}|Creature - Giant|5|6|Each Human creature you control has "{R}, {tap}: This creature deals 1 damage to target creature or player."|
+Titan's Strength|Theros|145|C|{R}|Instant|||Target creature gets +3/+1 until end of turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Two-Headed Cerberus|Theros|146|C|{1}{R}{R}|Creature - Hound|1|2|Double strike <i>(This creature deals both first-strike and regular combat damage.)</i>|
+Wild Celebrants|Theros|147|C|{3}{R}{R}|Creature - Satyr|5|3|When Wild Celebrants enters the battlefield, you may destroy target artifact.|
+Agent of Horizons|Theros|148|C|{2}{G}|Creature - Human Rogue|3|2|{2}{U}: Agent of Horizons can't be blocked this turn.|
+Anthousa, Setessan Hero|Theros|149|R|{3}{G}{G}|Legendary Creature - Human Warrior|4|5|Heroic - Whenever you cast a spell that targets Anthousa, Setessan Hero, up to three target lands you control each become 2/2 Warrior creatures until end of turn. They're still lands.|
+Glare of Heresy|Theros|15|U|{1}{W}|Sorcery|||Exile target white permanent.|
+Arbor Colossus|Theros|150|R|{2}{G}{G}{G}|Creature - Giant|6|6|Reach${3}{G}{G}{G}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Arbor Colossus becomes monstrous, destroy target creature with flying an opponent controls.|
+Artisan's Sorrow|Theros|151|U|{3}{G}|Instant|||Destroy target artifact or enchantment. Scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Boon Satyr|Theros|152|R|{1}{G}{G}|Enchantment Creature - Satyr|4|2|Flash$Bestow {3}{G}{G} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Enchanted creature gets +4/+2.|
+Bow of Nylea|Theros|153|R|{1}{G}{G}|Legendary Enchantment Artifact|||Attacking creatures you control have deathtouch.${1}{G}, {tap}: Choose one - Put a +1/+1 counter on target creature; or Bow of Nylea deals 2 damage to target creature with flying; or you gain 3 life; or put up to four target cards from your graveyard on the bottom of your library in any order.|
+Centaur Battlemaster|Theros|154|U|{3}{G}{G}|Creature - Centaur Warrior|3|3|Heroic - Whenever you cast a spell that targets Centaur Battlemaster, put three +1/+1 counters on Centaur Battlemaster.|
+Commune with the Gods|Theros|155|C|{1}{G}|Sorcery|||Reveal the top five cards of your library. You may put a creature or enchantment card from among them into your hand. Put the rest into your graveyard.|
+Defend the Hearth|Theros|156|C|{1}{G}|Instant|||Prevent all combat damage that would be dealt to players this turn.|
+Fade into Antiquity|Theros|157|C|{2}{G}|Sorcery|||Exile target artifact or enchantment.|
+Feral Invocation|Theros|158|C|{2}{G}|Enchantment - Aura|||Flash <i>(You may cast this spell any time you could cast an instant.)</i>$Enchant creature$Enchanted creature gets +2/+2.|
+Hunt the Hunter|Theros|159|U|{G}|Sorcery|||Target green creature you control gets +2/+2 until end of turn. It fights target green creature an opponent controls.|
+Gods Willing|Theros|16|C|{W}|Instant|||Target creature you control gains protection from the color of your choice until end of turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Karametra's Acolyte|Theros|160|U|{3}{G}|Creature - Human Druid|1|4|{tap}: Add an amount of {G} to your mana pool equal to your devotion to green. <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>|
+Leafcrown Dryad|Theros|161|C|{1}{G}|Enchantment Creature - Nymph Dryad|2|2|Bestow {3}{G} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Reach$Enchanted creature gets +2/+2 and has reach.|
+Mistcutter Hydra|Theros|162|R|{X}{G}|Creature - Hydra|0|0|Mistcutter Hydra can't be countered.$Haste, protection from blue$Mistcutter Hydra enters the battlefield with X +1/+1 counters on it.|
+Nemesis of Mortals|Theros|163|U|{4}{G}{G}|Creature - Snake|5|5|Nemesis of Mortals costs {1} less to cast for each creature card in your graveyard.${7}{G}{G}: Monstrosity 5. This ability costs {1} less to activate for each creature card in your graveyard. <i>(If this creature isn't monstrous, put five +1/+1 counters on it and it becomes monstrous.)</i>|
+Nessian Asp|Theros|164|C|{4}{G}|Creature - Snake|4|5|Reach${6}{G}: Monstrosity 4. <i>(If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)</i>|
+Nessian Courser|Theros|165|C|{2}{G}|Creature - Centaur Warrior|3|3||
+Nylea, God of the Hunt|Theros|166|M|{3}{G}|Legendary Enchantment Creature - God|6|6|Indestructible$As long as your devotion to green is less than five, Nylea isn't a creature. <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>$Other creatures you control have trample.${3}{G}: Target creature gets +2/+2 until end of turn.|
+Nylea's Disciple|Theros|167|C|{2}{G}{G}|Creature - Centaur Archer|3|3|When Nylea's Disciple enters the battlefield, you gain life equal to your devotion to green. <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>|
+Nylea's Emissary|Theros|168|U|{3}{G}|Enchantment Creature - Cat|3|3|Bestow {5}{G} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Trample$Enchanted creature gets +3/+3 and has trample.|
+Nylea's Presence|Theros|169|C|{1}{G}|Enchantment - Aura|||Enchant land$When Nylea's Presence enters the battlefield, draw a card.$Enchanted land is every basic land type in addition to its other types.|
+Heliod, God of the Sun|Theros|17|M|{3}{W}|Legendary Enchantment Creature - God|5|6|Indestructible$As long as your devotion to white is less than five, Heliod isn't a creature. <i>(Each {W} in the mana costs of permanents you control counts toward your devotion to white.)</i>$Other creatures you control have vigilance.${2}{W}{W}: Put a 2/1 white Cleric enchantment creature token onto the battlefield.|
+Ordeal of Nylea|Theros|170|U|{1}{G}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Nylea.$When you sacrifice Ordeal of Nylea, search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.|
+Pheres-Band Centaurs|Theros|171|C|{4}{G}|Creature - Centaur Warrior|3|7||
+Polukranos, World Eater|Theros|172|M|{2}{G}{G}|Legendary Creature - Hydra|5|5|{X}{X}{G}: Monstrosity X. <i>(If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)</i>$When Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.|
+Reverent Hunter|Theros|173|R|{2}{G}|Creature - Human Archer|1|1|When Reverent Hunter enters the battlefield, put a number of +1/+1 counters on it equal to your devotion to green. <i>(Each {G} in the mana costs of permanents you control counts toward your devotion to green.)</i>|
+Satyr Hedonist|Theros|174|C|{1}{G}|Creature - Satyr|2|1|{R}, Sacrifice Satyr Hedonist: Add {R}{R}{R} to your mana pool.|
+Satyr Piper|Theros|175|U|{2}{G}|Creature - Satyr Rogue|2|1|{3}{G}: Target creature must be blocked this turn if able.|
+Savage Surge|Theros|176|C|{1}{G}|Instant|||Target creature gets +2/+2 until end of turn. Untap that creature.|
+Sedge Scorpion|Theros|177|C|{G}|Creature - Scorpion|1|1|Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>|
+Shredding Winds|Theros|178|C|{2}{G}|Instant|||Shredding Winds deals 7 damage to target creature with flying.|
+Staunch-Hearted Warrior|Theros|179|C|{3}{G}|Creature - Human Warrior|2|2|Heroic - Whenever you cast a spell that targets Staunch-Hearted Warrior, put two +1/+1 counters on Staunch-Hearted Warrior.|
+Heliod's Emissary|Theros|18|U|{3}{W}|Enchantment Creature - Elk|3|3|Bestow {6}{W} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Whenever Heliod's Emissary or enchanted creature attacks, tap target creature an opponent controls.$Enchanted creature gets +3/+3.|
+Sylvan Caryatid|Theros|180|R|{1}{G}|Creature - Plant|0|3|Defender, hexproof${tap}: Add one mana of any color to your mana pool.|
+Time to Feed|Theros|181|C|{2}{G}|Sorcery|||Choose target creature an opponent controls. When that creature dies this turn, you gain 3 life. Target creature you control fights that$creature. <i>(Each deals damage equal to its power to the other.)</i>|
+Voyaging Satyr|Theros|182|C|{1}{G}|Creature - Satyr Druid|1|2|{tap}: Untap target land.|
+Vulpine Goliath|Theros|183|C|{4}{G}{G}|Creature - Fox|6|5|Trample|
+Warriors' Lesson|Theros|184|U|{G}|Instant|||Until end of turn, up to two target creatures you control each gain "Whenever this creature deals combat damage to a player, draw a card."|
+Akroan Hoplite|Theros|185|U|{R}{W}|Creature - Human Soldier|1|2|Whenever Akroan Hoplite attacks, it gets +X/+0 until end of turn, where X is the number of attacking creatures you control.|
+Anax and Cymede|Theros|186|R|{1}{R}{W}|Legendary Creature - Human Soldier|3|2|First strike, vigilance$Heroic - Whenever you cast a spell that targets Anax and Cymede, creatures you control get +1/+1 and gain trample until end of turn.|
+Ashen Rider|Theros|187|M|{4}{W}{W}{B}{B}|Creature - Archon|5|5|Flying$When Ashen Rider enters the battlefield or dies, exile target permanent.|
+Ashiok, Nightmare Weaver|Theros|188|M|{1}{U}{B}|Planeswalker - Ashiok|||+2: Exile the top three cards of target opponent's library.$-X: Put a creature card with converted mana cost X exiled with Ashiok, Nightmare Weaver onto the battlefield under your control. That creature is a Nightmare in addition to its other types.$-10: Exile all cards from all opponents' hands and graveyards.|
+Battlewise Hoplite|Theros|189|U|{W}{U}|Creature - Human Soldier|2|2|Heroic - Whenever you cast a spell that targets Battlewise Hoplite, put a +1/+1 counter on Battlewise Hoplite, then scry 1. <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>|
+Hopeful Eidolon|Theros|19|C|{W}|Enchantment Creature - Spirit|1|1|Bestow {3}{W} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>$Enchanted creature gets +1/+1 and has lifelink.|
+Chronicler of Heroes|Theros|190|U|{1}{G}{W}|Creature - Centaur Wizard|3|3|When Chronicler of Heroes enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.|
+Daxos of Meletis|Theros|191|R|{1}{W}{U}|Legendary Creature - Human Soldier|2|2|Daxos of Meletis can't be blocked by creatures with power 3 or greater.$Whenever Daxos of Meletis deals combat damage to a player, exile the top card of that player's library. You gain life equal to that card's converted mana cost. Until end of turn, you may cast that card and you may spend mana as though it were mana of any color to cast it.|
+Destructive Revelry|Theros|192|U|{R}{G}|Instant|||Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.|
+Fleecemane Lion|Theros|193|R|{G}{W}|Creature - Cat|3|3|{3}{G}{W}: Monstrosity 1. <i>(If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)</i>$As long as Fleecemane Lion is monstrous, it has hexproof and indestructible.|
+Horizon Chimera|Theros|194|U|{2}{G}{U}|Creature - Chimera|3|2|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$Flying, trample$Whenever you draw a card, you gain 1 life.|
+Kragma Warcaller|Theros|195|U|{3}{B}{R}|Creature - Minotaur Warrior|2|3|Minotaur creatures you control have haste.$Whenever a Minotaur you control attacks, it gets +2/+0 until end of turn.|
+Medomai the Ageless|Theros|196|M|{4}{W}{U}|Legendary Creature - Sphinx|4|4|Flying$Whenever Medomai the Ageless deals combat damage to a player, take an extra turn after this one.$Medomai the Ageless can't attack during extra turns.|
+Pharika's Mender|Theros|197|U|{3}{B}{G}|Creature - Gorgon|4|3|When Pharika's Mender enters the battlefield, you may return target creature or enchantment card from your graveyard to your hand.|
+Polis Crusher|Theros|198|R|{2}{R}{G}|Creature - Cyclops|4|4|Trample, protection from enchantments${4}{R}{G}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$Whenever Polis Crusher deals combat damage to a player, if Polis Crusher is monstrous, destroy target enchantment that player controls.|
+Prophet of Kruphix|Theros|199|R|{3}{G}{U}|Creature - Human Wizard|2|3|Untap all creatures and lands you control during each other player's untap step.$You may cast creature cards as though they had flash.|
+Cavalry Pegasus|Theros|2|C|{1}{W}|Creature - Pegasus|1|1|Flying$Whenever Cavalry Pegasus attacks, each attacking Human gains flying until end of turn.|
+Hundred-Handed One|Theros|20|R|{2}{W}{W}|Creature - Giant|3|5|Vigilance${3}{W}{W}{W}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$As long as Hundred-Handed One is monstrous, it has reach and can block an additional ninety-nine creatures each combat.|
+Psychic Intrusion|Theros|200|R|{3}{U}{B}|Sorcery|||Target opponent reveals his or her hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.|
+Reaper of the Wilds|Theros|201|R|{2}{B}{G}|Creature - Gorgon|4|5|Whenever another creature dies, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${B}: Reaper of the Wilds gains deathtouch until end of turn.${1}{G}: Reaper of the Wilds gains hexproof until end of turn.|
+Sentry of the Underworld|Theros|202|U|{3}{W}{B}|Creature - Griffin Skeleton|3|3|Flying, vigilance${W}{B}, Pay 3 life: Regenerate Sentry of the Underworld.|
+Shipwreck Singer|Theros|203|U|{U}{B}|Creature - Siren|1|2|Flying${1}{U}: Target creature an opponent controls attacks this turn if able.${1}{B}, {tap}: Attacking creatures get -1/-1 until end of turn.|
+Spellheart Chimera|Theros|204|U|{1}{U}{R}|Creature - Chimera|*|3|Flying, trample$Spellheart Chimera's power is equal to the number of instant and sorcery cards in your graveyard.|
+Steam Augury|Theros|205|R|{2}{U}{R}|Instant|||Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.|
+Triad of Fates|Theros|206|R|{2}{W}{B}|Legendary Creature - Human Wizard|3|3|{1}, {tap}: Put a fate counter on another target creature.${W}, {tap}: Exile target creature that has a fate counter on it, then return it to the battlefield under its owner's control.${B}, {tap}: Exile target creature that has a fate counter on it. Its controller draws two cards.|
+Tymaret, the Murder King|Theros|207|R|{B}{R}|Legendary Creature - Zombie Warrior|2|2|{1}{R}, Sacrifice another creature: Tymaret, the Murder King deals 2 damage to target player.${1}{B}, Sacrifice a creature: Return Tymaret from your graveyard to your hand.|
+Underworld Cerberus|Theros|208|M|{3}{B}{R}|Creature - Hound|6|6|Underworld Cerberus can't be blocked except by three or more creatures.$Cards in graveyards can't be the targets of spells or abilities.$When Underworld Cerberus dies, exile it and each player returns all creature cards from his or her graveyard to his or her hand.|
+Xenagos, the Reveler|Theros|209|M|{2}{R}{G}|Planeswalker - Xenagos|||+1: Add X mana in any combination of {R} and/or {G} to your mana pool, where X is the number of creatures you control.$0: Put a 2/2 red and green Satyr creature token with haste onto the battlefield.$-6: Exile the top seven cards of your library. You may put any number of creature and/or land cards from among them onto the battlefield.|
+Lagonna-Band Elder|Theros|21|C|{2}{W}|Creature - Centaur Advisor|3|2|When Lagonna-Band Elder enters the battlefield, if you control an enchantment, you gain 3 life.|
+Akroan Horse|Theros|210|R|{4}|Artifact Creature - Horse|0|4|Defender$When Akroan Horse enters the battlefield, an opponent gains control of it.$At the beginning of your upkeep, each opponent puts a 1/1 white Soldier creature token onto the battlefield.|
+Anvilwrought Raptor|Theros|211|U|{4}|Artifact Creature - Bird|2|1|Flying, first strike|
+Bronze Sable|Theros|212|C|{2}|Artifact Creature - Sable|2|1||
+Burnished Hart|Theros|213|U|{3}|Artifact Creature - Elk|2|2|{3}, Sacrifice Burnished Hart: Search your library for up to two basic land cards, put them onto the battlefield tapped, then shuffle your library.|
+Colossus of Akros|Theros|214|R|{8}|Artifact Creature - Golem|10|10|Defender, indestructible${1}0: Monstrosity 10. <i>(If this creature isn't monstrous, put ten +1/+1 counters on it and it becomes monstrous.)</i>$As long as Colossus of Akros is monstrous, it has trample and can attack as though it didn't have defender.|
+Flamecast Wheel|Theros|215|U|{1}|Artifact|||{5}, {tap}, Sacrifice Flamecast Wheel: Flamecast Wheel deals 3 damage to target creature.|
+Fleetfeather Sandals|Theros|216|C|{2}|Artifact - Equipment|||Equipped creature has flying and haste.$Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>|
+Guardians of Meletis|Theros|217|C|{3}|Artifact Creature - Golem|0|6|Defender|
+Opaline Unicorn|Theros|218|C|{3}|Artifact Creature - Unicorn|1|2|{tap}: Add one mana of any color to your mana pool.|
+Prowler's Helm|Theros|219|U|{2}|Artifact - Equipment|||Equipped creature can't be blocked except by Walls.$Equip {2}|
+Last Breath|Theros|22|C|{1}{W}|Instant|||Exile target creature with power 2 or less. Its controller gains 4 life.|
+Pyxis of Pandemonium|Theros|220|R|{1}|Artifact|||{tap}: Each player exiles the top card of his or her library face down.${7}, {tap}, Sacrifice Pyxis of Pandemonium: Each player turns face up all cards he or she owns exiled with Pyxis of Pandemonium, then puts all permanent cards among them onto the battlefield.|
+Traveler's Amulet|Theros|221|C|{1}|Artifact|||{1}, Sacrifice Traveler's Amulet: Search your library for a basic land card, reveal it, and put it into your hand. Then shuffle your library.|
+Witches' Eye|Theros|222|U|{1}|Artifact - Equipment|||Equipped creature has "{1}, {tap}: Scry 1." <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>$Equip {1}|
+Nykthos, Shrine to Nyx|Theros|223|R||Legendary Land|||{tap}: Add {1} to your mana pool.${2}, {tap}: Choose a color. Add to your mana pool an amount of mana of that color equal to your devotion to that color. <i>(Your devotion to a color is the number of mana symbols of that color in the mana costs of permanents you control.)</i>|
+Temple of Abandon|Theros|224|R||Land|||Temple of Abandon enters the battlefield tapped.$When Temple of Abandon enters the battlefield, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${tap}: Add {R} or {G} to your mana pool.|
+Temple of Deceit|Theros|225|R||Land|||Temple of Deceit enters the battlefield tapped.$When Temple of Deceit enters the battlefield, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${tap}: Add {U} or {B} to your mana pool.|
+Temple of Mystery|Theros|226|R||Land|||Temple of Mystery enters the battlefield tapped.$When Temple of Mystery enters the battlefield, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${tap}: Add {G} or {U} to your mana pool.|
+Temple of Silence|Theros|227|R||Land|||Temple of Silence enters the battlefield tapped.$When Temple of Silence enters the battlefield, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${tap}: Add {W} or {B} to your mana pool.|
+Temple of Triumph|Theros|228|R||Land|||Temple of Triumph enters the battlefield tapped.$When Temple of Triumph enters the battlefield, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>${tap}: Add {R} or {W} to your mana pool.|
+Unknown Shores|Theros|229|C||Land|||{tap}: Add {1} to your mana pool.${1}, {tap}: Add one mana of any color to your mana pool.|
+Leonin Snarecaster|Theros|23|C|{1}{W}|Creature - Cat Soldier|2|1|When Leonin Snarecaster enters the battlefield, you may tap target creature.|
+Plains|Theros|230|L||Basic Land - Plains|||W|
+Plains|Theros|231|L||Basic Land - Plains|||W|
+Plains|Theros|232|L||Basic Land - Plains|||W|
+Plains|Theros|233|L||Basic Land - Plains|||W|
+Island|Theros|234|L||Basic Land - Island|||U|
+Island|Theros|235|L||Basic Land - Island|||U|
+Island|Theros|236|L||Basic Land - Island|||U|
+Island|Theros|237|L||Basic Land - Island|||U|
+Swamp|Theros|238|L||Basic Land - Swamp|||B|
+Swamp|Theros|239|L||Basic Land - Swamp|||B|
+Observant Alseid|Theros|24|C|{2}{W}|Enchantment Creature - Nymph|2|2|Bestow {4}{W} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Vigilance$Enchanted creature gets +2/+2 and has vigilance.|
+Swamp|Theros|240|L||Basic Land - Swamp|||B|
+Swamp|Theros|241|L||Basic Land - Swamp|||B|
+Mountain|Theros|242|L||Basic Land - Mountain|||R|
+Mountain|Theros|243|L||Basic Land - Mountain|||R|
+Mountain|Theros|244|L||Basic Land - Mountain|||R|
+Mountain|Theros|245|L||Basic Land - Mountain|||R|
+Forest|Theros|246|L||Basic Land - Forest|||G|
+Forest|Theros|247|L||Basic Land - Forest|||G|
+Forest|Theros|248|L||Basic Land - Forest|||G|
+Forest|Theros|249|L||Basic Land - Forest|||G|
+Ordeal of Heliod|Theros|25|U|{1}{W}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Heliod.$When you sacrifice Ordeal of Heliod, you gain 10 life.|
+Phalanx Leader|Theros|26|U|{W}{W}|Creature - Human Soldier|1|1|Heroic - Whenever you cast a spell that targets Phalanx Leader, put a +1/+1 counter on each creature you control.|
+Ray of Dissolution|Theros|27|C|{2}{W}|Instant|||Destroy target enchantment. You gain 3 life.|
+Scholar of Athreos|Theros|28|C|{2}{W}|Creature - Human Cleric|1|4|{2}{B}: Each opponent loses 1 life. You gain life equal to the life lost this way.|
+Setessan Battle Priest|Theros|29|C|{1}{W}|Creature - Human Cleric|1|3|Heroic - Whenever you cast a spell that targets Setessan Battle Priest, you gain 2 life.|
+Celestial Archon|Theros|3|R|{3}{W}{W}|Enchantment Creature - Archon|4|4|Bestow {5}{W}{W} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Flying, first strike$Enchanted creature gets +4/+4 and has flying and first strike.|
+Setessan Griffin|Theros|30|C|{4}{W}|Creature - Griffin|3|2|Flying${2}{G}{G}: Setessan Griffin gets +2/+2 until end of turn. Activate this ability only once each turn.|
+Silent Artisan|Theros|31|C|{3}{W}{W}|Creature - Giant|3|5||
+Soldier of the Pantheon|Theros|32|R|{W}|Creature - Human Soldier|2|1|Protection from multicolored$Whenever an opponent casts a multicolored spell, you gain 1 life.|
+Spear of Heliod|Theros|33|R|{1}{W}{W}|Legendary Enchantment Artifact|||Creatures you control get +1/+1.${1}{W}{W}, {tap}: Destroy target creature that dealt damage to you this turn.|
+Traveling Philosopher|Theros|34|C|{1}{W}|Creature - Human Advisor|2|2||
+Vanquish the Foul|Theros|35|U|{5}{W}|Sorcery|||Destroy target creature with power 4 or greater. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Wingsteed Rider|Theros|36|C|{1}{W}{W}|Creature - Human Knight|2|2|Flying$Heroic - Whenever you cast a spell that targets Wingsteed Rider, put a +1/+1 counter on Wingsteed Rider.|
+Yoked Ox|Theros|37|C|{W}|Creature - Ox|0|4||
+Annul|Theros|38|C|{U}|Instant|||Counter target artifact or enchantment spell.|
+Aqueous Form|Theros|39|C|{U}|Enchantment - Aura|||Enchant creature$Enchanted creature can't be blocked.$Whenever enchanted creature attacks, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Chained to the Rocks|Theros|4|R|{W}|Enchantment - Aura|||Enchant Mountain you control$When Chained to the Rocks enters the battlefield, exile target creature an opponent controls until Chained to the Rocks leaves the battlefield. <i>(That creature returns under its owner's control.)</i>|
+Artisan of Forms|Theros|40|R|{1}{U}|Creature - Human Wizard|1|1|Heroic - Whenever you cast a spell that targets Artisan of Forms, you may have Artisan of Forms become a copy of target creature and gain this ability.|
+Benthic Giant|Theros|41|C|{5}{U}|Creature - Giant|4|5|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>|
+Bident of Thassa|Theros|42|R|{2}{U}{U}|Legendary Enchantment Artifact|||Whenever a creature you control deals combat damage to a player, you may draw a card.${1}{U}, {tap}: Creatures your opponents control attack this turn if able.|
+Breaching Hippocamp|Theros|43|C|{3}{U}|Creature - Horse Fish|3|2|Flash <i>(You may cast this spell any time you could cast an instant.)</i>$When Breaching Hippocamp enters the battlefield, untap another target creature you control.|
+Coastline Chimera|Theros|44|C|{3}{U}|Creature - Chimera|1|5|Flying${1}{W}: Coastline Chimera can block an additional creature this turn.|
+Crackling Triton|Theros|45|C|{2}{U}|Creature - Merfolk Wizard|2|3|{2}{R}, Sacrifice Crackling Triton: Crackling Triton deals 2 damage to target creature or player.|
+Curse of the Swine|Theros|46|R|{X}{U}{U}|Sorcery|||Exile X target creatures. For each creature exiled this way, its controller puts a 2/2 green Boar creature token onto the battlefield.|
+Dissolve|Theros|47|U|{1}{U}{U}|Instant|||Counter target spell. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Fate Foretold|Theros|48|C|{1}{U}|Enchantment - Aura|||Enchant creature$When Fate Foretold enters the battlefield, draw a card.$When enchanted creature dies, its controller draws a card.|
+Gainsay|Theros|49|U|{1}{U}|Instant|||Counter target blue spell.|
+Chosen by Heliod|Theros|5|C|{1}{W}|Enchantment - Aura|||Enchant creature$When Chosen by Heliod enters the battlefield, draw a card.$Enchanted creature gets +0/+2.|
+Griptide|Theros|50|C|{3}{U}|Instant|||Put target creature on top of its owner's library.|
+Horizon Scholar|Theros|51|U|{5}{U}|Creature - Sphinx|4|4|Flying$When Horizon Scholar enters the battlefield, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Lost in a Labyrinth|Theros|52|C|{U}|Instant|||Target creature gets -3/-0 until end of turn. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Master of Waves|Theros|53|M|{3}{U}|Creature - Merfolk Wizard|2|1|Protection from red$Elemental creatures you control get +1/+1.$When Master of Waves enters the battlefield, put a number of 1/0 blue Elemental creature tokens onto the battlefield equal to your devotion to blue. <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>|
+Meletis Charlatan|Theros|54|R|{2}{U}|Creature - Human Wizard|2|3|{2}{U}, {tap}: The controller of target instant or sorcery spell copies it. That player may choose new targets for the copy.|
+Mnemonic Wall|Theros|55|C|{4}{U}|Creature - Wall|0|4|Defender$When Mnemonic Wall enters the battlefield, you may return target instant or sorcery card from your graveyard to your hand.|
+Nimbus Naiad|Theros|56|C|{2}{U}|Enchantment Creature - Nymph|2|2|Bestow {4}{U} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Flying$Enchanted creature gets +2/+2 and has flying.|
+Omenspeaker|Theros|57|C|{1}{U}|Creature - Human Wizard|1|3|When Omenspeaker enters the battlefield, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Ordeal of Thassa|Theros|58|U|{1}{U}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Thassa.$When you sacrifice Ordeal of Thassa, draw two cards.|
+Prescient Chimera|Theros|59|C|{3}{U}{U}|Creature - Chimera|3|4|Flying$Whenever you cast an instant or sorcery spell, scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Dauntless Onslaught|Theros|6|U|{2}{W}|Instant|||Up to two target creatures each get +2/+2 until end of turn.|
+Prognostic Sphinx|Theros|60|R|{3}{U}{U}|Creature - Sphinx|3|5|Flying$Discard a card: Prognostic Sphinx gains hexproof until end of turn. Tap it.$Whenever Prognostic Sphinx attacks, scry 3. <i>(Look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Sea God's Revenge|Theros|61|U|{5}{U}|Sorcery|||Return up to three target creatures your opponents control to their owners' hands. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Sealock Monster|Theros|62|U|{3}{U}{U}|Creature - Octopus|5|5|Sealock Monster can't attack unless defending player controls an Island.${5}{U}{U}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Sealock Monster becomes monstrous, target land becomes an Island in addition to its other types.|
+Shipbreaker Kraken|Theros|63|R|{4}{U}{U}|Creature - Kraken|6|6|{6}{U}{U}: Monstrosity 4. <i>(If this creature isn't monstrous, put four +1/+1 counters on it and it becomes monstrous.)</i>$When Shipbreaker Kraken becomes monstrous, tap up to four target creatures. Those creatures don't untap during their controllers' untap steps for as long as you control Shipbreaker Kraken.|
+Stymied Hopes|Theros|64|C|{1}{U}|Instant|||Counter target spell unless its controller pays {1}. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Swan Song|Theros|65|R|{U}|Instant|||Counter target enchantment, instant, or sorcery spell. Its controller puts a 2/2 blue Bird creature token with flying onto the battlefield.|
+Thassa, God of the Sea|Theros|66|M|{2}{U}|Legendary Enchantment Creature - God|5|5|Indestructible$As long as your devotion to blue is less than five, Thassa isn't a creature. <i>(Each {U} in the mana costs of permanents you control counts toward your devotion to blue.)</i>$At the beginning of your upkeep, scry 1.${1}{U}: Target creature you control can't be blocked this turn.|
+Thassa's Bounty|Theros|67|C|{5}{U}|Sorcery|||Draw three cards. Target player puts the top three cards of his or her library into his or her graveyard.|
+Thassa's Emissary|Theros|68|U|{3}{U}|Enchantment Creature - Crab|3|3|Bestow {5}{U} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Whenever Thassa's Emissary or enchanted creature deals combat damage to a player, draw a card.$Enchanted creature gets +3/+3.|
+Triton Fortune Hunter|Theros|69|U|{2}{U}|Creature - Merfolk Soldier|2|2|Heroic - Whenever you cast a spell that targets Triton Fortune Hunter, draw a card.|
+Decorated Griffin|Theros|7|U|{4}{W}|Creature - Griffin|2|3|Flying${1}{W}: Prevent the next 1 combat damage that would be dealt to you this turn.|
+Triton Shorethief|Theros|70|C|{U}|Creature - Merfolk Rogue|1|2||
+Triton Tactics|Theros|71|U|{U}|Instant|||Up to two target creatures each get +0/+3 until end of turn. Untap those creatures. At this turn's next end of combat, tap each creature that was blocked by one of those creatures this turn and it doesn't untap during its controller's next untap step.|
+Vaporkin|Theros|72|C|{1}{U}|Creature - Elemental|2|1|Flying$Vaporkin can block only creatures with flying.|
+Voyage's End|Theros|73|C|{1}{U}|Instant|||Return target creature to its owner's hand. Scry 1. <i>(Look at the top card of your library. You may put that card on the bottom of your library.)</i>|
+Wavecrash Triton|Theros|74|C|{2}{U}|Creature - Merfolk Wizard|1|4|Heroic - Whenever you cast a spell that targets Wavecrash Triton, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.|
+Abhorrent Overlord|Theros|75|R|{5}{B}{B}|Creature - Demon|6|6|Flying$When Abhorrent Overlord enters the battlefield, put a number of 1/1 black Harpy creature tokens with flying onto the battlefield equal to your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>$At the beginning of your upkeep, sacrifice a creature.|
+Agent of the Fates|Theros|76|R|{1}{B}{B}|Creature - Human Assassin|3|2|Deathtouch$Heroic - Whenever you cast a spell that targets Agent of the Fates, each opponent sacrifices a creature.|
+Asphodel Wanderer|Theros|77|C|{B}|Creature - Skeleton Soldier|1|1|{2}{B}: Regenerate Asphodel Wanderer.|
+Baleful Eidolon|Theros|78|C|{1}{B}|Enchantment Creature - Spirit|1|1|Bestow {4}{B} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>$Enchanted creature gets +1/+1 and has deathtouch.|
+Blood-Toll Harpy|Theros|79|C|{2}{B}|Creature - Harpy|2|1|Flying$When Blood-Toll Harpy enters the battlefield, each player loses 1 life.|
+Divine Verdict|Theros|8|C|{3}{W}|Instant|||Destroy target attacking or blocking creature.|
+Boon of Erebos|Theros|80|C|{B}|Instant|||Target creature gets +2/+0 until end of turn. Regenerate it. You lose 2 life.|
+Cavern Lampad|Theros|81|C|{3}{B}|Enchantment Creature - Nymph|2|2|Bestow {5}{B} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Intimidate$Enchanted creature gets +2/+2 and has intimidate.|
+Cutthroat Maneuver|Theros|82|U|{3}{B}|Instant|||Up to two target creatures each get +1/+1 and gain lifelink until end of turn.|
+Dark Betrayal|Theros|83|U|{B}|Instant|||Destroy target black creature.|
+Disciple of Phenax|Theros|84|C|{2}{B}{B}|Creature - Human Cleric|1|3|When Disciple of Phenax enters the battlefield, target player reveals a number of cards from his or her hand equal to your devotion to black. You choose one of them. That player discards that card. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>|
+Erebos, God of the Dead|Theros|85|M|{3}{B}|Legendary Enchantment Creature - God|5|7|Indestructible$As long as your devotion to black is less than five, Erebos isn't a creature. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>$Your opponents can't gain life.${1}{B}, Pay 2 life: Draw a card.|
+Erebos's Emissary|Theros|86|U|{3}{B}|Enchantment Creature - Snake|3|3|Bestow {5}{B} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Discard a creature card: Erebos's Emissary gets +2/+2 until end of turn. If Erebos's Emissary is an Aura, enchanted creature gets +2/+2 until end of turn instead.$Enchanted creature gets +3/+3.|
+Felhide Minotaur|Theros|87|C|{2}{B}|Creature - Minotaur|2|3||
+Fleshmad Steed|Theros|88|C|{1}{B}|Creature - Horse|2|2|Whenever another creature dies, tap Fleshmad Steed.|
+Gray Merchant of Asphodel|Theros|89|C|{3}{B}{B}|Creature - Zombie|2|4|When Gray Merchant of Asphodel enters the battlefield, each opponent loses X life, where X is your devotion to black. You gain life equal to the life lost this way. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>|
+Elspeth, Sun's Champion|Theros|9|M|{4}{W}{W}|Planeswalker - Elspeth|||+1: Put three 1/1 white Soldier creature tokens onto the battlefield.$-3: Destroy all creatures with power 4 or greater.$-7: You get an emblem with "Creatures you control get +2/+2 and have flying."|
+Hero's Downfall|Theros|90|R|{1}{B}{B}|Instant|||Destroy target creature or planeswalker.|
+Hythonia the Cruel|Theros|91|M|{4}{B}{B}|Legendary Creature - Gorgon|4|6|Deathtouch${6}{B}{B}: Monstrosity 3. <i>(If this creature isn't monstrous, put three +1/+1 counters on it and it becomes monstrous.)</i>$When Hythonia the Cruel becomes monstrous, destroy all non-Gorgon creatures.|
+Insatiable Harpy|Theros|92|U|{2}{B}{B}|Creature - Harpy|2|2|Flying, lifelink|
+Keepsake Gorgon|Theros|93|U|{3}{B}{B}|Creature - Gorgon|2|5|Deathtouch${5}{B}{B}: Monstrosity 1. <i>(If this creature isn't monstrous, put a +1/+1 counter on it and it becomes monstrous.)</i>$When Keepsake Gorgon becomes monstrous, destroy target non-Gorgon creature an opponent controls.|
+Lash of the Whip|Theros|94|C|{4}{B}|Instant|||Target creature gets -4/-4 until end of turn.|
+Loathsome Catoblepas|Theros|95|C|{5}{B}|Creature - Beast|3|3|{2}{G}: Loathsome Catoblepas must be blocked this turn if able.$When Loathsome Catoblepas dies, target creature an opponent controls gets -3/-3 until end of turn.|
+March of the Returned|Theros|96|C|{3}{B}|Sorcery|||Return up to two target creature cards from your graveyard to your hand.|
+Mogis's Marauder|Theros|97|U|{2}{B}|Creature - Human Berserker|2|2|When Mogis's Marauder enters the battlefield, up to X target creatures each gain intimidate and haste until end of turn, where X is your devotion to black. <i>(Each {B} in the mana costs of permanents you control counts toward your devotion to black.)</i>|
+Nighthowler|Theros|98|R|{1}{B}{B}|Enchantment Creature - Horror|0|0|Bestow {2}{B}{B} <i>(If you cast this card for its bestow cost, it's an Aura spell with enchant creature. It becomes a creature again if it's not attached to a creature.)</i>$Nighthowler and enchanted creature each get +X/+X, where X is the number of creature cards in all graveyards.|
+Ordeal of Erebos|Theros|99|U|{1}{B}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Erebos.$When you sacrifice Ordeal of Erebos, target player discards two cards.|
+Sun Titan|Duel Decks: Heroes vs. Monsters|1|M|{4}{W}{W}|Creature - Giant|6|6|Vigilance$Whenever Sun Titan enters the battlefield or attacks, you may return target permanent card with converted mana cost 3 or less from your graveyard to the battlefield.|
+Freewind Equenaut|Duel Decks: Heroes vs. Monsters|10|C|{2}{W}|Creature - Human Archer|2|2|Flying$As long as Freewind Equenaut is enchanted, it has "{tap}: Freewind Equenaut deals 2 damage to target attacking or blocking creature."|
+Anax and Cymede|Duel Decks: Heroes vs. Monsters|11|R|{1}{R}{W}|Legendary Creature - Human Soldier|3|2|First strike, vigilance$Heroic - Whenever you cast a spell that targets Anax and Cymede, creatures you control get +1/+1 and gain trample until end of turn.|
+Armory Guard|Duel Decks: Heroes vs. Monsters|12|C|{3}{W}|Creature - Giant Soldier|2|5|Armory Guard has vigilance as long as you control a Gate.|
+Gustcloak Sentinel|Duel Decks: Heroes vs. Monsters|13|U|{2}{W}{W}|Creature - Human Soldier|3|3|Whenever Gustcloak Sentinel becomes blocked, you may untap it and remove it from combat.|
+Dawnstrike Paladin|Duel Decks: Heroes vs. Monsters|14|C|{3}{W}{W}|Creature - Human Knight|2|4|Vigilance <i>(Attacking doesn't cause this creature to tap.)</i>$Lifelink <i>(Damage dealt by this creature also causes you to gain that much life.)</i>|
+Nobilis of War|Duel Decks: Heroes vs. Monsters|15|R|{RW}{RW}{RW}{RW}{RW}|Creature - Spirit Avatar|3|4|Flying$Attacking creatures you control get +2/+0.|
+Kamahl, Pit Fighter|Duel Decks: Heroes vs. Monsters|16|R|{4}{R}{R}|Legendary Creature - Human Barbarian|6|1|Haste <i>(This creature can attack and {tap} as soon as it comes under your control.)</i>${tap}: Kamahl, Pit Fighter deals 3 damage to target creature or player.|
+Condemn|Duel Decks: Heroes vs. Monsters|17|U|{W}|Instant|||Put target attacking creature on the bottom of its owner's library. Its controller gains life equal to its toughness.|
+Daily Regimen|Duel Decks: Heroes vs. Monsters|18|U|{W}|Enchantment - Aura|||Enchant creature${1}{W}: Put a +1/+1 counter on enchanted creature.|
+Pay No Heed|Duel Decks: Heroes vs. Monsters|19|C|{W}|Instant|||Prevent all damage a source of your choice would deal this turn.|
+Somberwald Vigilante|Duel Decks: Heroes vs. Monsters|2|C|{R}|Creature - Human Warrior|1|1|Whenever Somberwald Vigilante becomes blocked by a creature, Somberwald Vigilante deals 1 damage to that creature.|
+Righteousness|Duel Decks: Heroes vs. Monsters|20|U|{W}|Instant|||Target blocking creature gets +7/+7 until end of turn.|
+Stand Firm|Duel Decks: Heroes vs. Monsters|21|C|{W}|Instant|||Target creature gets +1/+1 until end of turn.$Scry 2. <i>(To scry 2, look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Magma Jet|Duel Decks: Heroes vs. Monsters|22|U|{1}{R}|Instant|||Magma Jet deals 2 damage to target creature or player. Scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)</i>|
+Ordeal of Purphoros|Duel Decks: Heroes vs. Monsters|23|U|{1}{R}|Enchantment - Aura|||Enchant creature$Whenever enchanted creature attacks, put a +1/+1 counter on it. Then if it has three or more +1/+1 counters on it, sacrifice Ordeal of Purphoros.$When you sacrifice Ordeal of Purphoros, it deals 3 damage to target creature or player.|
+Bonds of Faith|Duel Decks: Heroes vs. Monsters|24|C|{1}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 as long as it's a Human. Otherwise, it can't attack or block.|
+Moment of Heroism|Duel Decks: Heroes vs. Monsters|25|C|{1}{W}|Instant|||Target creature gets +2/+2 and gains lifelink until end of turn. <i>(Damage dealt by the creature also causes its controller to gain that much life.)</i>|
+Undying Rage|Duel Decks: Heroes vs. Monsters|26|U|{2}{R}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and can't block.$When Undying Rage is put into a graveyard from the battlefield, return Undying Rage to its owner's hand.|
+Battle Mastery|Duel Decks: Heroes vs. Monsters|27|U|{2}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature has double strike.|
+Griffin Guide|Duel Decks: Heroes vs. Monsters|28|U|{2}{W}|Enchantment - Aura|||Enchant creature$Enchanted creature gets +2/+2 and has flying.$When enchanted creature dies, put a 2/2 white Griffin creature token with flying onto the battlefield.|
+Smite the Monstrous|Duel Decks: Heroes vs. Monsters|29|C|{3}{W}|Instant|||Destroy target creature with power 4 or greater.|
+Figure of Destiny|Duel Decks: Heroes vs. Monsters|3|R|{RW}|Creature - Kithkin|1|1|{RW}: Figure of Destiny becomes a 2/2 Kithkin Spirit.${RW}{RW}{RW}: If Figure of Destiny is a Spirit, it becomes a 4/4 Kithkin Spirit Warrior.${RW}{RW}{RW}{RW}{RW}{RW}: If Figure of Destiny is a Warrior, it becomes an 8/8 Kithkin Spirit Warrior Avatar with flying and first strike.|
+Miraculous Recovery|Duel Decks: Heroes vs. Monsters|30|U|{4}{W}|Instant|||Return target creature card from your graveyard to the battlefield. Put a +1/+1 counter on it.|
+Winds of Rath|Duel Decks: Heroes vs. Monsters|31|R|{3}{W}{W}|Sorcery|||Destroy all creatures that aren't enchanted. They can't be regenerated.|
+Pyrokinesis|Duel Decks: Heroes vs. Monsters|32|U|{4}{R}{R}|Instant|||You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.$Pyrokinesis deals 4 damage divided as you choose among any number of target creatures.|
+Boros Guildgate|Duel Decks: Heroes vs. Monsters|33|C||Land - Gate|||Boros Guildgate enters the battlefield tapped.${tap}: Add {R} or {W} to your mana pool.|
+New Benalia|Duel Decks: Heroes vs. Monsters|34|U||Land|||New Benalia enters the battlefield tapped.$When New Benalia enters the battlefield, scry 1. <i>(To scry 1, look at the top card of your library, then you may put that card on the bottom of your library.)</i>${tap}: Add {W} to your mana pool.|
+Mountain|Duel Decks: Heroes vs. Monsters|35|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|36|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|37|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|38|L||Basic Land - Mountain|||R|
+Plains|Duel Decks: Heroes vs. Monsters|39|L||Basic Land - Plains|||W|
+Cavalry Pegasus|Duel Decks: Heroes vs. Monsters|4|C|{1}{W}|Creature - Pegasus|1|1|Flying$Whenever Cavalry Pegasus attacks, each attacking Human gains flying until end of turn.|
+Plains|Duel Decks: Heroes vs. Monsters|40|L||Basic Land - Plains|||W|
+Plains|Duel Decks: Heroes vs. Monsters|41|L||Basic Land - Plains|||W|
+Plains|Duel Decks: Heroes vs. Monsters|42|L||Basic Land - Plains|||W|
+Polukranos, World Eater|Duel Decks: Heroes vs. Monsters|43|M|{2}{G}{G}|Legendary Creature - Hydra|5|5|{X}{X}{G}: Monstrosity X. <i>(If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)</i>$When Polukranos, World Eater becomes monstrous, it deals X damage divided as you choose among any number of target creatures your opponents control. Each of those creatures deals damage equal to its power to Polukranos.|
+Orcish Lumberjack|Duel Decks: Heroes vs. Monsters|44|C|{R}|Creature - Orc|1|1|{tap}, Sacrifice a Forest: Add three mana in any combination of {R} and/or {G} to your mana pool.|
+Deadly Recluse|Duel Decks: Heroes vs. Monsters|45|C|{1}{G}|Creature - Spider|1|2|Reach <i>(This creature can block creatures with flying.)</i>$Deathtouch <i>(Any amount of damage this deals to a creature is enough to destroy it.)</i>|
+Kavu Predator|Duel Decks: Heroes vs. Monsters|46|U|{1}{G}|Creature - Kavu|2|2|Trample$Whenever an opponent gains life, put that many +1/+1 counters on Kavu Predator.|
+Satyr Hedonist|Duel Decks: Heroes vs. Monsters|47|C|{1}{G}|Creature - Satyr|2|1|{R}, Sacrifice Satyr Hedonist: Add {R}{R}{R} to your mana pool.|
+Zhur-Taa Druid|Duel Decks: Heroes vs. Monsters|48|C|{R}{G}|Creature - Human Druid|1|1|{tap}: Add {G} to your mana pool.$Whenever you tap Zhur-Taa Druid for mana, it deals 1 damage to each opponent.|
+Blood Ogre|Duel Decks: Heroes vs. Monsters|49|C|{2}{R}|Creature - Ogre Warrior|2|2|Bloodthirst 1 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with a +1/+1 counter on it.)</i>$First strike <i>(This creature deals combat damage before creatures without first strike.)</i>|
+Fencing Ace|Duel Decks: Heroes vs. Monsters|5|U|{1}{W}|Creature - Human Soldier|1|1|Double strike <i>(This creature deals both first-strike and regular combat damage.)</i>|
+Troll Ascetic|Duel Decks: Heroes vs. Monsters|50|R|{1}{G}{G}|Creature - Troll Shaman|3|2|Hexproof <i>(This creature can't be the target of spells or abilities your opponents control.)</i>${1}{G}: Regenerate Troll Ascetic.|
+Crowned Ceratok|Duel Decks: Heroes vs. Monsters|51|U|{3}{G}|Creature - Rhino|4|3|Trample$Each creature you control with a +1/+1 counter on it has trample.|
+Gorehorn Minotaurs|Duel Decks: Heroes vs. Monsters|52|C|{2}{R}{R}|Creature - Minotaur Warrior|3|3|Bloodthirst 2 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with two +1/+1 counters on it.)</i>|
+Ghor-Clan Savage|Duel Decks: Heroes vs. Monsters|53|C|{3}{G}{G}|Creature - Centaur Berserker|2|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>|
+Deus of Calamity|Duel Decks: Heroes vs. Monsters|54|R|{RG}{RG}{RG}{RG}{RG}|Creature - Spirit Avatar|6|6|Trample$Whenever Deus of Calamity deals 6 or more damage to an opponent, destroy target land that player controls.|
+Conquering Manticore|Duel Decks: Heroes vs. Monsters|55|R|{4}{R}{R}|Creature - Manticore|5|5|Flying$When Conquering Manticore enters the battlefield, gain control of target creature an opponent controls until end of turn. Untap that creature. It gains haste until end of turn.|
+Crater Hellion|Duel Decks: Heroes vs. Monsters|56|R|{4}{R}{R}|Creature - Hellion Beast|6|6|Echo {4}{R}{R} <i>(At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)</i>$When Crater Hellion enters the battlefield, it deals 4 damage to each other creature.|
+Skarrgan Firebird|Duel Decks: Heroes vs. Monsters|57|R|{4}{R}{R}|Creature - Phoenix|3|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>$Flying${R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.|
+Valley Rannet|Duel Decks: Heroes vs. Monsters|58|C|{4}{R}{G}|Creature - Beast|6|3|Mountaincycling {2}, forestcycling {2} <i>({2}, Discard this card: Search your library for a Mountain or Forest card, reveal it, and put it into your hand. Then shuffle your library.)</i>|
+Krosan Tusker|Duel Decks: Heroes vs. Monsters|59|C|{5}{G}{G}|Creature - Boar Beast|6|5|Cycling {2}{G} <i>({2}{G}, Discard this card: Draw a card.)</i>$When you cycle Krosan Tusker, you may search your library for a basic land card, reveal that card, put it into your hand, then shuffle your library.|
+Thraben Valiant|Duel Decks: Heroes vs. Monsters|6|C|{1}{W}|Creature - Human Soldier|2|1|Vigilance|
+Skarrgan Skybreaker|Duel Decks: Heroes vs. Monsters|60|U|{4}{R}{R}{G}|Creature - Giant Shaman|3|3|Bloodthirst 3 <i>(If an opponent was dealt damage this turn, this creature enters the battlefield with three +1/+1 counters on it.)</i>${1}, Sacrifice Skarrgan Skybreaker: Skarrgan Skybreaker deals damage equal to its power to target creature or player.|
+Shower of Sparks|Duel Decks: Heroes vs. Monsters|61|C|{R}|Instant|||Shower of Sparks deals 1 damage to target creature and 1 damage to target player.|
+Prey Upon|Duel Decks: Heroes vs. Monsters|62|C|{G}|Sorcery|||Target creature you control fights target creature you don't control. <i>(Each deals damage equal to its power to the other.)</i>|
+Pyroclasm|Duel Decks: Heroes vs. Monsters|63|U|{1}{R}|Sorcery|||Pyroclasm deals 2 damage to each creature.|
+Regrowth|Duel Decks: Heroes vs. Monsters|64|U|{1}{G}|Sorcery|||Return target card from your graveyard to your hand.|
+Terrifying Presence|Duel Decks: Heroes vs. Monsters|65|C|{1}{G}|Instant|||Prevent all combat damage that would be dealt by creatures other than target creature this turn.|
+Destructive Revelry|Duel Decks: Heroes vs. Monsters|66|U|{R}{G}|Instant|||Destroy target artifact or enchantment. Destructive Revelry deals 2 damage to that permanent's controller.|
+Dragon Blood|Duel Decks: Heroes vs. Monsters|67|U|{3}|Artifact|||{3}, {tap}: Put a +1/+1 counter on target creature.|
+Volt Charge|Duel Decks: Heroes vs. Monsters|68|C|{2}{R}|Instant|||Volt Charge deals 3 damage to target creature or player. Proliferate. <i>(You choose any number of permanents and/or players with counters on them, then give each another counter of a kind already there.)</i>|
+Beast Within|Duel Decks: Heroes vs. Monsters|69|U|{2}{G}|Instant|||Destroy target permanent. Its controller puts a 3/3 green Beast creature token onto the battlefield.|
+Stun Sniper|Duel Decks: Heroes vs. Monsters|7|U|{R}{W}|Creature - Human Archer|1|1|{1}, {tap}: Stun Sniper deals 1 damage to target creature. Tap that creature.|
+Fires of Yavimaya|Duel Decks: Heroes vs. Monsters|70|U|{1}{R}{G}|Enchantment|||Creatures you control have haste.$Sacrifice Fires of Yavimaya: Target creature gets +2/+2 until end of turn.|
+Kazandu Refuge|Duel Decks: Heroes vs. Monsters|71|U||Land|||Kazandu Refuge enters the battlefield tapped.$When Kazandu Refuge enters the battlefield, you gain 1 life.${tap}: Add {R} or {G} to your mana pool.|
+Llanowar Reborn|Duel Decks: Heroes vs. Monsters|72|U||Land|||Llanowar Reborn enters the battlefield tapped.${tap}: Add {G} to your mana pool.$Graft 1 <i>(This land enters the battlefield with a +1/+1 counter on it. Whenever a creature enters the battlefield, you may move a +1/+1 counter from this land onto it.)</i>|
+Skarrg, the Rage Pits|Duel Decks: Heroes vs. Monsters|73|U||Land|||{tap}: Add {1} to your mana pool.${R}{G}, {tap}: Target creature gets +1/+1 and gains trample until end of turn.|
+Mountain|Duel Decks: Heroes vs. Monsters|74|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|75|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|76|L||Basic Land - Mountain|||R|
+Mountain|Duel Decks: Heroes vs. Monsters|77|L||Basic Land - Mountain|||R|
+Forest|Duel Decks: Heroes vs. Monsters|78|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Heroes vs. Monsters|79|L||Basic Land - Forest|||G|
+Truefire Paladin|Duel Decks: Heroes vs. Monsters|8|U|{R}{W}|Creature - Human Knight|2|2|Vigilance${R}{W}: Truefire Paladin gets +2/+0 until end of turn.${R}{W}: Truefire Paladin gains first strike until end of turn.|
+Forest|Duel Decks: Heroes vs. Monsters|80|L||Basic Land - Forest|||G|
+Forest|Duel Decks: Heroes vs. Monsters|81|L||Basic Land - Forest|||G|
+Auramancer|Duel Decks: Heroes vs. Monsters|9|C|{2}{W}|Creature - Human Wizard|2|2|When Auramancer enters the battlefield, you may return target enchantment card from your graveyard to your hand.|

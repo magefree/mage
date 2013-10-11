@@ -108,7 +108,7 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.Benefit, typeChoice, game)) {
+            while (!player.choose(Outcome.Benefit, typeChoice, game) && player.isInGame()) {
                 game.debugMessage("player canceled choosing type. retrying.");
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
@@ -185,7 +185,8 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
     @Override
     public void watch(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
-            if (game.getObject(event.getSourceId()).getName().equals("Cavern of Souls")) {
+            MageObject object = game.getObject(event.getSourceId());
+            if (object != null && object.getName().equals("Cavern of Souls")) {
                 spells.add(event.getTargetId()); 
             }
         }

@@ -109,6 +109,7 @@ public interface Card extends MageObject {
     boolean cast(Game game, Zone fromZone, SpellAbility ability, UUID controllerId);
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId);
     boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped);
+    boolean putOntoBattlefield(Game game, Zone fromZone, UUID sourceId, UUID controllerId, boolean tapped, ArrayList<UUID> appliedEffects);
     List<Mana> getMana();
 
     void build();

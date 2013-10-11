@@ -28,12 +28,12 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.dynamicvalue.DynamicValue;
 import mage.abilities.dynamicvalue.common.StaticValue;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.players.Player;
 import mage.util.CardUtil;
@@ -45,19 +45,28 @@ import mage.util.CardUtil;
 public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
     protected DynamicValue amount;
+    protected boolean optional;
 
     public DrawCardTargetEffect(int amount) {
         this(new StaticValue(amount));
     }
+    public DrawCardTargetEffect(int amount, boolean optional) {
+        this(new StaticValue(amount), optional);
+    }
 
     public DrawCardTargetEffect(DynamicValue amount) {
+        this(amount, false);
+    }
+    public DrawCardTargetEffect(DynamicValue amount, boolean optional) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
+        this.optional = optional;
     }
 
     public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
+        this.optional = effect.optional;
     }
 
     @Override
@@ -69,7 +78,9 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
-            player.drawCards(amount.calculate(game, source), game);
+            if (!optional || player.chooseUse(outcome, "Use draw effect?", game)) {
+                player.drawCards(amount.calculate(game, source), game);
+            }
             return true;
         }
         return false;
@@ -83,7 +94,12 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
         } else {
             sb.append("that player");
         }
-        sb.append(" draws ").append(CardUtil.numberToText(amount.toString())).append(" card");
+        if (optional) {
+            sb.append(" may draw ");
+        } else {
+            sb.append(" draws ");
+        }
+        sb.append(CardUtil.numberToText(amount.toString())).append(" card");
         try {
             if (Integer.parseInt(amount.toString()) > 1) {
                 sb.append("s");

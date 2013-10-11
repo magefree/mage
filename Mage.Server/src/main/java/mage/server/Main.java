@@ -167,13 +167,13 @@ public class Main {
                 } else {
                     sessionName = session.getHost();
                 }
-                if (throwable instanceof ClientDisconnectedException) {                    
+                if (throwable instanceof ClientDisconnectedException) {
                     SessionManager.getInstance().disconnect(client.getSessionId(), true);
-                    logger.info("client disconnected - " + sessionName);
+                    logger.info("Client disconnected - " + sessionName);
                 }
                 else {
                     SessionManager.getInstance().disconnect(client.getSessionId(), false);
-                    logger.info("connection to client lost - " + sessionName);
+                    logger.info("Connection to client lost - " + sessionName);
                 }
             }
         }
@@ -249,7 +249,7 @@ public class Main {
     private static Class<?> loadPlugin(Plugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
-            logger.info("Loading plugin: " + plugin.getClassName());
+            logger.debug("Loading plugin: " + plugin.getClassName());
             return Class.forName(plugin.getClassName(), true, classLoader);
         } catch (ClassNotFoundException ex) {
             logger.warn("Plugin not Found:" + plugin.getJar() + " - check plugin folder");
@@ -262,7 +262,7 @@ public class Main {
     private static MatchType loadGameType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
-            logger.info("Loading game type: " + plugin.getClassName());
+            logger.debug("Loading game type: " + plugin.getClassName());
             return (MatchType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Game type not found:" + plugin.getJar() + " - check plugin folder");
@@ -275,7 +275,7 @@ public class Main {
     private static TournamentType loadTournamentType(GamePlugin plugin) {
         try {
             classLoader.addURL(new File(pluginFolder + "/" + plugin.getJar()).toURI().toURL());
-            logger.info("Loading tournament type: " + plugin.getClassName());
+            logger.debug("Loading tournament type: " + plugin.getClassName());
             return (TournamentType) Class.forName(plugin.getTypeName(), true, classLoader).newInstance();
         } catch (ClassNotFoundException ex) {
             logger.warn("Tournament type not found:" + plugin.getJar() + " - check plugin folder");

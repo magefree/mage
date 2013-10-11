@@ -1,6 +1,7 @@
 syntax: glob
 Mage.Client/*.dck
 Mage.Client/db
+Mage.Client/gamelogs
 Mage.Client/mageclient.log
 Mage.Client/plugins/images
 Mage.Client/plugins/plugin.data
@@ -23,6 +24,7 @@ Mage.Server.Plugins/Mage.Player.AIMCTS/target
 Mage.Server.Plugins/Mage.Player.Human/target
 Mage.Server.Plugins/Mage.Draft.8PlayerBooster/target
 Mage.Server.Plugins/Mage.Tournament.BoosterDraft/target
+/Mage.Server.Plugins/Mage.Tournament.Constructed/target
 Mage.Server.Plugins/Mage.Tournament.Sealed/target
 Mage.Server.Plugins/Mage.Player.AI.DraftBot/target
 Mage.Server/config/init.txt
