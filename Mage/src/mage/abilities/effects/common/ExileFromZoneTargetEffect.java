@@ -37,8 +37,8 @@ import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.common.TargetCardInGraveyard;
 import mage.target.common.TargetCardInHand;
+import mage.target.common.TargetCardInYourGraveyard;
 
 /**
  *
@@ -82,16 +82,16 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
             Target target = null;
             switch (zone) {
                 case HAND:
-                    target = new TargetCardInHand(Math.min(player.getHand().count(filter, game), amount), filter);                    
+                    target = new TargetCardInHand(Math.min(player.getHand().count(filter, game), amount), filter);
                     break;
                 case GRAVEYARD:
-                    target = new TargetCardInGraveyard(Math.min(player.getGraveyard().count(filter, game), amount), filter);
+                    target = new TargetCardInYourGraveyard(Math.min(player.getGraveyard().count(filter, game), amount), filter);
                     break;
                 default:
             }
             if (target != null && target.canChoose(player.getId(), game)) {
                 if (target.choose(Outcome.Exile, player.getId(), source.getSourceId(), game)) {
-                    for (UUID cardId: target.getTargets()) {
+                    for (UUID cardId : target.getTargets()) {
                         Card card = game.getCard(cardId);
                         if (card != null) {
                             card.moveToExile(exileId, exileName, source.getSourceId(), game);
@@ -112,10 +112,8 @@ public class ExileFromZoneTargetEffect extends OneShotEffect<ExileFromZoneTarget
     private void setText() {
         if (amount == 1) {
             staticText = "Target player exiles a " + filter.getMessage() + " from his or her " + zone.toString().toLowerCase();
-        }
-        else {
+        } else {
             staticText = "Target player exiles " + amount + " " + filter.getMessage() + " from his or her " + zone.toString().toLowerCase();
         }
     }
-
 }

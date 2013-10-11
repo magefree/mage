@@ -25,44 +25,56 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.tempest;
+package mage.sets.eventide;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.AttachEffect;
-import mage.abilities.effects.common.continious.BoostEnchantedEffect;
-import mage.abilities.keyword.EnchantAbility;
+import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
+import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
-import mage.target.TargetPermanent;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
+import mage.counters.CounterType;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.CounterPredicate;
+import mage.target.Target;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
- * @author Loki
+ *
+ * @author jeffwadsworth
  */
-public class Enfeeblement extends CardImpl<Enfeeblement> {
-
-    public Enfeeblement(UUID ownerId) {
-        super(ownerId, 27, "Enfeeblement", Rarity.COMMON, new CardType[]{CardType.ENCHANTMENT}, "{B}{B}");
-        this.expansionSetCode = "TMP";
-        this.subtype.add("Aura");
-        this.color.setBlack(true);
-        TargetPermanent auraTarget = new TargetCreaturePermanent();
-        this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
-        Ability ability = new EnchantAbility(auraTarget.getTargetName());
-        this.addAbility(ability);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostEnchantedEffect(-2, -2, Duration.WhileOnBattlefield)));
+public class CrumblingAshes extends CardImpl<CrumblingAshes> {
+    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature with a -1/-1 counter on it");
+    
+    static {
+        filter.add(new CounterPredicate(CounterType.M1M1));
     }
 
-    public Enfeeblement(final Enfeeblement card) {
+    public CrumblingAshes(UUID ownerId) {
+        super(ownerId, 35, "Crumbling Ashes", Rarity.UNCOMMON, new CardType[]{CardType.ENCHANTMENT}, "{1}{B}");
+        this.expansionSetCode = "EVE";
+
+        this.color.setBlack(true);
+
+        // At the beginning of your upkeep, destroy target creature with a -1/-1 counter on it.
+        Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), TargetController.YOU, false);
+        Target target = new TargetCreaturePermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
+        this.addAbility(ability);
+        
+    }
+
+    public CrumblingAshes(final CrumblingAshes card) {
         super(card);
     }
 
     @Override
-    public Enfeeblement copy() {
-        return new Enfeeblement(this);
+    public CrumblingAshes copy() {
+        return new CrumblingAshes(this);
     }
 }
