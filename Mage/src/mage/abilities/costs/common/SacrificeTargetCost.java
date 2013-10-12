@@ -68,10 +68,14 @@ public class SacrificeTargetCost extends CostImpl<SacrificeTargetCost> {
         if (targets.choose(Outcome.Sacrifice, controllerId, sourceId, game)) {
             for (UUID targetId: targets.get(0).getTargets()) {
                 Permanent permanent = game.getPermanent(targetId);
-                if (permanent == null)
+                if (permanent == null) {
                     return false;
+                }
                 permanents.add(permanent.copy());
                 paid |= permanent.sacrifice(sourceId, game);
+            }
+            if (!paid && targets.get(0).getNumberOfTargets() == 0) {
+                paid = true; // e.g. for Devouring Rage
             }
         }
         return paid;
