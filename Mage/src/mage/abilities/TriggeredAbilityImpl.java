@@ -95,7 +95,7 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
             // log resolve of triggered ability 
-            if (object != null) {
+            if (object != null && object.getName() != null) {
                 game.informPlayers(new StringBuilder(object.getName()).append(" triggered ability resolves: ").append(this.getRule()).toString());
             } else {
                 game.informPlayers(new StringBuilder("Ability triggered: ").append(this.getRule()).toString());
