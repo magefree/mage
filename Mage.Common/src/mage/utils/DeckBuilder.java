@@ -13,6 +13,7 @@ import mage.cards.decks.Deck;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.interfaces.rate.RateCallback;
+import org.apache.log4j.Logger;
 
 /**
  * Builds deck from provided card pool.
@@ -52,6 +53,19 @@ public class DeckBuilder {
             remainingCards.add(new MageScoredCard(card, allowedColors, callback));
             names.add(card.getName());
         }
+// prints score and manaScore to log
+//        for(MageScoredCard scoreCard :remainingCards) {
+//            Logger.getLogger(DeckBuilder.class).info(
+//                    new StringBuilder("Score: ")
+//                    .append(scoreCard.getScore())
+//                    .append(" ManaScore: ")
+//                    .append(scoreCard.getManaCostScore(scoreCard.getCard(), allowedColors))
+//                    .append(" ")
+//                    .append(scoreCard.getCard().getName())
+//                    .append(" ")
+//                    .append(scoreCard.getCard().getManaCost().getText()).toString()
+//                    );
+//        }
         int min = 0;
         if (deckSize == 40) {
             deckCount = DECK_COUNT40;
@@ -147,7 +161,7 @@ public class DeckBuilder {
                 symbol = symbol.replace("{", "").replace("}", "");
                 if (isColoredMana(symbol)) {
                     for (ColoredManaSymbol allowed : allowedColors) {
-                        if (allowed.toString().equals(symbol)) {
+                        if (symbol.contains(allowed.toString())) {
                             count++;
                         }
                     }
@@ -255,15 +269,17 @@ public class DeckBuilder {
                 symbol = symbol.replace("{", "").replace("}", "");
                 if (isColoredMana(symbol)) {
                     for (ColoredManaSymbol allowed : allowedColors) {
-                        if (allowed.toString().equals(symbol)) {
+                        if (symbol.contains(allowed.toString())) {
                             count++;
                         }
                     }
+                    // colored but no selected colors, go back with negative value
                     if (count == 0) {
                         return -30;
                     }
                     if (!colors.contains(symbol)) {
                         multicolor += 1;
+                        colors.add(symbol);
                     }
                     Integer typeCount = singleCount.get(symbol);
                     if (typeCount == null) {
@@ -293,7 +309,7 @@ public class DeckBuilder {
     }
 
     protected static boolean isColoredMana(String symbol) {
-        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R");
+        return symbol.equals("W") || symbol.equals("G") || symbol.equals("U") || symbol.equals("B") || symbol.equals("R") || symbol.contains("/");
     }
 
 }
