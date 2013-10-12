@@ -47,6 +47,7 @@ public enum CounterType {
     FADE(new FadeCounter().name),
     FATE(new FateCounter().name),
     FEATHER(new FeatherCounter().name),
+    FUSE(new FuseCounter().name),
     QUEST(new QuestCounter().name),
     ARROWHEAD(new ArrowheadCounter().name),
     AIM(new AimCounter().name),
@@ -129,6 +130,8 @@ public enum CounterType {
                 return new FateCounter(amount);
             case FEATHER:
                 return new FeatherCounter(amount);
+            case FUSE:
+                return new FuseCounter(amount);
             case QUEST:
                 return new QuestCounter(amount);
             case ARROWHEAD:
