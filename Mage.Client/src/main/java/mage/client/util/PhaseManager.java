@@ -33,8 +33,11 @@ import java.util.Map;
 import java.util.prefs.Preferences;
 import mage.client.MageFrame;
 import mage.view.GameView;
+import org.apache.log4j.Logger;
 
 public class PhaseManager {
+
+    private static final Logger logger = Logger.getLogger(PhaseManager.class);
 
     private static final PhaseManager fInstance = new PhaseManager();
 
@@ -101,6 +104,8 @@ public class PhaseManager {
         if (prefKey != null) {
             String prop = prefs.get(prefKey, PHASE_ON);
             return !prop.equals(PHASE_ON);
+        } else {
+            logger.warn(new StringBuilder("Message not found: ").append(message));
         }
         return false;
     }

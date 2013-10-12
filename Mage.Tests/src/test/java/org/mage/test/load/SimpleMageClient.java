@@ -1,13 +1,12 @@
 package org.mage.test.load;
 
+import java.util.UUID;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.CallbackClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Session;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-
-import java.util.UUID;
 
 /**
  * For tests only
@@ -17,7 +16,7 @@ import java.util.UUID;
 public class SimpleMageClient implements MageClient {
 
     private UUID clientId;
-    private static final MageVersion version = new MageVersion(1, 1, 0, "dev");
+    private static final MageVersion version = new MageVersion(1, 1, 0, "");
 
     private static final transient Logger log = Logger.getLogger(SimpleMageClient.class);
 

@@ -34,6 +34,12 @@
 
 package mage.server.console;
 
+import java.util.UUID;
+import java.util.prefs.Preferences;
+import javax.swing.Box;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import mage.interfaces.MageClient;
 import mage.interfaces.callback.ClientCallback;
 import mage.remote.Connection;
@@ -41,10 +47,6 @@ import mage.remote.Session;
 import mage.remote.SessionImpl;
 import mage.utils.MageVersion;
 import org.apache.log4j.Logger;
-
-import javax.swing.*;
-import java.util.UUID;
-import java.util.prefs.Preferences;
 
 /**
  *
@@ -57,7 +59,7 @@ public class ConsoleFrame extends javax.swing.JFrame implements MageClient {
     private static Session session;
     private ConnectDialog connectDialog;
     private static Preferences prefs = Preferences.userNodeForPackage(ConsoleFrame.class);
-    private static final MageVersion version = new MageVersion(1, 1, 0, "dev");
+    private static final MageVersion version = new MageVersion(1, 1, 0, "");
 
     /**
      * @return the session
