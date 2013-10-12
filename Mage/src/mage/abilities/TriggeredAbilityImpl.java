@@ -77,9 +77,9 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
 
     @Override
     public boolean resolve(Game game) {
+        MageObject object = game.getObject(sourceId);
         if (optional) {
             Player player = game.getPlayer(this.getControllerId());
-            MageObject object = game.getObject(sourceId);
             StringBuilder sb = new StringBuilder();
             if (object != null) {
                 sb.append("Use the following ability from ").append(object.getName()).append("? ");
@@ -94,6 +94,12 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
         }
         //20091005 - 603.4
         if (checkInterveningIfClause(game)) {
+            // log resolve of triggered ability 
+            if (object != null) {
+                game.informPlayers(new StringBuilder(object.getName()).append(" triggered ability resolves: ").append(this.getRule()).toString());
+            } else {
+                game.informPlayers(new StringBuilder("Ability triggered: ").append(this.getRule()).toString());
+            }
             return super.resolve(game);
         }
         return false;
