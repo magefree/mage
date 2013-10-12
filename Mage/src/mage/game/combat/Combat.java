@@ -559,6 +559,9 @@ public class Combat implements Serializable, Copyable<Combat> {
         for (Map.Entry<UUID, Set<UUID>> entry :creaturesForcedToBlockAttackers.entrySet()) {
             boolean blockIsValid;
             Permanent creatureForcedToBlock = game.getPermanent(entry.getKey());
+            if (creatureForcedToBlock == null) {
+                break;
+            }
             // creature does not block -> not allowed
             if (creatureForcedToBlock.getBlocking() == 0) {
                 blockIsValid = false;

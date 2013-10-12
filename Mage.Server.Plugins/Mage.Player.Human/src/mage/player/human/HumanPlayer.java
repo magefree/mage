@@ -716,8 +716,8 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         updateGameStatePriority("getAmount", game);
         game.fireGetAmountEvent(playerId, message, min, max);
         waitForIntegerResponse(game);
-        if (response != null) {
-            return response.getInteger();
+        if (response != null && response.getInteger() != null) {
+            return response.getInteger().intValue();
         } else {
             return 0;
         }
