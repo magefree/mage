@@ -1452,13 +1452,10 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     rememberPick(card, RateCard.rateCard(card, null));
                 }
                 chosenColors = chooseDeckColorsIfPossible();
-                log.warn(this.getName() + " after choose Deck Colors.");
             }
             deck = buildDeck(new ArrayList<Card>(deck.getSideboard()), chosenColors);
-            log.warn(this.getName() + " after build deck.");
         }
         tournament.submitDeck(playerId, deck);
-        log.warn(this.getName() + " after submit deck.");
     }
 
     public Card pickBestCard(List<Card> cards, List<ColoredManaSymbol> chosenColors) {
