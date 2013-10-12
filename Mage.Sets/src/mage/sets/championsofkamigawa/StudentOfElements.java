@@ -28,11 +28,6 @@
 package mage.sets.championsofkamigawa;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.StateTriggeredAbility;
@@ -44,6 +39,10 @@ import mage.abilities.effects.common.FlipSourceEffect;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -105,7 +104,7 @@ class StudentOfElementsHasFlyingAbility extends StateTriggeredAbility<StudentOfE
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
         Permanent permanent = game.getPermanent(getSourceId());
-        if(permanent.getAbilities().contains(FlyingAbility.getInstance())){
+        if(permanent != null && permanent.getAbilities().contains(FlyingAbility.getInstance())){
             return true;
         }
         return false;
