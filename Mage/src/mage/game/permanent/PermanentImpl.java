@@ -805,6 +805,10 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         //20091005 - 701.13
         if (!game.replaceEvent(GameEvent.getEvent(EventType.SACRIFICE_PERMANENT, objectId, sourceId, controllerId))) {
             if (moveToZone(Zone.GRAVEYARD, sourceId, game, true)) {
+                Player player = game.getPlayer(getControllerId());
+                if (player != null) {
+                    game.informPlayers(new StringBuilder(player.getName()).append(" sacrificed ").append(this.getName()).toString());
+                }
                 game.fireEvent(GameEvent.getEvent(EventType.SACRIFICED_PERMANENT, objectId, sourceId, controllerId));
                 return true;
             }
@@ -870,7 +874,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         }
         Permanent attacker = game.getPermanent(attackerId);
         // controller of attacking permanent must be an opponent
-        if (!game.getOpponents(this.getControllerId()).contains(attacker.getControllerId())) {
+        if (game.getOpponents(this.getControllerId()) != null && !game.getOpponents(this.getControllerId()).contains(attacker.getControllerId())) {
             return false;
         }
         //20101001 - 509.1b
