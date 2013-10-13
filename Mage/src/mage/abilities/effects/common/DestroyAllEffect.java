@@ -28,9 +28,9 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.filter.FilterPermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,6 +62,7 @@ public class DestroyAllEffect extends OneShotEffect {
     public DestroyAllEffect(final DestroyAllEffect effect) {
         super(effect);
         this.filter = effect.filter.copy();
+        this.noRegen = effect.noRegen;
     }
 
     @Override
@@ -72,7 +73,7 @@ public class DestroyAllEffect extends OneShotEffect {
     @Override
     public boolean apply(Game game, Ability source) {
         for (Permanent permanent : game.getBattlefield().getActivePermanents(filter, source.getControllerId(), source.getSourceId(), game)) {
-            permanent.destroy(source.getId(), game, noRegen);
+            permanent.destroy(source.getSourceId(), game, noRegen);
         }
         return true;
     }
