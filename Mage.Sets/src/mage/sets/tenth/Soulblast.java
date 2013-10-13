@@ -91,21 +91,25 @@ class SoulblastEffect extends OneShotEffect<SoulblastEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
-        if (player != null) {
-            int power = 0;
-            for (Cost cost :source.getCosts()) {
-                if (cost instanceof SacrificeAllCost) {
-                    for (Permanent permanent : ((SacrificeAllCost) cost).getPermanents()) {
-                        power += permanent.getPower().getValue();
-                    }
+        int power = 0;
+        for (Cost cost :source.getCosts()) {
+            if (cost instanceof SacrificeAllCost) {
+                for (Permanent permanent : ((SacrificeAllCost) cost).getPermanents()) {
+                    power += permanent.getPower().getValue();
                 }
             }
-            if (power > 0) {
-                player.damage(power, source.getSourceId(), game, false, true);                
-            }
-            return true;
         }
-        return false;
+        if (power > 0) {
+            Player player = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+            if (player != null) {
+                player.damage(power, source.getSourceId(), game, false, true);
+            } else {
+                Permanent creature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+                if (creature != null) {
+                    creature.damage(power, source.getSourceId(), game, true, false);
+                }
+            }
+        }
+        return true;
     }
 }
