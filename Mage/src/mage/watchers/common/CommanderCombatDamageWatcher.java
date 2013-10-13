@@ -83,8 +83,8 @@ public class CommanderCombatDamageWatcher extends WatcherImpl<CommanderCombatDam
                 damageToPlayer.put(playerUUID, damage);
                 Player player = game.getPlayer(playerUUID);
                 MageObject commander = game.getObject(sourceId);
-                if(player != null && commander != null){
-                    game.informPlayers(commander.getName() + " did " + damage + "damages to " + player.getName() + " during the game.");
+                if (player != null && commander != null){
+                    game.informPlayers(commander.getName() + " did " + damage + " damages to " + player.getName() + " during the game.");
                 }
             }
         }
@@ -92,7 +92,6 @@ public class CommanderCombatDamageWatcher extends WatcherImpl<CommanderCombatDam
 
     public Map<UUID, Integer> getDamageToPlayer() {
         return damageToPlayer;
-    }
-    
+    }    
 
 }
