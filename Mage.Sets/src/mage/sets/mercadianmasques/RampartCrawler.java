@@ -33,18 +33,23 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author Backfir3
  */
 public class RampartCrawler extends CardImpl<RampartCrawler> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
+    static {
+        filter.add(new SubtypePredicate("Wall"));
+    }
 
     public RampartCrawler(UUID ownerId) {
 		super(ownerId, 156, "Rampart Crawler", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{B}");
@@ -56,7 +61,7 @@ public class RampartCrawler extends CardImpl<RampartCrawler> {
 		this.toughness = new MageInt(1);
 	
         // Rampart Crawler can't be blocked by Walls.
-		this.addAbility(new RampartCrawlerAbility());
+		this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public RampartCrawler(final RampartCrawler card) {
@@ -66,50 +71,6 @@ public class RampartCrawler extends CardImpl<RampartCrawler> {
     @Override
     public RampartCrawler copy() {
         return new RampartCrawler(this);
-    }
-
-}
-
-class RampartCrawlerAbility extends EvasionAbility<RampartCrawlerAbility> {
-
-    public RampartCrawlerAbility() {
-        this.addEffect(new RampartCrawlerEffect());
-    }
-
-    public RampartCrawlerAbility(final RampartCrawlerAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked by Walls.";
-    }
-
-    @Override
-    public RampartCrawlerAbility copy() {
-        return new RampartCrawlerAbility(this);
-    }
-
-}
-
-class RampartCrawlerEffect extends CantBlockSourceEffect {
-
-    public RampartCrawlerEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public RampartCrawlerEffect(final RampartCrawlerEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Wall");
-    }
-
-    @Override
-    public RampartCrawlerEffect copy() {
-        return new RampartCrawlerEffect(this);
     }
 
 }

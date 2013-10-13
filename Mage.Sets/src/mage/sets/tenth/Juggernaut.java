@@ -29,23 +29,27 @@
 package mage.sets.tenth;
 
 import java.util.UUID;
+import mage.MageInt;
+import mage.abilities.common.AttacksEachTurnStaticAbility;
+import mage.abilities.common.SimpleEvasionAbility;
+import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesSourceEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.EvasionAbility;
-import mage.abilities.common.AttacksEachTurnStaticAbility;
-import mage.abilities.effects.common.combat.CantBlockSourceEffect;
-import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class Juggernaut extends CardImpl<Juggernaut> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Walls");
+    static {
+        filter.add(new SubtypePredicate("Wall"));
+    }
 
     public Juggernaut(UUID ownerId) {
         super(ownerId, 328, "Juggernaut", Rarity.UNCOMMON, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{4}");
@@ -54,8 +58,10 @@ public class Juggernaut extends CardImpl<Juggernaut> {
         this.power = new MageInt(5);
         this.toughness = new MageInt(3);
 
+        // Juggernaut attacks each turn if able.
         this.addAbility(new AttacksEachTurnStaticAbility());
-        this.addAbility(new JuggernautAbility());
+        // Juggernaut can't be blocked by Walls.
+        this.addAbility(new SimpleEvasionAbility(new CantBeBlockedByCreaturesSourceEffect(filter, Duration.WhileOnBattlefield)));
     }
 
     public Juggernaut(final Juggernaut card) {
@@ -65,50 +71,6 @@ public class Juggernaut extends CardImpl<Juggernaut> {
     @Override
     public Juggernaut copy() {
         return new Juggernaut(this);
-    }
-
-}
-
-class JuggernautAbility extends EvasionAbility<JuggernautAbility> {
-
-    public JuggernautAbility() {
-        this.addEffect(new JuggernautEffect());
-    }
-
-    public JuggernautAbility(final JuggernautAbility ability) {
-        super(ability);
-    }
-
-    @Override
-    public String getRule() {
-        return "{this} can't be blocked by Walls.";
-    }
-
-    @Override
-    public JuggernautAbility copy() {
-        return new JuggernautAbility(this);
-    }
-
-}
-
-class JuggernautEffect extends CantBlockSourceEffect {
-
-    public JuggernautEffect() {
-        super(Duration.WhileOnBattlefield);
-    }
-
-    public JuggernautEffect(final JuggernautEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean canBeBlocked(Permanent attacker, Permanent blocker, Ability source, Game game) {
-        return !blocker.hasSubtype("Wall");
-    }
-
-    @Override
-    public JuggernautEffect copy() {
-        return new JuggernautEffect(this);
     }
 
 }
