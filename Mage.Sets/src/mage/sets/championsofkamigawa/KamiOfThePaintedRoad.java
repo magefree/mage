@@ -67,7 +67,7 @@ public class KamiOfThePaintedRoad extends CardImpl<KamiOfThePaintedRoad> {
         Ability ability = new SpellCastControllerTriggeredAbility(new GainProtectionFromColorSourceEffect(Duration.EndOfTurn), filter, true);
         Choice colorChoice = new ChoiceColor();
         colorChoice.setMessage("Choose color (Kami of the Painted Road)");
-        ability.addChoice(new ChoiceColor());
+        ability.addChoice(colorChoice);
         this.addAbility(ability);
 
     }
