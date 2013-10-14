@@ -28,13 +28,12 @@
 
 package mage.abilities.effects;
 
-import mage.constants.Outcome;
-import mage.abilities.Mode;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import mage.abilities.Mode;
+import mage.constants.Outcome;
 
 /**
  *
@@ -56,22 +55,31 @@ public class Effects extends ArrayList<Effect> {
 
     public String getText(Mode mode) {
         StringBuilder sbText = new StringBuilder();
+        String rule = null;
         for (Effect effect: this) {
-            String rule = effect.getText(mode);
-            if (rule != null) {
-                sbText.append(rule);
-                if (!rule.endsWith(". ")) {
-                    sbText.append(". ");
-                }
+            String endString = "";
+            if (rule != null && rule.length()> 3 && !rule.endsWith(". ")) {
+                endString = ". ";
             }
+            rule = effect.getText(mode);
+            if (rule != null) {
+                if (rule.startsWith("and ")) {
+                    endString = " ";
+                }
+                sbText.append(endString).append(rule);
+            }
+        }
+        if (rule != null && rule.length()> 3 && !rule.endsWith(". ")) {
+            sbText.append(".");
         }
         return sbText.toString();
     }
 
     public boolean hasOutcome(Outcome outcome) {
         for (Effect effect: this) {
-            if (effect.getOutcome() == outcome)
+            if (effect.getOutcome() == outcome) {
                 return true;
+            }
         }
         return false;
     }
@@ -87,10 +95,12 @@ public class Effects extends ArrayList<Effect> {
     public int getOutcomeTotal() {
         int total = 0;
         for (Effect effect: this) {
-            if (effect.getOutcome().isGood())
+            if (effect.getOutcome().isGood()) {
                 total++;
-            else
+            }
+            else {
                 total--;
+            }
         }
         return total;
     }
