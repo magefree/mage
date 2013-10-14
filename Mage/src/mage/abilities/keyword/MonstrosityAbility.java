@@ -92,11 +92,6 @@ public class MonstrosityAbility extends ActivatedAbilityImpl<MonstrosityAbility>
         return new MonstrosityAbility(this);
     }
 
-    @Override
-    public String getRule() {
-        return new StringBuilder(manaCosts.getText()).append(": ").append(super.getRule()).toString();
-    }
-
     public int getMonstrosityValue() {
         return monstrosityValue;
     }
