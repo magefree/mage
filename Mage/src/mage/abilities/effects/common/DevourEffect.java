@@ -30,12 +30,11 @@ package mage.abilities.effects.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.constants.Duration;
+import mage.constants.Outcome;
 import mage.counters.CounterType;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.permanent.AnotherPredicate;
@@ -158,8 +157,8 @@ public class DevourEffect extends ReplacementEffectImpl<DevourEffect> {
     @Override
     public String getText(Mode mode) {
         StringBuilder sb = new StringBuilder(devourFactor.toString());
-        sb.append(" (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with ");
-        sb.append(devourFactor.getRuleText()).append(")");
+        sb.append(" <i>(As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with ");
+        sb.append(devourFactor.getRuleText()).append(")</i>");
         return  sb.toString();
     }
 
