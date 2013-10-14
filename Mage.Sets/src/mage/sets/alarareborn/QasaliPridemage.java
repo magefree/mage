@@ -42,6 +42,7 @@ import mage.cards.CardImpl;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.target.Target;
 import mage.target.TargetPermanent;
 
 /**
@@ -69,10 +70,15 @@ public class QasaliPridemage extends CardImpl<QasaliPridemage> {
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
 
+        // Exalted (Whenever a creature you control attacks alone, that creature gets +1/+1 until end of turn.)
         this.addAbility(new ExaltedAbility());
+
+        // {1}, Sacrifice Qasali Pridemage: Destroy target artifact or enchantment.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new ManaCostsImpl("{1}"));
         ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPermanent(filter));
+        Target target = new TargetPermanent(filter);
+        target.setRequired(true);
+        ability.addTarget(target);
         this.addAbility(ability);
     }
 
