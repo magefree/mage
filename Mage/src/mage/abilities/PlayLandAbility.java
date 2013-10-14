@@ -51,8 +51,9 @@ public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if (!controlsAbility(playerId, game))
+        if (!controlsAbility(playerId, game)) {
             return false;
+        }
         //20091005 - 114.2a
         if (game.canPlaySorcery(playerId)) {
             return game.getPlayer(playerId).canPlayLand();

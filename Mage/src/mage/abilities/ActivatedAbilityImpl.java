@@ -210,7 +210,11 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
         if (game.isSimulation()) {
             return "";
         }
-        return " activates ability from " + getMessageText(game);
+        MageObject object = game.getObject(this.sourceId);
+        return new StringBuilder(" activates ")
+                .append(object != null ? this.getRule(object.getName()) :this.getRule())
+                .append(" from ")
+                .append(getMessageText(game)).toString();
     }
 
     protected String getMessageText(Game game) {
