@@ -28,6 +28,7 @@
 
 package mage.abilities.effects.common.continious;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.ContinuousEffectImpl;
@@ -53,12 +54,22 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl<AddCardTypeTar
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent target = game.getPermanent(targetPointer.getFirst(game, source));
-        if (target != null) {
-            if (!target.getCardType().contains(addedCardType))
-                target.getCardType().add(addedCardType);
+        boolean result = false;
+        for (UUID targetId :targetPointer.getTargets(game, source)) {
+            Permanent target = game.getPermanent(targetId);
+            if (target != null) {
+                if (!target.getCardType().contains(addedCardType)) {
+                    target.getCardType().add(addedCardType);
+                }
+                result = true;
+            }
         }
-        return false;
+        if (!result) {
+            if (this.getDuration().equals(Duration.Custom)) {
+                this.discard();
+            }
+        }
+        return result;
     }
 
     @Override
@@ -68,6 +79,9 @@ public class AddCardTypeTargetEffect extends ContinuousEffectImpl<AddCardTypeTar
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Target ").append(mode.getTargets().get(0).getTargetName()).append(" becomes ").append(addedCardType.toString()).append(" in addition to its other types until end of turn");
         return sb.toString();

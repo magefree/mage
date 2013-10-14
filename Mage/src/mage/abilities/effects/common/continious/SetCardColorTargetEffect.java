@@ -29,6 +29,7 @@
  */
 package mage.abilities.effects.common.continious;
 
+import java.util.UUID;
 import mage.MageObject;
 import mage.ObjectColor;
 import mage.abilities.Ability;
@@ -67,14 +68,22 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
 
     @Override
     public boolean apply(Game game, Ability source) {
-        MageObject o = game.getObject(targetPointer.getFirst(game, source));
-        if (o != null) {
-            if (o instanceof Permanent || o instanceof StackObject) {
-                o.getColor().setColor(setColor);
+        boolean result = false;
+        for (UUID targetId :targetPointer.getTargets(game, source)) {
+            MageObject o = game.getObject(targetId);
+            if (o != null) {
+                if (o instanceof Permanent || o instanceof StackObject) {
+                    o.getColor().setColor(setColor);
+                    result = true;
+                }
             }
         }
-
-        return false;
+        if (!result) {
+            if (this.getDuration().equals(Duration.Custom)) {
+                this.discard();
+            }
+        }
+        return result;
     }
 
     @Override
@@ -84,6 +93,9 @@ public class SetCardColorTargetEffect extends ContinuousEffectImpl<SetCardColorT
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
         sb.append(" becomes ").append(setColor.getDescription());

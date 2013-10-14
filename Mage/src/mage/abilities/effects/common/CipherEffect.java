@@ -87,7 +87,7 @@ public class CipherEffect extends OneShotEffect<CipherEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         TargetControlledCreaturePermanent target = new TargetControlledCreaturePermanent(true);
-        if (controller != null && target != null) {
+        if (controller != null) {
             if (target.canChoose(source.getControllerId(), game)
                 && controller.chooseUse(outcome, "Cipher this spell to a creature?", game)) {
                 controller.chooseTarget(outcome, target, source, game);

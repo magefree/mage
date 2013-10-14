@@ -110,7 +110,7 @@ class ThroughTheBreachEffect extends OneShotEffect<ThroughTheBreachEffect> {
                     if (card != null) {
                         if (card.putOntoBattlefield(game, Zone.HAND, source.getId(), source.getControllerId())) {
                             Permanent permanent = game.getPermanent(card.getId());
-                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.WhileOnBattlefield);
+                            ContinuousEffect effect = new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.Custom);
                             effect.setTargetPointer(new FixedTarget(permanent.getId()));
                             game.addEffect(effect, source);
                             SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice boosted " + card.getName());

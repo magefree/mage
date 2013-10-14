@@ -59,9 +59,10 @@ public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
         this.expansionSetCode = "CHK";
         this.subtype.add("Fox");
         this.subtype.add("Samurai");
-    this.color.setWhite(true);
+        this.color.setWhite(true);
         this.power = new MageInt(2);
         this.toughness = new MageInt(1);
+
         // Bushido 1 (When this blocks or becomes blocked, it gets +1/+1 until end of turn.)
         this.addAbility(new BushidoAbility(1));
         // {1}{W}, {T}: Put a training counter on target creature. 
@@ -69,8 +70,8 @@ public class SenseiGoldenTail extends CardImpl<SenseiGoldenTail> {
         ability.addCost(new TapSourceCost());
         ability.addTarget(new TargetCreaturePermanent());
         // That creature gains bushido 1 and becomes a Samurai in addition to its other creature types. Activate this ability only any time you could cast a sorcery.
-        ability.addEffect(new GainAbilityTargetEffect(new BushidoAbility(1),Duration.WhileOnBattlefield));
-        ability.addEffect(new AddCardSubTypeTargetEffect("Samurai",Duration.WhileOnBattlefield));
+        ability.addEffect(new GainAbilityTargetEffect(new BushidoAbility(1),Duration.Custom));
+        ability.addEffect(new AddCardSubTypeTargetEffect("Samurai",Duration.Custom));
         this.addAbility(ability);
     }
 
