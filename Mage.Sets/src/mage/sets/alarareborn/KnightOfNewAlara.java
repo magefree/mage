@@ -44,6 +44,7 @@ import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.predicate.mageobject.MulticoloredPredicate;
+import mage.filter.predicate.permanent.AnotherPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -81,8 +82,14 @@ public class KnightOfNewAlara extends CardImpl<KnightOfNewAlara> {
 
 class KnightOfNewAlaraEffect extends ContinuousEffectImpl<KnightOfNewAlaraEffect> {
 
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
+    static {
+        filter.add(new MulticoloredPredicate());
+        filter.add(new AnotherPredicate());
+    }
+
     public KnightOfNewAlaraEffect() {
-        super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.BoostCreature);
+        super(Duration.WhileOnBattlefield, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);
         staticText = "Each other multicolored creature you control gets +1/+1 for each of its colors";
     }
 
@@ -97,54 +104,13 @@ class KnightOfNewAlaraEffect extends ContinuousEffectImpl<KnightOfNewAlaraEffect
 
     @Override
     public boolean apply(Game game, Ability source) {
-        FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent();
-        filter.add(new MulticoloredPredicate());
-        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {
-            DynamicValue colors = new KnightOfNewAlaraColorCount(creature);
-            if (creature != null
-                    && creature != game.getPermanent(source.getSourceId())) {
-                creature.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostSourceEffect(colors, colors, Duration.WhileOnBattlefield)), source.getId(), game);
+        for (Permanent creature : game.getBattlefield().getAllActivePermanents(filter, source.getControllerId(), game)) {            
+            if (creature != null) {
+                int colors = creature.getColor().getColorCount();
+                creature.addPower(colors);
+                creature.addToughness(colors);
             }
         }
         return true;
-    }
-}
-
-class KnightOfNewAlaraColorCount implements DynamicValue {
-
-    final Permanent creature;
-    private int count;
-
-    public KnightOfNewAlaraColorCount(Permanent creature) {
-        this.creature = creature;
-        this.count = 0;
-    }
-
-    public KnightOfNewAlaraColorCount(final KnightOfNewAlaraColorCount dynamicValue) {
-        this.creature = dynamicValue.creature;
-        this.count = dynamicValue.count;
-    }
-
-    @Override
-    public int calculate(Game game, Ability source) {
-        if (creature != null) {
-            count = creature.getColor().getColorCount();
-        }
-        return count;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new KnightOfNewAlaraColorCount(this);
-    }
-
-    @Override
-    public String toString() {
-        return "1";
-    }
-
-    @Override
-    public String getMessage() {
-        return "of its colors";
     }
 }
