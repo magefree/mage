@@ -43,6 +43,7 @@ import mage.abilities.keyword.CanAttackOnlyAloneAbility;
 import mage.abilities.keyword.CantAttackAloneAbility;
 import mage.abilities.keyword.VigilanceAbility;
 import mage.constants.Outcome;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledCreaturePermanent;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.common.FilterPlaneswalkerPermanent;
@@ -304,7 +305,14 @@ public class Combat implements Serializable, Copyable<Combat> {
                     for(UUID attackingCreatureId : group.getAttackers()) {
                         Permanent attackingCreature = game.getPermanent(attackingCreatureId);
                         if (attackingCreature != null) {
-                            sb.append(attackingCreature.getName()).append(" ");
+                            sb.append(attackingCreature.getName()).append(" (");
+                            sb.append(attackingCreature.getPower().getValue()).append("/").append(attackingCreature.getToughness().getValue()).append(") ");
+                        } else {
+                            // creature left battlefield
+                            attackingCreature = (Permanent) game.getLastKnownInformation(attackingCreatureId, Zone.BATTLEFIELD);
+                            if (attackingCreature != null) {
+                                sb.append(attackingCreature.getName()).append(" [left battlefield)] ");
+                            }
                         }
                     }
                     if (group.getBlockers().size() > 0) {
@@ -312,7 +320,8 @@ public class Combat implements Serializable, Copyable<Combat> {
                         for(UUID blockingCreatureId : group.getBlockers()) {
                             Permanent blockingCreature = game.getPermanent(blockingCreatureId);
                             if (blockingCreature != null) {
-                                sb.append(blockingCreature.getName()).append(" ");
+                                sb.append(blockingCreature.getName()).append(" (");
+                                sb.append(blockingCreature.getPower().getValue()).append("/").append(blockingCreature.getToughness().getValue()).append(") ");
                             }
                         }
 

@@ -564,7 +564,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             while (hand.size() > 0) {
                 discard(hand.get(hand.iterator().next(), game), source, game);
             }
-            game.fireInformEvent(name + " discards " + Integer.toString(discardAmount) + " card" + (discardAmount > 1?"s":""));
             return;
         }
         int numDiscarded = 0;
@@ -579,7 +578,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                 numDiscarded++;
             }
         }
-        game.fireInformEvent(name + " discards " + Integer.toString(numDiscarded) + " card" + (numDiscarded > 1?"s":""));
     }
 
     @Override
@@ -588,7 +586,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         if (card != null) {
             removeFromHand(card, game);
             card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
-
+            game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
             return true;
         }
