@@ -62,7 +62,7 @@ public class EngulfingFlames extends CardImpl<EngulfingFlames> {
         this.getSpellAbility().addEffect(new EngulfingFlamesEffect());
         this.addWatcher(new DamagedByWatcher());
         // Flashback {3}{R}
-        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.SORCERY));
+        this.addAbility(new FlashbackAbility(new ManaCostsImpl("{3}{R}"), TimingRule.INSTANT));
     }
 
     public EngulfingFlames(final EngulfingFlames card) {
@@ -106,10 +106,12 @@ class EngulfingFlamesEffect extends ReplacementEffectImpl<EngulfingFlamesEffect>
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.REGENERATE) {
             DamagedByWatcher watcher = (DamagedByWatcher) game.getState().getWatchers().get("DamagedByWatcher", source.getSourceId());
-            if (watcher != null)
+            if (watcher != null) {
                 return watcher.damagedCreatures.contains(event.getTargetId());
+            }
         }
         return false;
     }
 
 }
+    
