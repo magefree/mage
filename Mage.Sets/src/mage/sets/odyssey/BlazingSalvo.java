@@ -94,7 +94,7 @@ class BlazingSalvoEffect extends OneShotEffect<BlazingSalvoEffect> {
                 } else {
                     permanent.damage(3, source.getSourceId(), game, true, false);
                 }
-            return true;  
+                return true;  
             } 
         } 
         return false;
