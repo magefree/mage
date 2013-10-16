@@ -63,7 +63,7 @@ public class MagmaSliver extends CardImpl<MagmaSliver> {
 
         // All Slivers have "{tap}: Target Sliver creature gets +X/+0 until end of turn, where X is the number of Slivers on the battlefield."
     Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(new PermanentsOnBattlefieldCount(new FilterCreaturePermanent("Sliver", "Sliver creatures")), new StaticValue(0), Duration.EndOfTurn), new TapSourceCost());
-    Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver creatures"));
+    Target target = new TargetCreaturePermanent(new FilterCreaturePermanent("Sliver", "Sliver creature"));
     target.setRequired(true);
     ability.addTarget(target);
     this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
