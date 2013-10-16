@@ -48,7 +48,7 @@ import mage.filter.predicate.mageobject.SubtypePredicate;
  */
 public class ShiftingSliver extends CardImpl<ShiftingSliver> {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("except by Slivers");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("Slivers");
     
     static {
         filter.add(Predicates.not(new SubtypePredicate("Sliver")));
