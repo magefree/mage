@@ -32,6 +32,7 @@ import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardCardCost;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.abilities.keyword.HasteAbility;
@@ -59,7 +60,9 @@ public class DwarvenStrikeForce extends CardImpl<DwarvenStrikeForce> {
 
         // Discard a card at random: Dwarven Strike Force gains first strike and haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost(true));
-        ability.addEffect(new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn));
+        Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn);
+        effect.setText("and haste until end of turn");
+        ability.addEffect(effect);
         this.addAbility(ability);
     }
 
