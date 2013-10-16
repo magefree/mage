@@ -29,6 +29,7 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.Ability;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.AttachEffect;
@@ -42,6 +43,7 @@ import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPermanent;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -66,12 +68,12 @@ public class KamahlsDesire extends CardImpl<KamahlsDesire> {
         this.addAbility(ability);
         
         // Enchanted creature has first strike.
-        ability.addEffect(new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
-        
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(FirstStrikeAbility.getInstance(), AttachmentType.AURA, Duration.WhileOnBattlefield));
         // Threshold - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
         ability.addEffect(new ConditionalContinousEffect(new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield), 
                                                          new CardsInControllerGraveCondition(7),  
                                                          "<br/><br/><i>Threshold</i> - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard."));
+        this.addAbility(ability);
     }
 
     public KamahlsDesire(final KamahlsDesire card) {
