@@ -31,20 +31,29 @@ import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.CantCounterControlledEffect;
 import mage.abilities.effects.common.CantCounterSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.FilterSpell;
+import mage.filter.FilterStackObject;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
- * @author cbt33, BetaSteward (Combust)
+ * @author cbt33, BetaSteward (Autumn's Veil, Combust)
  */
 public class RootSliver extends CardImpl<RootSliver> {
+    
+    private static final FilterSpell filter = new FilterSpell("Sliver spells");
+    
+    static {
+        filter.add(new SubtypePredicate("Sliver"));
+    }
+    
 
     public RootSliver(UUID ownerId) {
         super(ownerId, 137, "Root Sliver", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{3}{G}");
@@ -56,10 +65,10 @@ public class RootSliver extends CardImpl<RootSliver> {
         this.toughness = new MageInt(2);
 
         // Root Sliver can't be countered.
-        Ability ability = new SimpleStaticAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
-        this.addAbility(ability);
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterSourceEffect()));
         // Sliver spells can't be countered by spells or abilities.
-        this.addAbility(new SimpleStaticAbility(Zone.STACK, new GainAbilityAllEffect(ability, Duration.WhileOnStack, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
+        this.addAbility(new SimpleStaticAbility(Zone.STACK, new CantCounterControlledEffect(filter, new FilterStackObject(), Duration.WhileOnBattlefield)));
+
     }
 
     public RootSliver(final RootSliver card) {
@@ -71,3 +80,4 @@ public class RootSliver extends CardImpl<RootSliver> {
         return new RootSliver(this);
     }
 }
+
