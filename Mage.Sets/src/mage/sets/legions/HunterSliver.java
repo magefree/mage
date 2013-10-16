@@ -42,6 +42,7 @@ import mage.abilities.effects.RequirementEffect;
 import mage.abilities.effects.common.continious.GainAbilityAllEffect;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -60,6 +61,7 @@ public class HunterSliver extends CardImpl<HunterSliver> {
 
         // All Sliver creatures have provoke.
         Ability ability = new AttacksTriggeredAbility(new ProvokeEffect(), true, "may have target creature untap and block if able");
+        ability.addTarget(new TargetCreaturePermanent());
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAllEffect(ability, Duration.WhileOnBattlefield, new FilterCreaturePermanent("Sliver", "Sliver creatures"))));
     }
 
@@ -90,7 +92,7 @@ class ProvokeEffect extends RequirementEffect<ProvokeEffect> {
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        if (permanent.getId().equals(source.getFirstTarget())) {
+        if (permanent.getId().equals(targetPointer.getFirst(game, source))) {
             Permanent blocker = game.getPermanent(source.getFirstTarget());
             if (blocker != null && blocker.isTapped()){
                 blocker.untap(game);
