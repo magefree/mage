@@ -52,8 +52,8 @@ public class BlazingSalvo extends CardImpl<BlazingSalvo> {
         this.color.setRed(true);
 
         // Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to him or her.
-    this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
-    this.getSpellAbility().addEffect(new BlazingSalvoEffect());
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
+        this.getSpellAbility().addEffect(new BlazingSalvoEffect());
     }
 
     public BlazingSalvo(final BlazingSalvo card) {
@@ -82,23 +82,23 @@ class BlazingSalvoEffect extends OneShotEffect<BlazingSalvoEffect> {
         return new BlazingSalvoEffect(this);
     }
 
-@Override
-public boolean apply(Game game, Ability source) {
-    Permanent permanent = game.getPermanent(source.getFirstTarget());
-    if (permanent != null) {
-        Player player = game.getPlayer(permanent.getControllerId());
-        if (player != null) {
-        String message = "Have Blazing Salvo do 5 damage to you?";
-            if (player.chooseUse(Outcome.Damage, message, game)){
-                player.damage(5, source.getSourceId(), game, true, false);
-            } else {
-                permanent.damage(3, source.getSourceId(), game, true, false);
-            }
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Permanent permanent = game.getPermanent(targetPointer.getFirst(game, source));
+        if (permanent != null) {
+            Player player = game.getPlayer(permanent.getControllerId());
+            if (player != null) {
+                String message = "Have Blazing Salvo do 5 damage to you?";
+                if (player.chooseUse(Outcome.Damage, message, game)){
+                    player.damage(5, source.getSourceId(), game, true, false);
+                } else {
+                    permanent.damage(3, source.getSourceId(), game, true, false);
+                }
             return true;  
+            } 
         } 
-    } 
-    return false;
-    }
+        return false;
+   }
 
 }
 
