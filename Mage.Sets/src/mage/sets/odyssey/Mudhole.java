@@ -83,10 +83,13 @@ class MudholeEffect extends OneShotEffect<MudholeEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-    Player targetPlayer = game.getPlayer(source.getFirstTarget());
-    for (Card card: targetPlayer.getGraveyard().getCards(filter, game)) {
-       card.moveToExile(null, "", source.getId(), game);
-    }
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        if (targetPlayer != null) {
+            for (Card card: targetPlayer.getGraveyard().getCards(filter, game)) {
+                card.moveToExile(null, "", source.getSourceId(), game);
+            }
+            return true;
+        }
         return false;
     }
     
