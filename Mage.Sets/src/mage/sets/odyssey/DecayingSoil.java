@@ -31,12 +31,14 @@ import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
-import mage.abilities.condition.Condition;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ExileTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -73,7 +75,10 @@ public class DecayingSoil extends CardImpl<DecayingSoil> {
         this.addAbility(ability);
         
         // Threshold - As long as seven or more cards are in your graveyard, Decaying Soil has "Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand."
-    this.addAbility(new DecayingSoilTriggeredAbility());
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, 
+                                                new ConditionalContinousEffect(new GainAbilitySourceEffect(new DecayingSoilTriggeredAbility()), 
+                                                new CardsInControllerGraveCondition(7), 
+                                                "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.")));
     }
 
     public DecayingSoil(final DecayingSoil card) {
@@ -87,8 +92,6 @@ public class DecayingSoil extends CardImpl<DecayingSoil> {
 }
 
 class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl<DecayingSoilTriggeredAbility> {
-    
-    Condition condition = new CardsInControllerGraveCondition(7);
 
     DecayingSoilTriggeredAbility() {
         super(Zone.BATTLEFIELD, new DecayingSoilEffect(), true);
@@ -106,7 +109,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl<DecayingSoilTrig
     
     @Override
     public boolean checkInterveningIfClause(Game game) {
-        return condition.apply(game, this);
+        return true;
     }
     
 
@@ -142,7 +145,7 @@ class DecayingSoilTriggeredAbility extends TriggeredAbilityImpl<DecayingSoilTrig
 
     @Override
     public String getRule() {
-        return "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, Decaying Soil has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.";
+        return "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} has \"Whenever a nontoken creature is put into your graveyard from the battlefield, you may pay {1}. If you do, return that card to your hand.";
     }
 }
 
@@ -162,19 +165,15 @@ class DecayingSoilEffect extends OneShotEffect<DecayingSoilEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
-        //Permanent equipment = game.getPermanent(source.getSourceId());
         if (player != null) {
             if (player.chooseUse(Outcome.Benefit, " - Pay " + cost.getText() + "?", game)) {
                 cost.clearPaid();
                 if (cost.pay(source, game, source.getId(), source.getControllerId(), false)) {
                     UUID target = targetPointer.getFirst(game, source);
-                   // if (target != null && equipment != null) {
                       if (target != null) {  
                         Card card = game.getCard(target);
                         // check if it's still in graveyard
                         if (card != null && game.getState().getZone(card.getId()).equals(Zone.GRAVEYARD)) {
-                            //Player owner = game.getPlayer(card.getOwnerId());
-                           // owner.getHand().add(card);
                             card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
                             return true;
                         }
