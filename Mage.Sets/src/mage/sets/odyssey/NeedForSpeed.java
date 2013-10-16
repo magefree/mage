@@ -49,11 +49,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class NeedForSpeed extends CardImpl<NeedForSpeed> {
    
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("land");
-    
-    static {
-        filter.add(new CardTypePredicate(CardType.LAND));
-    }
+
 
     public NeedForSpeed(UUID ownerId) {
         super(ownerId, 209, "Need for Speed", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{R}");
@@ -64,7 +60,7 @@ public class NeedForSpeed extends CardImpl<NeedForSpeed> {
         // Sacrifice a land: Target creature gains haste until end of turn.
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, 
                                                    new GainAbilityTargetEffect(HasteAbility.getInstance(), Duration.EndOfTurn), 
-                                                   new SacrificeTargetCost(new TargetControlledPermanent(filter)));
+                                                   new SacrificeTargetCost(new TargetControlledPermanent(new FilterControlledPermanent("land"))));
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
