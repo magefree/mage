@@ -30,8 +30,10 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.continious.GainAbilityControlledEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.keyword.ProtectionAbility;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
@@ -62,7 +64,7 @@ public class WardSliver extends CardImpl<WardSliver> {
 
         // As Ward Sliver enters the battlefield, choose a color.
         // All Slivers have protection from the chosen color.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new WardSliverEffect());
+        Ability ability = new EntersBattlefieldTriggeredAbility(new GainAbilitySourceEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new WardSliverEffect())));
         ability.addChoice(new ChoiceColor());
         this.addAbility(ability);
     }
