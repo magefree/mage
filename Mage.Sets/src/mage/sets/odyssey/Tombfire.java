@@ -72,13 +72,13 @@ public class Tombfire extends CardImpl<Tombfire> {
 
 class TombfireEffect extends OneShotEffect<TombfireEffect> {
     
-        private static final FilterCard filter = new FilterCard("flashback");
+private static final FilterCard filter = new FilterCard("flashback");
     
     static{
         filter.add(new AbilityPredicate(FlashbackAbility.class));
     }
     
-        public TombfireEffect() {
+    public TombfireEffect() {
         super(Outcome.Exile);
         staticText = "Target player exiles all cards with flashback from his or her graveyard.";
     }
@@ -89,11 +89,15 @@ class TombfireEffect extends OneShotEffect<TombfireEffect> {
     
     @Override
     public boolean apply(Game game, Ability source) {
-    Player targetPlayer = game.getPlayer(source.getFirstTarget());
-    for (Card card: targetPlayer.getGraveyard().getCards(filter, game)) {
-       card.moveToExile(null, "", source.getId(), game);
-    }
-        return false;
+        Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
+        if (targetPlayer != null) {
+            for (Card card: targetPlayer.getGraveyard().getCards(filter, game)) {
+            card.moveToExile(null, "", source.getSourceId(), game);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
     
     @Override
