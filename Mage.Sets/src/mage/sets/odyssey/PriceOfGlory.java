@@ -29,10 +29,11 @@ package mage.sets.odyssey;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.effects.common.ManaEffect;
-import mage.abilities.mana.TriggeredManaAbility;
+import mage.abilities.TriggeredAbilityImpl;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
@@ -66,7 +67,7 @@ public class PriceOfGlory extends CardImpl<PriceOfGlory> {
     }
 }
 
-class PriceOfGloryAbility extends TriggeredManaAbility<PriceOfGloryAbility> {
+class PriceOfGloryAbility extends TriggeredAbilityImpl<PriceOfGloryAbility> {
 
     private static final String staticText = "Whenever a player taps a land for mana, if it's not that player's turn, destroy that land.";
 
@@ -104,10 +105,10 @@ class PriceOfGloryAbility extends TriggeredManaAbility<PriceOfGloryAbility> {
     }
 }
 
-class PriceOfGloryEffect extends ManaEffect<PriceOfGloryEffect> {
+class PriceOfGloryEffect extends OneShotEffect<PriceOfGloryEffect> {
 
     public PriceOfGloryEffect() {
-        super();
+        super(Outcome.DestroyPermanent);
         staticText = "if it's not that player's turn, destroy that land.";
     }
 
@@ -118,10 +119,11 @@ class PriceOfGloryEffect extends ManaEffect<PriceOfGloryEffect> {
     @Override
     public boolean apply(Game game, Ability source) {
         Permanent land = game.getPermanent(this.targetPointer.getFirst(game, source));
-        if (!land.getControllerId().equals(game.getActivePlayerId())) {
+        if (land != null && !land.getControllerId().equals(game.getActivePlayerId())) {
             land.destroy(source.getSourceId(), game, false);
+            return true;
         }
-        return true;
+        return false;
     }
 
     @Override
