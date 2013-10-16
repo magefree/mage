@@ -99,7 +99,7 @@ class QuickSliverEffect extends AsThoughEffectImpl<QuickSliverEffect> {
     public boolean applies(UUID sourceId, Ability source, Game game) {
         Card card = game.getCard(sourceId);
         if (card != null) {
-            if (card.getSubtype().contains("Sliver")) {   
+            if (card.hasSubtype("Sliver")) {   
                 return true;
             }
         }
