@@ -64,7 +64,7 @@ public class ExileSourceEffect extends OneShotEffect<ExileSourceEffect> {
             // try to exile card
             Card card = game.getCard(source.getSourceId());
             if (card != null) {
-                return card.moveToExile(null, "", source.getId(), game);
+                return card.moveToExile(null, "", source.getSourceId(), game);
             }
         }
         return false;

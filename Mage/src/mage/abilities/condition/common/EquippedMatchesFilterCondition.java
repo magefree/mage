@@ -29,6 +29,7 @@ package mage.abilities.condition.common;
 
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
+import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -51,13 +52,16 @@ public class EquippedMatchesFilterCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
         if (permanent != null && permanent.getAttachedTo() != null) {
-                        Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
-                        if (attachedTo != null) {
-                                if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
-                                        return true;
-                                }
+            Permanent attachedTo = game.getBattlefield().getPermanent(permanent.getAttachedTo());
+            if (attachedTo == null) {
+                attachedTo = (Permanent) game.getLastKnownInformation(permanent.getAttachedTo(), Zone.BATTLEFIELD);
+            }
+            if (attachedTo != null) {
+                if (filter.match(attachedTo, attachedTo.getId(),attachedTo.getControllerId(), game)) {
+                    return true;
+                }
 
-                        }
+            }
         }
         return false;
     }
