@@ -65,7 +65,12 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<Pl
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(source.getControllerId());
         if (player != null) {
-            player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
+            if(player.getLandsPerTurn() == Integer.MAX_VALUE ||  this.additionalCards == Integer.MAX_VALUE){
+                player.setLandsPerTurn(Integer.MAX_VALUE);
+            }
+            else{
+                player.setLandsPerTurn(player.getLandsPerTurn() + this.additionalCards);
+            }
             return true;
         }
         return true;
@@ -73,9 +78,16 @@ public class PlayAdditionalLandsControllerEffect extends ContinuousEffectImpl<Pl
 
     private void setText() {
         StringBuilder sb = new StringBuilder();
-        sb.append("You may play ").append(Integer.toString(additionalCards))
-                .append(" additional land").append((additionalCards == 1 ? "" : "s"))
-                .append(duration == Duration.EndOfTurn ? " this turn" : " on each of your turns");
+        sb.append("You may play ");
+        if(additionalCards == Integer.MAX_VALUE){
+            sb.append("any number of");
+        }
+        else
+        {
+        sb.append(Integer.toString(additionalCards));
+                }
+       sb.append(" additional land").append((additionalCards == 1 ? "" : "s"))
+         .append(duration == Duration.EndOfTurn ? " this turn" : " on each of your turns");
         staticText = sb.toString();
     }
 
