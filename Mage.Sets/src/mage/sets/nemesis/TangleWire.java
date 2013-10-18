@@ -105,7 +105,7 @@ class TangleWireEffect extends OneShotEffect<TangleWireEffect> {
         target.setRequired(true);
         target.setNotTarget(true);
 
-        if (player.chooseTarget(Outcome.Tap, target, source, game)) {
+        if (amount > 0 && player.chooseTarget(Outcome.Tap, target, source, game)) {
             boolean abilityApplied = false;
 
             for (UUID uuid : target.getTargets()) {
