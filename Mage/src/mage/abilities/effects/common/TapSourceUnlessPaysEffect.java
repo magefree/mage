@@ -28,10 +28,10 @@
 
 package mage.abilities.effects.common;
 
-import mage.constants.Outcome;
 import mage.abilities.Ability;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,8 +62,9 @@ public class TapSourceUnlessPaysEffect extends OneShotEffect<TapSourceUnlessPays
             if (cost.canPay(source.getSourceId(), source.getControllerId(), game)
                     && player.chooseUse(Outcome.Benefit, cost.getText() + " or " + permanent.getName() + " comes into play tapped?", game)) {
                 cost.clearPaid();
-                if (cost.pay(source, game, source.getId(), source.getControllerId(), false))
+                if (cost.pay(source, game, source.getSourceId(), source.getControllerId(), false)) {
                     return true;
+                }
             }
             permanent.tap(game);
             return true;

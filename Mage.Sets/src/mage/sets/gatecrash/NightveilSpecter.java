@@ -28,12 +28,6 @@
 package mage.sets.gatecrash;
 
 import java.util.UUID;
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DealsDamageToAPlayerTriggeredAbility;
@@ -43,9 +37,16 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.util.CardUtil;
 
 /**
 * FAQ
@@ -111,12 +112,7 @@ class NightveilSpecterExileEffect extends OneShotEffect<NightveilSpecterExileEff
           Card card = player.getLibrary().removeFromTop(game);
           Card sourceCard = game.getCard(source.getSourceId());
           if (card != null && sourceCard != null) {
-              UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
-              if (exileId == null) {
-                  exileId = UUID.randomUUID();
-                  game.getState().setValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString(), exileId);
-              }
-              return card.moveToExile(exileId, sourceCard.getName(), source.getSourceId(), game);
+              return card.moveToExile(CardUtil.getCardExileZoneId(game, source), sourceCard.getName(), source.getSourceId(), game);
           }
       }
       return false;
@@ -153,14 +149,21 @@ class NightveilSpecterEffect extends AsThoughEffectImpl<NightveilSpecterEffect> 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
       Card card = game.getCard(sourceId);
-      if (card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
-          Card sourceCard = game.getCard(source.getSourceId());
-          UUID exileId = (UUID) game.getState().getValue(new StringBuilder("exileZone").append(source.getSourceId()).append(sourceCard.getZoneChangeCounter()).toString());
-          ExileZone zone = game.getExile().getExileZone(exileId);
+      Player controller = game.getPlayer(source.getControllerId());
+      if (controller != null && card != null && game.getState().getZone(card.getId()) == Zone.EXILED) {
+          ExileZone zone = game.getExile().getExileZone(CardUtil.getCardExileZoneId(game, source));
           if (zone != null && zone.contains(card.getId())) {
-                if (card.getCardType().contains(CardType.INSTANT) || game.canPlaySorcery(source.getControllerId())) {
-                    card.setControllerId(source.getControllerId());
-                    return true;
+                if (card.getCardType().contains(CardType.LAND)) {
+                    // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
+                    if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
+                        card.setControllerId(source.getControllerId());
+                        return true;
+                    }
+                } else {
+                    if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
+                        card.setControllerId(source.getControllerId());
+                        return true;
+                    }
                 }
           }
       }
