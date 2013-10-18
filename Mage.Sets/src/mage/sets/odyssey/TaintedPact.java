@@ -87,27 +87,27 @@ class TaintedPactEffect extends OneShotEffect<TaintedPactEffect>{
     public boolean apply(Game game, Ability source) { 
         Card sourceCard = game.getCard(source.getSourceId()); 
         Player player = game.getPlayer(source.getControllerId());
-            if (player == null || sourceCard == null) {
-                return false;
-            }
-            Set<String> names = new HashSet<String>();
-            while (player.getLibrary().size() > 0) {
-                Card card = player.getLibrary().getFromTop(game);
-                    if (card != null) {
+        if (player == null || sourceCard == null) {
+            return false;
+        }
+        Set<String> names = new HashSet<String>();
+        while (player.getLibrary().size() > 0) {
+            Card card = player.getLibrary().getFromTop(game);
+            if (card != null) {
 
-                        card.moveToExile(null, null, source.getSourceId(), game);
-                        // Checks if there was already exiled a card with the same name
-                        if (names.contains(card.getName())) {
-                            break;
-                        }
-                        names.add(card.getName());
-                        if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("into your hand?").toString(), game)) {
-                             //Adds the current card to hand if it is chosen.
-                            card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
-                            break;
-                        }
-                    }
+                card.moveToExile(null, null, source.getSourceId(), game);
+                // Checks if there was already exiled a card with the same name
+                if (names.contains(card.getName())) {
+                    break;
+                }
+                names.add(card.getName());
+                if (player.chooseUse(outcome, new StringBuilder("Put ").append(card.getName()).append("into your hand?").toString(), game)) {
+                     //Adds the current card to hand if it is chosen.
+                    card.moveToZone(Zone.HAND, source.getSourceId(), game, true);
+                    break;
+                }
             }
-    return true;
+        }
+        return true;
     }
 }
