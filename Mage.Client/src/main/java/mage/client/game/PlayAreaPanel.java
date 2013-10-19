@@ -52,20 +52,26 @@ public class PlayAreaPanel extends javax.swing.JPanel {
     private UUID gameId;
     private boolean smallMode = false;
     private boolean playingMode = true;
+    private GamePanel gamePanel;
 
     public static final int PANEL_HEIGHT = 242;
     public static final int PANEL_HEIGHT_SMALL = 190;
 
     /** Creates new form PlayAreaPanel */
-    public PlayAreaPanel() {
+    public PlayAreaPanel(boolean isPlayer) {
         initComponents();
         setOpaque(false);
         battlefieldPanel.setOpaque(false);
-        addPopupMenu();
+        if (isPlayer) {
+            addPopupMenu();
+        } else {
+            addPopupMenuWatcher();
+        }
     }
 
-    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me, int priorityTime) {
-        this();
+    public PlayAreaPanel(PlayerView player, BigCard bigCard, UUID gameId, boolean me, int priorityTime, boolean isPlayer, GamePanel gamePanel) {
+        this(isPlayer);
+        this.gamePanel = gamePanel;
         init(player, bigCard, gameId, priorityTime);
         update(player);
     }
@@ -75,6 +81,57 @@ public class PlayAreaPanel extends javax.swing.JPanel {
         JMenuItem menuItem;
 
         Pmenu = new JPopupMenu();
+
+        menuItem = new JMenuItem("F2 - Confirm");
+        Pmenu.add(menuItem);
+
+        // Confirm (F2)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (gamePanel.getFeedbackPanel() != null) {
+                    gamePanel.getFeedbackPanel().pressOKYesOrDone();
+                }
+            }
+        });
+
+
+        menuItem = new JMenuItem("F3 - Cancel previous F4/F9 skip action");
+        Pmenu.add(menuItem);
+
+        // Cancel (F3)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().restorePriority(gameId);
+            }
+        });
+
+        Pmenu.addSeparator();
+
+        menuItem = new JMenuItem("F4 - Skip phases until next turn (stop on stack/attack/block)");
+        Pmenu.add(menuItem);
+
+        // Skip to next turn (F4)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().passTurnPriority(gameId);;
+            }
+        });
+
+        menuItem = new JMenuItem("F9 - Skip everything until own next turn (stop on attack/block)");
+        Pmenu.add(menuItem);
+
+        // Skip to next own turn (F9)
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.getSession().passPriorityUntilNextYourTurn(gameId);
+            }
+        });
+
+        Pmenu.addSeparator();
 
         menuItem = new JMenuItem("Concede game");
         Pmenu.add(menuItem);
@@ -89,21 +146,55 @@ public class PlayAreaPanel extends javax.swing.JPanel {
             }
         });
 
-        menuItem = new JMenuItem("Quit match");
+        Pmenu.addSeparator();
+
+        menuItem = new JMenuItem("Concede complete match");
         Pmenu.add(menuItem);
 
         // Quit match
         menuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to quit the match?", "Confirm quit match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to concede the complete match?", "Confirm concede match", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     MageFrame.getSession().quitMatch(gameId);
                 }
             }
         });
 
-        menuItem = new JMenuItem("Cancel");
+//        Pmenu.addSeparator();
+//
+//        menuItem = new JMenuItem("Cancel");
+//        Pmenu.add(menuItem);
+
+        battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent Me) {
+                if (Me.isPopupTrigger() && playingMode) {
+                    Pmenu.show(Me.getComponent(), Me.getX(), Me.getY());
+                }
+            }
+        });
+    }
+
+    private void addPopupMenuWatcher() {
+        final JPopupMenu Pmenu;
+        JMenuItem menuItem;
+
+        Pmenu = new JPopupMenu();
+
+        menuItem = new JMenuItem("Stop watching");
         Pmenu.add(menuItem);
+
+        // Stop watching
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (JOptionPane.showConfirmDialog(PlayAreaPanel.this, "Are you sure you want to stop watching the game?", "Confirm stop watching game", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    gamePanel.getSession().stopWatching(gameId);
+                    gamePanel.hideGame();
+                }
+            }
+        });
 
         battlefieldPanel.getMainPanel().addMouseListener(new MouseAdapter() {
             @Override

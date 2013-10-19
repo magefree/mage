@@ -64,7 +64,6 @@ public class GameView implements Serializable {
     private SimpleCardsView hand;
     private Map<String, SimpleCardsView> opponentHands;
     private CardsView stack = new CardsView();
-    //private List<UUID> stackOrder = new ArrayList<UUID>();
     private List<ExileView> exiles = new ArrayList<ExileView>();
     private List<RevealedView> revealed = new ArrayList<RevealedView>();
     private List<LookedAtView> lookedAt = new ArrayList<LookedAtView>();
@@ -76,10 +75,12 @@ public class GameView implements Serializable {
     private String priorityPlayerName = "";
     private int turn;
     private boolean special = false;
+    private boolean isPlayer;
 
 
-    public GameView(GameState state, Game game) {
-        priorityTime = game.getPriorityTime();
+    public GameView(GameState state, Game game, boolean isPlayer) {
+        this.isPlayer = isPlayer;
+        this.priorityTime = game.getPriorityTime();
         for (Player player: state.getPlayers().values()) {
             players.add(new PlayerView(player, state, game));
         }
@@ -273,6 +274,10 @@ public class GameView implements Serializable {
 
     public UUID getActivePlayerId() {
         return activePlayerId;
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
     }
 
 }

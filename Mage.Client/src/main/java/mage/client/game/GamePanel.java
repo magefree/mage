@@ -62,6 +62,7 @@ import java.util.*;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 
+
 /**
  *
  * @author BetaSteward_at_googlemail.com, nantuko8
@@ -351,7 +352,7 @@ public final class GamePanel extends javax.swing.JPanel {
             }
         }
         PlayerView player = game.getPlayers().get(playerSeat);
-        PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId, true, game.getPriorityTime());
+        PlayAreaPanel sessionPlayer = new PlayAreaPanel(player, bigCard, gameId, true, game.getPriorityTime(), game.isPlayer(), this);
         players.put(player.getPlayerId(), sessionPlayer);
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
@@ -383,7 +384,7 @@ public final class GamePanel extends javax.swing.JPanel {
                 col = numColumns - 1;
             }
             player = game.getPlayers().get(playerNum);
-            PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, false, game.getPriorityTime());
+            PlayAreaPanel playerPanel = new PlayAreaPanel(player, bigCard, gameId, false, game.getPriorityTime(), game.isPlayer(), this);
             players.put(player.getPlayerId(), playerPanel);
             c = new GridBagConstraints();
             c.fill = GridBagConstraints.BOTH;
@@ -1249,6 +1250,14 @@ public final class GamePanel extends javax.swing.JPanel {
         return gameChatPanel.getText();
     }
 
+    public Session getSession() {
+        return session;
+    }
+
+    public FeedbackPanel getFeedbackPanel() {
+        return feedbackPanel;
+    }
+
     private mage.client.components.ability.AbilityPicker abilityPicker;
     private mage.client.cards.BigCard bigCard;
     private javax.swing.JButton btnConcede;
@@ -1296,7 +1305,6 @@ public final class GamePanel extends javax.swing.JPanel {
     private boolean imagePanelState;
 
 }
-
 class ReplayTask extends SwingWorker<Void, Collection<MatchView>> {
 
     private Session session;
