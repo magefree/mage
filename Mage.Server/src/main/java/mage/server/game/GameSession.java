@@ -66,7 +66,7 @@ public class GameSession extends GameWatcher {
     private UserData userData;
 
     public GameSession(Game game, UUID userId, UUID playerId, boolean useTimeout) {
-        super(userId, game);
+        super(userId, game, true);
         this.playerId = playerId;
         this.useTimeout = useTimeout;
     }
@@ -229,7 +229,7 @@ public class GameSession extends GameWatcher {
     public GameView getGameView() {
         Player player = game.getPlayer(playerId);
         player.setUserData(this.userData);
-        GameView gameView = new GameView(game.getState(), game);
+        GameView gameView = new GameView(game.getState(), game, this.isPlayer);
         gameView.setHand(new SimpleCardsView(player.getHand().getCards(game)));
 
         if (player.getPlayersUnderYourControl().size() > 0) {

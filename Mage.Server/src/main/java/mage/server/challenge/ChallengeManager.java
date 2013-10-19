@@ -3,7 +3,6 @@ package mage.server.challenge;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
 import mage.constants.Zone;
 import mage.game.match.Match;
 

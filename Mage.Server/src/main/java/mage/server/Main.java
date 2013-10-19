@@ -167,20 +167,21 @@ public class Main {
         public void handleConnectionException(Throwable throwable, Client client) {
             Session session = SessionManager.getInstance().getSession(client.getSessionId());
             if (session != null) {
-                String sessionName;
+                StringBuilder sessionInfo = new StringBuilder();
                 User user = UserManager.getInstance().getUser(session.getUserId());
                 if (user != null) {
-                    sessionName = user.getName() + " at " + session.getHost();
+                    sessionInfo.append(user.getName());
                 } else {
-                    sessionName = session.getHost();
+                    sessionInfo.append("[user missing] ");
                 }
+                sessionInfo.append(" at ").append(session.getHost()).append(" sessionId: ").append(session.getId());
                 if (throwable instanceof ClientDisconnectedException) {
                     SessionManager.getInstance().disconnect(client.getSessionId(), true);
-                    logger.info("Client disconnected - " + sessionName);
+                    logger.debug("Client disconnected - " + sessionInfo);
                 }
                 else {
                     SessionManager.getInstance().disconnect(client.getSessionId(), false);
-                    logger.info("Connection to client lost - " + sessionName);
+                    logger.info("Connection to client lost - " + sessionInfo);
                 }
             }
         }

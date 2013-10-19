@@ -314,7 +314,11 @@ public class TableController {
             match.updateDeck(playerId, deck);
         }
         else {
-            TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
+            if (tournament != null) {
+                TournamentManager.getInstance().updateDeck(tournament.getId(), playerId, deck);
+            } else {
+                logger.fatal("Tournament == null  table: " + table.getId());
+            }
         }
     }
 
@@ -427,6 +431,8 @@ public class TableController {
     public synchronized void startMatch() {
         if (table.getState() == TableState.STARTING) {
             try {
+                User user = UserManager.getInstance().getUser(userId);
+                logger.info(new StringBuilder("User (table controller) ").append(user.getName()).append(" starts match: ").append(match.getId()));
                 match.startMatch();
                 startGame(null);
             } catch (GameException ex) {
@@ -447,6 +453,7 @@ public class TableController {
                 if (!match.getPlayer(entry.getValue()).hasQuit()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
+                        logger.info(new StringBuilder("User ").append(user.getName()).append(" game started - matchId ").append(match.getId()).append(" userId: ").append(user.getId()));
                         user.gameStarted(match.getGame().getId(), entry.getValue());
                         if (creator == null) {
                             creator = user.getName();
@@ -493,6 +500,7 @@ public class TableController {
                 for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
                     User user = UserManager.getInstance().getUser(entry.getKey());
                     if (user != null) {
+                        logger.info(new StringBuilder("User ").append(user.getName()).append(" tournament started: ").append(tournament.getId()).append(" userId: ").append(user.getId()));
                         user.tournamentStarted(tournament.getId(), entry.getValue());
                     }
                 }
@@ -510,7 +518,13 @@ public class TableController {
         table.initDraft();
         DraftManager.getInstance().createDraftSession(draft, userPlayerMap, table.getId());
         for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
-            UserManager.getInstance().getUser(entry.getKey()).draftStarted(draft.getId(), entry.getValue());
+            User user = UserManager.getInstance().getUser(entry.getKey());
+            if (user != null) {
+                logger.info(new StringBuilder("User ").append(user.getName()).append(" draft started: ").append(match.getId()).append(" userId: ").append(user.getId()));
+                user.draftStarted(draft.getId(), entry.getValue());
+            } else {
+                logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
+            }
         }
     }
 

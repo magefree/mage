@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 import mage.cards.decks.Deck;
-import mage.constants.TableState;
 import mage.game.Table;
 import mage.interfaces.callback.ClientCallback;
 import mage.players.net.UserData;
@@ -60,7 +59,7 @@ public class User {
     }
 
     public enum DisconnectReason {
-        LostConnection, Disconnected, CleaningUp;
+        LostConnection, Disconnected, CleaningUp, ConnectingOtherInstance;
     }
 
     private UUID userId = UUID.randomUUID();
@@ -105,10 +104,10 @@ public class User {
         this.sessionId = sessionId;
         if (sessionId.isEmpty()) {
             userState = UserState.Disconnected;
-            logger.info(new StringBuilder("User ").append(userName).append(" disconnected - userId = ").append(userId.toString()).toString());
+            logger.debug(new StringBuilder("User ").append(userName).append(" disconnected - userId = ").append(userId.toString()).toString());
         } else if (userState == UserState.Created) {
             userState = UserState.Connected;
-            logger.info(new StringBuilder("User ").append(userName).append(" created - userId = ").append(userId.toString()).toString());
+            logger.debug(new StringBuilder("User ").append(userName).append(" created - userId = ").append(userId.toString()).toString());
         } else {
             userState = UserState.Reconnected;
             reconnect();

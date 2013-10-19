@@ -100,12 +100,12 @@ public class UserManager {
         return false;
     }
 
-    public void disconnect(UUID userId) {
+    public void disconnect(UUID userId, User.DisconnectReason reason) {
         if (userId != null) {
-            ChatManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
+            ChatManager.getInstance().removeUser(userId, reason);
             if (users.containsKey(userId)) {
                 User user = users.get(userId);
-                logger.info(new StringBuilder("User ").append(user.getName()).append(" disconnected  id:").append(userId).toString());
+                logger.info(new StringBuilder("User ").append(user.getName()).append(" has lost connection  userId:").append(userId));
                 users.get(userId).setSessionId("");
                 ChatManager.getInstance().broadcast(userId, "has lost connection", MessageColor.BLACK);
             }
@@ -120,12 +120,18 @@ public class UserManager {
     }
 
     public void removeUser(UUID userId, User.DisconnectReason reason) {
-        if (users.containsKey(userId)) {
-            logger.info("Remove user " + users.get(userId).getName() + ": " + userId + " Reason: " + reason.toString());
+        User user = users.get(userId);
+        if (user != null) {
+            logger.info(new StringBuilder("Remove user: ").append(user.getName())
+                    .append(" userId: ").append(userId)
+                    .append(" sessionId: ").append(user.getSessionId())
+                    .append(" Reason: ").append(reason.toString()));
             ChatManager.getInstance().removeUser(userId, reason);
             ChatManager.getInstance().broadcast(userId, new StringBuilder("has disconnected (").append(reason.toString()).append(")").toString(), MessageColor.BLACK);
             users.get(userId).kill(reason);
             users.remove(userId);
+        } else {
+            logger.warn(new StringBuilder("Trying to remove userId: ").append(userId).append(" but user does not exist."));
         }
     }
 
@@ -142,7 +148,8 @@ public class UserManager {
         expired.add(Calendar.MINUTE, -3) ;
         for (User user: users.values()) {
             if (user.isExpired(expired.getTime())) {
-                logger.info(user.getName() + " session expired " + user.getId());
+                logger.info(new StringBuilder(user.getName()).append(" session expired userId: ").append(user.getId())
+                        .append(" sessionId: ").append(user.getSessionId()));
                 user.kill(User.DisconnectReason.LostConnection);
                 users.remove(user.getId());
             }

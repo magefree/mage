@@ -90,12 +90,11 @@ public class Session {
             if (user.getHost().equals(host)) {
                 if (user.getSessionId().isEmpty()) {
                     logger.info("Reconnecting session for " + userName);
-                }
-                else {
+                } else {
                     //throw new MageException("This machine is already connected");
                     //disconnect previous one
                     logger.info("Disconnecting another user instance: " + userName);
-                    UserManager.getInstance().disconnect(user.getId());
+                    UserManager.getInstance().disconnect(user.getId(), User.DisconnectReason.ConnectingOtherInstance);
                 }
             }
             else {
@@ -159,13 +158,13 @@ public class Session {
         return sessionId;
     }
 
-    public void disconnect() {
+    public void userLostConnection() {
         logger.info("session disconnected for user " + userId);
-        UserManager.getInstance().disconnect(userId);
+        UserManager.getInstance().disconnect(userId, User.DisconnectReason.LostConnection);
     }
 
     public void kill() {
-        logger.info("session killed for user " + userId);
+        logger.debug("session removed for user " + userId);
         UserManager.getInstance().removeUser(userId, User.DisconnectReason.Disconnected);
     }
 
@@ -175,7 +174,7 @@ public class Session {
             callbackHandler.handleCallbackOneway(new Callback(call));
         } catch (HandleCallbackException ex) {
             logger.fatal(new StringBuilder("Session of userId ").append(userId).append(" fireCallback error: ").append(ex.getMessage()).toString(), ex);
-            disconnect();
+            userLostConnection();
         }
     }
 

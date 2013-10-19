@@ -52,10 +52,12 @@ public class GameWatcher {
     protected UUID userId;
     protected Game game;
     protected boolean killed = false;
+    protected boolean isPlayer;
 
-    public GameWatcher(UUID userId, Game game) {
+    public GameWatcher(UUID userId, Game game, boolean isPlayer) {
         this.userId = userId;
         this.game = game;
+        this.isPlayer = isPlayer;
     }
 
     public boolean init() {
@@ -124,11 +126,15 @@ public class GameWatcher {
     }
 
     public GameView getGameView() {
-        return new GameView(game.getState(), game);
+        return new GameView(game.getState(), game, this.isPlayer);
     }
     
     public GameEndView getGameEndView(UUID playerId, Match match) {
         return new GameEndView(game.getState(), game, playerId, match);
+    }
+
+    public boolean isPlayer() {
+        return isPlayer;
     }
 
 }

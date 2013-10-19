@@ -314,7 +314,7 @@ public class GameController implements GameCallback {
         }
         User user = UserManager.getInstance().getUser(userId);
         if (user != null) {
-            GameWatcher gameWatcher = new GameWatcher(userId, game);
+            GameWatcher gameWatcher = new GameWatcher(userId, game, false);
             watchers.put(userId, gameWatcher);
             gameWatcher.init();
             ChatManager.getInstance().broadcast(chatId, user.getName(), " has started watching", MessageColor.BLUE);
