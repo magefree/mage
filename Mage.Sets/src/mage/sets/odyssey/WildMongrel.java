@@ -27,24 +27,28 @@
  */
 package mage.sets.odyssey;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.DiscardTargetCost;
 import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.SetCardColorTargetEffect;
 import mage.cards.CardImpl;
 import mage.choices.ChoiceColor;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
 import mage.target.targetpointer.FixedTarget;
-
-import java.util.UUID;
 
 /**
  * @author magenoxx_at_gmail.com
@@ -61,7 +65,9 @@ public class WildMongrel extends CardImpl<WildMongrel> {
         this.toughness = new MageInt(2);
 
         // Discard a card: Wild Mongrel gets +1/+1 and becomes the color of your choice until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(1, 1, Duration.EndOfTurn), new DiscardTargetCost(new TargetCardInHand()));
+        Effect effect = new BoostSourceEffect(1, 1, Duration.EndOfTurn);
+        effect.setText("{this} gets +1/+1");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardTargetCost(new TargetCardInHand()));
         ability.addEffect(new ChangeColorEffect());
         this.addAbility(ability);
     }
@@ -80,7 +86,7 @@ class ChangeColorEffect extends OneShotEffect<ChangeColorEffect> {
 
     public ChangeColorEffect() {
         super(Outcome.Neutral);
-        staticText = "becomes the color of your choice until end of turn";
+        staticText = "and becomes the color of your choice until end of turn";
     }
 
     public ChangeColorEffect(final ChangeColorEffect effect) {

@@ -70,7 +70,7 @@ class BlazingSalvoEffect extends OneShotEffect<BlazingSalvoEffect> {
     
     public BlazingSalvoEffect() {
         super(Outcome.Damage);
-        this.staticText = "Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to him or her.";
+        this.staticText = "Blazing Salvo deals 3 damage to target creature unless that creature's controller has Blazing Salvo deal 5 damage to him or her";
     }
     
     public BlazingSalvoEffect(final BlazingSalvoEffect effect){

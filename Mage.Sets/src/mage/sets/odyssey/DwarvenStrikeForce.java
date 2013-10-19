@@ -59,8 +59,10 @@ public class DwarvenStrikeForce extends CardImpl<DwarvenStrikeForce> {
         this.toughness = new MageInt(3);
 
         // Discard a card at random: Dwarven Strike Force gains first strike and haste until end of turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new GainAbilitySourceEffect(HasteAbility.getInstance(), Duration.EndOfTurn), new DiscardCardCost(true));
-        Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(),Duration.EndOfTurn);
+        Effect effect = new GainAbilitySourceEffect(FirstStrikeAbility.getInstance(), Duration.EndOfTurn);
+        effect.setText("{this} gains first strike");
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new DiscardCardCost(true));
+        effect = new GainAbilitySourceEffect(HasteAbility.getInstance(),Duration.EndOfTurn);
         effect.setText("and haste until end of turn");
         ability.addEffect(effect);
         this.addAbility(ability);

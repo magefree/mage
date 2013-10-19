@@ -70,7 +70,8 @@ public class CausticTar extends CardImpl<CausticTar> {
         // Enchanted land has "{tap}: Target player loses 3 life."
         Ability tarAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new LoseLifeTargetEffect(3), new TapSourceCost());
         tarAbility.addTarget(new TargetPlayer(true));
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(tarAbility, AttachmentType.AURA, Duration.WhileOnBattlefield)));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new GainAbilityAttachedEffect(tarAbility, AttachmentType.AURA, 
+                Duration.WhileOnBattlefield,"Enchanted land has \"{t}: Target player loses 3 life.\"")));
         
     }
 

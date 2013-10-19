@@ -65,7 +65,7 @@ public class CabalPatriarch extends CardImpl<CabalPatriarch> {
 
        // {2}{B}, Sacrifice a creature: Target creature gets -2/-2 until end of turn.
       Ability ability1 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostTargetEffect(-2, -2, Duration.EndOfTurn), new ManaCostsImpl("{2}{B}"));
-      TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledCreaturePermanent(""));
+      TargetControlledPermanent target = new TargetControlledPermanent(new FilterControlledCreaturePermanent("a creature"));
       target.setRequired(true);
       ability1.addCost(new SacrificeTargetCost(target));
       ability1.addTarget(new TargetCreaturePermanent(true));

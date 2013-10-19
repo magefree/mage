@@ -47,7 +47,7 @@ public class FilterCreatureOrPlayer extends FilterImpl<Object> implements Filter
     protected FilterPlayer playerFilter;
 
     public FilterCreatureOrPlayer() {
-        this("player or creature");
+        this("creature or player");
     }
 
     public FilterCreatureOrPlayer(String name) {

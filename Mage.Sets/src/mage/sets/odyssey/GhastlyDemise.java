@@ -30,13 +30,11 @@ package mage.sets.odyssey;
 import java.util.UUID;
 import mage.ObjectColor;
 import mage.abilities.Ability;
-import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.filter.FilterCard;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.ColorPredicate;
@@ -51,20 +49,19 @@ import mage.target.targetpointer.FirstTargetPointer;
  * @author cbt33
  */
 public class GhastlyDemise extends CardImpl<GhastlyDemise> {
-    
-        private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("creature if its tougness is less than the number of cards in your graveyard");
 
-        
-    static{
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature if its tougness is less than the number of cards in your graveyard");
+    static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
-        }
-    
+    }
+
     public GhastlyDemise(UUID ownerId) {
         super(ownerId, 139, "Ghastly Demise", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{B}");
         this.expansionSetCode = "ODY";
 
         this.color.setBlack(true);
 
+        // Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(filter));
         this.getSpellAbility().addEffect(new GhastlyDemiseEffect(false));
     }
@@ -80,17 +77,12 @@ public class GhastlyDemise extends CardImpl<GhastlyDemise> {
 }
 
 class GhastlyDemiseEffect extends OneShotEffect<GhastlyDemiseEffect> {
-    
-protected boolean noRegen;
 
-    public GhastlyDemiseEffect(String ruleText) {
-        this(false);
-        ruleText = "Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard.";
-        staticText = ruleText;
-    }
+    protected boolean noRegen;
 
     public GhastlyDemiseEffect(boolean noRegen) {
         super(Outcome.DestroyPermanent);
+        staticText = "Destroy target nonblack creature if its toughness is less than or equal to the number of cards in your graveyard";
         this.noRegen = noRegen;
     }
 
@@ -111,30 +103,21 @@ protected boolean noRegen;
             for (Target target : source.getTargets()) {
                 for (UUID permanentId : target.getTargets()) {
                     Permanent permanent = game.getPermanent(permanentId);
-                    if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().count(new FilterCard(), game)) {
-                        permanent.destroy(source.getId(), game, noRegen);
+                    if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().size()) {
+                        permanent.destroy(source.getSourceId(), game, noRegen);
                         affectedTargets++;
                     }
                 }
             }
-        }
-        else if (targetPointer.getTargets(game, source).size() > 0) {
+        } else if (targetPointer.getTargets(game, source).size() > 0) {
             for (UUID permanentId : targetPointer.getTargets(game, source)) {
                 Permanent permanent = game.getPermanent(permanentId);
-                if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().count(new FilterCard(), game)) {
-                    permanent.destroy(source.getId(), game, noRegen);
+                if (permanent != null && permanent.getToughness().getValue() <= game.getPlayer(source.getControllerId()).getGraveyard().size()) {
+                    permanent.destroy(source.getSourceId(), game, noRegen);
                     affectedTargets++;
                 }
             }
         }
         return affectedTargets > 0;
     }
-
-        @Override
-    public String getText(Mode mode) {
-        return staticText;
-}
-        
-        
-        
 }

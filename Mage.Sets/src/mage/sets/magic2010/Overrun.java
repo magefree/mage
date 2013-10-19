@@ -29,6 +29,7 @@
 package mage.sets.magic2010;
 
 import java.util.UUID;
+import mage.abilities.effects.Effect;
 import mage.constants.CardType;
 import mage.constants.Duration;
 import mage.constants.Rarity;
@@ -49,8 +50,13 @@ public class Overrun extends CardImpl<Overrun> {
         this.expansionSetCode = "M10";
         this.color.setGreen(true);
 
-        this.getSpellAbility().addEffect(new BoostControlledEffect(3, 3, Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent()));
+        // Creatures you control get +3/+3 and gain trample until end of turn.
+        Effect effect = new BoostControlledEffect(3, 3, Duration.EndOfTurn);
+        effect.setText("Creatures you control get +3/+3");
+        this.getSpellAbility().addEffect(effect);
+        effect = new GainAbilityControlledEffect(TrampleAbility.getInstance(), Duration.EndOfTurn, new FilterCreaturePermanent());
+        effect.setText("and gain trample until end of turn");
+        this.getSpellAbility().addEffect(effect);
     }
 
     public Overrun(final Overrun card) {

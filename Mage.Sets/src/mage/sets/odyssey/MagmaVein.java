@@ -38,8 +38,8 @@ import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.FilterPermanent;
 import mage.filter.common.FilterControlledPermanent;
+import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.AbilityPredicate;
 import mage.filter.predicate.mageobject.CardTypePredicate;
@@ -51,8 +51,8 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class MagmaVein extends CardImpl<MagmaVein> {
 
-    private static final FilterPermanent filter1 = new FilterPermanent("creature without flying");
-    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("land");
+    private static final FilterCreaturePermanent filter1 = new FilterCreaturePermanent("creature without flying");
+    private static final FilterControlledPermanent filter2 = new FilterControlledPermanent("a land");
     
     static {
         filter1.add(Predicates.not(new AbilityPredicate(FlyingAbility.class)));

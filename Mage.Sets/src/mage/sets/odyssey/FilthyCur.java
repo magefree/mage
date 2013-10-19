@@ -57,7 +57,7 @@ public class FilthyCur extends CardImpl<FilthyCur> {
 
         // Whenever Filthy Cur is dealt damage, you lose that much life.
         this.addAbility(new DealtDamageLoseLifeTriggeredAbility(Zone.BATTLEFIELD, new LoseLifeSourceEffect(0), false));
-        
+
     }
 
     public FilthyCur(final FilthyCur card) {
@@ -72,8 +72,7 @@ public class FilthyCur extends CardImpl<FilthyCur> {
 
 class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDamageLoseLifeTriggeredAbility> {
 
-    
-       public DealtDamageLoseLifeTriggeredAbility(Zone zone, Effect effect, boolean optional) {
+    public DealtDamageLoseLifeTriggeredAbility(Zone zone, Effect effect, boolean optional) {
         super(zone, effect, optional);
     }
 
@@ -92,7 +91,6 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
             if (event.getTargetId().equals(this.sourceId)) {
                 this.getEffects().clear();
                 this.addEffect(new LoseLifeControllerEffect(event.getAmount()));
-                this.getControllerId();
                 return true;
             }
         }
@@ -101,6 +99,6 @@ class DealtDamageLoseLifeTriggeredAbility extends TriggeredAbilityImpl<DealtDama
 
     @Override
     public String getRule() {
-        return "Whenever {this} is dealt damage, you lose that much life";
+        return "Whenever {this} is dealt damage, you lose that much life.";
     }
 }

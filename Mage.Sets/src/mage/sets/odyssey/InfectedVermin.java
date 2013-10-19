@@ -61,7 +61,7 @@ public class InfectedVermin extends CardImpl<InfectedVermin> {
                 new DamageEverythingEffect(3),
                 new ManaCostsImpl("{3}{B}"),
                 new CardsInControllerGraveCondition(7),
-                "<br/><br/><i>Threshold</i> - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard."));
+                "<i>Threshold</i> - {3}{B}: Infected Vermin deals 3 damage to each creature and each player. Activate this ability only if seven or more cards are in your graveyard."));
     }
 
     public InfectedVermin(final InfectedVermin card) {

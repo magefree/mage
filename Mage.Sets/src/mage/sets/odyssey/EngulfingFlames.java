@@ -80,7 +80,7 @@ class EngulfingFlamesEffect extends ReplacementEffectImpl<EngulfingFlamesEffect>
 
     public EngulfingFlamesEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "A creature dealt damage this way can't be regenerated this turn";
+        staticText = "It can't be regenerated this turn";
     }
 
     public EngulfingFlamesEffect(final EngulfingFlamesEffect effect) {

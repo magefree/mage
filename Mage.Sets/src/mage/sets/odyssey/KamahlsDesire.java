@@ -72,7 +72,7 @@ public class KamahlsDesire extends CardImpl<KamahlsDesire> {
         // Threshold - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard.
         ability.addEffect(new ConditionalContinousEffect(new BoostEnchantedEffect(3, 0, Duration.WhileOnBattlefield), 
                                                          new CardsInControllerGraveCondition(7),  
-                                                         "<br/><br/><i>Threshold</i> - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard."));
+                                                         "<i>Threshold</i> - Enchanted creature gets +3/+0 as long as seven or more cards are in your graveyard"));
         this.addAbility(ability);
     }
 

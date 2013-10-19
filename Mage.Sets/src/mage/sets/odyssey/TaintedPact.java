@@ -71,7 +71,7 @@ class TaintedPactEffect extends OneShotEffect<TaintedPactEffect>{
     
         public TaintedPactEffect() {
         super(Outcome.DrawCard);
-        this.staticText = "Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first.";
+        this.staticText = "Exile the top card of your library. You may put that card into your hand unless it has the same name as another card exiled this way. Repeat this process until you put a card into your hand or you exile two cards with the same name, whichever comes first";
     }
 
     public TaintedPactEffect(final TaintedPactEffect effect) {

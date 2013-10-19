@@ -38,6 +38,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
+import mage.game.permanent.Permanent;
 import mage.target.targetpointer.FixedTarget;
 
 /**
@@ -57,7 +58,7 @@ public class EssenceSliver extends CardImpl<EssenceSliver> {
 
         // Whenever a Sliver deals damage, its controller gains that much life.
         this.addAbility(new DealsDamageTriggeredAbility(new GainLifeTargetEffect(0), false, true));
-        
+
     }
 
     public EssenceSliver(final EssenceSliver card) {
@@ -71,8 +72,8 @@ public class EssenceSliver extends CardImpl<EssenceSliver> {
 }
 
 class DealsDamageTriggeredAbility extends TriggeredAbilityImpl<DealsDamageTriggeredAbility> {
-    
-     private boolean setTargetPointer;
+
+    private boolean setTargetPointer;
 
     public DealsDamageTriggeredAbility(Effect effect, boolean optional, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
@@ -80,37 +81,37 @@ class DealsDamageTriggeredAbility extends TriggeredAbilityImpl<DealsDamageTrigge
     }
 
     public DealsDamageTriggeredAbility(final DealsDamageTriggeredAbility ability) {
-            super(ability);
-            this.setTargetPointer = ability.setTargetPointer;
+        super(ability);
+        this.setTargetPointer = ability.setTargetPointer;
     }
 
     @Override
     public DealsDamageTriggeredAbility copy() {
-            return new DealsDamageTriggeredAbility(this);
+        return new DealsDamageTriggeredAbility(this);
     }
 
     @Override
     public boolean checkTrigger(GameEvent event, Game game) {
-            if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE ||
-                    event.getType() == GameEvent.EventType.DAMAGED_PLAYER ||
-                    event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
-                    if (game.getPermanent(event.getSourceId()).hasSubtype("Sliver")) {
-                         if (setTargetPointer) {
-                                for (Effect effect : this.getEffects()) {
-                                        effect.setTargetPointer(new FixedTarget(game.getControllerId(event.getSourceId())));
-                                        effect.setValue("damage", event.getAmount());
-                                }
-                            }
-                            return true;
+        if (event.getType() == GameEvent.EventType.DAMAGED_CREATURE
+                || event.getType() == GameEvent.EventType.DAMAGED_PLAYER
+                || event.getType() == GameEvent.EventType.DAMAGED_PLANESWALKER) {
+            Permanent creature = game.getPermanent(event.getSourceId());
+            if (creature != null && creature.hasSubtype("Sliver")) {
+                if (setTargetPointer) {
+                    for (Effect effect : this.getEffects()) {
+                        effect.setTargetPointer(new FixedTarget(game.getControllerId(event.getSourceId())));
+                        effect.setValue("damage", event.getAmount());
                     }
-
+                }
+                return true;
             }
-            return false;
+
+        }
+        return false;
     }
 
     @Override
     public String getRule() {
-            return "Whenever a Sliver deals damage, its controller" + super.getRule();
+        return "Whenever a Sliver deals damage, its controller" + super.getRule();
     }
-
 }

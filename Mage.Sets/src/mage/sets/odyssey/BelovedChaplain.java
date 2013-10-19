@@ -42,7 +42,7 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
  */
 public class BelovedChaplain extends CardImpl<BelovedChaplain> {
     
-    public static final FilterCard filter = new FilterCard("Creature");
+    public static final FilterCard filter = new FilterCard("creature");
             
             static {
                 filter.add(new CardTypePredicate(CardType.CREATURE));

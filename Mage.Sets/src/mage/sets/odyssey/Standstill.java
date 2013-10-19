@@ -28,14 +28,13 @@
 package mage.sets.odyssey;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
@@ -69,9 +68,7 @@ public class Standstill extends CardImpl<Standstill> {
     }
 }
 
-
 class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredAbility> {
-
 
     public SpellCastTriggeredAbility() {
         super(Zone.BATTLEFIELD, new StandstillEffect(), false);
@@ -92,7 +89,7 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredA
 
     @Override
     public String getRule() {
-        return "When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards";
+        return "When a player casts a spell, sacrifice Standstill. If you do, each of that player's opponents draws three cards.";
     }
 
     @Override
@@ -101,12 +98,11 @@ class SpellCastTriggeredAbility extends TriggeredAbilityImpl<SpellCastTriggeredA
     }
 }
 
-
 class StandstillEffect extends OneShotEffect<StandstillEffect> {
 
     public StandstillEffect() {
         super(Outcome.Sacrifice);
-        staticText = "sacrifice {this}";
+        staticText = "sacrifice {this}. If you do, each of that player's opponents draws three cards";
     }
 
     public StandstillEffect(final StandstillEffect effect) {
@@ -122,18 +118,16 @@ class StandstillEffect extends OneShotEffect<StandstillEffect> {
     public boolean apply(Game game, Ability source) {
         Permanent permanent = game.getPermanent(source.getSourceId());
         if (permanent != null) {
-            if(permanent.sacrifice(source.getSourceId(), game)){
-                for(UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))){
+            if (permanent.sacrifice(source.getSourceId(), game)) {
+                for (UUID uuid : game.getOpponents(this.getTargetPointer().getFirst(game, source))) {
                     Player player = game.getPlayer(uuid);
-                    if(player != null){
+                    if (player != null) {
                         player.drawCards(3, game);
                     }
                 }
                 return true;
             }
-            return false;
         }
         return false;
     }
-
 }

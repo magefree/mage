@@ -33,7 +33,8 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
+import mage.abilities.effects.common.AddContinuousEffectToGame;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -41,7 +42,6 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.mageobject.ColorPredicate;
-import mage.abilities.effects.common.AddContinuousEffectToGame;
 
 /**
  *
@@ -49,8 +49,7 @@ import mage.abilities.effects.common.AddContinuousEffectToGame;
  */
 public class DivineSacrament extends CardImpl<DivineSacrament> {
     
-     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
-
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("White creatures");
     static {
         filter.add(new ColorPredicate(ObjectColor.WHITE));
     }
@@ -62,13 +61,13 @@ public class DivineSacrament extends CardImpl<DivineSacrament> {
         this.color.setWhite(true);
 
         // White creatures get +1/+1.
-        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false));
+        this.addAbility(ability);
         // Threshold - White creatures get an additional +1/+1 as long as seven or more cards are in your graveyard.
-        ability.addEffect(
-                new ConditionalOneShotEffect(
-                    new AddContinuousEffectToGame(new BoostControlledEffect(1, 1, Duration.WhileOnBattlefield, filter, false)),
+        ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(
+                    new AddContinuousEffectToGame(new BoostAllEffect(1, 1, Duration.WhileOnBattlefield, filter, false)),
                     new CardsInControllerGraveCondition(7),
-                    "<br/><br/><i>Threshold</i> - If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
+                    "<i>Threshold</i> - If seven or more cards are in your graveyard, white creatures get an additional +1/+1."
                 ));
         this.addAbility(ability);
     }

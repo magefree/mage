@@ -54,8 +54,7 @@ import mage.target.common.TargetCreaturePermanent;
  */
 public class ZombieAssassin extends CardImpl<ZombieAssassin> {
     
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");
-    
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("nonblack creature");    
     static {
         filter.add(Predicates.not(new ColorPredicate(ObjectColor.BLACK)));
     }
@@ -76,7 +75,8 @@ public class ZombieAssassin extends CardImpl<ZombieAssassin> {
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(true), new TapSourceCost());
         Target target = new TargetCreaturePermanent(filter);
         target.setRequired(true);
-        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,new FilterCard("two cards from your graveyard"))));
+        ability.addTarget(target);
+        ability.addCost(new ExileFromGraveCost(new TargetCardInYourGraveyard(2,2,new FilterCard("cards from your graveyard"))));
         ability.addCost(new ExileSourceCost());
         this.addAbility(ability);
     }

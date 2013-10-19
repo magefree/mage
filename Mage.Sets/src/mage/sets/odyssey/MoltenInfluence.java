@@ -48,15 +48,13 @@ import mage.target.TargetSpell;
  */
 public class MoltenInfluence extends CardImpl<MoltenInfluence> {
 
-        private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
-
+    private static final FilterSpell filter = new FilterSpell("instant or sorcery spell");
     static {
         Predicates.or(
-                new CardTypePredicate(CardType.INSTANT), 
+                new CardTypePredicate(CardType.INSTANT),
                 new CardTypePredicate(CardType.SORCERY));
     }
-    
-    
+
     public MoltenInfluence(UUID ownerId) {
         super(ownerId, 207, "Molten Influence", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{1}{R}");
         this.expansionSetCode = "ODY";
@@ -66,7 +64,7 @@ public class MoltenInfluence extends CardImpl<MoltenInfluence> {
         // Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.
         this.getSpellAbility().addTarget(new TargetSpell(filter));
         this.getSpellAbility().addEffect(new MoltenInfluenceEffect());
-        
+
     }
 
     public MoltenInfluence(final MoltenInfluence card) {
@@ -79,36 +77,34 @@ public class MoltenInfluence extends CardImpl<MoltenInfluence> {
     }
 }
 
-
 class MoltenInfluenceEffect extends OneShotEffect<MoltenInfluenceEffect> {
-    
+
     public MoltenInfluenceEffect() {
         super(Outcome.Detriment);
-        this.staticText = "Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her.";
+        this.staticText = "Counter target instant or sorcery spell unless its controller has Molten Influence deal 4 damage to him or her";
     }
-    
-    public MoltenInfluenceEffect(final MoltenInfluenceEffect effect){
+
+    public MoltenInfluenceEffect(final MoltenInfluenceEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public MoltenInfluenceEffect copy() {
         return new MoltenInfluenceEffect(this);
     }
 
-@Override
-public boolean apply(Game game, Ability source) {
-    Spell spell = game.getStack().getSpell(source.getFirstTarget());
-    if (spell!=null) {
-    Player player = game.getPlayer(spell.getOwnerId());
-    String message = "Have Molten Influence do 4 damage to you?";
-    if (player.chooseUse(Outcome.Damage, message, game)){
-        player.damage(4, source.getSourceId(), game, false, true);
-    } else {
-        spell.counter(source.getId(), game);
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Spell spell = game.getStack().getSpell(source.getFirstTarget());
+        if (spell != null) {
+            Player player = game.getPlayer(spell.getControllerId());
+            String message = "Have Molten Influence do 4 damage to you?";
+            if (player.chooseUse(Outcome.Damage, message, game)) {
+                player.damage(4, source.getSourceId(), game, false, true);
+            } else {
+                spell.counter(source.getSourceId(), game);
+            }
+        }
+        return false;
     }
-    }
-    return false;
-}
-
 }

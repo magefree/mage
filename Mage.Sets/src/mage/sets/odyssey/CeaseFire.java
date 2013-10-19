@@ -83,7 +83,7 @@ class CeaseFireEffect extends ReplacementEffectImpl<CeaseFireEffect> {
 
     public CeaseFireEffect() {
         super(Duration.EndOfTurn, Outcome.Detriment);
-        staticText = "Target player can't cast creature spells.";
+        staticText = "Target player can't cast creature spells";
     }
 
     public CeaseFireEffect(final CeaseFireEffect effect) {

@@ -57,7 +57,7 @@ public class Tombfire extends CardImpl<Tombfire> {
         // Target player exiles all cards with flashback from his or her graveyard.
         this.getSpellAbility().addTarget(new TargetPlayer(true));
         this.getSpellAbility().addEffect(new TombfireEffect());
-        
+
     }
 
     public Tombfire(final Tombfire card) {
@@ -71,39 +71,37 @@ public class Tombfire extends CardImpl<Tombfire> {
 }
 
 class TombfireEffect extends OneShotEffect<TombfireEffect> {
-    
-private static final FilterCard filter = new FilterCard("flashback");
-    
-    static{
+
+    private static final FilterCard filter = new FilterCard("cards with flashback");
+
+    static {
         filter.add(new AbilityPredicate(FlashbackAbility.class));
     }
-    
+
     public TombfireEffect() {
         super(Outcome.Exile);
-        staticText = "Target player exiles all cards with flashback from his or her graveyard.";
+        staticText = "Target player exiles all cards with flashback from his or her graveyard";
     }
 
     public TombfireEffect(final TombfireEffect effect) {
         super(effect);
     }
-    
+
     @Override
     public boolean apply(Game game, Ability source) {
         Player targetPlayer = game.getPlayer(targetPointer.getFirst(game, source));
         if (targetPlayer != null) {
-            for (Card card: targetPlayer.getGraveyard().getCards(filter, game)) {
-            card.moveToExile(null, "", source.getSourceId(), game);
+            for (Card card : targetPlayer.getGraveyard().getCards(filter, game)) {
+                card.moveToExile(null, "", source.getSourceId(), game);
             }
             return true;
-        } else {
-            return false;
-        }
+        } 
+        return false;
+
     }
-    
+
     @Override
     public TombfireEffect copy() {
         return new TombfireEffect(this);
     }
-
 }
-    

@@ -110,8 +110,6 @@ class BridgeFromBelowAbility extends TriggeredAbilityImpl<BridgeFromBelowAbility
     public boolean checkTrigger(GameEvent event, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE) {
             ZoneChangeEvent zEvent = (ZoneChangeEvent) event;
-
-
             if (zEvent.getFromZone() == Zone.BATTLEFIELD && zEvent.getToZone() == Zone.GRAVEYARD) {
                 Permanent permanent = (Permanent) game.getLastKnownInformation(event.getTargetId(), Zone.BATTLEFIELD);
                 if (permanent != null && filter.match(permanent, sourceId, controllerId, game)) {

@@ -32,11 +32,14 @@ import mage.MageInt;
 import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.DiesAndDealtDamageThisTurnTriggeredAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.condition.common.CardsInControllerGraveCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.decorator.ConditionalActivatedAbility;
 import mage.abilities.decorator.ConditionalContinousEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.continious.GainAbilitySourceEffect;
 import mage.abilities.effects.common.continious.SetCardColorSourceEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.FlyingAbility;
@@ -55,12 +58,11 @@ import mage.target.common.TargetCreaturePermanent;
  * @author cbt33, Nantuko (Sengir Vampire)
  */
 public class RepentantVampire extends CardImpl<RepentantVampire> {
-    
+
     private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("black creature");
-            
-            static {
-                filter.add(new ColorPredicate(ObjectColor.BLACK));
-            }
+    static {
+        filter.add(new ColorPredicate(ObjectColor.BLACK));
+    }
 
     public RepentantVampire(UUID ownerId) {
         super(ownerId, 157, "Repentant Vampire", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{B}{B}");
@@ -74,16 +76,21 @@ public class RepentantVampire extends CardImpl<RepentantVampire> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever a creature dealt damage by Repentant Vampire this turn dies, put a +1/+1 counter on Repentant Vampire.
-         this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
+        this.addAbility(new DiesAndDealtDamageThisTurnTriggeredAbility(new AddCountersSourceEffect(CounterType.P1P1.createInstance()), false));
         // Threshold - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has "{tap}: Destroy target black creature."
-         Ability ability = new ConditionalActivatedAbility(Zone.BATTLEFIELD, 
-                                                            new DestroyTargetEffect(), 
-                                                            new TapSourceCost(), 
-                                                            new CardsInControllerGraveCondition(7), 
-                                                            "<br/><br/><i>Threshold</i> - As long as seven or more cards are in your graveyard, Repentant Vampire is white and has \"{t}: Destroy target black creature.");
-         ability.addTarget(new TargetCreaturePermanent(filter));
-         ability.addEffect(new ConditionalContinousEffect(new SetCardColorSourceEffect(ObjectColor.WHITE, Duration.EndOfGame), new CardsInControllerGraveCondition(7), ""));
-         this.addAbility(ability);
+        Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(
+                new SetCardColorSourceEffect(ObjectColor.WHITE, Duration.WhileOnBattlefield),
+                new CardsInControllerGraveCondition(7),
+                "<i>Threshold</i> - As long as seven or more cards are in your graveyard, {this} is white",
+                false));
+        Ability gainedAbility = new SimpleActivatedAbility(Zone.BATTLEFIELD, new DestroyTargetEffect(), new TapSourceCost());
+        gainedAbility.addTarget(new TargetCreaturePermanent(filter));
+        ability.addEffect(new ConditionalContinousEffect(
+                new GainAbilitySourceEffect(gainedAbility, Duration.WhileOnBattlefield),
+                new CardsInControllerGraveCondition(7),
+                "and has \"{t}: Destroy target black creature.\"",
+                false));
+        this.addAbility(ability);
     }
 
     public RepentantVampire(final RepentantVampire card) {
