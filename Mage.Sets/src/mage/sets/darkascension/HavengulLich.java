@@ -28,13 +28,6 @@
 package mage.sets.darkascension;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.AsThoughEffectType;
-import mage.constants.Duration;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -46,8 +39,14 @@ import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
+import mage.constants.Duration;
 import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.common.FilterCreatureCard;
 import mage.game.Game;
@@ -116,14 +115,16 @@ class HavengulLichPlayEffect extends AsThoughEffectImpl<HavengulLichPlayEffect> 
 
     @Override
     public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null && game.getState().getZone(card.getId()) == Zone.GRAVEYARD) {
-            if (targetPointer.getFirst(game, source).equals(card.getId()))
-                return true;
+        if (targetPointer.getFirst(game, source).equals(sourceId)) {
+            if (game.getState().getZone(sourceId) == Zone.GRAVEYARD) {
+                Card card = game.getCard(sourceId);
+                if (card != null && card.getSpellAbility() != null && card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
+                    return true;
+                }
+            }
         }
         return false;
     }
-
 }
 
 //create delayed triggered ability to watch for card being played
@@ -135,6 +136,7 @@ class HavengulLichPlayedEffect extends OneShotEffect<HavengulLichPlayedEffect> {
 
     public HavengulLichPlayedEffect(final HavengulLichPlayedEffect effect) {
         super(effect);
+        staticText = "When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn";
     }
 
     @Override
@@ -179,6 +181,11 @@ class HavengulLichDelayedTriggeredAbility extends DelayedTriggeredAbility<Haveng
     @Override
     public HavengulLichDelayedTriggeredAbility copy() {
         return new HavengulLichDelayedTriggeredAbility(this);
+    }
+
+    @Override
+    public String getRule() {
+        return "When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.";
     }
 }
 
