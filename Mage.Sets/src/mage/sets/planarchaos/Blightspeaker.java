@@ -28,10 +28,6 @@
 package mage.sets.planarchaos;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -40,8 +36,11 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.LoseLifeTargetEffect;
 import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.filter.Filter;
-import mage.filter.common.FilterCreatureCard;
+import mage.filter.FilterCard;
 import mage.filter.predicate.mageobject.ConvertedManaCostPredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.target.TargetPlayer;
@@ -53,7 +52,7 @@ import mage.target.common.TargetCardInLibrary;
  */
 public class Blightspeaker extends CardImpl<Blightspeaker> {
 
-    private static final FilterCreatureCard filter = new FilterCreatureCard("Rebel permanent card with converted mana cost 3 or less");
+    private static final FilterCard filter = new FilterCard("Rebel permanent card with converted mana cost 3 or less");
     static {
         filter.add(new SubtypePredicate("Rebel"));
         filter.add(new ConvertedManaCostPredicate(Filter.ComparisonType.LessThan, 4));
