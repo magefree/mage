@@ -216,6 +216,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                     return true;
                 }
             }
+            return false;
         }
         if (target instanceof TargetCardInHand) {
             List<Card> cards = new ArrayList<Card>();
@@ -261,6 +262,7 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
                 return false;
             }
         }
+
         if (target instanceof TargetPermanentOrPlayer) {
             List<Permanent> targets;
             TargetPermanentOrPlayer t = ((TargetPermanentOrPlayer) target);

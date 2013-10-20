@@ -82,11 +82,10 @@ public class FaerieImpostor extends CardImpl<FaerieImpostor> {
 
 class FaerieImpostorEffect extends OneShotEffect<FaerieImpostorEffect> {
 
-    private static final FilterControlledCreaturePermanent filter;
+    private static final FilterControlledCreaturePermanent filter = new FilterControlledCreaturePermanent("another creature you control");
     private static final String effectText = "sacrifice it unless you return another creature you control to its owner's hand";
 
     static {
-        filter = new FilterControlledCreaturePermanent("another creature you control");
         filter.add(new AnotherPredicate());
     }
 
@@ -111,7 +110,7 @@ class FaerieImpostorEffect extends OneShotEffect<FaerieImpostorEffect> {
 
             if ( permanent != null ) {
                 targetChosen = true;
-                permanent.moveToZone(Zone.HAND, this.getId(), game, false);
+                permanent.moveToZone(Zone.HAND, source.getSourceId(), game, false);
             }
         }
 
@@ -128,4 +127,3 @@ class FaerieImpostorEffect extends OneShotEffect<FaerieImpostorEffect> {
     }
 
 }
-
