@@ -157,8 +157,6 @@ public class TableController {
         }
         Player player = createPlayer(name, seat.getPlayerType(), skill);
         if (player != null) {
-            tournament.addPlayer(player, seat.getPlayerType());
-            table.joinTable(player, seat);
             User user = UserManager.getInstance().getUser(userId);
             if (user == null) {
                 logger.fatal(new StringBuilder("couldn't get user ").append(name).append(" for join tornament userId = ").append(userId).toString());
@@ -168,6 +166,8 @@ public class TableController {
                 user.showUserMessage("Join Table", new StringBuilder("A ").append(seat.getPlayerType()).append(" player can't join this table.").toString());
                 return false;
             }
+            tournament.addPlayer(player, seat.getPlayerType());
+            table.joinTable(player, seat);
             user.addTable(player.getId(), table);
             logger.debug("player joined " + player.getId());
             //only inform human players and add them to sessionPlayerMap
@@ -371,7 +371,7 @@ public class TableController {
             if (table.getState() == TableState.WAITING || table.getState() == TableState.STARTING) {
                 table.leaveNotStartedTable(playerId);
                 if (table.isTournament()) {
-                    TournamentManager.getInstance().quit(tournament.getId(), userId);
+                    tournament.removePlayer(playerId);
                 } else {
                     match.leave(playerId);
                 }
@@ -431,8 +431,14 @@ public class TableController {
     public synchronized void startMatch() {
         if (table.getState() == TableState.STARTING) {
             try {
-                User user = UserManager.getInstance().getUser(userId);
-                logger.info(new StringBuilder("User (table controller) ").append(user.getName()).append(" starts match: ").append(match.getId()));
+                String tableInfo;
+                if (table.isTournamentSubTable()) {
+                    tableInfo = "Tournament tournamentId: " + table.getTournament().getId() + " - sub";
+                } else {
+                    User user = UserManager.getInstance().getUser(userId);
+                    tableInfo = "User (table controller) " + user.getName();
+                }
+                logger.info(new StringBuilder(tableInfo).append(" match started match Id: ").append(match.getId()));
                 match.startMatch();
                 startGame(null);
             } catch (GameException ex) {
