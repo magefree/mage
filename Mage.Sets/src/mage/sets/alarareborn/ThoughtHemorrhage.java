@@ -92,7 +92,9 @@ class ThoughtHemorrhageEffect extends OneShotEffect<ThoughtHemorrhageEffect> {
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
             while (!you.choose(Outcome.Detriment, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!you.isInGame()) {
+                    return false;
+                }
             }
             cardName = cardChoice.getChoice();
             game.informPlayers("Thought Hemorrhage, named card: [" + cardName + "]");

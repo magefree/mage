@@ -96,7 +96,10 @@ class CursedScrollEffect extends OneShotEffect<CursedScrollEffect> {
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
             while (!you.choose(Outcome.Damage, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!you.isInGame()) {
+                    return false;
+                }
+
             }
             String cardName = cardChoice.getChoice();
             game.informPlayers("Cursed Scroll, named card: [" + cardName + "]");

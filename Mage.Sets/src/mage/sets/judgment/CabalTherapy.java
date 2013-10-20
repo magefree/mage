@@ -98,7 +98,9 @@ class CabalTherapyEffect extends OneShotEffect<CabalTherapyEffect> {
             cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Discard, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
 
             String cardName = cardChoice.getChoice();

@@ -91,8 +91,10 @@ class TabletOfTheGuildsEntersBattlefieldEffect extends OneShotEffect<TabletOfThe
             String colors;
             ChoiceColor colorChoice = new ChoiceColor();
             colorChoice.setMessage("Choose the first color");
-            while (!player.choose(Outcome.GainLife, colorChoice, game)  && player.isInGame()) {
-                game.debugMessage("player canceled choosing type. retrying.");
+            while (!player.choose(Outcome.GainLife, colorChoice, game)) {
+                if (!player.isInGame()) {
+                    return false;
+                }
             }
             game.getState().setValue(permanent.getId() + "_color1", colorChoice.getColor().toString());
             colors = colorChoice.getChoice().toLowerCase() + " and ";

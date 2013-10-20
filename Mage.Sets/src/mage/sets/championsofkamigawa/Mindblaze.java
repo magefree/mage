@@ -106,11 +106,15 @@ class MindblazeEffect extends OneShotEffect<MindblazeEffect> {
             numberChoice.setChoices(numbers);
 
             while (!playerControls.choose(Outcome.Neutral, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!playerControls.isInGame()) {
+                    return false;
+                }
             }
 
             while (!playerControls.choose(Outcome.Neutral, numberChoice, game)) {
-                game.debugMessage("player canceled choosing number. retrying.");
+                if (!playerControls.isInGame()) {
+                    return false;
+                }
             }
 
             game.informPlayers("Mindblaze, named card: [" + cardChoice.getChoice() + "]");

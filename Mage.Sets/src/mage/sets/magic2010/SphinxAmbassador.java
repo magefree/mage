@@ -116,7 +116,9 @@ class SphinxAmbassadorEffect extends OneShotEffect<SphinxAmbassadorEffect> {
                 cardChoice.setChoices(choices);
                 cardChoice.clearChoice();
                 while (!targetPlayer.choose(Outcome.Benefit, cardChoice, game)) {
-                    game.debugMessage("player canceled choosing name. retrying.");
+                    if (!targetPlayer.isInGame()) {
+                        return false;
+                    }
                 }
                 String cardName = cardChoice.getChoice();
 

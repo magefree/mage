@@ -100,7 +100,9 @@ class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
             cardName = cardChoice.getChoice();
             game.informPlayers("Spoils of the Vault, named card: [" + cardName + "]");

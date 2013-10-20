@@ -93,7 +93,9 @@ class MemoricideEffect extends OneShotEffect<MemoricideEffect> {
             cardChoice.clearChoice();
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
 
             String cardName = cardChoice.getChoice();

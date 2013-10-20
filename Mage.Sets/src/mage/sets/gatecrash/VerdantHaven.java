@@ -140,8 +140,10 @@ class VerdantHavenManaEffect extends ManaEffect<VerdantHavenManaEffect> {
                 Player player = game.getPlayer(land.getControllerId());
                 if (player != null) {
                     ChoiceColor choice = new ChoiceColor();
-                    while (!player.choose(outcome, choice, game) && player.isInGame()) {
-                        game.debugMessage("player canceled choosing color. retrying.");
+                    while (!player.choose(outcome, choice, game)) {
+                        if (!player.isInGame()) {
+                            return false;
+                        }
                     }
                     int amount = 1;
                     Mana mana = null;

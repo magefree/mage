@@ -98,7 +98,9 @@ class SlaughterGamesEffect extends SearchTargetGraveyardHandLibraryForCardNameAn
             cardChoice.setMessage("Name a nonland card");
 
             while (!controller.choose(Outcome.Exile, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
             String cardName;
             cardName = cardChoice.getChoice();

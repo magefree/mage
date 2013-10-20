@@ -102,7 +102,9 @@ class MeddlingMageChooseCardEffect extends OneShotEffect<MeddlingMageChooseCardE
             cardChoice.setChoices(CardRepository.instance.getNonLandNames());
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
             String cardName = cardChoice.getChoice();
             game.informPlayers("MeddlingMage, named card: [" + cardName + "]");

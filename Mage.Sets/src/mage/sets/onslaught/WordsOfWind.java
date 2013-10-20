@@ -105,8 +105,10 @@ class WordsOfWindEffect extends ReplacementEffectImpl<WordsOfWindEffect> {
                 TargetControlledPermanent target = new TargetControlledPermanent();
                 List<Permanent> liste = game.getBattlefield().getActivePermanents(new FilterControlledPermanent(), playerId, game);
                 if(!liste.isEmpty()){
-                    while (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)  && player.isInGame()){
-                        game.debugMessage("player canceled choosing permanent. retrying.");
+                    while (!player.choose(Outcome.ReturnToHand, target, source.getSourceId(), game)){
+                        if (!player.isInGame()) {
+                            return false;
+                        }
                     }
                     Permanent permanent = game.getPermanent(target.getFirstTarget());
                     if (permanent != null) {

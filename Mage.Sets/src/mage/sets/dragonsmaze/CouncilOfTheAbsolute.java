@@ -114,7 +114,9 @@ class CouncilOfTheAbsoluteChooseCardEffect extends OneShotEffect<CouncilOfTheAbs
             cardChoice.setChoices(CardRepository.instance.getNonLandAndNonCreatureNames());
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
             String cardName = cardChoice.getChoice();
             game.informPlayers("Council of the Absolute, named card: [" + cardName + "]");

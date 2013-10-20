@@ -99,8 +99,10 @@ public class MistformSliver extends CardImpl<MistformSliver> {
                 Choice typeChoice = new ChoiceImpl(true);
                 typeChoice.setMessage("Choose creature type");
                 typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-                while (!player.choose(Outcome.Detriment, typeChoice, game) && player.isInGame()) {
-                    game.debugMessage("player canceled choosing type. retrying.");
+                while (!player.choose(Outcome.Detriment, typeChoice, game)) {
+                    if (!player.isInGame()) {
+                        return false;
+                    }
                 }
                 game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
                 game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());

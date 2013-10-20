@@ -102,7 +102,9 @@ class NameCard extends OneShotEffect<NameCard> {
             cardChoice.setChoices(CardRepository.instance.getNames());
             cardChoice.clearChoice();
             while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                game.debugMessage("player canceled choosing name. retrying.");
+                if (!controller.isInGame()) {
+                    return false;
+                }
             }
             String cardName = cardChoice.getChoice();
             game.informPlayers("Runed Halo, named card: [" + cardName + "]");

@@ -108,8 +108,10 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
             Choice typeChoice = new ChoiceImpl(true);
             typeChoice.setMessage("Choose creature type");
             typeChoice.setChoices(CardRepository.instance.getCreatureTypes());
-            while (!player.choose(Outcome.Benefit, typeChoice, game) && player.isInGame()) {
-                game.debugMessage("player canceled choosing type. retrying.");
+            while (!player.choose(Outcome.Benefit, typeChoice, game)) {
+                if (!player.isInGame()) {
+                    return false;
+                }
             }
             game.informPlayers(permanent.getName() + ": " + player.getName() + " has chosen " + typeChoice.getChoice());
             game.getState().setValue(permanent.getId() + "_type", typeChoice.getChoice().toString());
@@ -122,10 +124,10 @@ class CavernOfSoulsEffect extends OneShotEffect<CavernOfSoulsEffect> {
     public CavernOfSoulsEffect copy() {
         return new CavernOfSoulsEffect(this);
     }
-
 }
 
 class CavernOfSoulsManaBuilder extends ConditionalManaBuilder {
+
     @Override
     public ConditionalMana build(Object... options) {
         return new CavernOfSoulsConditionalMana(this.mana);
@@ -147,7 +149,7 @@ class CavernOfSoulsConditionalMana extends ConditionalMana {
 }
 
 class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
-    
+
     @Override
     public boolean apply(Game game, Ability source, UUID manaProducer) {
         // check: ... to cast a creature spell
@@ -168,7 +170,7 @@ class CavernOfSoulsManaCondition extends CreatureCastManaCondition {
 class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
 
     public List<UUID> spells = new ArrayList<UUID>();
-  
+
     public CavernOfSoulsWatcher() {
         super("ManaPaidFromCavernOfSoulsWatcher", WatcherScope.GAME);
     }
@@ -187,7 +189,7 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
         if (event.getType() == GameEvent.EventType.MANA_PAYED) {
             MageObject object = game.getObject(event.getSourceId());
             if (object != null && object.getName().equals("Cavern of Souls")) {
-                spells.add(event.getTargetId()); 
+                spells.add(event.getTargetId());
             }
         }
     }
@@ -197,11 +199,10 @@ class CavernOfSoulsWatcher extends WatcherImpl<CavernOfSoulsWatcher> {
         super.reset();
         spells.clear();
     }
-
 }
 
 class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSoulsCantCounterEffect> {
-    
+
     public CavernOfSoulsCantCounterEffect() {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = null;
@@ -237,5 +238,4 @@ class CavernOfSoulsCantCounterEffect extends ReplacementEffectImpl<CavernOfSouls
         }
         return false;
     }
-
 }
