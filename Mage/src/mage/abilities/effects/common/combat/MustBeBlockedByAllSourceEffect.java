@@ -56,7 +56,11 @@ public class MustBeBlockedByAllSourceEffect extends RequirementEffect<MustBeBloc
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.canBlock(source.getSourceId(), game);
+        Permanent sourceCreature = game.getPermanent(source.getSourceId());
+        if (sourceCreature != null && sourceCreature.isAttacking()) {
+            return permanent.canBlock(source.getSourceId(), game);
+        }
+        return false;
     }
 
     @Override

@@ -29,10 +29,9 @@
 package mage.abilities.effects.common.combat;
 
 import java.util.UUID;
-import mage.constants.AttachmentType;
-import mage.constants.Duration;
 import mage.abilities.Ability;
 import mage.abilities.effects.RequirementEffect;
+import mage.constants.Duration;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
@@ -40,32 +39,24 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
-public class MustBeBlockedByAllAttachedEffect extends RequirementEffect<MustBeBlockedByAllAttachedEffect> {
+public class MustBeBlockedByAllTargetEffect extends RequirementEffect<MustBeBlockedByAllTargetEffect> {
 
-    protected AttachmentType attachmentType;
-
-    public MustBeBlockedByAllAttachedEffect(AttachmentType attachmentType) {
-        this(Duration.WhileOnBattlefield, attachmentType);
-    }
-
-    public MustBeBlockedByAllAttachedEffect(Duration duration, AttachmentType attachmentType) {
+    public MustBeBlockedByAllTargetEffect(Duration duration) {
         super(duration);
-        this.attachmentType = attachmentType;
-        staticText = "All creatures able to block " + (attachmentType.equals(AttachmentType.AURA) ? "enchanted":"equipped") + " creature do so";
+        staticText =  new StringBuilder("All creatures able to block target creature ")
+                .append(this.getDuration().equals(Duration.EndOfTurn) ? "this turn ":"")
+                .append("do so").toString();
     }
 
-    public MustBeBlockedByAllAttachedEffect(final MustBeBlockedByAllAttachedEffect effect) {
+    public MustBeBlockedByAllTargetEffect(final MustBeBlockedByAllTargetEffect effect) {
         super(effect);
     }
 
     @Override
     public boolean applies(Permanent permanent, Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            Permanent attachedCreature = game.getPermanent(attachment.getAttachedTo());
-            if (attachedCreature != null && attachedCreature.isAttacking()) {
-                return permanent.canBlock(attachment.getAttachedTo(), game);
-            }
+        Permanent sourceCreature = game.getPermanent(this.getTargetPointer().getFirst(game, source));
+        if (sourceCreature != null && sourceCreature.isAttacking()) {
+            return permanent.canBlock(this.getTargetPointer().getFirst(game, source), game);
         }
         return false;
     }
@@ -82,16 +73,12 @@ public class MustBeBlockedByAllAttachedEffect extends RequirementEffect<MustBeBl
 
     @Override
     public UUID mustBlockAttacker(Ability source, Game game) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        if (attachment != null && attachment.getAttachedTo() != null) {
-            return attachment.getAttachedTo() ;
-        }
-        return null;
+        return this.getTargetPointer().getFirst(game, source);
     }
 
     @Override
-    public MustBeBlockedByAllAttachedEffect copy() {
-        return new MustBeBlockedByAllAttachedEffect(this);
+    public MustBeBlockedByAllTargetEffect copy() {
+        return new MustBeBlockedByAllTargetEffect(this);
     }
 
 }
