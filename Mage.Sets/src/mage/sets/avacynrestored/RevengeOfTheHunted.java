@@ -33,7 +33,9 @@ import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.RequirementEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
 import mage.abilities.keyword.MiracleAbility;
@@ -59,7 +61,9 @@ public class RevengeOfTheHunted extends CardImpl<RevengeOfTheHunted> {
         this.getSpellAbility().addTarget(new TargetCreaturePermanent());
         this.getSpellAbility().addEffect(new BoostTargetEffect(6, 6, Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new GainAbilityTargetEffect(TrampleAbility.getInstance(), Duration.EndOfTurn));
-        this.getSpellAbility().addEffect(new RevengeOfTheHuntedEffect());
+        Effect effect = new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn);
+        effect.setText("and all creatures able to block it this turn do so");
+        this.getSpellAbility().addEffect(effect);
 
         this.addAbility(new MiracleAbility(new ManaCostsImpl("{G}")));
     }
@@ -71,46 +75,5 @@ public class RevengeOfTheHunted extends CardImpl<RevengeOfTheHunted> {
     @Override
     public RevengeOfTheHunted copy() {
         return new RevengeOfTheHunted(this);
-    }
-}
-
-class RevengeOfTheHuntedEffect extends RequirementEffect<RevengeOfTheHuntedEffect> {
-
-    public RevengeOfTheHuntedEffect() {
-        this(Duration.EndOfTurn);
-    }
-
-    public RevengeOfTheHuntedEffect(Duration duration) {
-        super(duration);
-        staticText = "All creatures able to block it this turn do so";
-    }
-
-    public RevengeOfTheHuntedEffect(final RevengeOfTheHuntedEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean applies(Permanent permanent, Ability source, Game game) {
-        return permanent.canBlock(source.getFirstTarget(), game);
-    }
-
-    @Override
-    public boolean mustAttack(Game game) {
-        return false;
-    }
-
-    @Override
-    public boolean mustBlock(Game game) {
-        return true;
-    }
-
-    @Override
-    public UUID mustBlockAttacker(Ability source, Game game) {
-        return source.getFirstTarget();
-    }
-
-    @Override
-    public RevengeOfTheHuntedEffect copy() {
-        return new RevengeOfTheHuntedEffect(this);
     }
 }

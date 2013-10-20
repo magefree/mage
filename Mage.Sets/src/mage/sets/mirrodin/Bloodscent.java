@@ -28,15 +28,11 @@
 package mage.sets.mirrodin;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.combat.MustBeBlockedByAllSourceEffect;
-import mage.abilities.effects.common.continious.GainAbilityTargetEffect;
+import mage.abilities.effects.common.combat.MustBeBlockedByAllTargetEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Zone;
+import mage.constants.Rarity;
 import mage.target.common.TargetCreaturePermanent;
 
 /**
@@ -49,8 +45,10 @@ public class Bloodscent extends CardImpl<Bloodscent> {
         super(ownerId, 114, "Bloodscent", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{G}");
         this.expansionSetCode = "MRD";
         this.color.setGreen(true);
-        this.getSpellAbility().addEffect(new GainAbilityTargetEffect(new SimpleStaticAbility(Zone.BATTLEFIELD, new MustBeBlockedByAllSourceEffect()), Duration.EndOfTurn));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+
+        // All creatures able to block target creature this turn do so.
+        this.getSpellAbility().addEffect(new MustBeBlockedByAllTargetEffect(Duration.EndOfTurn));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
 
     public Bloodscent(final Bloodscent card) {
