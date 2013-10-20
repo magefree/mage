@@ -159,7 +159,18 @@ public class Session {
     }
 
     public void userLostConnection() {
-        logger.info("session disconnected for user " + userId);
+        User user = UserManager.getInstance().getUser(userId);
+        if (logger.isInfoEnabled()) {
+            StringBuilder sb = new StringBuilder("user ");
+            if (user == null) {
+                sb.append("[user not found]");
+            } else {
+                sb.append(user.getName());
+            }
+            sb.append(" lost connection - userId: ").append(userId);
+            sb.append(" sessionId: ").append(sessionId);
+            logger.info(sb);
+        }
         UserManager.getInstance().disconnect(userId, User.DisconnectReason.LostConnection);
     }
 

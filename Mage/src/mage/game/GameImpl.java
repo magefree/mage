@@ -28,11 +28,30 @@
 
 package mage.game;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
+import java.util.Stack;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.DelayedTriggeredAbility;
 import mage.abilities.TriggeredAbility;
+import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.common.ChancellorAbility;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.ContinuousEffects;
@@ -50,7 +69,13 @@ import mage.cards.CardsImpl;
 import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
-import mage.constants.*;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.RangeOfInfluence;
+import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.Filter;
 import mage.filter.FilterPermanent;
@@ -60,11 +85,18 @@ import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.filter.predicate.mageobject.NamePredicate;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.filter.predicate.mageobject.SupertypePredicate;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
 import mage.game.combat.Combat;
 import mage.game.command.CommandObject;
+import mage.game.command.Commander;
 import mage.game.command.Emblem;
-import mage.game.events.*;
+import mage.game.events.GameEvent;
+import mage.game.events.Listener;
+import mage.game.events.PlayerQueryEvent;
+import mage.game.events.PlayerQueryEventSource;
+import mage.game.events.TableEvent;
 import mage.game.events.TableEvent.EventType;
+import mage.game.events.TableEventSource;
 import mage.game.permanent.Battlefield;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -82,16 +114,14 @@ import mage.target.Target;
 import mage.target.TargetPermanent;
 import mage.target.TargetPlayer;
 import mage.util.functions.ApplyToPermanent;
-import mage.watchers.common.*;
+import mage.watchers.common.CastSpellLastTurnWatcher;
+import mage.watchers.common.MiracleWatcher;
+import mage.watchers.common.MorbidWatcher;
+import mage.watchers.common.PlayerDamagedBySourceWatcher;
+import mage.watchers.common.PlayerLostLifeWatcher;
+import mage.watchers.common.SoulbondWatcher;
 import org.apache.log4j.Logger;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import mage.abilities.common.CastCommanderAbility;
-import mage.filter.predicate.permanent.ControllerIdPredicate;
-import mage.game.command.Commander;
 
 
 public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializable {
@@ -423,6 +453,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
             for (Player player: state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
+                    logger.info(new StringBuilder("Player ").append(player.getName()).append(" won the game ").append(this.getId()));
                     player.won(this);
                 }
             }
@@ -847,6 +878,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
+            logger.info(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
             player.concede(this);
             fireInformEvent(player.getName() + " has conceded.");
         }
@@ -1154,7 +1186,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         boolean played = false;
         for (UUID playerId: state.getPlayerList(state.getActivePlayerId())) {
             Player player = getPlayer(playerId);
-            while (player.isInGame()) { // player can die or win caused by triggered abilities
+            while (player.isInGame()) { // player can die or win caused by triggered abilities or leave the game
                 List<TriggeredAbility> abilities = state.getTriggered(player.getId());
                 if (abilities.isEmpty()) {
                     break;
@@ -1165,8 +1197,10 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                 }
                 else {
                     TriggeredAbility ability = player.chooseTriggeredAbility(abilities, this);
-                    state.removeTriggeredAbility(ability);
-                    played |= player.triggerAbility(ability, this);
+                    if (ability != null) {
+                        state.removeTriggeredAbility(ability);
+                        played |= player.triggerAbility(ability, this);
+                    }
                 }
             }
         }
@@ -1673,6 +1707,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player.hasLeft()) {
             return;
         }
+        logger.info(new StringBuilder("Player ").append(player.getName()).append(" left game ").append(this.getId()));
         player.leave();
         if (this.isGameOver()) {
             // no need to remove objects if only one player is left so the game is over
