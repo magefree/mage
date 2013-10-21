@@ -74,7 +74,8 @@ public enum CounterType {
     AGE(new AgeCounter().name),
     BLAZE(new BlazeCounter().name),
     ICE(new IceCounter().name),
-    BRIBERY(new BriberyCounter().name);
+    BRIBERY(new BriberyCounter().name),
+    TOWER(new TowerCounter().name);
 
     private String name;
 
@@ -108,6 +109,8 @@ public enum CounterType {
      */
     public Counter createInstance(int amount) {
         switch(this) {
+            case TOWER:
+                return new TowerCounter(amount);
             case P1P1:
                 return new PlusOneCounter(amount);
             case M1M1:
@@ -184,7 +187,7 @@ public enum CounterType {
                 return new BlazeCounter(amount);
             case ICE:
                 return new IceCounter(amount);
-                
+                                                                                    
         }
         return null;
     }
