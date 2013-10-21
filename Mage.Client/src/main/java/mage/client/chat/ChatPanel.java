@@ -439,7 +439,7 @@ class TableModel extends AbstractTableModel {
                     }
                 }
             }
-            if (update && list != null) {
+            if (update) {
                 synchronized (tableModel) {
                     this.players = list;
                     tableModel.loadData(this.players);

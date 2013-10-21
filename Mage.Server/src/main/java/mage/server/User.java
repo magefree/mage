@@ -305,4 +305,21 @@ public class User {
         return this.userData;
     }
 
+    public String getUserInfo() {
+        StringBuilder sb =  new StringBuilder();
+        if (gameSessions.size() > 0) {
+            sb.append("G: ").append(gameSessions.size());
+        }
+        if (tournamentSessions.size() > 0) {
+            if (sb.length() > 0) {
+                sb.append(" ");
+            }
+            sb.append("T: ").append(tournamentSessions.size());
+        }
+        if (sb.length() > 0) {
+            sb.insert(0, " - [");
+            sb.append("]");
+        }
+        return sb.toString();
+    }
 }

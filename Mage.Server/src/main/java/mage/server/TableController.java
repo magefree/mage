@@ -526,7 +526,7 @@ public class TableController {
         for (Entry<UUID, UUID> entry: userPlayerMap.entrySet()) {
             User user = UserManager.getInstance().getUser(entry.getKey());
             if (user != null) {
-                logger.info(new StringBuilder("User ").append(user.getName()).append(" draft started: ").append(match.getId()).append(" userId: ").append(user.getId()));
+                logger.info(new StringBuilder("User ").append(user.getName()).append(" draft started: ").append(draft.getId()).append(" userId: ").append(user.getId()));
                 user.draftStarted(draft.getId(), entry.getValue());
             } else {
                 logger.fatal(new StringBuilder("Start draft user not found userId: ").append(entry.getKey()));
