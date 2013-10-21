@@ -714,7 +714,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
                     resetStoredBookmark(game);
                     return true;
                 }
-                game.restoreState(bookmark);
+                if (!game.isGameOver()) { // if player left or game is over no undo is possible - this could lead to wrong winner
+                    game.restoreState(bookmark);
+                }
             }
         }
         return false;

@@ -436,7 +436,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     }
 
     @Override
-    public boolean isGameOver() {
+    public synchronized boolean isGameOver() {
         if (state.isGameOver()) {
             return true;
         }
@@ -451,13 +451,13 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
             }
         }
         if (remainingPlayers <= 1 || numLosers >= state.getPlayers().size() - 1) {
+            end();
             for (Player player: state.getPlayers().values()) {
                 if (!player.hasLeft() && !player.hasLost()) {
-                    logger.info(new StringBuilder("Player ").append(player.getName()).append(" won the game ").append(this.getId()));
+                    logger.debug(new StringBuilder("Player ").append(player.getName()).append(" won the game ").append(this.getId()));
                     player.won(this);
                 }
-            }
-            end();
+            }            
             endTime = new Date();
             return true;
         }
@@ -559,8 +559,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         boolean wasPaused = state.isPaused();
         state.resume();
         if (!isGameOver()) {
-//            if (simulation)
-//                logger.info("Turn " + Integer.toString(state.getTurnNum()));
             fireInformEvent("Turn " + Integer.toString(state.getTurnNum()));
             if (checkStopOnTurnOption()) {
                 return;
@@ -599,6 +597,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         }
         if (isGameOver()) {
             winnerId = findWinnersAndLosers();
+            logger.info(new StringBuilder("Game with gameId ").append(this.getId()).append(" ended."));
         }
     }
 
@@ -878,7 +877,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
     public synchronized void concede(UUID playerId) {
         Player player = state.getPlayer(playerId);
         if (player != null) {
-            logger.info(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
+            logger.debug(new StringBuilder("Player ").append(player.getName()).append(" concedes game ").append(this.getId()));
             player.concede(this);
             fireInformEvent(player.getName() + " has conceded.");
         }
@@ -1707,7 +1706,6 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         if (player.hasLeft()) {
             return;
         }
-        logger.info(new StringBuilder("Player ").append(player.getName()).append(" left game ").append(this.getId()));
         player.leave();
         if (this.isGameOver()) {
             // no need to remove objects if only one player is left so the game is over
