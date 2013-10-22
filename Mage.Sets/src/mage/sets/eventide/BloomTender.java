@@ -92,33 +92,26 @@ class BloomTenderEffect extends ManaEffect<BloomTenderEffect> {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player you = game.getPlayer(source.getControllerId());
-        Mana mana = new Mana();
+        Player you = game.getPlayer(source.getControllerId());        
         if (you != null) {
-            for (Permanent permanent : game.getBattlefield().getActivePermanents(you.getId(), game)) {
-                if (permanent.getColor().contains(ObjectColor.BLACK)
-                        && !mana.contains(Mana.BlackMana)) {
-                    mana = Mana.BlackMana(1);
+            Mana mana = new Mana();
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents(you.getId())) {
+                if (mana.getBlack() == 0 && permanent.getColor().isBlack()) {
+                    mana.addBlack();
                 }
-                if (permanent.getColor().contains(ObjectColor.BLUE)
-                        && !mana.contains(Mana.BlueMana)) {
-                    mana = Mana.BlueMana(1);
+                if (mana.getBlue() == 0 && permanent.getColor().isBlue()) {
+                    mana.addBlue();
                 }
-                if (permanent.getColor().contains(ObjectColor.RED)
-                        && !mana.contains(Mana.RedMana)) {
-                    mana = Mana.RedMana(1);
+                if (mana.getRed() == 0 && permanent.getColor().isRed()) {
+                    mana.addRed();
                 }
-                if (permanent.getColor().contains(ObjectColor.GREEN)
-                        && !mana.contains(Mana.GreenMana)) {
-                    mana = Mana.GreenMana(1);
+                if (mana.getGreen() == 0 && permanent.getColor().isGreen()) {
+                    mana.addGreen();
                 }
-                if (permanent.getColor().contains(ObjectColor.WHITE)
-                        && !mana.contains(Mana.WhiteMana)) {
-                    mana = Mana.WhiteMana(1);
+                if (mana.getWhite() == 0 && permanent.getColor().isWhite()) {
+                    mana.addWhite();
                 }
             }
-        }
-        if (you != null && mana != null) {
             you.getManaPool().addMana(mana, game, source);
             return true;
         }
