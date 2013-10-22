@@ -35,8 +35,10 @@ import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameEffect;
+import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -66,8 +68,10 @@ public class HelixPinnacle extends CardImpl<HelixPinnacle> {
         this.addAbility(ShroudAbility.getInstance());
 
         // {X}: Put X tower counters on Helix Pinnacle.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HelixPinnacleEffect(), new ManaCostsImpl("{X}")));
-
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD,
+                new AddCountersSourceEffect(CounterType.TOWER.createInstance(), new ManacostVariableValue(), true),
+                new ManaCostsImpl("{X}")));
+        
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
         Condition condition = new HasCounterCondition(CounterType.TOWER, 100);
         this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new WinGameEffect(), condition, rule), TargetController.YOU, false));
@@ -81,32 +85,5 @@ public class HelixPinnacle extends CardImpl<HelixPinnacle> {
     @Override
     public HelixPinnacle copy() {
         return new HelixPinnacle(this);
-    }
-}
-
-class HelixPinnacleEffect extends OneShotEffect<HelixPinnacleEffect> {
-
-    HelixPinnacleEffect() {
-        super(Outcome.Benefit);
-        staticText = "Put X tower counters on {this}";
-    }
-
-    HelixPinnacleEffect(HelixPinnacleEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HelixPinnacleEffect copy() {
-        return new HelixPinnacleEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent != null) {
-            permanent.addCounters(CounterType.TOWER.createInstance(source.getManaCostsToPay().getX()), game);
-            return true;
-        }
-        return false;
     }
 }

@@ -18,7 +18,7 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
         addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card.");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -36,7 +36,7 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
         addCard(Zone.LIBRARY, playerA, "Lightning Bolt");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card.");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -54,7 +54,7 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
         addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card.");
         setStopAt(2, PhaseStep.UPKEEP);
         execute();
 
@@ -72,7 +72,7 @@ public class HomicidalBruteTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerA, "Civilized Scholar");
         addCard(Zone.LIBRARY, playerA, "Sejiri Merfolk", 2);
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card. ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Draw a card, then discard a card.");
         attack(3, playerA, "Homicidal Brute");
         setStopAt(4, PhaseStep.UPKEEP);
         execute();

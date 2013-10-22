@@ -17,7 +17,7 @@ public class ProtectionFromColorTest extends CardTestPlayerBase {
         // tapped White Knight with Protection from Black
         addCard(Zone.BATTLEFIELD, playerB, "White Knight", 1, true);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature. ", "White Knight");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature.", "White Knight");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
@@ -31,11 +31,11 @@ public class ProtectionFromColorTest extends CardTestPlayerBase {
 
         addCard(Zone.BATTLEFIELD, playerB, "Runeclaw Bear", 1, true);
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature. ", "Runeclaw Bear");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}: Destroy target tapped creature.", "Runeclaw Bear");
         setStopAt(1, PhaseStep.BEGIN_COMBAT);
         execute();
 
-        // One should have beendestroyed by Royal Assassin
+        // One should have been destroyed by Royal Assassin
         assertPermanentCount(playerB, "Runeclaw Bear", 0);
     }
 }

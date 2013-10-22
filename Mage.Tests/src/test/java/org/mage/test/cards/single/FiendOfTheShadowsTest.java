@@ -21,7 +21,7 @@ public class FiendOfTheShadowsTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Mountain");
         addCard(Zone.HAND, playerB, "Lightning Bolt");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a human: Regenerate {this}. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Sacrifice a human: Regenerate {this}.");
         castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerB, "Lightning Bolt", "Fiend of the Shadows");
 
         setStopAt(1, PhaseStep.END_TURN);

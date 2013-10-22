@@ -23,7 +23,7 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Turn to Frog");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land.");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
         attack(1, playerA, "Raging Ravine");
 
@@ -44,10 +44,10 @@ public class TurnToFrogTest extends CardTestPlayerBase {
         addCard(Zone.BATTLEFIELD, playerB, "Island", 2);
         addCard(Zone.HAND, playerB, "Turn to Frog");
 
-        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land.");
         castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, "Turn to Frog", "Raging Ravine");
 
-        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land. ");
+        activateAbility(3, PhaseStep.PRECOMBAT_MAIN, playerA, "{2}{R}{G}: Until end of turn {this} becomes a 3/3 red and green Elemental creature with \"Whenever this creature attacks, put a +1/+1 counter on it.\" that's still a land.");
         attack(3, playerA, "Raging Ravine");
 
         setStopAt(3, PhaseStep.END_COMBAT);

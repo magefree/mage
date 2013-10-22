@@ -140,10 +140,14 @@ public class AddCountersSourceEffect extends OneShotEffect<AddCountersSourceEffe
         if (counter.getCount() > 1) {
             sb.append(CardUtil.numberToText(counter.getCount())).append(" ");
         } else {
-            sb.append("a ");
+            if (amount.toString().equals("X") && amount.getMessage().isEmpty()) {
+                sb.append("X ");
+            } else {
+                sb.append("a ");
+            }
         }
         sb.append(counter.getName().toLowerCase()).append(" counter on {this}");
-        if (amount.getMessage().length() > 0) {
+        if (!amount.getMessage().isEmpty()) {
             sb.append(" for each ").append(amount.getMessage());
         }
         staticText = sb.toString();
