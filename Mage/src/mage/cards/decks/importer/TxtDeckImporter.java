@@ -28,10 +28,12 @@
 
 package mage.cards.decks.importer;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
-import mage.cards.Sets;
+import java.util.Set;
 import mage.cards.decks.DeckCardInfo;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.repository.CardInfo;
@@ -45,7 +47,11 @@ import mage.cards.repository.ExpansionRepository;
  */
 public class TxtDeckImporter extends DeckImporter {
 
+    public static final String[] SET_VALUES = new String[] { "lands", "creatures", "planeswalkers","other spells" };
+    public static final Set<String> IGNORE_NAMES = new HashSet<String>(Arrays.asList(SET_VALUES));
+    
     private boolean sideboard = false;
+
 
     @Override
     protected void readLine(String line, DeckCardLists deckList) {
@@ -61,6 +67,9 @@ public class TxtDeckImporter extends DeckImporter {
         int delim = line.indexOf(' ');
         String lineNum = line.substring(0, delim).trim();
         String lineName = line.substring(delim).replace("’","\'").trim();
+        if (IGNORE_NAMES.contains(lineName)) {
+            return;
+        }
         try {
             int num = Integer.parseInt(lineNum);
             List<CardInfo> cards = CardRepository.instance.findCards(lineName);
