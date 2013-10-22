@@ -21,7 +21,7 @@ public class ConditionalTriggeredAbility extends TriggeredAbilityImpl<Conditiona
         this(ability, condition, text, false);
     }
 
-    public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text, Boolean optional) {
+    public ConditionalTriggeredAbility(TriggeredAbility ability, Condition condition, String text, boolean optional) {
         super(ability.getZone(), null);
         this.ability = ability;
         this.modes = ability.getModes();

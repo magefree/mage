@@ -28,27 +28,21 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.condition.Condition;
 import mage.abilities.condition.common.HasCounterCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalOneShotEffect;
+import mage.abilities.decorator.ConditionalTriggeredAbility;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.WinGameEffect;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
 import mage.abilities.keyword.ShroudAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
  *
@@ -73,8 +67,10 @@ public class HelixPinnacle extends CardImpl<HelixPinnacle> {
                 new ManaCostsImpl("{X}")));
         
         // At the beginning of your upkeep, if there are 100 or more tower counters on Helix Pinnacle, you win the game.
-        Condition condition = new HasCounterCondition(CounterType.TOWER, 100);
-        this.addAbility(new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new ConditionalOneShotEffect(new WinGameEffect(), condition, rule), TargetController.YOU, false));
+        this.addAbility(new ConditionalTriggeredAbility(
+                new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new WinGameEffect(), TargetController.YOU, false),
+                new HasCounterCondition(CounterType.TOWER, 100),
+                rule, false ));
 
     }
 

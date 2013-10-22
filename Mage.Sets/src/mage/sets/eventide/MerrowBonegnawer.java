@@ -70,7 +70,7 @@ public class MerrowBonegnawer extends CardImpl<MerrowBonegnawer> {
         this.toughness = new MageInt(1);
 
         // {tap}: Target player exiles a card from his or her graveyard.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, "Merrow Bonegnawer", new FilterCard("a card from your graveyard")), new TapSourceCost());
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileFromZoneTargetEffect(Zone.GRAVEYARD, exileId, "Merrow Bonegnawer", new FilterCard("a card")), new TapSourceCost());
         ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
         
