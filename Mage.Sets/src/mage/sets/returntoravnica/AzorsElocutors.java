@@ -115,11 +115,11 @@ class AzorsElocutorsEffect extends OneShotEffect<AzorsElocutorsEffect> {
 
     public AzorsElocutorsEffect() {
         super(Outcome.Benefit);
+        staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }
 
     public AzorsElocutorsEffect(final AzorsElocutorsEffect effect) {
         super(effect);
-        staticText = "put a filibuster counter on Azor's Elocutors. Then if Azor's Elocutors has five or more filibuster counters on it, you win the game";
     }
 
     @Override

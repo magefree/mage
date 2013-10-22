@@ -54,7 +54,7 @@ import mage.target.TargetPermanent;
  */
 public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
-    private static final String effectText = "When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library";
+    private static final String effectText = "When Ulamog is put into a graveyard from anywhere, ";
 
     public UlamogTheInfiniteGyre(UUID ownerId) {
         super(ownerId, 12, "Ulamog, the Infinite Gyre", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{11}");
@@ -83,7 +83,7 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
 class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
 
-    private static final String abilityText = "When you cast {this}, destroy target permanent";
+    private static final String abilityText = "When you cast {this}, destroy target permanent.";
 
     UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
         super(Zone.STACK, new DestroyTargetEffect());
@@ -120,6 +120,7 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheI
 
     UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
         super(Outcome.Benefit);
+        staticText = "its owner shuffles his or her graveyard into his or her library";
     }
 
     UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
