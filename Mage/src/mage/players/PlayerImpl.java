@@ -560,7 +560,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public void discard(int amount, Ability source, Game game) {
         if (amount >= hand.size()) {
-            int discardAmount = hand.size();
             while (hand.size() > 0) {
                 discard(hand.get(hand.iterator().next(), game), source, game);
             }
@@ -574,7 +573,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             TargetDiscard target = new TargetDiscard(playerId);
             choose(Outcome.Discard, target, source.getSourceId(), game);
             Card card = hand.get(target.getFirstTarget(), game);
-            if (card != null && discard(card, source, game)) {
+            if (discard(card, source, game)) {
                 numDiscarded++;
             }
         }
@@ -583,9 +582,8 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean discard(Card card, Ability source, Game game) {
         //20100716 - 701.7
-        if (card != null) {
-            removeFromHand(card, game);
-            card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getId(), game, false);
+        if (card != null 
+                && card.moveToZone(Zone.GRAVEYARD, source==null?null:source.getSourceId(), game, false)) {
             game.informPlayers(new StringBuilder(name).append(" discards ").append(card.getName()).toString());
             game.fireEvent(GameEvent.getEvent(GameEvent.EventType.DISCARDED_CARD, card.getId(), source==null?null:source.getId(), playerId));
             return true;
