@@ -28,22 +28,24 @@
 package mage.sets.riseoftheeldrazi;
 
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.ZoneChangeTriggeredAbility;
+import mage.abilities.common.PutIntoGraveFromAnywhereTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.AnnihilatorAbility;
 import mage.abilities.keyword.IndestructibleAbility;
+import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
+import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.players.Player;
 import mage.target.TargetPermanent;
@@ -54,8 +56,6 @@ import mage.target.TargetPermanent;
  */
 public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
-    private static final String effectText = "When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library";
-
     public UlamogTheInfiniteGyre(UUID ownerId) {
         super(ownerId, 12, "Ulamog, the Infinite Gyre", Rarity.MYTHIC, new CardType[]{CardType.CREATURE}, "{11}");
         this.expansionSetCode = "ROE";
@@ -64,11 +64,15 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
         this.power = new MageInt(10);
         this.toughness = new MageInt(10);
-
+        
+        // When you cast Ulamog, the Infinite Gyre, destroy target permanent.
         this.addAbility(new UlamogTheInfiniteGyreDestroyOnCastAbility());
+        // Annihilator 4 (Whenever this creature attacks, defending player sacrifices four permanents.)
         this.addAbility(new AnnihilatorAbility(4));
+        // Indestructible
         this.addAbility(IndestructibleAbility.getInstance());
-        this.addAbility(new ZoneChangeTriggeredAbility(Zone.GRAVEYARD, new UlamogTheInfiniteGyreEnterGraveyardEffect(), effectText, false));
+        // When Ulamog is put into a graveyard from anywhere, its owner shuffles his or her graveyard into his or her library.
+        this.addAbility(new PutIntoGraveFromAnywhereTriggeredAbility(new UlamogTheInfiniteGyreEnterGraveyardEffect(), false));
     }
 
     public UlamogTheInfiniteGyre(final UlamogTheInfiniteGyre card) {
@@ -83,11 +87,9 @@ public class UlamogTheInfiniteGyre extends CardImpl<UlamogTheInfiniteGyre> {
 
 class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<UlamogTheInfiniteGyreDestroyOnCastAbility> {
 
-    private static final String abilityText = "When you cast {this}, destroy target permanent";
-
     UlamogTheInfiniteGyreDestroyOnCastAbility ( ) {
         super(Zone.STACK, new DestroyTargetEffect());
-        this.addTarget(new TargetPermanent());
+        this.addTarget(new TargetPermanent(true));
     }
 
     UlamogTheInfiniteGyreDestroyOnCastAbility(UlamogTheInfiniteGyreDestroyOnCastAbility ability) {
@@ -112,7 +114,7 @@ class UlamogTheInfiniteGyreDestroyOnCastAbility extends TriggeredAbilityImpl<Ula
 
     @Override
     public String getRule() {
-        return abilityText;
+        return new StringBuilder("When you cast {this}, ").append(super.getRule()).toString();
     }
 }
 
@@ -120,6 +122,7 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheI
 
     UlamogTheInfiniteGyreEnterGraveyardEffect ( ) {
         super(Outcome.Benefit);
+        staticText = "its owner shuffles his or her graveyard into his or her library";
     }
 
     UlamogTheInfiniteGyreEnterGraveyardEffect(UlamogTheInfiniteGyreEnterGraveyardEffect effect) {
@@ -128,7 +131,18 @@ class UlamogTheInfiniteGyreEnterGraveyardEffect extends OneShotEffect<UlamogTheI
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Player player = game.getPlayer(source.getControllerId());
+        UUID ownerId = null;
+        Card card = game.getCard(source.getSourceId());
+        if (card != null) {
+            ownerId = card.getOwnerId();
+        }
+        if (ownerId == null) {
+            Permanent permanent = (Permanent) game.getLastKnownInformation(source.getSourceId(), Zone.BATTLEFIELD);
+            if (permanent != null) {
+                ownerId = permanent.getOwnerId();
+            }
+        }
+        Player player = game.getPlayer(ownerId);
         if (player != null) {
             player.getLibrary().addAll(player.getGraveyard().getCards(game), game);
             player.getGraveyard().clear();
