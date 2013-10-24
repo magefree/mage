@@ -25,75 +25,80 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.heroesvsmonsters;
+package mage.sets.betrayersofkamigawa;
 
 import java.util.UUID;
-import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.decorator.ConditionalActivatedAbility;
-import mage.abilities.effects.common.ReturnSourceFromGraveyardToHandEffect;
-import mage.abilities.keyword.BloodthirstAbility;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.ContinuousEffectImpl;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
+import mage.constants.SubLayer;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.watchers.common.BloodthirstWatcher;
 
 /**
  *
  * @author LevelX2
  */
-public class SkarrganFirebird extends CardImpl<SkarrganFirebird> {
+public class MirrorGallery extends CardImpl<MirrorGallery> {
 
-    public SkarrganFirebird(UUID ownerId) {
-        super(ownerId, 57, "Skarrgan Firebird", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{4}{R}{R}");
-        this.expansionSetCode = "DDL";
-        this.subtype.add("Phoenix");
+    public MirrorGallery(UUID ownerId) {
+        super(ownerId, 154, "Mirror Gallery", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{5}");
+        this.expansionSetCode = "BOK";
 
-        this.color.setRed(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(3);
-
-        // Bloodthirst 3
-        this.addAbility(new BloodthirstAbility(3));
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // {R}{R}{R}: Return Skarrgan Firebird from your graveyard to your hand. Activate this ability only if an opponent was dealt damage this turn.
-        this.addAbility(new ConditionalActivatedAbility(
-                Zone.GRAVEYARD,
-                new ReturnSourceFromGraveyardToHandEffect(),
-                new ManaCostsImpl("{R}{R}{R}"),
-                new OpponentWasDealtDamageCondition(),
-                null));
+        // The "legend rule" doesn't apply.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new MirrorGalleryRuleEffect()));
     }
 
-    public SkarrganFirebird(final SkarrganFirebird card) {
+    public MirrorGallery(final MirrorGallery card) {
         super(card);
     }
 
     @Override
-    public SkarrganFirebird copy() {
-        return new SkarrganFirebird(this);
+    public MirrorGallery copy() {
+        return new MirrorGallery(this);
     }
 }
 
-class OpponentWasDealtDamageCondition implements Condition {
+class MirrorGalleryRuleEffect extends ContinuousEffectImpl<MirrorGalleryRuleEffect> {
 
-    public OpponentWasDealtDamageCondition() {
+    public MirrorGalleryRuleEffect() {
+        super(Duration.WhileOnBattlefield, Outcome.Detriment);
+        staticText = "The \"legend rule\" doesn't apply";
+    }
+
+    public MirrorGalleryRuleEffect(final MirrorGalleryRuleEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public MirrorGalleryRuleEffect copy() {
+        return new MirrorGalleryRuleEffect(this);
+    }
+
+    @Override
+    public boolean apply(Layer layer, SubLayer sublayer, Ability source, Game game) {
+        switch (layer) {
+            case RulesEffects:
+                // Change the rule
+                game.getState().setLegendaryRuleActive(false);
+                break;
+        }
+        return false;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        BloodthirstWatcher watcher = (BloodthirstWatcher) game.getState().getWatchers().get("DamagedOpponents", source.getControllerId());
-        return !watcher.conditionMet();
+        return false;
     }
 
     @Override
-    public String toString() {
-	return "if an opponent was dealt damage this turn";
+    public boolean hasLayer(Layer layer) {
+        return layer == Layer.RulesEffects;
     }
 }
