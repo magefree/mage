@@ -1327,7 +1327,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
                     }
                 }
             }
-            if (filterLegendary.match(perm, this)) {
+            if (this.getState().isLegendaryRuleActive() && filterLegendary.match(perm, this)) {
                 legendary.add(perm);
             }
             if (filterEquipment.match(perm, this)) {
@@ -1415,6 +1415,7 @@ public abstract class GameImpl<T extends GameImpl<T>> implements Game, Serializa
         // If a player controls two or more legendary permanents with the same name, that player
         // chooses one of them, and the rest are put into their owners' graveyards.
         // This is called the "legend rule."
+
         if (legendary.size() > 1) {  //don't bother checking if less than 2 legends in play
             for (Permanent legend: legendary) {
                 FilterPermanent filterLegendName = new FilterPermanent();

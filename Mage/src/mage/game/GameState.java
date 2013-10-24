@@ -98,6 +98,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private Battlefield battlefield;
     private int turnNum = 1;
     private boolean extraTurn = false;
+    private boolean legendaryRuleActive = true;
     private boolean gameOver;
     private boolean paused;
     private ContinuousEffects effects;
@@ -144,6 +145,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.battlefield = state.battlefield.copy();
         this.turnNum = state.turnNum;
         this.extraTurn = state.extraTurn;
+        this.legendaryRuleActive = state.legendaryRuleActive;
         this.gameOver = state.gameOver;
         this.effects = state.effects.copy();
         for (TriggeredAbility trigger: state.triggered) {
@@ -385,7 +387,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
         battlefield.reset(game);
         combat.reset();
-        resetOtherAbilities();
+        this.reset();
         effects.apply(game);
         battlefield.fireControlChangeEvents(game);
     }
@@ -621,6 +623,11 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
+    private void reset() {
+        this.setLegendaryRuleActive(true);
+        this.resetOtherAbilities();
+    }
+
     public void clear() {
         battlefield.clear();
         effects.clear();
@@ -634,6 +641,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         lookedAt.clear();
         turnNum = 0;
         extraTurn = false;
+        legendaryRuleActive = true;
         gameOver = false;
         specialActions.clear();
         otherAbilities.clear();
@@ -654,6 +662,14 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public boolean isPaused() {
         return this.paused;
+    }
+
+    public boolean isLegendaryRuleActive() {
+        return legendaryRuleActive;
+    }
+
+    public void setLegendaryRuleActive(boolean legendaryRuleActive) {
+        this.legendaryRuleActive = legendaryRuleActive;
     }
 
 }
