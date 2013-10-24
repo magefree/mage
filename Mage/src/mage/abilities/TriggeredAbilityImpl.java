@@ -109,22 +109,24 @@ public abstract class TriggeredAbilityImpl<T extends TriggeredAbilityImpl<T>> ex
     public String getRule() {
         String superRule = super.getRule(true);
         StringBuilder sb = new StringBuilder();
-        String ruleLow = superRule.toLowerCase();
-        if (optional && !ruleLow.startsWith("you ")) {
-            if (this.getTargets().isEmpty() 
-                    || ruleLow.startsWith("exile") 
-                    || ruleLow.startsWith("destroy") 
-                    || ruleLow.startsWith("return") 
-                    || ruleLow.startsWith("tap")
-                    || ruleLow.startsWith("untap")) {
-                sb.append("you may ");
-            } else {
-                sb.append("you may have ");
-            }
+        if (!superRule.isEmpty()) {
+            String ruleLow = superRule.toLowerCase();
+            if (optional && !ruleLow.startsWith("you ")) {
+                if (this.getTargets().isEmpty()
+                        || ruleLow.startsWith("exile")
+                        || ruleLow.startsWith("destroy")
+                        || ruleLow.startsWith("return")
+                        || ruleLow.startsWith("tap")
+                        || ruleLow.startsWith("untap")) {
+                    sb.append("you may ");
+                } else {
+                    sb.append("you may have ");
+                }
 
+            }
+            sb.append(superRule.substring(0, 1).toLowerCase());
+            sb.append(superRule.substring(1));
         }
-        sb.append(superRule.substring(0, 1).toLowerCase());
-        sb.append(superRule.substring(1));
 
         return sb.toString();
     }

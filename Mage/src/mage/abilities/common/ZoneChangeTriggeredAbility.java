@@ -28,13 +28,14 @@
 
 package mage.abilities.common;
 
-import mage.constants.Zone;
 import mage.abilities.TriggeredAbilityImpl;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.game.events.ZoneChangeEvent;
+import mage.game.permanent.Permanent;
 
 /**
  * Is applied when the {@link Permanent} with this ability instance changes zones.
@@ -81,7 +82,7 @@ public class ZoneChangeTriggeredAbility<T extends ZoneChangeTriggeredAbility<T>>
 
     @Override
     public String getRule() {
-        return rule + super.getRule();
+        return new StringBuilder(rule).append(super.getRule()).toString();
     }
 
     @Override
