@@ -138,6 +138,5 @@ class DreamThiefWatcher extends WatcherImpl<DreamThiefWatcher> {
     @Override
     public void reset() {
         super.reset();
-        condition = false;
     }
 }
