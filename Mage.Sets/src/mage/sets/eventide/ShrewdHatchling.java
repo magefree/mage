@@ -29,6 +29,7 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.ObjectColor;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldAbility;
 import mage.abilities.common.SimpleActivatedAbility;
@@ -45,6 +46,7 @@ import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.counters.CounterType;
 import mage.filter.FilterSpell;
+import mage.filter.predicate.mageobject.ColorPredicate;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
@@ -62,7 +64,9 @@ public class ShrewdHatchling extends CardImpl<ShrewdHatchling> {
     
     static {
         filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new ColorPredicate(ObjectColor.BLUE));
         filter2.add(new ControllerPredicate(TargetController.YOU));
+        filter2.add(new ColorPredicate(ObjectColor.RED));
     }
     
     private String rule = "Whenever you cast a blue spell, remove a -1/-1 counter from Shrewd Hatchling.";
