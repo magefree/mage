@@ -47,7 +47,7 @@ import mage.cards.repository.ExpansionRepository;
  */
 public class TxtDeckImporter extends DeckImporter {
 
-    public static final String[] SET_VALUES = new String[] { "lands", "creatures", "planeswalkers","other spells" };
+    public static final String[] SET_VALUES = new String[] { "lands", "creatures", "planeswalkers","other spells","sideboard cards" };
     public static final Set<String> IGNORE_NAMES = new HashSet<String>(Arrays.asList(SET_VALUES));
     
     private boolean sideboard = false;
