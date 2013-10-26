@@ -67,7 +67,7 @@ public class NewPlayerPanel extends javax.swing.JPanel {
             this.txtPlayerName.setText(Config.defaultComputerName);
         }
         if (cbLevel.getModel().getSize() > 0) {
-            cbLevel.setSelectedIndex(cbLevel.getModel().getSize()-1);
+            cbLevel.setSelectedIndex((int) cbLevel.getModel().getSize()/2);
         }
     }
 

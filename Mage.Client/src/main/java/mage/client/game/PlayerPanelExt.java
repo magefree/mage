@@ -34,6 +34,28 @@
 
 package mage.client.game;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import mage.MageException;
 import mage.cards.MageCard;
 import mage.cards.action.ActionCallback;
@@ -59,19 +81,6 @@ import mage.view.ManaPoolView;
 import mage.view.PlayerView;
 import org.mage.card.arcane.ManaSymbols;
 
-import javax.swing.*;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 /**
  * Enhanced player pane.
  *
@@ -93,7 +102,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     
     private static final int PANEL_WIDTH = 94;
     private static final int PANEL_HEIGHT = 242;
-    private static final int PANEL_HEIGHT_SMALL = 190;
+    private static final int PANEL_HEIGHT_SMALL = 212;
 
     private static final Border greenBorder = new LineBorder(Color.green, 3);
     private static final Border redBorder = new LineBorder(Color.red, 2);
@@ -135,6 +144,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                     int priorityTimeValue = pt.getCount();
                     String text = getPriorityTimeLeftString(priorityTimeValue);
                     PlayerPanelExt.this.avatar.setTopText(text);
+                    PlayerPanelExt.this.timerLabel.setText(text);
                     PlayerPanelExt.this.avatar.repaint();
                 }
             });
@@ -210,9 +220,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         this.avatar.setText(player.getName());
         if (this.timer != null) {
             if (player.getPriorityTimeLeft() != Integer.MAX_VALUE) {
-            String priorityTimeValue = getPriorityTimeLeftString(player);
-            this.timer.setCount(player.getPriorityTimeLeft());
-            this.avatar.setTopText(priorityTimeValue);
+                String priorityTimeValue = getPriorityTimeLeftString(player);
+                this.timer.setCount(player.getPriorityTimeLeft());
+                this.avatar.setTopText(priorityTimeValue);
+                this.timerLabel.setText(priorityTimeValue);
             }
             if (player.hasPriority()) {
                 this.timer.resume();
@@ -288,6 +299,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         panelBackground = new MageRoundPane();
         panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
         Rectangle r = new Rectangle(80, 80);
+        timerLabel = new JLabel();
         lifeLabel = new JLabel();
         handLabel = new JLabel();
         poisonLabel = new JLabel();
@@ -307,6 +319,10 @@ public class PlayerPanelExt extends javax.swing.JPanel {
 
         BufferedImage resized = ImageHelper.getResizedImage(BufferedImageBuilder.bufferImage(image, BufferedImage.TYPE_INT_ARGB), r);
         avatar = new HoverButton("player", resized, resized, resized, r);
+        String showPlayerNamePermanently = MageFrame.getPreferences().get(PreferencesDialog.KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
+        if (showPlayerNamePermanently.equals("true")) {
+            avatar.setTextAlwaysVisible(true);
+        }
         avatar.setTextOffsetButtonY(10);
         avatar.setObserver(new Command() {
             @Override
@@ -314,6 +330,12 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                 session.sendPlayerUUID(gameId, playerId);
             }
         });
+        // timer area /small layout)
+        timerLabel.setToolTipText("Time left");
+        timerLabel.setSize(80,12);
+        timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // life area
         r = new Rectangle(18, 18);
         lifeLabel.setToolTipText("Life");
         Image imageLife = ImageHelper.getImageFromResources("/info/life.png");
@@ -321,6 +343,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         life = new ImagePanel(resizedLife, ImagePanel.ACTUAL);
         life.setToolTipText("Life");
         life.setOpaque(false);
+        // hand area
         r = new Rectangle(18, 18);
         handLabel.setToolTipText("Hand");
         Image imageHand = ImageHelper.getImageFromResources("/info/hand.png");
@@ -451,6 +474,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         manaCountLabelX.setText("0");
         manaLabels.put("X", manaCountLabelX);
         GroupLayout gl_panelBackground = new GroupLayout(panelBackground);
+
         gl_panelBackground.setHorizontalGroup(
                 gl_panelBackground.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panelBackground.createSequentialGroup()
@@ -527,6 +551,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addGap(6)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addComponent(btnPlayer, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(timerLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(avatar, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
                                 .addGap(14))
 
@@ -542,7 +567,8 @@ public class PlayerPanelExt extends javax.swing.JPanel {
                                 .addComponent(avatar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(btnPlayer)
-                                .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(timerLabel)
+                                .addGap(1)
                                 .addGroup(gl_panelBackground.createParallelGroup(Alignment.LEADING)
                                         .addGroup(gl_panelBackground.createSequentialGroup()
                                                 .addGap(1)
@@ -631,12 +657,14 @@ public class PlayerPanelExt extends javax.swing.JPanel {
         if (smallMode) {
             avatar.setVisible(false);
             btnPlayer.setVisible(true);
+            timerLabel.setVisible(true);
             panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL));
             panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT_SMALL);
         }
         else {
             avatar.setVisible(true);
             btnPlayer.setVisible(false);
+            timerLabel.setVisible(false);
             panelBackground.setPreferredSize(new Dimension(PANEL_WIDTH - 2, PANEL_HEIGHT));
             panelBackground.setBounds(0, 0, PANEL_WIDTH - 2, PANEL_HEIGHT);
         }
@@ -675,6 +703,7 @@ public class PlayerPanelExt extends javax.swing.JPanel {
     private JButton cheat;
     private MageRoundPane panelBackground;
 
+    private JLabel timerLabel;
     private JLabel lifeLabel;
     private JLabel handLabel;
     private JLabel libraryLabel;

@@ -23,6 +23,7 @@ public class HoverButton extends JPanel implements MouseListener {
     private Rectangle imageSize;
     private Rectangle buttonSize;
     private String text;
+    private boolean textAlwaysVisible = false;
     private int textOffsetY = 0;
     private int textOffsetButtonY = 2;
     private int textOffsetX = -1;
@@ -77,7 +78,7 @@ public class HoverButton extends JPanel implements MouseListener {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if (isEnabled()) {
-            if (isHovered) {
+            if (isHovered || textAlwaysVisible) {
                 g.drawImage(hoverImage, 0, 0, imageSize.width, imageSize.height, this);
                 if (text != null) {
                     if (textColor != null) {
@@ -271,4 +272,9 @@ public class HoverButton extends JPanel implements MouseListener {
     public void setTopText(String topText) {
         this.topText = topText;
     }
+
+    public void setTextAlwaysVisible(boolean textAlwaysVisible) {
+        this.textAlwaysVisible = textAlwaysVisible;
+    }
+
 }

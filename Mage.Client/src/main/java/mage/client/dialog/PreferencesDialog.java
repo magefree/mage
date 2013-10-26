@@ -77,6 +77,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
     public static final String KEY_SHOW_TOOLTIPS_ANY_ZONE = "showTooltipsInAnyZone";
     public static final String KEY_HAND_USE_BIG_CARDS = "handUseBigCards";
     public static final String KEY_PERMANENTS_IN_ONE_PILE = "nonLandPermanentsInOnePile";
+    public static final String KEY_SHOW_PLAYER_NAMES_PERMANENTLY = "showPlayerNamesPermanently";
     public static final String KEY_GAME_LOG_AUTO_SAVE = "gameLogAutoSave";
 
     public static final String KEY_CARD_IMAGES_USE_DEFAULT = "cardImagesUseDefault";
@@ -244,11 +245,12 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
         tabsPanel = new javax.swing.JTabbedPane();
         tabMain = new javax.swing.JPanel();
-        main_hand = new javax.swing.JPanel();
-        showToolTipsInAnyZone = new javax.swing.JCheckBox();
+        main_card = new javax.swing.JPanel();
         displayBigCardsInHand = new javax.swing.JCheckBox();
-        main_battlefield = new javax.swing.JPanel();
+        showToolTipsInAnyZone = new javax.swing.JCheckBox();
+        main_game = new javax.swing.JPanel();
         nonLandPermanentsInOnePile = new javax.swing.JCheckBox();
+        showPlayerNamesPermanently = new javax.swing.JCheckBox();
         main_gamelog = new javax.swing.JPanel();
         cbGameLogAutoSave = new javax.swing.JCheckBox();
         tabPhases = new javax.swing.JPanel();
@@ -339,28 +341,31 @@ public class PreferencesDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Preferences");
 
-        main_hand.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Hand"));
-        main_hand.setLayout(new java.awt.BorderLayout());
-
-        showToolTipsInAnyZone.setSelected(true);
-        showToolTipsInAnyZone.setText("Show tooltips");
-        showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showToolTipsInAnyZoneActionPerformed(evt);
-            }
-        });
-        main_hand.add(showToolTipsInAnyZone, java.awt.BorderLayout.CENTER);
+        main_card.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Card"));
+        main_card.setLayout(new java.awt.BorderLayout());
 
         displayBigCardsInHand.setText("Use big images (for high resolution screens)");
+        displayBigCardsInHand.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         displayBigCardsInHand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 displayBigCardsInHandActionPerformed(evt);
             }
         });
-        main_hand.add(displayBigCardsInHand, java.awt.BorderLayout.PAGE_START);
+        main_card.add(displayBigCardsInHand, java.awt.BorderLayout.PAGE_START);
 
-        main_battlefield.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Battlefield"));
-        main_battlefield.setLayout(new java.awt.BorderLayout());
+        showToolTipsInAnyZone.setSelected(true);
+        showToolTipsInAnyZone.setText("Show card tooltips while hoovering with the mouse pointer over a card");
+        showToolTipsInAnyZone.setToolTipText("");
+        showToolTipsInAnyZone.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        showToolTipsInAnyZone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showToolTipsInAnyZoneActionPerformed(evt);
+            }
+        });
+        main_card.add(showToolTipsInAnyZone, java.awt.BorderLayout.CENTER);
+
+        main_game.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game"));
+        main_game.setLayout(new java.awt.BorderLayout());
 
         nonLandPermanentsInOnePile.setSelected(true);
         nonLandPermanentsInOnePile.setLabel("Put non-land permanents in one pile");
@@ -369,8 +374,18 @@ public class PreferencesDialog extends javax.swing.JDialog {
                 nonLandPermanentsInOnePileActionPerformed(evt);
             }
         });
-        main_battlefield.add(nonLandPermanentsInOnePile, java.awt.BorderLayout.CENTER);
+        main_game.add(nonLandPermanentsInOnePile, java.awt.BorderLayout.CENTER);
         nonLandPermanentsInOnePile.getAccessibleContext().setAccessibleName("nonLandPermanentsInOnePile");
+
+        showPlayerNamesPermanently.setSelected(true);
+        showPlayerNamesPermanently.setText("Show player names on avatar permanently");
+        showPlayerNamesPermanently.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        showPlayerNamesPermanently.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPlayerNamesPermanentlyActionPerformed(evt);
+            }
+        });
+        main_game.add(showPlayerNamesPermanently, java.awt.BorderLayout.PAGE_END);
 
         main_gamelog.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game log"));
         main_gamelog.setLayout(new java.awt.BorderLayout());
@@ -391,24 +406,24 @@ public class PreferencesDialog extends javax.swing.JDialog {
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(main_hand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_battlefield, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
+                    .addComponent(main_card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(main_game, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(main_gamelog, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
                 .addContainerGap())
         );
         tabMainLayout.setVerticalGroup(
             tabMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(main_hand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_card, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(main_battlefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(main_game, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(main_gamelog, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
-        main_gamelog.getAccessibleContext().setAccessibleName("Game log");
+        main_card.getAccessibleContext().setAccessibleName("Game panel");
 
         tabsPanel.addTab("Main", tabMain);
 
@@ -1161,7 +1176,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
                             .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1227,7 +1242,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+            .addComponent(tabsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 562, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(saveButton)
@@ -1256,6 +1271,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         save(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true", "false", UPDATE_CACHE_POLICY);
+        save(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true", "false", UPDATE_CACHE_POLICY);
         save(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true", "false", UPDATE_CACHE_POLICY);
 
         // Phases
@@ -1321,12 +1337,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
         dialog.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
-    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
-    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
-
-    private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
-    }//GEN-LAST:event_displayBigCardsInHandActionPerformed
-
     private void cbUseDefaultImageFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUseDefaultImageFolderActionPerformed
         if (cbUseDefaultImageFolder.isSelected()) {
             useDefaultPath();
@@ -1366,9 +1376,6 @@ public class PreferencesDialog extends javax.swing.JDialog {
 
     private void txtProxyPortkeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProxyPortkeyTyped
     }//GEN-LAST:event_txtProxyPortkeyTyped
-
-    private void nonLandPermanentsInOnePileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonLandPermanentsInOnePileActionPerformed
-    }//GEN-LAST:event_nonLandPermanentsInOnePileActionPerformed
 
     private void rememberPswdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rememberPswdActionPerformed
     }//GEN-LAST:event_rememberPswdActionPerformed
@@ -1506,6 +1513,22 @@ public class PreferencesDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbGameLogAutoSaveActionPerformed
 
+    private void nonLandPermanentsInOnePileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nonLandPermanentsInOnePileActionPerformed
+
+    }//GEN-LAST:event_nonLandPermanentsInOnePileActionPerformed
+
+    private void showPlayerNamesPermanentlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPlayerNamesPermanentlyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_showPlayerNamesPermanentlyActionPerformed
+
+    private void displayBigCardsInHandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_displayBigCardsInHandActionPerformed
+
+    }//GEN-LAST:event_displayBigCardsInHandActionPerformed
+
+    private void showToolTipsInAnyZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showToolTipsInAnyZoneActionPerformed
+
+    }//GEN-LAST:event_showToolTipsInAnyZoneActionPerformed
+
     private void showProxySettings() {
         if (cbProxyType.getSelectedItem() == Connection.ProxyType.SOCKS) {
             this.pnlProxy.setVisible(true);
@@ -1588,6 +1611,7 @@ public class PreferencesDialog extends javax.swing.JDialog {
         load(prefs, dialog.displayBigCardsInHand, KEY_HAND_USE_BIG_CARDS, "true");
         load(prefs, dialog.showToolTipsInAnyZone, KEY_SHOW_TOOLTIPS_ANY_ZONE, "true");
         load(prefs, dialog.nonLandPermanentsInOnePile, KEY_PERMANENTS_IN_ONE_PILE, "true");
+        load(prefs, dialog.showPlayerNamesPermanently, KEY_SHOW_PLAYER_NAMES_PERMANENTLY, "true");
         load(prefs, dialog.cbGameLogAutoSave, KEY_GAME_LOG_AUTO_SAVE, "true");
     }
 
@@ -1944,14 +1968,15 @@ public class PreferencesDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblProxyServer;
     private javax.swing.JLabel lblProxyType;
     private javax.swing.JLabel lblProxyUserName;
-    private javax.swing.JPanel main_battlefield;
+    private javax.swing.JPanel main_card;
+    private javax.swing.JPanel main_game;
     private javax.swing.JPanel main_gamelog;
-    private javax.swing.JPanel main_hand;
     private javax.swing.JCheckBox nonLandPermanentsInOnePile;
     private javax.swing.JPanel pnlProxy;
     private javax.swing.JPanel pnlProxySettings;
     private javax.swing.JCheckBox rememberPswd;
     private javax.swing.JButton saveButton;
+    private javax.swing.JCheckBox showPlayerNamesPermanently;
     private javax.swing.JCheckBox showToolTipsInAnyZone;
     private javax.swing.JPanel sounds_backgroundMusic;
     private javax.swing.JPanel sounds_clips;
