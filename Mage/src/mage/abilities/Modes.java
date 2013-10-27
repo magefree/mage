@@ -166,8 +166,8 @@ public class Modes extends LinkedHashMap<UUID, Mode> {
         for (Mode mode: this.values()) {
             sb.append(mode.getEffects().getText(mode));
             if (this.size() > 1) {
-                if (sb.length() > 2 && sb.substring(sb.length()-2, sb.length()).equals(". ")) {
-                    sb.delete(sb.length()-2, sb.length());
+                if (sb.length() > 2 && sb.substring(sb.length()-1, sb.length()).equals(".")) {
+                    sb.delete(sb.length()-1, sb.length());
                 }
                 sb.append(andOr);
             }

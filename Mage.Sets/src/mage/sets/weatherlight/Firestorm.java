@@ -128,7 +128,7 @@ class FirestormCost extends CostImpl<FirestormCost> implements VariableCost {
     protected int amountPaid = 0;
 
     public FirestormCost() {
-        this.text = "discard X cards.";
+        this.text = "discard X cards";
     }
 
     public FirestormCost(final FirestormCost cost) {

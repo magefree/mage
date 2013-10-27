@@ -70,7 +70,7 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
         setText();
     }
 
-    public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
+        public GainAbilityAttachedEffect(Ability ability, AttachmentType attachmentType) {
         super(Duration.WhileOnBattlefield, Layer.AbilityAddingRemovingEffects_6, SubLayer.NA, Outcome.AddAbility);
         this.ability = ability;
         this.attachmentType = attachmentType;
@@ -126,13 +126,17 @@ public class GainAbilityAttachedEffect extends ContinuousEffectImpl<GainAbilityA
         }
         sb.append(" creature ");
         if (duration == Duration.WhileOnBattlefield) {
-            sb.append("has ");
+            sb.append("has \"");
         } else {
             sb.append("gains ");
         }
         sb.append(ability.getRule());
         if (!duration.toString().isEmpty()) {
             sb.append(" ").append(duration.toString());
+        } else {
+            if (duration == Duration.WhileOnBattlefield) {
+                sb.append("\"");
+            }
         }
         staticText = sb.toString();
     }

@@ -58,18 +58,18 @@ public class Effects extends ArrayList<Effect> {
         String rule = null;
         for (Effect effect: this) {
             String endString = "";
-            if (rule != null && rule.length()> 3 && !rule.endsWith(". ")) {
+            if (rule != null && rule.length()> 3 && !rule.endsWith(".")) {
                 endString = ". ";
             }
             rule = effect.getText(mode);
             if (rule != null) {
-                if (rule.startsWith("and ")) {
+                if (rule.startsWith("and ") || rule.startsWith(",")) {
                     endString = " ";
                 }
                 sbText.append(endString).append(rule);
             }
         }
-        if (rule != null && rule.length()> 3 && !rule.endsWith(". ")) {
+        if (rule != null && rule.length()> 3 && !rule.endsWith(".") && !rule.endsWith("\"")) {
             sbText.append(".");
         }
         return sbText.toString();

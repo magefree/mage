@@ -141,6 +141,6 @@ class CobraTrapAlternativeCost extends AlternativeCostImpl<CobraTrapAlternativeC
 
     @Override
     public String getText() {
-        return "If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost.";
+        return "If a noncreature permanent under your control was destroyed this turn by a spell or ability an opponent controlled, you may pay {G} rather than pay Cobra Trap's mana cost";
     }
 }

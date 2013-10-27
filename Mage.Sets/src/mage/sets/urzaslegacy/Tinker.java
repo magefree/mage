@@ -45,7 +45,7 @@ import mage.target.common.TargetControlledPermanent;
  */
 public class Tinker extends CardImpl<Tinker> {
 
-    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact.");
+    private static final FilterControlledPermanent filter = new FilterControlledPermanent("an artifact");
 
     static {
         filter.add(new CardTypePredicate(CardType.ARTIFACT));

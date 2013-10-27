@@ -79,7 +79,7 @@ class DevastatingSummonsCost extends CostImpl<DevastatingSummonsCost> implements
     protected int amountPaid = 0;
 
     public DevastatingSummonsCost() {
-        this.text = "sacrifice X lands.";
+        this.text = "sacrifice X lands";
     }
 
     public DevastatingSummonsCost(final DevastatingSummonsCost cost) {
