@@ -30,6 +30,7 @@
         <deckType name="Block Constructed - Shards of Alara" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ShardsOfAlaraBlock"/>
         <deckType name="Block Constructed - Theros" jar="mage-deck-constructed.jar" className="mage.deck.TherosBlock"/>
         <deckType name="Block Constructed - Zendikar" jar="mage-deck-constructed-${project.version}.jar" className="mage.deck.ZendikarBlock"/>
+        <deckType name="Variant Magic - Commander" jar="mage-deck-constructed.jar" className="mage.deck.Commander"/>
         <deckType name="Limited" jar="mage-deck-limited-${project.version}.jar" className="mage.deck.Limited"/>
     </deckTypes>
 </config>
