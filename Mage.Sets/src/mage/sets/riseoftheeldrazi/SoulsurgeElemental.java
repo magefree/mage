@@ -36,6 +36,7 @@ import mage.MageInt;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.dynamicvalue.common.PermanentsOnBattlefieldCount;
 import mage.abilities.dynamicvalue.common.StaticValue;
+import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.keyword.FirstStrikeAbility;
 import mage.cards.CardImpl;
@@ -58,8 +59,13 @@ public class SoulsurgeElemental extends CardImpl<SoulsurgeElemental> {
         this.power = new MageInt(0);
         this.toughness = new MageInt(1);
 
+        // First strike
         this.addAbility(FirstStrikeAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.ALL, new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Duration.EndOfGame)));
+
+        // Soulsurge Elemental's power is equal to the number of creatures you control.
+        Effect effect = new BoostSourceEffect(new PermanentsOnBattlefieldCount(new FilterControlledCreaturePermanent()), new StaticValue(0), Duration.EndOfGame);
+        effect.setText("{this}'s power is equal to the number of creatures you control");
+        this.addAbility(new SimpleStaticAbility(Zone.ALL, effect));
     }
 
     public SoulsurgeElemental(final SoulsurgeElemental card) {

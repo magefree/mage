@@ -97,6 +97,7 @@ class OozeToken extends Token {
 
     public OozeToken() {
         super("Ooze", "X/X green ooze creature token");
+
         cardType.add(CardType.CREATURE);
         color.setGreen(true);
         subtype.add("Ooze");

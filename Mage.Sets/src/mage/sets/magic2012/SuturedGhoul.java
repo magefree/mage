@@ -70,7 +70,7 @@ public class SuturedGhoul extends CardImpl<SuturedGhoul> {
 
         // Sutured Ghoul's power is equal to the total power of the exiled cards and its toughness is equal to their total toughness.
         BoostSourceEffect effect = new BoostSourceEffect(new SuturedGhoulPowerCount(), new SuturedGhoulToughnessCount(), Duration.WhileOnBattlefield);
-        effect.setRule(staticText2);
+        effect.setText(staticText2);
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, effect));
     }
 

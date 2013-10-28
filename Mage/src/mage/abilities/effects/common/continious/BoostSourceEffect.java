@@ -100,10 +100,6 @@ public class BoostSourceEffect extends ContinuousEffectImpl<BoostSourceEffect> i
         return false;
     }
 
-    public void setRule(String value) {
-        staticText = value;
-    }
-
     private void setText() {
         StringBuilder sb = new StringBuilder();
         sb.append("{this} gets ");
