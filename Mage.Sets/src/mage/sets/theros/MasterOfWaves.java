@@ -101,7 +101,7 @@ class MasterOfWavesElementalToken extends Token {
         this.cardType.add(CardType.CREATURE);
         this.subtype.add("Elemental");
 
-        this.color.isBlue();
+        this.color.setBlue(true);
 
         this.power = new MageInt(1);
         this.toughness = new MageInt(0);
