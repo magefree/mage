@@ -53,7 +53,7 @@ public class PlowThroughReito extends CardImpl<PlowThroughReito> {
 
         // Sweep - Return any number of Plains you control to their owner's hand. Target creature gets +1/+1 until end of turn for each Plains returned this way.
         this.getSpellAbility().addEffect(new SweepEffect("Plains"));
-        DynamicValue sweepValue = new SweepNumber("Plains", false);
+        DynamicValue sweepValue = new SweepNumber("Plains", true);
         this.getSpellAbility().addEffect(new BoostTargetEffect(sweepValue, sweepValue, Duration.EndOfTurn));
         this.getSpellAbility().addTarget(new TargetCreaturePermanent(true));
     }
