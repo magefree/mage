@@ -64,7 +64,7 @@ public class DealsDamageToAPlayerAttachedTriggeredAbility extends TriggeredAbili
     @Override
     public String getRule() {
         StringBuilder sb = new StringBuilder("Whenever ").append(attachedDescription);
-        sb.append(" creature deals");
+        sb.append(" deals");
         if (!onlyCombat) {
             sb.append(" combat");
         }

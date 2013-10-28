@@ -33,7 +33,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.RegenerateSourceEffect;
@@ -59,7 +59,7 @@ public class KashiTribeReaver extends CardImpl<KashiTribeReaver> {
 
         // Whenever Kashi-Tribe Reaver deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability;
-        ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), true, false, true);
         ability.addEffect(new SkipNextUntapTargetEffect("and it"));
         this.addAbility(ability);
         // {1}{G}: Regenerate Kashi-Tribe Reaver.

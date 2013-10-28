@@ -30,7 +30,7 @@ package mage.sets.legions;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.TriggeredAbilityImpl;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.cards.CardImpl;
@@ -57,7 +57,7 @@ public class ToxinSliver extends CardImpl<ToxinSliver> {
         this.toughness = new MageInt(3);
 
         // Whenever a Sliver deals combat damage to a creature, destroy that creature. It can't be regenerated.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(false), false, true)); 
+        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(false), true, false, true));
        
     }
 

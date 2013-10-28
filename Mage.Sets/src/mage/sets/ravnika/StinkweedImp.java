@@ -31,7 +31,7 @@ import java.util.UUID;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.effects.common.DestroyTargetEffect;
 import mage.abilities.keyword.DredgeAbility;
 import mage.abilities.keyword.FlyingAbility;
@@ -55,7 +55,7 @@ public class StinkweedImp extends CardImpl<StinkweedImp> {
         // Flying
         this.addAbility(FlyingAbility.getInstance());
         // Whenever Stinkweed Imp deals combat damage to a creature, destroy that creature.
-        this.addAbility(new DealsCombatDamageToACreatureTriggeredAbility(new DestroyTargetEffect(), false, true));
+        this.addAbility(new DealsDamageToACreatureTriggeredAbility(new DestroyTargetEffect(), true, false, true));
         // Dredge 5
         this.addAbility(new DredgeAbility(5));
     }

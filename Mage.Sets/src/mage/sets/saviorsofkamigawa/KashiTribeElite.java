@@ -33,7 +33,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.DealsCombatDamageToACreatureTriggeredAbility;
+import mage.abilities.common.DealsDamageToACreatureTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.common.SkipNextUntapTargetEffect;
 import mage.abilities.effects.common.TapTargetEffect;
@@ -74,7 +74,7 @@ public class KashiTribeElite extends CardImpl<KashiTribeElite> {
 
         // Whenever Kashi-Tribe Elite deals combat damage to a creature, tap that creature and it doesn't untap during its controller's next untap step.
         Ability ability;
-        ability = new DealsCombatDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), false, true);
+        ability = new DealsDamageToACreatureTriggeredAbility(new TapTargetEffect("that creature"), true, false, true);
         ability.addEffect(new SkipNextUntapTargetEffect("and it"));
         this.addAbility(ability);
 

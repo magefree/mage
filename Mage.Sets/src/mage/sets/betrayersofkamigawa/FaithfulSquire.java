@@ -82,7 +82,7 @@ public class FaithfulSquire extends CardImpl<FaithfulSquire> {
         this.addAbility(new ConditionalTriggeredAbility(
                 new OnEventTriggeredAbility(GameEvent.EventType.END_TURN_STEP_PRE, "beginning of the end step", true, new FlipSourceEffect()),
                 new HasCounterCondition(CounterType.KI, 2, Integer.MAX_VALUE),
-                "At the beginning of the end step, if there are two or more ki counters on Faithful Squire, you may flip it.", true));
+                "At the beginning of the end step, if there are two or more ki counters on {this}, you may flip it.", true));
 
         Ability ability = new SimpleStaticAbility(Zone.BATTLEFIELD, new ConditionalContinousEffect(new CopyTokenEffect(new KaisoMemoryOfLoyalty()), FlippedCondition.getInstance(), ""));
         ability.setRuleVisible(false);
@@ -118,7 +118,7 @@ class KaisoMemoryOfLoyalty extends Token {
                 Zone.BATTLEFIELD,
                 new PreventDamageTargetEffect(Duration.EndOfTurn, Integer.MAX_VALUE),
                 new RemoveCountersSourceCost(CounterType.KI.createInstance()));
-        ability.addTarget(new TargetCreaturePermanent());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 }
