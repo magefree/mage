@@ -68,8 +68,9 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
         StringBuilder sb = new StringBuilder();
         for (UUID targetId: getTargets()) {
             MageObject object = game.getObject(targetId);
-            if (object != null)
+            if (object != null) {
                 sb.append(object.getName()).append(" ");
+            }
         }
         return sb.toString();
     }
@@ -77,8 +78,9 @@ public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl
     @Override
     public boolean canTarget(UUID id, Game game) {
         MageObject object = game.getObject(id);
-        if (object != null && game.getState().getZone(id).match(zone))
+        if (object != null && game.getState().getZone(id).match(zone)) {
             return getFilter().match(object, game);
+        }
         return false;
     }
 

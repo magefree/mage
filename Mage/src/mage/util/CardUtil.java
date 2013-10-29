@@ -343,6 +343,9 @@ public class CardUtil {
         if (number >= 0 && number < 21) {
             return numberStrings[number];
         }
+        if (number == Integer.MAX_VALUE) {
+            return "any number of";
+        }
         return Integer.toString(number);
     }
 
