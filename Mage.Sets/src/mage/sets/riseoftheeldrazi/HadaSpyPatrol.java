@@ -64,9 +64,9 @@ public class HadaSpyPatrol extends LevelerCard<HadaSpyPatrol> {
         abilities1.add(new UnblockableAbility());
 
         Abilities<Ability> abilities2 = new AbilitiesImpl<Ability>();
-        abilities2.add(new UnblockableAbility());
         abilities2.add(ShroudAbility.getInstance());
-
+        abilities2.add(new UnblockableAbility());
+        
         LevelerCardBuilder.construct(this,
                 new LevelerCardBuilder.LevelAbility(1, 2, abilities1, 2, 2),
                 new LevelerCardBuilder.LevelAbility(3, -1, abilities2, 3, 3)
