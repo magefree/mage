@@ -65,13 +65,9 @@ public class SkipUntapTargetEffect extends ReplacementEffectImpl<SkipUntapTarget
 
     @Override
     public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        Permanent creature = game.getPermanent(event.getTargetId());
-        if (creature != null) {
-            Permanent sourcePermanent = game.getPermanent(source.getSourceId());
-            creature.addInfo(source.getSourceId().toString(), new StringBuilder("Does not untap during untap step [").append(sourcePermanent.getName()).append("]").toString());
-        }
         return true;
     }
+
 
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
