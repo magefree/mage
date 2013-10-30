@@ -64,7 +64,11 @@ public class EntersBattlefieldControlledTriggeredAbility extends EntersBattlefie
     }
 
     public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, String rule) {
-        super(zone, effect, filter, optional, rule, true);
+        this(zone, effect, filter, optional, false, rule);
+    }
+
+    public EntersBattlefieldControlledTriggeredAbility(Zone zone, Effect effect, FilterPermanent filter, boolean optional, boolean setTargetPointer, String rule) {
+        super(zone, effect, filter, optional, setTargetPointer, rule, true);
     }
 
     public EntersBattlefieldControlledTriggeredAbility(EntersBattlefieldControlledTriggeredAbility ability) {
