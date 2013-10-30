@@ -28,11 +28,11 @@
 
 package mage.abilities.keyword;
 
-import mage.constants.TimingRule;
-import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.common.counter.AddCountersSourceEffect;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.counters.common.LevelCounter;
 
 /**
@@ -57,6 +57,7 @@ public class LevelUpAbility extends ActivatedAbilityImpl<LevelUpAbility> {
 
     @Override
     public String getRule() {
-        return "Level up " + manaCostsToPay.getText();
+        return new StringBuilder("Level up ").append(manaCostsToPay.getText())
+                .append(" <i>(").append(manaCostsToPay.getText()).append(": Put a level counter on this. Level up only as a sorcery.)</i>").toString();
     }
 }

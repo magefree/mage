@@ -77,7 +77,9 @@ public class LevelerCardBuilder {
         for (Ability ability : abilities) {
             ContinuousEffect effect = new GainAbilitySourceEffect(ability);
             ConditionalContinousEffect abEffect = new ConditionalContinousEffect(effect, condition, "");
-            constructed.add(new SimpleStaticAbility(Zone.BATTLEFIELD, abEffect));
+            Ability staticAbility = new SimpleStaticAbility(Zone.BATTLEFIELD, abEffect);
+            staticAbility.setRuleVisible(false);
+            constructed.add(staticAbility);
         }
 
         ContinuousEffect effect = new SetPowerToughnessSourceEffect(power, toughness, Duration.WhileOnBattlefield);
@@ -216,14 +218,14 @@ public class LevelerCardBuilder {
 
         public String getRule() {
             StringBuilder sb = new StringBuilder();
-            sb.append("Level ").append(level1);
+            sb.append("<b>Level ").append(level1);
             if (level2 == -1) {
                 sb.append("+");
             }
             else {
                 sb.append("-").append(level2);
             }
-            sb.append(": ").append(power).append("/").append(toughness).append(" ");
+            sb.append(":</b> ").append(power).append("/").append(toughness).append(" ");
             for (String rule: abilities.getRules("{this}")) {
                 sb.append(rule).append(" ");
             }

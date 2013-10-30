@@ -69,7 +69,7 @@ public class Effects extends ArrayList<Effect> {
                 sbText.append(endString).append(rule);
             }
         }
-        if (rule != null && rule.length()> 3 && !rule.endsWith(".") && !rule.endsWith("\"")) {
+        if (rule != null && rule.length()> 3 && !rule.endsWith(".") && !rule.endsWith("\"") && !rule.startsWith("<b>Level ")) {
             sbText.append(".");
         }
         return sbText.toString();
