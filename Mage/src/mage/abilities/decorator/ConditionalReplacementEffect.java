@@ -28,6 +28,7 @@
 package mage.abilities.decorator;
 
 import mage.abilities.Ability;
+import mage.abilities.Mode;
 import mage.abilities.condition.Condition;
 import mage.abilities.condition.FixedCondition;
 import mage.abilities.effects.ReplacementEffect;
@@ -113,6 +114,14 @@ public class ConditionalReplacementEffect extends ReplacementEffectImpl<Conditio
             return otherwiseEffect.applies(event, source, game);
         }
         return false;
+    }
+
+    @Override
+    public String getText(Mode mode) {
+        if (staticText == null || staticText.isEmpty() && this.effect != null) { // usefull for conditional night/day card abilities
+            return effect.getText(mode);
+        }
+        return staticText;
     }
 
     @Override
