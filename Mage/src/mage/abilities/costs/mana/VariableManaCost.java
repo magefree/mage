@@ -44,6 +44,7 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     protected int multiplier;
     protected FilterMana filter;
     protected int minX = 0;
+    protected int maxX = Integer.MAX_VALUE;
 
     public VariableManaCost() {
         this(1);
@@ -55,13 +56,14 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
         options.add(new Mana());
     }
 
-    public VariableManaCost(VariableManaCost manaCost) {
+    public VariableManaCost(final VariableManaCost manaCost) {
         super(manaCost);
         this.multiplier = manaCost.multiplier;
         if (manaCost.filter != null) {
             this.filter = manaCost.filter.copy();
         }
         this.minX = manaCost.minX;
+        this.maxX = manaCost.maxX;
     }
 
     @Override
@@ -136,4 +138,13 @@ public class VariableManaCost extends ManaCostImpl<VariableManaCost> implements 
     public void setMinX(int minX) {
         this.minX = minX;
     }
+
+    public int getMaxX() {
+        return maxX;
+    }
+
+    public void setMaxX(int maxX) {
+        this.maxX = maxX;
+    }
+    
 }

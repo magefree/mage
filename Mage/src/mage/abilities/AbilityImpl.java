@@ -323,7 +323,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
             int xValue;
             if (!variableManaCost.isPaid()) { // should only happen for human players
                 if (!noMana) {
-                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), Integer.MAX_VALUE, "Announce the value for " + variableManaCost.getText(), game, this);
+                    xValue = game.getPlayer(this.controllerId).announceXMana(variableManaCost.getMinX(), variableManaCost.getMaxX(), "Announce the value for " + variableManaCost.getText(), game, this);
                     int amountMana = xValue * variableManaCost.getMultiplier();
                     StringBuilder manaString = new StringBuilder();
                     if (variableManaCost.getFilter() == null || variableManaCost.getFilter().isColorless()) {

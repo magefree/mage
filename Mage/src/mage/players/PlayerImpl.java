@@ -133,6 +133,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     protected Cards sideboard;
     protected Cards hand;
     protected Cards graveyard;
+    protected UUID commanderId;
     protected Abilities<Ability> abilities;
     protected Counters counters;
     protected int landsPlayed;
@@ -211,6 +212,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.sideboard = player.sideboard.copy();
         this.hand = player.hand.copy();
         this.graveyard = player.graveyard.copy();
+        this.commanderId = player.commanderId;
         this.abilities = player.abilities.copy();
         this.counters = player.counters.copy();
 
@@ -260,6 +262,7 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         this.sideboard = player.getSideboard().copy();
         this.hand = player.getHand().copy();
         this.graveyard = player.getGraveyard().copy();
+        this.commanderId = player.getCommanderId();
         this.abilities = player.getAbilities().copy();
         this.counters = player.getCounters().copy();
 
@@ -2030,5 +2033,15 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
     @Override
     public boolean canJoinTable(Table table) {
         return true;
+    }
+
+    @Override
+    public void setCommanderId(UUID commanderId) {
+        this.commanderId = commanderId;
+    };
+
+    @Override
+    public UUID getCommanderId() {
+        return this.commanderId;
     }
 }

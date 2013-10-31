@@ -104,6 +104,9 @@ public class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffe
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         sb.append("put ");
         if (counter.getCount() > 1) {

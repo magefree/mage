@@ -25,66 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.filter.predicate.other;
+package mage.sets.commander;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import mage.cards.Card;
-import mage.filter.predicate.Predicate;
-import mage.game.Game;
+import java.util.UUID;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class CardTextPredicate implements Predicate<Card> {
+public class HomewardPath extends mage.sets.commander2013.HomewardPath {
 
-    private final String text;
+    public HomewardPath(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 277;
+        this.expansionSetCode = "CMD";
+    }
 
-    public CardTextPredicate(String text) {
-        this.text = text;
+    public HomewardPath(final HomewardPath card) {
+        super(card);
     }
 
     @Override
-    public boolean apply(Card input, Game game) {
-        if (text.isEmpty()) {
-            return true;
-        }
-        // first check in card name
-        if (input.getName().toLowerCase().contains(text.toLowerCase())) {
-            return true;
-        }
-
-        //separate by spaces
-        String[] tokens = text.toLowerCase().split(" ");
-        for (String token : tokens) {
-            boolean found = false;
-            if (!token.isEmpty()) {
-                // then try to find in rules
-                for (String rule : input.getRules()) {
-                    if (rule.toLowerCase().contains(token)) {
-                        found = true;
-                        break;
-                    }
-                }
-
-                for (String subType : input.getSubtype()) {
-                    if (subType.equalsIgnoreCase(token)) {
-                        found = true;
-                        break;
-                    }
-                }
-            }
-            if (!found) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "CardText(" + text + ')';
+    public HomewardPath copy() {
+        return new HomewardPath(this);
     }
 }

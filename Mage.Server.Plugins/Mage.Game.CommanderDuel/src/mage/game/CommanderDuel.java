@@ -95,6 +95,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
                 if(player.getSideboard().size() > 0){
                     Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
                     if(commander != null){
+                        player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
                         ability.addEffect(new CommanderReplacementEffect(commander.getId()));
                         ability.addEffect(new CommanderCostModification(commander.getId()));

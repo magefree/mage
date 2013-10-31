@@ -339,4 +339,16 @@ public interface Player extends MageItem, Copyable<Player> {
      * @return
      */
     boolean canJoinTable(Table table);
+
+    /**
+     * Get the commanderId of the player
+     * @param card
+     */
+    void setCommanderId(UUID commanderId);
+
+    /**
+     * Set the commanderId of the player
+     * @param card
+     */
+    UUID getCommanderId();
 }

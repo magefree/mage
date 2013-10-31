@@ -145,6 +145,11 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
         return sb.toString();
     }
 
+    /**
+     * Called before each applyEffects or if after a permanent was copied for the copied object
+     *
+     * @param game
+     */
     @Override
     public void reset(Game game) {
         this.beforeResetControllerId = this.controllerId;
