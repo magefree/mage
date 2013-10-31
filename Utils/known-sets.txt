@@ -80,6 +80,7 @@ Dark Ascension|darkascension|
 Avacyn Restored|avacynrestored|
 Gatecrash|gatecrash|
 Magic: The Gathering-Commander|commander|
+Commander 2013 Edition|commander2013|
 Dragon's Maze|dragonsmaze|
 Modern Masters|modernmasters|
 Theros|theros|
