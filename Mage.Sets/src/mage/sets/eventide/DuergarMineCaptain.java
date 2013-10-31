@@ -29,9 +29,11 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.UntapSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.continious.BoostAllEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
@@ -41,34 +43,35 @@ import mage.filter.common.FilterAttackingCreature;
 
 /**
  *
- * @author North
- */
-public class NobilisOfWar extends CardImpl<NobilisOfWar> {
+ * @author jeffwadsworth
 
-    public NobilisOfWar(UUID ownerId) {
-        super(ownerId, 144, "Nobilis of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}{R/W}{R/W}");
+ */
+public class DuergarMineCaptain extends CardImpl<DuergarMineCaptain> {
+
+    public DuergarMineCaptain(UUID ownerId) {
+        super(ownerId, 138, "Duergar Mine-Captain", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{2}{R/W}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add("Dwarf");
+        this.subtype.add("Soldier");
 
         this.color.setRed(true);
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(1);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Attacking creatures you control get +2/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        // {1}{RW}, {untap}: Attacking creatures get +1/+0 until end of turn.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostAllEffect(1, 0, Duration.EndOfTurn, new FilterAttackingCreature(), false), new ManaCostsImpl("{1}{R/W}"));
+        ability.addCost(new UntapSourceCost());
+        this.addAbility(ability);
+        
     }
 
-    public NobilisOfWar(final NobilisOfWar card) {
+    public DuergarMineCaptain(final DuergarMineCaptain card) {
         super(card);
     }
 
     @Override
-    public NobilisOfWar copy() {
-        return new NobilisOfWar(this);
+    public DuergarMineCaptain copy() {
+        return new DuergarMineCaptain(this);
     }
 }

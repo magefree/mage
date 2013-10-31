@@ -29,46 +29,51 @@ package mage.sets.eventide;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.Ability;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.common.SacrificeSourceCost;
+import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.effects.common.PutOnLibraryTargetEffect;
+import mage.abilities.keyword.PersistAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.target.common.TargetCardInGraveyard;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+
  */
-public class NobilisOfWar extends CardImpl<NobilisOfWar> {
+public class GrazingKelpie extends CardImpl<GrazingKelpie> {
 
-    public NobilisOfWar(UUID ownerId) {
-        super(ownerId, 144, "Nobilis of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}{R/W}{R/W}");
+    public GrazingKelpie(UUID ownerId) {
+        super(ownerId, 153, "Grazing Kelpie", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{3}{G/U}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
+        this.subtype.add("Beast");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.color.setBlue(true);
+        this.color.setGreen(true);
+        this.power = new MageInt(2);
+        this.toughness = new MageInt(3);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Attacking creatures you control get +2/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        // {GU}, Sacrifice Grazing Kelpie: Put target card from a graveyard on the bottom of its owner's library.
+        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new PutOnLibraryTargetEffect(false), new ManaCostsImpl("{G/U}"));
+        ability.addCost(new SacrificeSourceCost());
+        ability.addTarget(new TargetCardInGraveyard());
+        this.addAbility(ability);
+        
+        // Persist
+        this.addAbility(new PersistAbility());
     }
 
-    public NobilisOfWar(final NobilisOfWar card) {
+    public GrazingKelpie(final GrazingKelpie card) {
         super(card);
     }
 
     @Override
-    public NobilisOfWar copy() {
-        return new NobilisOfWar(this);
+    public GrazingKelpie copy() {
+        return new GrazingKelpie(this);
     }
 }

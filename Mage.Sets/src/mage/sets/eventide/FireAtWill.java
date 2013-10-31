@@ -28,47 +28,50 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.effects.common.DamageMultiEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
-import mage.constants.Duration;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.permanent.AttackingPredicate;
+import mage.filter.predicate.permanent.BlockingPredicate;
+import mage.target.common.TargetCreaturePermanentAmount;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+ *
  */
-public class NobilisOfWar extends CardImpl<NobilisOfWar> {
+public class FireAtWill extends CardImpl<FireAtWill> {
 
-    public NobilisOfWar(UUID ownerId) {
-        super(ownerId, 144, "Nobilis of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}{R/W}{R/W}");
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("attacking or blocking creatures");
+
+    static {
+        filter.add(Predicates.or(
+                new AttackingPredicate(),
+                new BlockingPredicate()));
+    }
+
+    public FireAtWill(UUID ownerId) {
+        super(ownerId, 140, "Fire at Will", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{R/W}{R/W}{R/W}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
 
         this.color.setRed(true);
         this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Attacking creatures you control get +2/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        // Fire at Will deals 3 damage divided as you choose among one, two, or three target attacking or blocking creatures.
+        this.getSpellAbility().addEffect(new DamageMultiEffect(3));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanentAmount(3, filter));
+
     }
 
-    public NobilisOfWar(final NobilisOfWar card) {
+    public FireAtWill(final FireAtWill card) {
         super(card);
     }
 
     @Override
-    public NobilisOfWar copy() {
-        return new NobilisOfWar(this);
+    public FireAtWill copy() {
+        return new FireAtWill(this);
     }
 }

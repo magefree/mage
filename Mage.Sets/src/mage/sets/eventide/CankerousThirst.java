@@ -28,47 +28,47 @@
 package mage.sets.eventide;
 
 import java.util.UUID;
-import mage.MageInt;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.common.continious.BoostControlledEffect;
-import mage.abilities.keyword.FlyingAbility;
+import mage.abilities.condition.common.ManaWasSpentCondition;
+import mage.abilities.decorator.ConditionalContinousEffect;
+import mage.abilities.effects.common.continious.BoostTargetEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
+import mage.constants.ManaType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.filter.common.FilterAttackingCreature;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
- * @author North
+ * @author jeffwadsworth
+
  */
-public class NobilisOfWar extends CardImpl<NobilisOfWar> {
+public class CankerousThirst extends CardImpl<CankerousThirst> {
 
-    public NobilisOfWar(UUID ownerId) {
-        super(ownerId, 144, "Nobilis of War", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{R/W}{R/W}{R/W}{R/W}{R/W}");
+    public CankerousThirst(UUID ownerId) {
+        super(ownerId, 116, "Cankerous Thirst", Rarity.UNCOMMON, new CardType[]{CardType.INSTANT}, "{3}{B/G}");
         this.expansionSetCode = "EVE";
-        this.subtype.add("Spirit");
-        this.subtype.add("Avatar");
 
-        this.color.setRed(true);
-        this.color.setWhite(true);
-        this.power = new MageInt(3);
-        this.toughness = new MageInt(4);
+        this.color.setGreen(true);
+        this.color.setBlack(true);
 
-        // Flying
-        this.addAbility(FlyingAbility.getInstance());
-        // Attacking creatures you control get +2/+0.
-        BoostControlledEffect boostEffect = new BoostControlledEffect(2, 0, Duration.WhileOnBattlefield, new FilterAttackingCreature("Attacking creatures"), false);
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, boostEffect));
+        // If {B} was spent to cast Cankerous Thirst, you may have target creature get -3/-3 until end of turn. If {G} was spent to cast Cankerous Thirst, you may have target creature get +3/+3 until end of turn.
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+                new BoostTargetEffect(-3, -3, Duration.EndOfTurn),
+                new ManaWasSpentCondition(ManaType.BLACK), "If {B} was spent to cast {this}, you may have target creature get -3/-3 until end of turn", true));
+        this.getSpellAbility().addEffect(new ConditionalContinousEffect(
+                new BoostTargetEffect(3, 3, Duration.EndOfTurn),
+                new ManaWasSpentCondition(ManaType.GREEN), "If {G} was spent to cast {this}, you may have target creature get +3/+3 until end of turn", true));
+        this.getSpellAbility().addTarget(new TargetCreaturePermanent());
+        this.addInfo("Info1", "<i>(Do both if {B}{G} was spent.)<i>");
     }
 
-    public NobilisOfWar(final NobilisOfWar card) {
+    public CankerousThirst(final CankerousThirst card) {
         super(card);
     }
 
     @Override
-    public NobilisOfWar copy() {
-        return new NobilisOfWar(this);
+    public CankerousThirst copy() {
+        return new CankerousThirst(this);
     }
 }
