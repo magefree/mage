@@ -23,6 +23,7 @@ public class ConstructedFormats {
 
     private static final String[] constructedFormats = {
             ALL, STANDARD, EXTENDED, MODERN,
+            "Commander 2013 Edition",
             "* Theros Block", "Theros",
             "Magic 2014",
             "Modern Masters",
@@ -369,6 +370,9 @@ public class ConstructedFormats {
         }
         if (format.equals("Commander")) {
             return Arrays.asList("CMD");
+        }
+        if (format.equals("Commander 2013 Edition")) {
+            return Arrays.asList("C13");
         }
         if (format.equals("Planechase 2012")) {
             return Arrays.asList("PC2");

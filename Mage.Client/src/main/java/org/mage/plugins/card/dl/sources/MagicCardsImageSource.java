@@ -16,6 +16,7 @@ public class MagicCardsImageSource implements CardImageSource {
     private static final Map<String, String> setNameReplacement = new HashMap<String, String>() {
 
         {
+            put("C13", "commander-2013-edition");
             put("THS", "theros");
             put("M14", "magic-2014");
             put("DDL", "duel-decks-heroes-vs-monsters");
