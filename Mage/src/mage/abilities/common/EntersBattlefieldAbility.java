@@ -44,7 +44,7 @@ public class EntersBattlefieldAbility extends StaticAbility<EntersBattlefieldAbi
     protected Boolean showRule;
     
     public EntersBattlefieldAbility(Effect effect) {
-        this(new EntersBattlefieldEffect(effect), true);
+        this(effect, true);
     }
 /**
  *
