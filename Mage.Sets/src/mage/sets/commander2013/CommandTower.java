@@ -35,6 +35,8 @@ import mage.abilities.effects.common.ManaEffect;
 import mage.abilities.mana.SimpleManaAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.choices.Choice;
+import mage.choices.ChoiceImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.constants.Zone;
@@ -85,28 +87,46 @@ class CommandTowerManaEffect extends ManaEffect<CommandTowerManaEffect> {
     public boolean apply(Game game, Ability source) {
         Player controller = game.getPlayer(source.getControllerId());
         if (controller != null) {
-            Mana mana = new Mana();
             Card commander = game.getCard(controller.getCommanderId());
             if (commander != null) {
                 Mana commanderMana = commander.getManaCost().getMana();
+                Choice choice = new ChoiceImpl(true);
+                choice.setMessage("Pick a mana color");
                 if (commanderMana.getBlack() > 0) {
-                    mana.addBlack();
-                }
-                if (commanderMana.getBlue() > 0) {
-                    mana.addBlue();
-                }
-                if (commanderMana.getGreen() > 0) {
-                    mana.addGreen();
+                    choice.getChoices().add("Black");
                 }
                 if (commanderMana.getRed() > 0) {
-                    mana.addRed();
+                    choice.getChoices().add("Red");
+                }
+                if (commanderMana.getBlue() > 0) {
+                    choice.getChoices().add("Blue");
+                }
+                if (commanderMana.getGreen() > 0) {
+                    choice.getChoices().add("Green");
                 }
                 if (commanderMana.getWhite() > 0) {
-                    mana.addWhite();
+                    choice.getChoices().add("White");
                 }
+                if (choice.getChoices().size() > 0) {
+                    if (choice.getChoices().size() == 1) {
+                        choice.setChoice(choice.getChoices().iterator().next());
+                    } else {
+                        controller.choose(outcome, choice, game);
+                    }
+                    if (choice.getChoice().equals("Black")) {
+                        controller.getManaPool().addMana(Mana.BlackMana, game, source);
+                    } else if (choice.getChoice().equals("Blue")) {
+                        controller.getManaPool().addMana(Mana.BlueMana, game, source);
+                    } else if (choice.getChoice().equals("Red")) {
+                        controller.getManaPool().addMana(Mana.RedMana, game, source);
+                    } else if (choice.getChoice().equals("Green")) {
+                        controller.getManaPool().addMana(Mana.GreenMana, game, source);
+                    } else if (choice.getChoice().equals("White")) {
+                        controller.getManaPool().addMana(Mana.WhiteMana, game, source);
+                    }
+                }
+                return true;
             }
-            controller.getManaPool().addMana(mana, game, source);
-            return true;
         }
         return false;
     }
