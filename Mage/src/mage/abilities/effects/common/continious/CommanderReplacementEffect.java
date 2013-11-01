@@ -52,11 +52,12 @@ import mage.players.Player;
  */
 public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderReplacementEffect> {
 
-    private UUID commander;
-    public CommanderReplacementEffect(UUID commander) {
+    private UUID commanderId;
+
+    public CommanderReplacementEffect(UUID commanderId) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
         staticText = "If a commander would be put into its owner’s graveyard from anywhere, that player may put it into the command zone instead. If a commander would be put into the exile zone from anywhere, its owner may put it into the command zone instead.";
-        this.commander = commander;
+        this.commanderId = commanderId;
         this.duration = Duration.EndOfGame;
     }
 
@@ -80,17 +81,16 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderR
             Permanent permanent = ((ZoneChangeEvent)event).getTarget();
             if (permanent != null) {
                 Player player = game.getPlayer(permanent.getOwnerId());
-                if(player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    return permanent.moveToZone(Zone.COMMAND, source.getId(), game, false);
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
+                    return permanent.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                 }
             }
-        }
-        else {
+        } else {
             Card card = game.getCard(event.getTargetId());
             if (card != null) {
                 Player player = game.getPlayer(card.getOwnerId());
-                if(player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
-                    return card.moveToZone(Zone.COMMAND, source.getId(), game, false);
+                if (player != null && player.chooseUse(Outcome.Benefit, "Move commander to command zone?", game)){
+                    return card.moveToZone(Zone.COMMAND, source.getSourceId(), game, false);
                 }
             }
         }
@@ -100,7 +100,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderR
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.ZONE_CHANGE && (((ZoneChangeEvent)event).getToZone() == Zone.GRAVEYARD || ((ZoneChangeEvent)event).getToZone() == Zone.EXILED)) {
-            if(commander != null && commander.equals(event.getTargetId())){
+            if(commanderId != null && commanderId.equals(event.getTargetId())){
                 return true;
             }
         }

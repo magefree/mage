@@ -48,16 +48,16 @@ import mage.game.Game;
  * */
 public class CommanderCostModification extends CostModificationEffectImpl<CommanderCostModification> {
 
-    private UUID commander;
+    private UUID commanderId;
     
-    public CommanderCostModification(UUID commander) {
+    public CommanderCostModification(UUID commanderId) {
         super(Duration.Custom, Outcome.Neutral, CostModificationType.INCREASE_COST);
-        this.commander = commander;
+        this.commanderId = commanderId;
     }
 
     public CommanderCostModification(final CommanderCostModification effect) {
         super(effect);
-        this.commander = effect.commander;
+        this.commanderId = effect.commanderId;
     }
 
     @Override
@@ -65,10 +65,10 @@ public class CommanderCostModification extends CostModificationEffectImpl<Comman
                     
         Mana mana = abilityToModify.getManaCostsToPay().getMana();
         
-        Integer castCount = (Integer)game.getState().getValue(commander + "_castCount");
+        Integer castCount = (Integer)game.getState().getValue(commanderId + "_castCount");
         if(castCount == null){
             castCount = 0;
-            game.getState().setValue(commander + "_castCount", castCount);
+            game.getState().setValue(commanderId + "_castCount", castCount);
         }
                 
         int newCount = mana.getColorless() + 2*castCount;
@@ -80,7 +80,7 @@ public class CommanderCostModification extends CostModificationEffectImpl<Comman
 
     @Override
     public boolean applies(Ability abilityToModify, Ability source, Game game) {
-        if (abilityToModify instanceof CastCommanderAbility && abilityToModify.getSourceId().equals(commander)) {
+        if (abilityToModify instanceof CastCommanderAbility && abilityToModify.getSourceId().equals(commanderId)) {
             return true;
         }
         return false;

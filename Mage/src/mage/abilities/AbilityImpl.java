@@ -609,7 +609,7 @@ public abstract class AbilityImpl<T extends AbilityImpl<T>> implements Ability {
     @Override
     public boolean isInUseableZone(Game game, MageObject source, boolean checkLKI) {
 
-        // emblem are always actual
+        // emblem are always actual (also true for a commander? LevelX)
         if (zone.equals(Zone.COMMAND)) {
             return true;
         }

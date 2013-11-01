@@ -91,15 +91,15 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
         //Move commender to commande zone
         for (UUID playerId: state.getPlayerList(startingPlayerId)) {
             Player player = getPlayer(playerId);
-            if(player != null){
-                if(player.getSideboard().size() > 0){
+            if (player != null){
+                if (player.getSideboard().size() > 0){
                     Card commander =  getCard((UUID)player.getSideboard().toArray()[0]);
-                    if(commander != null){
+                    if (commander != null) {
                         player.setCommanderId(commander.getId());
                         commander.moveToZone(Zone.COMMAND, null, this, true);
                         ability.addEffect(new CommanderReplacementEffect(commander.getId()));
                         ability.addEffect(new CommanderCostModification(commander.getId()));
-                        getState().setValue(commander + "_castCount", new Integer(0));
+                        getState().setValue(commander.getId() + "_castCount", new Integer(0));
                         getState().getWatchers().add(new CommanderCombatDamageWatcher(commander.getId()));
                     }
                 }
