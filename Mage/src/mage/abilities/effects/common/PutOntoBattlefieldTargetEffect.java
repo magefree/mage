@@ -25,7 +25,6 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-
 package mage.abilities.effects.common;
 
 import mage.constants.Outcome;
@@ -75,31 +74,30 @@ public class PutOntoBattlefieldTargetEffect extends OneShotEffect<PutOntoBattlef
             Player controller = game.getPlayer(source.getControllerId());
             if (controller == null || !controller.chooseUse(Outcome.PutCreatureInPlay,
                     new StringBuilder("Put ")
-                        .append(source.getTargets() != null ? source.getTargets().get(0).getTargetName():"target")
-                        .append(" onto the battlefield?").toString(), game)) {
+                    .append(source.getTargets() != null ? source.getTargets().get(0).getTargetName() : "target")
+                    .append(" onto the battlefield?").toString(), game)) {
                 return false;
             }
         }
         for (UUID targetId : targetPointer.getTargets(game, source)) {
             Card card = game.getCard(targetId);
             if (card != null) {
-
-                    switch (game.getState().getZone(targetId)) {
-                        case GRAVEYARD:
-                            for (Player player : game.getPlayers().values()) {
-                                if (player.getGraveyard().contains(card.getId())) {
-                                    player.getGraveyard().remove(card);
-                                    result |= card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, tapped);
-                                }
+                switch (game.getState().getZone(targetId)) {
+                    case GRAVEYARD:
+                        for (Player player : game.getPlayers().values()) {
+                            if (player.getGraveyard().contains(card.getId())) {
+                                player.getGraveyard().remove(card);
+                                result |= card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, tapped);
                             }
-                        case HAND:
-                            for (Player player : game.getPlayers().values()) {
-                                if (player.getHand().contains(card.getId())) {
-                                    player.getHand().remove(card);
-                                    result |= card.moveToZone(Zone.BATTLEFIELD, source.getId(), game, tapped);
-                                }
+                        }
+                    case HAND:
+                        for (Player player : game.getPlayers().values()) {
+                            if (player.getHand().contains(card.getId())) {
+                                player.getHand().remove(card);
+                                result |= card.moveToZone(Zone.BATTLEFIELD, source.getSourceId(), game, tapped);
                             }
-                    }
+                        }
+                }
             }
         }
         return result;

@@ -5,6 +5,7 @@ import mage.abilities.dynamicvalue.DynamicValue;
 import mage.game.Game;
 
 public class ManacostVariableValue implements DynamicValue {
+
     @Override
     public int calculate(Game game, Ability sourceAbility) {
         return sourceAbility.getManaCostsToPay().getX();
