@@ -28,14 +28,12 @@
 package mage.abilities.common;
 
 
-import mage.MageObject;
 import mage.abilities.SpellAbility;
 import mage.cards.Card;
 import mage.constants.SpellAbilityType;
 import mage.constants.TimingRule;
 import mage.constants.Zone;
 import mage.game.Game;
-import mage.game.command.Commander;
 
 /**
  *
@@ -81,53 +79,3 @@ public class CastCommanderAbility extends SpellAbility {
     }
 
 }
-
-//class CastCommanderEffect extends OneShotEffect<CastCommanderEffect> {
-//
-//    public CastCommanderEffect() {
-//        super(Outcome.Benefit);
-//        staticText = "cast commander";
-//    }
-//
-//    public CastCommanderEffect(final CastCommanderEffect effect) {
-//        super(effect);
-//    }
-//
-//    @Override
-//    public CastCommanderEffect copy() {
-//        return new CastCommanderEffect(this);
-//    }
-//
-//    @Override
-//    public boolean apply(Game game, Ability source) {
-//        MageObject object =  game.getObject(source.getSourceId());
-//        if (object != null && object instanceof Commander) {
-//            Commander commander = (Commander)object;
-//            Player controller = game.getPlayer(source.getControllerId());
-//            if (controller != null) {
-//                SpellAbility spellAbility = commander.getCard().getSpellAbility();
-//
-//                spellAbility.clear();
-//                int amount = source.getManaCostsToPay().getX();
-//                spellAbility.getManaCostsToPay().setX(amount);
-//                for (Target target : spellAbility.getTargets()) {
-//                    target.setRequired(true);
-//                }
-//                if(controller.cast(spellAbility, game, true)){
-//                    Integer castCount = (Integer)game.getState().getValue(commander.getId() + "_castCount");
-//                    if(castCount != null){
-//                        castCount++;
-//                        game.getState().setValue(commander.getId() + "_castCount", castCount);
-//                    }
-//                    else {
-//                        castCount = 1;
-//                        game.getState().setValue(commander.getId() + "_castCount", castCount);
-//                    }
-//                    return true;
-//                }
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
-//}
