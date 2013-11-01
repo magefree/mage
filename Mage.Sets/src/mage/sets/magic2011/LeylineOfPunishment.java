@@ -40,6 +40,7 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.ReplacementEffectImpl;
+import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
 import mage.abilities.keyword.LeylineAbility;
 import mage.cards.CardImpl;
 import mage.game.Game;
@@ -57,8 +58,12 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
         super(ownerId, 148, "Leyline of Punishment", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{R}{R}");
         this.expansionSetCode = "M11";
         this.color.setRed(true);
+
+        // If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
         this.addAbility(LeylineAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect1()));
+        // Players can't gain life.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayersCantGainLifeEffect()));
+        // Damage can't be prevented.
         this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfPunishmentEffect2()));
     }
 
@@ -69,38 +74,6 @@ public class LeylineOfPunishment extends CardImpl<LeylineOfPunishment> {
     @Override
     public LeylineOfPunishment copy() {
         return new LeylineOfPunishment(this);
-    }
-
-}
-
-class LeylineOfPunishmentEffect1 extends ContinuousEffectImpl<LeylineOfPunishmentEffect1> {
-
-    public LeylineOfPunishmentEffect1() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Players can't gain life";
-    }
-
-    public LeylineOfPunishmentEffect1(final LeylineOfPunishmentEffect1 effect) {
-        super(effect);
-    }
-
-    @Override
-    public LeylineOfPunishmentEffect1 copy() {
-        return new LeylineOfPunishmentEffect1(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null)
-                    player.setCanGainLife(false);
-            }
-            return true;
-        }
-        return false;
     }
 
 }

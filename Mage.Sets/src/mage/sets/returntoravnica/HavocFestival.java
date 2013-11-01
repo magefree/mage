@@ -29,25 +29,19 @@
 package mage.sets.returntoravnica;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Duration;
-import mage.constants.Layer;
-import mage.constants.SubLayer;
-import mage.constants.TargetController;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.BeginningOfUpkeepTriggeredAbility;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.ContinuousEffectImpl;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
-
-
 
 /**
  *
@@ -65,7 +59,7 @@ public class HavocFestival extends CardImpl<HavocFestival> {
         this.color.setRed(true);
 
         // Players can't gain life.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HavocFestivalEffect()));
+       this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new PlayersCantGainLifeEffect()));
 
         // At the beginning of each player's upkeep, that player loses half his or her life, rounded up.
         Ability ability = new BeginningOfUpkeepTriggeredAbility(Zone.BATTLEFIELD, new HavocFestivalLoseLifeEffect(), TargetController.ANY, false);
@@ -82,40 +76,6 @@ public class HavocFestival extends CardImpl<HavocFestival> {
     public HavocFestival copy() {
         return new HavocFestival(this);
     }
-}
-
-class HavocFestivalEffect extends ContinuousEffectImpl<HavocFestivalEffect> {
-
-    public HavocFestivalEffect() {
-        super(Duration.WhileOnBattlefield, Layer.PlayerEffects, SubLayer.NA, Outcome.Benefit);
-        staticText = "Players can't gain life";
-    }
-
-    public HavocFestivalEffect(final HavocFestivalEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HavocFestivalEffect copy() {
-        return new HavocFestivalEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-            for (UUID playerId: controller.getInRange()) {
-                Player player = game.getPlayer(playerId);
-                if (player != null)
-                {
-                    player.setCanGainLife(false);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
-
 }
 
 class HavocFestivalLoseLifeEffect extends OneShotEffect<HavocFestivalLoseLifeEffect> {

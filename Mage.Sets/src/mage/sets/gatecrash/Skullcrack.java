@@ -35,6 +35,7 @@ import mage.constants.Rarity;
 import mage.abilities.Ability;
 import mage.abilities.effects.ReplacementEffectImpl;
 import mage.abilities.effects.common.DamageTargetEffect;
+import mage.abilities.effects.common.continious.PlayersCantGainLifeEffect;
 import mage.cards.CardImpl;
 import mage.constants.Duration;
 import mage.game.Game;
@@ -54,10 +55,10 @@ public class Skullcrack extends CardImpl<Skullcrack> {
         this.color.setRed(true);
 
         // Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
-        this.getSpellAbility().addEffect(new PlayersCantGetLiveEffect());
+        this.getSpellAbility().addEffect(new PlayersCantGainLifeEffect(Duration.EndOfTurn));
         this.getSpellAbility().addEffect(new DamageCantBePreventedEffect());
         this.getSpellAbility().addEffect(new DamageTargetEffect(3));
-        this.getSpellAbility().addTarget(new TargetPlayer());
+        this.getSpellAbility().addTarget(new TargetPlayer(true));
 
     }
 
@@ -100,41 +101,6 @@ class DamageCantBePreventedEffect extends ReplacementEffectImpl<DamageCantBePrev
     @Override
     public boolean applies(GameEvent event, Ability source, Game game) {
         if (event.getType() == GameEvent.EventType.PREVENT_DAMAGE) {
-            return true;
-        }
-        return false;
-    }
-}
-
-class PlayersCantGetLiveEffect extends ReplacementEffectImpl<PlayersCantGetLiveEffect> {
-
-    public PlayersCantGetLiveEffect() {
-        super(Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "Players can't gain life this turn";
-    }
-
-    public PlayersCantGetLiveEffect(final PlayersCantGetLiveEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public PlayersCantGetLiveEffect copy() {
-        return new PlayersCantGetLiveEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public boolean replaceEvent(GameEvent event, Ability source, Game game) {
-        return true;
-    }
-
-    @Override
-    public boolean applies(GameEvent event, Ability source, Game game) {
-        if (event.getType() == GameEvent.EventType.GAIN_LIFE) {
             return true;
         }
         return false;
