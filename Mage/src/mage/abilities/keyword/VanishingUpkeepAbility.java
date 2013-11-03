@@ -8,14 +8,20 @@ import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.util.CardUtil;
 
 public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
-    public VanishingUpkeepAbility() {
+
+    private int vanishingAmount;
+
+    public VanishingUpkeepAbility(int vanishingEffect) {
         super(new VanishingEffect(), TargetController.YOU, false);
+        this.vanishingAmount = vanishingEffect;
     }
 
     public VanishingUpkeepAbility(final VanishingUpkeepAbility ability) {
         super(ability);
+        this.vanishingAmount = ability.vanishingAmount;
     }
 
     @Override
@@ -25,7 +31,10 @@ public class VanishingUpkeepAbility extends BeginningOfUpkeepTriggeredAbility {
 
     @Override
     public String getRule() {
-        return "Vanishing (This permanent enters the battlefield with time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)";
+        return new StringBuilder("Vanishing ")
+            .append(vanishingAmount)
+            .append(" <i>(This permanent enters the battlefield with ").append(CardUtil.numberToText(vanishingAmount))
+            .append(" time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)<i>").toString();
     }
 }
 

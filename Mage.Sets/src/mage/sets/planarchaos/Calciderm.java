@@ -58,7 +58,7 @@ public class Calciderm extends CardImpl<Calciderm> {
         this.addAbility(ShroudAbility.getInstance());
         // Vanishing 4
         this.addAbility(new EntersBattlefieldAbility(new AddCountersSourceEffect(CounterType.TIME.createInstance(4))));
-        this.addAbility(new VanishingUpkeepAbility());
+        this.addAbility(new VanishingUpkeepAbility(4));
         this.addAbility(new VanishingSacrificeAbility());
     }
 

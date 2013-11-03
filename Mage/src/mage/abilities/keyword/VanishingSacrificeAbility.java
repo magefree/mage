@@ -11,6 +11,7 @@ import mage.game.permanent.Permanent;
 public class VanishingSacrificeAbility extends TriggeredAbilityImpl<VanishingSacrificeAbility> {
     public VanishingSacrificeAbility() {
         super(Zone.BATTLEFIELD, new SacrificeSourceEffect());
+        this.setRuleVisible(false);
     }
 
     public VanishingSacrificeAbility(final VanishingSacrificeAbility ability) {
@@ -32,9 +33,5 @@ public class VanishingSacrificeAbility extends TriggeredAbilityImpl<VanishingSac
     public VanishingSacrificeAbility copy() {
         return new VanishingSacrificeAbility(this);
     }
-
-    @Override
-    public String getRule() {
-        return "";
-    }
+    
 }
