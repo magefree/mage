@@ -29,30 +29,27 @@ package mage.sets.theros;
 
 import java.util.UUID;
 import mage.MageInt;
+import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.condition.common.ControlsPermanentCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
-import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.OneShotEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
+import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
 import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.filter.predicate.permanent.CounterPredicate;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
  * @author LevelX2
  */
 public class ChroniclerOfHeroes extends CardImpl<ChroniclerOfHeroes> {
-
-    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
-    static {
-        filter.add(new ControllerPredicate(TargetController.YOU));
-        filter.add(new CounterPredicate(CounterType.P1P1));
-    }
 
     public ChroniclerOfHeroes(UUID ownerId) {
         super(ownerId, 190, "Chronicler of Heroes", Rarity.UNCOMMON, new CardType[]{CardType.CREATURE}, "{1}{G}{W}");
@@ -66,10 +63,7 @@ public class ChroniclerOfHeroes extends CardImpl<ChroniclerOfHeroes> {
         this.toughness = new MageInt(3);
 
         // When Chronicler of Heroes enters the battlefield, draw a card if you control a creature with a +1/+1 counter on it.
-        this.addAbility(new EntersBattlefieldTriggeredAbility(new ConditionalOneShotEffect(
-                new DrawCardControllerEffect(1),
-                new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0),
-                "draw a card if you control a creature with a +1/+1 counter on it")));
+        this.addAbility(new EntersBattlefieldTriggeredAbility(new ChroniclerOfHeroesEffect()));
     }
 
     public ChroniclerOfHeroes(final ChroniclerOfHeroes card) {
@@ -79,5 +73,40 @@ public class ChroniclerOfHeroes extends CardImpl<ChroniclerOfHeroes> {
     @Override
     public ChroniclerOfHeroes copy() {
         return new ChroniclerOfHeroes(this);
+    }
+}
+
+class ChroniclerOfHeroesEffect extends OneShotEffect<ChroniclerOfHeroesEffect> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature with a +1/+1 counter on it");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
+        filter.add(new CounterPredicate(CounterType.P1P1));
+    }
+
+    public ChroniclerOfHeroesEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "draw a card if you control a creature with a +1/+1 counter on it";
+    }
+
+    public ChroniclerOfHeroesEffect(final ChroniclerOfHeroesEffect effect) {
+        super(effect);
+    }
+
+    @Override
+    public ChroniclerOfHeroesEffect copy() {
+        return new ChroniclerOfHeroesEffect(this);
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            if (new ControlsPermanentCondition(filter, ControlsPermanentCondition.CountType.MORE_THAN, 0).apply(game, source)) {
+                controller.drawCards(1, game);
+            }
+            return true;
+        }
+        return false;
     }
 }
