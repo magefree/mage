@@ -93,7 +93,7 @@ public class SearchLibraryPutInPlayEffect extends SearchEffect<SearchLibraryPutI
                 for (UUID cardId: (List<UUID>)target.getTargets()) {
                     Card card = player.getLibrary().getCard(cardId, game);
                     if (card != null) {
-                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getId(), source.getControllerId(), tapped);
+                        card.putOntoBattlefield(game, Zone.LIBRARY, source.getSourceId(), source.getControllerId(), tapped);
                     }
                 }
             }

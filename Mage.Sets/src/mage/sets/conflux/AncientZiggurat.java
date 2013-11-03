@@ -29,20 +29,13 @@ package mage.sets.conflux;
 
 import java.util.UUID;
 import mage.ConditionalMana;
-import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.mana.AnyColorManaAbility;
 import mage.abilities.mana.ConditionalAnyColorManaAbility;
 import mage.abilities.mana.builder.ConditionalManaBuilder;
 import mage.abilities.mana.conditional.CreatureCastManaCondition;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.game.Game;
 
 /**
  *

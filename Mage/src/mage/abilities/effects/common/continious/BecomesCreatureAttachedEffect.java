@@ -28,9 +28,13 @@
 
 package mage.abilities.effects.common.continious;
 
-import mage.constants.*;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffectImpl;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Layer;
+import mage.constants.Outcome;
+import mage.constants.SubLayer;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
@@ -43,10 +47,16 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
 
     protected Token token;
     protected String type;
+    protected boolean loseOther;  // loses all other abilities, card types, and creature types
 
     public BecomesCreatureAttachedEffect(Token token, String text, Duration duration) {
+        this(token, text, duration, false);
+    }
+
+    public BecomesCreatureAttachedEffect(Token token, String text, Duration duration, boolean loseOther) {
         super(duration, Layer.TypeChangingEffects_4,  SubLayer.NA, Outcome.BecomeCreature);
         this.token = token;
+        this.loseOther = loseOther;
         staticText = text;
     }
 
@@ -54,6 +64,7 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
         super(effect);
         this.token = effect.token.copy();
         this.type = effect.type;
+        this.loseOther = effect.loseOther;
     }
 
     @Override
@@ -77,12 +88,20 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                                     }
                                 }
                             }
+                            // card type
+                            if (loseOther) {
+                                permanent.getCardType().clear();
+                            }
                             if (token.getCardType().size() > 0) {
                                 for (CardType t : token.getCardType()) {
                                     if (!permanent.getCardType().contains(t)) {
                                         permanent.getCardType().add(t);
                                     }
                                 }
+                            }
+                            // sub type
+                            if (loseOther) {
+                                permanent.getSubtype().clear();
                             }
                             if (token.getSubtype().size() > 0) {
                                 for (String t : token.getSubtype()) {
@@ -95,6 +114,13 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                         break;
                     case ColorChangingEffects_5:
                         if (sublayer == SubLayer.NA) {
+                            if (loseOther) {
+                                permanent.getColor().setBlack(false);
+                                permanent.getColor().setGreen(false);
+                                permanent.getColor().setBlue(false);
+                                permanent.getColor().setWhite(false);
+                                permanent.getColor().setRed(false);
+                            }
                             if (token.getColor().hasColor()) {
                                 permanent.getColor().setColor(token.getColor());
                             }
@@ -102,21 +128,20 @@ public class BecomesCreatureAttachedEffect extends ContinuousEffectImpl<BecomesC
                         break;
                     case AbilityAddingRemovingEffects_6:
                         if (sublayer == SubLayer.NA) {
+                            if (loseOther) {
+                                permanent.removeAllAbilities(source.getSourceId(), game);
+                            }
                             if (token.getAbilities().size() > 0) {
                                 for (Ability ability: token.getAbilities()) {
-                                    permanent.addAbility(ability, game);
+                                    permanent.addAbility(ability, source.getSourceId(), game);
                                 }
                             }
                         }
                         break;
                     case PTChangingEffects_7:
                         if (sublayer == SubLayer.SetPT_7b) {
-                            int power = token.getPower().getValue();
-                            int toughness = token.getToughness().getValue();
-                            if (power != 0 && toughness != 0) {
-                                permanent.getPower().setValue(power);
-                                permanent.getToughness().setValue(toughness);
-                            }
+                            permanent.getPower().setValue(token.getPower().getValue());
+                            permanent.getToughness().setValue(token.getToughness().getValue());
                         }
                 }
             }

@@ -54,7 +54,6 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
     public GainLifeTargetEffect(DynamicValue life) {
         super(Outcome.GainLife);
         this.life = life;
-        setText();
     }
 
     public GainLifeTargetEffect(final GainLifeTargetEffect effect) {
@@ -80,6 +79,9 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (!staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         String message = life.getMessage();
 
@@ -98,22 +100,6 @@ public class GainLifeTargetEffect extends OneShotEffect<GainLifeTargetEffect> {
             sb.append(message);
         }
         return sb.toString();
-    }
-
-    private void setText() {
-        StringBuilder sb = new StringBuilder();
-        String message = life.getMessage();
-
-        sb.append("target players each gain ");
-        if (message.isEmpty() || !message.equals("1")) {
-            sb.append(life).append(" ");
-        }
-        sb.append("life");
-        if (message.length() > 0) {
-            sb.append(message.equals("1") ? " equal to the number of " : " for each ");
-            sb.append(message);
-        }
-        staticText = sb.toString();
     }
 
 }

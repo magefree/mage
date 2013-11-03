@@ -60,8 +60,9 @@ public class ConditionalManaEffect extends ManaEffect {
     public ConditionalManaEffect(ConditionalManaEffect effect) {
         super(effect);
         this.effect = (ManaEffect) effect.effect.copy();
-        if (effect.otherwiseEffect != null)
+        if (effect.otherwiseEffect != null) {
             this.otherwiseEffect = (ManaEffect) effect.otherwiseEffect.copy();
+        }
         this.condition = effect.condition;
     }
 

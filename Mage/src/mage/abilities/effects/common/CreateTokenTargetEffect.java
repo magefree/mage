@@ -12,9 +12,12 @@ import mage.game.permanent.token.Token;
 /**
  * @author Loki
  */
+
 public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffect> {
     private Token token;
     private DynamicValue amount;
+    private boolean tapped;
+    private boolean attacking;
 
     public CreateTokenTargetEffect(Token token) {
         this(token, new StaticValue(1));
@@ -25,15 +28,23 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
     }
 
     public CreateTokenTargetEffect(Token token, DynamicValue amount) {
+        this(token, amount, false, false);
+    }
+
+    public CreateTokenTargetEffect(Token token, DynamicValue amount, boolean tapped, boolean attacking) {
         super(Outcome.PutCreatureInPlay);
         this.token = token;
         this.amount = amount.copy();
+        this.tapped = tapped;
+        this.attacking = attacking;
     }
 
     public CreateTokenTargetEffect(final CreateTokenTargetEffect effect) {
         super(effect);
         this.amount = effect.amount;
         this.token = effect.token.copy();
+        this.tapped = effect.tapped;
+        this.attacking = effect.attacking;
     }
 
     @Override
@@ -57,6 +68,15 @@ public class CreateTokenTargetEffect extends OneShotEffect<CreateTokenTargetEffe
             sb.append(amount.toString());
         }
         sb.append(" ").append(token.getDescription()).append(" onto the battlefield");
+        if (tapped) {
+            sb.append(" tapped");
+        }
+        if (attacking) {
+            if (tapped) {
+                sb.append(" and");
+            }
+            sb.append(" attacking");
+        }
         String message = amount.getMessage();
         if (message.length() > 0) {
             sb.append(" for each ");

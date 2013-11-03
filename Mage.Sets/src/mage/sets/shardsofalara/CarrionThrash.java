@@ -47,7 +47,6 @@ import mage.target.common.TargetCardInYourGraveyard;
 public class CarrionThrash extends CardImpl<CarrionThrash> {
 
     private static final FilterCreatureCard filter = new FilterCreatureCard("another creature card from your graveyard");
-
     static {
         filter.add(new AnotherPredicate());
     }

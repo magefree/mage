@@ -27,6 +27,10 @@
 */
 package mage;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.abilities.mana.conditional.ManaCondition;
@@ -34,10 +38,6 @@ import mage.filter.Filter;
 import mage.filter.FilterMana;
 import mage.game.Game;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * @author nantuko
@@ -85,7 +85,7 @@ public class ConditionalMana extends Mana implements Serializable {
     }
 
     public boolean apply(Ability ability, Game game, UUID manaProducerId) {
-        if (conditions.size() == 0) {
+        if (conditions.isEmpty()) {
             throw new IllegalStateException("Conditional mana should contain at least one Condition");
         }
         for (Condition condition : conditions) {
@@ -125,12 +125,24 @@ public class ConditionalMana extends Mana implements Serializable {
         if (filter == null) {
             return;
         }
-        if (filter.isBlack()) black = 0;
-        if (filter.isBlue()) blue = 0;
-        if (filter.isWhite()) white = 0;
-        if (filter.isGreen()) green = 0;
-        if (filter.isRed()) red = 0;
-        if (filter.isColorless()) colorless = 0;
+        if (filter.isBlack()) {
+            black = 0;
+        }
+        if (filter.isBlue()) {
+            blue = 0;
+        }
+        if (filter.isWhite()) {
+            white = 0;
+        }
+        if (filter.isGreen()) {
+            green = 0;
+        }
+        if (filter.isRed()) {
+            red = 0;
+        }
+        if (filter.isColorless()) {
+            colorless = 0;
+        }
     }
 
     public UUID getManaProducerId() {
