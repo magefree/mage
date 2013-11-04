@@ -1,3 +1,16 @@
+|Generate|TOK:M14|Sliver|
+|Generate|TOK:M14|Angel|
+|Generate|TOK:M14|Cat|
+|Generate|TOK:M14|Goat|
+|Generate|TOK:M14|Zombie|
+|Generate|TOK:M14|Elemental 1|
+|Generate|TOK:M14|Elemental 2|
+|Generate|TOK:M14|Beast|
+|Generate|TOK:M14|Saproling|
+|Generate|TOK:M14|Wolf|
+|Generate|EMBLEM:M14|Liliana of the Dark Realms|
+|Generate|EMBLEM:M14|Garruk, Caller of Beasts|
+
 |Generate|TOK:THS|Cleric|
 |Generate|TOK:THS|Soldier 1|
 |Generate|TOK:THS|Soldier 2|
