@@ -37,7 +37,7 @@ import mage.abilities.costs.CostImpl;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.dynamicvalue.DynamicValue;
+import mage.abilities.dynamicvalue.common.ManaSpentToCastCount;
 import mage.abilities.dynamicvalue.common.ManacostVariableValue;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.OneShotEffect;
@@ -53,8 +53,6 @@ import mage.counters.CounterType;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.token.Token;
-import mage.game.stack.Spell;
-import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.common.TargetCreatureOrPlayer;
 import mage.target.common.TargetCreaturePermanent;
@@ -140,36 +138,6 @@ public class MarathWillOfTheWild extends CardImpl<MarathWillOfTheWild> {
     }
 }
 
-
-class ManaSpentToCastCount  implements DynamicValue{
-
-    public ManaSpentToCastCount(){
-    }
-
-    @Override
-    public int calculate(Game game, Ability source) {
-        int count = 0;
-        if (!game.getStack().isEmpty()) {
-            StackObject spell = game.getStack().getFirst();
-            if (spell != null &&  spell instanceof Spell && ((Spell)spell).getSourceId().equals(source.getSourceId())) {
-                count = ((Spell)spell).getSpellAbility().getManaCostsToPay().convertedManaCost();
-            }
-        }
-        return count;
-    }
-
-    @Override
-    public DynamicValue copy() {
-        return new ManaSpentToCastCount();
-    }
-
-
-    @Override
-    public String getMessage() {
-        return "the amount of mana spent to cast it";
-    }
-
-}
 
 class MarathWillOfTheWildCreateTokenEffect extends OneShotEffect<MarathWillOfTheWildCreateTokenEffect> {
 
