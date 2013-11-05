@@ -200,17 +200,24 @@ class MysticBarrierReplacementEffect extends ReplacementEffectImpl<MysticBarrier
                             if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_LEFT)) {
                                 if (!playerList.getNext().equals(defender.getId())) {
                                     // the defender is not the player to the left
+                                    Player attacker = game.getPlayer(event.getPlayerId());
+                                    if (attacker != null) {
+                                        game.informPlayer(attacker, "You can only attack to the left!");
+                                    }
                                     return true;
                                 }
                             }
                             if (allowedDirection.equals(MysticBarrier.ALLOW_ATTACKING_RIGHT)) {
                                 if (!playerList.getPrevious().equals(defender.getId())) {
                                     // the defender is not the player to the right
+                                    Player attacker = game.getPlayer(event.getPlayerId());
+                                    if (attacker != null) {
+                                        game.informPlayer(attacker, "You can only attack to the right!");
+                                    }
                                     return true;
                                 }
                             }
-                        }
-                        
+                        }                        
                     }
                 }
             }
