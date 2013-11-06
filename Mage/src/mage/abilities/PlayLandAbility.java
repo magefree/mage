@@ -70,6 +70,11 @@ public class PlayLandAbility extends ActivatedAbilityImpl<PlayLandAbility> {
     public String toString() {
         return this.name;
     }
+    
+    @Override
+    public String getRule() {
+        return this.name;
+    }
 
     @Override
     public PlayLandAbility copy() {
