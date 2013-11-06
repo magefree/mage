@@ -30,6 +30,7 @@ package mage.game.events;
 
 import java.io.Serializable;
 import java.util.EventObject;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -142,8 +143,13 @@ public class PlayerQueryEvent extends EventObject implements ExternalEvent, Seri
         return new PlayerQueryEvent(playerId, message, null, null, null, null, QueryType.ASK, 0, 0, false);
     }
 
-    public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, List<? extends ActivatedAbility> choices) {
-        return new PlayerQueryEvent(playerId, message, choices, null, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
+    public static PlayerQueryEvent chooseAbilityEvent(UUID playerId, String message, String objectName, List<? extends ActivatedAbility> choices) {
+        Set<String> nameAsSet = null;
+        if (objectName != null) {
+            nameAsSet = new HashSet<String>();
+            nameAsSet.add(objectName);
+        }
+        return new PlayerQueryEvent(playerId, message, choices, nameAsSet, null, null, QueryType.CHOOSE_ABILITY, 0, 0, false);
     }
 
     public static PlayerQueryEvent choosePileEvent(UUID playerId, String message, List<? extends Card> pile1, List<? extends Card> pile2) {

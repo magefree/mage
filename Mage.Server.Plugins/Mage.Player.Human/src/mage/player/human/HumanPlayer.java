@@ -452,7 +452,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                         }
                         LinkedHashMap<UUID, ActivatedAbility> useableAbilities = getUseableActivatedAbilities(object, zone, game);
                         if (useableAbilities != null && useableAbilities.size() > 0) {
-                            activateAbility(useableAbilities, game);
+                            activateAbility(useableAbilities, object, game);
                         }
                     }
                 }
@@ -539,7 +539,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
             LinkedHashMap<UUID, ManaAbility> useableAbilities = getUseableManaAbilities(object, zone, game);
             if (useableAbilities != null && useableAbilities.size() > 0) {
                 useableAbilities = ManaUtil.tryToAutoPay(unpaid, useableAbilities);
-                activateAbility(useableAbilities, game);
+                activateAbility(useableAbilities, object, game);
             }
         }
     }
@@ -741,7 +741,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
     protected void specialAction(Game game) {
         updateGameStatePriority("specialAction", game);
         LinkedHashMap<UUID, SpecialAction> specialActions = game.getState().getSpecialActions().getControlledBy(playerId);
-        game.fireGetChoiceEvent(playerId, name, new ArrayList<SpecialAction>(specialActions.values()));
+        game.fireGetChoiceEvent(playerId, name, null, new ArrayList<SpecialAction>(specialActions.values()));
         waitForResponse(game);
         if (response.getUUID() != null) {
             if (specialActions.containsKey(response.getUUID())) {
@@ -750,7 +750,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
         }
     }
 
-    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, Game game) {
+    protected void activateAbility(LinkedHashMap<UUID, ? extends ActivatedAbility> abilities, MageObject object, Game game) {
         updateGameStatePriority("activateAbility", game);
         if (abilities.size() == 1) {
             ActivatedAbility ability = abilities.values().iterator().next();
@@ -759,7 +759,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                 return;
             }
         }
-        game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(abilities.values()));
+        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<ActivatedAbility>(abilities.values()));
         waitForResponse(game);
         if (response.getUUID() != null) {
             if (abilities.containsKey(response.getUUID())) {
@@ -779,7 +779,7 @@ public class HumanPlayer extends PlayerImpl<HumanPlayer> {
                     if (useableAbilities != null && useableAbilities.size() == 1) {
                         return (SpellAbility) useableAbilities.values().iterator().next();
                     } else if (useableAbilities != null && useableAbilities.size() > 0) {
-                        game.fireGetChoiceEvent(playerId, name, new ArrayList<ActivatedAbility>(useableAbilities.values()));
+                        game.fireGetChoiceEvent(playerId, name, object, new ArrayList<ActivatedAbility>(useableAbilities.values()));
                         waitForResponse(game);
                         if (response.getUUID() != null) {
                             if (useableAbilities.containsKey(response.getUUID())) {

@@ -44,9 +44,13 @@ public class AbilityPickerView implements Serializable {
 
     private Map<UUID, String> choices = new LinkedHashMap<UUID, String>();
 
-    public AbilityPickerView(List<? extends Ability> abilities) {
+    public AbilityPickerView(String objectName, List<? extends Ability> abilities) {
         for (Ability ability: abilities) {
-            choices.put(ability.getId(), ability.getRule(true));
+            if (objectName == null) {
+                choices.put(ability.getId(), ability.getRule(true));
+            } else {
+                choices.put(ability.getId(), ability.getRule(objectName));
+            }
         }
     }
 

@@ -213,7 +213,11 @@ public class GameController implements GameCallback {
                                 playXMana(event.getPlayerId(), event.getMessage());
                                 break;
                             case CHOOSE_ABILITY:
-                                chooseAbility(event.getPlayerId(), event.getAbilities());
+                                String objectName = null;
+                                if(event.getChoices() != null && event.getChoices().size() > 0) {
+                                    objectName = event.getChoices().iterator().next();
+                                }
+                                chooseAbility(event.getPlayerId(), objectName, event.getAbilities());
                                 break;
                             case CHOOSE_PILE:
                                 choosePile(event.getPlayerId(), event.getMessage(), event.getPile1(), event.getPile2());
@@ -510,11 +514,11 @@ public class GameController implements GameCallback {
 
     }
 
-    private synchronized void chooseAbility(UUID playerId, final List<? extends Ability> choices) throws MageException {
+    private synchronized void chooseAbility(UUID playerId, final String objectName, final List<? extends Ability> choices) throws MageException {
         perform(playerId, new Command() {
             @Override
             public void execute(UUID playerId) {
-                getGameSession(playerId).chooseAbility(new AbilityPickerView(choices));
+                getGameSession(playerId).chooseAbility(new AbilityPickerView(objectName, choices));
             }
         });
     }

@@ -914,7 +914,6 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         LinkedHashMap<UUID, ActivatedAbility> useable = new LinkedHashMap<UUID, ActivatedAbility>();
         if (!(object instanceof Permanent) || ((Permanent)object).canUseActivatedAbilities(game)) {
             for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(zone)) {
-
                 if (ability.canActivate(playerId, game)) {
                     useable.put(ability.getId(), ability);
                 }
