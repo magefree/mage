@@ -49,6 +49,11 @@ public class TargetCreaturePermanent<T extends TargetCreaturePermanent<T>> exten
     public TargetCreaturePermanent(FilterCreaturePermanent filter) {
         this(1, 1, filter, false);
     }
+    
+    public TargetCreaturePermanent(FilterCreaturePermanent filter, boolean required) {
+        this(1, 1, filter, false);
+        setRequired(required);
+    }
 
     public TargetCreaturePermanent(int numTargets) {
         this(numTargets, numTargets, new FilterCreaturePermanent(), false);
