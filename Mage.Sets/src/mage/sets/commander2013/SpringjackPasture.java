@@ -78,6 +78,7 @@ public class SpringjackPasture extends CardImpl<SpringjackPasture> {
 
         // {tap}, Sacrifice X Goats: Add X mana of any one color to your mana pool. You gain X life.
         Ability ability2 = new SimpleActivatedAbility(Zone.BATTLEFIELD, new SpringjackPastureEffect(), new TapSourceCost());
+        ability2.addChoice(new ChoiceColor());
         ability2.addCost(new SpringjackPastureCost());
         this.addAbility(ability2);
 
@@ -108,27 +109,26 @@ class SpringjackPastureEffect extends OneShotEffect<SpringjackPastureEffect> {
     public boolean apply(Game game, Ability source) {
         Player you = game.getPlayer(source.getControllerId());
         ChoiceColor choice = (ChoiceColor) source.getChoices().get(0);
-        int count = new GetXValue().calculate(game, source);
-        if (choice.getColor().isBlack()) {
-            you.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
-            you.gainLife(count, game);
+        if (you != null && choice != null) {
+            int count = source.getManaCostsToPay().getX();
+            if (choice.getColor().isBlack()) {
+                you.getManaPool().addMana(new Mana(0, 0, 0, 0, count, 0, 0), game, source);
+                you.gainLife(count, game);
+            } else if (choice.getColor().isBlue()) {
+                you.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
+                you.gainLife(count, game);
+            } else if (choice.getColor().isRed()) {
+                you.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
+                you.gainLife(count, game);
+            } else if (choice.getColor().isGreen()) {
+                you.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
+                you.gainLife(count, game);
+            } else if (choice.getColor().isWhite()) {
+                you.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
+                you.gainLife(count, game);
+            }
             return true;
-        } else if (choice.getColor().isBlue()) {
-            you.getManaPool().addMana(new Mana(0, 0, count, 0, 0, 0, 0), game, source);
-            you.gainLife(count, game);
-            return true;
-        } else if (choice.getColor().isRed()) {
-            you.getManaPool().addMana(new Mana(count, 0, 0, 0, 0, 0, 0), game, source);
-            you.gainLife(count, game);
-            return true;
-        } else if (choice.getColor().isGreen()) {
-            you.getManaPool().addMana(new Mana(0, count, 0, 0, 0, 0, 0), game, source);
-            you.gainLife(count, game);
-            return true;
-        } else if (choice.getColor().isWhite()) {
-            you.getManaPool().addMana(new Mana(0, 0, 0, count, 0, 0, 0), game, source);
-            you.gainLife(count, game);
-            return true;
+
         }
         return false;
     }
@@ -208,7 +208,7 @@ class SpringjackPastureCost extends CostImpl<SpringjackPastureCost> implements V
 class GoatToken extends Token {
 
     public GoatToken() {
-        super("Goat", "a 0/1 white Goat creature token");
+        super("Goat", "0/1 white Goat creature token");
         cardType.add(CardType.CREATURE);
         color = ObjectColor.WHITE;
         subtype.add("Goat");
