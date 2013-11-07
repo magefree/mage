@@ -35,8 +35,13 @@ public class DiesCreatureTriggeredAbility extends TriggeredAbilityImpl<DiesCreat
     }
 
     public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter) {
+        this(effect, optional, filter, false);
+    }
+
+    public DiesCreatureTriggeredAbility(Effect effect, boolean optional, FilterCreaturePermanent filter, boolean setTargetPointer) {
         super(Zone.BATTLEFIELD, effect, optional);
         this.filter = filter;
+        this.setTargetPointer = setTargetPointer;
     }
 
     public DiesCreatureTriggeredAbility(DiesCreatureTriggeredAbility ability) {
