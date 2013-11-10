@@ -44,6 +44,7 @@ import mage.abilities.costs.mana.PhyrexianManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.Effects;
 import mage.cards.Card;
+import mage.choices.Choice;
 import mage.constants.TargetController;
 import mage.game.Game;
 import mage.game.stack.Spell;
@@ -310,6 +311,9 @@ public abstract class ActivatedAbilityImpl<T extends ActivatedAbilityImpl<T>> ex
                     sb.append(target.getTargetedName(game));
                 }
             }
+        }
+        for (Choice choice :this.getChoices()) {
+            sb.append(" - ").append(choice.getMessage()).append(": ").append(choice.getChoice());
         }
         return sb.toString();
     }
