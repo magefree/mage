@@ -36,6 +36,7 @@ import mage.constants.Outcome;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.target.common.TargetCardInASingleGraveyard;
 import mage.target.common.TargetCardInYourGraveyard;
 import mage.util.CardUtil;
 
@@ -55,14 +56,19 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
         }
         if (!this.text.endsWith(" from your graveyard")) {
             this.text = this.text + " from your graveyard";
-        }
-        
+        }        
     }
 
     public ExileFromGraveCost(TargetCardInYourGraveyard target, String text) {
         this(target);
         this.text = text;
     }
+
+    public ExileFromGraveCost(TargetCardInASingleGraveyard target) {
+        this.addTarget(target);
+        this.text = "Exile " + target.getTargetName();
+    }
+
 
     public ExileFromGraveCost(ExileFromGraveCost cost) {
         super(cost);
@@ -71,10 +77,9 @@ public class ExileFromGraveCost extends CostImpl<ExileFromGraveCost> {
     @Override
     public boolean pay(Ability ability, Game game, UUID sourceId, UUID controllerId, boolean noMana) {
         if (targets.choose(Outcome.Exile, controllerId, sourceId, game)) {
-            Player player = game.getPlayer(controllerId);
             for (UUID targetId: targets.get(0).getTargets()) {
-                Card card = player.getGraveyard().get(targetId, game);
-                if (card == null) {
+                Card card = game.getCard(targetId);
+                if (card == null || !game.getState().getZone(targetId).equals(Zone.GRAVEYARD)) {
                     return false;
                 }
                 paid |= card.moveToZone(Zone.EXILED, sourceId, game, false);

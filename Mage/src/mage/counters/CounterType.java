@@ -36,46 +36,47 @@ import mage.counters.common.*;
  * @author nantuko
  */
 public enum CounterType {
-    P1P1(new PlusOneCounter().name),
-    M1M1(new MinusOneCounter().name),
-    POISON(new PoisonCounter().name),
+    AGE(new AgeCounter().name),
+    AIM(new AimCounter().name),
+    ARROWHEAD(new ArrowheadCounter().name),
+    AWAKENING(new AwakeningCounter().name),
+    BLAZE(new BlazeCounter().name),
+    BRIBERY(new BriberyCounter().name),
     CHARGE(new ChargeCounter().name),
-    LORE(new LoreCounter().name),
-    LOYALTY(new LoyaltyCounter().name),
-    LEVEL(new LevelCounter().name),
-    TIME(new TimeCounter().name),
+    DESPAIR(new DespairCounter().name),
+    DEVOTION(new DevotionCounter().name),
+    DIVINITY(new DivinityCounter().name),
+    ELIXIR(new ElixirCounter().name),
+    EON(new EonCounter().name),
+    EYEBALL(new EyeballCounter().name),
     FADE(new FadeCounter().name),
     FATE(new FateCounter().name),
     FEATHER(new FeatherCounter().name),
     FUSE(new FuseCounter().name),
-    QUEST(new QuestCounter().name),
-    ARROWHEAD(new ArrowheadCounter().name),
-    AIM(new AimCounter().name),
-    EON(new EonCounter().name),
-    AWAKENING(new AwakeningCounter().name),
-    DEVOTION(new DevotionCounter().name),
-    DIVINITY(new DivinityCounter().name),
-    WISH(new WishCounter().name),
-    HOOFPRINT(new HoofprintCounter().name),
     HATCHLING(new HatchlingCounter().name),
+    HOOFPRINT(new HoofprintCounter().name),
+    ICE(new IceCounter().name),
     KI(new KiCounter().name),
+    LEVEL(new LevelCounter().name),
+    LORE(new LoreCounter().name),
+    LOYALTY(new LoyaltyCounter().name),
+    M1M1(new MinusOneCounter().name),
+    MINING(new MiningCounter().name),
+    P1P1(new PlusOneCounter().name),
+    PAGE(new PageCounter().name),
+    PAIN(new PainCounter().name),
+    PETRIFICATION(new PetrificationCounter().name),
+    POISON(new PoisonCounter().name),
+    PRESSURE(new PressureCounter().name),
+    QUEST(new QuestCounter().name),
     SLIME(new SlimeCounter().name),
     SPORE(new SporeCounter().name),
     STUDY(new StudyCounter().name),
-    EYEBALL(new EyeballCounter().name),
-    ELIXIR(new ElixirCounter().name),
-    PAIN(new PainCounter().name),
-    DESPAIR(new DespairCounter().name),
-    PAGE(new PageCounter().name),
-    PRESSURE(new PressureCounter().name),
-    PETRIFICATION(new PetrificationCounter().name),
-    MINING(new MiningCounter().name),
     THEFT(new TheftCounter().name),
-    AGE(new AgeCounter().name),
-    BLAZE(new BlazeCounter().name),
-    ICE(new IceCounter().name),
-    BRIBERY(new BriberyCounter().name),
-    TOWER(new TowerCounter().name);
+    TIME(new TimeCounter().name),
+    TOWER(new TowerCounter().name),
+    VILE(new VileCounter().name),
+    WISH(new WishCounter().name);
 
     private String name;
 
@@ -187,6 +188,8 @@ public enum CounterType {
                 return new BlazeCounter(amount);
             case ICE:
                 return new IceCounter(amount);
+            case VILE:
+                return new VileCounter(amount);
                                                                                     
         }
         return null;

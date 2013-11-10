@@ -25,115 +25,106 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.mirrodin;
+package mage.sets.commander2013;
 
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
 import mage.abilities.Ability;
+import mage.abilities.common.DiesCreatureTriggeredAbility;
+import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.DoIfCostPaid;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
-import mage.cards.repository.CardRepository;
-import mage.choices.Choice;
-import mage.choices.ChoiceImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TargetController;
 import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerPredicate;
 import mage.game.Game;
 import mage.players.Player;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class SpoilsOfTheVault extends CardImpl<SpoilsOfTheVault> {
+public class Foster extends CardImpl<Foster> {
 
-    public SpoilsOfTheVault(UUID ownerId) {
-        super(ownerId, 78, "Spoils of the Vault", Rarity.RARE, new CardType[]{CardType.INSTANT}, "{B}");
-        this.expansionSetCode = "MRD";
-
-        this.color.setBlack(true);
-
-        // Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards.
-        this.getSpellAbility().addEffect(new SpoilsOfTheVaultEffect());
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("a creature you control");
+    static {
+        filter.add(new ControllerPredicate(TargetController.YOU));
     }
 
-    public SpoilsOfTheVault(final SpoilsOfTheVault card) {
+    public Foster(UUID ownerId) {
+        super(ownerId, 146, "Foster", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{G}{G}");
+        this.expansionSetCode = "C13";
+
+        this.color.setGreen(true);
+
+        // Whenever a creature you control dies, you may pay {1}. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard.
+        Ability ability = new DiesCreatureTriggeredAbility(
+                new DoIfCostPaid(new FosterEffect(), new GenericManaCost(1)),
+                false, filter);
+        this.addAbility(ability);
+    }
+
+    public Foster(final Foster card) {
         super(card);
     }
 
     @Override
-    public SpoilsOfTheVault copy() {
-        return new SpoilsOfTheVault(this);
+    public Foster copy() {
+        return new Foster(this);
     }
 }
 
+class FosterEffect extends OneShotEffect<FosterEffect> {
 
-class SpoilsOfTheVaultEffect extends OneShotEffect<SpoilsOfTheVaultEffect> {
+    private static final FilterCreatureCard filter = new FilterCreatureCard();
 
-    public SpoilsOfTheVaultEffect() {
-        super(Outcome.Damage);
-        this.staticText = "Name a card. Reveal cards from the top of your library until you reveal the named card, then put that card into your hand. Exile all other cards revealed this way, and you lose 1 life for each of the exiled cards";
+    public FosterEffect() {
+        super(Outcome.ReturnToHand);
+        this.staticText = "reveal cards from the top of your library until you reveal a creature card. Put that card into your hand and the rest into your graveyard";
     }
 
-    public SpoilsOfTheVaultEffect(final SpoilsOfTheVaultEffect effect) {
+    public FosterEffect(final FosterEffect effect) {
         super(effect);
     }
 
     @Override
-    public SpoilsOfTheVaultEffect copy() {
-        return new SpoilsOfTheVaultEffect(this);
+    public FosterEffect copy() {
+        return new FosterEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        String cardName;
         Player controller = game.getPlayer(source.getControllerId());
         if (controller == null) {
             return false;
         }
-        else{
-            Choice cardChoice = new ChoiceImpl();
-            cardChoice.setChoices(CardRepository.instance.getNames());
-            cardChoice.clearChoice();
-            while (!controller.choose(Outcome.Detriment, cardChoice, game)) {
-                if (!controller.isInGame()) {
-                    return false;
-                }
-            }
-            cardName = cardChoice.getChoice();
-            game.informPlayers("Spoils of the Vault, named card: [" + cardName + "]");
-        }        
         Card sourceCard = game.getCard(source.getSourceId());
-        
-        if (cardName == null || sourceCard == null) {
+        if (sourceCard == null) {
             return false;
         }
-        
         Cards cards = new CardsImpl(Zone.PICK);
         while (controller.getLibrary().size() > 0) {
-            Card card = controller.getLibrary().removeFromTop(game);
+            Card card = controller.getLibrary().getFromTop(game);
             if (card != null) {
                 cards.add(card);
-                if(card.getName().equals(cardName)){
+                if(filter.match(card, game)){
                     card.moveToZone(Zone.HAND, source.getSourceId(), game, false);
                     break;
                 }
                 else{
-                    card.moveToExile(null, sourceCard.getName(), source.getId(), game);
+                    card.moveToZone(Zone.GRAVEYARD, source.getSourceId(), game, false);
                 }
             }
-            else{
-                break;
-            }
         }
-        
         controller.revealCards(sourceCard.getName(), cards, game);
-        controller.loseLife(cards.size(), game);
-        
         return true;
     }
 }
