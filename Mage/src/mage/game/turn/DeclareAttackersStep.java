@@ -61,6 +61,7 @@ public class DeclareAttackersStep extends Step<DeclareAttackersStep> {
     @Override
     public void beginStep(Game game, UUID activePlayerId) {
         super.beginStep(game, activePlayerId);
+        game.getTurn().setDeclareAttackersStepStarted(true);
         game.getCombat().selectAttackers(game);
     }
 

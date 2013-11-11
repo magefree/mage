@@ -156,12 +156,10 @@ class NightveilSpecterEffect extends AsThoughEffectImpl<NightveilSpecterEffect> 
                 if (card.getCardType().contains(CardType.LAND)) {
                     // If the revealed card is a land, you can play it only if it's your turn and you haven't yet played a land this turn.
                     if (game.getActivePlayerId().equals(source.getControllerId()) && controller.canPlayLand()) {
-                        card.setControllerId(source.getControllerId());
                         return true;
                     }
                 } else {
                     if (card.getSpellAbility().spellCanBeActivatedRegularlyNow(source.getControllerId(), game)) {
-                        card.setControllerId(source.getControllerId());
                         return true;
                     }
                 }
