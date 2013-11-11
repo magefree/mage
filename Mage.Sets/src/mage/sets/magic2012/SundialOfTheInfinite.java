@@ -34,8 +34,8 @@ import mage.constants.Zone;
 import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringYourTurnCost;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.cards.CardImpl;
@@ -52,9 +52,8 @@ public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
         this.expansionSetCode = "M12";
 
         // {1}, {tap}: End the turn. Activate this ability only during your turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1), MyTurnCondition.getInstance());
         ability.addCost(new TapSourceCost());
-        ability.addCost(new OnlyDuringYourTurnCost());
         this.addAbility(ability);
     }
 

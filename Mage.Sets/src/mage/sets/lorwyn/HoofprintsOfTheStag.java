@@ -32,8 +32,6 @@ import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.common.DrawCardTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringYourTurnCost;
 import mage.abilities.costs.common.RemoveCountersSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.CreateTokenEffect;
@@ -45,6 +43,8 @@ import mage.counters.CounterType;
 import mage.game.permanent.token.Token;
 
 import java.util.UUID;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 
 /**
  *
@@ -59,9 +59,8 @@ public class HoofprintsOfTheStag extends CardImpl<HoofprintsOfTheStag> {
         this.subtype.add("Elemental");
         this.color.setWhite(true);
         this.addAbility(new DrawCardTriggeredAbility(new AddCountersSourceEffect(CounterType.HOOFPRINT.createInstance(1)), true));
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new CreateTokenEffect(new WhiteElementalToken(), 1), new ManaCostsImpl("{2}{W}"), MyTurnCondition.getInstance());
         ability.addCost(new RemoveCountersSourceCost(CounterType.HOOFPRINT.createInstance(4)));
-        ability.addCost(new OnlyDuringYourTurnCost());
         this.addAbility(ability);
     }
 
