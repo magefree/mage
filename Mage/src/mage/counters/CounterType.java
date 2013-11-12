@@ -66,6 +66,7 @@ public enum CounterType {
     PAGE(new PageCounter().name),
     PAIN(new PainCounter().name),
     PETRIFICATION(new PetrificationCounter().name),
+    PLAGUE(new PlagueCounter().name),
     POISON(new PoisonCounter().name),
     PRESSURE(new PressureCounter().name),
     QUEST(new QuestCounter().name),
@@ -174,6 +175,8 @@ public enum CounterType {
                 return new DespairCounter(amount);
             case PAGE:
                 return new PageCounter(amount);
+            case PLAGUE:
+                return new PlagueCounter(amount);
             case PRESSURE:
                 return new PressureCounter(amount);
             case PETRIFICATION:

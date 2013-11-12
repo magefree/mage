@@ -29,8 +29,8 @@
 package mage.abilities;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -50,11 +50,12 @@ public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> 
     @Override
     public void trigger(Game game, UUID controllerId) {
         //20100716 - 603.8
-        Boolean triggered = (Boolean) game.getState().getValue(this.id.toString() + "triggered");
-        if (triggered == null)
+        Boolean triggered = (Boolean) game.getState().getValue(this.getSourceId().toString() + "triggered");
+        if (triggered == null) {
             triggered = Boolean.FALSE;
+        }
         if (!triggered) {
-            game.getState().setValue(this.id.toString() + "triggered", Boolean.TRUE);
+            game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.TRUE);
             super.trigger(game, controllerId);
         }
     }
@@ -62,11 +63,11 @@ public abstract class StateTriggeredAbility<T extends StateTriggeredAbility<T>> 
     @Override
     public boolean resolve(Game game) {
         //20100716 - 603.8
-        game.getState().setValue(this.id.toString() + "triggered", Boolean.FALSE);
+        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
         return super.resolve(game);
     }
 
     public void counter(Game game) {
-        game.getState().setValue(this.id.toString() + "triggered", Boolean.FALSE);
+        game.getState().setValue(this.getSourceId().toString() + "triggered", Boolean.FALSE);
     }
 }

@@ -34,7 +34,6 @@ import mage.abilities.Ability;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.effects.ContinuousEffectImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.mana.ColorlessManaAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
@@ -44,7 +43,9 @@ import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.SubLayer;
 import mage.constants.Zone;
+import mage.filter.FilterPermanent;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.other.OwnerIdPredicate;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
@@ -62,7 +63,7 @@ public class HomewardPath extends CardImpl<HomewardPath> {
         // {tap}: Add {1} to your mana pool.
         this.addAbility(new ColorlessManaAbility());
         // {tap}: Each player gains control of all creatures he or she owns.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HomewardPathEffect(), new TapSourceCost()));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new HomewardPathControlEffect(), new TapSourceCost()));
 
     }
 
@@ -76,33 +77,9 @@ public class HomewardPath extends CardImpl<HomewardPath> {
     }
 }
 
-class HomewardPathEffect extends OneShotEffect<HomewardPathEffect> {
-
-    public HomewardPathEffect() {
-        super(Outcome.Detriment);
-        this.staticText = "Each player gains control of all creatures he or she owns";
-    }
-
-    public HomewardPathEffect(final HomewardPathEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public HomewardPathEffect copy() {
-        return new HomewardPathEffect(this);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player controller = game.getPlayer(source.getControllerId());
-        if (controller != null) {
-
-        }
-        return false;
-    }
-}
-
 class HomewardPathControlEffect extends ContinuousEffectImpl<HomewardPathControlEffect> {
+
+    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent();
 
     public HomewardPathControlEffect() {
         super(Duration.EndOfGame, Layer.ControlChangingEffects_2, SubLayer.NA, Outcome.GainControl);
@@ -122,8 +99,15 @@ class HomewardPathControlEffect extends ContinuousEffectImpl<HomewardPathControl
     public void init(Ability source, Game game) {
         super.init(source, game);
         // add all creatures in range
-        for (Permanent permanent :game.getBattlefield().getActivePermanents(new FilterCreaturePermanent(), source.getControllerId(), game)) {
-            objects.add(permanent.getId());
+        Player controller = game.getPlayer(source.getControllerId());
+        if (controller != null) {
+            for (UUID playerId : controller.getInRange()) {
+                FilterPermanent playerFilter = filter.copy();
+                playerFilter.add(new OwnerIdPredicate(playerId));
+                for (Permanent permanent :game.getBattlefield().getActivePermanents(playerFilter, playerId, game)) {
+                    objects.add(permanent.getId());
+                }
+            }
         }
     }
 
@@ -133,7 +117,9 @@ class HomewardPathControlEffect extends ContinuousEffectImpl<HomewardPathControl
         for (UUID creatureId :objects) {
             Permanent creature = game.getPermanent(creatureId);
             if (creature != null) {
-                creature.changeControllerId(creature.getOwnerId(), game);
+                if (!creature.getControllerId().equals(creature.getOwnerId())) {
+                    creature.changeControllerId(creature.getOwnerId(), game);
+                }
             } else {
                 toRemove.add(creatureId);
             }
