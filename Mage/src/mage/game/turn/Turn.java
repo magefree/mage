@@ -28,18 +28,16 @@
 
 package mage.game.turn;
 
-import mage.constants.PhaseStep;
-import mage.constants.TurnPhase;
-import mage.game.Game;
-import mage.game.events.GameEvent;
-import mage.players.Player;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
-
+import mage.constants.PhaseStep;
+import mage.constants.TurnPhase;
+import mage.game.Game;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 
 /**
  *
@@ -50,6 +48,7 @@ public class Turn implements Serializable {
     private Phase currentPhase;
     private UUID activePlayerId;
     private List<Phase> phases = new ArrayList<Phase>();
+    private boolean declareAttackersStepStarted = false;
 
     public Turn() {
         phases.add(new BeginningPhase());
@@ -109,6 +108,7 @@ public class Turn implements Serializable {
     }
 
     public void play(Game game, UUID activePlayerId) {
+        this.setDeclareAttackersStepStarted(false);
         if (game.isPaused() || game.isGameOver()) {
             return;
         }
@@ -268,6 +268,14 @@ public class Turn implements Serializable {
         currentPhase = phase;
         game.fireEvent(new GameEvent(GameEvent.EventType.PHASE_CHANGED, activePlayerId, null, activePlayerId));
         //phase.play(game, activePlayerId);
+    }
+
+    public boolean isDeclareAttackersStepStarted() {
+        return declareAttackersStepStarted;
+    }
+
+    public void setDeclareAttackersStepStarted(boolean declareAttackersStepStarted) {
+        this.declareAttackersStepStarted = declareAttackersStepStarted;
     }
 
     public Turn copy() {

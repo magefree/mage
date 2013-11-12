@@ -29,11 +29,11 @@
 package mage.abilities.common;
 
 import java.util.UUID;
-import mage.constants.Zone;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -80,7 +80,16 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl<Ac
 
     @Override
     public String getRule() {
-        return new StringBuilder(super.getRule()).append(" Activate this ability only if ").append(condition.toString()).append(".").toString() ;
+        StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability only ");
+        if (condition.toString() != null) {
+            if (!condition.toString().startsWith("during")) {
+                sb.append("if ");
+            }
+            sb.append(condition.toString()).append(".");
+        } else {
+            sb.append(" [Condition toSting() == null] ");
+        }
+        return sb.toString() ;
     }
 
     @Override

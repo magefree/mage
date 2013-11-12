@@ -25,44 +25,51 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.magic2012;
+package mage.sets.commander2013;
 
 import java.util.UUID;
-
-import mage.constants.Zone;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.abilities.Ability;
-import mage.abilities.common.ActivateIfConditionActivatedAbility;
-import mage.abilities.condition.common.MyTurnCondition;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.effects.common.search.SearchLibraryPutInPlayEffect;
 import mage.cards.CardImpl;
-import mage.abilities.effects.common.EndTurnEffect;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.filter.FilterCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.SubtypePredicate;
+import mage.target.common.TargetCardInLibrary;
 
 /**
  *
- * @author nantuko
+ * @author LevelX2
  */
-public class SundialOfTheInfinite extends CardImpl<SundialOfTheInfinite> {
+public class SpoilsOfVictory extends CardImpl<SpoilsOfVictory> {
 
-    public SundialOfTheInfinite(UUID ownerId) {
-        super(ownerId, 218, "Sundial of the Infinite", Rarity.RARE, new CardType[]{CardType.ARTIFACT}, "{2}");
-        this.expansionSetCode = "M12";
-
-        // {1}, {tap}: End the turn. Activate this ability only during your turn.
-        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new EndTurnEffect(), new GenericManaCost(1), MyTurnCondition.getInstance());
-        ability.addCost(new TapSourceCost());
-        this.addAbility(ability);
+    private static final FilterCard filter = new FilterCard("Plains, Island, Swamp, Mountain, or Forest card");
+    static {
+        filter.add(Predicates.or(
+                new SubtypePredicate("Plains"),
+                new SubtypePredicate("Island"),
+                new SubtypePredicate("Swamp"),
+                new SubtypePredicate("Mountain"),
+                new SubtypePredicate("Forest")));
     }
 
-    public SundialOfTheInfinite(final SundialOfTheInfinite card) {
+    public SpoilsOfVictory(UUID ownerId) {
+        super(ownerId, 172, "Spoils of Victory", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{G}");
+        this.expansionSetCode = "C13";
+
+        this.color.setGreen(true);
+
+        // Search your library for a Plains, Island, Swamp, Mountain, or Forest card and put that card onto the battlefield. Then shuffle your library.
+        this.getSpellAbility().addEffect(new SearchLibraryPutInPlayEffect(new TargetCardInLibrary(filter), false, Outcome.PutLandInPlay));
+    }
+
+    public SpoilsOfVictory(final SpoilsOfVictory card) {
         super(card);
     }
 
     @Override
-    public SundialOfTheInfinite copy() {
-        return new SundialOfTheInfinite(this);
+    public SpoilsOfVictory copy() {
+        return new SpoilsOfVictory(this);
     }
 }

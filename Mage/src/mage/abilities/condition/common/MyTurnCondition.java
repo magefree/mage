@@ -42,4 +42,9 @@ public class MyTurnCondition implements Condition {
     public boolean apply(Game game, Ability source) {
         return game.getActivePlayerId().equals(source.getControllerId());
     }
+    
+    @Override
+    public String toString() {
+	return "during your turn";
+    }
 }

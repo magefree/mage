@@ -33,9 +33,9 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.MageInt;
 import mage.abilities.Ability;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
 import mage.abilities.common.DealsCombatDamageToAPlayerTriggeredAbility;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringYourTurnCost;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.ReturnToHandTargetEffect;
@@ -76,9 +76,8 @@ public class WalkerOfSecretWays extends CardImpl<WalkerOfSecretWays> {
         this.addAbility(new DealsCombatDamageToAPlayerTriggeredAbility(new WalkerOfSecretWaysEffect(), true, true));
 
         // {1}{U}: Return target Ninja you control to its owner's hand. Activate this ability only during your turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"));
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new ReturnToHandTargetEffect(), new ManaCostsImpl("{1}{U}"), MyTurnCondition.getInstance());
         ability.addTarget(new TargetControlledCreaturePermanent(1,1, filterCreature, false));
-        ability.addCost(new OnlyDuringYourTurnCost());
         this.addAbility(ability);
 
 

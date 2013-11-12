@@ -30,8 +30,8 @@ package mage.sets.conflux;
 import java.util.UUID;
 import mage.MageInt;
 import mage.abilities.Ability;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.OnlyDuringYourTurnCost;
+import mage.abilities.common.ActivateIfConditionActivatedAbility;
+import mage.abilities.condition.common.MyTurnCondition;
 import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.common.continious.BoostSourceEffect;
 import mage.abilities.effects.common.continious.BoostTargetEffect;
@@ -59,8 +59,7 @@ public class Fleshformer extends CardImpl<Fleshformer> {
         this.toughness = new MageInt(2);
 
         // {W}{U}{B}{R}{G}: Fleshformer gets +2/+2 and gains fear until end of turn. Target creature gets -2/-2 until end of turn. Activate this ability only during your turn.
-        Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{W}{U}{B}{R}{G}"));
-        ability.addCost(new OnlyDuringYourTurnCost());
+        Ability ability = new ActivateIfConditionActivatedAbility(Zone.BATTLEFIELD, new BoostSourceEffect(2, 2, Duration.EndOfTurn), new ManaCostsImpl("{W}{U}{B}{R}{G}"), MyTurnCondition.getInstance());
         ability.addEffect(new BoostTargetEffect(-2, -2, Duration.EndOfTurn));
         ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
