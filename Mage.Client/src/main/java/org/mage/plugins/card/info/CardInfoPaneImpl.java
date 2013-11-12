@@ -87,7 +87,7 @@ public class CardInfoPaneImpl extends JEditorPane implements CardInfoPane {
                                     } else {
                                         sb.append(", ");
                                     }
-                                    sb.append(counter.getCount()).append("x<i>").append(counter.getName()).append("</i>");
+                                    sb.append(counter.getCount()).append(" x <i>").append(counter.getName()).append("</i>");
                                     index++;
                                 }
                             }
