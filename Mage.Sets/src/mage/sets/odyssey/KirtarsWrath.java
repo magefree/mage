@@ -25,44 +25,28 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.torment;
+package mage.sets.odyssey;
 
 import java.util.UUID;
-import mage.Mana;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalManaEffect;
-import mage.abilities.effects.common.BasicManaEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
 
 /**
  *
- * @author Plopman
+ * @author LevelX2
  */
-public class CabalRitual extends CardImpl<CabalRitual> {
+public class KirtarsWrath extends mage.sets.commander2013.KirtarsWrath {
 
-    public CabalRitual(UUID ownerId) {
-        super(ownerId, 51, "Cabal Ritual", Rarity.COMMON, new CardType[]{CardType.INSTANT}, "{1}{B}");
-        this.expansionSetCode = "TOR";
-
-        this.color.setBlack(true);
-
-        // Add {B}{B}{B} to your mana pool.
-        // Threshold — Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard.
-        this.getSpellAbility().addEffect(new ConditionalManaEffect(
-                new BasicManaEffect(new Mana(0, 0, 0, 0, 5, 0, 0)),
-                new BasicManaEffect(new Mana(0, 0, 0, 0, 3, 0, 0)),
-                new CardsInControllerGraveCondition(7),
-                "Add {B}{B}{B} to your mana pool.<br/><br/><i>Threshold<i/> - Add {B}{B}{B}{B}{B} to your mana pool instead if seven or more cards are in your graveyard"));
+    public KirtarsWrath(UUID ownerId) {
+        super(ownerId);
+        this.cardNumber = 28;
+        this.expansionSetCode = "ODY";
     }
 
-    public CabalRitual(final CabalRitual card) {
+    public KirtarsWrath(final KirtarsWrath card) {
         super(card);
     }
 
     @Override
-    public CabalRitual copy() {
-        return new CabalRitual(this);
+    public KirtarsWrath copy() {
+        return new KirtarsWrath(this);
     }
 }
