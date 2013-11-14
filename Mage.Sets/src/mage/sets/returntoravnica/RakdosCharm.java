@@ -27,18 +27,16 @@
  */
 package mage.sets.returntoravnica;
 
-import java.util.ArrayList;
 import java.util.UUID;
-
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DestroyTargetEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
 import mage.constants.Outcome;
+import mage.constants.Rarity;
 import mage.filter.FilterPermanent;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -61,7 +59,7 @@ public class RakdosCharm extends CardImpl<RakdosCharm> {
         this.color.setRed(true);
 
         // Choose one — Exile all cards from target player's graveyard;
-        this.getSpellAbility().addEffect(new RakdosCharmExileEffect());
+        this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
 
         // or destroy target artifact;
@@ -118,31 +116,5 @@ public class RakdosCharm extends CardImpl<RakdosCharm> {
             return new RakdosCharmDamageEffect(this);
         }
 
-    }
-
-    class RakdosCharmExileEffect extends OneShotEffect<RakdosCharmExileEffect> {
-
-        public RakdosCharmExileEffect() {
-            super(Outcome.Exile);
-            staticText = "Exile all cards from target player's graveyard";
-        }
-
-        @Override
-        public RakdosCharmExileEffect copy() {
-            return new RakdosCharmExileEffect();
-        }
-
-        @Override
-        public boolean apply(Game game, Ability source) {
-            Player targetPlayer = game.getPlayer(source.getFirstTarget());
-            if (targetPlayer != null) {
-                ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
-                for (UUID cardId : graveyard) {
-                    game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-                }
-                return true;
-            }
-            return false;
-        }
     }
 }

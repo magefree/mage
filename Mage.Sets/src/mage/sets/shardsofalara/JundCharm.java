@@ -27,23 +27,17 @@
  */
 package mage.sets.shardsofalara;
 
-import java.util.ArrayList;
 import java.util.UUID;
-
+import mage.abilities.Mode;
+import mage.abilities.effects.common.DamageAllEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
+import mage.abilities.effects.common.counter.AddCountersTargetEffect;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.Mode;
-import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.DamageAllEffect;
-import mage.abilities.effects.common.counter.AddCountersTargetEffect;
-import mage.cards.CardImpl;
 import mage.counters.CounterType;
 import mage.filter.common.FilterCreaturePermanent;
-import mage.game.Game;
-import mage.players.Player;
 import mage.target.TargetPlayer;
 import mage.target.common.TargetCreaturePermanent;
 
@@ -62,7 +56,7 @@ public class JundCharm extends CardImpl<JundCharm> {
         this.color.setBlack(true);
 
         // Choose one - Exile all cards from target player's graveyard;
-        this.getSpellAbility().addEffect(new JundCharmEffect());
+        this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
         // or Jund Charm deals 2 damage to each creature;
         Mode mode = new Mode();
@@ -82,31 +76,5 @@ public class JundCharm extends CardImpl<JundCharm> {
     @Override
     public JundCharm copy() {
         return new JundCharm(this);
-    }
-}
-
-class JundCharmEffect extends OneShotEffect<JundCharmEffect> {
-
-    public JundCharmEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile all cards from target player's graveyard";
-    }
-
-    @Override
-    public JundCharmEffect copy() {
-        return new JundCharmEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
     }
 }

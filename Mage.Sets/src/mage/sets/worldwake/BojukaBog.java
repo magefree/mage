@@ -29,16 +29,17 @@ package mage.sets.worldwake;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.abilities.Ability;
 import mage.abilities.common.EntersBattlefieldTappedAbility;
 import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.abilities.mana.BlackManaAbility;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
 import mage.target.TargetPlayer;
@@ -53,10 +54,13 @@ public class BojukaBog extends CardImpl<BojukaBog> {
         super(ownerId, 132, "Bojuka Bog", Rarity.COMMON, new CardType[]{CardType.LAND}, "");
         this.expansionSetCode = "WWK";
 
+        // Bojuka Bog enters the battlefield tapped.
         this.addAbility(new EntersBattlefieldTappedAbility());
-        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new BojukaBogEffect());
+        // When Bojuka Bog enters the battlefield, exile all cards from target player's graveyard.
+        EntersBattlefieldTriggeredAbility ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+        // {T}: Add {B} to your mana pool.
         this.addAbility(new BlackManaAbility());
     }
 
@@ -68,31 +72,4 @@ public class BojukaBog extends CardImpl<BojukaBog> {
     public BojukaBog copy() {
         return new BojukaBog(this);
     }
-}
-
-class BojukaBogEffect extends OneShotEffect<BojukaBogEffect> {
-
-    public BojukaBogEffect() {
-        super(Outcome.Exile);
-        staticText = "exile all cards from target player's graveyard";
-    }
-
-    @Override
-    public BojukaBogEffect copy() {
-        return new BojukaBogEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

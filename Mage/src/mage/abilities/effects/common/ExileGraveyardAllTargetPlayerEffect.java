@@ -25,42 +25,45 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
 
+package mage.abilities.effects.common;
+
+import java.util.ArrayList;
 import java.util.UUID;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
-import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
-import mage.cards.CardImpl;
-import mage.constants.CardType;
-import mage.constants.Rarity;
+import mage.abilities.Ability;
+import mage.abilities.effects.OneShotEffect;
+import mage.constants.Outcome;
 import mage.constants.Zone;
-import mage.target.TargetPlayer;
+import mage.game.Game;
+import mage.players.Player;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class TormodsCrypt extends CardImpl<TormodsCrypt> {
 
-    public TormodsCrypt(UUID ownerId) {
-        super(ownerId, 115, "Tormod's Crypt", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "TSB";
+public class ExileGraveyardAllTargetPlayerEffect extends OneShotEffect<ExileGraveyardAllTargetPlayerEffect> {
 
-        // {tap}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllTargetPlayerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
-        this.addAbility(ability);
-    }
-
-    public TormodsCrypt(final TormodsCrypt card) {
-        super(card);
+    public ExileGraveyardAllTargetPlayerEffect() {
+        super(Outcome.Exile);
+        staticText = "exile all cards from target player's graveyard";
     }
 
     @Override
-    public TormodsCrypt copy() {
-        return new TormodsCrypt(this);
+    public ExileGraveyardAllTargetPlayerEffect copy() {
+        return new ExileGraveyardAllTargetPlayerEffect();
+    }
+
+    @Override
+    public boolean apply(Game game, Ability source) {
+        Player targetPlayer = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+        if (targetPlayer != null) {
+            ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
+            for (UUID cardId : graveyard) {
+                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
+            }
+            return true;
+        }
+        return false;
     }
 }
