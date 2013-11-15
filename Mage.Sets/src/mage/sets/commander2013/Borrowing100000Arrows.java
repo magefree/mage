@@ -29,70 +29,71 @@ package mage.sets.commander2013;
 
 import java.util.UUID;
 import mage.abilities.Ability;
-import mage.abilities.condition.common.CardsInControllerGraveCondition;
-import mage.abilities.decorator.ConditionalOneShotEffect;
 import mage.abilities.effects.OneShotEffect;
-import mage.abilities.effects.common.CreateTokenEffect;
-import mage.abilities.effects.common.DestroyAllEffect;
+import mage.abilities.effects.common.DrawCardControllerEffect;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.filter.common.FilterCreaturePermanent;
+import mage.filter.predicate.permanent.ControllerIdPredicate;
+import mage.filter.predicate.permanent.TappedPredicate;
 import mage.game.Game;
-import mage.game.permanent.token.SpiritWhiteToken;
+import mage.players.Player;
+import mage.target.common.TargetOpponent;
 
 /**
  *
  * @author LevelX2
  */
-public class KirtarsWrath extends CardImpl<KirtarsWrath> {
+public class Borrowing100000Arrows extends CardImpl<Borrowing100000Arrows> {
 
-    public KirtarsWrath(UUID ownerId) {
-        super(ownerId, 15, "Kirtar's Wrath", Rarity.RARE, new CardType[]{CardType.SORCERY}, "{4}{W}{W}");
+    public Borrowing100000Arrows(UUID ownerId) {
+        super(ownerId, 33, "Borrowing 100,000 Arrows", Rarity.UNCOMMON, new CardType[]{CardType.SORCERY}, "{2}{U}");
         this.expansionSetCode = "C13";
 
-        this.color.setWhite(true);
+        this.color.setBlue(true);
 
-        // Destroy all creatures. They can't be regenerated.
-        // Threshold - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated.
-        this.getSpellAbility().addEffect(new ConditionalOneShotEffect(
-                new KirtarsWrathEffect(),
-                new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true),
-                new CardsInControllerGraveCondition(7),
-                "Destroy all creatures. They can't be regenerated.<br/><br/><i>Threshold<i/> - If seven or more cards are in your graveyard, instead destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated"));
-
+        // Draw a card for each tapped creature target opponent controls.
+        this.getSpellAbility().addEffect(new Borrowing100000ArrowsEffect());
+        this.getSpellAbility().addTarget(new TargetOpponent(true));
     }
 
-    public KirtarsWrath(final KirtarsWrath card) {
+    public Borrowing100000Arrows(final Borrowing100000Arrows card) {
         super(card);
     }
 
     @Override
-    public KirtarsWrath copy() {
-        return new KirtarsWrath(this);
+    public Borrowing100000Arrows copy() {
+        return new Borrowing100000Arrows(this);
     }
 }
 
-class KirtarsWrathEffect extends OneShotEffect<KirtarsWrathEffect> {
+class Borrowing100000ArrowsEffect extends OneShotEffect<Borrowing100000ArrowsEffect> {
 
-    public KirtarsWrathEffect() {
-        super(Outcome.DestroyPermanent);
-        this.staticText = "destroy all creatures, then put two 1/1 white Spirit creature tokens with flying onto the battlefield. Creatures destroyed this way can't be regenerated";
+    public Borrowing100000ArrowsEffect() {
+        super(Outcome.DrawCard);
+        this.staticText = "Draw a card for each tapped creature target opponent controls";
     }
 
-    public KirtarsWrathEffect(final KirtarsWrathEffect effect) {
+    public Borrowing100000ArrowsEffect(final Borrowing100000ArrowsEffect effect) {
         super(effect);
     }
 
     @Override
-    public KirtarsWrathEffect copy() {
-        return new KirtarsWrathEffect(this);
+    public Borrowing100000ArrowsEffect copy() {
+        return new Borrowing100000ArrowsEffect(this);
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        new DestroyAllEffect(new FilterCreaturePermanent("all creatures"), true).apply(game, source);
-        return new CreateTokenEffect(new SpiritWhiteToken(), 2).apply(game, source);
+        Player opponent = game.getPlayer(this.getTargetPointer().getFirst(game, source));
+            if (opponent != null) {
+            FilterCreaturePermanent filter = new FilterCreaturePermanent();
+            filter.add(new TappedPredicate());
+            filter.add(new ControllerIdPredicate(opponent.getId()));
+            return new DrawCardControllerEffect(game.getBattlefield().count(filter, source.getSourceId(), source.getSourceId(), game)).apply(game, source);
+        }
+        return false;
     }
 }
