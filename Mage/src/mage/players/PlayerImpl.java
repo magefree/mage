@@ -920,9 +920,11 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
             }
             if (zone != Zone.HAND) {
                 if (zone != Zone.BATTLEFIELD && game.getContinuousEffects().asThough(object.getId(), AsThoughEffectType.CAST, game)) {
-                    for (ActivatedAbility ability: object.getAbilities().getActivatedAbilities(Zone.HAND)) {
+                    for (Ability ability: object.getAbilities()) {
                         ability.setControllerId(this.getId());
-                        useable.put(ability.getId(), ability);
+                        if (ability instanceof ActivatedAbility && ability.getZone().match(Zone.HAND)) {
+                            useable.put(ability.getId(), (ActivatedAbility) ability);
+                        }
                     }
                 }
             }
@@ -1755,8 +1757,9 @@ public abstract class PlayerImpl<T extends PlayerImpl<T>> implements Player, Ser
         for (ExileZone exile: game.getExile().getExileZones()) {
             for (Card card: exile.getCards(game)) {
                 if (game.getContinuousEffects().asThough(card.getId(), AsThoughEffectType.CAST, game)) {
-                    for (ActivatedAbility ability: card.getAbilities().getActivatedAbilities(Zone.HAND)) {
-                        if (ability instanceof SpellAbility || ability instanceof PlayLandAbility) {
+                    for (Ability ability: card.getAbilities()) {
+                        ability.setControllerId(this.getId()); // controller must be set for case owner != caster
+                        if (ability.getZone().match(Zone.HAND) && (ability instanceof SpellAbility || ability instanceof PlayLandAbility)) {
                             playable.add(ability);
                         }
                     }

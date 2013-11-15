@@ -27,24 +27,19 @@
  */
 package mage.sets.scarsofmirrodin;
 
-import java.util.ArrayList;
 import java.util.UUID;
-import mage.constants.CardType;
-import mage.constants.Outcome;
-import mage.constants.Rarity;
-import mage.constants.Zone;
-import mage.abilities.Ability;
 import mage.abilities.common.DiesTriggeredAbility;
 import mage.abilities.common.SimpleActivatedAbility;
 import mage.abilities.costs.common.SacrificeSourceCost;
 import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.ManaCostsImpl;
-import mage.abilities.effects.OneShotEffect;
 import mage.abilities.effects.common.DoIfCostPaid;
 import mage.abilities.effects.common.DrawCardControllerEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
-import mage.game.Game;
-import mage.players.Player;
+import mage.constants.CardType;
+import mage.constants.Rarity;
+import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
@@ -57,10 +52,12 @@ public class NihilSpellbomb extends CardImpl<NihilSpellbomb> {
         super(ownerId, 187, "Nihil Spellbomb", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{1}");
         this.expansionSetCode = "SOM";
 
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new NihilSpellbombEffect(), new TapSourceCost());
+        // {T}, Sacrifice Nihil Spellbomb: Exile all cards from target player's graveyard.
+        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllTargetPlayerEffect(), new TapSourceCost());
         ability.addCost(new SacrificeSourceCost());
         ability.addTarget(new TargetPlayer());
         this.addAbility(ability);
+        // When Nihil Spellbomb is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.
         this.addAbility(new DiesTriggeredAbility(new DoIfCostPaid(new DrawCardControllerEffect(1), new ManaCostsImpl("{B}")), false));
     }
 
@@ -72,31 +69,4 @@ public class NihilSpellbomb extends CardImpl<NihilSpellbomb> {
     public NihilSpellbomb copy() {
         return new NihilSpellbomb(this);
     }
-}
-
-class NihilSpellbombEffect extends OneShotEffect<NihilSpellbombEffect> {
-
-    public NihilSpellbombEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile all cards from target player's graveyard";
-    }
-
-    @Override
-    public NihilSpellbombEffect copy() {
-        return new NihilSpellbombEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }

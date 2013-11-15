@@ -82,7 +82,7 @@ class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl<MightyEmergen
     }
     
     public MightyEmergenceTriggeredAbility() {
-        super(Zone.BATTLEFIELD, new AddCountersTargetEffect(), true);
+        super(Zone.BATTLEFIELD, new MightyEmergenceAddCountersTargetEffect(), true);
     }
 
     public MightyEmergenceTriggeredAbility(MightyEmergenceTriggeredAbility ability) {
@@ -117,15 +117,15 @@ class MightyEmergenceTriggeredAbility extends TriggeredAbilityImpl<MightyEmergen
     }
 }
 
-class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffect> {
+class MightyEmergenceAddCountersTargetEffect extends OneShotEffect<MightyEmergenceAddCountersTargetEffect> {
 
 
 
-     public AddCountersTargetEffect() {
+     public MightyEmergenceAddCountersTargetEffect() {
         super(Outcome.Benefit);
      }
 
-    public AddCountersTargetEffect(final AddCountersTargetEffect effect) {
+    public MightyEmergenceAddCountersTargetEffect(final MightyEmergenceAddCountersTargetEffect effect) {
         super(effect);
     }
 
@@ -145,8 +145,8 @@ class AddCountersTargetEffect extends OneShotEffect<AddCountersTargetEffect> {
     }
 
     @Override
-    public AddCountersTargetEffect copy() {
-        return new AddCountersTargetEffect(this);
+    public MightyEmergenceAddCountersTargetEffect copy() {
+        return new MightyEmergenceAddCountersTargetEffect(this);
     }
 
     

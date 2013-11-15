@@ -25,42 +25,48 @@
  *  authors and should not be interpreted as representing official policies, either expressed
  *  or implied, of BetaSteward_at_googlemail.com.
  */
-package mage.sets.timeshifted;
+package mage.sets.commander2013;
 
 import java.util.UUID;
-import mage.abilities.common.SimpleActivatedAbility;
-import mage.abilities.costs.common.SacrificeSourceCost;
-import mage.abilities.costs.common.TapSourceCost;
+import mage.MageInt;
+import mage.abilities.Ability;
+import mage.abilities.common.EntersBattlefieldTriggeredAbility;
 import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
+import mage.abilities.keyword.FlyingAbility;
 import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Rarity;
-import mage.constants.Zone;
 import mage.target.TargetPlayer;
 
 /**
  *
- * @author North
+ * @author LevelX2
  */
-public class TormodsCrypt extends CardImpl<TormodsCrypt> {
+public class AngelOfFinality extends CardImpl<AngelOfFinality> {
 
-    public TormodsCrypt(UUID ownerId) {
-        super(ownerId, 115, "Tormod's Crypt", Rarity.COMMON, new CardType[]{CardType.ARTIFACT}, "{0}");
-        this.expansionSetCode = "TSB";
+    public AngelOfFinality(UUID ownerId) {
+        super(ownerId, 4, "Angel of Finality", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{W}");
+        this.expansionSetCode = "C13";
+        this.subtype.add("Angel");
 
-        // {tap}, Sacrifice Tormod's Crypt: Exile all cards from target player's graveyard.
-        SimpleActivatedAbility ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, new ExileGraveyardAllTargetPlayerEffect(), new TapSourceCost());
-        ability.addCost(new SacrificeSourceCost());
-        ability.addTarget(new TargetPlayer());
+        this.color.setWhite(true);
+        this.power = new MageInt(3);
+        this.toughness = new MageInt(4);
+
+        // Flying
+        this.addAbility(FlyingAbility.getInstance());
+        // When Angel of Finality enters the battlefield, exile all cards from target player's graveyard.
+        Ability ability = new EntersBattlefieldTriggeredAbility(new ExileGraveyardAllTargetPlayerEffect());
+        ability.addTarget(new TargetPlayer(true));
         this.addAbility(ability);
     }
 
-    public TormodsCrypt(final TormodsCrypt card) {
+    public AngelOfFinality(final AngelOfFinality card) {
         super(card);
     }
 
     @Override
-    public TormodsCrypt copy() {
-        return new TormodsCrypt(this);
+    public AngelOfFinality copy() {
+        return new AngelOfFinality(this);
     }
 }

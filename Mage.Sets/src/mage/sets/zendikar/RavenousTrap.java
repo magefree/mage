@@ -36,6 +36,7 @@ import mage.abilities.Ability;
 import mage.abilities.costs.AlternativeCostImpl;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.effects.OneShotEffect;
+import mage.abilities.effects.common.ExileGraveyardAllTargetPlayerEffect;
 import mage.cards.CardImpl;
 import mage.constants.Outcome;
 import mage.constants.Zone;
@@ -63,7 +64,7 @@ public class RavenousTrap extends CardImpl<RavenousTrap> {
         this.addWatcher(new CardsPutIntoGraveyardWatcher());
 
         // Exile all cards from target player's graveyard.
-        this.getSpellAbility().addEffect(new RavenousTrapEffect());
+        this.getSpellAbility().addEffect(new ExileGraveyardAllTargetPlayerEffect());
         this.getSpellAbility().addTarget(new TargetPlayer());
     }
 
@@ -110,31 +111,4 @@ class RavenousTrapAlternativeCost extends AlternativeCostImpl<RavenousTrapAltern
     public String getText() {
         return "If an opponent had three or more cards put into his or her graveyard from anywhere this turn, you may pay {0} rather than pay Ravenous Trap's mana cost";
     }
-}
-
-class RavenousTrapEffect extends OneShotEffect<RavenousTrapEffect> {
-
-    public RavenousTrapEffect() {
-        super(Outcome.Exile);
-        staticText = "Exile all cards from target player's graveyard";
-    }
-
-    @Override
-    public RavenousTrapEffect copy() {
-        return new RavenousTrapEffect();
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Player targetPlayer = game.getPlayer(source.getFirstTarget());
-        if (targetPlayer != null) {
-            ArrayList<UUID> graveyard = new ArrayList<UUID>(targetPlayer.getGraveyard());
-            for (UUID cardId : graveyard) {
-                game.getCard(cardId).moveToZone(Zone.EXILED, cardId, game, false);
-            }
-            return true;
-        }
-        return false;
-    }
-
 }
