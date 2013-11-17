@@ -29,25 +29,27 @@ package mage.sets.legions;
 
 import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
 import mage.abilities.keyword.FlashAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.game.Game;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.SubtypePredicate;
 
 /**
  *
  * @author cbt33, Loki (Shimmer Myr)
  */
 public class QuickSliver extends CardImpl<QuickSliver> {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("Sliver cards");
+    static {
+        filter.add(new SubtypePredicate("Sliver"));
+    }
 
     public QuickSliver(UUID ownerId) {
         super(ownerId, 136, "Quick Sliver", Rarity.COMMON, new CardType[]{CardType.CREATURE}, "{1}{G}");
@@ -61,7 +63,7 @@ public class QuickSliver extends CardImpl<QuickSliver> {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // Any player may play Sliver cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new QuickSliverEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter, true)));
     }
 
     public QuickSliver(final QuickSliver card) {
@@ -72,38 +74,4 @@ public class QuickSliver extends CardImpl<QuickSliver> {
     public QuickSliver copy() {
         return new QuickSliver(this);
     }
-}
-
-class QuickSliverEffect extends AsThoughEffectImpl<QuickSliverEffect> {
-
-    public QuickSliverEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "Any player may play Sliver cards as though they had flash";
-    }
-
-    public QuickSliverEffect(final QuickSliverEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public QuickSliverEffect copy() {
-        return new QuickSliverEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (card.hasSubtype("Sliver")) {   
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
