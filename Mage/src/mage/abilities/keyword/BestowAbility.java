@@ -112,19 +112,6 @@ public class BestowAbility extends SpellAbility {
         card.addAbility(ability);
     }
 
-    @Override
-    public boolean activate(Game game, boolean noMana) {
-        boolean result;
-        result = super.activate(game, noMana);
-        if (result) {
-            Spell spell = game.getStack().getSpell(this.getOriginalId());
-            if (spell != null) {
-                spell.getSubtype().add("Aura");
-            }
-        }
-        return result;
-    }
-
     public BestowAbility(final BestowAbility ability) {
         super(ability);
     }

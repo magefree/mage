@@ -60,7 +60,7 @@ public class PermanentCard extends PermanentImpl<PermanentCard> {
         init(card);
     }
 
-    protected void init(Card card) {
+    private void init(Card card) {
         copyFromCard(card);
         /*if (card.getCardType().contains(CardType.PLANESWALKER)) {
               this.loyalty = new MageInt(card.getLoyalty().getValue());

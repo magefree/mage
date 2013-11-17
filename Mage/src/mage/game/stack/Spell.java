@@ -28,9 +28,9 @@
 
 package mage.game.stack;
 
-import mage.constants.CardType;
-import mage.constants.Rarity;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import mage.MageInt;
 import mage.MageObject;
 import mage.Mana;
@@ -43,8 +43,13 @@ import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.PostResolveEffect;
+import mage.abilities.keyword.BestowAbility;
 import mage.cards.Card;
+import mage.cards.SplitCard;
+import mage.constants.CardType;
+import mage.constants.Rarity;
 import mage.constants.SpellAbilityType;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.Counters;
 import mage.game.Game;
@@ -53,28 +58,23 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.watchers.Watcher;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-import mage.abilities.keyword.BestowAbility;
-
-import mage.cards.SplitCard;
-
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class Spell<T extends Spell<T>> implements StackObject, Card {
 
-    private List<Card> spellCards = new ArrayList<Card>();
-    private List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
+    private final List<Card> spellCards = new ArrayList<Card>();
+    private final List<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
 
-    private Card card;
-    private SpellAbility ability;
+    private final Card card;
+    private final SpellAbility ability;
+    private final Zone fromZone;
+    private final UUID id;
+
     private UUID controllerId;
     private boolean copiedSpell;
-    private Zone fromZone;
-    private UUID id;
 
     public Spell(Card card, SpellAbility ability, UUID controllerId, Zone fromZone) {
         this.card = card;
@@ -146,7 +146,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
     @Override
     public boolean resolve(Game game) {
         boolean result;
-        if (card.getCardType().contains(CardType.INSTANT) || card.getCardType().contains(CardType.SORCERY)) {
+        if (this.getCardType().contains(CardType.INSTANT) || this.getCardType().contains(CardType.SORCERY)) {
             int index = 0;
             result = false;
             boolean legalParts = false;
@@ -181,7 +181,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             game.informPlayers(getName() + " has been fizzled.");
             counter(null, game);
             return false;
-        } else if (card.getCardType().contains(CardType.ENCHANTMENT) && card.getSubtype().contains("Aura")) {
+        } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
                 if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
@@ -189,7 +189,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
                 }
                 return false;
             }
-            if (card.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
+            if (this.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
                 updateOptionalCosts(0);
                 result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
                 return result;
@@ -351,6 +351,12 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
 
     @Override
     public List<String> getSubtype() {
+        if (this.getSpellAbility() instanceof BestowAbility) {
+            List<String> subtypes = new ArrayList<String>();
+            subtypes.addAll(card.getSubtype());
+            subtypes.add("Aura");
+            return subtypes;
+        }
         return card.getSubtype();
     }
 
