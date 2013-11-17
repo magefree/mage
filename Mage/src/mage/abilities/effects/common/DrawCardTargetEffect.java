@@ -46,6 +46,7 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
     protected DynamicValue amount;
     protected boolean optional;
+    protected boolean upTo;
 
     public DrawCardTargetEffect(int amount) {
         this(new StaticValue(amount));
@@ -57,16 +58,23 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
     public DrawCardTargetEffect(DynamicValue amount) {
         this(amount, false);
     }
+
     public DrawCardTargetEffect(DynamicValue amount, boolean optional) {
+        this(amount, optional, false);
+    }
+
+    public DrawCardTargetEffect(DynamicValue amount, boolean optional, boolean upto) {
         super(Outcome.DrawCard);
         this.amount = amount.copy();
         this.optional = optional;
+        this.upTo = upto;
     }
 
     public DrawCardTargetEffect(final DrawCardTargetEffect effect) {
         super(effect);
         this.amount = effect.amount.copy();
         this.optional = effect.optional;
+        this.upTo = effect.upTo;
     }
 
     @Override
@@ -78,8 +86,12 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
     public boolean apply(Game game, Ability source) {
         Player player = game.getPlayer(targetPointer.getFirst(game, source));
         if (player != null) {
+            int cardsToDraw = amount.calculate(game, source);
+            if (upTo) {
+                cardsToDraw = player.getAmount(0, cardsToDraw, "Draw how many cards?", game);
+            }
             if (!optional || player.chooseUse(outcome, "Use draw effect?", game)) {
-                player.drawCards(amount.calculate(game, source), game);
+                player.drawCards(cardsToDraw, game);
             }
             return true;
         }
@@ -88,6 +100,9 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
 
     @Override
     public String getText(Mode mode) {
+        if (staticText != null && !staticText.isEmpty()) {
+            return staticText;
+        }
         StringBuilder sb = new StringBuilder();
         if (mode.getTargets().size() > 0) {
             sb.append("Target ").append(mode.getTargets().get(0).getTargetName());
@@ -98,6 +113,9 @@ public class DrawCardTargetEffect extends OneShotEffect<DrawCardTargetEffect> {
             sb.append(" may draw ");
         } else {
             sb.append(" draws ");
+        }
+        if (upTo) {
+            sb.append("up to ");
         }
         sb.append(CardUtil.numberToText(amount.toString())).append(" card");
         try {
