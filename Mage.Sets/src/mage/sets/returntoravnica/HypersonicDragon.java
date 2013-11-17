@@ -27,23 +27,29 @@
  */
 package mage.sets.returntoravnica;
 
-import mage.constants.*;
+import java.util.UUID;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
 import mage.abilities.keyword.FlyingAbility;
 import mage.abilities.keyword.HasteAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
-
-import java.util.UUID;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  * @author magenoxx_at_gmail.com
  */
 public class HypersonicDragon extends CardImpl<HypersonicDragon> {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("sorcery spells");
+    static {
+        filter.add(new CardTypePredicate(CardType.SORCERY));
+    }
 
     public HypersonicDragon(UUID ownerId) {
         super(ownerId, 170, "Hypersonic Dragon", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{3}{U}{R}");
@@ -60,7 +66,7 @@ public class HypersonicDragon extends CardImpl<HypersonicDragon> {
         // Haste
         this.addAbility(HasteAbility.getInstance());
         // You may cast sorcery spells as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new HypersonicDragonEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public HypersonicDragon(final HypersonicDragon card) {
@@ -70,38 +76,5 @@ public class HypersonicDragon extends CardImpl<HypersonicDragon> {
     @Override
     public HypersonicDragon copy() {
         return new HypersonicDragon(this);
-    }
-}
-
-class HypersonicDragonEffect extends AsThoughEffectImpl<HypersonicDragonEffect> {
-
-    public HypersonicDragonEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast sorcery spells as though they had flash";
-    }
-
-    public HypersonicDragonEffect(final HypersonicDragonEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public HypersonicDragonEffect copy() {
-        return new HypersonicDragonEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (card.getCardType().contains(CardType.SORCERY) && card.getOwnerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 }
