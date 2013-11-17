@@ -29,16 +29,17 @@
 package mage.sets.mirrodinbesieged;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
-import mage.abilities.Ability;
 import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
 import mage.abilities.keyword.FlashAbility;
-import mage.cards.Card;
 import mage.cards.CardImpl;
-import mage.game.Game;
+import mage.constants.CardType;
+import mage.constants.Duration;
+import mage.constants.Rarity;
+import mage.constants.Zone;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -46,14 +47,22 @@ import mage.game.Game;
  */
 public class ShimmerMyr extends CardImpl<ShimmerMyr> {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("artifact cards");
+    static {
+        filter.add(new CardTypePredicate(CardType.ARTIFACT));
+    }
+
     public ShimmerMyr (UUID ownerId) {
         super(ownerId, 129, "Shimmer Myr", Rarity.RARE, new CardType[]{CardType.ARTIFACT, CardType.CREATURE}, "{3}");
         this.expansionSetCode = "MBS";
         this.subtype.add("Myr");
         this.power = new MageInt(2);
         this.toughness = new MageInt(2);
+        
+        // Flash
         this.addAbility(FlashAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ShimmerMyrEffect()));
+        // You may cast artifact cards as though they had flash.
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public ShimmerMyr (final ShimmerMyr card) {
@@ -63,40 +72,6 @@ public class ShimmerMyr extends CardImpl<ShimmerMyr> {
     @Override
     public ShimmerMyr copy() {
         return new ShimmerMyr(this);
-    }
-
-}
-
-class ShimmerMyrEffect extends AsThoughEffectImpl<ShimmerMyrEffect> {
-
-    public ShimmerMyrEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast artifact cards as though they had flash";
-    }
-
-    public ShimmerMyrEffect(final ShimmerMyrEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ShimmerMyrEffect copy() {
-        return new ShimmerMyrEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (card.getCardType().contains(CardType.ARTIFACT) && card.getOwnerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }
