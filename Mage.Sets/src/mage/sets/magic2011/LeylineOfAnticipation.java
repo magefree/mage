@@ -29,19 +29,17 @@
 package mage.sets.magic2011;
 
 import java.util.UUID;
-import mage.constants.AsThoughEffectType;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.keyword.LeylineAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.keyword.LeylineAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.game.Game;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
 
 /**
  *
@@ -49,12 +47,17 @@ import mage.game.Game;
  */
 public class LeylineOfAnticipation extends CardImpl<LeylineOfAnticipation> {
 
+    private static final FilterCreatureCard filter = new FilterCreatureCard("nonland cards");
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
+
     public LeylineOfAnticipation(UUID ownerId) {
         super(ownerId, 61, "Leyline of Anticipation", Rarity.RARE, new CardType[]{CardType.ENCHANTMENT}, "{2}{U}{U}");
         this.expansionSetCode = "M11";
         this.color.setBlue(true);
         this.addAbility(LeylineAbility.getInstance());
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new LeylineOfAnticipationEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public LeylineOfAnticipation(final LeylineOfAnticipation card) {
@@ -64,40 +67,6 @@ public class LeylineOfAnticipation extends CardImpl<LeylineOfAnticipation> {
     @Override
     public LeylineOfAnticipation copy() {
         return new LeylineOfAnticipation(this);
-    }
-
-}
-
-class LeylineOfAnticipationEffect extends AsThoughEffectImpl<LeylineOfAnticipationEffect> {
-
-    public LeylineOfAnticipationEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast nonland cards as though they had flash";
-    }
-
-    public LeylineOfAnticipationEffect(final LeylineOfAnticipationEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public LeylineOfAnticipationEffect copy() {
-        return new LeylineOfAnticipationEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (!card.getCardType().contains(CardType.LAND) && card.getOwnerId().equals(source.getControllerId())) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }
