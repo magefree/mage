@@ -28,29 +28,49 @@
 
 package mage.game.permanent;
 
-import mage.constants.AsThoughEffectType;
-import mage.constants.CardType;
-import mage.constants.Zone;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.effects.ContinuousEffect;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.RestrictionEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DefenderAbility;
+import mage.abilities.keyword.HasteAbility;
+import mage.abilities.keyword.HexproofAbility;
+import mage.abilities.keyword.IndestructibleAbility;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.WitherAbility;
 import mage.cards.CardImpl;
+import mage.constants.AsThoughEffectType;
+import mage.constants.CardType;
 import mage.constants.EffectType;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.game.Game;
-import mage.game.events.*;
+import mage.game.events.DamageCreatureEvent;
+import mage.game.events.DamagePlaneswalkerEvent;
+import mage.game.events.DamagedCreatureEvent;
+import mage.game.events.DamagedPlaneswalkerEvent;
+import mage.game.events.EntersTheBattlefieldEvent;
+import mage.game.events.GameEvent;
 import mage.game.events.GameEvent.EventType;
 import mage.players.Player;
 
-import java.util.*;
-
-
 /**
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl<T> implements Permanent {
 
@@ -154,12 +174,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
     public void reset(Game game) {
         this.beforeResetControllerId = this.controllerId;
         this.controllerId = originalControllerId;
-        if (!controllerId.equals(beforeResetControllerId)) {
-            controllerChanged = true;
-        }
-        else {
-            controllerChanged = false;
-        }
+        controllerChanged = !controllerId.equals(beforeResetControllerId);
         this.maxBlocks = 1;
         this.minBlockedBy = 1;
         this.maxBlockedBy = 0;
@@ -297,11 +312,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
 
     @Override
     public boolean canTap() {
-        //20100423 - 302.6
-        if (!cardType.contains(CardType.CREATURE) || !hasSummoningSickness()) {
-            return true;
-        }
-        return false;
+        return !cardType.contains(CardType.CREATURE) || !hasSummoningSickness();
     }
 
     @Override
@@ -572,15 +583,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
             }
         }
         this.attachedTo = permanentId;
-        /*
-         * 20121001 613.6. Within a layer or sublayer, determining which order effects are applied in is
-         *                 usually done using a timestamp system. An effect with an earlier timestamp is
-         *                 applied before an effect with a later timestamp
-         * 20121001 613.6d If an Aura, Equipment, or Fortification becomes attached to an object or player,
-         *                 the Aura, Equipment, or Fortification receives a new timestamp at that time.
-         */
-        for (Iterator<Ability> it = this.getAbilities().iterator(); it.hasNext();) {
-            Ability ability = it.next();
+        for (Ability ability : this.getAbilities()) {
             for (Iterator<Effect> ite = ability.getEffects(game, EffectType.CONTINUOUS).iterator(); ite.hasNext();) {
                 ContinuousEffect effect = (ContinuousEffect) ite.next();
                 game.getContinuousEffects().setUniqueTimesstamp(effect);
@@ -866,10 +869,8 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                 return false;
             }
         }
-        if (abilities.containsKey(DefenderAbility.getInstance().getId()) && !game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, game)) {
-            return false;
-        }
-        return true;
+        return !abilities.containsKey(DefenderAbility.getInstance().getId())
+                || game.getContinuousEffects().asThough(this.objectId, AsThoughEffectType.ATTACK, game);
     }
 
     @Override
@@ -900,11 +901,7 @@ public abstract class PermanentImpl<T extends PermanentImpl<T>> extends CardImpl
                 }
             }
         }
-
-        if (attacker != null && attacker.hasProtectionFrom(this, game)) {
-            return false;
-        }
-        return true;
+        return attacker == null || !attacker.hasProtectionFrom(this, game);
     }
 
     @Override

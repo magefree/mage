@@ -49,7 +49,11 @@ public class AbilityPickerView implements Serializable {
             if (objectName == null) {
                 choices.put(ability.getId(), ability.getRule(true));
             } else {
-                choices.put(ability.getId(), ability.getRule(objectName));
+                String rule = ability.getRule(objectName);
+                if (rule.isEmpty()) {
+                    rule = ability.toString();
+                }
+                choices.put(ability.getId(), rule);
             }
         }
     }

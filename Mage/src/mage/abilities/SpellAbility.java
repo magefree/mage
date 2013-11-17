@@ -124,7 +124,7 @@ public class SpellAbility extends ActivatedAbilityImpl<SpellAbility> {
     @Override
     public String getRule(boolean all) {
         if (all) {
-            return super.getRule(all) + name;
+            return new StringBuilder(super.getRule(all)).append(name).toString();
         }
         return super.getRule(false);
     }

@@ -191,6 +191,7 @@ public interface Game extends MageItem, Serializable {
      * @param copyToPermanent
      * @param source
      * @param applier
+     * @return
      */
     Permanent copyPermanent(Permanent copyFromPermanent, Permanent copyToPermanent, Ability source, ApplyToPermanent applier);
 

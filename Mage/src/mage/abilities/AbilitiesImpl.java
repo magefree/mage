@@ -29,6 +29,7 @@
 package mage.abilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -44,15 +45,14 @@ import mage.game.Game;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Abilities<T> {
 
     public AbilitiesImpl() {}
 
     public AbilitiesImpl(T... abilities) {
-        for (T ability : abilities) {
-            add(ability);
-        }
+        addAll(Arrays.asList(abilities));
     }
 
     public AbilitiesImpl(final AbilitiesImpl<T> abilities) {
@@ -244,7 +244,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
             if (ability.getOriginalId().equals(test.getId())) {
                 return true;
             }
-            if (ability instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
+            if (ability instanceof MageSingleton && test instanceof MageSingleton && ability.getRule().equals(test.getRule())) {
                 return true;
             }
         }

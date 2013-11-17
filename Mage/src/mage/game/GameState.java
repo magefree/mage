@@ -85,16 +85,22 @@ import mage.watchers.Watchers;
 */
 public class GameState implements Serializable, Copyable<GameState> {
 
-    private Players players;
-    private PlayerList playerList;
+    private final Players players;
+    private final PlayerList playerList;
+    private final Turn turn;
+    private final Revealed revealed;
+    private final Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
+    private final DelayedTriggeredAbilities delayed;
+    private final SpecialActions specialActions;
+    private final Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
+    private final TurnMods turnMods;
+    private final Watchers watchers;
+
     private UUID activePlayerId;
     private UUID priorityPlayerId;
-    private Turn turn;
     private SpellStack stack;
     private Command command;
     private Exile exile;
-    private Revealed revealed;
-    private Map<UUID, LookedAt> lookedAt = new HashMap<UUID, LookedAt>();
     private Battlefield battlefield;
     private int turnNum = 1;
     private boolean extraTurn = false;
@@ -104,12 +110,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     private ContinuousEffects effects;
     private TriggeredAbilities triggers;
     private List<TriggeredAbility> triggered = new ArrayList<TriggeredAbility>();
-    private DelayedTriggeredAbilities delayed;
-    private SpecialActions specialActions;
-    private Map<UUID, Abilities<ActivatedAbility>> otherAbilities = new HashMap<UUID, Abilities<ActivatedAbility>>();
     private Combat combat;
-    private TurnMods turnMods;
-    private Watchers watchers;
     private Map<String, Object> values = new HashMap<String, Object>();
     private Map<UUID, Zone> zones = new HashMap<UUID, Zone>();
 

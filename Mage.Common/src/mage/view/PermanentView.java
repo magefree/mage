@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import mage.cards.Card;
-import mage.counters.Counter;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentToken;
 
