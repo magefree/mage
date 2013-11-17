@@ -28,26 +28,29 @@
 package mage.sets.magic2013;
 
 import java.util.UUID;
-import mage.constants.AsThoughEffectType;
+import mage.MageInt;
+import mage.ObjectColor;
+import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.abilities.keyword.FlashAbility;
+import mage.cards.CardImpl;
 import mage.constants.CardType;
 import mage.constants.Duration;
-import mage.constants.Outcome;
 import mage.constants.Rarity;
 import mage.constants.Zone;
-import mage.MageInt;
-import mage.abilities.Ability;
-import mage.abilities.common.SimpleStaticAbility;
-import mage.abilities.effects.AsThoughEffectImpl;
-import mage.abilities.keyword.FlashAbility;
-import mage.cards.Card;
-import mage.cards.CardImpl;
-import mage.game.Game;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
  * @author North
  */
 public class YevaNaturesHerald extends CardImpl<YevaNaturesHerald> {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("green creature cards");
+    static {
+        filter.add(new ColorPredicate(ObjectColor.GREEN));
+    }
 
     public YevaNaturesHerald(UUID ownerId) {
         super(ownerId, 197, "Yeva, Nature's Herald", Rarity.RARE, new CardType[]{CardType.CREATURE}, "{2}{G}{G}");
@@ -63,7 +66,7 @@ public class YevaNaturesHerald extends CardImpl<YevaNaturesHerald> {
         // Flash
         this.addAbility(FlashAbility.getInstance());
         // You may cast green creature cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new YevaNaturesHeraldEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, filter)));
     }
 
     public YevaNaturesHerald(final YevaNaturesHerald card) {
@@ -73,40 +76,5 @@ public class YevaNaturesHerald extends CardImpl<YevaNaturesHerald> {
     @Override
     public YevaNaturesHerald copy() {
         return new YevaNaturesHerald(this);
-    }
-}
-
-class YevaNaturesHeraldEffect extends AsThoughEffectImpl<YevaNaturesHeraldEffect> {
-
-    public YevaNaturesHeraldEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast green creature cards as though they had flash";
-    }
-
-    public YevaNaturesHeraldEffect(final YevaNaturesHeraldEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public YevaNaturesHeraldEffect copy() {
-        return new YevaNaturesHeraldEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (card.getCardType().contains(CardType.CREATURE) && card.getColor().isGreen()
-                    && card.getOwnerId().equals(source.getControllerId())) {
-                // TODO: Maybe this check is not enough
-                return card.getSpellAbility().isInUseableZone(game, card, false);
-            }
-        }
-        return false;
     }
 }

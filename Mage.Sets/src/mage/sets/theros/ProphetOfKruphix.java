@@ -35,6 +35,7 @@ import mage.abilities.common.SimpleStaticAbility;
 import mage.abilities.effects.AsThoughEffectImpl;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.UntapAllControllerEffect;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
 import mage.cards.Card;
 import mage.cards.CardImpl;
 import mage.constants.AsThoughEffectType;
@@ -45,6 +46,7 @@ import mage.constants.Rarity;
 import mage.constants.TargetController;
 import mage.constants.Zone;
 import mage.filter.FilterPermanent;
+import mage.filter.common.FilterCreatureCard;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.mageobject.CardTypePredicate;
 import mage.game.Game;
@@ -77,7 +79,7 @@ public class ProphetOfKruphix extends CardImpl<ProphetOfKruphix> {
         Effect effect = new UntapAllControllerEffect(filter, "Untap all creatures and lands you control");
         this.addAbility(new BeginningOfUntapTriggeredAbility(Zone.BATTLEFIELD, effect, TargetController.NOT_YOU, false));
         // You may cast creature cards as though they had flash.
-        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new ProphetOfKruphixEffect()));
+        this.addAbility(new SimpleStaticAbility(Zone.BATTLEFIELD, new CastAsThoughItHadFlashEffect(Duration.WhileOnBattlefield, new FilterCreatureCard("creature cards"))));
 
     }
 
@@ -88,39 +90,5 @@ public class ProphetOfKruphix extends CardImpl<ProphetOfKruphix> {
     @Override
     public ProphetOfKruphix copy() {
         return new ProphetOfKruphix(this);
-    }
-}
-
-class ProphetOfKruphixEffect extends AsThoughEffectImpl<ProphetOfKruphixEffect> {
-
-    public ProphetOfKruphixEffect() {
-        super(AsThoughEffectType.CAST, Duration.WhileOnBattlefield, Outcome.Benefit);
-        staticText = "You may cast creature cards as though they had flash";
-    }
-
-    public ProphetOfKruphixEffect(final ProphetOfKruphixEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public ProphetOfKruphixEffect copy() {
-        return new ProphetOfKruphixEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (card.getCardType().contains(CardType.CREATURE)
-                    && card.getOwnerId().equals(source.getControllerId())) {
-                return card.getSpellAbility().isInUseableZone(game, card, false);
-            }
-        }
-        return false;
     }
 }

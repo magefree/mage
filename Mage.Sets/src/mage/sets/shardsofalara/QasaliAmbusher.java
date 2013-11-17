@@ -28,8 +28,6 @@
 package mage.sets.shardsofalara;
 
 import java.util.UUID;
-
-import mage.constants.*;
 import mage.MageInt;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbilityImpl;
@@ -39,6 +37,11 @@ import mage.abilities.effects.OneShotEffect;
 import mage.abilities.keyword.ReachAbility;
 import mage.cards.Card;
 import mage.cards.CardImpl;
+import mage.constants.CardType;
+import mage.constants.Outcome;
+import mage.constants.Rarity;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.filter.common.FilterControlledLandPermanent;
 import mage.filter.predicate.mageobject.SubtypePredicate;
 import mage.game.Game;
@@ -66,7 +69,7 @@ public class QasaliAmbusher extends CardImpl<QasaliAmbusher> {
         this.addAbility(ReachAbility.getInstance());
         // If a creature is attacking you and you control a Forest and a Plains, you may casbt Qasali Ambusher without paying its mana cost and as though it had flash.
         this.addAbility(new QasaliAmbusherAbility());
-                
+
     }
 
     public QasaliAmbusher(final QasaliAmbusher card) {
@@ -79,15 +82,16 @@ public class QasaliAmbusher extends CardImpl<QasaliAmbusher> {
     }
 }
 
-
 class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> {
 
     private static final FilterControlledLandPermanent filterPlains = new FilterControlledLandPermanent();
     private static final FilterControlledLandPermanent filterForest = new FilterControlledLandPermanent();
+
     static {
         filterPlains.add(new SubtypePredicate("Plains"));
         filterForest.add(new SubtypePredicate("Forest"));
     }
+
     public QasaliAmbusherAbility() {
         super(Zone.HAND, new QasaliAmbusherEffect(), new ManaCostsImpl());
         this.timing = TimingRule.INSTANT;
@@ -105,11 +109,11 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> 
 
     @Override
     public boolean canActivate(UUID playerId, Game game) {
-        if(super.canActivate(playerId, game)){
-            if(game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).size() > 0
-                        && game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).size() > 0){
-                for(CombatGroup group : game.getCombat().getGroups()){
-                    if(group.getDefenderId().equals(getControllerId())){
+        if (super.canActivate(playerId, game)) {
+            if (game.getBattlefield().getActivePermanents(filterPlains, this.getControllerId(), this.getSourceId(), game).size() > 0
+                    && game.getBattlefield().getActivePermanents(filterForest, this.getControllerId(), this.getSourceId(), game).size() > 0) {
+                for (CombatGroup group : game.getCombat().getGroups()) {
+                    if (group.getDefenderId().equals(getControllerId())) {
                         return true;
                     }
                 }
@@ -118,8 +122,6 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> 
         return false;
     }
 
-    
-    
     @Override
     public String getRule(boolean all) {
         return this.getRule();
@@ -127,7 +129,7 @@ class QasaliAmbusherAbility extends ActivatedAbilityImpl<QasaliAmbusherAbility> 
 
     @Override
     public String getRule() {
-        return "If a creature is attacking you and you control a Forest and a Plains, you may casbt Qasali Ambusher without paying its mana cost and as though it had flash";
+        return "If a creature is attacking you and you control a Forest and a Plains, you may cast {this} without paying its mana cost and as though it had flash.";
     }
 }
 
@@ -154,7 +156,6 @@ class QasaliAmbusherEffect extends OneShotEffect<QasaliAmbusherEffect> {
             Player controller = game.getPlayer(source.getControllerId());
             if (controller != null) {
                 SpellAbility spellAbility = card.getSpellAbility();
-                
                 spellAbility.clear();
                 return controller.cast(spellAbility, game, true);
             }
@@ -162,4 +163,3 @@ class QasaliAmbusherEffect extends OneShotEffect<QasaliAmbusherEffect> {
         return false;
     }
 }
-

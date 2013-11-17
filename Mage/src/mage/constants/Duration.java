@@ -14,7 +14,7 @@ public enum Duration {
     EndOfCombat("until end of combat"),
     Custom("");
 
-    private String text;
+    private final String text;
 
     Duration(String text) {
         this.text = text;

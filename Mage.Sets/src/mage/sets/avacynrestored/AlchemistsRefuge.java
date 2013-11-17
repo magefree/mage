@@ -41,6 +41,12 @@ import mage.cards.CardImpl;
 import mage.game.Game;
 
 import java.util.UUID;
+import mage.ObjectColor;
+import mage.abilities.effects.common.continious.CastAsThoughItHadFlashEffect;
+import mage.filter.common.FilterCreatureCard;
+import mage.filter.predicate.Predicates;
+import mage.filter.predicate.mageobject.CardTypePredicate;
+import mage.filter.predicate.mageobject.ColorPredicate;
 
 /**
  *
@@ -48,6 +54,11 @@ import java.util.UUID;
 
  */
 public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
+
+    private static final FilterCreatureCard filter = new FilterCreatureCard("nonland cards");
+    static {
+        filter.add(Predicates.not(new CardTypePredicate(CardType.LAND)));
+    }
 
     public AlchemistsRefuge(UUID ownerId) {
         super(ownerId, 225, "Alchemist's Refuge", Rarity.RARE, new CardType[]{CardType.LAND}, "");
@@ -57,7 +68,9 @@ public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
         this.addAbility(new ColorlessManaAbility());
 
         // {G}{U}, {tap}: You may cast nonland cards this turn as though they had flash.
-        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, new AddContinuousEffectToGame(new AlchemistsRefugeEffect()), new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
+        this.addAbility(new SimpleActivatedAbility(Zone.BATTLEFIELD, 
+                new AddContinuousEffectToGame(new CastAsThoughItHadFlashEffect(Duration.EndOfTurn, filter)),
+                new CompositeCost(new ManaCostsImpl("{G}{U}"), new TapSourceCost(), "{G}{U}, {T}")));
     }
 
     public AlchemistsRefuge(final AlchemistsRefuge card) {
@@ -68,39 +81,4 @@ public class AlchemistsRefuge extends CardImpl<AlchemistsRefuge> {
     public AlchemistsRefuge copy() {
         return new AlchemistsRefuge(this);
     }
-}
-
-class AlchemistsRefugeEffect extends AsThoughEffectImpl<AlchemistsRefugeEffect> {
-
-    public AlchemistsRefugeEffect() {
-        super(AsThoughEffectType.CAST, Duration.EndOfTurn, Outcome.Benefit);
-        staticText = "You may cast nonland cards this turn as though they had flash";
-    }
-
-    public AlchemistsRefugeEffect(final AlchemistsRefugeEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public boolean apply(Game game, Ability source) {
-        return true;
-    }
-
-    @Override
-    public AlchemistsRefugeEffect copy() {
-        return new AlchemistsRefugeEffect(this);
-    }
-
-    @Override
-    public boolean applies(UUID sourceId, Ability source, Game game) {
-        Card card = game.getCard(sourceId);
-        if (card != null) {
-            if (!card.getCardType().contains(CardType.LAND) && card.getOwnerId().equals(source.getControllerId())) {
-                // TODO: Check if this also works for cards that gained e.g. flashback from another source.
-                return card.getSpellAbility().isInUseableZone(game, card, false);
-            }
-        }
-        return false;
-    }
-
 }
