@@ -42,6 +42,7 @@ import mage.game.permanent.Permanent;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<TargetPermanent<T>> {
 
@@ -58,6 +59,11 @@ public class TargetPermanent<T extends TargetPermanent<T>> extends TargetObject<
     
     public TargetPermanent(FilterPermanent filter) {
         this(1, 1, filter, false);
+    }
+
+    public TargetPermanent(FilterPermanent filter, boolean required) {
+        this(1, 1, filter, false);
+        this.required = required;
     }
 
     public TargetPermanent(int numTargets, FilterPermanent filter) {
