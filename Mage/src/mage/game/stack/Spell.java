@@ -184,14 +184,14 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
         } else if (this.getCardType().contains(CardType.ENCHANTMENT) && this.getSubtype().contains("Aura")) {
             if (ability.getTargets().stillLegal(ability, game)) {
                 updateOptionalCosts(0);
-                if (card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId)) {
+                if (card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId)) {
                     return ability.resolve(game);
                 }
                 return false;
             }
             if (this.getCardType().contains(CardType.CREATURE)) { // e.g. Creature with Bestow (rule confirmation yet missing)
                 updateOptionalCosts(0);
-                result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
+                result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
                 return result;
             } else {
                 //20091005 - 608.2b
@@ -201,7 +201,7 @@ public class Spell<T extends Spell<T>> implements StackObject, Card {
             }
         } else {
             updateOptionalCosts(0);
-            result = card.putOntoBattlefield(game, Zone.HAND, ability.getId(), controllerId);
+            result = card.putOntoBattlefield(game, fromZone, ability.getId(), controllerId);
             return result;
         }
     }
