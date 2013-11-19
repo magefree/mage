@@ -34,11 +34,13 @@ import mage.ObjectColor;
 import mage.abilities.Abilities;
 import mage.abilities.AbilitiesImpl;
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.common.CastCommanderAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
 import mage.cards.Card;
 import mage.constants.CardType;
+import mage.constants.Zone;
 import mage.game.Game;
 
 /**
@@ -49,13 +51,20 @@ import mage.game.Game;
 
 public class Commander implements CommandObject{
 
-    private Card card;
-    private Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
+    private final Card card;
+    private final Abilities<Ability> abilites = new AbilitiesImpl<Ability>();
 
     
     public Commander(Card card){
         this.card = card;
         abilites.add(new CastCommanderAbility(card));
+        for (Ability ability : card.getAbilities()) {
+            if (ability instanceof ActivatedAbility && ability.getZone().equals(Zone.COMMAND)) {
+                Ability newAbility = ability.copy();
+                newAbility.setRuleVisible(false);
+                abilites.add(newAbility);
+            }
+        }
     }
     
     private Commander(Commander copy) {

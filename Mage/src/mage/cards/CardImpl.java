@@ -468,6 +468,9 @@ public abstract class CardImpl<T extends CardImpl<T>> extends MageObjectImpl<T> 
                         game.getExile().removeCard(this, game);
                         removed = true;
                         break;
+                    case COMMAND:
+                        removed = true;
+                        break;
                     case PICK:
                         removed = true;
                         break;

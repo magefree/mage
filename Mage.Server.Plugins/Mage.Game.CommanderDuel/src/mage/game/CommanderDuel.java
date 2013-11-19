@@ -171,6 +171,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
         if(player != null && mulliganedCards.containsKey(playerId)){
             for(Card card : mulliganedCards.get(playerId).getCards(this)){
                 if(card != null){
+                    card.setFaceDown(false);
                     card.moveToZone(Zone.LIBRARY, null, this, false);
                 }
             }
