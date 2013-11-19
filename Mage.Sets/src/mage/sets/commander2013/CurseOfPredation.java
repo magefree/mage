@@ -64,7 +64,7 @@ public class CurseOfPredation extends CardImpl<CurseOfPredation> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.BoostCreature));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever a creature attacks enchanted player, put a +1/+1 counter on it.

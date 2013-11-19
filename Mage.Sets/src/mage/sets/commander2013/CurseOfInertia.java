@@ -66,7 +66,7 @@ public class CurseOfInertia extends CardImpl<CurseOfInertia> {
         // Enchant player
         TargetPlayer auraTarget = new TargetPlayer();
         this.getSpellAbility().addTarget(auraTarget);
-        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Tap));
+        this.getSpellAbility().addEffect(new AttachEffect(Outcome.Detriment));
         this.addAbility(new EnchantAbility(auraTarget.getTargetName()));
 
         // Whenever a player attacks enchanted player with one or more creatures, that attacking player may tap or untap target permanent of his or her choice.
@@ -88,7 +88,6 @@ class CurseOfInertiaTriggeredAbility extends TriggeredAbilityImpl<CurseOfInertia
 
     public CurseOfInertiaTriggeredAbility() {
         super(Zone.BATTLEFIELD, new CurseOfInertiaTapOrUntapTargetEffect(), false);
-        this.addTarget(new TargetPermanent(true));
     }
 
     public CurseOfInertiaTriggeredAbility(Effect effect, boolean optional, String text) {
