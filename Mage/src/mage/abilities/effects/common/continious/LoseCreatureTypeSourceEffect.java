@@ -46,8 +46,8 @@ import mage.util.CardUtil;
  */
 public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl<LoseCreatureTypeSourceEffect> implements SourceEffect {
 
-    private DynamicValue dynamicValue;
-    private int lessThan;
+    private final DynamicValue dynamicValue;
+    private final int lessThan;
 
     public LoseCreatureTypeSourceEffect(DynamicValue dynamicValue, int lessThan) {
         super(Duration.WhileOnBattlefield, Outcome.Detriment);
@@ -79,6 +79,9 @@ public class LoseCreatureTypeSourceEffect extends ContinuousEffectImpl<LoseCreat
                     if (sublayer == SubLayer.NA) {
                         permanent.getCardType().remove(CardType.CREATURE);
                         permanent.getSubtype().clear();
+                        if (permanent.isAttacking() || permanent.getBlocking() > 0) {
+                            permanent.removeFromCombat(game);
+                        }
                     }
                     break;
             }
