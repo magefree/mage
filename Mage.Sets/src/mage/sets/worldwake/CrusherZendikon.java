@@ -58,18 +58,15 @@ public class CrusherZendikon extends CardImpl<CrusherZendikon> {
         this.color.setRed(true);
 
         // Enchant land
-        // Enchanted land is a 4/2 red Beast creature with trample. It's still a land.
-        // When enchanted land dies, return that card to its owner's hand.
-        
         TargetPermanent auraTarget = new TargetLandPermanent();
         this.getSpellAbility().addTarget(auraTarget);
         this.getSpellAbility().addEffect(new AttachEffect(Outcome.PutCreatureInPlay));
         Ability ability = new EnchantAbility(auraTarget.getTargetName());
         this.addAbility(ability);
-
+        // Enchanted land is a 4/2 red Beast creature with trample. It's still a land.
         Ability ability2 = new SimpleStaticAbility(Zone.BATTLEFIELD, new BecomesCreatureAttachedEffect(new BeastToken(), "Enchanted land is a 4/2 red Beast creature with trample. It's still a land.", Duration.WhileOnBattlefield));
         this.addAbility(ability2);
-
+        // When enchanted land dies, return that card to its owner's hand.
         Ability ability3 = new DiesAttachedTriggeredAbility(new ReturnToHandAttachedEffect(), "enchanted land", false, false);
         this.addAbility(ability3);
     }
