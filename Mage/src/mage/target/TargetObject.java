@@ -38,6 +38,7 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class TargetObject<T extends TargetObject<T>> extends TargetImpl<T> {
 

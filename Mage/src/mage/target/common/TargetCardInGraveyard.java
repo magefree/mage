@@ -28,14 +28,13 @@
 
 package mage.target.common;
 
-import mage.constants.Zone;
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.cards.Card;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.game.Game;
 import mage.target.TargetCard;
-
-import java.util.UUID;
 
 /**
  *
@@ -45,6 +44,11 @@ public class TargetCardInGraveyard extends TargetCard<TargetCardInGraveyard> {
 
     public TargetCardInGraveyard() {
         this(1, 1, new FilterCard("card from a graveyard"));
+    }
+
+    public TargetCardInGraveyard(boolean required) {
+        this();
+        this.setRequired(required);
     }
 
     public TargetCardInGraveyard(FilterCard filter) {

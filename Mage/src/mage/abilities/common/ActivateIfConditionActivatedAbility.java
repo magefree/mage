@@ -31,6 +31,7 @@ package mage.abilities.common;
 import java.util.UUID;
 import mage.abilities.ActivatedAbilityImpl;
 import mage.abilities.condition.Condition;
+import mage.abilities.condition.InvertCondition;
 import mage.abilities.costs.Cost;
 import mage.abilities.effects.Effect;
 import mage.constants.Zone;
@@ -80,7 +81,12 @@ public class ActivateIfConditionActivatedAbility extends ActivatedAbilityImpl<Ac
 
     @Override
     public String getRule() {
-        StringBuilder sb = new StringBuilder(super.getRule()).append(" Activate this ability only ");
+        StringBuilder sb = new StringBuilder(super.getRule());
+        if (condition instanceof InvertCondition) {
+            sb.append(" You can't activate this ability ");
+        } else {
+            sb.append(" Activate this ability only ");
+        }
         if (condition.toString() != null) {
             if (!condition.toString().startsWith("during")) {
                 sb.append("if ");

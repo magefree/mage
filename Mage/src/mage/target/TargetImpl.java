@@ -42,6 +42,7 @@ import java.util.*;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public abstract class TargetImpl<T extends TargetImpl<T>> implements Target {
 

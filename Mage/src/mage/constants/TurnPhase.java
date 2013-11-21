@@ -11,7 +11,7 @@ public enum TurnPhase {
     POSTCOMBAT_MAIN ("Postcombat Main"),
     END ("End");
 
-    private String text;
+    private final String text;
 
     TurnPhase(String text) {
         this.text = text;

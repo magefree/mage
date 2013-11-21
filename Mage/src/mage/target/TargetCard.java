@@ -42,6 +42,7 @@ import java.util.UUID;
 /**
  *
  * @author BetaSteward_at_googlemail.com
+ * @param <T>
  */
 public class TargetCard<T extends TargetCard<T>> extends TargetObject<TargetCard<T>> {
 

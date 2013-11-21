@@ -39,7 +39,7 @@ import mage.game.Game;
  */
 public class InvertCondition implements Condition {
 
-    private Condition condition;
+    private final Condition condition;
 
     public InvertCondition ( Condition condition ) {
         this.condition = condition;
@@ -53,4 +53,9 @@ public class InvertCondition implements Condition {
         return !condition.apply(game, source);
     }
 
+    @Override
+    public String toString() {
+        return condition.toString();
+    }
+    
 }
