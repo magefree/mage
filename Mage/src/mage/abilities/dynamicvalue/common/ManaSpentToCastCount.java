@@ -59,6 +59,10 @@ public class ManaSpentToCastCount  implements DynamicValue{
         return new ManaSpentToCastCount();
     }
 
+    @Override
+    public String toString() {
+        return "X";
+    }
 
     @Override
     public String getMessage() {

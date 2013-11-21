@@ -56,6 +56,7 @@ import mage.constants.Layer;
 import mage.constants.Outcome;
 import mage.constants.SpellAbilityType;
 import mage.constants.SubLayer;
+import mage.constants.Zone;
 import mage.filter.FilterCard;
 import mage.filter.predicate.Predicate;
 import mage.filter.predicate.Predicates;
@@ -65,12 +66,15 @@ import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.target.common.TargetCardInHand;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author BetaSteward_at_googlemail.com
  */
 public class ContinuousEffects implements Serializable {
+
+    private static final transient Logger logger = Logger.getLogger(ContinuousEffects.class);
 
     private Date lastSetTimestamp;
 
@@ -81,20 +85,19 @@ public class ContinuousEffects implements Serializable {
     private ContinuousEffectsList<RequirementEffect> requirementEffects = new ContinuousEffectsList<RequirementEffect>();
     private ContinuousEffectsList<RestrictionEffect> restrictionEffects = new ContinuousEffectsList<RestrictionEffect>();
     private ContinuousEffectsList<RestrictionUntapNotMoreThanEffect> restrictionUntapNotMoreThanEffects = new ContinuousEffectsList<RestrictionUntapNotMoreThanEffect>();
-    private Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>>(AsThoughEffectType.class);
     private ContinuousEffectsList<CostModificationEffect> costModificationEffects = new ContinuousEffectsList<CostModificationEffect>();
     private ContinuousEffectsList<SpliceCardEffect> spliceCardEffects = new ContinuousEffectsList<SpliceCardEffect>();
 
-    private List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<ContinuousEffectsList<?>>();
-    
+    private final Map<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>> asThoughEffectsMap = new EnumMap<AsThoughEffectType, ContinuousEffectsList<AsThoughEffect>>(AsThoughEffectType.class);
+    private final List<ContinuousEffectsList<?>> allEffectsLists = new ArrayList<ContinuousEffectsList<?>>();
     private final ApplyCountersEffect applyCounters;
     private final PlaneswalkerRedirectionEffect planeswalkerRedirectionEffect;
     private final AuraReplacementEffect auraReplacementEffect;
 
-    private List<ContinuousEffect> previous = new ArrayList<ContinuousEffect>();
+    private final List<ContinuousEffect> previous = new ArrayList<ContinuousEffect>();
 
     // effect.id -> sourceId - which effect was added by which sourceId
-    private Map<UUID, UUID> sources = new HashMap<UUID, UUID>();
+    private final Map<UUID, UUID> sources = new HashMap<UUID, UUID>();
 
     public ContinuousEffects() {
         applyCounters = new ApplyCountersEffect();
@@ -474,7 +477,6 @@ public class ContinuousEffects implements Serializable {
      *
      * @param abilityToModify
      * @param game
-     * @return
      */
     public void costModification ( Ability abilityToModify, Game game ) {
         List<CostModificationEffect> costEffects = getApplicableCostModificationEffects(game);
@@ -518,7 +520,6 @@ public class ContinuousEffects implements Serializable {
      *
      * @param abilityToModify
      * @param game
-     * @return
      */
     public void applySpliceEffects ( Ability abilityToModify, Game game ) {
         if ( ((SpellAbility) abilityToModify).getSpellAbilityType().equals(SpellAbilityType.SPLICE)) {
@@ -832,8 +833,14 @@ public class ContinuousEffects implements Serializable {
         for (Effect effect : effects) {
             HashSet<Ability> abilities = effects.getAbility(effect.getId());
             for (Ability ability : abilities) {
-                if (ability.getSourceId().equals(cardId)) {
-                    ability.setControllerId(controllerId);
+                if (ability.getSourceId() != null) {
+                    if (ability.getSourceId().equals(cardId)) {
+                        ability.setControllerId(controllerId);
+                    }
+                } else {
+                    if (!ability.getZone().equals(Zone.COMMAND)) {
+                        logger.fatal(new StringBuilder("No sourceId Ability: ").append(ability));
+                    }
                 }
             }
         }
@@ -851,6 +858,7 @@ public class ContinuousEffects implements Serializable {
      * Removes effects granted by sourceId
      *
      * @param sourceId
+     * @return
      */
     public List<Effect> removeGainedEffectsForSource(UUID sourceId) {
         List<Effect> effects = new ArrayList<Effect>();

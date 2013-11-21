@@ -56,7 +56,7 @@ import mage.watchers.common.CommanderCombatDamageWatcher;
 
 public class CommanderDuel extends GameImpl<CommanderDuel> {
 
-    private Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
+    private final Map<UUID, Cards> mulliganedCards = new HashMap<UUID, Cards>();
     
     public CommanderDuel(MultiplayerAttackOption attackOption, RangeOfInfluence range, int freeMulligans) {
         super(attackOption, range, freeMulligans);
@@ -106,7 +106,7 @@ public class CommanderDuel extends GameImpl<CommanderDuel> {
             }
             
         }
-        this.getState().addAbility(ability, null, null);
+        this.getState().addAbility(ability, this.getId(), null);
         state.getTurnMods().add(new TurnMod(startingPlayerId, PhaseStep.DRAW));
     }
     

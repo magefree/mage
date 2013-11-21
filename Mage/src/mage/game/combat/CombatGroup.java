@@ -29,16 +29,23 @@
 package mage.game.combat;
 
 import java.io.Serializable;
-import java.util.*;
-import mage.constants.Outcome;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import mage.abilities.common.DamageAsThoughNotBlockedAbility;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.CantBlockAloneAbility;
+import mage.abilities.keyword.DeathtouchAbility;
+import mage.abilities.keyword.DoubleStrikeAbility;
+import mage.abilities.keyword.FirstStrikeAbility;
+import mage.abilities.keyword.TrampleAbility;
+import mage.constants.Outcome;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.Copyable;
-
 
 /**
  *
