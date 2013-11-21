@@ -51,7 +51,7 @@ public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCou
     public RemoveVariableCountersSourceCost(Counter counter, int minimalCountersToPay) {
         this.minimalCountersToPay = minimalCountersToPay;
         this.name = counter.getName();
-        this.text = "Remove X " + name + " counter from {this}";
+        this.text = "Remove X " + name + " counters from {this}";
     }
 
     public RemoveVariableCountersSourceCost(Counter counter) {
@@ -68,10 +68,7 @@ public class RemoveVariableCountersSourceCost extends CostImpl<RemoveVariableCou
     @Override
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
-        if (permanent.getCounters().getCount(name) >= minimalCountersToPay) {
-            return true;
-        }
-        return false;
+        return permanent != null && permanent.getCounters().getCount(name) >= minimalCountersToPay;
     }
 
     @Override

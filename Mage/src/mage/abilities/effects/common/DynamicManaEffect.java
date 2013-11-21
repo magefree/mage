@@ -39,8 +39,8 @@ import mage.game.Game;
  */
 public class DynamicManaEffect extends BasicManaEffect {
 
-    private Mana computedMana;
-    private DynamicValue amount;
+    private final Mana computedMana;
+    private final DynamicValue amount;
     private String text = null;
 
     public DynamicManaEffect(Mana mana, DynamicValue amount) {

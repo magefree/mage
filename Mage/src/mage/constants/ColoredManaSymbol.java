@@ -7,7 +7,7 @@ package mage.constants;
 public enum ColoredManaSymbol {
     W("W"), U("U"), B("B"), R("R"), G("G");
 
-    private String text;
+    private final String text;
 
     ColoredManaSymbol(String text) {
         this.text = text;

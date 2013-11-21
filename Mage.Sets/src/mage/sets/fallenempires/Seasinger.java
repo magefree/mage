@@ -87,7 +87,9 @@ public class Seasinger extends CardImpl<Seasinger> {
         this.addAbility(new SkipUntapOptionalAbility());
 
         // {tap}: Gain control of target creature whose controller controls an Island for as long as you control Seasinger and Seasinger remains tapped.
-        ConditionalContinousEffect effect = new ConditionalContinousEffect(new GainControlTargetEffect(Duration.Custom), new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
+        ConditionalContinousEffect effect = new ConditionalContinousEffect(
+                new GainControlTargetEffect(Duration.Custom),
+                new ControlsPermanentCondition(seasinger, ControlsPermanentCondition.CountType.EQUAL_TO, 1, SourceTappedCondition.getInstance()), rule);
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
         creatureWhoseControllerControlsIsland.add(new ControllerControlsIslandPredicate());
         ability.addTarget(new TargetCreaturePermanent(creatureWhoseControllerControlsIsland));

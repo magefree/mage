@@ -32,6 +32,7 @@ import java.util.UUID;
 import mage.constants.AbilityType;
 import mage.abilities.Ability;
 import mage.abilities.costs.CostImpl;
+import mage.constants.AsThoughEffectType;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
@@ -66,7 +67,8 @@ public class TapSourceCost extends CostImpl<TapSourceCost> {
     public boolean canPay(UUID sourceId, UUID controllerId, Game game) {
         Permanent permanent = game.getPermanent(sourceId);
         if (permanent != null) {
-            return !permanent.isTapped() && permanent.canTap();
+            return !permanent.isTapped() && 
+                    (permanent.canTap() || game.getContinuousEffects().asThough(sourceId, AsThoughEffectType.ACTIVATE_HASTE, game));
         }
         return false;
     }

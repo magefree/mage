@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010 BetaSteward_at_googlemail.com. All rights reserved.
+ *  Copyright 2011 BetaSteward_at_googlemail.com. All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without modification, are
  *  permitted provided that the following conditions are met:
@@ -26,30 +26,22 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.condition.common;
+package mage.counters.common;
 
-import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
+import mage.counters.Counter;
 
 /**
- * Describes condition when Equipment is attached to an object
  *
  * @author LevelX2
  */
-public class EquipmentAttachedCondition implements Condition {
+public class StorageCounter extends Counter<SlimeCounter> {
 
-    private static final EquipmentAttachedCondition fInstance = new EquipmentAttachedCondition();
-
-    public static Condition getInstance() {
-        return fInstance;
+    public StorageCounter() {
+        this(1);
     }
 
-    @Override
-    public boolean apply(Game game, Ability source) {
-        Permanent attachment = game.getPermanent(source.getSourceId());
-        return attachment != null && attachment.getAttachedTo() != null;
+    public StorageCounter(int amount) {
+        super("storage");
+        this.count = amount;
     }
-
 }

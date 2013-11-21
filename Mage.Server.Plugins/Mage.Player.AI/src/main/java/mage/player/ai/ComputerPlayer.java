@@ -1292,6 +1292,9 @@ public class ComputerPlayer<T extends ComputerPlayer<T>> extends PlayerImpl<T> i
     public int getAmount(int min, int max, String message, Game game) {
         log.debug("getAmount");
         //TODO: improve this
+        if (min < max && min == 0) {
+            return new Random().nextInt(max+1);
+        }
         return min;
     }
 

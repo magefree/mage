@@ -28,7 +28,49 @@
 
 package mage.counters;
 
-import mage.counters.common.*;
+import mage.counters.common.AgeCounter;
+import mage.counters.common.AimCounter;
+import mage.counters.common.ArrowheadCounter;
+import mage.counters.common.AwakeningCounter;
+import mage.counters.common.BlazeCounter;
+import mage.counters.common.BriberyCounter;
+import mage.counters.common.ChargeCounter;
+import mage.counters.common.DespairCounter;
+import mage.counters.common.DevotionCounter;
+import mage.counters.common.DivinityCounter;
+import mage.counters.common.ElixirCounter;
+import mage.counters.common.EonCounter;
+import mage.counters.common.EyeballCounter;
+import mage.counters.common.FadeCounter;
+import mage.counters.common.FateCounter;
+import mage.counters.common.FeatherCounter;
+import mage.counters.common.FuseCounter;
+import mage.counters.common.HatchlingCounter;
+import mage.counters.common.HoofprintCounter;
+import mage.counters.common.IceCounter;
+import mage.counters.common.KiCounter;
+import mage.counters.common.LevelCounter;
+import mage.counters.common.LoreCounter;
+import mage.counters.common.LoyaltyCounter;
+import mage.counters.common.MiningCounter;
+import mage.counters.common.MinusOneCounter;
+import mage.counters.common.PageCounter;
+import mage.counters.common.PainCounter;
+import mage.counters.common.PetrificationCounter;
+import mage.counters.common.PlagueCounter;
+import mage.counters.common.PlusOneCounter;
+import mage.counters.common.PoisonCounter;
+import mage.counters.common.PressureCounter;
+import mage.counters.common.QuestCounter;
+import mage.counters.common.SlimeCounter;
+import mage.counters.common.SporeCounter;
+import mage.counters.common.StorageCounter;
+import mage.counters.common.StudyCounter;
+import mage.counters.common.TheftCounter;
+import mage.counters.common.TimeCounter;
+import mage.counters.common.TowerCounter;
+import mage.counters.common.VileCounter;
+import mage.counters.common.WishCounter;
 
 /**
  * Enum for counters, names and instances.
@@ -72,6 +114,7 @@ public enum CounterType {
     QUEST(new QuestCounter().name),
     SLIME(new SlimeCounter().name),
     SPORE(new SporeCounter().name),
+    STORAGE(new StorageCounter().name),
     STUDY(new StudyCounter().name),
     THEFT(new TheftCounter().name),
     TIME(new TimeCounter().name),
@@ -79,7 +122,7 @@ public enum CounterType {
     VILE(new VileCounter().name),
     WISH(new WishCounter().name);
 
-    private String name;
+    private final String name;
 
     private CounterType(String name) {
         this.name = name;
@@ -163,6 +206,8 @@ public enum CounterType {
                 return new SlimeCounter(amount);
             case SPORE:
                 return new SporeCounter(amount);
+            case STORAGE:
+                return new StorageCounter(amount);
             case STUDY:
                 return new StudyCounter(amount);
             case EYEBALL:
