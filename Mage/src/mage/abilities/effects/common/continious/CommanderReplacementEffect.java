@@ -52,7 +52,7 @@ import mage.players.Player;
  */
 public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderReplacementEffect> {
 
-    private UUID commanderId;
+    private final UUID commanderId;
 
     public CommanderReplacementEffect(UUID commanderId) {
         super(Duration.WhileOnBattlefield, Outcome.Benefit);
@@ -63,6 +63,7 @@ public class CommanderReplacementEffect extends ReplacementEffectImpl<CommanderR
 
     public CommanderReplacementEffect(final CommanderReplacementEffect effect) {
         super(effect);
+        this.commanderId = effect.commanderId;
     }
 
     @Override
