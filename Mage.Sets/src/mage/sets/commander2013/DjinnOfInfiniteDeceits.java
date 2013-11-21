@@ -76,7 +76,7 @@ public class DjinnOfInfiniteDeceits extends CardImpl<DjinnOfInfiniteDeceits> {
                 new ExchangeControlTargetEffect(Duration.EndOfGame, rule), 
                 new TapSourceCost(), 
                 new InvertCondition(new IsPhaseCondition(TurnPhase.COMBAT)));
-        this.getSpellAbility().addTarget(new TargetCreaturePermanent(2,2, filter, false));
+        ability.addTarget(new TargetCreaturePermanent(2,2, filter, false));
         this.addAbility(ability);
     }
 

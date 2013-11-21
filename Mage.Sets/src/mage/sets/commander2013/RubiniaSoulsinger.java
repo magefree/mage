@@ -43,6 +43,7 @@ import mage.constants.Rarity;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.target.common.TargetCreaturePermanent;
 
 /**
  *
@@ -70,6 +71,7 @@ public class RubiniaSoulsinger extends CardImpl<RubiniaSoulsinger> {
                 new RubiniaSoulsingerCondition(),
                 "Gain control of target creature for as long as you control Rubinia and Rubinia remains tapped");
         Ability ability = new SimpleActivatedAbility(Zone.BATTLEFIELD, effect, new TapSourceCost());
+        ability.addTarget(new TargetCreaturePermanent(true));
         this.addAbility(ability);
     }
 
