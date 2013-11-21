@@ -436,7 +436,7 @@ public class GameState implements Serializable, Copyable<GameState> {
     public Permanent getPermanent(UUID permanentId) {
         if (permanentId != null && battlefield.containsPermanent(permanentId)) {
             Permanent permanent = battlefield.getPermanent(permanentId);
-            setZone(permanent.getId(), Zone.BATTLEFIELD);
+            setZone(permanent.getId(), Zone.BATTLEFIELD); // shouldn't this be set anyway? (LevelX2)
             return permanent;
         }
         return null;

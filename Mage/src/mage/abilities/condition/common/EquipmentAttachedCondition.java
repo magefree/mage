@@ -34,25 +34,22 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 /**
+ * Describes condition when Equipment is attached to an object
  *
  * @author LevelX2
  */
+public class EquipmentAttachedCondition implements Condition {
 
+    private static final EquipmentAttachedCondition fInstance = new EquipmentAttachedCondition();
 
-public class SourceTappedCondition implements Condition {
-
-    private static final SourceTappedCondition fInstance = new SourceTappedCondition();
-
-    public static SourceTappedCondition getInstance() {
+    public static Condition getInstance() {
         return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.isTapped();
-        }
-        return false;
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        return attachment == null || attachment.getAttachedTo() == null;
     }
+
 }

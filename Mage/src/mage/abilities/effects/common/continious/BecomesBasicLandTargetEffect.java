@@ -70,7 +70,7 @@ public class BecomesBasicLandTargetEffect extends ContinuousEffectImpl<BecomesBa
 
     public BecomesBasicLandTargetEffect(Duration duration, boolean chooseLandType, String... landNames) {
         super(duration, Outcome.Detriment);
-        landTypes.addAll(Arrays.asList(landNames));
+        this.landTypes.addAll(Arrays.asList(landNames));
         this.chooseLandType = chooseLandType;
         this.staticText = setText();
 

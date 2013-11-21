@@ -27,12 +27,11 @@
  */
 package mage.abilities.condition.common;
 
+import java.util.UUID;
 import mage.abilities.Ability;
 import mage.abilities.condition.Condition;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
-
-import java.util.UUID;
 
 /**
  * Describes condition when creature is equipped.
@@ -41,7 +40,7 @@ import java.util.UUID;
  */
 public class EquippedCondition implements Condition {
 
-    private static EquippedCondition fInstance = new EquippedCondition();
+    private static final EquippedCondition fInstance = new EquippedCondition();
 
     public static Condition getInstance() {
         return fInstance;
@@ -53,7 +52,7 @@ public class EquippedCondition implements Condition {
         if (permanent != null) {
             for (UUID uuid : permanent.getAttachments()) {
                 Permanent attached = game.getBattlefield().getPermanent(uuid);
-                if (attached.getSubtype().contains("Equipment")) {
+                if (attached != null && attached.getSubtype().contains("Equipment")) {
                     return true;
                 }
             }

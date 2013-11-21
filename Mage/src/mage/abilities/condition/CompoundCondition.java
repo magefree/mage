@@ -26,33 +26,46 @@
  *  or implied, of BetaSteward_at_googlemail.com.
  */
 
-package mage.abilities.condition.common;
+package mage.abilities.condition;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import mage.abilities.Ability;
-import mage.abilities.condition.Condition;
 import mage.game.Game;
-import mage.game.permanent.Permanent;
 
 /**
+ * Combines conditions to one compound conditon, all single conditons
+ * must be true to return true for the compound condtion.
  *
  * @author LevelX2
  */
+public class CompoundCondition implements Condition {
 
+    private final ArrayList<Condition> conditions = new ArrayList();
+    private final String text;
 
-public class SourceTappedCondition implements Condition {
+    public CompoundCondition(Condition... conditions) {
+        this("", conditions);
+    }
 
-    private static final SourceTappedCondition fInstance = new SourceTappedCondition();
-
-    public static SourceTappedCondition getInstance() {
-        return fInstance;
+    public CompoundCondition(String text, Condition... conditions) {
+        this.conditions.addAll(Arrays.asList(conditions));
+        this.text = text;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.isTapped();
+        for (Condition condition: conditions) {
+            if (!condition.apply(game, source)) {
+                return false;
+            }
         }
-        return false;
+        return true;
     }
+
+    @Override
+    public String toString() {
+        return text;
+    }
+
 }

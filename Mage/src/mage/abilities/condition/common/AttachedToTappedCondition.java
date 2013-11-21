@@ -37,22 +37,24 @@ import mage.game.permanent.Permanent;
  *
  * @author LevelX2
  */
+public class AttachedToTappedCondition implements Condition {
 
+    private static final AttachedToTappedCondition fInstance = new AttachedToTappedCondition();
 
-public class SourceTappedCondition implements Condition {
-
-    private static final SourceTappedCondition fInstance = new SourceTappedCondition();
-
-    public static SourceTappedCondition getInstance() {
+    public static AttachedToTappedCondition getInstance() {
         return fInstance;
     }
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getBattlefield().getPermanent(source.getSourceId());
-        if (permanent != null) {
-            return permanent.isTapped();
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment == null || attachment.getAttachedTo() == null) {
+            return false;
         }
-        return false;
+        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
+        if (attachedTo == null) {
+            return false;
+        }
+        return attachedTo.isTapped();
     }
 }

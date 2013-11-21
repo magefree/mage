@@ -77,7 +77,12 @@ public class BoostControlledEffect extends ContinuousEffectImpl<BoostControlledE
     }
 
     /**
+     * @param power
+     * @param toughness
+     * @param duration
+     * @param filter
      * @param lockedIn if true, power and toughness will be calculated only once, when the ability resolves
+     * @param excludeSource
      */
     public BoostControlledEffect(DynamicValue power, DynamicValue toughness, Duration duration, FilterCreaturePermanent filter, boolean excludeSource, boolean lockedIn) {
         super(duration, Layer.PTChangingEffects_7, SubLayer.ModifyPT_7c, Outcome.BoostCreature);

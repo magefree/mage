@@ -39,7 +39,7 @@ import mage.game.permanent.Permanent;
  */
 public class AttachedToCounterCondition implements Condition {
 
-    private CounterType counterType;
+    private final CounterType counterType;
     private int amount = 1;
     private int from = -1;
     private int to;
@@ -61,11 +61,11 @@ public class AttachedToCounterCondition implements Condition {
 
     @Override
     public boolean apply(Game game, Ability source) {
-        Permanent permanent = game.getPermanent(source.getSourceId());
-        if (permanent == null || permanent.getAttachedTo() == null) {
+        Permanent attachment = game.getPermanent(source.getSourceId());
+        if (attachment == null || attachment.getAttachedTo() == null) {
             return false;
         }
-        Permanent attachedTo = game.getPermanent(permanent.getAttachedTo());
+        Permanent attachedTo = game.getPermanent(attachment.getAttachedTo());
         if (attachedTo == null) {
             return false;
         }
