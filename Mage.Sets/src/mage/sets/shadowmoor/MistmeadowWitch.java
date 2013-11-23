@@ -96,7 +96,7 @@ class MistmeadowWitchEffect extends OneShotEffect<MistmeadowWitchEffect> {
         if (permanent != null) {
             if (permanent.moveToExile(source.getSourceId(), "Mistmeadow Witch Exile", source.getId(), game)) {
                 //create delayed triggered ability
-                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD, true));
+                AtEndOfTurnDelayedTriggeredAbility delayedAbility = new AtEndOfTurnDelayedTriggeredAbility(new ReturnFromExileEffect(source.getSourceId(), Zone.BATTLEFIELD));
                 delayedAbility.setSourceId(source.getSourceId());
                 delayedAbility.setControllerId(source.getControllerId());
                 game.addDelayedTriggeredAbility(delayedAbility);
